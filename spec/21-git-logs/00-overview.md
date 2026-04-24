@@ -71,6 +71,7 @@ This module contains the complete implementation specification: domain glossary,
 | 13 | [13-coding-guidelines-applied.md](./13-coding-guidelines-applied.md) | Master guidelines applied to PHP/WP context |
 | 14 | [14-acceptance-criteria.md](./14-acceptance-criteria.md) | Testable acceptance criteria |
 | 15 | [15-blind-audit-checklist.md](./15-blind-audit-checklist.md) | Self-verification checklist for downstream AI |
+| 17 | [17-spec-consistency-checklist.md](./17-spec-consistency-checklist.md) | Spec consistency checklist vs coding guidelines, naming, booleans/enums, split-DB, seedable config |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Canonical AC index (mirrors 14) |
 | 98 | [98-changelog.md](./98-changelog.md) | Chronological changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Structural health report |
