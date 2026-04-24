@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "namespace": "GL",
+  "version": "1.0.0",
+  "updated": "2026-04-25",
+  "codes": [
+    { "code": "GL-AUTH-001", "httpStatus": 401, "userMessageKey": "auth.invalid_credentials", "debugOnly": false, "description": "Missing or invalid credentials." },
+    { "code": "GL-AUTH-002", "httpStatus": 401, "userMessageKey": "auth.jwt_invalid", "debugOnly": false, "description": "JWT malformed, expired, revoked, or signed by unknown kid." },
+    { "code": "GL-AUTH-003", "httpStatus": 401, "userMessageKey": "auth.refresh_invalid", "debugOnly": false, "description": "Refresh token invalid or revoked." },
+    { "code": "GL-AUTH-005", "httpStatus": 403, "userMessageKey": "auth.forbidden", "debugOnly": false, "description": "Caller lacks the required role/capability." },
+    { "code": "GL-AUTH-LOCKED", "httpStatus": 423, "userMessageKey": "auth.locked", "debugOnly": false, "description": "Account locked after repeated failed authentications." },
+    { "code": "GL-AUTH-NONCE", "httpStatus": 403, "userMessageKey": "auth.nonce_invalid", "debugOnly": false, "description": "Cookie auth nonce missing or invalid." },
+    { "code": "GL-AUTH-ORIGIN-DENIED", "httpStatus": 403, "userMessageKey": "auth.origin_denied", "debugOnly": false, "description": "Origin not in CORS allow-list." },
+
+    { "code": "GL-VAL-001", "httpStatus": 400, "userMessageKey": "validation.bad_request", "debugOnly": false, "description": "Generic validation failure." },
+    { "code": "GL-VAL-002", "httpStatus": 400, "userMessageKey": "validation.empty_query", "debugOnly": false, "description": "Required query parameter is empty." },
+    { "code": "GL-VAL-PROVIDER-DISABLED", "httpStatus": 400, "userMessageKey": "validation.provider_disabled", "debugOnly": false, "description": "Provider value reserved but not enabled in v1 (e.g., GitLab)." },
+
+    { "code": "GL-PUSH-001", "httpStatus": 415, "userMessageKey": "push.bad_content_type", "debugOnly": false, "description": "Content-Type must be application/json." },
+    { "code": "GL-PUSH-002", "httpStatus": 401, "userMessageKey": "push.envelope_missing", "debugOnly": false, "description": "X-GitLogs-Envelope header missing." },
+    { "code": "GL-PUSH-003", "httpStatus": 400, "userMessageKey": "push.bad_body", "debugOnly": false, "description": "Body missing or invalid JSON." },
+    { "code": "GL-PUSH-004", "httpStatus": 401, "userMessageKey": "push.envelope_bad_signature", "debugOnly": false, "description": "Envelope signature verification failed." },
+    { "code": "GL-PUSH-005", "httpStatus": 401, "userMessageKey": "push.envelope_expired", "debugOnly": false, "description": "Envelope expired." },
+    { "code": "GL-PUSH-006", "httpStatus": 401, "userMessageKey": "push.envelope_replay", "debugOnly": false, "description": "Envelope nonce reused within replay window." },
+    { "code": "GL-PUSH-007", "httpStatus": 403, "userMessageKey": "push.repo_not_allowed", "debugOnly": false, "description": "Repository not in allowlist." },
+    { "code": "GL-PUSH-008", "httpStatus": 422, "userMessageKey": "push.schema_invalid", "debugOnly": false, "description": "Body schema validation failure." },
+    { "code": "GL-PUSH-009", "httpStatus": 413, "userMessageKey": "push.payload_too_large", "debugOnly": false, "description": "Body exceeds 1 MB decompressed." },
+
+    { "code": "GL-RATE-001", "httpStatus": 429, "userMessageKey": "rate.limited", "debugOnly": false, "description": "Rate limit exceeded for this bucket." },
+
+    { "code": "GL-NF-001", "httpStatus": 404, "userMessageKey": "common.not_found", "debugOnly": false, "description": "Resource not found or not visible to caller." },
+
+    { "code": "GL-SYS-001", "httpStatus": 503, "userMessageKey": "system.transient", "debugOnly": false, "description": "Transient backend error after one retry." },
+    { "code": "GL-SYS-002", "httpStatus": 504, "userMessageKey": "system.timeout", "debugOnly": false, "description": "Server-side timeout." },
+    { "code": "GL-SYS-003", "httpStatus": 500, "userMessageKey": "system.internal", "debugOnly": true, "description": "Unexpected internal error; details visible only when gitlogs_debug_responses=1 and caller is admin." }
+  ]
+}
