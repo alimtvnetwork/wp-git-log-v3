@@ -24,6 +24,7 @@ Any content that analyzes bugs, failures, root causes, or fixes for application-
 | # | Folder | Description |
 |---|--------|-------------|
 | 01 | [01-phase-2-git-logs-audit/](./01-phase-2-git-logs-audit/00-overview.md) | Phase-2 spec-only audit of `spec/21-git-logs/` (25 findings) |
+| 02 | [02-consolidated-audit-findings/](./02-consolidated-audit-findings/00-overview.md) | Single auditable findings document — 24 numbered items with file paths and evidence snippets |
 
 ---
 
