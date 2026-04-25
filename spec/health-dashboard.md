@@ -3,9 +3,10 @@
 **Generated:** 2026-04-25  
 **Total Files Scanned:** 642  
 **Total Folders:** 80  
-**Overall Health:** 80/100 (B) — Phase 1 Triage + spec-index auto-regen
+**Modules Audited:** 52 (top-level + nested with `00-overview.md`)  
+**Overall Health:** 71/100 (C) — measured by `linter-scripts/check-tree-health.cjs`
 
-> **v3.7.1 (2026-04-25):** Added `linter-scripts/generate-spec-index.cjs` — `spec-index.md` now auto-regenerates from disk (642 files, 23 categories). Stale-index deduction cleared. **Score trajectory: 45 → 78 → 80 (+35 from F baseline).** Phase 2 (13 missing AC files, 15 missing consistency reports) still pending.
+> **v3.7.2 (2026-04-25):** Added `linter-scripts/check-tree-health.cjs` CI gate. **Honest measured score:** 71/100 (90/104 required files present, 26/104 recommended). Prior 78/80 numbers were narrative estimates — now reconciled with measured truth. CI threshold set to **70** to lock today's baseline; raise after Phase 2 fills 14 missing `99-consistency-report.md` files. Earlier today: Phase 1 Triage resolved slot 22 collision (`22-app-issues/` → `25-app-issues/`) and archived legacy `21-git-logs/` to `_archive/21-git-logs-v1/`.
 
 ---
 
@@ -13,10 +14,11 @@
 
 | Metric | Value |
 |--------|-------|
-| Score | **80/100 (B)** |
-| Deduction | -13 missing acceptance-criteria files |
-| Deduction | -7 missing consistency reports (partial penalty) |
-| Deduction | 0 stale `spec-index.md` (auto-regen v3.7.1) |
+| Score | **71/100 (C)** — measured |
+| Required files (00-overview + 99-consistency) | 90/104 (87%) |
+| Recommended files (97-AC + 98-changelog) | 26/104 (25%) |
+| Stale `spec-index.md` | 0 (auto-regen v3.7.1) |
+| CI gate threshold | 70 (locked v3.7.2) |
 
 ---
 
