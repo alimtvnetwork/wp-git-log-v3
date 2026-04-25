@@ -26,12 +26,17 @@ import json, re, sys, time, os
 from pathlib import Path
 from collections import Counter, defaultdict
 
-sys.path.insert(0, "/tmp")
-from lovable_ai import call_ai_structured  # type: ignore
+# Deterministic mode skips AI scoring entirely and produces byte-identical
+# JSON output across runs. Toggle via env var AUDIT_DETERMINISTIC=1.
+DETERMINISTIC = os.environ.get("AUDIT_DETERMINISTIC", "").strip() in {"1", "true", "yes"}
+
+if not DETERMINISTIC:
+    sys.path.insert(0, "/tmp")
+    from lovable_ai import call_ai_structured  # type: ignore
 
 ROOT = Path("/dev-server")
 SPEC = ROOT / "spec"
-OUT = ROOT / ".lovable/memory/audit/v2"
+OUT = ROOT / (".lovable/memory/audit/v2-deterministic" if DETERMINISTIC else ".lovable/memory/audit/v2")
 OUT.mkdir(parents=True, exist_ok=True)
 MODEL = "google/gemini-2.5-flash"
 TODAY = "2026-04-25"
@@ -279,8 +284,164 @@ For findings, prefer category=missing-contract when DDL/enums/schemas are
 absent; broken-link when links don't resolve. blast_radius=10 for foundational
 specs (enums, error codes, error envelope); 0 for leaf docs."""
 
+# ---------------- deterministic scorer ----------------
+# Pure-function scoring derived ONLY from deterministic metrics + folder facts.
+# No AI, no clocks, no randomness — same input → same output, byte-for-byte.
+def deterministic_score(folder: Path, metrics: dict) -> dict:
+    rel = MOD_REL[folder]
+    m = metrics
+
+    # ---- per-dimension rubric (all bounded 0-100) ----
+    # Implementability: rewards inlined contracts; penalises waffle and stub
+    impl = 30
+    if m["has_sql_ddl"]:      impl += 20
+    if m["has_json_schema"]:  impl += 15
+    if m["has_ts_enums"]:     impl += 10
+    if m["has_yaml_openapi"]: impl += 10
+    if m["has_mermaid"]:      impl += 5
+    if m["code_blocks_total"] >= 5: impl += 10
+    if m["overview_chars"] < 500:   impl -= 20
+    if m["waffle_per_kchar"] > 5:   impl -= 10
+    impl = max(0, min(100, impl))
+
+    # Completeness: AC count + overview size + child coverage
+    comp = 20
+    comp += min(40, m["ac_count"] * 5)
+    if m["overview_chars"] >= 2000: comp += 20
+    elif m["overview_chars"] >= 800: comp += 10
+    if m["consistency_report"]: comp += 10
+    if m["child_modules"] > 0:  comp += 10
+    if m["todo_density"] > 0:   comp -= min(20, m["todo_density"] * 5)
+    comp = max(0, min(100, comp))
+
+    # Alignment: full marks unless broken links suggest drift
+    align = 100
+    if m["links_broken"] > 0:
+        align -= min(60, m["links_broken"] * 10)
+    align = max(0, align)
+
+    # Consistency: hurt by broken links and missing §99
+    cons = 100
+    if not m["consistency_report"]: cons -= 20
+    if m["links_broken"] > 0:       cons -= min(50, m["links_broken"] * 8)
+    cons = max(0, cons)
+
+    # Clarity: waffle ratio
+    clar = 100
+    if m["waffle_per_kchar"] > 1:   clar -= int((m["waffle_per_kchar"] - 1) * 8)
+    clar = max(20, min(100, clar))
+
+    # Testability: AC + GWT density
+    if m["ac_count"] == 0:
+        test = 10
+    else:
+        test = 40 + min(40, m["ac_count"] * 6) + min(20, m["gwt_block_count"] * 4)
+    test = max(0, min(100, test))
+
+    # Maintainability: §99 + reasonable structure
+    maint = 50
+    if m["consistency_report"]: maint += 30
+    if m["md_files"] >= 3:      maint += 10
+    if m["todo_density"] == 0:  maint += 10
+    maint = max(0, min(100, maint))
+
+    scores = {
+        "implementability": impl,
+        "completeness":     comp,
+        "alignment":        align,
+        "consistency":      cons,
+        "clarity":          clar,
+        "testability":      test,
+        "maintainability":  maint,
+    }
+
+    # ---- findings (sorted, deterministic) ----
+    findings = []
+    if not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
+        findings.append({
+            "category": "missing-contract", "severity": "high", "impact": 8,
+            "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
+            "evidence": f"code_blocks_by_lang={json.dumps(m['code_blocks_by_lang'], sort_keys=True)}",
+            "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
+        })
+    if m["links_broken"] > 0:
+        findings.append({
+            "category": "broken-link", "severity": "high", "impact": 7,
+            "issue": f"{m['links_broken']} broken cross-spec link(s)",
+            "evidence": f"links_total={m['links_total']}, links_broken={m['links_broken']}",
+            "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
+        })
+    if m["waffle_per_kchar"] > 3:
+        findings.append({
+            "category": "ambiguity", "severity": "medium", "impact": 5,
+            "issue": f"High waffle density ({m['waffle_per_kchar']} per 1k chars)",
+            "evidence": "Words like should/may/might/optionally weaken normative force.",
+            "correction": "Replace waffle words with MUST / MUST NOT / SHALL per RFC 2119.",
+        })
+    if m["ac_count"] == 0:
+        findings.append({
+            "category": "untestable", "severity": "high", "impact": 8,
+            "issue": "No acceptance criteria found",
+            "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+            "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        })
+    elif m["gwt_block_count"] == 0:
+        findings.append({
+            "category": "untestable", "severity": "medium", "impact": 5,
+            "issue": "Acceptance criteria present but no Given/When/Then blocks",
+            "evidence": f"ac_count={m['ac_count']}, gwt_block_count=0",
+            "correction": "Rewrite each AC as a Given/When/Then block.",
+        })
+    if not m["consistency_report"]:
+        findings.append({
+            "category": "inconsistency", "severity": "medium", "impact": 4,
+            "issue": "Missing or empty 99-consistency-report.md",
+            "evidence": "consistency_report=false",
+            "correction": "Run linter-scripts/fill-missing-consistency-reports.cjs.",
+        })
+    if m["todo_density"] > 0:
+        findings.append({
+            "category": "drift", "severity": "low", "impact": 3,
+            "issue": f"{m['todo_density']} TODO/TBD/FIXME marker(s) in module body",
+            "evidence": f"todo_density={m['todo_density']}",
+            "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        })
+
+    # Stable order so JSON is byte-identical across runs
+    findings.sort(key=lambda f: (f["category"], f["severity"], -f["impact"], f["issue"]))
+
+    # Blast radius: foundational specs (children + contract presence)
+    blast = min(10, m["child_modules"] * 2
+                + (3 if m["has_sql_ddl"] else 0)
+                + (2 if m["has_ts_enums"] else 0)
+                + (2 if m["has_json_schema"] else 0))
+
+    overall = weighted(scores)
+    grade = grade_of(overall)
+    blockers = sorted({f["issue"] for f in findings if f["severity"] in {"critical", "high"}})
+
+    return {
+        "scores": scores,
+        "score_justification": (
+            f"Deterministic rubric: contracts={int(m['has_sql_ddl'])+int(m['has_json_schema'])+int(m['has_ts_enums'])}/3, "
+            f"ac={m['ac_count']}, gwt={m['gwt_block_count']}, broken_links={m['links_broken']}, "
+            f"waffle/kchar={m['waffle_per_kchar']}."
+        ),
+        "implementability_blockers": blockers,
+        "code_mapping": {
+            "implemented_by": [],
+            "expected_but_missing": [],
+            "orphan_code": [],
+        },
+        "findings": findings,
+        "verdict": f"Deterministic score {overall}/100 ({grade}) for spec/{rel}.",
+        "blast_radius": blast,
+    }
+
 # ---------------- runner ----------------
 def audit_module(folder: Path, metrics: dict):
+    if DETERMINISTIC:
+        return deterministic_score(folder, metrics)
     digest = build_digest(folder, metrics)
     return call_ai_structured(
         prompt=digest,
@@ -303,7 +464,7 @@ def render_module_report(rel: str, r: dict, metrics: dict) -> str:
     overall = weighted(s); g = grade_of(overall)
     md = [f"# Audit v2 — `spec/{rel}`\n",
           f"**Date:** {TODAY}  ",
-          f"**Auditor:** Lovable AI (gemini-3-flash-preview, 2-pass)  ",
+          f"**Auditor:** {'Deterministic rubric (no AI)' if DETERMINISTIC else 'Lovable AI (gemini-3-flash-preview, 2-pass)'}  ",
           f"**Implementability Score:** **{overall}/100 ({g})**  ",
           f"**Blast radius:** {r['blast_radius']}/10\n",
           f"> {r['verdict']}\n",
@@ -355,7 +516,8 @@ def main():
         except Exception as e:
             sys.stderr.write(f"ERROR {e}\n")
             results.append({"module": rel, "error": str(e), "weighted_overall": 0, "grade": "F"})
-        time.sleep(0.4)
+        if not DETERMINISTIC:
+            time.sleep(0.4)
 
     valid = [r for r in results if "scores" in r]
     if not valid:
@@ -422,7 +584,12 @@ def main():
         idx.append(f"| [`{r['module']}`](./{r['module'].replace('/','__') or '_root'}.md) | {s['implementability']} | {s['completeness']} | {s['alignment']} | {s['consistency']} | {s['clarity']} | {s['testability']} | {s['maintainability']} | **{r['weighted_overall']}** | {r['grade']} | {r['blast_radius']} |")
 
     (OUT / "00-index.md").write_text("\n".join(idx))
-    (OUT / "raw-results.json").write_text(json.dumps(results, indent=2))
+    # In deterministic mode, sort by module name and sort_keys for byte-identical output.
+    json_results = sorted(results, key=lambda r: r["module"]) if DETERMINISTIC else results
+    json_text = json.dumps(json_results, indent=2, sort_keys=DETERMINISTIC, ensure_ascii=True)
+    if DETERMINISTIC and not json_text.endswith("\n"):
+        json_text += "\n"
+    (OUT / "raw-results.json").write_text(json_text)
 
     # Executive summary (separate, short)
     exec_md = [f"# AI-Implementability Audit v2 — Executive Summary\n",

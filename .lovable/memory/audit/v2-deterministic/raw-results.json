@@ -1,0 +1,73 @@
+[
+  {
+    "blast_radius": 0,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [
+      {
+        "category": "drift",
+        "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        "evidence": "todo_density=3",
+        "impact": 3,
+        "issue": "3 TODO/TBD/FIXME marker(s) in module body",
+        "severity": "low"
+      },
+      {
+        "category": "missing-contract",
+        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
+        "evidence": "code_blocks_by_lang={\"bash\": 23, \"ini\": 1, \"markdown\": 1, \"plain\": 1, \"powershell\": 1, \"toml\": 1}",
+        "impact": 8,
+        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
+        "severity": "high"
+      }
+    ],
+    "grade": "C",
+    "implementability_blockers": [
+      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
+    ],
+    "metrics": {
+      "ac_chars": 3934,
+      "ac_count": 10,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 23,
+        "ini": 1,
+        "markdown": 1,
+        "plain": 1,
+        "powershell": 1,
+        "toml": 1
+      },
+      "code_blocks_total": 28,
+      "consistency_report": true,
+      "gwt_block_count": 10,
+      "has_json_schema": false,
+      "has_mermaid": false,
+      "has_sql_ddl": false,
+      "has_ts_enums": false,
+      "has_yaml_openapi": false,
+      "links_broken": 0,
+      "links_total": 107,
+      "md_files": 32,
+      "mmd_files": 0,
+      "overview_chars": 8021,
+      "todo_density": 3,
+      "waffle_per_kchar": 0.16
+    },
+    "module": "27-spec-toolchain",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.16.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 100,
+      "implementability": 40,
+      "maintainability": 90,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 74/100 (C) for spec/27-spec-toolchain.",
+    "weighted_overall": 74
+  }
+]

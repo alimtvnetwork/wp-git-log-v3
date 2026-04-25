@@ -1,9 +1,9 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-25  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
-**Category:** Auditor (AI-driven, **current**)  
+**Category:** Auditor (AI-driven by default; **deterministic mode** available)  
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
 
 ---
@@ -39,23 +39,34 @@ AI-implementability audit. Asks: *"Could a mediocre AI ship a working implementa
 ## Usage
 
 ```bash
-python3 linter-scripts/audit-spec-vs-code-v2.py
-AUDIT_ONLY="22-git-logs-v2" python3 linter-scripts/audit-spec-vs-code-v2.py   # smoke test one module
+python3 linter-scripts/audit-spec-vs-code-v2.py                                    # AI mode
+AUDIT_ONLY="22-git-logs-v2" python3 linter-scripts/audit-spec-vs-code-v2.py        # smoke test one module
+AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py              # deterministic mode
 ```
+
+## Modes
+
+| Mode | Trigger | Output dir | Reproducibility |
+|------|---------|------------|-----------------|
+| AI (default) | no env var | `.lovable/memory/audit/v2/` | Non-deterministic (model-dependent) |
+| Deterministic | `AUDIT_DETERMINISTIC=1` | `.lovable/memory/audit/v2-deterministic/` | **Byte-identical** across runs |
+
+Deterministic mode bypasses the AI gateway entirely and scores each module from a pure-function rubric over the same `deterministic_metrics()` digest used in AI mode. JSON output is sorted by module name, written with `sort_keys=True`, uses ASCII encoding, and ends with a single trailing newline — guaranteeing identical SHA-256 across consecutive runs on the same spec tree.
 
 ## Environment variables
 
 | Var | Purpose |
 |-----|---------|
-| `LOVABLE_API_KEY` | Required — Lovable AI Gateway credential |
+| `LOVABLE_API_KEY` | Required in AI mode — Lovable AI Gateway credential |
 | `AUDIT_ONLY` | Substring filter; only audit modules whose path matches |
+| `AUDIT_DETERMINISTIC` | `1`/`true`/`yes` → enable deterministic mode (no AI calls) |
 
 ## Outputs
 
-- `.lovable/memory/audit/v2/<module>.md` per module (overwritten).
-- `.lovable/memory/audit/v2/00-index.md` — full ranking + blast-radius leaderboard.
-- `.lovable/memory/audit/v2/EXECUTIVE-SUMMARY.md` — TL;DR.
-- `.lovable/memory/audit/v2/raw-results.json` — machine-readable.
+- `<output-dir>/<module>.md` per module (overwritten).
+- `<output-dir>/00-index.md` — full ranking + blast-radius leaderboard.
+- `<output-dir>/EXECUTIVE-SUMMARY.md` — TL;DR.
+- `<output-dir>/raw-results.json` — machine-readable; byte-identical across runs in deterministic mode.
 
 ## Exit codes
 
@@ -63,7 +74,7 @@ AUDIT_ONLY="22-git-logs-v2" python3 linter-scripts/audit-spec-vs-code-v2.py   # 
 |------|---------|
 | 0 | Audit complete |
 | 1 | At least one module failed AI scoring (others still written) |
-| 2 | `LOVABLE_API_KEY` missing |
+| 2 | `LOVABLE_API_KEY` missing (AI mode only) |
 
 ## Acceptance criteria
 
@@ -91,6 +102,21 @@ AUDIT_ONLY="22-git-logs-v2" python3 linter-scripts/audit-spec-vs-code-v2.py   # 
 - **Given** `AUDIT_ONLY="22-git-logs-v2"`,
 - **When** the script runs,
 - **Then** exactly one module MUST be audited.
+
+### AC-31-06 — Deterministic mode produces byte-identical JSON
+- **Given** `AUDIT_DETERMINISTIC=1` and an unchanged spec tree,
+- **When** the script is run twice consecutively,
+- **Then** `.lovable/memory/audit/v2-deterministic/raw-results.json` from both runs MUST have the same SHA-256 hash and identical byte length.
+
+### AC-31-07 — Deterministic mode writes to a separate output directory
+- **Given** `AUDIT_DETERMINISTIC=1`,
+- **When** the script runs,
+- **Then** outputs MUST be written under `.lovable/memory/audit/v2-deterministic/` and MUST NOT touch `.lovable/memory/audit/v2/`.
+
+### AC-31-08 — Deterministic mode performs zero AI calls
+- **Given** `AUDIT_DETERMINISTIC=1` and `LOVABLE_API_KEY` unset,
+- **When** the script runs,
+- **Then** it MUST complete with exit code 0 (no network call, no import of `lovable_ai`).
 
 ## Cross-references
 
