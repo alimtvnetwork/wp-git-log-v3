@@ -28,8 +28,8 @@ _(none)_
 ## Inputs
 
 - `readme.md` at repo root.
-- Spec sources of truth:
-  - [`.lovable/memory/constraints/install-command-formatting.md`](../../.lovable/memory/constraints/install-command-formatting.md)
+- Spec sources of truth (referenced from the script's docstring):
+  - `.lovable/memory/constraints/install-command-formatting.md` (memory-only — not a spec file; create on demand)
   - [`spec/01-spec-authoring-guide/11-root-readme-conventions.md`](../01-spec-authoring-guide/11-root-readme-conventions.md)
 
 ## Exit codes
