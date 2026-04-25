@@ -15,7 +15,7 @@
 | AC-08 | GitProfile.Acceptance ∈ { AcceptAllRepos, AcceptSelectedRepoOnly, AcceptSelectedRepoInAllVersions }. | brief §Domain.3.b |
 | AC-09 | `IsRestrictInBranch` toggles visibility and enforcement of `StrictBranch`. | brief §Domain.3.f |
 | AC-10 | Repo stores root URL stripped of `-vN`; RepoVersion stores each variant linked back to Repo. | brief §Domain.5 |
-| AC-11 | All 10 endpoints exist with the exact request/response field names from §Endpoints. | brief §Endpoints |
+| AC-11 | All 10 logical endpoints exist with the exact request/response field names from §Endpoints. Endpoints fold to 8 HTTP paths in §17 via the `?q=` query-param collapse rule documented in §04 (rows #5/#6 share `/get-logs`; rows #7/#8 share `/get-pipeline-logs`). | brief §Endpoints, §04, §17 |
 | AC-12 | `/append-log` supports streaming ingestion (`Transfer-Encoding: chunked`). | brief §Endpoints.2.b |
 | AC-13 | `HasError=true` on `/append-log` sets `Pipeline.HasError=1` until `/fixed-log` clears it. | brief §Endpoints.2.c |
 | AC-14 | All write endpoints respond with structured ack including `Retrieval` hints. | brief §Endpoints.1.a–b |
