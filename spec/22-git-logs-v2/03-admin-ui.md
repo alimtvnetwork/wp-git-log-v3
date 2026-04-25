@@ -64,3 +64,23 @@ Validation: server normalizes URL, parses owner/repo, derives `RootRepoName` for
 - **RepoVersion list** → click row → **History** filtered to one variant.
 - **History** columns: OccurredAt, App, Branch, Pipeline, ActionType, HasError, Summary.
 - **Action** view: raw enum log with filters (ActionType, RepoVersion, Profile, date range).
+
+---
+
+## First-run Bootstrap (one-time)
+
+Triggered when `Profile` table is empty AND the visiting WP user has the `manage_options` capability. Shown as a full-page form (not a menu item) on first admin entry to any Git Logs screen.
+
+| Field | Control | Notes |
+|-------|---------|-------|
+| UserName | text (required) | Defaults to current WP user's `display_name`; editable. |
+| Email | email (required) | Defaults to current WP user's email; editable. |
+| Confirm | checkbox + button "Create First Profile" | Required to submit. |
+
+On submit:
+1. Create `Profile` row with auto-generated `GeneratedKeyApi`, `Token`, `TempToken` (cryptographically random).
+2. Insert `RoleAssignment(ProfileId, RoleId=1)` (Admin).
+3. Write `AuditTrail` row: `AuditActionType=ProfileCreate`, `AuditOutcome=Success`, `Detail=BootstrapFirstProfile`.
+4. Redirect to **Profile** screen showing the freshly minted credentials with a one-time "Copy and store securely" banner.
+
+Subsequent visits never show the bootstrap form again because the `Profile` table is no longer empty. If the only Profile is later deleted, the bootstrap form re-appears (intentional — prevents lockout).

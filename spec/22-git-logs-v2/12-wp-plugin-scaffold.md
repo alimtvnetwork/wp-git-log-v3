@@ -159,3 +159,20 @@ git-logs/
 - All hook names, capability names, error codes, REST routes: defined as constants in `inc/Support/*` — no string literals at call sites.
 - One class per file; file name = class name.
 - Functions ≤ 15 lines; files ≤ 300 lines (PHP guideline).
+
+---
+
+## PHP standards cross-reference
+
+This scaffold inherits the cross-cutting PHP rules from [`spec/02-coding-guidelines/04-php/`](../02-coding-guidelines/04-php/00-overview.md). In particular:
+
+| Topic | Authoritative file |
+|-------|--------------------|
+| Enum-only typed values; no string-literal status comparisons | [`01-enums.md`](../02-coding-guidelines/04-php/01-enums.md) |
+| Forbidden patterns (swallowed errors, `@`, magic strings, etc.) | [`02-forbidden-patterns.md`](../02-coding-guidelines/04-php/02-forbidden-patterns.md) |
+| PascalCase classes, camelCase methods, PascalCase array keys | [`03-naming-conventions.md`](../02-coding-guidelines/04-php/03-naming-conventions.md) |
+| REST response envelope shape | [`05-response-array-standard.md`](../02-coding-guidelines/04-php/05-response-array-standard.md) |
+| Spacing, import order, namespace rules | [`08-spacing-and-imports.md`](../02-coding-guidelines/04-php/08-spacing-and-imports.md) |
+| PHP↔Go consistency (when CLI helpers are added) | [`10-php-go-consistency-audit.md`](../02-coding-guidelines/04-php/10-php-go-consistency-audit.md) |
+
+If a rule here conflicts with the cross-cutting standards folder, the cross-cutting folder wins and §12 is amended.

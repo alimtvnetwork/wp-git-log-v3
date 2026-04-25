@@ -1,6 +1,6 @@
 # Acceptance Criteria (v2)
 
-**Version:** 2.0.0  
+**Version:** 2.1.0  
 **Updated:** 2026-04-25
 
 | # | Criterion | Source |
@@ -30,3 +30,14 @@
 | AC-23 | All tables/columns/JSON keys/values use PascalCase; PKs are `INTEGER AUTOINCREMENT` named `{Table}Id`. | brief §DB.2–4 |
 | AC-24 | All typed values modeled as Enum in code AND lookup table in DB; no string-literal status comparisons. | brief §DB.5 |
 | AC-25 | Items marked `format:hide` in the mind-map are not rendered in UI. | brief §1.j |
+| AC-26 | All lookup tables seeded per §09 with the exact rows listed; re-running migration is a no-op (`INSERT OR IGNORE`). | §09 |
+| AC-27 | Admin role has every Permission row; Editor role has the 8 view/modify permissions listed in §09. | §09 |
+| AC-28 | First-run bootstrap creates exactly one Profile for the WP admin visitor; logged in `AuditTrail` as `ProfileCreate`. | §09 + §03 bootstrap |
+| AC-29 | Push payload >`MaxPushPayloadBytes` rejected with `GL-PAYLOAD-TOO-LARGE` (HTTP 413). | §10 |
+| AC-30 | Per-Profile token bucket enforces `RatePerMinPerProfile`; over-limit returns HTTP 429 with `Retry-After`. | §10 |
+| AC-31 | Lines per push >`MaxLinesPerPush` rejected with `GL-LINES-TOO-MANY`; lines >`MaxLineBytes` truncated and tagged Warn. | §10 |
+| AC-32 | v2 stores secrets as plain TEXT; no AES/HMAC code paths exist (deferred to v3). | §11 |
+| AC-33 | §11 documents v3 encryption fields, key strategy, and migration trigger; reserved `inc/Db/Crypto/` placeholder exists in v2 scaffold. | §11 + §12 |
+| AC-34 | PHP file tree matches §12: PSR-4 autoload, one class per file, bootstrap contains no business logic, hook/capability/error-code constants in `inc/Support/*`. | §12 |
+| AC-35 | Every spec entity in §02/§07/§08 has a corresponding repository file under `inc/Db/Repositories/`. | §12 |
+| AC-36 | Migration classes follow `V{Major}_{Minor}_{Patch}` naming under `inc/Migrations/` and implement `MigrationInterface`. | §06 + §12 |
