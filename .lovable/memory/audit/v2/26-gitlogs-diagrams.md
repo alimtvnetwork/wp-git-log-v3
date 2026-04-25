@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Lovable AI (gemini-3-flash-preview, 2-pass)  
-**Implementability Score:** **49/100 (D)**  
+**Implementability Score:** **65/100 (C)**  
 **Blast radius:** 6/10
 
-> This spec module describes diagrams and their contents but lacks the actual diagram code and database DDL, severely hindering AI implementability. It also lacks actionable acceptance criteria.
+> This module provides good diagrams but is critically lacking in machine-readable contracts (DDL, API schemas). It describes 'what' but not 'how' for AI implementation.
 
 
-**Score justification:** The implementability is low because the spec describes diagrams with no embedded diagram code for an AI to use. Testability is capped at 20 because ac_count is 0.
+**Score justification:** The low implementability score is due to the lack of DDL or explicit contracts for the described database. Testability is capped at 20 because ac_count is 0.
 
 ---
 
@@ -17,19 +17,20 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 30 | 10.5 |
-| Completeness | 20% | 70 | 14.0 |
-| Alignment | 15% | 0 | 0.0 |
+| Completeness | 20% | 80 | 16.0 |
+| Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 20 | 1.4 |
-| Maintainability | 3% | 100 | 3.0 |
+| Maintainability | 3% | 80 | 2.4 |
 
 ## Deterministic Metrics (pre-AI)
 
 ```json
 {
   "md_files": 4,
-  "overview_chars": 794,
+  "mmd_files": 8,
+  "overview_chars": 1490,
   "ac_chars": 1837,
   "ac_count": 0,
   "gwt_block_count": 0,
@@ -40,7 +41,8 @@
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
-  "links_total": 4,
+  "has_mermaid": true,
+  "links_total": 11,
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.0,
@@ -50,42 +52,36 @@
 
 ## Implementability Blockers
 
-- No mermaid diagram code is provided in the spec; only references to filenames.
-- No DDL for the database schema described in AC-D-01.
+- No SQL DDL provided for the database schema described in 01-er-diagram.mmd. This makes it impossible for an AI to implement the database.
+- No explicit contracts (e.g., JSON Schema, OpenAPI) for endpoints or data structures.
 
 ## Code Mapping
 
 **Implemented by:** _(none — pure-doc spec)_
-**Expected but missing:** `01-er-diagram.mmd`, `02-domain-design.mmd`, `03-endpoints-write.mmd`, `04-endpoints-read.mmd`, `05-auth-validation.mmd`, `06-permission-flow.mmd`, `07-rate-limit-flow.mmd`, `08-encryption-v3-flow.mmd`
+**Expected but missing:** _(none)_
 **Orphan code candidates:** _(none)_
 
 ## Findings
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | missing-contract | critical | 9/10 | The spec describes a set of diagrams but does not include the mermaid code for these diagrams within the spec itself. |
-| 2 | missing-contract | high | 8/10 | AC-D-01 refers to a database schema without providing the actual DDL for an AI to implement. |
-| 3 | missing-spec | medium | 5/10 | The spec lists diagram files in its inventory (e.g., '01-er-diagram.mmd') but these files are not found in the provided code implementation index. |
-| 4 | untestable | medium | 4/10 | The spec has 0 acceptance criteria actions (ac_count), making it difficult for an AI to objectively verify implementation. |
+| 1 | missing-contract | high | 8/10 | The ER diagram (01-er-diagram.mmd) describes a database schema but lacks the corresponding SQL DDL. |
+| 2 | missing-contract | high | 7/10 | The spec describes multiple endpoints (write and read) but provides no explicit contracts (e.g., JSON Schema or OpenAPI) for their request/response bodies or parameters. |
+| 3 | untestable | medium | 5/10 | There are no verifiable acceptance criteria (ac_count = 0). While there is an 'acceptance-criteria.md' it lists criteria for the diagrams themselves, not the system being diagrammed. |
 
 ### Detail + Proposed Corrections
 
-#### 1. [CRITICAL] The spec describes a set of diagrams but does not include the mermaid code for these diagrams within the spec itself.
-- **Category:** missing-contract  |  **Impact:** 9/10
-- **Evidence:** Overview lists files like '01-er-diagram.mmd' but these are not present in the spec module or the provided code index. AC-D-01 refers to '01-er-diagram.mmd' and database schema without providing the DDL.
-- **Proposed correction:** Embed the mermaid diagram code directly into the spec using code blocks, and if referring to a database, inline the DDL.
-
-#### 2. [HIGH] AC-D-01 refers to a database schema without providing the actual DDL for an AI to implement.
+#### 1. [HIGH] The ER diagram (01-er-diagram.mmd) describes a database schema but lacks the corresponding SQL DDL.
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** AC-D-01: '`01-er-diagram.mmd` includes every table from `spec/22-git-logs-v2/02-database-schema.md` (Profile, RoleAssignment, RolePermission, GitProfile, Repo, RepoVersion, Pipeline, LogEntry, ErrorLogEntry, App, AppLink, History, Action, AuditTrail, MigrationState + lookup tables).'
-- **Proposed correction:** Include the complete SQL DDL for all mentioned tables within the spec, or link to a definitive, inlined source within the spec module.
+- **Evidence:** File: 01-er-diagram.mmd (3665 chars) - Full ER schema. Deterministic metrics: has_sql_ddl=false
+- **Proposed correction:** Add the full SQL DDL for the ER diagram in 01-er-diagram.mmd, either inline or referenced as a separate file.
 
-#### 3. [MEDIUM] The spec lists diagram files in its inventory (e.g., '01-er-diagram.mmd') but these files are not found in the provided code implementation index.
-- **Category:** missing-spec  |  **Impact:** 5/10
-- **Evidence:** Overview inventory lists files such as '01-er-diagram.mmd', '02-domain-design.mmd', etc., which are absent from the 'ACTUAL CODE IMPLEMENTATION INDEX'.
-- **Proposed correction:** Either include the diagram files themselves in the spec module or clearly state that the spec only describes the *contents* of such diagrams, not the diagrams themselves.
+#### 2. [HIGH] The spec describes multiple endpoints (write and read) but provides no explicit contracts (e.g., JSON Schema or OpenAPI) for their request/response bodies or parameters.
+- **Category:** missing-contract  |  **Impact:** 7/10
+- **Evidence:** Files: 03-endpoints-write.mmd, 04-endpoints-read.mmd. Deterministic metrics: has_json_schema=false, has_yaml_openapi=false
+- **Proposed correction:** Provide OpenAPI or JSON Schema definitions for all described endpoints, including request/response structures and parameter definitions.
 
-#### 4. [MEDIUM] The spec has 0 acceptance criteria actions (ac_count), making it difficult for an AI to objectively verify implementation.
-- **Category:** untestable  |  **Impact:** 4/10
-- **Evidence:** Deterministic metrics show ac_count == 0.
-- **Proposed correction:** Reformulate acceptance criteria using Given/When/Then (GWT) blocks for clear, verifiable actions.
+#### 3. [MEDIUM] There are no verifiable acceptance criteria (ac_count = 0). While there is an 'acceptance-criteria.md' it lists criteria for the diagrams themselves, not the system being diagrammed.
+- **Category:** untestable  |  **Impact:** 5/10
+- **Evidence:** Deterministic metrics: ac_count=0. File: 97-acceptance-criteria.md describes AC-D-01..10 specific to diagrams.
+- **Proposed correction:** Add concrete, verifiable acceptance criteria for the *system* described by the diagrams, using GWT (Given/When/Then) format where appropriate. Link these to corresponding sections of the spec.
