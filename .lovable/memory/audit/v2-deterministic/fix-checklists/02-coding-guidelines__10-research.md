@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/10-research`
 
 **Generated:** 2026-04-25  
-**Current score:** 66/100 (C)  
+**Current score:** 63/100 (C)  
 **Implementability:** 30/100  
 **Estimated effort:** ~40 min  
 **Impact-weighted backlog:** 16 points

@@ -8,7 +8,7 @@
 > Deterministic score 84/100 (B) for spec/14-update.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3. Gates active: 0.
 
 ---
 

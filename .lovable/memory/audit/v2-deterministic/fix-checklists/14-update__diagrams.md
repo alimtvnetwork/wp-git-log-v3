@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/14-update/diagrams`
 
 **Generated:** 2026-04-25  
-**Current score:** 67/100 (C)  
+**Current score:** 65/100 (C)  
 **Implementability:** 35/100  
 **Estimated effort:** ~40 min  
 **Impact-weighted backlog:** 16 points

@@ -8,7 +8,7 @@
 > Deterministic score 67/100 (C) for spec/02-coding-guidelines/23-app-database.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 

@@ -8,7 +8,7 @@
 > Deterministic score 95/100 (A+) for spec/18-wp-plugin-how-to.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.
 
 ---
 

@@ -1,9 +1,9 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-25  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
-**Category:** Auditor (AI-driven by default; **deterministic mode** available)  
+**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates**)  
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
 
 ---
@@ -118,7 +118,41 @@ Deterministic mode bypasses the AI gateway entirely and scores each module from 
 - **When** the script runs,
 - **Then** it MUST complete with exit code 0 (no network call, no import of `lovable_ai`).
 
+## Hard scoring gates
+
+After the rubric computes raw per-dimension scores, a fixed table of **hard gates** is applied. Each gate caps ONE dimension when its predicate (a function of `metrics`) is true. Gates run in both deterministic AND AI mode — the AI cannot exceed these ceilings even if it gives an over-generous score.
+
+| Gate id | Dimension | Cap | Trigger |
+|---------|-----------|----:|---------|
+| `G-LINK-01` | consistency | 70 | `links_broken > 0` |
+| `G-LINK-02` | alignment | 60 | `links_broken >= 3` |
+| `G-AC-01`   | testability | 20 | `ac_count == 0` |
+| `G-AC-02`   | testability | 60 | `ac_count > 0 and gwt_block_count == 0` |
+| `G-CON-01`  | implementability | 50 | No `sql/json/ts/yaml` contract block in body |
+| `G-CON-02`  | implementability | 30 | `overview_chars < 500` |
+| `G-WAF-01`  | clarity | 70 | `waffle_per_kchar > 3` |
+| `G-WAF-02`  | clarity | 50 | `waffle_per_kchar > 6` |
+| `G-CR-01`   | maintainability | 60 | Missing `99-consistency-report.md` |
+| `G-TODO-01` | completeness | 70 | `todo_density >= 3` |
+
+The result envelope adds two new top-level keys:
+- `raw_scores` — pre-gate rubric output (so reductions are visible).
+- `applied_gates` — list of `{id, dimension, cap, before, after, active, rationale}`. Gate is `active=true` only when it actually lowered the score; `active=false` means the predicate fired but the rubric was already at/below the cap.
+
+A companion script renders these into a human report — see §16 [`16-generate-gate-report.md`](./16-generate-gate-report.md).
+
+### AC-31-09 — Hard gates apply in both modes
+- **Given** any module whose `links_broken > 0`,
+- **When** the audit runs in deterministic OR AI mode,
+- **Then** `scores.consistency` MUST be ≤ 70 AND `applied_gates` MUST contain an entry with `id="G-LINK-01"` and `active=true` (when the raw score exceeded 70).
+
+### AC-31-10 — Raw scores are preserved for audit trail
+- **Given** any audited module,
+- **When** the result envelope is read,
+- **Then** it MUST contain `raw_scores` (pre-gate) and `scores` (post-gate), and `weighted(scores) <= weighted(raw_scores)` for every module.
+
 ## Cross-references
 
 - §13 [`13-generate-gwt-acceptance.md`](./13-generate-gwt-acceptance.md) — consumes `raw-results.json`.
+- §16 [`16-generate-gate-report.md`](./16-generate-gate-report.md) — explains which gate caps each module.
 - §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md) — predecessor.

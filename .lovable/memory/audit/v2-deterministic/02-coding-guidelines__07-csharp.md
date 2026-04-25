@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **73/100 (C)**  
+**Implementability Score:** **71/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 73/100 (C) for spec/02-coding-guidelines/07-csharp.
+> Deterministic score 71/100 (C) for spec/02-coding-guidelines/07-csharp.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17. Gates active: 1.
 
 ---
 
@@ -21,7 +21,7 @@
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 80 | 5.6 |
+| Testability | 7% | 60 | 4.2 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)

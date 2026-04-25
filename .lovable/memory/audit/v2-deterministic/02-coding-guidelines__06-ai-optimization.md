@@ -8,7 +8,7 @@
 > Deterministic score 69/100 (C) for spec/02-coding-guidelines/06-ai-optimization.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.13.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.13. Gates active: 0.
 
 ---
 

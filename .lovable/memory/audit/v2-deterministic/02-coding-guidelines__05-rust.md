@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **80/100 (B)**  
+**Implementability Score:** **79/100 (B)**  
 **Blast radius:** 3/10
 
-> Deterministic score 80/100 (B) for spec/02-coding-guidelines/05-rust.
+> Deterministic score 79/100 (B) for spec/02-coding-guidelines/05-rust.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=0, broken_links=0, waffle/kchar=0.27.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=0, broken_links=0, waffle/kchar=0.27. Gates active: 1.
 
 ---
 
@@ -21,7 +21,7 @@
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 76 | 5.3 |
+| Testability | 7% | 60 | 4.2 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)

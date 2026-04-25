@@ -284,6 +284,72 @@ For findings, prefer category=missing-contract when DDL/enums/schemas are
 absent; broken-link when links don't resolve. blast_radius=10 for foundational
 specs (enums, error codes, error envelope); 0 for leaf docs."""
 
+# ---------------- hard scoring gates ----------------
+# Each gate caps ONE dimension when its trigger fires. Gates run AFTER the
+# rubric so a module's final score never violates these invariants. Every
+# applied gate is recorded so the gate report can explain exactly which rule
+# pulled each dimension down — no silent ceilings.
+#
+# Schema: id, dimension, cap, predicate(metrics)->bool, rationale
+HARD_GATES = [
+    {"id": "G-LINK-01", "dimension": "consistency",     "cap": 70,
+     "predicate": lambda m: m["links_broken"] > 0,
+     "rationale": "Any broken cross-spec link caps consistency at 70 — readers cannot trust references."},
+    {"id": "G-LINK-02", "dimension": "alignment",       "cap": 60,
+     "predicate": lambda m: m["links_broken"] >= 3,
+     "rationale": "≥3 broken links suggests structural drift; alignment with the wider spec tree is unreliable."},
+    {"id": "G-AC-01",   "dimension": "testability",     "cap": 20,
+     "predicate": lambda m: m["ac_count"] == 0,
+     "rationale": "Zero acceptance criteria → nothing is objectively verifiable."},
+    {"id": "G-AC-02",   "dimension": "testability",     "cap": 60,
+     "predicate": lambda m: m["ac_count"] > 0 and m["gwt_block_count"] == 0,
+     "rationale": "ACs exist but none use Given/When/Then — testability degraded."},
+    {"id": "G-CON-01",  "dimension": "implementability","cap": 50,
+     "predicate": lambda m: not (m["has_sql_ddl"] or m["has_json_schema"] or m["has_ts_enums"] or m["has_yaml_openapi"]),
+     "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) — an AI cannot generate code from prose alone."},
+    {"id": "G-CON-02",  "dimension": "implementability","cap": 30,
+     "predicate": lambda m: m["overview_chars"] < 500,
+     "rationale": "Overview <500 chars is a stub; no AI can implement from this."},
+    {"id": "G-WAF-01",  "dimension": "clarity",         "cap": 70,
+     "predicate": lambda m: m["waffle_per_kchar"] > 3,
+     "rationale": "Waffle density >3 per 1k chars — too many should/may/might to act on with confidence."},
+    {"id": "G-WAF-02",  "dimension": "clarity",         "cap": 50,
+     "predicate": lambda m: m["waffle_per_kchar"] > 6,
+     "rationale": "Waffle density >6 per 1k chars — language is essentially advisory, not normative."},
+    {"id": "G-CR-01",   "dimension": "maintainability", "cap": 60,
+     "predicate": lambda m: not m["consistency_report"],
+     "rationale": "Missing 99-consistency-report.md — drift cannot be tracked between releases."},
+    {"id": "G-TODO-01", "dimension": "completeness",    "cap": 70,
+     "predicate": lambda m: m["todo_density"] >= 3,
+     "rationale": "≥3 TODO/TBD/FIXME markers — module is explicitly incomplete."},
+]
+
+def apply_gates(scores: dict, metrics: dict) -> tuple[dict, list[dict]]:
+    """Return (capped_scores, applied_gate_records)."""
+    capped = dict(scores)
+    applied: list[dict] = []
+    for gate in HARD_GATES:
+        if not gate["predicate"](metrics):
+            continue
+        dim = gate["dimension"]
+        before = capped[dim]
+        cap = gate["cap"]
+        if before <= cap:
+            # Gate would not lower the score — record as passive (informational)
+            applied.append({
+                "id": gate["id"], "dimension": dim, "cap": cap,
+                "before": before, "after": before, "active": False,
+                "rationale": gate["rationale"],
+            })
+            continue
+        capped[dim] = cap
+        applied.append({
+            "id": gate["id"], "dimension": dim, "cap": cap,
+            "before": before, "after": cap, "active": True,
+            "rationale": gate["rationale"],
+        })
+    return capped, applied
+
 # ---------------- deterministic scorer ----------------
 # Pure-function scoring derived ONLY from deterministic metrics + folder facts.
 # No AI, no clocks, no randomness — same input → same output, byte-for-byte.
@@ -345,7 +411,7 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     if m["todo_density"] == 0:  maint += 10
     maint = max(0, min(100, maint))
 
-    scores = {
+    raw_scores = {
         "implementability": impl,
         "completeness":     comp,
         "alignment":        align,
@@ -354,6 +420,8 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         "testability":      test,
         "maintainability":  maint,
     }
+    # Apply hard gates AFTER the rubric so caps are explicit + traceable
+    scores, applied_gates = apply_gates(raw_scores, m)
 
     # ---- findings (sorted, deterministic) ----
     findings = []
@@ -422,10 +490,13 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
 
     return {
         "scores": scores,
+        "raw_scores": raw_scores,
+        "applied_gates": applied_gates,
         "score_justification": (
             f"Deterministic rubric: contracts={int(m['has_sql_ddl'])+int(m['has_json_schema'])+int(m['has_ts_enums'])}/3, "
             f"ac={m['ac_count']}, gwt={m['gwt_block_count']}, broken_links={m['links_broken']}, "
-            f"waffle/kchar={m['waffle_per_kchar']}."
+            f"waffle/kchar={m['waffle_per_kchar']}. "
+            f"Gates active: {sum(1 for g in applied_gates if g['active'])}."
         ),
         "implementability_blockers": blockers,
         "code_mapping": {
@@ -443,7 +514,7 @@ def audit_module(folder: Path, metrics: dict):
     if DETERMINISTIC:
         return deterministic_score(folder, metrics)
     digest = build_digest(folder, metrics)
-    return call_ai_structured(
+    result = call_ai_structured(
         prompt=digest,
         tool_name="emit_audit_v2",
         tool_description="Emit AI-implementability audit",
@@ -451,6 +522,13 @@ def audit_module(folder: Path, metrics: dict):
         system=SYSTEM,
         model=MODEL,
     )
+    # Apply hard gates to AI scores too — caps are non-negotiable
+    raw_scores = dict(result["scores"])
+    capped, applied_gates = apply_gates(raw_scores, metrics)
+    result["scores"] = capped
+    result["raw_scores"] = raw_scores
+    result["applied_gates"] = applied_gates
+    return result
 
 def weighted(scores: dict) -> int:
     return round(sum(scores[k] * w / 100 for k, w in WEIGHTS.items()))

@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/02-error-architecture`
 
 **Generated:** 2026-04-25  
-**Current score:** 82/100 (B)  
+**Current score:** 80/100 (B)  
 **Implementability:** 65/100  
 **Estimated effort:** ~10 min  
 **Impact-weighted backlog:** 6 points

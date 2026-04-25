@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **66/100 (C)**  
+**Implementability Score:** **64/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 66/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.
+> Deterministic score 64/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.09.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.09. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 30 | 10.5 |
 | Completeness | 20% | 70 | 14.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 90 | 6.3 |
 | Maintainability | 3% | 90 | 2.7 |

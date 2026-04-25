@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **75/100 (B)**  
+**Implementability Score:** **72/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 75/100 (B) for spec/02-coding-guidelines/03-golang/04-golang-standards-reference.
+> Deterministic score 72/100 (C) for spec/02-coding-guidelines/03-golang/04-golang-standards-reference.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=1, waffle/kchar=0.1.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=1, waffle/kchar=0.1. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 40 | 14.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |

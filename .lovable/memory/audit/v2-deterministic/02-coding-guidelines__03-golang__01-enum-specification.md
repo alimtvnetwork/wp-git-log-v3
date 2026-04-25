@@ -8,7 +8,7 @@
 > Deterministic score 63/100 (C) for spec/02-coding-guidelines/03-golang/01-enum-specification.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.11.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 

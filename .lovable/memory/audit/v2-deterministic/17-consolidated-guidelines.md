@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **86/100 (A)**  
+**Implementability Score:** **84/100 (B)**  
 **Blast radius:** 7/10
 
-> Deterministic score 86/100 (A) for spec/17-consolidated-guidelines.
+> Deterministic score 84/100 (B) for spec/17-consolidated-guidelines.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.06.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.06. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 95 | 33.2 |
 | Completeness | 20% | 55 | 11.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 90 | 6.3 |
 | Maintainability | 3% | 90 | 2.7 |

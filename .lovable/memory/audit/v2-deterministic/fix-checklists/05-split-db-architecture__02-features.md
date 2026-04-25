@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/05-split-db-architecture/02-features`
 
 **Generated:** 2026-04-25  
-**Current score:** 81/100 (B)  
+**Current score:** 79/100 (B)  
 **Implementability:** 75/100  
 **Estimated effort:** ~10 min  
 **Impact-weighted backlog:** 6 points

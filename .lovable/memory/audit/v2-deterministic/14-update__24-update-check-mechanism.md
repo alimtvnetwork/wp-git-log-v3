@@ -8,7 +8,7 @@
 > Deterministic score 75/100 (B) for spec/14-update/24-update-check-mechanism.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.06.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.06. Gates active: 0.
 
 ---
 

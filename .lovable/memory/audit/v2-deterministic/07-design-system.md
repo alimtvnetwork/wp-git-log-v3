@@ -8,7 +8,7 @@
 > Deterministic score 71/100 (C) for spec/07-design-system.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.19.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.
 
 ---
 

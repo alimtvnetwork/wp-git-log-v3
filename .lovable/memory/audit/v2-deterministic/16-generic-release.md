@@ -8,7 +8,7 @@
 > Deterministic score 82/100 (B) for spec/16-generic-release.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.
 
 ---
 

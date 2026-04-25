@@ -8,7 +8,7 @@
 > Deterministic score 89/100 (A) for spec/04-database-conventions.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.14.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.14. Gates active: 0.
 
 ---
 

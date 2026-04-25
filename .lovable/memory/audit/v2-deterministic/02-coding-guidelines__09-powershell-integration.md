@@ -8,7 +8,7 @@
 > Deterministic score 68/100 (C) for spec/02-coding-guidelines/09-powershell-integration.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 

@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/02-error-architecture/05-response-envelope`
 
 **Generated:** 2026-04-25  
-**Current score:** 77/100 (B)  
+**Current score:** 75/100 (B)  
 **Implementability:** 55/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

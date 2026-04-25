@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/01-error-resolution/05-debugging-guides`
 
 **Generated:** 2026-04-25  
-**Current score:** 76/100 (B)  
+**Current score:** 74/100 (C)  
 **Implementability:** 50/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/03-golang/04-golang-standards-reference`
 
 **Generated:** 2026-04-25  
-**Current score:** 75/100 (B)  
+**Current score:** 72/100 (C)  
 **Implementability:** 40/100  
 **Estimated effort:** ~45 min  
 **Impact-weighted backlog:** 21 points

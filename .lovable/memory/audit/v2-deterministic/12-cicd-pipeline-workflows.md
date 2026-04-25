@@ -8,7 +8,7 @@
 > Deterministic score 88/100 (A) for spec/12-cicd-pipeline-workflows.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.17.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.17. Gates active: 0.
 
 ---
 

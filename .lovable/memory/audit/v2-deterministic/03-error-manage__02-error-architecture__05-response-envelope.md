@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **77/100 (B)**  
+**Implementability Score:** **75/100 (B)**  
 **Blast radius:** 2/10
 
-> Deterministic score 77/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.
+> Deterministic score 75/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.06.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.06. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 55 | 19.2 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |

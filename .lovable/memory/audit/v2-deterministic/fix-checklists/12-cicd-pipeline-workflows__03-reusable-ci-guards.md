@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/12-cicd-pipeline-workflows/03-reusable-ci-guards`
 
 **Generated:** 2026-04-25  
-**Current score:** 80/100 (B)  
+**Current score:** 78/100 (B)  
 **Implementability:** 65/100  
 **Estimated effort:** ~10 min  
 **Impact-weighted backlog:** 6 points

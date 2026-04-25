@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/06-cicd-integration`
 
 **Generated:** 2026-04-25  
-**Current score:** 87/100 (A)  
+**Current score:** 85/100 (A)  
 **Implementability:** 75/100  
 **Estimated effort:** ~40 min  
 **Impact-weighted backlog:** 6 points

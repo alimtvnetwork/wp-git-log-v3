@@ -8,7 +8,7 @@
 > Deterministic score 69/100 (C) for spec/24-app-design-system-and-ui.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 

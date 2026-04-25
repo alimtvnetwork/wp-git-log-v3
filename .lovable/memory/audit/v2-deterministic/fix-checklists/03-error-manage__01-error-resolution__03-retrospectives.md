@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/01-error-resolution/03-retrospectives`
 
 **Generated:** 2026-04-25  
-**Current score:** 81/100 (B)  
+**Current score:** 79/100 (B)  
 **Implementability:** 65/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

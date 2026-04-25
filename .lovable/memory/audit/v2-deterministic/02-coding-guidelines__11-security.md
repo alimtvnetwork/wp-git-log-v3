@@ -8,7 +8,7 @@
 > Deterministic score 73/100 (C) for spec/02-coding-guidelines/11-security.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.13.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.
 
 ---
 

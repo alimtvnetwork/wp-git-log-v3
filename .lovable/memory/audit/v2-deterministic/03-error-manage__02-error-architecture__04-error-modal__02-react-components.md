@@ -8,7 +8,7 @@
 > Deterministic score 66/100 (C) for spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 

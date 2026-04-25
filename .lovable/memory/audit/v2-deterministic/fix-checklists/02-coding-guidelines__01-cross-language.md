@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/01-cross-language`
 
 **Generated:** 2026-04-25  
-**Current score:** 87/100 (A)  
+**Current score:** 84/100 (B)  
 **Implementability:** 95/100  
 **Estimated effort:** ~20 min  
 **Impact-weighted backlog:** 11 points

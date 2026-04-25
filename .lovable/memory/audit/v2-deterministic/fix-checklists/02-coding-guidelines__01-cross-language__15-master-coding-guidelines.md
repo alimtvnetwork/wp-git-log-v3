@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines`
 
 **Generated:** 2026-04-25  
-**Current score:** 76/100 (B)  
+**Current score:** 74/100 (C)  
 **Implementability:** 50/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

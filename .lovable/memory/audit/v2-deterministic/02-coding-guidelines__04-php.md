@@ -8,7 +8,7 @@
 > Deterministic score 79/100 (B) for spec/02-coding-guidelines/04-php.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.09.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 

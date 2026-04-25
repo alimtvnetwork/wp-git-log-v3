@@ -8,7 +8,7 @@
 > Deterministic score 76/100 (B) for spec/22-git-logs-v2.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.08.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.08. Gates active: 0.
 
 ---
 

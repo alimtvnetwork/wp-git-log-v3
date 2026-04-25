@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/01-error-resolution/04-verification-patterns`
 
 **Generated:** 2026-04-25  
-**Current score:** 82/100 (B)  
+**Current score:** 80/100 (B)  
 **Implementability:** 75/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

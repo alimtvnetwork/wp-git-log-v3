@@ -8,7 +8,7 @@
 > Deterministic score 64/100 (C) for spec/02-coding-guidelines/01-cross-language/16-static-analysis.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.22.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.22. Gates active: 0.
 
 ---
 

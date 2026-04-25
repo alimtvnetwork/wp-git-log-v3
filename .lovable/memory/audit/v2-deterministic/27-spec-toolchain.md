@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **74/100 (C)**  
+**Implementability Score:** **73/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 74/100 (C) for spec/27-spec-toolchain.
+> Deterministic score 73/100 (C) for spec/27-spec-toolchain.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.12.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.15. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 40 | 14.0 |
-| Completeness | 20% | 75 | 15.0 |
+| Completeness | 20% | 70 | 14.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -28,16 +28,16 @@
 
 ```json
 {
-  "md_files": 34,
+  "md_files": 35,
   "mmd_files": 0,
-  "overview_chars": 8185,
+  "overview_chars": 8358,
   "ac_chars": 3934,
   "ac_count": 10,
   "gwt_block_count": 10,
   "consistency_report": true,
-  "code_blocks_total": 30,
+  "code_blocks_total": 31,
   "code_blocks_by_lang": {
-    "bash": 24,
+    "bash": 25,
     "powershell": 1,
     "toml": 2,
     "plain": 1,
@@ -49,10 +49,10 @@
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 112,
+  "links_total": 118,
   "links_broken": 0,
-  "todo_density": 3,
-  "waffle_per_kchar": 0.12,
+  "todo_density": 6,
+  "waffle_per_kchar": 0.15,
   "child_modules": 0
 }
 ```
@@ -71,17 +71,17 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 3 TODO/TBD/FIXME marker(s) in module body |
+| 1 | drift | low | 3/10 | 6 TODO/TBD/FIXME marker(s) in module body |
 | 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 3 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 6 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=3
+- **Evidence:** todo_density=6
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
 
 #### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"bash": 24, "ini": 1, "markdown": 1, "plain": 1, "powershell": 1, "toml": 2}
+- **Evidence:** code_blocks_by_lang={"bash": 25, "ini": 1, "markdown": 1, "plain": 1, "powershell": 1, "toml": 2}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

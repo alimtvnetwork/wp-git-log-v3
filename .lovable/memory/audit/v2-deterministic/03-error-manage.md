@@ -8,7 +8,7 @@
 > Deterministic score 81/100 (B) for spec/03-error-manage.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 

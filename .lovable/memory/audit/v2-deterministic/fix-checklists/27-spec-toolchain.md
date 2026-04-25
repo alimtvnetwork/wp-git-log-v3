@@ -1,9 +1,9 @@
 # Fix Checklist — `spec/27-spec-toolchain`
 
 **Generated:** 2026-04-25  
-**Current score:** 74/100 (C)  
+**Current score:** 73/100 (C)  
 **Implementability:** 40/100  
-**Estimated effort:** ~65 min  
+**Estimated effort:** ~95 min  
 **Impact-weighted backlog:** 12 points
 
 ## Actions
@@ -11,7 +11,7 @@
 | # | Pri | Category | Target file | Effort | Action |
 |---:|:--:|---|---|---:|---|
 | 1 | **P0** | missing-contract | `spec/27-spec-toolchain/00-overview.md` | 30m | Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file — paste the contract directly. |
-| 2 | **P3** | drift | `spec/27-spec-toolchain/*.md` | 30m | Resolve 3 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC. |
+| 2 | **P3** | drift | `spec/27-spec-toolchain/*.md` | 60m | Resolve 6 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC. |
 | 3 | **P3** | maintainability | `spec/27-spec-toolchain/98-changelog.md` | 5m | After applying the above fixes, bump version (≥ minor) and add a row to `98-changelog.md` summarising what changed. |
 
 ## Detail + Acceptance test for each action
@@ -26,11 +26,11 @@
 
 ### 2. [P3] drift — `spec/27-spec-toolchain/*.md`
 
-**Action:** Resolve 3 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.
+**Action:** Resolve 6 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.
 
 **Acceptance test:** Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.
 
-**Effort estimate:** ~30 minutes
+**Effort estimate:** ~60 minutes
 
 ### 3. [P3] maintainability — `spec/27-spec-toolchain/98-changelog.md`
 
@@ -48,14 +48,14 @@
   "ac_count": 10,
   "child_modules": 0,
   "code_blocks_by_lang": {
-    "bash": 24,
+    "bash": 25,
     "ini": 1,
     "markdown": 1,
     "plain": 1,
     "powershell": 1,
     "toml": 2
   },
-  "code_blocks_total": 30,
+  "code_blocks_total": 31,
   "consistency_report": true,
   "gwt_block_count": 10,
   "has_json_schema": false,
@@ -64,11 +64,11 @@
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "links_broken": 0,
-  "links_total": 112,
-  "md_files": 34,
+  "links_total": 118,
+  "md_files": 35,
   "mmd_files": 0,
-  "overview_chars": 8185,
-  "todo_density": 3,
-  "waffle_per_kchar": 0.12
+  "overview_chars": 8358,
+  "todo_density": 6,
+  "waffle_per_kchar": 0.15
 }
 ```

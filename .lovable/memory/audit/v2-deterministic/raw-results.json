@@ -1,5 +1,25 @@
 [
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -53,7 +73,16 @@
       "waffle_per_kchar": 0.03
     },
     "module": ".",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.03.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 50,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.03. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -67,6 +96,44 @@
     "weighted_overall": 59
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 50,
+        "before": 50,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 60,
+        "dimension": "alignment",
+        "id": "G-LINK-02",
+        "rationale": "\u22653 broken links suggests structural drift; alignment with the wider spec tree is unreliable."
+      },
+      {
+        "active": true,
+        "after": 60,
+        "before": 64,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -139,8 +206,7 @@
       "waffle_per_kchar": 0.33
     },
     "module": "01-spec-authoring-guide",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=4, gwt=0, broken_links=11, waffle/kchar=0.33.",
-    "scores": {
+    "raw_scores": {
       "alignment": 40,
       "clarity": 100,
       "completeness": 60,
@@ -149,10 +215,40 @@
       "maintainability": 90,
       "testability": 64
     },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=4, gwt=0, broken_links=11, waffle/kchar=0.33. Gates active: 1.",
+    "scores": {
+      "alignment": 40,
+      "clarity": 100,
+      "completeness": 60,
+      "consistency": 50,
+      "implementability": 40,
+      "maintainability": 90,
+      "testability": 60
+    },
     "verdict": "Deterministic score 54/100 (D) for spec/01-spec-authoring-guide.",
     "weighted_overall": 54
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": true,
+        "after": 60,
+        "before": 70,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -210,8 +306,7 @@
       "waffle_per_kchar": 0.1
     },
     "module": "02-coding-guidelines",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=0, broken_links=1, waffle/kchar=0.1.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 85,
@@ -220,10 +315,40 @@
       "maintainability": 100,
       "testability": 70
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines.",
-    "weighted_overall": 82
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=0, broken_links=1, waffle/kchar=0.1. Gates active: 2.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 70,
+      "implementability": 70,
+      "maintainability": 100,
+      "testability": 60
+    },
+    "verdict": "Deterministic score 79/100 (B) for spec/02-coding-guidelines.",
+    "weighted_overall": 79
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 52,
+        "before": 52,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -248,7 +373,7 @@
         "severity": "medium"
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
@@ -285,8 +410,7 @@
       "waffle_per_kchar": 0.14
     },
     "module": "02-coding-guidelines/01-cross-language",
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=1, waffle/kchar=0.14.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 70,
@@ -295,10 +419,31 @@
       "maintainability": 100,
       "testability": 52
     },
-    "verdict": "Deterministic score 87/100 (A) for spec/02-coding-guidelines/01-cross-language.",
-    "weighted_overall": 87
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=1, waffle/kchar=0.14. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 70,
+      "implementability": 95,
+      "maintainability": 100,
+      "testability": 52
+    },
+    "verdict": "Deterministic score 84/100 (B) for spec/02-coding-guidelines/01-cross-language.",
+    "weighted_overall": 84
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 84,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -315,7 +460,7 @@
         "severity": "high"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "implementability_blockers": [
       "2 broken cross-spec link(s)"
     ],
@@ -347,8 +492,7 @@
       "waffle_per_kchar": 0.2
     },
     "module": "02-coding-guidelines/01-cross-language/02-boolean-principles",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=2, waffle/kchar=0.2.",
-    "scores": {
+    "raw_scores": {
       "alignment": 80,
       "clarity": 100,
       "completeness": 90,
@@ -357,10 +501,40 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.",
-    "weighted_overall": 76
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=2, waffle/kchar=0.2. Gates active: 1.",
+    "scores": {
+      "alignment": 80,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 74/100 (C) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.",
+    "weighted_overall": 74
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": true,
+        "after": 70,
+        "before": 75,
+        "cap": 70,
+        "dimension": "completeness",
+        "id": "G-TODO-01",
+        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -385,7 +559,7 @@
         "severity": "low"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
@@ -416,8 +590,7 @@
       "waffle_per_kchar": 0.08
     },
     "module": "02-coding-guidelines/01-cross-language/04-code-style",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.08.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -426,10 +599,31 @@
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
-    "weighted_overall": 75
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.08. Gates active: 2.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 90,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
+    "weighted_overall": 72
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -446,7 +640,7 @@
         "severity": "high"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
@@ -477,8 +671,7 @@
       "waffle_per_kchar": 0.13
     },
     "module": "02-coding-guidelines/01-cross-language/15-master-coding-guidelines",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.13.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 80,
@@ -487,10 +680,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
-    "weighted_overall": 76
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.13. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 74/100 (C) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
+    "weighted_overall": 74
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -561,7 +775,16 @@
       "waffle_per_kchar": 0.22
     },
     "module": "02-coding-guidelines/01-cross-language/16-static-analysis",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.22.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 40,
+      "consistency": 100,
+      "implementability": 50,
+      "maintainability": 90,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.22. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -575,6 +798,17 @@
     "weighted_overall": 64
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 52,
+        "before": 52,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -627,7 +861,16 @@
       "waffle_per_kchar": 0.09
     },
     "module": "02-coding-guidelines/02-typescript",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.09.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 55,
+      "consistency": 100,
+      "implementability": 50,
+      "maintainability": 90,
+      "testability": 52
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -641,6 +884,26 @@
     "weighted_overall": 70
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 52,
+        "before": 52,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -694,7 +957,16 @@
       "waffle_per_kchar": 0.19
     },
     "module": "02-coding-guidelines/03-golang",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.19.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 60,
+      "consistency": 100,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 52
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -708,6 +980,26 @@
     "weighted_overall": 68
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -764,7 +1056,16 @@
       "waffle_per_kchar": 0.11
     },
     "module": "02-coding-guidelines/03-golang/01-enum-specification",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.11.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 50,
+      "consistency": 100,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -778,6 +1079,26 @@
     "weighted_overall": 63
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -802,7 +1123,7 @@
         "severity": "high"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "implementability_blockers": [
       "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
@@ -832,8 +1153,7 @@
       "waffle_per_kchar": 0.1
     },
     "module": "02-coding-guidelines/03-golang/04-golang-standards-reference",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=1, waffle/kchar=0.1.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 90,
@@ -842,10 +1162,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/02-coding-guidelines/03-golang/04-golang-standards-reference.",
-    "weighted_overall": 75
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=1, waffle/kchar=0.1. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 70,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/03-golang/04-golang-standards-reference.",
+    "weighted_overall": 72
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -891,7 +1232,16 @@
       "waffle_per_kchar": 0.09
     },
     "module": "02-coding-guidelines/04-php",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.09.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 100,
+      "consistency": 100,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -905,6 +1255,17 @@
     "weighted_overall": 79
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -953,8 +1314,7 @@
       "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines/04-php/07-php-standards-reference",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.12.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 90,
@@ -963,10 +1323,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/02-coding-guidelines/04-php/07-php-standards-reference.",
-    "weighted_overall": 83
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.12. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 81/100 (B) for spec/02-coding-guidelines/04-php/07-php-standards-reference.",
+    "weighted_overall": 81
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 60,
+        "before": 76,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      }
+    ],
     "blast_radius": 3,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1012,8 +1393,7 @@
       "waffle_per_kchar": 0.27
     },
     "module": "02-coding-guidelines/05-rust",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=6, gwt=0, broken_links=0, waffle/kchar=0.27.",
-    "scores": {
+    "raw_scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 80,
@@ -1022,10 +1402,31 @@
       "maintainability": 100,
       "testability": 76
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/02-coding-guidelines/05-rust.",
-    "weighted_overall": 80
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=6, gwt=0, broken_links=0, waffle/kchar=0.27. Gates active: 1.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 60,
+      "maintainability": 100,
+      "testability": 60
+    },
+    "verdict": "Deterministic score 79/100 (B) for spec/02-coding-guidelines/05-rust.",
+    "weighted_overall": 79
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1075,7 +1476,16 @@
       "waffle_per_kchar": 0.13
     },
     "module": "02-coding-guidelines/06-ai-optimization",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.13.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 40,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1089,6 +1499,17 @@
     "weighted_overall": 69
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 60,
+        "before": 80,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1139,8 +1560,7 @@
       "waffle_per_kchar": 0.17
     },
     "module": "02-coding-guidelines/06-cicd-integration",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17.",
-    "scores": {
+    "raw_scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 85,
@@ -1149,10 +1569,40 @@
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 87/100 (A) for spec/02-coding-guidelines/06-cicd-integration.",
-    "weighted_overall": 87
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17. Gates active: 1.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 100,
+      "implementability": 75,
+      "maintainability": 100,
+      "testability": 60
+    },
+    "verdict": "Deterministic score 85/100 (A) for spec/02-coding-guidelines/06-cicd-integration.",
+    "weighted_overall": 85
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 60,
+        "before": 80,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1205,8 +1655,7 @@
       "waffle_per_kchar": 0.17
     },
     "module": "02-coding-guidelines/07-csharp",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17.",
-    "scores": {
+    "raw_scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
@@ -1215,10 +1664,40 @@
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 73/100 (C) for spec/02-coding-guidelines/07-csharp.",
-    "weighted_overall": 73
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17. Gates active: 1.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 100,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 60
+    },
+    "verdict": "Deterministic score 71/100 (C) for spec/02-coding-guidelines/07-csharp.",
+    "weighted_overall": 71
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1274,8 +1753,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/08-file-folder-naming",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -1284,10 +1762,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/02-coding-guidelines/08-file-folder-naming.",
-    "weighted_overall": 71
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 69/100 (C) for spec/02-coding-guidelines/08-file-folder-naming.",
+    "weighted_overall": 69
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1330,7 +1829,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/09-powershell-integration",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 65,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1344,6 +1852,26 @@
     "weighted_overall": 68
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1397,8 +1925,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/10-research",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 65,
@@ -1407,10 +1934,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 66/100 (C) for spec/02-coding-guidelines/10-research.",
-    "weighted_overall": 66
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 65,
+      "consistency": 70,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 63/100 (C) for spec/02-coding-guidelines/10-research.",
+    "weighted_overall": 63
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1455,7 +2003,16 @@
       "waffle_per_kchar": 0.13
     },
     "module": "02-coding-guidelines/11-security",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.13.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1469,6 +2026,17 @@
     "weighted_overall": 73
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1516,7 +2084,16 @@
       "waffle_per_kchar": 0.4
     },
     "module": "02-coding-guidelines/11-security/01-axios-version-control",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.4.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 50,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.4. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1530,6 +2107,26 @@
     "weighted_overall": 71
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1581,8 +2178,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/21-app",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 70,
@@ -1591,10 +2187,40 @@
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 67/100 (C) for spec/02-coding-guidelines/21-app.",
-    "weighted_overall": 67
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 70,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 65/100 (C) for spec/02-coding-guidelines/21-app.",
+    "weighted_overall": 65
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1648,8 +2274,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/22-app-issues",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 65,
@@ -1658,10 +2283,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 66/100 (C) for spec/02-coding-guidelines/22-app-issues.",
-    "weighted_overall": 66
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 65,
+      "consistency": 70,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 63/100 (C) for spec/02-coding-guidelines/22-app-issues.",
+    "weighted_overall": 63
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1704,7 +2350,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/23-app-database",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 60,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1718,6 +2373,17 @@
     "weighted_overall": 67
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1760,7 +2426,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/24-app-design-system-and-ui",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 60,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1774,6 +2449,7 @@
     "weighted_overall": 67
   },
   {
+    "applied_gates": [],
     "blast_radius": 8,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1809,7 +2485,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 100,
+      "consistency": 100,
+      "implementability": 45,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1823,6 +2508,17 @@
     "weighted_overall": 81
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1839,7 +2535,7 @@
         "severity": "high"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
@@ -1872,8 +2568,7 @@
       "waffle_per_kchar": 0.04
     },
     "module": "03-error-manage/01-error-resolution",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.04.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 85,
@@ -1882,10 +2577,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/03-error-manage/01-error-resolution.",
-    "weighted_overall": 76
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.04. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 74/100 (C) for spec/03-error-manage/01-error-resolution.",
+    "weighted_overall": 74
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1934,8 +2650,7 @@
       "waffle_per_kchar": 0.31
     },
     "module": "03-error-manage/01-error-resolution/03-retrospectives",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.31.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 80,
@@ -1944,10 +2659,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/03-error-manage/01-error-resolution/03-retrospectives.",
-    "weighted_overall": 81
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.31. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 79/100 (B) for spec/03-error-manage/01-error-resolution/03-retrospectives.",
+    "weighted_overall": 79
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1996,8 +2732,7 @@
       "waffle_per_kchar": 0.28
     },
     "module": "03-error-manage/01-error-resolution/04-verification-patterns",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.28.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 65,
@@ -2006,10 +2741,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
-    "weighted_overall": 82
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.28. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 65,
+      "consistency": 70,
+      "implementability": 75,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 80/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
+    "weighted_overall": 80
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2026,7 +2782,7 @@
         "severity": "high"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
@@ -2060,8 +2816,7 @@
       "waffle_per_kchar": 0.02
     },
     "module": "03-error-manage/01-error-resolution/05-debugging-guides",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.02.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 80,
@@ -2070,10 +2825,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/03-error-manage/01-error-resolution/05-debugging-guides.",
-    "weighted_overall": 76
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.02. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 74/100 (C) for spec/03-error-manage/01-error-resolution/05-debugging-guides.",
+    "weighted_overall": 74
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2090,7 +2866,7 @@
         "severity": "high"
       }
     ],
-    "grade": "B",
+    "grade": "C",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
@@ -2121,8 +2897,7 @@
       "waffle_per_kchar": 0.07
     },
     "module": "03-error-manage/01-error-resolution/app-issues",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.07.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -2131,10 +2906,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/03-error-manage/01-error-resolution/app-issues.",
-    "weighted_overall": 75
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.07. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 73/100 (C) for spec/03-error-manage/01-error-resolution/app-issues.",
+    "weighted_overall": 73
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2186,8 +2982,7 @@
       "waffle_per_kchar": 0.11
     },
     "module": "03-error-manage/02-error-architecture",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.11.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 85,
@@ -2196,10 +2991,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/03-error-manage/02-error-architecture.",
-    "weighted_overall": 82
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.11. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 80/100 (B) for spec/03-error-manage/02-error-architecture.",
+    "weighted_overall": 80
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2248,8 +3064,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/02-error-architecture/04-error-modal",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 90,
@@ -2258,10 +3073,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal.",
-    "weighted_overall": 83
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 81/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal.",
+    "weighted_overall": 81
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2309,7 +3145,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/02-error-architecture/04-error-modal/01-copy-formats",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 50,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2323,6 +3168,17 @@
     "weighted_overall": 71
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2371,7 +3227,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/02-error-architecture/04-error-modal/02-react-components",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 50,
+      "consistency": 100,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2385,6 +3250,17 @@
     "weighted_overall": 66
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2432,8 +3308,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 90,
@@ -2442,10 +3317,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference.",
-    "weighted_overall": 83
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 81/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference.",
+    "weighted_overall": 81
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2493,7 +3389,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/02-error-architecture/04-error-modal/04-color-themes",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 40,
+      "consistency": 100,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2507,6 +3412,17 @@
     "weighted_overall": 64
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2552,8 +3468,7 @@
       "waffle_per_kchar": 0.06
     },
     "module": "03-error-manage/02-error-architecture/05-response-envelope",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.06.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -2562,10 +3477,40 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 77/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
-    "weighted_overall": 77
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 55,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 75/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
+    "weighted_overall": 75
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2617,8 +3562,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/02-error-architecture/06-apperror-package",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 90,
@@ -2627,10 +3571,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/03-error-manage/02-error-architecture/06-apperror-package.",
-    "weighted_overall": 71
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 70,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 69/100 (C) for spec/03-error-manage/02-error-architecture/06-apperror-package.",
+    "weighted_overall": 69
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2678,7 +3643,16 @@
       "waffle_per_kchar": 0.09
     },
     "module": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.09.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 40,
+      "consistency": 100,
+      "implementability": 55,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2692,6 +3666,17 @@
     "weighted_overall": 66
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2740,8 +3725,7 @@
       "waffle_per_kchar": 0.11
     },
     "module": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.11.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 80,
@@ -2750,10 +3734,31 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics.",
-    "weighted_overall": 81
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.11. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 79/100 (B) for spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics.",
+    "weighted_overall": 79
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2804,8 +3809,7 @@
       "waffle_per_kchar": 0.05
     },
     "module": "03-error-manage/03-error-code-registry",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.05.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 85,
@@ -2814,10 +3818,40 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/03-error-manage/03-error-code-registry.",
-    "weighted_overall": 82
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.05. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 80/100 (B) for spec/03-error-manage/03-error-code-registry.",
+    "weighted_overall": 80
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2869,8 +3903,7 @@
       "waffle_per_kchar": 0.21
     },
     "module": "03-error-manage/03-error-code-registry/07-schemas",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.21.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 60,
@@ -2879,10 +3912,40 @@
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 65/100 (C) for spec/03-error-manage/03-error-code-registry/07-schemas.",
-    "weighted_overall": 65
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.21. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 60,
+      "consistency": 70,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 63/100 (C) for spec/03-error-manage/03-error-code-registry/07-schemas.",
+    "weighted_overall": 63
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2934,8 +3997,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/03-error-code-registry/08-linter-scripts",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 60,
@@ -2944,10 +4006,31 @@
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 65/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
-    "weighted_overall": 65
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 60,
+      "consistency": 70,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 63/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
+    "weighted_overall": 63
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -2993,8 +4076,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/03-error-code-registry/09-templates",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 70,
@@ -3003,10 +4085,21 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/03-error-manage/03-error-code-registry/09-templates.",
-    "weighted_overall": 71
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 70,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 68/100 (C) for spec/03-error-manage/03-error-code-registry/09-templates.",
+    "weighted_overall": 68
   },
   {
+    "applied_gates": [],
     "blast_radius": 7,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3047,7 +4140,16 @@
       "waffle_per_kchar": 0.14
     },
     "module": "04-database-conventions",
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.14.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 100,
+      "implementability": 85,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3061,6 +4163,17 @@
     "weighted_overall": 89
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 52,
+        "before": 52,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      }
+    ],
     "blast_radius": 9,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3107,7 +4220,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "05-split-db-architecture",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 100,
+      "implementability": 75,
+      "maintainability": 100,
+      "testability": 52
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3121,6 +4243,17 @@
     "weighted_overall": 82
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3170,8 +4303,7 @@
       "waffle_per_kchar": 0.01
     },
     "module": "05-split-db-architecture/02-features",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.01.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 65,
@@ -3180,10 +4312,49 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/05-split-db-architecture/02-features.",
-    "weighted_overall": 81
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.01. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 65,
+      "consistency": 70,
+      "implementability": 75,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 79/100 (B) for spec/05-split-db-architecture/02-features.",
+    "weighted_overall": 79
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      },
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 30,
+        "dimension": "implementability",
+        "id": "G-CON-02",
+        "rationale": "Overview <500 chars is a stub; no AI can implement from this."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3237,8 +4408,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "05-split-db-architecture/03-issues",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 55,
@@ -3247,10 +4417,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 56/100 (D) for spec/05-split-db-architecture/03-issues.",
-    "weighted_overall": 56
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 55,
+      "consistency": 70,
+      "implementability": 10,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 54/100 (D) for spec/05-split-db-architecture/03-issues.",
+    "weighted_overall": 54
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 52,
+        "before": 52,
+        "cap": 60,
+        "dimension": "testability",
+        "id": "G-AC-02",
+        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3300,7 +4491,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "06-seedable-config-architecture",
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 100,
+      "implementability": 85,
+      "maintainability": 100,
+      "testability": 52
+    },
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3314,6 +4514,17 @@
     "weighted_overall": 85
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3370,8 +4581,7 @@
       "waffle_per_kchar": 0.13
     },
     "module": "06-seedable-config-architecture/02-features",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.13.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 60,
@@ -3380,10 +4590,49 @@
       "maintainability": 90,
       "testability": 90
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/06-seedable-config-architecture/02-features.",
-    "weighted_overall": 80
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.13. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 60,
+      "consistency": 70,
+      "implementability": 75,
+      "maintainability": 90,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 78/100 (B) for spec/06-seedable-config-architecture/02-features.",
+    "weighted_overall": 78
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      },
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 30,
+        "dimension": "implementability",
+        "id": "G-CON-02",
+        "rationale": "Overview <500 chars is a stub; no AI can implement from this."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3437,8 +4686,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "06-seedable-config-architecture/03-issues",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 55,
@@ -3447,10 +4695,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 56/100 (D) for spec/06-seedable-config-architecture/03-issues.",
-    "weighted_overall": 56
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 55,
+      "consistency": 70,
+      "implementability": 10,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 54/100 (D) for spec/06-seedable-config-architecture/03-issues.",
+    "weighted_overall": 54
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3500,7 +4769,16 @@
       "waffle_per_kchar": 0.19
     },
     "module": "07-design-system",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.19.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 50,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3514,6 +4792,17 @@
     "weighted_overall": 71
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3558,7 +4847,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "10-research",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3572,6 +4870,7 @@
     "weighted_overall": 70
   },
   {
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3612,7 +4911,16 @@
       "waffle_per_kchar": 0.09
     },
     "module": "11-powershell-integration",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3626,6 +4934,7 @@
     "weighted_overall": 82
   },
   {
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3666,7 +4975,16 @@
       "waffle_per_kchar": 0.17
     },
     "module": "12-cicd-pipeline-workflows",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.17.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 100,
+      "implementability": 75,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.17. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3680,6 +4998,17 @@
     "weighted_overall": 88
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3735,8 +5064,7 @@
       "waffle_per_kchar": 0.21
     },
     "module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.21.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 65,
@@ -3745,10 +5073,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.",
-    "weighted_overall": 72
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.21. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 65,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 70/100 (C) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.",
+    "weighted_overall": 70
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3804,8 +5153,7 @@
       "waffle_per_kchar": 0.02
     },
     "module": "12-cicd-pipeline-workflows/02-go-binary-deploy",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.02.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -3814,10 +5162,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/12-cicd-pipeline-workflows/02-go-binary-deploy.",
-    "weighted_overall": 74
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.02. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 72/100 (C) for spec/12-cicd-pipeline-workflows/02-go-binary-deploy.",
+    "weighted_overall": 72
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3868,8 +5237,7 @@
       "waffle_per_kchar": 0.12
     },
     "module": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.12.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -3878,10 +5246,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/12-cicd-pipeline-workflows/03-reusable-ci-guards.",
-    "weighted_overall": 80
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.12. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 78/100 (B) for spec/12-cicd-pipeline-workflows/03-reusable-ci-guards.",
+    "weighted_overall": 78
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3933,8 +5322,7 @@
       "waffle_per_kchar": 0.08
     },
     "module": "13-generic-cli",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.08.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -3943,10 +5331,21 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/13-generic-cli.",
-    "weighted_overall": 83
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.08. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 75,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 81/100 (B) for spec/13-generic-cli.",
+    "weighted_overall": 81
   },
   {
+    "applied_gates": [],
     "blast_radius": 6,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3986,7 +5385,16 @@
       "waffle_per_kchar": 0.3
     },
     "module": "14-update",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4000,6 +5408,17 @@
     "weighted_overall": 84
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4050,7 +5469,16 @@
       "waffle_per_kchar": 0.06
     },
     "module": "14-update/24-update-check-mechanism",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.06.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 50,
+      "consistency": 100,
+      "implementability": 75,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4064,6 +5492,26 @@
     "weighted_overall": 75
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 35,
+        "before": 35,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4117,8 +5565,7 @@
       "waffle_per_kchar": 0.0
     },
     "module": "14-update/diagrams",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 65,
@@ -4127,10 +5574,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 67/100 (C) for spec/14-update/diagrams.",
-    "weighted_overall": 67
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 65,
+      "consistency": 70,
+      "implementability": 35,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 65/100 (C) for spec/14-update/diagrams.",
+    "weighted_overall": 65
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      }
+    ],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4179,8 +5647,7 @@
       "waffle_per_kchar": 0.08
     },
     "module": "15-distribution-and-runner",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.08.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -4189,10 +5656,21 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/15-distribution-and-runner.",
-    "weighted_overall": 80
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.08. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 78/100 (B) for spec/15-distribution-and-runner.",
+    "weighted_overall": 78
   },
   {
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4233,7 +5711,16 @@
       "waffle_per_kchar": 0.2
     },
     "module": "16-generic-release",
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4247,6 +5734,26 @@
     "weighted_overall": 82
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 55,
+        "before": 55,
+        "cap": 70,
+        "dimension": "completeness",
+        "id": "G-TODO-01",
+        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+      }
+    ],
     "blast_radius": 7,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4271,7 +5778,7 @@
         "severity": "low"
       }
     ],
-    "grade": "A",
+    "grade": "B",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
@@ -4317,8 +5824,7 @@
       "waffle_per_kchar": 0.06
     },
     "module": "17-consolidated-guidelines",
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.06.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 55,
@@ -4327,10 +5833,21 @@
       "maintainability": 90,
       "testability": 90
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/17-consolidated-guidelines.",
-    "weighted_overall": 86
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 55,
+      "consistency": 70,
+      "implementability": 95,
+      "maintainability": 90,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 84/100 (B) for spec/17-consolidated-guidelines.",
+    "weighted_overall": 84
   },
   {
+    "applied_gates": [],
     "blast_radius": 9,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4375,7 +5892,16 @@
       "waffle_per_kchar": 0.07
     },
     "module": "18-wp-plugin-how-to",
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 100,
+      "implementability": 95,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4389,6 +5915,26 @@
     "weighted_overall": 95
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4444,8 +5990,7 @@
       "waffle_per_kchar": 0.19
     },
     "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.19.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 75,
@@ -4454,10 +5999,31 @@
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
-    "weighted_overall": 71
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.19. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 70,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 69/100 (C) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
+    "weighted_overall": 69
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      }
+    ],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4517,7 +6083,16 @@
       "waffle_per_kchar": 0.08
     },
     "module": "22-git-logs-v2",
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.08.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 40,
+      "consistency": 100,
+      "implementability": 85,
+      "maintainability": 90,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4531,6 +6106,17 @@
     "weighted_overall": 76
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4575,7 +6161,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "23-app-database",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4589,6 +6184,17 @@
     "weighted_overall": 71
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4633,7 +6239,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "24-app-design-system-and-ui",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4647,6 +6262,17 @@
     "weighted_overall": 69
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4691,7 +6317,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "25-app-issues",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 85,
+      "consistency": 100,
+      "implementability": 30,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4705,6 +6340,26 @@
     "weighted_overall": 72
   },
   {
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 30,
+        "before": 30,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4766,8 +6421,7 @@
       "waffle_per_kchar": 0.09
     },
     "module": "25-app-issues/01-phase-2-git-logs-audit",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.09.",
-    "scores": {
+    "raw_scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 70,
@@ -4776,10 +6430,49 @@
       "maintainability": 90,
       "testability": 90
     },
-    "verdict": "Deterministic score 66/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.",
-    "weighted_overall": 66
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.09. Gates active: 1.",
+    "scores": {
+      "alignment": 90,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 70,
+      "implementability": 30,
+      "maintainability": 90,
+      "testability": 90
+    },
+    "verdict": "Deterministic score 64/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.",
+    "weighted_overall": 64
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 50,
+        "before": 50,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 60,
+        "dimension": "alignment",
+        "id": "G-LINK-02",
+        "rationale": "\u22653 broken links suggests structural drift; alignment with the wider spec tree is unreliable."
+      },
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4834,7 +6527,16 @@
       "waffle_per_kchar": 0.03
     },
     "module": "25-app-issues/02-consolidated-audit-findings",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=14, waffle/kchar=0.03.",
+    "raw_scores": {
+      "alignment": 40,
+      "clarity": 100,
+      "completeness": 75,
+      "consistency": 50,
+      "implementability": 40,
+      "maintainability": 100,
+      "testability": 90
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=14, waffle/kchar=0.03. Gates active: 0.",
     "scores": {
       "alignment": 40,
       "clarity": 100,
@@ -4848,6 +6550,26 @@
     "weighted_overall": 59
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 10,
+        "before": 10,
+        "cap": 20,
+        "dimension": "testability",
+        "id": "G-AC-01",
+        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+      },
+      {
+        "active": false,
+        "after": 35,
+        "before": 35,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4899,7 +6621,16 @@
       "waffle_per_kchar": 0.0
     },
     "module": "26-gitlogs-diagrams",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0.",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 40,
+      "consistency": 100,
+      "implementability": 35,
+      "maintainability": 100,
+      "testability": 10
+    },
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4913,6 +6644,26 @@
     "weighted_overall": 59
   },
   {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 40,
+        "before": 40,
+        "cap": 50,
+        "dimension": "implementability",
+        "id": "G-CON-01",
+        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+      },
+      {
+        "active": false,
+        "after": 70,
+        "before": 70,
+        "cap": 70,
+        "dimension": "completeness",
+        "id": "G-TODO-01",
+        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+      }
+    ],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4923,15 +6674,15 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=3",
+        "evidence": "todo_density=6",
         "impact": 3,
-        "issue": "3 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "6 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       },
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 24, \"ini\": 1, \"markdown\": 1, \"plain\": 1, \"powershell\": 1, \"toml\": 2}",
+        "evidence": "code_blocks_by_lang={\"bash\": 25, \"ini\": 1, \"markdown\": 1, \"plain\": 1, \"powershell\": 1, \"toml\": 2}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
         "severity": "high"
@@ -4946,14 +6697,14 @@
       "ac_count": 10,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 24,
+        "bash": 25,
         "ini": 1,
         "markdown": 1,
         "plain": 1,
         "powershell": 1,
         "toml": 2
       },
-      "code_blocks_total": 30,
+      "code_blocks_total": 31,
       "consistency_report": true,
       "gwt_block_count": 10,
       "has_json_schema": false,
@@ -4962,25 +6713,34 @@
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 112,
-      "md_files": 34,
+      "links_total": 118,
+      "md_files": 35,
       "mmd_files": 0,
-      "overview_chars": 8185,
-      "todo_density": 3,
-      "waffle_per_kchar": 0.12
+      "overview_chars": 8358,
+      "todo_density": 6,
+      "waffle_per_kchar": 0.15
     },
     "module": "27-spec-toolchain",
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.12.",
-    "scores": {
+    "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 70,
       "consistency": 100,
       "implementability": 40,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/27-spec-toolchain.",
-    "weighted_overall": 74
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 100,
+      "implementability": 40,
+      "maintainability": 90,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 73/100 (C) for spec/27-spec-toolchain.",
+    "weighted_overall": 73
   }
 ]

@@ -8,7 +8,7 @@
 > Deterministic score 59/100 (D) for spec/26-gitlogs-diagrams.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 

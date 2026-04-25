@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/17-consolidated-guidelines`
 
 **Generated:** 2026-04-25  
-**Current score:** 86/100 (A)  
+**Current score:** 84/100 (B)  
 **Implementability:** 95/100  
 **Estimated effort:** ~70 min  
 **Impact-weighted backlog:** 7 points
