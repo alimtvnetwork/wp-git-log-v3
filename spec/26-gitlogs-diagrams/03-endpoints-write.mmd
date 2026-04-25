@@ -7,38 +7,40 @@ sequenceDiagram
     participant AUD as AuditTrail
 
     Note over CI,API: POST /append-log (chunked)
-    CI->>API: RepoUrl, RootRepo, Branch, TempToken, Token,<br/>PipelineName, GitSha256, Logs[], ErrorLogs[], HasError
+    CI->>API: RepoUrl, RootRepo, Branch, TempToken, Token, PipelineName, GitSha256, Logs, ErrorLogs, HasError
     API->>V: parse RepoUrl, locate GitProfile
-    V->>V: Acceptance check (AcceptAllRepos / Selected / SelectedAllVersions)
-    V->>V: Branch restriction (IsRestrictInBranch + StrictBranch)
-    V->>V: TempToken match -> Profile
+    V->>V: Acceptance check (AcceptAllRepos or Selected or SelectedAllVersions)
+    V->>V: Branch restriction (IsRestrictInBranch and StrictBranch)
+    V->>V: TempToken match to Profile
     V->>V: Token same Profile, Profile Active, App Active
     alt Validation passes
-        API->>DB: upsert Pipeline; insert LogEntry and ErrorLogEntry
-        API->>DB: if HasError: Pipeline.HasError=1
-        API->>DB: insert History(ActionType=Append) and Action
-        API->>AUD: AuditActionType=LogPush, Outcome=Success
-        API-->>CI: 200 { Status: Success, TraceId, Retrieval }
+        API->>DB: upsert Pipeline
+        API->>DB: insert LogEntry and ErrorLogEntry
+        API->>DB: if HasError then Pipeline.HasError equals 1
+        API->>DB: insert History (ActionType Append) and Action
+        API->>AUD: AuditActionType LogPush, Outcome Success
+        API-->>CI: 200 ack with TraceId and Retrieval
     else Rejected
-        API->>AUD: AuditActionType=LogPush/AuthFail, Outcome=Rejected
-        API-->>CI: 4xx { ErrorCode: GL-..., TraceId }
+        API->>AUD: AuditActionType LogPush or AuthFail, Outcome Rejected
+        API-->>CI: 4xx with ErrorCode GL and TraceId
     end
 
     Note over CI,API: PUT /fixed-log
     CI->>API: RepoUrl, Branch, TempToken, RootRepo, Token, PipelineName
     API->>V: same validation chain
-    API->>DB: Pipeline.HasError=0; History(Fixed) and Action
-    API->>AUD: LogPush/Fixed Success
+    API->>DB: Pipeline.HasError equals 0
+    API->>DB: History (Fixed) and Action
+    API->>AUD: LogPush Fixed Success
     API-->>CI: 200 ack
 
     Note over CI,API: POST /clear-log
     CI->>API: same body as fixed-log
     API->>DB: delete LogEntry and ErrorLogEntry for Pipeline
-    API->>DB: History(Clear) and Action
+    API->>DB: History (Clear) and Action
     API-->>CI: 200 ack
 
     Note over CI,API: POST /clear-log-all
     CI->>API: RepoUrl, Branch, TempToken, RootRepo, Token (no PipelineName)
     API->>DB: delete logs for all pipelines on (RepoVersion, Branch)
-    API->>DB: History(ClearAll) and Action
+    API->>DB: History (ClearAll) and Action
     API-->>CI: 200 ack
