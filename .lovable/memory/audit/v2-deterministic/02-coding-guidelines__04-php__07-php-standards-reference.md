@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **83/100 (B)**  
+**Implementability Score:** **81/100 (B)**  
 **Blast radius:** 4/10
 
-> Deterministic score 83/100 (B) for spec/02-coding-guidelines/04-php/07-php-standards-reference.
+> Deterministic score 81/100 (B) for spec/02-coding-guidelines/04-php/07-php-standards-reference.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.12.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.12. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 65 | 22.8 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |

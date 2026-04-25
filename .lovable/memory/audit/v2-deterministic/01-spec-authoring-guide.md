@@ -8,7 +8,7 @@
 > Deterministic score 54/100 (D) for spec/01-spec-authoring-guide.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=4, gwt=0, broken_links=11, waffle/kchar=0.33.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=4, gwt=0, broken_links=11, waffle/kchar=0.33. Gates active: 1.
 
 ---
 
@@ -21,7 +21,7 @@
 | Alignment | 15% | 40 | 6.0 |
 | Consistency | 10% | 50 | 5.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 64 | 4.5 |
+| Testability | 7% | 60 | 4.2 |
 | Maintainability | 3% | 90 | 2.7 |
 
 ## Deterministic Metrics (pre-AI)

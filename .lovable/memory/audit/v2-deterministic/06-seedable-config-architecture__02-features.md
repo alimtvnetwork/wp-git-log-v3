@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **80/100 (B)**  
+**Implementability Score:** **78/100 (B)**  
 **Blast radius:** 5/10
 
-> Deterministic score 80/100 (B) for spec/06-seedable-config-architecture/02-features.
+> Deterministic score 78/100 (B) for spec/06-seedable-config-architecture/02-features.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.13.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.13. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 75 | 26.2 |
 | Completeness | 20% | 60 | 12.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 90 | 6.3 |
 | Maintainability | 3% | 90 | 2.7 |

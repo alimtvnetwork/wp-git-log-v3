@@ -8,7 +8,7 @@
 > Deterministic score 85/100 (A) for spec/06-seedable-config-architecture.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 

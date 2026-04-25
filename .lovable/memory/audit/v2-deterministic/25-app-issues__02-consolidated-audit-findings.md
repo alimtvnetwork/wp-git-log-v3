@@ -8,7 +8,7 @@
 > Deterministic score 59/100 (D) for spec/25-app-issues/02-consolidated-audit-findings.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=14, waffle/kchar=0.03.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=14, waffle/kchar=0.03. Gates active: 0.
 
 ---
 

@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **67/100 (C)**  
+**Implementability Score:** **65/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 67/100 (C) for spec/02-coding-guidelines/21-app.
+> Deterministic score 65/100 (C) for spec/02-coding-guidelines/21-app.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 30 | 10.5 |
 | Completeness | 20% | 70 | 14.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 96 | 6.7 |
 | Maintainability | 3% | 100 | 3.0 |

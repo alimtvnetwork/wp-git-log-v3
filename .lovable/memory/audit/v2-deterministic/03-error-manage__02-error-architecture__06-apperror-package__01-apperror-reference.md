@@ -8,7 +8,7 @@
 > Deterministic score 66/100 (C) for spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.09.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 

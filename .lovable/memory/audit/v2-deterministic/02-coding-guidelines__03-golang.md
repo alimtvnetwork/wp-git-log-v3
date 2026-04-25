@@ -8,7 +8,7 @@
 > Deterministic score 68/100 (C) for spec/02-coding-guidelines/03-golang.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.19.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.
 
 ---
 

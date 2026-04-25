@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **65/100 (C)**  
+**Implementability Score:** **63/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 65/100 (C) for spec/03-error-manage/03-error-code-registry/07-schemas.
+> Deterministic score 63/100 (C) for spec/03-error-manage/03-error-code-registry/07-schemas.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.21.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.21. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 30 | 10.5 |
 | Completeness | 20% | 60 | 12.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 96 | 6.7 |
 | Maintainability | 3% | 100 | 3.0 |

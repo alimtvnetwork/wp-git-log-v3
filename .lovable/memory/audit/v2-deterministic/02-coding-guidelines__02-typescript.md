@@ -8,7 +8,7 @@
 > Deterministic score 70/100 (C) for spec/02-coding-guidelines/02-typescript.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.09.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 

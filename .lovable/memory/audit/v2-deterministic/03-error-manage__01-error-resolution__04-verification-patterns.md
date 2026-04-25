@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **82/100 (B)**  
+**Implementability Score:** **80/100 (B)**  
 **Blast radius:** 4/10
 
-> Deterministic score 82/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.
+> Deterministic score 80/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.28.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.28. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 75 | 26.2 |
 | Completeness | 20% | 65 | 13.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |

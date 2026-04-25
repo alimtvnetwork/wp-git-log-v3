@@ -8,7 +8,7 @@
 > Deterministic score 71/100 (C) for spec/02-coding-guidelines/11-security/01-axios-version-control.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.4.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.4. Gates active: 0.
 
 ---
 

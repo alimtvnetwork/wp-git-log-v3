@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **72/100 (C)**  
+**Implementability Score:** **70/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 72/100 (C) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
+> Deterministic score 70/100 (C) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.21.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.21. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 50 | 17.5 |
 | Completeness | 20% | 65 | 13.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 90 | 6.3 |
 | Maintainability | 3% | 100 | 3.0 |

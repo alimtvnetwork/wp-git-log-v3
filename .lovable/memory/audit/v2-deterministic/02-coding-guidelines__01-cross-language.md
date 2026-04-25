@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **87/100 (A)**  
+**Implementability Score:** **84/100 (B)**  
 **Blast radius:** 10/10
 
-> Deterministic score 87/100 (A) for spec/02-coding-guidelines/01-cross-language.
+> Deterministic score 84/100 (B) for spec/02-coding-guidelines/01-cross-language.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=1, waffle/kchar=0.14.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=1, waffle/kchar=0.14. Gates active: 1.
 
 ---
 
@@ -19,7 +19,7 @@
 | Implementability | 35% | 95 | 33.2 |
 | Completeness | 20% | 70 | 14.0 |
 | Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 92 | 9.2 |
+| Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 52 | 3.6 |
 | Maintainability | 3% | 100 | 3.0 |
