@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 2.6.0  
+**Version:** 2.7.1  
 **Updated:** 2026-04-25
 
 ---
@@ -61,7 +61,7 @@
 
 ## Conflicts vs v1 (folder 21)
 
-Resolved by parallel-folder strategy; v2 wins. Legacy v1 banner in `spec/21-git-logs/00-overview.md`.
+Resolved by parallel-folder strategy; v2 wins. **Deprecation banners (v2.7.1, 2026-04-25)** prepended to all 10 legacy files in `spec/21-git-logs/` cross-linking back to v2 canonical source. Legacy v1 banner in `spec/21-git-logs/00-overview.md` retained.
 
 ## Open items (not blocking)
 
