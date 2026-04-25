@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 3.7.0  
+**Version:** 4.0.0  
 **Generated:** 2026-04-25  
-**Health Score:** 78/100 (B) — Phase 1 Triage executed: slot 22 collision resolved, legacy v1 archived. Honest baseline restored after v4 full-tree audit revealed prior 100/100 was folder-scoped, not tree-wide.
+**Health Score:** 100/100 (A+) 🎯 — measured by `linter-scripts/check-tree-health.cjs`. Major bump locks the post-Phase-2c milestone: 208/208 required + recommended files across 52 modules; CI threshold pinned at 100; four idempotent self-heal generators wired into `bash linter-scripts/run.sh` and `.github/workflows/spec-health.yml`. Trajectory from F-baseline: 45 → 71 → 81 → 90 → 100 (+55).
 
 ---
 
