@@ -1,10 +1,12 @@
 # Spec File Index — Searchable Reference
 
 **Generated:** 2026-04-10  
-**Total Files:** 411  
-**Categories:** 13
+**Total Files:** 411 (stale)  
+**Categories:** 13 (stale)
 
-> **How to search:** Use `Ctrl+F` / `Cmd+F` to search by keyword, file name, or category.
+> ⚠️ **STALE SNAPSHOT — DO NOT TRUST INVENTORY COUNTS.** Last regenerated 2026-04-10. Current ground truth is **636 md files across 80 folders** (per `dashboard-data.json` regenerated 2026-04-25). This file is hand-maintained and missing: `22-git-logs-v2/` (v2.8.7), `26-gitlogs-diagrams/`, `22-app-issues/02-consolidated-audit-findings/`, plus newer files in existing modules. It also references **phantom modules** that don't exist on disk: `08-docs-viewer-ui/`, `09-code-block-system/`. For authoritative inventory use `spec/dashboard-data.json` (`Inventory.Folders[]`).
+
+> **How to search:** Use `Ctrl+F` / `Cmd+F` to search by keyword, file name, or category — but cross-check against `dashboard-data.json` for currency.
 
 ---
 
