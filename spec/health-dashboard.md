@@ -1,12 +1,12 @@
 # Project-Wide Spec Health Dashboard
 
 **Generated:** 2026-04-25  
-**Total Files Scanned:** 642  
+**Total Files Scanned:** 656  
 **Total Folders:** 80  
-**Modules Audited:** 52 (top-level + nested with `00-overview.md`)  
-**Overall Health:** 71/100 (C) — measured by `linter-scripts/check-tree-health.cjs`
+**Modules Audited:** 52  
+**Overall Health:** 81/100 (B) — measured by `linter-scripts/check-tree-health.cjs`
 
-> **v3.7.2 (2026-04-25):** Added `linter-scripts/check-tree-health.cjs` CI gate. **Honest measured score:** 71/100 (90/104 required files present, 26/104 recommended). Prior 78/80 numbers were narrative estimates — now reconciled with measured truth. CI threshold set to **70** to lock today's baseline; raise after Phase 2 fills 14 missing `99-consistency-report.md` files. Earlier today: Phase 1 Triage resolved slot 22 collision (`22-app-issues/` → `25-app-issues/`) and archived legacy `21-git-logs/` to `_archive/21-git-logs-v1/`.
+> **v3.7.3 (2026-04-25):** Phase 2a complete — authored 14 missing `99-consistency-report.md` files. **Required files now 104/104 (100%).** Recommended files (97-AC + 98-changelog): 26/104 (25%). CI threshold raised to **80** to lock today's gains. Score trajectory: 45 → 71 → **81 (+36 from F baseline)**. Earlier today (v3.7.2) added `check-tree-health.cjs` CI gate that measures honest score (replaced narrative estimates).
 
 ---
 
@@ -14,11 +14,11 @@
 
 | Metric | Value |
 |--------|-------|
-| Score | **71/100 (C)** — measured |
-| Required files (00-overview + 99-consistency) | 90/104 (87%) |
+| Score | **81/100 (B)** — measured |
+| Required files (00-overview + 99-consistency) | **104/104 (100%)** ✅ |
 | Recommended files (97-AC + 98-changelog) | 26/104 (25%) |
 | Stale `spec-index.md` | 0 (auto-regen v3.7.1) |
-| CI gate threshold | 70 (locked v3.7.2) |
+| CI gate threshold | **80** (raised v3.7.3) |
 
 ---
 
