@@ -29,7 +29,7 @@ This document covers the **internal diagnostic stream**. CI/CD log ingestion is 
 |-----------|----------|
 | Audit trail schema | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) §3.6 |
 | Audit trail behavior | [./10-audit-trail.md](./10-audit-trail.md) *(planned)* |
-| Error management | [./11-error-management.md](./11-error-management.md) *(planned)* |
+| Error management (envelope, codes, no-swallow) | [./11-error-management.md](./11-error-management.md) |
 | Foundational error mgmt | [../03-error-manage/00-overview.md](../03-error-manage/00-overview.md) |
 | Glossary & enums | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |
 
@@ -363,7 +363,7 @@ ORDER BY n DESC;
 
 | # | Item | Notes |
 |---|------|-------|
-| OI-LOG-01 | Final error-code registry | Depends on `11-error-management.md` (not yet authored). |
+| OI-LOG-01 | ~~Final error-code registry~~ | **Resolved** — see [`11-error-management.md`](./11-error-management.md) §6. |
 | OI-LOG-02 | Trusted-proxy CIDR list source | WP option vs. constant in `wp-config.php`? |
 | OI-LOG-03 | `wp-cron` retry job for failed audit inserts | Needs a small persistence mechanism; `wp_options` ring buffer is one candidate. |
 | OI-LOG-04 | Whether `EndpointReceived` should also persist to `AuditTrail` or only to `error_log` at `Debug` | Cost/benefit — doubles row volume. |
