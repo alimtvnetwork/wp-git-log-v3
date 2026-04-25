@@ -1,6 +1,6 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.2.0  
+**Version:** 2.5.0  
 **Updated:** 2026-04-25
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
@@ -13,7 +13,11 @@ All `GL-*` codes returned by the plugin. Codes are stable strings (constants in 
 |------|------|-------|---------------|
 | GL-AUTH-WP-MISSING | 401 | No WP App Password / cookie present. | Authenticate via Application Password. |
 | GL-AUTH-WP-INVALID | 401 | App Password rejected by WP. | Regenerate App Password in WP admin. |
+| GL-AUTH-NOT-LOGGED-IN | 401 | `wp_get_current_user()` returned 0 (no resolved user). | Authenticate first. |
 | GL-AUTH-PROFILE-NOT-LINKED | 403 | WP user has no matching `Profile.UserName`. | Admin must create the Profile in plugin UI. |
+| GL-AUTH-NO-PROFILE-LINK | 403 | No `Profile.Email` matches `wp_user.user_email`. | Provision a Git Logs Profile with the same email. |
+| GL-AUTH-PROFILE-SUSPENDED | 403 | Lane A: matched Profile has `UserStatusId != Active`. | Re-activate Profile in admin. |
+| GL-AUTH-WRONG-LANE | 400 | Lane B credential (TempToken in body) sent to a Lane A read endpoint, or vice versa. | Use the correct lane per `25-headless-auth-notes.md`. |
 | GL-AUTHZ-PERMISSION-DENIED | 403 | Profile's `RolePermission` union lacks the required Permission. | Grant via AccessToRoles screen. |
 
 ## Authentication (Lane B — CI/CD writes)
