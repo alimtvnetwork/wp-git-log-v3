@@ -1,10 +1,13 @@
-# Git Logs WordPress Plugin
+# Git Logs WordPress Plugin (LEGACY v1)
 
 **Version:** 1.0.0  
 **Updated:** 2026-04-24  
-**Status:** Draft  
+**Status:** Superseded — see [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md)  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low
+
+> ⚠️ **Superseded by folder 22 (`spec/22-git-logs-v2/`).**  
+> v2 is the authoritative spec: SQLite root DB, JWT removed, `TempToken`+URL/branch validation, polymorphic `AppLink`, three-table audit model, 10 endpoints under `git-logs/v2`. Diagrams live in [`../26-gitlogs-diagrams/`](../26-gitlogs-diagrams/00-overview.md). This folder is retained for historical traceability only — do not implement from it.
 
 ---
 
