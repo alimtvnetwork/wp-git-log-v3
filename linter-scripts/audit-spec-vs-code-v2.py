@@ -490,10 +490,13 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
 
     return {
         "scores": scores,
+        "raw_scores": raw_scores,
+        "applied_gates": applied_gates,
         "score_justification": (
             f"Deterministic rubric: contracts={int(m['has_sql_ddl'])+int(m['has_json_schema'])+int(m['has_ts_enums'])}/3, "
             f"ac={m['ac_count']}, gwt={m['gwt_block_count']}, broken_links={m['links_broken']}, "
-            f"waffle/kchar={m['waffle_per_kchar']}."
+            f"waffle/kchar={m['waffle_per_kchar']}. "
+            f"Gates active: {sum(1 for g in applied_gates if g['active'])}."
         ),
         "implementability_blockers": blockers,
         "code_mapping": {
