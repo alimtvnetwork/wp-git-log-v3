@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 3.6.0  
+**Version:** 3.7.0  
 **Generated:** 2026-04-25  
-**Health Score:** 100/100 (A+) 🎯 — perfect score; zero deductions across all metrics
+**Health Score:** 78/100 (B) — Phase 1 Triage executed: slot 22 collision resolved, legacy v1 archived. Honest baseline restored after v4 full-tree audit revealed prior 100/100 was folder-scoped, not tree-wide.
 
 ---
 
