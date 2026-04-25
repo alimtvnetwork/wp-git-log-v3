@@ -25,7 +25,7 @@
 | 13-v1-vs-v2-mapping.md | ⚠️ Referenced; v1 deltas captured in changelog + `21-git-logs/` legacy banner |
 | 14-endpoint-examples.md | ✅ |
 | 15-error-codes.md | ✅ (4 new auth codes added in v2.6) |
-| 16-test-plan.md | ✅ |
+| 16-test-plan.md | ✅ (redirect stub → §32–§35) |
 | 17-openapi.yaml | ✅ |
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |

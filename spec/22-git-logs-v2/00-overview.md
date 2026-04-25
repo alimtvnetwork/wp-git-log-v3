@@ -69,7 +69,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 13 | [13-v1-vs-v2-mapping.md](./13-v1-vs-v2-mapping.md) | Side-by-side v1 ↔ v2 reference |
 | 14 | [14-endpoint-examples.md](./14-endpoint-examples.md) | Curl + JSON samples for all 10 endpoints |
 | 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog |
-| 16 | [16-test-plan.md](./16-test-plan.md) | Unit + Integration test scope |
+| 16 | [16-test-plan.md](./16-test-plan.md) | **Superseded** — redirects to §32–§35 |
 | 17 | [17-openapi.yaml](./17-openapi.yaml) | OpenAPI 3.1 machine-readable spec for all 10 endpoints |
 | 18 | [18-schema.sql](./18-schema.sql) | Verbatim DDL for V2_0_0 migration |
 | 19 | [19-permission-matrix.md](./19-permission-matrix.md) | Role × Permission × Screen audit grid |
