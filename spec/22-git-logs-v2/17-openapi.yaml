@@ -1,12 +1,13 @@
 openapi: 3.1.0
 info:
   title: Git Logs Plugin API
-  version: 2.3.0
+  version: 2.8.6
   description: |
     REST API for the Git Logs WordPress plugin.
     Source spec: spec/22-git-logs-v2/04-rest-api-endpoints.md
     Examples: spec/22-git-logs-v2/14-endpoint-examples.md
-    Errors: spec/22-git-logs-v2/15-error-codes.md
+    Errors: spec/22-git-logs-v2/15-error-codes.md (full GL-* enum mirrored in components.schemas.ErrorCode)
+    SSH lane: spec/22-git-logs-v2/31-ssh-key-auth.md
 
 servers:
   - url: https://{host}/wp-json/git-logs/v2
@@ -31,6 +32,15 @@ components:
         Logical placeholder. Lane B endpoints carry `TempToken` and `Token`
         inside the JSON body, not in headers. OpenAPI cannot model
         body-based auth; consumers must read the request schema.
+    SshSignature:
+      type: apiKey
+      in: header
+      name: X-GL-Signature
+      description: |
+        Lane B SSH sub-mode (preferred from v2.7.0). Requires four headers:
+        `X-GL-Fingerprint`, `X-GL-Timestamp`, `X-GL-Nonce`, `X-GL-Signature`.
+        Signature is computed per §31 canonical string `GL-SSHSIG-V1`.
+        Mutually exclusive with body `TempToken`/`Token` — both present → GL-SSH-LANE-CONFLICT.
 
   # -------------------------------------------------------------------------
   # Reusable schemas
@@ -127,15 +137,57 @@ components:
         NextCursor: { type: string, nullable: true }
         TotalReturned: { type: integer }
 
+    ErrorCode:
+      type: string
+      description: |
+        Stable GL-* code; full catalog in 15-error-codes.md.
+        Build-time GL-RELEASE-* codes (CI gates per §36) are intentionally
+        excluded — they never surface in HTTP responses.
+      enum:
+        - GL-AUTH-WP-MISSING
+        - GL-AUTH-WP-INVALID
+        - GL-AUTH-NOT-LOGGED-IN
+        - GL-AUTH-PROFILE-NOT-LINKED
+        - GL-AUTH-NO-PROFILE-LINK
+        - GL-AUTH-PROFILE-SUSPENDED
+        - GL-AUTH-WRONG-LANE
+        - GL-AUTHZ-PERMISSION-DENIED
+        - GL-AUTH-TEMPTOKEN-INVALID
+        - GL-AUTH-TOKEN-MISMATCH
+        - GL-AUTH-PROFILE-INACTIVE
+        - GL-APP-NOT-ACTIVE
+        - GL-SSH-HEADER-MISSING
+        - GL-SSH-TIMESTAMP-SKEW
+        - GL-SSH-KEY-UNKNOWN
+        - GL-SSH-KEY-INACTIVE
+        - GL-SSH-REPO-MISMATCH
+        - GL-SSH-NONCE-REUSED
+        - GL-SSH-SIGNATURE-INVALID
+        - GL-SSH-LANE-CONFLICT
+        - GL-AUTH-LANE-DISABLED
+        - GL-VALIDATION-PROFILE-NOT-FOUND
+        - GL-VALIDATION-REPO-NOT-ALLOWED
+        - GL-VALIDATION-BRANCH-RESTRICTED
+        - GL-VALIDATION-REPOURL-MALFORMED
+        - GL-VALIDATION-MISSING-FIELD
+        - GL-VALIDATION-FIELD-TYPE
+        - GL-PAYLOAD-TOO-LARGE
+        - GL-LINES-TOO-MANY
+        - GL-RATE-LIMIT-EXCEEDED
+        - GL-READ-CURSOR-INVALID
+        - GL-READ-PIPELINE-NOT-FOUND
+        - GL-READ-LIMIT-OUT-OF-RANGE
+        - GL-DB-UNAVAILABLE
+        - GL-MIGRATION-PENDING
+        - GL-CONFIG-MISSING
+        - GL-INTERNAL
+
     ErrorEnvelope:
       type: object
       required: [Status, Code, Message, RequestId, HttpStatus]
       properties:
         Status:     { type: string, enum: [Error] }
-        Code:
-          type: string
-          description: Stable GL-* code; full catalog in 15-error-codes.md.
-          example: GL-AUTH-TEMPTOKEN-INVALID
+        Code:       { $ref: '#/components/schemas/ErrorCode' }
         Message:    { type: string }
         RequestId:  { type: string }
         HttpStatus: { type: integer }
