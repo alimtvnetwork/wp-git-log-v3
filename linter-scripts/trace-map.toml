@@ -114,3 +114,5 @@ kind   = "function"
 
 [[trace]]
 ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-10"
+files  = ["linter-scripts/check-spec-cross-links.py"]
+kind   = "function"
