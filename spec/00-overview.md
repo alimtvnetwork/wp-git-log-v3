@@ -42,7 +42,7 @@ Root index for the entire specification tree. Each top-level folder contains a d
 
 | # | Module | Description |
 |---|--------|-------------|
-| 21 | [Git Logs (legacy v1)](./21-git-logs/00-overview.md) | ⚠️ Deprecated — superseded by `22-git-logs-v2/` |
+| 21 | [Git Logs (legacy v1)](./_archive/21-git-logs-v1/00-overview.md) | ⚠️ Deprecated — superseded by `22-git-logs-v2/` |
 | 22 | [App Issues](./25-app-issues/00-overview.md) | App bug analysis, root cause analysis, fix documentation |
 | 22 | [Git Logs v2](./22-git-logs-v2/00-overview.md) | ⚠️ **Slot collision with `25-app-issues`** — authoritative WP plugin spec (v2.8.7) |
 | 23 | [App Database](./23-app-database/00-overview.md) | App-specific data model, table designs, migration strategies |

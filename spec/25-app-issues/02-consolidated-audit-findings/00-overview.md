@@ -4,7 +4,7 @@
 **Version:** 1.0.0  
 **Updated:** 2026-04-25  
 **Audit Mode:** Spec-only (no code reviewed)  
-**Scope:** every file in `spec/21-git-logs/`  
+**Scope:** every file in `spec/_archive/21-git-logs-v1/`  
 **Status:** Open · awaiting remediation  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low
@@ -51,14 +51,14 @@ This is the **single source of truth** for every critical observation against th
 
 **Severity:** Critical · **Category:** Coverage · **Linked:** P2-GL-09, Checklist A1
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 62
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 62
 
 **Evidence:**
 ```
 | 04 | [04-rest-api-endpoints.md](./04-rest-api-endpoints.md) | REST endpoints with request/response schemas |
 ```
 
-**Why it fails.** The inventory promises `04-rest-api-endpoints.md`, but `ls spec/21-git-logs/` shows the file does not exist. Endpoints are name-dropped in `08`, `11`, `12`, and `16` (`/logs/push`, `/auth/token`, `/auth/refresh`, `/.well-known/jwks.json`, `/repositories`, `/users`, `/audit`) yet no canonical request/response schema, parameter validation, or HTTP-status table exists.
+**Why it fails.** The inventory promises `04-rest-api-endpoints.md`, but `ls spec/_archive/21-git-logs-v1/` shows the file does not exist. Endpoints are name-dropped in `08`, `11`, `12`, and `16` (`/logs/push`, `/auth/token`, `/auth/refresh`, `/.well-known/jwks.json`, `/repositories`, `/users`, `/audit`) yet no canonical request/response schema, parameter validation, or HTTP-status table exists.
 
 **Required fix.** Author `04-rest-api-endpoints.md` listing every route under `/wp-json/git-logs/v1` with: HTTP method, auth class, request body schema, query/path params, success envelope (PascalCase), error envelope, rate-limit class, audit-event name. Cross-link from every other file that references the route.
 
@@ -68,7 +68,7 @@ This is the **single source of truth** for every critical observation against th
 
 **Severity:** Critical · **Category:** Correctness · **Linked:** P2-GL-05, OI-ALLOW-01
 
-**File:** `spec/21-git-logs/08-allowlist-and-wildcard-matching.md` · **Lines:** 62–64, 141, 260
+**File:** `spec/_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md` · **Lines:** 62–64, 141, 260
 
 **Evidence:**
 ```
@@ -93,9 +93,9 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 **Severity:** Critical · **Category:** Correctness · **Linked:** P2-GL-06, OI-ERR-04, OI-JWT-02
 
 **Files:**
-- `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` · Lines 49, 138, 257, 300, 398, 412
-- `spec/21-git-logs/11-error-management.md` · Line 475
-- `spec/21-git-logs/12-logging-strategy.md` · Line 128
+- `spec/_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md` · Lines 49, 138, 257, 300, 398, 412
+- `spec/_archive/21-git-logs-v1/11-error-management.md` · Line 475
+- `spec/_archive/21-git-logs-v1/12-logging-strategy.md` · Line 128
 
 **Evidence (16-jwt-onboarding-and-token-usage.md):**
 ```
@@ -116,7 +116,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Critical · **Category:** Coverage · **Linked:** P2-GL-01
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 56–76
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 56–76
 
 **Evidence:**
 ```
@@ -147,9 +147,9 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Critical · **Category:** Governance · **Linked:** P2-GL-02, P2-GL-03, P2-GL-04
 
-**File:** `spec/21-git-logs/` (folder) · **Lines:** N/A (file absence)
+**File:** `spec/_archive/21-git-logs-v1/` (folder) · **Lines:** N/A (file absence)
 
-**Evidence:** `ls spec/21-git-logs/` returns no `97-acceptance-criteria.md`, `98-changelog.md`, or `99-consistency-report.md`.
+**Evidence:** `ls spec/_archive/21-git-logs-v1/` returns no `97-acceptance-criteria.md`, `98-changelog.md`, or `99-consistency-report.md`.
 
 **Why it fails.** Per `spec/01-spec-authoring-guide/03-required-files.md` the health-score formula requires `99-consistency-report.md`; the inventory in `00-overview.md` row 97/98/99 promises all three. Module health cannot exceed 75 % until they exist.
 
@@ -161,7 +161,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** High · **Category:** Governance · **Linked:** P2-GL-22, Checklist A6
 
-**File:** `spec/21-git-logs/11-error-management.md` · **Lines:** ~395 (representative)
+**File:** `spec/_archive/21-git-logs-v1/11-error-management.md` · **Lines:** ~395 (representative)
 
 **Evidence:**
 ```
@@ -170,7 +170,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Why it fails.** The file declares 30+ error codes (`GL-AUTH-*`, `GL-VAL-*`, `GL-PUSH-*`, `GL-RATE-*`, `GL-SYS-*`) but no machine-readable `error-codes.json` exists, contrary to `spec/01-spec-authoring-guide/03-required-files.md`.
 
-**Required fix.** Generate `spec/21-git-logs/error-codes.json` listing every code with `code`, `httpStatus`, `namespace`, `userMessageKey`, `debugOnly`. Add a linter rule: every `GL-*` mention in markdown must appear in the JSON.
+**Required fix.** Generate `spec/_archive/21-git-logs-v1/error-codes.json` listing every code with `code`, `httpStatus`, `namespace`, `userMessageKey`, `debugOnly`. Add a linter rule: every `GL-*` mention in markdown must appear in the JSON.
 
 ---
 
@@ -178,7 +178,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** High · **Category:** Security · **Linked:** P2-GL-07, OI-LOG-02
 
-**File:** `spec/21-git-logs/12-logging-strategy.md` · **Lines:** 260, 267
+**File:** `spec/_archive/21-git-logs-v1/12-logging-strategy.md` · **Lines:** 260, 267
 
 **Evidence:**
 ```
@@ -196,7 +196,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** High · **Category:** Correctness · **Linked:** P2-GL-08, OI-JWT-03
 
-**File:** `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` · **Lines:** 257, 283
+**File:** `spec/_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md` · **Lines:** 257, 283
 
 **Evidence:**
 ```
@@ -215,8 +215,8 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 **Severity:** Low · **Category:** Maintainability · **Linked:** P2-GL-20, Checklist C13
 
 **Files:**
-- `spec/21-git-logs/01-glossary-and-enums.md` (Provider enum declaration)
-- `spec/21-git-logs/00-overview.md` · Line 47
+- `spec/_archive/21-git-logs-v1/01-glossary-and-enums.md` (Provider enum declaration)
+- `spec/_archive/21-git-logs-v1/00-overview.md` · Line 47
 
 **Evidence (00-overview.md):**
 ```
@@ -233,7 +233,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Medium · **Category:** Edge Cases · **Linked:** P2-GL-21
 
-**File:** `spec/21-git-logs/08-allowlist-and-wildcard-matching.md` · **Lines:** 47, 112
+**File:** `spec/_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md` · **Lines:** 47, 112
 
 **Evidence:**
 ```
@@ -251,7 +251,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Medium · **Category:** Correctness · **Linked:** P2-GL-23
 
-**File:** `spec/21-git-logs/12-logging-strategy.md` · **Lines:** 59–68
+**File:** `spec/_archive/21-git-logs-v1/12-logging-strategy.md` · **Lines:** 59–68
 
 **Evidence:**
 ```
@@ -271,8 +271,8 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 **Severity:** Medium · **Category:** Scalability · **Linked:** P2-GL-24
 
 **Files:**
-- `spec/21-git-logs/00-overview.md` · Line 42
-- `spec/21-git-logs/02-database-schema-and-erd.md` · Line 58
+- `spec/_archive/21-git-logs-v1/00-overview.md` · Line 42
+- `spec/_archive/21-git-logs-v1/02-database-schema-and-erd.md` · Line 58
 
 **Evidence (00-overview.md):**
 ```
@@ -294,7 +294,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Medium · **Category:** Scalability · **Linked:** P2-GL-19
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 44
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 44
 
 **Evidence:**
 ```
@@ -311,9 +311,9 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Medium · **Category:** Security · **Linked:** P2-GL-25
 
-**File:** `spec/21-git-logs/` (folder) · **Lines:** N/A (file absence)
+**File:** `spec/_archive/21-git-logs-v1/` (folder) · **Lines:** N/A (file absence)
 
-**Evidence:** `rg -n "CORS|gitlogs_allowed_origins|Access-Control-Allow-Origin" spec/21-git-logs/` returns zero hits.
+**Evidence:** `rg -n "CORS|gitlogs_allowed_origins|Access-Control-Allow-Origin" spec/_archive/21-git-logs-v1/` returns zero hits.
 
 **Why it fails.** WP defaults expose REST routes to any origin; App Passwords + Bearer flows are cross-origin-friendly. Without a declared CORS stance the App will either (a) be denied from legitimate dashboards or (b) leak data to malicious origins.
 
@@ -326,8 +326,8 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 **Severity:** High · **Category:** Correctness · **Linked:** F-02
 
 **Files:**
-- `spec/21-git-logs/02-database-schema-and-erd.md` · Lines 128–162 (Repository table)
-- `spec/21-git-logs/08-allowlist-and-wildcard-matching.md` · Lines 125–127
+- `spec/_archive/21-git-logs-v1/02-database-schema-and-erd.md` · Lines 128–162 (Repository table)
+- `spec/_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md` · Lines 125–127
 
 **Evidence (02-database-schema-and-erd.md, line 143):**
 ```
@@ -350,13 +350,13 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Low · **Category:** Maintainability
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 80–89 (Cross-References table)
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 80–89 (Cross-References table)
 
 **Evidence:** The Cross-References table at the bottom of the overview was not updated when file `17` was added; the inventory row exists but no cross-link entry confirms its dependencies.
 
 **Why it fails.** Downstream tooling that walks Cross-References instead of the inventory table will not discover the consistency checklist.
 
-**Required fix.** Add a row to the Cross-References table: `| Spec consistency checklist | [../../21-git-logs/17-spec-consistency-checklist.md](../../21-git-logs/17-spec-consistency-checklist.md) |`.
+**Required fix.** Add a row to the Cross-References table: `| Spec consistency checklist | [../../_archive/21-git-logs-v1/17-spec-consistency-checklist.md](../../_archive/21-git-logs-v1/17-spec-consistency-checklist.md) |`.
 
 ---
 
@@ -364,7 +364,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** High · **Category:** Coverage
 
-**File:** `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` · **Lines:** 240–260, 345
+**File:** `spec/_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md` · **Lines:** 240–260, 345
 
 **Evidence:**
 ```
@@ -382,7 +382,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** High · **Category:** Security · **Linked:** P2-GL-11
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 39
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 39
 
 **Evidence:**
 ```
@@ -399,7 +399,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** High · **Category:** Coverage · **Linked:** P2-GL-12
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 46
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 46
 
 **Evidence:**
 ```
@@ -416,7 +416,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** High · **Category:** Coverage · **Linked:** P2-GL-10, F-07, F-14
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 61
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 61
 
 **Evidence:**
 ```
@@ -433,7 +433,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Medium · **Category:** Maintainability · **Linked:** P2-GL-16, Checklist A2
 
-**File:** `spec/21-git-logs/00-overview.md` · **Lines:** 71
+**File:** `spec/_archive/21-git-logs-v1/00-overview.md` · **Lines:** 71
 
 **Evidence:**
 ```
@@ -451,11 +451,11 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 **Severity:** High · **Category:** Testability · **Linked:** P2-GL-03, P2-GL-17, F-05
 
 **Files:**
-- `spec/21-git-logs/08-allowlist-and-wildcard-matching.md` · `AC-ALW-01..12`
-- `spec/21-git-logs/11-error-management.md` · `AC-ERR-*`
-- `spec/21-git-logs/12-logging-strategy.md` · `AC-LOG-01..08`
-- `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` · `AC-JWT-01..10`
-- `spec/21-git-logs/17-spec-consistency-checklist.md` · `AC-CHK-01..08`
+- `spec/_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md` · `AC-ALW-01..12`
+- `spec/_archive/21-git-logs-v1/11-error-management.md` · `AC-ERR-*`
+- `spec/_archive/21-git-logs-v1/12-logging-strategy.md` · `AC-LOG-01..08`
+- `spec/_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md` · `AC-JWT-01..10`
+- `spec/_archive/21-git-logs-v1/17-spec-consistency-checklist.md` · `AC-CHK-01..08`
 
 **Why it fails.** Per-file ACs exist; no canonical roll-up in `97-acceptance-criteria.md` or `14-acceptance-criteria.md`. Test orchestration cannot iterate the full set.
 
@@ -467,7 +467,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Medium · **Category:** Edge Cases · **Linked:** F-08
 
-**File:** `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` · **Lines:** 280–300
+**File:** `spec/_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md` · **Lines:** 280–300
 
 **Evidence:** Section 6.4 describes refresh-token reuse detection but does not state which client-side properties are stable enough to use as an idempotency fingerprint. A CLI agent that updates between requests will change `User-Agent` and trip lockout.
 
@@ -481,7 +481,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Severity:** Medium · **Category:** Maintainability · **Linked:** F-03
 
-**File:** `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` · **Lines:** 300
+**File:** `spec/_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md` · **Lines:** 300
 
 **Evidence:**
 ```
@@ -559,8 +559,8 @@ After remediation, run:
 
 ```bash
 python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
-rg -n '\b(ID|URL|JSON|JWT|IP|DB|API|HTTP|HTML|SQL|MD5)\b' spec/21-git-logs
-rg -n '\$is(Not|No|Non)[A-Z]' spec/21-git-logs
+rg -n '\b(ID|URL|JSON|JWT|IP|DB|API|HTTP|HTML|SQL|MD5)\b' spec/_archive/21-git-logs-v1
+rg -n '\$is(Not|No|Non)[A-Z]' spec/_archive/21-git-logs-v1
 ```
 
 **Expected:** all three return zero non-exempted hits and exit 0.
@@ -572,13 +572,13 @@ rg -n '\$is(Not|No|Non)[A-Z]' spec/21-git-logs
 | Reference | Location |
 |---|---|
 | Phase-2 audit (predecessor) | [../01-phase-2-git-logs-audit/00-overview.md](../01-phase-2-git-logs-audit/00-overview.md) |
-| Spec consistency checklist (v1 git-logs) | [../../21-git-logs/17-spec-consistency-checklist.md](../../21-git-logs/17-spec-consistency-checklist.md) |
+| Spec consistency checklist (v1 git-logs) | [../../_archive/21-git-logs-v1/17-spec-consistency-checklist.md](../../_archive/21-git-logs-v1/17-spec-consistency-checklist.md) |
 | Locked decisions | [./00-overview.md](./00-overview.md) §Locked Decisions |
-| Database schema (v1 git-logs) | [../../21-git-logs/02-database-schema-and-erd.md](../../21-git-logs/02-database-schema-and-erd.md) |
-| Error management (v1 git-logs) | [../../21-git-logs/11-error-management.md](../../21-git-logs/11-error-management.md) |
-| Logging strategy (v1 git-logs) | [../../21-git-logs/12-logging-strategy.md](../../21-git-logs/12-logging-strategy.md) |
-| JWT onboarding & usage (v1 git-logs) | [../../21-git-logs/16-jwt-onboarding-and-token-usage.md](../../21-git-logs/16-jwt-onboarding-and-token-usage.md) |
-| Allowlist & wildcard (v1 git-logs) | [../../21-git-logs/08-allowlist-and-wildcard-matching.md](../../21-git-logs/08-allowlist-and-wildcard-matching.md) |
+| Database schema (v1 git-logs) | [../../_archive/21-git-logs-v1/02-database-schema-and-erd.md](../../_archive/21-git-logs-v1/02-database-schema-and-erd.md) |
+| Error management (v1 git-logs) | [../../_archive/21-git-logs-v1/11-error-management.md](../../_archive/21-git-logs-v1/11-error-management.md) |
+| Logging strategy (v1 git-logs) | [../../_archive/21-git-logs-v1/12-logging-strategy.md](../../_archive/21-git-logs-v1/12-logging-strategy.md) |
+| JWT onboarding & usage (v1 git-logs) | [../../_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md](../../_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md) |
+| Allowlist & wildcard (v1 git-logs) | [../../_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md](../../_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md) |
 | Triage format | [../00-overview.md](../00-overview.md) |
 
 ---

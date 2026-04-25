@@ -5,13 +5,13 @@
 **Status:** Draft  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
-**Supersedes:** `spec/21-git-logs/` (legacy v1 retained for history)
+**Supersedes:** `spec/_archive/21-git-logs-v1/` (legacy v1 retained for history)
 
 ---
 
 ## Origin
 
-This module is the authoritative rewrite of the Git Logs WordPress plugin spec, derived from the verbatim brief at [`../21-git-logs/reference/00-verbatim-brief.md`](../21-git-logs/reference/00-verbatim-brief.md). Where v1 (folder 21) and v2 (folder 22) conflict, **v2 wins**.
+This module is the authoritative rewrite of the Git Logs WordPress plugin spec, derived from the verbatim brief at [`../_archive/21-git-logs-v1/reference/00-verbatim-brief.md`](../_archive/21-git-logs-v1/reference/00-verbatim-brief.md). Where v1 (folder 21) and v2 (folder 22) conflict, **v2 wins**.
 
 ---
 
@@ -94,8 +94,8 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 
 | Reference | Location |
 |-----------|----------|
-| Verbatim brief | [../21-git-logs/reference/00-verbatim-brief.md](../21-git-logs/reference/00-verbatim-brief.md) |
+| Verbatim brief | [../_archive/21-git-logs-v1/reference/00-verbatim-brief.md](../_archive/21-git-logs-v1/reference/00-verbatim-brief.md) |
 | Diagrams | [../26-gitlogs-diagrams/00-overview.md](../26-gitlogs-diagrams/00-overview.md) |
-| Legacy v1 spec | [../21-git-logs/00-overview.md](../21-git-logs/00-overview.md) |
+| Legacy v1 spec | [../_archive/21-git-logs-v1/00-overview.md](../_archive/21-git-logs-v1/00-overview.md) |
 | DB conventions | [../04-database-conventions/00-overview.md](../04-database-conventions/00-overview.md) |
 | Master coding guidelines | [../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md](../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md) |

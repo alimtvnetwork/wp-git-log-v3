@@ -63,13 +63,13 @@
 
 ## Conflicts vs v1 (folder 21)
 
-Resolved by parallel-folder strategy; v2 wins. **Deprecation banners (v2.7.1, 2026-04-25)** prepended to all 10 legacy files in `spec/21-git-logs/` cross-linking back to v2 canonical source. Legacy v1 banner in `spec/21-git-logs/00-overview.md` retained.
+Resolved by parallel-folder strategy; v2 wins. **Deprecation banners (v2.7.1, 2026-04-25)** prepended to all 10 legacy files in `spec/_archive/21-git-logs-v1/` cross-linking back to v2 canonical source. Legacy v1 banner in `spec/_archive/21-git-logs-v1/00-overview.md` retained.
 
 ## Open items (not blocking)
 
 1. **App identity (§07)** — still awaiting user confirmation on whether to add `Environment`, `Platform`, or `OwnerEmail`. Current set: `AppName`, `AppSlug`, `Description`, `ProfileId`, `AppStatusId`.
 
-> Note: the 09–13 numbering gap is **intentional and locked** — content is distributed across §05 (rate limit/payload caps), §37 (seed data, moved from §16 in v2.8.6), §30 R3 (encryption-deferred plan), §31 (SSH-key auth supersedes scaffold notes), and `spec/21-git-logs/` legacy banner (v1↔v2 mapping). Do not author standalone 09–13 files.
+> Note: the 09–13 numbering gap is **intentional and locked** — content is distributed across §05 (rate limit/payload caps), §37 (seed data, moved from §16 in v2.8.6), §30 R3 (encryption-deferred plan), §31 (SSH-key auth supersedes scaffold notes), and `spec/_archive/21-git-logs-v1/` legacy banner (v1↔v2 mapping). Do not author standalone 09–13 files.
 
 ## v2.8.7 Audit — §18 seeds vs §15 codes
 
