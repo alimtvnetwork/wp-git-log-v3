@@ -516,7 +516,8 @@ def main():
         except Exception as e:
             sys.stderr.write(f"ERROR {e}\n")
             results.append({"module": rel, "error": str(e), "weighted_overall": 0, "grade": "F"})
-        time.sleep(0.4)
+        if not DETERMINISTIC:
+            time.sleep(0.4)
 
     valid = [r for r in results if "scores" in r]
     if not valid:
