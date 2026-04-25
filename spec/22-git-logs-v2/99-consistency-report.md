@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 2.3.0  
+**Version:** 2.4.0  
 **Updated:** 2026-04-25
 
 ---
@@ -14,7 +14,7 @@
 | 02-database-schema.md | ✅ |
 | 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
 | 04-rest-api-endpoints.md | ✅ |
-| 05-auth-and-validation.md | ✅ (CI/CD cross-ref added) |
+| 05-auth-and-validation.md | ✅ (CI/CD cross-ref) |
 | 06-migrations-and-logger.md | ✅ |
 | 07-app-entity.md | ✅ |
 | 08-history-and-action.md | ✅ |
@@ -26,29 +26,35 @@
 | 14-endpoint-examples.md | ✅ |
 | 15-error-codes.md | ✅ |
 | 16-test-plan.md | ✅ |
+| 17-openapi.yaml | ✅ |
+| 18-schema.sql | ✅ |
+| 19-permission-matrix.md | ✅ |
+| 20-observability.md | ✅ |
+| 21-i18n.md | ✅ |
 | 97-acceptance-criteria.md | ✅ (36 AC) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
 
 ## Cross-link validation
 
-- `00-overview.md` → all section files (00, 01–16, 97–99): OK
-- `05-auth-and-validation.md` → `../12-cicd-pipeline-workflows/`: OK
-- `12-wp-plugin-scaffold.md` → `../02-coding-guidelines/04-php/*`: OK
-- `14-endpoint-examples.md` → `15-error-codes.md`: OK
-- `16-test-plan.md` → `12-wp-plugin-scaffold.md`, `15-error-codes.md`, `09-seed-data.md`: OK
-- Folder 26 inventory updated with 07/08 diagrams + SVGs in `/mnt/documents/gitlogs-diagrams/`: OK
+- `00-overview.md` → all section files (00, 01–21, 97–99): OK
+- `17-openapi.yaml` references `15-error-codes.md`, `04-rest-api-endpoints.md`, `14-endpoint-examples.md`: OK
+- `18-schema.sql` mirrors `02-database-schema.md` + `09-seed-data.md`: OK
+- `19-permission-matrix.md` consistent with `09-seed-data.md` (Admin=17, Editor=8) + `03-admin-ui.md`: OK
+- `20-observability.md` references `15-error-codes.md` for reject codes + `06-migrations-and-logger.md` for logger: OK
+- `21-i18n.md` references stable identifier rule already established in §15 / §09: OK
 
 ## Naming compliance
 
-- File prefixes 00–16, 97–99 sequential and unique. ✅
+- File prefixes 00–21, 97–99 sequential and unique. ✅
 - Tables/columns PascalCase, PKs `{Table}Id`. ✅
-- Enums declared with lookup-table requirement; seed values in `09-seed-data.md`. ✅
+- Enums declared with lookup-table requirement; seed values in `09-seed-data.md`; DDL in `18-schema.sql`. ✅
 - All `GL-*` error codes consolidated in `15-error-codes.md`. ✅
+- Translatable scope explicitly excludes stable identifiers per §21. ✅
 
 ## Conflicts vs v1 (folder 21)
 
-Resolved by parallel-folder strategy: v2 wins in any overlap; v1 retained as legacy with superseded banner. See `13-v1-vs-v2-mapping.md`.
+Resolved by parallel-folder strategy; v2 wins. See `13-v1-vs-v2-mapping.md`.
 
 ## Open items (not blocking)
 
