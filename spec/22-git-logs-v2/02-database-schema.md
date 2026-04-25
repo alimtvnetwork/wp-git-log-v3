@@ -284,4 +284,39 @@ Index: `(OccurredAt)`, `(AuditActionTypeId, OccurredAt)`.
 | ValueText | TEXT NULL | |
 | UpdatedAt | INTEGER | |
 
-Used for runtime toggles (e.g., `LogLevelMin = "Warn"` to disable Info/Debug).
+Used for runtime toggles (e.g., `LogLevelMin = "Warn"` to disable Info/Debug, `SshAuthMode`, `ReplayWindowSeconds`, `SshNonceJanitorBatch`, `UninstallMode`, `MaintenanceMode`). Default rows seeded in §16.
+
+---
+
+## SshKey (Lane B deploy-key auth — see §31)
+
+| Column | Type | Notes |
+|--------|------|-------|
+| SshKeyId | INTEGER PK AI | Project-wide PK convention. |
+| Fingerprint | TEXT UNIQUE NOT NULL | `SHA256:` + base64 SHA-256 of public key (RFC 4716). Uppercase prefix normalized on insert. |
+| RepoId | INTEGER FK → Repo NOT NULL | Deploy-key binding (one key → one Repo). |
+| KeyType | TEXT NOT NULL | `ssh-ed25519`, `ssh-rsa`, `ecdsa-sha2-nistp256`, … |
+| PublicKey | TEXT NOT NULL | Full OpenSSH single-line public key (`<type> <base64> [comment]`). |
+| Label | TEXT NULL | Human label (`gh-actions-prod`). |
+| OwnedByProfileId | INTEGER FK → Profile NOT NULL | Profile that registered the key. |
+| IsActive | INTEGER 0/1 NOT NULL DEFAULT 1 | Soft-disable on rotation. |
+| LastUsedAt | INTEGER NULL | Updated on successful auth. |
+| CreatedAt | INTEGER NOT NULL | |
+| RevokedAt | INTEGER NULL | Set when `IsActive` flipped to 0. |
+
+Indexes: `(RepoId, IsActive)`, `(OwnedByProfileId)`. Uniqueness on `Fingerprint` covers the lookup path.
+
+---
+
+## SshNonce (replay defense, short-lived)
+
+| Column | Type | Notes |
+|--------|------|-------|
+| SshNonceId | INTEGER PK AI | |
+| SshKeyId | INTEGER FK → SshKey NOT NULL | Bound to the verified key. |
+| Nonce | TEXT NOT NULL | Client-supplied, ≥16 bytes base64. |
+| SeenAt | INTEGER NOT NULL | Unix seconds. |
+
+Unique: `(SshKeyId, Nonce)`.  
+Retention: `ReplayWindowSeconds` only (default 300s). Pruned on every request (LIMIT `SshNonceJanitorBatch`) and via daily WP-cron. No long-term forensic copy.
+
