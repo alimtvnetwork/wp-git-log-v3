@@ -62,6 +62,7 @@
 | `linter-scripts/generate-gwt-acceptance.py` | [13](./13-generate-gwt-acceptance.md) | ✅ |
 | `linter-scripts/generate-trace-map.py` | [14](./14-generate-trace-map.md) | ✅ |
 | `linter-scripts/generate-fix-checklist.py` | [15](./15-generate-fix-checklist.md) | ✅ |
+| `linter-scripts/generate-gate-report.py` | [16](./16-generate-gate-report.md) | ✅ |
 | `linter-scripts/trace-map.toml` | [14](./14-generate-trace-map.md) | ✅ (data file consumed by §14) |
 | `linter-scripts/fill-missing-acceptance-criteria.cjs` | [20](./20-fill-missing-acceptance-criteria.md) | ✅ |
 | `linter-scripts/fill-missing-changelogs.cjs` | [21](./21-fill-missing-changelogs.md) | ✅ |
