@@ -103,6 +103,21 @@ Deterministic mode bypasses the AI gateway entirely and scores each module from 
 - **When** the script runs,
 - **Then** exactly one module MUST be audited.
 
+### AC-31-06 — Deterministic mode produces byte-identical JSON
+- **Given** `AUDIT_DETERMINISTIC=1` and an unchanged spec tree,
+- **When** the script is run twice consecutively,
+- **Then** `.lovable/memory/audit/v2-deterministic/raw-results.json` from both runs MUST have the same SHA-256 hash and identical byte length.
+
+### AC-31-07 — Deterministic mode writes to a separate output directory
+- **Given** `AUDIT_DETERMINISTIC=1`,
+- **When** the script runs,
+- **Then** outputs MUST be written under `.lovable/memory/audit/v2-deterministic/` and MUST NOT touch `.lovable/memory/audit/v2/`.
+
+### AC-31-08 — Deterministic mode performs zero AI calls
+- **Given** `AUDIT_DETERMINISTIC=1` and `LOVABLE_API_KEY` unset,
+- **When** the script runs,
+- **Then** it MUST complete with exit code 0 (no network call, no import of `lovable_ai`).
+
 ## Cross-references
 
 - §13 [`13-generate-gwt-acceptance.md`](./13-generate-gwt-acceptance.md) — consumes `raw-results.json`.
