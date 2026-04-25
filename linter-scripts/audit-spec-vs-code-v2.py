@@ -26,12 +26,17 @@ import json, re, sys, time, os
 from pathlib import Path
 from collections import Counter, defaultdict
 
-sys.path.insert(0, "/tmp")
-from lovable_ai import call_ai_structured  # type: ignore
+# Deterministic mode skips AI scoring entirely and produces byte-identical
+# JSON output across runs. Toggle via env var AUDIT_DETERMINISTIC=1.
+DETERMINISTIC = os.environ.get("AUDIT_DETERMINISTIC", "").strip() in {"1", "true", "yes"}
+
+if not DETERMINISTIC:
+    sys.path.insert(0, "/tmp")
+    from lovable_ai import call_ai_structured  # type: ignore
 
 ROOT = Path("/dev-server")
 SPEC = ROOT / "spec"
-OUT = ROOT / ".lovable/memory/audit/v2"
+OUT = ROOT / (".lovable/memory/audit/v2-deterministic" if DETERMINISTIC else ".lovable/memory/audit/v2")
 OUT.mkdir(parents=True, exist_ok=True)
 MODEL = "google/gemini-2.5-flash"
 TODAY = "2026-04-25"
