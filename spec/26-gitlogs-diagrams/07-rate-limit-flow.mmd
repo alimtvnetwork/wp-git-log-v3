@@ -1,0 +1,30 @@
+%% Rate-limit token bucket — per Profile
+%% Source: spec/22-git-logs-v2/10-rate-limit-and-payload.md
+
+sequenceDiagram
+    autonumber
+    participant CI as CI/CD Caller
+    participant API as REST Controller
+    participant RL as RateLimiter
+    participant TR as WP Transient (gitlogs_rate_{ProfileId})
+    participant SVC as LogIngestService
+    participant AUD as AuditTrail
+
+    CI->>API: POST /append-log (TempToken, body)
+    API->>API: Resolve Profile from TempToken
+    API->>RL: check(ProfileId)
+    RL->>TR: read { Tokens, LastRefillAt }
+    TR-->>RL: { Tokens=0.4, LastRefillAt=t0 }
+    RL->>RL: refill: Tokens = min(cap, Tokens + (now-t0)*rate)
+
+    alt Tokens >= 1
+        RL->>TR: write { Tokens-1, now }
+        RL-->>API: allow
+        API->>SVC: ingest(body)
+        SVC-->>API: ack
+        API-->>CI: 200 OK + Retrieval hints
+    else Tokens < 1
+        RL-->>API: deny, retryAfter = ceil((1-Tokens)/rate)
+        API->>AUD: log(LogPush, Outcome=Rejected, Detail=rate)
+        API-->>CI: 429 + Retry-After header
+    end

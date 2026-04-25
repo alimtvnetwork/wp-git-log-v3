@@ -66,6 +66,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 10 | [10-rate-limit-and-payload.md](./10-rate-limit-and-payload.md) | Per-Profile token bucket, payload caps |
 | 11 | [11-encryption-deferred-plan.md](./11-encryption-deferred-plan.md) | v3 encryption-at-rest blueprint |
 | 12 | [12-wp-plugin-scaffold.md](./12-wp-plugin-scaffold.md) | PHP file tree mapping spec → code |
+| 13 | [13-v1-vs-v2-mapping.md](./13-v1-vs-v2-mapping.md) | Side-by-side v1 ↔ v2 reference |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
