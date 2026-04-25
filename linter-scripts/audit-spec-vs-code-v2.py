@@ -411,7 +411,7 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     if m["todo_density"] == 0:  maint += 10
     maint = max(0, min(100, maint))
 
-    scores = {
+    raw_scores = {
         "implementability": impl,
         "completeness":     comp,
         "alignment":        align,
@@ -420,6 +420,8 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         "testability":      test,
         "maintainability":  maint,
     }
+    # Apply hard gates AFTER the rubric so caps are explicit + traceable
+    scores, applied_gates = apply_gates(raw_scores, m)
 
     # ---- findings (sorted, deterministic) ----
     findings = []
