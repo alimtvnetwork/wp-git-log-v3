@@ -4,14 +4,14 @@
     "Score": 77,
     "Grade": "C",
     "Deductions": [
-      "36 broken links (-20)",
+      "21 broken links (-20)",
       "1 missing overviews (-3)"
     ]
   },
   "Links": {
-    "TotalChecked": 2087,
-    "Ok": 2040,
-    "Broken": 36,
+    "TotalChecked": 2073,
+    "Ok": 2041,
+    "Broken": 21,
     "ExternalAllowed": 11,
     "ExternalAllowedDetails": [
       {
@@ -88,76 +88,6 @@
         "Text": "dashboard-data.json",
         "Target": "./dashboard-data.json",
         "Resolved": "dashboard-data.json"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 69,
-        "Text": "03-admin-ui.md",
-        "Target": "./03-admin-ui.md",
-        "Resolved": "21-git-logs/03-admin-ui.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 70,
-        "Text": "04-rest-api-endpoints.md",
-        "Target": "./04-rest-api-endpoints.md",
-        "Resolved": "21-git-logs/04-rest-api-endpoints.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 72,
-        "Text": "06-auth-wordpress-bridge.md",
-        "Target": "./06-auth-wordpress-bridge.md",
-        "Resolved": "21-git-logs/06-auth-wordpress-bridge.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 73,
-        "Text": "07-log-push-flow.md",
-        "Target": "./07-log-push-flow.md",
-        "Resolved": "21-git-logs/07-log-push-flow.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 75,
-        "Text": "09-log-retrieval-flow.md",
-        "Target": "./09-log-retrieval-flow.md",
-        "Resolved": "21-git-logs/09-log-retrieval-flow.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 76,
-        "Text": "10-audit-trail.md",
-        "Target": "./10-audit-trail.md",
-        "Resolved": "21-git-logs/10-audit-trail.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 79,
-        "Text": "13-coding-guidelines-applied.md",
-        "Target": "./13-coding-guidelines-applied.md",
-        "Resolved": "21-git-logs/13-coding-guidelines-applied.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 80,
-        "Text": "14-acceptance-criteria.md",
-        "Target": "./14-acceptance-criteria.md",
-        "Resolved": "21-git-logs/14-acceptance-criteria.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 81,
-        "Text": "15-blind-audit-checklist.md",
-        "Target": "./15-blind-audit-checklist.md",
-        "Resolved": "21-git-logs/15-blind-audit-checklist.md"
-      },
-      {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 84,
-        "Text": "98-changelog.md",
-        "Target": "./98-changelog.md",
-        "Resolved": "21-git-logs/98-changelog.md"
       },
       {
         "Source": "21-git-logs/01-glossary-and-enums.md",
@@ -284,41 +214,6 @@
         "Text": "../22-app-issues/00-overview.md",
         "Target": "../22-app-issues/00-overview.md",
         "Resolved": "22-app-issues/22-app-issues/00-overview.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 65,
-        "Text": "09-seed-data.md",
-        "Target": "./09-seed-data.md",
-        "Resolved": "22-git-logs-v2/09-seed-data.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 66,
-        "Text": "10-rate-limit-and-payload.md",
-        "Target": "./10-rate-limit-and-payload.md",
-        "Resolved": "22-git-logs-v2/10-rate-limit-and-payload.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 67,
-        "Text": "11-encryption-deferred-plan.md",
-        "Target": "./11-encryption-deferred-plan.md",
-        "Resolved": "22-git-logs-v2/11-encryption-deferred-plan.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 68,
-        "Text": "12-wp-plugin-scaffold.md",
-        "Target": "./12-wp-plugin-scaffold.md",
-        "Resolved": "22-git-logs-v2/12-wp-plugin-scaffold.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 69,
-        "Text": "13-v1-vs-v2-mapping.md",
-        "Target": "./13-v1-vs-v2-mapping.md",
-        "Resolved": "22-git-logs-v2/13-v1-vs-v2-mapping.md"
       },
       {
         "Source": "23-app-database/00-overview.md",
