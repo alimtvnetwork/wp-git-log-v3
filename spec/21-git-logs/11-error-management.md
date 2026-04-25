@@ -1,6 +1,6 @@
 # Error Management — Plugin-Wide Contract
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-25  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
@@ -357,12 +357,19 @@ Codes are namespaced `GL-<DOMAIN>-<NNN>`. Every code listed below MUST be added 
 | Code | HTTP | Public message | When |
 |------|------|----------------|------|
 | `GL-AUTH-001` | 401 | Authentication failed. | Wrong username/rawToken on `POST /auth/token`. |
-| `GL-AUTH-002` | 401 | Access JWT is invalid or expired. | JWT signature, exp, iss, aud, kid failures. |
+| `GL-AUTH-002` | 401 | Access JWT is invalid or expired. | **Generic** JWT failure (used when the specific sub-reason is not safe to disclose to the caller). |
 | `GL-AUTH-003` | 401 | Refresh token has been used or revoked. | Refresh-token reuse-detection (chain revoked). |
 | `GL-AUTH-004` | 401 | Refresh token has expired. | `ExpiresAt < NOW`. |
 | `GL-AUTH-005` | 423 | Account is temporarily locked. | `User.IsLocked = 1`. |
 | `GL-AUTH-006` | 401 | WordPress credentials are invalid. | WP App Password / cookie+nonce failure. |
 | `GL-AUTH-007` | 401 | Authorization header missing or malformed. | Bearer token absent or wrong scheme. |
+| `GL-AUTH-008` | 401 | Access JWT is invalid or expired. | **Internal sub-code** — JWT signature failed (`BadSignature`). Logged as `JwtValidationFailed_BadSignature`. Public message stays generic (`GL-AUTH-002` text) to avoid leaking validation internals. |
+| `GL-AUTH-009` | 401 | Access JWT is invalid or expired. | **Internal sub-code** — JWT `exp` in the past (`Expired`). Logged as `JwtValidationFailed_Expired`. |
+| `GL-AUTH-010` | 401 | Access JWT is invalid or expired. | **Internal sub-code** — JWT `iss` mismatch (`BadIssuer`). Logged as `JwtValidationFailed_BadIssuer`. |
+| `GL-AUTH-011` | 401 | Access JWT is invalid or expired. | **Internal sub-code** — JWT `aud` mismatch (`BadAudience`). Logged as `JwtValidationFailed_BadAudience`. |
+| `GL-AUTH-012` | 401 | Access JWT is invalid or expired. | **Internal sub-code** — JWT `jti` is on the denylist (`RevokedJti`). Logged as `JwtValidationFailed_RevokedJti`. |
+
+> **GL-AUTH-008..012 are debug-only sub-codes.** Outbound responses always carry `GL-AUTH-002` in `Errors.BackendMessage`. The sub-code appears only in `AuditTrail.DetailsJson.errorCode` and `error_log` — this prevents oracle attacks while preserving full diagnostics internally.
 
 ### 6.2 RBAC — `GL-RBAC-*`
 
@@ -407,7 +414,39 @@ Codes are namespaced `GL-<DOMAIN>-<NNN>`. Every code listed below MUST be added 
 |------|------|----------------|------|
 | `GL-RATE-001` | 429 | Too many requests. | Per-route or per-repo bucket exceeded. Includes `Retry-After` header. |
 
-### 6.7 Internal — `GL-INT-*`
+### 6.7 Ingestion — `GL-ING-*`
+
+CI/CD log-push body processing (after envelope JWT and allowlist have already passed). These codes are returned by `POST /logs/push` after the request was authorized but the payload itself failed.
+
+| Code | HTTP | Public message | When |
+|------|------|----------------|------|
+| `GL-ING-001` | 422 | Log batch failed validation. | `IngestionFailed_ValidationError` — body schema mismatch (missing `entries[]`, bad `severity`, etc.). |
+| `GL-ING-002` | 207 | Some entries were rejected; others persisted. | `IngestionPartial` — at least one `LogEntry` row failed but others succeeded. Response body lists `rejectedIndices[]` with per-index reason. HTTP 207 Multi-Status; `Status.Code` = 207. |
+| `GL-ING-003` | 500 | Failed to persist log entries. | `IngestionFailed_DbError` — `wpdb` insert failed for the entire batch. |
+| `GL-ING-004` | 422 | Pipeline auto-creation failed. | `Pipeline` row could not be auto-created (UNIQUE collision under contention or invalid `BranchName`/`PipelineName`). |
+
+### 6.8 Background Jobs — `GL-BG-*`
+
+Internal-only codes. Emitted by `wp-cron` jobs and JWKS rotation. **Never returned to a caller** — they exist only to give every background-job log line a registered code.
+
+| Code | HTTP | Public message | When |
+|------|------|----------------|------|
+| `GL-BG-001` | — | Refresh-token sweep job failed. | `RefreshTokenSweepFailed`. |
+| `GL-BG-002` | — | JWKS key rotation failed. | `JwksKeyRotationFailed` (rotation cron failure; the existing key remains active). |
+| `GL-BG-003` | — | Audit-trail retry job failed. | The deferred re-attempt of a failed `AuditTrail` insert (per `12-logging-strategy.md` §7.3) itself failed. |
+
+### 6.9 Security Events — `GL-SEC-*`
+
+Internal-only codes for `Security`-category events. **Never returned to a caller** — they exist only to give every security-event log line a registered code so SIEM filters can match.
+
+| Code | HTTP | Public message | When |
+|------|------|----------------|------|
+| `GL-SEC-001` | — | Replay attack suspected. | `SuspectedReplayAttack` — a previously-seen envelope JWT `jti` was re-presented inside the replay window. |
+| `GL-SEC-002` | — | Brute-force pattern suspected. | `SuspectedBruteForce` — N consecutive `GL-AUTH-001` failures from the same `RequestIp` within the rolling window. |
+| `GL-SEC-003` | — | Allowlist probing suspected. | `SuspectedAllowlistProbe` — N consecutive `GL-PUSH-001` rejections from the same caller within the rolling window. |
+| `GL-SEC-004` | 500 | Plugin integrity check failed. | `IntegrityCheckFailed` — JWKS signing key missing, encryption secret missing, or `AuditTrail` insert AND the `error_log` mirror both failed. Treat as fatal. |
+
+### 6.10 Internal — `GL-INT-*`
 
 | Code | HTTP | Public message | When |
 |------|------|----------------|------|
@@ -415,12 +454,53 @@ Codes are namespaced `GL-<DOMAIN>-<NNN>`. Every code listed below MUST be added 
 | `GL-INT-002` | 500 | Audit log write failed; operation completed. | `AuditTrail` insert failed (mirrored to `error_log`). |
 | `GL-INT-003` | 503 | Plugin database is temporarily unavailable. | `wpdb` connection lost. |
 
-### 6.8 Convention for adding new codes
+### 6.11 Logging-Event ↔ Error-Code Map (authoritative)
+
+Every `errorCode` value referenced by the structured-log catalog in `12-logging-strategy.md` §4 maps to exactly one row in §6.1–6.10 above. Success events (no `errorCode`) are omitted.
+
+| `12-logging-strategy.md` event | `errorCode` (registry) | Stream |
+|--------------------------------|------------------------|--------|
+| `JwtValidationFailed_BadSignature` (§4.2) | `GL-AUTH-008` *(public: `GL-AUTH-002`)* | Auth |
+| `JwtValidationFailed_Expired` (§4.2) | `GL-AUTH-009` *(public: `GL-AUTH-002`)* | Auth |
+| `JwtValidationFailed_BadIssuer` (§4.2) | `GL-AUTH-010` *(public: `GL-AUTH-002`)* | Auth |
+| `JwtValidationFailed_BadAudience` (§4.2) | `GL-AUTH-011` *(public: `GL-AUTH-002`)* | Auth |
+| `JwtValidationFailed_RevokedJti` (§4.2) | `GL-AUTH-012` *(public: `GL-AUTH-002`)* | Auth |
+| `RefreshTokenReuseDetected` (§4.2) | `GL-AUTH-003` | Auth |
+| `WpBridgeAuthFailed` (§4.2) | `GL-AUTH-006` | Auth |
+| `AllowlistRejected_NotRegistered` (§4.3) | `GL-PUSH-001` | Approval |
+| `AllowlistRejected_Disabled` (§4.3) | `GL-PUSH-002` | Approval |
+| `RoleCheckFailed` (§4.3) | `GL-RBAC-001` | Approval |
+| `RateLimitExceeded` (§4.3) | `GL-RATE-001` | Approval |
+| `EnvelopeJwtRejected_BadHmac` (§4.3) | `GL-PUSH-003` | Approval |
+| `EnvelopeJwtRejected_Expired` (§4.3) | `GL-PUSH-004` | Approval |
+| `EnvelopeJwtRejected_TtlTooLong` (§4.3) | `GL-PUSH-005` | Approval |
+| `EnvelopeJwtRejected_Replayed` (§4.3) | `GL-PUSH-006` | Approval |
+| `EnvelopeJwtRejected_Malformed` (§4.3) | `GL-PUSH-007` | Approval |
+| `PayloadCapExceeded` (§4.3) | `GL-PUSH-009` | Approval |
+| `IngestionFailed_ValidationError` (§4.4) | `GL-ING-001` | Ingestion |
+| `IngestionPartial` (§4.4) | `GL-ING-002` | Ingestion |
+| `IngestionFailed_DbError` (§4.4) | `GL-ING-003` | Ingestion |
+| `PipelineAutoCreateFailed` (§4.4) | `GL-ING-004` | Ingestion |
+| `RefreshTokenSweepFailed` (§4.5) | `GL-BG-001` | Background |
+| `JwksKeyRotationFailed` (§4.5) | `GL-BG-002` | Background |
+| `AuditRetryJobFailed` (§4.5) | `GL-BG-003` | Background |
+| `SuspectedReplayAttack` (§4.6) | `GL-SEC-001` | Security |
+| `SuspectedBruteForce` (§4.6) | `GL-SEC-002` | Security |
+| `SuspectedAllowlistProbe` (§4.6) | `GL-SEC-003` | Security |
+| `IntegrityCheckFailed` (§4.6) | `GL-SEC-004` | Security |
+| `OperationFailed` (any uncaught) | `GL-INT-001` | Internal |
+| `AuditWriteFailed` | `GL-INT-002` | Internal |
+| `DbConnectionLost` | `GL-INT-003` | Internal |
+
+> **Rule:** if a new event is added to `12-logging-strategy.md` §4, a row MUST be added to this table in the same change-set. CI lint job parses both files and fails the build on any orphan event name or orphan code.
+
+### 6.12 Convention for adding new codes
 
 1. Add the row here (this document is authoritative for plugin-specific codes).
 2. Add the entry to `error-codes-master.json` with `Domain = git-logs`.
-3. Run the overlap validator script (`../03-error-manage/03-error-code-registry/05-overlap-validator.md`).
-4. Bump this file's version (semver patch for new codes within an existing class; minor for a new class).
+3. If the code is referenced by a structured log event, add a row to §6.11.
+4. Run the overlap validator script (`../03-error-manage/03-error-code-registry/05-overlap-validator.md`).
+5. Bump this file's version (semver patch for new codes within an existing class; minor for a new class).
 
 ---
 
