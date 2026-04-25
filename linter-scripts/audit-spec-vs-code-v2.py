@@ -138,8 +138,12 @@ def deterministic_metrics(folder: Path) -> dict:
     waffle = len(WAFFLE_RX.findall(body_text))
     waffle_per_kchar = round(waffle / chars * 1000, 2)
 
+    # mermaid + other companion artefacts
+    mmd_files = list(folder.glob("*.mmd"))
+
     return {
         "md_files":            len(md_files),
+        "mmd_files":           len(mmd_files),
         "overview_chars":      len(ov),
         "ac_chars":            len(ac),
         "ac_count":            len(ac_ids),
@@ -151,6 +155,7 @@ def deterministic_metrics(folder: Path) -> dict:
         "has_json_schema":     has_json > 0,
         "has_ts_enums":        has_ts > 0,
         "has_yaml_openapi":    has_yaml > 0,
+        "has_mermaid":         len(mmd_files) > 0,
         "links_total":         total,
         "links_broken":        broken,
         "todo_density":        len(TODO_RX.findall(body_text)),
@@ -161,7 +166,7 @@ def deterministic_metrics(folder: Path) -> dict:
 # ---------------- digest ----------------
 def build_digest(folder: Path, metrics: dict) -> str:
     rel = MOD_REL[folder]
-    body = sorted(folder.glob("*.md"))
+    body = sorted(list(folder.glob("*.md")) + list(folder.glob("*.mmd")) + list(folder.glob("*.yaml")) + list(folder.glob("*.yml")))
     body_listing = "\n".join(f"  - {f.name} ({len(read(f))} chars)" for f in body)
     children = CHILDREN.get(rel, [])
     children_listing = "\n".join(f"  - spec/{c}" for c in children) or "  _(none)_"
