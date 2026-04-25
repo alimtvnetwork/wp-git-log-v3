@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics`
 
 **Generated:** 2026-04-25  
-**Current score:** 81/100 (B)  
+**Current score:** 79/100 (B)  
 **Implementability:** 65/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

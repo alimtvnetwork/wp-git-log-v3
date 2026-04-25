@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/21-app`
 
 **Generated:** 2026-04-25  
-**Current score:** 67/100 (C)  
+**Current score:** 65/100 (C)  
 **Implementability:** 30/100  
 **Estimated effort:** ~45 min  
 **Impact-weighted backlog:** 21 points

@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/12-cicd-pipeline-workflows/02-go-binary-deploy`
 
 **Generated:** 2026-04-25  
-**Current score:** 74/100 (C)  
+**Current score:** 72/100 (C)  
 **Implementability:** 50/100  
 **Estimated effort:** ~10 min  
 **Impact-weighted backlog:** 6 points

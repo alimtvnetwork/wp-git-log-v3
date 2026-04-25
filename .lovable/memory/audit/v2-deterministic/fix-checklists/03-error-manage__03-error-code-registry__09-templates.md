@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/03-error-code-registry/09-templates`
 
 **Generated:** 2026-04-25  
-**Current score:** 71/100 (C)  
+**Current score:** 68/100 (C)  
 **Implementability:** 40/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

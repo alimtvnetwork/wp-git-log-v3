@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/18-wp-plugin-how-to/02-enums-and-coding-style`
 
 **Generated:** 2026-04-25  
-**Current score:** 71/100 (C)  
+**Current score:** 69/100 (C)  
 **Implementability:** 40/100  
 **Estimated effort:** ~40 min  
 **Impact-weighted backlog:** 16 points

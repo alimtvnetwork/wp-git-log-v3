@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/03-error-manage/02-error-architecture/06-apperror-package`
 
 **Generated:** 2026-04-25  
-**Current score:** 71/100 (C)  
+**Current score:** 69/100 (C)  
 **Implementability:** 30/100  
 **Estimated effort:** ~45 min  
 **Impact-weighted backlog:** 21 points

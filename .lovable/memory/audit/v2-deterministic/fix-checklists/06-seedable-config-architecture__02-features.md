@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/06-seedable-config-architecture/02-features`
 
 **Generated:** 2026-04-25  
-**Current score:** 80/100 (B)  
+**Current score:** 78/100 (B)  
 **Implementability:** 75/100  
 **Estimated effort:** ~20 min  
 **Impact-weighted backlog:** 7 points

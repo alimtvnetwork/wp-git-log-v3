@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/04-php/07-php-standards-reference`
 
 **Generated:** 2026-04-25  
-**Current score:** 83/100 (B)  
+**Current score:** 81/100 (B)  
 **Implementability:** 65/100  
 **Estimated effort:** ~15 min  
 **Impact-weighted backlog:** 11 points

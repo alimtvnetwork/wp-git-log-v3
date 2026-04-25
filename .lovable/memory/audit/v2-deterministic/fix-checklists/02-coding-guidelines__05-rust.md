@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/05-rust`
 
 **Generated:** 2026-04-25  
-**Current score:** 80/100 (B)  
+**Current score:** 79/100 (B)  
 **Implementability:** 60/100  
 **Estimated effort:** ~35 min  
 **Impact-weighted backlog:** 6 points

@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/02-coding-guidelines/07-csharp`
 
 **Generated:** 2026-04-25  
-**Current score:** 73/100 (C)  
+**Current score:** 71/100 (C)  
 **Implementability:** 40/100  
 **Estimated effort:** ~70 min  
 **Impact-weighted backlog:** 16 points

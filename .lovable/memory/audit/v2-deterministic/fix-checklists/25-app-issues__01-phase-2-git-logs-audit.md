@@ -1,7 +1,7 @@
 # Fix Checklist — `spec/25-app-issues/01-phase-2-git-logs-audit`
 
 **Generated:** 2026-04-25  
-**Current score:** 66/100 (C)  
+**Current score:** 64/100 (C)  
 **Implementability:** 30/100  
 **Estimated effort:** ~50 min  
 **Impact-weighted backlog:** 17 points
