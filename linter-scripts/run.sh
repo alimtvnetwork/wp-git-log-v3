@@ -102,7 +102,7 @@ fi
 # ── Step 5: Spec tree health gate ─────────────────────────────────
 echo ""
 echo "═══ Step 5 — Spec tree health gate ═══"
-HEALTH_MIN="${SPEC_HEALTH_MIN:-80}"
+HEALTH_MIN="${SPEC_HEALTH_MIN:-88}"
 if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/check-tree-health.cjs" ]; then
   if node "$SCRIPT_DIR/check-tree-health.cjs" --min="$HEALTH_MIN"; then
     echo "✅ Spec tree health gate passed."
