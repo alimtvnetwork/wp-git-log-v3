@@ -51,6 +51,7 @@
 - `97-acceptance-criteria.md` AC-26..AC-41 reference §10, §17–§26 sources: OK
 - `18-schema.sql` `AuditActionType` seed includes Prune (19), Restore (20): OK
 - `30-threat-model.md` deferral list cross-links to `11-encryption-deferred-plan.md` (queued file)
+- `17-openapi.yaml` `ErrorCode` enum mirrors all 37 runtime `GL-*` codes from `15-error-codes.md` (release-time `GL-RELEASE-*` excluded by design): OK
 
 ## Naming compliance
 
