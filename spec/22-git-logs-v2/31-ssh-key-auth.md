@@ -27,7 +27,8 @@
 
 | Column | Type | Notes |
 |--------|------|-------|
-| Fingerprint | TEXT PK | `SHA256:` + base64 of SHA-256 of public key (RFC 4716). Lowercase `sha256:` accepted; stored canonical uppercase prefix. |
+| SshKeyId | INTEGER PK AI | Project-wide PK convention. |
+| Fingerprint | TEXT UNIQUE NOT NULL | `SHA256:` + base64 of SHA-256 of public key (RFC 4716). Lowercase `sha256:` normalized to uppercase prefix on insert. |
 | RepoId | INTEGER FK → Repo NOT NULL | Deploy-key binding. |
 | KeyType | TEXT NOT NULL | `ssh-ed25519`, `ssh-rsa`, `ecdsa-sha2-nistp256`, … |
 | PublicKey | TEXT NOT NULL | Full OpenSSH single-line public key (`<type> <base64> [comment]`). |
@@ -38,7 +39,7 @@
 | CreatedAt | INTEGER NOT NULL | |
 | RevokedAt | INTEGER NULL | Set when IsActive flipped to 0. |
 
-Indexes: `(RepoId, IsActive)`, `(OwnedByProfileId)`.
+Indexes: `(Fingerprint)` (covered by UNIQUE), `(RepoId, IsActive)`, `(OwnedByProfileId)`.
 
 ---
 
@@ -47,12 +48,12 @@ Indexes: `(RepoId, IsActive)`, `(OwnedByProfileId)`.
 | Column | Type | Notes |
 |--------|------|-------|
 | SshNonceId | INTEGER PK AI | |
-| Fingerprint | TEXT NOT NULL | FK to SshKey.Fingerprint |
-| Nonce | TEXT NOT NULL | Client-supplied, ≥16 bytes base64 |
-| SeenAt | INTEGER NOT NULL | Unix seconds |
+| SshKeyId | INTEGER FK → SshKey NOT NULL | Bound to the verified key. |
+| Nonce | TEXT NOT NULL | Client-supplied, ≥16 bytes base64. |
+| SeenAt | INTEGER NOT NULL | Unix seconds. |
 
-Unique: `(Fingerprint, Nonce)`.  
-Janitor: rows older than `ReplayWindowSeconds` deleted on each request (LIMIT 100) and via daily WP-cron.
+Unique: `(SshKeyId, Nonce)`.  
+Retention: **`ReplayWindowSeconds` only** (default 300s). Rows older than the window are pruned on every request (LIMIT `SshNonceJanitorBatch`) and via daily WP-cron. No long-term forensic copy — replay defense only.
 
 ---
 
