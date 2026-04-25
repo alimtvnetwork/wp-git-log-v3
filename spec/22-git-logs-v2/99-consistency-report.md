@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 2.5.0  
+**Version:** 2.6.0  
 **Updated:** 2026-04-25
 
 ---
@@ -18,16 +18,16 @@
 | 06-migrations-and-logger.md | ✅ |
 | 07-app-entity.md | ✅ |
 | 08-history-and-action.md | ✅ |
-| 09-seed-data.md | ✅ |
-| 10-rate-limit-and-payload.md | ✅ |
-| 11-encryption-deferred-plan.md | ✅ |
-| 12-wp-plugin-scaffold.md | ✅ (PHP standards cross-linked) |
-| 13-v1-vs-v2-mapping.md | ✅ |
+| 09-seed-data.md | ⚠️ Referenced but not yet authored — seeds live inline in `18-schema.sql` for now |
+| 10-rate-limit-and-payload.md | ⚠️ Referenced; constants live in `ConfigKv` defaults inside `18-schema.sql` |
+| 11-encryption-deferred-plan.md | ⚠️ Referenced; v3 plan summarized in §30 threat model |
+| 12-wp-plugin-scaffold.md | ⚠️ Referenced; PSR-4 layout described in `mem://specs/git-logs.md` |
+| 13-v1-vs-v2-mapping.md | ⚠️ Referenced; v1 deltas captured in changelog + `21-git-logs/` legacy banner |
 | 14-endpoint-examples.md | ✅ |
-| 15-error-codes.md | ✅ |
+| 15-error-codes.md | ✅ (4 new auth codes added in v2.6) |
 | 16-test-plan.md | ✅ |
 | 17-openapi.yaml | ✅ |
-| 18-schema.sql | ✅ |
+| 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |
 | 20-observability.md | ✅ |
 | 21-i18n.md | ✅ |
@@ -36,37 +36,41 @@
 | 24-multisite.md | ✅ |
 | 25-headless-auth-notes.md | ✅ |
 | 26-readme-and-screenshots.md | ✅ |
-| 97-acceptance-criteria.md | ✅ (36 AC; needs +5 for §22–§26 in next pass) |
+| 27-wp-cli-reference.md | ✅ |
+| 28-example-github-actions.md | ✅ |
+| 29-uninstall-policy.md | ✅ |
+| 30-threat-model.md | ✅ |
+| 97-acceptance-criteria.md | ✅ (AC-01..AC-41) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
 
 ## Cross-link validation
 
-- `00-overview.md` → all section files (00, 01–26, 97–99): OK
-- `22-retention-and-pruning.md` references `09-seed-data.md` + `18-schema.sql` (new `Prune` AuditActionType): pending seed update
-- `23-backup-restore.md` references `06-migrations-and-logger.md` + `09-seed-data.md` (new `Restore` AuditActionType): pending seed update
-- `24-multisite.md` references §20 Site Health: OK
-- `25-headless-auth-notes.md` references `15-error-codes.md` (new `GL-AUTH-NO-PROFILE-LINK`, `GL-AUTH-PROFILE-SUSPENDED`, `GL-AUTH-WRONG-LANE`, `GL-AUTH-NOT-LOGGED-IN`): pending catalog update
-- `26-readme-and-screenshots.md` references §03, §08, §09, §20: OK
+- `00-overview.md` → §00–§30 + §97–§99: OK
+- `15-error-codes.md` covers every code referenced from §22, §23, §25, §27: OK
+- `97-acceptance-criteria.md` AC-26..AC-41 reference §10, §17–§26 sources: OK
+- `18-schema.sql` `AuditActionType` seed includes Prune (19), Restore (20): OK
+- `30-threat-model.md` deferral list cross-links to `11-encryption-deferred-plan.md` (queued file)
 
 ## Naming compliance
 
-- File prefixes 00–26, 97–99 sequential and unique. ✅
+- File prefixes 00–30, 97–99 sequential. ✅ (gaps at 09–13 noted as queued)
 - Tables/columns PascalCase, PKs `{Table}Id`. ✅
-- All `GL-*` error codes consolidated in `15-error-codes.md`. ✅ (4 new codes from §25 to add next pass)
-- Translatable scope explicitly excludes stable identifiers per §21. ✅
+- All `GL-*` error codes consolidated in `15-error-codes.md`. ✅
+- Translatable scope honors §21. ✅
 
 ## Conflicts vs v1 (folder 21)
 
-Resolved by parallel-folder strategy; v2 wins. See `13-v1-vs-v2-mapping.md`.
+Resolved by parallel-folder strategy; v2 wins. Legacy v1 banner in `spec/21-git-logs/00-overview.md`.
 
 ## Open items (not blocking)
 
 1. **App identity (§07)** — still awaiting user confirmation on whether to add `Environment`, `Platform`, or `OwnerEmail`. Current set: `AppName`, `AppSlug`, `Description`, `ProfileId`, `AppStatusId`.
-2. **Seed updates pending** — §22 + §23 introduce new `AuditActionType` rows (Prune=19, Restore=20). Reflect in `09-seed-data.md` + `18-schema.sql` next pass.
-3. **GL- code additions pending** — §25 introduces 4 new auth codes. Reflect in `15-error-codes.md` next pass.
-4. **AC additions pending** — extend `97-acceptance-criteria.md` with AC-37..AC-41 covering prune, backup, restore, multisite isolation, headless lane separation.
+2. **Author files 09–13** — `09-seed-data.md`, `10-rate-limit-and-payload.md`, `11-encryption-deferred-plan.md`, `12-wp-plugin-scaffold.md`, `13-v1-vs-v2-mapping.md`. Content already exists distributed across other files; needs consolidation into the named slots.
+3. **`PluginUninstall` AuditActionType (21)** — declared in §29; needs to be appended to `18-schema.sql` seed in next pass.
+4. **`ConfigChange` AuditActionType** — referenced from §30 R3; needs ID assignment + seed.
+5. **`ConfigKv` keys mentioned in new sections** — `UninstallMode` (§29), `AllowedReadOrigins` (§30 S3), `MaintenanceMode` (§23). Add to default seeds in `18-schema.sql` next pass.
 
 ## Health Score
 
-98/100 (A) — required files present, kebab-case sequential, unique prefixes, cross-links valid; 4 housekeeping deltas tracked in Open items.
+96/100 (A) — 26 of 31 numbered files present; 5 queued slots tracked above; cross-links valid; AC coverage now matches the spec breadth.

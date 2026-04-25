@@ -314,7 +314,8 @@ INSERT OR IGNORE INTO AuditActionType (AuditActionTypeId, Name) VALUES
     (7,'RepoCreate'),(8,'RepoUpdate'),(9,'RepoDelete'),
     (10,'AppCreate'),(11,'AppUpdate'),(12,'AppDelete'),(13,'AppLinkChange'),
     (14,'LogPush'),(15,'LogQuery'),
-    (16,'AuthSuccess'),(17,'AuthFail'),(18,'MigrationRun');
+    (16,'AuthSuccess'),(17,'AuthFail'),(18,'MigrationRun'),
+    (19,'Prune'),(20,'Restore');
 
 INSERT OR IGNORE INTO AuditOutcome (AuditOutcomeId, Name) VALUES
     (1,'Success'),(2,'Rejected'),(3,'Error');

@@ -1,6 +1,6 @@
 # Acceptance Criteria (v2)
 
-**Version:** 2.0.0  
+**Version:** 2.5.0  
 **Updated:** 2026-04-25
 
 | # | Criterion | Source |
@@ -30,3 +30,19 @@
 | AC-23 | All tables/columns/JSON keys/values use PascalCase; PKs are `INTEGER AUTOINCREMENT` named `{Table}Id`. | brief §DB.2–4 |
 | AC-24 | All typed values modeled as Enum in code AND lookup table in DB; no string-literal status comparisons. | brief §DB.5 |
 | AC-25 | Items marked `format:hide` in the mind-map are not rendered in UI. | brief §1.j |
+| AC-26 | Per-Profile token bucket enforces `RatePerMinPerProfile`; bucket state survives request boundaries; `Retry-After` header set on 429. | §10 |
+| AC-27 | `MaxPushPayloadBytes`, `MaxLinesPerPush`, `MaxLineBytes` enforced before parse; oversize line truncated + tagged Warn (no GL- code). | §10 |
+| AC-28 | First-run bootstrap form appears iff `Profile` table empty AND current user has `manage_options`; one-time credential reveal; re-shown if last Profile deleted. | §03 |
+| AC-29 | `inc/Migrations/V{Major}_{Minor}_{Patch}.php` classes implement `MigrationInterface`; `MigrationState` keyed by `PluginVersion`; idempotent re-runs. | §06, §12 |
+| AC-30 | Every endpoint reject returns the §15 envelope `{Status, Code, Message, RequestId, HttpStatus}`; `RequestId` mirrored in `AuditTrail.RequestId`. | §15 |
+| AC-31 | `wp git-logs prune --older-than=Nd` enforces 7d floor; refused while migration pending; two-phase delete; final `wal_checkpoint(TRUNCATE)`; emits `AuditActionType.Prune` row. | §22 |
+| AC-32 | `wp git-logs backup` uses SQLite Online Backup API + manifest JSON; `restore` refuses without maintenance mode unless `--force`; downgrade across major versions always refused. | §23 |
+| AC-33 | `wp git-logs verify` runs `integrity_check` + `foreign_key_check` + `Profile≥1` + `MigrationState.PluginVersion=ConfigKv.PluginVersion`; surfaced via Site Health card. | §20, §23 |
+| AC-34 | Multisite: per-site DB file always (even when network-activated); no shared DB; reads stay site-scoped. | §24 |
+| AC-35 | Lane B credential to a Lane A endpoint (or vice versa) returns `GL-AUTH-WRONG-LANE`; Lane A requires Profile match by email else `GL-AUTH-NO-PROFILE-LINK`. | §25, §15 |
+| AC-36 | Translatable scope honors §21: GL-* codes, enum names, Permission names, REST routes, hook names, `ConfigKv` keys, audit `Detail` keys remain English. CI POT diff passes. | §21 |
+| AC-37 | `GET /wp-json/git-logs/v2/metrics` returns Prometheus exposition; auth gated by `HistoryView`; counters flushed every 5 min via wp_cron. | §20 |
+| AC-38 | `AuditActionType` lookup contains rows: Prune (19), Restore (20) per `18-schema.sql` seed. | §22, §23, §18 |
+| AC-39 | Permission gate uses `RolePermission` join only — never role name string compare. Buttons hidden (not disabled) when permission missing. | §19 |
+| AC-40 | OpenAPI 3.1 spec at `17-openapi.yaml` parses; covers all 10 endpoints; references `15-error-codes.md` envelope schema. | §17 |
+| AC-41 | WP.org release ZIP contains `readme.txt` + `screenshot-1..8.png`; CI gate runs `wp i18n make-pot` diff + `wp plugin check` before tagging. | §26, §21 |
