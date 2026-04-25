@@ -114,7 +114,7 @@ Routes needed (reference REST conventions from `14-rest-api-conventions.md`).
 | Content Type | Correct Location |
 |-------------|-----------------|
 | Cross-cutting coding principles | Core fundamentals (`01–20`) |
-| Bug analysis or fixes | `22-app-issues/` |
+| Bug analysis or fixes | `25-app-issues/` |
 | Research or evaluations | `10-research/` or `02-coding-guidelines/10-research/` |
 | Database schema (core conventions) | `04-database-conventions/` |
 | Database schema (app-specific) | `23-app-database/` |
@@ -165,7 +165,7 @@ The `21+` range forms a cohesive app-specific layer:
 | Folder | Purpose | Relationship |
 |--------|---------|-------------|
 | `21-app/` | Feature specs and workflows | **This folder** — defines what to build |
-| `22-app-issues/` | Bug tracking and resolution | References features from `21-app/` |
+| `25-app-issues/` | Bug tracking and resolution | References features from `21-app/` |
 | `23-app-database/` | Schema and migration specs | Implements data models from `21-app/` |
 | `24-app-design-system-and-ui/` | UI tokens and component specs | Implements visual specs from `21-app/` |
 
@@ -175,7 +175,7 @@ The `21+` range forms a cohesive app-specific layer:
 21-app/ (defines features)
   ├── 23-app-database/ (implements data layer)
   ├── 24-app-design-system-and-ui/ (implements UI layer)
-  └── 22-app-issues/ (tracks problems)
+  └── 25-app-issues/ (tracks problems)
 ```
 
 Features in `21-app/` drive work in the other three folders. Not the reverse.

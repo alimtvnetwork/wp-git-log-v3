@@ -44,7 +44,7 @@ All five critical handoff files now publish explicit Source-Folder Coverage Maps
 | 11 | `10-research.md` | `02-coding-guidelines/10-research/` | **180+** | — | — | **88%** | None | ⬆ +23 |
 | 12 | `12-root-research.md` | `10-research/` | **170+** | — | — | **88%** | None | ⬆ +23 |
 | 13 | `13-app.md` | `21-app/` | **210+** | — | — | **88%** | None | ⬆ +18 |
-| 14 | `14-app-issues.md` | `22-app-issues/` | **210+** | — | — | **85%** | None | ⬆ +25 |
+| 14 | `14-app-issues.md` | `25-app-issues/` | **210+** | — | — | **85%** | None | ⬆ +25 |
 | 15 | `15-cicd-pipeline-workflows.md` | `12-cicd-pipeline-workflows/` | 422 | 5,140 | 8% | 92% | None | — |
 | 16 | `16-app-design-system-and-ui.md` | `24-app-design-system-and-ui/` + error modal colors | **530+** | — | — | **93%** | None | ⬆ +5 |
 | 17 | `17-self-update-app-update.md` | `14-update/` | 441 | 4,486 | 10% | 93% | None | — |

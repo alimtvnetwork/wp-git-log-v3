@@ -119,7 +119,7 @@
 | CLI self-update system | `spec/14-update/` |
 | WordPress plugins | `spec/18-wp-plugin-how-to/` |
 | App-specific features | `spec/21-app/` |
-| Known app bugs/issues | `spec/22-app-issues/` |
+| Known app bugs/issues | `spec/25-app-issues/` |
 | App-specific database schema | `spec/23-app-database/` |
 | App-specific UI and design system | `spec/24-app-design-system-and-ui/` |
 

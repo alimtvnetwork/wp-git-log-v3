@@ -92,7 +92,7 @@ These are explicitly **kept open by design** — closing them would create dupli
 |-----|----------------|
 | `15-distribution-and-runner/` no standalone consolidated file | Folded into `17-self-update-app-update.md`; promote only if folder grows beyond 5 source files |
 | `16-generic-release/` folded into CI/CD consolidated | Overlaps heavily with `12-cicd-pipeline-workflows/` |
-| `10-research/`, `21-app/`, `22-app-issues/` placeholder folders | Memory rule: intentional stubs; never write 97/99 files for them |
+| `10-research/`, `21-app/`, `25-app-issues/` placeholder folders | Memory rule: intentional stubs; never write 97/99 files for them |
 | Linter framework internals (how to author a new rule from zero) | §34 documents all 16 existing rules and their contracts; framework-internal patterns are reasonably inferred from existing code — full "Linter Authoring Guide" can be a future Phase 6 if requested |
 
 ---

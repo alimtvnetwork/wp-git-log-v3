@@ -569,7 +569,7 @@
         ]
       },
       {
-        "Folder": "02-coding-guidelines/22-app-issues",
+        "Folder": "02-coding-guidelines/25-app-issues",
         "MdFiles": 1,
         "Subfolders": 0,
         "HasOverview": true,
@@ -1498,7 +1498,7 @@
         ]
       },
       {
-        "Folder": "22-app-issues",
+        "Folder": "25-app-issues",
         "MdFiles": 1,
         "Subfolders": 2,
         "HasOverview": true,
@@ -1510,7 +1510,7 @@
         ]
       },
       {
-        "Folder": "22-app-issues/01-phase-2-git-logs-audit",
+        "Folder": "25-app-issues/01-phase-2-git-logs-audit",
         "MdFiles": 1,
         "Subfolders": 0,
         "HasOverview": true,
@@ -1522,7 +1522,7 @@
         ]
       },
       {
-        "Folder": "22-app-issues/02-consolidated-audit-findings",
+        "Folder": "25-app-issues/02-consolidated-audit-findings",
         "MdFiles": 1,
         "Subfolders": 0,
         "HasOverview": true,

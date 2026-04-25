@@ -42,7 +42,7 @@ Application-specific design system and UI specifications. Covers component patte
 ## Cross-References
 
 - [Design System (Core)](../07-design-system/00-overview.md) — Foundational design system spec
-- [Git Logs v1 (legacy)](../21-git-logs/00-overview.md) — App-specific features and workflows (deprecated v1)
+- [Git Logs v1 (legacy)](../_archive/21-git-logs-v1/00-overview.md) — App-specific features and workflows (deprecated v1)
 - [Consolidated Design System](../17-consolidated-guidelines/07-design-system.md) — Consolidated summary
 
 ---

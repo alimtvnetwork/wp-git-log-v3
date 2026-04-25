@@ -62,7 +62,7 @@ Each row in the master matrix below contains:
 | 17 | `17-consolidated-guidelines/` | This folder itself — consolidated AI-readable digests and the gap analysis | (self) | All consolidated files | ✅ Full |
 | 18 | `18-wp-plugin-how-to/` | WP plugin foundation/architecture, enums and coding style, traits/composition, logging/error handling, helpers/responses/integration, input validation, reference implementations, WP integration patterns, testing, deployment, frontend/template patterns, design system, admin UI, REST API conventions, settings architecture, error handling extraction, data file patterns, frontend JS patterns | [`20-wp-plugin-conventions.md`](./20-wp-plugin-conventions.md) | [`02-coding-guidelines.md`](./02-coding-guidelines.md) §php, [`03-error-management.md`](./03-error-management.md) | ✅ Full |
 | 21 | `21-app/` | App-specific spec placement and decision guide | [`13-app.md`](./13-app.md) | [`14-app-issues.md`](./14-app-issues.md), [`22-app-database.md`](./22-app-database.md), [`16-app-design-system-and-ui.md`](./16-app-design-system-and-ui.md) | 🟡 Partial — placeholder, expanded inside app-* consolidated files |
-| 22 | `22-app-issues/` | App bug analysis, issue file template, placement rules | [`14-app-issues.md`](./14-app-issues.md) | [`13-app.md`](./13-app.md) | 🟡 Partial — placeholder folder |
+| 22 | `25-app-issues/` | App bug analysis, issue file template, placement rules | [`14-app-issues.md`](./14-app-issues.md) | [`13-app.md`](./13-app.md) | 🟡 Partial — placeholder folder |
 | 23 | `23-app-database/` | App-database conventions overlay on top of `04-database-conventions/` | [`22-app-database.md`](./22-app-database.md) | [`18-database-conventions.md`](./18-database-conventions.md), [`05-split-db-architecture.md`](./05-split-db-architecture.md) | ✅ Full |
 | 24 | `24-app-design-system-and-ui/` | App-design overlay on top of `07-design-system/` | [`16-app-design-system-and-ui.md`](./16-app-design-system-and-ui.md) | [`07-design-system.md`](./07-design-system.md), [`08-docs-viewer-ui.md`](./08-docs-viewer-ui.md), [`09-code-block-system.md`](./09-code-block-system.md) | ✅ Full |
 
@@ -85,7 +85,7 @@ Each row in the master matrix below contains:
 | `11-research.md` | `02-coding-guidelines/10-research/` | `10-research/` |
 | `12-root-research.md` | `10-research/` | `02-coding-guidelines/10-research/` |
 | `13-app.md` | `21-app/` | `02-coding-guidelines/21-app/` |
-| `14-app-issues.md` | `22-app-issues/` | `02-coding-guidelines/22-app-issues/`, `21-app/` |
+| `14-app-issues.md` | `25-app-issues/` | `02-coding-guidelines/25-app-issues/`, `21-app/` |
 | `15-cicd-pipeline-workflows.md` | `12-cicd-pipeline-workflows/` | `14-update/`, `15-distribution-and-runner/`, `16-generic-release/` |
 | `16-app-design-system-and-ui.md` | `24-app-design-system-and-ui/` | `07-design-system/`, `02-coding-guidelines/24-app-design-system-and-ui/` |
 | `17-self-update-app-update.md` | `14-update/` | `12-cicd-pipeline-workflows/06-self-update-mechanism/`, `15-distribution-and-runner/`, `16-generic-release/08-version-pinned-release-installers/` |
@@ -147,7 +147,7 @@ Each row in the master matrix below contains:
 |-----|------------------|--------|
 | `15-distribution-and-runner/` has no standalone consolidated file — merged into `17-self-update-app-update.md` | `15-distribution-and-runner/` | 🟡 Acceptable — referenced inline; promote to standalone if it grows beyond 5 files |
 | `16-generic-release/` folded into CI/CD consolidated rather than its own file | `16-generic-release/` | 🟡 Acceptable — overlaps heavily with `12-cicd-pipeline-workflows/` |
-| `10-research/` and `21-app/`, `22-app-issues/` are placeholder folders with only `00-overview.md` | `10-research/`, `21-app/`, `22-app-issues/` | 🟡 Expected — content lives in app-* consolidated files |
+| `10-research/` and `21-app/`, `25-app-issues/` are placeholder folders with only `00-overview.md` | `10-research/`, `21-app/`, `25-app-issues/` | 🟡 Expected — content lives in app-* consolidated files |
 | `02-coding-guidelines/06-cicd-integration/` cross-references CI/CD specs but is not summarized in `02-coding-guidelines.md` | `02-coding-guidelines/06-cicd-integration/` | ✅ Covered via `15-cicd-pipeline-workflows.md` cross-ref |
 
 ---

@@ -23,7 +23,7 @@ Any content that analyzes bugs, failures, root causes, or fixes for application-
 
 | # | Folder | Description |
 |---|--------|-------------|
-| 01 | [01-phase-2-git-logs-audit/](./01-phase-2-git-logs-audit/00-overview.md) | Phase-2 spec-only audit of `spec/21-git-logs/` (25 findings) |
+| 01 | [01-phase-2-git-logs-audit/](./01-phase-2-git-logs-audit/00-overview.md) | Phase-2 spec-only audit of `spec/_archive/21-git-logs-v1/` (25 findings) |
 | 02 | [02-consolidated-audit-findings/](./02-consolidated-audit-findings/00-overview.md) | Single auditable findings document — 24 numbered items with file paths and evidence snippets |
 
 ---
@@ -32,14 +32,14 @@ Any content that analyzes bugs, failures, root causes, or fixes for application-
 
 | Reference | Location |
 |-----------|----------|
-| App Specs (legacy v1 git-logs) | [../21-git-logs/00-overview.md](../21-git-logs/00-overview.md) |
+| App Specs (legacy v1 git-logs) | [../_archive/21-git-logs-v1/00-overview.md](../_archive/21-git-logs-v1/00-overview.md) |
 | Spec Authoring Guide | [../01-spec-authoring-guide/00-overview.md](../01-spec-authoring-guide/00-overview.md) |
 
 ---
 
 ## Verification
 
-_Auto-generated section — see `spec/22-app-issues/97-acceptance-criteria.md` for the full criteria index._
+_Auto-generated section — see `spec/25-app-issues/97-acceptance-criteria.md` for the full criteria index._
 
 ### AC-AI-000: App issues triage conformance: Overview
 

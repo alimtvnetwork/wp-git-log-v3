@@ -3,9 +3,9 @@
 **Generated:** 2026-04-25  
 **Total Files Scanned:** 645  
 **Total Folders:** 80  
-**Overall Health:** 100/100 (A+) 🎯
+**Overall Health:** 78/100 (B) — Phase 1 Triage executed
 
-> **Perfect score reached 2026-04-25.** Zero broken links, zero missing required files, zero deductions. Final clean-up: added `00-overview.md` + `99-consistency-report.md` to `21-git-logs/reference/`. Combined with the prior session's 30+ dead-link fixes and the new cross-repo allowlist mechanism in `linter-scripts/generate-dashboard-data.cjs`, the spec tree is now structurally clean. **Score trajectory: 74 → 97 → 100 (+26).**
+> **Honest baseline restored 2026-04-25 (v3.7.0).** Prior 100/100 was folder-scoped (folder 17 only). Full-tree v4 audit revealed 45/100 (F). Phase 1 Triage executed today: slot 22 collision resolved (`22-app-issues/` → `25-app-issues/`), legacy `21-git-logs/` archived to `_archive/21-git-logs-v1/`. **Score trajectory: 45 → 78 (+33).** Phase 2 (content fill: 13 missing AC files, 15 missing consistency reports) pending.
 
 ---
 
@@ -13,10 +13,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Score | **100/100 (A+)** 🎯 |
-| Deduction | 0 broken links |
-| Deduction | 0 missing consistency reports |
-| Deduction | 0 missing overviews |
+| Score | **78/100 (B)** |
+| Deduction | -13 missing acceptance-criteria files |
+| Deduction | -7 missing consistency reports (partial penalty) |
+| Deduction | -2 stale `spec-index.md` |
 
 ---
 

@@ -3,7 +3,7 @@
 **Version:** 1.0.0  
 **Updated:** 2026-04-25  
 **Phase:** 2 (Spec-only audit, no code)  
-**Audit Target:** `spec/21-git-logs/`  
+**Audit Target:** `spec/_archive/21-git-logs-v1/`  
 **Status:** Open  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low
@@ -12,9 +12,9 @@
 
 ## Overview
 
-Phase-2 audit of the `git-logs` WordPress plugin specification (`spec/21-git-logs/`). This report inventories every gap, inconsistency, missing requirement, contradiction, and unclear behavior detected between the locked decisions in `00-overview.md`, the existing spec files (`01`, `02`, `08`, `11`, `12`, `16`), and the file inventory the index promises to deliver. No source code is reviewed in this phase — findings are strictly spec-vs-spec and spec-vs-locked-decisions.
+Phase-2 audit of the `git-logs` WordPress plugin specification (`spec/_archive/21-git-logs-v1/`). This report inventories every gap, inconsistency, missing requirement, contradiction, and unclear behavior detected between the locked decisions in `00-overview.md`, the existing spec files (`01`, `02`, `08`, `11`, `12`, `16`), and the file inventory the index promises to deliver. No source code is reviewed in this phase — findings are strictly spec-vs-spec and spec-vs-locked-decisions.
 
-Each issue follows the standardized triage format mandated by `spec/22-app-issues/00-overview.md` (Reproduction / Cause / Fix / Prevention) and is assigned a stable ID (`P2-GL-NN`) for cross-referencing.
+Each issue follows the standardized triage format mandated by `spec/25-app-issues/00-overview.md` (Reproduction / Cause / Fix / Prevention) and is assigned a stable ID (`P2-GL-NN`) for cross-referencing.
 
 ---
 
@@ -22,14 +22,14 @@ Each issue follows the standardized triage format mandated by `spec/22-app-issue
 
 | # | Source | Role |
 |---|--------|------|
-| 1 | `spec/21-git-logs/00-overview.md` | Locked decisions, file inventory of record |
-| 2 | `spec/21-git-logs/01-glossary-and-enums.md` | Domain glossary and enum catalog |
-| 3 | `spec/21-git-logs/02-database-schema-and-erd.md` | DB schema (PascalCase tables, FKs, indexes) |
-| 4 | `spec/21-git-logs/08-allowlist-and-wildcard-matching.md` | Allowlist resolver and wildcard rules |
-| 5 | `spec/21-git-logs/11-error-management.md` | Error envelope, codes, no-swallow rules |
-| 6 | `spec/21-git-logs/12-logging-strategy.md` | Structured logging contract |
-| 7 | `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` | JWT lifecycle and onboarding |
-| 8 | `spec/22-app-issues/00-overview.md` | Triage format requirement |
+| 1 | `spec/_archive/21-git-logs-v1/00-overview.md` | Locked decisions, file inventory of record |
+| 2 | `spec/_archive/21-git-logs-v1/01-glossary-and-enums.md` | Domain glossary and enum catalog |
+| 3 | `spec/_archive/21-git-logs-v1/02-database-schema-and-erd.md` | DB schema (PascalCase tables, FKs, indexes) |
+| 4 | `spec/_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md` | Allowlist resolver and wildcard rules |
+| 5 | `spec/_archive/21-git-logs-v1/11-error-management.md` | Error envelope, codes, no-swallow rules |
+| 6 | `spec/_archive/21-git-logs-v1/12-logging-strategy.md` | Structured logging contract |
+| 7 | `spec/_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md` | JWT lifecycle and onboarding |
+| 8 | `spec/25-app-issues/00-overview.md` | Triage format requirement |
 | 9 | `spec/01-spec-authoring-guide/03-required-files.md` | Required-file rules per module |
 
 ---
@@ -37,7 +37,7 @@ Each issue follows the standardized triage format mandated by `spec/22-app-issue
 ## Methodology
 
 1. Cross-checked every "Locked Decision" in `00-overview.md` against concrete spec content.
-2. Compared the **Document Inventory** table (16 promised content files + 3 governance files) against files actually present in `spec/21-git-logs/`.
+2. Compared the **Document Inventory** table (16 promised content files + 3 governance files) against files actually present in `spec/_archive/21-git-logs-v1/`.
 3. Re-read each existing spec file for internal contradictions and dangling references (open items `OI-*`, `TBD`, "see §X" pointing nowhere).
 4. Verified mandatory artifacts required by the spec authoring guide (`97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`).
 5. Recorded every gap as a structured issue.
@@ -48,7 +48,7 @@ Each issue follows the standardized triage format mandated by `spec/22-app-issue
 
 | ID | Title | Severity | Category | Status |
 |----|-------|----------|----------|--------|
-| P2-GL-01 | 11 promised spec files are missing from `spec/21-git-logs/` | Critical | Coverage | Open |
+| P2-GL-01 | 11 promised spec files are missing from `spec/_archive/21-git-logs-v1/` | Critical | Coverage | Open |
 | P2-GL-02 | Mandatory `99-consistency-report.md` absent — module health unscorable | Critical | Governance | Open |
 | P2-GL-03 | `97-acceptance-criteria.md` absent — AC index referenced but not present | High | Governance | Open |
 | P2-GL-04 | `98-changelog.md` absent — version history unverifiable | Medium | Governance | Open |
@@ -80,7 +80,7 @@ Each issue follows the standardized triage format mandated by `spec/22-app-issue
 
 ## Detailed Findings
 
-Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix / Prevention) from `spec/22-app-issues/00-overview.md`.
+Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix / Prevention) from `spec/25-app-issues/00-overview.md`.
 
 ---
 
@@ -88,7 +88,7 @@ Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix 
 
 **Severity:** Critical · **Category:** Coverage
 
-**Reproduction.** Compare the **Document Inventory** in `spec/21-git-logs/00-overview.md` (rows 03, 04, 05, 06, 07, 09, 10, 13, 14, 15, 97, 98, 99) against `ls spec/21-git-logs/`. Files present: `00`, `01`, `02`, `08`, `11`, `12`, `16`. Files missing: `03`, `04`, `05`, `06`, `07`, `09`, `10`, `13`, `14`, `15`, `97`, `98`, `99` (13 entries; 11 are content files, 2 are governance + 1 AC index).
+**Reproduction.** Compare the **Document Inventory** in `spec/_archive/21-git-logs-v1/00-overview.md` (rows 03, 04, 05, 06, 07, 09, 10, 13, 14, 15, 97, 98, 99) against `ls spec/_archive/21-git-logs-v1/`. Files present: `00`, `01`, `02`, `08`, `11`, `12`, `16`. Files missing: `03`, `04`, `05`, `06`, `07`, `09`, `10`, `13`, `14`, `15`, `97`, `98`, `99` (13 entries; 11 are content files, 2 are governance + 1 AC index).
 
 **Cause.** The overview was authored as a forward-looking index but subsequent authoring sessions only produced the four "logging / errors / allowlist / JWT" deep-dives. No backfill pass closed the inventory.
 
@@ -102,7 +102,7 @@ Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix 
 
 **Severity:** Critical · **Category:** Governance
 
-**Reproduction.** `ls spec/21-git-logs/99-consistency-report.md` → file not found.
+**Reproduction.** `ls spec/_archive/21-git-logs-v1/99-consistency-report.md` → file not found.
 
 **Cause.** Module created without the mandatory governance footer required by `spec/01-spec-authoring-guide/03-required-files.md`. Without it the health score formula (4×25 %) cannot reach >75 %.
 
@@ -386,7 +386,7 @@ Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix 
 
 **Cause.** Registry artifact not generated.
 
-**Fix.** Produce `spec/21-git-logs/error-codes.json` listing every code, HTTP status, namespace, user-facing message key, debug-only flag.
+**Fix.** Produce `spec/_archive/21-git-logs-v1/error-codes.json` listing every code, HTTP status, namespace, user-facing message key, debug-only flag.
 
 **Prevention.** Linter check: every `GL-*` mention in markdown must be present in `error-codes.json`.
 
@@ -500,11 +500,11 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 
 | Reference | Location |
 |-----------|----------|
-| Audit target index | [../../21-git-logs/00-overview.md](../../21-git-logs/00-overview.md) |
-| Allowlist spec | [../../21-git-logs/08-allowlist-and-wildcard-matching.md](../../21-git-logs/08-allowlist-and-wildcard-matching.md) |
-| Error management spec | [../../21-git-logs/11-error-management.md](../../21-git-logs/11-error-management.md) |
-| Logging strategy spec | [../../21-git-logs/12-logging-strategy.md](../../21-git-logs/12-logging-strategy.md) |
-| JWT onboarding spec | [../../21-git-logs/16-jwt-onboarding-and-token-usage.md](../../21-git-logs/16-jwt-onboarding-and-token-usage.md) |
+| Audit target index | [../../_archive/21-git-logs-v1/00-overview.md](../../_archive/21-git-logs-v1/00-overview.md) |
+| Allowlist spec | [../../_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md](../../_archive/21-git-logs-v1/08-allowlist-and-wildcard-matching.md) |
+| Error management spec | [../../_archive/21-git-logs-v1/11-error-management.md](../../_archive/21-git-logs-v1/11-error-management.md) |
+| Logging strategy spec | [../../_archive/21-git-logs-v1/12-logging-strategy.md](../../_archive/21-git-logs-v1/12-logging-strategy.md) |
+| JWT onboarding spec | [../../_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md](../../_archive/21-git-logs-v1/16-jwt-onboarding-and-token-usage.md) |
 | Triage format requirement | [../00-overview.md](../00-overview.md) |
 | Required-files rules | [../../01-spec-authoring-guide/03-required-files.md](../../01-spec-authoring-guide/03-required-files.md) |
 

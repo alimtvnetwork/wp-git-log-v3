@@ -471,7 +471,7 @@ Setup: 60-req/60s sliding window, `R50` resolved.
 
 | # | Item | Notes |
 |---|------|-------|
-| OI-ALLOW-01 | HS256 verifier storage | Section 3 step 6 introduces `Repository.LogSenderTokenVerifier` (AEAD-encrypted). Alternative: switch envelope to **Ed25519 / RS256** so only a public key is stored — eliminates symmetric secret at rest. Decide before implementation; affects schema. Tracked as finding [F-02](../22-app-issues/02-consolidated-audit-findings/00-overview.md). |
+| OI-ALLOW-01 | HS256 verifier storage | Section 3 step 6 introduces `Repository.LogSenderTokenVerifier` (AEAD-encrypted). Alternative: switch envelope to **Ed25519 / RS256** so only a public key is stored — eliminates symmetric secret at rest. Decide before implementation; affects schema. Tracked as finding [F-02](../25-app-issues/02-consolidated-audit-findings/00-overview.md). |
 | OI-ALLOW-02 | Token rotation grace window | Default 24 h; should it be admin-configurable per-repo? |
 | OI-ALLOW-03 | `OwnerWildcard` + per-repo rate limit | Currently buckets by resolved `RepositoryId`; should an `OwnerWildcard` row instead bucket by `(RepositoryId, owner, repo-from-payload)` to avoid one noisy repo starving siblings? |
 | OI-ALLOW-04 | Whether to expose a `/repos/check` dry-run endpoint for CI to validate config | UX nicety; needs rate limit of its own. |

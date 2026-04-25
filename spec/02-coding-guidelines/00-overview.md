@@ -90,13 +90,13 @@ IMPORTANT — AI INSTRUCTION:
 
 2. Folders 21+ are for APP-SPECIFIC content.
    - 21-app: Application feature specs, workflows, architecture decisions.
-   - 22-app-issues: App bug analysis, root cause analysis, fix documentation.
+   - 25-app-issues: App bug analysis, root cause analysis, fix documentation.
 
 3. Decision guide for placement:
    - Reusable, foundational, or principle-driven → 01–20 (core fundamentals)
    - Exploratory, comparative, or evaluative → 10-research
    - App feature or workflow definition → 21-app
-   - App bug/failure/root cause analysis → 22-app-issues
+   - App bug/failure/root cause analysis → 25-app-issues
 
 4. New core fundamental folders use the next available number within 01–20.
 5. New app folders use the next available number after 22.
@@ -151,7 +151,7 @@ IMPORTANT — AI INSTRUCTION:
 | # | Category | Description | Files |
 |---|----------|-------------|-------|
 | 21 | [App](./21-app/00-overview.md) | App-specific specs: features, workflows, architecture decisions | 0 |
-| 22 | [App Issues](./22-app-issues/00-overview.md) | App bug analysis, root cause analysis, fix documentation | 0 |
+| 22 | [App Issues](./25-app-issues/00-overview.md) | App bug analysis, root cause analysis, fix documentation | 0 |
 | 23 | [App Database](./23-app-database/00-overview.md) | App-specific data model, table designs, migration strategies | 0 |
 | 24 | [App Design System & UI](./24-app-design-system-and-ui/00-overview.md) | App-specific design system, theming, component patterns, layout | 0 |
 
@@ -168,7 +168,7 @@ IMPORTANT — AI INSTRUCTION:
 | Date | Change |
 |------|--------|
 | 2026-04-16 | **Flattened structure** — removed nested `03-coding-guidelines-spec/` folder, moved all subfolders to root level |
-| 2026-04-09 | Restructured: 09→PowerShell, 10→Research, 09-security→11, 10-database→12, added 21-app, 22-app-issues |
+| 2026-04-09 | Restructured: 09→PowerShell, 10→Research, 09-security→11, 10-database→12, added 21-app, 25-app-issues |
 | 2026-04-02 | Added `10-database-conventions/` (8 files: schema design, ORM, views, testing, REST API format) |
 | 2026-04-02 | Added `09-security/` and moved Axios version control from `spec/01-app/` |
 | 2026-04-02 | Added `08-file-folder-naming/` (per-language conventions) |
