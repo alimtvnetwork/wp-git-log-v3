@@ -1,73 +1,66 @@
-# Acceptance Criteria — App Design System & UI
+# Acceptance Criteria — 24 App Design System And Ui
 
-**Version:** 1.0.0  
+**Version:** 2.0.0  
 **Updated:** 2026-04-25  
-**Scope:** `spec/24-app-design-system-and-ui/`
+**Scope:** `spec/24-app-design-system-and-ui/`  
+**Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
 
 ---
 
-## Purpose
+## Module Summary
 
-This document defines testable acceptance criteria for the **App Design System & UI** module. Every criterion is verifiable from the module's content alone — an AI implementer or human reviewer can check pass/fail without external context.
-
----
-
-## Criteria
-
-### AC-01: Module entry point exists and is non-trivial
-- **Given** the module folder `spec/24-app-design-system-and-ui/`
-- **When** `00-overview.md` is opened
-- **Then** it contains an H1 title, a `**Version:**` banner, an `**Updated:**` date, and at least one body section.
-- **Source:** `00-overview.md`
-
-### AC-02: All sibling files referenced from the overview are present on disk
-- **Given** the link inventory in `00-overview.md`
-- **When** each relative `.md` link is resolved
-- **Then** the target file exists in this module folder.
-- **Source:** `00-overview.md` cross-references; verified by `linter-scripts/check-spec-cross-links.py`.
-
-### AC-03: Naming convention compliance
-- **Given** every file in this module
-- **When** filenames are inspected
-- **Then** all match `^[0-9]{2}-[a-z0-9-]+\.md$` (or are recognized special files like `README.md`).
-- **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md`.
-
-### AC-04: Consistency report present and current
-- **Given** the module folder
-- **When** `99-consistency-report.md` is opened
-- **Then** it lists every `.md` file in this folder under "File Inventory" with status ✅.
-- **Source:** `99-consistency-report.md`.
-
-### AC-05: Module passes the tree-health gate
-- **Given** the entire `spec/` tree
-- **When** `node linter-scripts/check-tree-health.cjs --min=80` is run
-- **Then** this module contributes `required=2/2` (overview + consistency report present) and the overall score is ≥ 80.
-- **Source:** `linter-scripts/check-tree-health.cjs`.
+Defines the application-specific UI and design system standards, enforcing theme consistency, layout conventions, and semantic token usage via automated linting and snapshot testing.
 
 ---
 
-## Module-Specific Files
+## Inlined Contracts
 
-The following files in this module also constitute acceptance surface — each must remain valid markdown with a top-level H1 and version banner:
+> Required artifacts inlined here so each AC is self-contained — a mediocre AI does not need to chase cross-links.
 
-- `00-overview.md`
+N/A - This overview module defines meta-standards. 
+Required Semantic Token Prefixes: --color-*, --space-*, --font-*
+Required Theme Modes: 'light', 'dark'
+Required Scripts: 'npm run lint', 'npm run test'
+Version: 3.2.0
 
 ---
 
-## Validation
+## Acceptance Criteria
 
-Run the full pipeline:
+### AC-ADS-01: Tokenized Color and Spacing Usage  `[critical]`
+- **Given** The application UI codebase and the semantic token definitions in `00-overview.md`
+- **When** Running `npm run lint` on the project source code.
+- **Then** CSS or Style-in-JS properties must use variables (e.g., --color-primary) instead of hardcoded hex/rgb values.
+- **Verifies:** AC-ADS-000: App design-system conformance
 
-```bash
-bash linter-scripts/run.sh
-```
+### AC-ADS-02: Theme Snapshot Consistency  `[high]`
+- **Given** The UI components in light and dark mode configurations.
+- **When** Executing `npm run test` to trigger snapshot comparisons.
+- **Then** Visual regression tests pass with zero pixel mismatch against current baseline snapshots.
+- **Verifies:** AC-ADS-000: App design-system conformance
 
-This executes: validator → self-heal → regen index → tree-health gate. All steps must exit 0 for this module's acceptance to hold.
+### AC-ADS-03: Standard Layout Conformance  `[high]`
+- **Given** The application layout implementation.
+- **When** Inspecting DOM structure for top-level application shell components.
+- **Then** The layout must adhere to the 'layout conventions' mentioned in the Purpose section, specifically ensuring standard containers are used.
+- **Verifies:** Purpose: layout conventions
+
+### AC-ADS-04: Design System Version Alignment  `[low]`
+- **Given** The project versioning and metadata in 00-overview.md.
+- **When** Auditing package.json or component library metadata.
+- **Then** The implementation must be tagged or documented as conforming to Version 3.2.0.
+- **Verifies:** Version: 3.2.0
+
+### AC-ADS-05: Core vs App Design System Hierarchy  `[medium]`
+- **Given** A component intended for the application UI.
+- **When** The component is rendered in the browser.
+- **Then** The component must inherit styles from the Cross-Referenced 'Design System (Core)' while applying 'app-specific' overrides.
+- **Verifies:** Cross-References: [Design System (Core)]
 
 ---
 
 ## Cross-References
 
 - [Module overview](./00-overview.md)
+- [Module changelog](./98-changelog.md)
 - [Module consistency report](./99-consistency-report.md)
-- [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
