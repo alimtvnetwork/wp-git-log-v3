@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Git Logs Plugin API
-  version: 2.8.6
+  version: 2.8.2
   description: |
     REST API for the Git Logs WordPress plugin.
     Source spec: spec/22-git-logs-v2/04-rest-api-endpoints.md
@@ -144,6 +144,7 @@ components:
         Build-time GL-RELEASE-* codes (CI gates per §36) are intentionally
         excluded — they never surface in HTTP responses.
       enum:
+        # Lane A — admin/read auth
         - GL-AUTH-WP-MISSING
         - GL-AUTH-WP-INVALID
         - GL-AUTH-NOT-LOGGED-IN
@@ -152,10 +153,12 @@ components:
         - GL-AUTH-PROFILE-SUSPENDED
         - GL-AUTH-WRONG-LANE
         - GL-AUTHZ-PERMISSION-DENIED
+        # Lane B — TempToken
         - GL-AUTH-TEMPTOKEN-INVALID
         - GL-AUTH-TOKEN-MISMATCH
         - GL-AUTH-PROFILE-INACTIVE
         - GL-APP-NOT-ACTIVE
+        # Lane B — SSH sub-mode
         - GL-SSH-HEADER-MISSING
         - GL-SSH-TIMESTAMP-SKEW
         - GL-SSH-KEY-UNKNOWN
@@ -165,18 +168,22 @@ components:
         - GL-SSH-SIGNATURE-INVALID
         - GL-SSH-LANE-CONFLICT
         - GL-AUTH-LANE-DISABLED
+        # Validation
         - GL-VALIDATION-PROFILE-NOT-FOUND
         - GL-VALIDATION-REPO-NOT-ALLOWED
         - GL-VALIDATION-BRANCH-RESTRICTED
         - GL-VALIDATION-REPOURL-MALFORMED
         - GL-VALIDATION-MISSING-FIELD
         - GL-VALIDATION-FIELD-TYPE
+        # Rate / payload
         - GL-PAYLOAD-TOO-LARGE
         - GL-LINES-TOO-MANY
         - GL-RATE-LIMIT-EXCEEDED
+        # Read endpoints
         - GL-READ-CURSOR-INVALID
         - GL-READ-PIPELINE-NOT-FOUND
         - GL-READ-LIMIT-OUT-OF-RANGE
+        # Operational
         - GL-DB-UNAVAILABLE
         - GL-MIGRATION-PENDING
         - GL-CONFIG-MISSING

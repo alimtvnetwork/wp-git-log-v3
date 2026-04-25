@@ -1,6 +1,6 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.7.0)
--- Source spec: spec/22-git-logs-v2/02-database-schema.md, 16-seed-data.md, 31-ssh-key-auth.md
+-- Git Logs Plugin — schema + lookup seeds (v2.8.7)
+-- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
 -- All FKs: ON UPDATE CASCADE ON DELETE RESTRICT unless noted.
@@ -270,7 +270,7 @@ CREATE TABLE IF NOT EXISTS MigrationState (
 );
 
 -- ============================================================================
--- Seeds — see 09-seed-data.md
+-- Seeds — see 37-seed-data.md (slot moved from 16 in v2.8.6)
 -- ============================================================================
 
 INSERT OR IGNORE INTO UserStatus (UserStatusId, Name) VALUES
@@ -334,7 +334,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.7.0',    strftime('%s','now')),
+    ('PluginVersion',         '2.8.7',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
@@ -352,6 +352,8 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.0.0', strftime('%s','now'), NULL),
     ('2.5.0', strftime('%s','now'), NULL),
     ('2.6.0', strftime('%s','now'), NULL),
-    ('2.7.0', strftime('%s','now'), NULL);
+    ('2.7.0', strftime('%s','now'), NULL),
+    ('2.8.0', strftime('%s','now'), NULL),  -- doc-only consolidation cycle (no DDL changes)
+    ('2.8.7', strftime('%s','now'), NULL);  -- §18/§15 audit alignment
 
 COMMIT;

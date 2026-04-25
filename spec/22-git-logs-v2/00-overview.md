@@ -1,17 +1,11 @@
 # Git Logs v2 — Spec Overview
 
-**Version:** 2.8.4  
+**Version:** 2.8.7  
 **Updated:** 2026-04-25  
 **Status:** Draft  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
-**Supersedes:** `spec/21-git-logs/` (legacy v1, all 10 files banner-deprecated in v2.7.1)
-
----
-
-## ⚠ Open Question (only blocker)
-
-**§07 App identity fields** — awaiting user confirmation: should `App` gain optional `Environment`, `Platform`, or `OwnerEmail` columns? Current locked set: `AppName`, `AppSlug`, `Description`, `ProfileId`, `AppStatusId`. Until answered, the v2.8.x cycle stays open. All other sections are frozen.
+**Supersedes:** `spec/21-git-logs/` (legacy v1 retained for history)
 
 ---
 
@@ -68,12 +62,16 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 06 | [06-migrations-and-logger.md](./06-migrations-and-logger.md) | Versioned migration markers + level-aware logger |
 | 07 | [07-app-entity.md](./07-app-entity.md) | App schema, AppLink polymorphism, lifecycle |
 | 08 | [08-history-and-action.md](./08-history-and-action.md) | History/Action vs AuditTrail separation |
-| 09–13 | *(intentional gap — locked)* | Content distributed across §05 (rate limit), §16/§18 (seeds), §30 R3 (encryption-deferred), §31 (SSH-key auth), legacy folder 21 (v1↔v2 mapping). Do **not** author standalone 09–13 files. |
+| 09 | [09-seed-data.md](./09-seed-data.md) | Lookup-table rows, RolePermission seeds, ConfigKv defaults |
+| 10 | [10-rate-limit-and-payload.md](./10-rate-limit-and-payload.md) | Per-Profile token bucket, payload caps |
+| 11 | [11-encryption-deferred-plan.md](./11-encryption-deferred-plan.md) | v3 encryption-at-rest blueprint |
+| 12 | [12-wp-plugin-scaffold.md](./12-wp-plugin-scaffold.md) | PHP file tree mapping spec → code |
+| 13 | [13-v1-vs-v2-mapping.md](./13-v1-vs-v2-mapping.md) | Side-by-side v1 ↔ v2 reference |
 | 14 | [14-endpoint-examples.md](./14-endpoint-examples.md) | Curl + JSON samples for all 10 endpoints |
-| 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog (37 runtime + 5 release-time codes) |
+| 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog |
 | 16 | [16-test-plan.md](./16-test-plan.md) | **Superseded** — redirects to §32–§35 |
-| 17 | [17-openapi.yaml](./17-openapi.yaml) | OpenAPI 3.1 machine-readable spec (8 paths, 10 logical endpoints via `?q=` collapse) |
-| 18 | [18-schema.sql](./18-schema.sql) | Verbatim DDL with seeds (25 AuditActionType, 10 ConfigKv defaults, 4 MigrationState markers) |
+| 17 | [17-openapi.yaml](./17-openapi.yaml) | OpenAPI 3.1 machine-readable spec for all 10 endpoints |
+| 18 | [18-schema.sql](./18-schema.sql) | Verbatim DDL for V2_0_0 migration |
 | 19 | [19-permission-matrix.md](./19-permission-matrix.md) | Role × Permission × Screen audit grid |
 | 20 | [20-observability.md](./20-observability.md) | Site Health card, metrics endpoint, counters |
 | 21 | [21-i18n.md](./21-i18n.md) | Text-domain rules, translatable scope, RTL/CI |
@@ -83,17 +81,10 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 25 | [25-headless-auth-notes.md](./25-headless-auth-notes.md) | Headless WP + JWT/OAuth supported combos |
 | 26 | [26-readme-and-screenshots.md](./26-readme-and-screenshots.md) | WP.org `readme.txt` + screenshot inventory |
 | 27 | [27-wp-cli-reference.md](./27-wp-cli-reference.md) | Consolidated `wp git-logs *` subcommand catalog |
-| 28 | [28-example-github-actions.md](./28-example-github-actions.md) | Drop-in workflow YAML (SSH primary + TempToken legacy tab) |
+| 28 | [28-example-github-actions.md](./28-example-github-actions.md) | Drop-in workflow YAML for Lane B push + fixed |
 | 29 | [29-uninstall-policy.md](./29-uninstall-policy.md) | DB retention modes on plugin removal |
 | 30 | [30-threat-model.md](./30-threat-model.md) | STRIDE pass over the v2 attack surface |
-| 31 | [31-ssh-key-auth.md](./31-ssh-key-auth.md) | SSH-key Lane B sub-mode (preferred from v2.7.0) |
-| 32 | [32-cli-test-plan.md](./32-cli-test-plan.md) | Seven-stage CLI test plan |
-| 33 | [33-bats-test-skeleton.md](./33-bats-test-skeleton.md) | Bats CLI smoke skeleton |
-| 34 | [34-phpunit-test-skeleton.md](./34-phpunit-test-skeleton.md) | PHPUnit unit skeleton (in-memory SQLite) |
-| 35 | [35-reference-ci-yml.md](./35-reference-ci-yml.md) | Reference `ci.yml` (12-job full matrix) |
-| 36 | [36-release-checklist.md](./36-release-checklist.md) | Semver gates, tag hygiene, release-day procedure |
-| 37 | [37-seed-data.md](./37-seed-data.md) | Human-readable seed catalog (counterpart to §18 DDL) |
-| 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC-01..AC-48 |
+| 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
 
