@@ -1,0 +1,23 @@
+graph TD
+    GP[GitProfile<br/>provider + owner + acceptance]
+    R[Repo<br/>RootRepoName / RootRepoUrl]
+    RV[RepoVersion<br/>VersionSuffix v0..vN]
+    P[Pipeline<br/>BranchName + PipelineName + HasError]
+    H[History<br/>per-RepoVersion timeline]
+    A[Action<br/>enum-typed action log]
+    APP[App<br/>AppName + AppSlug + Status]
+    AL[AppLink<br/>polymorphic GP or Repo]
+    PR[Profile<br/>credentials owner]
+
+    GP --> R
+    R --> RV
+    RV --> P
+    RV --> H
+    RV --> A
+    P --> A
+
+    PR --> APP
+    APP --> AL
+    AL -->|LinkType=GitProfile| GP
+    AL -->|LinkType=Repo| R
+    APP -.attribution.-> H

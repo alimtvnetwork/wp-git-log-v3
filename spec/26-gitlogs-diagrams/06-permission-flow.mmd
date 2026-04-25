@@ -1,0 +1,15 @@
+flowchart LR
+    Req([Admin UI request]) --> WP[WP App Password / cookie auth]
+    WP --> Map[Map WP user -> plugin Profile]
+    Map --> Roles[Load RoleAssignment for Profile]
+    Roles --> Perms[Resolve RolePermission union]
+    Perms --> Check{Required Permission<br/>in resolved set?}
+    Check -- Yes --> Allow([Handler executes])
+    Check -- No  --> Deny([Reject GL-AUTHZ-PERMISSION-DENIED])
+    Allow --> Audit1[AuditTrail Success]
+    Deny  --> Audit2[AuditTrail Rejected]
+
+    subgraph SeededRules
+      AdminRow[Role=Admin -> all Permissions seeded]
+      EditorRow[Role=Editor -> AppView, AppModify,<br/>HistoryView, RepoView]
+    end

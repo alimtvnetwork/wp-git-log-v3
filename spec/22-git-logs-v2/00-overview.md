@@ -1,0 +1,79 @@
+# Git Logs v2 — Spec Overview
+
+**Version:** 2.0.0  
+**Updated:** 2026-04-25  
+**Status:** Draft  
+**AI Confidence:** Production-Ready  
+**Ambiguity:** Low  
+**Supersedes:** `spec/21-git-logs/` (legacy v1 retained for history)
+
+---
+
+## Origin
+
+This module is the authoritative rewrite of the Git Logs WordPress plugin spec, derived from the verbatim brief at [`../21-git-logs/reference/00-verbatim-brief.md`](../21-git-logs/reference/00-verbatim-brief.md). Where v1 (folder 21) and v2 (folder 22) conflict, **v2 wins**.
+
+---
+
+## Locked Decisions
+
+| # | Decision | Value |
+|---|----------|-------|
+| 1 | Database engine | SQLite (Gitlogs root DB), single file |
+| 2 | Naming | PascalCase tables, columns, JSON keys, JSON values |
+| 3 | Primary keys | `INTEGER AUTOINCREMENT`, named `{TableName}Id` |
+| 4 | Auth (writes / admin UI) | WordPress App Password / cookie auth |
+| 5 | Auth (CI/CD) | `TempToken` + GitHub URL + branch validation; **JWT dropped** |
+| 6 | Roles | Plugin-internal SQLite (Admin, Editor); not WP roles |
+| 7 | Authorization | Always check **Permission**, never Role |
+| 8 | Acceptance modes | `AcceptAllRepos`, `AcceptSelectedRepoOnly`, `AcceptSelectedRepoInAllVersions` |
+| 9 | Branch restriction | `IsRestrictInBranch` + `StrictBranch` on GitProfile |
+| 10 | App linkage | Polymorphic `AppLink` table (LinkType: GitProfile \| Repo) |
+| 11 | App credentials | Inherit from parent Profile (no own tokens) |
+| 12 | App lifecycle | `AppStatus` enum: Active, Disabled, Archived |
+| 13 | Audit model | Three tables: `AuditTrail` (system), `History` (per RepoVersion), `Action` (enum log) |
+| 14 | Migrations | Marker per plugin version in DB config table; idempotent |
+| 15 | Logger | Level-aware (Trace/Debug/Info/Warn/Error/Fatal); Info/Debug runtime-disable |
+| 16 | REST namespace | `git-logs/v2` |
+| 17 | Endpoint count | 10 (see 04) |
+| 18 | Plugin slug | `git-logs` |
+| 19 | DB table prefix | none (SQLite root DB owned by plugin) |
+
+---
+
+## Top-Level UI Menus
+
+Profile · Roles · AccessToRoles · GitProfile · Repo · RepoVersion · History · Action
+
+Items marked `format:hide` in mind-map are informational only and never rendered.
+
+---
+
+## Document Inventory
+
+| # | File | Description |
+|---|------|-------------|
+| 00 | [00-overview.md](./00-overview.md) | This index |
+| 01 | [01-glossary-and-enums.md](./01-glossary-and-enums.md) | Terms + enum catalog |
+| 02 | [02-database-schema.md](./02-database-schema.md) | Tables, columns, FKs, indexes (markdown) |
+| 03 | [03-admin-ui.md](./03-admin-ui.md) | Menus, screens, fields |
+| 04 | [04-rest-api-endpoints.md](./04-rest-api-endpoints.md) | 10 endpoints, request/response shapes |
+| 05 | [05-auth-and-validation.md](./05-auth-and-validation.md) | TempToken + URL/branch validation |
+| 06 | [06-migrations-and-logger.md](./06-migrations-and-logger.md) | Versioned migration markers + level-aware logger |
+| 07 | [07-app-entity.md](./07-app-entity.md) | App schema, AppLink polymorphism, lifecycle |
+| 08 | [08-history-and-action.md](./08-history-and-action.md) | History/Action vs AuditTrail separation |
+| 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
+| 98 | [98-changelog.md](./98-changelog.md) | Changelog |
+| 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
+
+---
+
+## Cross-References
+
+| Reference | Location |
+|-----------|----------|
+| Verbatim brief | [../21-git-logs/reference/00-verbatim-brief.md](../21-git-logs/reference/00-verbatim-brief.md) |
+| Diagrams | [../26-gitlogs-diagrams/00-overview.md](../26-gitlogs-diagrams/00-overview.md) |
+| Legacy v1 spec | [../21-git-logs/00-overview.md](../21-git-logs/00-overview.md) |
+| DB conventions | [../04-database-conventions/00-overview.md](../04-database-conventions/00-overview.md) |
+| Master coding guidelines | [../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md](../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md) |
