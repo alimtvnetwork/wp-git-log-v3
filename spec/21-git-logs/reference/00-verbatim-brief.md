@@ -275,3 +275,18 @@ These will be resolved in favor of this brief once execution begins:
 ```
 If you have any question or confusion, feel free to ask. If you are creating multiple tasks, especially larger ones, organize them so that when I say `next`, you continue with the remaining tasks. Do you understand? Always add this part at the end of the writing inside the code block. Do you understand? Can you please do that?
 ```
+
+---
+
+## 14. Locked Decisions (2026-04-25, follow-up Q&A)
+
+| # | Decision | Value |
+|---|----------|-------|
+| L1 | Folder scope | New parallel folder `spec/22-git-logs-v2/`. Folder 21 untouched as legacy. |
+| L2 | JWT | **Dropped entirely.** Writes use WP application-password equivalent. CI/CD uses `TempToken` + GitHub URL + branch validation only. RS256/JWKS/refresh-token machinery removed. |
+| L3 | Audit model | Keep all three: `AuditTrail` (immutable system-wide), `History` (per-`RepoVersion` event view), `Action` (typed enum table referenced by both). |
+| L4 | App linkage | Separate `AppLink` table: `AppLinkId`, `AppId` FK, `LinkTypeId` FK (enum: `GitProfile`, `Repo`), `TargetId` (polymorphic FK by `LinkTypeId`), `IsActive`, `CreatedAt`. Allows multi-link and (re)link history. |
+| L5 | App auth | App inherits parent Profile's `GeneratedKeyApi`, `Token`, `TempToken`. App does not carry its own credentials. |
+| L6 | App lifecycle | `AppStatus` enum: `Active`, `Disabled`, `Archived`. CI/CD pushes rejected for non-`Active` apps. |
+| L7 | App identity (default proposal — pending user amend) | `AppId` PK, `AppName` (req), `AppSlug` (req, unique), `Description` (optional), `EnvironmentId` FK (enum: Dev/Staging/Prod), `ProfileId` FK, `AppStatusId` FK, `CreatedAt`, `UpdatedAt`. |
+
