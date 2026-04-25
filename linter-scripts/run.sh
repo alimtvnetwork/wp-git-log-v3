@@ -79,3 +79,37 @@ else
   echo "❌ Validation failed with CODE RED violations."
   exit $EXIT_CODE
 fi
+
+# ── Step 3: Self-heal missing consistency reports ─────────────────
+echo ""
+echo "═══ Step 3 — Filling missing consistency reports ═══"
+if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/fill-missing-consistency-reports.cjs" ]; then
+  node "$SCRIPT_DIR/fill-missing-consistency-reports.cjs"
+else
+  echo "⏭️  Skipped (node not installed or script missing)."
+fi
+
+# ── Step 4: Regenerate spec-index.md ──────────────────────────────
+echo ""
+echo "═══ Step 4 — Regenerating spec-index.md ═══"
+if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/generate-spec-index.cjs" ]; then
+  node "$SCRIPT_DIR/generate-spec-index.cjs"
+else
+  echo "⏭️  Skipped (node not installed or script missing)."
+fi
+
+# ── Step 5: Spec tree health gate ─────────────────────────────────
+echo ""
+echo "═══ Step 5 — Spec tree health gate ═══"
+HEALTH_MIN="${SPEC_HEALTH_MIN:-80}"
+if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/check-tree-health.cjs" ]; then
+  if node "$SCRIPT_DIR/check-tree-health.cjs" --min="$HEALTH_MIN"; then
+    echo "✅ Spec tree health gate passed."
+  else
+    echo "❌ Spec tree health below threshold $HEALTH_MIN."
+    exit 1
+  fi
+else
+  echo "⏭️  Skipped (node not installed or script missing)."
+fi
+
