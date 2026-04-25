@@ -33,7 +33,7 @@ ROOT = Path("/dev-server")
 SPEC = ROOT / "spec"
 OUT = ROOT / ".lovable/memory/audit/v2"
 OUT.mkdir(parents=True, exist_ok=True)
-MODEL = "google/gemini-3-flash-preview"
+MODEL = "google/gemini-2.5-flash"
 TODAY = "2026-04-25"
 
 WEIGHTS = {
