@@ -338,7 +338,7 @@ Implementers MUST add these as automated tests. Vectors are grouped by stage; ea
 
 For brevity, a `Repository` row is written as `R{id}: owner/repo, AcceptanceMode, VersionMode, Status` (UpdatedAt strictly increases by id unless noted).
 
-### 11.1 URL Normalization (pure, no DB)
+### 10.1 URL Normalization (pure, no DB)
 
 | # | Input `repoUrl` | Expected normalized `(provider, ownerLower, repoLower)` | Result |
 |---|---|---|---|
@@ -360,7 +360,7 @@ For brevity, a `Repository` row is written as `R{id}: owner/repo, AcceptanceMode
 | N-16 | `https://github.com/Acme/Widget#frag` | — | `400 PROVIDER_UNSUPPORTED` (`MALFORMED_URL`) |
 | N-17 | `https://github.com/Acme` | — | `400 PROVIDER_UNSUPPORTED` (`MALFORMED_URL` — missing `<repo>`) |
 
-### 11.2 Wildcard Suffix Regex (`RX-VERSION-WILDCARD` against base `widget`)
+### 10.2 Wildcard Suffix Regex (`RX-VERSION-WILDCARD` against base `widget`)
 
 Pattern: `^widget(-v[1-9][0-9]{0,3})?$`
 
@@ -379,7 +379,7 @@ Pattern: `^widget(-v[1-9][0-9]{0,3})?$`
 | W-11 | `Widget-v2` | yes (case-insensitive owner/repo compared after lowercase; `widget` matches `Widget`) |
 | W-12 | `widgetV2` | no (missing `-`) |
 
-### 11.3 Resolution Precedence
+### 10.3 Resolution Precedence
 
 Setup A:
 - `R10: acme/widget, RepoUrl, Exact, Active` (UpdatedAt: 2026-04-01)
@@ -414,7 +414,7 @@ Setup C (`Disabled` priority):
 
 > Implementers MUST select tier first, then status-check the chosen row. Falling back from a Disabled exact match to an Active wildcard is **forbidden** (this is a deliberate denial behaviour: a temporarily disabled repo MUST NOT silently route through an org-wide allowance).
 
-### 11.4 Envelope JWT
+### 10.4 Envelope JWT
 
 Setup: `R40: acme/widget, RepoUrl, Exact, Active`, `LogSenderTokenVerifier` known to test.
 
@@ -429,7 +429,7 @@ Setup: `R40: acme/widget, RepoUrl, Exact, Active`, `LogSenderTokenVerifier` know
 | E-07 | `nonce` length 8 | `400 ENVELOPE_MALFORMED` (min 16) |
 | E-08 | `iat` 70 s in the future (clock skew) | `401 ENVELOPE_EXPIRED` (skew window is ±60 s) |
 
-### 11.5 Rate Limit (per resolved `RepositoryId`)
+### 10.5 Rate Limit (per resolved `RepositoryId`)
 
 Setup: 60-req/60s sliding window, `R50` resolved.
 
@@ -440,7 +440,7 @@ Setup: 60-req/60s sliding window, `R50` resolved.
 | RL-03 | Wait 60 s after RL-01, then push | `202` (window slid) |
 | RL-04 | `OwnerWildcard` row resolves all of `acme/*` to `R12`; 60 pushes from 60 different repos in the org | First 60 `202`, 61st `429` (one bucket per resolved id) |
 
-### 11.6 Body Cap
+### 10.6 Body Cap
 
 | # | Body size after decompression | Outcome |
 |---|---|---|
@@ -449,7 +449,7 @@ Setup: 60-req/60s sliding window, `R50` resolved.
 | B-03 | 1,048,577 B | `413 PAYLOAD_TOO_LARGE` |
 | B-04 | gzip request, 200 KB compressed → 1.5 MB decompressed | `413 PAYLOAD_TOO_LARGE` (cap is post-decompression per `07-log-push-flow.md`) |
 
-### 11.7 End-to-End Audit Linkage
+### 10.7 End-to-End Audit Linkage
 
 | # | Scenario | Required side-effect |
 |---|---|---|
@@ -459,7 +459,7 @@ Setup: 60-req/60s sliding window, `R50` resolved.
 
 ---
 
-## 12. Open Items
+## 11. Open Items
 
 | # | Item | Notes |
 |---|------|-------|
