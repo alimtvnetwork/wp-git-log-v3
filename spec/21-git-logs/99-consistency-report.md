@@ -8,7 +8,7 @@
 
 ## Status
 
-This folder is **legacy v1**. All 10 spec files were banner-deprecated in v2.7.1 (2026-04-25). No further consistency audits are performed against v1 content — drift is expected and acceptable.
+This folder is **legacy v1**. All v1 spec files were banner-deprecated in v2.7.1 (2026-04-25). No further consistency audits are performed against v1 content — drift is expected and acceptable.
 
 For the current authoritative spec, see:
 
@@ -20,22 +20,7 @@ For the current authoritative spec, see:
 
 ## File Inventory (v1 — frozen)
 
-| # | File | Status |
-|---|------|--------|
-| 1 | `00-overview.md` | ⚠️ Deprecated (banner) |
-| 2 | `01-glossary.md` | ⚠️ Deprecated (banner) |
-| 3 | `02-schema-erd.md` | ⚠️ Deprecated (banner) |
-| 4 | `05-auth-jwt.md` | ⚠️ Deprecated (banner) — JWT removed in v2 |
-| 5 | `08-allowlist.md` | ⚠️ Deprecated (banner) |
-| 6 | `11-error.md` | ⚠️ Deprecated (banner) — superseded by v2 §15 |
-| 7 | `12-logging.md` | ⚠️ Deprecated (banner) |
-| 8 | `16-jwt-onboarding.md` | ⚠️ Deprecated (banner) — N/A in v2 |
-| 9 | `17-checklist.md` | ⚠️ Deprecated (banner) |
-| 10 | `97-acceptance-criteria.md` | ⚠️ Deprecated (banner) |
-| 11 | `reference/00-verbatim-brief.md` | ✅ Preserved (verbatim source brief) |
-| 12 | `reference/*.md` | ✅ Preserved (historical reference) |
-
-> The `reference/` sub-folder is intentionally without `00-overview.md` — it contains the verbatim brief and supporting raw notes that fed v2.
+All `.md` files in this folder carry a deprecation banner pointing readers to folder 22 v2. The `reference/` subfolder is intentionally without `00-overview.md` — it contains the verbatim source brief and supporting raw notes that fed v2.
 
 ---
 

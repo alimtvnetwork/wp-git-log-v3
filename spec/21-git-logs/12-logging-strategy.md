@@ -36,7 +36,7 @@ This document covers the **internal diagnostic stream**. CI/CD log ingestion is 
 | Reference | Location |
 |-----------|----------|
 | Audit trail schema | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) §3.6 |
-| Audit trail behavior | [./10-audit-trail.md](./10-audit-trail.md) *(planned)* |
+| Audit trail behavior | ./10-audit-trail.md (`10-audit-trail` — removed in v1 deprecation) *(planned)* |
 | Error management | [./11-error-management.md](./11-error-management.md) *(planned)* |
 | Foundational error mgmt | [../03-error-manage/00-overview.md](../03-error-manage/00-overview.md) |
 | Glossary & enums | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |

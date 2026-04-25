@@ -356,7 +356,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Why it fails.** Downstream tooling that walks Cross-References instead of the inventory table will not discover the consistency checklist.
 
-**Required fix.** Add a row to the Cross-References table: `| Spec consistency checklist | [./17-spec-consistency-checklist.md](./17-spec-consistency-checklist.md) |`.
+**Required fix.** Add a row to the Cross-References table: `| Spec consistency checklist | [../../21-git-logs/17-spec-consistency-checklist.md](../../21-git-logs/17-spec-consistency-checklist.md) |`.
 
 ---
 
@@ -571,15 +571,15 @@ rg -n '\$is(Not|No|Non)[A-Z]' spec/21-git-logs
 
 | Reference | Location |
 |---|---|
-| Phase-2 audit (predecessor) | [../22-app-issues/01-phase-2-git-logs-audit/00-overview.md](../22-app-issues/01-phase-2-git-logs-audit/00-overview.md) |
-| Spec consistency checklist | [./17-spec-consistency-checklist.md](./17-spec-consistency-checklist.md) |
+| Phase-2 audit (predecessor) | [../01-phase-2-git-logs-audit/00-overview.md](../01-phase-2-git-logs-audit/00-overview.md) |
+| Spec consistency checklist (v1 git-logs) | [../../21-git-logs/17-spec-consistency-checklist.md](../../21-git-logs/17-spec-consistency-checklist.md) |
 | Locked decisions | [./00-overview.md](./00-overview.md) §Locked Decisions |
-| Database schema (current) | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) |
-| Error management | [./11-error-management.md](./11-error-management.md) |
-| Logging strategy | [./12-logging-strategy.md](./12-logging-strategy.md) |
-| JWT onboarding & usage | [./16-jwt-onboarding-and-token-usage.md](./16-jwt-onboarding-and-token-usage.md) |
-| Allowlist & wildcard | [./08-allowlist-and-wildcard-matching.md](./08-allowlist-and-wildcard-matching.md) |
-| Triage format | [../22-app-issues/00-overview.md](../22-app-issues/00-overview.md) |
+| Database schema (v1 git-logs) | [../../21-git-logs/02-database-schema-and-erd.md](../../21-git-logs/02-database-schema-and-erd.md) |
+| Error management (v1 git-logs) | [../../21-git-logs/11-error-management.md](../../21-git-logs/11-error-management.md) |
+| Logging strategy (v1 git-logs) | [../../21-git-logs/12-logging-strategy.md](../../21-git-logs/12-logging-strategy.md) |
+| JWT onboarding & usage (v1 git-logs) | [../../21-git-logs/16-jwt-onboarding-and-token-usage.md](../../21-git-logs/16-jwt-onboarding-and-token-usage.md) |
+| Allowlist & wildcard (v1 git-logs) | [../../21-git-logs/08-allowlist-and-wildcard-matching.md](../../21-git-logs/08-allowlist-and-wildcard-matching.md) |
+| Triage format | [../00-overview.md](../00-overview.md) |
 
 ---
 

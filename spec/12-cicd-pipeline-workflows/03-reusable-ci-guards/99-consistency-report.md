@@ -71,7 +71,7 @@ The folder uses `99-ai-implementation-guide.md` for the AI-implementation guide 
 
 ## Open Items
 
-1. **Decide slot-99 disambiguation policy** — keep both 99-files (current state, documented above) or rename `99-ai-implementation-guide.md` → `10-ai-implementation-guide.md`. Defer until owner decides.
+1. **Decide slot-99 disambiguation policy** — keep both 99-files (current state) or rename `99-ai-implementation-guide.md` → `10-ai-implementation-guide.md`. Defer until owner decides.
 2. **No formal `98-changelog.md`** — per `00-overview.md` lifecycle, the module is shipping but immature. Add a changelog when first breaking change lands.
 
 ---

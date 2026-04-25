@@ -62,11 +62,11 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 06 | [06-migrations-and-logger.md](./06-migrations-and-logger.md) | Versioned migration markers + level-aware logger |
 | 07 | [07-app-entity.md](./07-app-entity.md) | App schema, AppLink polymorphism, lifecycle |
 | 08 | [08-history-and-action.md](./08-history-and-action.md) | History/Action vs AuditTrail separation |
-| 09 | _09-seed-data.md_ | **Locked vacant** — content moved to §37 (`37-seed-data.md`) in v2.8.6 |
-| 10 | _10-rate-limit-and-payload.md_ | **Locked vacant** — content distributed to §05 (auth/validation) and `ConfigKv` defaults in §18 |
-| 11 | _11-encryption-deferred-plan.md_ | **Locked vacant** — content folded into §30 R3 (threat model deferral) |
-| 12 | _12-wp-plugin-scaffold.md_ | **Locked vacant** — PSR-4 layout lives in `mem://specs/git-logs.md` |
-| 13 | _13-v1-vs-v2-mapping.md_ | **Locked vacant** — superseded by `spec/21-git-logs/` legacy banner cross-link |
+| 09 | _09-seed-data_ | **Locked vacant slot** — content redistributed to §37 + §08 |
+| 10 | _10-rate-limit-and-payload_ | **Locked vacant slot** — content redistributed to §05 + §18 |
+| 11 | _11-encryption-deferred-plan_ | **Locked vacant slot** — content redistributed to §30 R3 |
+| 12 | _12-wp-plugin-scaffold_ | **Locked vacant slot** — content redistributed to §38 (planned) |
+| 13 | _13-v1-vs-v2-mapping_ | **Locked vacant slot** — mapping distributed across §05/§18/§30/§31 |
 | 14 | [14-endpoint-examples.md](./14-endpoint-examples.md) | Curl + JSON samples for all 10 endpoints |
 | 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog |
 | 16 | [16-test-plan.md](./16-test-plan.md) | **Superseded** — redirects to §32–§35 |

@@ -66,23 +66,24 @@ This module contains the complete implementation specification: domain glossary,
 | 00 | [00-overview.md](./00-overview.md) | This index — locked decisions, file inventory, cross-references |
 | 01 | [01-glossary-and-enums.md](./01-glossary-and-enums.md) | Domain glossary and full enum catalog |
 | 02 | [02-database-schema-and-erd.md](./02-database-schema-and-erd.md) | Tables, columns, FKs, indexes, ERD |
-| 03 | [03-admin-ui.md](./03-admin-ui.md) | WP admin menu, screens, fields, validation |
-| 04 | [04-rest-api-endpoints.md](./04-rest-api-endpoints.md) | REST endpoints with request/response schemas |
-| 05 | [05-auth-jwt-flow.md](./05-auth-jwt-flow.md) | JWT issuance, verification, refresh, JWKS |
-| 06 | [06-auth-wordpress-bridge.md](./06-auth-wordpress-bridge.md) | WordPress App Password / cookie bridge |
-| 07 | [07-log-push-flow.md](./07-log-push-flow.md) | CI/CD push flow, envelope JWT, rate limit |
-| 08 | [08-allowlist-and-wildcard-matching.md](./08-allowlist-and-wildcard-matching.md) | Allowlist resolver, version-wildcard regex |
-| 09 | [09-log-retrieval-flow.md](./09-log-retrieval-flow.md) | Branch → pipeline → entries retrieval |
-| 10 | [10-audit-trail.md](./10-audit-trail.md) | Audit trail schema, write rules, query API |
-| 11 | [11-error-management.md](./11-error-management.md) | Error classes, no-swallow rules, response envelope |
-| 12 | [12-logging-strategy.md](./12-logging-strategy.md) | Internal diagnostic logs (separate from CI logs) |
-| 13 | [13-coding-guidelines-applied.md](./13-coding-guidelines-applied.md) | Master guidelines applied to PHP/WP context |
-| 14 | [14-acceptance-criteria.md](./14-acceptance-criteria.md) | Testable acceptance criteria |
-| 15 | [15-blind-audit-checklist.md](./15-blind-audit-checklist.md) | Self-verification checklist for downstream AI |
-| 17 | [17-spec-consistency-checklist.md](./17-spec-consistency-checklist.md) | Spec consistency checklist vs coding guidelines, naming, booleans/enums, split-DB, seedable config |
-| 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Canonical AC index (mirrors 14) |
-| 98 | [98-changelog.md](./98-changelog.md) | Chronological changelog |
-| 99 | [99-consistency-report.md](./99-consistency-report.md) | Structural health report |
+| 03 | _03-admin-ui_ | ⚠️ Removed in deprecation — see folder 22 v2 §03 |
+| 04 | _04-rest-api-endpoints_ | ⚠️ Removed in deprecation — see folder 22 v2 §04 |
+| 05 | [05-auth-jwt-flow.md](./05-auth-jwt-flow.md) | ⚠️ Deprecated — JWT removed in v2; see folder 22 v2 §05 |
+| 06 | _06-auth-wordpress-bridge_ | ⚠️ Removed in deprecation — see folder 22 v2 §05 |
+| 07 | _07-log-push-flow_ | ⚠️ Removed in deprecation — see folder 22 v2 §07 |
+| 08 | [08-allowlist-and-wildcard-matching.md](./08-allowlist-and-wildcard-matching.md) | Allowlist resolver (v1) |
+| 09 | _09-log-retrieval-flow_ | ⚠️ Removed in deprecation — see folder 22 v2 §04 |
+| 10 | _10-audit-trail_ | ⚠️ Removed in deprecation — see folder 22 v2 §08 + §15 |
+| 11 | [11-error-management.md](./11-error-management.md) | ⚠️ Deprecated — see folder 22 v2 §15 |
+| 12 | [12-logging-strategy.md](./12-logging-strategy.md) | ⚠️ Deprecated — see folder 22 v2 §06 |
+| 13 | _13-coding-guidelines-applied_ | ⚠️ Removed in deprecation |
+| 14 | _14-acceptance-criteria_ | ⚠️ Removed in deprecation — see §97 |
+| 15 | _15-blind-audit-checklist_ | ⚠️ Removed in deprecation |
+| 16 | [16-jwt-onboarding-and-token-usage.md](./16-jwt-onboarding-and-token-usage.md) | ⚠️ Deprecated — JWT removed in v2 |
+| 17 | [17-spec-consistency-checklist.md](./17-spec-consistency-checklist.md) | Spec consistency checklist (v1) |
+| 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Canonical AC index (v1) |
+| 98 | _98-changelog_ | ⚠️ Never authored — folder frozen at v1 |
+| 99 | [99-consistency-report.md](./99-consistency-report.md) | Structural health report (deprecated stub) |
 
 ---
 

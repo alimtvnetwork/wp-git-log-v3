@@ -38,7 +38,7 @@ If any check fails, the request is rejected, audited, and counted toward securit
 | Database schema (Repository, lookup tables) | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) §3.3, §5 |
 | Glossary (`logSenderToken`, envelope JWT, wildcard) | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |
 | Logging strategy (allowlist & ingestion events) | [./12-logging-strategy.md](./12-logging-strategy.md) §4.3, §4.4 |
-| Log push flow (planned) | [./07-log-push-flow.md](./07-log-push-flow.md) |
+| Log push flow (planned) | ./07-log-push-flow.md (`07-log-push-flow` — removed in v1 deprecation) |
 | Locked decisions (rate limit, payload cap, HS256) | [./00-overview.md](./00-overview.md) §Locked Decisions |
 
 ---

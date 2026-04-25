@@ -662,7 +662,7 @@ Per the locked decision in [00-overview.md](./00-overview.md): log retention is 
 | ORM and views | [../04-database-conventions/03-orm-and-views.md](../04-database-conventions/03-orm-and-views.md) |
 | REST API JSON format (PascalCase keys) | [../04-database-conventions/06-rest-api-format.md](../04-database-conventions/06-rest-api-format.md) |
 | Glossary & enums | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |
-| Audit trail behavior | [./10-audit-trail.md](./10-audit-trail.md) |
+| Audit trail behavior | ./10-audit-trail.md (`10-audit-trail` — removed in v1 deprecation) |
 
 ---
 

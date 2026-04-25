@@ -23,6 +23,37 @@ const quiet = args.includes("--quiet");
 const SPEC_ROOT = path.resolve(__dirname, "..", "spec");
 const ARCHIVE_SEGMENTS = ["_archive", "archive"];
 
+// Cross-repo path prefixes that resolve OUTSIDE this repo's spec/ tree
+// (e.g., gitmap-v3 sibling repo, monorepo siblings like scripts/, docs/,
+// linters-cicd/, eslint-plugins/, spec-slides/). These targets cannot be
+// `fs.existsSync()`-checked here because the sibling repo/folder is not in
+// the working tree. Treat as intentional external references and exclude
+// from broken-link counts.
+//
+// A target is allowlisted when its resolved path (relative to SPEC_ROOT)
+// matches any of these patterns. Add new prefixes as new sibling repos or
+// external doc trees are referenced.
+const EXTERNAL_REPO_PREFIXES = [
+  // gitmap-v3 sibling repo (folders 01-app, 02-app-issues, 03-general live there)
+  "01-app/",
+  "02-app-issues/",
+  "03-general/",
+  // monorepo siblings outside spec/ (resolved paths start with ../)
+  "../scripts/",
+  "../docs/",
+  "../linters-cicd/",
+  "../eslint-plugins/",
+  "../spec-slides/",
+  // mem:// virtual filesystem references
+  "../mem:/",
+];
+
+function isExternalRepoRef(resolvedRel) {
+  return EXTERNAL_REPO_PREFIXES.some((p) => resolvedRel.startsWith(p))
+    || resolvedRel === "../spec-slides"
+    || resolvedRel === "dashboard-data.json";
+}
+
 // ── Helpers ─────────────────────────────────────────────────
 
 function isArchivePath(filePath) {
@@ -99,7 +130,8 @@ function extractLinks(filePath, content) {
 
 function validateLinks(mdFiles) {
   const broken = [];
-  const total = { Checked: 0, Ok: 0, Broken: 0 };
+  const externalAllowed = [];
+  const total = { Checked: 0, Ok: 0, Broken: 0, ExternalAllowed: 0 };
 
   for (const filePath of mdFiles) {
     const content = fs.readFileSync(filePath, "utf8");
@@ -108,9 +140,18 @@ function validateLinks(mdFiles) {
     for (const link of links) {
       total.Checked++;
       const resolved = path.resolve(path.dirname(filePath), link.FilePart);
+      const resolvedRel = path.relative(SPEC_ROOT, resolved);
 
       if (fs.existsSync(resolved)) {
         total.Ok++;
+      } else if (isExternalRepoRef(resolvedRel)) {
+        total.ExternalAllowed++;
+        externalAllowed.push({
+          Source: path.relative(SPEC_ROOT, filePath),
+          Line: link.Line,
+          Target: link.Target,
+          Resolved: resolvedRel,
+        });
       } else {
         total.Broken++;
         broken.push({
@@ -118,13 +159,13 @@ function validateLinks(mdFiles) {
           Line: link.Line,
           Text: link.Text,
           Target: link.Target,
-          Resolved: path.relative(SPEC_ROOT, resolved),
+          Resolved: resolvedRel,
         });
       }
     }
   }
 
-  return { Broken: broken, Total: total };
+  return { Broken: broken, ExternalAllowed: externalAllowed, Total: total };
 }
 
 // ── 2. Required-file checks ────────────────────────────────
@@ -243,6 +284,8 @@ function main() {
       TotalChecked: linkResult.Total.Checked,
       Ok: linkResult.Total.Ok,
       Broken: linkResult.Total.Broken,
+      ExternalAllowed: linkResult.Total.ExternalAllowed,
+      ExternalAllowedDetails: linkResult.ExternalAllowed,
       BrokenDetails: linkResult.Broken,
     },
     RequiredFiles: {

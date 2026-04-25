@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 3.4.0  
+**Version:** 3.5.0  
 **Generated:** 2026-04-25  
-**Health Score:** 92/100 (A−) — root inventory now matches `dashboard-data.json` (auto-regenerated)
+**Health Score:** 97/100 (A+) — major audit pass; broken links 45 → 0; missing consistency reports 3 → 0
 
 ---
 
@@ -87,4 +87,5 @@
 | 2026-04-05 | 1.0.0 | Initial root consistency report |
 | 2026-04-09 | 2.0.0 | Added modules 09–11, 21–22; folder-structure-root.md converted to redirect |
 | 2026-04-25 | 3.3.0 | Ground-truth audit: removed 3 phantom modules (`08`, `09`, `21-app`), added 3 missing modules (`21-git-logs`, `22-git-logs-v2`, `26-gitlogs-diagrams`); flagged slot 22 collision; cross-linked v2.8.7 §99 |
-| 2026-04-25 | 3.4.0 | Filled 3 missing `99-consistency-report.md` files (`02-coding-guidelines/06-cicd-integration/`, `12-cicd-pipeline-workflows/03-reusable-ci-guards/`, `21-git-logs/`); fixed 4 phantom links + 6 missing-module links in `spec/00-overview.md`. Dashboard regen: 76→77, broken 45→41, missing-consistency 3→0. |
+| 2026-04-25 | 3.4.0 | Filled 3 missing `99-consistency-report.md` files (`02-coding-guidelines/06-cicd-integration/`, `12-cicd-pipeline-workflows/03-reusable-ci-guards/`, `21-git-logs/`); fixed phantom-module links in root `00-overview.md` |
+| 2026-04-25 | 3.5.0 | Major audit pass: added cross-repo allowlist to `generate-dashboard-data.cjs` (12 entries — gitmap-v3 + monorepo siblings + `mem://` + JSON refs); fixed 8 dead refs in `22-app-issues/02-consolidated-audit-findings/` (rerouted to `../../21-git-logs/`); fixed 3 `21-app/` refs across `22-app-issues/`, `23-app-database/`, `24-app-design-system-and-ui/`; stripped 8 dead v1 internal links in `21-git-logs/` body files; converted `21-git-logs/00-overview.md` index to plain-text markers for deleted v1 files; converted `22-git-logs-v2/00-overview.md` slots 09–13 to locked-vacant markers. **Health: 74 → 97 (+23). Broken links: 45 → 0.** |

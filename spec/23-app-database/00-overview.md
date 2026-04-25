@@ -43,7 +43,7 @@ Application-specific database specifications. Covers the app's data model, table
 
 - [Database Conventions (Core)](../04-database-conventions/00-overview.md) — General naming, PK/FK, ORM conventions
 - [Split DB Architecture](../05-split-db-architecture/00-overview.md) — SQLite partitioning and migration patterns
-- [App](../21-app/00-overview.md) — App-specific features and workflows
+- [Git Logs v1 (legacy)](../21-git-logs/00-overview.md) — App-specific features and workflows (deprecated v1)
 - [Consolidated Database Conventions](../17-consolidated-guidelines/18-database-conventions.md) — Consolidated summary
 
 ---

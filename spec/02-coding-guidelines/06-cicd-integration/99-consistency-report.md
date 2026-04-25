@@ -51,15 +51,15 @@ This module deviates from the universal `98-changelog.md` / `99-consistency-repo
 ## Naming Compliance
 
 - File prefixes: `00`, `01`–`07`, `97`, `98`, `99` — sequential except for slot-99 deviation noted above.
-- Markdown headings PascalCase / sentence case consistent with neighbour modules ✅.
-- No PascalCase database identifiers (this is a process module, not a data spec) — N/A ✅.
+- Markdown headings consistent with neighbour modules ✅.
+- No PascalCase database identifiers (process module, not data spec) — N/A ✅.
 
 ---
 
 ## Open Items
 
 1. **Author formal `98-changelog.md`** — currently the module's history lives in PR descriptions and the FAQ. Low priority while still in Phase 1.
-2. **Decide slot-99 disambiguation policy** — either keep both 99-files (current state, documented above) or rename `99-troubleshooting.md` → e.g. `08-troubleshooting.md`. Defer until owner decides.
+2. **Decide slot-99 disambiguation policy** — either keep both 99-files (current state) or rename `99-troubleshooting.md` → `08-troubleshooting.md`. Defer until owner decides.
 
 ---
 
