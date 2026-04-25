@@ -1,6 +1,6 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.0.0  
+**Version:** 2.8.3  
 **Updated:** 2026-04-25  
 **Namespace:** `/wp-json/git-logs/v2`
 
@@ -54,6 +54,8 @@
 | 8 | GET  | `/get-pipeline-logs?q=…` | URL-style variant of #7 | App Password / Cookie |
 | 9 | GET  | `/get-error-logs` | Error logs across all pipelines | App Password / Cookie |
 | 10 | GET | `/get-pipeline-error-logs` | Error logs for one pipeline | App Password / Cookie |
+
+> **Logical-endpoint vs HTTP-path count.** This map lists **10 logical endpoints** but they collapse to **8 HTTP paths** in `17-openapi.yaml`. Rows #5/#6 share path `/get-logs` (the `?q=…` variant is a query parameter, not a separate route); same for #7/#8 sharing `/get-pipeline-logs`. AC-11 ("all 10 endpoints exist with the exact request/response field names") is satisfied by the 8-path OpenAPI document because the `q` query parameter is documented on the parent path. Implementations MUST handle both shapes (explicit `RepoUrl`+`Branch` AND shorthand `q=…`) inside the same route handler. Adding a brand-new logical endpoint requires either a new path or a new query-param shape — never silent overloading of an existing path.
 
 ---
 
