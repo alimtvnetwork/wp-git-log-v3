@@ -52,9 +52,9 @@ Locked decisions from `00-overview.md` referenced here:
 | Onboarding flow & sequence diagrams | [./16-jwt-onboarding-and-token-usage.md](./16-jwt-onboarding-and-token-usage.md) |
 | Error envelope & `GL-AUTH-*` codes | [./11-error-management.md](./11-error-management.md) |
 | `User` / `RefreshToken` schema | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) |
-| WordPress bridge (alternative auth) | [./06-auth-wordpress-bridge.md](./06-auth-wordpress-bridge.md) |
+| WordPress bridge (alternative auth) | ./06-auth-wordpress-bridge.md (`06-auth-wordpress-bridge` — removed in v1 deprecation) |
 | Allowlist (envelope JWT, separate subsystem) | [./08-allowlist-and-wildcard-matching.md](./08-allowlist-and-wildcard-matching.md) |
-| Audit trail | [./10-audit-trail.md](./10-audit-trail.md) |
+| Audit trail | ./10-audit-trail.md (`10-audit-trail` — removed in v1 deprecation) |
 | Locked decisions | [./00-overview.md](./00-overview.md) §Locked Decisions |
 
 ---

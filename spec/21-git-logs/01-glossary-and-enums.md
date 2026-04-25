@@ -137,4 +137,4 @@ This document defines all domain terms and the canonical enum catalog used acros
 ## Cross-References
 
 - [02-database-schema-and-erd.md](./02-database-schema-and-erd.md) — Lookup tables for each enum
-- [13-coding-guidelines-applied.md](./13-coding-guidelines-applied.md) — Enum usage rules
+- 13-coding-guidelines-applied.md (`13-coding-guidelines-applied` — removed in v1 deprecation) — Enum usage rules

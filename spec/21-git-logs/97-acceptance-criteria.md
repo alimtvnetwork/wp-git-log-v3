@@ -52,7 +52,7 @@ Each criterion is written **Given / When / Then** so it can be lifted directly i
 | Error envelope & all `GL-*` codes | [./11-error-management.md](./11-error-management.md) |
 | Error codes registry (machine-readable) | [./error-codes.json](./error-codes.json) |
 | `Repository` / `Pipeline` / `LogEntry` schema | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) |
-| Audit trail | [./10-audit-trail.md](./10-audit-trail.md) *(planned)* |
+| Audit trail | ./10-audit-trail.md (`10-audit-trail` — removed in v1 deprecation) *(planned)* |
 | Logging strategy (PII redaction) | [./12-logging-strategy.md](./12-logging-strategy.md) |
 | Onboarding flow (token issuance prerequisites) | [./16-jwt-onboarding-and-token-usage.md](./16-jwt-onboarding-and-token-usage.md) |
 

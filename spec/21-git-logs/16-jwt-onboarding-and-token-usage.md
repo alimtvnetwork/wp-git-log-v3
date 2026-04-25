@@ -31,7 +31,7 @@ It is the operational README for integrators. It does **not** redefine schemas �
 | Database schema | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) |
 | Glossary & enums | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |
 | JWT signing details (planned) | [./05-auth-jwt-flow.md](./05-auth-jwt-flow.md) |
-| WordPress bridge (planned) | [./06-auth-wordpress-bridge.md](./06-auth-wordpress-bridge.md) |
+| WordPress bridge (planned) | ./06-auth-wordpress-bridge.md (`06-auth-wordpress-bridge` — removed in v1 deprecation) |
 | Logging strategy | [./12-logging-strategy.md](./12-logging-strategy.md) |
 | Locked decisions | [./00-overview.md](./00-overview.md) §Locked Decisions |
 
