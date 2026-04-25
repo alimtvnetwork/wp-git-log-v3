@@ -1,6 +1,6 @@
 # Git Logs v2 — Spec Overview
 
-**Version:** 2.0.0  
+**Version:** 2.8.7  
 **Updated:** 2026-04-25  
 **Status:** Draft  
 **AI Confidence:** Production-Ready  

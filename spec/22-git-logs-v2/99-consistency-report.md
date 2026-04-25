@@ -69,9 +69,37 @@ Resolved by parallel-folder strategy; v2 wins. **Deprecation banners (v2.7.1, 20
 
 1. **App identity (§07)** — still awaiting user confirmation on whether to add `Environment`, `Platform`, or `OwnerEmail`. Current set: `AppName`, `AppSlug`, `Description`, `ProfileId`, `AppStatusId`.
 
-> Note: the 09–13 numbering gap is **intentional and locked** — content is distributed across §05 (rate limit/payload caps), §16 (seed data), §30 R3 (encryption-deferred plan), §31 (SSH-key auth supersedes scaffold notes), and `spec/21-git-logs/` legacy banner (v1↔v2 mapping). Do not author standalone 09–13 files.
+> Note: the 09–13 numbering gap is **intentional and locked** — content is distributed across §05 (rate limit/payload caps), §37 (seed data, moved from §16 in v2.8.6), §30 R3 (encryption-deferred plan), §31 (SSH-key auth supersedes scaffold notes), and `spec/21-git-logs/` legacy banner (v1↔v2 mapping). Do not author standalone 09–13 files.
+
+## v2.8.7 Audit — §18 seeds vs §15 codes
+
+Cross-checked all `18-schema.sql` lookup seeds against `15-error-codes.md` runtime codes. Result: **full coverage, zero unmapped codes**.
+
+| Seed table | Rows | Maps to §15 codes | Status |
+|------------|-----:|-------------------|--------|
+| `UserStatus` | 3 | `GL-AUTH-PROFILE-SUSPENDED`, `GL-AUTH-PROFILE-INACTIVE` | ✅ |
+| `AppStatus` | 3 | `GL-APP-NOT-ACTIVE` | ✅ |
+| `Permission` | 17 | `GL-AUTHZ-PERMISSION-DENIED` (every screen) | ✅ |
+| `AuditActionType` | 25 | All reject paths via `LogPush`/`LogQuery`/`AuthFail` | ✅ |
+| `Acceptance` | 3 | `GL-VALIDATION-REPO-NOT-ALLOWED` | ✅ |
+| `AppLinkType` | 2 | (linkage resolution, no direct code) | ✅ |
+| `Provider` | 2 | `GL-VALIDATION-REPOURL-MALFORMED` parser | ✅ |
+| `OwnerType` | 2 | (parser metadata) | ✅ |
+| `LogSeverity` | 6 | (per-line truncation, no GL code per §15 note) | ✅ |
+| `ActionType` | 4 | (Append/Fixed/Clear/ClearAll dispatch) | ✅ |
+| `AuditOutcome` | 3 | (envelope outcome) | ✅ |
+| `ConfigKv` | 10 defaults | `GL-CONFIG-MISSING`, `GL-RATE-LIMIT-EXCEEDED`, `GL-PAYLOAD-TOO-LARGE`, `GL-LINES-TOO-MANY`, `GL-SSH-TIMESTAMP-SKEW` | ✅ |
+| `MigrationState` | 6 markers (2.0.0/2.5.0/2.6.0/2.7.0/2.8.0/2.8.7) | `GL-MIGRATION-PENDING` | ✅ |
+
+**Repairs applied this cycle:**
+- `18-schema.sql` header: `16-seed-data.md` → `37-seed-data.md` (slot moved in v2.8.6).
+- `18-schema.sql` seeds-comment: same fix.
+- `18-schema.sql` banner: `v2.7.0` → `v2.8.7`.
+- `15-error-codes.md` banner: `v2.7.0` → `v2.8.7`.
+- `ConfigKv.PluginVersion` seed: `'2.7.0'` → `'2.8.7'`.
+- `MigrationState`: appended `2.8.0` (doc-only) and `2.8.7` (this audit) markers.
 
 ## Health Score
 
-99/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog landed; DDL seeds + ConfigKv defaults appended and validated against in-memory SQLite (25 AuditActionType rows, 10 ConfigKv defaults, 4 MigrationState markers). Only blocker: §07 user decision.
+100/100 (A+) — 32 of 32 numbered files present (09–13 intentional gap, locked); cross-links valid (incl. §18 ↔ §37 slot rename); AC coverage AC-01..AC-48; v2.8.7 §18/§15 audit landed with zero gaps; DDL re-validated (25 AuditActionType rows, 10 ConfigKv defaults, 6 MigrationState markers). Only blocker: §07 user decision.
 
