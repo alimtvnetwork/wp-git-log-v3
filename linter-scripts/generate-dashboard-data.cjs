@@ -23,6 +23,24 @@ const quiet = args.includes("--quiet");
 const SPEC_ROOT = path.resolve(__dirname, "..", "spec");
 const ARCHIVE_SEGMENTS = ["_archive", "archive"];
 
+// Cross-repo path prefixes that resolve OUTSIDE this repo (e.g., gitmap-v3
+// sibling). These targets cannot be `fs.existsSync()`-checked here because
+// the sibling repo is not in the working tree. Treat as intentional external
+// references and exclude from broken-link counts.
+//
+// A target is allowlisted when its resolved path (relative to SPEC_ROOT)
+// starts with any of these prefixes. Add new prefixes as new sibling repos
+// or external doc trees are referenced.
+const EXTERNAL_REPO_PREFIXES = [
+  "01-app/",
+  "02-app-issues/",
+  "03-general/",
+];
+
+function isExternalRepoRef(resolvedRel) {
+  return EXTERNAL_REPO_PREFIXES.some((p) => resolvedRel.startsWith(p));
+}
+
 // ── Helpers ─────────────────────────────────────────────────
 
 function isArchivePath(filePath) {
