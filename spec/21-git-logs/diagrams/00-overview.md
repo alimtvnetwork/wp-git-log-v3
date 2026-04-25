@@ -13,7 +13,8 @@
 | # | File | Purpose | Render hint |
 |---|------|---------|-------------|
 | 01 | [01-rest-endpoints-mindmap.mmd](./01-rest-endpoints-mindmap.mmd) | Mind-map of every REST endpoint under `/wp-json/git-logs/v1` — HTTP method, auth mechanism, intended caller. Branch-coloured per subsystem (auth, users, repositories, logs, audit). | Wide canvas (≥ 1600 px). Dark theme baked in. |
-| 02 | [02-sqlite-split-db-design.mmd](./02-sqlite-split-db-design.mmd) | **Proposed** SQLite re-cast of the data layer following [`05-split-db-architecture`](../../05-split-db-architecture/00-overview.md): one `root.db` for app metadata + one `logs/repo-{id}-…db` per allowlisted repository. Includes lifecycle arrows for `POST /repositories`. | Tall canvas (≥ 2000 px height). |
+| 02a | [02a-sqlite-root-db.mmd](./02a-sqlite-root-db.mmd) | **Proposed** SQLite Root DB (`./data/root.db`) — one per installation, holds users, allowlist, audit, JWT keys, app config. Shows entity / transactional / lookup tables, FK arrows, and the `LogsDbPath` bridge to per-repo files. | Wide canvas. |
+| 02b | [02b-sqlite-logs-db.mmd](./02b-sqlite-logs-db.mmd) | **Proposed** SQLite Logs DB (`./data/logs/repo-{id}-{owner}-{repo}.db`) — one per allowlisted repository. Shows the per-repo schema (`Pipeline`, `LogEntry`, `EnvelopeNonce`, `RepositoryMeta`), the file-system layout, and the 7-step lifecycle for `POST /repositories`. | Tall canvas (≥ 2000 px height). |
 | 03 | [03-seedable-config-flow.mmd](./03-seedable-config-flow.mmd) | First-run vs subsequent-run bootstrap flow per [`06-seedable-config-architecture`](../../06-seedable-config-architecture/00-overview.md) (CW Config). Shows seeding of lookup tables, JWT key generation, SemVer-aware merge on config bumps, and per-repo logs-DB creation. | Tall canvas. |
 
 ---
