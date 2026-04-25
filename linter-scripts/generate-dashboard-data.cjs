@@ -271,6 +271,8 @@ function main() {
       TotalChecked: linkResult.Total.Checked,
       Ok: linkResult.Total.Ok,
       Broken: linkResult.Total.Broken,
+      ExternalAllowed: linkResult.Total.ExternalAllowed,
+      ExternalAllowedDetails: linkResult.ExternalAllowed,
       BrokenDetails: linkResult.Broken,
     },
     RequiredFiles: {
