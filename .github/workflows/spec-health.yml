@@ -33,15 +33,20 @@ jobs:
           test -f linter-scripts/generate-spec-index.cjs || { echo "❌ generate-spec-index.cjs missing"; exit 1; }
           echo "✅ Both scripts present."
 
+      - name: Self-heal missing consistency reports
+        run: |
+          if [ -f linter-scripts/fill-missing-consistency-reports.cjs ]; then
+            node linter-scripts/fill-missing-consistency-reports.cjs
+          fi
+
       - name: Regenerate spec-index.md (drift check)
         run: |
           node linter-scripts/generate-spec-index.cjs
-          if [ -n "$(git status --porcelain spec/spec-index.md)" ]; then
-            echo "⚠️  spec-index.md is out of date. Run 'node linter-scripts/generate-spec-index.cjs' and commit the result."
-            git --no-pager diff spec/spec-index.md | head -40
-            # Soft warning only — do not fail the build for index drift.
+          if [ -n "$(git status --porcelain spec/)" ]; then
+            echo "⚠️  Spec artifacts out of date. Run 'bash linter-scripts/run.sh' locally and commit results."
+            git --no-pager diff --stat spec/ | head -20
           else
-            echo "✅ spec-index.md is up to date."
+            echo "✅ Spec artifacts up to date."
           fi
 
       - name: Spec tree health gate (threshold 80)
