@@ -46,7 +46,7 @@
 | 34-phpunit-test-skeleton.md | ✅ |
 | 35-reference-ci-yml.md | ✅ |
 | 36-release-checklist.md | ✅ (new in v2.8.0) |
-| 97-acceptance-criteria.md | ✅ (AC-01..AC-41) |
+| 97-acceptance-criteria.md | ✅ (AC-01..AC-48) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
 
