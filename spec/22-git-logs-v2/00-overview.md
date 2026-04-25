@@ -70,6 +70,11 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 14 | [14-endpoint-examples.md](./14-endpoint-examples.md) | Curl + JSON samples for all 10 endpoints |
 | 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog |
 | 16 | [16-test-plan.md](./16-test-plan.md) | Unit + Integration test scope |
+| 17 | [17-openapi.yaml](./17-openapi.yaml) | OpenAPI 3.1 machine-readable spec for all 10 endpoints |
+| 18 | [18-schema.sql](./18-schema.sql) | Verbatim DDL for V2_0_0 migration |
+| 19 | [19-permission-matrix.md](./19-permission-matrix.md) | Role × Permission × Screen audit grid |
+| 20 | [20-observability.md](./20-observability.md) | Site Health card, metrics endpoint, counters |
+| 21 | [21-i18n.md](./21-i18n.md) | Text-domain rules, translatable scope, RTL/CI |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
