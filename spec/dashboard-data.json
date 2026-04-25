@@ -1,15 +1,15 @@
 {
   "Generated": "2026-04-25",
   "Health": {
-    "Score": 97,
+    "Score": 99,
     "Grade": "A+",
     "Deductions": [
-      "1 missing overviews (-3)"
+      "1 missing consistency reports (-1)"
     ]
   },
   "Links": {
-    "TotalChecked": 2065,
-    "Ok": 2053,
+    "TotalChecked": 2071,
+    "Ok": 2059,
     "Broken": 0,
     "ExternalAllowed": 12,
     "ExternalAllowedDetails": [
@@ -89,17 +89,17 @@
     "BrokenDetails": []
   },
   "RequiredFiles": {
-    "MissingOverview": [
+    "MissingOverview": [],
+    "MissingConsistency": [
       {
         "Folder": "21-git-logs/reference",
-        "FileCount": 2
+        "FileCount": 3
       }
-    ],
-    "MissingConsistency": []
+    ]
   },
   "Inventory": {
     "TotalFolders": 80,
-    "TotalMdFiles": 639,
+    "TotalMdFiles": 640,
     "Folders": [
       {
         "Folder": "",
@@ -1491,13 +1491,14 @@
       },
       {
         "Folder": "21-git-logs/reference",
-        "MdFiles": 2,
+        "MdFiles": 3,
         "Subfolders": 0,
-        "HasOverview": false,
+        "HasOverview": true,
         "HasConsistency": false,
         "HasChangelog": false,
         "HasAcceptance": false,
         "Files": [
+          "00-overview.md",
           "00-verbatim-brief.md",
           "Gitlogs_App.md"
         ]
