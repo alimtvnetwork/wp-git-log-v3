@@ -66,11 +66,13 @@ Resolved by parallel-folder strategy; v2 wins. Legacy v1 banner in `spec/21-git-
 ## Open items (not blocking)
 
 1. **App identity (§07)** — still awaiting user confirmation on whether to add `Environment`, `Platform`, or `OwnerEmail`. Current set: `AppName`, `AppSlug`, `Description`, `ProfileId`, `AppStatusId`.
-2. **Author files 09–13** — `09-seed-data.md`, `10-rate-limit-and-payload.md`, `11-encryption-deferred-plan.md`, `12-wp-plugin-scaffold.md`, `13-v1-vs-v2-mapping.md`. Content already exists distributed across other files; needs consolidation into the named slots.
-3. **`PluginUninstall` AuditActionType (21)** — declared in §29; needs to be appended to `18-schema.sql` seed in next pass.
-4. **`ConfigChange` AuditActionType** — referenced from §30 R3; needs ID assignment + seed.
-5. **`ConfigKv` keys mentioned in new sections** — `UninstallMode` (§29), `AllowedReadOrigins` (§30 S3), `MaintenanceMode` (§23). Add to default seeds in `18-schema.sql` next pass.
+2. **`PluginUninstall` AuditActionType (21)** — declared in §29; needs to be appended to `18-schema.sql` seed in next pass.
+3. **`ConfigChange` AuditActionType** — referenced from §30 R3; needs ID assignment + seed.
+4. **`ConfigKv` keys mentioned in new sections** — `UninstallMode` (§29), `AllowedReadOrigins` (§30 S3), `MaintenanceMode` (§23), `SshReplayWindowSec`=300 (§31). Add to default seeds in `18-schema.sql` next pass.
+
+> Note: the 09–13 numbering gap is **intentional and locked** — content is distributed across §05 (rate limit/payload caps), §16 (seed data), §30 R3 (encryption-deferred plan), §31 (SSH-key auth supersedes scaffold notes), and `spec/21-git-logs/` legacy banner (v1↔v2 mapping). Do not author standalone 09–13 files.
 
 ## Health Score
 
-96/100 (A) — 26 of 31 numbered files present; 5 queued slots tracked above; cross-links valid; AC coverage now matches the spec breadth.
+98/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog entry landed; only DDL seed appends + §07 user decision remain.
+
