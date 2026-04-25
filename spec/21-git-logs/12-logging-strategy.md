@@ -1,9 +1,9 @@
 # Logging Strategy
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-24  
-**Status:** Draft  
-**AI Confidence:** Medium  
+**Version:** 1.1.0  
+**Updated:** 2026-04-25  
+**Status:** Active  
+**AI Confidence:** High  
 **Ambiguity:** Low
 
 ---
@@ -117,77 +117,86 @@ Every event below MUST emit exactly one structured log line and one `AuditTrail`
 
 ### 4.2 Authentication & JWT Validation
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` |
-|-------|----------|-------------------|----------------|
-| `JwtValidationStarted` | `Debug` | — | — |
-| `JwtValidationSucceeded` | `Info` | `AuthSuccess` | `Success` |
-| `JwtValidationFailed_BadSignature` | `Warn` | `AuthFail` | `Rejected` |
-| `JwtValidationFailed_Expired` | `Info` | `AuthFail` | `Rejected` |
-| `JwtValidationFailed_BadIssuer` | `Warn` | `AuthFail` | `Rejected` |
-| `JwtValidationFailed_BadAudience` | `Warn` | `AuthFail` | `Rejected` |
-| `JwtValidationFailed_RevokedJti` | `Warn` | `AuthFail` | `Rejected` |
-| `RefreshTokenRotated` | `Info` | `TokenIssue` | `Success` |
-| `RefreshTokenReuseDetected` | `Error` | `AuthFail` | `Rejected` |
-| `WpBridgeAuthSucceeded` | `Info` | `AuthSuccess` | `Success` |
-| `WpBridgeAuthFailed` | `Warn` | `AuthFail` | `Rejected` |
-| `TokenIssued` | `Info` | `TokenIssue` | `Success` |
-| `TokenRevoked` | `Info` | `TokenRevoke` | `Success` |
+> Every `errorCode` below is defined in [`11-error-management.md`](./11-error-management.md) §6 — the authoritative registry. The "public-facing" GL-AUTH-002 codes (008–012) are **debug-only sub-codes**: they appear only in `AuditTrail.DetailsJson.errorCode` and `error_log`; the outbound envelope always carries the generic `GL-AUTH-002` to prevent oracle attacks.
 
-> `RefreshTokenReuseDetected` MUST also revoke the entire token chain (set `IsRevoked = 1` on every descendant) and emit a separate `Security` event.
+| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
+|-------|----------|-------------------|----------------|-------------|
+| `JwtValidationStarted` | `Debug` | — | — | — |
+| `JwtValidationSucceeded` | `Info` | `AuthSuccess` | `Success` | — |
+| `JwtValidationFailed_BadSignature` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-008` |
+| `JwtValidationFailed_Expired` | `Info` | `AuthFail` | `Rejected` | `GL-AUTH-009` |
+| `JwtValidationFailed_BadIssuer` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-010` |
+| `JwtValidationFailed_BadAudience` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-011` |
+| `JwtValidationFailed_RevokedJti` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-012` |
+| `RefreshTokenRotated` | `Info` | `TokenIssue` | `Success` | — |
+| `RefreshTokenReuseDetected` | `Error` | `AuthFail` | `Rejected` | `GL-AUTH-003` |
+| `WpBridgeAuthSucceeded` | `Info` | `AuthSuccess` | `Success` | — |
+| `WpBridgeAuthFailed` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-006` |
+| `TokenIssued` | `Info` | `TokenIssue` | `Success` | — |
+| `TokenRevoked` | `Info` | `TokenRevoke` | `Success` | — |
+
+> `RefreshTokenReuseDetected` MUST also revoke the entire token chain (set `IsRevoked = 1` on every descendant) and emit a separate `Security` event (`SuspectedReplayAttack` → `GL-SEC-001`).
 
 ### 4.3 Approval & Policy Decisions
 
 Every authorization or policy decision (allowlist match, role check, rate-limit check) MUST log its decision — both pass and fail.
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` |
-|-------|----------|-------------------|----------------|
-| `AllowlistMatched_Exact` | `Info` | `LogPush` | `Success` (continues) |
-| `AllowlistMatched_VersionWildcard` | `Info` | `LogPush` | `Success` (continues) |
-| `AllowlistMatched_OwnerWildcard` | `Info` | `LogPush` | `Success` (continues) |
-| `AllowlistRejected_NotRegistered` | `Warn` | `LogPush` | `Rejected` |
-| `AllowlistRejected_Disabled` | `Warn` | `LogPush` | `Rejected` |
-| `RoleCheckPassed` | `Debug` | — | — |
-| `RoleCheckFailed` | `Warn` | varies | `Rejected` |
-| `RateLimitPassed` | `Debug` | — | — |
-| `RateLimitExceeded` | `Warn` | `LogPush` or `LogQuery` | `Rejected` |
-| `EnvelopeJwtVerified` | `Info` | `LogPush` | `Success` (continues) |
-| `EnvelopeJwtRejected_BadHmac` | `Warn` | `LogPush` | `Rejected` |
-| `EnvelopeJwtRejected_Expired` | `Info` | `LogPush` | `Rejected` |
-| `PayloadCapExceeded` | `Warn` | `LogPush` | `Rejected` |
+| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
+|-------|----------|-------------------|----------------|-------------|
+| `AllowlistMatched_Exact` | `Info` | `LogPush` | `Success` (continues) | — |
+| `AllowlistMatched_VersionWildcard` | `Info` | `LogPush` | `Success` (continues) | — |
+| `AllowlistMatched_OwnerWildcard` | `Info` | `LogPush` | `Success` (continues) | — |
+| `AllowlistRejected_NotRegistered` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-001` |
+| `AllowlistRejected_Disabled` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-002` |
+| `RoleCheckPassed` | `Debug` | — | — | — |
+| `RoleCheckFailed` | `Warn` | varies | `Rejected` | `GL-RBAC-001` |
+| `RateLimitPassed` | `Debug` | — | — | — |
+| `RateLimitExceeded` | `Warn` | `LogPush` or `LogQuery` | `Rejected` | `GL-RATE-001` |
+| `EnvelopeJwtVerified` | `Info` | `LogPush` | `Success` (continues) | — |
+| `EnvelopeJwtRejected_BadHmac` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-003` |
+| `EnvelopeJwtRejected_Expired` | `Info` | `LogPush` | `Rejected` | `GL-PUSH-004` |
+| `EnvelopeJwtRejected_TtlTooLong` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-005` |
+| `EnvelopeJwtRejected_Replayed` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-006` |
+| `EnvelopeJwtRejected_Malformed` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-007` |
+| `PayloadCapExceeded` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-009` |
 
 > Each "continues" event is informational; the transaction's terminal outcome is logged separately at `EndpointCompleted` time so each `AuditTrail` row maps to one final state.
 
 ### 4.4 CI/CD Log Ingestion (`POST /logs/push`)
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` |
-|-------|----------|-------------------|----------------|
-| `IngestionStarted` | `Debug` | — | — |
-| `PipelineAutoCreated` | `Info` | — | — |
-| `LogEntriesPersisted` | `Info` | `LogPush` | `Success` |
-| `IngestionPartial` | `Warn` | `LogPush` | `Rejected` |
-| `IngestionFailed_DbError` | `Error` | `LogPush` | `Error` |
-| `IngestionFailed_ValidationError` | `Warn` | `LogPush` | `Rejected` |
+| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
+|-------|----------|-------------------|----------------|-------------|
+| `IngestionStarted` | `Debug` | — | — | — |
+| `PipelineAutoCreated` | `Info` | — | — | — |
+| `PipelineAutoCreateFailed` | `Warn` | `LogPush` | `Rejected` | `GL-ING-004` |
+| `LogEntriesPersisted` | `Info` | `LogPush` | `Success` | — |
+| `IngestionPartial` | `Warn` | `LogPush` | `Rejected` | `GL-ING-002` |
+| `IngestionFailed_DbError` | `Error` | `LogPush` | `Error` | `GL-ING-003` |
+| `IngestionFailed_ValidationError` | `Warn` | `LogPush` | `Rejected` | `GL-ING-001` |
 
 > `IngestionPartial` MUST list the rejected entries' indices in `details.rejectedIndices` and the reason per index.
 
 ### 4.5 Background & Maintenance
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` |
-|-------|----------|-------------------|----------------|
-| `RefreshTokenSweepStarted` | `Debug` | — | — |
-| `RefreshTokenSweepCompleted` | `Info` | — | `Success` |
-| `RefreshTokenSweepFailed` | `Error` | — | `Error` |
-| `JwksKeyRotationStarted` | `Info` | — | — |
-| `JwksKeyRotationCompleted` | `Info` | — | `Success` |
+| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
+|-------|----------|-------------------|----------------|-------------|
+| `RefreshTokenSweepStarted` | `Debug` | — | — | — |
+| `RefreshTokenSweepCompleted` | `Info` | — | `Success` | — |
+| `RefreshTokenSweepFailed` | `Error` | — | `Error` | `GL-BG-001` |
+| `JwksKeyRotationStarted` | `Info` | — | — | — |
+| `JwksKeyRotationCompleted` | `Info` | — | `Success` | — |
+| `JwksKeyRotationFailed` | `Error` | — | `Error` | `GL-BG-002` |
+| `AuditRetryJobStarted` | `Debug` | — | — | — |
+| `AuditRetryJobFailed` | `Error` | — | `Error` | `GL-BG-003` |
 
 ### 4.6 Security Events
 
-| Event | Severity |
-|-------|----------|
-| `SuspectedReplayAttack` | `Error` |
-| `SuspectedBruteForce` | `Warn` |
-| `SuspectedAllowlistProbe` | `Warn` |
-| `IntegrityCheckFailed` | `Fatal` |
+| Event | Severity | `errorCode` |
+|-------|----------|-------------|
+| `SuspectedReplayAttack` | `Error` | `GL-SEC-001` |
+| `SuspectedBruteForce` | `Warn` | `GL-SEC-002` |
+| `SuspectedAllowlistProbe` | `Warn` | `GL-SEC-003` |
+| `IntegrityCheckFailed` | `Fatal` | `GL-SEC-004` |
 
 ---
 
@@ -218,7 +227,7 @@ try {
     $this->logger->logEvent('OperationFailed', LogSeverity::Error, [
         'auditActionTypeName' => 'RepoCreate',
         'auditOutcomeName'    => 'Error',
-        'errorCode'           => 'INTERNAL_ERROR',
+        'errorCode'           => 'GL-INT-001',
         'errorMessage'        => $e->getMessage(),
         'errorStack'          => $e->getTraceAsString(),
     ]);
