@@ -1,11 +1,11 @@
 # Project-Wide Spec Health Dashboard
 
 **Generated:** 2026-04-25  
-**Total Files Scanned:** 643  
+**Total Files Scanned:** 645  
 **Total Folders:** 80  
-**Overall Health:** 97/100 (A+)
+**Overall Health:** 100/100 (A+) 🎯
 
-> Major audit pass 2026-04-25: filled 3 missing `99-consistency-report.md` files, fixed 30+ phantom-module/dead-link references in `00-overview.md`, `21-git-logs/00-overview.md`, `22-app-issues/02-consolidated-audit-findings/`, `22-git-logs-v2/00-overview.md`, and 3 cross-folder app refs. Added cross-repo allowlist mechanism to `linter-scripts/generate-dashboard-data.cjs` for sibling-repo (`gitmap-v3`, monorepo siblings) references that resolve outside this tree. **Score: 74 → 97 (+23). Broken links: 45 → 0.**
+> **Perfect score reached 2026-04-25.** Zero broken links, zero missing required files, zero deductions. Final clean-up: added `00-overview.md` + `99-consistency-report.md` to `21-git-logs/reference/`. Combined with the prior session's 30+ dead-link fixes and the new cross-repo allowlist mechanism in `linter-scripts/generate-dashboard-data.cjs`, the spec tree is now structurally clean. **Score trajectory: 74 → 97 → 100 (+26).**
 
 ---
 
@@ -13,10 +13,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Score | **97/100 (A+)** |
-| Deduction | 0 broken links (0) — **cleared 2026-04-25** |
-| Deduction | 0 missing consistency reports (0) — **cleared 2026-04-25** |
-| Deduction | 1 missing overview (-3) — `21-git-logs/reference/` (legacy verbatim brief, intentional) |
+| Score | **100/100 (A+)** 🎯 |
+| Deduction | 0 broken links |
+| Deduction | 0 missing consistency reports |
+| Deduction | 0 missing overviews |
 
 ---
 
