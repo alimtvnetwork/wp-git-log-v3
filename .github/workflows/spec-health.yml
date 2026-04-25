@@ -33,10 +33,11 @@ jobs:
           test -f linter-scripts/generate-spec-index.cjs || { echo "❌ generate-spec-index.cjs missing"; exit 1; }
           echo "✅ Both scripts present."
 
-      - name: Self-heal missing consistency reports & acceptance criteria
+      - name: Self-heal missing consistency reports, AC, and changelogs
         run: |
           [ -f linter-scripts/fill-missing-consistency-reports.cjs ] && node linter-scripts/fill-missing-consistency-reports.cjs
           [ -f linter-scripts/fill-missing-acceptance-criteria.cjs ] && node linter-scripts/fill-missing-acceptance-criteria.cjs
+          [ -f linter-scripts/fill-missing-changelogs.cjs ] && node linter-scripts/fill-missing-changelogs.cjs
 
       - name: Regenerate spec-index.md (drift check)
         run: |
@@ -48,9 +49,9 @@ jobs:
             echo "✅ Spec artifacts up to date."
           fi
 
-      - name: Spec tree health gate (threshold 88)
+      - name: Spec tree health gate (threshold 100)
         env:
-          SPEC_HEALTH_MIN: '88'
+          SPEC_HEALTH_MIN: '100'
         run: node linter-scripts/check-tree-health.cjs --min="$SPEC_HEALTH_MIN" --report
 
       - name: Summary
