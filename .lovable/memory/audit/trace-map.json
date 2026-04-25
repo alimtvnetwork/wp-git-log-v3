@@ -546,6 +546,12 @@
     "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-01",
     "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-02",
     "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-03",
+    "27-spec-toolchain/14-generate-trace-map.md#AC-14-01",
+    "27-spec-toolchain/14-generate-trace-map.md#AC-14-02",
+    "27-spec-toolchain/14-generate-trace-map.md#AC-14-03",
+    "27-spec-toolchain/14-generate-trace-map.md#AC-14-04",
+    "27-spec-toolchain/14-generate-trace-map.md#AC-14-05",
+    "27-spec-toolchain/14-generate-trace-map.md#AC-14-06",
     "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01",
     "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02",
     "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03",
@@ -628,8 +634,8 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 423,
-    "ac_total": 439,
+    "ac_drifted": 429,
+    "ac_total": 445,
     "ac_traced": 16,
     "code_orphan": 23,
     "code_referenced": 6,
