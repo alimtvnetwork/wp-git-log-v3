@@ -35,7 +35,7 @@ A spec passes only when every applicable check returns **PASS**. `N/A` is allowe
 
 1. Open the spec file under audit (e.g., `02-database-schema-and-erd.md`).
 2. Walk through every section below in order. Do not skip — record `PASS`, `FAIL`, or `N/A` for each row.
-3. For every `FAIL`, capture the offending excerpt (≤ 120 chars) and the corrective action in the **Findings Log** at the bottom of the audited file (or in a sibling issue file under `spec/22-app-issues/`).
+3. For every `FAIL`, capture the offending excerpt (≤ 120 chars) and the corrective action in the **Findings Log** at the bottom of the audited file (or in a sibling issue file under `spec/25-app-issues/`).
 4. Run the cross-link verifier:
    ```bash
    python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
@@ -145,7 +145,7 @@ A spec passes only when every applicable check returns **PASS**. `N/A` is allowe
 | F1 | File starts with the standard header (Title, **Version:** X.Y.Z, **Updated:** YYYY-MM-DD, optional Status / AI Confidence / Ambiguity) | Conforms to `01-spec-authoring-guide/02-naming-conventions.md` |
 | F2 | File ends with a **Cross-References** table linking to every guideline domain it depends on | Present and resolves |
 | F3 | All `AC-*` IDs in the file are unique and listed in `97-acceptance-criteria.md` | Linter pass |
-| F4 | All `OI-*` (open items) and `TBD` markers are tracked in the parent `98-changelog.md` or in a `spec/22-app-issues/` entry | Untracked open item → FAIL |
+| F4 | All `OI-*` (open items) and `TBD` markers are tracked in the parent `98-changelog.md` or in a `spec/25-app-issues/` entry | Untracked open item → FAIL |
 | F5 | No prose contradicts a row in `00-overview.md` **Locked Decisions** | Inconsistency → FAIL |
 
 ---
@@ -243,8 +243,8 @@ Each grep returning zero hits (after subtracting documented exemptions) is a pos
 | Split-DB Architecture | [../05-split-db-architecture/00-overview.md](../05-split-db-architecture/00-overview.md) |
 | Seedable Config (CW Config) | [../06-seedable-config-architecture/00-overview.md](../06-seedable-config-architecture/00-overview.md) |
 | App Spec Index | [./00-overview.md](./00-overview.md) |
-| Phase-2 Audit Findings | [../22-app-issues/01-phase-2-git-logs-audit/00-overview.md](../22-app-issues/01-phase-2-git-logs-audit/00-overview.md) |
-| Triage Format | [../22-app-issues/00-overview.md](../22-app-issues/00-overview.md) |
+| Phase-2 Audit Findings | [../25-app-issues/01-phase-2-git-logs-audit/00-overview.md](../25-app-issues/01-phase-2-git-logs-audit/00-overview.md) |
+| Triage Format | [../25-app-issues/00-overview.md](../25-app-issues/00-overview.md) |
 
 ---
 

@@ -54,7 +54,7 @@ No app-specific content may appear in the 01–20 range. No foundational princip
 | 14 | `14-update/` | CLI self-update blueprints, release distribution, deploy strategies |
 | 15–20 | _Reserved_ | Future core fundamental topics |
 | 21 | `21-app/` | App-specific specs: features, workflows, architecture |
-| 22 | `22-app-issues/` | App bug analysis, root cause analysis, fix documentation |
+| 22 | `25-app-issues/` | App bug analysis, root cause analysis, fix documentation |
 
 ### Rules
 
@@ -107,7 +107,7 @@ spec/
 │
 │ ── APP-SPECIFIC (21+) ──
 ├── 21-app/                                  # App feature specs, workflows
-├── 22-app-issues/                          # App bug analysis, root cause, fixes
+├── 25-app-issues/                          # App bug analysis, root cause, fixes
 │
 │ ── ARCHIVE & GOVERNANCE ──
 ├── 99-archive/                             # Deprecated specifications
@@ -229,7 +229,7 @@ Folders 21 and above are for **application-level** content:
 | # | Folder | Purpose |
 |---|--------|---------|
 | 21 | `21-app/` | App feature specs, workflows, architecture decisions |
-| 22 | `22-app-issues/` | App bug analysis, root cause analysis, fix documentation |
+| 22 | `25-app-issues/` | App bug analysis, root cause analysis, fix documentation |
 
 New app-related folders use the next available number after 22.
 
@@ -248,7 +248,7 @@ AI INSTRUCTION — Coding Guidelines Placement:
    → Place in 21-app
 
 4. Does the content analyze bugs, failures, root causes, or fixes?
-   → Place in 22-app-issues
+   → Place in 25-app-issues
 
 5. Never place app-specific content in the 01–20 range.
 6. Never place foundational principles in the 21+ range.
@@ -261,6 +261,6 @@ AI INSTRUCTION — Coding Guidelines Placement:
 | 09 | `09-powershell-integration/` | Fixed — all PowerShell content goes here |
 | 10 | `10-research/` | Fixed — all research content goes here |
 | 21 | `21-app/` | Fixed — all app specs go here |
-| 22 | `22-app-issues/` | Fixed — all app issue analysis goes here |
+| 22 | `25-app-issues/` | Fixed — all app issue analysis goes here |
 
 See [`00-overview.md`](../02-coding-guidelines/00-overview.md) for the full category listing.

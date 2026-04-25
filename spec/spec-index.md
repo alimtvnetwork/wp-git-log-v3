@@ -246,7 +246,7 @@
 | `spec/04-database-conventions/07-split-db-pattern.md` | Split DB Pattern | 1.0.0 |
 | `spec/04-database-conventions/99-consistency-report.md` | Consistency Report — Database Conventions | 1.0.0 |
 | `spec/02-coding-guidelines/21-app/00-overview.md` | App | 1.0.0 |
-| `spec/02-coding-guidelines/22-app-issues/00-overview.md` | App Issues | 1.0.0 |
+| `spec/02-coding-guidelines/25-app-issues/00-overview.md` | App Issues | 1.0.0 |
 
 ## 🔴 Error Management
 
@@ -582,7 +582,7 @@
 
 | File | Title | Version |
 |------|-------|---------|
-| `spec/22-app-issues/00-overview.md` | App Issues | 1.0.0 |
+| `spec/25-app-issues/00-overview.md` | App Issues | 1.0.0 |
 
 ## 🗄️ App Database
 

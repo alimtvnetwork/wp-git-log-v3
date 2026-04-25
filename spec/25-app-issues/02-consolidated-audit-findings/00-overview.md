@@ -27,7 +27,7 @@ This is the **single source of truth** for every critical observation against th
 | **Required fix** | Concrete, actionable remediation |
 | **Linked audit IDs** | Cross-references to Phase-2 audit (`P2-GL-NN`) and consistency checklist rows |
 
-> **Correction notice.** This document supersedes the Phase-2 audit (`spec/22-app-issues/01-phase-2-git-logs-audit/00-overview.md`) wherever they disagree. The Phase-2 audit treated `02-database-schema-and-erd.md` and parts of `08-allowlist-and-wildcard-matching.md` as "missing"; line-anchored evidence below proves both files exist and are substantive. Findings have been re-scored accordingly.
+> **Correction notice.** This document supersedes the Phase-2 audit (`spec/25-app-issues/01-phase-2-git-logs-audit/00-overview.md`) wherever they disagree. The Phase-2 audit treated `02-database-schema-and-erd.md` and parts of `08-allowlist-and-wildcard-matching.md` as "missing"; line-anchored evidence below proves both files exist and are substantive. Findings have been re-scored accordingly.
 
 ---
 

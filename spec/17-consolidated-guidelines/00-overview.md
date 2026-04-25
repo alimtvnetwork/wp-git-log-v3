@@ -47,7 +47,7 @@ This folder provides **standalone, self-contained AI-readable references** for e
 | 11 | [11-research.md](./11-research.md) | `02-coding-guidelines/` — Coding guidelines research placement rules |
 | 12 | [12-root-research.md](./12-root-research.md) | `10-research/` — Root-level research placement rules |
 | 13 | [13-app.md](./13-app.md) | `21-app/` — App-specific spec placement and decision guide |
-| 14 | [14-app-issues.md](./14-app-issues.md) | `22-app-issues/` — App bug analysis, issue file template, placement rules |
+| 14 | [14-app-issues.md](./14-app-issues.md) | `25-app-issues/` — App bug analysis, issue file template, placement rules |
 | 15 | [15-cicd-pipeline-workflows.md](./15-cicd-pipeline-workflows.md) | `12-cicd-pipeline-workflows/` — CI/CD pipeline specs, deployment workflows, install scripts, code signing |
 | 16 | [16-app-design-system-and-ui.md](./16-app-design-system-and-ui.md) | `24-app-design-system-and-ui/` — App-specific design system extending core tokens |
 | 17 | [17-self-update-app-update.md](./17-self-update-app-update.md) | `14-update/` — CLI self-update, rename-first deploy, handoff, release pipeline, install scripts |

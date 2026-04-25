@@ -39,7 +39,7 @@ Any content that analyzes bugs, failures, root causes, or fixes for application-
 
 ## Verification
 
-_Auto-generated section — see `spec/22-app-issues/97-acceptance-criteria.md` for the full criteria index._
+_Auto-generated section — see `spec/25-app-issues/97-acceptance-criteria.md` for the full criteria index._
 
 ### AC-AI-000: App issues triage conformance: Overview
 

@@ -14,7 +14,7 @@
 
 Phase-2 audit of the `git-logs` WordPress plugin specification (`spec/21-git-logs/`). This report inventories every gap, inconsistency, missing requirement, contradiction, and unclear behavior detected between the locked decisions in `00-overview.md`, the existing spec files (`01`, `02`, `08`, `11`, `12`, `16`), and the file inventory the index promises to deliver. No source code is reviewed in this phase — findings are strictly spec-vs-spec and spec-vs-locked-decisions.
 
-Each issue follows the standardized triage format mandated by `spec/22-app-issues/00-overview.md` (Reproduction / Cause / Fix / Prevention) and is assigned a stable ID (`P2-GL-NN`) for cross-referencing.
+Each issue follows the standardized triage format mandated by `spec/25-app-issues/00-overview.md` (Reproduction / Cause / Fix / Prevention) and is assigned a stable ID (`P2-GL-NN`) for cross-referencing.
 
 ---
 
@@ -29,7 +29,7 @@ Each issue follows the standardized triage format mandated by `spec/22-app-issue
 | 5 | `spec/21-git-logs/11-error-management.md` | Error envelope, codes, no-swallow rules |
 | 6 | `spec/21-git-logs/12-logging-strategy.md` | Structured logging contract |
 | 7 | `spec/21-git-logs/16-jwt-onboarding-and-token-usage.md` | JWT lifecycle and onboarding |
-| 8 | `spec/22-app-issues/00-overview.md` | Triage format requirement |
+| 8 | `spec/25-app-issues/00-overview.md` | Triage format requirement |
 | 9 | `spec/01-spec-authoring-guide/03-required-files.md` | Required-file rules per module |
 
 ---
@@ -80,7 +80,7 @@ Each issue follows the standardized triage format mandated by `spec/22-app-issue
 
 ## Detailed Findings
 
-Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix / Prevention) from `spec/22-app-issues/00-overview.md`.
+Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix / Prevention) from `spec/25-app-issues/00-overview.md`.
 
 ---
 
