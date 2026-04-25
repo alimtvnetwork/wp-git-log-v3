@@ -1,9 +1,9 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-25  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
-**Category:** Auditor (AI-driven, **current**)  
+**Category:** Auditor (AI-driven by default; **deterministic mode** available)  
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
 
 ---
