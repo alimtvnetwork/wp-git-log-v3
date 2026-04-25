@@ -14,9 +14,9 @@ sequenceDiagram
     V->>V: TempToken match -> Profile
     V->>V: Token same Profile, Profile Active, App Active
     alt Validation passes
-        API->>DB: upsert Pipeline; insert LogEntry+ErrorLogEntry
+        API->>DB: upsert Pipeline; insert LogEntry and ErrorLogEntry
         API->>DB: if HasError: Pipeline.HasError=1
-        API->>DB: insert History(ActionType=Append) + Action
+        API->>DB: insert History(ActionType=Append) and Action
         API->>AUD: AuditActionType=LogPush, Outcome=Success
         API-->>CI: 200 { Status: Success, TraceId, Retrieval }
     else Rejected
@@ -27,18 +27,18 @@ sequenceDiagram
     Note over CI,API: PUT /fixed-log
     CI->>API: RepoUrl, Branch, TempToken, RootRepo, Token, PipelineName
     API->>V: same validation chain
-    API->>DB: Pipeline.HasError=0; History(Fixed) + Action
+    API->>DB: Pipeline.HasError=0; History(Fixed) and Action
     API->>AUD: LogPush/Fixed Success
     API-->>CI: 200 ack
 
     Note over CI,API: POST /clear-log
     CI->>API: same body as fixed-log
-    API->>DB: delete LogEntry+ErrorLogEntry for Pipeline
-    API->>DB: History(Clear) + Action
+    API->>DB: delete LogEntry and ErrorLogEntry for Pipeline
+    API->>DB: History(Clear) and Action
     API-->>CI: 200 ack
 
     Note over CI,API: POST /clear-log-all
     CI->>API: RepoUrl, Branch, TempToken, RootRepo, Token (no PipelineName)
     API->>DB: delete logs for all pipelines on (RepoVersion, Branch)
-    API->>DB: History(ClearAll) + Action
+    API->>DB: History(ClearAll) and Action
     API-->>CI: 200 ack
