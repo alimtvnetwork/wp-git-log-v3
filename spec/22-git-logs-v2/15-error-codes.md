@@ -1,6 +1,6 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.8.1  
+**Version:** 2.7.0  
 **Updated:** 2026-04-25
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
@@ -82,18 +82,6 @@ Validation order fixed by §31 (steps 1–10). See [`31-ssh-key-auth.md`](./31-s
 | GL-MIGRATION-PENDING | 503 | Plugin booting; migration not yet applied. | Retry after a few seconds. |
 | GL-CONFIG-MISSING | 500 | Required `ConfigKv` key absent (corrupted DB). | Re-run activator. |
 | GL-INTERNAL | 500 | Unhandled exception. `RequestId` correlates with WP error log. | Report to maintainer with `RequestId`. |
-
-## Release / CI gates (build-time, never runtime)
-
-These codes are emitted by CI jobs defined in §35 (per the §36 release checklist). They never reach a live HTTP client; they fail the pipeline. HTTP column is `n/a`.
-
-| Code | HTTP | Cause | Caller action |
-|------|------|-------|---------------|
-| GL-RELEASE-VERSION-DRIFT | n/a | Tag version doesn't match `git-logs.php` header, `readme.txt` `Stable tag:`, `18-schema.sql` `PluginVersion` row, and `98-changelog.md` top row simultaneously. | Re-stamp all four locations; re-tag. |
-| GL-RELEASE-README-INVALID | n/a | `readme.txt` failed WP.org readme validator (missing header, bad section). | Fix `readme.txt` per §26; re-run validator. |
-| GL-RELEASE-WP-CHECK-FAIL | n/a | `wp plugin check` reported a blocker (PHP_CodeSniffer / forbidden function / missing nonce). | Fix flagged file; re-run `wp plugin check`. |
-| GL-RELEASE-POT-DIFF | n/a | `wp i18n make-pot` diff > 0 — translatable strings added without regenerating the POT. | Run `wp i18n make-pot languages/git-logs.pot`; commit. |
-| GL-RELEASE-UPGRADE-FAIL | n/a | E2E upgrade-from-previous-tag job failed: migration error, `wp git-logs verify` non-zero, or row-count delta. | Fix migration class; add downgrade-safe defaults; re-run E2E. |
 
 ---
 

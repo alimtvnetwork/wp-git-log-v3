@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 2.8.1  
+**Version:** 2.7.1  
 **Updated:** 2026-04-25
 
 ---
@@ -40,12 +40,6 @@
 | 28-example-github-actions.md | ✅ |
 | 29-uninstall-policy.md | ✅ |
 | 30-threat-model.md | ✅ |
-| 31-ssh-key-auth.md | ✅ |
-| 32-cli-test-plan.md | ✅ |
-| 33-bats-test-skeleton.md | ✅ |
-| 34-phpunit-test-skeleton.md | ✅ |
-| 35-reference-ci-yml.md | ✅ |
-| 36-release-checklist.md | ✅ (new in v2.8.0) |
 | 97-acceptance-criteria.md | ✅ (AC-01..AC-41) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
@@ -57,6 +51,7 @@
 - `97-acceptance-criteria.md` AC-26..AC-41 reference §10, §17–§26 sources: OK
 - `18-schema.sql` `AuditActionType` seed includes Prune (19), Restore (20): OK
 - `30-threat-model.md` deferral list cross-links to `11-encryption-deferred-plan.md` (queued file)
+- `17-openapi.yaml` `ErrorCode` enum mirrors all 37 runtime `GL-*` codes from `15-error-codes.md` (release-time `GL-RELEASE-*` excluded by design): OK
 
 ## Naming compliance
 
@@ -77,5 +72,5 @@ Resolved by parallel-folder strategy; v2 wins. **Deprecation banners (v2.7.1, 20
 
 ## Health Score
 
-99/100 (A) — 32 of 32 numbered files present (09–13 intentional gap, locked); §36 release-checklist landed in v2.8.0 with 5 new CI gates queued for §15/§35; cross-links valid; AC coverage matches spec breadth; DDL seeds + ConfigKv defaults validated against in-memory SQLite (25 AuditActionType rows, 10 ConfigKv defaults, 4 MigrationState markers); legacy folder 21 fully banner-deprecated. Only blocker: §07 user decision.
+99/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog landed; DDL seeds + ConfigKv defaults appended and validated against in-memory SQLite (25 AuditActionType rows, 10 ConfigKv defaults, 4 MigrationState markers). Only blocker: §07 user decision.
 
