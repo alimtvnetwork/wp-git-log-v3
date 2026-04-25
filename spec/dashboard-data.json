@@ -4,35 +4,21 @@
     "Score": 77,
     "Grade": "C",
     "Deductions": [
-      "43 broken links (-20)",
+      "41 broken links (-20)",
       "1 missing overviews (-3)"
     ]
   },
   "Links": {
-    "TotalChecked": 2077,
-    "Ok": 2034,
-    "Broken": 43,
+    "TotalChecked": 2081,
+    "Ok": 2040,
+    "Broken": 41,
     "BrokenDetails": [
       {
         "Source": "00-overview.md",
-        "Line": 29,
-        "Text": "Docs Viewer UI",
-        "Target": "./08-docs-viewer-ui/00-overview.md",
-        "Resolved": "08-docs-viewer-ui/00-overview.md"
-      },
-      {
-        "Source": "00-overview.md",
-        "Line": 30,
-        "Text": "Code Block System",
-        "Target": "./09-code-block-system/00-overview.md",
-        "Resolved": "09-code-block-system/00-overview.md"
-      },
-      {
-        "Source": "00-overview.md",
-        "Line": 41,
-        "Text": "App",
-        "Target": "./21-app/00-overview.md",
-        "Resolved": "21-app/00-overview.md"
+        "Line": 61,
+        "Text": "dashboard-data.json",
+        "Target": "./dashboard-data.json",
+        "Resolved": "dashboard-data.json"
       },
       {
         "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
