@@ -1,6 +1,6 @@
 # Error Management — Plugin-Wide Contract
 
-**Version:** 1.1.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-25  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
