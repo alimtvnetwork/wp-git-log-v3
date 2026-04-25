@@ -332,7 +332,7 @@ Each request produces exactly one **terminal** `AuditTrail` row at step 10 in ad
 
 ---
 
-## 11. Test Vectors
+## 10. Test Vectors
 
 Implementers MUST add these as automated tests. Vectors are grouped by stage; each vector lists `Input`, `Repository row(s) present`, and the **exact** expected outcome (`AcceptOrRejectCode`, `MatchedRepositoryId`, `MatchedTier`).
 
