@@ -75,6 +75,11 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 19 | [19-permission-matrix.md](./19-permission-matrix.md) | Role × Permission × Screen audit grid |
 | 20 | [20-observability.md](./20-observability.md) | Site Health card, metrics endpoint, counters |
 | 21 | [21-i18n.md](./21-i18n.md) | Text-domain rules, translatable scope, RTL/CI |
+| 22 | [22-retention-and-pruning.md](./22-retention-and-pruning.md) | `wp git-logs prune` command + eligibility rules |
+| 23 | [23-backup-restore.md](./23-backup-restore.md) | SQLite Online Backup + manifest + restore validation |
+| 24 | [24-multisite.md](./24-multisite.md) | Per-site vs network behavior |
+| 25 | [25-headless-auth-notes.md](./25-headless-auth-notes.md) | Headless WP + JWT/OAuth supported combos |
+| 26 | [26-readme-and-screenshots.md](./26-readme-and-screenshots.md) | WP.org `readme.txt` + screenshot inventory |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
