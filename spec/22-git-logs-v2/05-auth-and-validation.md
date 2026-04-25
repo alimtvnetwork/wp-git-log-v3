@@ -16,9 +16,20 @@
 
 ### Lane B — CI/CD Endpoints (`/append-log`, `/fixed-log`, `/clear-log`, `/clear-log-all`)
 
-The body carries `TempToken`, `Token`, `RepoUrl`, `Branch`, etc. **The authoritative check is GitHub URL + branch + GitProfile acceptance**, not the token. The token is checked too, as misdirection.
+Lane B has **two sub-modes** selected by header `X-GL-Auth-Mode`:
 
-#### Validation Steps (in order, no early exit on auth-related rejection masks reasons in response)
+- `ssh` (preferred from v2.7.0) — SSH deploy-key signature. **Full spec: [§31 SSH Key Authentication](31-ssh-key-auth.md).**
+- `temptoken` (default when header absent; deprecated, removal in v3.0.0) — body-carried `TempToken` + `Token`.
+
+Lane gating is governed by `ConfigKv.SshAuthMode` ∈ { `optional` (default), `preferred`, `required` }. When `required`, TempToken submissions reject with `GL-AUTH-LANE-DISABLED`.
+
+A request MUST NOT mix lanes — `X-GL-Auth-Mode: ssh` together with a body `TempToken` field rejects as `GL-SSH-LANE-CONFLICT`.
+
+Regardless of sub-mode, **the authoritative gate is GitHub URL + branch + GitProfile acceptance**. Credentials (TempToken or SSH signature) confirm the caller; they do not authorize the repo.
+
+#### TempToken Sub-mode — Validation Steps
+
+In order. No early exit may mask the rejection reason in the response body.
 
 1. **Parse** `RepoUrl` → `(provider, owner, repoName, versionSuffix)`.
 2. **Locate GitProfile** by `(Provider, OwnerName)`.
@@ -33,7 +44,25 @@ The body carries `TempToken`, `Token`, `RepoUrl`, `Branch`, etc. **The authorita
 7. **Profile UserStatus** must be `Active`. Else `GL-AUTH-PROFILE-INACTIVE`.
 8. **App lifecycle (optional)**: if request resolves to a linked `App`, require `AppStatus=Active`. Else `GL-APP-NOT-ACTIVE`.
 
-All outcomes write to `AuditTrail` (`AuthSuccess` / `AuthFail`) with `RouteName`, `RequestId`, `HttpStatus`.
+#### SSH Sub-mode — Validation Steps
+
+Full payload shape, signing string, and code samples in §31. The 10-step order is reproduced here for cross-reference:
+
+1. Mode header present (`X-GL-Auth-Mode: ssh`) → enter SSH lane.
+2. Header completeness (fingerprint, timestamp, nonce, signature) → else `GL-SSH-HEADER-MISSING`.
+3. Timestamp skew within `ReplayWindowSeconds` → else `GL-SSH-TIMESTAMP-SKEW`.
+4. SshKey lookup by `Fingerprint` AND `IsActive=1` → else `GL-SSH-KEY-UNKNOWN` / `GL-SSH-KEY-INACTIVE`.
+5. Repo binding: parsed `RepoUrl` → `RepoId` must equal `SshKey.RepoId` → else `GL-SSH-REPO-MISMATCH`.
+6. Acceptance + branch rules (reuses TempToken steps 3–4 above).
+7. Nonce uniqueness (`INSERT OR IGNORE INTO SshNonce`) → else `GL-SSH-NONCE-REUSED`.
+8. Signature verify against canonical signing string `GL-SSHSIG-V1` → else `GL-SSH-SIGNATURE-INVALID`.
+9. Profile `UserStatus = Active` → else `GL-AUTH-PROFILE-INACTIVE`.
+10. App lifecycle (when applicable) → else `GL-APP-NOT-ACTIVE`.
+
+All outcomes (both sub-modes) write to `AuditTrail`:
+- TempToken: `AuthSuccess` / `AuthFail`.
+- SSH: `SshAuthSuccess` / `SshAuthFail` (seeded in §16).
+- Common fields: `RouteName`, `RequestId`, `HttpStatus`, `ActorIp`.
 
 ---
 
@@ -64,6 +93,15 @@ All outcomes write to `AuditTrail` (`AuthSuccess` / `AuthFail`) with `RouteName`
 | GL-AUTH-TOKEN-MISMATCH | 401 | B |
 | GL-AUTH-PROFILE-INACTIVE | 403 | B |
 | GL-APP-NOT-ACTIVE | 403 | B |
+| GL-SSH-HEADER-MISSING | 400 | B (ssh) |
+| GL-SSH-TIMESTAMP-SKEW | 401 | B (ssh) |
+| GL-SSH-KEY-UNKNOWN | 401 | B (ssh) |
+| GL-SSH-KEY-INACTIVE | 403 | B (ssh) |
+| GL-SSH-REPO-MISMATCH | 403 | B (ssh) |
+| GL-SSH-NONCE-REUSED | 401 | B (ssh) |
+| GL-SSH-SIGNATURE-INVALID | 401 | B (ssh) |
+| GL-SSH-LANE-CONFLICT | 400 | B (ssh) |
+| GL-AUTH-LANE-DISABLED | 403 | B (mode gate) |
 | GL-AUTH-WP-MISSING | 401 | A |
 | GL-AUTHZ-PERMISSION-DENIED | 403 | A |
 
