@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 3.3.0  
+**Version:** 3.4.0  
 **Generated:** 2026-04-25  
-**Health Score:** 92/100 (A−)
+**Health Score:** 92/100 (A−) — root inventory now matches `dashboard-data.json` (auto-regenerated)
 
 ---
 
