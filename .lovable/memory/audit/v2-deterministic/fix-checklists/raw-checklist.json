@@ -1,0 +1,50 @@
+{
+  "category_counts": {
+    "drift": 1,
+    "maintainability": 1,
+    "missing-contract": 1
+  },
+  "checklists": [
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/27-spec-toolchain/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/27-spec-toolchain/00-overview.md"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 3 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 30,
+          "priority": "P3",
+          "target_file": "spec/27-spec-toolchain/*.md"
+        },
+        {
+          "ac_test": "Given `spec/27-spec-toolchain/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/27-spec-toolchain/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 40,
+      "module": "27-spec-toolchain",
+      "score": 74
+    }
+  ],
+  "generated": "2026-04-25",
+  "modules_analysed": 1,
+  "priority_counts": {
+    "P0": 1,
+    "P3": 2
+  },
+  "total_actions": 3,
+  "total_effort_minutes": 65
+}
