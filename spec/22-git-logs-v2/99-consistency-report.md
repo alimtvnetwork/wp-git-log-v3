@@ -66,13 +66,10 @@ Resolved by parallel-folder strategy; v2 wins. Legacy v1 banner in `spec/21-git-
 ## Open items (not blocking)
 
 1. **App identity (§07)** — still awaiting user confirmation on whether to add `Environment`, `Platform`, or `OwnerEmail`. Current set: `AppName`, `AppSlug`, `Description`, `ProfileId`, `AppStatusId`.
-2. **`PluginUninstall` AuditActionType (21)** — declared in §29; needs to be appended to `18-schema.sql` seed in next pass.
-3. **`ConfigChange` AuditActionType** — referenced from §30 R3; needs ID assignment + seed.
-4. **`ConfigKv` keys mentioned in new sections** — `UninstallMode` (§29), `AllowedReadOrigins` (§30 S3), `MaintenanceMode` (§23), `SshReplayWindowSec`=300 (§31). Add to default seeds in `18-schema.sql` next pass.
 
 > Note: the 09–13 numbering gap is **intentional and locked** — content is distributed across §05 (rate limit/payload caps), §16 (seed data), §30 R3 (encryption-deferred plan), §31 (SSH-key auth supersedes scaffold notes), and `spec/21-git-logs/` legacy banner (v1↔v2 mapping). Do not author standalone 09–13 files.
 
 ## Health Score
 
-98/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog entry landed; only DDL seed appends + §07 user decision remain.
+99/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog landed; DDL seeds + ConfigKv defaults appended and validated against in-memory SQLite (25 AuditActionType rows, 10 ConfigKv defaults, 4 MigrationState markers). Only blocker: §07 user decision.
 
