@@ -514,7 +514,7 @@ def audit_module(folder: Path, metrics: dict):
     if DETERMINISTIC:
         return deterministic_score(folder, metrics)
     digest = build_digest(folder, metrics)
-    return call_ai_structured(
+    result = call_ai_structured(
         prompt=digest,
         tool_name="emit_audit_v2",
         tool_description="Emit AI-implementability audit",
@@ -522,6 +522,13 @@ def audit_module(folder: Path, metrics: dict):
         system=SYSTEM,
         model=MODEL,
     )
+    # Apply hard gates to AI scores too — caps are non-negotiable
+    raw_scores = dict(result["scores"])
+    capped, applied_gates = apply_gates(raw_scores, metrics)
+    result["scores"] = capped
+    result["raw_scores"] = raw_scores
+    result["applied_gates"] = applied_gates
+    return result
 
 def weighted(scores: dict) -> int:
     return round(sum(scores[k] * w / 100 for k, w in WEIGHTS.items()))
