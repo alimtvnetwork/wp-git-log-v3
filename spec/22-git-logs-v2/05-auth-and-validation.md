@@ -1,6 +1,6 @@
 # Authentication and Validation (v2)
 
-**Version:** 2.0.0  
+**Version:** 2.1.0  
 **Updated:** 2026-04-25  
 **JWT:** dropped entirely.
 
@@ -66,3 +66,21 @@ All outcomes write to `AuditTrail` (`AuthSuccess` / `AuthFail`) with `RouteName`
 | GL-APP-NOT-ACTIVE | 403 | B |
 | GL-AUTH-WP-MISSING | 401 | A |
 | GL-AUTHZ-PERMISSION-DENIED | 403 | A |
+
+> Full catalog with HTTP status, cause, and caller action: [`15-error-codes.md`](./15-error-codes.md).
+
+---
+
+## CI/CD pipeline integration
+
+Callers invoking Lane B endpoints from CI runners should follow the conventions in [`spec/12-cicd-pipeline-workflows/`](../12-cicd-pipeline-workflows/00-overview.md), specifically:
+
+| Topic | Authoritative file |
+|-------|--------------------|
+| Where to inject `TempToken` / `Token` (job secrets, never repo-checked-in) | [`07-environment-variable-setup.md`](../12-cicd-pipeline-workflows/07-environment-variable-setup.md) |
+| Standard CI job naming + ordering | [`01-ci-pipeline.md`](../12-cicd-pipeline-workflows/01-ci-pipeline.md) |
+| Reusable guards (e.g., skip push if branch ∉ allowlist) | [`03-reusable-ci-guards/`](../12-cicd-pipeline-workflows/03-reusable-ci-guards/) |
+| Failure-vs-success log routing (`HasError` flag wiring) | this doc + `01-ci-pipeline.md` §Failure handling |
+| End-to-end curl examples per endpoint | [`14-endpoint-examples.md`](./14-endpoint-examples.md) |
+
+Pipeline templates should send the `Pipeline` field as the CI job name (e.g. `build-and-test`, `deploy-prod`) so History views align with CI dashboards.

@@ -1,6 +1,6 @@
 # Gitlogs Diagrams
 
-**Version:** 1.1.0  
+**Version:** 1.0.0  
 **Updated:** 2026-04-25
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).
@@ -16,7 +16,4 @@ Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-
 | 04 | 04-endpoints-read.mmd | get-logs / get-pipeline-logs / get-error-logs / get-pipeline-error-logs flows |
 | 05 | 05-auth-validation.mmd | TempToken + URL/Branch validation |
 | 06 | 06-permission-flow.mmd | Role → Permission → Action authorization |
-| 07 | 07-rate-limit-flow.mmd | Per-Profile token-bucket sequence (§10) |
-| 08 | 08-encryption-v3-flow.mmd | Deferred encryption-at-rest migration flow (§11) |
-| 97 | 97-acceptance-criteria.md | Diagram completeness AC |
 | 99 | 99-consistency-report.md | Health/structure |
