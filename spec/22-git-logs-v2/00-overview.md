@@ -62,6 +62,14 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 06 | [06-migrations-and-logger.md](./06-migrations-and-logger.md) | Versioned migration markers + level-aware logger |
 | 07 | [07-app-entity.md](./07-app-entity.md) | App schema, AppLink polymorphism, lifecycle |
 | 08 | [08-history-and-action.md](./08-history-and-action.md) | History/Action vs AuditTrail separation |
+| 09 | [09-seed-data.md](./09-seed-data.md) | Lookup-table rows, RolePermission seeds, ConfigKv defaults |
+| 10 | [10-rate-limit-and-payload.md](./10-rate-limit-and-payload.md) | Per-Profile token bucket, payload caps |
+| 11 | [11-encryption-deferred-plan.md](./11-encryption-deferred-plan.md) | v3 encryption-at-rest blueprint |
+| 12 | [12-wp-plugin-scaffold.md](./12-wp-plugin-scaffold.md) | PHP file tree mapping spec → code |
+| 13 | [13-v1-vs-v2-mapping.md](./13-v1-vs-v2-mapping.md) | Side-by-side v1 ↔ v2 reference |
+| 14 | [14-endpoint-examples.md](./14-endpoint-examples.md) | Curl + JSON samples for all 10 endpoints |
+| 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog |
+| 16 | [16-test-plan.md](./16-test-plan.md) | Unit + Integration test scope |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
