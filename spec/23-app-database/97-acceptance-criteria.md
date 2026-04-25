@@ -1,73 +1,71 @@
-# Acceptance Criteria — App Database
+# Acceptance Criteria — 23 App Database
 
-**Version:** 1.0.0  
+**Version:** 2.0.0  
 **Updated:** 2026-04-25  
-**Scope:** `spec/23-app-database/`
+**Scope:** `spec/23-app-database/`  
+**Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
 
 ---
 
-## Purpose
+## Module Summary
 
-This document defines testable acceptance criteria for the **App Database** module. Every criterion is verifiable from the module's content alone — an AI implementer or human reviewer can check pass/fail without external context.
-
----
-
-## Criteria
-
-### AC-01: Module entry point exists and is non-trivial
-- **Given** the module folder `spec/23-app-database/`
-- **When** `00-overview.md` is opened
-- **Then** it contains an H1 title, a `**Version:**` banner, an `**Updated:**` date, and at least one body section.
-- **Source:** `00-overview.md`
-
-### AC-02: All sibling files referenced from the overview are present on disk
-- **Given** the link inventory in `00-overview.md`
-- **When** each relative `.md` link is resolved
-- **Then** the target file exists in this module folder.
-- **Source:** `00-overview.md` cross-references; verified by `linter-scripts/check-spec-cross-links.py`.
-
-### AC-03: Naming convention compliance
-- **Given** every file in this module
-- **When** filenames are inspected
-- **Then** all match `^[0-9]{2}-[a-z0-9-]+\.md$` (or are recognized special files like `README.md`).
-- **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md`.
-
-### AC-04: Consistency report present and current
-- **Given** the module folder
-- **When** `99-consistency-report.md` is opened
-- **Then** it lists every `.md` file in this folder under "File Inventory" with status ✅.
-- **Source:** `99-consistency-report.md`.
-
-### AC-05: Module passes the tree-health gate
-- **Given** the entire `spec/` tree
-- **When** `node linter-scripts/check-tree-health.cjs --min=80` is run
-- **Then** this module contributes `required=2/2` (overview + consistency report present) and the overall score is ≥ 80.
-- **Source:** `linter-scripts/check-tree-health.cjs`.
+Defines the app-specific data model, schema migrations, and query patterns for the application database. It enforces strict SQLite partitioning and forward-only migration rules (Rule 12).
 
 ---
 
-## Module-Specific Files
+## Inlined Contracts
 
-The following files in this module also constitute acceptance surface — each must remain valid markdown with a top-level H1 and version banner:
+> Required artifacts inlined here so each AC is self-contained — a mediocre AI does not need to chase cross-links.
 
-- `00-overview.md`
+# Database Schema Rule 12 (App-Specific)
+- Migrations: Forward-only logic only.
+- Column Modification: New columns must be NULLABLE.
+- Defaults: No DEFAULT values allowed on new columns in migrations.
+- Naming: PascalCase for all Tables and Columns.
+
+# File Paths
+- Verification Script: linter-scripts/check-forbidden-strings.py
+- Architecture Ref: 05-split-db-architecture/00-overview.md
+- Convention Ref: 04-database-conventions/00-overview.md
 
 ---
 
-## Validation
+## Acceptance Criteria
 
-Run the full pipeline:
+### AC-ADB-01: Forward-only Migrations  `[critical]`
+- **Given** A new migration file is created for the app-database module
+- **When** Inspecting the migration script structure during verification.
+- **Then** The migration logic must only contain forward-moving changes without 'DOWN' or 'ROLLBACK' destructors as per Rule 12.
+- **Verifies:** spec/23-app-database/00-overview.md
 
-```bash
-bash linter-scripts/run.sh
-```
+### AC-ADB-02: PascalCase Enforcement  `[high]`
+- **Given** New table or column definitions are added to the schema
+- **When** Checking naming conventions against core database rules referenced in the overview.
+- **Then** All identifiers must use PascalCase naming conventions.
+- **Verifies:** spec/23-app-database/00-overview.md
 
-This executes: validator → self-heal → regen index → tree-health gate. All steps must exit 0 for this module's acceptance to hold.
+### AC-ADB-03: Schema Alteration Constraints  `[critical]`
+- **Given** An existing table is being modified via a migration script
+- **When** Adding a new column to a table with existing data.
+- **Then** Any appended columns must be NULLABLE and cannot contain a DEFAULT clause (Rule 12).
+- **Verifies:** spec/23-app-database/00-overview.md
+
+### AC-ADB-04: Forbidden Strings Linter Pass  `[critical]`
+- **Given** The linter script `python3 linter-scripts/check-forbidden-strings.py` is executed
+- **When** Automated verification runs on the database module.
+- **Then** The process must return exit code 0; any non-zero exit blocks the merge.
+- **Verifies:** spec/23-app-database/00-overview.md
+
+### AC-ADB-05: Split DB Architecture Conformance  `[medium]`
+- **Given** The app-database module configuration
+- **When** Evaluating table placement between main and partition databases.
+- **Then** The partitioning of the SQLite database must adhere to the 'Split DB Architecture' pattern referenced in the cross-references.
+- **Verifies:** spec/23-app-database/00-overview.md
 
 ---
 
 ## Cross-References
 
 - [Module overview](./00-overview.md)
+- [Module changelog](./98-changelog.md)
 - [Module consistency report](./99-consistency-report.md)
-- [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
