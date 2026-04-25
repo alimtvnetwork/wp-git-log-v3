@@ -1,7 +1,9 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 3.4.0  
-**Updated:** 2026-04-24
+**Version:** 3.5.0  
+**Updated:** 2026-04-25
+
+> **v3.5.0 update:** Added [`31-full-tree-ai-audit-v4.md`](./31-full-tree-ai-audit-v4.md) — first audit covering the **entire** `spec/` tree. Headline score **45/100 (F)** — supersedes the partial-scope verdicts of `25/26/29` for whole-tree readiness.
 
 ---
 
