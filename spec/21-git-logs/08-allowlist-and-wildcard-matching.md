@@ -156,12 +156,91 @@ The same GitHub repo can be expressed many ways. The resolver MUST normalize bef
 | `https://github.com/Acme/Widget/tree/main` | **REJECT** (path components beyond `<owner>/<repo>` not allowed) |
 | `https://gitlab.com/Acme/Widget` | **REJECT** (provider not supported in v1) |
 
-Normalization rules:
+### 4.1 Formal Grammar (PCRE, anchored, case-sensitive unless noted)
 
-1. Lowercase scheme/host comparison; strip trailing `/`, strip trailing `.git`.
-2. Recognized hosts: `github.com`, `www.github.com`, `api.github.com` (path adjusted to `/repos/<owner>/<repo>`).
-3. Lowercase `owner` and `repo` for matching only — original casing is logged in `AuditTrail.DetailsJson.originalRepoUrl`.
-4. Reject any path with > 2 segments after the host.
+These are the **only** patterns the resolver MUST use. Implementations MUST NOT introduce additional regexes for the same purpose.
+
+| ID | Purpose | Regex (PCRE) | Notes |
+|---|---|---|---|
+| `RX-OWNER` | GitHub login (user or org) | `^[A-Za-z0-9](?:[A-Za-z0-9]\|-(?=[A-Za-z0-9])){0,38}$` | 1–39 chars; no leading/trailing `-`; no `--`. Mirrors GitHub's own rule. Compared case-**insensitively** after lowercasing. |
+| `RX-REPO` | GitHub repo name | `^[A-Za-z0-9._-]{1,100}$` | Cannot be `.` or `..`. Compared case-**insensitively**. |
+| `RX-VERSION-SUFFIX` | Optional `-vN` tail used by `VersionMode=Wildcard` | `(?:-v[1-9][0-9]{0,3})?` | Group is optional; `N` is 1–9999, no leading zeros. |
+| `RX-VERSION-WILDCARD` | Full repo match under `VersionMode=Wildcard` | `^<base><RX-VERSION-SUFFIX>$` | `<base>` = the literal `Repository.RepoName` (lowercased) re-quoted via `preg_quote($base, '/')`. Case-**sensitive** (because `<base>` is already lowercased). |
+| `RX-HTTPS-URL` | HTTPS GitHub URL | `^https?://(?:www\.\|api\.)?github\.com/(?<owner>[^/]+)/(?<repo>[^/?#]+?)(?:\.git)?/?$` | Path beyond `<owner>/<repo>` rejected by the resolver before regex. |
+| `RX-SSH-URL` | SSH GitHub URL | `^(?:ssh://)?git@github\.com[:/](?<owner>[^/]+)/(?<repo>[^/?#]+?)(?:\.git)?/?$` | Both `git@github.com:owner/repo.git` and `ssh://git@github.com/owner/repo` forms. |
+
+**Reserved-name check** (after `RX-REPO` passes): the literal values `.`, `..`, and any value matching `^_+$` MUST be rejected with `400 PROVIDER_UNSUPPORTED` regardless of allowlist hits — these cannot be valid GitHub repos and indicate a malformed normalization.
+
+### 4.2 Deterministic Normalization Algorithm
+
+```
+function normalizeRepoUrl(input: string): NormalizedRepo | NormalizationError
+    1. Trim leading/trailing whitespace.
+    2. If length > 2048 → return NormalizationError("URL_TOO_LONG").
+    3. Split scheme:
+         a. If input starts with "git@" or "ssh://"  → kind = SSH
+         b. Else if input starts with "http://" or "https://" → kind = HTTPS
+         c. Else → return NormalizationError("UNSUPPORTED_SCHEME")
+    4. Apply RX-HTTPS-URL or RX-SSH-URL by kind.
+       Capture-fail → return NormalizationError("MALFORMED_URL").
+    5. Extract host (only meaningful for HTTPS); reject if host is not in
+       {github.com, www.github.com, api.github.com}
+       → NormalizationError("PROVIDER_UNSUPPORTED").
+    6. Take captured `owner`, `repo`.
+       If `repo` ends with ".git" (defensive — regex already strips), strip it.
+    7. Validate `owner` against RX-OWNER (pre-lowercase).
+       Fail → NormalizationError("OWNER_INVALID").
+    8. Validate `repo` against RX-REPO (pre-lowercase).
+       Fail → NormalizationError("REPO_INVALID").
+    9. Reject reserved repo names (".", "..", "^_+$").
+   10. Produce:
+         provider     = "GitHub"
+         ownerLower   = lower(owner)
+         repoLower    = lower(repo)
+         ownerOriginal = owner   ← preserved for AuditTrail.DetailsJson.originalRepoUrl
+         repoOriginal  = repo
+   11. Return NormalizedRepo(provider, ownerLower, repoLower, ownerOriginal, repoOriginal).
+```
+
+Normalization is **pure** (no DB access, no I/O) and MUST be deterministic. Every `NormalizationError` maps to `400 PROVIDER_UNSUPPORTED` (one error code; the specific reason is logged in `AuditTrail.DetailsJson.normalizationReason`, never returned to the client).
+
+### 4.3 Resolution after Normalization
+
+After normalization, the resolver runs four parameterized SELECTs in tier order (§2.4) and stops at the first hit:
+
+```sql
+-- Tier 1: RepoUrl + Exact
+SELECT RepositoryId, RepositoryStatusId, UpdatedAt
+FROM Repository
+WHERE LOWER(OwnerName) = :ownerLower
+  AND LOWER(RepoName)  = :repoLower
+  AND AcceptanceModeId = :RepoUrl
+  AND VersionModeId    = :Exact
+ORDER BY UpdatedAt DESC
+LIMIT 1;
+
+-- Tier 2: RepoUrl + Wildcard
+SELECT RepositoryId, RepositoryStatusId, UpdatedAt
+FROM Repository
+WHERE LOWER(OwnerName) = :ownerLower
+  AND :repoLower REGEXP CONCAT('^', LOWER(RepoName), '(-v[1-9][0-9]{0,3})?$')
+  AND AcceptanceModeId = :RepoUrl
+  AND VersionModeId    = :Wildcard
+ORDER BY UpdatedAt DESC
+LIMIT 1;
+
+-- Tier 3 / 4: OwnerWildcard (Exact / Wildcard treated identically — VersionMode is ignored)
+SELECT RepositoryId, RepositoryStatusId, UpdatedAt
+FROM Repository
+WHERE LOWER(OwnerName) = :ownerLower
+  AND AcceptanceModeId = :OwnerWildcard
+ORDER BY UpdatedAt DESC
+LIMIT 1;
+```
+
+Implementations that cannot rely on `REGEXP` (e.g., very old MariaDB) MUST fetch all candidate rows for `(ownerLower, RepoUrl, Wildcard)` and apply `RX-VERSION-WILDCARD` in PHP. The result MUST be identical.
+
+
 
 ---
 
