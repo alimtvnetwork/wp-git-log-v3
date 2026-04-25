@@ -1,9 +1,9 @@
 # Allowlist & Wildcard Matching — Endpoint-Level Approval for `POST /logs/push`
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-24  
-**Status:** Draft  
-**AI Confidence:** Medium  
+**Version:** 1.1.0  
+**Updated:** 2026-04-25  
+**Status:** Active  
+**AI Confidence:** Production-Ready  
 **Ambiguity:** Low
 
 ---
@@ -156,12 +156,91 @@ The same GitHub repo can be expressed many ways. The resolver MUST normalize bef
 | `https://github.com/Acme/Widget/tree/main` | **REJECT** (path components beyond `<owner>/<repo>` not allowed) |
 | `https://gitlab.com/Acme/Widget` | **REJECT** (provider not supported in v1) |
 
-Normalization rules:
+### 4.1 Formal Grammar (PCRE, anchored, case-sensitive unless noted)
 
-1. Lowercase scheme/host comparison; strip trailing `/`, strip trailing `.git`.
-2. Recognized hosts: `github.com`, `www.github.com`, `api.github.com` (path adjusted to `/repos/<owner>/<repo>`).
-3. Lowercase `owner` and `repo` for matching only — original casing is logged in `AuditTrail.DetailsJson.originalRepoUrl`.
-4. Reject any path with > 2 segments after the host.
+These are the **only** patterns the resolver MUST use. Implementations MUST NOT introduce additional regexes for the same purpose.
+
+| ID | Purpose | Regex (PCRE) | Notes |
+|---|---|---|---|
+| `RX-OWNER` | GitHub login (user or org) | `^[A-Za-z0-9](?:[A-Za-z0-9]\|-(?=[A-Za-z0-9])){0,38}$` | 1–39 chars; no leading/trailing `-`; no `--`. Mirrors GitHub's own rule. Compared case-**insensitively** after lowercasing. |
+| `RX-REPO` | GitHub repo name | `^[A-Za-z0-9._-]{1,100}$` | Cannot be `.` or `..`. Compared case-**insensitively**. |
+| `RX-VERSION-SUFFIX` | Optional `-vN` tail used by `VersionMode=Wildcard` | `(?:-v[1-9][0-9]{0,3})?` | Group is optional; `N` is 1–9999, no leading zeros. |
+| `RX-VERSION-WILDCARD` | Full repo match under `VersionMode=Wildcard` | `^<base><RX-VERSION-SUFFIX>$` | `<base>` = the literal `Repository.RepoName` (lowercased) re-quoted via `preg_quote($base, '/')`. Case-**sensitive** (because `<base>` is already lowercased). |
+| `RX-HTTPS-URL` | HTTPS GitHub URL | `^https?://(?:www\.\|api\.)?github\.com/(?<owner>[^/]+)/(?<repo>[^/?#]+?)(?:\.git)?/?$` | Path beyond `<owner>/<repo>` rejected by the resolver before regex. |
+| `RX-SSH-URL` | SSH GitHub URL | `^(?:ssh://)?git@github\.com[:/](?<owner>[^/]+)/(?<repo>[^/?#]+?)(?:\.git)?/?$` | Both `git@github.com:owner/repo.git` and `ssh://git@github.com/owner/repo` forms. |
+
+**Reserved-name check** (after `RX-REPO` passes): the literal values `.`, `..`, and any value matching `^_+$` MUST be rejected with `400 PROVIDER_UNSUPPORTED` regardless of allowlist hits — these cannot be valid GitHub repos and indicate a malformed normalization.
+
+### 4.2 Deterministic Normalization Algorithm
+
+```
+function normalizeRepoUrl(input: string): NormalizedRepo | NormalizationError
+    1. Trim leading/trailing whitespace.
+    2. If length > 2048 → return NormalizationError("URL_TOO_LONG").
+    3. Split scheme:
+         a. If input starts with "git@" or "ssh://"  → kind = SSH
+         b. Else if input starts with "http://" or "https://" → kind = HTTPS
+         c. Else → return NormalizationError("UNSUPPORTED_SCHEME")
+    4. Apply RX-HTTPS-URL or RX-SSH-URL by kind.
+       Capture-fail → return NormalizationError("MALFORMED_URL").
+    5. Extract host (only meaningful for HTTPS); reject if host is not in
+       {github.com, www.github.com, api.github.com}
+       → NormalizationError("PROVIDER_UNSUPPORTED").
+    6. Take captured `owner`, `repo`.
+       If `repo` ends with ".git" (defensive — regex already strips), strip it.
+    7. Validate `owner` against RX-OWNER (pre-lowercase).
+       Fail → NormalizationError("OWNER_INVALID").
+    8. Validate `repo` against RX-REPO (pre-lowercase).
+       Fail → NormalizationError("REPO_INVALID").
+    9. Reject reserved repo names (".", "..", "^_+$").
+   10. Produce:
+         provider     = "GitHub"
+         ownerLower   = lower(owner)
+         repoLower    = lower(repo)
+         ownerOriginal = owner   ← preserved for AuditTrail.DetailsJson.originalRepoUrl
+         repoOriginal  = repo
+   11. Return NormalizedRepo(provider, ownerLower, repoLower, ownerOriginal, repoOriginal).
+```
+
+Normalization is **pure** (no DB access, no I/O) and MUST be deterministic. Every `NormalizationError` maps to `400 PROVIDER_UNSUPPORTED` (one error code; the specific reason is logged in `AuditTrail.DetailsJson.normalizationReason`, never returned to the client).
+
+### 4.3 Resolution after Normalization
+
+After normalization, the resolver runs four parameterized SELECTs in tier order (§2.4) and stops at the first hit:
+
+```sql
+-- Tier 1: RepoUrl + Exact
+SELECT RepositoryId, RepositoryStatusId, UpdatedAt
+FROM Repository
+WHERE LOWER(OwnerName) = :ownerLower
+  AND LOWER(RepoName)  = :repoLower
+  AND AcceptanceModeId = :RepoUrl
+  AND VersionModeId    = :Exact
+ORDER BY UpdatedAt DESC
+LIMIT 1;
+
+-- Tier 2: RepoUrl + Wildcard
+SELECT RepositoryId, RepositoryStatusId, UpdatedAt
+FROM Repository
+WHERE LOWER(OwnerName) = :ownerLower
+  AND :repoLower REGEXP CONCAT('^', LOWER(RepoName), '(-v[1-9][0-9]{0,3})?$')
+  AND AcceptanceModeId = :RepoUrl
+  AND VersionModeId    = :Wildcard
+ORDER BY UpdatedAt DESC
+LIMIT 1;
+
+-- Tier 3 / 4: OwnerWildcard (Exact / Wildcard treated identically — VersionMode is ignored)
+SELECT RepositoryId, RepositoryStatusId, UpdatedAt
+FROM Repository
+WHERE LOWER(OwnerName) = :ownerLower
+  AND AcceptanceModeId = :OwnerWildcard
+ORDER BY UpdatedAt DESC
+LIMIT 1;
+```
+
+Implementations that cannot rely on `REGEXP` (e.g., very old MariaDB) MUST fetch all candidate rows for `(ownerLower, RepoUrl, Wildcard)` and apply `RX-VERSION-WILDCARD` in PHP. The result MUST be identical.
+
+
 
 ---
 
@@ -253,16 +332,144 @@ Each request produces exactly one **terminal** `AuditTrail` row at step 10 in ad
 
 ---
 
-## 10. Open Items
+## 10. Test Vectors
+
+Implementers MUST add these as automated tests. Vectors are grouped by stage; each vector lists `Input`, `Repository row(s) present`, and the **exact** expected outcome (`AcceptOrRejectCode`, `MatchedRepositoryId`, `MatchedTier`).
+
+For brevity, a `Repository` row is written as `R{id}: owner/repo, AcceptanceMode, VersionMode, Status` (UpdatedAt strictly increases by id unless noted).
+
+### 10.1 URL Normalization (pure, no DB)
+
+| # | Input `repoUrl` | Expected normalized `(provider, ownerLower, repoLower)` | Result |
+|---|---|---|---|
+| N-01 | `https://github.com/Acme/Widget` | `(GitHub, acme, widget)` | OK |
+| N-02 | `https://github.com/Acme/Widget.git` | `(GitHub, acme, widget)` | OK |
+| N-03 | `https://github.com/Acme/Widget/` | `(GitHub, acme, widget)` | OK |
+| N-04 | `https://www.github.com/Acme/Widget` | `(GitHub, acme, widget)` | OK |
+| N-05 | `git@github.com:Acme/Widget.git` | `(GitHub, acme, widget)` | OK |
+| N-06 | `ssh://git@github.com/Acme/Widget` | `(GitHub, acme, widget)` | OK |
+| N-07 | `https://github.com/Acme/Widget/tree/main` | — | `400 PROVIDER_UNSUPPORTED` (`MALFORMED_URL`) |
+| N-08 | `https://gitlab.com/Acme/Widget` | — | `400 PROVIDER_UNSUPPORTED` (`PROVIDER_UNSUPPORTED`) |
+| N-09 | `http://github.com/acme/widget` | `(GitHub, acme, widget)` | OK (HTTP accepted by `RX-HTTPS-URL`; TLS is enforced by hosting, not by the resolver) |
+| N-10 | `https://github.com/-acme/widget` | — | `400 PROVIDER_UNSUPPORTED` (`OWNER_INVALID` — leading `-`) |
+| N-11 | `https://github.com/acme--bad/widget` | — | `400 PROVIDER_UNSUPPORTED` (`OWNER_INVALID` — `--` consecutive) |
+| N-12 | `https://github.com/acme/.` | — | `400 PROVIDER_UNSUPPORTED` (`REPO_INVALID` — reserved name) |
+| N-13 | `https://github.com/acme/..` | — | `400 PROVIDER_UNSUPPORTED` (`REPO_INVALID` — reserved name) |
+| N-14 | (string of 2049 chars) | — | `400 PROVIDER_UNSUPPORTED` (`URL_TOO_LONG`) |
+| N-15 | `https://github.com/Acme/Widget?ref=foo` | — | `400 PROVIDER_UNSUPPORTED` (`MALFORMED_URL`) |
+| N-16 | `https://github.com/Acme/Widget#frag` | — | `400 PROVIDER_UNSUPPORTED` (`MALFORMED_URL`) |
+| N-17 | `https://github.com/Acme` | — | `400 PROVIDER_UNSUPPORTED` (`MALFORMED_URL` — missing `<repo>`) |
+
+### 10.2 Wildcard Suffix Regex (`RX-VERSION-WILDCARD` against base `widget`)
+
+Pattern: `^widget(-v[1-9][0-9]{0,3})?$`
+
+| # | Candidate `repo` | Expected match? |
+|---|---|---|
+| W-01 | `widget` | yes |
+| W-02 | `widget-v1` | yes |
+| W-03 | `widget-v9999` | yes |
+| W-04 | `widget-v0` | no (leading-zero / zero) |
+| W-05 | `widget-v01` | no (leading zero) |
+| W-06 | `widget-V2` | no (uppercase `V`) |
+| W-07 | `widget-v` | no (no number) |
+| W-08 | `widget-v10000` | no (5+ digits) |
+| W-09 | `widget-v2-rc1` | no (extra suffix) |
+| W-10 | `widgets-v2` | no (base differs) |
+| W-11 | `Widget-v2` | yes (case-insensitive owner/repo compared after lowercase; `widget` matches `Widget`) |
+| W-12 | `widgetV2` | no (missing `-`) |
+
+### 10.3 Resolution Precedence
+
+Setup A:
+- `R10: acme/widget, RepoUrl, Exact, Active` (UpdatedAt: 2026-04-01)
+- `R11: acme/widget, RepoUrl, Wildcard, Active` (UpdatedAt: 2026-04-02)
+- `R12: acme/*,    OwnerWildcard, Exact, Active` (UpdatedAt: 2026-04-03)
+
+| # | Inbound `(owner, repo)` | Expected `MatchedRepositoryId` | Tier |
+|---|---|---|---|
+| P-01 | `acme/widget` | `R10` | 1 (RepoUrl + Exact) |
+| P-02 | `acme/widget-v3` | `R11` | 2 (RepoUrl + Wildcard) |
+| P-03 | `acme/anything-else` | `R12` | 3 (OwnerWildcard) |
+| P-04 | `other/widget` | — (none match) | `403 ALLOWLIST_REJECTED_NOT_REGISTERED` |
+
+Setup B (tie-break within tier — most-recent `UpdatedAt` wins):
+- `R20: acme/widget, RepoUrl, Exact, Active` (UpdatedAt: 2026-01-01)
+- `R21: acme/widget, RepoUrl, Exact, Active` (UpdatedAt: 2026-04-15)
+
+| # | Inbound | Expected `MatchedRepositoryId` |
+|---|---|---|
+| P-05 | `acme/widget` | `R21` (newer) |
+
+> Setup B should be considered a **data-quality smell** (duplicate exact rows); admin UI MUST prevent it at write time via `IdxRepository_OwnerRepo` (per `02-database-schema-and-erd.md`). The precedence rule exists only to be deterministic if the constraint is ever bypassed by a migration.
+
+Setup C (`Disabled` priority):
+- `R30: acme/widget, RepoUrl, Exact, Disabled`
+- `R31: acme/*,     OwnerWildcard, Exact, Active`
+
+| # | Inbound | Expected outcome |
+|---|---|---|
+| P-06 | `acme/widget` | `403 ALLOWLIST_REJECTED_DISABLED` (more-specific tier wins **before** status check; the status check then rejects) |
+| P-07 | `acme/sibling` | Accept via `R31` (tier 3) |
+
+> Implementers MUST select tier first, then status-check the chosen row. Falling back from a Disabled exact match to an Active wildcard is **forbidden** (this is a deliberate denial behaviour: a temporarily disabled repo MUST NOT silently route through an org-wide allowance).
+
+### 10.4 Envelope JWT
+
+Setup: `R40: acme/widget, RepoUrl, Exact, Active`, `LogSenderTokenVerifier` known to test.
+
+| # | Envelope | Expected outcome |
+|---|---|---|
+| E-01 | Valid signature, `iat = now`, `exp = now+60`, fresh `nonce` | `202 Accepted` |
+| E-02 | Signed with wrong secret | `401 ENVELOPE_BAD_SIGNATURE` |
+| E-03 | `exp = now − 120` | `401 ENVELOPE_EXPIRED` |
+| E-04 | `exp = now + 600` (`exp − iat = 600`) | `401 ENVELOPE_TTL_TOO_LONG` |
+| E-05 | Same `(RepositoryId, nonce)` as a successful push within last 10 min | `401 ENVELOPE_REPLAYED` + `SuspectedReplayAttack` event |
+| E-06 | Missing `nonce` claim | `400 ENVELOPE_MALFORMED` |
+| E-07 | `nonce` length 8 | `400 ENVELOPE_MALFORMED` (min 16) |
+| E-08 | `iat` 70 s in the future (clock skew) | `401 ENVELOPE_EXPIRED` (skew window is ±60 s) |
+
+### 10.5 Rate Limit (per resolved `RepositoryId`)
+
+Setup: 60-req/60s sliding window, `R50` resolved.
+
+| # | Sequence | Expected outcome on each |
+|---|---|---|
+| RL-01 | Requests 1–60 within 30 s | All `202` |
+| RL-02 | Request 61 within same window | `429 RATE_LIMITED`, `Retry-After` between 1 and 60 |
+| RL-03 | Wait 60 s after RL-01, then push | `202` (window slid) |
+| RL-04 | `OwnerWildcard` row resolves all of `acme/*` to `R12`; 60 pushes from 60 different repos in the org | First 60 `202`, 61st `429` (one bucket per resolved id) |
+
+### 10.6 Body Cap
+
+| # | Body size after decompression | Outcome |
+|---|---|---|
+| B-01 | 1,048,575 B | OK |
+| B-02 | 1,048,576 B | OK (== 1 MB exact) |
+| B-03 | 1,048,577 B | `413 PAYLOAD_TOO_LARGE` |
+| B-04 | gzip request, 200 KB compressed → 1.5 MB decompressed | `413 PAYLOAD_TOO_LARGE` (cap is post-decompression per `07-log-push-flow.md`) |
+
+### 10.7 End-to-End Audit Linkage
+
+| # | Scenario | Required side-effect |
+|---|---|---|
+| L-01 | Any successful push | Exactly one `AuditTrail (LogPush, Success)` row, `DetailsJson.matchedRepositoryId = R{id}`, `DetailsJson.matchedTier ∈ {1,2,3,4}`. |
+| L-02 | Any rejected push | Exactly one `AuditTrail (LogPush, Rejected)` row with `DetailsJson.rejectReason ∈ {NotRegistered, Disabled, BadSignature, Expired, TtlTooLong, Replayed, RateLimited, PayloadTooLarge, ProviderUnsupported}`. |
+| L-03 | DB error during persistence | One `AuditTrail (LogPush, Error)` row; the controller re-throws (no swallow). |
+
+---
+
+## 11. Open Items
 
 | # | Item | Notes |
 |---|------|-------|
-| OI-ALLOW-01 | HS256 verifier storage | Section 3 step 6 introduces `Repository.LogSenderTokenVerifier` (AEAD-encrypted). Alternative: switch envelope to **Ed25519 / RS256** so only a public key is stored — eliminates symmetric secret at rest. Decide before implementation; affects schema. |
+| OI-ALLOW-01 | HS256 verifier storage | Section 3 step 6 introduces `Repository.LogSenderTokenVerifier` (AEAD-encrypted). Alternative: switch envelope to **Ed25519 / RS256** so only a public key is stored — eliminates symmetric secret at rest. Decide before implementation; affects schema. Tracked as finding [F-02](../22-app-issues/02-consolidated-audit-findings/00-overview.md). |
 | OI-ALLOW-02 | Token rotation grace window | Default 24 h; should it be admin-configurable per-repo? |
 | OI-ALLOW-03 | `OwnerWildcard` + per-repo rate limit | Currently buckets by resolved `RepositoryId`; should an `OwnerWildcard` row instead bucket by `(RepositoryId, owner, repo-from-payload)` to avoid one noisy repo starving siblings? |
 | OI-ALLOW-04 | Whether to expose a `/repos/check` dry-run endpoint for CI to validate config | UX nicety; needs rate limit of its own. |
 | OI-ALLOW-05 | Schema amendment | If OI-ALLOW-01 chooses AEAD verifier, add column `LogSenderTokenVerifier VARBINARY(255) NULL` to `Repository` and bump schema to v3.0.0. |
+| OI-ALLOW-06 | Disabled-priority denial (P-06) | Confirm UX: should the admin UI surface that a Disabled exact-row is **shadowing** a wildcard row, so the admin understands why pushes for that one repo are 403 while sibling repos succeed? |
 
 ---
 
-*Endpoint-level approval for unauthenticated, controlled CI/CD log ingestion. No error swallowed; every decision audited.*
+*Endpoint-level approval for unauthenticated, controlled CI/CD log ingestion. No error swallowed; every decision audited. Regex, normalization, and test vectors are exhaustive — implementations that diverge are non-conformant.*
