@@ -80,6 +80,10 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 24 | [24-multisite.md](./24-multisite.md) | Per-site vs network behavior |
 | 25 | [25-headless-auth-notes.md](./25-headless-auth-notes.md) | Headless WP + JWT/OAuth supported combos |
 | 26 | [26-readme-and-screenshots.md](./26-readme-and-screenshots.md) | WP.org `readme.txt` + screenshot inventory |
+| 27 | [27-wp-cli-reference.md](./27-wp-cli-reference.md) | Consolidated `wp git-logs *` subcommand catalog |
+| 28 | [28-example-github-actions.md](./28-example-github-actions.md) | Drop-in workflow YAML for Lane B push + fixed |
+| 29 | [29-uninstall-policy.md](./29-uninstall-policy.md) | DB retention modes on plugin removal |
+| 30 | [30-threat-model.md](./30-threat-model.md) | STRIDE pass over the v2 attack surface |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
