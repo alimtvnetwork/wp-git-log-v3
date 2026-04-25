@@ -1,6 +1,6 @@
 # Error Management — Plugin-Wide Contract
 
-**Version:** 1.1.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-25  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
@@ -345,6 +345,164 @@ try {
 ### 5.1 Single documented exception — JWKS
 
 `/.well-known/jwks.json` MUST return the **raw JWKS document** (not wrapped) because external JWT libraries expect the standard shape. The `X-Request-Id` header is still set. This is the **only** route exempt from envelope wrapping. If a JWKS request errors, an envelope IS returned with an appropriate code.
+
+### 5.2 Per-Endpoint HTTP-to-Error Mapping (authoritative)
+
+This is the **normative matrix** every controller MUST satisfy. For each endpoint, every failure path is enumerated with: HTTP status, GL-* code (from §6), the structured-log event from `12-logging-strategy.md` §4, and the terminal `AuditOutcome`. A failure not listed here is forbidden — if a new failure mode appears, add a row here AND in §6.11 in the same change-set.
+
+> **No-swallow guarantee.** Every row maps a failure to a registered code. The `ErrorEnvelopeMiddleware` in §4.5 catches every uncaught `Throwable` and emits row `* ` (any) → `GL-INT-001`, so there is no path that returns without a code.
+
+#### 5.2.1 Auth — `/auth/*`
+
+| Endpoint | Method | HTTP | GL Code | Log Event | `AuditOutcome` | Trigger |
+|----------|--------|------|---------|-----------|----------------|---------|
+| `/auth/token` | POST | **200** | — | `TokenIssued` | `Success` | Valid `username` + `rawToken` (Argon2id verify ok). |
+| `/auth/token` | POST | 401 | `GL-AUTH-001` | `WpBridgeAuthFailed` *(or `AuthFail` generic)* | `Rejected` | Wrong credentials. |
+| `/auth/token` | POST | 423 | `GL-AUTH-005` | `AuthFail` | `Rejected` | `User.IsLocked = 1`. |
+| `/auth/token` | POST | 422 | `GL-VAL-001` + per-field | `OperationRejected` | `Rejected` | Missing/malformed body fields. |
+| `/auth/token` | POST | 429 | `GL-RATE-001` | `RateLimitExceeded` | `Rejected` | Per-IP login bucket exceeded. |
+| `/auth/token` | POST | 500 | `GL-INT-001` | `OperationFailed` | `Error` | Uncaught `Throwable`. |
+| `/auth/refresh` | POST | **200** | — | `RefreshTokenRotated` | `Success` | Valid, unused, unexpired refresh token. |
+| `/auth/refresh` | POST | 401 | `GL-AUTH-003` | `RefreshTokenReuseDetected` | `Rejected` | Token already used (chain revoked). Also emits `SuspectedReplayAttack` → `GL-SEC-001`. |
+| `/auth/refresh` | POST | 401 | `GL-AUTH-004` | `AuthFail` | `Rejected` | `RefreshToken.ExpiresAt < NOW`. |
+| `/auth/refresh` | POST | 401 | `GL-AUTH-007` | `AuthFail` | `Rejected` | `Authorization` / body field missing/malformed. |
+| `/auth/refresh` | POST | 422 | `GL-VAL-001` | `OperationRejected` | `Rejected` | Body schema invalid. |
+| `/auth/refresh` | POST | 429 | `GL-RATE-001` | `RateLimitExceeded` | `Rejected` | Per-IP refresh bucket exceeded. |
+| `/auth/refresh` | POST | 500 | `GL-INT-001` | `OperationFailed` | `Error` | Uncaught. |
+| `/auth/logout` | POST | **204** | — | `TokenRevoked` | `Success` | Valid Bearer JWT; `jti` added to denylist. |
+| `/auth/logout` | POST | 401 | `GL-AUTH-002` *(public)* | `JwtValidationFailed_*` *(`GL-AUTH-008..012` internal)* | `Rejected` | Bad signature / expired / bad iss / bad aud / revoked jti. |
+| `/auth/logout` | POST | 401 | `GL-AUTH-007` | `AuthFail` | `Rejected` | `Authorization` header missing/malformed. |
+| `/auth/logout` | POST | 500 | `GL-INT-001` | `OperationFailed` | `Error` | Uncaught. |
+| `/.well-known/jwks.json` | GET | **200** | — | `EndpointCompleted` | `Success` | Returns raw JWKS doc (envelope-exempt, see §5.1). |
+| `/.well-known/jwks.json` | GET | 500 | `GL-SEC-004` | `IntegrityCheckFailed` | `Error` | No `Active` `JwtKey` row. **Envelope IS returned** for this error path. |
+
+#### 5.2.2 Users — `/users` and `/users/{id}`
+
+| Endpoint | Method | HTTP | GL Code | Log Event | `AuditOutcome` | Trigger |
+|----------|--------|------|---------|-----------|----------------|---------|
+| `/users` | POST | **201** | — | `OperationSucceeded` | `Success` | Created; `rawToken` issued. |
+| `/users` | POST | 401 | `GL-AUTH-006` | `WpBridgeAuthFailed` | `Rejected` | WP cookie+nonce / App-Password failed. |
+| `/users` | POST | 403 | `GL-RBAC-001` | `RoleCheckFailed` | `Rejected` | Caller lacks `UserAdmin`. |
+| `/users` | POST | 409 | `GL-RES-002` | `OperationRejected` | `Rejected` | `Username` collision. |
+| `/users` | POST | 422 | `GL-VAL-001` + per-field | `OperationRejected` | `Rejected` | Validation. |
+| `/users` | POST | 500 | `GL-INT-001` | `OperationFailed` | `Error` | Uncaught. |
+| `/users` | POST | 503 | `GL-INT-003` | `DbConnectionLost` | `Error` | `wpdb` connection lost. |
+| `/users` | GET | **200** | — | `OperationSucceeded` | `Success` | List. |
+| `/users` | GET | 401 | `GL-AUTH-002` *(public)* | `JwtValidationFailed_*` | `Rejected` | JWT failure (sub-code `GL-AUTH-008..012`). |
+| `/users` | GET | 401 | `GL-AUTH-007` | `AuthFail` | `Rejected` | Header missing/malformed. |
+| `/users` | GET | 403 | `GL-RBAC-001` | `RoleCheckFailed` | `Rejected` | Lacks `UserAdmin`. |
+| `/users` | GET | 422 | `GL-VAL-001` | `OperationRejected` | `Rejected` | Bad query params. |
+| `/users` | GET | 429 | `GL-RATE-001` | `RateLimitExceeded` | `Rejected` | Per-user bucket. |
+| `/users/{id}` | GET | **200** | — | `OperationSucceeded` | `Success` | Resource. |
+| `/users/{id}` | GET | 401 | `GL-AUTH-002` / `GL-AUTH-007` | `JwtValidationFailed_*` / `AuthFail` | `Rejected` | JWT / header. |
+| `/users/{id}` | GET | 403 | `GL-RBAC-001` | `RoleCheckFailed` | `Rejected` | Lacks `UserAdmin`. |
+| `/users/{id}` | GET | 404 | `GL-RES-001` | `OperationRejected` | `Rejected` | No row. |
+| `/users/{id}` | PATCH | **200** | — | `OperationSucceeded` | `Success` | Updated. |
+| `/users/{id}` | PATCH | 401 / 403 / 404 | as above | as above | `Rejected` | Same as GET. |
+| `/users/{id}` | PATCH | 422 | `GL-VAL-001` + per-field | `OperationRejected` | `Rejected` | Body invalid. |
+| `/users/{id}` | DELETE | **204** | — | `OperationSucceeded` | `Success` | Removed. |
+| `/users/{id}` | DELETE | 401 / 403 / 404 | as above | as above | `Rejected` | Same as GET. |
+| `/users/{id}/token:rotate` | POST | **200** | — | `TokenIssued` | `Success` | New `rawToken` returned. |
+| `/users/{id}/token:rotate` | POST | 401 / 403 / 404 | as above | as above | `Rejected` | Same as GET. |
+| *(any of the above)* | * | 500 | `GL-INT-001` | `OperationFailed` | `Error` | Uncaught. |
+| *(any of the above)* | * | 503 | `GL-INT-003` | `DbConnectionLost` | `Error` | DB lost. |
+
+#### 5.2.3 Repositories — `/repositories` and `/repositories/{id}`
+
+| Endpoint | Method | HTTP | GL Code | Log Event | `AuditOutcome` | Trigger |
+|----------|--------|------|---------|-----------|----------------|---------|
+| `/repositories` | POST | **201** | — | `OperationSucceeded` | `Success` | Allowlisted; per-repo `LogSenderToken` returned. |
+| `/repositories` | POST | 401 | `GL-AUTH-002` / `GL-AUTH-007` | `JwtValidationFailed_*` / `AuthFail` | `Rejected` | JWT / header. |
+| `/repositories` | POST | 403 | `GL-RBAC-001` | `RoleCheckFailed` | `Rejected` | Lacks `RepoAdmin`. |
+| `/repositories` | POST | 409 | `GL-RES-002` | `OperationRejected` | `Rejected` | `(Provider, Owner, Repo)` collision. |
+| `/repositories` | POST | 400 | `GL-PUSH-008` | `OperationRejected` | `Rejected` | Provider not supported (non-GitHub URL). |
+| `/repositories` | POST | 422 | `GL-VAL-001` + per-field | `OperationRejected` | `Rejected` | Validation (e.g., bad `AcceptanceModeName`). |
+| `/repositories` | GET | **200** | — | `OperationSucceeded` | `Success` | List. |
+| `/repositories` | GET | 401 / 403 / 422 / 429 | mirrors `/users` GET | mirrors | `Rejected` | Same families. (Allowed roles: `RepoAdmin` OR `LogReader`.) |
+| `/repositories/{id}` | GET / PATCH / DELETE | **200 / 200 / 204** | — | `OperationSucceeded` | `Success` | Standard CRUD. |
+| `/repositories/{id}` | GET / PATCH / DELETE | 401 | `GL-AUTH-002` / `GL-AUTH-007` | `JwtValidationFailed_*` / `AuthFail` | `Rejected` | JWT / header. |
+| `/repositories/{id}` | GET / PATCH / DELETE | 403 | `GL-RBAC-001` | `RoleCheckFailed` | `Rejected` | Lacks `RepoAdmin` (PATCH/DELETE) or `RepoAdmin`/`LogReader` (GET). |
+| `/repositories/{id}` | GET / PATCH / DELETE | 404 | `GL-RES-001` | `OperationRejected` | `Rejected` | No row. |
+| `/repositories/{id}` | PATCH | 422 | `GL-VAL-001` + per-field | `OperationRejected` | `Rejected` | Body invalid. |
+| `/repositories/{id}/sender-token:rotate` | POST | **200** | — | `TokenIssued` | `Success` | New `LogSenderToken` returned. |
+| `/repositories/{id}/sender-token:rotate` | POST | 401 / 403 / 404 | as above | as above | `Rejected` | Same. |
+| *(any of the above)* | * | 500 | `GL-INT-001` | `OperationFailed` | `Error` | Uncaught. |
+| *(any of the above)* | * | 503 | `GL-INT-003` | `DbConnectionLost` | `Error` | DB lost. |
+
+#### 5.2.4 Logs — `/logs/push` (CI ingestion, envelope-JWT auth)
+
+This is the highest-risk endpoint. Every rejection mode has its own code so SIEM can alert per category.
+
+| Endpoint | Method | HTTP | GL Code | Log Event | `AuditOutcome` | Trigger |
+|----------|--------|------|---------|-----------|----------------|---------|
+| `/logs/push` | POST | **202** | — | `LogEntriesPersisted` | `Success` | Full batch persisted. |
+| `/logs/push` | POST | **207** | `GL-ING-002` | `IngestionPartial` | `Rejected` | Some entries persisted, others rejected. `Results` lists `rejectedIndices[]`. |
+| `/logs/push` | POST | 400 | `GL-PUSH-007` | `EnvelopeJwtRejected_Malformed` | `Rejected` | Envelope JWT missing/invalid claims. |
+| `/logs/push` | POST | 400 | `GL-PUSH-008` | `OperationRejected` | `Rejected` | `repoUrl` claim points at unsupported provider. |
+| `/logs/push` | POST | 401 | `GL-PUSH-003` | `EnvelopeJwtRejected_BadHmac` | `Rejected` | HMAC signature mismatch. |
+| `/logs/push` | POST | 401 | `GL-PUSH-004` | `EnvelopeJwtRejected_Expired` | `Rejected` | Envelope `exp` in the past. |
+| `/logs/push` | POST | 401 | `GL-PUSH-005` | `EnvelopeJwtRejected_TtlTooLong` | `Rejected` | `exp - iat > 5 min`. |
+| `/logs/push` | POST | 401 | `GL-PUSH-006` | `EnvelopeJwtRejected_Replayed` | `Rejected` | `jti` in `EnvelopeNonce` table. Also emits `SuspectedReplayAttack` → `GL-SEC-001`. |
+| `/logs/push` | POST | 403 | `GL-PUSH-001` | `AllowlistRejected_NotRegistered` | `Rejected` | `repoUrl` not in allowlist. After N consecutive: `SuspectedAllowlistProbe` → `GL-SEC-003`. |
+| `/logs/push` | POST | 403 | `GL-PUSH-002` | `AllowlistRejected_Disabled` | `Rejected` | Repository row disabled. |
+| `/logs/push` | POST | 413 | `GL-PUSH-009` | `PayloadCapExceeded` | `Rejected` | Decompressed body > 1 MB. |
+| `/logs/push` | POST | 422 | `GL-ING-001` | `IngestionFailed_ValidationError` | `Rejected` | Body schema invalid (after auth passed). |
+| `/logs/push` | POST | 422 | `GL-ING-004` | `PipelineAutoCreateFailed` | `Rejected` | `Pipeline` UNIQUE collision under contention or invalid name. |
+| `/logs/push` | POST | 429 | `GL-RATE-001` | `RateLimitExceeded` | `Rejected` | Per-`RepositoryId` bucket (60/60s). Includes `Retry-After`. |
+| `/logs/push` | POST | 500 | `GL-INT-001` | `OperationFailed` | `Error` | Uncaught. |
+| `/logs/push` | POST | 500 | `GL-ING-003` | `IngestionFailed_DbError` | `Error` | `wpdb` insert failed for the entire batch. |
+| `/logs/push` | POST | 500 | `GL-INT-002` | `AuditWriteFailed` | `Error` *(operation completed; audit failed)* | Operation succeeded but `AuditTrail` insert failed. Mirrored to `error_log`. |
+| `/logs/push` | POST | 503 | `GL-INT-003` | `DbConnectionLost` | `Error` | `wpdb` connection lost before insert. |
+
+#### 5.2.5 Logs — `/logs` and `/logs/{id}` (read, Bearer JWT)
+
+| Endpoint | Method | HTTP | GL Code | Log Event | `AuditOutcome` | Trigger |
+|----------|--------|------|---------|-----------|----------------|---------|
+| `/logs` | GET | **200** | — | `OperationSucceeded` | `Success` | Cursor page. |
+| `/logs` | GET | 401 | `GL-AUTH-002` *(public)* | `JwtValidationFailed_*` | `Rejected` | JWT failure (sub-codes `GL-AUTH-008..012`). |
+| `/logs` | GET | 401 | `GL-AUTH-007` | `AuthFail` | `Rejected` | Header missing/malformed. |
+| `/logs` | GET | 403 | `GL-RBAC-001` | `RoleCheckFailed` | `Rejected` | Lacks `LogReader` OR scope excludes the requested repo. |
+| `/logs` | GET | 422 | `GL-VAL-001` + per-field | `OperationRejected` | `Rejected` | Bad cursor / `Limit` out of range / non-RFC-3339 dates. |
+| `/logs` | GET | 429 | `GL-RATE-001` | `RateLimitExceeded` | `Rejected` | Per-user query bucket. |
+| `/logs` | GET | 500 / 503 | `GL-INT-001` / `GL-INT-003` | `OperationFailed` / `DbConnectionLost` | `Error` | Internal. |
+| `/logs/{id}` | GET | **200** | — | `OperationSucceeded` | `Success` | Single entry. |
+| `/logs/{id}` | GET | 401 / 403 | as above | as above | `Rejected` | JWT / RBAC. |
+| `/logs/{id}` | GET | 404 | `GL-RES-001` | `OperationRejected` | `Rejected` | No entry, OR entry exists but caller's `LogReader` scope excludes its repo (returns 404 not 403 to prevent ID enumeration). |
+| `/logs/{id}` | GET | 500 / 503 | `GL-INT-001` / `GL-INT-003` | `OperationFailed` / `DbConnectionLost` | `Error` | Internal. |
+
+#### 5.2.6 Audit & Health
+
+| Endpoint | Method | HTTP | GL Code | Log Event | `AuditOutcome` | Trigger |
+|----------|--------|------|---------|-----------|----------------|---------|
+| `/audit-trail` | GET | **200** | — | `OperationSucceeded` | `Success` | Page. |
+| `/audit-trail` | GET | 401 / 403 | `GL-AUTH-002` / `GL-AUTH-007` / `GL-RBAC-001` | as above | `Rejected` | JWT / RBAC. Requires role `Auditor`. |
+| `/audit-trail` | GET | 422 / 429 / 500 / 503 | `GL-VAL-001` / `GL-RATE-001` / `GL-INT-001` / `GL-INT-003` | as above | varies | Standard. |
+| `/health` | GET | **200** | — | `EndpointCompleted` | `Success` | Snapshot. |
+| `/health` | GET | 503 | `GL-INT-003` | `DbConnectionLost` | `Error` | `wpdb` ping failed. |
+
+#### 5.2.7 Background jobs (no HTTP surface)
+
+These never produce an HTTP response; they exist here for completeness so every emitter has a code.
+
+| Job | GL Code | Log Event | `AuditOutcome` |
+|-----|---------|-----------|----------------|
+| Refresh-token sweep | `GL-BG-001` | `RefreshTokenSweepFailed` | `Error` |
+| JWKS key rotation | `GL-BG-002` | `JwksKeyRotationFailed` | `Error` |
+| Audit-trail retry | `GL-BG-003` | `AuditRetryJobFailed` | `Error` |
+
+### 5.3 No-Swallow Verification Checklist
+
+The matrix above is a **closed set**. CI MUST enforce the following invariants on every PR:
+
+| # | Invariant | Enforcement |
+|---|-----------|-------------|
+| NS-01 | Every controller's catch chain ends with a `\Throwable` handler that throws `AppError('GL-INT-001', …)`. | Static lint: every `catch (\Throwable $e)` block must call `throw new AppError(code: 'GL-INT-001', …)`. |
+| NS-02 | Every public-facing failure path in 5.2.* is reachable by at least one test fixture in `97-acceptance-criteria.md`. | Coverage report cross-references AC numbers. |
+| NS-03 | No GL-* code appears in source code that is absent from §6 of this document. | `bin/check-codes.php` greps `'GL-[A-Z]+-\d{3}'` literals and diffs against the registry. |
+| NS-04 | Conversely, every code in §6 is either reachable from at least one row in 5.2.* or tagged `debugOnly: true` in `error-codes.json`. | Same script; second pass. |
+| NS-05 | Every row in 5.2.* whose `AuditOutcome` is `Rejected` or `Error` has a matching log event in `12-logging-strategy.md` §4. | Lint cross-walk between this file and §4 of `12-…`. |
+
+> **Effect.** With NS-01..05 green, every endpoint failure provably routes to a registered GL-* code and an audited outcome. There is no path where an exception escapes into a generic 500 without a code.
 
 ---
 
