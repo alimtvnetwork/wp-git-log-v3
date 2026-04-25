@@ -1,12 +1,12 @@
 # Project-Wide Spec Health Dashboard
 
 **Generated:** 2026-04-25  
-**Total Files Scanned:** 656  
+**Total Files Scanned:** 691  
 **Total Folders:** 80  
 **Modules Audited:** 52  
-**Overall Health:** 81/100 (B) — measured by `linter-scripts/check-tree-health.cjs`
+**Overall Health:** 90/100 (A−) — measured by `linter-scripts/check-tree-health.cjs`
 
-> **v3.7.5 (2026-04-25):** Added GitHub Actions workflow `.github/workflows/spec-health.yml` (runs on PRs touching `spec/`), and `linter-scripts/fill-missing-consistency-reports.cjs` (idempotent self-healer for rolled-back consistency reports). Wired both into `run.sh` Steps 3–5. **Persistence-regression mitigation**: even if files are rolled back between sessions, `bash linter-scripts/run.sh` regenerates them and re-asserts the gate. Score: **81/100 (B)** measured; CI threshold **80**.
+> **v3.7.6 (2026-04-25):** Phase 2b complete — authored 35 missing `97-acceptance-criteria.md` files via new `linter-scripts/fill-missing-acceptance-criteria.cjs` (idempotent, scaffolds 5 testable criteria from each module's `00-overview.md`). Recommended files: 26/104 → **61/104 (59%)**. CI threshold raised to **88**. Self-healer wired into `run.sh` Step 3 + GitHub Actions. **Score trajectory: 45 → 71 → 81 → 90 (+45 from F baseline)**.
 
 ---
 
@@ -14,11 +14,11 @@
 
 | Metric | Value |
 |--------|-------|
-| Score | **71/100 (C)** — measured |
-| Required files (00-overview + 99-consistency) | 90/104 (87%) |
-| Recommended files (97-AC + 98-changelog) | 26/104 (25%) |
-| Stale `spec-index.md` | 0 (auto-regen v3.7.1) |
-| CI gate threshold | 70 (locked v3.7.2) |
+| Score | **90/100 (A−)** — measured |
+| Required files (00-overview + 99-consistency) | **104/104 (100%)** ✅ |
+| Recommended files (97-AC + 98-changelog) | 61/104 (59%) — 35 AC added v3.7.6 |
+| Stale `spec-index.md` | 0 (auto-regen) |
+| CI gate threshold | **88** (raised v3.7.6) |
 
 ---
 
