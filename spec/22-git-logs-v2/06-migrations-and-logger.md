@@ -29,7 +29,20 @@ on plugin_loaded:
 - One row per plugin version. New deploy → new version → new marker absent → migration runs once.
 - Migrations must be idempotent (CREATE TABLE IF NOT EXISTS, ALTER guarded by pragma checks).
 - Failures: do not insert marker; raise; log `MigrationRun` with `Outcome=Error`.
-- Lookup tables (enums) are seeded inside the same migration transaction.
+- Lookup tables (enums) and `RolePermission` rows are seeded inside the same migration transaction (see [`09-seed-data.md`](./09-seed-data.md)).
+
+### File layout
+
+Migrations live under `inc/Migrations/` (see [`12-wp-plugin-scaffold.md`](./12-wp-plugin-scaffold.md)). One PHP class per plugin version:
+
+```
+inc/Migrations/
+  ├── MigrationRunner.php   # Boot orchestrator: discovers Vx_y_z classes, applies in order
+  ├── V2_0_0.php            # Initial schema + seeds
+  └── V2_1_0.php …          # Future additive migrations
+```
+
+Class naming: `GitLogs\Migrations\V{Major}_{Minor}_{Patch}` implementing `MigrationInterface { public function up(PDO $db): void; public function version(): string; }`. The runner sorts by `version()` and applies any whose `PluginVersion` is missing from `MigrationState`.
 
 ---
 
