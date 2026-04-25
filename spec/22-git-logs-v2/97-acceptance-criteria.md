@@ -1,6 +1,6 @@
 # Acceptance Criteria (v2)
 
-**Version:** 2.7.0  
+**Version:** 2.5.0  
 **Updated:** 2026-04-25
 
 | # | Criterion | Source |

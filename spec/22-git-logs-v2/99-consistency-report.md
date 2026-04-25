@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 2.7.0  
+**Version:** 2.6.0  
 **Updated:** 2026-04-25
 
 ---
@@ -39,12 +39,7 @@
 | 27-wp-cli-reference.md | ✅ |
 | 28-example-github-actions.md | ✅ |
 | 29-uninstall-policy.md | ✅ |
-| 30-threat-model.md | ✅ (S5–S8 + T6 added in v2.7) |
-| 31-ssh-key-auth.md | ✅ (new in v2.7) |
-| 32-cli-test-plan.md | ✅ (new in v2.7) |
-| 33-bats-test-skeleton.md | ✅ (new in v2.7) |
-| 34-phpunit-test-skeleton.md | ✅ (new in v2.7) |
-| 35-reference-ci-yml.md | ✅ (new in v2.7) |
+| 30-threat-model.md | ✅ |
 | 97-acceptance-criteria.md | ✅ (AC-01..AC-41) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
@@ -59,7 +54,7 @@
 
 ## Naming compliance
 
-- File prefixes 00–35, 97–99 sequential. ✅ (gaps at 09–13 intentional — content distributed across §05/§16/§30/§31; locked decision, not queued work)
+- File prefixes 00–30, 97–99 sequential. ✅ (gaps at 09–13 noted as queued)
 - Tables/columns PascalCase, PKs `{Table}Id`. ✅
 - All `GL-*` error codes consolidated in `15-error-codes.md`. ✅
 - Translatable scope honors §21. ✅
@@ -74,8 +69,10 @@ Resolved by parallel-folder strategy; v2 wins. Legacy v1 banner in `spec/21-git-
 2. **`PluginUninstall` AuditActionType (21)** — declared in §29; needs to be appended to `18-schema.sql` seed in next pass.
 3. **`ConfigChange` AuditActionType** — referenced from §30 R3; needs ID assignment + seed.
 4. **`ConfigKv` keys mentioned in new sections** — `UninstallMode` (§29), `AllowedReadOrigins` (§30 S3), `MaintenanceMode` (§23), `SshReplayWindowSec`=300 (§31). Add to default seeds in `18-schema.sql` next pass.
-5. **§98 changelog** — needs v2.7.0 entry covering SSH lane, GL-SSH-* codes, AuditActionType 22–24, §32–§35 test plan, §28 dual workflows, §30 S5–S8 + T6.
+
+> Note: the 09–13 numbering gap is **intentional and locked** — content is distributed across §05 (rate limit/payload caps), §16 (seed data), §30 R3 (encryption-deferred plan), §31 (SSH-key auth supersedes scaffold notes), and `spec/21-git-logs/` legacy banner (v1↔v2 mapping). Do not author standalone 09–13 files.
 
 ## Health Score
 
-97/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog entry pending.
+98/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog entry landed; only DDL seed appends + §07 user decision remain.
+
