@@ -464,7 +464,7 @@ def render_module_report(rel: str, r: dict, metrics: dict) -> str:
     overall = weighted(s); g = grade_of(overall)
     md = [f"# Audit v2 — `spec/{rel}`\n",
           f"**Date:** {TODAY}  ",
-          f"**Auditor:** Lovable AI (gemini-3-flash-preview, 2-pass)  ",
+          f"**Auditor:** {'Deterministic rubric (no AI)' if DETERMINISTIC else 'Lovable AI (gemini-3-flash-preview, 2-pass)'}  ",
           f"**Implementability Score:** **{overall}/100 ({g})**  ",
           f"**Blast radius:** {r['blast_radius']}/10\n",
           f"> {r['verdict']}\n",
