@@ -1,12 +1,12 @@
 # Project-Wide Spec Health Dashboard
 
 **Generated:** 2026-04-25  
-**Total Files Scanned:** 642  
+**Total Files Scanned:** 656  
 **Total Folders:** 80  
-**Modules Audited:** 52 (top-level + nested with `00-overview.md`)  
-**Overall Health:** 71/100 (C) — measured by `linter-scripts/check-tree-health.cjs`
+**Modules Audited:** 52  
+**Overall Health:** 81/100 (B) — measured by `linter-scripts/check-tree-health.cjs`
 
-> **v3.7.2 (2026-04-25):** Added `linter-scripts/check-tree-health.cjs` CI gate. **Honest measured score:** 71/100 (90/104 required files present, 26/104 recommended). Prior 78/80 numbers were narrative estimates — now reconciled with measured truth. CI threshold set to **70** to lock today's baseline; raise after Phase 2 fills 14 missing `99-consistency-report.md` files. Earlier today: Phase 1 Triage resolved slot 22 collision (`22-app-issues/` → `25-app-issues/`) and archived legacy `21-git-logs/` to `_archive/21-git-logs-v1/`.
+> **v3.7.5 (2026-04-25):** Added GitHub Actions workflow `.github/workflows/spec-health.yml` (runs on PRs touching `spec/`), and `linter-scripts/fill-missing-consistency-reports.cjs` (idempotent self-healer for rolled-back consistency reports). Wired both into `run.sh` Steps 3–5. **Persistence-regression mitigation**: even if files are rolled back between sessions, `bash linter-scripts/run.sh` regenerates them and re-asserts the gate. Score: **81/100 (B)** measured; CI threshold **80**.
 
 ---
 
