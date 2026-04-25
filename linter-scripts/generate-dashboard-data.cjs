@@ -117,7 +117,8 @@ function extractLinks(filePath, content) {
 
 function validateLinks(mdFiles) {
   const broken = [];
-  const total = { Checked: 0, Ok: 0, Broken: 0 };
+  const externalAllowed = [];
+  const total = { Checked: 0, Ok: 0, Broken: 0, ExternalAllowed: 0 };
 
   for (const filePath of mdFiles) {
     const content = fs.readFileSync(filePath, "utf8");
@@ -126,9 +127,18 @@ function validateLinks(mdFiles) {
     for (const link of links) {
       total.Checked++;
       const resolved = path.resolve(path.dirname(filePath), link.FilePart);
+      const resolvedRel = path.relative(SPEC_ROOT, resolved);
 
       if (fs.existsSync(resolved)) {
         total.Ok++;
+      } else if (isExternalRepoRef(resolvedRel)) {
+        total.ExternalAllowed++;
+        externalAllowed.push({
+          Source: path.relative(SPEC_ROOT, filePath),
+          Line: link.Line,
+          Target: link.Target,
+          Resolved: resolvedRel,
+        });
       } else {
         total.Broken++;
         broken.push({
@@ -136,13 +146,13 @@ function validateLinks(mdFiles) {
           Line: link.Line,
           Text: link.Text,
           Target: link.Target,
-          Resolved: path.relative(SPEC_ROOT, resolved),
+          Resolved: resolvedRel,
         });
       }
     }
   }
 
-  return { Broken: broken, Total: total };
+  return { Broken: broken, ExternalAllowed: externalAllowed, Total: total };
 }
 
 // ── 2. Required-file checks ────────────────────────────────
