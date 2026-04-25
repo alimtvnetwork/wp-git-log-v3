@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 3.3.0  
+**Version:** 3.4.0  
 **Generated:** 2026-04-25  
-**Health Score:** 92/100 (A−)
+**Health Score:** 92/100 (A−) — root inventory now matches `dashboard-data.json` (auto-regenerated)
 
 ---
 
@@ -87,3 +87,4 @@
 | 2026-04-05 | 1.0.0 | Initial root consistency report |
 | 2026-04-09 | 2.0.0 | Added modules 09–11, 21–22; folder-structure-root.md converted to redirect |
 | 2026-04-25 | 3.3.0 | Ground-truth audit: removed 3 phantom modules (`08`, `09`, `21-app`), added 3 missing modules (`21-git-logs`, `22-git-logs-v2`, `26-gitlogs-diagrams`); flagged slot 22 collision; cross-linked v2.8.7 §99 |
+| 2026-04-25 | 3.4.0 | Filled 3 missing `99-consistency-report.md` files (`02-coding-guidelines/06-cicd-integration/`, `12-cicd-pipeline-workflows/03-reusable-ci-guards/`, `21-git-logs/`); fixed 4 phantom links + 6 missing-module links in `spec/00-overview.md`. Dashboard regen: 76→77, broken 45→41, missing-consistency 3→0. |

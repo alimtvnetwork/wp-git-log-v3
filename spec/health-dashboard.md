@@ -1,11 +1,11 @@
 # Project-Wide Spec Health Dashboard
 
 **Generated:** 2026-04-25  
-**Total Files Scanned:** 636  
+**Total Files Scanned:** 639  
 **Total Folders:** 80  
-**Overall Health:** 74/100 (C)
+**Overall Health:** 77/100 (C)
 
-> Regenerated 2026-04-25 against folder 22 v2.8.7 spec state. Inventory growth (560→636 md files, 75→80 folders) reflects new modules: `22-git-logs-v2/`, `26-gitlogs-diagrams/`, `22-app-issues/02-consolidated-audit-findings/`. Broken-link count rose from 32 to 45 — see breakdown below.
+> Regenerated 2026-04-25 (post-§99 audit follow-up). Filled 3 missing consistency reports (`02-coding-guidelines/06-cicd-integration/`, `12-cicd-pipeline-workflows/03-reusable-ci-guards/`, `21-git-logs/`). Fixed 4 phantom-module links in `spec/00-overview.md` (replaced `08-docs-viewer-ui`, `09-code-block-system`, `21-app/` with locked-vacant markers; added missing `13-generic-cli`, `15-distribution-and-runner`, `16-generic-release`, `18-wp-plugin-how-to`, `21-git-logs`, `22-git-logs-v2`, `26-gitlogs-diagrams`). Score: 76→77; broken links 45→41; missing-consistency 3→0.
 
 ---
 
@@ -13,10 +13,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Score | **74/100 (C)** |
-| Deduction | 45 broken links (-20) |
-| Deduction | 3 missing consistency reports (-3) |
-| Deduction | 1 missing overview (-3) |
+| Score | **77/100 (C)** |
+| Deduction | 41 broken links (-20) |
+| Deduction | 0 missing consistency reports (0) — **cleared 2026-04-25** |
+| Deduction | 1 missing overview (-3) — `21-git-logs/reference/` (legacy verbatim brief, intentional) |
 
 ### Effective (Waived) Score
 

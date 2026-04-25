@@ -1,39 +1,24 @@
 {
   "Generated": "2026-04-25",
   "Health": {
-    "Score": 74,
+    "Score": 77,
     "Grade": "C",
     "Deductions": [
-      "45 broken links (-20)",
-      "3 missing consistency reports (-3)",
+      "41 broken links (-20)",
       "1 missing overviews (-3)"
     ]
   },
   "Links": {
-    "TotalChecked": 2075,
-    "Ok": 2030,
-    "Broken": 45,
+    "TotalChecked": 2081,
+    "Ok": 2040,
+    "Broken": 41,
     "BrokenDetails": [
       {
         "Source": "00-overview.md",
-        "Line": 29,
-        "Text": "Docs Viewer UI",
-        "Target": "./08-docs-viewer-ui/00-overview.md",
-        "Resolved": "08-docs-viewer-ui/00-overview.md"
-      },
-      {
-        "Source": "00-overview.md",
-        "Line": 30,
-        "Text": "Code Block System",
-        "Target": "./09-code-block-system/00-overview.md",
-        "Resolved": "09-code-block-system/00-overview.md"
-      },
-      {
-        "Source": "00-overview.md",
-        "Line": 41,
-        "Text": "App",
-        "Target": "./21-app/00-overview.md",
-        "Resolved": "21-app/00-overview.md"
+        "Line": 61,
+        "Text": "dashboard-data.json",
+        "Target": "./dashboard-data.json",
+        "Resolved": "dashboard-data.json"
       },
       {
         "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
@@ -176,13 +161,6 @@
         "Resolved": "21-git-logs/98-changelog.md"
       },
       {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 85,
-        "Text": "99-consistency-report.md",
-        "Target": "./99-consistency-report.md",
-        "Resolved": "21-git-logs/99-consistency-report.md"
-      },
-      {
         "Source": "21-git-logs/01-glossary-and-enums.md",
         "Line": 140,
         "Text": "13-coding-guidelines-applied.md",
@@ -321,13 +299,6 @@
         "Text": "App",
         "Target": "../21-app/00-overview.md",
         "Resolved": "21-app/00-overview.md"
-      },
-      {
-        "Source": "health-dashboard.md",
-        "Line": 26,
-        "Text": "`mem://constraints/avoid-app-sync`",
-        "Target": "../mem://constraints/avoid-app-sync",
-        "Resolved": "../mem:/constraints/avoid-app-sync"
       }
     ]
   },
@@ -338,24 +309,11 @@
         "FileCount": 2
       }
     ],
-    "MissingConsistency": [
-      {
-        "Folder": "02-coding-guidelines/06-cicd-integration",
-        "FileCount": 11
-      },
-      {
-        "Folder": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
-        "FileCount": 11
-      },
-      {
-        "Folder": "21-git-logs",
-        "FileCount": 10
-      }
-    ]
+    "MissingConsistency": []
   },
   "Inventory": {
     "TotalFolders": 80,
-    "TotalMdFiles": 636,
+    "TotalMdFiles": 639,
     "Folders": [
       {
         "Folder": "",
@@ -709,10 +667,10 @@
       },
       {
         "Folder": "02-coding-guidelines/06-cicd-integration",
-        "MdFiles": 11,
+        "MdFiles": 12,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
+        "HasConsistency": true,
         "HasChangelog": false,
         "HasAcceptance": true,
         "Files": [
@@ -726,6 +684,7 @@
           "07-performance.md",
           "97-acceptance-criteria.md",
           "98-faq.md",
+          "99-consistency-report.md",
           "99-troubleshooting.md"
         ]
       },
@@ -1446,10 +1405,10 @@
       },
       {
         "Folder": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
-        "MdFiles": 11,
+        "MdFiles": 12,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
+        "HasConsistency": true,
         "HasChangelog": false,
         "HasAcceptance": false,
         "Files": [
@@ -1463,7 +1422,8 @@
           "07-shared-cli-wrapper.md",
           "08-config-schema.md",
           "09-workflow-templates.md",
-          "99-ai-implementation-guide.md"
+          "99-ai-implementation-guide.md",
+          "99-consistency-report.md"
         ]
       },
       {
@@ -1711,10 +1671,10 @@
       },
       {
         "Folder": "21-git-logs",
-        "MdFiles": 10,
+        "MdFiles": 11,
         "Subfolders": 2,
         "HasOverview": true,
-        "HasConsistency": false,
+        "HasConsistency": true,
         "HasChangelog": false,
         "HasAcceptance": true,
         "Files": [
@@ -1727,7 +1687,8 @@
           "12-logging-strategy.md",
           "16-jwt-onboarding-and-token-usage.md",
           "17-spec-consistency-checklist.md",
-          "97-acceptance-criteria.md"
+          "97-acceptance-criteria.md",
+          "99-consistency-report.md"
         ]
       },
       {
