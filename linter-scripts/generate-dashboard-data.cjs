@@ -50,7 +50,8 @@ const EXTERNAL_REPO_PREFIXES = [
 
 function isExternalRepoRef(resolvedRel) {
   return EXTERNAL_REPO_PREFIXES.some((p) => resolvedRel.startsWith(p))
-    || resolvedRel === "../spec-slides";
+    || resolvedRel === "../spec-slides"
+    || resolvedRel === "dashboard-data.json";
 }
 
 // ── Helpers ─────────────────────────────────────────────────
