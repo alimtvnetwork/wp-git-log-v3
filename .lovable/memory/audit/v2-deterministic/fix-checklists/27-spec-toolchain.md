@@ -48,14 +48,14 @@
   "ac_count": 10,
   "child_modules": 0,
   "code_blocks_by_lang": {
-    "bash": 23,
+    "bash": 24,
     "ini": 1,
     "markdown": 1,
     "plain": 1,
     "powershell": 1,
-    "toml": 1
+    "toml": 2
   },
-  "code_blocks_total": 28,
+  "code_blocks_total": 30,
   "consistency_report": true,
   "gwt_block_count": 10,
   "has_json_schema": false,
@@ -64,11 +64,11 @@
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "links_broken": 0,
-  "links_total": 107,
-  "md_files": 32,
+  "links_total": 112,
+  "md_files": 34,
   "mmd_files": 0,
-  "overview_chars": 8021,
+  "overview_chars": 8185,
   "todo_density": 3,
-  "waffle_per_kchar": 0.16
+  "waffle_per_kchar": 0.12
 }
 ```

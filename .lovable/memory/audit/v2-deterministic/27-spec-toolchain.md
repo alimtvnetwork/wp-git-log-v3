@@ -8,7 +8,7 @@
 > Deterministic score 74/100 (C) for spec/27-spec-toolchain.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.16.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.12.
 
 ---
 
@@ -28,18 +28,18 @@
 
 ```json
 {
-  "md_files": 32,
+  "md_files": 34,
   "mmd_files": 0,
-  "overview_chars": 8021,
+  "overview_chars": 8185,
   "ac_chars": 3934,
   "ac_count": 10,
   "gwt_block_count": 10,
   "consistency_report": true,
-  "code_blocks_total": 28,
+  "code_blocks_total": 30,
   "code_blocks_by_lang": {
-    "bash": 23,
+    "bash": 24,
     "powershell": 1,
-    "toml": 1,
+    "toml": 2,
     "plain": 1,
     "ini": 1,
     "markdown": 1
@@ -49,10 +49,10 @@
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 107,
+  "links_total": 112,
   "links_broken": 0,
   "todo_density": 3,
-  "waffle_per_kchar": 0.16,
+  "waffle_per_kchar": 0.12,
   "child_modules": 0
 }
 ```
@@ -83,5 +83,5 @@
 
 #### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"bash": 23, "ini": 1, "markdown": 1, "plain": 1, "powershell": 1, "toml": 1}
+- **Evidence:** code_blocks_by_lang={"bash": 24, "ini": 1, "markdown": 1, "plain": 1, "powershell": 1, "toml": 2}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.
