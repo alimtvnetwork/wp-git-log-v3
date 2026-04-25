@@ -1,6 +1,6 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-25
 
 | # | Criterion | Source |
@@ -13,3 +13,5 @@
 | AC-D-06 | `06-permission-flow.mmd` resolves WP user → Profile → RolePermission union → Permission check (never role name). | v2 §05 + brief §5 |
 | AC-D-07 | All diagrams emoji-free (no lexer errors); render successfully via Mermaid CLI. | rendering smoke test |
 | AC-D-08 | No diagram references JWT, RS256, or JWKS (dropped in v2). | locked decision 5 |
+| AC-D-09 | `07-rate-limit-flow.mmd` shows token-bucket refill, allow/deny branches, 429 + Retry-After, and AuditTrail rejection. | v2 §10 |
+| AC-D-10 | `08-encryption-v3-flow.mmd` covers MasterKey → DataKey → LookupKey derivation, ALTER + per-row encryption, MigrationState insert, idempotency. | v2 §11 |
