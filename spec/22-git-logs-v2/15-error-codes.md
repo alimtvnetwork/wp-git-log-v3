@@ -1,6 +1,6 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.7.0  
+**Version:** 2.8.7  
 **Updated:** 2026-04-25
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
