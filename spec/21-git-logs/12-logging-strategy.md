@@ -363,7 +363,7 @@ ORDER BY n DESC;
 
 | # | Item | Notes |
 |---|------|-------|
-| OI-LOG-01 | Final error-code registry | Depends on `11-error-management.md` (not yet authored). |
+| OI-LOG-01 | ~~Final error-code registry~~ | **Resolved** — see [`11-error-management.md`](./11-error-management.md) §6. |
 | OI-LOG-02 | Trusted-proxy CIDR list source | WP option vs. constant in `wp-config.php`? |
 | OI-LOG-03 | `wp-cron` retry job for failed audit inserts | Needs a small persistence mechanism; `wp_options` ring buffer is one candidate. |
 | OI-LOG-04 | Whether `EndpointReceived` should also persist to `AuditTrail` or only to `error_log` at `Debug` | Cost/benefit — doubles row volume. |
