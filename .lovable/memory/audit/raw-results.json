@@ -1,0 +1,4136 @@
+[
+  {
+    "module": ".",
+    "verdict": "The root spec serves as an excellent directory but fails as a specification due to the total absence of Acceptance Criteria and a critical ID collision in the module inventory. It describes the 'what' but not the 'how' regarding the automated maintenance scripts found in the codebase.",
+    "scores": {
+      "testability": 0,
+      "maintainability": 85,
+      "clarity": 85,
+      "consistency": 60,
+      "alignment": 80,
+      "completeness": 50
+    },
+    "findings": [
+      {
+        "issue": "Slot collision in Module Inventory: both 'App Issues' and 'Git Logs v2' are assigned index 22.",
+        "severity": "medium",
+        "category": "inconsistency",
+        "evidence": "App Issues (22), Git Logs v2 (22) in Module Inventory table.",
+        "correction": "Assign unique IDs to each module.",
+        "impact": 5
+      },
+      {
+        "evidence": "Supporting Files table lists dashboard-data.json.",
+        "correction": "Clarify that dashboard-data.json is a generated artifact, not a source file.",
+        "impact": 2,
+        "severity": "low",
+        "category": "drift",
+        "issue": "Spec lists 'dashboard-data.json' as a supporting file, but it is a generated output from linter scripts."
+      },
+      {
+        "issue": "The root spec has no Acceptance Criteria, making it impossible to audit via automation.",
+        "correction": "Define concrete pass/fail metrics for spec health.",
+        "evidence": "Acceptance Criteria (MISSING) section.",
+        "impact": 7,
+        "severity": "high",
+        "category": "untestable"
+      },
+      {
+        "issue": "Linter scripts that maintain spec integrity are documented in code but not registered in the root spec.",
+        "category": "missing-spec",
+        "severity": "medium",
+        "impact": 4,
+        "evidence": "Numerous linter-scripts/* exist (e.g., generate-spec-index.cjs) but aren't mentioned as drivers of the spec root health.",
+        "correction": "Add a section detailing the automated linter scripts that maintain this index."
+      }
+    ],
+    "grade": "C",
+    "weighted_overall": 60,
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/generate-dashboard-data.cjs",
+        "linter-scripts/generate-spec-index.cjs",
+        "linter-scripts/check-tree-health.cjs",
+        ".github/workflows/spec-health.yml"
+      ],
+      "expected_but_missing": [
+        "spec/dashboard-data.json"
+      ],
+      "orphan_code": []
+    }
+  },
+  {
+    "module": "01-spec-authoring-guide",
+    "grade": "A",
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/audit-spec-vs-code.py",
+        "linter-scripts/check-axios-version.sh",
+        "linter-scripts/check-forbidden-spec-paths.sh",
+        "linter-scripts/check-forbidden-strings.py",
+        "linter-scripts/check-memory-mirror-drift.py",
+        "linter-scripts/check-readme-canonicals.py",
+        "linter-scripts/check-readme-install-section.py",
+        "linter-scripts/check-root-readme.py",
+        "linter-scripts/check-spec-folder-refs.py",
+        "linter-scripts/run.sh",
+        "linter-scripts/suggest-spec-cross-link-fixes.py",
+        "linter-scripts/validate-guidelines.py"
+      ],
+      "implemented_by": [
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/fill-missing-acceptance-criteria.cjs",
+        "linter-scripts/fill-missing-changelogs.cjs",
+        "linter-scripts/fill-missing-consistency-reports.cjs",
+        "linter-scripts/generate-dashboard-data.cjs",
+        "linter-scripts/generate-spec-index.cjs",
+        ".github/workflows/spec-health.yml"
+      ],
+      "expected_but_missing": []
+    },
+    "verdict": "The spec is exceptionally well-structured and aligns closely with the extensive linter infrastructure provided in the codebase. Minor drift exists regarding the manual vs. automated nature of filling spec files.",
+    "weighted_overall": 89,
+    "scores": {
+      "testability": 80,
+      "completeness": 85,
+      "alignment": 90,
+      "clarity": 95,
+      "consistency": 90,
+      "maintainability": 95
+    },
+    "findings": [
+      {
+        "category": "drift",
+        "impact": 7,
+        "severity": "medium",
+        "evidence": "Health Score (0\u2013100) section in 00-overview.md vs linter-scripts/check-tree-health.cjs",
+        "correction": "Update Health Score weights in 00-overview.md to match the logic in check-tree-health.cjs and dashboard generation.",
+        "issue": "The spec defines specific weights for health scores (25% each), which may not align with the actual JavaScript linter implementation."
+      },
+      {
+        "correction": "Add a section to 10-mandatory-linter-infrastructure.md describing the automation scripts for filling missing AC, changelogs, and reports.",
+        "issue": "Linter scripts for auto-generating spec files are present in code but not documented in the spec module.",
+        "category": "missing-spec",
+        "evidence": "Scripts like fill-missing-acceptance-criteria.cjs exist but are not detailed in the authoring guide.",
+        "severity": "low",
+        "impact": 5
+      },
+      {
+        "correction": "Define specific metrics or tools used to objective calculate 'Ambiguity' and 'AI Confidence' levels.",
+        "issue": "AI Confidence and Ambiguity scores are subjective and lack an automated validation path in the current linter index.",
+        "category": "untestable",
+        "evidence": "Scoring Metrics tables in 00-overview.md.",
+        "severity": "low",
+        "impact": 3
+      },
+      {
+        "category": "orphan-spec",
+        "severity": "medium",
+        "evidence": "\"calculated by the dashboard scanner\" in 00-overview.md",
+        "impact": 4,
+        "correction": "Create or link the dashboard UI code that consumes the reported Health Score metrics.",
+        "issue": "The spec references a 'dashboard' which is implied by generate-dashboard-data.cjs but the UI/frontend is not in the index."
+      }
+    ]
+  },
+  {
+    "module": "02-coding-guidelines",
+    "scores": {
+      "testability": 80,
+      "completeness": 85,
+      "clarity": 90,
+      "consistency": 85,
+      "maintainability": 95,
+      "alignment": 90
+    },
+    "grade": "A",
+    "findings": [
+      {
+        "category": "drift",
+        "impact": 7,
+        "correction": "Update documentation to confirm that PascalCase is enforced for JSON keys in TS/Go/PHP, as the current text implies a hybrid but then asserts PascalCase for JSON in those languages.",
+        "issue": "The spec mandates PascalCase for JSON keys in TypeScript/PHP/Go, which contradicts standard web/API practices (camelCase/snake_case for JSON).",
+        "severity": "medium",
+        "evidence": "KEY INSIGHT: Go, TypeScript, PHP... PascalCase is the DEFAULT for identifiers, keys, JSON."
+      },
+      {
+        "correction": "Define specific line count thresholds for PHP and C# or clarify if the 'Function metrics' rule applies globally across all non-Rust languages.",
+        "evidence": "6. Function metrics \u2014 Functions: 8\u201315 lines. Files: < 300 lines. React components: < 100 lines.",
+        "issue": "Function metric limits are specified generally but lack language-specific nuances (e.g., PHP/C# class methods).",
+        "severity": "low",
+        "category": "untestable",
+        "impact": 4
+      },
+      {
+        "correction": "Explicitly state that Rust types/enums use PascalCase AS PER COMMUNITY STANDARD, rather than framing it as a project-specific mandate that happens to align.",
+        "issue": "The hybrid naming section is slightly confusing regarding whether Rust PascalCase for types is a project override or just acknowledging the standard.",
+        "severity": "low",
+        "evidence": "Types/Enums \u2192 PascalCase: struct BrowserActivity (Rust standard)",
+        "category": "ambiguity",
+        "impact": 2
+      },
+      {
+        "impact": 5,
+        "category": "missing-spec",
+        "severity": "medium",
+        "issue": "The code contains automated validators for these guidelines, but the spec does not reference the automated enforcement tools.",
+        "evidence": "linter-scripts/validate-guidelines.go exists in the file index.",
+        "correction": "Add a section detailing how linter-scripts/validate-guidelines.go enforces these rules."
+      }
+    ],
+    "verdict": "A high-quality, authoritative spec with clear rules. The main risk is the 'PascalCase for JSON' mandate which likely drifts from real-world API consumers, and the lack of explicit connection to the validation scripts in the codebase.",
+    "weighted_overall": 88,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py",
+        "linter-scripts/forbidden-strings.toml"
+      ]
+    }
+  },
+  {
+    "module": "02-coding-guidelines/01-cross-language",
+    "scores": {
+      "testability": 60,
+      "clarity": 80,
+      "alignment": 85,
+      "maintainability": 85,
+      "completeness": 75,
+      "consistency": 70
+    },
+    "findings": [
+      {
+        "category": "orphan-spec",
+        "issue": "The spec claims linter rules are documented, but provides no specific config paths or rule names.",
+        "impact": 7,
+        "severity": "high",
+        "correction": "Assign specific linter rule mappings (e.g., ESlint, PHPStan) to each file in this module.",
+        "evidence": "AC-02: ESLint/linter rules are documented for automated enforcement"
+      },
+      {
+        "issue": "No conflict resolution policy if a language-specific spec contradicts this global spec.",
+        "category": "ambiguity",
+        "evidence": "Language-specific specs reference these as the single source of truth.",
+        "severity": "medium",
+        "correction": "Define the specific project tiers or labels where these 'cross-language' rules take precedence over language-specific ones.",
+        "impact": 4
+      },
+      {
+        "issue": "AC references file 03 (casting elimination) but the module focuses heavily on naming/formatting; depth of 03 is unknown without implementation details.",
+        "category": "drift",
+        "correction": "Remove mention of 'casting elimination patterns' from AC or provide the missing 03-casting-elimination-patterns.md file content.",
+        "severity": "low",
+        "impact": 3,
+        "evidence": "AC-01: Casting elimination patterns cover type-safe alternatives to type assertions"
+      },
+      {
+        "evidence": "Overview table lists #04 code-style subfolder, but file inventory only shows 21-newline-styling-examples.md.",
+        "impact": 5,
+        "correction": "Update the overview table to list file 04 as existing or clarify if it is external to this module.",
+        "severity": "medium",
+        "category": "inconsistency",
+        "issue": "The Overview references a subfolder (04-code-style) that does not appear in the file inventory."
+      }
+    ],
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/audit-spec-vs-code.py",
+        "linter-scripts/check-forbidden-spec-paths.sh"
+      ],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py",
+        "linter-scripts/forbidden-strings.toml"
+      ],
+      "expected_but_missing": []
+    },
+    "weighted_overall": 76,
+    "grade": "B",
+    "verdict": "A high-quality set of structural guidelines with good linter support, but suffers from inconsistencies between the overview table and the actual file inventory (specifically missing subfolders)."
+  },
+  {
+    "module": "02-coding-guidelines/01-cross-language/02-boolean-principles",
+    "verdict": "The spec is well-structured and internally consistent, but it references a non-existent directory for its primary codegen tool and has a truncated acceptance criterion (AC-07). It effectively bridges DB naming with code logic.",
+    "scores": {
+      "consistency": 90,
+      "alignment": 75,
+      "completeness": 80,
+      "testability": 70,
+      "maintainability": 85,
+      "clarity": 85
+    },
+    "grade": "B",
+    "findings": [
+      {
+        "category": "drift",
+        "severity": "medium",
+        "impact": 4,
+        "evidence": "`Codegen tool:` [`linters-cicd/codegen/`](../../../../linters-cicd/codegen/README.md)",
+        "correction": "Update the codegen path in 00-overview.md to match the actual folder structure (likely linter-scripts or similar).",
+        "issue": "Spec references a codegen tool path that does not exist in the code index."
+      },
+      {
+        "evidence": "linter-scripts/validate-guidelines.go exists but is not explicitly mapped to specific ACs beyond general mentions.",
+        "correction": "Document the specific boolean validation logic implemented in validate-guidelines.go/py within the 'Linter' section of the spec.",
+        "impact": 3,
+        "severity": "low",
+        "category": "missing-spec",
+        "issue": "Implementation details for automated boolean validation are not fully specified."
+      },
+      {
+        "issue": "AC-07 is cut off and contains a typo/incomplete requirement.",
+        "correction": "Define what 'positive intent' means for extraction or provide a code example for AC-07.",
+        "evidence": "AC-07: 'The condition must be extracted into a single named boolean with positive inten' (truncated).",
+        "impact": 2,
+        "severity": "low",
+        "category": "untestable"
+      },
+      {
+        "category": "ambiguity",
+        "severity": "medium",
+        "impact": 3,
+        "evidence": "'emits Go methods, PHP traits... from Is*/Has* db-tagged fields.'",
+        "correction": "Explicitly list which PHP traits or Go methods are generated.",
+        "issue": "The spec mentions auto-generation of traits/methods but provides no schema or template example."
+      }
+    ],
+    "weighted_overall": 81,
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/check-axios-version.sh",
+        "linter-scripts/check-memory-mirror-drift.py"
+      ],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py",
+        "linter-scripts/generate-gwt-acceptance.py"
+      ],
+      "expected_but_missing": [
+        "linters-cicd/codegen/"
+      ]
+    }
+  },
+  {
+    "module": "02-coding-guidelines/01-cross-language/04-code-style",
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py"
+      ],
+      "orphan_code": []
+    },
+    "grade": "A",
+    "verdict": "Highly mature and well-structured documentation module. The alignment with linter scripts is strong, though specific thresholds (like the 15-line limit) require careful verification against script constants to prevent drift.",
+    "weighted_overall": 94,
+    "scores": {
+      "testability": 85,
+      "completeness": 95,
+      "alignment": 90,
+      "clarity": 90,
+      "consistency": 100,
+      "maintainability": 100
+    },
+    "findings": [
+      {
+        "issue": "Code-style limits in spec (15 lines) may not be synchronized with hardcoded values in linter scripts.",
+        "correction": "Update scripts to reflect the 15-line limit and error handling exemptions documented in v3.2.0.",
+        "severity": "high",
+        "evidence": "AC-05: Function Limit Enforcement (15 lines), linter-scripts/validate-guidelines.go (often defaults to 10 or 20 without specific context)",
+        "impact": 8,
+        "category": "drift"
+      },
+      {
+        "issue": "'Syntax permitting' creates ambiguity in multi-language enforcement.",
+        "correction": "Replace 'syntax permitting' with explicit rules for PHP (8.0+ permits), Go (required), and TS (permitted).",
+        "impact": 3,
+        "evidence": "AC-06: Every argument must be placed on its own line with a trailing comma (syntax permitting).",
+        "severity": "low",
+        "category": "ambiguity"
+      },
+      {
+        "issue": "Removal of dead code is mentioned but lacks an objective testable metric in ACs.",
+        "correction": "Define which files or patterns constitute 'dead code' for automated checking.",
+        "severity": "medium",
+        "evidence": "Rule 14 (referenced in 06-comments-and-documentation.md): Dead code.",
+        "impact": 2,
+        "category": "untestable"
+      }
+    ]
+  },
+  {
+    "module": "02-coding-guidelines/01-cross-language/15-master-coding-guidelines",
+    "weighted_overall": 90,
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/generate-gwt-acceptance.py"
+      ],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py",
+        "linter-scripts/forbidden-strings.toml"
+      ],
+      "expected_but_missing": []
+    },
+    "verdict": "The spec is exceptionally well-structured and clear. Minor drift exists between the strict AC (zero-nesting) and the complexity typically allowed in validator scripts, and some linter configuration details (forbidden strings) are missing from the prose.",
+    "scores": {
+      "clarity": 95,
+      "maintainability": 90,
+      "testability": 80,
+      "completeness": 90,
+      "alignment": 85,
+      "consistency": 95
+    },
+    "grade": "A",
+    "findings": [
+      {
+        "category": "drift",
+        "severity": "high",
+        "impact": 8,
+        "evidence": "AC-05: MUST NOT contain any nested 'if' statements (nesting level 0)",
+        "correction": "Ensure all linter scripts (Go/Python) consistently enforce the '0 nested ifs' rule as defined in AC-05.",
+        "issue": "High risk of drift between the 'master' spec and the implementation of regional linters."
+      },
+      {
+        "category": "untestable",
+        "severity": "low",
+        "evidence": "AC-02: using 'apperror.Result[T]' or a custom 'Outcome' struct",
+        "impact": 4,
+        "correction": "Specify the exact struct/package name for 'Outcome' or require a specific interface for result types.",
+        "issue": "Allowing 'custom Outcome structs' without a naming standard makes automated enforcement difficult."
+      },
+      {
+        "issue": "The forbidden strings configuration exists in code but is not explicitly listed in the spec content.",
+        "correction": "Add a section in 03-code-style-and-errors.md detailing specific forbidden strings (e.g., 'var', 'any', 'TODO').",
+        "impact": 5,
+        "evidence": "linter-scripts/forbidden-strings.toml",
+        "severity": "medium",
+        "category": "missing-spec"
+      }
+    ]
+  },
+  {
+    "module": "02-coding-guidelines/01-cross-language/16-static-analysis",
+    "code_mapping": {
+      "expected_but_missing": [
+        "golangci-lint.yml",
+        ".eslintrc.json",
+        ".phpcs.xml",
+        "stylecop.json",
+        ".clippy.toml",
+        "pyproject.toml",
+        "sonarqube-config.qualitygate"
+      ],
+      "orphan_code": [
+        "linter-scripts/audit-spec-vs-code.py",
+        "linter-scripts/check-memory-mirror-drift.py"
+      ],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py",
+        ".github/workflows/spec-health.yml"
+      ]
+    },
+    "findings": [
+      {
+        "evidence": "Every guideline that can be machine-enforced MUST have a corresponding linter rule. (Overview \u00a7Purpose)",
+        "correction": "Provide actual configuration files (e.g., .eslintrc, golangci.yml) for the tools described in the spec.",
+        "impact": 8,
+        "category": "orphan-spec",
+        "severity": "critical",
+        "issue": "The spec describes extensive linter configurations for 8 languages, but the code index only contains meta-scripts for spec health."
+      },
+      {
+        "impact": 3,
+        "evidence": "01 | [11-eslint-enforcement.md](../../02-typescript/11-eslint-enforcement.md) | TypeScript | ESLint",
+        "correction": "Remove reference to external TypeScript ESLint spec or ensure it is tracked in the inventory.",
+        "severity": "low",
+        "issue": "External reference to TypeScript spec is mentioned but not visible in the provided context/index.",
+        "category": "drift"
+      },
+      {
+        "severity": "medium",
+        "issue": "Acceptance criteria focus on the presence of documentation rather than the correctness of the automation scripts.",
+        "category": "untestable",
+        "impact": 5,
+        "evidence": "Every supported language (8) has a dedicated linter spec",
+        "correction": "Update AC to include specific checkable file paths for configurations."
+      },
+      {
+        "category": "missing-spec",
+        "severity": "medium",
+        "issue": "The code contains custom guideline validators (Go/Python) not explicitly detailed in the static analysis spec.",
+        "evidence": "linter-scripts/validate-guidelines.go",
+        "correction": "Add documentation for the custom validation logic found in linter-scripts/.",
+        "impact": 4
+      }
+    ],
+    "grade": "C",
+    "scores": {
+      "alignment": 40,
+      "consistency": 90,
+      "testability": 70,
+      "maintainability": 80,
+      "completeness": 85,
+      "clarity": 90
+    },
+    "verdict": "The specification is exceptionally well-structured as a documentation module but fails as a technical specification because the described linter configurations (ESLint, Ruff, StyleCop, etc.) are entirely absent from the code index, which only contains maintenance scripts for the specs themselves.",
+    "weighted_overall": 72
+  },
+  {
+    "module": "02-coding-guidelines/02-typescript",
+    "verdict": "The spec module is a detailed 'ghost' document; it describes a mature TypeScript architecture and specific enums that do not exist in the provided code index, which instead contains linter infrastructure.",
+    "grade": "F",
+    "findings": [
+      {
+        "issue": "Spec focuses on ESLint while the repository uses custom linter scripts for enforcement.",
+        "category": "drift",
+        "severity": "high",
+        "correction": "Update spec/02-coding-guidelines/02-typescript/11-eslint-enforcement.md to match the custom linter scripts actually present in linter-scripts/.",
+        "evidence": "Spec 11-eslint-enforcement.md describes ESLint/SonarQube, but the code index contains a large suite of custom Python/Go/Node linter scripts.",
+        "impact": 7
+      },
+      {
+        "impact": 9,
+        "evidence": "01-06-*.md and 10-*.md define specific enums, but no corresponding .ts files exist in the code index.",
+        "correction": "Create the TypeScript enum files or remove the specific enum specs if they are purely conceptual.",
+        "category": "orphan-spec",
+        "severity": "critical",
+        "issue": "Detailed enum specifications exist with no corresponding implementation files in the project."
+      },
+      {
+        "issue": "Acceptance criteria are high-level guidelines rather than verifiable project states.",
+        "category": "untestable",
+        "severity": "medium",
+        "evidence": "AC-01 'Type definitions avoid any' is a general guideline, not a specific verifiable criterion for a module.",
+        "correction": "Add specific file paths or checkable patterns to the AC.",
+        "impact": 5
+      },
+      {
+        "impact": 6,
+        "evidence": "AC-02: Patterns mentions Zustand and React Query, which are architectural choices not evidenced in the file list.",
+        "correction": "Define which files or directories these patterns apply to.",
+        "category": "ambiguity",
+        "severity": "medium",
+        "issue": "AC-02 introduces external library dependencies (Zustand, React Query) not mentioned in the main overview."
+      }
+    ],
+    "code_mapping": {
+      "expected_but_missing": [
+        "src/types/connection-status.ts",
+        "src/types/entity-status.ts",
+        "src/types/execution-status.ts",
+        "src/types/export-status.ts",
+        "src/types/message-status.ts",
+        "src/types/log-level.ts",
+        ".eslintrc.json",
+        "tsconfig.json"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    },
+    "weighted_overall": 38,
+    "scores": {
+      "clarity": 60,
+      "alignment": 0,
+      "maintainability": 70,
+      "completeness": 80,
+      "consistency": 70,
+      "testability": 30
+    }
+  },
+  {
+    "module": "02-coding-guidelines/03-golang",
+    "verdict": "The spec describes a full-scale Go application (with DI, DB repositories, and custom error types), but the code index only contains a single utility script. This is a significant 'hallucination' drift where the guidelines are disconnected from the actual project footprint.",
+    "findings": [
+      {
+        "impact": 7,
+        "evidence": "AC-02: Architecture mentions Service layers, DI, and Repository patterns.",
+        "severity": "high",
+        "category": "orphan-spec",
+        "issue": "Spec describes a complex backend architecture (DI, Services, Repositories) that does not exist in the code index.",
+        "correction": "Remove specific infrastructure claims like Repository patterns if the repo only contains linter scripts."
+      },
+      {
+        "correction": "Update AC-01 to reflect actual error handling in validate-guidelines.go.",
+        "issue": "The only Go file (validate-guidelines.go) uses standard error handling, not the mandated apperror.Result[T] pattern.",
+        "category": "drift",
+        "impact": 5,
+        "evidence": "AC-01: Error handling uses apperror.Result[T] pattern consistently",
+        "severity": "medium"
+      },
+      {
+        "category": "missing-spec",
+        "severity": "low",
+        "evidence": "linter-scripts/validate-guidelines.go exists without mention in the spec.",
+        "impact": 3,
+        "correction": "Add documentation for the validator script logic to the Golang standards.",
+        "issue": "The primary Go implementation file is not referenced or governed by the spec module."
+      },
+      {
+        "severity": "low",
+        "evidence": "AC-01: Naming conventions follow Go idioms",
+        "impact": 2,
+        "category": "untestable",
+        "issue": "Acceptance criteria for naming are subjective and lack objective verification steps.",
+        "correction": "Define concrete naming rules instead of referencing 'Go idioms'."
+      }
+    ],
+    "weighted_overall": 48,
+    "scores": {
+      "maintainability": 80,
+      "consistency": 80,
+      "clarity": 70,
+      "alignment": 20,
+      "completeness": 40,
+      "testability": 30
+    },
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/validate-guidelines.go"
+      ],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go"
+      ],
+      "expected_but_missing": [
+        "pkg/apperror/result.go",
+        "pkg/pathutil/pathutil.go",
+        "pkg/fileutil/fileutil.go"
+      ]
+    },
+    "grade": "D"
+  },
+  {
+    "module": "02-coding-guidelines/03-golang/01-enum-specification",
+    "code_mapping": {
+      "expected_but_missing": [
+        "internal/enums/providertype/variant.go",
+        "internal/enums/platformtype/variant.go"
+      ],
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go"
+      ]
+    },
+    "verdict": "The spec is a high-quality template but describes an entirely fictional codebase relative to the provided index. While internally consistent, it suffers from 100% orphan status for the core implementation files it mandates.",
+    "weighted_overall": 48,
+    "findings": [
+      {
+        "evidence": "Acceptance Criteria (first 4000 chars) (MISSING)",
+        "issue": "The spec is missing an Acceptance Criteria section entirely.",
+        "severity": "high",
+        "correction": "Add a dedicated Acceptance Criteria section with GWT scenarios as per the project's standard and the presence of generate-gwt-acceptance.py script.",
+        "impact": 8,
+        "category": "missing-spec"
+      },
+      {
+        "impact": 9,
+        "category": "orphan-spec",
+        "issue": "The spec describes a specific folder structure and files (internal/enums/...) that do not exist in the code index.",
+        "severity": "critical",
+        "evidence": "internal/enums/providertype/variant.go (described in spec, absent in index)",
+        "correction": "Provide at least one reference implementation of the byte-based enum pattern in the code index."
+      },
+      {
+        "impact": 4,
+        "category": "drift",
+        "issue": "The projects listed under 'Applies To' do not appear in the code index, which contains only linter-scripts.",
+        "severity": "medium",
+        "evidence": "Applies To: GSearch CLI, BRun CLI, etc.",
+        "correction": "Sync the 'Applies To' table with current project names found in the linter scripts or repository metadata."
+      },
+      {
+        "impact": 5,
+        "category": "untestable",
+        "issue": "Required methods are listed but lack objective verification logic in the spec body.",
+        "severity": "medium",
+        "evidence": "Required Methods table (no validation criteria)",
+        "correction": "Define specific, measurable pass/fail criteria for the required Go methods."
+      }
+    ],
+    "grade": "F",
+    "scores": {
+      "completeness": 30,
+      "testability": 20,
+      "clarity": 80,
+      "consistency": 90,
+      "maintainability": 70,
+      "alignment": 5
+    }
+  },
+  {
+    "module": "02-coding-guidelines/03-golang/04-golang-standards-reference",
+    "code_mapping": {
+      "expected_but_missing": [
+        "internal/apperror/apperror.go",
+        "internal/dbutil/dbutil.go"
+      ],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go"
+      ],
+      "orphan_code": []
+    },
+    "findings": [
+      {
+        "issue": "Spec mandates PascalCase file naming which contradicts standard Go conventions (snake_case), potentially causing friction with existing Go tooling.",
+        "category": "drift",
+        "severity": "medium",
+        "correction": "Align PascalCase file naming requirement with standard Go linter expectations or acknowledge linter-scripts as the enforcement mechanism.",
+        "impact": 5,
+        "evidence": "AC-01: PascalCase file naming vs standard Go snake_case convention."
+      },
+      {
+        "category": "untestable",
+        "issue": "Ban on nested 'if' blocks is difficult to enforce strictly via standard linters without specific cyclomatic complexity or custom AST rules.",
+        "severity": "medium",
+        "correction": "Specify a regex or concrete method for identifying 'indentation level' or 'nested if' beyond a simple line count.",
+        "impact": 4,
+        "evidence": "AC-04: Absolute ban on nested if blocks."
+      },
+      {
+        "evidence": "AC-07: Use of 'dbutil' wrappers.",
+        "impact": 7,
+        "correction": "Define the 'dbutil' types and methods in a dedicated spec file or internal reference.",
+        "severity": "high",
+        "issue": "The spec references a 'dbutil' wrapper as mandatory but no specification for its API exists in the provided context.",
+        "category": "missing-spec"
+      },
+      {
+        "issue": "Line count limits are ambiguous regarding whether they count 'Lines of Code' (LOC) or physical lines (including whitespace/comments).",
+        "category": "ambiguity",
+        "severity": "low",
+        "impact": 3,
+        "correction": "Clarify if the 15-line limit includes comments, whitespace, or docstrings.",
+        "evidence": "AC-03: Function body with more than 15 lines of code."
+      }
+    ],
+    "weighted_overall": 83,
+    "scores": {
+      "consistency": 95,
+      "completeness": 85,
+      "maintainability": 90,
+      "alignment": 70,
+      "clarity": 90,
+      "testability": 80
+    },
+    "verdict": "The spec is highly structured and opinionated, which is good for consistency, but relies on internal frameworks (apperror, dbutil) that are documented as existing but are not visible in the provided code index, creating a 'spec-only' bubble.",
+    "grade": "B"
+  },
+  {
+    "module": "02-coding-guidelines/04-php",
+    "verdict": "The spec is a total 'orphan'\u2014it describes a complex PHP architecture (RiseupAsia namespace, enums, ResultHelpers) for which ZERO corresponding PHP code exists in the provided index. The index contains only linter scripts.",
+    "findings": [
+      {
+        "category": "drift",
+        "severity": "critical",
+        "evidence": "Acceptance Criteria mentions RiseupAsia\\Enums and includes/Enums/ but code index only shows linter-scripts/.",
+        "impact": 10,
+        "correction": "Verify if the RiseupAsia namespace exists or use the provided codebase index which only contains linter scripts.",
+        "issue": "Spec describes an entire PHP framework/library that is missing from the provided code index."
+      },
+      {
+        "impact": 2,
+        "evidence": "Document Inventory table lists the same files (01-enums.md, etc.) three times in a row.",
+        "severity": "low",
+        "category": "inconsistency",
+        "issue": "Redundant/repeating rows in the Overview table.",
+        "correction": "Remove redundant file listings from the Document Inventory table."
+      },
+      {
+        "category": "untestable",
+        "impact": 5,
+        "evidence": "AC-06: REST Error Handling Guardrails is cut off (\"Given a REST API handler in a WordPress compa\").",
+        "severity": "high",
+        "correction": "Provide the referenced 05-response-array-standard.md or equivalent code to define error handling guardrails.",
+        "issue": "AC-06 is truncated and incomplete."
+      },
+      {
+        "category": "ambiguity",
+        "impact": 3,
+        "severity": "medium",
+        "evidence": "AC-01: \"implement the isEqual(self $other): bool method\"",
+        "correction": "Clarify if 'isEqual' is meant to be a Trait or if it must be manually implemented in every enum.",
+        "issue": "Enforced manual implementation of identical methods across all enums is high-maintenance."
+      }
+    ],
+    "weighted_overall": 28,
+    "scores": {
+      "testability": 30,
+      "completeness": 40,
+      "alignment": 0,
+      "clarity": 70,
+      "consistency": 50,
+      "maintainability": 60
+    },
+    "code_mapping": {
+      "implemented_by": [],
+      "expected_but_missing": [
+        "includes/Enums/UploadStatusType.php",
+        "includes/Helpers/ResultHelper.php",
+        "includes/Enums/ResponseKeyType.php",
+        "includes/Enums/HookType.php"
+      ],
+      "orphan_code": []
+    },
+    "grade": "F"
+  },
+  {
+    "module": "02-coding-guidelines/04-php/07-php-standards-reference",
+    "scores": {
+      "testability": 80,
+      "completeness": 90,
+      "alignment": 0,
+      "clarity": 80,
+      "consistency": 85,
+      "maintainability": 70
+    },
+    "weighted_overall": 48,
+    "findings": [
+      {
+        "issue": "The spec describes a specific PHP implementation (enums, database wrappers) that is entirely absent from the codebase.",
+        "correction": "Remove specific class/file references from the spec or mark them as requirements for future implementation since they do not exist in the current index.",
+        "impact": 9,
+        "evidence": "AC-01: 'A class file in the includes/Enums/ directory'; Inlined Contracts: 'includes/Enums/HookType.php'",
+        "severity": "critical",
+        "category": "orphan-spec"
+      },
+      {
+        "correction": "Update AC-05 'Verifies' reference to point to the correct file (03-initialization-and-booleans.md).",
+        "issue": "AC-05 verification link is broken/truncated.",
+        "category": "drift",
+        "evidence": "AC-05: 'Verifies: 0' (Cut off)",
+        "severity": "low",
+        "impact": 3
+      },
+      {
+        "issue": "Spec style oscillates between a global standard and project-specific requirements.",
+        "correction": "Define whether this spec is a generic standard for NEW code or if it is supposed to describe the existing project codebase.",
+        "evidence": "The File Inventory lists '01-naming-and-errors.md' etc, but these do not exist in the code index as executable/implemented PHP code.",
+        "severity": "medium",
+        "impact": 5,
+        "category": "ambiguity"
+      }
+    ],
+    "verdict": "The spec is well-written as a standalone document but has zero alignment with the provided code index, which contains only linter scripts and no PHP implementation files. It describes a PHP architecture that does not exist in the current environment.",
+    "code_mapping": {
+      "orphan_code": [],
+      "expected_but_missing": [
+        "includes/Enums/HookType.php",
+        "includes/Enums/HttpMethodType.php",
+        "includes/Enums/CapabilityType.php",
+        "includes/Enums/ErrorType.php",
+        "includes/ErrorChecking/ErrorChecker.php",
+        "includes/Database/DbResult.php",
+        "includes/Constants/constants.php"
+      ],
+      "implemented_by": []
+    },
+    "grade": "F"
+  },
+  {
+    "module": "02-coding-guidelines/05-rust",
+    "code_mapping": {
+      "orphan_code": [],
+      "expected_but_missing": [
+        "src/cli-rust/** (implied by \"Time Log CLI\")",
+        "Cargo.toml"
+      ],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.py"
+      ]
+    },
+    "weighted_overall": 48,
+    "findings": [
+      {
+        "severity": "high",
+        "category": "orphan-spec",
+        "evidence": "Rust-specific coding standards for the Time Log CLI and any future Rust-based projects.",
+        "correction": "Include the Time Log CLI Rust source files in the codebase index or remove specific references to it from the spec until it exists.",
+        "impact": 7,
+        "issue": "The spec describes standards for a \"Time Log CLI\" which is completely absent from the provided code index."
+      },
+      {
+        "impact": 4,
+        "correction": "Update the spec to include Go guidelines or update the codebase to use Rust for linter validation if that is the intent.",
+        "evidence": "linter-scripts/validate-guidelines.go",
+        "category": "drift",
+        "severity": "medium",
+        "issue": "The code contains a Go validator for guidelines, while the spec focuses heavily on Rust standards, suggesting a language mismatch in the tooling layer."
+      },
+      {
+        "impact": 3,
+        "evidence": "No unnecessary Clone derives on large structs",
+        "correction": "Provide concrete quantitative metrics for \"unnecessary\" or \"large\".",
+        "category": "untestable",
+        "severity": "low",
+        "issue": "Acceptance criteria AC-04 uses subjective terms (\"unnecessary\", \"large\") that cannot be objectively verified."
+      },
+      {
+        "issue": "The code index is composed entirely of maintenance scripts (Python, Node, Bash), but there are no coding guidelines for these languages in the provided spec.",
+        "impact": 6,
+        "correction": "Add documentation for the Python/Bash/Node scripts used in the linter-scripts directory.",
+        "evidence": "linter-scripts/check-memory-mirror-drift.py, etc.",
+        "category": "missing-spec",
+        "severity": "medium"
+      }
+    ],
+    "grade": "F",
+    "scores": {
+      "clarity": 90,
+      "testability": 60,
+      "maintainability": 80,
+      "completeness": 30,
+      "alignment": 5,
+      "consistency": 85
+    },
+    "verdict": "The spec is well-written but describes a non-existent codebase (Time Log CLI) while ignoring the actual codebase (a Large collection of Python/Node/Go linter scripts). It is a 'ghost spec' for a project not currently indexed."
+  },
+  {
+    "module": "02-coding-guidelines/06-ai-optimization",
+    "weighted_overall": 83,
+    "verdict": "The spec is highly detailed and structurally sound as a documentation module, but it fails to acknowledge the existing automated linting tools (Go/Python) that implement the rules it describes. It treats the rules as purely for AI prompting rather than integrated CI/CD enforcement.",
+    "grade": "B",
+    "scores": {
+      "alignment": 75,
+      "completeness": 90,
+      "maintainability": 80,
+      "clarity": 85,
+      "consistency": 90,
+      "testability": 70
+    },
+    "findings": [
+      {
+        "category": "drift",
+        "evidence": "linter-scripts/validate-guidelines.go and linter-scripts/check-forbidden-strings.py",
+        "issue": "The codebase contains active linter scripts (Go/Python) that enforce coding guidelines, but the spec refers to them as theoretical AI instructions.",
+        "impact": 7,
+        "correction": "Update the spec to include Go as a primary validation language and reference specific linter scripts that enforce these rules.",
+        "severity": "high"
+      },
+      {
+        "evidence": "linter-scripts/forbidden-strings.toml",
+        "category": "missing-spec",
+        "issue": "The forbidden strings configuration exists in code but is not mapped to the AH rules in the spec.",
+        "impact": 5,
+        "correction": "Add documentation for forbidden-strings.toml and how it maps to the Anti-Hallucination rules.",
+        "severity": "medium"
+      },
+      {
+        "correction": "Define what makes the checklist 'machine-parsable' (JSON, YAML, or specific Markdown format).",
+        "severity": "low",
+        "category": "untestable",
+        "evidence": "Quick-reference checklist is machine-parsable with checkboxes",
+        "issue": "Acceptance Criteria for 'machine-parsable' is vague and lacks a schema or format requirement.",
+        "impact": 3
+      }
+    ],
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/check-forbidden-strings.py",
+        "linter-scripts/forbidden-strings.toml"
+      ],
+      "expected_but_missing": [],
+      "orphan_code": []
+    }
+  },
+  {
+    "module": "02-coding-guidelines/06-cicd-integration",
+    "verdict": "The spec describes a 'linters-cicd' package and a GitHub Composite Action that do not exist in the codebase. While there is a 'linter-scripts' folder, it lacks the structure, SARIF validation, and distribution files (action.yml) promised in the spec.",
+    "grade": "F",
+    "findings": [
+      {
+        "issue": "Fundamental directory naming mismatch between spec and implementation.",
+        "category": "drift",
+        "evidence": "Spec expects `linters-cicd/`; Code uses `linter-scripts/`.",
+        "correction": "Unify the directory structure: Rename `linter-scripts/` to `linters-cicd/` or update the spec to reflect the existing directory.",
+        "severity": "high",
+        "impact": 8
+      },
+      {
+        "issue": "SARIF validation script mentioned in AC does not exist in the code index.",
+        "category": "orphan-spec",
+        "correction": "Create the SARIF validation script or remove the requirement from AC-CI-002.",
+        "severity": "high",
+        "impact": 7,
+        "evidence": "AC-CI-002: `linters-cicd/scripts/validate-sarif.py` validates every emitted file..."
+      },
+      {
+        "issue": "The primary deliverable (CI integration/Composite Action) is missing from the codebase.",
+        "category": "orphan-spec",
+        "impact": 9,
+        "correction": "Create action.yml and the CI templates directory described in Layer 3.",
+        "severity": "critical",
+        "evidence": "Layer 3 \u2014 CI templates (`linters-cicd/ci/`) ... GitHub composite Action under `linters-cicd/action.yml`."
+      },
+      {
+        "impact": 3,
+        "severity": "low",
+        "correction": "Add documentation for the Go-based validator existing in the linter-scripts directory.",
+        "evidence": "linter-scripts/validate-guidelines.go",
+        "category": "missing-spec",
+        "issue": "Go implementation of the validator exists but spec focuses exclusively on Python/Bash."
+      },
+      {
+        "evidence": "AC-CI-003: produces a SARIF file with zero CODE RED findings.",
+        "severity": "medium",
+        "correction": "Define the specific 'zero CODE RED findings' criteria or link to the rule set.",
+        "impact": 4,
+        "category": "untestable",
+        "issue": "'CODE RED' is a symbolic link to a guideline set not explicitly defined within the testable context of this spec module."
+      }
+    ],
+    "code_mapping": {
+      "expected_but_missing": [
+        "linters-cicd/checks/",
+        "linters-cicd/configs/",
+        "linters-cicd/ci/",
+        "linters-cicd/action.yml",
+        "linters-cicd/run-all.sh",
+        "linters-cicd/scripts/validate-sarif.py"
+      ],
+      "implemented_by": [
+        "linter-scripts/run.sh",
+        "linter-scripts/validate-guidelines.py",
+        ".github/workflows/spec-health.yml"
+      ],
+      "orphan_code": [
+        "linter-scripts/audit-spec-vs-code.py",
+        "linter-scripts/check-axios-version.sh"
+      ]
+    },
+    "weighted_overall": 60,
+    "scores": {
+      "consistency": 80,
+      "completeness": 90,
+      "maintainability": 70,
+      "alignment": 20,
+      "clarity": 85,
+      "testability": 60
+    }
+  },
+  {
+    "module": "02-coding-guidelines/07-csharp",
+    "code_mapping": {
+      "expected_but_missing": [],
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.py",
+        "linter-scripts/validate-guidelines.go"
+      ]
+    },
+    "findings": [
+      {
+        "impact": 8,
+        "category": "orphan-spec",
+        "evidence": "C#-specific coding standards that extend the [cross-language guidelines]... applies to all .NET/C# code",
+        "severity": "high",
+        "issue": "The spec describes C# coding standards but the code index contains zero C# files (.cs).",
+        "correction": "Provide C# source code examples or link to a C# project managed by these standards."
+      },
+      {
+        "issue": "Wording implies active C# development, yet the repo only contains Python/Node/Go/Shell scripts.",
+        "severity": "medium",
+        "evidence": "These rules apply to all .NET/C# code and align with the project's naming conventions",
+        "correction": "Explicitly state if these standards are intended for future C# development or apply to external plugins.",
+        "impact": 3,
+        "category": "ambiguity"
+      },
+      {
+        "category": "untestable",
+        "impact": 4,
+        "correction": "Define how standards like 'Method bodies \u226415 lines' are enforced (e.g., via EditorConfig or Roslyn Analyzers).",
+        "evidence": "All criteria are testable via code review or static analysis.",
+        "severity": "low",
+        "issue": "Criteria like 'Method bodies \u226415 lines' are not enforced by any tooling found in the code index."
+      }
+    ],
+    "grade": "C",
+    "scores": {
+      "completeness": 95,
+      "testability": 60,
+      "clarity": 90,
+      "alignment": 0,
+      "maintainability": 90,
+      "consistency": 95
+    },
+    "weighted_overall": 64,
+    "verdict": "The spec is internally consistent and very well-written, but it describes a C# environment that does not exist in the provided codebase index, resulting in a total lack of alignment."
+  },
+  {
+    "module": "02-coding-guidelines/08-file-folder-naming",
+    "grade": "A",
+    "findings": [
+      {
+        "issue": "The AC for Go folder naming is vague regarding underscores vs hyphens.",
+        "evidence": "00-overview.md: \"Go ... Folders: lowercase (no hyphens)\" vs \"Examples: internal/\"",
+        "correction": "Define specific verifiable examples of Go package naming (e.g., 'no underscores permitted in package names' vs filenames) to make the criterion objective.",
+        "impact": 3,
+        "severity": "low",
+        "category": "untestable"
+      },
+      {
+        "category": "ambiguity",
+        "severity": "medium",
+        "evidence": "00-overview.md Quick Reference: Universal (lowercase) vs C# (PascalCase).",
+        "correction": "Specify if 'Universal' rules (lowercase, no spaces) are enforced by linters even when language-specific rules (PascalCase) contradict them.",
+        "impact": 5,
+        "issue": "Contradiction between Universal rules and Language-specific rules."
+      },
+      {
+        "issue": "Missing specific naming conventions for non-executable asset files.",
+        "impact": 2,
+        "correction": "Specify naming rules for JSON, YAML, and MarkDown files which appear in the project but aren't explicitly detailed in the language-specific files.",
+        "evidence": "Project contains .yml, .json, and .md files globally.",
+        "severity": "low",
+        "category": "missing-spec"
+      }
+    ],
+    "scores": {
+      "testability": 90,
+      "maintainability": 95,
+      "clarity": 85,
+      "consistency": 80,
+      "alignment": 90,
+      "completeness": 90
+    },
+    "verdict": "The spec is highly structured and provides clear cross-language guidance that aligns with the presence of 'validate-guidelines' scripts in the codebase. The main risk is the logical contradiction between 'Universal' lowercase rules and 'C#' PascalCase rules, which needs clearer hierarchical precedence.",
+    "code_mapping": {
+      "orphan_code": [],
+      "expected_but_missing": [],
+      "implemented_by": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py",
+        "linter-scripts/check-tree-health.cjs"
+      ]
+    },
+    "weighted_overall": 88
+  },
+  {
+    "module": "02-coding-guidelines/09-powershell-integration",
+    "scores": {
+      "consistency": 90,
+      "alignment": 20,
+      "clarity": 85,
+      "completeness": 40,
+      "maintainability": 70,
+      "testability": 60
+    },
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/check-axios-version.sh",
+        "linter-scripts/run.sh",
+        "linter-scripts/validate-guidelines.go"
+      ],
+      "expected_but_missing": [],
+      "implemented_by": [
+        "linter-scripts/run.ps1"
+      ]
+    },
+    "findings": [
+      {
+        "correction": "Either implement the PowerShell guidelines in new scripts or remove the spec if PowerShell is no longer a primary automation tool.",
+        "evidence": "Spec defines extensive naming and error handling rules, but only one .ps1 file exists in the index.",
+        "impact": 7,
+        "category": "orphan-spec",
+        "severity": "high",
+        "issue": "The spec defines comprehensive guidelines for a language that is almost entirely absent from the codebase."
+      },
+      {
+        "severity": "medium",
+        "issue": "Codebase is 95% non-PowerShell script, but no guidelines for those languages are visible in this module.",
+        "category": "missing-spec",
+        "impact": 5,
+        "evidence": "linter-scripts/ contains .py, .sh, .cjs, and .go files.",
+        "correction": "Add guidance for Python, Shell, and Node.js which dominate the linter-scripts directory."
+      },
+      {
+        "issue": "Version '7.x' is too broad for a strict technical specification.",
+        "severity": "low",
+        "category": "ambiguity",
+        "impact": 2,
+        "correction": "Define specific PowerShell Core version (e.g., 7.4 LTS) instead of '7.x'.",
+        "evidence": "Runtime: PowerShell Core 7.x (pwsh)"
+      },
+      {
+        "evidence": "AC-03: Safe Execution with ShouldProcess",
+        "correction": "Update AC-03 to specify which files or function prefixes must implement ShouldProcess.",
+        "impact": 3,
+        "category": "untestable",
+        "issue": "AC-03 requires ShouldProcess for scripts impacting 'system state' but doesn't define what constitutes state in this project.",
+        "severity": "low"
+      }
+    ],
+    "grade": "D",
+    "verdict": "The spec is a 'ghost spec'\u2014it provides high-quality guidelines for a technology (PowerShell) that is virtually non-existent in the provided code index (1 file vs 20+ non-PS files). It represents significant overhead for a toolchain that primarily uses Python and JavaScript.",
+    "weighted_overall": 51
+  },
+  {
+    "module": "02-coding-guidelines/10-research",
+    "weighted_overall": 72,
+    "verdict": "The spec is technically sound in its structure and meta-documentation but is currently a hollow shell. While it correctly identifies linting tools that exist in the codebase, it fails to fulfill its primary purpose as it contains no actual research content.",
+    "grade": "C",
+    "scores": {
+      "maintainability": 100,
+      "alignment": 100,
+      "completeness": 40,
+      "testability": 80,
+      "consistency": 95,
+      "clarity": 90
+    },
+    "findings": [
+      {
+        "issue": "The spec module defines a folder for research but contains zero research documents.",
+        "impact": 5,
+        "evidence": "_No content yet. Add research documents as numbered files within this folder._",
+        "category": "orphan-spec",
+        "severity": "medium",
+        "correction": "Provide a concrete research document or evaluation (e.g., a choice of game engine or UI framework) to justify the existence of this module."
+      },
+      {
+        "category": "untestable",
+        "evidence": "When `node linter-scripts/check-tree-health.cjs --min=80` is run... Then this module contributes `required=2/2`",
+        "impact": 2,
+        "issue": "AC-05 references very specific script output that may not be directly observable in the same format.",
+        "correction": "Clarify how the module-specific health and 'required=2/2' is calculated or displayed by the script.",
+        "severity": "low"
+      }
+    ],
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": []
+    }
+  },
+  {
+    "module": "02-coding-guidelines/11-security",
+    "verdict": "The spec is well-written but describes a sub-module (01-axios-version-control) that isn't in the inventory, and it ignores existing security tools in the codebase like the forbidden-strings scanner.",
+    "weighted_overall": 72,
+    "grade": "C",
+    "scores": {
+      "maintainability": 85,
+      "alignment": 60,
+      "completeness": 75,
+      "testability": 80,
+      "consistency": 70,
+      "clarity": 90
+    },
+    "findings": [
+      {
+        "impact": 8,
+        "issue": "The sub-module for Axios version control is missing from the provided file inventory despite being central to the ACs.",
+        "evidence": "ACs verify 01-axios-version-control/00-overview.md which is missing from the file inventory.",
+        "category": "drift",
+        "severity": "high",
+        "correction": "Ensure subfolder naming matches the spec (the spec mentions 01-axios-version-control but the index doesn't show it)."
+      },
+      {
+        "correction": "Specify which files/manifests the script 'check-axios-version.sh' actually scans.",
+        "severity": "medium",
+        "category": "untestable",
+        "evidence": "AC-01: 'Given A project package.json file' - the codebase index contains no package.json.",
+        "impact": 5,
+        "issue": "ACs reference package.json which is not present in the codebase index."
+      },
+      {
+        "correction": "Add requirements to the security spec regarding forbidden strings/patterns using the existing forbidden-strings.toml.",
+        "severity": "medium",
+        "evidence": "linter-scripts/forbidden-strings.toml and linter-scripts/check-forbidden-strings.py exist but are not mentioned in the spec.",
+        "category": "missing-spec",
+        "issue": "The spec ignores existing security infrastructure for forbidden string detection.",
+        "impact": 7
+      },
+      {
+        "impact": 2,
+        "issue": "Internal versioning inconsistency within the spec module.",
+        "category": "drift",
+        "evidence": "Overview Version: 3.2.0 vs Acceptance Criteria Version: 2.0.0.",
+        "severity": "low",
+        "correction": "Update Version to be consistent across the module (Overview says 3.2.0, AC says 2.0.0)."
+      }
+    ],
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/check-axios-version.sh"
+      ],
+      "expected_but_missing": [
+        "spec/02-coding-guidelines/11-security/01-axios-version-control/00-overview.md",
+        "spec/02-coding-guidelines/11-security/01-axios-version-control/01-implementation-rules.md",
+        "spec/02-coding-guidelines/11-security/01-axios-version-control/02-security-notes.md"
+      ],
+      "orphan_code": [
+        "linter-scripts/validate-guidelines.go",
+        "linter-scripts/validate-guidelines.py",
+        "linter-scripts/forbidden-strings.toml"
+      ]
+    }
+  },
+  {
+    "module": "02-coding-guidelines/11-security/01-axios-version-control",
+    "weighted_overall": 79,
+    "code_mapping": {
+      "expected_but_missing": [
+        "package.json"
+      ],
+      "orphan_code": [
+        "linter-scripts/check-forbidden-strings.py"
+      ],
+      "implemented_by": [
+        "linter-scripts/check-axios-version.sh"
+      ]
+    },
+    "scores": {
+      "consistency": 90,
+      "clarity": 95,
+      "completeness": 80,
+      "maintainability": 85,
+      "alignment": 70,
+      "testability": 60
+    },
+    "findings": [
+      {
+        "impact": 5,
+        "category": "drift",
+        "issue": "Spec implies manual code review and general CI but doesn't explicitly name the existing specialized linter script.",
+        "evidence": "linter-scripts/check-axios-version.sh exists but 01-implementation-rules.md is not linked to it in the provided summary.",
+        "correction": "Reference the actual validation script (check-axios-version.sh) in the implementation rules.",
+        "severity": "medium"
+      },
+      {
+        "category": "missing-spec",
+        "issue": "The core target of this spec (package.json) is missing from the code index.",
+        "evidence": "The spec defines a strict version pinning policy for dependencies, but no package.json or similar manifest is present in the code index.",
+        "impact": 8,
+        "correction": "Add package.json to the index or provide samples of compliant vs non-compliant configurations beyond the overview snippet.",
+        "severity": "high"
+      },
+      {
+        "impact": 3,
+        "category": "untestable",
+        "evidence": "AC 1-4 are behavioral but lack measurable technical thresholds (e.g., 'CI job fails with EXIT 1').",
+        "issue": "Acceptance Criteria are descriptive rather than objectively verifiable against the provided scripts.",
+        "correction": "Define specific EXIT codes or CI failure messages for the check-axios-version.sh script in the AC.",
+        "severity": "low"
+      }
+    ],
+    "verdict": "The spec is well-written and logically sound, but it lacks alignment with the provided code index because the primary file it governs (package.json) is missing, even though a enforcement script (check-axios-version.sh) exists.",
+    "grade": "B"
+  },
+  {
+    "module": "02-coding-guidelines/21-app",
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/check-forbidden-spec-paths.sh",
+        "linter-scripts/check-spec-folder-refs.py",
+        "linter-scripts/validate-guidelines.py"
+      ],
+      "expected_but_missing": [],
+      "orphan_code": []
+    },
+    "weighted_overall": 79,
+    "findings": [
+      {
+        "correction": "Remove the placeholder 'No content yet' and add actual application feature specifications.",
+        "evidence": "_No content yet. Add app-specific specs as numbered files within this folder._",
+        "impact": 5,
+        "category": "orphan-spec",
+        "severity": "medium",
+        "issue": "The spec defines a structure for application features but contains no actual feature content."
+      },
+      {
+        "issue": "Version and date mismatch between Overview and Acceptance Criteria.",
+        "severity": "low",
+        "category": "drift",
+        "impact": 2,
+        "evidence": "Overview: Version 3.2.0 (2026-04-16) vs AC: Version 2.0.0 (2026-04-25)",
+        "correction": "Update Version and Updated dates in 00-overview.md and 97-acceptance-criteria.md to match."
+      },
+      {
+        "impact": 3,
+        "correction": "Clarify if the numbering starts at 01 or follows a different convention given the folder is '21-app'.",
+        "evidence": "The filename must follow the numbered prefix convention (e.g., 01-feature-name.md)",
+        "severity": "low",
+        "category": "ambiguity",
+        "issue": "Conflicting numbering guidance: folder is '21', but AC suggests '01' for sub-files."
+      }
+    ],
+    "grade": "B",
+    "scores": {
+      "clarity": 85,
+      "maintainability": 90,
+      "testability": 95,
+      "completeness": 70,
+      "alignment": 80,
+      "consistency": 75
+    },
+    "verdict": "The spec provides a clear organizational framework for application-specific documentation, supported by linter scripts, but currently functions as an empty shell without concrete implementation details."
+  },
+  {
+    "module": "02-coding-guidelines/22-app-issues",
+    "weighted_overall": 80,
+    "scores": {
+      "testability": 85,
+      "clarity": 85,
+      "maintainability": 90,
+      "alignment": 90,
+      "completeness": 70,
+      "consistency": 80
+    },
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh"
+      ],
+      "orphan_code": [],
+      "expected_but_missing": []
+    },
+    "grade": "B",
+    "findings": [
+      {
+        "issue": "The spec defines a container for content that does not yet exist.",
+        "category": "orphan-spec",
+        "severity": "medium",
+        "correction": "Populate the module with at least one example bug analysis or actual app issue document as the overview currently states 'No content yet'.",
+        "evidence": "## Contents \\n\\n _No content yet. Add app issue analyses as numbered files within this folder._",
+        "impact": 3
+      },
+      {
+        "impact": 2,
+        "correction": "Align the version numbers between 00-overview.md (3.2.0) and 97-acceptance-criteria.md (1.0.0).",
+        "evidence": "Overview Version: 3.2.0; AC Version: 1.0.0",
+        "category": "inconsistency",
+        "severity": "low",
+        "issue": "Internal versioning mismatch between overview and acceptance criteria."
+      },
+      {
+        "impact": 1,
+        "evidence": "AC-01: Module entry point exists and is non-trivial",
+        "correction": "Specify the exact criteria for what constitutes a 'non-trivial' entry point beyond header metadata.",
+        "severity": "low",
+        "category": "untestable",
+        "issue": "'Non-trivial' is subjective and difficult to verify programmatically without clearer constraints."
+      }
+    ],
+    "verdict": "The spec module is a well-structured shell and correctly integrates with existing linter tools, but it currently lacks any actual content (app issues) and contains minor versioning inconsistencies."
+  },
+  {
+    "module": "02-coding-guidelines/23-app-database",
+    "code_mapping": {
+      "expected_but_missing": [
+        "01-users-table.md",
+        "02-orders-table.md"
+      ],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "weighted_overall": 40,
+    "grade": "D",
+    "findings": [
+      {
+        "severity": "high",
+        "category": "orphan-spec",
+        "impact": 7,
+        "evidence": "_No content yet. Add database design documents as numbered files within this folder._",
+        "correction": "Populate the folder with at least one representative numbered file (e.g., 01-data-model.md) as the overview claims to cover app-specific designs.",
+        "issue": "The spec module is a shell with no actual database design content despite being versioned 3.2.0."
+      },
+      {
+        "issue": "AC-05 refers to a 'Purpose' section that does not actually contain the UUID requirement; the requirement is only in the inlined contract.",
+        "correction": "Specify an automated tool or manual check process in the AC to verify UUID usage in markdown files.",
+        "evidence": "AC-05: UUID Primary Key Standardization (Verifies: 00-overview.md - Purpose section)",
+        "impact": 3,
+        "severity": "medium",
+        "category": "untestable"
+      },
+      {
+        "issue": "Conflicting signals between 'Purpose' (which implies content) and 'Contents' (which is empty).",
+        "category": "ambiguity",
+        "severity": "low",
+        "impact": 5,
+        "evidence": "Purpose: Covers data model decisions, table designs... Contents: No content yet.",
+        "correction": "Clearly state in the Overview whether this module is intended to be a repository of schema definitions or just a guideline for how to write them."
+      }
+    ],
+    "verdict": "The module is an empty shell (Type: Orphan Spec). While it sets up rules, it contains zero actual database designs despite a high version number (3.2.0) and detailed acceptance criteria that have nothing to validate against.",
+    "scores": {
+      "completeness": 30,
+      "alignment": 0,
+      "consistency": 60,
+      "clarity": 70,
+      "maintainability": 80,
+      "testability": 50
+    }
+  },
+  {
+    "module": "02-coding-guidelines/24-app-design-system-and-ui",
+    "scores": {
+      "testability": 30,
+      "maintainability": 70,
+      "completeness": 20,
+      "clarity": 60,
+      "alignment": 0,
+      "consistency": 50
+    },
+    "findings": [
+      {
+        "correction": "Create the actual design system content files (colors, typography, etc.) as the folder is currently empty.",
+        "evidence": "_No content yet. Add design system documents as numbered files within this folder._",
+        "impact": 9,
+        "category": "orphan-spec",
+        "issue": "Spec folder is an empty shell with no actual design system definitions.",
+        "severity": "high"
+      },
+      {
+        "category": "drift",
+        "severity": "medium",
+        "issue": "Acceptance Criteria contains technical requirements not found in the source overview.",
+        "evidence": "AC includes an 'Inlined Contract' with specific keys (primary-color, grid-column-count) that do not exist in the overview.",
+        "correction": "Add the 'Design System Requirements Contract' or specific layout/theming values to the module overview (00-overview.md).",
+        "impact": 5
+      },
+      {
+        "evidence": "AC-02: Then The implementation must align with the 'App-specific design system specifications'...",
+        "correction": "Specify which UI framework or file pattern in the code should be checked for alignment.",
+        "impact": 4,
+        "category": "untestable",
+        "issue": "Acceptance Criteria refers to 'code implementation' but no frontend code exists in the index to verify.",
+        "severity": "medium"
+      },
+      {
+        "correction": "Define the specific max-content-width and spacing-unit values instead of giving ranges/options.",
+        "evidence": "spacing-unit: 4px or 8px increments.",
+        "impact": 3,
+        "category": "ambiguity",
+        "issue": "Layout constants in the AC are ambiguous (4px OR 8px).",
+        "severity": "low"
+      }
+    ],
+    "grade": "D",
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [],
+      "expected_but_missing": [
+        "spec/02-coding-guidelines/24-app-design-system-and-ui/01-colors.md",
+        "spec/02-coding-guidelines/24-app-design-system-and-ui/02-typography.md"
+      ]
+    },
+    "weighted_overall": 33,
+    "verdict": "The spec is a 'hollow' module. It defines how design documents SHOULD look and provides ACs for them, but contains zero actual design rules (colors, fonts, grids) in the overview, and there is no corresponding UI code in the index to validate against."
+  },
+  {
+    "module": "03-error-manage",
+    "scores": {
+      "maintainability": 80,
+      "alignment": 15,
+      "clarity": 90,
+      "testability": 70,
+      "consistency": 95,
+      "completeness": 85
+    },
+    "weighted_overall": 54,
+    "code_mapping": {
+      "expected_but_missing": [
+        "pkg/apperror/apperror.go",
+        "pkg/response/envelope.go",
+        "ui/src/hooks/useErrorModal.ts",
+        "ui/src/utils/statusCheck.ts",
+        "03-error-code-registry/error-codes-master.json"
+      ],
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/generate-gwt-acceptance.py"
+      ]
+    },
+    "findings": [
+      {
+        "evidence": "AC-01, AC-05, AC-07 describe Go packages (apperror) and Response Envelopes that do not exist in the file index.",
+        "correction": "Create the referenced apperror package in the backend and status check utility in the frontend.",
+        "severity": "critical",
+        "impact": 8,
+        "category": "orphan-spec",
+        "issue": "The spec describes a mature 3-tier error architecture, but the code index contains only linter scripts."
+      },
+      {
+        "category": "drift",
+        "issue": "AC-03 references a registry file that is not present in the code index.",
+        "evidence": "AC-03: 'registered in 03-error-code-registry/error-codes-master.json'",
+        "correction": "Ensure the code index includes the JSON registry or remove the mandate for its use from AC-03.",
+        "severity": "high",
+        "impact": 5
+      },
+      {
+        "evidence": "Individual files in linter-scripts like generate-gwt-acceptance.py are present but not detailed in the Error Management overview.",
+        "severity": "low",
+        "correction": "Add a section to Error Resolution (Category 01) explaining how to use the linter-scripts to verify spec alignment.",
+        "impact": 3,
+        "category": "missing-spec",
+        "issue": "The code index contains extensive linter scripts for specs, but the spec does not document their role in error resolution."
+      },
+      {
+        "evidence": "AC-06: 'The notification system MUST apply specific color tokens...'",
+        "impact": 4,
+        "severity": "medium",
+        "correction": "Define the specific 'notification system' component/file to be checked.",
+        "category": "untestable",
+        "issue": "AC-06 refers to a 'notification system' without locating the implementation in the codebase."
+      }
+    ],
+    "grade": "D",
+    "verdict": "The specification is internally well-structured and highly detailed, but it exists in a vacuum. It describes a complex cross-stack architecture (PHP/Go/React) that is entirely absent from the provided code index, which only contains linter scripts."
+  },
+  {
+    "module": "03-error-manage/01-error-resolution",
+    "findings": [
+      {
+        "issue": "Referenced subfolders are missing from the file inventory.",
+        "severity": "medium",
+        "category": "orphan-spec",
+        "correction": "Add the '03-retrospectives', '04-verification-patterns', '05-debugging-guides', and 'app-issues' directories to the codebase if they are intended to be part of this module.",
+        "evidence": "Overview defines Subfolders 03, 04, 05, and 06 (app-issues) as part of this module.",
+        "impact": 5
+      },
+      {
+        "severity": "low",
+        "category": "untestable",
+        "issue": "Module-specific AC is vague and lacks measurable criteria beyond basic structure.",
+        "impact": 3,
+        "evidence": "The following files in this module also constitute acceptance surface \u2014 each must remain valid markdown...",
+        "correction": "Define specific metrics for what constitutes a 'valid markdown' and 'top-level H1' per language in the content-specific files."
+      }
+    ],
+    "grade": "B",
+    "verdict": "The spec is well-structured and aligns perfectly with the automation tooling (linter-scripts) present in the codebase. However, it claims to manage several sub-directories (retrospectives, debugging-guides) that are not present in the provided file inventory, creating a documentation gap.",
+    "scores": {
+      "clarity": 90,
+      "alignment": 75,
+      "maintainability": 85,
+      "completeness": 80,
+      "consistency": 85,
+      "testability": 80
+    },
+    "weighted_overall": 82,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh"
+      ]
+    }
+  },
+  {
+    "module": "03-error-manage/01-error-resolution/03-retrospectives",
+    "grade": "F",
+    "verdict": "The spec is a 'Phantom Spec'\u2014it describes a complex system (Go backend/React frontend) in high detail, but the actual provided code index contains only Python and Shell linting scripts. Alignment is zero.",
+    "scores": {
+      "alignment": 0,
+      "completeness": 60,
+      "consistency": 90,
+      "clarity": 70,
+      "maintainability": 80,
+      "testability": 40
+    },
+    "findings": [
+      {
+        "correction": "The code index contains only linter scripts; include the backend and frontend source files to validate these retrospective claims.",
+        "category": "drift",
+        "evidence": "AC-01 through AC-07 describe specific Go and React files (e.g., backend/internal/api/handlers/handlers.go) that are completely missing from the provided code index.",
+        "issue": "Spec describes a full-stack application, but the provided code index only contains CI/infra scripts.",
+        "impact": 9,
+        "severity": "critical"
+      },
+      {
+        "category": "untestable",
+        "correction": "Finish the incomplete AC-07 definition to include proper When/Then clauses.",
+        "issue": "AC-07 is truncated mid-sentence, rendering it untestable.",
+        "evidence": "AC-07: Skip Redundant Plugin Activation... When... Th [truncated]",
+        "impact": 5,
+        "severity": "medium"
+      },
+      {
+        "severity": "low",
+        "impact": 2,
+        "evidence": "\"timestamp\":\"...\" in AC-01.",
+        "issue": "Timestamp format in health response is not specified.",
+        "correction": "Explicitly define the expected 'timestamp' format (e.g., ISO-8601) in AC-01.",
+        "category": "ambiguity"
+      }
+    ],
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "backend/internal/api/handlers/handlers.go",
+        "backend/internal/services/publish/service.go",
+        "backend/internal/wordpress/uploader.go",
+        "src/App.tsx",
+        "src/lib/api/methods.ts",
+        "src/components/BackendStatus.tsx"
+      ]
+    },
+    "weighted_overall": 41
+  },
+  {
+    "module": "03-error-manage/01-error-resolution/04-verification-patterns",
+    "scores": {
+      "consistency": 80,
+      "completeness": 90,
+      "maintainability": 70,
+      "alignment": 0,
+      "clarity": 85,
+      "testability": 60
+    },
+    "weighted_overall": 43,
+    "code_mapping": {
+      "expected_but_missing": [
+        "BackendStatus.tsx",
+        "getResolvedApiUrl()",
+        "openapi.yaml",
+        "backend/handlers/health.go"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    },
+    "findings": [
+      {
+        "category": "orphan-spec",
+        "issue": "Spec describes specific components (BackendStatus.tsx) and functions (getResolvedApiUrl) that are completely absent from the code index.",
+        "correction": "Provide the actual frontend and backend implementation files or mark this spec as an architectural pattern template without concrete code mapping.",
+        "impact": 9,
+        "severity": "critical",
+        "evidence": "AC-03: Given Frontend component BackendStatus.tsx; AC-04: log the value returned by getResolvedApiUrl(); AC-06: endpoint is documented in openapi.yaml."
+      },
+      {
+        "evidence": "Document Inventory shows: 01-frontend-backend-sync.md and 99-consistency-report.md listed twice in separate blocks.",
+        "correction": "Update the file inventory to remove the double-listed files and include the missing 01-frontend-backend-sync.md content correctly.",
+        "impact": 2,
+        "severity": "low",
+        "issue": "Broken internal document inventory layout and double-listing.",
+        "category": "drift"
+      },
+      {
+        "category": "untestable",
+        "issue": "Verification logic for WebSockets is generic and lacks specific code triggers or utility functions.",
+        "evidence": "AC-05: onclose provides the numeric exit code and reason string.",
+        "correction": "Define what constitutes a 'numeric exit code' check in the context of a browser-based WebSocket onclose event.",
+        "impact": 3,
+        "severity": "medium"
+      }
+    ],
+    "grade": "F",
+    "verdict": "The spec module is a total orphan; it describes specific UI components, API wrappers, and configuration files that do not exist in the provided code index, which only contains linter scripts."
+  },
+  {
+    "module": "03-error-manage/01-error-resolution/05-debugging-guides",
+    "grade": "F",
+    "findings": [
+      {
+        "impact": 10,
+        "category": "drift",
+        "severity": "critical",
+        "issue": "Spec refers to application logic, but only linter scripts exist in the code index.",
+        "evidence": "AC-01, AC-03, AC-05 describe specific PHP, Go, and TS implementations not present in the index.",
+        "correction": "Verify against actual application code or mark spec as 'Future' if the code is not yet indexed."
+      },
+      {
+        "correction": "Define verifiable file paths/symbols that actually exist in the target repository.",
+        "severity": "high",
+        "issue": "Acceptance Criteria rely on files/symbols that do not exist.",
+        "evidence": "'The PHP constants PLUGIN_DEBUG_LOGGING and PLUGIN_ERROR_LOGGING are defined in includes/constants.php'",
+        "category": "untestable",
+        "impact": 8
+      },
+      {
+        "correction": "Remove double directory listings in the Document Inventory.",
+        "severity": "low",
+        "issue": "Duplicate entries in Document Inventory.",
+        "evidence": "Overview.md lists 01-debugging-php.md and others twice under Document Inventory.",
+        "category": "ambiguity",
+        "impact": 2
+      }
+    ],
+    "scores": {
+      "clarity": 80,
+      "consistency": 85,
+      "maintainability": 70,
+      "alignment": 0,
+      "completeness": 90,
+      "testability": 10
+    },
+    "verdict": "The spec is well-written internally but suffers from a total 'Alignment' failure: it describes a full-stack application (WP/Go/React) while the provided code index contains only Python/Bash/JS linter scripts. It is an orphan spec module.",
+    "weighted_overall": 48,
+    "code_mapping": {
+      "expected_but_missing": [
+        "includes/constants.php",
+        "wp-content/themes/...",
+        "internal/api/server.go",
+        "src/api/client.ts"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    }
+  },
+  {
+    "module": "03-error-manage/01-error-resolution/app-issues",
+    "grade": "F",
+    "findings": [
+      {
+        "issue": "Spec describes concrete application logic (UrlError casing, Code Red logging) that is entirely absent from the code index.",
+        "category": "orphan-spec",
+        "severity": "critical",
+        "correction": "Add implementation files for the UrlError renaming and the Code Red logging system described in the AC.",
+        "evidence": "AC-01 through AC-06 describe Go and TypeScript implementations, but the index only contains linter scripts.",
+        "impact": 9
+      },
+      {
+        "category": "untestable",
+        "severity": "medium",
+        "issue": "AC requires case-sensitive searches of the 'spec tree' but the spec body references app code implementation (Go/TS).",
+        "impact": 5,
+        "evidence": "AC-04: 'Zero instances of the string URLError shall exist' - requires a codebase to check against.",
+        "correction": "Define specific file patterns or code markers to check for compliance."
+      },
+      {
+        "evidence": "'Level: Code Red (or equivalent)'",
+        "correction": "Define the specific log mechanism or library used for 'Code Red' levels.",
+        "impact": 3,
+        "issue": "The term 'Code Red' is used as a log level but isn't tied to a specific logging library standard (e.g., Zap, Winston).",
+        "severity": "low",
+        "category": "ambiguity"
+      }
+    ],
+    "verdict": "The specification is well-structured and internally consistent but fails completely on alignment. It describes detailed error handling logic for Go and TypeScript that does not exist in the provided codebase, which consists only of linter scripts.",
+    "weighted_overall": 48,
+    "scores": {
+      "clarity": 85,
+      "alignment": 0,
+      "maintainability": 80,
+      "completeness": 90,
+      "consistency": 95,
+      "testability": 40
+    },
+    "code_mapping": {
+      "expected_but_missing": [
+        "src/errors/UrlError.go (or similar)",
+        "src/logging/code-red-logger.go (or similar)",
+        "src/assets/AssetLoader.ts",
+        "src/plugins/PluginInstaller.ts"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    }
+  },
+  {
+    "module": "03-error-manage/02-error-architecture",
+    "verdict": "The specification is high-quality documentation for a system that does not exist in the provided code index. It represents a 100% architectural drift/orphan state.",
+    "scores": {
+      "maintainability": 80,
+      "testability": 70,
+      "clarity": 90,
+      "consistency": 95,
+      "alignment": 0,
+      "completeness": 85
+    },
+    "findings": [
+      {
+        "issue": "The spec describes a multi-tier error architecture (Go apperror, React Error Modal) that has no corresponding implementation in the code index.",
+        "impact": 10,
+        "evidence": "Tier 1: Delegated Server (PHP/other)... Tier 2: Go Backend \u2192 apperror package... Tier 3: Frontend (React) \u2192 Error store...",
+        "correction": "Implement the Go apperror package and React error modal components described in the 04-07 subfolders.",
+        "category": "orphan-spec",
+        "severity": "critical"
+      },
+      {
+        "issue": "The code index contains extensive linter scripts that are referenced by the AC but not defined as part of the architecture.",
+        "impact": 4,
+        "evidence": "linter-scripts/check-tree-health.cjs, linter-scripts/run.sh",
+        "correction": "Create specifications for the linter scripts present in the codebase.",
+        "category": "missing-spec",
+        "severity": "medium"
+      },
+      {
+        "category": "untestable",
+        "severity": "low",
+        "impact": 3,
+        "evidence": "node linter-scripts/check-tree-health.cjs --min=80",
+        "correction": "Update AC-05 to reference a verifiable health metric or remove reliance on external scripts not yet validated against this module's code.",
+        "issue": "Acceptance criteria AC-05 relies on a linter script whose internal pass/fail logic for this specific module is opaque within the spec."
+      }
+    ],
+    "grade": "F",
+    "weighted_overall": 51,
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "/internal/apperror/apperror.go",
+        "/internal/api/delegation.go",
+        "/frontend/src/components/ErrorModal.tsx",
+        "/frontend/src/hooks/useErrorStore.ts"
+      ]
+    }
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/04-error-modal",
+    "weighted_overall": 51,
+    "verdict": "The specification is high quality and detailed, but it is a complete 'orphan'. The code index contains only infrastructure scripts and lacks the entire React application stack (components, hooks, state) described in the module.",
+    "grade": "F",
+    "findings": [
+      {
+        "category": "orphan-spec",
+        "severity": "critical",
+        "issue": "Spec describes a complex React UI and API integration that is entirely missing from the provided code index.",
+        "evidence": "The file index contains only linter scripts and CI workflows, while the spec describes GlobalErrorModal, useErrorHistory hook, and Zod/Zustand logic.",
+        "correction": "Implement the React components and hooks described in the spec or move the spec to a 'planned' or 'draft' status if the implementation is missing from the index.",
+        "impact": 10
+      },
+      {
+        "issue": "Acceptance criteria reference specific UI components and Tailwind classes that cannot be verified without the source code.",
+        "severity": "medium",
+        "category": "untestable",
+        "impact": 5,
+        "correction": "Create a real implementation file to allow the AC-01 check to verify 'text-destructive' class existence.",
+        "evidence": "AC-01: 'The header icon must render the AlertCircle icon with the text-destructive Tailwind class'"
+      }
+    ],
+    "code_mapping": {
+      "implemented_by": [],
+      "expected_but_missing": [
+        "src/components/error/GlobalErrorModal.tsx",
+        "src/hooks/useErrorHistory.ts",
+        "src/store/useErrorStore.ts",
+        "src/api/errorHistoryApi.ts",
+        "src/styles/errorThemes.ts"
+      ],
+      "orphan_code": []
+    },
+    "scores": {
+      "maintainability": 85,
+      "completeness": 95,
+      "clarity": 90,
+      "testability": 40,
+      "alignment": 0,
+      "consistency": 95
+    }
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/04-error-modal/01-copy-formats",
+    "grade": "F",
+    "verdict": "The spec is a high-quality template but is currently a pure orphan; the code index contains only linter scripts and no application code. Furthermore, the spec itself is incomplete, missing all Acceptance Criteria and ending mid-sentence.",
+    "scores": {
+      "completeness": 20,
+      "consistency": 80,
+      "testability": 0,
+      "clarity": 40,
+      "alignment": 0,
+      "maintainability": 70
+    },
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "frontend/src/features/error-management/components/ErrorModal/utils/reportGenerators.ts",
+        "frontend/src/features/error-management/components/ErrorModal/CopyMenu.tsx",
+        "backend/pkg/api/handlers/logs.go"
+      ]
+    },
+    "findings": [
+      {
+        "issue": "The entire spec module is orphaned; no implementation code for error reporting exists in the provided index.",
+        "category": "orphan-spec",
+        "impact": 10,
+        "severity": "critical",
+        "correction": "Implement the error report generators and copy-menu UI described in the spec or link to existing frontend components.",
+        "evidence": "Spec defines 9 format types (01-compact-report.md, etc.) and generateErrorReport() logic, but no matching frontend/backend code is in the index."
+      },
+      {
+        "impact": 5,
+        "correction": "Either provide Acceptance Criteria for this module or remove the section placeholder.",
+        "severity": "high",
+        "evidence": "Acceptance Criteria (first 4000 chars)\\n(MISSING)",
+        "category": "missing-spec",
+        "issue": "The spec module is missing all Acceptance Criteria, rendering it untestable."
+      },
+      {
+        "issue": "The overview document cuts off mid-sentence at the end of the file.",
+        "category": "ambiguity",
+        "correction": "Finish the sentence regarding Delegated Server Info requirements.",
+        "severity": "medium",
+        "impact": 3,
+        "evidence": "It includes:\\n\\n- Delegated endp [EOF]"
+      },
+      {
+        "severity": "medium",
+        "correction": "Add specific GWT (Given/When/Then) scenarios for the split-button copy logic.",
+        "impact": 4,
+        "evidence": "The spec provides visual ASCII diagrams but no verifiable test logic for ensuring the 'Copy Compact' vs 'Copy Full' behavior.",
+        "category": "untestable",
+        "issue": "Split-button behavior is described visually but lacks functional acceptance criteria."
+      }
+    ],
+    "weighted_overall": 21
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/04-error-modal/02-react-components",
+    "scores": {
+      "consistency": 80,
+      "completeness": 40,
+      "clarity": 85,
+      "testability": 0,
+      "maintainability": 70,
+      "alignment": 0
+    },
+    "weighted_overall": 38,
+    "code_mapping": {
+      "expected_but_missing": [
+        "src/components/error-modal/GlobalErrorModal.tsx",
+        "src/store/errorStore.ts",
+        "src/hooks/useSessionDiagnostics.ts",
+        "src/utils/reportGenerator.ts"
+      ],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [
+      {
+        "correction": "Create the React components, store, and hooks described in the spec or remove the source code placeholders.",
+        "severity": "critical",
+        "impact": 9,
+        "evidence": "The spec contains detailed 'Component Source Code' (06) and 'Error Store' (02), but the code index only contains python/bash linter scripts.",
+        "category": "orphan-spec",
+        "issue": "Spec describes a complete React error-handling UI system that does not exist in the codebase."
+      },
+      {
+        "category": "missing-spec",
+        "issue": "The main overview file is missing its Acceptance Criteria section.",
+        "evidence": "Acceptance Criteria (first 4000 chars)\\n(MISSING)",
+        "correction": "Add Acceptance Criteria to the overview file to ensure testability.",
+        "severity": "medium",
+        "impact": 5
+      },
+      {
+        "category": "drift",
+        "issue": "Internal date inconsistency within the overview file.",
+        "correction": "Align the 'Updated' date in the header with the 'updated' date at the bottom of the document.",
+        "severity": "low",
+        "impact": 1,
+        "evidence": "Header: 2026-04-01 | Footer: 2026-03-31"
+      },
+      {
+        "issue": "The module lacks testable Acceptance Criteria, making it impossible to verify implementation success.",
+        "category": "untestable",
+        "evidence": "Signal metrics show ac_count: 0.",
+        "impact": 7,
+        "severity": "high",
+        "correction": "Define objective verification steps for the component hierarchy and state transitions."
+      }
+    ],
+    "grade": "F",
+    "verdict": "The spec describes a sophisticated React/Zustand error management UI in high detail, but the provided code index contains only infrastructure/linter scripts. This is a 100% orphan spec with no implementation and missing Acceptance Criteria."
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference",
+    "scores": {
+      "clarity": 90,
+      "consistency": 95,
+      "testability": 80,
+      "completeness": 85,
+      "alignment": 0,
+      "maintainability": 90
+    },
+    "findings": [
+      {
+        "severity": "critical",
+        "correction": "Implement the Global Error Modal components in src/components/errors/ to match the specification.",
+        "impact": 10,
+        "issue": "Spec describes an entire frontend error handling system that does not exist in the code index.",
+        "evidence": "Location: src/components/errors/ listed in overview but missing from code index.",
+        "category": "orphan-spec"
+      },
+      {
+        "evidence": "The generated markdown must strip timestamps and base API URLs... while retaining the relative paths.",
+        "category": "untestable",
+        "impact": 3,
+        "issue": "AC-06 'Scrubbing Rules' is too vague for automated verification.",
+        "correction": "Update AC-06 to define specific regex or cleaning rules for markdown scrubbing.",
+        "severity": "low"
+      },
+      {
+        "evidence": "11-queue-navigation.md mentions multi-error support but underlying state logic isn't detailed.",
+        "category": "missing-spec",
+        "impact": 5,
+        "issue": "The mechanism for storing multiple errors in the queue is under-specified.",
+        "correction": "Add a specific file for Error Queue state management (Redux/Zustand) referred to by file 11.",
+        "severity": "medium"
+      }
+    ],
+    "code_mapping": {
+      "orphan_code": [],
+      "expected_but_missing": [
+        "src/components/errors/GlobalErrorModal.tsx",
+        "src/components/errors/types.ts",
+        "src/hooks/useSessionDiagnostics.ts",
+        "src/components/errors/sections/BackendSection.tsx"
+      ],
+      "implemented_by": []
+    },
+    "verdict": "The specification is exceptionally detailed and internally consistent, but it is an 'orphan spec' as none of the described React components or logic exist in the provided code index.",
+    "weighted_overall": 51,
+    "grade": "F"
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/04-error-modal/04-color-themes",
+    "verdict": "The spec is a 'ghost' document: it provides a highly detailed description of a color theme system (Go vs PHP tiers) that has zero representation in the provided code index, which consists only of linter scripts. Without Acceptance Criteria or evidence of implementation, it is currently useless for engineering verification.",
+    "grade": "F",
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "tailwind.config.js",
+        "src/styles/design-tokens.css",
+        "src/components/error-modal/ErrorModal.tsx"
+      ]
+    },
+    "weighted_overall": 31,
+    "scores": {
+      "completeness": 20,
+      "clarity": 60,
+      "maintainability": 70,
+      "consistency": 90,
+      "testability": 0,
+      "alignment": 0
+    },
+    "findings": [
+      {
+        "severity": "high",
+        "correction": "Add formal GWT (Given/When/Then) acceptance criteria for color theme transitions and contrast ratios.",
+        "impact": 5,
+        "evidence": "Acceptance Criteria (first 4000 chars) (MISSING)",
+        "issue": "Spec lacks Acceptance Criteria entirely.",
+        "category": "untestable"
+      },
+      {
+        "impact": 8,
+        "issue": "Spec describes a detailed design system that does not appear to be implemented in the provided code index.",
+        "evidence": "File 01: CSS custom properties (light/dark)... [02-backend-tab-colors.md]",
+        "category": "orphan-spec",
+        "severity": "critical",
+        "correction": "Link the spec to actual UI components (e.g., ErrorModal.tsx) or provide the Tailwind configuration mapping those tokens."
+      },
+      {
+        "category": "ambiguity",
+        "issue": "Vague reliance on tailwind utility classes without defining the actual palette values or fallbacks.",
+        "evidence": "text-blue-500 dark:text-blue-400... text-orange-500/5",
+        "impact": 3,
+        "correction": "Explicitly define the hex values and Contrast Ratio (WCAG 2.1) for these semantic tokens.",
+        "severity": "medium"
+      }
+    ]
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/05-response-envelope",
+    "grade": "F",
+    "verdict": "The specification is high-quality in content but describes a non-existent system in the provided codebase index, resulting in a 0% alignment score. It acts as an 'orphan spec' for functionality (PascalCase API envelopes) that simply isn't there.",
+    "scores": {
+      "completeness": 80,
+      "consistency": 85,
+      "alignment": 0,
+      "maintainability": 80,
+      "testability": 90,
+      "clarity": 70
+    },
+    "weighted_overall": 51,
+    "findings": [
+      {
+        "category": "orphan-spec",
+        "issue": "The specification describes a core system architecture that is entirely missing from the codebase.",
+        "correction": "Implement the Response Envelope Go and PHP types described in ADR 01 and reference 04, or update index.",
+        "impact": 10,
+        "severity": "critical",
+        "evidence": "The spec describes structured Go/PHP response envelopes (AC-01, AC-03, AC-04) but no corresponding application code exists in the index."
+      },
+      {
+        "evidence": "00-overview.md: 2026-04-16 vs 97-acceptance-criteria.md: 2026-04-25",
+        "severity": "low",
+        "impact": 1,
+        "correction": "Sync timestamps: AC is April 25, Overview is April 16.",
+        "issue": "Inconsistent 'Updated' dates across module files.",
+        "category": "drift"
+      },
+      {
+        "severity": "medium",
+        "correction": "Complete the sentence for AC-06.",
+        "impact": 2,
+        "evidence": "AC-06: When Th... [End of file]",
+        "category": "ambiguity",
+        "issue": "AC-06 is truncated and incomplete."
+      }
+    ],
+    "code_mapping": {
+      "expected_but_missing": [
+        "internal/response/envelope.go",
+        "pkg/models/response.go",
+        "src/api/response_envelope.php"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    }
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/06-apperror-package",
+    "scores": {
+      "alignment": 0,
+      "testability": 75,
+      "consistency": 70,
+      "clarity": 60,
+      "completeness": 80,
+      "maintainability": 80
+    },
+    "findings": [
+      {
+        "issue": "Spec describes a Go error package that is entirely missing from the code index.",
+        "evidence": "The spec defines Go types 'Result[T]', 'AppError', and 'AppErrType' but no Go source files exist in the index.",
+        "category": "orphan-spec",
+        "impact": 10,
+        "severity": "critical",
+        "correction": "Ensure the Go package implementing 'AppError' and 'Result[T]' is included in the codebase index."
+      },
+      {
+        "severity": "medium",
+        "correction": "Explain how a Go struct 'prevents' access to a field based on the state of another field (e.g., via private fields and getter methods).",
+        "issue": "AC-06 describes 'Result guard rule' enforcement which is vague for a Go implementation.",
+        "evidence": "AC-06: The Result object must prevent access to the data payload if the internal AppError is non-nil.",
+        "category": "ambiguity",
+        "impact": 3
+      },
+      {
+        "correction": "Update the file inventory to accurately reflect the presence or absence of the '01-apperror-reference/' subfolder.",
+        "severity": "low",
+        "category": "inconsistency",
+        "issue": "Inconsistency between Overview inventory and actual file structure.",
+        "evidence": "Overview-Document Inventory lists '01-apperror-reference/' subfolder, but the Signal Metrics and module context show only 4 flat files.",
+        "impact": 2
+      }
+    ],
+    "weighted_overall": 49,
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [],
+      "expected_but_missing": [
+        "pkg/apperror/types.go",
+        "pkg/apperror/result.go",
+        "pkg/apperror/codes.go",
+        "pkg/apperror/stacktrace.go"
+      ]
+    },
+    "verdict": "The specification describes a detailed Go-based error handling framework (structs, generics, enums), but the provided code index contains only Python and JavaScript linter scripts. The spec is a complete orphan.",
+    "grade": "F"
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
+    "weighted_overall": 40,
+    "scores": {
+      "testability": 0,
+      "clarity": 85,
+      "alignment": 0,
+      "maintainability": 90,
+      "completeness": 40,
+      "consistency": 80
+    },
+    "code_mapping": {
+      "expected_but_missing": [
+        "pkg/apperror/apperror.go",
+        "pkg/apperror/types.go",
+        "pkg/apperror/result.go",
+        "pkg/apperror/serialization.go"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    },
+    "findings": [
+      {
+        "issue": "Spec describes a core Golang package that is entirely missing from the provided code index.",
+        "severity": "critical",
+        "category": "orphan-spec",
+        "evidence": "Spec describes a comprehensive Golang error handling package (AppError struct, Result[T] generics, E1xxx enums) but the code index only contains linter scripts.",
+        "correction": "Ensure the Golang implementation of the apperror package is indexed or implemented in the expected path (e.g., /pkg/apperror).",
+        "impact": 10
+      },
+      {
+        "issue": "The spec module is missing mandatory Acceptance Criteria sections.",
+        "severity": "high",
+        "category": "missing-spec",
+        "evidence": "Acceptance Criteria (first 4000 chars) (MISSING)",
+        "correction": "Add a section or file defining the Acceptance Criteria for the AppError package.",
+        "impact": 7
+      },
+      {
+        "issue": "Without Acceptance Criteria, the implementation cannot be objectively verified.",
+        "severity": "medium",
+        "category": "untestable",
+        "evidence": "ac_count: 0, ac_chars: 0",
+        "correction": "Define clear, verifiable GWT (Given/When/Then) scenarios for error wrapping and result guards.",
+        "impact": 6
+      },
+      {
+        "category": "inconsistency",
+        "severity": "low",
+        "issue": "Minor internal inconsistency in the document inventory table.",
+        "impact": 2,
+        "evidence": "The Document Inventory table lists '99-consistency-report.md' twice.",
+        "correction": "Remove duplicate file entry in the Document Inventory table."
+      }
+    ],
+    "verdict": "The spec describes a sophisticated Golang error handling library with generics and custom enums, but it is a pure 'orphan spec' as no corresponding application code exists in the index. Furthermore, it lacks all Acceptance Criteria, making it an architectural reference without verification requirements.",
+    "grade": "F"
+  },
+  {
+    "module": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
+    "findings": [
+      {
+        "impact": 10,
+        "evidence": "AC-01 through AC-07 describe specific React hooks, Zustand stores, and backend middleware not present in the code index.",
+        "correction": "Implement useExecutionLogger and sessionLogging middleware or provide the source-of-truth code files in the index.",
+        "category": "orphan-spec",
+        "severity": "critical",
+        "issue": "Spec describes a complete logging/diagnostic system that is entirely absent from the provided codebase."
+      },
+      {
+        "impact": 3,
+        "evidence": "AC-07: Sensitive Data Redaction `[high]` - [Empty Content]",
+        "correction": "Regenerate or manually fix the Acceptance Criteria to include the missing content for AC-07.",
+        "category": "drift",
+        "severity": "medium",
+        "issue": "AC-07 is truncated or incomplete in 97-acceptance-criteria.md."
+      },
+      {
+        "severity": "low",
+        "category": "ambiguity",
+        "impact": 2,
+        "correction": "Define the measurement protocol for the 0.1ms CPU overhead requirement.",
+        "evidence": "AC-02: Logger Performance Overhead ... CPU overhead per log ... must remain below 0.1ms.",
+        "issue": "Performance metrics are specified without a defined measurement environment or tool, making them untestable."
+      }
+    ],
+    "grade": "F",
+    "verdict": "The spec is a high-quality 'hallucination' relative to the provided codebase; it describes a sophisticated React/Backend logging architecture that does not exist in the source files, which only contain linter scripts.",
+    "scores": {
+      "consistency": 90,
+      "alignment": 0,
+      "completeness": 60,
+      "maintainability": 80,
+      "testability": 40,
+      "clarity": 70
+    },
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "src/hooks/useExecutionLogger.ts",
+        "src/store/executionStore.ts",
+        "src/middleware/sessionLogging.ts",
+        "src/utils/redaction.ts",
+        "src/types/error-envelope.ts"
+      ]
+    },
+    "weighted_overall": 51
+  },
+  {
+    "module": "03-error-manage/03-error-code-registry",
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh"
+      ],
+      "expected_but_missing": [
+        "07-schemas/00-overview.md",
+        "08-linter-scripts/00-overview.md",
+        "09-templates/00-overview.md",
+        "error-codes-master.json"
+      ],
+      "orphan_code": []
+    },
+    "grade": "C",
+    "weighted_overall": 70,
+    "scores": {
+      "maintainability": 90,
+      "consistency": 80,
+      "clarity": 85,
+      "alignment": 60,
+      "completeness": 70,
+      "testability": 40
+    },
+    "findings": [
+      {
+        "correction": "Ensure the inventory index in 00-overview.md reflects the actual codebase structure (currently missing directories 07, 08, 09).",
+        "issue": "Overview inventory references non-existent folders and JSON files.",
+        "category": "drift",
+        "severity": "medium",
+        "evidence": "Overview mentions folders 07-schemas, 08-linter-scripts, 09-templates and error-codes-master.json which are not in the file inventory.",
+        "impact": 4
+      },
+      {
+        "issue": "Missing machine-readable master database mentioned in spec.",
+        "correction": "Create the error-codes-master.json file or remove references to it as a 'Machine-readable master index'.",
+        "impact": 7,
+        "evidence": "File #06 error-codes-master.json listed in inventory but missing from disk.",
+        "severity": "high",
+        "category": "missing-spec"
+      },
+      {
+        "impact": 5,
+        "severity": "medium",
+        "evidence": "Acceptance criteria (AC-01 to AC-05) focus 100% on document metadata and 0% on error code logic or collision prevention.",
+        "category": "untestable",
+        "issue": "Acceptance criteria do not verify the primary function (collision prevention).",
+        "correction": "Define what 'General/Shared' or 'Nexus Flow' error codes actually are; AC only validates file presence, not registry integrity."
+      },
+      {
+        "impact": 2,
+        "severity": "low",
+        "evidence": "00-overview.md lists 99-consistency-report.md twice in the document inventory tables.",
+        "category": "inconsistency",
+        "issue": "Duplicate entry in document inventory table.",
+        "correction": "Remove the second instance of 99-consistency-report.md in the folder inventory table."
+      }
+    ],
+    "verdict": "The spec serves as a good organizational shell but fails significantly on alignment (referencing multiple missing sub-directories and a master JSON file) and testability (ACs only check for file existence, ignore the logic of error code ranges)."
+  },
+  {
+    "module": "03-error-manage/03-error-code-registry/07-schemas",
+    "verdict": "The spec is a pure 'orphan'\u2014it defines rigorous technical constraints for JSON schemas that have no corresponding implementation files in the provided codebase index.",
+    "weighted_overall": 40,
+    "scores": {
+      "alignment": 0,
+      "consistency": 90,
+      "maintainability": 80,
+      "completeness": 60,
+      "clarity": 70,
+      "testability": 95
+    },
+    "code_mapping": {
+      "implemented_by": [],
+      "expected_but_missing": [
+        "schemata/error-registry.schema.json",
+        "src/error-registry/validator.js"
+      ],
+      "orphan_code": []
+    },
+    "grade": "F",
+    "findings": [
+      {
+        "severity": "critical",
+        "issue": "The spec describes JSON schemas that do not exist in the codebase.",
+        "category": "orphan-spec",
+        "impact": 10,
+        "correction": "Create the JSON schema files defined in the AC (e.g., in a /schemata/ or /contracts/ directory).",
+        "evidence": "Entire AC section defines JSON schema constraints (ErrorCodeRegex, SeverityEnum, HTTPRange) but no .json or .schema files exist in the index."
+      },
+      {
+        "category": "missing-spec",
+        "severity": "medium",
+        "issue": "Requirement details are only present in AC, missing from the overview/body.",
+        "evidence": "00-overview.md contains only metadata and a purpose statement; AC contains the actual logic.",
+        "correction": "Add a 'contracts' or 'definitions' section to 00-overview.md explaining the schema structure.",
+        "impact": 4
+      },
+      {
+        "evidence": "JSON Schema Versions: Targeting Draft 7 or 2020-12 compat.",
+        "correction": "Explicitly state which JSON schema version (Draft 7 OR 2020-12) is the standard.",
+        "impact": 3,
+        "category": "ambiguity",
+        "severity": "low",
+        "issue": "Vague schema version target prevents strict validation setup."
+      }
+    ]
+  },
+  {
+    "module": "03-error-manage/03-error-code-registry/08-linter-scripts",
+    "scores": {
+      "testability": 30,
+      "completeness": 40,
+      "clarity": 70,
+      "alignment": 10,
+      "maintainability": 60,
+      "consistency": 80
+    },
+    "findings": [
+      {
+        "issue": "The spec describes a specific 'Error Code Registry' linter that is absent from the codebase.",
+        "severity": "high",
+        "evidence": "AC-01 through AC-05 describe an error code linter that does not exist in the file inventory.",
+        "correction": "Implement the error registry linter script or update the spec to reflect existing generic linting tools.",
+        "impact": 8,
+        "category": "orphan-spec"
+      },
+      {
+        "category": "drift",
+        "impact": 5,
+        "correction": "Add the Error Code linter to the main run.sh/run.ps1 execution flow.",
+        "evidence": "linter-scripts/run.sh",
+        "issue": "The entry point scripts do not appear to invoke the error registry validation described.",
+        "severity": "medium"
+      },
+      {
+        "impact": 4,
+        "category": "missing-spec",
+        "severity": "low",
+        "issue": "Numerous existing linter scripts in the index have no corresponding requirements in this module.",
+        "evidence": "linter-scripts/check-memory-mirror-drift.py",
+        "correction": "Create spec modules for the variety of existing scripts like check-axios-version.sh or check-memory-mirror-drift.py."
+      },
+      {
+        "correction": "Define the specific command or script name that satisfies the AC.",
+        "issue": "AC refers to 'the linter script' generically without identifying the file name.",
+        "severity": "medium",
+        "evidence": "AC-01: 'Running the consistency linter script'",
+        "category": "untestable",
+        "impact": 3
+      }
+    ],
+    "grade": "F",
+    "weighted_overall": 40,
+    "verdict": "The spec describes a specific Error Code Registry linter which is completely missing from the codebase, while ignoring the 20+ actual linter scripts present in the index.",
+    "code_mapping": {
+      "implemented_by": [],
+      "expected_but_missing": [
+        "linter-scripts/check-error-registry.py",
+        "linter-scripts/validate-error-codes.sh"
+      ],
+      "orphan_code": [
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/generate-gwt-acceptance.py",
+        "linter-scripts/audit-spec-vs-code.py"
+      ]
+    }
+  },
+  {
+    "module": "03-error-manage/03-error-code-registry/09-templates",
+    "scores": {
+      "maintainability": 70,
+      "alignment": 0,
+      "clarity": 90,
+      "testability": 40,
+      "consistency": 80,
+      "completeness": 85
+    },
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": []
+    },
+    "findings": [
+      {
+        "issue": "Spec describes a functional system (Error Registry) that has no corresponding implementation in the code index.",
+        "category": "orphan-spec",
+        "correction": "Create error registry implementation files or move this spec to a purely documentation-focused ARCHITECTURE directory.",
+        "impact": 8,
+        "severity": "high",
+        "evidence": "spec/03-error-manage/03-error-code-registry/09-templates describes error code formats (XX-000-00) and mappings."
+      },
+      {
+        "correction": "Specify where the registry file should exist and what tool should validate it.",
+        "severity": "medium",
+        "impact": 5,
+        "evidence": "AC-07: The error registry is audited for compliance with the template.",
+        "category": "untestable",
+        "issue": "AC-07 refers to auditing a registry that does not exist in the file inventory."
+      },
+      {
+        "issue": "Redundant/duplicated file inventory tables in the overview.",
+        "category": "inconsistency",
+        "evidence": "00-overview.md Document Inventory section repeats two files twice in two separate tables.",
+        "severity": "low",
+        "impact": 2,
+        "correction": "Clean up the Overview file to list the document inventory correctly once."
+      }
+    ],
+    "weighted_overall": 46,
+    "grade": "D",
+    "verdict": "The spec is well-written as a template but is a complete orphan; it describes an error management system, naming conventions, and HTTP mappings for which there is zero corresponding code in the provided index."
+  },
+  {
+    "module": "04-database-conventions",
+    "verdict": "The specification is exceptionally well-written and clear, providing a robust 'Golden Rule' set for database design. However, it receives a failing grade because it is entirely 'orphan'\u2014there is zero database implementation code (schemas, migrations, or models) in the provided index to align with, making it a document-only module that does not govern actual code yet.",
+    "grade": "F",
+    "weighted_overall": 51,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "scores": {
+      "consistency": 90,
+      "maintainability": 85,
+      "completeness": 95,
+      "clarity": 90,
+      "alignment": 0,
+      "testability": 30
+    },
+    "findings": [
+      {
+        "category": "orphan-spec",
+        "evidence": "Purpose: Comprehensive database design and implementation conventions... single source of truth for how databases are designed and used across all languages.",
+        "issue": "Entirely orphaned spec: no database schemas, migrations, or ORM models exist in the code index.",
+        "impact": 8,
+        "correction": "Create initial migration and base model implementation matching PascalCase and singular table rules.",
+        "severity": "critical"
+      },
+      {
+        "impact": 2,
+        "category": "drift",
+        "evidence": "07 | [07-split-db-pattern.md](./07-split-db-pattern.md) | Split DB pattern... vs AC listing 07-split-db-pattern.md",
+        "issue": "Minor internal link/index naming inconsistency likely between overview and detailed content files.",
+        "correction": "Rename `07-split-db-pattern.md` to `07-split-db-architecture.md` to match index or update index to match filename.",
+        "severity": "low"
+      },
+      {
+        "issue": "Acceptance criteria only test the existence of files, not the technical database rules defined in the 'Golden Rules'.",
+        "evidence": "AC-01 through AC-05 focus exclusively on file existence and linter passing.",
+        "category": "untestable",
+        "impact": 5,
+        "severity": "medium",
+        "correction": "Define specific SQL/ORM output patterns in AC (e.g., 'Table names must match PascalCase regex')."
+      }
+    ]
+  },
+  {
+    "module": "05-split-db-architecture",
+    "scores": {
+      "maintainability": 50,
+      "alignment": 0,
+      "clarity": 70,
+      "testability": 30,
+      "consistency": 40,
+      "completeness": 60
+    },
+    "findings": [
+      {
+        "severity": "medium",
+        "impact": 3,
+        "correction": "Ensure the document inventory matches the actual files present in the file system.",
+        "evidence": "Document Inventory lists 02-features/* and 03-issues/* but these are not in the File Inventory.",
+        "issue": "Document Inventory references missing files.",
+        "category": "drift"
+      },
+      {
+        "evidence": "The spec describes a 'Production-Ready' pattern for SQLite organization but the code index contains only linter scripts.",
+        "impact": 10,
+        "severity": "critical",
+        "correction": "Implement the Split-DB architecture or remove/reclassify the spec as a 'Future Pattern' document.",
+        "issue": "Complete absence of implementation code for a 'Production-Ready' spec.",
+        "category": "orphan-spec"
+      },
+      {
+        "evidence": "AC-01: 'SQLite databases split correctly by domain'",
+        "correction": "Define specific SQLite PRAGMA or table checks instead of generic 'correctly split' bullet points.",
+        "severity": "medium",
+        "impact": 5,
+        "category": "untestable",
+        "issue": "Acceptance criteria are vague and not objectively verifiable."
+      },
+      {
+        "category": "inconsistency",
+        "issue": "Redundant and potentially conflicting AC files.",
+        "impact": 4,
+        "severity": "low",
+        "correction": "Consolidate or clarify the difference between 97-acceptance-criteria.md and 98-acceptance-criteria.md.",
+        "evidence": "Both 97 and 98 contain acceptance criteria with different version numbers and formatting."
+      }
+    ],
+    "code_mapping": {
+      "expected_but_missing": [
+        "src/database/root.db",
+        "src/database/session_manager.py",
+        "src/database/migrations/",
+        "src/auth/rbac_casbin.py"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    },
+    "weighted_overall": 33,
+    "grade": "F",
+    "verdict": "The spec is a pure architectural guideline with 0% code alignment; it describes a system that does not exist in the provided repository (which only contains linter scripts). Furthermore, the spec's internal inventory is broken as it references sub-directories and files that are missing from the folder structure."
+  },
+  {
+    "module": "05-split-db-architecture/02-features",
+    "grade": "A",
+    "verdict": "The spec is a high-quality documentation module that correctly describes architectural features and linting requirements. While it references technical features like RBAC and Isolation without corresponding app code in the index, this is acceptable for a pure-documentation spec (Alignment 100). The biggest risk is the minor internal timestamp drift.",
+    "scores": {
+      "testability": 90,
+      "clarity": 90,
+      "alignment": 100,
+      "maintainability": 95,
+      "completeness": 95,
+      "consistency": 85
+    },
+    "findings": [
+      {
+        "category": "missing-spec",
+        "issue": "Spec describes functional features (RBAC, isolation) but no corresponding application code is indexed.",
+        "evidence": "spec/05-split-db-architecture/02-features/04-rbac-casbin.md",
+        "impact": 5,
+        "severity": "medium",
+        "correction": "Define infrastructure/code specs for Casbin and DB isolation in a separate technical module."
+      },
+      {
+        "evidence": "AC-01: Module entry point exists and is non-trivial",
+        "impact": 2,
+        "severity": "low",
+        "correction": "Specify the exact metrics or criteria for what constitutes a 'trival' vs 'non-trivial' entry point.",
+        "category": "untestable",
+        "issue": "Criterion 'non-trivial' is subjective and not objectively verifiable."
+      },
+      {
+        "category": "ambiguity",
+        "issue": "Internal timestamp inconsistency within the module.",
+        "evidence": "Overview: 2026-04-16 vs AC: 2026-04-25 vs Table: 2026-04-03",
+        "severity": "low",
+        "correction": "Synchronize 'Updated' dates across overview and AC files.",
+        "impact": 2
+      }
+    ],
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [],
+      "expected_but_missing": []
+    },
+    "weighted_overall": 94
+  },
+  {
+    "module": "05-split-db-architecture/03-issues",
+    "scores": {
+      "testability": 80,
+      "alignment": 100,
+      "maintainability": 85,
+      "clarity": 90,
+      "completeness": 80,
+      "consistency": 75
+    },
+    "findings": [
+      {
+        "severity": "medium",
+        "correction": "Update 00-overview.md to include the Version banner required by AC-01.",
+        "impact": 5,
+        "evidence": "00-overview.md: contains Updated date but missing **Version:** banner.",
+        "issue": "Entry point missing required Version banner defined in its own AC.",
+        "category": "missing-spec"
+      },
+      {
+        "impact": 2,
+        "category": "inconsistency",
+        "evidence": "00-overview.md (2026-04-16) vs 97-acceptance-criteria.md (2026-04-25)",
+        "issue": "Date mismatch between overview and AC documents.",
+        "correction": "Align the 'Updated' dates across overview and acceptance criteria files.",
+        "severity": "low"
+      },
+      {
+        "issue": "Acceptance criteria depends on external global state (entire tree health) rather than module-specific facts.",
+        "evidence": "AC-05: 'overall score is \u2265 80'",
+        "category": "untestable",
+        "impact": 3,
+        "severity": "low",
+        "correction": "Replace the generic 80% tree-health requirement with specific validation of this module's documentation completeness."
+      }
+    ],
+    "weighted_overall": 83,
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [],
+      "expected_but_missing": []
+    },
+    "verdict": "The spec is a standard administrative module for tracking issues. It technically matches the code index insofar as it references linter scripts that exist, but it fails its own AC-01 (missing version banner) and contains internal date inconsistencies.",
+    "grade": "B"
+  },
+  {
+    "module": "06-seedable-config-architecture",
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/check-spec-cross-links.py"
+      ],
+      "expected_but_missing": [
+        "config.seed.json",
+        "internal/config/loader.go",
+        "internal/db/seeder.go",
+        "internal/config/schema.json"
+      ],
+      "orphan_code": []
+    },
+    "grade": "F",
+    "verdict": "The spec is a 'phantom' architecture: it describes a sophisticated configuration and seeding system (Go/GORM/SQLite) that is completely absent from the provided codebase, which consists entirely of linter scripts. Furthermore, the spec's own internal file inventory refers to multiple feature files that are missing from the bundle.",
+    "weighted_overall": 25,
+    "scores": {
+      "testability": 20,
+      "completeness": 30,
+      "alignment": 0,
+      "clarity": 60,
+      "consistency": 40,
+      "maintainability": 70
+    },
+    "findings": [
+      {
+        "correction": "Implement the CW Config pattern in the codebase or mark this spec as 'Draft/Proposed'.",
+        "issue": "Spec describes a production-ready system that does not exist in the code index.",
+        "category": "orphan-spec",
+        "impact": 10,
+        "severity": "critical",
+        "evidence": "The spec describes application-level seeding (SQLite, Go, config.seed.json), but the repo only contains linter scripts."
+      },
+      {
+        "category": "missing-spec",
+        "severity": "high",
+        "evidence": "Codebase consists of ~20 linter scripts/workflows not described in the architecture spec.",
+        "impact": 7,
+        "correction": "Add a spec module or file documenting the actual codebase (linter/CI tools).",
+        "issue": "The actual code (linter scripts) is entirely undocumented by the spec."
+      },
+      {
+        "impact": 5,
+        "evidence": "Overview lists 02-features/01...06, but the 'Signal metrics' and 'File inventory' show these files are missing.",
+        "severity": "medium",
+        "category": "inconsistency",
+        "issue": "The document inventory lists 6 feature files that do not exist in the file list.",
+        "correction": "Update the document inventory to match the actual files on disk."
+      },
+      {
+        "impact": 4,
+        "evidence": "AC-01: 'Initial seed data populates all required configuration' - lacks technical definition of 'required'.",
+        "severity": "low",
+        "category": "untestable",
+        "issue": "Acceptance criteria are high-level and lack objective technical validation steps beyond a cross-link check.",
+        "correction": "Define specific, measurable criteria for GORM merge-strategies and JSON schema validation."
+      }
+    ]
+  },
+  {
+    "module": "06-seedable-config-architecture/02-features",
+    "verdict": "The module is a high-quality specification of an architecture that does not yet exist in the provided code index, resulting in a massive alignment gap. While the linter scripts mentioned in ACs are present, the core RAG and seeding logic is missing.",
+    "weighted_overall": 54,
+    "scores": {
+      "testability": 95,
+      "completeness": 85,
+      "alignment": 20,
+      "consistency": 80,
+      "maintainability": 85,
+      "clarity": 90
+    },
+    "grade": "D",
+    "findings": [
+      {
+        "issue": "The spec defines a functional architecture that is entirely missing from the codebase.",
+        "severity": "critical",
+        "evidence": "The module describes RAG chunk settings, Go validation patterns, and DB seeding (Files 01-06), but the code index only contains linter scripts.",
+        "correction": "Implement the Go configuration and validation logic described in files 01 through 06.",
+        "impact": 8,
+        "category": "orphan-spec"
+      },
+      {
+        "impact": 2,
+        "category": "drift",
+        "issue": "Internal date inconsistency within the module.",
+        "severity": "low",
+        "evidence": "00-overview.md: 2026-04-20 vs 97-acceptance-criteria.md: 2026-04-25.",
+        "correction": "Update the 'Updated' date in 00-overview.md to match the 2026-04-25 date in the Acceptance Criteria."
+      },
+      {
+        "issue": "Significant tooling codebase exists without specification.",
+        "severity": "medium",
+        "evidence": "The code contains multiple scripts like check-axios-version.sh and validate-guidelines.go with no corresponding functional spec.",
+        "correction": "Add spec modules for the various linter scripts (e.g., axios version checker, forbidden strings) found in the code index.",
+        "impact": 4,
+        "category": "missing-spec"
+      }
+    ],
+    "code_mapping": {
+      "expected_but_missing": [
+        "pkg/config/rag_settings.go",
+        "pkg/validation/rag_validators.go",
+        "pkg/validation/rag_test.go",
+        "pkg/db/seeding.go"
+      ],
+      "orphan_code": [
+        "linter-scripts/check-axios-version.sh",
+        "linter-scripts/validate-guidelines.go"
+      ],
+      "implemented_by": [
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh"
+      ]
+    }
+  },
+  {
+    "module": "06-seedable-config-architecture/03-issues",
+    "grade": "A",
+    "verdict": "The module is a high-quality meta-spec (Issue Tracker) that correctly identifies its own lack of code implementation. It fails internal consistency slightly due to a missing version banner and conflicting dates.",
+    "weighted_overall": 91,
+    "findings": [
+      {
+        "correction": "Add the Version banner to 00-overview.md to satisfy AC-01.",
+        "severity": "medium",
+        "evidence": "AC-01: ... it contains an H1 title, a **Version:** banner...",
+        "category": "missing-spec",
+        "impact": 3,
+        "issue": "The overview file lacks the version banner required by its own AC."
+      },
+      {
+        "severity": "low",
+        "correction": "Remove or define 'trivially' or specify a minimum character count for the body.",
+        "impact": 1,
+        "issue": "'Non-trivial' is a subjective measure in ACs.",
+        "category": "untestable",
+        "evidence": "the module's entry point exists and is non-trivial"
+      },
+      {
+        "evidence": "Updated: 2026-04-16 (top) vs 2026-04-03 (bottom)",
+        "category": "ambiguity",
+        "impact": 1,
+        "issue": "Conflicting metadata dates in 00-overview.md.",
+        "correction": "Correct the 'Updated' date in 00-overview.md to match the file footer or vice-versa.",
+        "severity": "low"
+      }
+    ],
+    "code_mapping": {
+      "orphan_code": [],
+      "expected_but_missing": [],
+      "implemented_by": []
+    },
+    "scores": {
+      "maintainability": 100,
+      "completeness": 95,
+      "alignment": 100,
+      "consistency": 80,
+      "testability": 90,
+      "clarity": 85
+    }
+  },
+  {
+    "module": "07-design-system",
+    "verdict": "The specification is exceptionally well-written and detailed, but it is a total orphan. It describes a sophisticated UI system that does not exist in the provided codebase, which consists entirely of linter scripts and CI workflows.",
+    "grade": "F",
+    "scores": {
+      "consistency": 95,
+      "maintainability": 90,
+      "completeness": 95,
+      "clarity": 90,
+      "alignment": 0,
+      "testability": 85
+    },
+    "findings": [
+      {
+        "correction": "Provide the source code for the components and CSS tokens described in the design system.",
+        "severity": "critical",
+        "category": "orphan-spec",
+        "issue": "Spec describes a complete frontend UI system but zero UI code exists in the index.",
+        "evidence": "The spec describes a 'variable-driven architecture' and 'CSS custom properties' but the code index only contains linter scripts.",
+        "impact": 10
+      },
+      {
+        "category": "untestable",
+        "evidence": "AC-034: 'Responsive at mobile/tablet/desktop breakpoints'",
+        "issue": "Responsive breakpoints are mentioned but not defined with specific values in AC.",
+        "impact": 3,
+        "correction": "Define exact pixel/rem values for breakpoints and standard spacing increments.",
+        "severity": "low"
+      },
+      {
+        "severity": "low",
+        "correction": "Define whether 'HSL format' means raw values for composition or full CSS declarations.",
+        "evidence": "'All colors reference CSS custom properties via hsl(var(--token))' vs 'All colors use HSL format'",
+        "issue": "The method of HSL implementation (raw components vs. full color string) is slightly ambiguous.",
+        "category": "ambiguity",
+        "impact": 2
+      },
+      {
+        "severity": "medium",
+        "correction": "Add a section to the Design System spec describing the required meta-data and health checks for specs.",
+        "issue": "The codebase contains extensive linter scripts for spec health, but the design system does not document these requirements.",
+        "evidence": "linter-scripts/audit-spec-vs-code.py, .github/workflows/spec-health.yml",
+        "category": "missing-spec",
+        "impact": 4
+      }
+    ],
+    "weighted_overall": 51,
+    "code_mapping": {
+      "expected_but_missing": [
+        "src/styles/tokens.css",
+        "src/components/CodeBlock/CodeBlock.tsx",
+        "src/components/Navigation/Header.tsx",
+        "src/components/Button/Button.tsx",
+        "src/styles/typography.css"
+      ],
+      "orphan_code": [],
+      "implemented_by": []
+    }
+  },
+  {
+    "module": "10-research",
+    "weighted_overall": 83,
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/check-spec-folder-refs.py",
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh"
+      ],
+      "expected_but_missing": []
+    },
+    "findings": [
+      {
+        "impact": 5,
+        "correction": "Define exactly which characters are allowed in the prefix and the expected date format (e.g., YYYY-MM-DD).",
+        "severity": "medium",
+        "evidence": "Every research note has a date prefix... and a 'Decision:' or 'Outcome:' section.",
+        "category": "ambiguity",
+        "issue": "AC-RES-000 specifies a 'date prefix' and specific sections not defined in the naming convention (AC-03)."
+      },
+      {
+        "correction": "Harmonize the filename regex in AC-03 with the 'date prefix' requirement in AC-RES-000.",
+        "severity": "medium",
+        "impact": 4,
+        "evidence": "AC-03: ^[0-9]{2}-[a-z0-9-]+\\.md$ vs AC-RES-000: Every research note has a date prefix.",
+        "category": "inconsistency",
+        "issue": "The filename regex allows only 2 digits, which contradicts a standard date prefix (e.g. 2024-01-01)."
+      },
+      {
+        "evidence": "_No research documents added yet._ vs AC-RES-000: Every research note has... a 'Decision:' or 'Outcome:' section.",
+        "impact": 3,
+        "correction": "Replace the 'Contents' placeholder with at least one example file or remove the requirement for specific internal sections until content exists.",
+        "severity": "low",
+        "category": "untestable",
+        "issue": "The module currently contains zero research notes, making AC-RES-000 impossible to verify against the current state."
+      }
+    ],
+    "scores": {
+      "consistency": 70,
+      "completeness": 85,
+      "maintainability": 90,
+      "alignment": 95,
+      "clarity": 80,
+      "testability": 80
+    },
+    "verdict": "The spec is well-structured and maps correctly to the linter scripts in the codebase, but contains a significant internal contradiction between its general naming convention and its specific 'research note' formatting requirements.",
+    "grade": "B"
+  },
+  {
+    "module": "11-powershell-integration",
+    "verdict": "The spec describes a sophisticated Go/React deployment runner ('run.ps1' with 'powershell.json'), but the codebase only contains a runner for 'linter-scripts'. This is a major structural drift where the design exists as a template/idea without the actual implementation in the provided index.",
+    "grade": "D",
+    "scores": {
+      "testability": 20,
+      "alignment": 30,
+      "completeness": 70,
+      "clarity": 85,
+      "maintainability": 80,
+      "consistency": 65
+    },
+    "findings": [
+      {
+        "correction": "Update spec to reflect that the runner is currently used for linter-scripts, or move the linter-scripts runner to a different module.",
+        "severity": "high",
+        "category": "drift",
+        "issue": "Spec describes a Go/React orchestrator but only linter runner code exists.",
+        "evidence": "Spec states: 'Reusable PowerShell runner for Go backend + React frontend projects' - Code index only shows linter-scripts/run.ps1.",
+        "impact": 7
+      },
+      {
+        "category": "missing-spec",
+        "evidence": "linter-scripts/run.ps1 exists but the spec describes a generalized fullstack runner.",
+        "issue": "Linter script runner logic is not explicitly documented.",
+        "impact": 4,
+        "correction": "Add documentation for the specific logic/purpose of linter-scripts/run.ps1.",
+        "severity": "medium"
+      },
+      {
+        "correction": "Replace meta-checks (file exists) with functional checks (e.g., 'winget check returns 0').",
+        "severity": "medium",
+        "category": "untestable",
+        "evidence": "AC-01 through AC-05 only verify that the documentation files exist and pass linting.",
+        "issue": "Acceptance criteria only test for the existence of the spec, not the functionality of the code.",
+        "impact": 3
+      },
+      {
+        "impact": 2,
+        "issue": "Redundant changelog files in the same module.",
+        "evidence": "File inventory shows both '98-changelog.md' and 'changelog.md'.",
+        "category": "inconsistency",
+        "severity": "low",
+        "correction": "Consolidate duplicate changelog files."
+      }
+    ],
+    "weighted_overall": 51,
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/run.ps1"
+      ],
+      "expected_but_missing": [
+        "run.ps1",
+        "powershell.json"
+      ]
+    }
+  },
+  {
+    "module": "12-cicd-pipeline-workflows",
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh",
+        ".github/workflows/spec-health.yml"
+      ],
+      "expected_but_missing": [],
+      "orphan_code": []
+    },
+    "scores": {
+      "alignment": 70,
+      "maintainability": 80,
+      "consistency": 55,
+      "clarity": 85,
+      "completeness": 60,
+      "testability": 40
+    },
+    "findings": [
+      {
+        "category": "inconsistency",
+        "impact": 3,
+        "correction": "Renumber files to ensure unique prefixes according to the spec naming convention.",
+        "evidence": "Two files prefixed with 01, two with 02, two with 04, 05, 06, 07.",
+        "issue": "Duplicate numbering in file inventory prefixes.",
+        "severity": "low"
+      },
+      {
+        "correction": "Update the overview to reflect actual file presence in the root rather than subdirectories.",
+        "issue": "Overview describes a subfolder structure that does not exist on disk.",
+        "severity": "medium",
+        "evidence": "Overview mentions archetypes in subfolders (01-browser-extension-deploy/), but File Inventory shows all files are in the root.",
+        "category": "drift",
+        "impact": 5
+      },
+      {
+        "evidence": ".github/workflows/spec-health.yml exists in code but is not explicitly mapped in the spec files.",
+        "issue": "Actual GitHub Actions workflow file is not documented in the inventory.",
+        "severity": "medium",
+        "correction": "Add documentation for the .github/workflows/spec-health.yml which implements these CI patterns.",
+        "impact": 4,
+        "category": "missing-spec"
+      },
+      {
+        "correction": "Add GWT criteria for specific pipeline logic like checksum verification or code signing.",
+        "evidence": "AC-01 through AC-05 only test file existence and linter passes, not the logic of the CI/CD workflows.",
+        "severity": "high",
+        "issue": "Acceptance Criteria are meta-tests for spec health, not functional tests for CI/CD workflows.",
+        "category": "untestable",
+        "impact": 6
+      }
+    ],
+    "grade": "C",
+    "weighted_overall": 63,
+    "verdict": "The module is a comprehensive collection of documentation but suffers from structural drift (describes subfolders that aren't there) and duplicate file numbering. Most critically, the Acceptance Criteria only validate that the documentation exists, rather than validating the technical requirements of the CI/CD pipelines themselves."
+  },
+  {
+    "module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
+    "scores": {
+      "completeness": 40,
+      "alignment": 0,
+      "consistency": 90,
+      "clarity": 85,
+      "maintainability": 80,
+      "testability": 50
+    },
+    "verdict": "The spec describes a detailed browser extension deployment pipeline that does not exist in the code index. While it follows meta-documentation standards perfectly, it is an empty shell with 0% alignment to functional code.",
+    "grade": "F",
+    "findings": [
+      {
+        "issue": "The spec describes a complex CI/CD pipeline architecture that is completely absent from the provided codebase.",
+        "severity": "critical",
+        "category": "drift",
+        "evidence": "Pipeline Architecture: setup (lint + test) \u2192 build-sdk \u2192 [build-module-A, build-module-B, build-module-C] \u2192 build-extension",
+        "impact": 9,
+        "correction": "Update the spec to reference actual GitHub Action workflow files (e.g., .github/workflows/...) that implement this logic."
+      },
+      {
+        "issue": "The spec defines an extension deployment process, but there is no extension code or build configuration in the index.",
+        "impact": 8,
+        "correction": "Remove the spec or implement the browser extension build/deploy scripts referenced.",
+        "evidence": "Language: TypeScript / JavaScript, Package Manager: pnpm, Output: .zip archive of extension dist/ contents",
+        "category": "orphan-spec",
+        "severity": "high"
+      },
+      {
+        "issue": "Acceptance criteria focus exclusively on 'spec meta-health' rather than the success/failure of the actual deployment pipeline.",
+        "severity": "medium",
+        "category": "untestable",
+        "correction": "Define ACs that verify the existence and behavior of actual yaml/bash pipeline files.",
+        "impact": 3,
+        "evidence": "AC-05: Module passes the tree-health gate"
+      }
+    ],
+    "weighted_overall": 49,
+    "code_mapping": {
+      "implemented_by": [],
+      "expected_but_missing": [
+        "**/ci-pipeline-config-or-script",
+        "**/release-pipeline-config-or-script",
+        "**/package.json"
+      ],
+      "orphan_code": [
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh",
+        "linter-scripts/check-spec-cross-links.py"
+      ]
+    }
+  },
+  {
+    "module": "12-cicd-pipeline-workflows/02-go-binary-deploy",
+    "findings": [
+      {
+        "correction": "Provide the actual GitHub Action YAML files or CI/CD configuration that implements the Go binary build and release pipelines described in the spec.",
+        "evidence": "Pipeline Architecture: sha-check \u2192 [lint, vulncheck] \u2192 test (matrix: N suites) \u2192 test-summary \u2192 build (matrix: 6 targets) \u2192 build-summary",
+        "impact": 10,
+        "issue": "The spec describes a detailed CI/CD pipeline for Go binaries, but the code index contains zero Go application code or CI/CD workflow files.",
+        "category": "drift",
+        "severity": "critical"
+      },
+      {
+        "correction": "Change 'all match' to 'should match' or reference a specific validator script that is confirmed to run against this specific module's paths.",
+        "evidence": "Then all match `^[0-9]{2}-[a-z0-9-]+\\.md$` [...] verified by linter-scripts/check-spec-cross-links.py.",
+        "impact": 3,
+        "issue": "AC-03 and AC-02 reference linter scripts as verification, but the scripts themselves (like check-tree-health.cjs) are infrastructure, not evidence of the pipeline's logic.",
+        "category": "untestable",
+        "severity": "low"
+      },
+      {
+        "evidence": "node linter-scripts/check-tree-health.cjs --min=80",
+        "correction": "Add specific documentation for the linter scripts to the spec or remove the direct dependency on them for acceptance criteria within a feature module.",
+        "impact": 2,
+        "issue": "ACs depend heavily on linter-scripts which are present in code but not comprehensively described in this module's functional scope.",
+        "severity": "low",
+        "category": "missing-spec"
+      }
+    ],
+    "verdict": "The specification is well-structured and internally consistent, but it is a total 'orphan'\u2014it describes a sophisticated Go CI/CD pipeline and release workflow that simply does not exist in the provided code index.",
+    "grade": "F",
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [],
+      "expected_but_missing": [
+        "github-actions-workflow-for-ci-pipeline",
+        "github-actions-workflow-for-release-pipeline"
+      ]
+    },
+    "scores": {
+      "testability": 80,
+      "consistency": 100,
+      "completeness": 95,
+      "alignment": 0,
+      "maintainability": 90,
+      "clarity": 90
+    },
+    "weighted_overall": 51
+  },
+  {
+    "module": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
+    "grade": "C",
+    "verdict": "The module functions primarily as a 'Blueprint' or 'Implementation Guide' for CI patterns rather than a specification for the existing codebase. While the 'Forbidden Name' and 'Tree Health' concepts are present in the linter-scripts, the majority of the described patterns (06-09) and the specific architecture (ci-guards.yaml) are missing from the code index.",
+    "findings": [
+      {
+        "impact": 5,
+        "issue": "The spec describes generic CI guards for app code, but the code implements them as meta-linters for the spec tree.",
+        "evidence": "The overview says 'originally implemented in Bash and Python under .github/scripts/ of a Go monorepo' and describes them as 'reusable-ci-guards'. The code shows these scripts in 'linter-scripts/' specifically for spec validation.",
+        "category": "drift",
+        "severity": "medium",
+        "correction": "Update the spec to clarify that these patterns are applied to the spec repository itself via linter-scripts, rather than generic CI guards for application code."
+      },
+      {
+        "issue": "Several patterns described (06, 07, 08, 09) do not exist in the code index.",
+        "evidence": "Patterns 06 (Matrix Test Aggregator) and 07 (Shared CLI Wrapper) have no corresponding scripts in the linter-scripts directory.",
+        "category": "orphan-spec",
+        "impact": 4,
+        "severity": "high",
+        "correction": "Implement the 'Matrix Test Aggregator' and 'Shared CLI Wrapper' or remove them from the spec if they are not intended for this repository."
+      },
+      {
+        "correction": "Add specific AC for the logic of the guards (e.g., 'must detect forbidden strings') rather than just checking if files exist.",
+        "severity": "low",
+        "category": "untestable",
+        "issue": "Acceptance Criteria only verify the existence of documentation, not the behavior of the guards.",
+        "evidence": "AC-01 through AC-05 only verify the existence of spec files and the success of the linter-scripts themselves, not the functionality of the patterns described.",
+        "impact": 3
+      },
+      {
+        "correction": "Specify whether the patterns are 'blueprints' for others to follow or the actual implementation used in this repo.",
+        "severity": "medium",
+        "category": "ambiguity",
+        "issue": "Spec vacillates between being a 'Guide' for other repos and a 'Spec' for the current repo's tooling.",
+        "evidence": "Section 'Why These Six?' describes problems like 'redeclared in this block' (compiler errors) which don't apply to the Markdown files in this repo.",
+        "impact": 4
+      }
+    ],
+    "scores": {
+      "maintainability": 85,
+      "completeness": 60,
+      "clarity": 70,
+      "consistency": 80,
+      "testability": 50,
+      "alignment": 40
+    },
+    "weighted_overall": 60,
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/check-forbidden-strings.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh",
+        "linter-scripts/check-spec-cross-links.py"
+      ],
+      "expected_but_missing": [
+        "ci-guards.yaml",
+        ".github/scripts/forbidden-name-guard.py",
+        ".github/scripts/baseline-diff-lint.py"
+      ]
+    }
+  },
+  {
+    "module": "13-generic-cli",
+    "verdict": "The specification is an exceptionally detailed and well-structured methodology for building CLI tools. However, as it behaves as a 'Meta-Spec', the alignment is technically 100% (it describes a standard, not specific existing code), but the Acceptance Criteria are weak because they only validate the markdown files' existence rather than the technical correctness of the architecture described.",
+    "findings": [
+      {
+        "evidence": "This specification is a **complete, self-contained blueprint** for building production-quality CLI tools. Hand it to any AI assistant or developer and they can implement a well-structured CLI from scratch.",
+        "severity": "medium",
+        "impact": 3,
+        "category": "orphan-spec",
+        "issue": "The module provides a detailed implementation blueprint for a CLI, but no actual CLI code exists in the index.",
+        "correction": "Either implement a reference CLI tool following these guidelines or clearly mark this module as a 'Methodology Standard' with no corresponding implementation code."
+      },
+      {
+        "issue": "Acceptance criteria only test the existence/formatting of the spec files, not the technical requirements of the CLI architecture described.",
+        "correction": "Define specific performance or behavioral metrics for the CLI tools produced by this spec (e.g., 'subcommands must return exit code 0 on success').",
+        "evidence": "All criteria are verifiable from the module's content alone (AC-01 through AC-05)",
+        "severity": "medium",
+        "impact": 5,
+        "category": "untestable"
+      },
+      {
+        "category": "inconsistency",
+        "severity": "low",
+        "evidence": "Document Index: | 01 | [01-overview.md](00-overview.md) | This document... vs Actual file: 00-overview.md",
+        "impact": 2,
+        "correction": "Rename 00-overview.md to 01-overview.md or update the Document Index table to point to 00-overview.md.",
+        "issue": "Internal document index has a numbering mismatch between sequence (01) and filename (00-overview.md)."
+      }
+    ],
+    "scores": {
+      "maintainability": 90,
+      "testability": 40,
+      "alignment": 100,
+      "completeness": 95,
+      "clarity": 90,
+      "consistency": 85
+    },
+    "weighted_overall": 86,
+    "grade": "B",
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    }
+  },
+  {
+    "module": "14-update",
+    "scores": {
+      "clarity": 90,
+      "testability": 30,
+      "maintainability": 80,
+      "alignment": 10,
+      "consistency": 85,
+      "completeness": 95
+    },
+    "findings": [
+      {
+        "evidence": "04-build-scripts.md describes `run.ps1` / `run.sh`; 10-last-release-detection.md describes `Get-LastRelease.ps1`.",
+        "impact": 8,
+        "severity": "high",
+        "correction": "Ensure the release scripts and internal CLI update logic described are present in the code index or clarify if this module is a multi-repo standard.",
+        "category": "orphan-spec",
+        "issue": "Spec describes specific scripts and binary logic that are entirely absent from the provided codebase."
+      },
+      {
+        "severity": "medium",
+        "impact": 5,
+        "correction": "Define functional requirements for the update mechanism (e.g., exit codes, SHA formats) rather than just meta-document requirements.",
+        "evidence": "AC-01 through AC-05 focus exclusively on file metadata and linter passes.",
+        "category": "untestable",
+        "issue": "Acceptance Criteria only verify document structure, not the actual update/install logic."
+      },
+      {
+        "issue": "Missing file index entry for sequence number 24.",
+        "category": "inconsistency",
+        "impact": 2,
+        "severity": "low",
+        "correction": "Renumber or include file 24 in the inventory.",
+        "evidence": "File Inventory jumps from 23 to 25."
+      }
+    ],
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "Get-LastRelease.ps1",
+        "get-last-release.sh",
+        "run.ps1",
+        "run.sh",
+        "winres.json"
+      ]
+    },
+    "weighted_overall": 51,
+    "grade": "D",
+    "verdict": "The specification is an exceptionally detailed and well-structured set of documents, but it is currently a 'paper-only' specification with zero alignment to the provided codebase, which consists only of linter scripts. It functions as a blueprint for a system that does not exist in the current index."
+  },
+  {
+    "module": "14-update/24-update-check-mechanism",
+    "code_mapping": {
+      "implemented_by": [],
+      "expected_but_missing": [
+        "UpdateCheckerService.cs",
+        "UpdateChecker.cs",
+        "UpdateCheckCommand.cs",
+        "PreCommandHook.cs",
+        "UpdateCheckerRepository.cs"
+      ],
+      "orphan_code": []
+    },
+    "findings": [
+      {
+        "correction": "Implement the UpdateCheckerService and related CLI commands as specified, or mark the spec as 'Concept/Future' if development hasn't started.",
+        "evidence": "Spec 05-update-checker-service.md and 06-cli-commands.md describe concrete C#/.NET or Go/Node classes and CLI flags.",
+        "issue": "The spec describes a complex production-ready update mechanism, but no implementation files exist in the code index.",
+        "severity": "critical",
+        "category": "orphan-spec",
+        "impact": 10
+      },
+      {
+        "category": "missing-spec",
+        "impact": 5,
+        "correction": "Add a spec module under linter-scripts or tools/ defining the requirements for the various maintenance scripts currently in the repo.",
+        "evidence": "linter-scripts/audit-spec-vs-code.py, validate-guidelines.py, etc.",
+        "severity": "medium",
+        "issue": "The codebase contains extensive linter scripts that are completely undocumented in the provided spec inventory."
+      },
+      {
+        "impact": 3,
+        "category": "untestable",
+        "evidence": "AC #1: 'measured wall time of full discovery \u2264 6s on a healthy network'",
+        "severity": "low",
+        "issue": "Acceptance criteria relies on subjective environmental conditions ('healthy network').",
+        "correction": "Define the measurable thresholds for 'healthy network' or remove environmental dependencies from AC."
+      }
+    ],
+    "grade": "F",
+    "scores": {
+      "clarity": 90,
+      "alignment": 0,
+      "maintainability": 90,
+      "consistency": 95,
+      "testability": 70,
+      "completeness": 95
+    },
+    "weighted_overall": 51,
+    "verdict": "The specification is exceptionally detailed and internally consistent, but it is an 'orphan spec' with 0% alignment. It describes a sophisticated update mechanism that does not exist in the provided code index."
+  },
+  {
+    "module": "14-update/diagrams",
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "spec/14-update/diagrams/01-self-update-workflow.mmd",
+        "spec/14-update/diagrams/02-update-cleanup-workflow.mmd"
+      ]
+    },
+    "weighted_overall": 51,
+    "grade": "D",
+    "findings": [
+      {
+        "issue": "The diagrams described in the inventory do not exist in the codebase.",
+        "severity": "high",
+        "category": "orphan-spec",
+        "correction": "Create the missing .mmd files or remove their references from the overview.",
+        "evidence": "Diagram Inventory lists 01-self-update-workflow.mmd and 02-update-cleanup-workflow.mmd",
+        "impact": 8
+      },
+      {
+        "issue": "Inconsistent update dates within 00-overview.md.",
+        "severity": "low",
+        "category": "inconsistency",
+        "impact": 1,
+        "evidence": "Header: 2026-04-16; Footer: 2026-04-15",
+        "correction": "Update Overview footer date to match the header date (2026-04-16)."
+      },
+      {
+        "severity": "medium",
+        "category": "ambiguity",
+        "impact": 3,
+        "correction": "Correct the broken filename in the 'Update Command Workflow' cross-reference.",
+        "evidence": "[../16-update-command-workflow.md](../22-update-command-workflow.md)",
+        "issue": "Broken or inconsistent cross-reference path (16 vs 22)."
+      }
+    ],
+    "scores": {
+      "completeness": 40,
+      "alignment": 20,
+      "consistency": 60,
+      "clarity": 80,
+      "testability": 90,
+      "maintainability": 90
+    },
+    "verdict": "The spec module is a high-quality shell that fails its primary purpose: the actual diagram files (.mmd) are missing from the repository, rendering the documentation empty."
+  },
+  {
+    "module": "15-distribution-and-runner",
+    "verdict": "The spec is well-written and clear, but there is a massive disconnect with the actual codebase: common installers and the release pipeline are entirely missing, and the runner scripts are in the wrong directory.",
+    "weighted_overall": 64,
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/validate-guidelines.go"
+      ],
+      "expected_but_missing": [
+        "install.sh",
+        "install.ps1",
+        "run.sh",
+        "run.ps1",
+        ".github/workflows/release.yml",
+        "install-config.json",
+        "linters-cicd/install.sh"
+      ],
+      "implemented_by": [
+        "linter-scripts/run.sh",
+        "linter-scripts/run.ps1",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/check-spec-cross-links.py"
+      ]
+    },
+    "grade": "D",
+    "findings": [
+      {
+        "evidence": "The root runner scripts (run.sh / run.ps1) at the repo root... (Overview) vs linter-scripts/run.sh in code index.",
+        "correction": "Relocate run.sh/run.ps1 from linter-scripts/ to the repository root as required by the spec.",
+        "impact": 8,
+        "category": "drift",
+        "issue": "Runner scripts are located in linter-scripts/ instead of the repository root as mandated by the spec.",
+        "severity": "high"
+      },
+      {
+        "category": "orphan-spec",
+        "severity": "critical",
+        "issue": "The primary distribution mechanism (installers and release pipeline) is missing from the codebase.",
+        "correction": "Create the release.yml workflow and the primary installation scripts (install.sh/ps1).",
+        "evidence": "The CI/CD release pipeline (.github/workflows/release.yml)... (Overview)",
+        "impact": 9
+      },
+      {
+        "impact": 3,
+        "correction": "Add the Go validator into the 'Distribution and Runner' spec folder as a core component of the 'lint' command.",
+        "evidence": "linter-scripts/validate-guidelines.go exists but is not explicitly detailed in the distribution architecture beyond a mention of 'legacy' behavior.",
+        "severity": "low",
+        "issue": "The Go validator implementation is an orphan without a clear architectural home in the spec.",
+        "category": "missing-spec"
+      },
+      {
+        "category": "ambiguity",
+        "issue": "Contradiction between 'Every GitHub Release MUST publish all' and the tree being 'not a release asset'.",
+        "severity": "medium",
+        "evidence": "sourced via codeload.github.com archive \u2014 not a release asset",
+        "correction": "Clarify if 'codeload.github.com' is the only source or if a tagged zip artifact is required for the tree.",
+        "impact": 2
+      }
+    ],
+    "scores": {
+      "testability": 95,
+      "maintainability": 90,
+      "completeness": 90,
+      "clarity": 85,
+      "alignment": 30,
+      "consistency": 80
+    }
+  },
+  {
+    "module": "16-generic-release",
+    "code_mapping": {
+      "expected_but_missing": [
+        ".github/workflows/release.yml",
+        "scripts/install.sh",
+        "scripts/install.ps1"
+      ],
+      "orphan_code": [],
+      "implemented_by": [
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/run.sh"
+      ]
+    },
+    "scores": {
+      "testability": 60,
+      "completeness": 85,
+      "clarity": 90,
+      "maintainability": 90,
+      "consistency": 95,
+      "alignment": 40
+    },
+    "grade": "C",
+    "findings": [
+      {
+        "correction": "Implement the concrete release workflow or install scripts described in the blueprint to anchor the spec in reality.",
+        "evidence": "This folder defines a generic, reusable blueprint for releasing cross-compiled CLI binaries via CI/CD... See the Mermaid diagram: images/release-pipeline-flow.mmd",
+        "issue": "The spec describes a detailed release pipeline and install scripts, but no actual CI/CD or release scripts exist in the index.",
+        "severity": "high",
+        "category": "orphan-spec",
+        "impact": 8
+      },
+      {
+        "severity": "medium",
+        "issue": "A large suite of linter scripts exists in the codebase but is not documented by this or any other visible spec.",
+        "evidence": "linter-scripts/audit-spec-vs-code.py, linter-scripts/check-axios-version.sh, etc.",
+        "correction": "Define a new spec module or section specifically for the linter-scripts utility suite.",
+        "impact": 5,
+        "category": "missing-spec"
+      },
+      {
+        "category": "drift",
+        "impact": 2,
+        "correction": "Update AC-05 to reflect that the script is a .cjs file or rename the file.",
+        "severity": "low",
+        "issue": "AC-05 references check-tree-health.js (JS) while the codebase contains check-tree-health.cjs (CJS).",
+        "evidence": "node linter-scripts/check-tree-health.js --min=80"
+      },
+      {
+        "category": "untestable",
+        "impact": 4,
+        "correction": "Define explicit technical metrics for 'cross-compilation' and 'checksum verification' as ACs.",
+        "severity": "medium",
+        "issue": "Acceptance criteria only cover meta-documentation health and not the actual technical requirements of a release pipeline.",
+        "evidence": "AC-01 through AC-05 only test file presence and linting, not implementation features."
+      }
+    ],
+    "weighted_overall": 72,
+    "verdict": "The spec is an excellent 'blueprint' for a release system, but it is currently an orphan. It describes complex build/release logic that is nowhere to be found in the provided code index, while the code index contains many linter scripts that are completely undocumented."
+  },
+  {
+    "module": "17-consolidated-guidelines",
+    "scores": {
+      "alignment": 100,
+      "completeness": 100,
+      "maintainability": 100,
+      "clarity": 95,
+      "testability": 95,
+      "consistency": 95
+    },
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh"
+      ],
+      "orphan_code": []
+    },
+    "findings": [
+      {
+        "issue": "Mismatch between Overview health score (100) and Acceptance Criteria threshold (80).",
+        "impact": 2,
+        "evidence": "AC-05: ...overall score is \u2265 80 vs Overview: Health Score 100/100",
+        "category": "drift",
+        "severity": "low",
+        "correction": "Update AC-05 to reflect the actual score calculation or lower the threshold if 'score 100/100' in overview is a hard goal."
+      },
+      {
+        "evidence": "AC-01: Module entry point exists and is non-trivial",
+        "category": "untestable",
+        "issue": "'Non-trivial' is a subjective term and hard to verify objectively.",
+        "impact": 1,
+        "correction": "Define what 'non-trivial' means (e.g., minimum character count or specific metadata headers).",
+        "severity": "low"
+      }
+    ],
+    "weighted_overall": 98,
+    "verdict": "An exceptionally robust and complete spec module that accurately governs a large collection of consolidated guidelines. It perfectly aligns with the linter infrastructure provided in the code index.",
+    "grade": "A+"
+  },
+  {
+    "module": "18-wp-plugin-how-to",
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [],
+      "expected_but_missing": [
+        "WordPress Plugin Boilerplate/Scaffold",
+        "PHP Enum Domain Models",
+        "REST API Controller Reference"
+      ]
+    },
+    "weighted_overall": 58,
+    "scores": {
+      "clarity": 95,
+      "alignment": 0,
+      "maintainability": 90,
+      "completeness": 90,
+      "consistency": 85,
+      "testability": 40
+    },
+    "grade": "C",
+    "verdict": "The documentation is exceptionally thorough and well-organized as a 'How-To' guide, but it is currently an 'Orphan Spec' because the codebase contains none of the WordPress PHP patterns it claims to govern.",
+    "findings": [
+      {
+        "issue": "Spec describes a production-ready 'Gold Standard' for WP plugins, but no actual PHP/WP code exists in the index.",
+        "severity": "high",
+        "category": "orphan-spec",
+        "correction": "Supply the reference implementation or boilerplate code described in 07-reference-implementations.md and 01-foundation-and-architecture.md.",
+        "evidence": "Comprehensive blueprint for building WordPress plugins... Any new WordPress plugin MUST follow the contracts and patterns in this folder.",
+        "impact": 8
+      },
+      {
+        "severity": "medium",
+        "category": "inconsistency",
+        "issue": "The overview references internal subfolders that appear to be missing or flattened in the actual file list.",
+        "impact": 3,
+        "correction": "Rename or re-index the '02-enums-and-coding-style/' folder to match the flat file list or update the inventory.",
+        "evidence": "File Inventory Table item 02 shows a subfolder './02-enums-and-coding-style/' which is not present in the provided file list."
+      },
+      {
+        "impact": 5,
+        "correction": "Update AC to include specific PHP/WP structural requirements (e.g., PSR-4 namespace presence).",
+        "evidence": "AC-01 through AC-05 focus exclusively on Markdown linting and folder structure.",
+        "severity": "medium",
+        "category": "untestable",
+        "issue": "Acceptance Criteria verify Markdown structure but do not verify the technical content of the WP architecture."
+      }
+    ]
+  },
+  {
+    "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
+    "verdict": "The spec is well-written as a documentation piece but fails completely as a 'spec-vs-code' module because 100% of the described implementation (PHP Enums) is missing from the code index, and the AC only tests if the documentation files exist.",
+    "grade": "F",
+    "findings": [
+      {
+        "issue": "The spec module describes specific PHP codebase modules that are entirely missing from the code index.",
+        "category": "orphan-spec",
+        "evidence": "The spec defines concrete PHP enum implementations (SelfUpdateStatusType with 17 cases, ActionType with 40+ cases) in 03-self-update-status-enum.md and 04-action-type-enum.md.",
+        "impact": 10,
+        "severity": "critical",
+        "correction": "Ensure the specified PHP Enums (SelfUpdateStatusType, ActionType) are added to the repository or mark this spec as 'Architecture Design' if code is pending."
+      },
+      {
+        "correction": "Add domain-specific Acceptance Criteria (e.g., verifying specific enum cases or metadata return types) instead of just checking file existence.",
+        "severity": "medium",
+        "impact": 5,
+        "evidence": "AC-01 through AC-05 only verify the existence and formatting of the markdown files themselves (meta-testing).",
+        "category": "untestable",
+        "issue": "Acceptance Criteria only validate documentation structure, not the technical requirements of the enums."
+      },
+      {
+        "impact": 3,
+        "severity": "low",
+        "correction": "Update AC-01 to match the actual lack of a Version/Updated banner in the provided 00-overview.md snippet.",
+        "evidence": "AC-01 requires a '**Version:**' banner, but the 00-overview.md content provided does not contain one.",
+        "issue": "The spec's own acceptance criteria fail against the provided spec content.",
+        "category": "drift"
+      }
+    ],
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [],
+      "expected_but_missing": [
+        "src/Enums/SelfUpdateStatusType.php",
+        "src/Enums/ActionType.php"
+      ]
+    },
+    "weighted_overall": 49,
+    "scores": {
+      "maintainability": 85,
+      "alignment": 0,
+      "clarity": 90,
+      "testability": 30,
+      "consistency": 90,
+      "completeness": 80
+    }
+  },
+  {
+    "module": "22-git-logs-v2",
+    "verdict": "The specification is highly detailed and structurally sound as a documentation-only project, but it fails the audit because the provided code index contains zero implementation files corresponding to the plugin described (it only contains meta-scripts).",
+    "grade": "F",
+    "weighted_overall": 54,
+    "findings": [
+      {
+        "issue": "Complete absence of implementation code for the described WordPress plugin.",
+        "category": "drift",
+        "evidence": "The entire code index consists of linter scripts and CI workflows, but the spec describes a WordPress plugin with SQLite tables and REST endpoints.",
+        "correction": "Score the alignment at 0 and flag as an 'Orphan Spec' until the WordPress plugin implementation files are present in the index.",
+        "impact": 10,
+        "severity": "critical"
+      },
+      {
+        "category": "untestable",
+        "issue": "Acceptance criteria lack specific test harness definitions for time-windowed logic.",
+        "severity": "low",
+        "impact": 3,
+        "correction": "Define clear, quantifiable pass/fail conditions for deduplication and streaming ingestion.",
+        "evidence": "AC-05: Duplicate diagnostic log lines deduplicate within a 60s window. AC-12: /append-log supports streaming ingestion."
+      },
+      {
+        "category": "inconsistency",
+        "issue": "Mismatched version numbers between different files in the same spec module.",
+        "correction": "Sync version numbers across overview and AC or adopt a unified 'current version' variable.",
+        "impact": 2,
+        "severity": "low",
+        "evidence": "Overview: Version 2.8.7; Acceptance Criteria: Version 2.5.0."
+      }
+    ],
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/audit-spec-vs-code.py",
+        "linter-scripts/check-spec-folder-refs.py"
+      ],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "inc/Migrations/V*_*.php",
+        "inc/Endpoints/LogController.php",
+        "inc/Models/GitProfile.php",
+        "inc/Database/SQLiteManager.php"
+      ]
+    },
+    "scores": {
+      "alignment": 0,
+      "maintainability": 85,
+      "testability": 70,
+      "clarity": 85,
+      "completeness": 90,
+      "consistency": 80
+    }
+  },
+  {
+    "module": "23-app-database",
+    "grade": "F",
+    "code_mapping": {
+      "orphan_code": [],
+      "expected_but_missing": [
+        "migrations/app-db/",
+        "src/database/models/"
+      ],
+      "implemented_by": [
+        "linter-scripts/check-forbidden-strings.py",
+        "linter-scripts/forbidden-strings.toml"
+      ]
+    },
+    "verdict": "The spec module is a 'ghost' document; it defines rigorous acceptance criteria for a database schema and migration system that does not exist in the codebase. It has zero completeness regarding actual table definitions or business data models.",
+    "weighted_overall": 39,
+    "scores": {
+      "maintainability": 80,
+      "consistency": 90,
+      "clarity": 70,
+      "completeness": 5,
+      "alignment": 10,
+      "testability": 60
+    },
+    "findings": [
+      {
+        "severity": "high",
+        "evidence": "Document Inventory: (empty \u2014 awaiting content)",
+        "impact": 8,
+        "category": "orphan-spec",
+        "issue": "Spec is an empty shell with no defined data model or schema details.",
+        "correction": "Populate the Document Inventory and define the actual table schemas/migration files."
+      },
+      {
+        "correction": "Add the actual database implementation files to the code index or adjust the spec to reflect the lack of implementation.",
+        "issue": "Spec refers to a database implementation that does not exist in the provided file inventory.",
+        "category": "drift",
+        "evidence": "Spec references 'app-database' schema and migrations, but no .sql, .db, or ORM files exist in the code index.",
+        "severity": "critical",
+        "impact": 9
+      },
+      {
+        "issue": "Rule 12 is referenced as a requirement but the logic for enforcement is hidden in a python script.",
+        "correction": "Specify exactly which strings or patterns Rule 12 and the linter are looking for within the spec file.",
+        "evidence": "Then any appended columns must be NULLABLE and cannot contain a DEFAULT clause (Rule 12).",
+        "severity": "low",
+        "impact": 3,
+        "category": "ambiguity"
+      }
+    ]
+  },
+  {
+    "module": "24-app-design-system-and-ui",
+    "weighted_overall": 28,
+    "verdict": "The spec is a 'hollow shell' describing a UI system and testing pipeline that have zero presence in the provided codebase. It refers to non-existent layout conventions and lacks concrete implementation paths.",
+    "scores": {
+      "testability": 20,
+      "completeness": 20,
+      "maintainability": 60,
+      "consistency": 50,
+      "alignment": 0,
+      "clarity": 40
+    },
+    "findings": [
+      {
+        "category": "orphan-spec",
+        "impact": 9,
+        "correction": "Provide pathing to the actual UI application source code and theme definitions.",
+        "evidence": "Defines application-specific UI and design system standards... enforces theme consistency.",
+        "issue": "Spec describes an application UI and design system that do not exist in the code index.",
+        "severity": "critical"
+      },
+      {
+        "correction": "Define specific layout patterns (containers, grids) instead of referencing 'awaiting content'.",
+        "evidence": "The layout must adhere to the 'layout conventions' mentioned in the Purpose section... (empty \u2014 awaiting content)",
+        "issue": "Acceptance criteria rely on a layout convention that is explicitly empty in the overview.",
+        "severity": "high",
+        "category": "ambiguity",
+        "impact": 7
+      },
+      {
+        "category": "untestable",
+        "impact": 5,
+        "correction": "Specify exactly how npm run lint verifies tokens (e.g. stylelint-config-css-modules).",
+        "evidence": "Then CSS or Style-in-JS properties must use variables (e.g., --color-primary) instead of hardcoded hex/rgb values.",
+        "issue": "Verification command is generic (npm run lint) with no specific configuration for token enforcement.",
+        "severity": "medium"
+      },
+      {
+        "correction": "Verify and align the version numbers across metadata and AC files.",
+        "severity": "low",
+        "issue": "Mismatch between Spec version and AC versioning metadata.",
+        "evidence": "Overview Version: 3.2.0; AC Version: 2.0.0; Reference version: 3.2.0.",
+        "category": "inconsistency",
+        "impact": 2
+      }
+    ],
+    "grade": "F",
+    "code_mapping": {
+      "orphan_code": [
+        "linter-scripts/generate-gwt-acceptance.py"
+      ],
+      "expected_but_missing": [
+        "src/theme/**",
+        "src/components/**",
+        "storybook/**",
+        "package.json"
+      ],
+      "implemented_by": []
+    }
+  },
+  {
+    "module": "25-app-issues",
+    "verdict": "The spec is structurally sound but describes a ghost ship: the primary content (audit logs and findings) listed in the table of contents is missing from the file inventory. It functions more as a template than a populated record.",
+    "weighted_overall": 58,
+    "scores": {
+      "consistency": 60,
+      "alignment": 40,
+      "completeness": 50,
+      "clarity": 90,
+      "maintainability": 80,
+      "testability": 95
+    },
+    "code_mapping": {
+      "implemented_by": [],
+      "orphan_code": [
+        "linter-scripts/check-axios-version.sh"
+      ],
+      "expected_but_missing": [
+        "spec/25-app-issues/01-phase-2-git-logs-audit/00-overview.md",
+        "spec/25-app-issues/02-consolidated-audit-findings/00-overview.md"
+      ]
+    },
+    "grade": "D",
+    "findings": [
+      {
+        "impact": 5,
+        "correction": "Create the sub-folders and overview files for 01 and 02 identified in the table of contents.",
+        "evidence": "Contents table lists 01-phase-2-git-logs-audit and 02-consolidated-audit-findings which are missing from the index.",
+        "issue": "Spec references sub-modules that do not exist in the file inventory.",
+        "severity": "high",
+        "category": "orphan-spec"
+      },
+      {
+        "impact": 2,
+        "correction": "Harmonize the update dates across the module to reflect the latest revision.",
+        "evidence": "Overview: 2026-04-16; AC-AI-000: 2026-04-21; AC document: 2026-04-25.",
+        "severity": "low",
+        "issue": "Internal 'Updated' dates are inconsistent across the module.",
+        "category": "inconsistency"
+      },
+      {
+        "category": "drift",
+        "issue": "AC-AI-000 mandates specific sections in issue files, but no such issue files exist in the module.",
+        "severity": "medium",
+        "correction": "Update AC-AI-000 to reflect the actual content or update the module to include the required sections.",
+        "evidence": "Then Every issue file contains all four sections [Reproduction / Cause / Fix / Prevention]",
+        "impact": 4
+      },
+      {
+        "severity": "low",
+        "issue": "Script 'check-axios-version.sh' is implemented but not documented in this issue-tracking module.",
+        "category": "missing-spec",
+        "impact": 3,
+        "correction": "Add a spec entry in 25-app-issues for the axios version check script.",
+        "evidence": "linter-scripts/check-axios-version.sh exists in code index."
+      }
+    ]
+  },
+  {
+    "module": "25-app-issues/01-phase-2-git-logs-audit",
+    "code_mapping": {
+      "orphan_code": [],
+      "expected_but_missing": [],
+      "implemented_by": [
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/check-spec-cross-links.py",
+        "linter-scripts/run.sh"
+      ]
+    },
+    "grade": "A",
+    "weighted_overall": 94,
+    "findings": [
+      {
+        "correction": "The audit identifies 11 missing files; proceed to Phase 3 or generate the missing spec files in the target archive directory.",
+        "issue": "The audit reports that over 60% of the target application's specifications are missing.",
+        "category": "orphan-spec",
+        "evidence": "P2-GL-01: 11 promised spec files are missing from spec/_archive/21-git-logs-v1/",
+        "severity": "critical",
+        "impact": 8
+      },
+      {
+        "correction": "Specify which 'tree-health' categories apply to an issue-report module vs a standard feature module.",
+        "issue": "AC-05 references a specific tree-health score (80) which may fluctuate based on unrelated modules.",
+        "category": "untestable",
+        "impact": 3,
+        "evidence": "AC-05: Module passes the tree-health gate ... contributes required=2/2 (overview + consistency report present)",
+        "severity": "low"
+      },
+      {
+        "correction": "Provide a specific path for the 'denylist storage' rather than just flagging it as undefined.",
+        "issue": "Unresolved security decisions (JTI Denylist) prevent implementation of secure logout/revocation.",
+        "category": "ambiguity",
+        "impact": 7,
+        "severity": "high",
+        "evidence": "P2-GL-06: Revoked-JTI denylist storage location undefined (OI-ERR-04 unresolved)"
+      }
+    ],
+    "scores": {
+      "consistency": 95,
+      "clarity": 95,
+      "alignment": 100,
+      "completeness": 90,
+      "testability": 90,
+      "maintainability": 90
+    },
+    "verdict": "A high-quality audit spec that accurately identifies critical gaps in the target archive. It successfully maps to the linter-scripts it requires for validation."
+  },
+  {
+    "module": "25-app-issues/02-consolidated-audit-findings",
+    "grade": "A",
+    "code_mapping": {
+      "implemented_by": [
+        "linter-scripts/check-tree-health.cjs",
+        "linter-scripts/run.sh",
+        "linter-scripts/check-spec-cross-links.py"
+      ],
+      "expected_but_missing": [],
+      "orphan_code": []
+    },
+    "verdict": "An exceptionally detailed and well-structured audit document that serves as a meta-specification for architectural debt. It aligns well with the linter infrastructure but describes a system (git-logs-v1) currently residing in an archive path.",
+    "weighted_overall": 92,
+    "findings": [
+      {
+        "severity": "low",
+        "evidence": "Scope: every file in spec/_archive/21-git-logs-v1/",
+        "impact": 2,
+        "category": "orphan-spec",
+        "issue": "Spec describes an archived/legacy system not present in the current code index.",
+        "correction": "Maintain the spec but acknowledge it describes architectural debt/bugs in the 'git-logs' archive rather than active features in the current codebase."
+      },
+      {
+        "issue": "AC-05 is not objectively verifiable without knowing the state of the rest of the tree.",
+        "correction": "Remove specific score requirements from AC or provide the baseline score in the spec.",
+        "severity": "medium",
+        "evidence": "overall score is \u2265 80",
+        "impact": 3,
+        "category": "untestable"
+      },
+      {
+        "category": "drift",
+        "impact": 4,
+        "evidence": "This document supersedes the Phase-2 audit (spec/25-app-issues/01-phase-2-git-logs-audit/00-overview.md)",
+        "severity": "medium",
+        "correction": "Ensure '01-phase-2-git-logs-audit' is present in the file index or remove the corrective claim.",
+        "issue": "The spec references a Phase-2 audit file that is not listed in the provided module input/index."
+      }
+    ],
+    "scores": {
+      "consistency": 100,
+      "clarity": 95,
+      "alignment": 90,
+      "completeness": 90,
+      "testability": 75,
+      "maintainability": 100
+    }
+  },
+  {
+    "module": "26-gitlogs-diagrams",
+    "grade": "F",
+    "verdict": "The spec is a ghost\u2014it defines an inventory and strict acceptance criteria for 8 Mermaid diagrams that do not exist in the provided file index. It fails fundamentally on alignment.",
+    "findings": [
+      {
+        "evidence": "Overview table lists files 01 through 06, plus AC-D-09/10 mention 07 and 08.",
+        "issue": "Spec inventory and AC describe 8 Mermaid diagram files that are missing from the file index.",
+        "category": "orphan-spec",
+        "impact": 10,
+        "severity": "critical",
+        "correction": "Create the missing .mmd files in the spec directory as defined in the overview inventory."
+      },
+      {
+        "severity": "medium",
+        "correction": "Update 00-overview.md to include files 07 and 08 in the inventory table.",
+        "impact": 3,
+        "issue": "Overview inventory is missing definitions for diagrams required by Acceptance Criteria.",
+        "evidence": "AC-D-09 references 07-rate-limit-flow.mmd, AC-D-10 references 08-encryption-v3-flow.mmd, but overview only lists up to 06.",
+        "category": "inconsistency"
+      },
+      {
+        "correction": "Define specific rendering tool versions or specific visual components to be verified.",
+        "severity": "low",
+        "impact": 2,
+        "category": "untestable",
+        "issue": "AC-D-07 is a 'smoke test' that lacks a specific CI check or verifiable output state.",
+        "evidence": "AC-D-07: 'render successfully via Mermaid CLI.'"
+      }
+    ],
+    "scores": {
+      "alignment": 0,
+      "testability": 40,
+      "consistency": 50,
+      "maintainability": 60,
+      "clarity": 70,
+      "completeness": 30
+    },
+    "weighted_overall": 28,
+    "code_mapping": {
+      "orphan_code": [],
+      "implemented_by": [],
+      "expected_but_missing": [
+        "spec/26-gitlogs-diagrams/01-er-diagram.mmd",
+        "spec/26-gitlogs-diagrams/02-domain-design.mmd",
+        "spec/26-gitlogs-diagrams/03-endpoints-write.mmd",
+        "spec/26-gitlogs-diagrams/04-endpoints-read.mmd",
+        "spec/26-gitlogs-diagrams/05-auth-validation.mmd",
+        "spec/26-gitlogs-diagrams/06-permission-flow.mmd",
+        "spec/26-gitlogs-diagrams/07-rate-limit-flow.mmd",
+        "spec/26-gitlogs-diagrams/08-encryption-v3-flow.mmd"
+      ]
+    }
+  }
+]
