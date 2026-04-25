@@ -1,3 +1,11 @@
+> ⚠️ **DEPRECATED — Legacy v1 Spec (folder 21)**  
+> This document is preserved for historical reference only. **Do not implement against it.**  
+> The active specification is **v2** in [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
+> See [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md) for the current canonical source.  
+> Deprecated: 2026-04-25
+
+---
+
 # Git Logs WordPress Plugin
 
 **Version:** 1.0.0  
