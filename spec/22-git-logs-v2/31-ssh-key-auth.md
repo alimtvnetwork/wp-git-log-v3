@@ -124,12 +124,12 @@ Order matters; first failure aborts and writes `AuditTrail.AuthFail`.
 4. **SshKey lookup** — `SELECT … WHERE Fingerprint=? AND IsActive=1`. Miss → `GL-SSH-KEY-UNKNOWN`. Inactive row → `GL-SSH-KEY-INACTIVE`.
 5. **Repo binding** — parse `RepoUrl` → resolve to `RepoId`; must equal `SshKey.RepoId`. Else `GL-SSH-REPO-MISMATCH`.
 6. **Acceptance + branch** — apply GitProfile rules (acceptance, `IsRestrictInBranch`) exactly as §05 steps 3–4.
-7. **Nonce uniqueness** — `INSERT OR IGNORE INTO SshNonce(Fingerprint, Nonce, SeenAt)`. Affected rows = 0 → `GL-SSH-NONCE-REUSED`.
+7. **Nonce uniqueness** — `INSERT OR IGNORE INTO SshNonce(SshKeyId, Nonce, SeenAt)`. Affected rows = 0 → `GL-SSH-NONCE-REUSED`.
 8. **Signature verify** — reconstruct canonical signing string; call `ssh-keygen -Y verify` (or PHP equivalent via `phpseclib`) with `PublicKey`, namespace `git-logs@v2`. Failure → `GL-SSH-SIGNATURE-INVALID`.
 9. **Profile status** — `OwnedByProfileId.UserStatus` must be `Active`. Else `GL-AUTH-PROFILE-INACTIVE`.
 10. **App lifecycle** — if request resolves to an `App`, `AppStatus=Active` required. Else `GL-APP-NOT-ACTIVE`.
 
-On success: `UPDATE SshKey SET LastUsedAt=? WHERE Fingerprint=?`; `AuditTrail.SshAuthSuccess`.
+On success: `UPDATE SshKey SET LastUsedAt=? WHERE SshKeyId=?`; `AuditTrail.SshAuthSuccess`.
 
 ---
 
