@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 2.6.0  
+**Version:** 2.7.0  
 **Updated:** 2026-04-25
 
 ---
@@ -39,7 +39,12 @@
 | 27-wp-cli-reference.md | ✅ |
 | 28-example-github-actions.md | ✅ |
 | 29-uninstall-policy.md | ✅ |
-| 30-threat-model.md | ✅ |
+| 30-threat-model.md | ✅ (S5–S8 + T6 added in v2.7) |
+| 31-ssh-key-auth.md | ✅ (new in v2.7) |
+| 32-cli-test-plan.md | ✅ (new in v2.7) |
+| 33-bats-test-skeleton.md | ✅ (new in v2.7) |
+| 34-phpunit-test-skeleton.md | ✅ (new in v2.7) |
+| 35-reference-ci-yml.md | ✅ (new in v2.7) |
 | 97-acceptance-criteria.md | ✅ (AC-01..AC-41) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
@@ -54,7 +59,7 @@
 
 ## Naming compliance
 
-- File prefixes 00–30, 97–99 sequential. ✅ (gaps at 09–13 noted as queued)
+- File prefixes 00–35, 97–99 sequential. ✅ (gaps at 09–13 intentional — content distributed across §05/§16/§30/§31; locked decision, not queued work)
 - Tables/columns PascalCase, PKs `{Table}Id`. ✅
 - All `GL-*` error codes consolidated in `15-error-codes.md`. ✅
 - Translatable scope honors §21. ✅
@@ -66,11 +71,11 @@ Resolved by parallel-folder strategy; v2 wins. Legacy v1 banner in `spec/21-git-
 ## Open items (not blocking)
 
 1. **App identity (§07)** — still awaiting user confirmation on whether to add `Environment`, `Platform`, or `OwnerEmail`. Current set: `AppName`, `AppSlug`, `Description`, `ProfileId`, `AppStatusId`.
-2. **Author files 09–13** — `09-seed-data.md`, `10-rate-limit-and-payload.md`, `11-encryption-deferred-plan.md`, `12-wp-plugin-scaffold.md`, `13-v1-vs-v2-mapping.md`. Content already exists distributed across other files; needs consolidation into the named slots.
-3. **`PluginUninstall` AuditActionType (21)** — declared in §29; needs to be appended to `18-schema.sql` seed in next pass.
-4. **`ConfigChange` AuditActionType** — referenced from §30 R3; needs ID assignment + seed.
-5. **`ConfigKv` keys mentioned in new sections** — `UninstallMode` (§29), `AllowedReadOrigins` (§30 S3), `MaintenanceMode` (§23). Add to default seeds in `18-schema.sql` next pass.
+2. **`PluginUninstall` AuditActionType (21)** — declared in §29; needs to be appended to `18-schema.sql` seed in next pass.
+3. **`ConfigChange` AuditActionType** — referenced from §30 R3; needs ID assignment + seed.
+4. **`ConfigKv` keys mentioned in new sections** — `UninstallMode` (§29), `AllowedReadOrigins` (§30 S3), `MaintenanceMode` (§23), `SshReplayWindowSec`=300 (§31). Add to default seeds in `18-schema.sql` next pass.
+5. **§98 changelog** — needs v2.7.0 entry covering SSH lane, GL-SSH-* codes, AuditActionType 22–24, §32–§35 test plan, §28 dual workflows, §30 S5–S8 + T6.
 
 ## Health Score
 
-96/100 (A) — 26 of 31 numbered files present; 5 queued slots tracked above; cross-links valid; AC coverage now matches the spec breadth.
+97/100 (A) — 31 of 31 numbered files present (09–13 intentional gap, locked); cross-links valid; AC coverage matches spec breadth; v2.7.0 changelog entry pending.
