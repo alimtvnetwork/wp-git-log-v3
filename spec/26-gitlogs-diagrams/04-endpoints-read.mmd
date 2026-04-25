@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    participant U as Admin / Viewer
+    participant API as git-logs/v2 API
+    participant AZ as Authorizer
+    participant DB as SQLite Root DB
+    participant AUD as AuditTrail
+
+    Note over U,API: GET /get-logs (body or ?q=)
+    U->>API: WP App Password / cookie + body { RepoUrl, GitSha256 }
+    API->>AZ: resolve WP user -> Profile -> Permission(HistoryView)
+    alt Permitted
+        API->>DB: join RepoVersion+Pipeline+LogEntry+ErrorLogEntry by GitSha256
+        DB-->>API: rows
+        API-->>U: { RepoUrl, RootRepo, BranchName, PipelineNames[], IsPass, HasError, ErrorLogs[], Logs[] }
+        API->>AUD: LogQuery Success
+    else Denied
+        API->>AUD: AuthFail / Rejected
+        API-->>U: 401/403 GL-AUTHZ-PERMISSION-DENIED
+    end
+
+    Note over U,API: GET /get-pipeline-logs (body or ?q=)
+    U->>API: { RepoUrl, GitSha256, PipelineName }
+    API->>DB: scoped to one Pipeline
+    API-->>U: { ..., PipelineName, IsPass, HasError, ErrorLogs[], Logs[] }
+
+    Note over U,API: GET /get-error-logs
+    U->>API: { RepoUrl, GitSha256 }
+    API->>DB: ErrorLogEntry only, all pipelines
+    API-->>U: { ..., PipelineNames[], IsPass, HasError, ErrorLogs[{PipelineName, LogText}] }
+
+    Note over U,API: GET /get-pipeline-error-logs
+    U->>API: { RepoUrl, GitSha256, PipelineName }
+    API->>DB: ErrorLogEntry for one Pipeline
+    API-->>U: { ..., PipelineName, IsPass, HasError, ErrorLogs[] }

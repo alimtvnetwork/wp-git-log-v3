@@ -1,0 +1,143 @@
+erDiagram
+    Profile ||--o{ RoleAssignment : has
+    Role ||--o{ RoleAssignment : assigned
+    Role ||--o{ RolePermission : grants
+    Permission ||--o{ RolePermission : in
+    Profile ||--o{ GitProfile : owns
+    Provider ||--o{ GitProfile : provider
+    OwnerType ||--o{ GitProfile : ownerKind
+    Acceptance ||--o{ GitProfile : acceptance
+    GitProfile ||--o{ Repo : contains
+    Repo ||--o{ RepoVersion : versions
+    RepoVersion ||--o{ Pipeline : runs
+    Pipeline ||--o{ LogEntry : produces
+    Pipeline ||--o{ ErrorLogEntry : produces
+    LogSeverity ||--o{ LogEntry : severity
+    Profile ||--o{ App : owns
+    AppStatus ||--o{ App : status
+    App ||--o{ AppLink : links
+    AppLinkType ||--o{ AppLink : kind
+    GitProfile ||--o{ AppLink : targetGP
+    Repo ||--o{ AppLink : targetRepo
+    RepoVersion ||--o{ History : timeline
+    App ||--o{ History : actor
+    ActionType ||--o{ History : actionKind
+    ActionType ||--o{ Action : actionKind
+    RepoVersion ||--o{ Action : on
+    Pipeline ||--o{ Action : on
+    Profile ||--o{ Action : by
+    AuditActionType ||--o{ AuditTrail : kind
+    AuditOutcome ||--o{ AuditTrail : outcome
+    Profile ||--o{ AuditTrail : actor
+
+    Profile {
+        int ProfileId PK
+        string UserName
+        string Email
+        string GeneratedKeyApi
+        string Token
+        string TempToken
+        int UserStatusId FK
+    }
+    GitProfile {
+        int GitProfileId PK
+        int ProviderId FK
+        int OwnerTypeId FK
+        string OwnerName
+        string ProfileUrl
+        int AcceptanceId FK
+        string SelectedRepoUrl
+        int IsRestrictInBranch
+        string StrictBranch
+        int OwnedByProfileId FK
+    }
+    Repo {
+        int RepoId PK
+        int GitProfileId FK
+        string RootRepoName
+        string RootRepoUrl
+    }
+    RepoVersion {
+        int RepoVersionId PK
+        int RepoId FK
+        string VersionSuffix
+        string RepoUrl
+    }
+    Pipeline {
+        int PipelineId PK
+        int RepoVersionId FK
+        string BranchName
+        string PipelineName
+        int HasError
+        string LastGitSha256
+    }
+    LogEntry {
+        int LogEntryId PK
+        int PipelineId FK
+        string GitSha256
+        int LineNumber
+        string LogText
+        int LogSeverityId FK
+        string FilePath
+        int OccurredAt
+    }
+    ErrorLogEntry {
+        int ErrorLogEntryId PK
+        int PipelineId FK
+        string GitSha256
+        int LineNumber
+        string LogText
+    }
+    App {
+        int AppId PK
+        string AppName
+        string AppSlug
+        string Description
+        int ProfileId FK
+        int AppStatusId FK
+    }
+    AppLink {
+        int AppLinkId PK
+        int AppId FK
+        int AppLinkTypeId FK
+        int TargetGitProfileId FK
+        int TargetRepoId FK
+        int IsActive
+    }
+    History {
+        int HistoryId PK
+        int RepoVersionId FK
+        int AppId FK
+        string BranchName
+        string PipelineName
+        string GitSha256
+        int ActionTypeId FK
+        int HasError
+        string Summary
+        int OccurredAt
+    }
+    Action {
+        int ActionId PK
+        int ActionTypeId FK
+        int RepoVersionId FK
+        int PipelineId FK
+        int ProfileId FK
+        int OccurredAt
+    }
+    AuditTrail {
+        int AuditTrailId PK
+        int AuditActionTypeId FK
+        int AuditOutcomeId FK
+        int ActorProfileId FK
+        string RouteName
+        int HttpStatus
+        string RequestId
+        string Detail
+        int OccurredAt
+    }
+    MigrationState {
+        int MigrationStateId PK
+        string PluginVersion
+        int AppliedAt
+        string Checksum
+    }
