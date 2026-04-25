@@ -22,6 +22,7 @@
 | 12-suggest-spec-cross-link-fixes.md | ✅ | Generator (advisory + `--apply`) |
 | 13-generate-gwt-acceptance.md | ✅ | Generator (AI-driven) |
 | 14-generate-trace-map.md | ✅ | Generator (Spec ↔ Code trace map) |
+| 15-generate-fix-checklist.md | ✅ | Generator (per-module fix checklist) |
 | 20-fill-missing-acceptance-criteria.md | ✅ | Filler |
 | 21-fill-missing-changelogs.md | ✅ | Filler |
 | 22-fill-missing-consistency-reports.md | ✅ | Filler |
