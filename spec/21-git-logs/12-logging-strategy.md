@@ -1,6 +1,6 @@
 # Logging Strategy
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-25  
 **Status:** Active  
 **AI Confidence:** High  
@@ -29,7 +29,7 @@ This document covers the **internal diagnostic stream**. CI/CD log ingestion is 
 |-----------|----------|
 | Audit trail schema | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) §3.6 |
 | Audit trail behavior | [./10-audit-trail.md](./10-audit-trail.md) *(planned)* |
-| Error management (envelope, codes, no-swallow) | [./11-error-management.md](./11-error-management.md) |
+| Error management | [./11-error-management.md](./11-error-management.md) *(planned)* |
 | Foundational error mgmt | [../03-error-manage/00-overview.md](../03-error-manage/00-overview.md) |
 | Glossary & enums | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |
 
@@ -52,20 +52,229 @@ This document covers the **internal diagnostic stream**. CI/CD log ingestion is 
 
 ## 2. Trace Context
 
-Every request MUST carry a `TraceId`.
+Every request MUST carry a `TraceId`. The same value flows through HTTP headers, the response envelope (as `Attributes.SessionId`), every structured log line, and the terminal `AuditTrail` row.
 
-### Resolution order
+### 2.1 Resolution order
 
-1. Inbound `X-Request-Id` header (validated as UUIDv4 or 16+ char alphanumeric).
+1. Inbound `X-Request-Id` header (validated as UUIDv4 or `^[A-Za-z0-9._-]{8,128}$`).
 2. Inbound `Traceparent` header (W3C Trace Context — extract `trace-id`).
-3. Generated `wp_generate_uuid4()` if neither header is present.
+3. Generated `wp_generate_uuid4()` if neither header is present (or the inbound value fails validation).
 
-### Propagation
+### 2.2 Propagation
 
 - Echoed back as `X-Request-Id` response header.
+- Surfaced as `Attributes.SessionId` in the response envelope (per `11-error-management.md` §3).
 - Stored in `AuditTrail.DetailsJson.traceId`.
 - Included in every internal `error_log` mirror line.
 - Forwarded to GitHub callbacks (where applicable) as `X-Request-Id`.
+
+### 2.3 Lifecycle Phases
+
+A `TraceId` lives through **six phases**. Each phase has at least one structured log event in §4 and produces evidence on a different surface.
+
+| # | Phase | Surface | Owner |
+|---|-------|---------|-------|
+| 1 | **Resolve** | `TraceMiddleware` reads/generates the value. | `TraceMiddleware` (outermost). |
+| 2 | **Propagate (request-side)** | Set as the request-scoped context value. Every `logEvent()` call reads it. | `TraceMiddleware`. |
+| 3 | **Annotate** | Each subsystem (`Auth`, `Approval`, `Ingestion`) emits structured log lines carrying the same `traceId`. | Per-subsystem services. |
+| 4 | **Persist** | Final `AuditTrail` row writes `DetailsJson.traceId = <value>`. | `AuditMiddleware`. |
+| 5 | **Surface (response-side)** | Echoed as `X-Request-Id` response header AND `Attributes.SessionId` envelope field. | `ErrorEnvelopeMapper` / response post-processor. |
+| 6 | **Forward** | When the plugin calls back to GitHub, the same value is sent as `X-Request-Id` on the outbound request. | Outbound HTTP client. |
+
+> **Invariant.** The `TraceId` value is set exactly once in phase 1 and is **immutable** for the rest of the request. Phase 1 is also the only phase allowed to fail; if it does, the request is rejected at the edge with a server-generated id and a `Warn` log line. See `11-error-management.md` rule R2.
+
+### 2.4 Example HTTP Headers
+
+#### 2.4.1 Inbound — caller supplies a valid `X-Request-Id`
+
+```http
+POST /wp-json/git-logs/v1/logs/push HTTP/1.1
+Host: example.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...   ; envelope JWT (HS256, per-repo LogSenderToken)
+Content-Type: application/json
+Content-Encoding: gzip
+X-Request-Id: 5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571
+Traceparent: 00-5b3e0fd29b4a4a18b2b6cb2c2c8cd571-00f067aa0ba902b7-01
+User-Agent: github-actions-runner/2.317.0
+Content-Length: 18432
+```
+
+The plugin accepts `5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571` (UUIDv4 ✓ and matches the `Traceparent` `trace-id`) and uses it as the `TraceId`.
+
+#### 2.4.2 Inbound — caller omits the header
+
+```http
+POST /wp-json/git-logs/v1/logs/push HTTP/1.1
+Host: example.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+Content-Type: application/json
+User-Agent: github-actions-runner/2.317.0
+```
+
+`TraceMiddleware` generates `wp_generate_uuid4()` → `f2c11b5e-4406-49c9-bff1-3a5a6d9b7044`.
+
+#### 2.4.3 Inbound — caller supplies a malformed value
+
+```http
+X-Request-Id: <script>alert(1)</script>
+```
+
+The value fails the `^[A-Za-z0-9._-]{8,128}$` whitelist. `TraceMiddleware`:
+
+1. Discards the inbound value.
+2. Generates a fresh server-side UUIDv4.
+3. Emits a `Warn` log line `TraceIdRejected_Malformed` with the rejected value (truncated to 64 chars) in `details.rejectedTraceId`.
+
+#### 2.4.4 Outbound — success response
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: application/json
+X-Request-Id: 5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 47
+X-RateLimit-Reset: 1714032720
+```
+
+```json
+{
+  "Status": { "IsSuccess": true, "IsFailed": false, "Code": 202, "Message": "OK", "Timestamp": "2026-04-25T08:11:42.117Z" },
+  "Attributes": {
+    "RequestedAt": "https://example.com/wp-json/git-logs/v1/logs/push",
+    "SessionId": "5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571",
+    "HasAnyErrors": false, "IsSingle": false, "IsMultiple": true, "IsEmpty": false,
+    "TotalRecords": 12, "PerPage": 0, "TotalPages": 0, "CurrentPage": 0
+  },
+  "Results": [{ "PersistedCount": 12, "PipelineId": 88 }]
+}
+```
+
+The `X-Request-Id` response header value is **byte-identical** to `Attributes.SessionId`.
+
+#### 2.4.5 Outbound — error response (envelope rejected by allowlist)
+
+```http
+HTTP/1.1 403 Forbidden
+Content-Type: application/json
+X-Request-Id: 5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571
+```
+
+```json
+{
+  "Status": { "IsSuccess": false, "IsFailed": true, "Code": 403, "Message": "[GL-PUSH-001] Repository is not in the allowlist.", "Timestamp": "2026-04-25T08:11:42.220Z" },
+  "Attributes": { "SessionId": "5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571", "RequestedAt": "https://example.com/wp-json/git-logs/v1/logs/push", "HasAnyErrors": true, "IsEmpty": true, "TotalRecords": 0 },
+  "Results": [],
+  "Errors": { "BackendMessage": "[GL-PUSH-001] Repository is not in the allowlist.", "ValidationErrors": [] }
+}
+```
+
+### 2.5 End-to-End Timeline — JWT validation → CI/CD log ingestion
+
+A worked example for `POST /wp-json/git-logs/v1/logs/push`. The same `traceId = 5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571` appears on every line. Times are relative to `t0`.
+
+```
+t0    + 0.00 ms  ── HTTP request hits PHP-FPM
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 1. TraceMiddleware                                                  │
+                   │    - Reads X-Request-Id header → validates → adopts.                │
+                   │    - Sets request-scoped context: traceId=5b3e0fd2-…                │
+                   └─────────────────────────────────────────────────────────────────────┘
+
+t0    + 0.40 ms  LOG  EndpointReceived           [Info]   traceId=5b3e0fd2-…
+                                                          httpMethod=POST endpointPath=/wp-json/git-logs/v1/logs/push
+                                                          requestIp=140.82.121.4 userAgent="github-actions-runner/2.317.0"
+
+t0    + 0.85 ms  LOG  EndpointResolved           [Debug]  traceId=5b3e0fd2-…  controller=LogPushController
+
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 2. AuthMiddleware (envelope JWT path — HS256, per-repo)             │
+                   └─────────────────────────────────────────────────────────────────────┘
+t0    + 1.10 ms  LOG  JwtValidationStarted       [Debug]  traceId=5b3e0fd2-…  alg=HS256 kid=lst_42_…
+t0    + 1.95 ms  LOG  EnvelopeJwtVerified        [Info]   traceId=5b3e0fd2-…  repositoryId=42
+                                                          (HMAC ok · exp ok · ttl ok · jti not in nonce table)
+                  AUDIT  (no row yet — terminal write happens at EndpointCompleted)
+
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 3. ApprovalMiddleware — allowlist + RBAC + rate limit               │
+                   └─────────────────────────────────────────────────────────────────────┘
+t0    + 2.30 ms  LOG  AllowlistMatched_Exact     [Info]   traceId=5b3e0fd2-…  repositoryId=42
+                                                          matchMode=Exact  acceptanceMode=RepoUrl
+t0    + 2.55 ms  LOG  RoleCheckPassed            [Debug]  traceId=5b3e0fd2-…  role=LogSender(envelope)
+t0    + 2.80 ms  LOG  RateLimitPassed            [Debug]  traceId=5b3e0fd2-…  bucket=repo:42  remaining=47/60
+
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 4. ValidationMiddleware — body schema                               │
+                   └─────────────────────────────────────────────────────────────────────┘
+t0    + 3.40 ms  LOG  PayloadCapPassed           [Debug]  traceId=5b3e0fd2-…  rawBytes=18432  decompressedBytes=87104
+
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 5. LogPushController → IngestionService                             │
+                   └─────────────────────────────────────────────────────────────────────┘
+t0    + 3.90 ms  LOG  IngestionStarted           [Debug]  traceId=5b3e0fd2-…  entryCount=12
+t0    + 4.25 ms  LOG  PipelineAutoCreated        [Info]   traceId=5b3e0fd2-…  pipelineId=88 branch=main pipeline=ci-build
+t0    + 9.60 ms  LOG  LogEntriesPersisted        [Info]   traceId=5b3e0fd2-…  pipelineId=88 persisted=12 failed=0
+
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 6. ErrorEnvelopeMiddleware — wraps response                         │
+                   └─────────────────────────────────────────────────────────────────────┘
+t0    + 9.85 ms                                  Builds 202 envelope; SessionId = traceId.
+
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 7. AuditMiddleware — single terminal AuditTrail row                 │
+                   └─────────────────────────────────────────────────────────────────────┘
+t0    +10.10 ms  AUDIT INSERT INTO AuditTrail  (one row)
+                   AuditActionTypeName = 'LogPush'
+                   AuditOutcomeName    = 'Success'
+                   IsSuccessful        = 1
+                   HttpMethod          = 'POST'
+                   HttpStatus          = 202
+                   EndpointPath        = '/wp-json/git-logs/v1/logs/push'
+                   RequestIp           = '140.82.121.4'
+                   DetailsJson         = { "traceId":"5b3e0fd2-…", "repositoryId":42,
+                                           "pipelineId":88, "persisted":12, "latencyMs":10 }
+
+                   ┌─────────────────────────────────────────────────────────────────────┐
+                   │ 8. LoggingMiddleware (exit)                                         │
+                   └─────────────────────────────────────────────────────────────────────┘
+t0    +10.35 ms  LOG  EndpointCompleted          [Info]   traceId=5b3e0fd2-…
+                                                          httpStatus=202  latencyMs=10
+                                                          auditActionTypeName=LogPush  auditOutcomeName=Success
+
+t0    +10.50 ms  ── HTTP response flushed
+                   X-Request-Id: 5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571
+                   Body: { "Attributes": { "SessionId": "5b3e0fd2-…" }, … }
+```
+
+#### 2.5.1 Failure variant — JWT signature invalid
+
+If step 2 fails, the timeline diverges and the same `traceId` still appears everywhere:
+
+```
+t0    + 1.10 ms  LOG  JwtValidationStarted             [Debug]  traceId=5b3e0fd2-…
+t0    + 1.85 ms  LOG  JwtValidationFailed_BadSignature [Warn]   traceId=5b3e0fd2-…
+                                                                errorCode=GL-AUTH-008  (internal sub-code)
+                                                                publicErrorCode=GL-AUTH-002
+t0    + 2.00 ms                                        ErrorEnvelopeMapper builds 401 envelope with
+                                                       BackendMessage="[GL-AUTH-002] Access JWT is invalid or expired."
+t0    + 2.20 ms  AUDIT INSERT (Outcome=Rejected, errorCode=GL-AUTH-008 in DetailsJson)
+t0    + 2.35 ms  LOG  EndpointCompleted                [Info]   traceId=5b3e0fd2-…  httpStatus=401  latencyMs=2
+t0    + 2.50 ms  ── HTTP 401 flushed; X-Request-Id: 5b3e0fd2-…
+```
+
+> **Note:** the public `BackendMessage` carries `GL-AUTH-002` (generic), while the audit row and log lines carry the precise sub-code `GL-AUTH-008` — preventing the response from acting as an oracle while preserving full diagnostics. See `11-error-management.md` §6.1.
+
+#### 2.5.2 Operational query — reconstruct the timeline
+
+```sql
+-- Single-trace timeline (audit rows for one request)
+SELECT CreatedAt, AuditActionTypeName, AuditOutcomeName, HttpStatus,
+       JSON_EXTRACT(DetailsJson, '$.errorCode') AS errorCode
+FROM   VwAuditTrailDetail
+WHERE  JSON_EXTRACT(DetailsJson, '$.traceId') = '5b3e0fd2-9b4a-4a18-b2b6-cb2c2c8cd571'
+ORDER  BY CreatedAt ASC;
+```
+
+For the structured log lines (mirrored to `error_log` when severity ≥ Warn), grep on `"traceId":"5b3e0fd2-…"`.
 
 ---
 
@@ -117,86 +326,77 @@ Every event below MUST emit exactly one structured log line and one `AuditTrail`
 
 ### 4.2 Authentication & JWT Validation
 
-> Every `errorCode` below is defined in [`11-error-management.md`](./11-error-management.md) §6 — the authoritative registry. The "public-facing" GL-AUTH-002 codes (008–012) are **debug-only sub-codes**: they appear only in `AuditTrail.DetailsJson.errorCode` and `error_log`; the outbound envelope always carries the generic `GL-AUTH-002` to prevent oracle attacks.
+| Event | Severity | `AuditActionType` | `AuditOutcome` |
+|-------|----------|-------------------|----------------|
+| `JwtValidationStarted` | `Debug` | — | — |
+| `JwtValidationSucceeded` | `Info` | `AuthSuccess` | `Success` |
+| `JwtValidationFailed_BadSignature` | `Warn` | `AuthFail` | `Rejected` |
+| `JwtValidationFailed_Expired` | `Info` | `AuthFail` | `Rejected` |
+| `JwtValidationFailed_BadIssuer` | `Warn` | `AuthFail` | `Rejected` |
+| `JwtValidationFailed_BadAudience` | `Warn` | `AuthFail` | `Rejected` |
+| `JwtValidationFailed_RevokedJti` | `Warn` | `AuthFail` | `Rejected` |
+| `RefreshTokenRotated` | `Info` | `TokenIssue` | `Success` |
+| `RefreshTokenReuseDetected` | `Error` | `AuthFail` | `Rejected` |
+| `WpBridgeAuthSucceeded` | `Info` | `AuthSuccess` | `Success` |
+| `WpBridgeAuthFailed` | `Warn` | `AuthFail` | `Rejected` |
+| `TokenIssued` | `Info` | `TokenIssue` | `Success` |
+| `TokenRevoked` | `Info` | `TokenRevoke` | `Success` |
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
-|-------|----------|-------------------|----------------|-------------|
-| `JwtValidationStarted` | `Debug` | — | — | — |
-| `JwtValidationSucceeded` | `Info` | `AuthSuccess` | `Success` | — |
-| `JwtValidationFailed_BadSignature` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-008` |
-| `JwtValidationFailed_Expired` | `Info` | `AuthFail` | `Rejected` | `GL-AUTH-009` |
-| `JwtValidationFailed_BadIssuer` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-010` |
-| `JwtValidationFailed_BadAudience` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-011` |
-| `JwtValidationFailed_RevokedJti` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-012` |
-| `RefreshTokenRotated` | `Info` | `TokenIssue` | `Success` | — |
-| `RefreshTokenReuseDetected` | `Error` | `AuthFail` | `Rejected` | `GL-AUTH-003` |
-| `WpBridgeAuthSucceeded` | `Info` | `AuthSuccess` | `Success` | — |
-| `WpBridgeAuthFailed` | `Warn` | `AuthFail` | `Rejected` | `GL-AUTH-006` |
-| `TokenIssued` | `Info` | `TokenIssue` | `Success` | — |
-| `TokenRevoked` | `Info` | `TokenRevoke` | `Success` | — |
-
-> `RefreshTokenReuseDetected` MUST also revoke the entire token chain (set `IsRevoked = 1` on every descendant) and emit a separate `Security` event (`SuspectedReplayAttack` → `GL-SEC-001`).
+> `RefreshTokenReuseDetected` MUST also revoke the entire token chain (set `IsRevoked = 1` on every descendant) and emit a separate `Security` event.
 
 ### 4.3 Approval & Policy Decisions
 
 Every authorization or policy decision (allowlist match, role check, rate-limit check) MUST log its decision — both pass and fail.
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
-|-------|----------|-------------------|----------------|-------------|
-| `AllowlistMatched_Exact` | `Info` | `LogPush` | `Success` (continues) | — |
-| `AllowlistMatched_VersionWildcard` | `Info` | `LogPush` | `Success` (continues) | — |
-| `AllowlistMatched_OwnerWildcard` | `Info` | `LogPush` | `Success` (continues) | — |
-| `AllowlistRejected_NotRegistered` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-001` |
-| `AllowlistRejected_Disabled` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-002` |
-| `RoleCheckPassed` | `Debug` | — | — | — |
-| `RoleCheckFailed` | `Warn` | varies | `Rejected` | `GL-RBAC-001` |
-| `RateLimitPassed` | `Debug` | — | — | — |
-| `RateLimitExceeded` | `Warn` | `LogPush` or `LogQuery` | `Rejected` | `GL-RATE-001` |
-| `EnvelopeJwtVerified` | `Info` | `LogPush` | `Success` (continues) | — |
-| `EnvelopeJwtRejected_BadHmac` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-003` |
-| `EnvelopeJwtRejected_Expired` | `Info` | `LogPush` | `Rejected` | `GL-PUSH-004` |
-| `EnvelopeJwtRejected_TtlTooLong` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-005` |
-| `EnvelopeJwtRejected_Replayed` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-006` |
-| `EnvelopeJwtRejected_Malformed` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-007` |
-| `PayloadCapExceeded` | `Warn` | `LogPush` | `Rejected` | `GL-PUSH-009` |
+| Event | Severity | `AuditActionType` | `AuditOutcome` |
+|-------|----------|-------------------|----------------|
+| `AllowlistMatched_Exact` | `Info` | `LogPush` | `Success` (continues) |
+| `AllowlistMatched_VersionWildcard` | `Info` | `LogPush` | `Success` (continues) |
+| `AllowlistMatched_OwnerWildcard` | `Info` | `LogPush` | `Success` (continues) |
+| `AllowlistRejected_NotRegistered` | `Warn` | `LogPush` | `Rejected` |
+| `AllowlistRejected_Disabled` | `Warn` | `LogPush` | `Rejected` |
+| `RoleCheckPassed` | `Debug` | — | — |
+| `RoleCheckFailed` | `Warn` | varies | `Rejected` |
+| `RateLimitPassed` | `Debug` | — | — |
+| `RateLimitExceeded` | `Warn` | `LogPush` or `LogQuery` | `Rejected` |
+| `EnvelopeJwtVerified` | `Info` | `LogPush` | `Success` (continues) |
+| `EnvelopeJwtRejected_BadHmac` | `Warn` | `LogPush` | `Rejected` |
+| `EnvelopeJwtRejected_Expired` | `Info` | `LogPush` | `Rejected` |
+| `PayloadCapExceeded` | `Warn` | `LogPush` | `Rejected` |
 
 > Each "continues" event is informational; the transaction's terminal outcome is logged separately at `EndpointCompleted` time so each `AuditTrail` row maps to one final state.
 
 ### 4.4 CI/CD Log Ingestion (`POST /logs/push`)
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
-|-------|----------|-------------------|----------------|-------------|
-| `IngestionStarted` | `Debug` | — | — | — |
-| `PipelineAutoCreated` | `Info` | — | — | — |
-| `PipelineAutoCreateFailed` | `Warn` | `LogPush` | `Rejected` | `GL-ING-004` |
-| `LogEntriesPersisted` | `Info` | `LogPush` | `Success` | — |
-| `IngestionPartial` | `Warn` | `LogPush` | `Rejected` | `GL-ING-002` |
-| `IngestionFailed_DbError` | `Error` | `LogPush` | `Error` | `GL-ING-003` |
-| `IngestionFailed_ValidationError` | `Warn` | `LogPush` | `Rejected` | `GL-ING-001` |
+| Event | Severity | `AuditActionType` | `AuditOutcome` |
+|-------|----------|-------------------|----------------|
+| `IngestionStarted` | `Debug` | — | — |
+| `PipelineAutoCreated` | `Info` | — | — |
+| `LogEntriesPersisted` | `Info` | `LogPush` | `Success` |
+| `IngestionPartial` | `Warn` | `LogPush` | `Rejected` |
+| `IngestionFailed_DbError` | `Error` | `LogPush` | `Error` |
+| `IngestionFailed_ValidationError` | `Warn` | `LogPush` | `Rejected` |
 
 > `IngestionPartial` MUST list the rejected entries' indices in `details.rejectedIndices` and the reason per index.
 
 ### 4.5 Background & Maintenance
 
-| Event | Severity | `AuditActionType` | `AuditOutcome` | `errorCode` |
-|-------|----------|-------------------|----------------|-------------|
-| `RefreshTokenSweepStarted` | `Debug` | — | — | — |
-| `RefreshTokenSweepCompleted` | `Info` | — | `Success` | — |
-| `RefreshTokenSweepFailed` | `Error` | — | `Error` | `GL-BG-001` |
-| `JwksKeyRotationStarted` | `Info` | — | — | — |
-| `JwksKeyRotationCompleted` | `Info` | — | `Success` | — |
-| `JwksKeyRotationFailed` | `Error` | — | `Error` | `GL-BG-002` |
-| `AuditRetryJobStarted` | `Debug` | — | — | — |
-| `AuditRetryJobFailed` | `Error` | — | `Error` | `GL-BG-003` |
+| Event | Severity | `AuditActionType` | `AuditOutcome` |
+|-------|----------|-------------------|----------------|
+| `RefreshTokenSweepStarted` | `Debug` | — | — |
+| `RefreshTokenSweepCompleted` | `Info` | — | `Success` |
+| `RefreshTokenSweepFailed` | `Error` | — | `Error` |
+| `JwksKeyRotationStarted` | `Info` | — | — |
+| `JwksKeyRotationCompleted` | `Info` | — | `Success` |
 
 ### 4.6 Security Events
 
-| Event | Severity | `errorCode` |
-|-------|----------|-------------|
-| `SuspectedReplayAttack` | `Error` | `GL-SEC-001` |
-| `SuspectedBruteForce` | `Warn` | `GL-SEC-002` |
-| `SuspectedAllowlistProbe` | `Warn` | `GL-SEC-003` |
-| `IntegrityCheckFailed` | `Fatal` | `GL-SEC-004` |
+| Event | Severity |
+|-------|----------|
+| `SuspectedReplayAttack` | `Error` |
+| `SuspectedBruteForce` | `Warn` |
+| `SuspectedAllowlistProbe` | `Warn` |
+| `IntegrityCheckFailed` | `Fatal` |
 
 ---
 
@@ -227,7 +427,7 @@ try {
     $this->logger->logEvent('OperationFailed', LogSeverity::Error, [
         'auditActionTypeName' => 'RepoCreate',
         'auditOutcomeName'    => 'Error',
-        'errorCode'           => 'GL-INT-001',
+        'errorCode'           => 'INTERNAL_ERROR',
         'errorMessage'        => $e->getMessage(),
         'errorStack'          => $e->getTraceAsString(),
     ]);
@@ -372,7 +572,7 @@ ORDER BY n DESC;
 
 | # | Item | Notes |
 |---|------|-------|
-| OI-LOG-01 | ~~Final error-code registry~~ | **Resolved** — see [`11-error-management.md`](./11-error-management.md) §6. |
+| OI-LOG-01 | Final error-code registry | Depends on `11-error-management.md` (not yet authored). |
 | OI-LOG-02 | Trusted-proxy CIDR list source | WP option vs. constant in `wp-config.php`? |
 | OI-LOG-03 | `wp-cron` retry job for failed audit inserts | Needs a small persistence mechanism; `wp_options` ring buffer is one candidate. |
 | OI-LOG-04 | Whether `EndpointReceived` should also persist to `AuditTrail` or only to `error_log` at `Debug` | Cost/benefit — doubles row volume. |
