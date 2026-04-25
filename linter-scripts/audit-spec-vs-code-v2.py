@@ -584,7 +584,12 @@ def main():
         idx.append(f"| [`{r['module']}`](./{r['module'].replace('/','__') or '_root'}.md) | {s['implementability']} | {s['completeness']} | {s['alignment']} | {s['consistency']} | {s['clarity']} | {s['testability']} | {s['maintainability']} | **{r['weighted_overall']}** | {r['grade']} | {r['blast_radius']} |")
 
     (OUT / "00-index.md").write_text("\n".join(idx))
-    (OUT / "raw-results.json").write_text(json.dumps(results, indent=2))
+    # In deterministic mode, sort by module name and sort_keys for byte-identical output.
+    json_results = sorted(results, key=lambda r: r["module"]) if DETERMINISTIC else results
+    json_text = json.dumps(json_results, indent=2, sort_keys=DETERMINISTIC, ensure_ascii=True)
+    if DETERMINISTIC and not json_text.endswith("\n"):
+        json_text += "\n"
+    (OUT / "raw-results.json").write_text(json_text)
 
     # Executive summary (separate, short)
     exec_md = [f"# AI-Implementability Audit v2 — Executive Summary\n",
