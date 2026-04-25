@@ -1,18 +1,17 @@
 {
   "Generated": "2026-04-25",
   "Health": {
-    "Score": 76,
+    "Score": 77,
     "Grade": "C",
     "Deductions": [
-      "44 broken links (-20)",
-      "1 missing consistency reports (-1)",
+      "43 broken links (-20)",
       "1 missing overviews (-3)"
     ]
   },
   "Links": {
-    "TotalChecked": 2074,
-    "Ok": 2030,
-    "Broken": 44,
+    "TotalChecked": 2077,
+    "Ok": 2034,
+    "Broken": 43,
     "BrokenDetails": [
       {
         "Source": "00-overview.md",
@@ -176,13 +175,6 @@
         "Resolved": "21-git-logs/98-changelog.md"
       },
       {
-        "Source": "21-git-logs/00-overview.md",
-        "Line": 85,
-        "Text": "99-consistency-report.md",
-        "Target": "./99-consistency-report.md",
-        "Resolved": "21-git-logs/99-consistency-report.md"
-      },
-      {
         "Source": "21-git-logs/01-glossary-and-enums.md",
         "Line": 140,
         "Text": "13-coding-guidelines-applied.md",
@@ -331,16 +323,11 @@
         "FileCount": 2
       }
     ],
-    "MissingConsistency": [
-      {
-        "Folder": "21-git-logs",
-        "FileCount": 10
-      }
-    ]
+    "MissingConsistency": []
   },
   "Inventory": {
     "TotalFolders": 80,
-    "TotalMdFiles": 638,
+    "TotalMdFiles": 639,
     "Folders": [
       {
         "Folder": "",
@@ -1698,10 +1685,10 @@
       },
       {
         "Folder": "21-git-logs",
-        "MdFiles": 10,
+        "MdFiles": 11,
         "Subfolders": 2,
         "HasOverview": true,
-        "HasConsistency": false,
+        "HasConsistency": true,
         "HasChangelog": false,
         "HasAcceptance": true,
         "Files": [
@@ -1714,7 +1701,8 @@
           "12-logging-strategy.md",
           "16-jwt-onboarding-and-token-usage.md",
           "17-spec-consistency-checklist.md",
-          "97-acceptance-criteria.md"
+          "97-acceptance-criteria.md",
+          "99-consistency-report.md"
         ]
       },
       {
