@@ -1,6 +1,6 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.5.0  
+**Version:** 2.7.0  
 **Updated:** 2026-04-25
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
@@ -28,6 +28,22 @@ All `GL-*` codes returned by the plugin. Codes are stable strings (constants in 
 | GL-AUTH-TOKEN-MISMATCH | 401 | `Token` doesn't match the same Profile that owns the matched `TempToken`. | Update CI secrets. |
 | GL-AUTH-PROFILE-INACTIVE | 403 | Profile `UserStatus` ∈ {Suspended, Revoked}. | Re-activate Profile in admin. |
 | GL-APP-NOT-ACTIVE | 403 | Linked `App.AppStatus` ∈ {Disabled, Archived}. | Set App back to Active or unlink. |
+
+## Authentication (Lane B — SSH sub-mode, preferred from v2.7.0)
+
+Validation order fixed by §31 (steps 1–10). See [`31-ssh-key-auth.md`](./31-ssh-key-auth.md) for canonical signing string and payload shape.
+
+| Code | HTTP | Step | Cause | Caller action |
+|------|------|------|-------|---------------|
+| GL-SSH-HEADER-MISSING | 400 | 2 | One of `X-GL-Fingerprint`, `X-GL-Timestamp`, `X-GL-Nonce`, `X-GL-Signature` absent. | Re-run signer; ensure all four headers set. |
+| GL-SSH-TIMESTAMP-SKEW | 401 | 3 | `\|now − X-GL-Timestamp\| > ReplayWindowSeconds`. | Sync runner clock (NTP). |
+| GL-SSH-KEY-UNKNOWN | 401 | 4 | No `SshKey` row matches `Fingerprint`. | Register the public key on the target Repo. |
+| GL-SSH-KEY-INACTIVE | 403 | 4 | `SshKey.IsActive=0`. | Re-activate or rotate to a new key. |
+| GL-SSH-REPO-MISMATCH | 403 | 5 | Parsed `RepoId` ≠ `SshKey.RepoId` (deploy-key binding). | Use a key registered on this Repo. |
+| GL-SSH-NONCE-REUSED | 401 | 7 | `(SshKeyId, Nonce)` already seen within `ReplayWindowSeconds`. | Generate a fresh ≥16-byte nonce per request. |
+| GL-SSH-SIGNATURE-INVALID | 401 | 8 | `ssh-keygen -Y verify` failed against canonical `GL-SSHSIG-V1` string. | Confirm namespace `git-logs@v2`, body hash, header values match signed payload. |
+| GL-SSH-LANE-CONFLICT | 400 | mode parse | `X-GL-Auth-Mode: ssh` AND body `TempToken` both present. | Pick one lane. |
+| GL-AUTH-LANE-DISABLED | 403 | mode parse | TempToken submitted while `ConfigKv.SshAuthMode = required`. | Switch CI to SSH lane. |
 
 ## Validation (Lane B body inputs)
 
