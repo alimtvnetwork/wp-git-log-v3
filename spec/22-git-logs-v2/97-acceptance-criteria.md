@@ -1,6 +1,6 @@
 # Acceptance Criteria (v2)
 
-**Version:** 2.5.0  
+**Version:** 2.8.1  
 **Updated:** 2026-04-25
 
 | # | Criterion | Source |
@@ -46,3 +46,10 @@
 | AC-39 | Permission gate uses `RolePermission` join only — never role name string compare. Buttons hidden (not disabled) when permission missing. | §19 |
 | AC-40 | OpenAPI 3.1 spec at `17-openapi.yaml` parses; covers all 10 endpoints; references `15-error-codes.md` envelope schema. | §17 |
 | AC-41 | WP.org release ZIP contains `readme.txt` + `screenshot-1..8.png`; CI gate runs `wp i18n make-pot` diff + `wp plugin check` before tagging. | §26, §21 |
+| AC-42 | `version-drift-check` CI job greps `git-logs.php`, `readme.txt` `Stable tag:`, `18-schema.sql` `PluginVersion`, and `98-changelog.md` top row; mismatch fails with `GL-RELEASE-VERSION-DRIFT`. | §36, §35 |
+| AC-43 | `readme-validator` CI job runs WP.org readme validator on `readme.txt`; non-zero exit fails with `GL-RELEASE-README-INVALID`. | §36, §26 |
+| AC-44 | `wp-plugin-check` CI job runs `wp plugin check` on the packaged ZIP; any blocker fails with `GL-RELEASE-WP-CHECK-FAIL`. | §36, §26 |
+| AC-45 | `pot-diff` CI job runs `wp i18n make-pot` and fails on non-empty diff with `GL-RELEASE-POT-DIFF`. | §36, §21 |
+| AC-46 | `upgrade-from-previous` E2E job installs the previous tag, seeds sample data, upgrades to current tag, runs `wp git-logs verify`; non-zero or row-count delta fails with `GL-RELEASE-UPGRADE-FAIL`. | §36, §23, §27 |
+| AC-47 | Tag format `v{Major}.{Minor}.{Patch}`; pre-release uses `-rc.N` / `-beta.N`; never re-used; never force-pushed. | §36 §2 |
+| AC-48 | Hotfix branches off the previous tag (not `main`), apply minimal fix without migration, then forward-port via `cherry-pick`. | §36 §5 |
