@@ -4,15 +4,15 @@
     "Score": 74,
     "Grade": "C",
     "Deductions": [
-      "50 broken links (-20)",
+      "45 broken links (-20)",
       "3 missing consistency reports (-3)",
       "1 missing overviews (-3)"
     ]
   },
   "Links": {
-    "TotalChecked": 2080,
+    "TotalChecked": 2075,
     "Ok": 2030,
-    "Broken": 50,
+    "Broken": 45,
     "BrokenDetails": [
       {
         "Source": "00-overview.md",
@@ -307,41 +307,6 @@
         "Text": "../22-app-issues/00-overview.md",
         "Target": "../22-app-issues/00-overview.md",
         "Resolved": "22-app-issues/22-app-issues/00-overview.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 65,
-        "Text": "09-seed-data.md",
-        "Target": "./09-seed-data.md",
-        "Resolved": "22-git-logs-v2/09-seed-data.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 66,
-        "Text": "10-rate-limit-and-payload.md",
-        "Target": "./10-rate-limit-and-payload.md",
-        "Resolved": "22-git-logs-v2/10-rate-limit-and-payload.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 67,
-        "Text": "11-encryption-deferred-plan.md",
-        "Target": "./11-encryption-deferred-plan.md",
-        "Resolved": "22-git-logs-v2/11-encryption-deferred-plan.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 68,
-        "Text": "12-wp-plugin-scaffold.md",
-        "Target": "./12-wp-plugin-scaffold.md",
-        "Resolved": "22-git-logs-v2/12-wp-plugin-scaffold.md"
-      },
-      {
-        "Source": "22-git-logs-v2/00-overview.md",
-        "Line": 69,
-        "Text": "13-v1-vs-v2-mapping.md",
-        "Target": "./13-v1-vs-v2-mapping.md",
-        "Resolved": "22-git-logs-v2/13-v1-vs-v2-mapping.md"
       },
       {
         "Source": "23-app-database/00-overview.md",
