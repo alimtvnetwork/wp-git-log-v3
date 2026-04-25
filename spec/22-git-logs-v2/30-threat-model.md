@@ -1,6 +1,6 @@
 # Threat Model (v2)
 
-**Version:** 2.5.0  
+**Version:** 2.7.0  
 **Updated:** 2026-04-25
 
 STRIDE pass over the v2 attack surface. Each row names the threat, the affected asset, the v2 mitigation, and any residual risk deferred to v3.
@@ -34,7 +34,7 @@ Three boundaries:
 
 | # | Threat | Asset | Mitigation | Residual |
 |---|--------|-------|------------|----------|
-| S1 | Attacker submits valid-looking `/append-log` with stolen `TempToken`+`Token`. | Pipeline integrity | Lane B requires both tokens + `RepoUrl` matching a configured GitProfile + Acceptance + branch rule. Profile rotation invalidates within the next read of the row (no token cache). | TempToken theft from a CI secret store still wins until rotated. v3 plan: short-lived signed tokens (§11). |
+| S1 | Attacker submits valid-looking `/append-log` with stolen `TempToken`+`Token` (legacy lane). | Pipeline integrity | Lane B requires both tokens + `RepoUrl` matching a configured GitProfile + Acceptance + branch rule. Profile rotation invalidates within the next read of the row (no token cache). **From v2.7.0**: SSH sub-mode (§31) eliminates shared-secret theft entirely; operators set `ConfigKv.SshAuthMode=required` to retire this lane. | Until cutover to `SshAuthMode=required`, TempToken theft from a CI secret store still wins. v3.0.0 removes the lane outright. |
 | S2 | Attacker forges a WP App Password to hit Lane A. | Read access to logs | WP core + Application Passwords + Profile-link by email. Brute force throttled by WP core. | If the WP user account is compromised, all readable logs leak. Mitigated by per-Profile permission scoping and `AuditTrail.LogQuery` rows. |
 | S3 | Attacker spoofs `Origin` header to bypass CORS. | Read endpoints | CORS read from `ConfigKv.AllowedReadOrigins`; default empty (same-origin only). Header is advisory; browser enforces. | Server-to-server callers ignore CORS entirely; same-origin policy is browser-only. Not a server-side defense. |
 | S4 | Multiple `/append-log` calls forge a different Pipeline's identity by reusing `Pipeline` name. | Cross-pipeline data injection | Pipeline uniqueness is `(RepoVersionId, Branch, Pipeline)`. Cross-Profile collisions blocked by GitProfile ownership of the RepoVersion. | A Profile owning two GitProfiles can collapse Pipelines across them — operator's choice. |
@@ -103,15 +103,15 @@ Three boundaries:
 
 | Severity | Count | Notes |
 |----------|-------|-------|
-| Mitigated in v2 | 23 | Listed above. |
-| Deferred to v3 | 4 | S1 (signed tokens), I3 (rotating redaction list), R1 (append-only audit chain), D4 (multi-engine backend). |
+| Mitigated in v2 | 27 | Listed above (incl. S5–S8 SSH-lane additions). |
+| Deferred to v3 | 4 | S1 hard-removal of TempToken lane, I3 (rotating redaction list), R1 (append-only audit chain), D4 (multi-engine backend). |
 | Out of scope | 5 | T1 (filesystem), D2 (hosting), I1 (CI-side), E1/E5 (WP Admin trust). |
 
 ---
 
 ## Required v3 prerequisites that fall out of this model
 
-1. Short-lived signed tokens replacing `TempToken` (S1).
+1. Hard-remove the TempToken sub-mode in v3.0.0 (S1). v2.7.0 ships SSH sub-mode (§31) as the migration path; v3.0.0 deletes the TempToken code path and forces `SshAuthMode=required`.
 2. Append-only audit journal with checksum chain (R1).
 3. Encryption-at-rest with Argon2id-hashed lookup keys (T1, I3) — already planned in `11-encryption-deferred-plan.md`.
 4. Optional MySQL/Postgres backend for high-volume sites (D4).
