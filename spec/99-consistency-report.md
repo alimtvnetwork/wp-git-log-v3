@@ -48,35 +48,34 @@
 
 | Module | Overview | Consistency Report |
 |--------|----------|--------------------|
-| `21-git-logs/` | ✅ | — (legacy v1, banner-deprecated; superseded by `22-git-logs-v2/`) |
-| `25-app-issues/` | ✅ | — (placeholder) |
+| `_archive/21-git-logs-v1/` | ✅ | ✅ (archived 2026-04-25, v3.7.0) |
 | `22-git-logs-v2/` | ✅ | ✅ (v2.8.7, authoritative) |
 | `23-app-database/` | ✅ | — (placeholder) |
 | `24-app-design-system-and-ui/` | ✅ | — (placeholder) |
+| `25-app-issues/` | ✅ | — (placeholder; renamed from `22-app-issues/` in v3.7.0) |
 | `26-gitlogs-diagrams/` | ✅ | ✅ |
 
 ---
 
-## Findings (v3.3.0 audit)
+## Findings (v3.7.0 — Phase 1 Triage)
 
-### Resolved drift (was claimed in v3.2.0, now corrected)
-- ❌ → removed: `08-docs-viewer-ui/` listed ✅ but folder does not exist on disk.
-- ❌ → removed: `09-code-block-system/` listed ✅ but folder does not exist on disk.
-- ❌ → removed: `21-app/` listed but folder does not exist (only `21-git-logs/` occupies slot 21).
-- ➕ added: `21-git-logs/` (legacy v1, deprecated).
-- ➕ added: `22-git-logs-v2/` (v2.8.7 authoritative — see [its §99](./22-git-logs-v2/99-consistency-report.md)).
-- ➕ added: `26-gitlogs-diagrams/` (Mermaid sources + SVG renders).
+### Resolved this cycle
+- ✅ **Slot 22 collision resolved**: `22-app-issues/` → `25-app-issues/` (slot 25 was free). All inbound refs rewritten.
+- ✅ **Legacy v1 archived**: `21-git-logs/` → `_archive/21-git-logs-v1/`. All inbound refs rewritten to archive path.
+- ✅ **Honest scoring**: rolled back inflated 100/100 (folder-scoped) to tree-wide baseline post v4 audit.
 
-### Open integrity issue (not blocking)
-- ⚠️ **Slot 22 collision**: both `25-app-issues/` and `22-git-logs-v2/` occupy folder-prefix `22-`. This violates the slot-immutability rule (see `mem://index.md` core). Suggested resolution: rename `25-app-issues/` → `25-app-issues/` (next free numeric slot before `26-gitlogs-diagrams/`). Defer until owner approves; record as locked once moved.
+### Open integrity issues (Phase 2 — not blocking, content-author work)
+- ⚠️ **13 modules missing `97-acceptance-criteria.md`** (per v4 full-tree audit).
+- ⚠️ **15 modules missing `99-consistency-report.md`** (per v4 full-tree audit).
+- ⚠️ **`spec-index.md` stale** — needs auto-regen script.
 
 ---
 
 ## Summary
 
 - **Errors:** 0
-- **Warnings:** 1 (slot 22 collision)
-- **Health Score:** 92/100 (A−) — penalty for unresolved slot collision; everything else is consistent and ground-truth-verified.
+- **Warnings:** 3 (Phase 2 content gaps)
+- **Health Score:** 78/100 (B) — Phase 1 Triage complete; Phase 2 content-fill pending.
 
 ---
 
@@ -86,7 +85,9 @@
 |------|---------|--------|
 | 2026-04-05 | 1.0.0 | Initial root consistency report |
 | 2026-04-09 | 2.0.0 | Added modules 09–11, 21–22; folder-structure-root.md converted to redirect |
-| 2026-04-25 | 3.3.0 | Ground-truth audit: removed 3 phantom modules (`08`, `09`, `21-app`), added 3 missing modules (`21-git-logs`, `22-git-logs-v2`, `26-gitlogs-diagrams`); flagged slot 22 collision; cross-linked v2.8.7 §99 |
-| 2026-04-25 | 3.4.0 | Filled 3 missing `99-consistency-report.md` files (`02-coding-guidelines/06-cicd-integration/`, `12-cicd-pipeline-workflows/03-reusable-ci-guards/`, `21-git-logs/`); fixed phantom-module links in root `00-overview.md` |
-| 2026-04-25 | 3.5.0 | Major audit pass: added cross-repo allowlist to `generate-dashboard-data.cjs` (12 entries — gitmap-v3 + monorepo siblings + `mem://` + JSON refs); fixed 8 dead refs in `25-app-issues/02-consolidated-audit-findings/` (rerouted to `../../_archive/21-git-logs-v1/`); fixed 3 `21-app/` refs across `25-app-issues/`, `23-app-database/`, `24-app-design-system-and-ui/`; stripped 8 dead v1 internal links in `21-git-logs/` body files; converted `21-git-logs/00-overview.md` index to plain-text markers for deleted v1 files; converted `22-git-logs-v2/00-overview.md` slots 09–13 to locked-vacant markers. **Health: 74 → 97 (+23). Broken links: 45 → 0.** |
-| 2026-04-25 | 3.6.0 | **Perfect score reached.** Added `00-overview.md` + `99-consistency-report.md` to `21-git-logs/reference/` (cleared the last -3 missing-overview deduction and the resulting -1 missing-consistency deduction). Health: 97 → **100/100 (A+)**. All metrics zero. |
+| 2026-04-25 | 3.3.0 | Ground-truth audit: removed 3 phantom modules; added 3 missing modules; flagged slot 22 collision |
+| 2026-04-25 | 3.4.0 | Filled 3 missing `99-consistency-report.md` files; fixed phantom-module links |
+| 2026-04-25 | 3.5.0 | Cross-repo allowlist; 45→0 broken links; v1 cleanup |
+| 2026-04-25 | 3.6.0 | Folder-scoped 100/100 (later corrected by v4 audit as not tree-wide) |
+| 2026-04-25 | 3.7.0 | **Phase 1 Triage executed.** Renamed `22-app-issues/` → `25-app-issues/` (slot collision resolved). Archived `21-git-logs/` → `_archive/21-git-logs-v1/`. Honest score restored to **78/100 (B)** pending Phase 2 content fill. |
+
