@@ -1,0 +1,118 @@
+# ──────────────────────────────────────────────────────────────────────
+# Spec ↔ Code Trace Map
+# ──────────────────────────────────────────────────────────────────────
+# Each [[trace]] entry links ONE acceptance criterion to ONE OR MORE
+# concrete code targets (file, optional symbol, optional kind).
+#
+# Canonical AC identifier: "<spec-relpath-from-spec/>#<ac-id>"
+#   e.g. "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-06"
+#
+# Field reference:
+#   ac        — canonical AC id (REQUIRED)
+#   files     — array of repo-relative file paths backing the AC (REQUIRED, ≥1)
+#   symbol    — optional function / class / endpoint / route name
+#   kind      — function | endpoint | config | workflow | cli-flag | env-var
+#   note      — optional one-line rationale
+#
+# Generated/maintained-with: linter-scripts/generate-trace-map.py
+# Consumed by:               linter-scripts/check-trace-map.py
+# ──────────────────────────────────────────────────────────────────────
+
+# ===== §27 spec-toolchain — auditor v2 =====
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "OUT"
+kind   = "config"
+note   = "v2 outputs always under .lovable/memory/audit/v2/ (or v2-deterministic/)"
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-02"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "WEIGHTS"
+kind   = "config"
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-03"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "deterministic_metrics"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-04"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "main"
+kind   = "function"
+note   = "high_blast = sorted(valid, key=lambda r: (-r['blast_radius'], r['weighted_overall']))"
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-05"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "AUDIT_ONLY"
+kind   = "env-var"
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-06"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "deterministic_score"
+kind   = "function"
+note   = "Pure-function rubric → byte-identical raw-results.json"
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-07"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "DETERMINISTIC"
+kind   = "env-var"
+
+[[trace]]
+ac     = "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-08"
+files  = ["linter-scripts/audit-spec-vs-code-v2.py"]
+symbol = "DETERMINISTIC"
+kind   = "env-var"
+note   = "lovable_ai import is gated behind `if not DETERMINISTIC`"
+
+# ===== §27 spec-toolchain — link checker =====
+
+[[trace]]
+ac     = "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-01"
+files  = ["linter-scripts/check-spec-cross-links.py"]
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-02"
+files  = ["linter-scripts/check-spec-cross-links.py"]
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-03"
+files  = ["linter-scripts/check-spec-cross-links.py", "linter-scripts/spec-cross-links.allowlist"]
+kind   = "config"
+
+[[trace]]
+ac     = "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-04"
+files  = ["linter-scripts/check-spec-cross-links.py"]
+symbol = "--json"
+kind   = "cli-flag"
+
+# ===== §27 module-level acceptance criteria =====
+
+[[trace]]
+ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01"
+files  = ["linter-scripts/check-spec-folder-refs.py", "linter-scripts/check-tree-health.cjs"]
+note   = "Bijection between code and spec — enforced by tree health + folder refs"
+
+[[trace]]
+ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-08"
+files  = [".github/workflows/spec-health.yml"]
+kind   = "workflow"
+
+[[trace]]
+ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-09"
+files  = ["linter-scripts/check-tree-health.cjs"]
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-10"
+files  = ["linter-scripts/check-spec-cross-links.py"]
+kind   = "function"
