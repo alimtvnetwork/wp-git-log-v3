@@ -1,19 +1,24 @@
 {
   "Generated": "2026-04-25",
   "Health": {
-    "Score": 77,
-    "Grade": "C",
+    "Score": 97,
+    "Grade": "A+",
     "Deductions": [
-      "21 broken links (-20)",
       "1 missing overviews (-3)"
     ]
   },
   "Links": {
-    "TotalChecked": 2073,
-    "Ok": 2041,
-    "Broken": 21,
-    "ExternalAllowed": 11,
+    "TotalChecked": 2065,
+    "Ok": 2053,
+    "Broken": 0,
+    "ExternalAllowed": 12,
     "ExternalAllowedDetails": [
+      {
+        "Source": "00-overview.md",
+        "Line": 61,
+        "Target": "./dashboard-data.json",
+        "Resolved": "dashboard-data.json"
+      },
       {
         "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
         "Line": 228,
@@ -81,155 +86,7 @@
         "Resolved": "../mem:/constraints/avoid-app-sync"
       }
     ],
-    "BrokenDetails": [
-      {
-        "Source": "00-overview.md",
-        "Line": 61,
-        "Text": "dashboard-data.json",
-        "Target": "./dashboard-data.json",
-        "Resolved": "dashboard-data.json"
-      },
-      {
-        "Source": "21-git-logs/01-glossary-and-enums.md",
-        "Line": 140,
-        "Text": "13-coding-guidelines-applied.md",
-        "Target": "./13-coding-guidelines-applied.md",
-        "Resolved": "21-git-logs/13-coding-guidelines-applied.md"
-      },
-      {
-        "Source": "21-git-logs/02-database-schema-and-erd.md",
-        "Line": 665,
-        "Text": "./10-audit-trail.md",
-        "Target": "./10-audit-trail.md",
-        "Resolved": "21-git-logs/10-audit-trail.md"
-      },
-      {
-        "Source": "21-git-logs/05-auth-jwt-flow.md",
-        "Line": 55,
-        "Text": "./06-auth-wordpress-bridge.md",
-        "Target": "./06-auth-wordpress-bridge.md",
-        "Resolved": "21-git-logs/06-auth-wordpress-bridge.md"
-      },
-      {
-        "Source": "21-git-logs/05-auth-jwt-flow.md",
-        "Line": 57,
-        "Text": "./10-audit-trail.md",
-        "Target": "./10-audit-trail.md",
-        "Resolved": "21-git-logs/10-audit-trail.md"
-      },
-      {
-        "Source": "21-git-logs/08-allowlist-and-wildcard-matching.md",
-        "Line": 41,
-        "Text": "./07-log-push-flow.md",
-        "Target": "./07-log-push-flow.md",
-        "Resolved": "21-git-logs/07-log-push-flow.md"
-      },
-      {
-        "Source": "21-git-logs/12-logging-strategy.md",
-        "Line": 39,
-        "Text": "./10-audit-trail.md",
-        "Target": "./10-audit-trail.md",
-        "Resolved": "21-git-logs/10-audit-trail.md"
-      },
-      {
-        "Source": "21-git-logs/16-jwt-onboarding-and-token-usage.md",
-        "Line": 34,
-        "Text": "./06-auth-wordpress-bridge.md",
-        "Target": "./06-auth-wordpress-bridge.md",
-        "Resolved": "21-git-logs/06-auth-wordpress-bridge.md"
-      },
-      {
-        "Source": "21-git-logs/97-acceptance-criteria.md",
-        "Line": 55,
-        "Text": "./10-audit-trail.md",
-        "Target": "./10-audit-trail.md",
-        "Resolved": "21-git-logs/10-audit-trail.md"
-      },
-      {
-        "Source": "22-app-issues/00-overview.md",
-        "Line": 35,
-        "Text": "../21-app/00-overview.md",
-        "Target": "../21-app/00-overview.md",
-        "Resolved": "21-app/00-overview.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 359,
-        "Text": "./17-spec-consistency-checklist.md",
-        "Target": "./17-spec-consistency-checklist.md",
-        "Resolved": "22-app-issues/02-consolidated-audit-findings/17-spec-consistency-checklist.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 574,
-        "Text": "../22-app-issues/01-phase-2-git-logs-audit/00-overview.md",
-        "Target": "../22-app-issues/01-phase-2-git-logs-audit/00-overview.md",
-        "Resolved": "22-app-issues/22-app-issues/01-phase-2-git-logs-audit/00-overview.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 575,
-        "Text": "./17-spec-consistency-checklist.md",
-        "Target": "./17-spec-consistency-checklist.md",
-        "Resolved": "22-app-issues/02-consolidated-audit-findings/17-spec-consistency-checklist.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 577,
-        "Text": "./02-database-schema-and-erd.md",
-        "Target": "./02-database-schema-and-erd.md",
-        "Resolved": "22-app-issues/02-consolidated-audit-findings/02-database-schema-and-erd.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 578,
-        "Text": "./11-error-management.md",
-        "Target": "./11-error-management.md",
-        "Resolved": "22-app-issues/02-consolidated-audit-findings/11-error-management.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 579,
-        "Text": "./12-logging-strategy.md",
-        "Target": "./12-logging-strategy.md",
-        "Resolved": "22-app-issues/02-consolidated-audit-findings/12-logging-strategy.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 580,
-        "Text": "./16-jwt-onboarding-and-token-usage.md",
-        "Target": "./16-jwt-onboarding-and-token-usage.md",
-        "Resolved": "22-app-issues/02-consolidated-audit-findings/16-jwt-onboarding-and-token-usage.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 581,
-        "Text": "./08-allowlist-and-wildcard-matching.md",
-        "Target": "./08-allowlist-and-wildcard-matching.md",
-        "Resolved": "22-app-issues/02-consolidated-audit-findings/08-allowlist-and-wildcard-matching.md"
-      },
-      {
-        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
-        "Line": 582,
-        "Text": "../22-app-issues/00-overview.md",
-        "Target": "../22-app-issues/00-overview.md",
-        "Resolved": "22-app-issues/22-app-issues/00-overview.md"
-      },
-      {
-        "Source": "23-app-database/00-overview.md",
-        "Line": 46,
-        "Text": "App",
-        "Target": "../21-app/00-overview.md",
-        "Resolved": "21-app/00-overview.md"
-      },
-      {
-        "Source": "24-app-design-system-and-ui/00-overview.md",
-        "Line": 45,
-        "Text": "App",
-        "Target": "../21-app/00-overview.md",
-        "Resolved": "21-app/00-overview.md"
-      }
-    ]
+    "BrokenDetails": []
   },
   "RequiredFiles": {
     "MissingOverview": [
