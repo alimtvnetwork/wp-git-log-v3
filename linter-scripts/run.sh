@@ -80,13 +80,14 @@ else
   exit $EXIT_CODE
 fi
 
-# ── Step 3: Self-heal missing consistency reports ─────────────────
+# ── Step 3: Self-heal missing required & recommended files ───────
 echo ""
-echo "═══ Step 3 — Filling missing consistency reports ═══"
-if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/fill-missing-consistency-reports.cjs" ]; then
-  node "$SCRIPT_DIR/fill-missing-consistency-reports.cjs"
+echo "═══ Step 3 — Filling missing consistency reports & acceptance criteria ═══"
+if command -v node &>/dev/null; then
+  [ -f "$SCRIPT_DIR/fill-missing-consistency-reports.cjs" ] && node "$SCRIPT_DIR/fill-missing-consistency-reports.cjs"
+  [ -f "$SCRIPT_DIR/fill-missing-acceptance-criteria.cjs" ] && node "$SCRIPT_DIR/fill-missing-acceptance-criteria.cjs"
 else
-  echo "⏭️  Skipped (node not installed or script missing)."
+  echo "⏭️  Skipped (node not installed)."
 fi
 
 # ── Step 4: Regenerate spec-index.md ──────────────────────────────
