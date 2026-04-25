@@ -1,250 +1,396 @@
 {
-  "Generated": "2026-04-16",
+  "Generated": "2026-04-25",
   "Health": {
-    "Score": 80,
-    "Grade": "B",
+    "Score": 74,
+    "Grade": "C",
     "Deductions": [
-      "32 broken links (-20)"
+      "50 broken links (-20)",
+      "3 missing consistency reports (-3)",
+      "1 missing overviews (-3)"
     ]
   },
   "Links": {
-    "TotalChecked": 1642,
-    "Ok": 1610,
-    "Broken": 32,
+    "TotalChecked": 2080,
+    "Ok": 2030,
+    "Broken": 50,
     "BrokenDetails": [
       {
-        "Source": "13-generic-cli/21-post-install-shell-activation.md",
-        "Line": 7,
-        "Text": "spec/01-app/31-cd.md",
-        "Target": "../01-app/31-cd.md",
-        "Resolved": "01-app/31-cd.md"
+        "Source": "00-overview.md",
+        "Line": 29,
+        "Text": "Docs Viewer UI",
+        "Target": "./08-docs-viewer-ui/00-overview.md",
+        "Resolved": "08-docs-viewer-ui/00-overview.md"
       },
       {
-        "Source": "13-generic-cli/21-post-install-shell-activation.md",
-        "Line": 8,
-        "Text": "spec/02-app-issues/22-installer-path-not-active-after-install.md",
-        "Target": "../02-app-issues/22-installer-path-not-active-after-install.md",
-        "Resolved": "02-app-issues/22-installer-path-not-active-after-install.md"
+        "Source": "00-overview.md",
+        "Line": 30,
+        "Text": "Code Block System",
+        "Target": "./09-code-block-system/00-overview.md",
+        "Resolved": "09-code-block-system/00-overview.md"
       },
       {
-        "Source": "13-generic-cli/21-post-install-shell-activation.md",
-        "Line": 8,
-        "Text": "24-cd-command-does-not-change-shell-directory.md",
-        "Target": "../02-app-issues/24-cd-command-does-not-change-shell-directory.md",
-        "Resolved": "02-app-issues/24-cd-command-does-not-change-shell-directory.md"
+        "Source": "00-overview.md",
+        "Line": 41,
+        "Text": "App",
+        "Target": "./21-app/00-overview.md",
+        "Resolved": "21-app/00-overview.md"
       },
       {
-        "Source": "13-generic-cli/21-post-install-shell-activation.md",
-        "Line": 8,
-        "Text": "25-powershell-cd-wrapper-not-loaded.md",
-        "Target": "../02-app-issues/25-powershell-cd-wrapper-not-loaded.md",
-        "Resolved": "02-app-issues/25-powershell-cd-wrapper-not-loaded.md"
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 228,
+        "Text": "`scripts/sync-readme-stats.mjs`",
+        "Target": "../../scripts/sync-readme-stats.mjs",
+        "Resolved": "../scripts/sync-readme-stats.mjs"
       },
       {
-        "Source": "13-generic-cli/21-post-install-shell-activation.md",
-        "Line": 287,
-        "Text": "22-installer-path-not-active-after-install",
-        "Target": "../02-app-issues/22-installer-path-not-active-after-install.md",
-        "Resolved": "02-app-issues/22-installer-path-not-active-after-install.md"
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 229,
+        "Text": "`docs/principles.md`",
+        "Target": "../../docs/principles.md",
+        "Resolved": "../docs/principles.md"
       },
       {
-        "Source": "13-generic-cli/21-post-install-shell-activation.md",
-        "Line": 288,
-        "Text": "24-cd-command-does-not-change-shell-directory",
-        "Target": "../02-app-issues/24-cd-command-does-not-change-shell-directory.md",
-        "Resolved": "02-app-issues/24-cd-command-does-not-change-shell-directory.md"
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 229,
+        "Text": "`docs/architecture.md`",
+        "Target": "../../docs/architecture.md",
+        "Resolved": "../docs/architecture.md"
       },
       {
-        "Source": "13-generic-cli/21-post-install-shell-activation.md",
-        "Line": 289,
-        "Text": "25-powershell-cd-wrapper-not-loaded",
-        "Target": "../02-app-issues/25-powershell-cd-wrapper-not-loaded.md",
-        "Resolved": "02-app-issues/25-powershell-cd-wrapper-not-loaded.md"
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 229,
+        "Text": "`docs/author.md`",
+        "Target": "../../docs/author.md",
+        "Resolved": "../docs/author.md"
       },
       {
-        "Source": "14-update/01-self-update-overview.md",
-        "Line": 180,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md",
+        "Line": 59,
+        "Text": "`linters-cicd/codegen/`",
+        "Target": "../../../../linters-cicd/codegen/README.md",
+        "Resolved": "../linters-cicd/codegen/README.md"
       },
       {
-        "Source": "14-update/01-self-update-overview.md",
-        "Line": 181,
-        "Text": "03-self-update-mechanism.md",
-        "Target": "../03-general/03-self-update-mechanism.md",
-        "Resolved": "03-general/03-self-update-mechanism.md"
+        "Source": "02-coding-guidelines/01-cross-language/12-no-negatives.md",
+        "Line": 275,
+        "Text": "`linters-cicd/codegen/`",
+        "Target": "../../../linters-cicd/codegen/README.md",
+        "Resolved": "../linters-cicd/codegen/README.md"
       },
       {
-        "Source": "14-update/01-self-update-overview.md",
-        "Line": 182,
-        "Text": "09-build-deploy.md",
-        "Target": "../01-app/09-build-deploy.md",
-        "Resolved": "01-app/09-build-deploy.md"
+        "Source": "02-coding-guidelines/02-typescript/11-eslint-enforcement.md",
+        "Line": 137,
+        "Text": "Custom Plugin Source",
+        "Target": "../../../eslint-plugins/coding-guidelines/index.js",
+        "Resolved": "../eslint-plugins/coding-guidelines/index.js"
       },
       {
-        "Source": "14-update/02-deploy-path-resolution.md",
-        "Line": 379,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "15-distribution-and-runner/00-overview.md",
+        "Line": 91,
+        "Text": "`spec-slides/00-overview.md`",
+        "Target": "../../spec-slides/00-overview.md",
+        "Resolved": "../spec-slides/00-overview.md"
       },
       {
-        "Source": "14-update/02-deploy-path-resolution.md",
-        "Line": 380,
-        "Text": "09-build-deploy.md",
-        "Target": "../01-app/09-build-deploy.md",
-        "Resolved": "01-app/09-build-deploy.md"
+        "Source": "15-distribution-and-runner/02-runner-contract.md",
+        "Line": 103,
+        "Text": "`spec-slides/`",
+        "Target": "../../spec-slides/",
+        "Resolved": "../spec-slides"
       },
       {
-        "Source": "14-update/03-rename-first-deploy.md",
-        "Line": 236,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "17-consolidated-guidelines/28-distribution-and-runner.md",
+        "Line": 234,
+        "Text": "`spec-slides/00-overview.md`",
+        "Target": "../../spec-slides/00-overview.md",
+        "Resolved": "../spec-slides/00-overview.md"
       },
       {
-        "Source": "14-update/03-rename-first-deploy.md",
-        "Line": 237,
-        "Text": "03-self-update-mechanism.md",
-        "Target": "../03-general/03-self-update-mechanism.md",
-        "Resolved": "03-general/03-self-update-mechanism.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 69,
+        "Text": "03-admin-ui.md",
+        "Target": "./03-admin-ui.md",
+        "Resolved": "21-git-logs/03-admin-ui.md"
       },
       {
-        "Source": "14-update/03-rename-first-deploy.md",
-        "Line": 238,
-        "Text": "09-build-deploy.md",
-        "Target": "../01-app/09-build-deploy.md",
-        "Resolved": "01-app/09-build-deploy.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 70,
+        "Text": "04-rest-api-endpoints.md",
+        "Target": "./04-rest-api-endpoints.md",
+        "Resolved": "21-git-logs/04-rest-api-endpoints.md"
       },
       {
-        "Source": "14-update/04-build-scripts.md",
-        "Line": 295,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 72,
+        "Text": "06-auth-wordpress-bridge.md",
+        "Target": "./06-auth-wordpress-bridge.md",
+        "Resolved": "21-git-logs/06-auth-wordpress-bridge.md"
       },
       {
-        "Source": "14-update/04-build-scripts.md",
-        "Line": 296,
-        "Text": "09-build-deploy.md",
-        "Target": "../01-app/09-build-deploy.md",
-        "Resolved": "01-app/09-build-deploy.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 73,
+        "Text": "07-log-push-flow.md",
+        "Target": "./07-log-push-flow.md",
+        "Resolved": "21-git-logs/07-log-push-flow.md"
       },
       {
-        "Source": "14-update/05-handoff-mechanism.md",
-        "Line": 253,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 75,
+        "Text": "09-log-retrieval-flow.md",
+        "Target": "./09-log-retrieval-flow.md",
+        "Resolved": "21-git-logs/09-log-retrieval-flow.md"
       },
       {
-        "Source": "14-update/05-handoff-mechanism.md",
-        "Line": 254,
-        "Text": "03-self-update-mechanism.md",
-        "Target": "../03-general/03-self-update-mechanism.md",
-        "Resolved": "03-general/03-self-update-mechanism.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 76,
+        "Text": "10-audit-trail.md",
+        "Target": "./10-audit-trail.md",
+        "Resolved": "21-git-logs/10-audit-trail.md"
       },
       {
-        "Source": "14-update/06-cleanup.md",
-        "Line": 181,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 79,
+        "Text": "13-coding-guidelines-applied.md",
+        "Target": "./13-coding-guidelines-applied.md",
+        "Resolved": "21-git-logs/13-coding-guidelines-applied.md"
       },
       {
-        "Source": "14-update/06-cleanup.md",
-        "Line": 182,
-        "Text": "03-self-update-mechanism.md",
-        "Target": "../03-general/03-self-update-mechanism.md",
-        "Resolved": "03-general/03-self-update-mechanism.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 80,
+        "Text": "14-acceptance-criteria.md",
+        "Target": "./14-acceptance-criteria.md",
+        "Resolved": "21-git-logs/14-acceptance-criteria.md"
       },
       {
-        "Source": "14-update/07-console-safe-handoff.md",
-        "Line": 261,
-        "Text": "../03-general/02f-self-update-orchestration.md",
-        "Target": "../03-general/02f-self-update-orchestration.md",
-        "Resolved": "03-general/02f-self-update-orchestration.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 81,
+        "Text": "15-blind-audit-checklist.md",
+        "Target": "./15-blind-audit-checklist.md",
+        "Resolved": "21-git-logs/15-blind-audit-checklist.md"
       },
       {
-        "Source": "14-update/07-console-safe-handoff.md",
-        "Line": 262,
-        "Text": "../03-general/03-self-update-mechanism.md",
-        "Target": "../03-general/03-self-update-mechanism.md",
-        "Resolved": "03-general/03-self-update-mechanism.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 84,
+        "Text": "98-changelog.md",
+        "Target": "./98-changelog.md",
+        "Resolved": "21-git-logs/98-changelog.md"
       },
       {
-        "Source": "14-update/07-console-safe-handoff.md",
-        "Line": 263,
-        "Text": "../02-app-issues/03-update-sync-lock-loop.md",
-        "Target": "../02-app-issues/03-update-sync-lock-loop.md",
-        "Resolved": "02-app-issues/03-update-sync-lock-loop.md"
+        "Source": "21-git-logs/00-overview.md",
+        "Line": 85,
+        "Text": "99-consistency-report.md",
+        "Target": "./99-consistency-report.md",
+        "Resolved": "21-git-logs/99-consistency-report.md"
       },
       {
-        "Source": "16-generic-release/02-release-pipeline.md",
-        "Line": 218,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "21-git-logs/01-glossary-and-enums.md",
+        "Line": 140,
+        "Text": "13-coding-guidelines-applied.md",
+        "Target": "./13-coding-guidelines-applied.md",
+        "Resolved": "21-git-logs/13-coding-guidelines-applied.md"
       },
       {
-        "Source": "16-generic-release/02-release-pipeline.md",
-        "Line": 219,
-        "Text": "05-code-signing.md",
-        "Target": "../03-general/05-code-signing.md",
-        "Resolved": "03-general/05-code-signing.md"
+        "Source": "21-git-logs/02-database-schema-and-erd.md",
+        "Line": 665,
+        "Text": "./10-audit-trail.md",
+        "Target": "./10-audit-trail.md",
+        "Resolved": "21-git-logs/10-audit-trail.md"
       },
       {
-        "Source": "16-generic-release/02-release-pipeline.md",
-        "Line": 220,
-        "Text": "12-release-command.md",
-        "Target": "../01-app/12-release-command.md",
-        "Resolved": "01-app/12-release-command.md"
+        "Source": "21-git-logs/05-auth-jwt-flow.md",
+        "Line": 55,
+        "Text": "./06-auth-wordpress-bridge.md",
+        "Target": "./06-auth-wordpress-bridge.md",
+        "Resolved": "21-git-logs/06-auth-wordpress-bridge.md"
       },
       {
-        "Source": "16-generic-release/03-install-scripts.md",
-        "Line": 348,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "21-git-logs/05-auth-jwt-flow.md",
+        "Line": 57,
+        "Text": "./10-audit-trail.md",
+        "Target": "./10-audit-trail.md",
+        "Resolved": "21-git-logs/10-audit-trail.md"
       },
       {
-        "Source": "16-generic-release/06-release-metadata.md",
-        "Line": 174,
-        "Text": "02-powershell-build-deploy.md",
-        "Target": "../03-general/02-powershell-build-deploy.md",
-        "Resolved": "03-general/02-powershell-build-deploy.md"
+        "Source": "21-git-logs/08-allowlist-and-wildcard-matching.md",
+        "Line": 41,
+        "Text": "./07-log-push-flow.md",
+        "Target": "./07-log-push-flow.md",
+        "Resolved": "21-git-logs/07-log-push-flow.md"
       },
       {
-        "Source": "16-generic-release/06-release-metadata.md",
-        "Line": 175,
-        "Text": "13-release-data-model.md",
-        "Target": "../01-app/13-release-data-model.md",
-        "Resolved": "01-app/13-release-data-model.md"
+        "Source": "21-git-logs/12-logging-strategy.md",
+        "Line": 39,
+        "Text": "./10-audit-trail.md",
+        "Target": "./10-audit-trail.md",
+        "Resolved": "21-git-logs/10-audit-trail.md"
       },
       {
-        "Source": "16-generic-release/07-known-issues-and-fixes.md",
-        "Line": 341,
-        "Text": "spec/02-app-issues/13-release-pipeline-dist-directory.md",
-        "Target": "../02-app-issues/13-release-pipeline-dist-directory.md",
-        "Resolved": "02-app-issues/13-release-pipeline-dist-directory.md"
+        "Source": "21-git-logs/16-jwt-onboarding-and-token-usage.md",
+        "Line": 34,
+        "Text": "./06-auth-wordpress-bridge.md",
+        "Target": "./06-auth-wordpress-bridge.md",
+        "Resolved": "21-git-logs/06-auth-wordpress-bridge.md"
       },
       {
-        "Source": "16-generic-release/07-known-issues-and-fixes.md",
-        "Line": 342,
-        "Text": "spec/14-update/09-winres-icon-constraint.md",
-        "Target": "../14-update/09-winres-icon-constraint.md",
-        "Resolved": "14-update/09-winres-icon-constraint.md"
+        "Source": "21-git-logs/97-acceptance-criteria.md",
+        "Line": 55,
+        "Text": "./10-audit-trail.md",
+        "Target": "./10-audit-trail.md",
+        "Resolved": "21-git-logs/10-audit-trail.md"
+      },
+      {
+        "Source": "22-app-issues/00-overview.md",
+        "Line": 35,
+        "Text": "../21-app/00-overview.md",
+        "Target": "../21-app/00-overview.md",
+        "Resolved": "21-app/00-overview.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 359,
+        "Text": "./17-spec-consistency-checklist.md",
+        "Target": "./17-spec-consistency-checklist.md",
+        "Resolved": "22-app-issues/02-consolidated-audit-findings/17-spec-consistency-checklist.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 574,
+        "Text": "../22-app-issues/01-phase-2-git-logs-audit/00-overview.md",
+        "Target": "../22-app-issues/01-phase-2-git-logs-audit/00-overview.md",
+        "Resolved": "22-app-issues/22-app-issues/01-phase-2-git-logs-audit/00-overview.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 575,
+        "Text": "./17-spec-consistency-checklist.md",
+        "Target": "./17-spec-consistency-checklist.md",
+        "Resolved": "22-app-issues/02-consolidated-audit-findings/17-spec-consistency-checklist.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 577,
+        "Text": "./02-database-schema-and-erd.md",
+        "Target": "./02-database-schema-and-erd.md",
+        "Resolved": "22-app-issues/02-consolidated-audit-findings/02-database-schema-and-erd.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 578,
+        "Text": "./11-error-management.md",
+        "Target": "./11-error-management.md",
+        "Resolved": "22-app-issues/02-consolidated-audit-findings/11-error-management.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 579,
+        "Text": "./12-logging-strategy.md",
+        "Target": "./12-logging-strategy.md",
+        "Resolved": "22-app-issues/02-consolidated-audit-findings/12-logging-strategy.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 580,
+        "Text": "./16-jwt-onboarding-and-token-usage.md",
+        "Target": "./16-jwt-onboarding-and-token-usage.md",
+        "Resolved": "22-app-issues/02-consolidated-audit-findings/16-jwt-onboarding-and-token-usage.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 581,
+        "Text": "./08-allowlist-and-wildcard-matching.md",
+        "Target": "./08-allowlist-and-wildcard-matching.md",
+        "Resolved": "22-app-issues/02-consolidated-audit-findings/08-allowlist-and-wildcard-matching.md"
+      },
+      {
+        "Source": "22-app-issues/02-consolidated-audit-findings/00-overview.md",
+        "Line": 582,
+        "Text": "../22-app-issues/00-overview.md",
+        "Target": "../22-app-issues/00-overview.md",
+        "Resolved": "22-app-issues/22-app-issues/00-overview.md"
+      },
+      {
+        "Source": "22-git-logs-v2/00-overview.md",
+        "Line": 65,
+        "Text": "09-seed-data.md",
+        "Target": "./09-seed-data.md",
+        "Resolved": "22-git-logs-v2/09-seed-data.md"
+      },
+      {
+        "Source": "22-git-logs-v2/00-overview.md",
+        "Line": 66,
+        "Text": "10-rate-limit-and-payload.md",
+        "Target": "./10-rate-limit-and-payload.md",
+        "Resolved": "22-git-logs-v2/10-rate-limit-and-payload.md"
+      },
+      {
+        "Source": "22-git-logs-v2/00-overview.md",
+        "Line": 67,
+        "Text": "11-encryption-deferred-plan.md",
+        "Target": "./11-encryption-deferred-plan.md",
+        "Resolved": "22-git-logs-v2/11-encryption-deferred-plan.md"
+      },
+      {
+        "Source": "22-git-logs-v2/00-overview.md",
+        "Line": 68,
+        "Text": "12-wp-plugin-scaffold.md",
+        "Target": "./12-wp-plugin-scaffold.md",
+        "Resolved": "22-git-logs-v2/12-wp-plugin-scaffold.md"
+      },
+      {
+        "Source": "22-git-logs-v2/00-overview.md",
+        "Line": 69,
+        "Text": "13-v1-vs-v2-mapping.md",
+        "Target": "./13-v1-vs-v2-mapping.md",
+        "Resolved": "22-git-logs-v2/13-v1-vs-v2-mapping.md"
+      },
+      {
+        "Source": "23-app-database/00-overview.md",
+        "Line": 46,
+        "Text": "App",
+        "Target": "../21-app/00-overview.md",
+        "Resolved": "21-app/00-overview.md"
+      },
+      {
+        "Source": "24-app-design-system-and-ui/00-overview.md",
+        "Line": 45,
+        "Text": "App",
+        "Target": "../21-app/00-overview.md",
+        "Resolved": "21-app/00-overview.md"
+      },
+      {
+        "Source": "health-dashboard.md",
+        "Line": 26,
+        "Text": "`mem://constraints/avoid-app-sync`",
+        "Target": "../mem://constraints/avoid-app-sync",
+        "Resolved": "../mem:/constraints/avoid-app-sync"
       }
     ]
   },
   "RequiredFiles": {
-    "MissingOverview": [],
-    "MissingConsistency": []
+    "MissingOverview": [
+      {
+        "Folder": "21-git-logs/reference",
+        "FileCount": 2
+      }
+    ],
+    "MissingConsistency": [
+      {
+        "Folder": "02-coding-guidelines/06-cicd-integration",
+        "FileCount": 11
+      },
+      {
+        "Folder": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
+        "FileCount": 11
+      },
+      {
+        "Folder": "21-git-logs",
+        "FileCount": 10
+      }
+    ]
   },
   "Inventory": {
-    "TotalFolders": 75,
-    "TotalMdFiles": 560,
+    "TotalFolders": 80,
+    "TotalMdFiles": 636,
     "Folders": [
       {
         "Folder": "",
@@ -264,7 +410,7 @@
       },
       {
         "Folder": "01-spec-authoring-guide",
-        "MdFiles": 15,
+        "MdFiles": 16,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -283,6 +429,7 @@
           "08-cross-references.md",
           "09-exceptions.md",
           "10-mandatory-linter-infrastructure.md",
+          "11-root-readme-conventions.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md"
@@ -291,7 +438,7 @@
       {
         "Folder": "02-coding-guidelines",
         "MdFiles": 5,
-        "Subfolders": 15,
+        "Subfolders": 16,
         "HasOverview": true,
         "HasConsistency": true,
         "HasChangelog": false,
@@ -593,6 +740,28 @@
           "05-enum-naming-quick-reference.md",
           "97-acceptance-criteria.md",
           "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "02-coding-guidelines/06-cicd-integration",
+        "MdFiles": 11,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": false,
+        "HasChangelog": false,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "01-sarif-contract.md",
+          "02-plugin-model.md",
+          "03-language-roadmap.md",
+          "04-ci-templates.md",
+          "05-distribution.md",
+          "06-rules-mapping.md",
+          "07-performance.md",
+          "97-acceptance-criteria.md",
+          "98-faq.md",
+          "99-troubleshooting.md"
         ]
       },
       {
@@ -1156,7 +1325,7 @@
       },
       {
         "Folder": "06-seedable-config-architecture/02-features",
-        "MdFiles": 7,
+        "MdFiles": 8,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1169,6 +1338,7 @@
           "03-rag-validation-tests.md",
           "04-rag-test-coverage-matrix.md",
           "05-validation-data-seeding.md",
+          "06-update-check-keys.md",
           "99-consistency-report.md"
         ]
       },
@@ -1212,85 +1382,16 @@
         ]
       },
       {
-        "Folder": "08-docs-viewer-ui",
-        "MdFiles": 3,
-        "Subfolders": 2,
-        "HasOverview": true,
-        "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md",
-          "01-fundamentals.md",
-          "99-consistency-report.md"
-        ]
-      },
-      {
-        "Folder": "08-docs-viewer-ui/02-features",
-        "MdFiles": 10,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md",
-          "01-typography.md",
-          "02-syntax-highlighting.md",
-          "03-fullscreen-mode.md",
-          "04-keyboard-navigation.md",
-          "05-copy-markdown.md",
-          "06-shortcuts-overlay.md",
-          "06-ui-theme-animations.md",
-          "07-visual-rendering-guide.md",
-          "99-consistency-report.md"
-        ]
-      },
-      {
-        "Folder": "08-docs-viewer-ui/03-issues",
-        "MdFiles": 1,
-        "Subfolders": 0,
-        "HasOverview": false,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "01-code-line-alignment.md"
-        ]
-      },
-      {
-        "Folder": "09-code-block-system",
-        "MdFiles": 12,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md",
-          "01-architecture.md",
-          "02-html-structure.md",
-          "03-syntax-highlighting.md",
-          "04-interactions.md",
-          "05-styling.md",
-          "06-constants-and-maps.md",
-          "07-clipboard.md",
-          "08-checklist-blocks.md",
-          "09-tree-structure-rendering.md",
-          "10-selection-bar.md",
-          "99-consistency-report.md"
-        ]
-      },
-      {
         "Folder": "10-research",
-        "MdFiles": 1,
+        "MdFiles": 2,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
+        "HasConsistency": true,
         "HasChangelog": false,
         "HasAcceptance": false,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "99-consistency-report.md"
         ]
       },
       {
@@ -1320,7 +1421,7 @@
       {
         "Folder": "12-cicd-pipeline-workflows",
         "MdFiles": 19,
-        "Subfolders": 2,
+        "Subfolders": 4,
         "HasOverview": true,
         "HasConsistency": true,
         "HasChangelog": false,
@@ -1344,7 +1445,7 @@
           "09-binary-icon-branding.md",
           "10-release-pipeline-issues-rca.md",
           "99-consistency-report.md",
-          "README.md"
+          "readme.md"
         ]
       },
       {
@@ -1379,9 +1480,31 @@
         ]
       },
       {
+        "Folder": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
+        "MdFiles": 11,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": false,
+        "HasChangelog": false,
+        "HasAcceptance": false,
+        "Files": [
+          "00-overview.md",
+          "01-forbidden-name-guard.md",
+          "02-grandfather-baseline-naming.md",
+          "03-cross-file-collision-audit.md",
+          "04-baseline-diff-lint-gate.md",
+          "05-actionable-lint-suggestions.md",
+          "06-matrix-test-aggregator.md",
+          "07-shared-cli-wrapper.md",
+          "08-config-schema.md",
+          "09-workflow-templates.md",
+          "99-ai-implementation-guide.md"
+        ]
+      },
+      {
         "Folder": "13-generic-cli",
         "MdFiles": 22,
-        "Subfolders": 0,
+        "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
         "HasChangelog": false,
@@ -1413,8 +1536,8 @@
       },
       {
         "Folder": "14-update",
-        "MdFiles": 11,
-        "Subfolders": 0,
+        "MdFiles": 29,
+        "Subfolders": 3,
         "HasOverview": true,
         "HasConsistency": true,
         "HasChangelog": false,
@@ -1429,36 +1552,49 @@
           "06-cleanup.md",
           "07-console-safe-handoff.md",
           "08-repo-path-sync.md",
+          "09-version-verification.md",
+          "10-last-release-detection.md",
+          "11-windows-icon-embedding.md",
+          "12-code-signing.md",
+          "13-release-assets.md",
+          "14-checksums-verification.md",
+          "15-release-versioning.md",
+          "16-cross-compilation.md",
+          "17-release-pipeline.md",
+          "18-install-scripts.md",
+          "19-updater-binary.md",
+          "20-network-requirements.md",
+          "21-config-file.md",
+          "22-update-command-workflow.md",
+          "23-install-script-version-probe.md",
+          "25-release-pinned-installer.md",
+          "26-repo-major-version-migrator.md",
+          "27-generic-installer-behavior.md",
           "99-consistency-report.md",
-          "README.md"
+          "readme.md"
         ]
       },
       {
-        "Folder": "14-update",
-        "MdFiles": 18,
-        "Subfolders": 1,
+        "Folder": "14-update/24-update-check-mechanism",
+        "MdFiles": 13,
+        "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
         "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
-          "01-self-update-overview.md",
-          "02-deploy-path-resolution.md",
-          "03-rename-first-deploy.md",
-          "04-build-scripts.md",
-          "05-handoff-mechanism.md",
-          "06-cleanup.md",
-          "07-release-assets.md",
-          "08-checksums-verification.md",
-          "09-release-versioning.md",
-          "10-cross-compilation.md",
-          "11-release-pipeline.md",
-          "12-install-scripts.md",
-          "13-updater-binary.md",
-          "14-network-requirements.md",
-          "15-config-file.md",
-          "16-update-command-workflow.md",
+          "01-fundamentals.md",
+          "02-status-script-json.md",
+          "03-combined-json.md",
+          "04-database-schema.md",
+          "05-update-checker-service.md",
+          "06-cli-commands.md",
+          "07-pre-command-hook.md",
+          "08-error-handling.md",
+          "09-json-fallback-store.md",
+          "97-acceptance-criteria.md",
+          "97-changelog.md",
           "99-consistency-report.md"
         ]
       },
@@ -1475,8 +1611,25 @@
         ]
       },
       {
+        "Folder": "15-distribution-and-runner",
+        "MdFiles": 6,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": false,
+        "HasAcceptance": false,
+        "Files": [
+          "00-overview.md",
+          "01-install-contract.md",
+          "02-runner-contract.md",
+          "03-release-pipeline.md",
+          "04-install-config.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
         "Folder": "16-generic-release",
-        "MdFiles": 9,
+        "MdFiles": 10,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1491,12 +1644,13 @@
           "05-release-assets.md",
           "06-release-metadata.md",
           "07-known-issues-and-fixes.md",
+          "08-version-pinned-release-installers.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "17-consolidated-guidelines",
-        "MdFiles": 25,
+        "MdFiles": 32,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1527,6 +1681,13 @@
           "21-lovable-folder-structure.md",
           "22-app-database.md",
           "23-generic-cli.md",
+          "24-folder-mapping.md",
+          "25-blind-ai-implementability-audit.md",
+          "26-blind-ai-audit-v2.md",
+          "27-linter-authoring-guide.md",
+          "28-distribution-and-runner.md",
+          "29-blind-ai-audit-v3.md",
+          "30-readme-improvement-suggestions.md",
           "99-consistency-report.md"
         ]
       },
@@ -1584,7 +1745,28 @@
         ]
       },
       {
-        "Folder": "21-app",
+        "Folder": "21-git-logs",
+        "MdFiles": 10,
+        "Subfolders": 2,
+        "HasOverview": true,
+        "HasConsistency": false,
+        "HasChangelog": false,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "01-glossary-and-enums.md",
+          "02-database-schema-and-erd.md",
+          "05-auth-jwt-flow.md",
+          "08-allowlist-and-wildcard-matching.md",
+          "11-error-management.md",
+          "12-logging-strategy.md",
+          "16-jwt-onboarding-and-token-usage.md",
+          "17-spec-consistency-checklist.md",
+          "97-acceptance-criteria.md"
+        ]
+      },
+      {
+        "Folder": "21-git-logs/diagrams",
         "MdFiles": 1,
         "Subfolders": 0,
         "HasOverview": true,
@@ -1596,7 +1778,32 @@
         ]
       },
       {
+        "Folder": "21-git-logs/reference",
+        "MdFiles": 2,
+        "Subfolders": 0,
+        "HasOverview": false,
+        "HasConsistency": false,
+        "HasChangelog": false,
+        "HasAcceptance": false,
+        "Files": [
+          "00-verbatim-brief.md",
+          "Gitlogs_App.md"
+        ]
+      },
+      {
         "Folder": "22-app-issues",
+        "MdFiles": 1,
+        "Subfolders": 2,
+        "HasOverview": true,
+        "HasConsistency": false,
+        "HasChangelog": false,
+        "HasAcceptance": false,
+        "Files": [
+          "00-overview.md"
+        ]
+      },
+      {
+        "Folder": "22-app-issues/01-phase-2-git-logs-audit",
         "MdFiles": 1,
         "Subfolders": 0,
         "HasOverview": true,
@@ -1605,6 +1812,62 @@
         "HasAcceptance": false,
         "Files": [
           "00-overview.md"
+        ]
+      },
+      {
+        "Folder": "22-app-issues/02-consolidated-audit-findings",
+        "MdFiles": 1,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": false,
+        "HasChangelog": false,
+        "HasAcceptance": false,
+        "Files": [
+          "00-overview.md"
+        ]
+      },
+      {
+        "Folder": "22-git-logs-v2",
+        "MdFiles": 33,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "01-glossary-and-enums.md",
+          "02-database-schema.md",
+          "03-admin-ui.md",
+          "04-rest-api-endpoints.md",
+          "05-auth-and-validation.md",
+          "06-migrations-and-logger.md",
+          "07-app-entity.md",
+          "08-history-and-action.md",
+          "14-endpoint-examples.md",
+          "15-error-codes.md",
+          "16-seed-data.md",
+          "16-test-plan.md",
+          "19-permission-matrix.md",
+          "20-observability.md",
+          "21-i18n.md",
+          "22-retention-and-pruning.md",
+          "23-backup-restore.md",
+          "24-multisite.md",
+          "25-headless-auth-notes.md",
+          "26-readme-and-screenshots.md",
+          "27-wp-cli-reference.md",
+          "28-example-github-actions.md",
+          "29-uninstall-policy.md",
+          "30-threat-model.md",
+          "31-ssh-key-auth.md",
+          "32-cli-test-plan.md",
+          "33-bats-test-skeleton.md",
+          "34-phpunit-test-skeleton.md",
+          "35-reference-ci-yml.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
@@ -1629,6 +1892,20 @@
         "HasAcceptance": false,
         "Files": [
           "00-overview.md"
+        ]
+      },
+      {
+        "Folder": "26-gitlogs-diagrams",
+        "MdFiles": 3,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": false,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "99-consistency-report.md"
         ]
       }
     ]
