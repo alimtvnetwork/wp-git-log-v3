@@ -32,7 +32,7 @@ Any content that analyzes bugs, failures, root causes, or fixes for application-
 
 | Reference | Location |
 |-----------|----------|
-| App Specs | [../21-app/00-overview.md](../21-app/00-overview.md) |
+| App Specs (legacy v1 git-logs) | [../21-git-logs/00-overview.md](../21-git-logs/00-overview.md) |
 | Spec Authoring Guide | [../01-spec-authoring-guide/00-overview.md](../01-spec-authoring-guide/00-overview.md) |
 
 ---
