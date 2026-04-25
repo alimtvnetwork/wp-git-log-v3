@@ -52,7 +52,7 @@
 
 ## Cross-link validation
 
-- `00-overview.md` → §00–§30 + §97–§99: OK
+- `00-overview.md` → §00–§36 + §97–§99 (refreshed v2.8.4): OK
 - `15-error-codes.md` covers every code referenced from §22, §23, §25, §27: OK
 - `97-acceptance-criteria.md` AC-26..AC-41 reference §10, §17–§26 sources: OK
 - `18-schema.sql` `AuditActionType` seed includes Prune (19), Restore (20): OK
