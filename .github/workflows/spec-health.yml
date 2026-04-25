@@ -1,0 +1,56 @@
+name: Spec Tree Health
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'spec/**'
+      - 'linter-scripts/check-tree-health.cjs'
+      - 'linter-scripts/generate-spec-index.cjs'
+      - '.github/workflows/spec-health.yml'
+  pull_request:
+    paths:
+      - 'spec/**'
+      - 'linter-scripts/check-tree-health.cjs'
+      - 'linter-scripts/generate-spec-index.cjs'
+
+jobs:
+  health-gate:
+    name: Spec tree health gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify required scripts exist
+        run: |
+          test -f linter-scripts/check-tree-health.cjs || { echo "❌ check-tree-health.cjs missing"; exit 1; }
+          test -f linter-scripts/generate-spec-index.cjs || { echo "❌ generate-spec-index.cjs missing"; exit 1; }
+          echo "✅ Both scripts present."
+
+      - name: Regenerate spec-index.md (drift check)
+        run: |
+          node linter-scripts/generate-spec-index.cjs
+          if [ -n "$(git status --porcelain spec/spec-index.md)" ]; then
+            echo "⚠️  spec-index.md is out of date. Run 'node linter-scripts/generate-spec-index.cjs' and commit the result."
+            git --no-pager diff spec/spec-index.md | head -40
+            # Soft warning only — do not fail the build for index drift.
+          else
+            echo "✅ spec-index.md is up to date."
+          fi
+
+      - name: Spec tree health gate (threshold 80)
+        env:
+          SPEC_HEALTH_MIN: '80'
+        run: node linter-scripts/check-tree-health.cjs --min="$SPEC_HEALTH_MIN" --report
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Spec Tree Health Result" >> "$GITHUB_STEP_SUMMARY"
+          node linter-scripts/check-tree-health.cjs --report 2>&1 | head -10 >> "$GITHUB_STEP_SUMMARY" || true
