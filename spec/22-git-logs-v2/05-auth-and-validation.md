@@ -93,6 +93,15 @@ All outcomes (both sub-modes) write to `AuditTrail`:
 | GL-AUTH-TOKEN-MISMATCH | 401 | B |
 | GL-AUTH-PROFILE-INACTIVE | 403 | B |
 | GL-APP-NOT-ACTIVE | 403 | B |
+| GL-SSH-HEADER-MISSING | 400 | B (ssh) |
+| GL-SSH-TIMESTAMP-SKEW | 401 | B (ssh) |
+| GL-SSH-KEY-UNKNOWN | 401 | B (ssh) |
+| GL-SSH-KEY-INACTIVE | 403 | B (ssh) |
+| GL-SSH-REPO-MISMATCH | 403 | B (ssh) |
+| GL-SSH-NONCE-REUSED | 401 | B (ssh) |
+| GL-SSH-SIGNATURE-INVALID | 401 | B (ssh) |
+| GL-SSH-LANE-CONFLICT | 400 | B (ssh) |
+| GL-AUTH-LANE-DISABLED | 403 | B (mode gate) |
 | GL-AUTH-WP-MISSING | 401 | A |
 | GL-AUTHZ-PERMISSION-DENIED | 403 | A |
 
