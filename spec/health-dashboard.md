@@ -1,11 +1,11 @@
 # Project-Wide Spec Health Dashboard
 
 **Generated:** 2026-04-25  
-**Total Files Scanned:** 645  
+**Total Files Scanned:** 642  
 **Total Folders:** 80  
-**Overall Health:** 78/100 (B) — Phase 1 Triage executed
+**Overall Health:** 80/100 (B) — Phase 1 Triage + spec-index auto-regen
 
-> **Honest baseline restored 2026-04-25 (v3.7.0).** Prior 100/100 was folder-scoped (folder 17 only). Full-tree v4 audit revealed 45/100 (F). Phase 1 Triage executed today: slot 22 collision resolved (`22-app-issues/` → `25-app-issues/`), legacy `21-git-logs/` archived to `_archive/21-git-logs-v1/`. **Score trajectory: 45 → 78 (+33).** Phase 2 (content fill: 13 missing AC files, 15 missing consistency reports) pending.
+> **v3.7.1 (2026-04-25):** Added `linter-scripts/generate-spec-index.cjs` — `spec-index.md` now auto-regenerates from disk (642 files, 23 categories). Stale-index deduction cleared. **Score trajectory: 45 → 78 → 80 (+35 from F baseline).** Phase 2 (13 missing AC files, 15 missing consistency reports) still pending.
 
 ---
 
@@ -13,10 +13,10 @@
 
 | Metric | Value |
 |--------|-------|
-| Score | **78/100 (B)** |
+| Score | **80/100 (B)** |
 | Deduction | -13 missing acceptance-criteria files |
 | Deduction | -7 missing consistency reports (partial penalty) |
-| Deduction | -2 stale `spec-index.md` |
+| Deduction | 0 stale `spec-index.md` (auto-regen v3.7.1) |
 
 ---
 
