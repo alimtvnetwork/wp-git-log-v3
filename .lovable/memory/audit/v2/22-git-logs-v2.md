@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Lovable AI (gemini-3-flash-preview, 2-pass)  
-**Implementability Score:** **58/100 (D)**  
-**Blast radius:** 7/10
+**Implementability Score:** **54/100 (D)**  
+**Blast radius:** 8/10
 
-> This spec provides a comprehensive overview but falls short on implementability due to a lack of inline, machine-readable contracts for critical components like database schemas, JSON schemas, and enums. The absence of GWT blocks significantly impacts testability.
+> This module provides a very comprehensive overview with good consistency and minimal waffle. However, the lack of machine-readable contracts for enums and JSON schemas, and critically, the complete absence of formal acceptance criteria, significantly hinder implementability and testability. The module also suffers from a complete misalignment with the provided code index.
 
 
-**Score justification:** The implementability is low because while it states it has DDL and JSON schemas, they are provided as markdown and not inline, which greatly hinders an AI's ability to directly implement. The testability is capped at 20 due to 'ac_count == 0'.
+**Score justification:** The implementability score is low because while SQL DDL is present, critical components like enums and all JSON schemas are missing. Testability is severely impacted by the complete absence of acceptance criteria (ac_count=0). Alignment is 0 as the spec does not align with any of the provided code.
 
 ---
 
@@ -17,12 +17,12 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 45 | 15.8 |
-| Completeness | 20% | 90 | 18.0 |
+| Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 0 | 0.0 |
 | Consistency | 10% | 100 | 10.0 |
-| Clarity | 10% | 100 | 10.0 |
+| Clarity | 10% | 90 | 9.0 |
 | Testability | 7% | 20 | 1.4 |
-| Maintainability | 3% | 100 | 3.0 |
+| Maintainability | 3% | 70 | 2.1 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -59,9 +59,12 @@
 
 ## Implementability Blockers
 
-- DDL for database schema is not inlined as code, but as markdown.
-- JSON schemas are not inlined as code, but as markdown.
-- Enums are documented as markdown tables, not as machine-readable code.
+- Missing enum definitions in a machine-readable format (e.g., TypeScript or equivalent).
+- Missing complete JSON schemas for all request/response bodies, as the spec only mentions has_json_schema: true but doesn't inline them or point to a comprehensive machine-readable definition.
+- The OpenAPI spec (17-openapi.yaml) is referenced but not inlined, which would increase implementability.
+- No concrete examples of AppLink polymorphism with CHECK constraints.
+- DB table prefix not specified for SQLite (though 'none' is mentioned, concrete DDL should reflect this consistently).
+- Many fields and data types are mentioned in prose (e.g., 'GeneratedKeyApi', 'Token', 'TempToken') but lack explicit type definitions or constraints beyond their names.
 
 ## Code Mapping
 
@@ -73,23 +76,35 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | missing-contract | high | 8/10 | Database DDL and JSON schemas are described in markdown but not provided as inline code blocks. |
-| 2 | missing-contract | medium | 5/10 | Enums are documented as markdown tables, making them harder for an AI to parse and implement directly. |
-| 3 | untestable | high | 7/10 | No acceptance criteria are formatted as GWT (Given/When/Then) blocks, severely limiting testability for an AI. |
+| 1 | missing-contract | high | 8/10 | Enums are mentioned but not defined concretely in a machine-readable format. |
+| 2 | missing-contract | high | 7/10 | Complete JSON schemas for all request/response bodies are missing. |
+| 3 | ambiguity | medium | 5/10 | Despite having 'has_sql_ddl': true, a potential ambiguity exists around SQLite's dynamic typing behavior and explicit column constraints. |
+| 4 | untestable | critical | 10/10 | The spec states 'ac_count: 0', meaning no measurable acceptance criteria are defined. |
+| 5 | missing-contract | medium | 6/10 | The OpenAPI 3.1 spec (17-openapi.yaml) is referenced but not inlined, forcing implementers to look elsewhere. |
 
 ### Detail + Proposed Corrections
 
-#### 1. [HIGH] Database DDL and JSON schemas are described in markdown but not provided as inline code blocks.
+#### 1. [HIGH] Enums are mentioned but not defined concretely in a machine-readable format.
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** File '02-database-schema.md' describes tables, columns, FKs, indexes but not as directly implementable DDL. 'has_sql_ddl' is true, but the DDL itself is not inline. Similarly for 'has_json_schema'.
-- **Proposed correction:** Inline the SQL DDL for '02-database-schema.md' and any JSON schemas as code blocks within the spec, or link directly to machine-readable schema files.
+- **Evidence:** 01-glossary-and-enums.md mentions enums like AppStatus, but the actual enum definitions (e.g., TypeScript, JSON) are not provided or inlined. The Deterministic metrics report has_ts_enums: false.
+- **Proposed correction:** Add TypeScript or JSON definitions for all enums in 01-glossary-and-enums.md or a new dedicated file, referencing them from relevant sections.
 
-#### 2. [MEDIUM] Enums are documented as markdown tables, making them harder for an AI to parse and implement directly.
-- **Category:** missing-contract  |  **Impact:** 5/10
-- **Evidence:** File '01-glossary-and-enums.md' contains 'Terms + enum catalog' but 'has_ts_enums' is false, indicating no machine-readable enums.
-- **Proposed correction:** Provide enums as machine-readable code (e.g., TypeScript enums, JSON schema enums, or equivalent) instead of or in addition to markdown tables.
+#### 2. [HIGH] Complete JSON schemas for all request/response bodies are missing.
+- **Category:** missing-contract  |  **Impact:** 7/10
+- **Evidence:** The spec mentions 04-rest-api-endpoints.md and 14-endpoint-examples.md for request/response shapes and examples, and has_json_schema: true, but the full machine-readable JSON schemas are not inlined or provided in a single, comprehensive location.
+- **Proposed correction:** Inline the full JSON schemas for all API endpoints within 04-rest-api-endpoints.md or provide a dedicated, referenced file with all schemas.
 
-#### 3. [HIGH] No acceptance criteria are formatted as GWT (Given/When/Then) blocks, severely limiting testability for an AI.
-- **Category:** untestable  |  **Impact:** 7/10
-- **Evidence:** 'ac_count' is 0, and 'gwt_block_count' is 0.
-- **Proposed correction:** Reformat all acceptance criteria into GWT (Given/When/Then) blocks to make them objectively verifiable.
+#### 3. [MEDIUM] Despite having 'has_sql_ddl': true, a potential ambiguity exists around SQLite's dynamic typing behavior and explicit column constraints.
+- **Category:** ambiguity  |  **Impact:** 5/10
+- **Evidence:** 02-database-schema.md and 18-schema.sql contain DDL, but without explicit type constraints (e.g., `CHECK (type IN ('value1', 'value2'))`) for string-based 'enums' or other domain-specific types, AI implementation could interpret these loosely.
+- **Proposed correction:** Augment DDL in 02-database-schema.md and 18-schema.sql with explicit `CHECK` constraints for all columns that have restricted values, especially those representing enums or other limited sets.
+
+#### 4. [CRITICAL] The spec states 'ac_count: 0', meaning no measurable acceptance criteria are defined.
+- **Category:** untestable  |  **Impact:** 10/10
+- **Evidence:** Deterministic metrics report ac_count: 0.
+- **Proposed correction:** Refactor 97-acceptance-criteria.md to include concrete, verifiable Given/When/Then (GWT) scenarios for all critical functionalities. Aim for at least one AC per key feature described.
+
+#### 5. [MEDIUM] The OpenAPI 3.1 spec (17-openapi.yaml) is referenced but not inlined, forcing implementers to look elsewhere.
+- **Category:** missing-contract  |  **Impact:** 6/10
+- **Evidence:** Document Inventory lists 17-openapi.yaml but the content is not in this module. While referenced, an AI coder would need to be pointed to or given this file separately.
+- **Proposed correction:** Inline the content of 17-openapi.yaml into the spec module, ideally within 04-rest-api-endpoints.md or as a dedicated, inlined subsection, or provide a direct link to its content.
