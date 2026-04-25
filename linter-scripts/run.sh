@@ -80,13 +80,14 @@ else
   exit $EXIT_CODE
 fi
 
-# ── Step 3: Self-heal missing consistency reports ─────────────────
+# ── Step 3: Self-heal missing required & recommended files ───────
 echo ""
-echo "═══ Step 3 — Filling missing consistency reports ═══"
-if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/fill-missing-consistency-reports.cjs" ]; then
-  node "$SCRIPT_DIR/fill-missing-consistency-reports.cjs"
+echo "═══ Step 3 — Filling missing consistency reports & acceptance criteria ═══"
+if command -v node &>/dev/null; then
+  [ -f "$SCRIPT_DIR/fill-missing-consistency-reports.cjs" ] && node "$SCRIPT_DIR/fill-missing-consistency-reports.cjs"
+  [ -f "$SCRIPT_DIR/fill-missing-acceptance-criteria.cjs" ] && node "$SCRIPT_DIR/fill-missing-acceptance-criteria.cjs"
 else
-  echo "⏭️  Skipped (node not installed or script missing)."
+  echo "⏭️  Skipped (node not installed)."
 fi
 
 # ── Step 4: Regenerate spec-index.md ──────────────────────────────
@@ -101,7 +102,7 @@ fi
 # ── Step 5: Spec tree health gate ─────────────────────────────────
 echo ""
 echo "═══ Step 5 — Spec tree health gate ═══"
-HEALTH_MIN="${SPEC_HEALTH_MIN:-80}"
+HEALTH_MIN="${SPEC_HEALTH_MIN:-88}"
 if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/check-tree-health.cjs" ]; then
   if node "$SCRIPT_DIR/check-tree-health.cjs" --min="$HEALTH_MIN"; then
     echo "✅ Spec tree health gate passed."
