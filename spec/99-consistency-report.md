@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 3.5.0  
+**Version:** 3.6.0  
 **Generated:** 2026-04-25  
-**Health Score:** 97/100 (A+) — major audit pass; broken links 45 → 0; missing consistency reports 3 → 0
+**Health Score:** 100/100 (A+) 🎯 — perfect score; zero deductions across all metrics
 
 ---
 
