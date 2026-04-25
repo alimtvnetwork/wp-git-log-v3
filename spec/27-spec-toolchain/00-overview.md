@@ -52,6 +52,7 @@ Numbering convention inside this module:
 | 12 | [12-suggest-spec-cross-link-fixes.md](./12-suggest-spec-cross-link-fixes.md) | `linter-scripts/suggest-spec-cross-link-fixes.py` | Fuzzy-match broken-link suggestions, optional `--apply` |
 | 13 | [13-generate-gwt-acceptance.md](./13-generate-gwt-acceptance.md) | `linter-scripts/generate-gwt-acceptance.py` | AI-driven Given/When/Then AC generator |
 | 14 | [14-generate-trace-map.md](./14-generate-trace-map.md) | `linter-scripts/generate-trace-map.py` | Spec ↔ Code traceability mapper (drift + orphan reports) |
+| 15 | [15-generate-fix-checklist.md](./15-generate-fix-checklist.md) | `linter-scripts/generate-fix-checklist.py` | Per-module fix checklist with file targets + AC tests |
 
 ### Fillers (idempotent scaffolders)
 
