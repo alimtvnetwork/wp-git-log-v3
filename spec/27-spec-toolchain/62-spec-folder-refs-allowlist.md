@@ -43,7 +43,7 @@ spec/15-self-update-app-update/
 
 ### AC-62-02 — Doc-only entries are not linkified
 - **Given** an entry under `[doc-only]`,
-- **When** §01 (link validator) sees a markdown link `[x](spec/<entry>)`,
+- **When** §01 (link validator) sees a markdown link of the form `[x]` followed by `(spec/<entry>)`,
 - **Then** §01 MUST report it as broken (this allowlist does NOT cover §01).
 
 ### AC-62-03 — External entries pass §02

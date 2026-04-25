@@ -36,7 +36,7 @@
 ### AC-T-06 — Each spec links back to the source file with a relative repo path
 - **Given** any per-artifact spec section,
 - **When** the file is read,
-- **Then** it MUST link to the source file using the format `[\`linter-scripts/<name>\`](../../linter-scripts/<name>)` (or `.github/workflows/<name>` for CI).
+- **Then** it MUST link to the source file using a markdown link whose label is `` `linter-scripts/<name>` `` and whose target is `../../linter-scripts/<name>` (or `../../.github/workflows/<name>` for CI workflows).
 
 ### AC-T-07 — Slot immutability
 - **Given** the §99 consistency report,

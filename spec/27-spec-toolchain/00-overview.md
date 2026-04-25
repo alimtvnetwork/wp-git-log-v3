@@ -33,7 +33,7 @@ Numbering convention inside this module:
 
 | # | Spec file | Code artifact | Purpose |
 |---|-----------|---------------|---------|
-| 01 | [01-check-spec-cross-links.md](./01-check-spec-cross-links.md) | `linter-scripts/check-spec-cross-links.py` | Resolve every internal `[link](path.md#anchor)` inside `spec/` |
+| 01 | [01-check-spec-cross-links.md](./01-check-spec-cross-links.md) | `linter-scripts/check-spec-cross-links.py` | Resolve every internal markdown link inside `spec/` (e.g. `[label](path.md#anchor)`) |
 | 02 | [02-check-spec-folder-refs.md](./02-check-spec-folder-refs.md) | `linter-scripts/check-spec-folder-refs.py` | Reject prose references to non-existent numbered spec folders |
 | 03 | [03-check-forbidden-strings.md](./03-check-forbidden-strings.md) | `linter-scripts/check-forbidden-strings.py` | Generic TOML-driven forbidden pattern scanner |
 | 04 | [04-check-forbidden-spec-paths.md](./04-check-forbidden-spec-paths.md) | `linter-scripts/check-forbidden-spec-paths.sh` | Block deprecated paths + uppercase `.md` filenames |

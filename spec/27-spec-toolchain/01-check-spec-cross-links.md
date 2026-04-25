@@ -46,12 +46,12 @@ Human report on stderr; JSON on stdout when `--json`.
 ## Acceptance criteria
 
 ### AC-01-01 — Broken file link is detected
-- **Given** a markdown file in `spec/` containing `[x](./missing.md)`,
+- **Given** a markdown file in `spec/` containing a link of the form `[x]` followed by `(./missing.md)`,
 - **When** the script runs,
 - **Then** it MUST exit `1` and report the file path + line + target.
 
 ### AC-01-02 — Broken anchor is detected
-- **Given** `[x](./real.md#non-existent-heading)`,
+- **Given** a link of the form `[x]` followed by `(./real.md#non-existent-heading)`,
 - **When** the script runs and `real.md` exists but has no matching heading,
 - **Then** it MUST exit `1` and categorise the failure as `missing-section`.
 

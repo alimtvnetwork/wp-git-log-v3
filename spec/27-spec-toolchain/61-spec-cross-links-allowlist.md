@@ -16,7 +16,7 @@ Suppression list for known broken-link exceptions consumed by §01 [`check-spec-
 - One entry per line.
 - Lines beginning with `#` are comments.
 - Blank lines are ignored.
-- Entries match the literal `target` string of a markdown link `[x](target)` — no globbing.
+- Entries match the literal `target` string of a markdown link of the form `[x]` followed by `(target)` — no globbing.
 
 ```
 # Example
