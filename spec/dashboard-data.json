@@ -81,9 +81,9 @@
       },
       {
         "Source": "health-dashboard.md",
-        "Line": 26,
-        "Target": "../mem://constraints/avoid-app-sync",
-        "Resolved": "../mem:/constraints/avoid-app-sync"
+        "Line": 46,
+        "Target": "./dashboard-data.json",
+        "Resolved": "dashboard-data.json"
       }
     ],
     "BrokenDetails": []
