@@ -1,73 +1,76 @@
-# Acceptance Criteria — Security Guidelines
+# Acceptance Criteria — 11 Security
 
-**Version:** 1.0.0  
+**Version:** 2.0.0  
 **Updated:** 2026-04-25  
-**Scope:** `spec/02-coding-guidelines/11-security/`
+**Scope:** `spec/02-coding-guidelines/11-security/`  
+**Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
 
 ---
 
-## Purpose
+## Module Summary
 
-This document defines testable acceptance criteria for the **Security Guidelines** module. Every criterion is verifiable from the module's content alone — an AI implementer or human reviewer can check pass/fail without external context.
-
----
-
-## Criteria
-
-### AC-01: Module entry point exists and is non-trivial
-- **Given** the module folder `spec/02-coding-guidelines/11-security/`
-- **When** `00-overview.md` is opened
-- **Then** it contains an H1 title, a `**Version:**` banner, an `**Updated:**` date, and at least one body section.
-- **Source:** `00-overview.md`
-
-### AC-02: All sibling files referenced from the overview are present on disk
-- **Given** the link inventory in `00-overview.md`
-- **When** each relative `.md` link is resolved
-- **Then** the target file exists in this module folder.
-- **Source:** `00-overview.md` cross-references; verified by `linter-scripts/check-spec-cross-links.py`.
-
-### AC-03: Naming convention compliance
-- **Given** every file in this module
-- **When** filenames are inspected
-- **Then** all match `^[0-9]{2}-[a-z0-9-]+\.md$` (or are recognized special files like `README.md`).
-- **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md`.
-
-### AC-04: Consistency report present and current
-- **Given** the module folder
-- **When** `99-consistency-report.md` is opened
-- **Then** it lists every `.md` file in this folder under "File Inventory" with status ✅.
-- **Source:** `99-consistency-report.md`.
-
-### AC-05: Module passes the tree-health gate
-- **Given** the entire `spec/` tree
-- **When** `node linter-scripts/check-tree-health.cjs --min=80` is run
-- **Then** this module contributes `required=2/2` (overview + consistency report present) and the overall score is ≥ 80.
-- **Source:** `linter-scripts/check-tree-health.cjs`.
+This module establishes security coding guidelines and strict dependency version control policies, specifically mandating pinning for the Axios library to prevent the use of versions with known vulnerabilities (1.14.1 and 0.30.4).
 
 ---
 
-## Module-Specific Files
+## Inlined Contracts
 
-The following files in this module also constitute acceptance surface — each must remain valid markdown with a top-level H1 and version banner:
+> Required artifacts inlined here so each AC is self-contained — a mediocre AI does not need to chase cross-links.
 
-- `00-overview.md`
+### Axios Version Matrix
+| Version Category | Exact Version | Status |
+| :--- | :--- | :--- |
+| Preferred | 1.14.0 | APPROVED |
+| Legacy | 0.30.3 | APPROVED |
+| Vulnerable | 1.14.1 | BLOCKED |
+| Vulnerable | 0.30.4 | BLOCKED |
+| Other | Any other | BLOCKED (Pending Manual Approval) |
+
+### Security Document Structure
+Required files for subfolders:
+1. 00-overview.md
+2. 01-implementation-rules.md
+3. 02-security-notes.md
+4. 99-consistency-report.md
 
 ---
 
-## Validation
+## Acceptance Criteria
 
-Run the full pipeline:
+### AC-01: Strict Axios Version Pinning  `[critical]`
+- **Given** A project `package.json` file or dependency manifest
+- **When** The AI or developer adds or updates the Axios library
+- **Then** The Axios dependency MUST be pinned exactly to either `1.14.0` or `0.30.3` with no range operators (e.g., no `^` or `~`).
+- **Verifies:** 01-axios-version-control/00-overview.md
 
-```bash
-bash linter-scripts/run.sh
-```
+### AC-02: Blocked Vulnerable Version 1.14.1  `[critical]`
+- **Given** A requirement to update dependencies to the latest patch version
+- **When** Version 1.14.1 is proposed or found in the codebase
+- **Then** The version `1.14.1` MUST be rejected and flagged as blocked due to confirmed security vulnerabilities.
+- **Verifies:** 01-axios-version-control/00-overview.md
 
-This executes: validator → self-heal → regen index → tree-health gate. All steps must exit 0 for this module's acceptance to hold.
+### AC-03: Blocked Vulnerable Version 0.30.4  `[critical]`
+- **Given** A legacy project requiring a 0.x.x version of Axios
+- **When** Version 0.30.4 is proposed or found in the codebase
+- **Then** The version `0.30.4` MUST be rejected and flagged as blocked due to confirmed security vulnerabilities.
+- **Verifies:** 01-axios-version-control/00-overview.md
+
+### AC-04: Security Subfolder Template Compliance  `[medium]`
+- **Given** A new subfolder creation within `11-security/` for a new security topic
+- **When** A new security policy (e.g., input sanitization) is added
+- **Then** The subfolder MUST contain at least four specific files: `00-overview.md`, `01-implementation-rules.md`, `02-security-notes.md`, and `99-consistency-report.md`.
+- **Verifies:** 00-overview.md
+
+### AC-05: Unverified Version Default Deny  `[high]`
+- **Given** A developer attempting to use an unlisted version of Axios (e.g., 1.15.0)
+- **When** An unlisted version is detected in configuration
+- **Then** The version MUST be treated as `BLOCKED` until it undergoes manual verification and is added to the Version Matrix.
+- **Verifies:** 01-axios-version-control/00-overview.md
 
 ---
 
 ## Cross-References
 
 - [Module overview](./00-overview.md)
+- [Module changelog](./98-changelog.md)
 - [Module consistency report](./99-consistency-report.md)
-- [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
