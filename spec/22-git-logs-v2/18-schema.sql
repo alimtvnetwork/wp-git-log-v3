@@ -1,6 +1,6 @@
 -- ============================================================================
--- Git Logs Plugin — V2_0_0 schema + lookup seeds
--- Source spec: spec/22-git-logs-v2/02-database-schema.md, 09-seed-data.md
+-- Git Logs Plugin — schema + lookup seeds (v2.7.0)
+-- Source spec: spec/22-git-logs-v2/02-database-schema.md, 16-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
 -- All FKs: ON UPDATE CASCADE ON DELETE RESTRICT unless noted.
@@ -315,7 +315,10 @@ INSERT OR IGNORE INTO AuditActionType (AuditActionTypeId, Name) VALUES
     (10,'AppCreate'),(11,'AppUpdate'),(12,'AppDelete'),(13,'AppLinkChange'),
     (14,'LogPush'),(15,'LogQuery'),
     (16,'AuthSuccess'),(17,'AuthFail'),(18,'MigrationRun'),
-    (19,'Prune'),(20,'Restore');
+    (19,'Prune'),(20,'Restore'),
+    (21,'PluginUninstall'),
+    (22,'SshKeyRegister'),(23,'SshKeyRevoke'),(24,'SshKeyRotate'),
+    (25,'ConfigChange');
 
 INSERT OR IGNORE INTO AuditOutcome (AuditOutcomeId, Name) VALUES
     (1,'Success'),(2,'Rejected'),(3,'Error');
@@ -330,15 +333,25 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
-    ('LogLevelMin',          'Info',     strftime('%s','now')),
-    ('PluginVersion',        '2.0.0',    strftime('%s','now')),
-    ('RatePerMinPerProfile', '60',       strftime('%s','now')),
-    ('MaxPushPayloadBytes',  '1048576',  strftime('%s','now')),
-    ('MaxLinesPerPush',      '10000',    strftime('%s','now')),
-    ('MaxLineBytes',         '65536',    strftime('%s','now'));
+    ('LogLevelMin',           'Info',     strftime('%s','now')),
+    ('PluginVersion',         '2.7.0',    strftime('%s','now')),
+    ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
+    ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
+    ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
+    ('MaxLineBytes',          '65536',    strftime('%s','now')),
+    -- v2.5 additions
+    ('MaintenanceMode',       '0',        strftime('%s','now')),  -- §23 backup/restore gate
+    -- v2.6 additions
+    ('UninstallMode',         'Preserve', strftime('%s','now')),  -- §29 ∈ {Preserve,Archive,Wipe}
+    ('AllowedReadOrigins',    '',         strftime('%s','now')),  -- §30 S3 CORS allowlist (CSV; empty = none)
+    -- v2.7 additions
+    ('SshReplayWindowSec',    '300',      strftime('%s','now'));  -- §31 SSH timestamp skew tolerance
 
 -- Migration marker — last
 INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
-    ('2.0.0', strftime('%s','now'), NULL);
+    ('2.0.0', strftime('%s','now'), NULL),
+    ('2.5.0', strftime('%s','now'), NULL),
+    ('2.6.0', strftime('%s','now'), NULL),
+    ('2.7.0', strftime('%s','now'), NULL);
 
 COMMIT;
