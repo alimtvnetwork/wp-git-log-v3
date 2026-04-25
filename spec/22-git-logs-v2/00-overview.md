@@ -92,6 +92,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 34 | [34-phpunit-test-skeleton.md](./34-phpunit-test-skeleton.md) | PHPUnit unit skeleton (in-memory SQLite) |
 | 35 | [35-reference-ci-yml.md](./35-reference-ci-yml.md) | Reference `ci.yml` (12-job full matrix) |
 | 36 | [36-release-checklist.md](./36-release-checklist.md) | Semver gates, tag hygiene, release-day procedure |
+| 37 | [37-seed-data.md](./37-seed-data.md) | Human-readable seed catalog (counterpart to §18 DDL) |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC-01..AC-48 |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
