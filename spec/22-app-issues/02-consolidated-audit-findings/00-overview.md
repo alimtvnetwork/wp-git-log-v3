@@ -356,7 +356,7 @@ Then close `OI-ALLOW-01` and `OI-ALLOW-05`.
 
 **Why it fails.** Downstream tooling that walks Cross-References instead of the inventory table will not discover the consistency checklist.
 
-**Required fix.** Add a row to the Cross-References table: `| Spec consistency checklist | [./17-spec-consistency-checklist.md](./17-spec-consistency-checklist.md) |`.
+**Required fix.** Add a row to the Cross-References table: `| Spec consistency checklist | [../../21-git-logs/17-spec-consistency-checklist.md](../../21-git-logs/17-spec-consistency-checklist.md) |`.
 
 ---
 
