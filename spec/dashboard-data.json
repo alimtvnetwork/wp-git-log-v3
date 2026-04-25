@@ -4,16 +4,83 @@
     "Score": 77,
     "Grade": "C",
     "Deductions": [
-      "47 broken links (-20)",
+      "36 broken links (-20)",
       "1 missing overviews (-3)"
     ]
   },
   "Links": {
     "TotalChecked": 2087,
     "Ok": 2040,
-    "Broken": 47,
-    "ExternalAllowed": 0,
-    "ExternalAllowedDetails": [],
+    "Broken": 36,
+    "ExternalAllowed": 11,
+    "ExternalAllowedDetails": [
+      {
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 228,
+        "Target": "../../scripts/sync-readme-stats.mjs",
+        "Resolved": "../scripts/sync-readme-stats.mjs"
+      },
+      {
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 229,
+        "Target": "../../docs/principles.md",
+        "Resolved": "../docs/principles.md"
+      },
+      {
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 229,
+        "Target": "../../docs/architecture.md",
+        "Resolved": "../docs/architecture.md"
+      },
+      {
+        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
+        "Line": 229,
+        "Target": "../../docs/author.md",
+        "Resolved": "../docs/author.md"
+      },
+      {
+        "Source": "02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md",
+        "Line": 59,
+        "Target": "../../../../linters-cicd/codegen/README.md",
+        "Resolved": "../linters-cicd/codegen/README.md"
+      },
+      {
+        "Source": "02-coding-guidelines/01-cross-language/12-no-negatives.md",
+        "Line": 275,
+        "Target": "../../../linters-cicd/codegen/README.md",
+        "Resolved": "../linters-cicd/codegen/README.md"
+      },
+      {
+        "Source": "02-coding-guidelines/02-typescript/11-eslint-enforcement.md",
+        "Line": 137,
+        "Target": "../../../eslint-plugins/coding-guidelines/index.js",
+        "Resolved": "../eslint-plugins/coding-guidelines/index.js"
+      },
+      {
+        "Source": "15-distribution-and-runner/00-overview.md",
+        "Line": 91,
+        "Target": "../../spec-slides/00-overview.md",
+        "Resolved": "../spec-slides/00-overview.md"
+      },
+      {
+        "Source": "15-distribution-and-runner/02-runner-contract.md",
+        "Line": 103,
+        "Target": "../../spec-slides/",
+        "Resolved": "../spec-slides"
+      },
+      {
+        "Source": "17-consolidated-guidelines/28-distribution-and-runner.md",
+        "Line": 234,
+        "Target": "../../spec-slides/00-overview.md",
+        "Resolved": "../spec-slides/00-overview.md"
+      },
+      {
+        "Source": "health-dashboard.md",
+        "Line": 26,
+        "Target": "../mem://constraints/avoid-app-sync",
+        "Resolved": "../mem:/constraints/avoid-app-sync"
+      }
+    ],
     "BrokenDetails": [
       {
         "Source": "00-overview.md",
@@ -21,76 +88,6 @@
         "Text": "dashboard-data.json",
         "Target": "./dashboard-data.json",
         "Resolved": "dashboard-data.json"
-      },
-      {
-        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
-        "Line": 228,
-        "Text": "`scripts/sync-readme-stats.mjs`",
-        "Target": "../../scripts/sync-readme-stats.mjs",
-        "Resolved": "../scripts/sync-readme-stats.mjs"
-      },
-      {
-        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
-        "Line": 229,
-        "Text": "`docs/principles.md`",
-        "Target": "../../docs/principles.md",
-        "Resolved": "../docs/principles.md"
-      },
-      {
-        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
-        "Line": 229,
-        "Text": "`docs/architecture.md`",
-        "Target": "../../docs/architecture.md",
-        "Resolved": "../docs/architecture.md"
-      },
-      {
-        "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
-        "Line": 229,
-        "Text": "`docs/author.md`",
-        "Target": "../../docs/author.md",
-        "Resolved": "../docs/author.md"
-      },
-      {
-        "Source": "02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md",
-        "Line": 59,
-        "Text": "`linters-cicd/codegen/`",
-        "Target": "../../../../linters-cicd/codegen/README.md",
-        "Resolved": "../linters-cicd/codegen/README.md"
-      },
-      {
-        "Source": "02-coding-guidelines/01-cross-language/12-no-negatives.md",
-        "Line": 275,
-        "Text": "`linters-cicd/codegen/`",
-        "Target": "../../../linters-cicd/codegen/README.md",
-        "Resolved": "../linters-cicd/codegen/README.md"
-      },
-      {
-        "Source": "02-coding-guidelines/02-typescript/11-eslint-enforcement.md",
-        "Line": 137,
-        "Text": "Custom Plugin Source",
-        "Target": "../../../eslint-plugins/coding-guidelines/index.js",
-        "Resolved": "../eslint-plugins/coding-guidelines/index.js"
-      },
-      {
-        "Source": "15-distribution-and-runner/00-overview.md",
-        "Line": 91,
-        "Text": "`spec-slides/00-overview.md`",
-        "Target": "../../spec-slides/00-overview.md",
-        "Resolved": "../spec-slides/00-overview.md"
-      },
-      {
-        "Source": "15-distribution-and-runner/02-runner-contract.md",
-        "Line": 103,
-        "Text": "`spec-slides/`",
-        "Target": "../../spec-slides/",
-        "Resolved": "../spec-slides"
-      },
-      {
-        "Source": "17-consolidated-guidelines/28-distribution-and-runner.md",
-        "Line": 234,
-        "Text": "`spec-slides/00-overview.md`",
-        "Target": "../../spec-slides/00-overview.md",
-        "Resolved": "../spec-slides/00-overview.md"
       },
       {
         "Source": "21-git-logs/00-overview.md",
@@ -336,13 +333,6 @@
         "Text": "App",
         "Target": "../21-app/00-overview.md",
         "Resolved": "21-app/00-overview.md"
-      },
-      {
-        "Source": "health-dashboard.md",
-        "Line": 26,
-        "Text": "`mem://constraints/avoid-app-sync`",
-        "Target": "../mem://constraints/avoid-app-sync",
-        "Resolved": "../mem:/constraints/avoid-app-sync"
       }
     ]
   },
