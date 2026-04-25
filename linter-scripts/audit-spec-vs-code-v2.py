@@ -166,7 +166,7 @@ def deterministic_metrics(folder: Path) -> dict:
 # ---------------- digest ----------------
 def build_digest(folder: Path, metrics: dict) -> str:
     rel = MOD_REL[folder]
-    body = sorted(folder.glob("*.md"))
+    body = sorted(list(folder.glob("*.md")) + list(folder.glob("*.mmd")) + list(folder.glob("*.yaml")) + list(folder.glob("*.yml")))
     body_listing = "\n".join(f"  - {f.name} ({len(read(f))} chars)" for f in body)
     children = CHILDREN.get(rel, [])
     children_listing = "\n".join(f"  - spec/{c}" for c in children) or "  _(none)_"
