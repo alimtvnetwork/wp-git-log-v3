@@ -8,7 +8,7 @@
 > Deterministic score 74/100 (C) for spec/27-spec-toolchain.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.17.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.16.
 
 ---
 
@@ -52,7 +52,7 @@
   "links_total": 107,
   "links_broken": 0,
   "todo_density": 3,
-  "waffle_per_kchar": 0.17,
+  "waffle_per_kchar": 0.16,
   "child_modules": 0
 }
 ```
