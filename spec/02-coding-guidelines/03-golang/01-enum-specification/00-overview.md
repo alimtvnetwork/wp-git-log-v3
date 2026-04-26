@@ -1,8 +1,8 @@
 # Enum Specification
 
-**Version:** 3.2.0  
+**Version:** 3.3.0  
 **Status:** Complete  
-**Updated:** 2026-04-16    
+**Updated:** 2026-04-26    
 **AI Confidence:** High  
 **Ambiguity:** None
 **Error Range:** N/A (Cross-cutting standard)
@@ -100,6 +100,177 @@ internal/enums/
 └── searchmodetype/
     └── variant.go
 ```
+
+---
+
+## Reference Implementation (NORMATIVE)
+
+This section is the **single inlined reference contract** for the entire Go enum
+pattern. Every CLI listed under §"Applies To" MUST mirror this shape — package
+name suffix, zero-value semantics, method set, lookup-table layout, and JSON
+behavior. Deviations are non-conformant.
+
+### Go reference: `internal/enums/providertype/variant.go`
+
+```go
+// Package providertype defines the canonical Provider enum.
+// Generated from spec/02-coding-guidelines/03-golang/01-enum-specification.
+// Zero value MUST be Invalid (never "Unknown").
+package providertype
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// Variant is a byte-sized enum. Width is part of the contract: do not widen.
+type Variant byte
+
+const (
+	Invalid     Variant = iota // 0 — sentinel; never serialized as a real value
+	SerpApi                    // 1
+	MapsScraper                // 2
+	Colly                      // 3
+)
+
+// variantLabels is the SINGLE source of truth used by String, Label, Parse,
+// MarshalJSON, and UnmarshalJSON. Order MUST match the iota order above.
+var variantLabels = [...]string{
+	Invalid:     "invalid",
+	SerpApi:     "serpapi",
+	MapsScraper: "maps-scraper",
+	Colly:       "colly",
+}
+
+// All returns every valid variant (Invalid excluded).
+func All() []Variant {
+	return []Variant{SerpApi, MapsScraper, Colly}
+}
+
+// ByIndex returns the variant whose iota position equals i.
+// Out-of-range indexes return Invalid (never panic).
+func ByIndex(i int) Variant {
+	if i <= 0 || i >= len(variantLabels) {
+		return Invalid
+	}
+	return Variant(i)
+}
+
+// Parse converts a wire string into a Variant. Unknown input returns Invalid
+// AND a non-nil error — callers MUST check the error.
+func Parse(s string) (Variant, error) {
+	for i, label := range variantLabels {
+		if label == s && Variant(i) != Invalid {
+			return Variant(i), nil
+		}
+	}
+	return Invalid, fmt.Errorf("providertype: unknown variant %q", s)
+}
+
+// String returns the wire form. Invalid returns "invalid".
+func (v Variant) String() string {
+	if int(v) >= len(variantLabels) {
+		return "invalid"
+	}
+	return variantLabels[v]
+}
+
+// Label is the human-facing display string. Override per-variant if you need
+// title-case or localized output; defaults to String for brevity here.
+func (v Variant) Label() string { return v.String() }
+
+// IsValid reports whether v is a known non-Invalid variant.
+func (v Variant) IsValid() bool { return v != Invalid && int(v) < len(variantLabels) }
+
+// IsSerpApi / IsMapsScraper / IsColly — one Is{Variant} method per value.
+func (v Variant) IsSerpApi() bool     { return v == SerpApi }
+func (v Variant) IsMapsScraper() bool { return v == MapsScraper }
+func (v Variant) IsColly() bool       { return v == Colly }
+
+// IsOther is the inverse of equality. True iff v != other.
+func (v Variant) IsOther(other Variant) bool { return v != other }
+
+// IsAnyOf returns true if v matches any variant in others.
+func (v Variant) IsAnyOf(others ...Variant) bool {
+	for _, o := range others {
+		if v == o {
+			return true
+		}
+	}
+	return false
+}
+
+// MarshalJSON serializes as a JSON string ("serpapi"), never as a number.
+func (v Variant) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.String())
+}
+
+// UnmarshalJSON accepts a JSON string and rejects unknown values with an
+// error. Numbers, booleans, and null are all rejected.
+func (v *Variant) UnmarshalJSON(data []byte) error {
+	var s string
+	if err := json.Unmarshal(data, &s); err != nil {
+		return fmt.Errorf("providertype: expected JSON string, got %s", string(data))
+	}
+	parsed, err := Parse(s)
+	if err != nil {
+		return err
+	}
+	*v = parsed
+	return nil
+}
+```
+
+### Cross-language wire-format mirror (TypeScript)
+
+Any TypeScript consumer of an API that returns this enum MUST mirror the wire
+strings exactly. This block is the lockstep contract for §"Code Mirror" audits.
+
+```ts
+// Mirror of internal/enums/providertype/variant.go
+// MUST update both sides in the same commit.
+export const ProviderType = {
+  SerpApi:     "serpapi",
+  MapsScraper: "maps-scraper",
+  Colly:       "colly",
+} as const;
+
+export type ProviderType = (typeof ProviderType)[keyof typeof ProviderType];
+
+export const ALL_PROVIDER_TYPES: readonly ProviderType[] = [
+  ProviderType.SerpApi,
+  ProviderType.MapsScraper,
+  ProviderType.Colly,
+] as const;
+
+export function isProviderType(s: string): s is ProviderType {
+  return (ALL_PROVIDER_TYPES as readonly string[]).includes(s);
+}
+```
+
+### JSON Schema (Draft 2020-12) for the wire form
+
+Use this schema in any HTTP boundary that accepts a `providerType` field:
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://riseup.asia/schemas/provider-type.json",
+  "title": "ProviderType",
+  "type": "string",
+  "enum": ["serpapi", "maps-scraper", "colly"]
+}
+```
+
+### Forbidden shapes (lint-enforced)
+
+| Shape | Why forbidden |
+|---|---|
+| `type Variant int` (or any width >byte) | Wastes bytes; breaks binary fixtures. |
+| `Unknown Variant = iota` | Spec mandates `Invalid` as zero. |
+| Per-method label lookups (no `variantLabels` table) | Drift between String/Label/Parse. |
+| `MarshalJSON` returning a number | Wire form is string, always. |
+| Silent `Parse` (returns Invalid, nil) | Callers cannot detect bad input. |
 
 ---
 

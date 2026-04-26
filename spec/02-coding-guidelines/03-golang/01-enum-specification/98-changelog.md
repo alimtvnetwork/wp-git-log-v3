@@ -1,6 +1,6 @@
 # Changelog — Enum Specification
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/02-coding-guidelines/03-golang/01-enum-specification/`
 
@@ -16,6 +16,16 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26 (Phase 20 contract inlining, module #10)
+- **Added** normative Reference Implementation block in `00-overview.md`:
+  full `internal/enums/providertype/variant.go`, TypeScript wire-format mirror,
+  Draft 2020-12 JSON Schema, and a forbidden-shapes table.
+- **Added** lockstep cross-language contract: Go + TS + JSON Schema must
+  ship in the same commit (G-CON-01 contract requirement).
+- **Verified** TS mirror typechecks under `tsc --strict`; JSON Schema rejects
+  unknown strings, numbers, and null inputs (`Draft202012Validator`).
+- Bumps overview to v3.3.0.
 
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).

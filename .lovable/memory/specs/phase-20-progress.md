@@ -1,10 +1,10 @@
 ---
 name: Phase 20 contract-inlining progress
-description: Tracks the 9-module contract-inlining sweep and the Phase 22 audit delta showing 2 C→B promotions, 1 within-A jump, 0.5 mean lift, 30→23 G-CON-01 firings.
+description: Tracks the 10-of-11-module contract-inlining sweep; module #10 (Go enum reference impl) landed 2026-04-26 with TS+JSON-Schema lockstep mirror.
 type: feature
 ---
 
-# Phase 20 — Contract Inlining (status: 9 of 11 done)
+# Phase 20 — Contract Inlining (status: 10 of 11 done)
 
 ## Modules upgraded (9)
 
@@ -19,6 +19,7 @@ type: feature
 | 7 | `22-git-logs-v2/02-database-schema` | DDL excerpt (lookup/entity/FK/polymorphic/split-DB) | 84 | 84 | 0 (capped) |
 | 8 | `06-seedable-config-architecture/00-overview` | JSON Schema 2020-12 + ref instance | 95 | 95 | 0 (A+ saturated) |
 | 9 | `14-update/24-update-check-mechanism/04-database-schema` | TS+Go enum mirror + JSON Schema 2020-12 with conditional if/then | 89 | **93** | **+4 (within A)** |
+| 10 | `02-coding-guidelines/03-golang/01-enum-specification` | Full Go reference impl + TS mirror + JSON Schema + forbidden-shapes table | 73 | _pending re-audit_ | _expected C→B/A_ |
 
 ## Phase 22 audit delta (re-run 2026-04-26)
 
@@ -31,7 +32,6 @@ Pre-Phase-20 baseline: `.lovable/memory/audit/v2-deterministic-pre-phase20-basel
 
 ## Remaining Phase 20 queue
 
-* **#10** — `02-coding-guidelines/03-golang/01-enum-specification` (Go enum reference impl, already 70-ish C-tier).
 * **#11** — `18-wp-plugin-how-to/02-enums-and-coding-style` (PHP enum reference impl — currently 73 C, impl=40).
 
 ## Next-bottleneck recommendations from the audit
