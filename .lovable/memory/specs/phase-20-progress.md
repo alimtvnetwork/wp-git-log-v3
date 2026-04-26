@@ -1,10 +1,10 @@
 ---
 name: Phase 20 contract-inlining progress
-description: Tracks the 9-module contract-inlining sweep and the Phase 22 audit delta showing 2 C→B promotions, 1 within-A jump, 0.5 mean lift, 30→23 G-CON-01 firings.
+description: Tracks the 10-of-11-module contract-inlining sweep; module #10 (Go enum reference impl) landed 2026-04-26 with TS+JSON-Schema lockstep mirror.
 type: feature
 ---
 
-# Phase 20 — Contract Inlining (status: 9 of 11 done)
+# Phase 20 — Contract Inlining (status: 10 of 11 done)
 
 ## Modules upgraded (9)
 
