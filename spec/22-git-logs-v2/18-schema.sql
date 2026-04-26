@@ -406,6 +406,7 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.8.0', strftime('%s','now'), NULL),  -- doc-only consolidation cycle (no DDL changes)
     ('2.8.7', strftime('%s','now'), NULL),  -- §18/§15 audit alignment
     ('2.8.8', strftime('%s','now'), NULL),  -- Q1 IsOrganization (column rename + table drop)
-    ('2.8.9', strftime('%s','now'), NULL);  -- Q2 PipelineAction rename + SystemEvent
+    ('2.8.9', strftime('%s','now'), NULL),  -- Q2 PipelineAction rename + SystemEvent
+    ('2.9.0', strftime('%s','now'), NULL);  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
 
 COMMIT;
