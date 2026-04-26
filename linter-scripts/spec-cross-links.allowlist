@@ -1,6 +1,8 @@
 # Spec cross-link allowlist (waivers)
 # Format: <relpath>:<line>:<target>
-# Regenerated 2026-04-26 after inline-fix sweep (was 77, now 16)
+# Updated 2026-04-26: 16 entries from inline-fix sweep + 10 deferred-target waivers
+# (root /scripts/, /docs/, /linters-cicd/codegen/, /eslint-plugins/, /spec-slides/
+#  — files referenced from spec but not yet present in the repo).
 
 spec/02-coding-guidelines/01-cross-language/02-boolean-principles/05-exemptions-and-api.md:84:value
 spec/02-coding-guidelines/01-cross-language/02-boolean-principles/05-exemptions-and-api.md:85:err
