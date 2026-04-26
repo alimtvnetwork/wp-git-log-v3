@@ -27,10 +27,10 @@ This document defines testable acceptance criteria for the **Consolidated Guidel
 - **Source:** `00-overview.md` (the link inventory under test); `linter-scripts/check-spec-cross-links.py` (the resolver); `linter-scripts/suggest-spec-cross-link-fixes.py` (auto-fix proposer); `linter-scripts/check-spec-folder-refs.py` (cross-folder validity); `99-consistency-report.md` (where orphan warnings surface).
 
 ### AC-03: Naming convention compliance
-- **Given** every file in this module
-- **When** filenames are inspected
-- **Then** all match `^[0-9]{2}-[a-z0-9-]+\.md$` (or are recognized special files like `README.md`).
-- **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md`.
+- **Given** every Markdown file in the module folder `spec/17-consolidated-guidelines/`
+- **When** filenames are inspected by `linter-scripts/validate-guidelines.py` (and its Go twin `validate-guidelines.go`, which MUST agree byte-for-byte)
+- **Then** the following naming rules MUST hold: (a) every numbered guideline file MUST match the regex `^[0-9]{2}-[a-z0-9-]+\.md$` — exactly two leading digits followed by a hyphen, then lowercase letters/digits/hyphens, then `.md` (e.g. `02-coding-guidelines.md` ✅; `2-coding.md` ❌; `02_coding.md` ❌; `02-Coding-Guidelines.md` ❌ uppercase forbidden; `02-coding guidelines.md` ❌ space forbidden); (b) the three template-position files MUST be exactly `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md` — these slot numbers are RESERVED across the entire `spec/` tree and MUST NOT be reused for guideline content (per `mem://index.md` Core rule "File slots are immutable once shipped"); (c) the entry-point file MUST be exactly `00-overview.md` — never `index.md`, `README.md`, or `00-readme.md`; (d) numeric prefixes MUST be unique within the folder — two files cannot share the same `NN-` prefix (the slot-collision rule that triggered the §22 rename to §25 in v3.7.0); (e) numeric prefixes MUST be monotonically increasing in the order content was added — gaps ARE permitted (e.g. `09`–`13` are intentionally vacant in §22) but reusing a previously-shipped slot for new content is FORBIDDEN even after the original was renamed; (f) the recognized special files exempt from the numbered regex are exactly: `README.md` (folder-level intro, optional), the three `97`/`98`/`99` template files, and `00-overview.md` — no other special files are permitted.
+- **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md` (canonical naming spec); `linter-scripts/validate-guidelines.py` + `linter-scripts/validate-guidelines.go` (enforcement, twin implementations MUST agree); `mem://index.md` Core rule on slot immutability; `mem://specs/full-tree-audit-v4.md` Phase 1 (§22 → §25 rename precedent demonstrating the cost of slot reuse).
 
 ### AC-04: Consistency report present and current
 - **Given** the module folder
