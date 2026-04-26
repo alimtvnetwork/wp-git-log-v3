@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.12  
-**Updated:** 2026-04-26 (Phase 12: Phase 9 Follow-ups — AC-73..AC-75 added for `Pipeline.PreviousHasError` state-transition matrix, back-fill correctness, single-statement write atomicity; AC-67 extended to mention optional `Header.StateTransition` field)
+**Version:** 3.8.13  
+**Updated:** 2026-04-26 (Phase 13: Deepen Scaffolded ACs — 8 high-traffic one-liner ACs rewritten with full GWT body + concrete §-cross-refs: AC-02 Profile schema absence-of-password-column, AC-03 migration semver ordering + 12-marker baseline, AC-12 streaming ingest size-cap incrementality + atomicity, AC-14 AckResponse Retrieval URL contract, AC-17 App columns incl. forbidden Phase B1 fields, AC-18 AppLink XOR + CASCADE, AC-22 §26 6-file Mermaid inventory + render contract, AC-30 ErrorEnvelope shape + RequestId mirroring + NDJSON error split. AC count unchanged at 75.)
 
 ---
 
@@ -50,10 +50,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 ## Section B — Domain Model & Profiles
 
 ### AC-02 — Profile fields  `[active]`
-- **Given** a created Profile row
-- **When** the row is read from the SQLite root DB
-- **Then** it contains exactly `UserName`, `Email`, `GeneratedKeyApi`, `Token`, `TempToken` (no password column anywhere in the schema).
-- **Verifies:** brief §2, §02, §18.
+- **Given** a `Profile` row exists in the SQLite root DB (path per §39 `ConfigKv.RootDbPath`, conventionally `<plugin-data>/git-logs.db`)
+- **When** the row is read via `SELECT * FROM Profile WHERE ProfileId = :id`
+- **Then** the result MUST contain exactly these columns and no others (per §02 v3.8.6 + §18 v2.9.3 DDL): `ProfileId INTEGER PRIMARY KEY AUTOINCREMENT`, `UserName TEXT NOT NULL UNIQUE`, `Email TEXT NOT NULL`, `GeneratedKeyApi TEXT NOT NULL` (server-issued opaque token used as the WP App Password username — see §05 §3.a), `Token TEXT NOT NULL` (the long-lived bearer token paired with `GeneratedKeyApi` per §05), `TempToken TEXT NULL` (short-lived rotation slot, NULL when no rotation in flight), `CreatedAt INTEGER NOT NULL`, `UpdatedAt INTEGER NOT NULL`; AND there MUST NOT be any column named `Password`, `PasswordHash`, `Salt`, `Pepper`, or any other plaintext-or-derived secret material — the schema is intentionally password-free because authentication uses WP App Passwords (§05 Lane A) or SSH key signatures (§31 Lane B), never a Profile-stored password; AND the `UNIQUE` constraint on `UserName` MUST be enforced at the SQLite level (not application level) so concurrent inserts cannot race past a `SELECT … WHERE UserName = ?` check.
+- **Verifies:** brief §2 (Profile entity), §02 v3.8.6 (Profile table doc), §18 v2.9.3 (DDL), §05 (Lane A auth flow), §31 (Lane B auth flow), §39 (RootDbPath ConfigKv key).
 
 ### AC-07 — GitProfile URL canonicalization  `[active]`
 - **Given** a GitProfile is saved with `IsOrganization` set to 0 or 1
@@ -80,16 +80,16 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** brief §Domain.5, §02, §18.
 
 ### AC-17 — App entity columns  `[active]`
-- **Given** a created App row
-- **When** the row is read
-- **Then** it contains `AppName`, `AppSlug` (UNIQUE), `Description`, `ProfileId` (FK), `AppStatusId` (FK).
-- **Verifies:** locked decision 10–12, §02, §18.
+- **Given** an `App` row exists in the SQLite root DB (per §02 v3.8.6 + §18 v2.9.3 DDL; this is the consumer-app identity table introduced by §07 locked decisions 10–12)
+- **When** the row is read via `SELECT * FROM App WHERE AppId = :id`
+- **Then** the result MUST contain exactly these columns and no others: `AppId INTEGER PRIMARY KEY AUTOINCREMENT`, `AppName TEXT NOT NULL`, `AppSlug TEXT NOT NULL UNIQUE` (kebab-case identifier used in `/append-log` payloads — `[a-z0-9][a-z0-9-]*` per §07 locked decision 11), `Description TEXT NULL`, `ProfileId INTEGER NOT NULL REFERENCES Profile(ProfileId) ON DELETE RESTRICT` (the App MUST be owned by exactly one Profile — RESTRICT prevents orphaning), `AppStatusId INTEGER NOT NULL REFERENCES AppStatus(AppStatusId) ON DELETE RESTRICT` (lookup table per §02; values `Active` / `Suspended` / `Archived` per §01 glossary), `CreatedAt INTEGER NOT NULL`, `UpdatedAt INTEGER NOT NULL`; AND `AppSlug` UNIQUE MUST be enforced at the SQLite level so two Profiles cannot register the same slug; AND the `App` table MUST NOT carry any of the (forbidden, blocked-on-user) Phase B1 fields `Environment`, `Platform`, `OwnerEmail` until the §07 App identity decision is unblocked — adding them speculatively is a schema violation per §07 locked decision 12.
+- **Verifies:** locked decisions 10–12 (App entity scope), §02 v3.8.6 (App + AppStatus table doc), §18 v2.9.3 (DDL + FK constraints), §01 (AppStatus enum), §07 (Phase B1 blocked fields).
 
 ### AC-18 — Polymorphic AppLink  `[active]`
-- **Given** an `AppLink` row is inserted
-- **When** the CHECK constraint runs
-- **Then** exactly one of `RepoId` / `GitProfileId` MUST be non-NULL (XOR via CHECK), so the link target is unambiguous.
-- **Verifies:** locked decision 10, §18.
+- **Given** an `AppLink` row insert is attempted (per §02 v3.8.6 + §18 v2.9.3 DDL — this table associates an `App` with EITHER a specific `Repo` OR a specific `GitProfile` for credential-inheritance scoping per §07 locked decision 10)
+- **When** the row is committed
+- **Then** the SQLite-level `CHECK` constraint MUST enforce XOR semantics: `CHECK ((RepoId IS NOT NULL) <> (GitProfileId IS NOT NULL))` — i.e. exactly one of the two FK columns is non-NULL, never both, never neither; AND inserting a row with both columns NULL MUST fail with SQLite error code 19 (`SQLITE_CONSTRAINT_CHECK`) — application-layer guards alone are NOT sufficient; AND inserting a row with both columns set MUST also fail with the same constraint error; AND the table MUST carry composite UNIQUE constraints `UNIQUE (AppId, RepoId)` and `UNIQUE (AppId, GitProfileId)` so a single App cannot link to the same Repo or GitProfile twice (the NULL side is exempt by SQLite's standard UNIQUE-with-NULL semantics, which is the desired behavior); AND both FKs MUST use `ON DELETE CASCADE` so deleting the parent `App`, `Repo`, or `GitProfile` automatically prunes the dangling link rows; AND the polymorphic discriminator is implicit (which column is non-NULL) — the table MUST NOT carry an explicit `LinkType TEXT` column because the XOR CHECK already encodes it and a separate column risks drift between `LinkType` and the actual non-NULL FK.
+- **Verifies:** locked decision 10 (polymorphic linking design), §02 v3.8.6 (AppLink table doc), §18 v2.9.3 (DDL + CHECK + UNIQUE + FK CASCADE).
 
 ### AC-19 — App credential inheritance  `[active]`
 - **Given** an App linked to a parent Profile
@@ -148,10 +148,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** brief §Endpoints, §04, §17.
 
 ### AC-12 — Streaming ingestion  `[active]`
-- **Given** an `/append-log` request
-- **When** the client sends `Transfer-Encoding: chunked`
-- **Then** the server reads the body as a stream (no full-buffer requirement) and applies §10 size caps incrementally.
-- **Verifies:** brief §Endpoints.2.b, §04.
+- **Given** a client sends a request to `/append-log` (endpoint #1 per §04) carrying `Transfer-Encoding: chunked` (no `Content-Length` header) — typically used by CI runners forwarding live `tail -f` output
+- **When** the server begins parsing the request body
+- **Then** the server MUST consume the body as a stream — reading and parsing one JSON value (or one NDJSON line, if §04 §11 ingestion-side streaming is later adopted) at a time — and MUST NOT buffer the entire body into memory before validation begins; AND the §10 size caps (`ConfigKv.MaxPushPayloadBytes` default 1 MiB, `MaxLinesPerPush` default 10 000, `MaxLineBytes` default 64 KiB) MUST be enforced INCREMENTALLY against running counters: as soon as any threshold is crossed mid-stream, the server MUST abort by returning `GL-PAYLOAD-TOO-LARGE` (HTTP 413) per §15 with a partial-ingest indicator in the error envelope's `Message` (e.g. `"aborted at line 8217 of …"`); AND chunks already accepted before the abort MUST be rolled back (the entire `/append-log` request is atomic per AC-13's sticky-`HasError` contract — a partial commit would corrupt the per-SHA cursor); AND the server MUST set a hard wall-clock cap of `ConfigKv.AppendLogMaxStreamSec` (recommended default 30 s) to prevent slow-loris ingest exhausting the PHP-FPM worker pool — exceeding the cap MUST return `GL-INGEST-TIMEOUT` per §15; AND when the request omits `Transfer-Encoding: chunked` and instead sends `Content-Length: N`, the server MAY (but is not required to) enable streaming — buffered ingest is acceptable for known-bounded payloads under the size caps.
+- **Verifies:** brief §Endpoints.2.b (chunked ingest), §04 (endpoint #1 contract), §10 (size cap matrix), §15 (`GL-PAYLOAD-TOO-LARGE`, `GL-INGEST-TIMEOUT`), AC-13 (atomicity coupling).
 
 ### AC-13 — HasError sticky until fixed-log  `[active]`
 - **Given** an `/append-log` with `HasError=true` is accepted for a Pipeline
@@ -160,16 +160,16 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** brief §Endpoints.2.c, §04.
 
 ### AC-14 — Structured ack with Retrieval hints  `[active]`
-- **Given** any write endpoint returns 200/202
+- **Given** any write endpoint (`/append-log` #1, `/fixed-log` #2, `/clear-log` #3, `/clear-log-all` #4 per §04) returns a successful response (HTTP 200 or 202)
 - **When** the response body is parsed
-- **Then** it contains a `Retrieval` block with the canonical read-back URL(s) for the just-written entity.
-- **Verifies:** brief §Endpoints.1.a–b, §04.
+- **Then** the JSON body MUST conform to the `AckResponse` schema in §17 OpenAPI v2.9.4 — at minimum: `Status: "Ok"`, `RequestId` (UUID, mirrored to `AuditTrail.RequestId` per AC-30), `WrittenCount` (rows accepted into per-SHA storage), `Pipeline` (echo of the resolved `{PipelineId, Branch, Sha}`), AND a `Retrieval` block; AND the `Retrieval` block MUST contain canonical read-back URLs for the entity just written: `Retrieval.PipelineLogs` = absolute URL to `/get-pipeline-logs?PipelineId=<id>` (read all logs for this pipeline run), `Retrieval.PipelineErrorLogs` = absolute URL to `/get-pipeline-error-logs?PipelineId=<id>` (read only error rows), `Retrieval.RepoLogs` = absolute URL to `/get-logs?RepoUrl=<url>&Branch=<branch>` (read across the whole branch); AND each URL MUST be absolute (include scheme + host + `/wp-json/git-logs/v2/` namespace) so CI runners can paste it verbatim into chat/PR-comment integrations without further URL composition; AND the URLs MUST be the JSON-page form by default — clients wanting NDJSON streaming opt in by adding `Accept: application/x-ndjson` per AC-67, NOT by mutating the `Retrieval` URLs; AND the `Retrieval` block MUST also be present on `/clear-log` and `/clear-log-all` responses, where the URLs return empty pages (this proves the clear succeeded and is auditable); AND `Retrieval` URLs MUST NEVER include credentials or tokens — authentication is the caller's responsibility per §05.
+- **Verifies:** brief §Endpoints.1.a–b (ack contract), §04 (write endpoints #1–#4), §17 v2.9.4 (`AckResponse` schema), AC-30 (RequestId mirroring), AC-67 (NDJSON opt-in).
 
 ### AC-30 — Error envelope shape + RequestId mirroring  `[active]`
-- **Given** any endpoint rejects a request
+- **Given** any endpoint (write #1–#4, read #5–#10, admin #11+) rejects a request for any reason — validation failure, auth failure, rate-limit hit, internal error, or any of the 30+ `GL-*` codes registered in §15
 - **When** the response body is read
-- **Then** it matches `{Status, Code, Message, RequestId, HttpStatus}` AND `RequestId` appears in the corresponding `AuditTrail.RequestId` row.
-- **Verifies:** §15, §10.
+- **Then** the body MUST conform exactly to the `ErrorEnvelope` schema in §17 v2.9.4 `components.schemas.ErrorEnvelope`: `{Status: "Error", Code: <GL-* enum>, Message: <human-readable string>, RequestId: <UUID>, HttpStatus: <int matching the response status code>}` — and MUST NOT include any other top-level keys (no `details`, no `stack`, no `data` — those leak implementation detail and break client parsers); AND `Code` MUST be drawn from the `ErrorCode` enum in §17 (currently 30+ values incl. all `GL-NDJSON-*` and `GL-SHA-DB-*` codes per Phase 11); AND `RequestId` MUST be a UUIDv4 generated server-side (not client-supplied — clients sending an `X-Request-Id` header MUST have it ignored to prevent log-injection); AND the SAME `RequestId` MUST appear in the corresponding `AuditTrail.RequestId` row written for this request (so a customer reporting "I got error req_abc" can be cross-referenced to a single audit row); AND `HttpStatus` MUST equal the response's actual HTTP status code (no envelope claiming 400 inside a 200 response — that's a contract violation that breaks middleware error handling); AND `Message` MUST be safe to display verbatim to end users — it MUST NOT contain stack traces, file paths, SQL fragments, or any internal-only detail; AND on NDJSON streaming responses (per AC-67/AC-68), errors that occur BEFORE the `Header` frame flushes MUST use this envelope shape (the response is still conventional JSON); errors AFTER `Header` flushes MUST use the in-stream `NdjsonErrorFrame` per §17 instead — the envelope is for pre-stream failures only.
+- **Verifies:** §15 (full `GL-*` code catalog), §10 (RequestId generation rule), §17 v2.9.4 (`ErrorEnvelope` + `ErrorCode` enum + `NdjsonErrorFrame`), §22 (`AuditTrail` correlation), AC-67/AC-68 (NDJSON error frame split).
 
 ### AC-37 — Prometheus metrics endpoint  `[active]`
 - **Given** the metrics endpoint `GET /wp-json/git-logs/v2/metrics`
@@ -188,10 +188,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 ## Section E — Logging, Migrations & Roles
 
 ### AC-03 — Migration runs once per version  `[active]`
-- **Given** the plugin boots at version `X.Y.Z`
-- **When** the migration runner inspects `MigrationState`
-- **Then** the V`X_Y_Z` migration runs exactly once; subsequent boots of the same version short-circuit.
-- **Verifies:** brief §3.b–e, §06, §12.
+- **Given** the plugin boots at semver `X.Y.Z` (read from `ConfigKv.PluginVersion` per §18 v2.9.3 — currently `2.9.3`)
+- **When** the migration runner executes during `plugins_loaded` action (per §06 §3.b)
+- **Then** the runner MUST consult `MigrationState` (PK = `PluginVersion TEXT`, plus `AppliedAt INTEGER NOT NULL`, `ChecksumOk INTEGER NULL` per §18) and MUST execute the migration named `V<X>_<Y>_<Z>` (e.g. `V2_9_3` for `2.9.3`) IF AND ONLY IF no row exists with `PluginVersion = 'X.Y.Z'`; AND on successful completion the runner MUST insert exactly one new `MigrationState` row with `PluginVersion = 'X.Y.Z', AppliedAt = strftime('%s','now')` — re-boots at the same version MUST short-circuit by detecting the existing row and skipping the migration entirely (NEVER re-run, NEVER re-attempt — even if the prior run partially failed; partial failures are surfaced via `ChecksumOk = 0` and require manual operator intervention per §23 backup/restore); AND the runner MUST execute migrations in strict semver-ascending order — booting at `2.9.3` against a DB last migrated at `2.9.0` MUST run `V2_9_1` then `V2_9_2` then `V2_9_3` in that order, never out-of-order, never skipping; AND each migration MUST be wrapped in `BEGIN IMMEDIATE; … COMMIT;` so a failure mid-migration leaves the DB at the prior version (no half-migrated schema); AND the runner MUST refuse to start (returning `GL-MIGRATION-PENDING` per §15 on every API call) if the DB carries `MigrationState` rows for versions NEWER than the running plugin (a downgrade scenario — the operator must manually restore from §23 backup or upgrade the plugin); AND every Phase 0..11 marker (`2.0.0`, `2.5.0`, `2.6.0`, `2.7.0`, `2.8.0`, `2.8.7`, `2.8.8`, `2.8.9`, `2.9.0`, `2.9.1`, `2.9.2`, `2.9.3` — 12 markers total) MUST be present in `MigrationState` after a fresh install applying the v2.9.3 baseline schema, NOT just the latest one (the audit trail of intermediate versions matters for §23 restore correctness).
+- **Verifies:** brief §3.b–e (migration lifecycle), §06 (plugin boot sequence), §12 (CI/CD migration coupling), §15 (`GL-MIGRATION-PENDING`), §18 v2.9.3 (`MigrationState` DDL + 12 baseline markers), §23 (backup/restore interaction).
 
 ### AC-04 — Logger level gating  `[active]`
 - **Given** `ConfigKv.LogLevelMin` is set
@@ -256,10 +256,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 ## Section G — Schema Conventions & Diagrams
 
 ### AC-22 — Diagram inventory  `[active]`
-- **Given** folder `26-gitlogs-diagrams/`
-- **When** it is listed
-- **Then** it contains Mermaid sources for ER, domain, endpoint, auth, and permission diagrams.
-- **Verifies:** brief §Diagrams, §26.
+- **Given** folder `spec/26-gitlogs-diagrams/` (the Mermaid companion folder for §22, brought to v2.1.0 by Phase 10)
+- **When** the folder contents are listed
+- **Then** the folder MUST contain exactly these 6 Mermaid source files (each named `NN-<purpose>.mmd`) reflecting the v2.9.0 split-DB shape: `01-er-diagram.mmd` (entity-relationship across root DB + per-SHA DBs — incl. `Profile`, `App`, `AppLink`, `Repo`, `RepoVersion`, `GitProfile`, `Pipeline`, `ShaRegistry`, `SshKey`, `SshNonce`, `MigrationState`, `ConfigKv`, `AuditTrail`), `05-auth-validation.mmd` (Lane A WP-App-Password flow + Lane B SSH-key flow per §05/§31), `06-permission-flow.mmd` (Casbin RBAC matrix per §28), `07-rate-limit-flow.mmd` (per-profile bucket per §07/§10), `08-encryption-v3-flow.mmd` (token encryption-at-rest per §30), `09-endpoints-mindmap.mmd` (the 10 REST endpoints organised by surface — write/read/admin/streaming per §04 §11.7); AND each `.mmd` file MUST have a companion `.svg` artifact (rendered by `@mermaid-js/mermaid-cli` v11+ per Phase 10) so reviewers without Mermaid tooling can preview directly — re-render command `mmdc -i <file>.mmd -o <file>.svg -p puppeteer.json -b transparent` documented in §00; AND the folder's §00 banner version MUST track the schema version the diagrams reflect (currently v2.1.0 reflecting v2.9.0 split-DB shape) — when §02/§18 schema changes land, §26 banner MUST be bumped and ALL affected `.mmd` files re-rendered before the changelog row is closed; AND no other `.mmd` files MUST exist in the folder (legacy diagrams from v1 live in `spec/_archive/21-git-logs-v1/` per the slot-26-archive precedent — never in the active folder).
+- **Verifies:** brief §Diagrams, §26 v2.1.0 (Mermaid companion folder), §02/§18 (schema source-of-truth that diagrams reflect), §05/§28/§30/§31/§04 (each diagram's source spec), Phase 10 roadmap (mmdc render contract).
 
 ### AC-23 — PascalCase + AUTOINCREMENT PK  `[active]`
 - **Given** any table or JSON payload in the codebase
