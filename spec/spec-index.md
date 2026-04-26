@@ -146,9 +146,9 @@
 | `spec/02-coding-guidelines/01-cross-language/26-magic-values-and-immutability.md` | Magic Values, Immutability & Class-First Design | 3.2.0 |
 | `spec/02-coding-guidelines/01-cross-language/27-types-folder-convention.md` | Types Folder Convention & Common Type Aliases | 3.2.0 |
 | `spec/02-coding-guidelines/01-cross-language/28-slug-conventions.md` | Slug Conventions | 3.2.0 |
-| `spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md` | Coding Guidelines — Acceptance Criteria | 3.2.0 |
-| `spec/02-coding-guidelines/01-cross-language/98-changelog.md` | Coding Guidelines — Changelog | 3.2.0 |
-| `spec/02-coding-guidelines/01-cross-language/99-consistency-report.md` | Consistency Report: Cross-Language Guidelines | 3.2.0 |
+| `spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md` | Cross-Language Coding Guidelines — Acceptance Criteria | 4.0.0 |
+| `spec/02-coding-guidelines/01-cross-language/98-changelog.md` | Coding Guidelines — Changelog | 4.0.0 |
+| `spec/02-coding-guidelines/01-cross-language/99-consistency-report.md` | Consistency Report: Cross-Language Guidelines | 4.0.0 |
 | `spec/02-coding-guidelines/02-typescript/00-overview.md` | TypeScript Standards | 3.2.0 |
 | `spec/02-coding-guidelines/02-typescript/01-connection-status-enum.md` | TypeScript ConnectionStatus Enum — `src/lib/enums/connection-status.ts` |  |
 | `spec/02-coding-guidelines/02-typescript/02-entity-status-enum.md` | TypeScript EntityStatus Enum — `src/lib/enums/entity-status.ts` |  |
