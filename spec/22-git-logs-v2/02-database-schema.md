@@ -142,7 +142,8 @@ Unique: `(RepoId, VersionSuffix)`.
 | RepoVersionId | INTEGER FK → RepoVersion | |
 | BranchName | TEXT NOT NULL | |
 | PipelineName | TEXT NOT NULL | |
-| HasError | INTEGER 0/1 NOT NULL DEFAULT 0 | Set by /append-log when HasError=true; cleared by /fixed-log |
+| HasError | INTEGER 0/1 NOT NULL DEFAULT 0 CHECK (HasError IN (0,1)) | Set by `/append-log` when `HasError=true`; cleared by `/fixed-log`. |
+| PreviousHasError | INTEGER 0/1 NOT NULL DEFAULT 0 CHECK (PreviousHasError IN (0,1)) | **NEW v2.9.2 (Phase 9).** The value `HasError` held *immediately before* the most recent `/append-log` or `/fixed-log` transition. Lets the UI render `first-failure` (`PreviousHasError=0, HasError=1`), `still-failing` (`1,1`), `just-recovered` (`1,0`), `still-green` (`0,0`) without scanning the per-SHA log file (AC-49). **Back-fill rule on migration to v2.9.2:** `UPDATE Pipeline SET PreviousHasError = HasError;` so the very first transition after upgrade is correctly labeled `still-failing` / `still-green` rather than spuriously `first-failure` / `just-recovered`. **Write rule going forward:** every server-side mutation of `HasError` MUST set `PreviousHasError = OLD.HasError` in the same transaction (single UPDATE statement, no separate read-modify-write). |
 | LastGitSha256 | TEXT NULL | |
 | UpdatedAt | INTEGER | |
 
