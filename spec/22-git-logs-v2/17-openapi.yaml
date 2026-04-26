@@ -432,6 +432,12 @@ paths:
   /get-logs:
     get:
       summary: List log entries by Repo + Branch (or ?q= shorthand)
+      description: |
+        Returns a paginated `LogPage` by default. Streams an NDJSON sequence
+        of `NdjsonFrame` lines when `Accept: application/x-ndjson` is sent
+        (Phase 11 v2.9.3, spec §04 §11). NDJSON adds two query params:
+        `after-seq` (resume from a previous stream's last `Seq`) and
+        `stream-id` (correlate with the original `Header.StreamId`).
       security: [ { WpAppPassword: [] } ]
       parameters:
         - { name: RepoUrl, in: query, schema: { type: string, format: uri } }
@@ -440,8 +446,19 @@ paths:
         - { name: Limit,   in: query, schema: { type: integer, minimum: 1, maximum: 1000, default: 100 } }
         - { name: Cursor,  in: query, schema: { type: string } }
         - { name: Severity, in: query, schema: { $ref: '#/components/schemas/LogSeverity' } }
+        - { name: after-seq, in: query, schema: { type: integer, format: int64, minimum: 0 }, description: 'NDJSON only — resume from this Seq (exclusive). Ignored on application/json responses.' }
+        - { name: stream-id, in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId for resume correlation.' }
       responses:
-        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/LogPage' } } } }
+        '200':
+          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          headers:
+            X-Content-Type-Options: { schema: { type: string }, description: 'Set to nosniff on NDJSON responses.' }
+            Transfer-Encoding:      { schema: { type: string }, description: 'chunked on NDJSON responses; absent on JSON.' }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LogPage' }
+            application/x-ndjson:
+              schema: { type: string, format: binary, description: 'See components.responses.NdjsonStream and components.schemas.NdjsonFrame.' }
         '400': { $ref: '#/components/responses/BadRequest' }
         '401': { $ref: '#/components/responses/Unauthorized' }
         '403': { $ref: '#/components/responses/Forbidden' }
@@ -449,36 +466,71 @@ paths:
   /get-pipeline-logs:
     get:
       summary: List log entries for one PipelineId
+      description: |
+        Returns a paginated `LogPage` by default. Streams NDJSON when
+        `Accept: application/x-ndjson` is sent (spec §04 §11).
       security: [ { WpAppPassword: [] } ]
       parameters:
         - { name: PipelineId, in: query, schema: { type: integer } }
         - { name: q,          in: query, schema: { type: string }, description: 'Shorthand: <PipelineId>' }
         - { name: Limit,      in: query, schema: { type: integer, minimum: 1, maximum: 1000, default: 100 } }
         - { name: Cursor,     in: query, schema: { type: string } }
+        - { name: after-seq,  in: query, schema: { type: integer, format: int64, minimum: 0 }, description: 'NDJSON only — resume from this Seq (exclusive).' }
+        - { name: stream-id,  in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId.' }
       responses:
-        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/LogPage' } } } }
+        '200':
+          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LogPage' }
+            application/x-ndjson:
+              schema: { type: string, format: binary, description: 'See components.responses.NdjsonStream and components.schemas.NdjsonFrame.' }
         '404': { $ref: '#/components/responses/NotFound' }
 
   /get-error-logs:
     get:
       summary: List error log entries by Repo + Branch
+      description: |
+        Returns a paginated `ErrorLogPage` by default. Streams NDJSON
+        (`ErrorLog` frames in place of `Log` frames) when
+        `Accept: application/x-ndjson` is sent (spec §04 §11).
       security: [ { WpAppPassword: [] } ]
       parameters:
         - { name: RepoUrl, in: query, schema: { type: string, format: uri } }
         - { name: Branch,  in: query, schema: { type: string } }
         - { name: Limit,   in: query, schema: { type: integer, minimum: 1, maximum: 1000, default: 100 } }
         - { name: Cursor,  in: query, schema: { type: string } }
+        - { name: after-seq, in: query, schema: { type: integer, format: int64, minimum: 0 }, description: 'NDJSON only — resume from this Seq (exclusive).' }
+        - { name: stream-id, in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId.' }
       responses:
-        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ErrorLogPage' } } } }
+        '200':
+          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorLogPage' }
+            application/x-ndjson:
+              schema: { type: string, format: binary, description: 'See components.responses.NdjsonStream and components.schemas.NdjsonFrame.' }
 
   /get-pipeline-error-logs:
     get:
       summary: List error log entries for one PipelineId
+      description: |
+        Returns a paginated `ErrorLogPage` by default. Streams NDJSON
+        (`ErrorLog` frames) when `Accept: application/x-ndjson` is sent
+        (spec §04 §11).
       security: [ { WpAppPassword: [] } ]
       parameters:
         - { name: PipelineId, in: query, schema: { type: integer } }
         - { name: Limit,      in: query, schema: { type: integer, minimum: 1, maximum: 1000, default: 100 } }
         - { name: Cursor,     in: query, schema: { type: string } }
+        - { name: after-seq,  in: query, schema: { type: integer, format: int64, minimum: 0 }, description: 'NDJSON only — resume from this Seq (exclusive).' }
+        - { name: stream-id,  in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId.' }
       responses:
-        '200': { description: OK, content: { application/json: { schema: { $ref: '#/components/schemas/ErrorLogPage' } } } }
+        '200':
+          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorLogPage' }
+            application/x-ndjson:
+              schema: { type: string, format: binary, description: 'See components.responses.NdjsonStream and components.schemas.NdjsonFrame.' }
         '404': { $ref: '#/components/responses/NotFound' }
