@@ -248,9 +248,17 @@ Expanded §27 §97 from 10 ACs (AC-T-01..AC-T-10) to **20 module-specific GWT AC
 ## Status legend
 - ✅ done · ⏳ pending · 🚧 blocked
 
-## Next-pointer
-**Phases 16a + 16b + 16c + 16d-i + 16d-ii + 16d-iii + 16d-iv complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT). **Unblocked candidates remaining:**
-- **Phase 16d-v** — Deepen **§28 universal-ci-cli §97** (5-AC scaffold).
-- Phase B1 remains blocked on user.
+## ✅ Phase 16d-v — §28 universal-ci-cli §97 deepen (DONE, v2.0.0)
 
-On next `next`: take **Phase 16d-v (§28 universal-ci-cli §97 deepen)** unless you redirect.
+Expanded §28 §97 from 28 ACs to **40 module-specific GWT ACs** (AC-28-29..AC-28-40 added; AC-28-01..AC-28-28 preserved). Closed all four v1.1-deferred error codes (`GLCI-EXEC-RUNNER-CRASHED`, `GLCI-EXEC-TIMEOUT`, `GLCI-PUSH-STREAM-BROKEN`, `GLCI-DETECT-MULTIPLE-MODULES`) + added GitLab/Azure/Bitbucket/generic-shell provider auto-fill, telemetry prohibition (Locked Decision #10), streaming buffer cap, per-runtime tool selection (TS/Go/PHP), and direct `glci push-fixed`/`clear` invocation. Lockstep §98 v2.0.0 + §99 v2.0.0 + spec-index regenerated. Tree-health: 100/100 (A+).
+
+---
+
+## Next-pointer
+**All Phase 16d sub-phases complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT). **All unblocked deepening phases done.**
+
+Remaining work:
+- 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user — confirm `Environment`, `Platform`, `OwnerEmail` shape).
+- Optional future passes: deepen any remaining 5-AC scaffold modules surfaced by a fresh `mem://specs/full-tree-audit-v4.md` re-run.
+
+On next `next`: re-scan the spec tree for any remaining 5-AC scaffold §97 files and propose the next deepening target, OR await user input on Phase B1.
