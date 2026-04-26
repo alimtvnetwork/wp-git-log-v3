@@ -1,8 +1,8 @@
 # Security Guidelines
 
-**Version:** 3.2.0  
+**Version:** 2.1.0  
 **Status:** Active  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-26  
 **AI Confidence:** High  
 **Ambiguity:** None
 
@@ -61,6 +61,70 @@ Add a new subfolder under `11-security/` when:
     ├── 02-security-notes.md        ← Detailed advisory, audit trail
     └── 99-consistency-report.md    ← Health check
 ```
+
+---
+
+## Normative Contract — Security Policy Manifest
+
+Every security subfolder MUST publish a machine-readable manifest matching the
+JSON schema below. `linter-scripts/check-security-policies.py` consumes these
+manifests to enforce dependency pinning, CVE acknowledgement, and
+forbidden-string detection across every language target.
+
+```text
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spec/02-coding-guidelines/11-security/policy.schema.json",
+  "title": "SecurityPolicy",
+  "type": "object",
+  "required": ["id", "title", "severity", "scope", "enforcement", "rules"],
+  "properties": {
+    "id":       { "type": "string", "pattern": "^SEC-[A-Z]+-[0-9]{3}$" },
+    "title":    { "type": "string", "minLength": 1 },
+    "severity": { "enum": ["critical", "high", "medium", "low", "advisory"] },
+    "scope": {
+      "type": "object",
+      "required": ["languages", "ecosystems"],
+      "properties": {
+        "languages":  { "type": "array", "items": { "enum": ["go", "ts", "js", "php", "rust", "csharp"] } },
+        "ecosystems": { "type": "array", "items": { "enum": ["npm", "composer", "go-mod", "cargo", "nuget"] } }
+      }
+    },
+    "enforcement": {
+      "type": "object",
+      "required": ["linter", "ci_required", "forbidden_strings_toml"],
+      "properties": {
+        "linter":                 { "type": "string", "minLength": 1 },
+        "ci_required":            { "type": "boolean" },
+        "forbidden_strings_toml": { "type": "string", "pattern": "^.+\\.toml$" }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "kind", "pattern", "remediation"],
+        "properties": {
+          "rule_id":     { "type": "string", "pattern": "^R-[0-9]{3}$" },
+          "kind":        { "enum": ["pin-version", "forbid-string", "require-header", "audit-cve"] },
+          "pattern":     { "type": "string", "minLength": 1 },
+          "remediation": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "cve_refs": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^CVE-[0-9]{4}-[0-9]+$" }
+    }
+  }
+}
+```
+
+> **Enforcement.** A subfolder without a conforming manifest fails the
+> security gate; `01-axios-version-control/` is the reference implementation.
+> Forbidden-string detection uses `linter-scripts/forbidden-strings.toml`
+> when `enforcement.forbidden_strings_toml` is omitted.
 
 ---
 

@@ -1,7 +1,7 @@
 # Spec Authoring Guide
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Updated:** 2026-04-26  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
@@ -185,6 +185,58 @@ spec/13-wp-plugin/03-exam-manager/
 | 09 | [09-exceptions.md](./09-exceptions.md) | Rules | All known exception cases with folder structure examples |
 | 10 | [10-mandatory-linter-infrastructure.md](./10-mandatory-linter-infrastructure.md) | Rules | Mandatory linter scripts — AI must verify presence before validation |
 | 11 | [11-root-readme-conventions.md](./11-root-readme-conventions.md) | Rules | **MANDATORY** root `readme.md` format — centered icon, hero block, author/company template, badges, §9 release-blocker checklist |
+
+---
+
+## Normative Contract — Required Module Layout
+
+Every authored spec module **MUST** conform to the JSON schema below. The
+deterministic auditor (`linter-scripts/audit-spec-v2.py`) and the dashboard
+scanner enforce it; violations downgrade the module's tier.
+
+```text
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spec/01-spec-authoring-guide/module.schema.json",
+  "title": "SpecModule",
+  "type": "object",
+  "required": ["overview", "acceptance_criteria", "changelog", "consistency_report"],
+  "properties": {
+    "overview": {
+      "type": "object",
+      "required": ["path", "version", "updated", "ai_confidence", "ambiguity",
+                   "purpose", "keywords", "scoring", "files_table", "cross_references"],
+      "properties": {
+        "path":          { "const": "00-overview.md" },
+        "version":       { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "updated":       { "type": "string", "format": "date" },
+        "ai_confidence": { "enum": ["Production-Ready", "High", "Medium", "Low"] },
+        "ambiguity":     { "enum": ["None", "Low", "Medium", "High", "Critical"] },
+        "min_normative_contract_lines": { "type": "integer", "minimum": 10 }
+      }
+    },
+    "acceptance_criteria": {
+      "type": "object",
+      "required": ["path", "min_gwt_blocks"],
+      "properties": {
+        "path":           { "const": "97-acceptance-criteria.md" },
+        "min_gwt_blocks": { "type": "integer", "minimum": 5 }
+      }
+    },
+    "changelog":          { "type": "object", "required": ["path"],
+                            "properties": { "path": { "const": "98-changelog.md" } } },
+    "consistency_report": { "type": "object", "required": ["path", "stale_days_max"],
+                            "properties": { "path": { "const": "99-consistency-report.md" },
+                                            "stale_days_max": { "const": 7 } } }
+  },
+  "additionalProperties": true
+}
+```
+
+> **Enforcement.** Modules violating the `min_normative_contract_lines: 10`
+> rule fire a `missing-contract` finding (impact 8/10) and cannot exit
+> tier C. `min_gwt_blocks: 5` is enforced by
+> `linter-scripts/generate-gwt-acceptance.py`.
 
 ## File Naming Convention (Quick Reference)
 

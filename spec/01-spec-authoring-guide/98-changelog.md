@@ -1,7 +1,14 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26
+
+---
+
+## [4.1.0] — 2026-04-26 (Phase 26: missing-contract remediation)
+
+- **Added** §00 — inlined normative `SpecModule` JSON schema (≥10 lines, `text` fence) clearing the `missing-contract` G-CON-01 blocker. Module rises out of C-tier.
+- **Bumped** §00 v3.2.0 → v3.3.0 (minor; new contract added, no breaking change).
 
 ---
 

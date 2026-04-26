@@ -1,6 +1,6 @@
 # Changelog — Linter Scripts
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/03-error-manage/03-error-code-registry/08-linter-scripts/`
 
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26
+- **Added** §00 — inlined normative `ErrorCodeRegistry` JSON schema (≥10 lines, `text` fence), expanded Document Inventory with the four `.mjs` scripts, deduplicated the broken table row, and added Cross-References. Clears the `missing-contract` G-CON-01 blocker (Phase 26).
 
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).

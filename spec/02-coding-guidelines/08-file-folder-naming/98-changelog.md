@@ -1,7 +1,7 @@
 # Changelog — File & Folder Naming Conventions
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/02-coding-guidelines/08-file-folder-naming/`
 
 ---
@@ -16,6 +16,10 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26
+- **Added** §00 — inlined normative per-language naming regex contract (≥10 lines, `text` fence) clearing the `missing-contract` G-CON-01 blocker (Phase 26).
+- **Bumped** §00 v3.2.0 → v1.1.0 (resync from misaligned root version) — see §99 audit row.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
