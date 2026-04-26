@@ -1,8 +1,10 @@
 # Consistency Report — Coding Guidelines
 
-**Version:** 3.2.0  
-**Last Updated:** 2026-04-16  
+**Version:** 4.0.0
+**Last Updated:** 2026-04-26
 **Health Score:** 100/100 (A+)
+
+> **v4.0.0 update (Phase 16e):** §97 fully rewritten from 22 table-row criteria to **20 module-specific Given/When/Then ACs** (AC-CG-01..AC-CG-20). The new ACs codify the §02 parent governance contract — numbering ranges, four-required-files rule, six CODE-RED rules, hybrid naming policy, lockstep rules, language-vs-cross-language hierarchy, and tree-health gate. Legacy AC-001..022 preserved as AC-CG-LEGACY-001..022 for traceability. **Open gap surfaced**: 15 §97 files across the spec tree (including 8 within §02 subfolders) currently have 0 GWT ACs — tracked for Phase 16f+ deepening sweep. Module-level tree-health remains 100/100 because all required files are present; the AC-count gap will surface when AC-CG-19's per-subfolder gate is enforced.
 
 ---
 
