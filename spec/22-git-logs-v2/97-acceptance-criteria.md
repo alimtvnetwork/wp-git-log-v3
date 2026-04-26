@@ -256,10 +256,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 ## Section G — Schema Conventions & Diagrams
 
 ### AC-22 — Diagram inventory  `[active]`
-- **Given** folder `26-gitlogs-diagrams/`
-- **When** it is listed
-- **Then** it contains Mermaid sources for ER, domain, endpoint, auth, and permission diagrams.
-- **Verifies:** brief §Diagrams, §26.
+- **Given** folder `spec/26-gitlogs-diagrams/` (the Mermaid companion folder for §22, brought to v2.1.0 by Phase 10)
+- **When** the folder contents are listed
+- **Then** the folder MUST contain exactly these 6 Mermaid source files (each named `NN-<purpose>.mmd`) reflecting the v2.9.0 split-DB shape: `01-er-diagram.mmd` (entity-relationship across root DB + per-SHA DBs — incl. `Profile`, `App`, `AppLink`, `Repo`, `RepoVersion`, `GitProfile`, `Pipeline`, `ShaRegistry`, `SshKey`, `SshNonce`, `MigrationState`, `ConfigKv`, `AuditTrail`), `05-auth-validation.mmd` (Lane A WP-App-Password flow + Lane B SSH-key flow per §05/§31), `06-permission-flow.mmd` (Casbin RBAC matrix per §28), `07-rate-limit-flow.mmd` (per-profile bucket per §07/§10), `08-encryption-v3-flow.mmd` (token encryption-at-rest per §30), `09-endpoints-mindmap.mmd` (the 10 REST endpoints organised by surface — write/read/admin/streaming per §04 §11.7); AND each `.mmd` file MUST have a companion `.svg` artifact (rendered by `@mermaid-js/mermaid-cli` v11+ per Phase 10) so reviewers without Mermaid tooling can preview directly — re-render command `mmdc -i <file>.mmd -o <file>.svg -p puppeteer.json -b transparent` documented in §00; AND the folder's §00 banner version MUST track the schema version the diagrams reflect (currently v2.1.0 reflecting v2.9.0 split-DB shape) — when §02/§18 schema changes land, §26 banner MUST be bumped and ALL affected `.mmd` files re-rendered before the changelog row is closed; AND no other `.mmd` files MUST exist in the folder (legacy diagrams from v1 live in `spec/_archive/21-git-logs-v1/` per the slot-26-archive precedent — never in the active folder).
+- **Verifies:** brief §Diagrams, §26 v2.1.0 (Mermaid companion folder), §02/§18 (schema source-of-truth that diagrams reflect), §05/§28/§30/§31/§04 (each diagram's source spec), Phase 10 roadmap (mmdc render contract).
 
 ### AC-23 — PascalCase + AUTOINCREMENT PK  `[active]`
 - **Given** any table or JSON payload in the codebase
