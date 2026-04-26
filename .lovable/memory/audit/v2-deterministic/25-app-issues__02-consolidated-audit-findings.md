@@ -8,7 +8,7 @@
 > Deterministic score 59/100 (D) for spec/25-app-issues/02-consolidated-audit-findings.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=14, waffle/kchar=0.03. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.03. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "md_files": 4,
   "mmd_files": 0,
   "overview_chars": 28968,
-  "ac_chars": 2688,
+  "ac_chars": 2692,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
@@ -46,7 +46,7 @@
   "has_yaml_openapi": false,
   "has_mermaid": false,
   "links_total": 32,
-  "links_broken": 14,
+  "links_broken": 13,
   "todo_density": 0,
   "waffle_per_kchar": 0.03,
   "child_modules": 0
@@ -55,7 +55,7 @@
 
 ## Implementability Blockers
 
-- 14 broken cross-spec link(s)
+- 13 broken cross-spec link(s)
 - No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 
 ## Code Mapping
@@ -68,14 +68,14 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | broken-link | high | 7/10 | 14 broken cross-spec link(s) |
+| 1 | broken-link | high | 7/10 | 13 broken cross-spec link(s) |
 | 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [HIGH] 14 broken cross-spec link(s)
+#### 1. [HIGH] 13 broken cross-spec link(s)
 - **Category:** broken-link  |  **Impact:** 7/10
-- **Evidence:** links_total=32, links_broken=14
+- **Evidence:** links_total=32, links_broken=13
 - **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
 
 #### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body

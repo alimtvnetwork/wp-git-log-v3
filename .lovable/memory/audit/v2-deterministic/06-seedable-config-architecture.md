@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **85/100 (A)**  
+**Implementability Score:** **95/100 (A+)**  
 **Blast radius:** 10/10
 
-> Deterministic score 85/100 (A) for spec/06-seedable-config-architecture.
+> Deterministic score 95/100 (A+) for spec/06-seedable-config-architecture.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.05. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 85 | 29.8 |
-| Completeness | 20% | 70 | 14.0 |
+| Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 52 | 3.6 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -31,30 +31,31 @@
   "md_files": 7,
   "mmd_files": 0,
   "overview_chars": 3989,
-  "ac_chars": 624,
-  "ac_count": 2,
-  "gwt_block_count": 0,
+  "ac_chars": 22330,
+  "ac_count": 23,
+  "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 16,
+  "code_blocks_total": 20,
   "code_blocks_by_lang": {
-    "plain": 2,
+    "plain": 5,
     "bash": 1,
     "json": 3,
     "markdown": 1,
     "sql": 3,
     "go": 2,
     "typescript": 3,
-    "css": 1
+    "css": 1,
+    "text": 1
   },
   "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 8,
+  "links_total": 7,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.0,
+  "waffle_per_kchar": 0.05,
   "child_modules": 2
 }
 ```
@@ -73,11 +74,5 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | untestable | medium | 5/10 | Acceptance criteria present but no Given/When/Then blocks |
 
 ### Detail + Proposed Corrections
-
-#### 1. [MEDIUM] Acceptance criteria present but no Given/When/Then blocks
-- **Category:** untestable  |  **Impact:** 5/10
-- **Evidence:** ac_count=2, gwt_block_count=0
-- **Proposed correction:** Rewrite each AC as a Given/When/Then block.

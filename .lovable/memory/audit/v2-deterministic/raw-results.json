@@ -116,15 +116,6 @@
         "rationale": "\u22653 broken links suggests structural drift; alignment with the wider spec tree is unreliable."
       },
       {
-        "active": true,
-        "after": 60,
-        "before": 64,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      },
-      {
         "active": false,
         "after": 40,
         "before": 40,
@@ -144,7 +135,7 @@
       {
         "category": "broken-link",
         "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=61, links_broken=11",
+        "evidence": "links_total=66, links_broken=11",
         "impact": 7,
         "issue": "11 broken cross-spec link(s)",
         "severity": "high"
@@ -160,173 +151,129 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 3, \"html\": 2, \"markdown\": 23, \"plain\": 40}",
+        "evidence": "code_blocks_by_lang={\"bash\": 3, \"html\": 2, \"markdown\": 23, \"plain\": 40, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
         "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=4, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
       }
     ],
-    "grade": "D",
+    "grade": "C",
     "implementability_blockers": [
       "11 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2490,
-      "ac_count": 4,
+      "ac_chars": 23174,
+      "ac_count": 25,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 3,
         "html": 2,
         "markdown": 23,
-        "plain": 40
+        "plain": 40,
+        "text": 1
       },
-      "code_blocks_total": 68,
+      "code_blocks_total": 69,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 21,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 11,
-      "links_total": 61,
+      "links_total": 66,
       "md_files": 16,
       "mmd_files": 0,
       "overview_chars": 22937,
       "todo_density": 2,
-      "waffle_per_kchar": 0.33
+      "waffle_per_kchar": 0.3
     },
     "module": "01-spec-authoring-guide",
     "raw_scores": {
       "alignment": 40,
       "clarity": 100,
-      "completeness": 60,
+      "completeness": 80,
       "consistency": 50,
       "implementability": 40,
       "maintainability": 90,
-      "testability": 64
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=4, gwt=0, broken_links=11, waffle/kchar=0.33. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=25, gwt=21, broken_links=11, waffle/kchar=0.3. Gates active: 0.",
     "scores": {
       "alignment": 40,
       "clarity": 100,
-      "completeness": 60,
+      "completeness": 80,
       "consistency": 50,
       "implementability": 40,
       "maintainability": 90,
-      "testability": 60
+      "testability": 100
     },
-    "verdict": "Deterministic score 54/100 (D) for spec/01-spec-authoring-guide.",
-    "weighted_overall": 54
+    "verdict": "Deterministic score 61/100 (C) for spec/01-spec-authoring-guide.",
+    "weighted_overall": 61
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
-      {
-        "active": true,
-        "after": 60,
-        "before": 70,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=31, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=5, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
-      }
-    ],
-    "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3327,
-      "ac_count": 5,
+      "ac_chars": 23190,
+      "ac_count": 26,
       "child_modules": 16,
       "code_blocks_by_lang": {
         "bash": 1,
         "go": 16,
         "plain": 2,
         "sql": 1,
+        "text": 1,
         "ts": 1,
         "typescript": 11
       },
-      "code_blocks_total": 32,
+      "code_blocks_total": 33,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 21,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": true,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 31,
+      "links_broken": 0,
+      "links_total": 32,
       "md_files": 6,
       "mmd_files": 0,
-      "overview_chars": 10822,
+      "overview_chars": 10823,
       "todo_density": 0,
-      "waffle_per_kchar": 0.1
+      "waffle_per_kchar": 0.16
     },
     "module": "02-coding-guidelines",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
-      "consistency": 92,
+      "completeness": 100,
+      "consistency": 100,
       "implementability": 70,
       "maintainability": 100,
-      "testability": 70
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=0, broken_links=1, waffle/kchar=0.1. Gates active: 2.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.16. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
-      "consistency": 70,
+      "completeness": 100,
+      "consistency": 100,
       "implementability": 70,
       "maintainability": 100,
-      "testability": 60
+      "testability": 100
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/02-coding-guidelines.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 90/100 (A) for spec/02-coding-guidelines.",
+    "weighted_overall": 90
   },
   {
     "applied_gates": [
@@ -338,15 +285,6 @@
         "dimension": "consistency",
         "id": "G-LINK-01",
         "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
-      {
-        "active": false,
-        "after": 52,
-        "before": 52,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
       }
     ],
     "blast_radius": 10,
@@ -359,27 +297,19 @@
       {
         "category": "broken-link",
         "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=117, links_broken=1",
+        "evidence": "links_total=125, links_broken=1",
         "impact": 7,
         "issue": "1 broken cross-spec link(s)",
         "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=2, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
       }
     ],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
     "metrics": {
-      "ac_chars": 662,
-      "ac_count": 2,
+      "ac_chars": 16790,
+      "ac_count": 23,
       "child_modules": 4,
       "code_blocks_by_lang": {
         "bash": 2,
@@ -390,54 +320,55 @@
         "plain": 22,
         "rust": 4,
         "sql": 9,
+        "text": 1,
         "typescript": 40,
         "yaml": 1
       },
-      "code_blocks_total": 257,
+      "code_blocks_total": 258,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": true,
       "has_ts_enums": true,
       "has_yaml_openapi": true,
       "links_broken": 1,
-      "links_total": 117,
+      "links_total": 125,
       "md_files": 31,
       "mmd_files": 0,
       "overview_chars": 7220,
       "todo_density": 0,
-      "waffle_per_kchar": 0.14
+      "waffle_per_kchar": 0.16
     },
     "module": "02-coding-guidelines/01-cross-language",
     "raw_scores": {
       "alignment": 90,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 100,
       "consistency": 92,
       "implementability": 95,
       "maintainability": 100,
-      "testability": 52
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=1, waffle/kchar=0.14. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=1, waffle/kchar=0.16. Gates active: 1.",
     "scores": {
       "alignment": 90,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 100,
       "consistency": 70,
       "implementability": 95,
       "maintainability": 100,
-      "testability": 52
+      "testability": 100
     },
-    "verdict": "Deterministic score 84/100 (B) for spec/02-coding-guidelines/01-cross-language.",
-    "weighted_overall": 84
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/01-cross-language.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [
       {
         "active": true,
         "after": 70,
-        "before": 84,
+        "before": 92,
         "cap": 70,
         "dimension": "consistency",
         "id": "G-LINK-01",
@@ -454,15 +385,15 @@
       {
         "category": "broken-link",
         "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=31, links_broken=2",
+        "evidence": "links_total=34, links_broken=1",
         "impact": 7,
-        "issue": "2 broken cross-spec link(s)",
+        "issue": "1 broken cross-spec link(s)",
         "severity": "high"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
-      "2 broken cross-spec link(s)"
+      "1 broken cross-spec link(s)"
     ],
     "metrics": {
       "ac_chars": 5368,
@@ -483,9 +414,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 2,
-      "links_total": 31,
-      "md_files": 8,
+      "links_broken": 1,
+      "links_total": 34,
+      "md_files": 9,
       "mmd_files": 0,
       "overview_chars": 3375,
       "todo_density": 0,
@@ -493,17 +424,17 @@
     },
     "module": "02-coding-guidelines/01-cross-language/02-boolean-principles",
     "raw_scores": {
-      "alignment": 80,
+      "alignment": 90,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 84,
+      "consistency": 92,
       "implementability": 50,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=2, waffle/kchar=0.2. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.2. Gates active: 1.",
     "scores": {
-      "alignment": 80,
+      "alignment": 90,
       "clarity": 100,
       "completeness": 90,
       "consistency": 70,
@@ -511,20 +442,11 @@
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.",
-    "weighted_overall": 74
+    "verdict": "Deterministic score 76/100 (B) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.",
+    "weighted_overall": 76
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": true,
         "after": 70,
@@ -543,14 +465,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=38, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
         "evidence": "todo_density=3",
@@ -559,10 +473,8 @@
         "severity": "low"
       }
     ],
-    "grade": "C",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 4713,
       "ac_count": 9,
@@ -581,9 +493,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 38,
-      "md_files": 10,
+      "links_broken": 0,
+      "links_total": 41,
+      "md_files": 11,
       "mmd_files": 0,
       "overview_chars": 2589,
       "todo_density": 3,
@@ -591,59 +503,38 @@
     },
     "module": "02-coding-guidelines/01-cross-language/04-code-style",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.08. Gates active: 2.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.08. Gates active: 1.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 76/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
+    "weighted_overall": 76
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=54, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 5021,
       "ac_count": 9,
@@ -662,49 +553,39 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 54,
-      "md_files": 10,
+      "links_broken": 0,
+      "links_total": 57,
+      "md_files": 11,
       "mmd_files": 0,
       "overview_chars": 1564,
       "todo_density": 0,
-      "waffle_per_kchar": 0.13
+      "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines/01-cross-language/15-master-coding-guidelines",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.13. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
-    "weighted_overall": 74
+    "verdict": "Deterministic score 78/100 (B) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
+    "weighted_overall": 78
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -723,28 +604,19 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 6, \"ini\": 4, \"js\": 1, \"neon\": 1, \"plain\": 1, \"properties\": 1, \"rust\": 1, \"toml\": 4, \"xml\": 3, \"yaml\": 5}",
+        "evidence": "code_blocks_by_lang={\"bash\": 6, \"ini\": 4, \"js\": 1, \"neon\": 1, \"plain\": 1, \"properties\": 1, \"rust\": 1, \"text\": 1, \"toml\": 4, \"xml\": 3, \"yaml\": 5}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
         "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
-      "No acceptance criteria found",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 1024,
-      "ac_count": 0,
+      "ac_chars": 21603,
+      "ac_count": 28,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 6,
@@ -754,13 +626,14 @@
         "plain": 1,
         "properties": 1,
         "rust": 1,
+        "text": 1,
         "toml": 4,
         "xml": 3,
         "yaml": 5
       },
-      "code_blocks_total": 27,
+      "code_blocks_total": 28,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
@@ -772,43 +645,33 @@
       "mmd_files": 0,
       "overview_chars": 5988,
       "todo_density": 2,
-      "waffle_per_kchar": 0.22
+      "waffle_per_kchar": 0.17
     },
     "module": "02-coding-guidelines/01-cross-language/16-static-analysis",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 90,
-      "testability": 10
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.22. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.17. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 90,
-      "testability": 10
+      "testability": 100
     },
-    "verdict": "Deterministic score 64/100 (C) for spec/02-coding-guidelines/01-cross-language/16-static-analysis.",
-    "weighted_overall": 64
+    "verdict": "Deterministic score 78/100 (B) for spec/02-coding-guidelines/01-cross-language/16-static-analysis.",
+    "weighted_overall": 78
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 52,
-        "before": 52,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -823,77 +686,61 @@
         "impact": 3,
         "issue": "1 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
-      },
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=2, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 642,
-      "ac_count": 2,
+      "ac_chars": 16692,
+      "ac_count": 23,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 1,
         "javascript": 1,
+        "text": 1,
         "typescript": 73
       },
-      "code_blocks_total": 75,
+      "code_blocks_total": 76,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 70,
+      "links_total": 79,
       "md_files": 16,
       "mmd_files": 0,
       "overview_chars": 3035,
       "todo_density": 1,
-      "waffle_per_kchar": 0.09
+      "waffle_per_kchar": 0.2
     },
     "module": "02-coding-guidelines/02-typescript",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 55,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 90,
-      "testability": 52
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 55,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 90,
-      "testability": 52
+      "testability": 100
     },
-    "verdict": "Deterministic score 70/100 (C) for spec/02-coding-guidelines/02-typescript.",
-    "weighted_overall": 70
+    "verdict": "Deterministic score 79/100 (B) for spec/02-coding-guidelines/02-typescript.",
+    "weighted_overall": 79
   },
   {
     "applied_gates": [
-      {
-        "active": false,
-        "after": 52,
-        "before": 52,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      },
       {
         "active": false,
         "after": 40,
@@ -912,84 +759,76 @@
     },
     "findings": [
       {
+        "category": "drift",
+        "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        "evidence": "todo_density=1",
+        "impact": 3,
+        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
+        "severity": "low"
+      },
+      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"go\": 43, \"plain\": 2}",
+        "evidence": "code_blocks_by_lang={\"go\": 43, \"plain\": 2, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
         "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=2, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 632,
-      "ac_count": 2,
+      "ac_chars": 16626,
+      "ac_count": 23,
       "child_modules": 2,
       "code_blocks_by_lang": {
         "go": 43,
-        "plain": 2
+        "plain": 2,
+        "text": 1
       },
-      "code_blocks_total": 45,
+      "code_blocks_total": 46,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 19,
+      "links_total": 28,
       "md_files": 11,
       "mmd_files": 0,
       "overview_chars": 1170,
-      "todo_density": 0,
-      "waffle_per_kchar": 0.19
+      "todo_density": 1,
+      "waffle_per_kchar": 0.18
     },
     "module": "02-coding-guidelines/03-golang",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 60,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 40,
-      "maintainability": 100,
-      "testability": 52
+      "maintainability": 90,
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 60,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 40,
-      "maintainability": 100,
-      "testability": 52
+      "maintainability": 90,
+      "testability": 100
     },
-    "verdict": "Deterministic score 68/100 (C) for spec/02-coding-guidelines/03-golang.",
-    "weighted_overall": 68
+    "verdict": "Deterministic score 76/100 (B) for spec/02-coding-guidelines/03-golang.",
+    "weighted_overall": 76
   },
   {
     "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
       {
         "active": false,
         "after": 40,
@@ -1010,46 +849,37 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 2, \"go\": 55, \"markdown\": 1, \"plain\": 11}",
+        "evidence": "code_blocks_by_lang={\"bash\": 3, \"go\": 55, \"markdown\": 1, \"plain\": 11}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
         "severity": "high"
       }
     ],
     "grade": "C",
     "implementability_blockers": [
-      "No acceptance criteria found",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 0,
-      "ac_count": 0,
+      "ac_chars": 2792,
+      "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 2,
+        "bash": 3,
         "go": 55,
         "markdown": 1,
         "plain": 11
       },
-      "code_blocks_total": 69,
+      "code_blocks_total": 70,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 5,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 10,
-      "md_files": 7,
+      "links_total": 16,
+      "md_files": 9,
       "mmd_files": 0,
       "overview_chars": 5774,
       "todo_density": 0,
@@ -1059,36 +889,27 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "verdict": "Deterministic score 63/100 (C) for spec/02-coding-guidelines/03-golang/01-enum-specification.",
-    "weighted_overall": 63
+    "verdict": "Deterministic score 73/100 (C) for spec/02-coding-guidelines/03-golang/01-enum-specification.",
+    "weighted_overall": 73
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 40,
@@ -1107,14 +928,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=35, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={\"go\": 40, \"plain\": 4}",
@@ -1123,9 +936,8 @@
         "severity": "high"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
@@ -1144,9 +956,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 35,
-      "md_files": 9,
+      "links_broken": 0,
+      "links_total": 38,
+      "md_files": 10,
       "mmd_files": 0,
       "overview_chars": 2742,
       "todo_density": 0,
@@ -1154,26 +966,26 @@
     },
     "module": "02-coding-guidelines/03-golang/04-golang-standards-reference",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=1, waffle/kchar=0.1. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/03-golang/04-golang-standards-reference.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 77/100 (B) for spec/02-coding-guidelines/03-golang/04-golang-standards-reference.",
+    "weighted_overall": 77
   },
   {
     "applied_gates": [
@@ -1197,7 +1009,7 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"php\": 67, \"plain\": 6}",
+        "evidence": "code_blocks_by_lang={\"php\": 67, \"plain\": 6, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
         "severity": "high"
@@ -1208,28 +1020,29 @@
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 4761,
-      "ac_count": 8,
+      "ac_chars": 20674,
+      "ac_count": 28,
       "child_modules": 1,
       "code_blocks_by_lang": {
         "php": 67,
-        "plain": 6
+        "plain": 6,
+        "text": 1
       },
-      "code_blocks_total": 73,
+      "code_blocks_total": 74,
       "consistency_report": true,
-      "gwt_block_count": 7,
+      "gwt_block_count": 20,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 30,
+      "links_total": 42,
       "md_files": 12,
       "mmd_files": 0,
       "overview_chars": 2063,
       "todo_density": 0,
-      "waffle_per_kchar": 0.09
+      "waffle_per_kchar": 0.13
     },
     "module": "02-coding-guidelines/04-php",
     "raw_scores": {
@@ -1241,7 +1054,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1255,37 +1068,16 @@
     "weighted_overall": 79
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=31, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
-    "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 6427,
       "ac_count": 11,
@@ -1305,9 +1097,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 31,
-      "md_files": 8,
+      "links_broken": 0,
+      "links_total": 34,
+      "md_files": 9,
       "mmd_files": 0,
       "overview_chars": 2038,
       "todo_density": 0,
@@ -1315,39 +1107,29 @@
     },
     "module": "02-coding-guidelines/04-php/07-php-standards-reference",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.12. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/02-coding-guidelines/04-php/07-php-standards-reference.",
-    "weighted_overall": 81
+    "verdict": "Deterministic score 86/100 (A) for spec/02-coding-guidelines/04-php/07-php-standards-reference.",
+    "weighted_overall": 86
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 60,
-        "before": 76,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 3,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1356,100 +1138,80 @@
     },
     "findings": [
       {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=6, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
+        "category": "drift",
+        "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        "evidence": "todo_density=1",
+        "impact": 3,
+        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
+        "severity": "low"
       }
     ],
     "grade": "B",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 1632,
-      "ac_count": 6,
+      "ac_chars": 20751,
+      "ac_count": 27,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "plain": 5,
         "rust": 50,
         "sql": 2,
+        "text": 1,
         "toml": 1
       },
-      "code_blocks_total": 58,
+      "code_blocks_total": 59,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 9,
+      "links_total": 16,
       "md_files": 10,
       "mmd_files": 0,
       "overview_chars": 3191,
-      "todo_density": 0,
-      "waffle_per_kchar": 0.27
+      "todo_density": 1,
+      "waffle_per_kchar": 0.25
     },
     "module": "02-coding-guidelines/05-rust",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 60,
-      "maintainability": 100,
-      "testability": 76
+      "maintainability": 90,
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=6, gwt=0, broken_links=0, waffle/kchar=0.27. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.25. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 60,
-      "maintainability": 100,
-      "testability": 60
+      "maintainability": 90,
+      "testability": 100
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/02-coding-guidelines/05-rust.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 83/100 (B) for spec/02-coding-guidelines/05-rust.",
+    "weighted_overall": 83
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 596,
-      "ac_count": 0,
+      "ac_chars": 19240,
+      "ac_count": 23,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "go": 11,
@@ -1457,80 +1219,62 @@
         "php": 4,
         "plain": 2,
         "rust": 3,
+        "text": 1,
         "typescript": 13
       },
-      "code_blocks_total": 34,
+      "code_blocks_total": 35,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 31,
+      "links_total": 46,
       "md_files": 9,
       "mmd_files": 0,
       "overview_chars": 1647,
       "todo_density": 0,
-      "waffle_per_kchar": 0.13
+      "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines/06-ai-optimization",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "verdict": "Deterministic score 69/100 (C) for spec/02-coding-guidelines/06-ai-optimization.",
-    "weighted_overall": 69
+    "verdict": "Deterministic score 84/100 (B) for spec/02-coding-guidelines/06-ai-optimization.",
+    "weighted_overall": 84
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 60,
-        "before": 80,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=7, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
-      }
-    ],
+    "findings": [],
     "grade": "A",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 1410,
-      "ac_count": 7,
+      "ac_chars": 22357,
+      "ac_count": 28,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 27,
@@ -1539,60 +1283,52 @@
         "php": 1,
         "plain": 10,
         "python": 1,
+        "text": 1,
         "toml": 7,
         "ts": 2,
         "yaml": 7
       },
-      "code_blocks_total": 58,
+      "code_blocks_total": 59,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": true,
       "links_broken": 0,
-      "links_total": 34,
+      "links_total": 46,
       "md_files": 13,
       "mmd_files": 0,
       "overview_chars": 3154,
       "todo_density": 0,
-      "waffle_per_kchar": 0.17
+      "waffle_per_kchar": 0.13
     },
     "module": "02-coding-guidelines/06-cicd-integration",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 80
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 60
+      "testability": 100
     },
-    "verdict": "Deterministic score 85/100 (A) for spec/02-coding-guidelines/06-cicd-integration.",
-    "weighted_overall": 85
+    "verdict": "Deterministic score 89/100 (A) for spec/02-coding-guidelines/06-cicd-integration.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 60,
-        "before": 80,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      },
       {
         "active": false,
         "after": 40,
@@ -1613,81 +1349,65 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"csharp\": 15}",
+        "evidence": "code_blocks_by_lang={\"csharp\": 15, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
         "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=7, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 3259,
-      "ac_count": 7,
+      "ac_chars": 24619,
+      "ac_count": 28,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "csharp": 15
+        "csharp": 15,
+        "text": 1
       },
-      "code_blocks_total": 15,
+      "code_blocks_total": 16,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 32,
+      "links_total": 41,
       "md_files": 8,
       "mmd_files": 0,
       "overview_chars": 1982,
       "todo_density": 0,
-      "waffle_per_kchar": 0.17
+      "waffle_per_kchar": 0.31
     },
     "module": "02-coding-guidelines/07-csharp",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
-      "testability": 80
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.31. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
-      "testability": 60
+      "testability": 100
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/02-coding-guidelines/07-csharp.",
-    "weighted_overall": 71
+    "verdict": "Deterministic score 75/100 (B) for spec/02-coding-guidelines/07-csharp.",
+    "weighted_overall": 75
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 40,
@@ -1705,14 +1425,6 @@
       "orphan_code": []
     },
     "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=26, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
@@ -1724,11 +1436,10 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2752,
+      "ac_chars": 2756,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -1744,7 +1455,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 26,
       "md_files": 9,
       "mmd_files": 0,
@@ -1754,26 +1465,26 @@
     },
     "module": "02-coding-guidelines/08-file-folder-naming",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 69/100 (C) for spec/02-coding-guidelines/08-file-folder-naming.",
-    "weighted_overall": 69
+    "verdict": "Deterministic score 73/100 (C) for spec/02-coding-guidelines/08-file-folder-naming.",
+    "weighted_overall": 73
   },
   {
     "applied_gates": [
@@ -1854,15 +1565,6 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
-      {
         "active": false,
         "after": 30,
         "before": 30,
@@ -1880,14 +1582,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=7, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={\"bash\": 1}",
@@ -1898,11 +1592,10 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2564,
+      "ac_chars": 2568,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -1916,7 +1609,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 7,
       "md_files": 4,
       "mmd_files": 0,
@@ -1926,26 +1619,26 @@
     },
     "module": "02-coding-guidelines/10-research",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 63/100 (C) for spec/02-coding-guidelines/10-research.",
-    "weighted_overall": 63
+    "verdict": "Deterministic score 68/100 (C) for spec/02-coding-guidelines/10-research.",
+    "weighted_overall": 68
   },
   {
     "applied_gates": [
@@ -2026,97 +1719,67 @@
     "weighted_overall": 73
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 0,
-      "ac_count": 0,
+      "ac_chars": 2740,
+      "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 1,
+        "bash": 2,
         "json": 4,
         "plain": 3,
         "yaml": 1
       },
-      "code_blocks_total": 9,
+      "code_blocks_total": 10,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 5,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": true,
       "links_broken": 0,
-      "links_total": 8,
-      "md_files": 4,
+      "links_total": 14,
+      "md_files": 6,
       "mmd_files": 0,
       "overview_chars": 3375,
       "todo_density": 0,
-      "waffle_per_kchar": 0.4
+      "waffle_per_kchar": 0.31
     },
     "module": "02-coding-guidelines/11-security/01-axios-version-control",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.4. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.31. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/02-coding-guidelines/11-security/01-axios-version-control.",
-    "weighted_overall": 71
+    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/11-security/01-axios-version-control.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 30,
@@ -2135,14 +1798,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=8, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={}",
@@ -2153,7 +1808,6 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
@@ -2169,48 +1823,39 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 8,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 848,
+      "overview_chars": 854,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
     "module": "02-coding-guidelines/21-app",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 65/100 (C) for spec/02-coding-guidelines/21-app.",
-    "weighted_overall": 65
+    "verdict": "Deterministic score 69/100 (C) for spec/02-coding-guidelines/21-app.",
+    "weighted_overall": 69
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 30,
@@ -2229,14 +1874,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=8, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={\"bash\": 1}",
@@ -2247,11 +1884,10 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2572,
+      "ac_chars": 2576,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -2265,7 +1901,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 8,
       "md_files": 4,
       "mmd_files": 0,
@@ -2275,26 +1911,26 @@
     },
     "module": "02-coding-guidelines/22-app-issues",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 63/100 (C) for spec/02-coding-guidelines/22-app-issues.",
-    "weighted_overall": 63
+    "verdict": "Deterministic score 68/100 (C) for spec/02-coding-guidelines/22-app-issues.",
+    "weighted_overall": 68
   },
   {
     "applied_gates": [
@@ -2508,39 +2144,18 @@
     "weighted_overall": 81
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=20, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2692,
+      "ac_chars": 2696,
       "ac_count": 5,
       "child_modules": 4,
       "code_blocks_by_lang": {
@@ -2559,7 +2174,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 20,
       "md_files": 7,
       "mmd_files": 0,
@@ -2569,59 +2184,38 @@
     },
     "module": "03-error-manage/01-error-resolution",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 85,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.04. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 85,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/03-error-manage/01-error-resolution.",
-    "weighted_overall": 74
+    "verdict": "Deterministic score 79/100 (B) for spec/03-error-manage/01-error-resolution.",
+    "weighted_overall": 79
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=3, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 4774,
       "ac_count": 9,
@@ -2641,9 +2235,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 3,
-      "md_files": 7,
+      "links_broken": 0,
+      "links_total": 6,
+      "md_files": 8,
       "mmd_files": 0,
       "overview_chars": 962,
       "todo_density": 0,
@@ -2651,59 +2245,38 @@
     },
     "module": "03-error-manage/01-error-resolution/03-retrospectives",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.31. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.31. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/03-error-manage/01-error-resolution/03-retrospectives.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 84/100 (B) for spec/03-error-manage/01-error-resolution/03-retrospectives.",
+    "weighted_overall": 84
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=5, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3686,
       "ac_count": 7,
@@ -2723,69 +2296,48 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": true,
-      "links_broken": 1,
-      "links_total": 5,
-      "md_files": 4,
+      "links_broken": 0,
+      "links_total": 8,
+      "md_files": 5,
       "mmd_files": 0,
       "overview_chars": 727,
       "todo_density": 0,
-      "waffle_per_kchar": 0.28
+      "waffle_per_kchar": 0.25
     },
     "module": "03-error-manage/01-error-resolution/04-verification-patterns",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.28. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.25. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
-    "weighted_overall": 80
+    "verdict": "Deterministic score 84/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
+    "weighted_overall": 84
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=10, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 5631,
       "ac_count": 9,
@@ -2807,9 +2359,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 10,
-      "md_files": 6,
+      "links_broken": 0,
+      "links_total": 13,
+      "md_files": 7,
       "mmd_files": 0,
       "overview_chars": 820,
       "todo_density": 0,
@@ -2817,59 +2369,38 @@
     },
     "module": "03-error-manage/01-error-resolution/05-debugging-guides",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.02. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.02. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/03-error-manage/01-error-resolution/05-debugging-guides.",
-    "weighted_overall": 74
+    "verdict": "Deterministic score 78/100 (B) for spec/03-error-manage/01-error-resolution/05-debugging-guides.",
+    "weighted_overall": 78
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=14, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 4185,
       "ac_count": 7,
@@ -2888,71 +2419,50 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 14,
-      "md_files": 5,
+      "links_broken": 0,
+      "links_total": 17,
+      "md_files": 6,
       "mmd_files": 0,
       "overview_chars": 1338,
       "todo_density": 0,
-      "waffle_per_kchar": 0.07
+      "waffle_per_kchar": 0.06
     },
     "module": "03-error-manage/01-error-resolution/app-issues",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.07. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 73/100 (C) for spec/03-error-manage/01-error-resolution/app-issues.",
-    "weighted_overall": 73
+    "verdict": "Deterministic score 78/100 (B) for spec/03-error-manage/01-error-resolution/app-issues.",
+    "weighted_overall": 78
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=24, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2687,
+      "ac_chars": 2691,
       "ac_count": 5,
       "child_modules": 4,
       "code_blocks_by_lang": {
@@ -2973,7 +2483,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 24,
       "md_files": 7,
       "mmd_files": 0,
@@ -2983,59 +2493,38 @@
     },
     "module": "03-error-manage/02-error-architecture",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 85,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.11. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 85,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/03-error-manage/02-error-architecture.",
-    "weighted_overall": 80
+    "verdict": "Deterministic score 84/100 (B) for spec/03-error-manage/02-error-architecture.",
+    "weighted_overall": 84
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=51, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
-    "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 4468,
       "ac_count": 8,
@@ -3055,9 +2544,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 51,
-      "md_files": 9,
+      "links_broken": 0,
+      "links_total": 54,
+      "md_files": 10,
       "mmd_files": 0,
       "overview_chars": 1429,
       "todo_density": 0,
@@ -3065,80 +2554,60 @@
     },
     "module": "03-error-manage/02-error-architecture/04-error-modal",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal.",
-    "weighted_overall": 81
+    "verdict": "Deterministic score 86/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal.",
+    "weighted_overall": 86
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 0,
-      "ac_count": 0,
+      "ac_chars": 3015,
+      "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
+        "bash": 1,
         "json": 2,
         "markdown": 3,
         "plain": 20,
         "typescript": 4
       },
-      "code_blocks_total": 29,
+      "code_blocks_total": 30,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 5,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 31,
-      "md_files": 11,
+      "links_total": 37,
+      "md_files": 13,
       "mmd_files": 0,
       "overview_chars": 5375,
       "todo_density": 0,
@@ -3148,79 +2617,59 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats.",
-    "weighted_overall": 71
+    "verdict": "Deterministic score 82/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats.",
+    "weighted_overall": 82
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 0,
-      "ac_count": 0,
+      "ac_chars": 2960,
+      "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
+        "bash": 1,
         "css": 1,
         "plain": 2,
         "ts": 1,
         "tsx": 2,
         "typescript": 15
       },
-      "code_blocks_total": 21,
+      "code_blocks_total": 22,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 5,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 24,
-      "md_files": 10,
+      "links_total": 30,
+      "md_files": 12,
       "mmd_files": 0,
       "overview_chars": 2918,
       "todo_density": 0,
@@ -3230,57 +2679,36 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "verdict": "Deterministic score 66/100 (C) for spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components.",
-    "weighted_overall": 66
+    "verdict": "Deterministic score 77/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components.",
+    "weighted_overall": 77
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=45, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
-    "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 4843,
       "ac_count": 9,
@@ -3299,9 +2727,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 45,
-      "md_files": 16,
+      "links_broken": 0,
+      "links_total": 48,
+      "md_files": 17,
       "mmd_files": 0,
       "overview_chars": 6800,
       "todo_density": 0,
@@ -3309,80 +2737,60 @@
     },
     "module": "03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference.",
-    "weighted_overall": 81
+    "verdict": "Deterministic score 86/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference.",
+    "weighted_overall": 86
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 0,
-      "ac_count": 0,
+      "ac_chars": 2830,
+      "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
+        "bash": 1,
         "css": 2,
         "plain": 1,
         "tsx": 4,
         "typescript": 3
       },
-      "code_blocks_total": 10,
+      "code_blocks_total": 11,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 5,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 9,
-      "md_files": 5,
+      "links_total": 15,
+      "md_files": 7,
       "mmd_files": 0,
       "overview_chars": 1524,
       "todo_density": 0,
@@ -3392,57 +2800,36 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 65,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 65,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "verdict": "Deterministic score 64/100 (C) for spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes.",
-    "weighted_overall": 64
+    "verdict": "Deterministic score 75/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes.",
+    "weighted_overall": 75
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=6, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 4450,
       "ac_count": 7,
@@ -3459,9 +2846,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 6,
-      "md_files": 7,
+      "links_broken": 0,
+      "links_total": 9,
+      "md_files": 8,
       "mmd_files": 0,
       "overview_chars": 863,
       "todo_density": 0,
@@ -3469,38 +2856,29 @@
     },
     "module": "03-error-manage/02-error-architecture/05-response-envelope",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 55,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 55,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
-    "weighted_overall": 75
+    "verdict": "Deterministic score 79/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
+    "weighted_overall": 79
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 30,
@@ -3519,14 +2897,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=4, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={}",
@@ -3537,7 +2907,6 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
@@ -3553,9 +2922,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 4,
-      "md_files": 4,
+      "links_broken": 0,
+      "links_total": 7,
+      "md_files": 5,
       "mmd_files": 0,
       "overview_chars": 840,
       "todo_density": 0,
@@ -3563,140 +2932,99 @@
     },
     "module": "03-error-manage/02-error-architecture/06-apperror-package",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 69/100 (C) for spec/03-error-manage/02-error-architecture/06-apperror-package.",
-    "weighted_overall": 69
+    "verdict": "Deterministic score 74/100 (C) for spec/03-error-manage/02-error-architecture/06-apperror-package.",
+    "weighted_overall": 74
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 0,
-      "ac_count": 0,
+      "ac_chars": 2926,
+      "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
+        "bash": 1,
         "go": 74,
         "json": 1,
         "php": 4,
         "plain": 3
       },
-      "code_blocks_total": 82,
+      "code_blocks_total": 83,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 5,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 23,
-      "md_files": 9,
+      "links_total": 29,
+      "md_files": 11,
       "mmd_files": 0,
       "overview_chars": 1974,
       "todo_density": 0,
-      "waffle_per_kchar": 0.09
+      "waffle_per_kchar": 0.08
     },
     "module": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 65,
       "consistency": 100,
       "implementability": 55,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 65,
       "consistency": 100,
       "implementability": 55,
       "maintainability": 100,
-      "testability": 10
+      "testability": 90
     },
-    "verdict": "Deterministic score 66/100 (C) for spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference.",
-    "weighted_overall": 66
+    "verdict": "Deterministic score 77/100 (B) for spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference.",
+    "weighted_overall": 77
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=3, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 5648,
       "ac_count": 11,
@@ -3716,71 +3044,50 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 3,
-      "md_files": 5,
+      "links_broken": 0,
+      "links_total": 6,
+      "md_files": 6,
       "mmd_files": 0,
       "overview_chars": 802,
       "todo_density": 0,
-      "waffle_per_kchar": 0.11
+      "waffle_per_kchar": 0.1
     },
     "module": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.11. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 80,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 84/100 (B) for spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics.",
+    "weighted_overall": 84
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=22, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2752,
+      "ac_chars": 2756,
       "ac_count": 5,
       "child_modules": 3,
       "code_blocks_by_lang": {
@@ -3800,7 +3107,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 22,
       "md_files": 9,
       "mmd_files": 0,
@@ -3810,38 +3117,29 @@
     },
     "module": "03-error-manage/03-error-code-registry",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 85,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.05. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.05. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 85,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/03-error-manage/03-error-code-registry.",
-    "weighted_overall": 80
+    "verdict": "Deterministic score 84/100 (B) for spec/03-error-manage/03-error-code-registry.",
+    "weighted_overall": 84
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 30,
@@ -3860,14 +3158,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=3, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={}",
@@ -3878,7 +3168,6 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
@@ -3894,48 +3183,39 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 3,
-      "md_files": 3,
+      "links_broken": 0,
+      "links_total": 6,
+      "md_files": 4,
       "mmd_files": 0,
       "overview_chars": 635,
       "todo_density": 0,
-      "waffle_per_kchar": 0.21
+      "waffle_per_kchar": 0.18
     },
     "module": "03-error-manage/03-error-code-registry/07-schemas",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 60,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.21. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 60,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 63/100 (C) for spec/03-error-manage/03-error-code-registry/07-schemas.",
-    "weighted_overall": 63
+    "verdict": "Deterministic score 67/100 (C) for spec/03-error-manage/03-error-code-registry/07-schemas.",
+    "weighted_overall": 67
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 30,
@@ -3954,14 +3234,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=3, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={}",
@@ -3972,7 +3244,6 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
@@ -3988,9 +3259,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 3,
-      "md_files": 3,
+      "links_broken": 0,
+      "links_total": 6,
+      "md_files": 4,
       "mmd_files": 0,
       "overview_chars": 655,
       "todo_density": 0,
@@ -3998,59 +3269,38 @@
     },
     "module": "03-error-manage/03-error-code-registry/08-linter-scripts",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 60,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 60,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 63/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
-    "weighted_overall": 63
+    "verdict": "Deterministic score 67/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
+    "weighted_overall": 67
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=3, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "C",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 4035,
       "ac_count": 8,
@@ -4067,9 +3317,9 @@
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
-      "links_broken": 1,
-      "links_total": 3,
-      "md_files": 4,
+      "links_broken": 0,
+      "links_total": 6,
+      "md_files": 5,
       "mmd_files": 0,
       "overview_chars": 697,
       "todo_density": 0,
@@ -4077,26 +3327,26 @@
     },
     "module": "03-error-manage/03-error-code-registry/09-templates",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 68/100 (C) for spec/03-error-manage/03-error-code-registry/09-templates.",
-    "weighted_overall": 68
+    "verdict": "Deterministic score 73/100 (C) for spec/03-error-manage/03-error-code-registry/09-templates.",
+    "weighted_overall": 73
   },
   {
     "applied_gates": [],
@@ -4163,119 +3413,80 @@
     "weighted_overall": 89
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 52,
-        "before": 52,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 9,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=2, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
-      }
-    ],
-    "grade": "B",
+    "findings": [],
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 639,
-      "ac_count": 2,
+      "ac_chars": 22965,
+      "ac_count": 23,
       "child_modules": 2,
       "code_blocks_by_lang": {
         "bash": 1,
         "go": 14,
         "json": 1,
-        "plain": 5,
-        "sql": 3
+        "plain": 7,
+        "sql": 3,
+        "text": 1
       },
-      "code_blocks_total": 24,
+      "code_blocks_total": 27,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 8,
+      "links_total": 7,
       "md_files": 7,
       "mmd_files": 0,
       "overview_chars": 3931,
       "todo_density": 0,
-      "waffle_per_kchar": 0.0
+      "waffle_per_kchar": 0.06
     },
     "module": "05-split-db-architecture",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 100,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 52
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 100,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 52
+      "testability": 100
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/05-split-db-architecture.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 91/100 (A) for spec/05-split-db-architecture.",
+    "weighted_overall": 91
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=19, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2771,
+      "ac_chars": 2775,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4294,7 +3505,7 @@
       "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 19,
       "md_files": 9,
       "mmd_files": 0,
@@ -4304,38 +3515,29 @@
     },
     "module": "05-split-db-architecture/02-features",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.01. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.01. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/05-split-db-architecture/02-features.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 84/100 (B) for spec/05-split-db-architecture/02-features.",
+    "weighted_overall": 84
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 10,
@@ -4363,14 +3565,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=6, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={\"bash\": 1}",
@@ -4381,11 +3575,10 @@
     ],
     "grade": "D",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2624,
+      "ac_chars": 2628,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4399,7 +3592,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 6,
       "md_files": 4,
       "mmd_files": 0,
@@ -4409,60 +3602,41 @@
     },
     "module": "05-split-db-architecture/03-issues",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 55,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 10,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 55,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 10,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 54/100 (D) for spec/05-split-db-architecture/03-issues.",
-    "weighted_overall": 54
+    "verdict": "Deterministic score 59/100 (D) for spec/05-split-db-architecture/03-issues.",
+    "weighted_overall": 59
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 52,
-        "before": 52,
-        "cap": 60,
-        "dimension": "testability",
-        "id": "G-AC-02",
-        "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Rewrite each AC as a Given/When/Then block.",
-        "evidence": "ac_count=2, gwt_block_count=0",
-        "impact": 5,
-        "issue": "Acceptance criteria present but no Given/When/Then blocks",
-        "severity": "medium"
-      }
-    ],
-    "grade": "A",
+    "findings": [],
+    "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 624,
-      "ac_count": 2,
+      "ac_chars": 22330,
+      "ac_count": 23,
       "child_modules": 2,
       "code_blocks_by_lang": {
         "bash": 1,
@@ -4470,61 +3644,52 @@
         "go": 2,
         "json": 3,
         "markdown": 1,
-        "plain": 2,
+        "plain": 5,
         "sql": 3,
+        "text": 1,
         "typescript": 3
       },
-      "code_blocks_total": 16,
+      "code_blocks_total": 20,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": true,
       "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 8,
+      "links_total": 7,
       "md_files": 7,
       "mmd_files": 0,
       "overview_chars": 3989,
       "todo_density": 0,
-      "waffle_per_kchar": 0.0
+      "waffle_per_kchar": 0.05
     },
     "module": "06-seedable-config-architecture",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 100,
       "consistency": 100,
       "implementability": 85,
       "maintainability": 100,
-      "testability": 52
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.05. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 100,
       "consistency": 100,
       "implementability": 85,
       "maintainability": 100,
-      "testability": 52
+      "testability": 100
     },
-    "verdict": "Deterministic score 85/100 (A) for spec/06-seedable-config-architecture.",
-    "weighted_overall": 85
+    "verdict": "Deterministic score 95/100 (A+) for spec/06-seedable-config-architecture.",
+    "weighted_overall": 95
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4532,14 +3697,6 @@
       "orphan_code": []
     },
     "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=27, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
@@ -4550,11 +3707,9 @@
       }
     ],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2850,
+      "ac_chars": 2854,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4572,7 +3727,7 @@
       "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 27,
       "md_files": 10,
       "mmd_files": 0,
@@ -4582,38 +3737,29 @@
     },
     "module": "06-seedable-config-architecture/02-features",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 60,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 75,
       "maintainability": 90,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.13. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 60,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 75,
       "maintainability": 90,
       "testability": 90
     },
-    "verdict": "Deterministic score 78/100 (B) for spec/06-seedable-config-architecture/02-features.",
-    "weighted_overall": 78
+    "verdict": "Deterministic score 82/100 (B) for spec/06-seedable-config-architecture/02-features.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 10,
@@ -4641,14 +3787,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=6, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={\"bash\": 1}",
@@ -4659,11 +3797,10 @@
     ],
     "grade": "D",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2652,
+      "ac_chars": 2656,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4677,7 +3814,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 6,
       "md_files": 4,
       "mmd_files": 0,
@@ -4687,62 +3824,41 @@
     },
     "module": "06-seedable-config-architecture/03-issues",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 55,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 10,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 55,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 10,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 54/100 (D) for spec/06-seedable-config-architecture/03-issues.",
-    "weighted_overall": 54
+    "verdict": "Deterministic score 59/100 (D) for spec/06-seedable-config-architecture/03-issues.",
+    "weighted_overall": 59
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3783,
-      "ac_count": 0,
+      "ac_chars": 57625,
+      "ac_count": 34,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 1,
@@ -4754,7 +3870,7 @@
       },
       "code_blocks_total": 77,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 34,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
@@ -4766,30 +3882,30 @@
       "mmd_files": 0,
       "overview_chars": 7892,
       "todo_density": 0,
-      "waffle_per_kchar": 0.19
+      "waffle_per_kchar": 0.15
     },
     "module": "07-design-system",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/07-design-system.",
-    "weighted_overall": 71
+    "verdict": "Deterministic score 86/100 (A) for spec/07-design-system.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [
@@ -4998,17 +4114,7 @@
     "weighted_overall": 88
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5016,14 +4122,6 @@
       "orphan_code": []
     },
     "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=10, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
@@ -5033,13 +4131,12 @@
         "severity": "high"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2711,
+      "ac_chars": 2715,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5055,7 +4152,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": true,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 10,
       "md_files": 6,
       "mmd_files": 0,
@@ -5065,39 +4162,29 @@
     },
     "module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.21. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.21. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 70/100 (C) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.",
-    "weighted_overall": 70
+    "verdict": "Deterministic score 75/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.",
+    "weighted_overall": 75
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5105,14 +4192,6 @@
       "orphan_code": []
     },
     "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=43, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
@@ -5122,13 +4201,12 @@
         "severity": "high"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2717,
+      "ac_chars": 2721,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5144,7 +4222,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": true,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 43,
       "md_files": 7,
       "mmd_files": 0,
@@ -5154,61 +4232,40 @@
     },
     "module": "12-cicd-pipeline-workflows/02-go-binary-deploy",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.02. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.02. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/12-cicd-pipeline-workflows/02-go-binary-deploy.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 77/100 (B) for spec/12-cicd-pipeline-workflows/02-go-binary-deploy.",
+    "weighted_overall": 77
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=53, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2995,
+      "ac_chars": 2999,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5228,7 +4285,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": true,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 53,
       "md_files": 14,
       "mmd_files": 0,
@@ -5238,26 +4295,26 @@
     },
     "module": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.12. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 78/100 (B) for spec/12-cicd-pipeline-workflows/03-reusable-ci-guards.",
-    "weighted_overall": 78
+    "verdict": "Deterministic score 82/100 (B) for spec/12-cicd-pipeline-workflows/03-reusable-ci-guards.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [
@@ -5287,13 +4344,13 @@
         "severity": "high"
       }
     ],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [
       "1 broken cross-spec link(s)"
     ],
     "metrics": {
-      "ac_chars": 3117,
-      "ac_count": 5,
+      "ac_chars": 23395,
+      "ac_count": 20,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 3,
@@ -5307,7 +4364,7 @@
       },
       "code_blocks_total": 155,
       "consistency_report": true,
-      "gwt_block_count": 5,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": true,
@@ -5319,30 +4376,30 @@
       "mmd_files": 0,
       "overview_chars": 5356,
       "todo_density": 0,
-      "waffle_per_kchar": 0.08
+      "waffle_per_kchar": 0.09
     },
     "module": "13-generic-cli",
     "raw_scores": {
       "alignment": 90,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 90,
       "consistency": 92,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.08. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=20, gwt=20, broken_links=1, waffle/kchar=0.09. Gates active: 1.",
     "scores": {
       "alignment": 90,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 90,
       "consistency": 70,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/13-generic-cli.",
-    "weighted_overall": 81
+    "verdict": "Deterministic score 85/100 (A) for spec/13-generic-cli.",
+    "weighted_overall": 85
   },
   {
     "applied_gates": [],
@@ -5353,11 +4410,11 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3319,
-      "ac_count": 5,
+      "ac_chars": 26925,
+      "ac_count": 20,
       "child_modules": 2,
       "code_blocks_by_lang": {
         "bash": 70,
@@ -5370,7 +4427,7 @@
       },
       "code_blocks_total": 229,
       "consistency_report": true,
-      "gwt_block_count": 5,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
@@ -5382,66 +4439,45 @@
       "mmd_files": 0,
       "overview_chars": 7401,
       "todo_density": 0,
-      "waffle_per_kchar": 0.3
+      "waffle_per_kchar": 0.28
     },
     "module": "14-update",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 100,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.28. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 100,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "verdict": "Deterministic score 84/100 (B) for spec/14-update.",
-    "weighted_overall": 84
+    "verdict": "Deterministic score 88/100 (A) for spec/14-update.",
+    "weighted_overall": 88
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "B",
-    "implementability_blockers": [
-      "No acceptance criteria found"
-    ],
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4402,
-      "ac_count": 0,
+      "ac_chars": 32550,
+      "ac_count": 55,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 1,
@@ -5450,58 +4486,50 @@
         "jsonc": 1,
         "plain": 17,
         "powershell": 1,
-        "sql": 1
+        "sql": 1,
+        "text": 1
       },
-      "code_blocks_total": 26,
+      "code_blocks_total": 27,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 60,
+      "links_total": 63,
       "md_files": 14,
       "mmd_files": 0,
       "overview_chars": 5211,
       "todo_density": 0,
-      "waffle_per_kchar": 0.06
+      "waffle_per_kchar": 0.05
     },
     "module": "14-update/24-update-check-mechanism",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=55, gwt=20, broken_links=0, waffle/kchar=0.05. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 50,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/14-update/24-update-check-mechanism.",
-    "weighted_overall": 75
+    "verdict": "Deterministic score 89/100 (A) for spec/14-update/24-update-check-mechanism.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 35,
@@ -5520,14 +4548,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=9, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={\"bash\": 1}",
@@ -5538,11 +4558,10 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2590,
+      "ac_chars": 2594,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5556,7 +4575,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 9,
       "md_files": 4,
       "mmd_files": 2,
@@ -5566,26 +4585,26 @@
     },
     "module": "14-update/diagrams",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 35,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 65,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 35,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 65/100 (C) for spec/14-update/diagrams.",
-    "weighted_overall": 65
+    "verdict": "Deterministic score 70/100 (C) for spec/14-update/diagrams.",
+    "weighted_overall": 70
   },
   {
     "applied_gates": [
@@ -5620,8 +4639,8 @@
       "1 broken cross-spec link(s)"
     ],
     "metrics": {
-      "ac_chars": 2687,
-      "ac_count": 5,
+      "ac_chars": 22436,
+      "ac_count": 20,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 4,
@@ -5632,7 +4651,7 @@
       },
       "code_blocks_total": 14,
       "consistency_report": true,
-      "gwt_block_count": 5,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
@@ -5644,30 +4663,30 @@
       "mmd_files": 0,
       "overview_chars": 5469,
       "todo_density": 0,
-      "waffle_per_kchar": 0.08
+      "waffle_per_kchar": 0.06
     },
     "module": "15-distribution-and-runner",
     "raw_scores": {
       "alignment": 90,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 90,
       "consistency": 92,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.08. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
     "scores": {
       "alignment": 90,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 90,
       "consistency": 70,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "verdict": "Deterministic score 78/100 (B) for spec/15-distribution-and-runner.",
-    "weighted_overall": 78
+    "verdict": "Deterministic score 81/100 (B) for spec/15-distribution-and-runner.",
+    "weighted_overall": 81
   },
   {
     "applied_gates": [],
@@ -5678,11 +4697,11 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2839,
-      "ac_count": 5,
+      "ac_chars": 27050,
+      "ac_count": 20,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 35,
@@ -5696,7 +4715,7 @@
       },
       "code_blocks_total": 89,
       "consistency_report": true,
-      "gwt_block_count": 5,
+      "gwt_block_count": 20,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
@@ -5714,35 +4733,44 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 100,
-      "testability": 90
+      "testability": 100
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/16-generic-release.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 86/100 (A) for spec/16-generic-release.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [
       {
         "active": true,
         "after": 70,
-        "before": 92,
+        "before": 76,
         "cap": 70,
         "dimension": "consistency",
         "id": "G-LINK-01",
         "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
+        "active": true,
+        "after": 60,
+        "before": 70,
+        "cap": 60,
+        "dimension": "alignment",
+        "id": "G-LINK-02",
+        "rationale": "\u22653 broken links suggests structural drift; alignment with the wider spec tree is unreliable."
       },
       {
         "active": false,
@@ -5764,26 +4792,26 @@
       {
         "category": "broken-link",
         "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=144, links_broken=1",
+        "evidence": "links_total=146, links_broken=3",
         "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
+        "issue": "3 broken cross-spec link(s)",
         "severity": "high"
       },
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=6",
+        "evidence": "todo_density=15",
         "impact": 3,
-        "issue": "6 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "15 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
     "grade": "B",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)"
+      "3 broken cross-spec link(s)"
     ],
     "metrics": {
-      "ac_chars": 3464,
+      "ac_chars": 10987,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5815,27 +4843,27 @@
       "has_sql_ddl": true,
       "has_ts_enums": true,
       "has_yaml_openapi": true,
-      "links_broken": 1,
-      "links_total": 144,
+      "links_broken": 3,
+      "links_total": 146,
       "md_files": 35,
       "mmd_files": 0,
       "overview_chars": 7300,
-      "todo_density": 6,
+      "todo_density": 15,
       "waffle_per_kchar": 0.06
     },
     "module": "17-consolidated-guidelines",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 70,
       "clarity": 100,
       "completeness": 55,
-      "consistency": 92,
+      "consistency": 76,
       "implementability": 95,
       "maintainability": 90,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=3, waffle/kchar=0.06. Gates active: 2.",
     "scores": {
-      "alignment": 90,
+      "alignment": 60,
       "clarity": 100,
       "completeness": 55,
       "consistency": 70,
@@ -5843,8 +4871,8 @@
       "maintainability": 90,
       "testability": 90
     },
-    "verdict": "Deterministic score 84/100 (B) for spec/17-consolidated-guidelines.",
-    "weighted_overall": 84
+    "verdict": "Deterministic score 79/100 (B) for spec/17-consolidated-guidelines.",
+    "weighted_overall": 79
   },
   {
     "applied_gates": [],
@@ -5917,15 +4945,6 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
-      {
         "active": false,
         "after": 40,
         "before": 40,
@@ -5943,14 +4962,6 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=27, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         "evidence": "code_blocks_by_lang={\"bash\": 1, \"php\": 12, \"plain\": 8}",
@@ -5961,11 +4972,10 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2759,
+      "ac_chars": 2763,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5981,7 +4991,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 27,
       "md_files": 8,
       "mmd_files": 0,
@@ -5991,37 +5001,46 @@
     },
     "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.19. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 75,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 40,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 69/100 (C) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
-    "weighted_overall": 69
+    "verdict": "Deterministic score 73/100 (C) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
+    "weighted_overall": 73
   },
   {
     "applied_gates": [
       {
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+      },
+      {
         "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        "after": 70,
+        "before": 70,
+        "cap": 70,
+        "dimension": "completeness",
+        "id": "G-TODO-01",
+        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
       }
     ],
     "blast_radius": 5,
@@ -6032,78 +5051,79 @@
     },
     "findings": [
       {
-        "category": "drift",
-        "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=2",
-        "impact": 3,
-        "issue": "2 TODO/TBD/FIXME marker(s) in module body",
-        "severity": "low"
+        "category": "broken-link",
+        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
+        "evidence": "links_total=63, links_broken=1",
+        "impact": 7,
+        "issue": "1 broken cross-spec link(s)",
+        "severity": "high"
       },
       {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
+        "category": "drift",
+        "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        "evidence": "todo_density=12",
+        "impact": 3,
+        "issue": "12 TODO/TBD/FIXME marker(s) in module body",
+        "severity": "low"
       }
     ],
     "grade": "B",
     "implementability_blockers": [
-      "No acceptance criteria found"
+      "1 broken cross-spec link(s)"
     ],
     "metrics": {
-      "ac_chars": 5902,
-      "ac_count": 0,
+      "ac_chars": 61197,
+      "ac_count": 68,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 12,
+        "bash": 11,
         "bats": 8,
-        "json": 16,
-        "php": 11,
-        "plain": 35,
-        "sql": 1,
+        "json": 22,
+        "md": 2,
+        "php": 9,
+        "plain": 38,
+        "sql": 2,
         "text": 2,
-        "yaml": 4
+        "yaml": 5
       },
-      "code_blocks_total": 89,
+      "code_blocks_total": 99,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 68,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_yaml_openapi": true,
-      "links_broken": 0,
-      "links_total": 45,
-      "md_files": 33,
+      "links_broken": 1,
+      "links_total": 63,
+      "md_files": 35,
       "mmd_files": 0,
-      "overview_chars": 6279,
-      "todo_density": 2,
-      "waffle_per_kchar": 0.08
+      "overview_chars": 6779,
+      "todo_density": 12,
+      "waffle_per_kchar": 0.09
     },
     "module": "22-git-logs-v2",
     "raw_scores": {
-      "alignment": 100,
+      "alignment": 90,
       "clarity": 100,
-      "completeness": 40,
-      "consistency": 100,
+      "completeness": 70,
+      "consistency": 92,
       "implementability": 85,
       "maintainability": 90,
-      "testability": 10
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=68, gwt=68, broken_links=1, waffle/kchar=0.09. Gates active: 1.",
     "scores": {
-      "alignment": 100,
+      "alignment": 90,
       "clarity": 100,
-      "completeness": 40,
-      "consistency": 100,
+      "completeness": 70,
+      "consistency": 70,
       "implementability": 85,
       "maintainability": 90,
-      "testability": 10
+      "testability": 100
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/22-git-logs-v2.",
-    "weighted_overall": 76
+    "verdict": "Deterministic score 84/100 (B) for spec/22-git-logs-v2.",
+    "weighted_overall": 84
   },
   {
     "applied_gates": [
@@ -6342,15 +5362,6 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
-      {
         "active": false,
         "after": 30,
         "before": 30,
@@ -6367,14 +5378,6 @@
       "orphan_code": []
     },
     "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=13, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
@@ -6394,11 +5397,10 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2648,
+      "ac_chars": 2652,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -6412,7 +5414,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 13,
       "md_files": 4,
       "mmd_files": 0,
@@ -6422,26 +5424,26 @@
     },
     "module": "25-app-issues/01-phase-2-git-logs-audit",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 90,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.09. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 30,
       "maintainability": 90,
       "testability": 90
     },
-    "verdict": "Deterministic score 64/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.",
-    "weighted_overall": 64
+    "verdict": "Deterministic score 68/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.",
+    "weighted_overall": 68
   },
   {
     "applied_gates": [
@@ -6483,9 +5485,9 @@
       {
         "category": "broken-link",
         "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=32, links_broken=14",
+        "evidence": "links_total=32, links_broken=13",
         "impact": 7,
-        "issue": "14 broken cross-spec link(s)",
+        "issue": "13 broken cross-spec link(s)",
         "severity": "high"
       },
       {
@@ -6499,11 +5501,11 @@
     ],
     "grade": "D",
     "implementability_blockers": [
-      "14 broken cross-spec link(s)",
+      "13 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 2688,
+      "ac_chars": 2692,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -6518,7 +5520,7 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 14,
+      "links_broken": 13,
       "links_total": 32,
       "md_files": 4,
       "mmd_files": 0,
@@ -6536,7 +5538,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=14, waffle/kchar=0.03. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.03. Gates active: 0.",
     "scores": {
       "alignment": 40,
       "clarity": 100,
@@ -6552,13 +5554,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
-        "cap": 20,
-        "dimension": "testability",
-        "id": "G-AC-01",
-        "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        "active": true,
+        "after": 70,
+        "before": 92,
+        "cap": 70,
+        "dimension": "consistency",
+        "id": "G-LINK-01",
+        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
       },
       {
         "active": false,
@@ -6578,82 +5580,75 @@
     },
     "findings": [
       {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
+        "category": "broken-link",
+        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
+        "evidence": "links_total=18, links_broken=1",
+        "impact": 7,
+        "issue": "1 broken cross-spec link(s)",
         "severity": "high"
       },
       {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "category": "missing-contract",
+        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
+        "evidence": "code_blocks_by_lang={\"text\": 1}",
         "impact": 8,
-        "issue": "No acceptance criteria found",
+        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
         "severity": "high"
       }
     ],
-    "grade": "D",
+    "grade": "C",
     "implementability_blockers": [
-      "No acceptance criteria found",
+      "1 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
     ],
     "metrics": {
-      "ac_chars": 1837,
-      "ac_count": 0,
+      "ac_chars": 17103,
+      "ac_count": 21,
       "child_modules": 0,
-      "code_blocks_by_lang": {},
-      "code_blocks_total": 0,
+      "code_blocks_by_lang": {
+        "text": 1
+      },
+      "code_blocks_total": 1,
       "consistency_report": true,
-      "gwt_block_count": 0,
+      "gwt_block_count": 20,
       "has_json_schema": false,
       "has_mermaid": true,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "links_broken": 0,
-      "links_total": 11,
+      "links_broken": 1,
+      "links_total": 18,
       "md_files": 4,
-      "mmd_files": 8,
-      "overview_chars": 1490,
+      "mmd_files": 6,
+      "overview_chars": 4264,
       "todo_density": 0,
-      "waffle_per_kchar": 0.0
+      "waffle_per_kchar": 0.06
     },
     "module": "26-gitlogs-diagrams",
     "raw_scores": {
-      "alignment": 100,
+      "alignment": 90,
       "clarity": 100,
-      "completeness": 40,
-      "consistency": 100,
+      "completeness": 90,
+      "consistency": 92,
       "implementability": 35,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=21, gwt=20, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
     "scores": {
-      "alignment": 100,
+      "alignment": 90,
       "clarity": 100,
-      "completeness": 40,
-      "consistency": 100,
+      "completeness": 90,
+      "consistency": 70,
       "implementability": 35,
       "maintainability": 100,
-      "testability": 10
+      "testability": 100
     },
-    "verdict": "Deterministic score 59/100 (D) for spec/26-gitlogs-diagrams.",
-    "weighted_overall": 59
+    "verdict": "Deterministic score 71/100 (C) for spec/26-gitlogs-diagrams.",
+    "weighted_overall": 71
   },
   {
     "applied_gates": [
-      {
-        "active": false,
-        "after": 40,
-        "before": 40,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
-      },
       {
         "active": false,
         "after": 70,
@@ -6664,7 +5659,7 @@
         "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
@@ -6674,51 +5669,42 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=6",
+        "evidence": "todo_density=7",
         "impact": 3,
-        "issue": "6 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "7 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
-      },
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 25, \"ini\": 1, \"markdown\": 1, \"plain\": 1, \"powershell\": 1, \"toml\": 2}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
       }
     ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
-    ],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3934,
-      "ac_count": 10,
+      "ac_chars": 13558,
+      "ac_count": 19,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 25,
+        "bash": 27,
         "ini": 1,
+        "json": 1,
         "markdown": 1,
         "plain": 1,
         "powershell": 1,
         "toml": 2
       },
-      "code_blocks_total": 31,
+      "code_blocks_total": 34,
       "consistency_report": true,
-      "gwt_block_count": 10,
-      "has_json_schema": false,
+      "gwt_block_count": 19,
+      "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
       "links_broken": 0,
-      "links_total": 118,
-      "md_files": 35,
+      "links_total": 131,
+      "md_files": 37,
       "mmd_files": 0,
-      "overview_chars": 8358,
-      "todo_density": 6,
-      "waffle_per_kchar": 0.15
+      "overview_chars": 8720,
+      "todo_density": 7,
+      "waffle_per_kchar": 0.12
     },
     "module": "27-spec-toolchain",
     "raw_scores": {
@@ -6726,21 +5712,103 @@
       "clarity": 100,
       "completeness": 70,
       "consistency": 100,
-      "implementability": 40,
+      "implementability": 55,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=10, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 70,
       "consistency": 100,
-      "implementability": 40,
+      "implementability": 55,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 73/100 (C) for spec/27-spec-toolchain.",
-    "weighted_overall": 73
+    "verdict": "Deterministic score 78/100 (B) for spec/27-spec-toolchain.",
+    "weighted_overall": 78
+  },
+  {
+    "applied_gates": [
+      {
+        "active": false,
+        "after": 70,
+        "before": 70,
+        "cap": 70,
+        "dimension": "completeness",
+        "id": "G-TODO-01",
+        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+      }
+    ],
+    "blast_radius": 2,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [
+      {
+        "category": "drift",
+        "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        "evidence": "todo_density=4",
+        "impact": 3,
+        "issue": "4 TODO/TBD/FIXME marker(s) in module body",
+        "severity": "low"
+      }
+    ],
+    "grade": "B",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 20531,
+      "ac_count": 40,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "go": 1,
+        "http": 1,
+        "json": 4,
+        "plain": 7,
+        "text": 1,
+        "toml": 2,
+        "yaml": 4
+      },
+      "code_blocks_total": 20,
+      "consistency_report": true,
+      "gwt_block_count": 40,
+      "has_json_schema": true,
+      "has_mermaid": false,
+      "has_sql_ddl": false,
+      "has_ts_enums": false,
+      "has_yaml_openapi": true,
+      "links_broken": 0,
+      "links_total": 23,
+      "md_files": 13,
+      "mmd_files": 0,
+      "overview_chars": 6408,
+      "todo_density": 4,
+      "waffle_per_kchar": 0.15
+    },
+    "module": "28-universal-ci-cli",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 90,
+      "testability": 100
+    },
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=40, gwt=40, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 70,
+      "consistency": 100,
+      "implementability": 65,
+      "maintainability": 90,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 81/100 (B) for spec/28-universal-ci-cli.",
+    "weighted_overall": 81
   }
 ]

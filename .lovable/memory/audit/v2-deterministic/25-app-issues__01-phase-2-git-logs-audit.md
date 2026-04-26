@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **64/100 (C)**  
+**Implementability Score:** **68/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 64/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.
+> Deterministic score 68/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=1, waffle/kchar=0.09. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -18,8 +18,8 @@
 |---|---:|---:|---:|
 | Implementability | 35% | 30 | 10.5 |
 | Completeness | 20% | 70 | 14.0 |
-| Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 70 | 7.0 |
+| Alignment | 15% | 100 | 15.0 |
+| Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 90 | 6.3 |
 | Maintainability | 3% | 90 | 2.7 |
@@ -31,7 +31,7 @@
   "md_files": 4,
   "mmd_files": 0,
   "overview_chars": 26938,
-  "ac_chars": 2648,
+  "ac_chars": 2652,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
@@ -45,7 +45,7 @@
   "has_yaml_openapi": false,
   "has_mermaid": false,
   "links_total": 13,
-  "links_broken": 1,
+  "links_broken": 0,
   "todo_density": 1,
   "waffle_per_kchar": 0.09,
   "child_modules": 0
@@ -54,7 +54,6 @@
 
 ## Implementability Blockers
 
-- 1 broken cross-spec link(s)
 - No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 
 ## Code Mapping
@@ -67,23 +66,17 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | broken-link | high | 7/10 | 1 broken cross-spec link(s) |
-| 2 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
-| 3 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
+| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
+| 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [HIGH] 1 broken cross-spec link(s)
-- **Category:** broken-link  |  **Impact:** 7/10
-- **Evidence:** links_total=13, links_broken=1
-- **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
-
-#### 2. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
 - **Evidence:** todo_density=1
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
 
-#### 3. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+#### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
 - **Evidence:** code_blocks_by_lang={"bash": 2}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

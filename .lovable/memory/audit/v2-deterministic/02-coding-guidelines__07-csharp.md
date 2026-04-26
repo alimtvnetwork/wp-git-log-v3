@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **71/100 (C)**  
+**Implementability Score:** **75/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 71/100 (C) for spec/02-coding-guidelines/07-csharp.
+> Deterministic score 75/100 (B) for spec/02-coding-guidelines/07-csharp.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=7, gwt=0, broken_links=0, waffle/kchar=0.17. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.31. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 40 | 14.0 |
-| Completeness | 20% | 75 | 15.0 |
+| Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 60 | 4.2 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -31,23 +31,24 @@
   "md_files": 8,
   "mmd_files": 0,
   "overview_chars": 1982,
-  "ac_chars": 3259,
-  "ac_count": 7,
-  "gwt_block_count": 0,
+  "ac_chars": 24619,
+  "ac_count": 28,
+  "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 15,
+  "code_blocks_total": 16,
   "code_blocks_by_lang": {
-    "csharp": 15
+    "csharp": 15,
+    "text": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 32,
+  "links_total": 41,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.17,
+  "waffle_per_kchar": 0.31,
   "child_modules": 0
 }
 ```
@@ -67,16 +68,10 @@
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
 | 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
-| 2 | untestable | medium | 5/10 | Acceptance criteria present but no Given/When/Then blocks |
 
 ### Detail + Proposed Corrections
 
 #### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"csharp": 15}
+- **Evidence:** code_blocks_by_lang={"csharp": 15, "text": 1}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.
-
-#### 2. [MEDIUM] Acceptance criteria present but no Given/When/Then blocks
-- **Category:** untestable  |  **Impact:** 5/10
-- **Evidence:** ac_count=7, gwt_block_count=0
-- **Proposed correction:** Rewrite each AC as a Given/When/Then block.

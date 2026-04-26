@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **71/100 (C)**  
+**Implementability Score:** **86/100 (A)**  
 **Blast radius:** 4/10
 
-> Deterministic score 71/100 (C) for spec/07-design-system.
+> Deterministic score 86/100 (A) for spec/07-design-system.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=0, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.15. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 65 | 22.8 |
-| Completeness | 20% | 50 | 10.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 10 | 0.7 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -31,9 +31,9 @@
   "md_files": 17,
   "mmd_files": 0,
   "overview_chars": 7892,
-  "ac_chars": 3783,
-  "ac_count": 0,
-  "gwt_block_count": 0,
+  "ac_chars": 57625,
+  "ac_count": 34,
+  "gwt_block_count": 34,
   "consistency_report": true,
   "code_blocks_total": 77,
   "code_blocks_by_lang": {
@@ -52,14 +52,14 @@
   "links_total": 58,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.19,
+  "waffle_per_kchar": 0.15,
   "child_modules": 0
 }
 ```
 
 ## Implementability Blockers
 
-- No acceptance criteria found
+_(none — AI can build this)_
 
 ## Code Mapping
 
@@ -71,11 +71,5 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | untestable | high | 8/10 | No acceptance criteria found |
 
 ### Detail + Proposed Corrections
-
-#### 1. [HIGH] No acceptance criteria found
-- **Category:** untestable  |  **Impact:** 8/10
-- **Evidence:** ac_count=0 in 97-acceptance-criteria.md
-- **Proposed correction:** Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.

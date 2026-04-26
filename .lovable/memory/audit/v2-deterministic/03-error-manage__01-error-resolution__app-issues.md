@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **73/100 (C)**  
+**Implementability Score:** **78/100 (B)**  
 **Blast radius:** 2/10
 
-> Deterministic score 73/100 (C) for spec/03-error-manage/01-error-resolution/app-issues.
+> Deterministic score 78/100 (B) for spec/03-error-manage/01-error-resolution/app-issues.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=1, waffle/kchar=0.07. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.06. Gates active: 0.
 
 ---
 
@@ -18,8 +18,8 @@
 |---|---:|---:|---:|
 | Implementability | 35% | 50 | 17.5 |
 | Completeness | 20% | 75 | 15.0 |
-| Alignment | 15% | 90 | 13.5 |
-| Consistency | 10% | 70 | 7.0 |
+| Alignment | 15% | 100 | 15.0 |
+| Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
@@ -28,7 +28,7 @@
 
 ```json
 {
-  "md_files": 5,
+  "md_files": 6,
   "mmd_files": 0,
   "overview_chars": 1338,
   "ac_chars": 4185,
@@ -47,17 +47,17 @@
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 14,
-  "links_broken": 1,
+  "links_total": 17,
+  "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.07,
+  "waffle_per_kchar": 0.06,
   "child_modules": 0
 }
 ```
 
 ## Implementability Blockers
 
-- 1 broken cross-spec link(s)
+_(none — AI can build this)_
 
 ## Code Mapping
 
@@ -69,11 +69,5 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | broken-link | high | 7/10 | 1 broken cross-spec link(s) |
 
 ### Detail + Proposed Corrections
-
-#### 1. [HIGH] 1 broken cross-spec link(s)
-- **Category:** broken-link  |  **Impact:** 7/10
-- **Evidence:** links_total=14, links_broken=1
-- **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
