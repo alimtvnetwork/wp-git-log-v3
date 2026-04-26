@@ -105,6 +105,93 @@ Comprehensive database design and implementation conventions covering naming, sc
 
 ---
 
+## Canonical Reference DDL
+
+> **Normative contract.** This single block demonstrates every Golden Rule
+> simultaneously. Any DDL emitted by an AI agent or human contributor MUST
+> structurally match this template. Lints in `linter-scripts/` validate
+> against the rules implied here.
+
+```sql
+-- =====================================================================
+-- Canonical SQLite reference schema — illustrates ALL golden rules.
+-- Engine: SQLite 3.38+. Same DDL transposes to MySQL by swapping
+-- AUTOINCREMENT → AUTO_INCREMENT and INTEGER → INT.
+-- =====================================================================
+
+-- Rule 1+2+3: Singular PascalCase table; PK named {TableName}Id.
+CREATE TABLE User (
+    UserId          INTEGER PRIMARY KEY AUTOINCREMENT,
+    Email           TEXT    NOT NULL UNIQUE,
+    DisplayName     TEXT    NOT NULL,
+    -- Rule 5: Boolean uses Is/Has prefix, positive-only naming.
+    IsActive        INTEGER NOT NULL DEFAULT 1 CHECK (IsActive IN (0, 1)),
+    HasVerifiedEmail INTEGER NOT NULL DEFAULT 0 CHECK (HasVerifiedEmail IN (0, 1)),
+    CreatedAt       TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+    UpdatedAt       TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+);
+
+-- Rule 8: Repeated values normalized into a lookup table.
+CREATE TABLE ProjectStatus (
+    ProjectStatusId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Code            TEXT    NOT NULL UNIQUE,    -- e.g., 'Active', 'Archived'
+    Label           TEXT    NOT NULL
+);
+
+-- Rule 4: FK column reuses the EXACT PK name from the parent table.
+CREATE TABLE Project (
+    ProjectId       INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserId          INTEGER NOT NULL,           -- FK → User.UserId (same name)
+    ProjectStatusId INTEGER NOT NULL,           -- FK → ProjectStatus.ProjectStatusId
+    Name            TEXT    NOT NULL,
+    Slug            TEXT    NOT NULL UNIQUE,
+    CreatedAt       TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+    FOREIGN KEY (UserId)          REFERENCES User(UserId)                   ON DELETE CASCADE,
+    FOREIGN KEY (ProjectStatusId) REFERENCES ProjectStatus(ProjectStatusId) ON DELETE RESTRICT
+);
+
+-- Indexes also PascalCase: Idx_<Table>_<Column[s]>
+CREATE INDEX Idx_Project_UserId          ON Project (UserId);
+CREATE INDEX Idx_Project_ProjectStatusId ON Project (ProjectStatusId);
+
+-- Rule 9: Joins exposed via a view rather than ad-hoc SQL in code.
+CREATE VIEW ProjectWithOwnerView AS
+SELECT
+    p.ProjectId,
+    p.Name              AS ProjectName,
+    p.Slug              AS ProjectSlug,
+    s.Code              AS StatusCode,
+    s.Label             AS StatusLabel,
+    u.UserId            AS OwnerUserId,
+    u.Email             AS OwnerEmail,
+    u.DisplayName       AS OwnerDisplayName,
+    p.CreatedAt         AS ProjectCreatedAt
+FROM Project p
+JOIN User           u ON u.UserId          = p.UserId
+JOIN ProjectStatus  s ON s.ProjectStatusId = p.ProjectStatusId;
+```
+
+### Forbidden Tokens (lint-enforced)
+
+| ❌ Forbidden | ✅ Required |
+|--------------|------------|
+| `CREATE TABLE Users`        | `CREATE TABLE User`          |
+| `user_id`, `created_at`     | `UserId`, `CreatedAt`        |
+| `id INTEGER PRIMARY KEY`    | `UserId INTEGER PRIMARY KEY` |
+| `UUID`, `GUID`, `CHAR(36)`  | `INTEGER PRIMARY KEY AUTOINCREMENT` |
+| `IsDisabled`, `IsDeleted`   | `IsActive`, `IsArchived`     |
+| Inline `JOIN` in app code   | `CREATE VIEW … View`         |
+
+### Acceptance — DDL Conformance
+
+**Given** a contributor adds a new `.sql` migration anywhere in the repo,  
+**When** `linter-scripts/check-forbidden-strings.py` runs in CI,  
+**Then** zero forbidden tokens above appear AND every `CREATE TABLE`
+declares `<TableName>Id INTEGER PRIMARY KEY AUTOINCREMENT` as its first
+column.
+
+---
+
 ## Cross-References
 
 | Reference | Location |
