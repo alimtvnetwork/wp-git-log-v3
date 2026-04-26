@@ -270,39 +270,41 @@ Completes the §22 Git Logs governance contract. Rewrote §97 from 9 table-row c
 
 ---
 
-## Next-pointer
-**Phase 16g complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT).
+## ✅ Phase 16h — §02/01-cross-language §97 deepen (DONE, v4.0.0)
 
-**13 remaining §97 files with 0 GWT ACs** (post-16g), priority order:
+Parent contract for ALL language subfolders under §02. Rewrote §97 from 6 stub checkboxes to **20 module-specific GWT ACs** (AC-CL-01..AC-CL-20) covering: inheritance contract + waiver discipline (AC-CL-01), positive boolean naming (AC-CL-02), boolean-flag method prefixes `is`/`has`/`can`/`should`/`will`/`was`/`did` (AC-CL-03), strict typing no implicit any/`interface{}`/`mixed`/`dynamic` (AC-CL-04), typed conversion over raw casts (AC-CL-05), cyclomatic complexity ≤ 10 hard / ≤ 5 preferred (AC-CL-06), nesting depth ≤ 3 (AC-CL-07), magic-value extraction on rule-of-two (AC-CL-08), JSON keys PascalCase wire-format (AC-CL-09), language-idiomatic function names with cross-language semantic-verb consistency (AC-CL-10), DB tables singular PascalCase + columns PascalCase + FK `<TargetTable>Id` (AC-CL-11), kebab-case ASCII slugs (AC-CL-12), explicit nullability typing (AC-CL-13), lazy evaluation for branched expensive computations (AC-CL-14), regex hygiene (AC-CL-15), code mutation avoidance with `mutate*` exception (AC-CL-16), Result/Option/Either over throwing (AC-CL-17), `types/` folder convention forbids `interfaces/`/`models/`/`dto/`/`entities/` (AC-CL-18), `<unit>.test.<ext>` + behavior-named tests (AC-CL-19), DRY rule-of-three forbids premature abstraction (AC-CL-20). Legacy AC-01/AC-02 preserved as AC-CL-LEGACY-* at end. Lockstep: §98 v3.2.0 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
+## Next-pointer
+**Phase 16h complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT).
+
+**12 remaining §97 files with 0 GWT ACs** (post-16h), priority order:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/01-cross-language/` | 0 | **P0** | Parent of all language rules |
-| 2 | `02-coding-guidelines/02-typescript/` | 0 | P1 | High code-blast radius |
-| 3 | `02-coding-guidelines/03-golang/` | 0 | P1 | High code-blast radius |
-| 4 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
-| 5 | `02-coding-guidelines/05-rust/` | 0 | P1 | High code-blast radius |
-| 6 | `02-coding-guidelines/07-csharp/` | 0 | P1 | High code-blast radius |
-| 7 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
-| 8 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
-| 9 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 10 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 11 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 12 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 13 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `02-coding-guidelines/02-typescript/` | 0 | **P1** | Inherits §02/01; high code-blast radius |
+| 2 | `02-coding-guidelines/03-golang/` | 0 | P1 | Inherits §02/01 |
+| 3 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
+| 4 | `02-coding-guidelines/05-rust/` | 0 | P1 | Inherits §02/01 |
+| 5 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
+| 6 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
+| 7 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
+| 8 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 9 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 10 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 11 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 12 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
 🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04 (immutable slots).
 
 Remaining work:
-- ⏳ **Phase 16h** — Deepen `02-coding-guidelines/01-cross-language/97` (P0 — parent of all language rules).
-- ⏳ **Phase 16i–16o** — Deepen TS/Go/PHP/Rust/C#/AI-Opt/Security subfolder §97 files (P1 batch).
+- ⏳ **Phase 16i** — Deepen `02-coding-guidelines/02-typescript/97` (P1 — first language child to inherit §02/01).
+- ⏳ **Phase 16j–16o** — Deepen Go/PHP/Rust/C#/AI-Opt subfolder §97 files (P1 batch).
 - ⏳ **Phase 16p** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16q** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user — confirm `Environment`, `Platform`, `OwnerEmail` shape).
 - 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user — pick rename target).
 
-On next `next`: take **Phase 16h (`02-coding-guidelines/01-cross-language/97` deepen)** — P0 because it's the parent of all language-specific subfolders (TS/Go/PHP/Rust/C#) and deepening it provides the inherited contract for the entire 16i–16o batch.
-
-On next `next`: take **Phase 16g (`26-gitlogs-diagrams/97` deepen)** — P0 completes the §22 Git Logs governance contract. Unless you redirect or want to unblock B1/B2 first.
-
+On next `next`: take **Phase 16i (`02-coding-guidelines/02-typescript/97` deepen)** — P1, first language child whose §97 will reference the AC-CL-* parent contract just shipped. Unless you redirect or want to unblock B1/B2 first.
 

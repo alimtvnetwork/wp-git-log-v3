@@ -1,10 +1,18 @@
 # Coding Guidelines — Changelog
 
 
-**Version:** 3.2.0  
-**Last Updated:** 2026-04-16  
+**Version:** 4.0.0
+**Last Updated:** 2026-04-26
 
-All notable changes to the Coding Guidelines specification are documented here.
+All notable changes to the Cross-Language Coding Guidelines specification are documented here.
+
+---
+
+## v4.0.0 — 2026-04-26 (Phase 16h: §97 full GWT rewrite)
+
+- **Changed** §97 — full GWT rewrite. Replaced 6 stub checkbox criteria (AC-01 + AC-02 with sub-bullets) with **20 module-specific Given/When/Then ACs** (AC-CL-01..AC-CL-20) covering language-agnostic rules INHERITED by every language subfolder under §02 (`02-typescript/`, `03-golang/`, `04-php/`, `05-rust/`, `07-csharp/`): inheritance contract + waiver discipline (AC-CL-01), positive-form boolean naming (AC-CL-02), boolean-flag method prefixes `is`/`has`/`can`/`should`/`will`/`was`/`did` (AC-CL-03), strict typing no implicit any/`interface{}`/`mixed`/`dynamic` (AC-CL-04), typed conversion over raw casts (AC-CL-05), cyclomatic complexity ≤ 10 hard / ≤ 5 preferred (AC-CL-06), nesting depth ≤ 3 (AC-CL-07), magic-value extraction on rule-of-two (AC-CL-08), JSON keys PascalCase wire-format (AC-CL-09), language-idiomatic function names with cross-language semantic-verb consistency (AC-CL-10), DB tables singular PascalCase + columns PascalCase + FK `<TargetTable>Id` (AC-CL-11), kebab-case ASCII slugs (AC-CL-12), explicit nullability typing (AC-CL-13), lazy evaluation for branched expensive computations (AC-CL-14), regex documentation + anchoring + no catastrophic backtracking (AC-CL-15), code mutation avoidance with `mutate*`-prefix exception (AC-CL-16), Result/Option/Either over throwing for expected failures (AC-CL-17), `types/` folder convention forbids `interfaces/`/`models/`/`dto/`/`entities/` (AC-CL-18), `<unit>.test.<ext>` naming + behavior-named test functions (AC-CL-19), DRY rule-of-three forbids premature abstraction (AC-CL-20).
+- **Preserved** legacy stub checkboxes as AC-CL-LEGACY-01-A..02-C at end of §97.
+- **Bumped** §97 v3.2.0 → v4.0.0 (major; AC contract type changed from stub-checkbox to GWT). §98 v3.2.0 → v4.0.0. §99 v3.2.0 → v4.0.0.
 
 ---
 
