@@ -83,9 +83,12 @@ Landed in v3.8.10 / schema v2.9.2:
 - §01: banner v3.8.6→v3.8.10. Bare `Pipeline` glossary row split into 3 — `Pipeline`, `HasError`, `PreviousHasError`.
 - **Phase 9 follow-ups deferred:** §97 ACs for `PreviousHasError` (state-transition matrix, back-fill correctness, single-statement write atomicity), §03 admin UI rendering of the four state labels, §04 NDJSON `Header` frame label exposure.
 
-## ⏳ Phase 10 — Diagram Render Pass
-**Files:** `26-gitlogs-diagrams/`
-- Re-render all `.mmd` → `.svg` after Phase 4 changes land
+## ✅ Phase 10 — Diagram Render Pass (DONE, v2.1.0)
+
+Landed in folder 26 v2.1.0:
+- Rendered all 6 active `.mmd` sources to companion `.svg` build artifacts via `@mermaid-js/mermaid-cli` v11+ (`mmdc -b transparent` with `--no-sandbox` Puppeteer flags): `01-er-diagram.svg` (313 KB, v2.9.0 split-DB shape with `ShaRegistry`/`SshKey`/`SshNonce`), `05-auth-validation.svg` (177 KB), `06-permission-flow.svg` (113 KB), `07-rate-limit-flow.svg` (35 KB), `08-encryption-v3-flow.svg` (34 KB), `09-endpoints-mindmap.svg` (182 KB).
+- §00 banner v2.0.0→v2.1.0 + render-pass note + re-render command. §98 v2.1.0 row added. §99 banner v2.0.0→v2.1.0 + Phase 10 audit table + inventory rows updated to list `.mmd / .svg` pairs. spec-index refreshed.
+- Source `.mmd` files unchanged — render-only phase. SVGs let reviewers without Mermaid tooling preview directly.
 
 ---
 
@@ -100,4 +103,4 @@ Landed in v3.8.10 / schema v2.9.2:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 10** (Diagram Render Pass — re-render all `.mmd` → `.svg` in `26-gitlogs-diagrams/` after Phases 4–9 schema changes land)
+**Top pending = Phase B1** (BLOCKED on user — §07 App identity fields: confirm `Environment`, `Platform`, `OwnerEmail` shape). All numbered phases 0–10 complete. Next unblocked candidate = "Phase 11 — Deferred follow-ups pickup" (Phase 8 streaming ConfigKv/error-code/OpenAPI/AC seeding + Phase 9 PreviousHasError ACs/UI/NDJSON Header label exposure) — propose only on explicit user `next` after acknowledging.

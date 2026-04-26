@@ -1,6 +1,6 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 2.0.0  
+**Version:** 2.1.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/26-gitlogs-diagrams/`
 
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 2.1.0 — 2026-04-26
+- **Added** (Phase 10 — Diagram Render Pass per `mem://specs/phased-roadmap.md`) — Rendered all 6 active `.mmd` sources to companion `.svg` files via `@mermaid-js/mermaid-cli` v11+ (`mmdc -b transparent`, `--no-sandbox` Puppeteer flags): `01-er-diagram.svg` (313 KB, full v2.9.0 split-DB ER incl. `ShaRegistry`, `SshKey`, `SshNonce`), `05-auth-validation.svg` (177 KB), `06-permission-flow.svg` (113 KB, classDef-colored RBAC), `07-rate-limit-flow.svg` (35 KB, token-bucket sequence), `08-encryption-v3-flow.svg` (34 KB, deferred-v3 keys), `09-endpoints-mindmap.svg` (182 KB, all 8 endpoints). Sources unchanged; SVGs are checked-in build artifacts so reviewers without Mermaid tooling can preview the diagrams directly. Picks up the schema/UI changes that landed in Phases 4–9 (split-DB boundary already reflected in `01-er-diagram.mmd` since v3.8.5 Phase 4; SSH-Key Lane B entities since v3.8.6 Phase 5). No `.mmd` content edits in this phase — render-only.
 
 ### 2.0.0 — 2026-04-26
 - **Removed** (MAJOR) — `02-domain-design.mmd` retired; it overlapped ~70% with `01-er-diagram.mmd` (both showed GitProfile → Repo → RepoVersion connectivity), causing user confusion that "everything looks like an ERD". Hierarchy info now lives in the ER's relationship arrows + the prose schema in `../22-git-logs-v2/02-database-schema.md`. Slot 02 is now an intentional locked gap.
