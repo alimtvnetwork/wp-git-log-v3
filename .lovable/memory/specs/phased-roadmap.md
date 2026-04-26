@@ -91,4 +91,4 @@ Landed in v3.8.7:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 6** (SSH-Key Lane B: Flow & Threat Doc)
+**Top pending = Phase 7** (AC Quality Pass — convert all ACs to GWT format; add ACs for SshKey/SshNonce/replay/lane-downgrade)
