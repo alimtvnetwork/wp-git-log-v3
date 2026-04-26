@@ -18,7 +18,9 @@
 | RepoVersion | A specific version variant of a Repo (e.g., `repo`, `repo-v2`, `repo-v100`). |
 | App | User-registered logical app, linked polymorphically to a Repo or a GitProfile via AppLink. |
 | AppLink | Polymorphic join row binding an App to a target (GitProfile \| Repo). |
-| Pipeline | Named CI/CD pipeline within a (RepoVersion, Branch) scope. |
+| Pipeline | Named CI/CD pipeline within a (RepoVersion, Branch) scope. Carries two boolean state columns: `HasError` (current state) and `PreviousHasError` (state immediately before the latest transition — see next two rows). |
+| HasError | Boolean (0/1) on `Pipeline`. `1` means the pipeline currently has at least one unresolved error reported via `/append-log` with `HasError=true`; cleared back to `0` by `/fixed-log`. **Sticky**: remains `1` across subsequent `/append-log` calls until explicitly cleared (AC-13). |
+| PreviousHasError | **NEW v2.9.2 (Phase 9).** Boolean (0/1) on `Pipeline`. Holds the value `HasError` had **immediately before** the most recent `/append-log` or `/fixed-log` transition, so the UI can label transitions as `first-failure` (`0→1`), `still-failing` (`1→1`), `just-recovered` (`1→0`), or `still-green` (`0→0`) without scanning the per-SHA log file. Write rule: every server-side mutation of `HasError` MUST set `PreviousHasError = OLD.HasError` in the same SQL transaction (single `UPDATE` statement, never read-modify-write). Back-fill rule on the v2.9.1 → v2.9.2 migration: `UPDATE Pipeline SET PreviousHasError = HasError;` so the very first transition after upgrade is correctly labeled `still-*` rather than spuriously appearing as a fresh `first-failure` / `just-recovered` event. |
 | LogEntry | Single line of pipeline output (Info/Debug/etc.). **v3.8.0**: lives in the per-SHA SQLite file, not the root DB — see §39. |
 | ErrorLogEntry | Single line tagged as error output. **v3.8.0**: lives in the per-SHA SQLite file. |
 | ShaRegistry | Root-DB index pointing at every per-SHA SQLite file + roll-up summary stats (last status, failure count, …). One row per (PipelineId, Sha). |
