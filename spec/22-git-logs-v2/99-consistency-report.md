@@ -183,6 +183,19 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase 3 scope discipline:** §00 inventory row for §39, §97 ACs (AC-49..AC-53 promotion to active), Mermaid re-render, root `spec-index.md` bump are **deferred to Phase 4** per `mem://specs/phased-roadmap.md`. Phases 5–10 untouched.
 
+## v3.8.5 Audit — Phase 4 Split-DB doc closure
+
+| File | Change |
+|------|--------|
+| `00-overview.md` | §39 inventory row rewritten — old "NEW v3.8.0; logs/<RepoVersionId>/<GitSha256>.sqlite" replaced with v2.9.0-active wording (path `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`, ConfigKv keys, cross-refs to §15/§22/§23/§29). Banner v3.8.0 → v3.8.5. |
+| `97-acceptance-criteria.md` | AC-49..AC-53 promoted from draft to **Active (v2.9.0)**; rewritten to match shipped DDL/runtime (key on `(PipelineId, Sha)`, `RowCount`/`LastSeenAt`/`FileSizeBytes`/`Sha256` mirrors, defaults `MaxOpenShaDbHandles=32` / `ShaDbIdleCloseSec=120`, `GL-SHA-DB-QUOTA-EXCEEDED` 507, prune crash-safety, manifest `ShaFiles[]`, Wipe per-SHA-tree-first). Banner v3.8.2 → v3.8.5. |
+| `spec/spec-index.md` | Refreshed 9 version cells (00→3.8.5, 01→3.8.3, 02→3.8.3, 15→2.9.0, 22→2.9.0, 23→2.9.0, 29→2.9.0, 97→3.8.5, 99→3.8.5). |
+| `26-gitlogs-diagrams/01-er-diagram.mmd` | Top annotation declares root-DB scope + split-DB boundary; stale `RepoVersion → ShaRegistry seenShas` and `LogSeverity → ShaRegistry lastSeverity` edges removed; `Pipeline → ShaRegistry lastSha` collapsed to canonical `sha` edge; `ShaRegistry` entity block rewritten to v2.9.0 §18 DDL columns (`PipelineId`, `Sha`, `DbFilePath`, `RowCount`, `FirstSeenAt`, `LastSeenAt`, `FileSizeBytes`, `Sha256`). |
+| `98-changelog.md` | v3.8.5 row added. |
+| `99-consistency-report.md` | This audit table added; banner v3.8.4 → v3.8.5. |
+
+**Phase 4 scope discipline:** Phases 5–10 untouched. Phase B1 (§07 App identity fields) remains blocked on user decision.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §02↔§15↔§22↔§23↔§29↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-59; v3.8.4 Phase 3 split-DB error codes + lifecycle landed in §15 + §22 + §23 + §29 with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 4 (§00 §39 row, §97 AC-49..AC-53 promotion, Mermaid re-render, root `spec-index.md`); (c) Phases 5–10 (SSH-Key Lane B, AC GWT pass, NDJSON streaming, `PreviousHasError`, diagram render).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §02↔§15↔§22↔§23↔§29↔§39 ↔ §05-split-db-architecture, root `spec-index.md` ↔ all 22-git-logs-v2 files); AC coverage AC-01..AC-59 with AC-49..AC-53 now Active (v2.9.0); ER diagram (`26-gitlogs-diagrams/01-er-diagram.mmd`) reflects v2.9.0 split-DB shape; v3.8.5 Phase 4 doc closure landed in §00 + §97 + spec-index + ER diagram with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 5 (SSH-Key Lane B schema/errors); (c) Phase 6 (SSH-Key flow + threat doc); (d) Phases 7–10 (AC GWT pass, NDJSON streaming, `Pipeline.PreviousHasError`, diagram .svg render).
