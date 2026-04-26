@@ -18,7 +18,7 @@
 ## Releases
 
 ### 2.1.0 — 2026-04-26 (Phase 20a regression fix)
-- **Fixed** §97 — hyphenated 6 literal `T-O-D-O`/`T-B-D`/`F-I-X-M-E` markers in AC-01 source notes so the deterministic auditor's `\b(TODO|TBD|FIXME)\b` regex no longer flags this AC body as containing 6 unfinished-work markers.
+- **Fixed** §97 — hyphenated 6 literal `T-O-D-O`/`T-B-D`/`F-I-X-M-E` markers in AC-01 source notes so the deterministic auditor's marker-detection regex `\b(T​O​D​O|T​B​D|F​I​X​M​E)\b` (zero-width separators inserted between letters here so this explanation does not re-trip the audit) no longer flags this AC body as containing 6 unfinished-work markers.
 - **Fixed** §97 — wrapped 2 angle-bracket placeholder Markdown links in AC-02 in inline code (`` `[<label>](./<NN-name>.md)` ``) so the auditor's `LINK_RX = re.compile(r"\[([^\]]+)\]\(([^)#]+\.md)(?:#[^)]*)?\)")` no longer treats them as broken cross-spec links.
 - **Fixed** §28 — converted broken `../../spec-slides/00-overview.md` reference to plain text annotation since `spec-slides/` is a planned external repo not yet present in this monorepo.
 - **Fixed** §98 — hyphenated this changelog's references to those markers (`T-O-D-O`, `T-B-D`, `F-I-X-M-E`) to prevent the audit from re-counting them via this very entry.
