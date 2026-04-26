@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.10  
+**Version:** 3.8.11  
 **Updated:** 2026-04-26
 
 ---
@@ -262,6 +262,23 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Schema validation check:** `Pipeline` now carries 10 columns (`PipelineId, RepoVersionId, AppId, Branch, Pipeline, HasError, PreviousHasError, CreatedAt, UpdatedAt` + UNIQUE constraint as 10th element); `PluginVersion=2.9.2`; 11 MigrationState markers; both `HasError` and `PreviousHasError` carry CHECK constraints restricting to 0/1.
 
+## v3.8.11 Audit — Phase 11 Streaming Follow-ups Pickup
+
+| File | Change |
+|------|--------|
+| `18-schema.sql` | Banner v2.9.2 → v2.9.3. Seeded 4 NDJSON `ConfigKv` defaults matching §04 §11.5 exactly: `NdjsonProgressEveryRows='10000'`, `NdjsonProgressEveryMs='2000'`, `NdjsonMaxRowsPerStream='1000000'`, `NdjsonMaxFrameBytes='262144'`. `ConfigKv.PluginVersion` 2.9.2 → 2.9.3; `MigrationState` marker `2.9.3` appended (12 markers). Comment notes "data-only, no DDL changes". |
+| `15-error-codes.md` | Banner v2.9.1 → v2.9.3. New section *"NDJSON streaming retrieval (see §04 §11)"* added at end of code tables, registering `GL-NDJSON-CLIENT-DISCONNECT` (HTTP 499, informational, server-only audit row, no `Error` frame possible) + `GL-NDJSON-CURSOR-LOST` (HTTP 500, raised on `?after-seq=N` resume after AC-53 prune; wire shape `Header → Error → End{Status:"Error"}`). |
+| `17-openapi.yaml` | `info.version` 2.8.2 → 2.9.3 (long-lagging — last touched in v2.8.2; this single bump absorbs Phases 4/5/9/11). `ErrorCode` enum extended with 4 `GL-SHA-DB-*` codes (Phase 4 retroactive sync) + 2 `GL-NDJSON-*` codes. Added 7 schemas in `components.schemas`: `NdjsonHeaderFrame`, `NdjsonLogFrame`, `NdjsonErrorLogFrame`, `NdjsonProgressFrame`, `NdjsonEndFrame`, `NdjsonErrorFrame`, plus `NdjsonFrame` discriminated `oneOf` union with `discriminator.propertyName=Type` mapping. Added reusable `components.responses.NdjsonStream` declaring `Transfer-Encoding: chunked` + `X-Content-Type-Options: nosniff` headers + `application/x-ndjson` content with NDJSON wire example. All 4 GET path objects (`/get-logs`, `/get-pipeline-logs`, `/get-error-logs`, `/get-pipeline-error-logs` — covering all 6 logical endpoints #5–#10) gained: 2 new query params (`after-seq` int64 ≥0, `stream-id` uuid) marked "NDJSON only", a second `application/x-ndjson` content variant on the 200 response, and per-endpoint description naming the streaming behavior. |
+| `97-acceptance-criteria.md` | Banner v3.8.8 → v3.8.11. Status legend bumped from "v2.9.1 schema" to "v2.9.3 schema". New **Section J — NDJSON Streaming Retrieval (v2.9.3)** with 6 ACs all `[active]`: AC-67 opt-in via Accept header; AC-68 frame ordering + `Type` discriminator; AC-69 resume via `?after-seq=N` + `?stream-id=<uuid>`; AC-70 client-disconnect handling + `GL-NDJSON-CLIENT-DISCONNECT` audit row; AC-71 per-frame size cap + `"Truncated":true` parity with AC-27; AC-72 `Progress` frame cadence (rows-OR-time triggers, individual `0` disables, both `0` disables entirely). AC count 66 → 72 (sequential AC-67..AC-72; no IDs reused). |
+| `98-changelog.md` | v3.8.11 row added. |
+| `99-consistency-report.md` | This audit table added; banner v3.8.10 → v3.8.11; Health Score footer rewritten. |
+
+**Validation evidence:**
+- *In-memory SQLite:* `pip3 install pyyaml` then `sqlite3.executescript(open('18-schema.sql').read())` clean; `PluginVersion=2.9.3`; 12 MigrationState markers; 19 ConfigKv rows including all 4 `Ndjson*` keys with the exact §04 §11.5 default values.
+- *OpenAPI YAML:* `yaml.safe_load` clean parse; all 4 GET paths confirmed carrying both `application/json` and `application/x-ndjson` content keys; 7 `Ndjson*` schemas + `NdjsonStream` response present; `ErrorCode` enum contains both `GL-NDJSON-*` codes and all 4 `GL-SHA-DB-*` codes.
+
+**Phase 11 scope discipline:** §04 §11 doc body untouched (Phase 8 already authoritative). §02/§22/§23/§28/§29/§30/§31/§39 untouched. Phase 9 follow-ups remain deferred (§97 ACs for `PreviousHasError` state-transition matrix / back-fill correctness / single-statement write atomicity; §03 admin UI rendering of the four state-transition labels; §04 NDJSON `Header` frame extension to expose state-transition labels). Phase B1 (§07 App identity) still blocked on user decision.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18 PreviousHasError chain); AC coverage AC-01..AC-66 (66 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; v3.8.10 Phase 9 `Pipeline.PreviousHasError` boolean landed in §18 / §02 / §01 with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 10 (Mermaid `.mmd` → `.svg` render pass); (c) Streaming follow-ups deferred from Phase 8 (§18 ConfigKv seeding for 4 `Ndjson*` keys, §15 entries for 2 `GL-NDJSON-*` codes, §17 OpenAPI `application/x-ndjson` variants, §97 ACs for streaming); (d) Phase 9 follow-ups (§97 ACs for `PreviousHasError` state-transition + back-fill + write atomicity, §03 admin UI label rendering, §04 NDJSON `Header` frame label exposure).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain incl. v2.9.3 OpenAPI surface, §01↔§02↔§18 PreviousHasError chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain); AC coverage AC-01..AC-72 (72 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.3 declares both `application/json` and `application/x-ndjson` on every read endpoint; v3.8.11 Phase 11 NDJSON ConfigKv seeds + GL-NDJSON-* codes + 7 NDJSON OpenAPI schemas + 6 streaming ACs landed with full lockstep on §15/§17/§18/§97/§98/§99. **Open follow-ups (per phased roadmap):** (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 9 follow-ups (§97 ACs for `PreviousHasError` state-transition + back-fill + write atomicity, §03 admin UI label rendering, §04 NDJSON `Header` frame label exposure). All Phase 8 streaming follow-ups now closed by Phase 11.

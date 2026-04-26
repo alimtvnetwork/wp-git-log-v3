@@ -86,9 +86,17 @@ Landed in v3.8.10 / schema v2.9.2:
 ## ✅ Phase 10 — Diagram Render Pass (DONE, v2.1.0)
 
 Landed in folder 26 v2.1.0:
-- Rendered all 6 active `.mmd` sources to companion `.svg` build artifacts via `@mermaid-js/mermaid-cli` v11+ (`mmdc -b transparent` with `--no-sandbox` Puppeteer flags): `01-er-diagram.svg` (313 KB, v2.9.0 split-DB shape with `ShaRegistry`/`SshKey`/`SshNonce`), `05-auth-validation.svg` (177 KB), `06-permission-flow.svg` (113 KB), `07-rate-limit-flow.svg` (35 KB), `08-encryption-v3-flow.svg` (34 KB), `09-endpoints-mindmap.svg` (182 KB).
-- §00 banner v2.0.0→v2.1.0 + render-pass note + re-render command. §98 v2.1.0 row added. §99 banner v2.0.0→v2.1.0 + Phase 10 audit table + inventory rows updated to list `.mmd / .svg` pairs. spec-index refreshed.
-- Source `.mmd` files unchanged — render-only phase. SVGs let reviewers without Mermaid tooling preview directly.
+- Rendered all 6 active `.mmd` sources to companion `.svg` artifacts via `@mermaid-js/mermaid-cli` v11+. Source `.mmd` unchanged.
+- §00/§98/§99 banners + spec-index refreshed.
+
+## ✅ Phase 11 — Streaming Follow-ups Pickup (DONE, v3.8.11 / schema v2.9.3)
+
+Absorbed all Phase 8 streaming deferrals + AC coverage:
+- §18: 4 NDJSON ConfigKv seeds (`NdjsonProgressEveryRows=10000`, `NdjsonProgressEveryMs=2000`, `NdjsonMaxRowsPerStream=1000000`, `NdjsonMaxFrameBytes=262144`); PluginVersion 2.9.2→2.9.3; MigrationState 2.9.3 appended (12 markers).
+- §15: `GL-NDJSON-CLIENT-DISCONNECT` (499) + `GL-NDJSON-CURSOR-LOST` (500) registered.
+- §17: `info.version` 2.8.2→2.9.3 (absorbs Phases 4/5/9/11). `ErrorCode` enum gained 4 `GL-SHA-DB-*` + 2 `GL-NDJSON-*` codes. 7 new `Ndjson*` schemas + `NdjsonStream` reusable response. All 4 GET paths carry `application/x-ndjson` content variant + `after-seq`/`stream-id` query params.
+- §97: 6 new ACs (AC-67..AC-72) — opt-in, frame ordering, resume, disconnect, frame cap, Progress cadence. AC count 66→72.
+- Validation: `pyyaml.safe_load` clean; in-memory SQLite confirms 19 ConfigKv rows, 12 MigrationState markers.
 
 ---
 
@@ -103,4 +111,4 @@ Landed in folder 26 v2.1.0:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase B1** (BLOCKED on user — §07 App identity fields: confirm `Environment`, `Platform`, `OwnerEmail` shape). All numbered phases 0–10 complete. Next unblocked candidate = "Phase 11 — Deferred follow-ups pickup" (Phase 8 streaming ConfigKv/error-code/OpenAPI/AC seeding + Phase 9 PreviousHasError ACs/UI/NDJSON Header label exposure) — propose only on explicit user `next` after acknowledging.
+**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–11 complete. Next unblocked candidate = "Phase 12 — Phase 9 follow-ups" (§97 ACs for `Pipeline.PreviousHasError` state-transition matrix / back-fill correctness / single-statement write atomicity; §03 admin UI rendering of the four state labels; §04 NDJSON `Header` frame label exposure) — propose only on explicit user `next` after acknowledging.

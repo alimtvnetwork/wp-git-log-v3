@@ -1,6 +1,6 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.9.1  
+**Version:** 2.9.3  
 **Updated:** 2026-04-26 (Phase 5: schema-side `SshKey`/`SshNonce` shipped in §18 v2.9.1; existing 9 SSH codes now backed by canonical DDL)
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
@@ -95,6 +95,16 @@ Codes raised by the per-SHA SQLite handle pool when reading/writing `<dataDir>/<
 | GL-SHA-DB-QUOTA-EXCEEDED | 507 | Open-handle pool already at `MaxOpenShaDbHandles` and no idle handle is older than `ShaDbIdleCloseSec`; pool refused a new open. | Retry; tune `MaxOpenShaDbHandles` / `ShaDbIdleCloseSec` in `ConfigKv`. |
 
 ---
+
+## NDJSON streaming retrieval (see §04 §11)
+
+Codes specific to the `Accept: application/x-ndjson` opt-in streaming mode for read endpoints #5/#6/#7/#8/#9/#10. Both codes can appear either as a mid-stream `Error` frame (when the connection is still open and at least the `Header` frame has flushed) or as a conventional JSON envelope (when the failure happens before any frame is emitted).
+
+| Code | HTTP | Cause | Caller action |
+|------|------|-------|---------------|
+| GL-NDJSON-CLIENT-DISCONNECT | 499 | **Informational, server-only audit.** Mid-stream the client closed the TCP connection (EPIPE/ECONNRESET detected within 1 flush cycle per §04 §11.4 step 4). The server returns the per-SHA handle to the AC-52 LRU pool, abandons the cursor, and writes one `AuditTrail` row with this code. **No `Error` frame is sent** — the socket is gone. The 499 status is recorded in access logs only; clients never observe it. | None — this is an audit-side code. To resume from the last successfully delivered row, re-issue the request with `?after-seq=<Seq of last received Log/ErrorLog frame>` per §04 §11.6. |
+| GL-NDJSON-CURSOR-LOST | 500 | A `?after-seq=N` resume request (or a fresh stream that internally crossed a SHA boundary) found that the per-SHA `.db` file referenced by the original cursor has been pruned (AC-53) or the `ShaRegistry` row is gone. The server cannot satisfy the requested `Seq` range. Wire shape per §04 §11.6: `Header` → `Error{Code:"GL-NDJSON-CURSOR-LOST"}` → `End{Status:"Error"}`. | Discard the cursor and re-issue without `?after-seq=`; accept that rows in the lost SHA window are unrecoverable from logs alone (per §22 retention contract — pruning is expected). |
+
 
 ## Envelope (recap)
 

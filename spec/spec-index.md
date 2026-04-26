@@ -796,7 +796,7 @@
 | `spec/22-git-logs-v2/07-app-entity.md` | App Entity (v2) | 2.0.0 |
 | `spec/22-git-logs-v2/08-history-and-action.md` | History, PipelineAction, SystemEvent, and AuditTrail (v2) | 3.0.0 |
 | `spec/22-git-logs-v2/14-endpoint-examples.md` | Endpoint Examples (v2) | 2.2.0 |
-| `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.9.1 |
+| `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.9.3 |
 | `spec/22-git-logs-v2/16-seed-data.md` | Seed Data (v2) | 2.7.1 |
 | `spec/22-git-logs-v2/16-test-plan.md` | Test Plan (v2) — SUPERSEDED | 2.7.0 |
 | `spec/22-git-logs-v2/19-permission-matrix.md` | Permission Matrix (v2) | 2.3.0 |
@@ -817,9 +817,9 @@
 | `spec/22-git-logs-v2/34-phpunit-test-skeleton.md` | PHPUnit Test Skeleton (v2) | 2.7.0 |
 | `spec/22-git-logs-v2/35-reference-ci-yml.md` | Reference CI Workflow (.github/workflows/ci.yml) | 2.7.0 |
 | `spec/22-git-logs-v2/39-split-db-log-storage.md` | Split-DB Log Storage (per-SHA SQLite) | 1.0.0 |
-| `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 3.8.8 |
+| `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 3.8.11 |
 | `spec/22-git-logs-v2/98-changelog.md` | Changelog (v2) |  |
-| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.10 |
+| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.11 |
 
 ## 🗄️ App Database
 
