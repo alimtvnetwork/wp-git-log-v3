@@ -25,8 +25,9 @@ confirm zero contradictions before handing off to implementer AIs.
 | Failed re-check preserves prior `HasUpdate` | 05, 06 (`do-update` failure), 08, 97 | ✅ Consistent |
 | Hook returns < 50 ms; never blocks | 00, 07, 97 | ✅ Consistent |
 | Schema Rule 10/11/12 columns present | 04, 09, 97 | ✅ Consistent |
-| `UpdateStatus` enum values: `UpToDate`, `UpdateFound`, `UpdateApplied`, `Failed`, `Migrated` | 04, 05, 09 | ✅ Consistent (note: `Migrated` added in 04 §2; surfaces in 09 via `NewRepoUrl` flow described in 03/06/07) |
+| `UpdateStatus` enum values: `UpToDate`, `UpdateFound`, `UpdateApplied`, `Failed`, `Migrated` | 04 §2 + §6, 05, 09 | ✅ Consistent — Phase 20 #9 inlined TS + Go enum mirrors in §04 §6 with strict `parseUpdateStatus` / `ParseUpdateStatus` |
 | §97 v2.0.0 GWT rewrite consistency | 97, 98, 99 | ✅ Consistent — 20 GWT ACs (AC-UCM-01..20) + 34 legacy traceability notes |
+| Phase 20 #9 — TS enum + Go enum + JSON Schema 2020-12 wire format inlined in §04 | 04 §6/§7/§8, 09 | ✅ TS compiles under `tsc --strict`; JSON schema well-formed Draft 2020-12; positive instance validates; conditional `if/then` (HasUpdate ⇒ LatestVersion) correctly rejects bad data |
 
 ---
 
