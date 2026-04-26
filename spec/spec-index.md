@@ -614,9 +614,9 @@
 | `spec/13-generic-cli/19-shell-completion.md` | Shell Completion — Generic CLI Spec |  |
 | `spec/13-generic-cli/20-terminal-output-design.md` | Terminal Output Design — Rich CLI Report Formatting |  |
 | `spec/13-generic-cli/21-post-install-shell-activation.md` | Post-Install Shell Activation — Generic CLI Spec |  |
-| `spec/13-generic-cli/97-acceptance-criteria.md` | Acceptance Criteria — Generic CLI Creation Guidelines — Overview | 1.0.0 |
-| `spec/13-generic-cli/98-changelog.md` | Changelog — Generic CLI Creation Guidelines — Overview | 1.0.0 |
-| `spec/13-generic-cli/99-consistency-report.md` | Consistency Report — Generic CLI | 1.0.0 |
+| `spec/13-generic-cli/97-acceptance-criteria.md` | Acceptance Criteria — Generic CLI Creation Guidelines — Overview | 2.0.0 |
+| `spec/13-generic-cli/98-changelog.md` | Changelog — Generic CLI Creation Guidelines — Overview | 1.1.0 |
+| `spec/13-generic-cli/99-consistency-report.md` | Consistency Report — Generic CLI | 1.1.0 |
 
 ## 🔄 Update
 

@@ -1,7 +1,9 @@
 # Consistency Report — Generic CLI
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-24
+**Version:** 1.1.0  
+**Updated:** 2026-04-26
+
+> **v1.1.0 (Phase 16a):** §97 deepened from 5 generic structural ACs to 20 ACs total — added 15 module-specific GWT ACs (AC-06..AC-20) covering subcommand dispatch, flag parsing, three-layer config, multi-format output, exit-code contract, code-style limits, embedded help, date format centralization, constants discipline, verbose logging, progress tracking, batch execution, shell completion, terminal palette, and post-install doctor activation. §97 banner v1.0.0 → v2.0.0; §98 v1.0.0 → v1.1.0; spec-index updated.
 
 ---
 
