@@ -782,13 +782,13 @@
 | `spec/17-consolidated-guidelines/25-blind-ai-implementability-audit.md` | Blind-AI Implementability Audit — Critical Gap Analysis | 1.0.0 |
 | `spec/17-consolidated-guidelines/26-blind-ai-audit-v2.md` | Blind-AI Implementability Audit — v2.0 (Post Phase 1–5) | 2.0.0 |
 | `spec/17-consolidated-guidelines/27-linter-authoring-guide.md` | 27 — Linter Authoring Guide | 1.0.0 |
-| `spec/17-consolidated-guidelines/28-distribution-and-runner.md` | 28 — Distribution and Runner (Consolidated) | 1.0.0 |
+| `spec/17-consolidated-guidelines/28-distribution-and-runner.md` | 28 — Distribution and Runner (Consolidated) | 1.1.0 |
 | `spec/17-consolidated-guidelines/29-blind-ai-audit-v3.md` | 29 — Blind-AI Implementability Audit — v3.0 (Post Phase 6A/6B/6D) | 3.0.0 |
 | `spec/17-consolidated-guidelines/30-readme-improvement-suggestions.md` | README Improvement Suggestions |  |
 | `spec/17-consolidated-guidelines/31-full-tree-ai-audit-v4.md` | 31 — Full Spec-Tree AI-Implementability Audit (v4.0) | 4.0.0 |
-| `spec/17-consolidated-guidelines/97-acceptance-criteria.md` | Acceptance Criteria — Consolidated Guidelines | 2.0.0 |
-| `spec/17-consolidated-guidelines/98-changelog.md` | Changelog — Consolidated Guidelines | 2.0.0 |
-| `spec/17-consolidated-guidelines/99-consistency-report.md` | Consistency Report — Consolidated Guidelines | 4.0.0 |
+| `spec/17-consolidated-guidelines/97-acceptance-criteria.md` | Acceptance Criteria — Consolidated Guidelines | 2.1.0 |
+| `spec/17-consolidated-guidelines/98-changelog.md` | Changelog — Consolidated Guidelines | 2.1.0 |
+| `spec/17-consolidated-guidelines/99-consistency-report.md` | Consistency Report — Consolidated Guidelines | 4.1.0 |
 
 ## 🔌 WP Plugin How-To
 
