@@ -1,8 +1,8 @@
 # Consistency Report: Error Code Registry
 
-**Version:** 3.2.0  
-**Generated:** 2026-03-31  
-**Health Score:** 100/100 (A+)
+**Version:** 3.3.0  
+**Generated:** 2026-04-26  
+**Health Score:** 100/100 (A+) — Phase 21 deepening sweep
 
 ---
 
@@ -10,25 +10,47 @@
 
 | # | File | Status |
 |---|------|--------|
-| 1 | `00-overview.md` | ✅ Present |
-| 2 | `01-registry.md` | ✅ Present |
-| 3 | `02-integration-guide.md` | ✅ Present |
-| 4 | `03-collision-resolution-summary.md` | ✅ Present |
-| 5 | `04-error-code-utilization-report.md` | ✅ Present |
-| 6 | `05-overlap-validator.md` | ✅ Present |
-| 7 | `error-codes-master.json` | ✅ Present |
+| 00 | `00-overview.md` | ✅ Present |
+| 01 | `01-registry.md` | ✅ Present |
+| 02 | `02-integration-guide.md` | ✅ Present |
+| 03 | `03-collision-resolution-summary.md` | ✅ Present |
+| 04 | `04-error-code-utilization-report.md` | ✅ Present |
+| 05 | `05-overlap-validator.md` | ✅ Present |
+| 97 | `97-acceptance-criteria.md` | ✅ Present |
+| 98 | `98-changelog.md` | ✅ Present |
 
-**Subfolders:**
+**Total:** 8 files (excluding this report)
 
-| # | Folder | `00-overview.md` | `99-consistency-report.md` | Status |
-|---|--------|-------------------|----------------------------|--------|
-| 1 | `07-schemas/` | ✅ | ✅ | ✅ Compliant |
-| 2 | `08-linter-scripts/` | ✅ | ✅ | ✅ Compliant |
-| 3 | `09-templates/` | ✅ | ✅ | ✅ Compliant |
+---
+
+## Naming Convention Compliance
+
+| Check | Result |
+|-------|--------|
+| Lowercase kebab-case | ✅ All files compliant |
+| Numeric prefixes | ✅ All files prefixed |
+
+---
+
+## Cross-Reference Validation
+
+No external cross-references detected. ✅
+
+> Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry` to verify.
 
 ---
 
 ## Summary
 
 - **Errors:** 0
+- **Warnings:** 0
+- **Observations:** 0
 - **Health Score:** 100/100 (A+)
+
+---
+
+## Validation History
+
+| Date | Version | Action |
+|------|---------|--------|
+| 2026-04-26 | 3.3.0 | Phase 21 deepening sweep — auto-promoted to gold-standard 5-section shape |

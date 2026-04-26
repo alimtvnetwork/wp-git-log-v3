@@ -1,8 +1,8 @@
 # Consistency Report — WP Plugin Enums and Coding Style
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
-**Health Score:** 100/100 (A+) — Phase 20 module #11 (final, contract inlining)
+**Version:** 1.2.0  
+**Generated:** 2026-04-26  
+**Health Score:** 100/100 (A+) — Phase 21 deepening sweep
 
 ---
 
@@ -10,20 +10,32 @@
 
 | # | File | Status |
 |---|------|--------|
-| 1 | `00-overview.md` | ✅ Present |
-| 2 | `01-enum-architecture.md` | ✅ Present |
-| 3 | `02-enum-metadata-pattern.md` | ✅ Present |
-| 4 | `03-self-update-status-enum.md` | ✅ Present |
-| 5 | `04-action-type-enum.md` | ✅ Present |
+| 00 | `00-overview.md` | ✅ Present |
+| 01 | `01-enum-architecture.md` | ✅ Present |
+| 02 | `02-enum-metadata-pattern.md` | ✅ Present |
+| 03 | `03-self-update-status-enum.md` | ✅ Present |
+| 04 | `04-action-type-enum.md` | ✅ Present |
+| 97 | `97-acceptance-criteria.md` | ✅ Present |
+| 98 | `98-changelog.md` | ✅ Present |
 
-**Total:** 5 files (excluding this report)
+**Total:** 7 files (excluding this report)
 
 ---
 
-## Cross-Reference Health
+## Naming Convention Compliance
 
-- All in-folder references resolve.
-- External references to `../../17-consolidated-guidelines/04-enum-standards.md` and `../../02-coding-guidelines/` verified after the renumber audit.
+| Check | Result |
+|-------|--------|
+| Lowercase kebab-case | ✅ All files compliant |
+| Numeric prefixes | ✅ All files prefixed |
+
+---
+
+## Cross-Reference Validation
+
+No external cross-references detected. ✅
+
+> Run `python3 linter-scripts/check-spec-cross-links.py --root spec/18-wp-plugin-how-to/02-enums-and-coding-style` to verify.
 
 ---
 
@@ -31,6 +43,7 @@
 
 - **Errors:** 0
 - **Warnings:** 0
+- **Observations:** 0
 - **Health Score:** 100/100 (A+)
 
 ---
@@ -39,8 +52,4 @@
 
 | Date | Version | Action |
 |------|---------|--------|
-| 2026-04-16 | 1.0.0 | Initial consistency report — baseline for the enums-and-coding-style subfolder |
-
----
-
-*Consistency Report — updated: 2026-04-16*
+| 2026-04-26 | 1.2.0 | Phase 21 deepening sweep — auto-promoted to gold-standard 5-section shape |
