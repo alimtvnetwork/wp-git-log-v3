@@ -78,6 +78,51 @@ Each issue follows the standardized triage format mandated by `spec/25-app-issue
 
 ---
 
+## Normative Contract — Issue Record Schema
+
+Every `P2-GL-NN` finding in this report MUST conform to the JSON schema
+below. The audit linter (`linter-scripts/check-issue-records.py`) parses this
+file, extracts each issue, and validates it against the schema before the
+report is allowed to publish.
+
+```text
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spec/25-app-issues/01-phase-2-git-logs-audit/issue.schema.json",
+  "title": "Phase2GitLogsIssue",
+  "type": "object",
+  "required": ["id", "title", "severity", "category", "status",
+               "reproduction", "cause", "fix", "prevention"],
+  "properties": {
+    "id":       { "type": "string", "pattern": "^P2-GL-[0-9]{2}$" },
+    "title":    { "type": "string", "minLength": 1 },
+    "severity": { "enum": ["Critical", "High", "Medium", "Low"] },
+    "category": {
+      "enum": ["Coverage", "Governance", "Correctness", "Security",
+               "Maintainability", "Testability", "Scalability",
+               "Edge Cases"]
+    },
+    "status":   { "enum": ["Open", "In Progress", "Resolved", "Wontfix"] },
+    "open_item_ref": { "type": "string", "pattern": "^OI-[A-Z]+-[0-9]{2}$" },
+    "reproduction":  { "type": "string", "minLength": 1 },
+    "cause":         { "type": "string", "minLength": 1 },
+    "fix":           { "type": "string", "minLength": 1 },
+    "prevention":    { "type": "string", "minLength": 1 },
+    "audit_target":  { "const": "spec/_archive/21-git-logs-v1/" },
+    "phase":         { "const": 2 }
+  },
+  "additionalProperties": false
+}
+```
+
+> **Enforcement.** Any finding missing a Reproduction / Cause / Fix / Prevention
+> block, using a non-canonical category, or referring to an unknown
+> `OI-*` open item fails CI and blocks the report from being marked
+> "Production-Ready". Counts in the Totals row MUST match the actual
+> per-severity tallies in the table above.
+
+---
+
 ## Detailed Findings
 
 Each finding below uses the mandatory triage layout (Reproduction / Cause / Fix / Prevention) from `spec/25-app-issues/00-overview.md`.
