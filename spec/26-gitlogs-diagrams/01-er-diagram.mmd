@@ -9,9 +9,7 @@ erDiagram
     GitProfile ||--o{ Repo : contains
     Repo ||--o{ RepoVersion : versions
     RepoVersion ||--o{ Pipeline : runs
-    RepoVersion ||--o{ ShaRegistry : seenShas
-    Pipeline ||--o{ ShaRegistry : lastSha
-    LogSeverity ||--o{ ShaRegistry : lastSeverity
+    Pipeline ||--o{ ShaRegistry : sha
     Profile ||--o{ App : owns
     AppStatus ||--o{ App : status
     App ||--o{ AppLink : links
