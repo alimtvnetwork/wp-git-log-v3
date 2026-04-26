@@ -58,6 +58,8 @@ GWT_RX    = re.compile(r"\*\*Given\*\*.*?\*\*When\*\*.*?\*\*Then\*\*", re.S | re
 AC_RX     = re.compile(r"(?:^|\n)\s*###?\s*AC[-\s]?[A-Z\d-]+", re.I)
 LINK_RX   = re.compile(r"\[([^\]]+)\]\(([^)#]+\.md)(?:#[^)]*)?\)")
 CODE_BLOCK_RX = re.compile(r"```(\w+)?\n(.*?)```", re.S)
+FRONTMATTER_RX = re.compile(r"\A---\n(.*?)\n---\n", re.S)
+KIND_RX        = re.compile(r"^kind:\s*([A-Za-z0-9_-]+)\s*$", re.M)
 
 # ---------------- code surface ----------------
 def collect_code_index() -> str:
