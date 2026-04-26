@@ -1,7 +1,7 @@
 # SSH Key Authentication (v2.x)
 
-**Version:** 2.7.0  
-**Updated:** 2026-04-25  
+**Version:** 2.9.1  
+**Updated:** 2026-04-26 (Phase 5: SshKey + SshNonce now in canonical §18 DDL; SshAuthMode + SshNonceJanitorBatch in ConfigKv seeds)  
 **Status:** Lane B preferred mechanism. Coexists with TempToken/Token (deprecated, removal in v3.0.0).
 
 ---
