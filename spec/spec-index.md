@@ -698,9 +698,9 @@
 | `spec/16-generic-release/06-release-metadata.md` | 06 — Release Metadata |  |
 | `spec/16-generic-release/07-known-issues-and-fixes.md` | 07 — Release Pipeline: Known Issues, Root Causes & Fixes |  |
 | `spec/16-generic-release/08-version-pinned-release-installers.md` | 08 — Version-Pinned Release Installers | 1.0.0 |
-| `spec/16-generic-release/97-acceptance-criteria.md` | Acceptance Criteria — Generic Release Pipeline Specification | 1.0.0 |
-| `spec/16-generic-release/98-changelog.md` | Changelog — Generic Release Pipeline Specification | 1.0.0 |
-| `spec/16-generic-release/99-consistency-report.md` | Consistency Report — Generic Release | 1.0.0 |
+| `spec/16-generic-release/97-acceptance-criteria.md` | Acceptance Criteria — Generic Release Pipeline Specification | 2.0.0 |
+| `spec/16-generic-release/98-changelog.md` | Changelog — Generic Release Pipeline Specification | 2.0.0 |
+| `spec/16-generic-release/99-consistency-report.md` | Consistency Report — Generic Release | 2.0.0 |
 
 ## 📋 Consolidated Guidelines
 
