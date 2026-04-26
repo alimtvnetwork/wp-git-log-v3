@@ -215,9 +215,3 @@ Second module deepening pass:
 - Phase B1 remains blocked on user.
 
 On next `next`: take **Phase 16c (§22 git-logs §97 depth pass)** unless you redirect.
-- **Phase 16b** — Deepen **§14 update §97** (currently 5 generic scaffold ACs; module covers update check mechanism — high-value ~10-15 module-specific ACs).
-- **Phase 16c** — Deepen **§22 git-logs §97** follow-up pass on AC-04/AC-05/AC-25/AC-34 (left lean in Phase 13).
-- **Phase 16d** — Deepen another high-traffic module flagged in `mem://specs/full-tree-audit-v4.md` (e.g. §15 distribution-and-runner, §16 generic-release, §17 consolidated-guidelines, §27 spec-toolchain, §28 universal-ci-cli — all currently scaffolded with 5 generic ACs).
-- Phase B1 remains blocked on user.
-
-On next `next`: take **Phase 16b (§14 update §97 deepen)** unless you redirect.
