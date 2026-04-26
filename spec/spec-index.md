@@ -530,8 +530,8 @@
 | `spec/06-seedable-config-architecture/97-acceptance-criteria.md` | Seedable Config Architecture — Acceptance Criteria | 4.0.0 |
 | `spec/06-seedable-config-architecture/97-changelog.md` | Seedable Config Architecture — Changelog | 3.2.0 |
 | `spec/06-seedable-config-architecture/98-acceptance-criteria.md` | Seedable Config Architecture: Acceptance Criteria | 3.2.0 |
-| `spec/06-seedable-config-architecture/98-changelog.md` | Changelog — Seedable Config Architecture + Changelog Versioning (also known as CW Config) | 1.0.0 |
-| `spec/06-seedable-config-architecture/99-consistency-report.md` | Consistency Report: Seedable Config Architecture | 3.2.0 |
+| `spec/06-seedable-config-architecture/98-changelog.md` | Changelog — Seedable Config Architecture + Changelog Versioning (also known as CW Config) | 4.0.0 |
+| `spec/06-seedable-config-architecture/99-consistency-report.md` | Consistency Report: Seedable Config Architecture | 4.0.0 |
 
 ## 🎨 Design System
 
