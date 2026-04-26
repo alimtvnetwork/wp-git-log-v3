@@ -8,15 +8,15 @@
 | File | Present | Notes |
 |------|---------|-------|
 | 00-overview.md | ✅ | Index + inventory (v2.0.0) |
-| 01-er-diagram.mmd | ✅ | erDiagram — only place data shape lives |
+| 01-er-diagram.mmd / .svg | ✅ | erDiagram — only place data shape lives. SVG re-rendered Phase 10 v2.1.0 (313 KB, reflects v2.9.0 split-DB shape). |
 | ~~02-domain-design.mmd~~ | 🗑️ | Removed v2.0.0 — duplicated 01; slot locked |
 | ~~03-endpoints-write.mmd~~ | 🗑️ | Removed v2.0.0 — folded into 09; slot locked |
 | ~~04-endpoints-read.mmd~~ | 🗑️ | Removed v2.0.0 — folded into 09; slot locked |
-| 05-auth-validation.mmd | ✅ | flowchart TD + diagram-type header |
-| 06-permission-flow.mmd | ✅ | flowchart LR, redrawn v2.0.0 with classDef colors + GL-* codes |
-| 07-rate-limit-flow.mmd | ✅ | sequenceDiagram + diagram-type header |
-| 08-encryption-v3-flow.mmd | ✅ | v3 deferred + diagram-type header |
-| 09-endpoints-mindmap.mmd | ✅ | **NEW v2.0.0** — mindmap, all 8 endpoints with verb/path/body/response/permission/audit/errors |
+| 05-auth-validation.mmd / .svg | ✅ | flowchart TD + diagram-type header. SVG re-rendered Phase 10 v2.1.0 (177 KB). |
+| 06-permission-flow.mmd / .svg | ✅ | flowchart LR, redrawn v2.0.0 with classDef colors + GL-* codes. SVG re-rendered Phase 10 v2.1.0 (113 KB). |
+| 07-rate-limit-flow.mmd / .svg | ✅ | sequenceDiagram + diagram-type header. SVG re-rendered Phase 10 v2.1.0 (35 KB). |
+| 08-encryption-v3-flow.mmd / .svg | ✅ | v3 deferred + diagram-type header. SVG re-rendered Phase 10 v2.1.0 (34 KB). |
+| 09-endpoints-mindmap.mmd / .svg | ✅ | mindmap, all 8 endpoints with verb/path/body/response/permission/audit/errors. SVG re-rendered Phase 10 v2.1.0 (182 KB). |
 | 97-acceptance-criteria.md | ✅ | AC-D-01, AC-D-05..AC-D-11 (AC-D-02/03/04 retired) |
 | 98-changelog.md | ✅ | v2.0.0 |
 | 99-consistency-report.md | ✅ | This file |
