@@ -76,4 +76,4 @@ This subsystem is **ready for hand-off** to an implementer AI.
 
 ---
 
-*Consistency Report — v2.0.0 — 2026-04-26*
+*Consistency Report — v2.1.0 — 2026-04-26*
