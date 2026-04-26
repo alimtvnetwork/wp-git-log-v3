@@ -86,4 +86,4 @@ Landed in v3.8.4:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 3** (Split-DB Error Codes & Cross-Section Updates)
+**Top pending = Phase 4** (Split-DB Doc Closure)
