@@ -1,7 +1,7 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.8.3  
-**Updated:** 2026-04-25  
+**Version:** 2.9.2  
+**Updated:** 2026-04-26 (Phase 8: NDJSON streaming retrieval format defined for endpoints #5/#6/#7/#8/#9/#10 — opt-in via `Accept: application/x-ndjson`, frame schema, error-mid-stream handling, backpressure & flush cadence, sentinel close frame)
 **Namespace:** `/wp-json/git-logs/v2`
 
 ---
