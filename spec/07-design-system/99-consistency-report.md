@@ -1,7 +1,9 @@
 # Consistency Report
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-24
+**Version:** 3.3.0  
+**Updated:** 2026-04-26
+
+> **v3.3.0 update (Phase 15a):** §97 partially converted from table-row format to GWT — Theme & Variables section (AC-001..AC-006) deepened from ~80 chars/row to 994-4231 chars/AC (12-50× depth) with full G/W/T bodies + cross-refs to `01`/`02`/`06`/`src/index.css`/`tailwind.config.ts`/WCAG 2.1. AC IDs unchanged (still AC-001..AC-034 sequential). Sections AC-007..AC-034 (Typography, Motion & Transitions, Code Blocks, Navigation, Page Consistency) remain in table format pending Phase 15b..15e. Banner v3.2.0 → v3.3.0.
 
 ---
 
