@@ -1,7 +1,7 @@
 # Changelog — Phase 2 — Enums and Coding Style
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/18-wp-plugin-how-to/02-enums-and-coding-style/`
 
 ---
@@ -16,6 +16,18 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26 (Phase 20 contract inlining, module #11 — final)
+- **Added** normative Reference Implementation block in `00-overview.md`:
+  full `SelfUpdateStatusType` PHP 8.1+ backed enum (7 cases, `JsonSerializable`,
+  per-case `is{Case}()` helpers, `isEqual`/`isOtherThan`/`isAnyOf`,
+  `match`-based `label()`, strict `parse()` that throws on unknown).
+- **Added** TypeScript wire-format mirror (`as const` object + type-guard) and
+  Draft 2020-12 JSON Schema for the wire form.
+- **Added** forbidden-shapes table (6 lint-enforced rules).
+- **Verified** TS mirror typechecks under `tsc --strict`; JSON Schema rejects
+  unknown strings, integers, and null inputs.
+- **Added** version banner (v1.1.0) to overview previously missing one.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
