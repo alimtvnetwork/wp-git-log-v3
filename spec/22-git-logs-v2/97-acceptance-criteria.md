@@ -405,6 +405,46 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 
 ---
 
+## Section J — NDJSON Streaming Retrieval (v2.9.3) — NEW in Phase 11
+
+### AC-67 — NDJSON opt-in via Accept header  `[active]`
+- **Given** a client issues a GET to one of `/get-logs`, `/get-pipeline-logs`, `/get-error-logs`, `/get-pipeline-error-logs` (endpoints #5–#10 per §04 §11.7)
+- **When** the request carries `Accept: application/x-ndjson` (alone, or with a lower q-value alternative such as `application/x-ndjson, application/json;q=0.5`)
+- **Then** the server MUST respond with `Content-Type: application/x-ndjson; charset=utf-8`, `Transfer-Encoding: chunked`, `X-Content-Type-Options: nosniff`, and MUST NOT set `Content-Length`; AND if the same request is sent without the header (or with `Accept: application/json`), the server MUST return the legacy `LogPage` / `ErrorLogPage` JSON envelope per §17 OpenAPI without setting any of the streaming headers; AND for write endpoints #1–#4 (`/append-log`, `/fixed-log`, `/clear-log`, `/clear-log-all`) the `Accept: application/x-ndjson` header MUST be silently ignored — these endpoints always return the standard JSON `AckResponse`.
+- **Verifies:** §04 §11.2, §04 §11.7, §17 (paths `/get-*` content variants).
+
+### AC-68 — Frame ordering and discriminator  `[active]`
+- **Given** an NDJSON stream is opened against any of the 6 read endpoints
+- **When** the server flushes frames over the socket
+- **Then** exactly one `Header` frame MUST be the first line, with `Schema:"git-logs-v2/ndjson@1"` and a non-empty UUID `StreamId`; AND zero or more `Log` / `ErrorLog` / `Progress` frames MUST follow in cursor order with monotonically increasing `Seq` (no gaps, no duplicates within a single uninterrupted stream); AND at most one `Error` frame MAY appear; AND exactly one `End` frame MUST be the last line with `Status ∈ {Complete, Truncated, Error}`; AND every line MUST carry a `Type` discriminator matching one of the six values declared in `components.schemas.NdjsonFrame`; AND lines MUST be separated by exactly one LF (`\n`, U+000A) — never CRLF; AND the server MUST NOT split a single JSON object across `\n`.
+- **Verifies:** §04 §11.3, §04 §11.4, §17 `components.schemas.NdjsonFrame` discriminator mapping.
+
+### AC-69 — Resume via after-seq + stream-id  `[active]`
+- **Given** an earlier stream returned `End{Status:"Truncated", NextAfterSeq:N}` — typically because `ConfigKv.NdjsonMaxRowsPerStream` (default `1000000`) was hit — or the client recorded the last successfully received `Seq` before disconnect
+- **When** the client re-issues the same request with `?after-seq=N` (and optionally `?stream-id=<original Header.StreamId UUID>` for audit correlation)
+- **Then** the new stream MUST emit a fresh `Header` frame with a NEW `StreamId` and resume row emission strictly after `Seq=N` (exclusive); AND if the per-SHA `.db` file referenced by the original cursor has since been pruned per AC-53, the response MUST be `Header` → `Error{Code:"GL-NDJSON-CURSOR-LOST"}` → `End{Status:"Error"}` per §15 v2.9.3; AND `?after-seq` and `?stream-id` MUST be ignored on legacy `application/json` responses (no error, no behavior change) so accidental presence does not break non-streaming clients.
+- **Verifies:** §04 §11.6, §15 (`GL-NDJSON-CURSOR-LOST`), AC-53 (prune lifecycle).
+
+### AC-70 — Client disconnect handling (GL-NDJSON-CLIENT-DISCONNECT)  `[active]`
+- **Given** a streaming response is in progress with the per-SHA SQLite handle open via the AC-52 LRU pool
+- **When** the client closes the TCP connection mid-stream (EPIPE / ECONNRESET / browser tab close)
+- **Then** the server MUST detect the broken pipe within 1 flush cycle (≤ `NdjsonProgressEveryMs` worst case, default 2000 ms); AND MUST return the per-SHA handle to the AC-52 pool (no leak); AND MUST abandon the cursor without retry; AND MUST write exactly one `AuditTrail` row with `Code="GL-NDJSON-CLIENT-DISCONNECT"` (HTTP 499, informational, server-side audit only); AND MUST NOT attempt to send any further frames (the socket is gone — no `Error` frame, no `End` frame).
+- **Verifies:** §04 §11.4 step 4, §15 (`GL-NDJSON-CLIENT-DISCONNECT`), AC-52 (handle pool).
+
+### AC-71 — Per-frame size cap and truncation  `[active]`
+- **Given** the server is about to emit a `Log` or `ErrorLog` frame whose serialized JSON exceeds `ConfigKv.NdjsonMaxFrameBytes` (default `262144` = 256 KiB)
+- **When** the frame is composed
+- **Then** the server MUST truncate `LogText` to fit within the cap (preserving valid UTF-8 — never emit a partial multi-byte sequence), MUST add `"Truncated":true` to the same frame (mirroring AC-27 ingest-side `Warn` truncation semantics), and MUST emit the line atomically with a single trailing `\n`; AND the server MUST NOT split the object across multiple lines; AND `Seq` numbering MUST treat the truncated frame as one row (no gap, no duplicate).
+- **Verifies:** §04 §11.4 step 3, §04 §11.5 (`NdjsonMaxFrameBytes`), AC-27 (ingest truncation parity).
+
+### AC-72 — Progress frame cadence  `[active]`
+- **Given** a long-running stream is walking the per-SHA cursor
+- **When** either `ConfigKv.NdjsonProgressEveryRows` rows have been emitted since the last `Progress` (default `10000`) OR `ConfigKv.NdjsonProgressEveryMs` milliseconds have elapsed since the last `Progress` (default `2000`), whichever fires first
+- **Then** the server MUST emit one `Progress` frame carrying `Seq` (continuing the monotonic sequence), `RowsEmitted` (cumulative since `Header`), `ElapsedMs` (cumulative since `Header`), and OPTIONALLY `CurrentSha` (the SHA the cursor is currently inside); AND if either ConfigKv key is set to `0`, that trigger MUST be disabled (rows-only or time-only progress); AND if both are `0`, NO `Progress` frames MUST be emitted at all.
+- **Verifies:** §04 §11.5 (`NdjsonProgressEveryRows`, `NdjsonProgressEveryMs`), §04 §11.3 `Progress` frame schema.
+
+---
+
 ## Cross-References
 
 - [Module overview](./00-overview.md)
