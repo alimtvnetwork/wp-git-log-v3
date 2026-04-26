@@ -1,8 +1,10 @@
 # Consistency Report: C# Coding Standards
 
-**Version:** 3.2.0  
-**Generated:** 2026-04-02  
+**Version:** 4.0.0
+**Generated:** 2026-04-26
 **Health Score:** 100/100 (A+)
+
+> **v4.0.0 update (Phase 16m):** §97 fully rewritten from 38 stub checkbox criteria (AC-01..AC-07) to **20 module-specific Given/When/Then ACs** (AC-CS-01..AC-CS-20). New ACs codify C#-specific rules layered on cross-language parent: explicit AC-CL-* inheritance with documented AC-CL-12 waiver for `PascalCase.cs` files, .NET 8+ + `LangVersion=latest` + `Nullable=enable` + `TreatWarningsAsErrors=true`, .NET naming guidelines (no SCREAMING_SNAKE_CASE constants), acronym casing rules differing from Go (first-only for ≥3, both-caps for 2), boolean prefix discipline, boolean-flag-branching FORBIDDEN with documented exemptions, one-type-per-file `.NET` convention, body ≤ 15 LOC + ≤ 3 params, `Async` suffix + `CancellationToken` last, `.Result`/`.Wait` FORBIDDEN, `Task.WhenAll` for independent awaits, `Result<T>`/`OneOf<T,Error>` for expected failures, `catch (Exception)` FORBIDDEN, `ArgumentNullException.ThrowIfNull` + `nameof()`, `record` over `class` for DTOs + `init` setters, `object` returns FORBIDDEN + pattern matching, exhaustive `switch` expressions with `UnreachableException`, magic-value extraction, Roslyn + StyleCop + `.editorconfig` zero-warning gate, self-application doctest. Legacy 38 stubs preserved as AC-CS-LEGACY-01..07 at end of §97. Module-level tree-health: 100/100 (A+).
 
 ---
 
