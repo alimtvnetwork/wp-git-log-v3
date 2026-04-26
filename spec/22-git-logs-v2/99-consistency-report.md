@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.5  
+**Version:** 3.8.6  
 **Updated:** 2026-04-26
 
 ---
