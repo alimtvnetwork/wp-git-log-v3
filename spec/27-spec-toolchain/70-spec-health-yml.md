@@ -9,7 +9,13 @@
 
 ## Purpose
 
-GitHub Actions workflow wiring the spec-health gate. Triggers on every push to `main` and every pull request that touches `spec/`, the gate script (§05), or the index generator (§10). Fails the build when the tree-health score drops below threshold.
+GitHub Actions workflow wiring three spec-quality gates in series:
+
+1. **Spec tree health gate** (§05) — score threshold.
+2. **Spec cross-link gate** (§01) — zero broken internal markdown links.
+3. **Trace-map regression gate** (§15) — AC coverage, drift, orphan code.
+
+Triggers on every push to `main` and every pull request that touches `spec/`, any linter script, or this workflow file. Fails the build when any gate reports a regression.
 
 ## Trigger surface
 
