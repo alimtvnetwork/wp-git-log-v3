@@ -217,6 +217,16 @@ Expanded §15 §97 from 5 generic scaffold ACs (AC-01..AC-05 retained as univers
 
 ---
 
+## ✅ Phase 16d-ii — §16 generic-release §97 deepen (DONE, v2.0.0)
+
+Expanded §16 §97 from 5 generic scaffold ACs (AC-01..AC-05 retained) to **20 module-specific GWT ACs** (AC-06..AC-20 added). Harmonized with §15 AC-12/13/16/18 — citation-only, no edit propagation. §16 is the upstream generic blueprint; §15 is the concrete consumer.
+- §16 §97 banner v1.0.0 → **v2.0.0**.
+- New ACs: AC-06 cross-comp matrix (6 minimum targets, `CGO_ENABLED=0`, build-once); AC-07 tag-driven trigger (no `main`/PR/schedule, SHA-pinned); AC-08 atomic publication (draft → verify-roundtrip → promote, no auto-publish to npm/PyPI); AC-09 asset naming (`<binary>-<version>-<os>-<arch>.<ext>`, flat archive, Go runtime tokens, `0755`, no symlinks); AC-10 release-metadata.json schema (required keys, `-ldflags -X` version, assets-superset-of-checksums); AC-11 version-pinned installers (no `/releases/latest` probe, spec-first ordering, deterministic re-gen); AC-12 SHA-256 protocol (`sha256sum`-compat, install-time verify before extract, signing-tool-agnostic); AC-13 PATH activation (idempotent fenced-marker block, `doctor` self-heal, no system-wide without `--system`); AC-14 terminal output (stderr for progress, `NO_COLOR` honored, color-when-TTY); AC-15 known-issues ledger (`REL-NNN` IDs, prevention rule REQUIRED in same fix PR, generalizable rules promote to siblings); AC-16 Mermaid diagrams (parseable by `mmdc`, cover all six referenced specs, `.mmd` source separate from `.svg` artifact); AC-17 generic-vs-concrete separation (placeholder convention preserved, consumer ACs cite generic ACs, deviations require justification); AC-18 Bash+PS installer parity (functionally equivalent, OS-conventional defaults, shared 6-flag surface, OS-mismatch detection, third installer flavor forbidden); AC-19 cross-refs intact + bi-directional (back-refs to §12/§13 encouraged); AC-20 sibling files versioned + content-aligned (§08 marked authoritative wins over §03 on installer questions).
+- Lockstep: §98 v2.0.0 row added + §99 v1.0.0 → v2.0.0 + spec-index 3 cells bumped.
+- Tree-health: 100/100 (A+) maintained.
+
+---
+
 ## 🚧 Blocked (awaiting user decision)
 - **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
 
@@ -226,11 +236,10 @@ Expanded §15 §97 from 5 generic scaffold ACs (AC-01..AC-05 retained as univers
 - ✅ done · ⏳ pending · 🚧 blocked
 
 ## Next-pointer
-**Phases 16a + 16b + 16c + 16d-i complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT). **Unblocked candidates remaining:**
-- **Phase 16d-ii** — Deepen **§16 generic-release §97** (currently 5-AC scaffold; covers tag-driven release pipeline + artifact set + checksums — many overlap-points with §15 AC-12/13/16 to harmonize).
-- **Phase 16d-iii** — Deepen **§17 consolidated-guidelines §97** (5-AC scaffold; the umbrella-policy module).
-- **Phase 16d-iv** — Deepen **§27 spec-toolchain §97** (5-AC scaffold; covers the `linter-scripts/` toolchain itself).
+**Phases 16a + 16b + 16c + 16d-i + 16d-ii complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT). **Unblocked candidates remaining:**
+- **Phase 16d-iii** — Deepen **§17 consolidated-guidelines §97** (5-AC scaffold; umbrella-policy module).
+- **Phase 16d-iv** — Deepen **§27 spec-toolchain §97** (5-AC scaffold; covers the `linter-scripts/` toolchain itself — many self-referential ACs).
 - **Phase 16d-v** — Deepen **§28 universal-ci-cli §97** (5-AC scaffold).
 - Phase B1 remains blocked on user.
 
-On next `next`: take **Phase 16d-ii (§16 generic-release §97 deepen)** unless you redirect.
+On next `next`: take **Phase 16d-iii (§17 consolidated-guidelines §97 deepen)** unless you redirect.
