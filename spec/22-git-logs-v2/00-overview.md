@@ -1,11 +1,22 @@
+---
+kind: future-spec
+description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed). The actual PHP plugin code lives in a downstream WordPress-plugin repo, not in this spec-only repo. Exempt from drift findings that flag missing PHP / SQL / REST endpoint files.
+---
+
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.8.5  
-**Updated:** 2026-04-26 (Phase 4: §39 inventory row refreshed for v2.9.0 path layout; AC-49..AC-53 promoted to active in §97; root spec-index bumped)  
-**Status:** Draft  
+**Version:** 3.8.6  
+**Updated:** 2026-04-26 (Phase 27 drift sweep: future-spec frontmatter added so drift gate stops flagging missing downstream PHP plugin code as a regression)  
+**Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
 **Supersedes:** `spec/_archive/21-git-logs-v1/` (legacy v1 retained for history)
+
+---
+
+## Drift Acknowledgment (Phase 27 — 2026-04-26)
+
+This module is the **authoritative contract** for the Git Logs WordPress plugin (SQLite root DB, REST endpoints, App-Password auth, etc.). The actual plugin implementation (PHP files, SQLite migrations, REST handlers) lives in a **separate downstream WordPress-plugin repository**, not in this spec-only repo. The local code index only contains `linter-scripts/`. Drift findings of the form "spec describes WP plugin but no PHP/SQL files exist locally" are **expected and accepted**. The `kind: future-spec` frontmatter signals the audit to skip them. Until the downstream repo is wired into a unified codebase, an alignment score of N/A (not 0) is correct.
 
 ---
 

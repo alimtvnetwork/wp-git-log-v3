@@ -1,10 +1,15 @@
 # Changelog — Go Binary Deploy — Overview
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/12-cicd-pipeline-workflows/02-go-binary-deploy/`
 
 ---
+
+## v1.1.0 — 2026-04-26 (Phase 27 drift sweep)
+
+- **Added** `kind: future-spec` frontmatter + Drift Acknowledgment section to `00-overview.md`. Acknowledges that referenced application/workflow code lives in downstream repos and is intentionally absent from this spec-only repo's local code index, so audit `drift` findings of the form "spec references file that doesn't exist" are expected and accepted.
+- **Bumped** banner v3.2.0 → v3.3.0 (minor; metadata + acknowledgment, no contract change).
 
 ## Format
 

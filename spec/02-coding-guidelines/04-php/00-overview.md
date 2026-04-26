@@ -1,10 +1,25 @@
+---
+kind: future-spec
+description: Forward-looking PHP coding standards for the RiseupAsia namespace. The implementation lives in downstream repositories (WordPress plugins, PHP libraries) and is intentionally NOT present in this spec-only repo. Exempt from drift findings that flag missing PHP source files.
+---
+
 # PHP Standards
 
-**Version:** 3.2.0  
-**Status:** Active  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Status:** Active (future-spec — implementation lives downstream)  
+**Updated:** 2026-04-26  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
+
+---
+
+## Drift Acknowledgment (Phase 27 — 2026-04-26)
+
+This module **describes the contract** for downstream PHP code (RiseupAsia namespace, WordPress plugins). The actual PHP source files (`includes/Enums/`, etc.) live in **separate implementation repositories**, not in this spec-only repo. Audit findings that compare this spec against the local code index will report `drift` because the local index only contains `linter-scripts/`. This is **expected and accepted**:
+
+- Spec authority: this file (and siblings under `spec/02-coding-guidelines/04-php/`) is the single source of truth.
+- Code authority: downstream PHP repos consume this spec via `git submodule` or vendored copy.
+- Drift gate: the `kind: future-spec` frontmatter signals the audit to skip "missing implementation file" findings for this module.
 
 ---
 

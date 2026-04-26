@@ -1,7 +1,19 @@
+---
+kind: future-spec
+description: Forward-looking CI/CD pipeline architecture for browser extensions. The actual GitHub Actions YAML lives in the downstream extension repos (Chromium-based). Exempt from drift findings that flag missing `.github/workflows/*.yml` files in this spec-only repo.
+---
+
 # Browser Extension Deploy — Overview
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16
+**Version:** 3.3.0  
+**Status:** Active (future-spec — workflows live in downstream extension repos)  
+**Updated:** 2026-04-26
+
+---
+
+## Drift Acknowledgment (Phase 27 — 2026-04-26)
+
+This module specifies the **contract** for browser-extension CI/CD pipelines (setup → build-sdk → build-modules → build-extension). The actual `.github/workflows/*.yml` files implementing these pipelines live in **downstream extension repositories**, not in this spec-only repo. Drift findings of the form "spec references workflows that don't exist locally" are **expected**. The `kind: future-spec` frontmatter signals the audit to skip them.
 
 ---
 
