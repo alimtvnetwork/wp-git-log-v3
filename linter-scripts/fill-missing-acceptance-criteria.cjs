@@ -16,19 +16,18 @@ const SPEC_DIR = path.resolve(__dirname, '..', 'spec');
 const TODAY = new Date().toISOString().slice(0, 10);
 
 function listModules(dir, prefix = '') {
+  // Recursively walk every sub-folder under spec/ (excluding _archive and dotfiles).
+  // A "module" is any folder containing 00-overview.md.
   const out = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === '_archive') continue;
     const full = path.join(dir, entry.name);
     const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
-    out.push({ rel, full });
-    for (const sub of fs.readdirSync(full, { withFileTypes: true })) {
-      if (!sub.isDirectory() || sub.name.startsWith('.')) continue;
-      const subFull = path.join(full, sub.name);
-      if (fs.existsSync(path.join(subFull, '00-overview.md'))) {
-        out.push({ rel: `${rel}/${sub.name}`, full: subFull });
-      }
+    if (fs.existsSync(path.join(full, '00-overview.md'))) {
+      out.push({ rel, full });
     }
+    // Recurse — fixes the prior 2-level-deep cap that left deep sub-modules unfilled.
+    out.push(...listModules(full, rel));
   }
   return out;
 }
@@ -83,7 +82,7 @@ This document defines testable acceptance criteria for the **${title}** module. 
 - **Given** every file in this module
 - **When** filenames are inspected
 - **Then** all match \`^[0-9]{2}-[a-z0-9-]+\\.md$\` (or are recognized special files like \`README.md\`).
-- **Source:** \`spec/01-spec-authoring-guide/02-naming-conventions.md\`.
+- **Source:** \`${upToSpec}01-spec-authoring-guide/02-naming-conventions.md\`.
 
 ### AC-04: Consistency report present and current
 - **Given** the module folder
@@ -123,7 +122,7 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 
 - [Module overview](./00-overview.md)
 - [Module consistency report](./99-consistency-report.md)
-- [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
+- [Spec authoring guide — acceptance criteria template](${upToSpec}01-spec-authoring-guide/03-required-files.md)
 `;
 }
 

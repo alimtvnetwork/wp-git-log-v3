@@ -30,7 +30,7 @@ This document defines testable acceptance criteria for the **Seedable Config Arc
 - **Given** every file in this module
 - **When** filenames are inspected
 - **Then** all match `^[0-9]{2}-[a-z0-9-]+\.md$` (or are recognized special files like `README.md`).
-- **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md`.
+- **Source:** `../../01-spec-authoring-guide/02-naming-conventions.md`.
 
 ### AC-04: Consistency report present and current
 - **Given** the module folder
@@ -70,4 +70,4 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 
 - [Module overview](./00-overview.md)
 - [Module consistency report](./99-consistency-report.md)
-- [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
+- [Spec authoring guide — acceptance criteria template](../../01-spec-authoring-guide/03-required-files.md)

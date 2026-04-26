@@ -1,7 +1,7 @@
 > ⚠️ **DEPRECATED — Legacy v1 Spec (folder 21)**  
 > This document is preserved for historical reference only. **Do not implement against it.**  
-> The active specification is **v2** in [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
-> See [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md) for the current canonical source.  
+> The active specification is **v2** in [`spec/22-git-logs-v2/`](../../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
+> See [`spec/22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) for the current canonical source.  
 > Deprecated: 2026-04-25
 
 ---
@@ -32,9 +32,9 @@ Three guarantees:
 
 | Reference | Location |
 |-----------|----------|
-| Universal Response Envelope (canonical) | [../03-error-manage/02-error-architecture/05-response-envelope/04-response-envelope-reference.md](../03-error-manage/02-error-architecture/05-response-envelope/04-response-envelope-reference.md) |
-| Error Code Registry (project-wide) | [../03-error-manage/03-error-code-registry/01-registry.md](../03-error-manage/03-error-code-registry/01-registry.md) |
-| Error Architecture (3-tier) | [../03-error-manage/02-error-architecture/01-error-handling-reference.md](../03-error-manage/02-error-architecture/01-error-handling-reference.md) |
+| Universal Response Envelope (canonical) | [../../03-error-manage/02-error-architecture/05-response-envelope/04-response-envelope-reference.md](../../03-error-manage/02-error-architecture/05-response-envelope/04-response-envelope-reference.md) |
+| Error Code Registry (project-wide) | [../../03-error-manage/03-error-code-registry/01-registry.md](../../03-error-manage/03-error-code-registry/01-registry.md) |
+| Error Architecture (3-tier) | [../../03-error-manage/02-error-architecture/01-error-handling-reference.md](../../03-error-manage/02-error-architecture/01-error-handling-reference.md) |
 | Logging strategy (TraceId, redaction, no-swallow) | [./12-logging-strategy.md](./12-logging-strategy.md) |
 | JWT onboarding (auth error codes appear here) | [./16-jwt-onboarding-and-token-usage.md](./16-jwt-onboarding-and-token-usage.md) |
 | Allowlist (push-error codes appear here) | [./08-allowlist-and-wildcard-matching.md](./08-allowlist-and-wildcard-matching.md) |

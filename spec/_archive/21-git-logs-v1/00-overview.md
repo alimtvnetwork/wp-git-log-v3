@@ -1,7 +1,7 @@
 > ⚠️ **DEPRECATED — Legacy v1 Spec (folder 21)**  
 > This document is preserved for historical reference only. **Do not implement against it.**  
-> The active specification is **v2** in [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
-> See [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md) for the current canonical source.  
+> The active specification is **v2** in [`spec/22-git-logs-v2/`](../../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
+> See [`spec/22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) for the current canonical source.  
 > Deprecated: 2026-04-25
 
 ---
@@ -91,12 +91,12 @@ This module contains the complete implementation specification: domain glossary,
 
 | Reference | Location |
 |-----------|----------|
-| Spec authoring guide | [../01-spec-authoring-guide/00-overview.md](../01-spec-authoring-guide/00-overview.md) |
-| Master coding guidelines | [../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md](../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md) |
-| PHP standards reference | [../02-coding-guidelines/04-php/07-php-standards-reference/00-overview.md](../02-coding-guidelines/04-php/07-php-standards-reference/00-overview.md) |
-| Error management | [../03-error-manage/00-overview.md](../03-error-manage/00-overview.md) |
-| Database conventions | [../04-database-conventions/00-overview.md](../04-database-conventions/00-overview.md) |
-| WP plugin how-to | [../18-wp-plugin-how-to/00-overview.md](../18-wp-plugin-how-to/00-overview.md) |
+| Spec authoring guide | [../../01-spec-authoring-guide/00-overview.md](../../01-spec-authoring-guide/00-overview.md) |
+| Master coding guidelines | [../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md](../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md) |
+| PHP standards reference | [../../02-coding-guidelines/04-php/07-php-standards-reference/00-overview.md](../../02-coding-guidelines/04-php/07-php-standards-reference/00-overview.md) |
+| Error management | [../../03-error-manage/00-overview.md](../../03-error-manage/00-overview.md) |
+| Database conventions | [../../04-database-conventions/00-overview.md](../../04-database-conventions/00-overview.md) |
+| WP plugin how-to | [../../18-wp-plugin-how-to/00-overview.md](../../18-wp-plugin-how-to/00-overview.md) |
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Version:** 1.0.0  
 **Updated:** 2026-04-25  
-**Status:** ⚠️ **DEPRECATED** — superseded by [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (v2.8.7 authoritative).
+**Status:** ⚠️ **DEPRECATED** — superseded by [`spec/22-git-logs-v2/`](../../22-git-logs-v2/00-overview.md) (v2.8.7 authoritative).
 
 ---
 
@@ -12,8 +12,8 @@ This folder is **legacy v1**. All v1 spec files were banner-deprecated in v2.7.1
 
 For the current authoritative spec, see:
 
-- **Folder 22 v2 overview**: [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md)
-- **Folder 22 v2 consistency report**: [`spec/22-git-logs-v2/99-consistency-report.md`](../22-git-logs-v2/99-consistency-report.md)
+- **Folder 22 v2 overview**: [`spec/22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md)
+- **Folder 22 v2 consistency report**: [`spec/22-git-logs-v2/99-consistency-report.md`](../../22-git-logs-v2/99-consistency-report.md)
 - **v1 ↔ v2 mapping**: distributed across folder 22 §05/§18/§30/§31 + this folder's deprecation banners (see `mem://specs/git-logs.md` for the locked decision).
 
 ---

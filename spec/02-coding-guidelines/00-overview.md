@@ -151,7 +151,7 @@ IMPORTANT — AI INSTRUCTION:
 | # | Category | Description | Files |
 |---|----------|-------------|-------|
 | 21 | [App](./21-app/00-overview.md) | App-specific specs: features, workflows, architecture decisions | 0 |
-| 22 | [App Issues](./25-app-issues/00-overview.md) | App bug analysis, root cause analysis, fix documentation | 0 |
+| 22 | [App Issues](../25-app-issues/00-overview.md) | App bug analysis, root cause analysis, fix documentation | 0 |
 | 23 | [App Database](./23-app-database/00-overview.md) | App-specific data model, table designs, migration strategies | 0 |
 | 24 | [App Design System & UI](./24-app-design-system-and-ui/00-overview.md) | App-specific design system, theming, component patterns, layout | 0 |
 

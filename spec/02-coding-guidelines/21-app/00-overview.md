@@ -27,5 +27,5 @@ _No content yet. Add app-specific specs as numbered files within this folder._
 
 | Reference | Location |
 |-----------|----------|
-| App Issues | [../25-app-issues/00-overview.md](../25-app-issues/00-overview.md) |
+| App Issues | [../../25-app-issues/00-overview.md](../../25-app-issues/00-overview.md) |
 | Coding Guidelines Spec | [../00-overview.md](../00-overview.md) |

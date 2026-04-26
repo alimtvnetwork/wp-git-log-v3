@@ -1,7 +1,7 @@
 > ⚠️ **DEPRECATED — Legacy v1 Spec (folder 21)**  
 > This document is preserved for historical reference only. **Do not implement against it.**  
-> The active specification is **v2** in [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
-> See [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md) for the current canonical source.  
+> The active specification is **v2** in [`spec/22-git-logs-v2/`](../../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
+> See [`spec/22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) for the current canonical source.  
 > Deprecated: 2026-04-25
 
 ---
@@ -235,16 +235,16 @@ Each grep returning zero hits (after subtracting documented exemptions) is a pos
 
 | Reference | Location |
 |-----------|----------|
-| Master Coding Guidelines | [../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md](../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md) |
-| Naming + Database (master) | [../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/01-naming-and-database.md](../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/01-naming-and-database.md) |
-| Boolean + Enum (master) | [../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/02-boolean-and-enum.md](../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/02-boolean-and-enum.md) |
-| Database Naming Conventions | [../04-database-conventions/01-naming-conventions.md](../04-database-conventions/01-naming-conventions.md) |
-| REST API Format (PascalCase JSON) | [../04-database-conventions/06-rest-api-format.md](../04-database-conventions/06-rest-api-format.md) |
-| Split-DB Architecture | [../05-split-db-architecture/00-overview.md](../05-split-db-architecture/00-overview.md) |
-| Seedable Config (CW Config) | [../06-seedable-config-architecture/00-overview.md](../06-seedable-config-architecture/00-overview.md) |
+| Master Coding Guidelines | [../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md](../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md) |
+| Naming + Database (master) | [../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/01-naming-and-database.md](../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/01-naming-and-database.md) |
+| Boolean + Enum (master) | [../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/02-boolean-and-enum.md](../../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/02-boolean-and-enum.md) |
+| Database Naming Conventions | [../../04-database-conventions/01-naming-conventions.md](../../04-database-conventions/01-naming-conventions.md) |
+| REST API Format (PascalCase JSON) | [../../04-database-conventions/06-rest-api-format.md](../../04-database-conventions/06-rest-api-format.md) |
+| Split-DB Architecture | [../../05-split-db-architecture/00-overview.md](../../05-split-db-architecture/00-overview.md) |
+| Seedable Config (CW Config) | [../../06-seedable-config-architecture/00-overview.md](../../06-seedable-config-architecture/00-overview.md) |
 | App Spec Index | [./00-overview.md](./00-overview.md) |
-| Phase-2 Audit Findings | [../25-app-issues/01-phase-2-git-logs-audit/00-overview.md](../25-app-issues/01-phase-2-git-logs-audit/00-overview.md) |
-| Triage Format | [../25-app-issues/00-overview.md](../25-app-issues/00-overview.md) |
+| Phase-2 Audit Findings | [../../25-app-issues/01-phase-2-git-logs-audit/00-overview.md](../../25-app-issues/01-phase-2-git-logs-audit/00-overview.md) |
+| Triage Format | [../../25-app-issues/00-overview.md](../../25-app-issues/00-overview.md) |
 
 ---
 
