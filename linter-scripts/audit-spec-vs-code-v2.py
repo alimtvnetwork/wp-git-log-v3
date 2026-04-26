@@ -416,8 +416,11 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     if m["waffle_per_kchar"] > 1:   clar -= int((m["waffle_per_kchar"] - 1) * 8)
     clar = max(20, min(100, clar))
 
-    # Testability: AC + GWT density
-    if m["ac_count"] == 0:
+    # Testability: AC + GWT density. Trackers are exempt — issue lists are not
+    # contracts and don't require AC; their "testability" is the structure itself.
+    if is_tracker:
+        test = 80
+    elif m["ac_count"] == 0:
         test = 10
     else:
         test = 40 + min(40, m["ac_count"] * 6) + min(20, m["gwt_block_count"] * 4)
