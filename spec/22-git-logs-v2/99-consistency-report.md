@@ -196,6 +196,22 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase 4 scope discipline:** Phases 5–10 untouched. Phase B1 (§07 App identity fields) remains blocked on user decision.
 
+## v3.8.6 Audit — Phase 5 SSH-Key Lane B schema & errors
+
+| File | Change |
+|------|--------|
+| `18-schema.sql` | Added `CREATE TABLE SshKey` (11 cols: `SshKeyId PK AI`, `Fingerprint UNIQUE`, `RepoId FK ON DELETE CASCADE`, `KeyType`, `PublicKey`, `Label`, `OwnedByProfileId FK`, `IsActive CHECK 0/1 DEFAULT 1`, `LastUsedAt`, `CreatedAt`, `RevokedAt`) + 2 indexes (`IxSshKeyRepoActive`, `IxSshKeyOwner`); added `CREATE TABLE SshNonce` (`SshNonceId PK`, `SshKeyId FK ON DELETE CASCADE`, `Nonce`, `SeenAt`, `UNIQUE(SshKeyId, Nonce)`) + 1 index. Added 2 ConfigKv defaults (`SshAuthMode='optional'`, `SshNonceJanitorBatch='100'`). Bumped `PluginVersion` 2.9.0 → 2.9.1; appended `MigrationState` 2.9.1. Banner v2.9.0 → v2.9.1. |
+| `01-glossary-and-enums.md` | 3 new entries: `SshKey` (deploy-key model + full column list + Lane B authoritative semantics), `Ed25519Signature` (OpenSSH PEM signature over `GL-SSHSIG-V1` canonical string, namespace `git-logs@v2`, `-H sha512`), `SshNonce` (replay-defense semantics, prune cadence). Banner v3.8.3 → v3.8.6. |
+| `02-database-schema.md` | Banner v3.8.3 → v3.8.6 (existing SshKey/SshNonce sub-sections from earlier §31 doc work now backed by canonical §18 DDL). |
+| `15-error-codes.md` | Banner v2.9.0 → v2.9.1 — confirms 9 SSH lane codes (`GL-SSH-HEADER-MISSING`, `-TIMESTAMP-SKEW`, `-KEY-UNKNOWN`, `-KEY-INACTIVE`, `-REPO-MISMATCH`, `-NONCE-REUSED`, `-SIGNATURE-INVALID`, `-LANE-CONFLICT`, plus `GL-AUTH-LANE-DISABLED`) are backed by canonical schema. |
+| `31-ssh-key-auth.md` | Banner v2.7.0 → v2.9.1 — canonical-DDL note added. |
+| `98-changelog.md` | v3.8.6 row added. |
+| `99-consistency-report.md` | This audit table added; banner v3.8.5 → v3.8.6. |
+
+**In-memory SQLite validation:** 31 tables (was 29 in v2.9.0); `SshKey` + `SshNonce` present; `LogEntry`/`ErrorLogEntry` still absent; 15 ConfigKv keys (was 13); `PluginVersion=2.9.1`; 10 MigrationState markers; 3 SshKey* AuditActionType seeds (`SshKeyRegister`/`SshKeyRevoke`/`SshKeyRotate`).
+
+**Phase 5 scope discipline:** §05 SSH lane block insertion, §28 GH-Actions SSH-signed example, §30 STRIDE entries are **deferred to Phase 6**. AC additions for SshKey/SshNonce deferred to Phase 7 (AC GWT pass). Phases 7–10 untouched. Phase B1 still blocked on user.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §02↔§15↔§22↔§23↔§29↔§39 ↔ §05-split-db-architecture, root `spec-index.md` ↔ all 22-git-logs-v2 files); AC coverage AC-01..AC-59 with AC-49..AC-53 now Active (v2.9.0); ER diagram (`26-gitlogs-diagrams/01-er-diagram.mmd`) reflects v2.9.0 split-DB shape; v3.8.5 Phase 4 doc closure landed in §00 + §97 + spec-index + ER diagram with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 5 (SSH-Key Lane B schema/errors); (c) Phase 6 (SSH-Key flow + threat doc); (d) Phases 7–10 (AC GWT pass, NDJSON streaming, `Pipeline.PreviousHasError`, diagram .svg render).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §02↔§15↔§22↔§23↔§29↔§39); AC coverage AC-01..AC-59; ER diagram reflects v2.9.0 split-DB shape; v3.8.6 Phase 5 SSH-Key Lane B schema landed in §18 (SshKey + SshNonce + 2 ConfigKv) with glossary/error/spec lockstep on §01 + §02 + §15 + §31 + changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 6 (SSH-Key flow into §05 + §28 + §30); (c) Phase 7 (AC GWT pass — including new ACs for SshKey/SshNonce); (d) Phases 8–10 (NDJSON streaming, `Pipeline.PreviousHasError`, diagram .svg render).
