@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.1  
+**Version:** 3.8.2  
 **Updated:** 2026-04-26
 
 ---
@@ -89,7 +89,8 @@ Cross-checked all `18-schema.sql` lookup seeds against `15-error-codes.md` runti
 | `Provider` | 2 | `GL-VALIDATION-REPOURL-MALFORMED` parser | ✅ |
 | ~~`OwnerType`~~ | 0 | (retired v3.8.1 — replaced by `GitProfile.IsOrganization` boolean; tombstoned in §16) | 🗑️ |
 | `LogSeverity` | 6 | (per-line truncation, no GL code per §15 note) | ✅ |
-| `ActionType` | 4 | (Append/Fixed/Clear/ClearAll dispatch) | ✅ |
+| `PipelineActionType` | 4 | (Append/Fixed/Clear/ClearAll dispatch — renamed from `ActionType` in v3.8.2) | ✅ |
+| `SystemEventType` | 16 | (NEW v3.8.2 — feeds `SystemEvent` business-event feed; no GL code, internal) | ✅ |
 | `AuditOutcome` | 3 | (envelope outcome) | ✅ |
 | `ConfigKv` | 10 defaults | `GL-CONFIG-MISSING`, `GL-RATE-LIMIT-EXCEEDED`, `GL-PAYLOAD-TOO-LARGE`, `GL-LINES-TOO-MANY`, `GL-SSH-TIMESTAMP-SKEW` | ✅ |
 | `MigrationState` | 6 markers (2.0.0/2.5.0/2.6.0/2.7.0/2.8.0/2.8.7) | `GL-MIGRATION-PENDING` | ✅ |
@@ -116,7 +117,7 @@ User reviewed `26-gitlogs-diagrams/02-domain-design.mmd` + `01-er-diagram.mmd` a
 Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enums.md` (OwnerType retired, PipelineActionType renamed, SystemEventType added, ShaRegistry+SystemEvent+PipelineAction terms), `02-database-schema.md` (GitProfile.IsOrganization, lookup list updated, LogEntry+ErrorLogEntry removed, ShaRegistry added, History rename, PipelineAction rename, SystemEvent added), `08-history-and-action.md` (4-table model), `97-acceptance-criteria.md` (AC-07 + AC-21 reworded, AC-49–AC-53 added), `98-changelog.md`, `99-consistency-report.md`, `26-gitlogs-diagrams/01-er-diagram.mmd` (regenerated with split boundary), `26-gitlogs-diagrams/02-domain-design.mmd` (regenerated with subgraphs).
 
 **Queued (NOT in this commit, tracked in `mem://specs/git-logs.md` queued decisions):**
-- §18 `18-schema.sql`: ~~drop `OwnerType` table+seed~~ ✅ landed v3.8.1; ~~add `GitProfile.IsOrganization`~~ ✅ landed v3.8.1; drop `LogEntry`+`ErrorLogEntry`, add `ShaRegistry`+`SystemEvent` tables, rename `Action`→`PipelineAction`, add 16 `SystemEventType` seeds, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults. *(Q2 + Q3 still queued.)*
+- §18 `18-schema.sql`: ~~drop `OwnerType` table+seed~~ ✅ landed v3.8.1; ~~add `GitProfile.IsOrganization`~~ ✅ landed v3.8.1; ~~rename `Action`→`PipelineAction` + `ActionType`→`PipelineActionType`~~ ✅ landed v3.8.2; ~~add `SystemEvent`+`SystemEventType` tables + 16 seeds~~ ✅ landed v3.8.2; drop `LogEntry`+`ErrorLogEntry`, add `ShaRegistry` table, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults. *(Q3 still queued.)*
 - §22 retention: prune walks `ShaRegistry` + deletes per-SHA files.
 - §23 backup: manifest must list per-SHA file inventory + per-file row counts + sha256.
 - §29 uninstall: Wipe mode deletes the `logs/` folder.
@@ -136,6 +137,27 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 | `98-changelog.md` | Added v3.8.1 row. |
 | `99-consistency-report.md` | Tombstoned `OwnerType` seed-coverage row; flipped Q1 status in v3.8.0 audit table; this audit table added. Banner v3.8.0 → v3.8.1. |
 
+## v3.8.2 Audit — Q2 PipelineAction rename + SystemEvent lockstep
+
+| File | Change |
+|------|--------|
+| `18-schema.sql` | `CREATE TABLE ActionType` → `PipelineActionType`; `CREATE TABLE Action` → `PipelineAction` (PK rename, FK rename, added `RepoVersionId NOT NULL` + `ProfileId` FK + 2 indexes); `History.ActionTypeId` → `PipelineActionTypeId`; **NEW** `CREATE TABLE SystemEventType` lookup; **NEW** `CREATE TABLE SystemEvent` with loose-polymorphic Target + 3 indexes; `INSERT INTO ActionType` → `INSERT INTO PipelineActionType` (4 rows); **NEW** `INSERT INTO SystemEventType` (16 rows); `ConfigKv.PluginVersion` 2.8.8 → 2.8.9; `MigrationState` markers 2.8.8 + 2.8.9 appended; banner v2.8.8 → v2.8.9. |
+| `03-admin-ui.md` | History menu item gains "Activity tab" note for SystemEvent; Action menu item reworded (UI label retained, backing table renamed); History columns relabel `ActionType` → `PipelineActionType`. Banner v2.1.0 → v2.2.0. |
+| `01-glossary-and-enums.md` | Banner v3.8.0 → v3.8.1 (entries already correct from v3.8.0 doc-only pass). |
+| `97-acceptance-criteria.md` | Added AC-56 (no `Action`/`ActionType` tables), AC-57 (`SystemEvent` columns + indexes), AC-58 (16 `SystemEventType` seeds in canonical order), AC-59 (Activity tab + Action menu wording). Banner v3.8.1 → v3.8.2. |
+| `98-changelog.md` | Added v3.8.2 row. |
+| `99-consistency-report.md` | Flipped Q2 status in v3.8.0 audit table; this audit table added; seed-coverage table updated for new lookup counts. Banner v3.8.1 → v3.8.2. |
+
+**SQLite validation (in-memory `executescript` of `18-schema.sql`):**
+- `PipelineActionType` = 4 rows (Append/Fixed/Clear/ClearAll) ✅
+- `SystemEventType` = 16 rows ✅
+- `AuditActionType` = 25 rows (unchanged) ✅
+- `Permission` = 17, `LogSeverity` = 6, `Acceptance` = 3, `AppStatus` = 3, `AppLinkType` = 2, `UserStatus` = 3, `Provider` = 2 ✅
+- `ConfigKv` = 10 defaults (`PluginVersion='2.8.9'`) ✅
+- `MigrationState` = 8 markers (2.0.0/2.5.0/2.6.0/2.7.0/2.8.0/2.8.7/2.8.8/2.8.9) ✅
+- Legacy tables `Action`/`ActionType`/`OwnerType` confirmed **absent**. ✅
+- New tables `PipelineAction`/`PipelineActionType`/`SystemEvent`/`SystemEventType` confirmed **present**. ✅
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. new §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-53; v3.8.0 domain-model overhaul landed with full lockstep on overview/schema/glossary/§08/AC/changelog/diagrams. Only blockers: (a) §07 user decision (App identity), (b) §18 DDL rewrite queued.
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-59; v3.8.2 Q2 PipelineAction rename + SystemEvent fully landed in §18 + §03 + §01 + §97 with full lockstep on changelog/consistency. Only blockers: (a) §07 user decision (App identity), (b) Q3 split-DB DDL queued (LogEntry/ErrorLogEntry → ShaRegistry + per-SHA files; §15 `GL-SHA-DB-*` codes; §22/§23/§29 lifecycle).

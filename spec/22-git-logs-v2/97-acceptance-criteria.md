@@ -1,6 +1,6 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.1  
+**Version:** 3.8.2  
 **Updated:** 2026-04-26
 
 | # | Criterion | Source |
@@ -53,3 +53,7 @@
 | AC-41 | WP.org release ZIP contains `readme.txt` + `screenshot-1..8.png`; CI gate runs `wp plugin check` before tagging. | §26 |
 | AC-54 | GitProfile create/edit form renders an **Is organization** checkbox (default off) bound to `GitProfile.IsOrganization` (0/1). The legacy "OwnerType (derived)" field MUST NOT render. Toggling the checkbox flips the canonical URL form between `github.com/$org/$repo` and `github.com/$username/$repo` on save. | §03 + v3.8.1 |
 | AC-55 | `18-schema.sql` MUST NOT create the `OwnerType` table and MUST NOT seed `OwnerType` rows; `GitProfile` table MUST declare `IsOrganization INTEGER NOT NULL DEFAULT 0 CHECK (IsOrganization IN (0,1))` in place of `OwnerTypeId`. | §18 + v3.8.1 |
+| AC-56 | `18-schema.sql` MUST NOT create `ActionType` or `Action` tables. The lookup table is named `PipelineActionType` and the audit-row table is named `PipelineAction`. `History.ActionTypeId` is renamed to `History.PipelineActionTypeId` and references `PipelineActionType(PipelineActionTypeId)`. | §18 + v3.8.2 |
+| AC-57 | `18-schema.sql` MUST create a `SystemEvent` table with columns `(SystemEventId PK, SystemEventTypeId FK, ActorProfileId FK NULL, TargetType TEXT NULL, TargetId INTEGER NULL, Summary TEXT, DetailJson TEXT, OccurredAt INTEGER)` plus indexes on `(SystemEventTypeId, OccurredAt)`, `(ActorProfileId, OccurredAt)`, `(TargetType, TargetId, OccurredAt)`. `TargetType`/`TargetId` carry **no** FK CHECK so audit history outlives target rows. | §02, §08, §18 + v3.8.2 |
+| AC-58 | `SystemEventType` lookup MUST seed exactly 16 rows in this order: ProfileCreated, ProfileDeleted, ProfileStatusChanged, RoleAssigned, RoleRevoked, GitProfileCreated, GitProfileAcceptanceChanged, GitProfileBranchRestrictionChanged, AppCreated, AppStatusChanged, AppLinkAdded, AppLinkRemoved, SshKeyRegistered, SshKeyRevoked, SshKeyRotated, TempTokenRotated. | §01, §18 + v3.8.2 |
+| AC-59 | History UI surfaces an **Activity** tab backed by `SystemEvent` with filter chip *Git events / System events / All*. The legacy "Action" top-level menu is retained as the UI label but is now backed by the renamed `PipelineAction` table. | §03 + v3.8.2 |
