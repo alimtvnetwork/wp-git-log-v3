@@ -20,8 +20,9 @@ type: feature
 | 8 | `06-seedable-config-architecture/00-overview` | JSON Schema 2020-12 + ref instance | 95 | 95 | 0 (A+ saturated) |
 | 9 | `14-update/24-update-check-mechanism/04-database-schema` | TS+Go enum mirror + JSON Schema 2020-12 with conditional if/then | 89 | **93** | **+4 (within A)** |
 | 10 | `02-coding-guidelines/03-golang/01-enum-specification` | Full Go reference impl + TS mirror + JSON Schema + forbidden-shapes table | 73 | _pending re-audit_ | _expected C→B/A_ |
+| 11 | `18-wp-plugin-how-to/02-enums-and-coding-style` | Full PHP backed enum (`SelfUpdateStatusType`) + TS mirror + JSON Schema + forbidden-shapes table | 73 | _pending re-audit_ | _expected C→B/A_ |
 
-## Phase 22 audit delta (re-run 2026-04-26)
+## Phase 22 audit delta (re-run 2026-04-26, modules 1–9 only)
 
 * Mean weighted: 77.8 → **78.3 (+0.5)**
 * G-CON-01 firings: 30 → **23 (-7)**
@@ -30,9 +31,11 @@ type: feature
 Full report: `.lovable/memory/audit/v2-deterministic/PHASE-22-DELTA-REPORT.md`
 Pre-Phase-20 baseline: `.lovable/memory/audit/v2-deterministic-pre-phase20-baseline/`
 
-## Remaining Phase 20 queue
+## Phase 20 status: COMPLETE ✅
 
-* **#11** — `18-wp-plugin-how-to/02-enums-and-coding-style` (PHP enum reference impl — currently 73 C, impl=40).
+All 11 queued modules upgraded. Awaiting **Phase 22 re-run #2** to capture
+the lift from modules #10 (Go enum) and #11 (PHP enum) — both expected to
+move ~73 C → 80+ B (G-CON-01 cleared on each).
 
 ## Next-bottleneck recommendations from the audit
 
