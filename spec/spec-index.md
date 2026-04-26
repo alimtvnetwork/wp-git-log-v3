@@ -213,9 +213,9 @@
 | `spec/02-coding-guidelines/04-php/08-spacing-and-imports.md` | PHP Spacing and Import Rules | 3.2.0 |
 | `spec/02-coding-guidelines/04-php/09-response-key-type-inventory.md` | ResponseKeyType — Case Inventory & Usage Map |  |
 | `spec/02-coding-guidelines/04-php/10-php-go-consistency-audit.md` | PHP–Go Cross-Language Consistency Audit | 1.0.0 |
-| `spec/02-coding-guidelines/04-php/97-acceptance-criteria.md` | Acceptance Criteria — 04 Php | 2.0.0 |
-| `spec/02-coding-guidelines/04-php/98-changelog.md` | PHP Standards — Changelog | 3.2.0 |
-| `spec/02-coding-guidelines/04-php/99-consistency-report.md` | Consistency Report: PHP Standards | 3.2.0 |
+| `spec/02-coding-guidelines/04-php/97-acceptance-criteria.md` | PHP Standards — Acceptance Criteria | 4.0.0 |
+| `spec/02-coding-guidelines/04-php/98-changelog.md` | PHP Standards — Changelog | 4.0.0 |
+| `spec/02-coding-guidelines/04-php/99-consistency-report.md` | Consistency Report: PHP Standards | 4.0.0 |
 | `spec/02-coding-guidelines/05-rust/00-overview.md` | Rust Coding Standards | 3.2.0 |
 | `spec/02-coding-guidelines/05-rust/01-naming-conventions.md` | Rust Naming Conventions | 3.2.0 |
 | `spec/02-coding-guidelines/05-rust/02-error-handling.md` | Rust Error Handling | 3.2.0 |

@@ -1,8 +1,10 @@
 # Consistency Report: PHP Standards
 
-**Version:** 3.2.0  
-**Generated:** 2026-03-31  
+**Version:** 4.0.0
+**Generated:** 2026-04-26
 **Health Score:** 100/100 (A+)
+
+> **v4.0.0 update (Phase 16k):** §97 fully rewritten from 7 table-row criteria (AC-01..AC-07) to **20 module-specific Given/When/Then ACs** (AC-PHP-01..AC-PHP-20). New ACs codify PHP-specific rules layered on cross-language parent: explicit AC-CL-* inheritance, PHP 8.1+ + `declare(strict_types=1)` mandatory, string-backed enums with PascalCase cases+values, mandatory `isEqual()`, `ResultHelper` exhaustive return contract, `ResponseKeyType::Foo->value` keys, role-based casing, boolean prefix discipline, `use`-imported globals, `safeExecute` REST wrap + `wp_die()` FORBIDDEN, blank-line discipline, `readonly` DTOs, full type declarations, `BaseException` hierarchy, `phpstan --level=8` + `psalm` zero-issue gate, PSR-4 file-per-class, PHPUnit 10+ `#[Test]` attribute, composer pinning, PSR-3 logging with no `error_log`/`var_dump`, self-application doctest. Legacy AC-01..AC-07 preserved as AC-PHP-LEGACY-* at end of §97. Module-level tree-health: 100/100 (A+).
 
 ---
 

@@ -1,10 +1,18 @@
 # PHP Standards — Changelog
 
 
-**Version:** 3.2.0  
-**Last Updated:** 2026-04-16  
+**Version:** 4.0.0
+**Last Updated:** 2026-04-26
 
 All notable changes to the PHP Standards specification are documented here.
+
+---
+
+## v4.0.0 — 2026-04-26 (Phase 16k: §97 full GWT rewrite)
+
+- **Changed** §97 — full GWT rewrite. Replaced 7 table-row criteria (AC-01..AC-07) with **20 module-specific Given/When/Then ACs** (AC-PHP-01..AC-PHP-20) covering: explicit AC-CL-01..AC-CL-20 inheritance (AC-PHP-01); PHP 8.1+ minimum + `declare(strict_types=1)` mandatory first statement (AC-PHP-02); string-backed enums with PascalCase cases AND PascalCase values (AC-PHP-03); mandatory `isEqual(self $other): bool` on every enum (AC-PHP-04); `ResultHelper::ok|failed|error|errorWithCode|errorFromException` only on service returns (AC-PHP-05); `ResponseKeyType::Foo->value` array keys, no string literals (AC-PHP-06); role-based identifier casing (AC-PHP-07); boolean `is`/`has`/`can`/`should` camelCase prefix, no snake_case, no negative polarity (AC-PHP-08); `use`-imported globals with no leading backslash, grouped imports (AC-PHP-09); `safeExecute(fn() => ...)` REST wrap + `wp_die()` FORBIDDEN (AC-PHP-10); blank-line discipline before `if`/`throw`/`return` (AC-PHP-11); constructor property promotion + `readonly` for DTOs (AC-PHP-12); type declarations on every parameter and return, no `mixed` without waiver (AC-PHP-13); `RiseupAsia\Exceptions\BaseException` hierarchy, SPL only at boundaries (AC-PHP-14); `phpstan --level=8` + `psalm --show-info=true` zero issues + no baseline files (AC-PHP-15); PSR-4 file-per-class (AC-PHP-16); PHPUnit 10+ `#[Test]` attribute, no `@test` PHPDoc (AC-PHP-17); composer caret-with-patch + `composer.lock` checked in (AC-PHP-18); PSR-3 `LoggerInterface` structured logging, no `error_log`/`var_dump`/`print_r`/`echo` (AC-PHP-19); self-application doctest (AC-PHP-20).
+- **Preserved** legacy AC-01..AC-07 as AC-PHP-LEGACY-01..07 at end of §97.
+- **Bumped** §97 v2.0.0 → v4.0.0 (major; AC contract reshaped from 7 table rows to 20 GWT). §98 v3.2.0 → v4.0.0. §99 v3.2.0 → v4.0.0.
 
 ---
 
