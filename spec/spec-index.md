@@ -860,10 +860,10 @@
 
 | File | Title | Version |
 |------|-------|---------|
-| `spec/26-gitlogs-diagrams/00-overview.md` | Gitlogs Diagrams | 1.2.0 |
-| `spec/26-gitlogs-diagrams/97-acceptance-criteria.md` | Acceptance Criteria — Gitlogs Diagrams | 1.2.0 |
-| `spec/26-gitlogs-diagrams/98-changelog.md` | Changelog — Gitlogs Diagrams | 1.0.0 |
-| `spec/26-gitlogs-diagrams/99-consistency-report.md` | Consistency Report — Gitlogs Diagrams | 1.0.0 |
+| `spec/26-gitlogs-diagrams/00-overview.md` | Gitlogs Diagrams | 2.0.0 |
+| `spec/26-gitlogs-diagrams/97-acceptance-criteria.md` | Acceptance Criteria — Gitlogs Diagrams | 2.0.0 |
+| `spec/26-gitlogs-diagrams/98-changelog.md` | Changelog — Gitlogs Diagrams | 2.0.0 |
+| `spec/26-gitlogs-diagrams/99-consistency-report.md` | Consistency Report — Gitlogs Diagrams | 2.0.0 |
 
 ## 📦 Archive (deprecated)
 
