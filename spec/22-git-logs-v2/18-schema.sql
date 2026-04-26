@@ -428,7 +428,10 @@ INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     -- v2.9 additions (Q3 Split-DB, §39)
     ('ShaLogsRoot',           'logs',     strftime('%s','now')),  -- root folder for per-SHA .db files (relative to plugin data dir)
     ('MaxOpenShaDbHandles',   '32',       strftime('%s','now')),  -- LRU cache cap for open per-SHA SQLite handles
-    ('ShaDbIdleCloseSec',     '120',      strftime('%s','now')); -- idle seconds before a per-SHA handle is closed
+    ('ShaDbIdleCloseSec',     '120',      strftime('%s','now')),  -- idle seconds before a per-SHA handle is closed
+    -- v2.9.1 additions (Phase 5 SSH-Key Lane B, §31)
+    ('SshAuthMode',           'optional', strftime('%s','now')),  -- §31 lane gate ∈ {optional, preferred, required}
+    ('SshNonceJanitorBatch',  '100',      strftime('%s','now')); -- §31 max SshNonce rows pruned per request
 
 -- Migration marker — last
 INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
@@ -440,6 +443,7 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.8.7', strftime('%s','now'), NULL),  -- §18/§15 audit alignment
     ('2.8.8', strftime('%s','now'), NULL),  -- Q1 IsOrganization (column rename + table drop)
     ('2.8.9', strftime('%s','now'), NULL),  -- Q2 PipelineAction rename + SystemEvent
-    ('2.9.0', strftime('%s','now'), NULL);  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
+    ('2.9.0', strftime('%s','now'), NULL),  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
+    ('2.9.1', strftime('%s','now'), NULL);  -- Phase 5: SSH-Key Lane B canonical schema (SshKey + SshNonce + 2 ConfigKv)
 
 COMMIT;
