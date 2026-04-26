@@ -114,6 +114,16 @@ Closed §22-scope subset of `mem://specs/full-tree-audit-v4.md` deepening backlo
 
 ---
 
+## ✅ Phase 14 — Deepen Scaffolded ACs in §17 §97 (DONE, v1.1.0)
+
+Closed §17-scope subset of the deepening backlog. Doc-only, no schema/DDL churn:
+- §17 §97: 4 short ACs (AC-01..AC-04) deepened from ~209-260 chars to 1941-2254 chars each (8–10×): AC-01 module-entry-point structural contract (6 rules), AC-02 cross-link contract (6 rules incl. slot-immutability `../16-...` rule), AC-03 naming-regex contract with positive/negative examples + slot-collision precedent, AC-04 consistency-report freshness contract (7 rules incl. measured-not-narrated rule + version-≥-overview lockstep).
+- AC-05 already deep (1803 chars) — left as-is. AC count unchanged at 5.
+- Banner v1.0.0 → v1.1.0; lockstep §98 v1.1.0 + §99 v3.6.0 + spec-index updated.
+- §07 design-system NOT touched in Phase 14 — it uses table-style AC-001..AC-NNN format (different surgery needed); flagged as candidate Phase 15.
+
+---
+
 ## 🚧 Blocked (awaiting user decision)
 - **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
 
@@ -125,4 +135,4 @@ Closed §22-scope subset of `mem://specs/full-tree-audit-v4.md` deepening backlo
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–13 complete. All Phase 8/9 follow-ups closed; §22-scope AC deepening backlog closed. **Remaining unblocked candidates:** (a) extend Phase 13 deepening to §07 design-system + §17 consolidated-guidelines (other high-traffic modules per audit memo); (b) §03 admin UI rendering of state labels (consumer-side, out-of-scope for spec project unless user wants it scoped). On next `next`, propose (a) as Phase 14 or unblock B1.
+**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–14 complete. **Remaining unblocked candidates:** (a) **Phase 15** — convert §07 design-system §97 from table-style AC-001..AC-NNN format to GWT one-AC-per-section format (structural conversion, NOT just deepening — bigger surgery, scope ~50+ ACs); (b) §03 admin UI rendering of state labels (consumer-side, out-of-scope unless user explicitly scopes it). On next `next`, either unblock B1, approve Phase 15, or scope a different audit-driven cleanup.

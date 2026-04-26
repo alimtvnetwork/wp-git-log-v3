@@ -1,7 +1,9 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 3.5.0  
-**Updated:** 2026-04-25
+**Version:** 3.6.0  
+**Updated:** 2026-04-26
+
+> **v3.6.0 update:** Phase 14 deepened §97 ACs AC-01..AC-04 from ~209-260 chars to 1941-2254 chars each (8–10× depth) — full GWT + concrete cross-refs to linter scripts and slot-immutability precedent. AC count unchanged at 5. No §17 sibling files added or removed; no contract changes — purely AC-body deepening per `mem://specs/full-tree-audit-v4.md` open backlog. Banner v3.5.0 → v3.6.0.
 
 > **v3.5.0 update:** Added [`31-full-tree-ai-audit-v4.md`](./31-full-tree-ai-audit-v4.md) — first audit covering the **entire** `spec/` tree. Headline score **45/100 (F)** — supersedes the partial-scope verdicts of `25/26/29` for whole-tree readiness.
 
