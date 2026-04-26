@@ -1,6 +1,6 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.9.2 — Phase 9: add Pipeline.PreviousHasError boolean)
--- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md, 01-glossary-and-enums.md (Phase 9 PreviousHasError glossary)
+-- Git Logs Plugin — schema + lookup seeds (v2.9.3 — Phase 11: seed 4 Ndjson* ConfigKv keys for §04 streaming)
+-- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md, 01-glossary-and-enums.md, 04-rest-api-endpoints.md §11 (Phase 8 NDJSON streaming)
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
 -- All FKs: ON UPDATE CASCADE ON DELETE RESTRICT unless noted.
