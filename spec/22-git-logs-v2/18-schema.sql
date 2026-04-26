@@ -1,5 +1,5 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.8.8 — Q1 IsOrganization)
+-- Git Logs Plugin — schema + lookup seeds (v2.8.9 — Q2 PipelineAction rename + SystemEvent)
 -- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
@@ -59,8 +59,18 @@ CREATE TABLE IF NOT EXISTS LogSeverity (
     Numeric INTEGER NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS ActionType (
-    ActionTypeId INTEGER PRIMARY KEY AUTOINCREMENT,
+-- v3.8.0: ActionType lookup renamed to PipelineActionType (the Action table → PipelineAction).
+-- The old name implied "any system action" but the table only records pipeline-bound CI events.
+-- Non-pipeline business state changes live in SystemEvent (see SystemEventType below). See §08.
+CREATE TABLE IF NOT EXISTS PipelineActionType (
+    PipelineActionTypeId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL UNIQUE
+);
+
+-- v3.8.0: SystemEventType seeds the SystemEvent table for non-Git business events
+-- (ProfileCreated, RoleAssigned, AppCreated, SshKeyRevoked, …). See §08.
+CREATE TABLE IF NOT EXISTS SystemEventType (
+    SystemEventTypeId INTEGER PRIMARY KEY AUTOINCREMENT,
     Name TEXT NOT NULL UNIQUE
 );
 
@@ -215,26 +225,51 @@ CREATE INDEX IF NOT EXISTS IxErrorLogEntryPipeline ON ErrorLogEntry(PipelineId, 
 -- ---------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS History (
-    HistoryId     INTEGER PRIMARY KEY AUTOINCREMENT,
-    RepoVersionId INTEGER NOT NULL REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE,
-    PipelineId    INTEGER REFERENCES Pipeline(PipelineId),
-    AppId         INTEGER REFERENCES App(AppId),
-    ActionTypeId  INTEGER NOT NULL REFERENCES ActionType(ActionTypeId),
-    HasError      INTEGER NOT NULL DEFAULT 0,
-    Summary       TEXT,
-    OccurredAt    INTEGER NOT NULL
+    HistoryId            INTEGER PRIMARY KEY AUTOINCREMENT,
+    RepoVersionId        INTEGER NOT NULL REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE,
+    PipelineId           INTEGER REFERENCES Pipeline(PipelineId),
+    AppId                INTEGER REFERENCES App(AppId),
+    PipelineActionTypeId INTEGER NOT NULL REFERENCES PipelineActionType(PipelineActionTypeId), -- v3.8.0 was ActionTypeId
+    HasError             INTEGER NOT NULL DEFAULT 0,
+    Summary              TEXT,
+    OccurredAt           INTEGER NOT NULL
 );
 
 CREATE INDEX IF NOT EXISTS IxHistoryRepoVersion ON History(RepoVersionId, OccurredAt);
 
-CREATE TABLE IF NOT EXISTS Action (
-    ActionId      INTEGER PRIMARY KEY AUTOINCREMENT,
-    HistoryId     INTEGER REFERENCES History(HistoryId) ON DELETE CASCADE,
-    ActionTypeId  INTEGER NOT NULL REFERENCES ActionType(ActionTypeId),
-    PipelineId    INTEGER REFERENCES Pipeline(PipelineId),
-    Detail        TEXT,
-    OccurredAt    INTEGER NOT NULL
+-- v3.8.0: renamed from `Action` (table) — pipeline-bound enum log. See §08.
+CREATE TABLE IF NOT EXISTS PipelineAction (
+    PipelineActionId     INTEGER PRIMARY KEY AUTOINCREMENT,
+    HistoryId            INTEGER REFERENCES History(HistoryId) ON DELETE CASCADE,
+    PipelineActionTypeId INTEGER NOT NULL REFERENCES PipelineActionType(PipelineActionTypeId),
+    RepoVersionId        INTEGER NOT NULL REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE,
+    PipelineId           INTEGER REFERENCES Pipeline(PipelineId),
+    ProfileId            INTEGER REFERENCES Profile(ProfileId),
+    Detail               TEXT,
+    OccurredAt           INTEGER NOT NULL
 );
+
+CREATE INDEX IF NOT EXISTS IxPipelineActionRepoVersion ON PipelineAction(RepoVersionId, OccurredAt);
+CREATE INDEX IF NOT EXISTS IxPipelineActionType        ON PipelineAction(PipelineActionTypeId, OccurredAt);
+
+-- v3.8.0 NEW: business state changes that are NOT Git pushes
+-- (ProfileCreated, RoleAssigned, GitProfileAcceptanceChanged, AppCreated, SshKeyRevoked, …).
+-- Loose polymorphic target — `TargetType`/`TargetId` carry no FK CHECK so audit history
+-- outlives the entity row. See §08 for the four-table responsibility split.
+CREATE TABLE IF NOT EXISTS SystemEvent (
+    SystemEventId      INTEGER PRIMARY KEY AUTOINCREMENT,
+    SystemEventTypeId  INTEGER NOT NULL REFERENCES SystemEventType(SystemEventTypeId),
+    ActorProfileId     INTEGER REFERENCES Profile(ProfileId),
+    TargetType         TEXT,        -- Profile | GitProfile | Repo | App | SshKey | RoleAssignment
+    TargetId           INTEGER,     -- PK in the table named by TargetType (no FK)
+    Summary            TEXT,
+    DetailJson         TEXT,
+    OccurredAt         INTEGER NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS IxSystemEventType   ON SystemEvent(SystemEventTypeId, OccurredAt);
+CREATE INDEX IF NOT EXISTS IxSystemEventActor  ON SystemEvent(ActorProfileId, OccurredAt);
+CREATE INDEX IF NOT EXISTS IxSystemEventTarget ON SystemEvent(TargetType, TargetId, OccurredAt);
 
 CREATE TABLE IF NOT EXISTS AuditTrail (
     AuditTrailId       INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -302,8 +337,18 @@ INSERT OR IGNORE INTO LogSeverity (LogSeverityId, Name, Numeric) VALUES
     (1,'Trace',10),(2,'Debug',20),(3,'Info',30),
     (4,'Warn',40),(5,'Error',50),(6,'Fatal',60);
 
-INSERT OR IGNORE INTO ActionType (ActionTypeId, Name) VALUES
+-- v3.8.0: PipelineActionType replaces ActionType
+INSERT OR IGNORE INTO PipelineActionType (PipelineActionTypeId, Name) VALUES
     (1,'Append'),(2,'Fixed'),(3,'Clear'),(4,'ClearAll');
+
+-- v3.8.0 NEW: SystemEventType — 16 seeded business-event kinds. See §08 + §01 glossary.
+INSERT OR IGNORE INTO SystemEventType (SystemEventTypeId, Name) VALUES
+    (1,'ProfileCreated'),(2,'ProfileDeleted'),(3,'ProfileStatusChanged'),
+    (4,'RoleAssigned'),(5,'RoleRevoked'),
+    (6,'GitProfileCreated'),(7,'GitProfileAcceptanceChanged'),(8,'GitProfileBranchRestrictionChanged'),
+    (9,'AppCreated'),(10,'AppStatusChanged'),(11,'AppLinkAdded'),(12,'AppLinkRemoved'),
+    (13,'SshKeyRegistered'),(14,'SshKeyRevoked'),(15,'SshKeyRotated'),
+    (16,'TempTokenRotated');
 
 INSERT OR IGNORE INTO AuditActionType (AuditActionTypeId, Name) VALUES
     (1,'ProfileCreate'),(2,'ProfileUpdate'),(3,'ProfileDelete'),
@@ -331,7 +376,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.8.8',    strftime('%s','now')),
+    ('PluginVersion',         '2.8.9',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
@@ -351,6 +396,8 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.6.0', strftime('%s','now'), NULL),
     ('2.7.0', strftime('%s','now'), NULL),
     ('2.8.0', strftime('%s','now'), NULL),  -- doc-only consolidation cycle (no DDL changes)
-    ('2.8.7', strftime('%s','now'), NULL);  -- §18/§15 audit alignment
+    ('2.8.7', strftime('%s','now'), NULL),  -- §18/§15 audit alignment
+    ('2.8.8', strftime('%s','now'), NULL),  -- Q1 IsOrganization (column rename + table drop)
+    ('2.8.9', strftime('%s','now'), NULL);  -- Q2 PipelineAction rename + SystemEvent
 
 COMMIT;
