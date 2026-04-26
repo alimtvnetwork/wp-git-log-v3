@@ -382,9 +382,15 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     # Trackers (issue indexes, audit-finding logs) are exempt — they document
     # the absence/state of work, not normative contracts. Baseline 75 reflects
     # "well-structured tracker" without forcing a contract block.
+    # Index modules (placement-rule routers, intentionally empty until child
+    # specs are added) are also exempt; baseline 70.
     if is_tracker:
         impl = 75
         if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
+    elif is_index:
+        impl = 70
+        if m["overview_chars"] < 200: impl -= 15  # penalise zero-content indexes
+        if m["child_modules"] > 0:    impl += 10  # bonus when index actually routes children
     else:
         impl = 30
         if m["has_sql_ddl"]:      impl += 20
