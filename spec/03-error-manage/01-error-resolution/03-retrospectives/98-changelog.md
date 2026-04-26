@@ -1,10 +1,15 @@
 # Changelog — Retrospectives
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/03-error-manage/01-error-resolution/03-retrospectives/`
 
 ---
+
+## v1.1.0 — 2026-04-26 (Phase 27 drift sweep)
+
+- **Added** `kind: future-spec` frontmatter + Drift Acknowledgment section to `00-overview.md`. Acknowledges that referenced application/workflow code lives in downstream repos and is intentionally absent from this spec-only repo's local code index, so audit `drift` findings of the form "spec references file that doesn't exist" are expected and accepted.
+- **Bumped** banner v3.2.0 → v3.3.0 (minor; metadata + acknowledgment, no contract change).
 
 ## Format
 
