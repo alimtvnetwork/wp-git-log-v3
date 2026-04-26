@@ -201,12 +201,13 @@ An NDJSON response is a sequence of JSON objects separated by exactly one `\n` (
 #### 11.3.1 `Header` frame (always first, exactly one)
 
 ```json
-{"Type":"Header","Schema":"git-logs-v2/ndjson@1","RepoUrl":"github.com/acme/api","RootRepo":"github.com/acme/api","BranchName":"main","Sha":"a1b2c3…","PipelineNames":["build","test"],"TotalRowsHint":42117,"StreamId":"uuid-v4","StartedAt":1745638800}
+{"Type":"Header","Schema":"git-logs-v2/ndjson@1","RepoUrl":"github.com/acme/api","RootRepo":"github.com/acme/api","BranchName":"main","Sha":"a1b2c3…","PipelineNames":["build","test"],"TotalRowsHint":42117,"StreamId":"uuid-v4","StartedAt":1745638800,"StateTransition":"first-failure"}
 ```
 
 - `Schema` MUST be `"git-logs-v2/ndjson@1"` for v2.9.2 (bump on breaking change).
 - `TotalRowsHint` is the `ShaRegistry.RowCount` mirror (AC-50) — **advisory only**, may drift if the per-SHA file is being written concurrently.
 - `StreamId` MUST be propagated to `AuditTrail.RequestId` (AC-30) so server-side correlation works.
+- `StateTransition` (added v2.9.3 Phase 12) is OPTIONAL and emitted ONLY on single-pipeline scopes (endpoints #7/#8/#9/#10 — i.e. `/get-pipeline-logs`, `/get-pipeline-error-logs`) when the request resolves to exactly one `Pipeline` row. The value is one of the four §01 glossary v3.8.10 labels — `"still-green"`, `"first-failure"`, `"still-failing"`, `"just-recovered"` — derived purely from the row's `(PreviousHasError, HasError)` tuple per §97 AC-73. On repo-scope endpoints (#5/#6 `/get-logs`, `/get-error-logs`) and on 404 / multi-pipeline resolutions, the field MUST be ABSENT entirely (never `null`, never `"unknown"`) per §97 AC-74. Clients MUST treat absence as "not-applicable" rather than as an error — older spec versions and broader-scope endpoints simply omit the field.
 
 #### 11.3.2 `Log` frame (zero or more)
 
