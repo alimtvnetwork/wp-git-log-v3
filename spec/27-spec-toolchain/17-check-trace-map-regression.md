@@ -92,42 +92,42 @@ Sorted keys + 2-space indent + trailing newline → byte-stable diffs.
 
 ## Acceptance criteria
 
-### AC-15-01 — Healthy run with unchanged baseline exits 0
+### AC-17-01 — Healthy run with unchanged baseline exits 0
 - **Given** `.lovable/memory/audit/trace-map.json` and `.lovable/memory/audit/trace-map-baseline.json` have identical `summary` blocks,
 - **When** the script is invoked with no flags,
 - **Then** it MUST exit `0` AND stdout MUST contain `✅ No regression`.
 
-### AC-15-02 — AC coverage drop fails the build
+### AC-17-02 — AC coverage drop fails the build
 - **Given** `current.ac_traced < baseline.ac_traced` AND `--tolerance` is unset,
 - **When** the script runs,
 - **Then** it MUST exit `1` AND stdout MUST contain `AC coverage regressed`.
 
-### AC-15-03 — Drift growth fails the build
+### AC-17-03 — Drift growth fails the build
 - **Given** `current.ac_drifted > baseline.ac_drifted`,
 - **When** the script runs,
 - **Then** it MUST exit `1` AND stdout MUST contain `Drift grew`.
 
-### AC-15-04 — Orphan growth fails the build
+### AC-17-04 — Orphan growth fails the build
 - **Given** `current.code_orphan > baseline.code_orphan`,
 - **When** the script runs,
 - **Then** it MUST exit `1` AND stdout MUST contain `Orphan code grew`.
 
-### AC-15-05 — `--update-baseline` rewrites the file deterministically
+### AC-17-05 — `--update-baseline` rewrites the file deterministically
 - **Given** any current state,
 - **When** the script is run twice consecutively with `--update-baseline`,
 - **Then** `.lovable/memory/audit/trace-map-baseline.json` MUST have identical SHA-256 between the two runs (sorted keys, fixed indent, trailing newline).
 
-### AC-15-06 — `--report-only` never exits non-zero
+### AC-17-06 — `--report-only` never exits non-zero
 - **Given** a regression that would normally fire exit `1`,
 - **When** `--report-only` is passed,
 - **Then** the script MUST still print the regression list AND MUST exit `0`.
 
-### AC-15-07 — Generator's missing-* findings are propagated
+### AC-17-07 — Generator's missing-* findings are propagated
 - **Given** `trace-map.toml` references a non-existent file,
 - **When** the script runs,
 - **Then** it MUST exit `1` even if no regression is otherwise detected.
 
-### AC-15-08 — CI workflow invokes the gate on every push and PR
+### AC-17-08 — CI workflow invokes the gate on every push and PR
 - **Given** the `.github/workflows/spec-health.yml` workflow,
 - **When** a push or PR touches `spec/`, `linter-scripts/`, or `.github/workflows/`,
 - **Then** the workflow MUST run `python3 linter-scripts/check-trace-map-regression.py` AND fail the run if it exits non-zero.
