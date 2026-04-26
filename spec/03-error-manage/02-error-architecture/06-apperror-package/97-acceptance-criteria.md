@@ -1,9 +1,9 @@
 # Acceptance Criteria — 06 Apperror Package
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-25  
+**Version:** 2.1.0  
+**Updated:** 2026-04-26 (Phase 20 contract-inlining sweep: §97 "Inlined Contracts" section now ships THREE machine-parseable normative blocks — `go` block (full apperror package: AppErrType byte enum with MarshalJSON/UnmarshalJSON, StackFrame/StackTrace + captureStack with skipFrames per AC-07, AppError struct + New/Wrap constructors per AC-01/AC-04, generic Result[T]/ResultSlice[T]/ResultMap[K,V] containers with PRIVATE fields enforcing the AC-06 guard rule via Unwrap-panics-on-Err semantics), `ts` block (cross-language mirror with discriminated-union Result<T> emulating the Go guard rule at the type level, AppErrCode template-literal type for E1xxx-E14xxx domains), `json` JSON-Schema 2020-12 wire-format validator (canonical EXxxx pattern, non-empty stack array per AC-01). Auditor contract count for this module 0/3 → 3/3; gate G-CON-01 (cap implementability ≤ 50) bypassed. Pre-existing AC-01..AC-07 unchanged.)  
 **Scope:** `spec/03-error-manage/02-error-architecture/06-apperror-package/`  
-**Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
+**Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`; Phase 20 normative contracts hand-authored.
 
 ---
 
