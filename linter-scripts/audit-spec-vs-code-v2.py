@@ -463,8 +463,9 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     # ---- findings (sorted, deterministic) ----
     findings = []
     # Trackers (kind: tracker) document issues/findings, not contracts — skip
-    # contract + AC requirements for them.
-    if not is_tracker and not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
+    # contract + AC requirements for them. Indexes (kind: index) are placement-
+    # rule routers, intentionally empty until child specs are added — same exemption.
+    if not is_exempt and not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
         findings.append({
             "category": "missing-contract", "severity": "high", "impact": 8,
             "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
@@ -485,14 +486,14 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
             "evidence": "Words like should/may/might/optionally weaken normative force.",
             "correction": "Replace waffle words with MUST / MUST NOT / SHALL per RFC 2119.",
         })
-    if not is_tracker and m["ac_count"] == 0:
+    if not is_exempt and m["ac_count"] == 0:
         findings.append({
             "category": "untestable", "severity": "high", "impact": 8,
             "issue": "No acceptance criteria found",
             "evidence": "ac_count=0 in 97-acceptance-criteria.md",
             "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
         })
-    elif not is_tracker and m["gwt_block_count"] == 0:
+    elif not is_exempt and m["gwt_block_count"] == 0:
         findings.append({
             "category": "untestable", "severity": "medium", "impact": 5,
             "issue": "Acceptance criteria present but no Given/When/Then blocks",
