@@ -1,7 +1,7 @@
 # 70 — spec-health.yml
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Source:** [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)  
 **Category:** CI workflow
 
