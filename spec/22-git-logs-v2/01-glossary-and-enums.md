@@ -1,7 +1,7 @@
 # Glossary and Enum Catalog (v2)
 
-**Version:** 3.8.1  
-**Updated:** 2026-04-26
+**Version:** 3.8.3  
+**Updated:** 2026-04-26 (Q3 Split-DB: glossary entries for `PerShaDb`, `ShaLogsRoot`)
 
 ---
 
@@ -21,7 +21,9 @@
 | Pipeline | Named CI/CD pipeline within a (RepoVersion, Branch) scope. |
 | LogEntry | Single line of pipeline output (Info/Debug/etc.). **v3.8.0**: lives in the per-SHA SQLite file, not the root DB — see §39. |
 | ErrorLogEntry | Single line tagged as error output. **v3.8.0**: lives in the per-SHA SQLite file. |
-| ShaRegistry | Root-DB index pointing at every per-SHA SQLite file + roll-up summary stats (last status, failure count, …). |
+| ShaRegistry | Root-DB index pointing at every per-SHA SQLite file + roll-up summary stats (last status, failure count, …). One row per (PipelineId, Sha). |
+| PerShaDb | A standalone SQLite file dedicated to one Git SHA. Contains `LogEntry`, `ErrorLogEntry`, and per-SHA metadata. Path: `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`. Schema in §39. |
+| ShaLogsRoot | `ConfigKv` key (default `logs`) — folder name (relative to plugin data dir) that contains the two-char-prefix shard tree of per-SHA `.db` files. |
 | History | Per-RepoVersion event timeline (who pushed what, when, on which branch, result). |
 | PipelineAction | Enum-typed audit row for pipeline operations (Append, Fixed, Clear, ClearAll). **v3.8.0**: renamed from `Action`. |
 | SystemEvent | **v3.8.0** — Business state changes that aren't Git pushes (ProfileCreated, KeyRevoked, AppCreated, RoleAssigned, …). Loose polymorphic target. |

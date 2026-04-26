@@ -1,5 +1,5 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.8.9 — Q2 PipelineAction rename + SystemEvent)
+-- Git Logs Plugin — schema + lookup seeds (v2.9.0 — Q3 Split-DB: drop LogEntry/ErrorLogEntry, add ShaRegistry)
 -- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
@@ -200,25 +200,29 @@ CREATE TABLE IF NOT EXISTS Pipeline (
     UNIQUE (RepoVersionId, Branch, Pipeline)
 );
 
-CREATE TABLE IF NOT EXISTS LogEntry (
-    LogEntryId    INTEGER PRIMARY KEY AUTOINCREMENT,
-    PipelineId    INTEGER NOT NULL REFERENCES Pipeline(PipelineId) ON DELETE CASCADE,
-    LogSeverityId INTEGER NOT NULL REFERENCES LogSeverity(LogSeverityId),
-    Message       TEXT NOT NULL,
-    OccurredAt    INTEGER NOT NULL
+-- ---------------------------------------------------------------------------
+-- Per-SHA log storage registry (Q3 Split-DB, v2.9.0)
+-- LogEntry and ErrorLogEntry tables MOVED out of root DB.
+-- They now live in per-SHA SQLite files under <ShaLogsRoot>/<Sha[0:2]>/<Sha>.db
+-- See §39-split-db-log-storage.md for the per-SHA file schema.
+-- ShaRegistry tracks which SHAs have a per-SHA file and metadata about it.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS ShaRegistry (
+    ShaRegistryId  INTEGER PRIMARY KEY AUTOINCREMENT,
+    PipelineId     INTEGER NOT NULL REFERENCES Pipeline(PipelineId) ON DELETE CASCADE,
+    Sha            TEXT NOT NULL,                 -- 40-char lowercase hex
+    DbFilePath     TEXT NOT NULL,                 -- relative to ShaLogsRoot
+    RowCount       INTEGER NOT NULL DEFAULT 0,    -- total rows across LogEntry+ErrorLogEntry in the per-SHA file
+    FirstSeenAt    INTEGER NOT NULL,
+    LastSeenAt     INTEGER NOT NULL,
+    FileSizeBytes  INTEGER NOT NULL DEFAULT 0,
+    Sha256         TEXT,                          -- nullable; computed at backup/checksum time
+    UNIQUE (PipelineId, Sha)
 );
 
-CREATE INDEX IF NOT EXISTS IxLogEntryPipeline ON LogEntry(PipelineId, OccurredAt);
-
-CREATE TABLE IF NOT EXISTS ErrorLogEntry (
-    ErrorLogEntryId INTEGER PRIMARY KEY AUTOINCREMENT,
-    PipelineId      INTEGER NOT NULL REFERENCES Pipeline(PipelineId) ON DELETE CASCADE,
-    LogSeverityId   INTEGER NOT NULL REFERENCES LogSeverity(LogSeverityId),
-    Message         TEXT NOT NULL,
-    OccurredAt      INTEGER NOT NULL
-);
-
-CREATE INDEX IF NOT EXISTS IxErrorLogEntryPipeline ON ErrorLogEntry(PipelineId, OccurredAt);
+CREATE INDEX IF NOT EXISTS IxShaRegistrySha       ON ShaRegistry(Sha);
+CREATE INDEX IF NOT EXISTS IxShaRegistryLastSeen  ON ShaRegistry(LastSeenAt);
 
 -- ---------------------------------------------------------------------------
 -- Audit triumvirate
@@ -376,7 +380,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.8.9',    strftime('%s','now')),
+    ('PluginVersion',         '2.9.0',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
@@ -387,7 +391,11 @@ INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('UninstallMode',         'Preserve', strftime('%s','now')),  -- §29 ∈ {Preserve,Archive,Wipe}
     ('AllowedReadOrigins',    '',         strftime('%s','now')),  -- §30 S3 CORS allowlist (CSV; empty = none)
     -- v2.7 additions
-    ('SshReplayWindowSec',    '300',      strftime('%s','now'));  -- §31 SSH timestamp skew tolerance
+    ('SshReplayWindowSec',    '300',      strftime('%s','now')),  -- §31 SSH timestamp skew tolerance
+    -- v2.9 additions (Q3 Split-DB, §39)
+    ('ShaLogsRoot',           'logs',     strftime('%s','now')),  -- root folder for per-SHA .db files (relative to plugin data dir)
+    ('MaxOpenShaDbHandles',   '32',       strftime('%s','now')),  -- LRU cache cap for open per-SHA SQLite handles
+    ('ShaDbIdleCloseSec',     '120',      strftime('%s','now')); -- idle seconds before a per-SHA handle is closed
 
 -- Migration marker — last
 INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
@@ -398,6 +406,7 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.8.0', strftime('%s','now'), NULL),  -- doc-only consolidation cycle (no DDL changes)
     ('2.8.7', strftime('%s','now'), NULL),  -- §18/§15 audit alignment
     ('2.8.8', strftime('%s','now'), NULL),  -- Q1 IsOrganization (column rename + table drop)
-    ('2.8.9', strftime('%s','now'), NULL);  -- Q2 PipelineAction rename + SystemEvent
+    ('2.8.9', strftime('%s','now'), NULL),  -- Q2 PipelineAction rename + SystemEvent
+    ('2.9.0', strftime('%s','now'), NULL);  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
 
 COMMIT;

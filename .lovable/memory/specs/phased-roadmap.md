@@ -12,16 +12,15 @@ type: feature
 
 ## ✅ Phase 0 — Q1 IsOrganization (DONE, v3.8.1)
 ## ✅ Phase 1 — Q2 PipelineAction + SystemEvent (DONE, v3.8.2)
+## ✅ Phase 2 — Split-DB Schema Surgery (DONE, v3.8.3 / schema v2.9.0)
+
+Landed in v3.8.3:
+- §18: dropped `LogEntry` + `ErrorLogEntry` (and their indexes), added `ShaRegistry` table + 2 indexes, added 3 ConfigKv defaults (`ShaLogsRoot`, `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`), bumped PluginVersion 2.8.9→2.9.0, appended MigrationState 2.9.0.
+- §02: banner 3.8.0→3.8.3, engine note rewritten, ConfigKv sub-table for new keys.
+- §01: banner 3.8.1→3.8.3, ShaRegistry def refined, NEW glossary rows `PerShaDb` + `ShaLogsRoot`.
+- §98 changelog v3.8.3 row added; §99 v3.8.3 audit table + Q3 status flip in v3.8.0 audit. Schema validated in-memory: 29 tables, no LogEntry/ErrorLogEntry, ShaRegistry present, 13 ConfigKv rows, 9 MigrationState markers.
 
 ---
-
-## ⏳ Phase 2 — Split-DB Schema Surgery (root DB)
-**Files:** `18-schema.sql`, `02-database-schema.md`, `01-glossary-and-enums.md`
-- Drop `LogEntry` and `ErrorLogEntry` from root DB DDL
-- Add `ShaRegistry` table (PK: ShaRegistryId; cols: PipelineId FK, Sha, DbFilePath, RowCount, FirstSeenAt, LastSeenAt, FileSizeBytes, Sha256)
-- Add 3 `ConfigKv` defaults: `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`, `ShaLogsRoot`
-- Update §02 schema doc + ERD callouts
-- Update §01 glossary: add `ShaRegistry`, `PerShaDb`; note `LogEntry` lives in per-SHA file
 
 ## ⏳ Phase 3 — Split-DB Error Codes & Cross-Section Updates
 **Files:** `15-error-codes.md`, `22-retention-and-pruning.md`, `23-backup-restore.md`, `29-uninstall-policy.md`
@@ -86,4 +85,4 @@ type: feature
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 2** (Split-DB Schema Surgery)
+**Top pending = Phase 3** (Split-DB Error Codes & Cross-Section Updates)

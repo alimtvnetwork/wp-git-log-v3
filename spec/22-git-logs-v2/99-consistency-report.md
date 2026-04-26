@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.2  
+**Version:** 3.8.3  
 **Updated:** 2026-04-26
 
 ---
@@ -117,7 +117,7 @@ User reviewed `26-gitlogs-diagrams/02-domain-design.mmd` + `01-er-diagram.mmd` a
 Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enums.md` (OwnerType retired, PipelineActionType renamed, SystemEventType added, ShaRegistry+SystemEvent+PipelineAction terms), `02-database-schema.md` (GitProfile.IsOrganization, lookup list updated, LogEntry+ErrorLogEntry removed, ShaRegistry added, History rename, PipelineAction rename, SystemEvent added), `08-history-and-action.md` (4-table model), `97-acceptance-criteria.md` (AC-07 + AC-21 reworded, AC-49–AC-53 added), `98-changelog.md`, `99-consistency-report.md`, `26-gitlogs-diagrams/01-er-diagram.mmd` (regenerated with split boundary), `26-gitlogs-diagrams/02-domain-design.mmd` (regenerated with subgraphs).
 
 **Queued (NOT in this commit, tracked in `mem://specs/git-logs.md` queued decisions):**
-- §18 `18-schema.sql`: ~~drop `OwnerType` table+seed~~ ✅ landed v3.8.1; ~~add `GitProfile.IsOrganization`~~ ✅ landed v3.8.1; ~~rename `Action`→`PipelineAction` + `ActionType`→`PipelineActionType`~~ ✅ landed v3.8.2; ~~add `SystemEvent`+`SystemEventType` tables + 16 seeds~~ ✅ landed v3.8.2; drop `LogEntry`+`ErrorLogEntry`, add `ShaRegistry` table, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults. *(Q3 still queued.)*
+- §18 `18-schema.sql`: ~~drop `OwnerType` table+seed~~ ✅ landed v3.8.1; ~~add `GitProfile.IsOrganization`~~ ✅ landed v3.8.1; ~~rename `Action`→`PipelineAction` + `ActionType`→`PipelineActionType`~~ ✅ landed v3.8.2; ~~add `SystemEvent`+`SystemEventType` tables + 16 seeds~~ ✅ landed v3.8.2; ~~drop `LogEntry`+`ErrorLogEntry`, add `ShaRegistry` table, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults~~ ✅ landed v3.8.3 (Phase 2); add 4 `GL-SHA-DB-*` codes to §15 (queued for Phase 3).
 - §22 retention: prune walks `ShaRegistry` + deletes per-SHA files.
 - §23 backup: manifest must list per-SHA file inventory + per-file row counts + sha256.
 - §29 uninstall: Wipe mode deletes the `logs/` folder.
@@ -158,6 +158,18 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 - Legacy tables `Action`/`ActionType`/`OwnerType` confirmed **absent**. ✅
 - New tables `PipelineAction`/`PipelineActionType`/`SystemEvent`/`SystemEventType` confirmed **present**. ✅
 
+## v3.8.3 Audit — Phase 2 Q3 Split-DB schema surgery (root DB)
+
+| File | Change |
+|------|--------|
+| `18-schema.sql` | **DROP** `CREATE TABLE LogEntry` + `IxLogEntryPipeline`; **DROP** `CREATE TABLE ErrorLogEntry` + `IxErrorLogEntryPipeline` (replaced with retirement comment block referencing §39). **ADD** `CREATE TABLE ShaRegistry` (PK `ShaRegistryId`, cols `PipelineId FK`, `Sha`, `DbFilePath`, `RowCount`, `FirstSeenAt`, `LastSeenAt`, `FileSizeBytes`, `Sha256 NULL`, `UNIQUE(PipelineId, Sha)`) + indexes `IxShaRegistrySha`/`IxShaRegistryLastSeen`. **ADD** 3 `ConfigKv` defaults (`ShaLogsRoot='logs'`, `MaxOpenShaDbHandles='32'`, `ShaDbIdleCloseSec='120'`). `ConfigKv.PluginVersion` 2.8.9 → 2.9.0; `MigrationState` marker 2.9.0 appended; banner v2.8.9 → v2.9.0. |
+| `02-database-schema.md` | Banner 3.8.0 → 3.8.3. Engine line clarified: root DDL no longer ships `LogEntry`/`ErrorLogEntry`; ships `ShaRegistry` + 3 new ConfigKv keys. `ConfigKv` section gained a v3.8.3 sub-table with new keys + defaults + purpose. |
+| `01-glossary-and-enums.md` | Banner 3.8.1 → 3.8.3. `ShaRegistry` definition refined ("One row per (PipelineId, Sha)"). NEW glossary rows: `PerShaDb` (per-SHA SQLite file + path layout) + `ShaLogsRoot` (ConfigKv key + sharded folder tree). |
+| `98-changelog.md` | Added v3.8.3 row. |
+| `99-consistency-report.md` | This audit table added; v3.8.0 audit table flipped (`LogEntry`/`ErrorLogEntry` drop + `ShaRegistry` + 3 ConfigKv defaults marked landed in v3.8.3); banner 3.8.2 → 3.8.3. |
+
+**Phase 2 scope discipline:** §15 error codes (`GL-SHA-DB-*`), §22 prune walk, §23 backup manifest, §29 wipe, §97 ACs (AC-49..AC-53 promotion), §00 inventory row, Mermaid re-render, root `spec-index.md` bump are **deferred to Phases 3–4** per `mem://specs/phased-roadmap.md`.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-59; v3.8.2 Q2 PipelineAction rename + SystemEvent fully landed in §18 + §03 + §01 + §97 with full lockstep on changelog/consistency. Only blockers: (a) §07 user decision (App identity), (b) Q3 split-DB DDL queued (LogEntry/ErrorLogEntry → ShaRegistry + per-SHA files; §15 `GL-SHA-DB-*` codes; §22/§23/§29 lifecycle).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-59; v3.8.3 Phase 2 split-DB schema surgery landed in §18 + §02 + §01 with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 3 (§15 `GL-SHA-DB-*` codes + §22/§23/§29 lifecycle); (c) Phase 4 (§00/§97 promote AC-49..AC-53 + Mermaid re-render + spec-index bump).

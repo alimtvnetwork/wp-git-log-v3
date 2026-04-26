@@ -1,8 +1,8 @@
 # Database Schema (v2, SQLite)
 
-**Version:** 3.8.0  
+**Version:** 3.8.3  
 **Updated:** 2026-04-26  
-**Engine:** SQLite (root DB file owned by plugin) + per-SHA SQLite files under `wp-content/uploads/git-logs/logs/` — see §39
+**Engine:** SQLite (root DB file owned by plugin) + per-SHA SQLite files under `wp-content/uploads/git-logs/<ShaLogsRoot>/` — see §39. **v3.8.3 (Q3 Split-DB):** root DDL no longer ships `LogEntry` / `ErrorLogEntry`; those tables live exclusively in per-SHA files. Root DB now ships `ShaRegistry` (canonical pointer + summary) plus 3 new `ConfigKv` keys (`ShaLogsRoot`, `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`).
 
 ---
 
@@ -304,6 +304,14 @@ Index: `(OccurredAt)`, `(AuditActionTypeId, OccurredAt)`.
 | UpdatedAt | INTEGER | |
 
 Used for runtime toggles (e.g., `LogLevelMin = "Warn"` to disable Info/Debug, `SshAuthMode`, `ReplayWindowSeconds`, `SshNonceJanitorBatch`, `UninstallMode`, `MaintenanceMode`). Default rows seeded in §16.
+
+**v3.8.3 (Q3 Split-DB) — new keys:**
+
+| KeyName | Default | Purpose |
+|---------|---------|---------|
+| `ShaLogsRoot` | `logs` | Folder name (relative to plugin data dir) where per-SHA `.db` files are stored. Final layout: `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`. |
+| `MaxOpenShaDbHandles` | `32` | LRU cache cap for simultaneously open per-SHA SQLite handles. Eviction drops the least-recently-used handle and closes its connection. |
+| `ShaDbIdleCloseSec` | `120` | Idle window (seconds) after which an open per-SHA handle is closed even if cache cap is not exceeded. |
 
 ---
 
