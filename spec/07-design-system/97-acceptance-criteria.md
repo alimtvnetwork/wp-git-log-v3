@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 3.6.0  
-**Updated:** 2026-04-26 (Phase 15d: Code Blocks section AC-017..AC-025 converted from table format to full GWT subsections — fixed-dark-bg contract, language-badge color mapping, font-size control bounds + localStorage persistence, line pin/unpin React state + visual precedence rules, shift-click range selection idempotency, fullscreen viewport inset + backdrop + z-index stack, Escape/overlay-click exit + cleanup, copy-button success state + Clipboard API + fallback, tree/structure emoji prefixes + guide rendering. AC IDs unchanged at AC-001..AC-034. 25 of 34 ACs now GWT; 9 await Phase 15e.)
+**Version:** 3.7.0  
+**Updated:** 2026-04-26 (Phase 15e: Navigation + Page Consistency sections AC-026..AC-034 converted from table format to full GWT subsections — header icon scale + active down-press, gradient underline sweep with origin-flip mechanics, dropdown primary-tinted hover, mobile sidebar Sheet pattern + backdrop + auto-close, Ctrl+B global shortcut + input-guard + per-breakpoint behavior, section-pattern composition rule, font-registry enforcement, full :hover/:active/:focus-visible/:disabled state language, mobile/tablet/desktop breakpoint contracts. AC IDs unchanged at AC-001..AC-034. **34 of 34 ACs now GWT — §07 §97 conversion COMPLETE.** Zero table rows remain.)
 
 ---
 
@@ -9,7 +9,7 @@
 
 Testable criteria for validating design system compliance across all components and pages.
 
-> **Format note (Phase 15d in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006), Typography (AC-007..AC-011), Motion & Transitions (AC-012..AC-016), and Code Blocks (AC-017..AC-025)** are fully converted to GWT subsections (25 of 34 ACs total). **Navigation + Page Consistency** remain in table format pending Phase 15e. AC IDs are stable across the conversion — `AC-012` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
+> **Format note (Phase 15e — conversion COMPLETE):** All 34 ACs in this file are now in full Given/When/Then format. The §07 §97 structural conversion is finished as of v3.7.0. Sections covered: Theme & Variables (AC-001..AC-006), Typography (AC-007..AC-011), Motion & Transitions (AC-012..AC-016), Code Blocks (AC-017..AC-025), Navigation (AC-026..AC-030), Page Consistency (AC-031..AC-034). AC IDs are stable across the conversion history — `AC-012` means the same criterion before and after the format change. Zero table rows remain. All ACs include explicit `Given` / `When` / `Then` bodies plus `Source:` cross-references.
 
 ---
 
