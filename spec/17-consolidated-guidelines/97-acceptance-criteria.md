@@ -15,10 +15,10 @@ This document defines testable acceptance criteria for the **Consolidated Guidel
 ## Criteria
 
 ### AC-01: Module entry point exists and is non-trivial
-- **Given** the module folder `spec/17-consolidated-guidelines/`
-- **When** `00-overview.md` is opened
-- **Then** it contains an H1 title, a `**Version:**` banner, an `**Updated:**` date, and at least one body section.
-- **Source:** `00-overview.md`
+- **Given** the module folder `spec/17-consolidated-guidelines/` (the canonical "table of contents" module that consolidates references to every other top-level numbered folder under `spec/`, currently 32 sibling files `00-overview.md` + `01-..` through `31-..` + `97`/`98`/`99`)
+- **When** `00-overview.md` is opened and parsed as Markdown
+- **Then** the file MUST satisfy ALL of the following structural rules: (a) the FIRST non-blank line MUST be an H1 heading (`# <title>`) — the title MUST mention "consolidated" or "guidelines" so a reader landing from the spec index immediately understands the module's role; (b) within the first 10 lines after the H1 there MUST be a `**Version:** X.Y.Z` banner where `X.Y.Z` is a valid SemVer triple — this banner MUST be present (the linter `linter-scripts/check-tree-health.cjs` counts it as a "required artifact"); (c) within the same first 10-line window there MUST be an `**Updated:** YYYY-MM-DD` banner using ISO-8601 calendar-date format — relative dates ("yesterday", "last week") and locale-specific formats (`DD/MM/YYYY`, `MM-DD-YYYY`) are FORBIDDEN because the tree-health audit sorts files by this date; (d) below the banners there MUST be at least one `## ` H2 section with at least one paragraph of body content — an empty file with only banners FAILS this AC because it provides no navigational value; (e) the file MUST NOT contain `TODO:`, `TBD`, or `FIXME` markers anywhere outside fenced code blocks (these signal unfinished spec work and the linter's `forbidden-strings.toml` blocks them per `linter-scripts/check-forbidden-strings.py`).
+- **Source:** `00-overview.md` (the file under test); `linter-scripts/check-tree-health.cjs` (banner + non-trivial enforcement); `linter-scripts/check-forbidden-strings.py` + `linter-scripts/forbidden-strings.toml` (TODO/TBD/FIXME ban); `spec/01-spec-authoring-guide/03-required-files.md` (the canonical "what every module needs" reference).
 
 ### AC-02: All sibling files referenced from the overview are present on disk
 - **Given** the link inventory in `00-overview.md`
