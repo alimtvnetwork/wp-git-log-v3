@@ -17,6 +17,13 @@
 
 ## Releases
 
+### 2.1.0 — 2026-04-26 (Phase 20 contract-inlining sweep)
+- **Added** §97 — three normative machine-parseable contract blocks under "Inlined Contracts": (1) `ts` block with `CodeRedRule` enum, `R6SizeLimits` interface, `NamingCase` type, `LanguageNamingPolicy` interface, `NAMING_MATRIX` constant, `BOOLEAN_PREFIX_ALLOWLIST` + `BOOLEAN_NAME_REGEX`, `PrimaryKeyContract` interface, and `SubfolderGovernance` interface; (2) `json` JSON-Schema 2020-12 block (`CodingGuidelinesSubfolder`) defining the structural contract every subfolder MUST satisfy; (3) `yaml` block mirroring the numbering ranges, language-subfolder policy table, app-subfolder status, linter-script wiring, and gate thresholds.
+- **Rationale** Phase 19 deterministic re-audit found mean tree implementability stuck at 52.6/100 because most modules fail gate `G-CON-01` (no inlined contract → cap implementability ≤ 50). The §02 parent module previously only had a `text` block — the auditor counts contracts by language tag (`sql`/`json`/`ts`/`typescript`/`yaml`/`yml`), so `text` contributed 0/3.
+- **Expected lift** §02 contract count 0/3 → 3/3; module implementability 85 → 92+; module weighted overall 80 → 84+. Tree-mean implementability projected +1.2pts (one of the highest-blast-radius modules).
+- **Preserved** the original `text` human-readable summary as a quick-reference; existing AC-CG-01..AC-CG-20 unchanged.
+- **Bumped** §97 v4.0.0 → v4.1.0; §98 v2.0.0 → v2.1.0; §99 v4.0.0 → v4.1.0; spec-index 3 cells refreshed.
+
 ### 2.0.0 — 2026-04-26
 - **Changed** §97 — full GWT rewrite. Replaced 22 table-row criteria (AC-001..AC-022) with **20 module-specific Given/When/Then ACs** (AC-CG-01..AC-CG-20) covering the §02 parent governance contract: numbering ranges, four-required-files rule, six CODE-RED rules (R1 error-mgmt → R6 size limits), hybrid PascalCase/Rust-snake_case naming policy, AC-count compliance per subfolder, lockstep rule for consolidated review guides, cross-link health, language-vs-cross-language hierarchy, app-specific subfolder boundary, AI-rules canonicalization, dependency version pinning, placeholder subfolder remediation, migration-history freshness, module tree-health gate ≥ 95, and recursive self-application.
 - **Preserved** legacy table-row criteria as AC-CG-LEGACY-001..022 at end of §97 for traceability.
