@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **59/100 (D)**  
+**Implementability Score:** **62/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 59/100 (D) for spec/25-app-issues/02-consolidated-audit-findings.
+> Deterministic score 62/100 (C) for spec/25-app-issues/02-consolidated-audit-findings.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.03. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.03. Gates active: 1.
 
 ---
 
@@ -16,21 +16,22 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 40 | 14.0 |
+| Implementability | 35% | 50 | 17.5 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 40 | 6.0 |
 | Consistency | 10% | 50 | 5.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 90 | 6.3 |
+| Testability | 7% | 80 | 5.6 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
 ```json
 {
+  "kind": "tracker",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 28968,
+  "overview_chars": 29146,
   "ac_chars": 2692,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -56,7 +57,6 @@
 ## Implementability Blockers
 
 - 13 broken cross-spec link(s)
-- No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 
 ## Code Mapping
 
@@ -69,7 +69,6 @@
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
 | 1 | broken-link | high | 7/10 | 13 broken cross-spec link(s) |
-| 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 
 ### Detail + Proposed Corrections
 
@@ -77,8 +76,3 @@
 - **Category:** broken-link  |  **Impact:** 7/10
 - **Evidence:** links_total=32, links_broken=13
 - **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
-
-#### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
-- **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"bash": 2, "plain": 21}
-- **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

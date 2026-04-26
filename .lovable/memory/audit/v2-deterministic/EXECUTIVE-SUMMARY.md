@@ -1,13 +1,13 @@
 # AI-Implementability Audit v2 — Executive Summary
 
 **Date:** 2026-04-25  
-**Verdict:** Mean **78.5/100** weighted, **54.3/100** implementability across 79 modules.
+**Verdict:** Mean **78.7/100** weighted, **54.9/100** implementability across 79 modules.
 
 ## TL;DR
 
-- A mediocre AI could implement **~54.3%** of features from the spec alone.
-- 0 F-tier modules; 4 D-tier; 17 A-tier.
-- Top blocker categories: `missing-contract` (28), `drift` (12), `broken-link` (8)
+- A mediocre AI could implement **~54.9%** of features from the spec alone.
+- 0 F-tier modules; 1 D-tier; 17 A-tier.
+- Top blocker categories: `missing-contract` (25), `drift` (12), `broken-link` (8)
 
 ## To raise the mean to 80+:
 1. Inline contracts (DDL/enums/JSON-schemas) into the highest blast-radius modules first — see table above.
