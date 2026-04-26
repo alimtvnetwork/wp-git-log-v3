@@ -453,6 +453,7 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.8.8', strftime('%s','now'), NULL),  -- Q1 IsOrganization (column rename + table drop)
     ('2.8.9', strftime('%s','now'), NULL),  -- Q2 PipelineAction rename + SystemEvent
     ('2.9.0', strftime('%s','now'), NULL),  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
-    ('2.9.1', strftime('%s','now'), NULL);  -- Phase 5: SSH-Key Lane B canonical schema (SshKey + SshNonce + 2 ConfigKv)
+    ('2.9.1', strftime('%s','now'), NULL),  -- Phase 5: SSH-Key Lane B canonical schema (SshKey + SshNonce + 2 ConfigKv)
+    ('2.9.2', strftime('%s','now'), NULL);   -- Phase 9: add Pipeline.PreviousHasError boolean (back-fill = copy current HasError)
 
 COMMIT;
