@@ -422,7 +422,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.9.1',    strftime('%s','now')),
+    ('PluginVersion',         '2.9.2',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
