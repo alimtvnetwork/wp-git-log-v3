@@ -45,11 +45,11 @@ const DEFAULT_REPO_BASE =
 
 const KIND_VARIANT: Record<string, string> = {
   function: "bg-primary/10 text-primary border-primary/20",
-  endpoint: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
-  config: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20",
-  workflow: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",
-  "cli-flag": "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
-  "env-var": "bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20",
+  endpoint: "bg-trace-endpoint/10 text-trace-endpoint border-trace-endpoint/20",
+  config: "bg-trace-config/10 text-trace-config border-trace-config/20",
+  workflow: "bg-trace-workflow/10 text-trace-workflow border-trace-workflow/20",
+  "cli-flag": "bg-trace-cli-flag/10 text-trace-cli-flag border-trace-cli-flag/20",
+  "env-var": "bg-trace-env-var/10 text-trace-env-var border-trace-env-var/20",
 };
 
 function KindBadge({ kind }: { kind: TraceKind }) {
@@ -378,7 +378,7 @@ const TraceViewer = () => {
                             {row.status === "drift" ? (
                               <Badge
                                 variant="outline"
-                                className="h-4 px-1.5 text-[10px] border-amber-500/40 text-amber-700 dark:text-amber-400"
+                                className="h-4 px-1.5 text-[10px] border-warning/40 text-warning"
                               >
                                 drift
                               </Badge>
@@ -421,7 +421,7 @@ const TraceViewer = () => {
                       }`}
                     >
                       <div className="flex items-start gap-2">
-                        <FileCode className="h-3.5 w-3.5 mt-0.5 shrink-0 text-amber-600" />
+                        <FileCode className="h-3.5 w-3.5 mt-0.5 shrink-0 text-warning" />
                         <div className="min-w-0 flex-1">
                           <div className="font-mono text-xs truncate">{row.file}</div>
                           <div className="text-[10px] text-muted-foreground mt-0.5">
@@ -478,8 +478,8 @@ const TraceViewer = () => {
                   <Separator />
 
                   {detailAc.length === 0 ? (
-                    <div className="rounded-md border border-amber-500/30 bg-amber-500/5 p-3 text-xs">
-                      <div className="flex items-center gap-2 font-medium text-amber-700 dark:text-amber-400">
+                    <div className="rounded-md border border-warning/30 bg-warning/5 p-3 text-xs">
+                      <div className="flex items-center gap-2 font-medium text-warning">
                         <AlertCircle className="h-4 w-4" />
                         Drift — no code link
                       </div>
@@ -569,8 +569,8 @@ const TraceViewer = () => {
                       Backed acceptance criteria ({detailFileAcs.length})
                     </div>
                     {detailFileAcs.length === 0 ? (
-                      <div className="rounded-md border border-amber-500/30 bg-amber-500/5 p-3 text-xs">
-                        <div className="flex items-center gap-2 font-medium text-amber-700 dark:text-amber-400">
+                      <div className="rounded-md border border-warning/30 bg-warning/5 p-3 text-xs">
+                        <div className="flex items-center gap-2 font-medium text-warning">
                           <AlertCircle className="h-4 w-4" />
                           Orphan — no spec coverage
                         </div>
@@ -627,7 +627,7 @@ function SummaryChip({
     tone === "primary"
       ? "border-primary/30 bg-primary/5 text-primary"
       : tone === "warning"
-      ? "border-amber-500/30 bg-amber-500/5 text-amber-700 dark:text-amber-400"
+      ? "border-warning/30 bg-warning/5 text-warning"
       : tone === "destructive"
       ? "border-destructive/30 bg-destructive/5 text-destructive"
       : "border-border bg-muted/40 text-muted-foreground";

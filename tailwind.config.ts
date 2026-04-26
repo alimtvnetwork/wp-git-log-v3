@@ -31,6 +31,25 @@ export default {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+        warning: {
+          DEFAULT: "hsl(var(--warning))",
+          foreground: "hsl(var(--warning-foreground))",
+        },
+        info: {
+          DEFAULT: "hsl(var(--info))",
+          foreground: "hsl(var(--info-foreground))",
+        },
+        success: {
+          DEFAULT: "hsl(var(--success))",
+          foreground: "hsl(var(--success-foreground))",
+        },
+        trace: {
+          endpoint: "hsl(var(--trace-endpoint))",
+          config: "hsl(var(--trace-config))",
+          workflow: "hsl(var(--trace-workflow))",
+          "cli-flag": "hsl(var(--trace-cli-flag))",
+          "env-var": "hsl(var(--trace-env-var))",
+        },
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
