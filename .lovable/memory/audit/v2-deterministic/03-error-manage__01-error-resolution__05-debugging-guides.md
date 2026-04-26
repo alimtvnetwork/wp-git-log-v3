@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **78/100 (B)**  
+**Implementability Score:** **82/100 (B)**  
 **Blast radius:** 2/10
 
-> Deterministic score 78/100 (B) for spec/03-error-manage/01-error-resolution/05-debugging-guides.
+> Deterministic score 82/100 (B) for spec/03-error-manage/01-error-resolution/05-debugging-guides.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.02. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
+| Implementability | 35% | 60 | 21.0 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -50,6 +50,8 @@
   "has_json_schema": false,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": true,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 13,
   "links_broken": 0,

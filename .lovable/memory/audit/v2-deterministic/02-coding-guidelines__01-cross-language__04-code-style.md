@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **76/100 (B)**  
+**Implementability Score:** **80/100 (B)**  
 **Blast radius:** 2/10
 
-> Deterministic score 76/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.
+> Deterministic score 80/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.08. Gates active: 1.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
+| Implementability | 35% | 60 | 21.0 |
 | Completeness | 20% | 70 | 14.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -47,6 +47,8 @@
   "has_json_schema": false,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": true,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 41,
   "links_broken": 0,

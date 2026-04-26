@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.2** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.3** — AI-Implementability Edition.
+
+v2.3 (2026-04-26, Phase 25):
+  - Contract definition expanded: typed-language reference blocks
+    (≥3 of go/rust/php/csharp/java/kotlin/swift/python/cpp) and CI workflow
+    YAML (≥5 yaml/yml blocks) now satisfy G-CON-01.
+  - Implementability bonuses: +10 typed-lang, +5 CI workflow.
+  - Rationale: a Go/PHP/CI-CD spec with dozens of reference snippets IS a
+    contract for an AI generating that language; rubric no longer assumes
+    every contract is SQL/JSON/TS.
 
 v2.2 (2026-04-26, Phase 24):
   - Front-matter `kind: index` exempts placement-rule routers (intentionally
@@ -142,6 +151,18 @@ def deterministic_metrics(folder: Path) -> dict:
     has_json = lang_counter.get("json", 0)
     has_ts   = lang_counter.get("ts", 0) + lang_counter.get("typescript", 0)
     has_yaml = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0)
+    # v2.3: typed-language reference blocks (go/php/csharp/rust/etc.) are also
+    # contracts for language-specific coding-guideline modules. Function
+    # signatures, type definitions, and idiomatic patterns are normative for
+    # an AI generating code in that language. Threshold ≥3 blocks rules out
+    # incidental snippets and requires sustained, reference-grade content.
+    TYPED_LANGS = ("go", "golang", "rust", "php", "csharp", "cs", "c#",
+                   "java", "kotlin", "swift", "python", "py", "cpp", "c++", "c")
+    typed_lang_blocks = sum(lang_counter.get(l, 0) for l in TYPED_LANGS)
+    has_typed_lang_contract = typed_lang_blocks >= 3
+    # v2.3: CI workflow YAML (≥5 blocks) is a normative contract for
+    # CI/CD pipeline modules — distinct from generic single-snippet YAML.
+    has_ci_workflow = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0) >= 5
 
     # cross-spec link health
     links = LINK_RX.findall(body_text)
@@ -181,6 +202,8 @@ def deterministic_metrics(folder: Path) -> dict:
         "has_json_schema":     has_json > 0,
         "has_ts_enums":        has_ts > 0,
         "has_yaml_openapi":    has_yaml > 0,
+        "has_typed_lang_contract": has_typed_lang_contract,  # v2.3
+        "has_ci_workflow":     has_ci_workflow,              # v2.3
         "has_mermaid":         len(mmd_files) > 0,
         "links_total":         total,
         "links_broken":        broken,
@@ -326,8 +349,8 @@ HARD_GATES = [
      "predicate": lambda m: m["ac_count"] > 0 and m["gwt_block_count"] == 0,
      "rationale": "ACs exist but none use Given/When/Then — testability degraded."},
     {"id": "G-CON-01",  "dimension": "implementability","cap": 50,
-     "predicate": lambda m: not (m["has_sql_ddl"] or m["has_json_schema"] or m["has_ts_enums"] or m["has_yaml_openapi"]),
-     "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) — an AI cannot generate code from prose alone."},
+     "predicate": lambda m: not (m["has_sql_ddl"] or m["has_json_schema"] or m["has_ts_enums"] or m["has_yaml_openapi"] or m.get("has_typed_lang_contract") or m.get("has_ci_workflow")),
+     "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) — an AI cannot generate code from prose alone."},
     {"id": "G-CON-02",  "dimension": "implementability","cap": 30,
      "predicate": lambda m: m["overview_chars"] < 500,
      "rationale": "Overview <500 chars is a stub; no AI can implement from this."},
@@ -402,6 +425,12 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         if m["has_json_schema"]:  impl += 15
         if m["has_ts_enums"]:     impl += 10
         if m["has_yaml_openapi"]: impl += 10
+        # v2.3: typed-language reference contracts (Go/PHP/C#/Rust/etc.)
+        # are normative for language-specific coding-guideline modules.
+        if m.get("has_typed_lang_contract"): impl += 10
+        # v2.3: CI workflow YAML (≥5 blocks) is a normative contract for
+        # CI/CD pipeline modules.
+        if m.get("has_ci_workflow"):         impl += 5
         if m["has_mermaid"]:      impl += 5
         if m["code_blocks_total"] >= 5: impl += 10
         if m["overview_chars"] < 500:   impl -= 20
@@ -470,10 +499,14 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     # Trackers (kind: tracker) document issues/findings, not contracts — skip
     # contract + AC requirements for them. Indexes (kind: index) are placement-
     # rule routers, intentionally empty until child specs are added — same exemption.
-    if not is_exempt and not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
+    if (not is_exempt
+            and not m["has_sql_ddl"] and not m["has_json_schema"]
+            and not m["has_ts_enums"] and not m["has_yaml_openapi"]
+            and not m.get("has_typed_lang_contract")
+            and not m.get("has_ci_workflow")):
         findings.append({
             "category": "missing-contract", "severity": "high", "impact": 8,
-            "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
+            "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
             "evidence": f"code_blocks_by_lang={json.dumps(m['code_blocks_by_lang'], sort_keys=True)}",
             "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         })

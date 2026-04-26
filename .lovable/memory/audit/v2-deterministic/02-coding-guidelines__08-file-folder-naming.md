@@ -46,6 +46,8 @@
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": false,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 26,
   "links_broken": 0,
@@ -57,7 +59,7 @@
 
 ## Implementability Blockers
 
-- No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+- No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 
 ## Code Mapping
 
@@ -69,11 +71,11 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
+| 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+#### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
 - **Evidence:** code_blocks_by_lang={"bash": 1, "php": 1, "plain": 34}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.
