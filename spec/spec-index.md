@@ -796,7 +796,7 @@
 | `spec/22-git-logs-v2/07-app-entity.md` | App Entity (v2) | 2.0.0 |
 | `spec/22-git-logs-v2/08-history-and-action.md` | History, PipelineAction, SystemEvent, and AuditTrail (v2) | 3.0.0 |
 | `spec/22-git-logs-v2/14-endpoint-examples.md` | Endpoint Examples (v2) | 2.2.0 |
-| `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.8.7 |
+| `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.9.0 |
 | `spec/22-git-logs-v2/16-seed-data.md` | Seed Data (v2) | 2.7.1 |
 | `spec/22-git-logs-v2/16-test-plan.md` | Test Plan (v2) — SUPERSEDED | 2.7.0 |
 | `spec/22-git-logs-v2/19-permission-matrix.md` | Permission Matrix (v2) | 2.3.0 |
