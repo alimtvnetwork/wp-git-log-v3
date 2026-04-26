@@ -38,6 +38,70 @@
         "symbol": "--json"
       }
     ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-01": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-02": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-03": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-04": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-05": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "write_baseline"
+      }
+    ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-06": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "cli-flag",
+        "note": null,
+        "symbol": "--report-only"
+      }
+    ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-07": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "run_generator"
+      }
+    ],
+    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-08": [
+      {
+        "file": ".github/workflows/spec-health.yml",
+        "kind": "workflow",
+        "note": null,
+        "symbol": null
+      }
+    ],
     "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01": [
       {
         "file": "linter-scripts/audit-spec-vs-code-v2.py",
@@ -143,6 +207,7 @@
   },
   "code_to_ac": {
     ".github/workflows/spec-health.yml": [
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-08",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-08"
     ],
     "linter-scripts/audit-spec-vs-code-v2.py": [
@@ -164,6 +229,15 @@
     ],
     "linter-scripts/check-spec-folder-refs.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01"
+    ],
+    "linter-scripts/check-trace-map-regression.py": [
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-01",
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-02",
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-03",
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-04",
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-05",
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-06",
+      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-07"
     ],
     "linter-scripts/check-tree-health.cjs": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01",
@@ -659,7 +733,6 @@
     "linter-scripts/check-readme-canonicals.py",
     "linter-scripts/check-readme-install-section.py",
     "linter-scripts/check-root-readme.py",
-    "linter-scripts/check-trace-map-regression.py",
     "linter-scripts/fill-missing-acceptance-criteria.cjs",
     "linter-scripts/fill-missing-changelogs.cjs",
     "linter-scripts/fill-missing-consistency-reports.cjs",
@@ -680,13 +753,13 @@
   ],
   "summary": {
     "ac_drifted": 471,
-    "ac_total": 487,
-    "ac_traced": 16,
-    "code_orphan": 26,
-    "code_referenced": 6,
+    "ac_total": 495,
+    "ac_traced": 24,
+    "code_orphan": 25,
+    "code_referenced": 7,
     "code_total": 32,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 16
+    "trace_entries": 24
   }
 }
