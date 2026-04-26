@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.0  
+**Version:** 3.9.1  
 **Updated:** 2026-04-26
 
 ---
@@ -11,7 +11,7 @@
 |------|---------|
 | 00-overview.md | ✅ |
 | 01-glossary-and-enums.md | ✅ |
-| 02-database-schema.md | ✅ |
+| 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
 | 04-rest-api-endpoints.md | ✅ |
 | 05-auth-and-validation.md | ✅ (CI/CD cross-ref) |
