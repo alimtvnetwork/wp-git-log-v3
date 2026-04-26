@@ -1,8 +1,10 @@
 # Consistency Report: Error Modal Reference
 
-**Version:** 3.2.0  
-**Generated:** 2026-04-02  
+**Version:** 3.3.0  
+**Generated:** 2026-04-26  
 **Health Score:** 100/100 (A+)
+
+> **Phase-20 Update (2026-04-26):** Inlined three normative contract blocks (TypeScript types, JSON Schema 2020-12, React props) into `97-acceptance-criteria.md` (v2.1.0). Module now satisfies gate G-CON-01; orphan-spec status (51/F) cleared.
 
 ---
 
