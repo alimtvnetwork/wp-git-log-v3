@@ -802,8 +802,8 @@
 | `spec/22-git-logs-v2/19-permission-matrix.md` | Permission Matrix (v2) | 2.3.0 |
 | `spec/22-git-logs-v2/20-observability.md` | Observability (v2) | 2.3.0 |
 
-| `spec/22-git-logs-v2/22-retention-and-pruning.md` | Retention & Pruning (v2) | 2.5.0 |
-| `spec/22-git-logs-v2/23-backup-restore.md` | Backup & Restore (v2) | 2.5.0 |
+| `spec/22-git-logs-v2/22-retention-and-pruning.md` | Retention & Pruning (v2) | 2.9.0 |
+| `spec/22-git-logs-v2/23-backup-restore.md` | Backup & Restore (v2) | 2.9.0 |
 | `spec/22-git-logs-v2/24-multisite.md` | Multisite Behavior (v2) | 2.5.0 |
 | `spec/22-git-logs-v2/25-headless-auth-notes.md` | Headless WordPress — Auth Notes (v2) | 2.5.0 |
 | `spec/22-git-logs-v2/26-readme-and-screenshots.md` | WP.org Readme + Screenshots (v2) | 2.5.0 |
