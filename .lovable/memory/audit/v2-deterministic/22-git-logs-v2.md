@@ -35,15 +35,15 @@
   "ac_count": 68,
   "gwt_block_count": 68,
   "consistency_report": true,
-  "code_blocks_total": 99,
+  "code_blocks_total": 100,
   "code_blocks_by_lang": {
+    "sql": 3,
     "json": 22,
     "plain": 38,
     "text": 2,
     "bash": 11,
     "yaml": 5,
     "php": 9,
-    "sql": 2,
     "bats": 8,
     "md": 2
   },
@@ -52,7 +52,7 @@
   "has_ts_enums": false,
   "has_yaml_openapi": true,
   "has_mermaid": false,
-  "links_total": 63,
+  "links_total": 64,
   "links_broken": 1,
   "todo_density": 12,
   "waffle_per_kchar": 0.09,
@@ -81,7 +81,7 @@
 
 #### 1. [HIGH] 1 broken cross-spec link(s)
 - **Category:** broken-link  |  **Impact:** 7/10
-- **Evidence:** links_total=63, links_broken=1
+- **Evidence:** links_total=64, links_broken=1
 - **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
 
 #### 2. [LOW] 12 TODO/TBD/FIXME marker(s) in module body
