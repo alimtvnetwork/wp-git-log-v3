@@ -1,3 +1,7 @@
+%% v3.8.5 — Phase 4 re-render. Split-DB boundary: every entity below lives in the ROOT DB
+%% (wp-content/uploads/git-logs/git-logs.sqlite). LogEntry / ErrorLogEntry no longer exist;
+%% log lines live in per-SHA files at <ShaLogsRoot>/<aa>/<sha>.db (see §39). The ShaRegistry
+%% entity is the only pointer from root → per-SHA tree.
 erDiagram
     Profile ||--o{ RoleAssignment : has
     Role ||--o{ RoleAssignment : assigned
