@@ -1,8 +1,8 @@
 # Database Schema (v2, SQLite)
 
-**Version:** 2.7.0  
-**Updated:** 2026-04-25  
-**Engine:** SQLite (single root DB file owned by plugin)
+**Version:** 3.8.0  
+**Updated:** 2026-04-26  
+**Engine:** SQLite (root DB file owned by plugin) + per-SHA SQLite files under `wp-content/uploads/git-logs/logs/` — see §39
 
 ---
 
@@ -25,14 +25,18 @@
 | Role | RoleId, Name |
 | Permission | PermissionId, Name |
 | Provider | ProviderId, Name |
-| OwnerType | OwnerTypeId, Name |
 | Acceptance | AcceptanceId, Name |
 | AppStatus | AppStatusId, Name |
 | AppLinkType | AppLinkTypeId, Name |
 | LogSeverity | LogSeverityId, Name, Numeric |
-| ActionType | ActionTypeId, Name |
+| PipelineActionType | PipelineActionTypeId, Name |
+| SystemEventType | SystemEventTypeId, Name |
 | AuditActionType | AuditActionTypeId, Name |
 | AuditOutcome | AuditOutcomeId, Name |
+
+> **v3.8.0**: `OwnerType` lookup retired — replaced by `GitProfile.IsOrganization` boolean.  
+> **v3.8.0**: `ActionType` lookup renamed to `PipelineActionType` (the `Action` table was renamed to `PipelineAction` to reflect its true scope: pipeline-bound, not system-wide).  
+> **v3.8.0**: New `SystemEventType` lookup feeds the new `SystemEvent` table for non-Git business events (ProfileCreated, KeyRevoked, AppCreated, …). See §08.
 
 ---
 
@@ -87,7 +91,7 @@ Unique: `(RoleId, PermissionId)`.
 |--------|------|-------|
 | GitProfileId | INTEGER PK AI | |
 | ProviderId | INTEGER FK → Provider | GitHub in v2 |
-| OwnerTypeId | INTEGER FK → OwnerType | User \| Organization |
+| IsOrganization | INTEGER 0/1 NOT NULL DEFAULT 0 | **v3.8.0** — replaces `OwnerTypeId` lookup. `1` ⇒ `github.com/$org/$repo`; `0` ⇒ `github.com/$username/$repo`. Drives URL canonicalization + admin-UI checkbox label "Is organization". |
 | OwnerName | TEXT NOT NULL | e.g., `alimtvnetwork` |
 | ProfileUrl | TEXT NOT NULL | Canonicalized w/ trailing slash |
 | AcceptanceId | INTEGER FK → Acceptance | |
