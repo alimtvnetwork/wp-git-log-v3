@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **82/100 (B)**  
+**Implementability Score:** **87/100 (A)**  
 **Blast radius:** 2/10
 
-> Deterministic score 82/100 (B) for spec/12-cicd-pipeline-workflows/03-reusable-ci-guards.
+> Deterministic score 87/100 (A) for spec/12-cicd-pipeline-workflows/03-reusable-ci-guards.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.12. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 65 | 22.8 |
+| Implementability | 35% | 80 | 28.0 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -50,6 +50,8 @@
   "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": true,
+  "has_typed_lang_contract": true,
+  "has_ci_workflow": true,
   "has_mermaid": false,
   "links_total": 53,
   "links_broken": 0,

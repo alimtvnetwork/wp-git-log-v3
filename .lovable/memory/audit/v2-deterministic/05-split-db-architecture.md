@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **91/100 (A)**  
+**Implementability Score:** **95/100 (A+)**  
 **Blast radius:** 9/10
 
-> Deterministic score 91/100 (A) for spec/05-split-db-architecture.
+> Deterministic score 95/100 (A+) for spec/05-split-db-architecture.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 75 | 26.2 |
+| Implementability | 35% | 85 | 29.8 |
 | Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -49,6 +49,8 @@
   "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": true,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 7,
   "links_broken": 0,

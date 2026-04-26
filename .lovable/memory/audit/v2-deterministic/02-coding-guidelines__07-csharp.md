@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **75/100 (B)**  
+**Implementability Score:** **78/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 75/100 (B) for spec/02-coding-guidelines/07-csharp.
+> Deterministic score 78/100 (B) for spec/02-coding-guidelines/07-csharp.
 
 
 **Score justification:** Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.31. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 40 | 14.0 |
+| Implementability | 35% | 50 | 17.5 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -45,6 +45,8 @@
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": true,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 41,
   "links_broken": 0,
@@ -56,7 +58,7 @@
 
 ## Implementability Blockers
 
-- No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+_(none — AI can build this)_
 
 ## Code Mapping
 
@@ -68,11 +70,5 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 
 ### Detail + Proposed Corrections
-
-#### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
-- **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"csharp": 15, "text": 1}
-- **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

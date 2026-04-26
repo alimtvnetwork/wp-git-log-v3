@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **85/100 (A)**  
+**Implementability Score:** **88/100 (A)**  
 **Blast radius:** 5/10
 
-> Deterministic score 85/100 (A) for spec/13-generic-cli.
+> Deterministic score 88/100 (A) for spec/13-generic-cli.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=20, gwt=20, broken_links=1, waffle/kchar=0.09. Gates active: 1.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 75 | 26.2 |
+| Implementability | 35% | 85 | 29.8 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 90 | 13.5 |
 | Consistency | 10% | 70 | 7.0 |
@@ -51,6 +51,8 @@
   "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": true,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 94,
   "links_broken": 1,

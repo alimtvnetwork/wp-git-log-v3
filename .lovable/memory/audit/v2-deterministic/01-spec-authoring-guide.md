@@ -48,6 +48,8 @@
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": false,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 66,
   "links_broken": 11,
@@ -60,7 +62,7 @@
 ## Implementability Blockers
 
 - 11 broken cross-spec link(s)
-- No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+- No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 
 ## Code Mapping
 
@@ -74,7 +76,7 @@
 |---:|---|:-:|:-:|---|
 | 1 | broken-link | high | 7/10 | 11 broken cross-spec link(s) |
 | 2 | drift | low | 3/10 | 2 TODO/TBD/FIXME marker(s) in module body |
-| 3 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
+| 3 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
 
 ### Detail + Proposed Corrections
 
@@ -88,7 +90,7 @@
 - **Evidence:** todo_density=2
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
 
-#### 3. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+#### 3. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
 - **Evidence:** code_blocks_by_lang={"bash": 3, "html": 2, "markdown": 23, "plain": 40, "text": 1}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

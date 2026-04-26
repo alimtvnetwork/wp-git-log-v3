@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **77/100 (B)**  
+**Implementability Score:** **79/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 77/100 (B) for spec/12-cicd-pipeline-workflows/02-go-binary-deploy.
+> Deterministic score 79/100 (B) for spec/12-cicd-pipeline-workflows/02-go-binary-deploy.
 
 
 **Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.02. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
+| Implementability | 35% | 55 | 19.2 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -46,6 +46,8 @@
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": true,
+  "has_typed_lang_contract": false,
+  "has_ci_workflow": true,
   "has_mermaid": false,
   "links_total": 43,
   "links_broken": 0,
@@ -57,7 +59,7 @@
 
 ## Implementability Blockers
 
-- No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+_(none — AI can build this)_
 
 ## Code Mapping
 
@@ -69,11 +71,5 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 
 ### Detail + Proposed Corrections
-
-#### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
-- **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"bash": 10, "plain": 5, "yaml": 14}
-- **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

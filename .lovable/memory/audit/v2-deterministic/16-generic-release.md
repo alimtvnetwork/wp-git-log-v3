@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **86/100 (A)**  
+**Implementability Score:** **88/100 (A)**  
 **Blast radius:** 2/10
 
-> Deterministic score 86/100 (A) for spec/16-generic-release.
+> Deterministic score 88/100 (A) for spec/16-generic-release.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 65 | 22.8 |
+| Implementability | 35% | 70 | 24.5 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -51,6 +51,8 @@
   "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": true,
+  "has_typed_lang_contract": false,
+  "has_ci_workflow": true,
   "has_mermaid": false,
   "links_total": 41,
   "links_broken": 0,

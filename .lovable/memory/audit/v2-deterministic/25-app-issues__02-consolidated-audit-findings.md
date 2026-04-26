@@ -45,6 +45,8 @@
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
+  "has_typed_lang_contract": false,
+  "has_ci_workflow": false,
   "has_mermaid": false,
   "links_total": 32,
   "links_broken": 13,
