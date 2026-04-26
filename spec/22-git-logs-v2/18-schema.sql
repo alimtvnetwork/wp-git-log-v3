@@ -1,6 +1,6 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.9.1 — Phase 5 SSH-Key Lane B: add SshKey + SshNonce tables, 2 ConfigKv keys)
--- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
+-- Git Logs Plugin — schema + lookup seeds (v2.9.2 — Phase 9: add Pipeline.PreviousHasError boolean)
+-- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md, 01-glossary-and-enums.md (Phase 9 PreviousHasError glossary)
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
 -- All FKs: ON UPDATE CASCADE ON DELETE RESTRICT unless noted.
@@ -189,14 +189,23 @@ CREATE INDEX IF NOT EXISTS IxAppLinkApp ON AppLink(AppId);
 -- ---------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS Pipeline (
-    PipelineId    INTEGER PRIMARY KEY AUTOINCREMENT,
-    RepoVersionId INTEGER NOT NULL REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE,
-    AppId         INTEGER REFERENCES App(AppId),
-    Branch        TEXT NOT NULL,
-    Pipeline      TEXT NOT NULL,
-    HasError      INTEGER NOT NULL DEFAULT 0,
-    CreatedAt     INTEGER NOT NULL,
-    UpdatedAt     INTEGER NOT NULL,
+    PipelineId        INTEGER PRIMARY KEY AUTOINCREMENT,
+    RepoVersionId     INTEGER NOT NULL REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE,
+    AppId             INTEGER REFERENCES App(AppId),
+    Branch            TEXT NOT NULL,
+    Pipeline          TEXT NOT NULL,
+    HasError          INTEGER NOT NULL DEFAULT 0
+                          CHECK (HasError IN (0, 1)),
+    -- v2.9.2 (Phase 9): captures the value HasError held *immediately before*
+    -- the most recent /append-log or /fixed-log transition. Lets the UI render
+    -- "first-failure" vs "still-failing" vs "just-recovered" without scanning
+    -- the per-SHA log file. Back-fill rule on migration to v2.9.2: copy the
+    -- current HasError into PreviousHasError so the very first transition
+    -- after upgrade is correctly labeled "no change" rather than "new failure".
+    PreviousHasError  INTEGER NOT NULL DEFAULT 0
+                          CHECK (PreviousHasError IN (0, 1)),
+    CreatedAt         INTEGER NOT NULL,
+    UpdatedAt         INTEGER NOT NULL,
     UNIQUE (RepoVersionId, Branch, Pipeline)
 );
 
@@ -413,7 +422,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.9.1',    strftime('%s','now')),
+    ('PluginVersion',         '2.9.2',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
@@ -444,6 +453,7 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.8.8', strftime('%s','now'), NULL),  -- Q1 IsOrganization (column rename + table drop)
     ('2.8.9', strftime('%s','now'), NULL),  -- Q2 PipelineAction rename + SystemEvent
     ('2.9.0', strftime('%s','now'), NULL),  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
-    ('2.9.1', strftime('%s','now'), NULL);  -- Phase 5: SSH-Key Lane B canonical schema (SshKey + SshNonce + 2 ConfigKv)
+    ('2.9.1', strftime('%s','now'), NULL),  -- Phase 5: SSH-Key Lane B canonical schema (SshKey + SshNonce + 2 ConfigKv)
+    ('2.9.2', strftime('%s','now'), NULL);   -- Phase 9: add Pipeline.PreviousHasError boolean (back-fill = copy current HasError)
 
 COMMIT;

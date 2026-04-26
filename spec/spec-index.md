@@ -787,8 +787,8 @@
 | File | Title | Version |
 |------|-------|---------|
 | `spec/22-git-logs-v2/00-overview.md` | Git Logs v2 — Spec Overview | 3.8.5 |
-| `spec/22-git-logs-v2/01-glossary-and-enums.md` | Glossary and Enum Catalog (v2) | 3.8.6 |
-| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 3.8.6 |
+| `spec/22-git-logs-v2/01-glossary-and-enums.md` | Glossary and Enum Catalog (v2) | 3.8.10 |
+| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 3.8.10 |
 | `spec/22-git-logs-v2/03-admin-ui.md` | Admin UI (v2) | 2.2.0 |
 | `spec/22-git-logs-v2/04-rest-api-endpoints.md` | REST API Endpoints (v2) | 2.9.2 |
 | `spec/22-git-logs-v2/05-auth-and-validation.md` | Authentication and Validation (v2) | 2.9.1 |
@@ -819,7 +819,7 @@
 | `spec/22-git-logs-v2/39-split-db-log-storage.md` | Split-DB Log Storage (per-SHA SQLite) | 1.0.0 |
 | `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 3.8.8 |
 | `spec/22-git-logs-v2/98-changelog.md` | Changelog (v2) |  |
-| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.9 |
+| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.10 |
 
 ## 🗄️ App Database
 
