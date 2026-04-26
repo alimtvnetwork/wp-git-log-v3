@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **82/100 (B)**  
+**Implementability Score:** **86/100 (A)**  
 **Blast radius:** 2/10
 
-> Deterministic score 82/100 (B) for spec/16-generic-release.
+> Deterministic score 86/100 (A) for spec/16-generic-release.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 65 | 22.8 |
-| Completeness | 20% | 75 | 15.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 90 | 6.3 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -31,9 +31,9 @@
   "md_files": 12,
   "mmd_files": 0,
   "overview_chars": 5168,
-  "ac_chars": 2839,
-  "ac_count": 5,
-  "gwt_block_count": 5,
+  "ac_chars": 27050,
+  "ac_count": 20,
+  "gwt_block_count": 20,
   "consistency_report": true,
   "code_blocks_total": 89,
   "code_blocks_by_lang": {

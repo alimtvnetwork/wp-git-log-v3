@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **82/100 (B)**  
+**Implementability Score:** **91/100 (A)**  
 **Blast radius:** 9/10
 
-> Deterministic score 82/100 (B) for spec/05-split-db-architecture.
+> Deterministic score 91/100 (A) for spec/05-split-db-architecture.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 75 | 26.2 |
-| Completeness | 20% | 70 | 14.0 |
+| Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 52 | 3.6 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -31,27 +31,28 @@
   "md_files": 7,
   "mmd_files": 0,
   "overview_chars": 3931,
-  "ac_chars": 639,
-  "ac_count": 2,
-  "gwt_block_count": 0,
+  "ac_chars": 22965,
+  "ac_count": 23,
+  "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 24,
+  "code_blocks_total": 27,
   "code_blocks_by_lang": {
-    "plain": 5,
+    "plain": 7,
     "bash": 1,
     "sql": 3,
     "go": 14,
-    "json": 1
+    "json": 1,
+    "text": 1
   },
   "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 8,
+  "links_total": 7,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.0,
+  "waffle_per_kchar": 0.06,
   "child_modules": 2
 }
 ```
@@ -70,11 +71,5 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | untestable | medium | 5/10 | Acceptance criteria present but no Given/When/Then blocks |
 
 ### Detail + Proposed Corrections
-
-#### 1. [MEDIUM] Acceptance criteria present but no Given/When/Then blocks
-- **Category:** untestable  |  **Impact:** 5/10
-- **Evidence:** ac_count=2, gwt_block_count=0
-- **Proposed correction:** Rewrite each AC as a Given/When/Then block.

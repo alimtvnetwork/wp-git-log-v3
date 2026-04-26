@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **68/100 (C)**  
+**Implementability Score:** **76/100 (B)**  
 **Blast radius:** 4/10
 
-> Deterministic score 68/100 (C) for spec/02-coding-guidelines/03-golang.
+> Deterministic score 76/100 (B) for spec/02-coding-guidelines/03-golang.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=2, gwt=0, broken_links=0, waffle/kchar=0.19. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.18. Gates active: 0.
 
 ---
 
@@ -17,12 +17,12 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 40 | 14.0 |
-| Completeness | 20% | 60 | 12.0 |
+| Completeness | 20% | 85 | 17.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 52 | 3.6 |
-| Maintainability | 3% | 100 | 3.0 |
+| Testability | 7% | 100 | 7.0 |
+| Maintainability | 3% | 90 | 2.7 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -31,24 +31,25 @@
   "md_files": 11,
   "mmd_files": 0,
   "overview_chars": 1170,
-  "ac_chars": 632,
-  "ac_count": 2,
-  "gwt_block_count": 0,
+  "ac_chars": 16626,
+  "ac_count": 23,
+  "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 45,
+  "code_blocks_total": 46,
   "code_blocks_by_lang": {
     "go": 43,
-    "plain": 2
+    "plain": 2,
+    "text": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 19,
+  "links_total": 28,
   "links_broken": 0,
-  "todo_density": 0,
-  "waffle_per_kchar": 0.19,
+  "todo_density": 1,
+  "waffle_per_kchar": 0.18,
   "child_modules": 2
 }
 ```
@@ -67,17 +68,17 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
-| 2 | untestable | medium | 5/10 | Acceptance criteria present but no Given/When/Then blocks |
+| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
+| 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
-- **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"go": 43, "plain": 2}
-- **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.
+#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
+- **Category:** drift  |  **Impact:** 3/10
+- **Evidence:** todo_density=1
+- **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
 
-#### 2. [MEDIUM] Acceptance criteria present but no Given/When/Then blocks
-- **Category:** untestable  |  **Impact:** 5/10
-- **Evidence:** ac_count=2, gwt_block_count=0
-- **Proposed correction:** Rewrite each AC as a Given/When/Then block.
+#### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
+- **Category:** missing-contract  |  **Impact:** 8/10
+- **Evidence:** code_blocks_by_lang={"go": 43, "plain": 2, "text": 1}
+- **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

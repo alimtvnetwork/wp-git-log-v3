@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **84/100 (B)**  
+**Implementability Score:** **88/100 (A)**  
 **Blast radius:** 6/10
 
-> Deterministic score 84/100 (B) for spec/14-update.
+> Deterministic score 88/100 (A) for spec/14-update.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.28. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 65 | 22.8 |
-| Completeness | 20% | 85 | 17.0 |
+| Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 90 | 6.3 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -31,9 +31,9 @@
   "md_files": 31,
   "mmd_files": 0,
   "overview_chars": 7401,
-  "ac_chars": 3319,
-  "ac_count": 5,
-  "gwt_block_count": 5,
+  "ac_chars": 26925,
+  "ac_count": 20,
+  "gwt_block_count": 20,
   "consistency_report": true,
   "code_blocks_total": 229,
   "code_blocks_by_lang": {
@@ -53,7 +53,7 @@
   "links_total": 137,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.3,
+  "waffle_per_kchar": 0.28,
   "child_modules": 2
 }
 ```

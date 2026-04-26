@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **79/100 (B)**  
+**Implementability Score:** **83/100 (B)**  
 **Blast radius:** 3/10
 
-> Deterministic score 79/100 (B) for spec/02-coding-guidelines/05-rust.
+> Deterministic score 83/100 (B) for spec/02-coding-guidelines/05-rust.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=0, broken_links=0, waffle/kchar=0.27. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.25. Gates active: 0.
 
 ---
 
@@ -17,12 +17,12 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 60 | 21.0 |
-| Completeness | 20% | 80 | 16.0 |
+| Completeness | 20% | 85 | 17.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 60 | 4.2 |
-| Maintainability | 3% | 100 | 3.0 |
+| Testability | 7% | 100 | 7.0 |
+| Maintainability | 3% | 90 | 2.7 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -31,26 +31,27 @@
   "md_files": 10,
   "mmd_files": 0,
   "overview_chars": 3191,
-  "ac_chars": 1632,
-  "ac_count": 6,
-  "gwt_block_count": 0,
+  "ac_chars": 20751,
+  "ac_count": 27,
+  "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 58,
+  "code_blocks_total": 59,
   "code_blocks_by_lang": {
     "plain": 5,
     "sql": 2,
     "rust": 50,
-    "toml": 1
+    "toml": 1,
+    "text": 1
   },
   "has_sql_ddl": true,
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 9,
+  "links_total": 16,
   "links_broken": 0,
-  "todo_density": 0,
-  "waffle_per_kchar": 0.27,
+  "todo_density": 1,
+  "waffle_per_kchar": 0.25,
   "child_modules": 0
 }
 ```
@@ -69,11 +70,11 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | untestable | medium | 5/10 | Acceptance criteria present but no Given/When/Then blocks |
+| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [MEDIUM] Acceptance criteria present but no Given/When/Then blocks
-- **Category:** untestable  |  **Impact:** 5/10
-- **Evidence:** ac_count=6, gwt_block_count=0
-- **Proposed correction:** Rewrite each AC as a Given/When/Then block.
+#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
+- **Category:** drift  |  **Impact:** 3/10
+- **Evidence:** todo_density=1
+- **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

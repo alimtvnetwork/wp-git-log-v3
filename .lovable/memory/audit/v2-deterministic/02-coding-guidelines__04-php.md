@@ -8,7 +8,7 @@
 > Deterministic score 79/100 (B) for spec/02-coding-guidelines/04-php.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.09. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.13. Gates active: 0.
 
 ---
 
@@ -31,24 +31,25 @@
   "md_files": 12,
   "mmd_files": 0,
   "overview_chars": 2063,
-  "ac_chars": 4761,
-  "ac_count": 8,
-  "gwt_block_count": 7,
+  "ac_chars": 20674,
+  "ac_count": 28,
+  "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 73,
+  "code_blocks_total": 74,
   "code_blocks_by_lang": {
     "php": 67,
-    "plain": 6
+    "plain": 6,
+    "text": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 30,
+  "links_total": 42,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.09,
+  "waffle_per_kchar": 0.13,
   "child_modules": 1
 }
 ```
@@ -73,5 +74,5 @@
 
 #### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"php": 67, "plain": 6}
+- **Evidence:** code_blocks_by_lang={"php": 67, "plain": 6, "text": 1}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

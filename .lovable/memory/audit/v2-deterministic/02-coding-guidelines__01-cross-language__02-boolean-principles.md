@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **74/100 (C)**  
+**Implementability Score:** **76/100 (B)**  
 **Blast radius:** 2/10
 
-> Deterministic score 74/100 (C) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.
+> Deterministic score 76/100 (B) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=2, waffle/kchar=0.2. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.2. Gates active: 1.
 
 ---
 
@@ -18,7 +18,7 @@
 |---|---:|---:|---:|
 | Implementability | 35% | 50 | 17.5 |
 | Completeness | 20% | 90 | 18.0 |
-| Alignment | 15% | 80 | 12.0 |
+| Alignment | 15% | 90 | 13.5 |
 | Consistency | 10% | 70 | 7.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
@@ -28,7 +28,7 @@
 
 ```json
 {
-  "md_files": 8,
+  "md_files": 9,
   "mmd_files": 0,
   "overview_chars": 3375,
   "ac_chars": 5368,
@@ -48,8 +48,8 @@
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_mermaid": false,
-  "links_total": 31,
-  "links_broken": 2,
+  "links_total": 34,
+  "links_broken": 1,
   "todo_density": 0,
   "waffle_per_kchar": 0.2,
   "child_modules": 0
@@ -58,7 +58,7 @@
 
 ## Implementability Blockers
 
-- 2 broken cross-spec link(s)
+- 1 broken cross-spec link(s)
 
 ## Code Mapping
 
@@ -70,11 +70,11 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | broken-link | high | 7/10 | 2 broken cross-spec link(s) |
+| 1 | broken-link | high | 7/10 | 1 broken cross-spec link(s) |
 
 ### Detail + Proposed Corrections
 
-#### 1. [HIGH] 2 broken cross-spec link(s)
+#### 1. [HIGH] 1 broken cross-spec link(s)
 - **Category:** broken-link  |  **Impact:** 7/10
-- **Evidence:** links_total=31, links_broken=2
+- **Evidence:** links_total=34, links_broken=1
 - **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
