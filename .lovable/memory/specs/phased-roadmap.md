@@ -68,9 +68,12 @@ Landed in v3.8.8:
 - 7 new ACs added in Section I, all `[active]`: AC-60 SshKey registration shape; AC-61 SshNonce replay defense (skew + per-key uniqueness + janitor); AC-62 lane gating via `SshAuthMode` + mixed-lane `GL-SSH-LANE-CONFLICT`; AC-63 signature stripping defense (header-completeness ordered first + mandatory HTTPS); AC-64 SshKey rotation flow (`IsActive=0` no-cache reject + dual SystemEvent + dual AuditTrail); AC-65 deploy-key one-Repo blast radius (FK CASCADE + `LastUsedAt` anomaly + rate cap); AC-66 canonical signing string + `git-logs@v2` namespace + `-H sha512`.
 - AC-38 amended to list SSH AuditActionType seeds (22/23/24). AC count 59 → 66.
 
-## ⏳ Phase 8 — API Streaming Spec
-**Files:** `04-rest-api-endpoints.md`
-- Define NDJSON streaming format for log retrieval
+## ✅ Phase 8 — API Streaming Spec (DONE, v3.8.9)
+
+Landed in v3.8.9:
+- §04 banner v2.8.3 → v2.9.2. Added new top-level §11 NDJSON Streaming Retrieval (v2.9.2) with 9 sub-sections covering rationale, opt-in via `Accept: application/x-ndjson`, 5-frame schema (`Header`/`Log`/`ErrorLog`/`Progress`/`End` + optional mid-stream `Error`), ordering & atomicity, 4 new ConfigKv keys (doc-only), resume via `?after-seq=N` + `?stream-id=<uuid>`, endpoint applicability matrix (#5–#10 ✅; #1–#4 ❌), wire example, cross-refs.
+- 2 new error codes introduced doc-side: `GL-NDJSON-CLIENT-DISCONNECT` (499 informational), `GL-NDJSON-CURSOR-LOST` (500).
+- **Streaming follow-ups deferred:** §18 ConfigKv seeding for 4 `Ndjson*` keys, §15 entries for 2 `GL-NDJSON-*` codes, §17 OpenAPI `application/x-ndjson` content variants for endpoints #5–#10, §97 ACs for streaming behavior. Tracked under "Streaming follow-ups" in §99 Phase 8 audit.
 
 ## ⏳ Phase 9 — Pipeline PreviousHasError Flag
 **Files:** `18-schema.sql`, `02-database-schema.md`, `01-glossary-and-enums.md`
