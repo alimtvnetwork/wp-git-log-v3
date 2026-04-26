@@ -21,10 +21,10 @@ This document defines testable acceptance criteria for the **Consolidated Guidel
 - **Source:** `00-overview.md` (the file under test); `linter-scripts/check-tree-health.cjs` (banner + non-trivial enforcement); `linter-scripts/check-forbidden-strings.py` + `linter-scripts/forbidden-strings.toml` (TODO/TBD/FIXME ban); `spec/01-spec-authoring-guide/03-required-files.md` (the canonical "what every module needs" reference).
 
 ### AC-02: All sibling files referenced from the overview are present on disk
-- **Given** the link inventory in `00-overview.md`
-- **When** each relative `.md` link is resolved
-- **Then** the target file exists in this module folder.
-- **Source:** `00-overview.md` cross-references; verified by `linter-scripts/check-spec-cross-links.py`.
+- **Given** the link inventory in `00-overview.md` (the overview MUST enumerate every sibling guideline file the consolidated module covers — currently 31 numbered guideline files plus `97`/`98`/`99`)
+- **When** every relative Markdown link of the form `[<label>](./<NN-name>.md)` or `[<label>](<NN-name>.md)` is resolved against the module folder by `linter-scripts/check-spec-cross-links.py`
+- **Then** ALL of the following MUST hold simultaneously: (a) every link target MUST be a real file in `spec/17-consolidated-guidelines/` — broken links are a hard CI failure (the tree-health gate exits non-zero); (b) conversely, every `.md` file in the module folder (except `97`/`98`/`99` which are template-position files, NOT navigational entries) MUST be referenced by at least ONE link from `00-overview.md` — orphan files are a soft warning surfaced in `99-consistency-report.md` and MUST be either linked from the overview or moved out of the module; (c) link targets MUST use lowercase kebab-case filenames matching the on-disk inode (case-sensitive even on macOS/Windows because deployment targets are Linux); (d) anchor fragments (`#section-id`) inside link targets MUST resolve to a real heading slug in the destination file — dangling fragments are flagged by `linter-scripts/suggest-spec-cross-link-fixes.py` with a suggested correction; (e) cross-folder links of the form `../NN-other-folder/...md` are PERMITTED but the destination folder MUST exist (the slot-immutability rule means `../16-...` MUST NOT resolve since slot 16 was renamed to 37 in v2.8.6); (f) any auto-fix proposed by `suggest-spec-cross-link-fixes.py` MUST be applied or explicitly suppressed via a comment — silently ignoring suggestions accumulates drift.
+- **Source:** `00-overview.md` (the link inventory under test); `linter-scripts/check-spec-cross-links.py` (the resolver); `linter-scripts/suggest-spec-cross-link-fixes.py` (auto-fix proposer); `linter-scripts/check-spec-folder-refs.py` (cross-folder validity); `99-consistency-report.md` (where orphan warnings surface).
 
 ### AC-03: Naming convention compliance
 - **Given** every file in this module
