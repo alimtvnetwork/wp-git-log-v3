@@ -490,10 +490,14 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     # Trackers (kind: tracker) document issues/findings, not contracts — skip
     # contract + AC requirements for them. Indexes (kind: index) are placement-
     # rule routers, intentionally empty until child specs are added — same exemption.
-    if not is_exempt and not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
+    if (not is_exempt
+            and not m["has_sql_ddl"] and not m["has_json_schema"]
+            and not m["has_ts_enums"] and not m["has_yaml_openapi"]
+            and not m.get("has_typed_lang_contract")
+            and not m.get("has_ci_workflow")):
         findings.append({
             "category": "missing-contract", "severity": "high", "impact": 8,
-            "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
+            "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
             "evidence": f"code_blocks_by_lang={json.dumps(m['code_blocks_by_lang'], sort_keys=True)}",
             "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
         })
