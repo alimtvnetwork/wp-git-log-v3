@@ -1,6 +1,6 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.0  
+**Version:** 3.8.1  
 **Updated:** 2026-04-26
 
 | # | Criterion | Source |
@@ -51,3 +51,5 @@
 | AC-39 | Permission gate uses `RolePermission` join only — never role name string compare. Buttons hidden (not disabled) when permission missing. | §19 |
 | AC-40 | OpenAPI 3.1 spec at `17-openapi.yaml` parses; covers all 10 endpoints; references `15-error-codes.md` envelope schema. | §17 |
 | AC-41 | WP.org release ZIP contains `readme.txt` + `screenshot-1..8.png`; CI gate runs `wp plugin check` before tagging. | §26 |
+| AC-54 | GitProfile create/edit form renders an **Is organization** checkbox (default off) bound to `GitProfile.IsOrganization` (0/1). The legacy "OwnerType (derived)" field MUST NOT render. Toggling the checkbox flips the canonical URL form between `github.com/$org/$repo` and `github.com/$username/$repo` on save. | §03 + v3.8.1 |
+| AC-55 | `18-schema.sql` MUST NOT create the `OwnerType` table and MUST NOT seed `OwnerType` rows; `GitProfile` table MUST declare `IsOrganization INTEGER NOT NULL DEFAULT 0 CHECK (IsOrganization IN (0,1))` in place of `OwnerTypeId`. | §18 + v3.8.1 |
