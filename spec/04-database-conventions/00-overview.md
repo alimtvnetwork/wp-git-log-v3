@@ -1,8 +1,8 @@
 # Database Conventions
 
-**Version:** 3.2.0  
+**Version:** 3.3.0  
 **Status:** Active  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-26  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
