@@ -306,31 +306,37 @@ Fifth and final mainstream-language child to inherit AC-CL-*. Rewrote §97 from 
 
 ---
 
-## Next-pointer
-**Phase 16m complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT). **All 5 mainstream language children done.**
+## ✅ Phase 16n — §02/06-ai-optimization §97 deepen (DONE, v4.0.0) — **All P1 §97 complete**
 
-**7 remaining §97 files with 0 GWT ACs** (post-16m), priority order:
+Last remaining P1 §97. Rewrote §97 from 7 stub checkboxes to **20 module-specific GWT ACs** (AC-AI-01..AC-AI-20) covering: explicit AC-CL-* + per-language AC-XX-* example-code inheritance (AC-AI-01); 6-language coverage including C# + AI-meta `AH-A*` namespace (AC-AI-02); rule ID regex `^AH-(X|G|T|P|R|C|A)\d+$` + retired-ID immutability (AC-AI-03); mandatory ❌Forbidden+✅Required+Source triplet per rule (AC-AI-04); machine-parsable `- [ ] CHK-NN` checklist with ≥ 50 checks (AC-AI-05); every check links to a rule or canonical spec (AC-AI-06); 7-section common-mistake schema with ≥ 15 entries (AC-AI-07); zero-overlap rule across rules+checks+mistakes per AC-CL-20 (AC-AI-08); condensed master ≤ 200 non-blank non-fence lines for context-window fit (AC-AI-09); enum quick-ref 5-section template per language (AC-AI-10); placeholder-name blocklist (`foo`/`bar`/`baz`/`xxx`/`todo`/`myVar`/`temp`/`data1`) with sole `❌ Before` exemption (AC-AI-11); fabricated-API ban — every imported symbol MUST exist (AC-AI-12); mandatory `AH-A*` AI-meta rules: STOP/scan/verify, no-silent-assumption, ask-when-ambiguous, cite-source (AC-AI-13); closed Severity {low,medium,high,critical} + Frequency {rare,occasional,common} enums (AC-AI-14); checklist 4-section ordering Pre-Output/During/Post-Output/Per-Language (AC-AI-15); language-tagged code fences mandatory, bare ``` FORBIDDEN (AC-AI-16); rule body ≤ 60 lines for atomicity (AC-AI-17); checklist runnable as self-graded test ≥ 90% green-rate (AC-AI-18); cross-language sibling-linking for universal concepts anchored at AC-CL-09 (AC-AI-19); self-application doctest gate (AC-AI-20). Legacy 7 stubs preserved as AC-AI-LEGACY-* at end. Lockstep: §98 v1.0.0 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+**🎉 Milestone — Phase 16 P1 batch complete:** All §02 children (cross-language, TypeScript, Golang, PHP, Rust, C#, AI-Optimization) now carry full 20-GWT §97 contracts. The AI-implementer can read any one of these folders and have a self-contained, normative, testable spec without chasing parent docs.
+
+---
+
+## Next-pointer
+**Phase 16n complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT) + §02/06-ai-optimization §97 (20 GWT). **All P1 §97s complete.**
+
+**6 remaining §97 files with 0 GWT ACs** (post-16n), all P2:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/06-ai-optimization/` | 0 | **P1** | AI rules subfolder |
-| 2 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision with above |
-| 3 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 4 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 5 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 6 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 7 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `02-coding-guidelines/06-cicd-integration/` | 0 | **P2** | 🚨 Slot collision with `06-ai-optimization` |
+| 2 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 3 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 4 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 5 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 6 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
-🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04.
+🚨 **Slot collision (B2)**: `02-coding-guidelines/` still has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04. Phase 16n shipped §97 for one of the two; deepening 16o for the other will codify the collision in two §97s simultaneously, increasing pressure to resolve B2.
 
 Remaining work:
-- ⏳ **Phase 16n** — Deepen `02-coding-guidelines/06-ai-optimization/97` (P1 — last P1 §97).
-- ⏳ **Phase 16o** — Deepen `02-coding-guidelines/06-cicd-integration/97` (P2 — also B2-flagged).
+- ⏳ **Phase 16o** — Deepen `02-coding-guidelines/06-cicd-integration/97` (P2 — also B2-flagged collision twin).
 - ⏳ **Phase 16p** — Deepen `02-coding-guidelines/01-cross-language/16-static-analysis/97` (P2 deep nested).
 - ⏳ **Phase 16q** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16r** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
-- 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user).
-- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user).
+- 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user: `Environment`, `Platform`, `OwnerEmail` shape).
+- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user: pick rename target for one of `06-ai-optimization`/`06-cicd-integration`).
 
-On next `next`: take **Phase 16n (`02-coding-guidelines/06-ai-optimization/97` deepen)** — last remaining **P1** §97; this completes the §02 cross-language + language-children + AI-opt P1 batch. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16o (`02-coding-guidelines/06-cicd-integration/97` deepen)** — first P2; intentionally tackled next because shipping §97 for the other §06 makes the B2 collision impossible to ignore. Unless you redirect or want to unblock B1/B2 first.
 
