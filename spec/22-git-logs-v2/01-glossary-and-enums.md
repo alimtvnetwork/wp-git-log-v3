@@ -1,6 +1,6 @@
 # Glossary and Enum Catalog (v2)
 
-**Version:** 3.8.3  
+**Version:** 3.8.6  
 **Updated:** 2026-04-26 (Q3 Split-DB: glossary entries for `PerShaDb`, `ShaLogsRoot`)
 
 ---
