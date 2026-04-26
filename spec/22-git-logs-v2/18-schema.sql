@@ -1,5 +1,5 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.9.0 — Q3 Split-DB: drop LogEntry/ErrorLogEntry, add ShaRegistry)
+-- Git Logs Plugin — schema + lookup seeds (v2.9.1 — Phase 5 SSH-Key Lane B: add SshKey + SshNonce tables, 2 ConfigKv keys)
 -- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
