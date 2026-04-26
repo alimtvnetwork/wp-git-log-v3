@@ -1,7 +1,7 @@
 # Glossary and Enum Catalog (v2)
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-25
+**Version:** 3.8.0  
+**Updated:** 2026-04-26
 
 ---
 
@@ -19,10 +19,12 @@
 | App | User-registered logical app, linked polymorphically to a Repo or a GitProfile via AppLink. |
 | AppLink | Polymorphic join row binding an App to a target (GitProfile \| Repo). |
 | Pipeline | Named CI/CD pipeline within a (RepoVersion, Branch) scope. |
-| LogEntry | Single line of pipeline output (Info/Debug/etc.). |
-| ErrorLogEntry | Single line tagged as error output. |
+| LogEntry | Single line of pipeline output (Info/Debug/etc.). **v3.8.0**: lives in the per-SHA SQLite file, not the root DB — see §39. |
+| ErrorLogEntry | Single line tagged as error output. **v3.8.0**: lives in the per-SHA SQLite file. |
+| ShaRegistry | Root-DB index pointing at every per-SHA SQLite file + roll-up summary stats (last status, failure count, …). |
 | History | Per-RepoVersion event timeline (who pushed what, when, on which branch, result). |
-| Action | Enum-typed audit row for repo/pipeline operations (Append, Fixed, Clear, ClearAll). |
+| PipelineAction | Enum-typed audit row for pipeline operations (Append, Fixed, Clear, ClearAll). **v3.8.0**: renamed from `Action`. |
+| SystemEvent | **v3.8.0** — Business state changes that aren't Git pushes (ProfileCreated, KeyRevoked, AppCreated, RoleAssigned, …). Loose polymorphic target. |
 | AuditTrail | System-wide append-only log of every endpoint hit and transaction outcome. |
 | MigrationState | DB-config row marking a plugin version as migrated (boot-time idempotent). |
 
@@ -64,11 +66,9 @@
 | GitHub | Active in v2 |
 | GitLab | Reserved |
 
-### OwnerType
-| Code | Meaning |
-|------|---------|
-| User | GitHub user account |
-| Organization | GitHub organization |
+### OwnerType (retired in v3.8.0)
+
+> Replaced by `GitProfile.IsOrganization` (boolean). The two-value lookup table was overkill for a true binary; the boolean drives URL canonicalization (`github.com/$org/$repo` vs `github.com/$username/$repo`) and the admin-UI "Is organization" checkbox directly.
 
 ### Acceptance
 | Code | Meaning |
@@ -100,13 +100,33 @@
 | Error | 50 | Error |
 | Fatal | 60 | Fatal |
 
-### ActionType
+### PipelineActionType (renamed from `ActionType` in v3.8.0)
 | Code | Meaning |
 |------|---------|
 | Append | `/append-log` write |
 | Fixed | `/fixed-log` write |
 | Clear | `/clear-log` write |
 | ClearAll | `/clear-log-all` write |
+
+### SystemEventType (NEW v3.8.0)
+| Code | Meaning |
+|------|---------|
+| ProfileCreated | New plugin Profile row |
+| ProfileDeleted | Profile removed |
+| ProfileStatusChanged | Active ↔ Suspended ↔ Revoked |
+| RoleAssigned | Profile granted a Role |
+| RoleRevoked | Role removed from a Profile |
+| GitProfileCreated | New GitProfile row |
+| GitProfileAcceptanceChanged | Acceptance enum value changed |
+| GitProfileBranchRestrictionChanged | `IsRestrictInBranch` / `StrictBranch` modified |
+| AppCreated | App row created |
+| AppStatusChanged | Active ↔ Disabled ↔ Archived |
+| AppLinkAdded | New AppLink row |
+| AppLinkRemoved | AppLink soft-disabled (`IsActive = 0`) |
+| SshKeyRegistered | New SshKey row |
+| SshKeyRevoked | SshKey `IsActive` flipped to 0 |
+| SshKeyRotated | New key registered to replace an existing one |
+| TempTokenRotated | Profile.TempToken regenerated |
 
 ### AuditActionType
 | Code | Meaning |
