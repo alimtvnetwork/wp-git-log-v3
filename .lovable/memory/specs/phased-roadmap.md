@@ -124,6 +124,28 @@ Closed §17-scope subset of the deepening backlog. Doc-only, no schema/DDL churn
 
 ---
 
+## ✅ Phase 15a — Convert §07 §97 Theme & Variables to GWT (DONE, v3.3.0)
+
+First slice of the §07 structural conversion. AC IDs preserved across format change:
+- §07 §97 banner v3.2.0 → v3.3.0; AC count unchanged at 34 (AC-001..AC-034 sequential, verified — no IDs added/removed/renamed).
+- **6 ACs converted (AC-001..AC-006 Theme & Variables)** from one-row table format (~80 chars each) to full GWT subsections (994-4231 chars each, 12-50× depth) with concrete contracts + cross-refs to `01-design-principles.md`, `02-theme-variable-architecture.md`, `src/index.css`, `tailwind.config.ts`, theme provider, WCAG 2.1 §1.4.3/§1.4.11.
+- Added top-of-file **Format note** documenting the mid-conversion state (some sections GWT, others still table) so consumers and future maintainers aren't confused — IDs are stable across formats so ID-scraping tooling continues to work unchanged.
+- Lockstep §98 v1.0.0 → v1.1.0 + §99 v3.2.0 → v3.3.0 + spec-index updated.
+
+---
+
+## ⏳ Phase 15b..15e — Convert remaining §07 §97 sections to GWT (PENDING)
+
+Same surgery as 15a, applied section by section to keep each batch reviewable:
+- **15b — Typography (AC-007..AC-011)** — 5 ACs covering Ubuntu/Poppins/Mono fonts, gradient headings, heading-level discipline.
+- **15c — Motion & Transitions (AC-012..AC-016)** — 5 ACs covering 300ms hover cap, no-JS-animation rule, `prefers-reduced-motion`, link underline sweep, CTA slide animation.
+- **15d — Code Blocks (AC-017..AC-025)** — 9 ACs covering dark-bg-in-both-themes, language badge, font-size controls, line pin/select, fullscreen, copy button, tree prefixes.
+- **15e — Navigation + Page Consistency (AC-026..AC-034)** — 9 ACs covering header hover, menu underline, dropdown tint, sidebar mobile collapse, Ctrl+B toggle, section patterns, font discipline, state language, responsive breakpoints.
+
+Each phase: deepen the section's ACs in place, bump §97/§98/§99 banners, update spec-index, mark done in this roadmap. Order is suggested but not forced — pick whichever section is highest-traffic next.
+
+---
+
 ## 🚧 Blocked (awaiting user decision)
 - **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
 
@@ -135,4 +157,4 @@ Closed §17-scope subset of the deepening backlog. Doc-only, no schema/DDL churn
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–14 complete. **Remaining unblocked candidates:** (a) **Phase 15** — convert §07 design-system §97 from table-style AC-001..AC-NNN format to GWT one-AC-per-section format (structural conversion, NOT just deepening — bigger surgery, scope ~50+ ACs); (b) §03 admin UI rendering of state labels (consumer-side, out-of-scope unless user explicitly scopes it). On next `next`, either unblock B1, approve Phase 15, or scope a different audit-driven cleanup.
+**Top pending = Phase 15b (Typography section).** All numbered phases 0–14 complete; Phase 15a (Theme & Variables) done. **Unblocked candidates:** Phase 15b → 15c → 15d → 15e (continuing the §07 §97 GWT conversion section by section). Phase B1 remains blocked on user. On next `next`, take **Phase 15b** unless the user redirects.
