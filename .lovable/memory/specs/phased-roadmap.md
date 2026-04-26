@@ -198,20 +198,26 @@ Second module deepening pass:
 
 ---
 
+## ✅ Phase 16c — §22 git-logs §97 depth pass on AC-04/AC-05/AC-25/AC-34 (DONE, v3.9.0)
+
+Closed the four lean ACs Phase 13 explicitly deferred. AC IDs preserved (still 75; AC-04/AC-05/AC-25/AC-34 grew 10-15× in depth):
+- §22 §97 banner v3.8.13 → **v3.9.0**.
+- AC-04 logger gating (constant-time integer compare at call boundary, sink-side filtering forbidden, request-scoped cache, 6-level fixed `Trace=0..Fatal=5`); AC-05 dedup window (rolling 60s from FIRST hit, fingerprint = source+level+template+ctx_hash, error/fatal carve-out, process-local LRU bounded at 1024, `[deduped: N]` suffix on expiry); AC-25 `format:hide` omitted from DOM entirely (not CSS-hidden — defense-in-depth against view-source/DevTools/screen-reader/session-replay leakage, server-side-only omission, consistent across all projections, empty parent containers must collapse); AC-34 multisite per-site DB (per-`blog_id` SQLite file at `wp_upload_dir()` path, shared file forbidden even network-activated, `switch_to_blog`/`restore_current_blog` connection invalidation, per-site lazy migration, `wp_delete_site` cleanup).
+- Lockstep §98 v3.9.0 row added + §99 v3.8.13 → v3.9.0 + spec-index updated.
+
+---
+
 ## 🚧 Blocked (awaiting user decision)
 - **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
 
 ---
 
 ## Status legend
-- ✅ done
-- ⏳ pending
-- 🚧 blocked
+- ✅ done · ⏳ pending · 🚧 blocked
 
 ## Next-pointer
-**Phases 16a + 16b complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) all deep. **Unblocked candidates remaining**:
-- **Phase 16c** — Deepen **§22 git-logs §97** follow-up pass on AC-04/AC-05/AC-25/AC-34 (left lean in Phase 13).
-- **Phase 16d** — Deepen another high-traffic 5-AC-scaffold module: §15 distribution-and-runner, §16 generic-release, §17 consolidated-guidelines, §27 spec-toolchain, §28 universal-ci-cli.
+**Phases 16a + 16b + 16c complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs now deep). **Unblocked candidates remaining:**
+- **Phase 16d** — Deepen another high-traffic 5-AC scaffold module: §15 distribution-and-runner, §16 generic-release, §17 consolidated-guidelines, §27 spec-toolchain, §28 universal-ci-cli.
 - Phase B1 remains blocked on user.
 
-On next `next`: take **Phase 16c (§22 git-logs §97 depth pass)** unless you redirect.
+On next `next`: take **Phase 16d** (start with §15 distribution-and-runner) unless you redirect.
