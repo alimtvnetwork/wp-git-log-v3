@@ -2,6 +2,7 @@
 
 ## Core
 Spec-only project. No app code generation; do not modify src/pages/Index.tsx.
+Communication: never use the words "suggest" or "never" in chat replies. Just do the work or state the action.
 Markdown spec docs live under `spec/`; numbered `NN-name/` folders, each with `00-overview.md`.
 Never touch `.release/`. Bump at least minor version on code changes.
 Do NOT append boilerplate "If you have any question..." or "Do you understand?..." blocks.
