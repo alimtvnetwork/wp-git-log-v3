@@ -422,7 +422,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.9.2',    strftime('%s','now')),
+    ('PluginVersion',         '2.9.3',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
@@ -440,7 +440,12 @@ INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('ShaDbIdleCloseSec',     '120',      strftime('%s','now')),  -- idle seconds before a per-SHA handle is closed
     -- v2.9.1 additions (Phase 5 SSH-Key Lane B, §31)
     ('SshAuthMode',           'optional', strftime('%s','now')),  -- §31 lane gate ∈ {optional, preferred, required}
-    ('SshNonceJanitorBatch',  '100',      strftime('%s','now')); -- §31 max SshNonce rows pruned per request
+    ('SshNonceJanitorBatch',  '100',      strftime('%s','now')),  -- §31 max SshNonce rows pruned per request
+    -- v2.9.3 additions (Phase 11 NDJSON streaming, §04 §11)
+    ('NdjsonProgressEveryRows', '10000',  strftime('%s','now')),  -- §04 §11.5 emit Progress frame every N rows; 0 disables row-based progress
+    ('NdjsonProgressEveryMs',   '2000',   strftime('%s','now')),  -- §04 §11.5 emit Progress frame every N ms; 0 disables time-based progress
+    ('NdjsonMaxRowsPerStream',  '1000000',strftime('%s','now')),  -- §04 §11.5 hard cap rows per stream; on hit End{Status:"Truncated"}, client resumes via ?after-seq=
+    ('NdjsonMaxFrameBytes',     '262144', strftime('%s','now')); -- §04 §11.5 per-frame JSON byte cap (256 KiB); oversized LogText truncated with "Truncated":true
 
 -- Migration marker — last
 INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
