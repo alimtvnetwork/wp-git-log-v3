@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.1** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.2** — AI-Implementability Edition.
+
+v2.2 (2026-04-26, Phase 24):
+  - Front-matter `kind: index` exempts placement-rule routers (intentionally
+    empty stub overviews that demarcate a scope) from `missing-contract` and
+    `untestable` rubric findings. Baseline impl 70 (vs tracker's 75).
 
 v2.1 (2026-04-26, Phase 23):
   - Front-matter `kind: tracker` exempts issue/finding modules from
