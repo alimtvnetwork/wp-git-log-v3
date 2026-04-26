@@ -9,7 +9,7 @@
 
 Every criterion below is stated as **Given / When / Then**. Each AC also carries a `Verifies:` pointer to the source section(s) of this folder so a downstream auditor can trace the assertion back to the authoritative spec without external context.
 
-> **Status legend:** `[active]` = enforced for v2.9.1 schema. `[draft]` = not yet enforced (no rows in this file currently carry this state — kept here for future phases). `[deprecated]` = retained for cross-version diff only.
+> **Status legend:** `[active]` = enforced for v2.9.3 schema. `[draft]` = not yet enforced (no rows in this file currently carry this state — kept here for future phases). `[deprecated]` = retained for cross-version diff only.
 
 ---
 
