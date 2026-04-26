@@ -86,4 +86,4 @@ Landed in v3.8.5:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 4** (Split-DB Doc Closure)
+**Top pending = Phase 5** (SSH-Key Lane B: Schema & Errors)
