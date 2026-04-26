@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 3.5.0  
-**Updated:** 2026-04-26 (Phase 15c: Motion & Transitions section AC-012..AC-016 converted from table format to full GWT subsections — 300ms timing budget, JS-animation-library prohibition list, `prefers-reduced-motion` global override + per-component opt-in, link sweep direction + pseudo-element implementation, CTA slide animation contract. AC IDs unchanged at AC-001..AC-034. 16 of 34 ACs now GWT; 18 await Phase 15d..15e.)
+**Version:** 3.6.0  
+**Updated:** 2026-04-26 (Phase 15d: Code Blocks section AC-017..AC-025 converted from table format to full GWT subsections — fixed-dark-bg contract, language-badge color mapping, font-size control bounds + localStorage persistence, line pin/unpin React state + visual precedence rules, shift-click range selection idempotency, fullscreen viewport inset + backdrop + z-index stack, Escape/overlay-click exit + cleanup, copy-button success state + Clipboard API + fallback, tree/structure emoji prefixes + guide rendering. AC IDs unchanged at AC-001..AC-034. 25 of 34 ACs now GWT; 9 await Phase 15e.)
 
 ---
 
@@ -9,7 +9,7 @@
 
 Testable criteria for validating design system compliance across all components and pages.
 
-> **Format note (Phase 15c in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006), Typography (AC-007..AC-011), and Motion & Transitions (AC-012..AC-016)** are fully converted to GWT subsections (16 of 34 ACs total). **Code Blocks, Navigation, Page Consistency** remain in table format pending Phase 15d..15e. AC IDs are stable across the conversion — `AC-012` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
+> **Format note (Phase 15d in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006), Typography (AC-007..AC-011), Motion & Transitions (AC-012..AC-016), and Code Blocks (AC-017..AC-025)** are fully converted to GWT subsections (25 of 34 ACs total). **Navigation + Page Consistency** remain in table format pending Phase 15e. AC IDs are stable across the conversion — `AC-012` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
 
 ---
 
