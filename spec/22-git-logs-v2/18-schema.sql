@@ -189,14 +189,23 @@ CREATE INDEX IF NOT EXISTS IxAppLinkApp ON AppLink(AppId);
 -- ---------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS Pipeline (
-    PipelineId    INTEGER PRIMARY KEY AUTOINCREMENT,
-    RepoVersionId INTEGER NOT NULL REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE,
-    AppId         INTEGER REFERENCES App(AppId),
-    Branch        TEXT NOT NULL,
-    Pipeline      TEXT NOT NULL,
-    HasError      INTEGER NOT NULL DEFAULT 0,
-    CreatedAt     INTEGER NOT NULL,
-    UpdatedAt     INTEGER NOT NULL,
+    PipelineId        INTEGER PRIMARY KEY AUTOINCREMENT,
+    RepoVersionId     INTEGER NOT NULL REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE,
+    AppId             INTEGER REFERENCES App(AppId),
+    Branch            TEXT NOT NULL,
+    Pipeline          TEXT NOT NULL,
+    HasError          INTEGER NOT NULL DEFAULT 0
+                          CHECK (HasError IN (0, 1)),
+    -- v2.9.2 (Phase 9): captures the value HasError held *immediately before*
+    -- the most recent /append-log or /fixed-log transition. Lets the UI render
+    -- "first-failure" vs "still-failing" vs "just-recovered" without scanning
+    -- the per-SHA log file. Back-fill rule on migration to v2.9.2: copy the
+    -- current HasError into PreviousHasError so the very first transition
+    -- after upgrade is correctly labeled "no change" rather than "new failure".
+    PreviousHasError  INTEGER NOT NULL DEFAULT 0
+                          CHECK (PreviousHasError IN (0, 1)),
+    CreatedAt         INTEGER NOT NULL,
+    UpdatedAt         INTEGER NOT NULL,
     UNIQUE (RepoVersionId, Branch, Pipeline)
 );
 
