@@ -162,9 +162,9 @@
 | `spec/02-coding-guidelines/02-typescript/10-log-level-enum.md` | TypeScript LogLevel Enum — `src/lib/enums/log-level.ts` |  |
 | `spec/02-coding-guidelines/02-typescript/11-eslint-enforcement.md` | TypeScript ESLint Enforcement — Rule Mapping | 3.2.0 |
 | `spec/02-coding-guidelines/02-typescript/12-discriminated-union-patterns.md` | Discriminated Union & Action Type Patterns | 1.0.0 |
-| `spec/02-coding-guidelines/02-typescript/97-acceptance-criteria.md` | TypeScript Standards — Acceptance Criteria | 3.2.0 |
-| `spec/02-coding-guidelines/02-typescript/98-changelog.md` | TypeScript Standards — Changelog | 3.2.0 |
-| `spec/02-coding-guidelines/02-typescript/99-consistency-report.md` | Consistency Report: TypeScript Standards | 3.2.0 |
+| `spec/02-coding-guidelines/02-typescript/97-acceptance-criteria.md` | TypeScript Standards — Acceptance Criteria | 4.0.0 |
+| `spec/02-coding-guidelines/02-typescript/98-changelog.md` | TypeScript Standards — Changelog | 4.0.0 |
+| `spec/02-coding-guidelines/02-typescript/99-consistency-report.md` | Consistency Report: TypeScript Standards | 4.0.0 |
 | `spec/02-coding-guidelines/03-golang/00-overview.md` | Golang Standards | 3.2.0 |
 | `spec/02-coding-guidelines/03-golang/01-enum-specification/00-overview.md` | Enum Specification | 3.2.0 |
 | `spec/02-coding-guidelines/03-golang/01-enum-specification/01-enum-pattern.md` | Enum Pattern | 3.2.0 |

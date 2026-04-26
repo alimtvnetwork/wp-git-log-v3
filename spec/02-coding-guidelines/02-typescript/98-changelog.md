@@ -1,10 +1,18 @@
 # TypeScript Standards — Changelog
 
 
-**Version:** 3.2.0  
-**Last Updated:** 2026-04-16  
+**Version:** 4.0.0
+**Last Updated:** 2026-04-26
 
 All notable changes to the TypeScript Standards specification are documented here.
+
+---
+
+## v4.0.0 — 2026-04-26 (Phase 16i: §97 full GWT rewrite)
+
+- **Changed** §97 — full GWT rewrite. Replaced 6 stub checkbox criteria (AC-01 + AC-02 with sub-bullets) with **20 module-specific Given/When/Then ACs** (AC-TS-01..AC-TS-20) covering: explicit inheritance from `../01-cross-language/97` AC-CL-01..AC-CL-20 (AC-TS-01); 6-flag strict tsconfig (AC-TS-02); `any` forbidden, `unknown` + narrowing the only escape (AC-TS-03); `as const` string-literal-union enums NEVER `enum` keyword (AC-TS-04); `Promise.all` for independent async — CODE-RED rule (AC-TS-05); discriminated unions with `never` exhaustive checks (AC-TS-06); `AppError` discriminated union over `throw new Error` (AC-TS-07); functional components + hooks only (AC-TS-08); Zustand for client / React Query for server — never inverse (AC-TS-09); `async` returns `Promise<Result<T,AppError>>` (AC-TS-10); Zod schema at every external boundary (AC-TS-11); `noUncheckedIndexedAccess` enforces `T | undefined` (AC-TS-12); kebab-case files + PascalCase component exports (AC-TS-13); `@typescript-eslint/recommended-type-checked` + `--max-warnings 0` (AC-TS-14); `interface` for shapes / `type` for unions (AC-TS-15); generic constraints required for non-trivial use (AC-TS-16); import grouping external→internal-alias→relative + named over default (AC-TS-17); `react-hooks/exhaustive-deps` as error (AC-TS-18); Vitest + RTL behavior-named tests (AC-TS-19); self-application doctest of enum/discriminated-union examples (AC-TS-20).
+- **Preserved** legacy stub checkboxes as AC-TS-LEGACY-01-A..02-C at end of §97.
+- **Bumped** §97 v3.2.0 → v4.0.0 (major; AC contract type changed from stub-checkbox to GWT). §98 v3.2.0 → v4.0.0. §99 v3.2.0 → v4.0.0.
 
 ---
 
