@@ -819,7 +819,7 @@
 | `spec/22-git-logs-v2/39-split-db-log-storage.md` | Split-DB Log Storage (per-SHA SQLite) | 1.0.0 |
 | `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 3.8.5 |
 | `spec/22-git-logs-v2/98-changelog.md` | Changelog (v2) |  |
-| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.5 |
+| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.6 |
 
 ## 🗄️ App Database
 
