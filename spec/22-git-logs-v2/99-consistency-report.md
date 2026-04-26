@@ -89,7 +89,8 @@ Cross-checked all `18-schema.sql` lookup seeds against `15-error-codes.md` runti
 | `Provider` | 2 | `GL-VALIDATION-REPOURL-MALFORMED` parser | ✅ |
 | ~~`OwnerType`~~ | 0 | (retired v3.8.1 — replaced by `GitProfile.IsOrganization` boolean; tombstoned in §16) | 🗑️ |
 | `LogSeverity` | 6 | (per-line truncation, no GL code per §15 note) | ✅ |
-| `ActionType` | 4 | (Append/Fixed/Clear/ClearAll dispatch) | ✅ |
+| `PipelineActionType` | 4 | (Append/Fixed/Clear/ClearAll dispatch — renamed from `ActionType` in v3.8.2) | ✅ |
+| `SystemEventType` | 16 | (NEW v3.8.2 — feeds `SystemEvent` business-event feed; no GL code, internal) | ✅ |
 | `AuditOutcome` | 3 | (envelope outcome) | ✅ |
 | `ConfigKv` | 10 defaults | `GL-CONFIG-MISSING`, `GL-RATE-LIMIT-EXCEEDED`, `GL-PAYLOAD-TOO-LARGE`, `GL-LINES-TOO-MANY`, `GL-SSH-TIMESTAMP-SKEW` | ✅ |
 | `MigrationState` | 6 markers (2.0.0/2.5.0/2.6.0/2.7.0/2.8.0/2.8.7) | `GL-MIGRATION-PENDING` | ✅ |
