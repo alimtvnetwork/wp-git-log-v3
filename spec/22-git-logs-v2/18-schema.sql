@@ -200,25 +200,29 @@ CREATE TABLE IF NOT EXISTS Pipeline (
     UNIQUE (RepoVersionId, Branch, Pipeline)
 );
 
-CREATE TABLE IF NOT EXISTS LogEntry (
-    LogEntryId    INTEGER PRIMARY KEY AUTOINCREMENT,
-    PipelineId    INTEGER NOT NULL REFERENCES Pipeline(PipelineId) ON DELETE CASCADE,
-    LogSeverityId INTEGER NOT NULL REFERENCES LogSeverity(LogSeverityId),
-    Message       TEXT NOT NULL,
-    OccurredAt    INTEGER NOT NULL
+-- ---------------------------------------------------------------------------
+-- Per-SHA log storage registry (Q3 Split-DB, v2.9.0)
+-- LogEntry and ErrorLogEntry tables MOVED out of root DB.
+-- They now live in per-SHA SQLite files under <ShaLogsRoot>/<Sha[0:2]>/<Sha>.db
+-- See §39-split-db-log-storage.md for the per-SHA file schema.
+-- ShaRegistry tracks which SHAs have a per-SHA file and metadata about it.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS ShaRegistry (
+    ShaRegistryId  INTEGER PRIMARY KEY AUTOINCREMENT,
+    PipelineId     INTEGER NOT NULL REFERENCES Pipeline(PipelineId) ON DELETE CASCADE,
+    Sha            TEXT NOT NULL,                 -- 40-char lowercase hex
+    DbFilePath     TEXT NOT NULL,                 -- relative to ShaLogsRoot
+    RowCount       INTEGER NOT NULL DEFAULT 0,    -- total rows across LogEntry+ErrorLogEntry in the per-SHA file
+    FirstSeenAt    INTEGER NOT NULL,
+    LastSeenAt     INTEGER NOT NULL,
+    FileSizeBytes  INTEGER NOT NULL DEFAULT 0,
+    Sha256         TEXT,                          -- nullable; computed at backup/checksum time
+    UNIQUE (PipelineId, Sha)
 );
 
-CREATE INDEX IF NOT EXISTS IxLogEntryPipeline ON LogEntry(PipelineId, OccurredAt);
-
-CREATE TABLE IF NOT EXISTS ErrorLogEntry (
-    ErrorLogEntryId INTEGER PRIMARY KEY AUTOINCREMENT,
-    PipelineId      INTEGER NOT NULL REFERENCES Pipeline(PipelineId) ON DELETE CASCADE,
-    LogSeverityId   INTEGER NOT NULL REFERENCES LogSeverity(LogSeverityId),
-    Message         TEXT NOT NULL,
-    OccurredAt      INTEGER NOT NULL
-);
-
-CREATE INDEX IF NOT EXISTS IxErrorLogEntryPipeline ON ErrorLogEntry(PipelineId, OccurredAt);
+CREATE INDEX IF NOT EXISTS IxShaRegistrySha       ON ShaRegistry(Sha);
+CREATE INDEX IF NOT EXISTS IxShaRegistryLastSeen  ON ShaRegistry(LastSeenAt);
 
 -- ---------------------------------------------------------------------------
 -- Audit triumvirate
