@@ -7,12 +7,16 @@ on:
       - 'spec/**'
       - 'linter-scripts/check-tree-health.cjs'
       - 'linter-scripts/generate-spec-index.cjs'
+      - 'linter-scripts/check-spec-cross-links.py'
+      - 'linter-scripts/spec-cross-links.allowlist'
       - '.github/workflows/spec-health.yml'
   pull_request:
     paths:
       - 'spec/**'
       - 'linter-scripts/check-tree-health.cjs'
       - 'linter-scripts/generate-spec-index.cjs'
+      - 'linter-scripts/check-spec-cross-links.py'
+      - 'linter-scripts/spec-cross-links.allowlist'
 
 jobs:
   health-gate:
