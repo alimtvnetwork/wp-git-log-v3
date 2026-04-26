@@ -470,7 +470,7 @@
 
 | File | Title | Version |
 |------|-------|---------|
-| `spec/04-database-conventions/00-overview.md` | Database Conventions | 3.2.0 |
+| `spec/04-database-conventions/00-overview.md` | Database Conventions | 3.3.0 |
 | `spec/04-database-conventions/01-naming-conventions.md` | Database Naming Conventions | 3.5.0 |
 | `spec/04-database-conventions/02-schema-design.md` | Database Schema Design | 3.3.0 |
 | `spec/04-database-conventions/03-orm-and-views.md` | ORM Usage and Database Views | 3.2.0 |
@@ -479,8 +479,8 @@
 | `spec/04-database-conventions/06-rest-api-format.md` | REST API Response Format | 3.2.0 |
 | `spec/04-database-conventions/07-split-db-pattern.md` | Split DB Pattern | 3.2.0 |
 | `spec/04-database-conventions/97-acceptance-criteria.md` | Acceptance Criteria — Database Conventions | 1.0.0 |
-| `spec/04-database-conventions/98-changelog.md` | Changelog — Database Conventions | 1.0.0 |
-| `spec/04-database-conventions/99-consistency-report.md` | Consistency Report — Database Conventions | 3.2.0 |
+| `spec/04-database-conventions/98-changelog.md` | Changelog — Database Conventions | 1.1.0 |
+| `spec/04-database-conventions/99-consistency-report.md` | Consistency Report — Database Conventions | 3.3.0 |
 
 ## 🗄️ Split DB Architecture
 
