@@ -54,8 +54,18 @@ jobs:
           SPEC_HEALTH_MIN: '100'
         run: node linter-scripts/check-tree-health.cjs --min="$SPEC_HEALTH_MIN" --report
 
+      - name: Trace-map regression gate
+        # Runs generate-trace-map.py and compares against the committed baseline at
+        # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC
+        # coverage drops, drift grows, orphan code grows, or trace-map.toml
+        # references a missing AC / file. Spec: spec/27-spec-toolchain/15-check-trace-map-regression.md
+        run: python3 linter-scripts/check-trace-map-regression.py
+
       - name: Summary
         if: always()
         run: |
           echo "## Spec Tree Health Result" >> "$GITHUB_STEP_SUMMARY"
           node linter-scripts/check-tree-health.cjs --report 2>&1 | head -10 >> "$GITHUB_STEP_SUMMARY" || true
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Trace-map Regression Result" >> "$GITHUB_STEP_SUMMARY"
+          python3 linter-scripts/check-trace-map-regression.py --report-only 2>&1 | tail -10 >> "$GITHUB_STEP_SUMMARY" || true
