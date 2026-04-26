@@ -329,6 +329,45 @@ components:
       content: { application/json: { schema: { $ref: '#/components/schemas/ErrorEnvelope' } } }
     ServerError:       { description: Internal error, content: { application/json: { schema: { $ref: '#/components/schemas/ErrorEnvelope' } } } }
 
+    # NDJSON streaming response (added v2.9.3 Phase 11; spec §04 §11). Used as
+    # a second `content` variant on the 200 response of every read endpoint
+    # (#5–#10). Servers select this representation when `Accept: application/x-ndjson`
+    # is present per RFC 7231 content negotiation; otherwise the JSON page
+    # response is returned. Servers MUST also set Transfer-Encoding: chunked
+    # and X-Content-Type-Options: nosniff and MUST NOT set Content-Length on
+    # NDJSON responses (§04 §11.2).
+    NdjsonStream:
+      description: |
+        Newline-delimited JSON stream of NdjsonFrame values. Frame ordering
+        per §04 §11.4: exactly one Header first, zero or more
+        Log/ErrorLog/Progress in cursor order, optional one Error, exactly
+        one End last. Clients parse line-by-line and switch on the `Type`
+        discriminator. Stream is best-effort resumable via `?after-seq=` +
+        `?stream-id=` (§04 §11.6).
+      headers:
+        X-Content-Type-Options:
+          schema: { type: string, enum: [nosniff] }
+          description: Always present on NDJSON responses; prevents MIME sniffing of partial bodies.
+        Transfer-Encoding:
+          schema: { type: string, enum: [chunked] }
+          description: Always chunked; Content-Length is never set on NDJSON responses.
+      content:
+        application/x-ndjson:
+          schema:
+            type: string
+            format: binary
+            description: |
+              Logical schema is `NdjsonFrame` per line; OpenAPI cannot model
+              line-delimited streams natively, so the wire body is declared
+              as binary. See `components.schemas.NdjsonFrame` for the per-line
+              object shape and `components.schemas.NdjsonHeaderFrame` … `NdjsonEndFrame`
+              for each variant.
+          example: |
+            {"Type":"Header","Schema":"git-logs-v2/ndjson@1","StreamId":"3f2a…","Endpoint":"/get-logs","RequestId":"req_abc","ServerTimeMs":1714032000000,"Filters":{"RepoUrl":"https://github.com/x/y","Branch":"main","Limit":1000}}
+            {"Type":"Log","Seq":1,"LogId":1042,"PipelineId":7,"Sha":"abc123…","Severity":"Info","LogText":"build start","CreatedAt":1714032001000}
+            {"Type":"Log","Seq":2,"LogId":1043,"PipelineId":7,"Sha":"abc123…","Severity":"Info","LogText":"npm install","CreatedAt":1714032002000}
+            {"Type":"Progress","Seq":3,"RowsEmitted":2,"ElapsedMs":42,"CurrentSha":"abc123…"}
+            {"Type":"End","Seq":4,"Status":"Complete","RowsEmitted":2,"ElapsedMs":58}
 # ---------------------------------------------------------------------------
 # Paths — 10 endpoints
 # ---------------------------------------------------------------------------
