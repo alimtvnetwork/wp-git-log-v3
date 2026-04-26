@@ -1,3 +1,9 @@
+%% Diagram type: flowchart TD (NOT an ER diagram)
+%% What this answers: "For a CI/CD write request, what is the exact
+%%   validation order and which GL-* error code is raised at each
+%%   rejection point?"
+%% Authoritative source: spec/22-git-logs-v2/05-auth-and-validation.md
+
 flowchart TD
     Start([CI/CD request to write endpoint]) --> Parse[Parse RepoUrl<br/>provider, owner, repoName, versionSuffix]
     Parse --> FindGP{GitProfile found<br/>by Provider+OwnerName?}

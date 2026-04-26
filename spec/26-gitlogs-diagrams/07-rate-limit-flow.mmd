@@ -1,5 +1,8 @@
-%% Rate-limit token bucket — per Profile
-%% Source: spec/22-git-logs-v2/10-rate-limit-and-payload.md
+%% Diagram type: sequenceDiagram (NOT an ER diagram)
+%% What this answers: "When a CI caller hits a write endpoint, how does
+%%   the per-Profile token bucket decide allow vs 429, and what gets
+%%   written to the WP transient store at each step?"
+%% Authoritative source: spec/22-git-logs-v2/10-rate-limit-and-payload.md
 
 sequenceDiagram
     autonumber
