@@ -19,6 +19,7 @@ type: feature
 | 7 | `22-git-logs-v2/02-database-schema` | DDL excerpt (lookup/entity/FK/polymorphic/split-DB) | 84 | 84 | 0 (capped) |
 | 8 | `06-seedable-config-architecture/00-overview` | JSON Schema 2020-12 + ref instance | 95 | 95 | 0 (A+ saturated) |
 | 9 | `14-update/24-update-check-mechanism/04-database-schema` | TS+Go enum mirror + JSON Schema 2020-12 with conditional if/then | 89 | **93** | **+4 (within A)** |
+| 10 | `02-coding-guidelines/03-golang/01-enum-specification` | Full Go reference impl + TS mirror + JSON Schema + forbidden-shapes table | 73 | _pending re-audit_ | _expected C→B/A_ |
 
 ## Phase 22 audit delta (re-run 2026-04-26)
 
