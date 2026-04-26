@@ -62,6 +62,52 @@ Root index for the entire specification tree. Each top-level folder contains a d
 
 ---
 
+## Normative Contract — Spec Tree Index
+
+This module is an **index** spec. Its normative contract is the JSON schema below
+that downstream tooling (`linter-scripts/generate-dashboard-data.cjs`,
+`linter-scripts/check-spec-cross-links.py`) consumes when emitting
+`dashboard-data.json` and `spec-index.md`.
+
+```text
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "spec/00-overview.schema.json",
+  "title": "SpecTreeIndex",
+  "type": "object",
+  "required": ["version", "updated", "modules"],
+  "properties": {
+    "version":  { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "updated":  { "type": "string", "format": "date" },
+    "kind":     { "const": "index" },
+    "modules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["number", "slug", "path", "status"],
+        "properties": {
+          "number": { "type": "integer", "minimum": 0, "maximum": 99 },
+          "slug":   { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+          "path":   { "type": "string", "pattern": "^\\./[0-9]{2}-[a-z0-9-]+/00-overview\\.md$" },
+          "status": { "enum": ["active", "locked-vacant", "deprecated", "slot-collision"] },
+          "description": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
+```
+
+> **Enforcement.** The dashboard scanner refuses to emit `dashboard-data.json`
+> when this overview violates the schema (missing module row, illegal slug,
+> duplicated number unless `status = "slot-collision"`). Slots `08`, `09`
+> remain locked-vacant per `spec/01-spec-authoring-guide/02-naming-conventions.md`
+> §"Reserved ranges".
+
+---
+
 ## Cross-References
 
 | Reference | Location |
