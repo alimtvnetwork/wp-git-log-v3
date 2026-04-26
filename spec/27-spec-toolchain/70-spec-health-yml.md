@@ -23,11 +23,15 @@ Triggers on every push to `main` and every pull request that touches `spec/`, an
   - `spec/**`
   - `linter-scripts/check-tree-health.cjs`
   - `linter-scripts/generate-spec-index.cjs`
+  - `linter-scripts/check-spec-cross-links.py`
+  - `linter-scripts/spec-cross-links.allowlist`
   - `.github/workflows/spec-health.yml`
 - **Pull request**, paths:
   - `spec/**`
   - `linter-scripts/check-tree-health.cjs`
   - `linter-scripts/generate-spec-index.cjs`
+  - `linter-scripts/check-spec-cross-links.py`
+  - `linter-scripts/spec-cross-links.allowlist`
 
 ## Job
 
