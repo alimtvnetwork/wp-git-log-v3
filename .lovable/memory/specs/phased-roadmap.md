@@ -227,6 +227,19 @@ Expanded §16 §97 from 5 generic scaffold ACs (AC-01..AC-05 retained) to **20 m
 
 ---
 
+## ✅ Phase 16d-iii — §17 consolidated-guidelines §97 deepen (DONE, v2.0.0)
+
+Expanded §17 §97 from 5 generic scaffold ACs to **20 module-specific GWT ACs** (AC-06..AC-20 added; AC-01..AC-05 preserved). Lockstep §98 v2.0.0 + §99 v4.0.0 + spec-index updated. Tree-health: 100/100 (A+).
+
+---
+
+## ✅ Phase 16d-iv — §27 spec-toolchain §97 deepen (DONE, v2.0.0)
+
+Expanded §27 §97 from 10 ACs (AC-T-01..AC-T-10) to **20 module-specific GWT ACs** (AC-T-11..AC-T-20 added; AC-T-01..AC-T-10 preserved verbatim). New ACs cover: stderr-vs-stdout discipline (AC-T-11), filler tight-loop idempotency (AC-T-12), generator determinism + content-derived timestamps (AC-T-13), auditor JSON output contract (AC-T-14), config self-validation + bidirectional spec-config links (AC-T-15), runner cross-platform pipeline equivalence (AC-T-16), trace-map round-trip + FORBIDDEN-ideas hard-block per `mem://constraints/forbidden-trace-map-ideas` (AC-T-17), Python+Go twin byte-equivalence (AC-T-18), CI workflow trigger-path completeness + threshold lock at 100 (AC-T-19), `trace-map.md` informational-not-spec status with slot 80+ reservation (AC-T-20). Lockstep: §98 v2.0.0 row added + §99 v1.1.0 → v2.0.0 + spec-index regenerated (3 cells bumped). Tree-health: 100/100 (A+) maintained.
+
+---
+
+
 ## 🚧 Blocked (awaiting user decision)
 - **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
 
