@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.8  
-**Updated:** 2026-04-26 (Phase 7: AC Quality Pass — every AC rewritten in Given/When/Then format; AC-60..AC-66 added for SSH-Key Lane B coverage — registration, replay defense, lane gating, signature stripping, key rotation, deploy-key blast-radius, audit trail)
+**Version:** 3.8.11  
+**Updated:** 2026-04-26 (Phase 11: Streaming Follow-ups Pickup — AC-67..AC-72 added for §04 §11 NDJSON streaming behavior; status legend extended to v2.9.3)
 
 ---
 
