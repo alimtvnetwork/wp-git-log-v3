@@ -80,10 +80,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** brief §Domain.5, §02, §18.
 
 ### AC-17 — App entity columns  `[active]`
-- **Given** a created App row
-- **When** the row is read
-- **Then** it contains `AppName`, `AppSlug` (UNIQUE), `Description`, `ProfileId` (FK), `AppStatusId` (FK).
-- **Verifies:** locked decision 10–12, §02, §18.
+- **Given** an `App` row exists in the SQLite root DB (per §02 v3.8.6 + §18 v2.9.3 DDL; this is the consumer-app identity table introduced by §07 locked decisions 10–12)
+- **When** the row is read via `SELECT * FROM App WHERE AppId = :id`
+- **Then** the result MUST contain exactly these columns and no others: `AppId INTEGER PRIMARY KEY AUTOINCREMENT`, `AppName TEXT NOT NULL`, `AppSlug TEXT NOT NULL UNIQUE` (kebab-case identifier used in `/append-log` payloads — `[a-z0-9][a-z0-9-]*` per §07 locked decision 11), `Description TEXT NULL`, `ProfileId INTEGER NOT NULL REFERENCES Profile(ProfileId) ON DELETE RESTRICT` (the App MUST be owned by exactly one Profile — RESTRICT prevents orphaning), `AppStatusId INTEGER NOT NULL REFERENCES AppStatus(AppStatusId) ON DELETE RESTRICT` (lookup table per §02; values `Active` / `Suspended` / `Archived` per §01 glossary), `CreatedAt INTEGER NOT NULL`, `UpdatedAt INTEGER NOT NULL`; AND `AppSlug` UNIQUE MUST be enforced at the SQLite level so two Profiles cannot register the same slug; AND the `App` table MUST NOT carry any of the (forbidden, blocked-on-user) Phase B1 fields `Environment`, `Platform`, `OwnerEmail` until the §07 App identity decision is unblocked — adding them speculatively is a schema violation per §07 locked decision 12.
+- **Verifies:** locked decisions 10–12 (App entity scope), §02 v3.8.6 (App + AppStatus table doc), §18 v2.9.3 (DDL + FK constraints), §01 (AppStatus enum), §07 (Phase B1 blocked fields).
 
 ### AC-18 — Polymorphic AppLink  `[active]`
 - **Given** an `AppLink` row is inserted
