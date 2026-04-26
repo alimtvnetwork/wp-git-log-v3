@@ -52,11 +52,12 @@ Landed in v3.8.6 / schema v2.9.1:
 - AuditActionType seeds verified: `SshKeyRegister`(22), `SshKeyRevoke`(23), `SshKeyRotate`(24) already present.
 - In-memory SQLite validation: 31 tables, 15 ConfigKv, 10 MigrationState markers, 3 SshKey* AuditActionTypes.
 
-## ⏳ Phase 6 — SSH-Key Lane B: Flow & Threat Doc
-**Files:** `05-auth-and-validation.md`, `28-example-github-actions.md`, `30-threat-model.md`
-- §05 auth flow: SSH signature verification path
-- §28: SSH-signed workflow example
-- §30: SSH threats (key theft, signature replay, key rotation)
+## ✅ Phase 6 — SSH-Key Lane B: Flow & Threat Doc (DONE, v3.8.7)
+
+Landed in v3.8.7:
+- §05: banner v2.1.0→v2.9.1. SSH lane block (10-step validation order) confirmed authoritative; cross-refs to §31/§15/§18 verified.
+- §28: banner v2.7.0→v2.9.1. Drop-in `git-logs-ssh.yml` workflow (namespace `git-logs@v2`, four headers, canonical signing string, deploy-key rotation, key-wipe `if: always()`) confirmed authoritative.
+- §30: banner v2.7.0→v2.9.1. Added 4 STRIDE Spoofing rows (S5 replay, S6 key theft, S7 sig stripping/lane downgrade, S8 lane-mode forgery) — closes the "S5–S8 SSH-lane additions" forward reference in summary.
 
 ---
 
@@ -90,4 +91,4 @@ Landed in v3.8.6 / schema v2.9.1:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 6** (SSH-Key Lane B: Flow & Threat Doc)
+**Top pending = Phase 7** (AC Quality Pass — convert all ACs to GWT format; add ACs for SshKey/SshNonce/replay/lane-downgrade)

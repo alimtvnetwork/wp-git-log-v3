@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.6  
+**Version:** 3.8.7  
 **Updated:** 2026-04-26
 
 ---
@@ -212,6 +212,18 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase 5 scope discipline:** §05 SSH lane block insertion, §28 GH-Actions SSH-signed example, §30 STRIDE entries are **deferred to Phase 6**. AC additions for SshKey/SshNonce deferred to Phase 7 (AC GWT pass). Phases 7–10 untouched. Phase B1 still blocked on user.
 
+## v3.8.7 Audit — Phase 6 SSH-Key Lane B flow & threat doc
+
+| File | Change |
+|------|--------|
+| `05-auth-and-validation.md` | Banner v2.1.0 → v2.9.1. SSH lane block (10-step validation order) confirmed authoritative; cross-refs to §31 (signing string), §15 (9 SSH error codes), §18 v2.9.1 (canonical SshKey/SshNonce DDL) verified. Coexistence rules (`X-GL-Auth-Mode` parse, `SshAuthMode` gate, `GL-SSH-LANE-CONFLICT`, `GL-AUTH-LANE-DISABLED`) preserved. |
+| `28-example-github-actions.md` | Banner v2.7.0 → v2.9.1. Drop-in `git-logs-ssh.yml` workflow confirmed authoritative — namespace `git-logs@v2`, four required headers, canonical signing string `GL-SSHSIG-V1\nMETHOD\nPATH\nTIMESTAMP\nNONCE\nsha256(body)`, deploy-key rotation, `~/.ssh-gitlogs` cleanup with `if: always()`. SSH-mode gotchas table covers all 7 SSH error codes + `GL-AUTH-LANE-DISABLED`. Legacy TempToken workflow retained as deprecation reference. |
+| `30-threat-model.md` | Banner v2.7.0 → v2.9.1. Added 4 STRIDE Spoofing rows that the v2.7.0 summary already promised but never wrote: **S5 Signature replay** (`SshReplayWindowSec` skew, per-key `(SshKeyId, Nonce)` uniqueness, `SshNonceJanitorBatch` table-bound); **S6 Private-key theft from CI runner** (deploy-key one-Repo blast radius, immediate `IsActive=0` rotation, `LastUsedAt` anomaly surface, GH-Actions key-wipe, per-Profile rate cap); **S7 Signature stripping / lane downgrade** (mandatory HTTPS, `SshAuthMode=required` hard reject, `GL-SSH-LANE-CONFLICT` mixed-lane block, header-completeness ordered before signature check); **S8 Lane-mode forgery** (`ConfigKv.SshAuthMode` direct DB edit covered by T1, `AuditTrail.ConfigKvUpdate` for in-band changes). Closes the "S5–S8 SSH-lane additions" forward reference in §30 summary. |
+| `98-changelog.md` | v3.8.7 row added. |
+| `99-consistency-report.md` | This audit table added; banner v3.8.6 → v3.8.7. |
+
+**Phase 6 scope discipline:** AC additions for SshKey/SshNonce/replay/lane-downgrade are **deferred to Phase 7** (AC GWT pass). §15/§18/§31 untouched (already at v2.9.1 from Phase 5). Phases 7–10 untouched. Phase B1 still blocked on user.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §02↔§15↔§22↔§23↔§29↔§39); AC coverage AC-01..AC-59; ER diagram reflects v2.9.0 split-DB shape; v3.8.6 Phase 5 SSH-Key Lane B schema landed in §18 (SshKey + SshNonce + 2 ConfigKv) with glossary/error/spec lockstep on §01 + §02 + §15 + §31 + changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 6 (SSH-Key flow into §05 + §28 + §30); (c) Phase 7 (AC GWT pass — including new ACs for SshKey/SshNonce); (d) Phases 8–10 (NDJSON streaming, `Pipeline.PreviousHasError`, diagram .svg render).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain); AC coverage AC-01..AC-59; ER diagram reflects v2.9.0 split-DB shape; v3.8.7 Phase 6 SSH-Key Lane B flow + threat doc landed in §05 + §28 + §30 with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 7 (AC GWT pass + new ACs for SshKey/SshNonce/replay/lane-downgrade); (c) Phase 8 (NDJSON streaming on §04); (d) Phase 9 (`Pipeline.PreviousHasError`); (e) Phase 10 (diagram .svg render).

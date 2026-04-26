@@ -1,7 +1,7 @@
 # Example GitHub Actions Workflow (v2)
 
-**Version:** 2.7.0  
-**Updated:** 2026-04-25
+**Version:** 2.9.1  
+**Updated:** 2026-04-26 (Phase 6: SSH-signed example confirmed authoritative — namespace `git-logs@v2`, four required headers, deploy-key model)
 
 Copy-paste workflows showing the canonical Lane B integration: push log + error lines on every CI run, mark fixed on green re-runs.
 

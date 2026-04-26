@@ -1,7 +1,7 @@
 # Authentication and Validation (v2)
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-25  
+**Version:** 2.9.1  
+**Updated:** 2026-04-26 (Phase 6: SSH lane block confirmed authoritative; §31 + §15 + §18 v2.9.1 cross-refs verified)  
 **JWT:** dropped entirely.
 
 ---
