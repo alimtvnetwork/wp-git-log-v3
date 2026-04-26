@@ -83,4 +83,4 @@ Single job `health-gate` running:
 - §01 [`01-check-spec-cross-links.md`](./01-check-spec-cross-links.md) — the cross-link gate this workflow invokes.
 - §05 [`05-check-tree-health.md`](./05-check-tree-health.md) — the tree-health gate this workflow invokes.
 - §10 [`10-generate-spec-index.md`](./10-generate-spec-index.md) — auxiliary trigger path.
-- §15 [`15-check-trace-map-regression.md`](./17-check-trace-map-regression.md) — the trace-map regression gate.
+- §17 [`17-check-trace-map-regression.md`](./17-check-trace-map-regression.md) — the trace-map regression gate.
