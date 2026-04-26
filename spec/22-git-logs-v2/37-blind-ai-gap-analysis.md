@@ -37,7 +37,7 @@
 | Admin UI menu structure + first-run bootstrap | `03-admin-ui.md` | Medium-High (some screens are prose, not wireframes) |
 | Retention/pruning, backup/restore, multisite behavior | `22`/`23`/`24` | **High** |
 | WP-CLI commands (`wp git-logs *`) | `27-wp-cli-reference.md` | **High** |
-| i18n scope (translatable vs English-locked) | `21-i18n.md` | **High** |
+
 | Threat model, observability counters | `30`/`20` | Medium (counters listed; emission points partially prose) |
 | Reference CI YAML, BATS + PHPUnit skeletons | `33`/`34`/`35` | **High** (drop-in) |
 
@@ -172,7 +172,7 @@ Legend: ✅ kept, ✏ changed shape, ❌ removed, ➕ new in v2.
 | OpenAPI | n/a | 3.1 spec covering all 10 endpoints | ➕ |
 | WP-CLI | n/a | `wp git-logs *` catalog (§27) | ➕ |
 | Observability | n/a | Site Health card + Prometheus `/metrics` (§20) | ➕ |
-| i18n | n/a | text-domain rules + translatable scope (§21) | ➕ |
+
 | Test harness | n/a | BATS + PHPUnit skeletons (§33–§34) | ➕ |
 | Reference CI YAML | n/a | §35 | ➕ |
 

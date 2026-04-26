@@ -74,7 +74,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 18 | [18-schema.sql](./18-schema.sql) | Verbatim DDL for V2_0_0 migration |
 | 19 | [19-permission-matrix.md](./19-permission-matrix.md) | Role × Permission × Screen audit grid |
 | 20 | [20-observability.md](./20-observability.md) | Site Health card, metrics endpoint, counters |
-| 21 | [21-i18n.md](./21-i18n.md) | Text-domain rules, translatable scope, RTL/CI |
+| 21 | _(removed v3.7.8 — slot retired, see §99)_ | i18n out of scope for v2 |
 | 22 | [22-retention-and-pruning.md](./22-retention-and-pruning.md) | `wp git-logs prune` command + eligibility rules |
 | 23 | [23-backup-restore.md](./23-backup-restore.md) | SQLite Online Backup + manifest + restore validation |
 | 24 | [24-multisite.md](./24-multisite.md) | Per-site vs network behavior |

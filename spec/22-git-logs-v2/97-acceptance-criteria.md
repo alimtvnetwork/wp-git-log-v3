@@ -45,4 +45,4 @@
 | AC-38 | `AuditActionType` lookup contains rows: Prune (19), Restore (20) per `18-schema.sql` seed. | §22, §23, §18 |
 | AC-39 | Permission gate uses `RolePermission` join only — never role name string compare. Buttons hidden (not disabled) when permission missing. | §19 |
 | AC-40 | OpenAPI 3.1 spec at `17-openapi.yaml` parses; covers all 10 endpoints; references `15-error-codes.md` envelope schema. | §17 |
-| AC-41 | WP.org release ZIP contains `readme.txt` + `screenshot-1..8.png`; CI gate runs `wp i18n make-pot` diff + `wp plugin check` before tagging. | §26, §21 |
+| AC-41 | WP.org release ZIP contains `readme.txt` + `screenshot-1..8.png`; CI gate runs `wp plugin check` before tagging. | §26 |
