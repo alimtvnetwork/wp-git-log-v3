@@ -163,10 +163,16 @@ def process(root: Path, dry_run: bool = False) -> tuple[int, int]:
             skipped += 1
             continue
         text = report.read_text(encoding="utf-8", errors="replace")
-        if len(text.encode()) >= THIN_BYTES and has_all_sections(text):
+        # SAFETY: only deepen reports that are BOTH thin AND would grow.
+        # Never shrink an existing report (which would destroy curated content).
+        if len(text.encode()) >= THIN_BYTES:
             skipped += 1
             continue
         new_text = render(report.parent, text)
+        if len(new_text.encode()) <= len(text.encode()):
+            # Generated version isn't bigger — skip to avoid regressions.
+            skipped += 1
+            continue
         if dry_run:
             print(f"[would deepen] {report.relative_to(root.parent)} ({len(text)}B → {len(new_text)}B)")
         else:
