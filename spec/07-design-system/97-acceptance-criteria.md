@@ -53,13 +53,36 @@ Testable criteria for validating design system compliance across all components 
 
 ## Typography
 
-| # | Criterion | Source |
-|---|-----------|--------|
-| AC-007 | Headings use Ubuntu font family | `03-typography.md` |
-| AC-008 | Body text uses Poppins font family | `03-typography.md` |
-| AC-009 | Code blocks use Ubuntu Mono / JetBrains Mono | `03-typography.md` |
-| AC-010 | H1 and H2 use gradient text effect | `03-typography.md` |
-| AC-011 | No heading level is skipped (H1 → H2 → H3) | `12-page-creation-rules.md` |
+### AC-007: Headings use the Ubuntu font family
+- **Given** any heading element rendered in the application (`<h1>` through `<h6>`, plus any custom component that visually presents as a heading — e.g. `<CardTitle>`, `<DialogTitle>`, hero display text)
+- **When** the computed style is inspected in browser devtools
+- **Then** `font-family` MUST resolve to `"Ubuntu"` as the FIRST family in the stack, with a system-sans fallback chain (`"Ubuntu", system-ui, -apple-system, "Segoe UI", sans-serif`); AND the Ubuntu font MUST be loaded via Google Fonts in `index.html` `<head>` with `display=swap` (e.g. `<link rel="preconnect" href="https://fonts.googleapis.com">` + `<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">`) — `display=swap` is REQUIRED so headings remain readable during font load (no FOIT); AND the family MUST be registered in `tailwind.config.ts` under `theme.extend.fontFamily.heading` (or `display`) so utility classes like `font-heading` resolve correctly; AND headings MUST NOT use Poppins (the body family per AC-008) — mixing the two within a single heading is a contract violation; AND when a heading appears INSIDE a card or dialog, the font family MUST still be Ubuntu — child-component overrides are FORBIDDEN unless the design system explicitly defines a non-heading display font.
+- **Source:** `03-typography.md` (font-stack contract), `index.html` (font-loading), `tailwind.config.ts` (`fontFamily.heading` registration), AC-008 (body family separation), AC-010 (gradient effect on H1/H2 — applied AFTER the family rule).
+
+### AC-008: Body text uses the Poppins font family
+- **Given** any non-heading text element (`<p>`, `<span>`, `<li>`, `<button>` label, form input text, table cell, footer copyright)
+- **When** the computed style is inspected
+- **Then** `font-family` MUST resolve to `"Poppins"` as the first family with a system-sans fallback (`"Poppins", system-ui, -apple-system, "Segoe UI", sans-serif`); AND Poppins MUST be loaded via Google Fonts in `index.html` `<head>` with `display=swap` and weights `300;400;500;600;700` at minimum (the design system uses `font-medium` and `font-semibold` for emphasis); AND the family MUST be registered in `tailwind.config.ts` under `theme.extend.fontFamily.sans` so it becomes the project DEFAULT (Tailwind's `font-sans` utility resolves to Poppins, not the built-in system stack); AND body text MUST NOT use Ubuntu — Ubuntu is reserved for headings per AC-007 to maintain visual hierarchy; AND inline `<code>` (within paragraphs) MUST use the monospace family per AC-009, NOT Poppins, even though it's body context.
+- **Source:** `03-typography.md` (body-stack contract), `index.html` (font-loading), `tailwind.config.ts` (`fontFamily.sans` default override), AC-007 (heading family separation), AC-009 (code/mono escape hatch).
+
+### AC-009: Code blocks use Ubuntu Mono / JetBrains Mono
+- **Given** any `<code>`, `<pre>`, or `<CodeBlock>` element (incl. inline `<code>` inside paragraphs)
+- **When** the computed style is inspected
+- **Then** `font-family` MUST resolve to a monospace stack with `"Ubuntu Mono"` as the first family and `"JetBrains Mono"` as a secondary fallback before generic `monospace` (full stack: `"Ubuntu Mono", "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace`); AND BOTH `Ubuntu Mono` AND `JetBrains Mono` MUST be loaded via Google Fonts in `index.html` with `display=swap` (Ubuntu Mono weights `400;700`; JetBrains Mono weights `400;500;700` — the heavier weights support syntax-highlight bold tokens); AND the family MUST be registered in `tailwind.config.ts` under `theme.extend.fontFamily.mono` so utilities like `font-mono` resolve to this stack (overriding Tailwind's built-in `font-mono` which uses ui-monospace + Menlo); AND code blocks MUST preserve `font-feature-settings: "liga" 0;` to disable programming ligatures by default — ligatures are user-opt-in via a `format:ligatures` directive per `07-code-blocks.md` because they obscure the actual character sequence which matters in code review; AND inline `<code>` MUST use the same family as block `<pre>` so a snippet quoted in prose visually matches the same snippet in a code block.
+- **Source:** `03-typography.md` (monospace stack), `07-code-blocks.md` (ligature default + inline-vs-block parity), `index.html` (dual font-loading), `tailwind.config.ts` (`fontFamily.mono` override).
+
+### AC-010: H1 and H2 use the gradient text effect
+- **Given** any `<h1>` or `<h2>` rendered in the application (raw HTML headings AND component wrappers like `<PageTitle>` / `<SectionTitle>` that semantically render as H1/H2)
+- **When** the computed style is inspected
+- **Then** the heading MUST have a gradient text fill via `background-image: var(--gradient-primary)` (or an equivalent `linear-gradient(...)` referencing design tokens) PLUS `background-clip: text` PLUS `-webkit-background-clip: text` PLUS `color: transparent` (or `-webkit-text-fill-color: transparent` for Safari compatibility) — ALL FOUR properties are required for cross-browser gradient text; AND the gradient MUST reference design tokens — hardcoded color stops are FORBIDDEN per AC-001 (typical token form: `linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)))`); AND H3..H6 MUST NOT use the gradient effect — they remain solid `hsl(var(--foreground))` to preserve the visual hierarchy where only the top two levels carry the brand emphasis; AND when the heading wraps to multiple lines, the gradient MUST flow continuously across all lines (the gradient is applied to the full text box, not per-line); AND for accessibility, the gradient MUST NOT be the SOLE conveyor of meaning — semantic `<h1>`/`<h2>` tagging carries the structural meaning for screen readers, the gradient is purely visual decoration.
+- **Source:** `03-typography.md` (gradient effect), `02-theme-variable-architecture.md` (`--gradient-primary` token), AC-001 (no hardcoded colors in gradient stops), `12-page-creation-rules.md` (heading-hierarchy semantics — see AC-011).
+
+### AC-011: No heading level is skipped (H1 → H2 → H3)
+- **Given** any page in the application
+- **When** the heading outline is extracted (e.g. via browser accessibility tree or `document.querySelectorAll('h1,h2,h3,h4,h5,h6')` traversal)
+- **Then** the heading levels MUST form a monotonically descending or sibling-only sequence — a heading at level N MUST be preceded by a heading at level N-1 OR a heading at level N (sibling) OR be the first heading on the page (which MUST be H1); AND every page MUST have EXACTLY ONE `<h1>` (the page title) — pages with zero H1s violate WCAG and SEO; pages with multiple H1s break the document outline; AND skipping levels (H1 → H3, or H2 → H4) is FORBIDDEN even if it visually looks acceptable, because screen readers use the level structure to build a navigable outline and gaps make the structure unreliable; AND when a component wraps a section with its own heading, the wrapper MUST accept a `level` prop (or use a polymorphic `as` prop) so the consumer can choose the correct level for the surrounding context — hardcoded `<h2>` inside a reusable Card component is a bug because it forces every consumer to nest at the same depth; AND visual styling MUST be decoupled from semantic level via Tailwind utilities — a semantic `<h3>` rendered with `text-4xl font-bold` is permitted (and often correct) when the visual hierarchy doesn't match the semantic outline.
+- **Source:** `12-page-creation-rules.md` (heading-discipline rule), `03-typography.md` (visual styling decoupling), WCAG 2.1 §1.3.1 (info & relationships) + §2.4.6 (headings & labels), `tailwind.config.ts` (utility classes for visual sizing).
+
 
 ## Motion & Transitions
 
