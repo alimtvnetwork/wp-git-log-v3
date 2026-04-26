@@ -260,39 +260,45 @@ Re-scan of all §97 files surfaced **15 modules with 0 GWT ACs** (table-row scaf
 
 ---
 
-## Next-pointer
-**Phase 16e complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT).
+## ✅ Phase 16f — §01 spec-authoring-guide §97 deepen (DONE, v4.0.0)
 
-**Phase 16e scan exposed 15 §97 files with 0 GWT ACs.** Highest-impact remaining targets, in priority order (parent-before-child rule):
+The meta-spec — governs every OTHER spec in the tree. Rewrote §97 from 18 table-row criteria to **20 module-specific GWT ACs** (AC-SAG-01..AC-SAG-20) covering: four-required-files rule, kebab-case + numeric-prefix regex, reserved prefix discipline (00/97/98/99), slot immutability, seven mandatory `00-overview.md` sections, ≥ 5 GWT ACs per `97`, reverse-chronological SemVer-bumped `98`, ≤ 7-day stale rule on `99`, relative + `.md` cross-link rule, four-file lockstep on every spec edit, three template patterns (CLI / app+features / flat), 3+-files → subfolder `00-overview.md`, `.lovable/memories/` (plural) canonical memory folder, mandatory linter infrastructure presence, root-readme hero+badges+§9-release-blocker format, AI-Confidence/Ambiguity score honesty, Reliability Risk Report mandate, **dogfooding self-application** (AC-SAG-18 — module satisfies all 20 ACs against itself), `bash linter-scripts/run.sh` exit-0 + tree-health gate, and forbidden manual edits to `spec-index.md`. Legacy AC-001..018 preserved as AC-SAG-LEGACY-001..018. Lockstep: §98 v3.2.0 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
+## Next-pointer
+**Phase 16f complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT).
+
+**14 remaining §97 files with 0 GWT ACs** (post-16f), priority order:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `01-spec-authoring-guide/` | 0 | **P0** | The spec that authors all OTHER specs — must dogfood first |
-| 2 | `26-gitlogs-diagrams/` | 0 | P0 | Diagrams are part of §22 governance contract |
-| 3 | `02-coding-guidelines/01-cross-language/` | 0 | P0 | Parent of all language rules |
-| 4 | `02-coding-guidelines/02-typescript/` | 0 | P1 | High code-blast radius |
-| 5 | `02-coding-guidelines/03-golang/` | 0 | P1 | High code-blast radius |
-| 6 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
-| 7 | `02-coding-guidelines/05-rust/` | 0 | P1 | High code-blast radius |
-| 8 | `02-coding-guidelines/07-csharp/` | 0 | P1 | High code-blast radius |
-| 9 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules — this AI literally needs them |
-| 10 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | Numbering collision with `06-ai-optimization` (slot 06 reused — needs Triage) |
-| 11 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 12 | `02-coding-guidelines/97-acceptance-criteria.md` (parent) | ✅ 20 | DONE | Phase 16e |
-| 13 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 14 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do not edit |
-| 15 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom spec" |
-| 16 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom spec" |
+| 1 | `26-gitlogs-diagrams/` | 0 | **P0** | Diagrams part of §22 governance contract |
+| 2 | `02-coding-guidelines/01-cross-language/` | 0 | **P0** | Parent of all language rules |
+| 3 | `02-coding-guidelines/02-typescript/` | 0 | P1 | High code-blast radius |
+| 4 | `02-coding-guidelines/03-golang/` | 0 | P1 | High code-blast radius |
+| 5 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
+| 6 | `02-coding-guidelines/05-rust/` | 0 | P1 | High code-blast radius |
+| 7 | `02-coding-guidelines/07-csharp/` | 0 | P1 | High code-blast radius |
+| 8 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
+| 9 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
+| 10 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 11 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 12 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 13 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 14 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
-🚨 **Slot collision discovered**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 (immutable slots). This needs a Phase-1-Triage-style rename (precedent: §22→§25). Flagging for user decision.
+🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04 (immutable slots). Awaiting user decision (suggested rename: `06-cicd-integration/` → `12-cicd-integration/`).
 
 Remaining work:
-- ⏳ **Phase 16f** — Deepen `01-spec-authoring-guide/97` (P0 — dogfooding the spec-authoring spec).
 - ⏳ **Phase 16g** — Deepen `26-gitlogs-diagrams/97` (P0 — completes §22 governance contract).
 - ⏳ **Phase 16h** — Deepen `02-coding-guidelines/01-cross-language/97` (P0 — parent of all language rules).
 - ⏳ **Phase 16i–16o** — Deepen TS/Go/PHP/Rust/C#/AI-Opt/Security subfolder §97 files (P1 batch).
+- ⏳ **Phase 16p** — Deepen `14-update/24-update-check-mechanism/97` (P2).
+- ⏳ **Phase 16q** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs"; may also need re-classification).
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user — confirm `Environment`, `Platform`, `OwnerEmail` shape).
-- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user — pick rename target for `06-cicd-integration/` → `12-cicd-integration/`?).
+- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user — pick rename target).
 
-On next `next`: take **Phase 16f (`01-spec-authoring-guide/97` deepen)** — highest priority because it's the spec governing how all other specs are authored. Unless you redirect.
+On next `next`: take **Phase 16g (`26-gitlogs-diagrams/97` deepen)** — P0 completes the §22 Git Logs governance contract. Unless you redirect or want to unblock B1/B2 first.
+
 
