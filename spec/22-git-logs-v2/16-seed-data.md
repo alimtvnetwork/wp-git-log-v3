@@ -74,12 +74,9 @@ Seed insert idempotency uses unique `(RoleId, PermissionId)`.
 
 ---
 
-## OwnerType (introduced 2.0.0)
+## OwnerType (retired in v3.8.0)
 
-| Id | Name |
-|----|------|
-| 1 | User |
-| 2 | Organization |
+> **Retired** — replaced by `GitProfile.IsOrganization` boolean (0/1). No seed rows; the `OwnerType` lookup table is dropped from §18 schema. Tombstone kept here so historical migrations and §01 glossary cross-refs still resolve.
 
 ---
 
