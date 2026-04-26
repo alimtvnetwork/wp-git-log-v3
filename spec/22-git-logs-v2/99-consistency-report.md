@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.1  
+**Version:** 3.8.2  
 **Updated:** 2026-04-26
 
 ---
@@ -116,7 +116,7 @@ User reviewed `26-gitlogs-diagrams/02-domain-design.mmd` + `01-er-diagram.mmd` a
 Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enums.md` (OwnerType retired, PipelineActionType renamed, SystemEventType added, ShaRegistry+SystemEvent+PipelineAction terms), `02-database-schema.md` (GitProfile.IsOrganization, lookup list updated, LogEntry+ErrorLogEntry removed, ShaRegistry added, History rename, PipelineAction rename, SystemEvent added), `08-history-and-action.md` (4-table model), `97-acceptance-criteria.md` (AC-07 + AC-21 reworded, AC-49–AC-53 added), `98-changelog.md`, `99-consistency-report.md`, `26-gitlogs-diagrams/01-er-diagram.mmd` (regenerated with split boundary), `26-gitlogs-diagrams/02-domain-design.mmd` (regenerated with subgraphs).
 
 **Queued (NOT in this commit, tracked in `mem://specs/git-logs.md` queued decisions):**
-- §18 `18-schema.sql`: ~~drop `OwnerType` table+seed~~ ✅ landed v3.8.1; ~~add `GitProfile.IsOrganization`~~ ✅ landed v3.8.1; drop `LogEntry`+`ErrorLogEntry`, add `ShaRegistry`+`SystemEvent` tables, rename `Action`→`PipelineAction`, add 16 `SystemEventType` seeds, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults. *(Q2 + Q3 still queued.)*
+- §18 `18-schema.sql`: ~~drop `OwnerType` table+seed~~ ✅ landed v3.8.1; ~~add `GitProfile.IsOrganization`~~ ✅ landed v3.8.1; ~~rename `Action`→`PipelineAction` + `ActionType`→`PipelineActionType`~~ ✅ landed v3.8.2; ~~add `SystemEvent`+`SystemEventType` tables + 16 seeds~~ ✅ landed v3.8.2; drop `LogEntry`+`ErrorLogEntry`, add `ShaRegistry` table, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults. *(Q3 still queued.)*
 - §22 retention: prune walks `ShaRegistry` + deletes per-SHA files.
 - §23 backup: manifest must list per-SHA file inventory + per-file row counts + sha256.
 - §29 uninstall: Wipe mode deletes the `logs/` folder.
