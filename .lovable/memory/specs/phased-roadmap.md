@@ -282,34 +282,39 @@ First language child to inherit AC-CL-*. Rewrote §97 from 6 stub checkboxes to 
 
 ---
 
-## Next-pointer
-**Phase 16i complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT).
+## ✅ Phase 16j — §02/03-golang §97 deepen (DONE, v4.0.0)
 
-**11 remaining §97 files with 0 GWT ACs** (post-16i), priority order:
+Second language child to inherit AC-CL-*. Rewrote §97 from 6 stub checkboxes to **20 module-specific GWT ACs** (AC-GO-01..AC-GO-20) covering: explicit AC-CL-* inheritance (AC-GO-01); Go 1.22+ pinned toolchain (AC-GO-02); ALL-CAPS acronyms `URL`/`ID`/`HTTP`/`JSON`/`SQL` never `Url`/`Id` (AC-GO-03); `apperror.Result[T]` for project APIs / `(T, error)` for stdlib boundaries (AC-GO-04); `panic` forbidden outside main/init/_test.go (AC-GO-05); `errors.Is`/`As` over `==` or string match (AC-GO-06); `context.Context` first param, never struct field (AC-GO-07); defer placement immediately after acquisition + no unbounded-loop defers (AC-GO-08); `type X string` + `Validate()` enums NOT iota for wire types (AC-GO-09); generics over `interface{}` (AC-GO-10); goroutine cancellation discipline (AC-GO-11); channel direction in signatures, sender owns close (AC-GO-12); 11-linter `golangci-lint` config + CI zero-warning gate (AC-GO-13); 1-3 letter receiver names consistent across type (AC-GO-14); pointer/value receiver consistency (AC-GO-15); explicit `json:"PascalCase"` tags per AC-CL-09 (AC-GO-16); table-driven `t.Run` tests (AC-GO-17); minimal deps + no vendoring (AC-GO-18); `log/slog` over `fmt.Println` (AC-GO-19); self-application doctest (AC-GO-20). Legacy AC-01/AC-02 preserved as AC-GO-LEGACY-* at end. Lockstep: §98 v3.2.0 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
+## Next-pointer
+**Phase 16j complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT).
+
+**10 remaining §97 files with 0 GWT ACs** (post-16j), priority order:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/03-golang/` | 0 | **P1** | Inherits §02/01 |
-| 2 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
-| 3 | `02-coding-guidelines/05-rust/` | 0 | P1 | Inherits §02/01 |
-| 4 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
-| 5 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
-| 6 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
-| 7 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 8 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 9 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 10 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 11 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `02-coding-guidelines/04-php/` | 7 (table) | **P1** | Has rows but no GWT |
+| 2 | `02-coding-guidelines/05-rust/` | 0 | P1 | Inherits §02/01 |
+| 3 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
+| 4 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
+| 5 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
+| 6 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 7 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 8 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 9 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 10 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
-🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04 (immutable slots).
+🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04.
 
 Remaining work:
-- ⏳ **Phase 16j** — Deepen `02-coding-guidelines/03-golang/97` (P1 — second language child).
-- ⏳ **Phase 16k–16n** — Deepen PHP/Rust/C#/AI-Opt subfolder §97 files (P1 batch).
+- ⏳ **Phase 16k** — Deepen `02-coding-guidelines/04-php/97` (P1 — third language child; convert 7 table rows to GWT).
+- ⏳ **Phase 16l–16n** — Deepen Rust/C#/AI-Opt subfolder §97 files (P1 batch).
 - ⏳ **Phase 16p** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16q** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user).
 - 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user).
 
-On next `next`: take **Phase 16j (`02-coding-guidelines/03-golang/97` deepen)** — P1 second language child after TypeScript. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16k (`02-coding-guidelines/04-php/97` deepen)** — P1 third language child; converts existing 7 table rows + adds GWT depth. Unless you redirect or want to unblock B1/B2 first.
 

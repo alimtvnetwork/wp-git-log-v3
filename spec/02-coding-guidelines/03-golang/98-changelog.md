@@ -1,10 +1,18 @@
 # Golang Standards — Changelog
 
 
-**Version:** 3.2.0  
-**Last Updated:** 2026-04-16  
+**Version:** 4.0.0
+**Last Updated:** 2026-04-26
 
 All notable changes to the Golang Standards specification are documented here.
+
+---
+
+## v4.0.0 — 2026-04-26 (Phase 16j: §97 full GWT rewrite)
+
+- **Changed** §97 — full GWT rewrite. Replaced 6 stub checkbox criteria (AC-01 + AC-02 with sub-bullets) with **20 module-specific Given/When/Then ACs** (AC-GO-01..AC-GO-20) covering: explicit AC-CL-01..AC-CL-20 inheritance (AC-GO-01); minimum Go 1.22 + pinned toolchain (AC-GO-02); ALL-CAPS acronyms `URL`/`ID`/`HTTP`/`JSON`/`SQL` never `Url`/`Id` (AC-GO-03); `apperror.Result[T]` for project APIs / `(T, error)` for stdlib boundaries (AC-GO-04); `panic` forbidden outside main/init/_test.go (AC-GO-05); `errors.Is`/`As` over `==` or string match (AC-GO-06); `context.Context` as first parameter, never struct field (AC-GO-07); `defer` placement immediately after acquisition + no unbounded-loop defers (AC-GO-08); `type X string` + `Validate()` enums NOT iota for wire types (AC-GO-09); generics over `interface{}`/`any` for typed containers (AC-GO-10); goroutines MUST have explicit cancellation via ctx/quit/WaitGroup/errgroup (AC-GO-11); channel direction `<-chan`/`chan<-` in signatures, sender owns close (AC-GO-12); 11-linter `golangci-lint` config + CI fails on any warning (AC-GO-13); 1-3 letter receiver names consistent across type (AC-GO-14); pointer-vs-value receiver consistency, no mixing (AC-GO-15); explicit `json:"PascalCaseName"` tags per AC-CL-09 (AC-GO-16); table-driven tests + `t.Run` subtests + `t.Parallel` (AC-GO-17); minimal deps + no vendoring without waiver (AC-GO-18); `log/slog` with structured K/V, no `fmt.Println` for logging (AC-GO-19); self-application doctest of enum/defer examples (AC-GO-20).
+- **Preserved** legacy stub checkboxes as AC-GO-LEGACY-01-A..02-C at end of §97.
+- **Bumped** §97 v3.2.0 → v4.0.0 (major; AC contract type changed from stub-checkbox to GWT). §98 v3.2.0 → v4.0.0. §99 v3.2.0 → v4.0.0.
 
 ---
 
