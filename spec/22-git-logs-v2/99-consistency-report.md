@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.7.8  
+**Version:** 3.8.0  
 **Updated:** 2026-04-26
 
 ---
@@ -42,7 +42,8 @@
 | 30-threat-model.md | ✅ |
 | 36-why-v1-archived.md | ✅ (added 2026-04-25) |
 | 37-blind-ai-gap-analysis.md | ✅ (added 2026-04-25) |
-| 97-acceptance-criteria.md | ✅ (AC-01..AC-41) |
+| 39-split-db-log-storage.md | ✅ (added v3.8.0 2026-04-26 — per-SHA SQLite storage spec) |
+| 97-acceptance-criteria.md | ✅ (AC-01..AC-53; +AC-49..AC-53 in v3.8.0 for split-DB) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
 
@@ -101,7 +102,29 @@ Cross-checked all `18-schema.sql` lookup seeds against `15-error-codes.md` runti
 - `ConfigKv.PluginVersion` seed: `'2.7.0'` → `'2.8.7'`.
 - `MigrationState`: appended `2.8.0` (doc-only) and `2.8.7` (this audit) markers.
 
+## v3.8.0 Audit — Domain-model overhaul (user diagram review)
+
+User reviewed `26-gitlogs-diagrams/02-domain-design.mmd` + `01-er-diagram.mmd` and raised four concerns:
+
+| # | Concern | Resolution |
+|---|---------|------------|
+| 1 | "Why is `RepoVersionId` inside `Action`? Naming is the issue." | Renamed `Action` → `PipelineAction` + `ActionType` → `PipelineActionType`. Documented scope (RepoVersion + Pipeline only) in §08. |
+| 2 | "History should also cover non-Git events (ProfileCreated, KeyRevoked, …)" | Introduced `SystemEvent` table with 16-value `SystemEventType` lookup; loose polymorphic (`TargetType` + `TargetId`, no FK CHECK). Four-table model documented in §08. |
+| 3 | "Where are logs streamed? Use the split-DB pattern, per-SHA SQLite." | Created §39. `LogEntry`/`ErrorLogEntry` deleted from root DB; root DB keeps only `ShaRegistry` (registry + rolled-up summary). Per-SHA file at `logs/<RepoVersionId>/<GitSha256>.sqlite` with semantic tables (`PipelineRun`, `StatusSnapshot`) that answer last-status / failure-count / pipelines-failing in O(1). |
+| 4 | "`GitProfile` doesn't mark organization vs user — needs `IsOrganization` checkbox." | Added `IsOrganization INTEGER 0/1` column on `GitProfile`; retired `OwnerType` lookup. Drives URL canonicalization + admin-UI checkbox. |
+
+Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enums.md` (OwnerType retired, PipelineActionType renamed, SystemEventType added, ShaRegistry+SystemEvent+PipelineAction terms), `02-database-schema.md` (GitProfile.IsOrganization, lookup list updated, LogEntry+ErrorLogEntry removed, ShaRegistry added, History rename, PipelineAction rename, SystemEvent added), `08-history-and-action.md` (4-table model), `97-acceptance-criteria.md` (AC-07 + AC-21 reworded, AC-49–AC-53 added), `98-changelog.md`, `99-consistency-report.md`, `26-gitlogs-diagrams/01-er-diagram.mmd` (regenerated with split boundary), `26-gitlogs-diagrams/02-domain-design.mmd` (regenerated with subgraphs).
+
+**Queued (NOT in this commit, tracked in `mem://specs/git-logs.md` queued decisions):**
+- §18 `18-schema.sql`: drop `OwnerType` table+seed, drop `LogEntry`+`ErrorLogEntry`, add `GitProfile.IsOrganization`, add `ShaRegistry`+`SystemEvent` tables, rename `Action`→`PipelineAction`, add 16 `SystemEventType` seeds, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults.
+- §22 retention: prune walks `ShaRegistry` + deletes per-SHA files.
+- §23 backup: manifest must list per-SHA file inventory + per-file row counts + sha256.
+- §29 uninstall: Wipe mode deletes the `logs/` folder.
+- §03 admin-ui: add "Is organization" checkbox to GitProfile create/edit screen.
+- §15 error-codes: add `GL-SHA-DB-CREATE-FAILED`, `GL-SHA-DB-OPEN-FAILED`, `GL-SHA-DB-CORRUPT`, `GL-SHA-DB-NOT-FOUND`.
+- Per-SHA SVG re-render of `01-er-diagram.mmd` + `02-domain-design.mmd`.
+- `26-gitlogs-diagrams/00-overview.md` banner bump v1.1.0 → v1.2.0 + inventory note for the new split-DB callouts.
+
 ## Health Score
 
-100/100 (A+) — 32 of 32 numbered files present (09–13 intentional gap, locked); cross-links valid (incl. §18 ↔ §37 slot rename); AC coverage AC-01..AC-48; v2.8.7 §18/§15 audit landed with zero gaps; DDL re-validated (25 AuditActionType rows, 10 ConfigKv defaults, 6 MigrationState markers). Only blocker: §07 user decision.
-
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. new §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-53; v3.8.0 domain-model overhaul landed with full lockstep on overview/schema/glossary/§08/AC/changelog/diagrams. Only blockers: (a) §07 user decision (App identity), (b) §18 DDL rewrite queued.

@@ -5,14 +5,13 @@ erDiagram
     Permission ||--o{ RolePermission : in
     Profile ||--o{ GitProfile : owns
     Provider ||--o{ GitProfile : provider
-    OwnerType ||--o{ GitProfile : ownerKind
     Acceptance ||--o{ GitProfile : acceptance
     GitProfile ||--o{ Repo : contains
     Repo ||--o{ RepoVersion : versions
     RepoVersion ||--o{ Pipeline : runs
-    Pipeline ||--o{ LogEntry : produces
-    Pipeline ||--o{ ErrorLogEntry : produces
-    LogSeverity ||--o{ LogEntry : severity
+    RepoVersion ||--o{ ShaRegistry : seenShas
+    Pipeline ||--o{ ShaRegistry : lastSha
+    LogSeverity ||--o{ ShaRegistry : lastSeverity
     Profile ||--o{ App : owns
     AppStatus ||--o{ App : status
     App ||--o{ AppLink : links
@@ -21,11 +20,13 @@ erDiagram
     Repo ||--o{ AppLink : targetRepo
     RepoVersion ||--o{ History : timeline
     App ||--o{ History : actor
-    ActionType ||--o{ History : actionKind
-    ActionType ||--o{ Action : actionKind
-    RepoVersion ||--o{ Action : on
-    Pipeline ||--o{ Action : on
-    Profile ||--o{ Action : by
+    PipelineActionType ||--o{ History : actionKind
+    PipelineActionType ||--o{ PipelineAction : actionKind
+    RepoVersion ||--o{ PipelineAction : on
+    Pipeline ||--o{ PipelineAction : on
+    Profile ||--o{ PipelineAction : by
+    SystemEventType ||--o{ SystemEvent : kind
+    Profile ||--o{ SystemEvent : actor
     AuditActionType ||--o{ AuditTrail : kind
     AuditOutcome ||--o{ AuditTrail : outcome
     Profile ||--o{ AuditTrail : actor
@@ -42,7 +43,7 @@ erDiagram
     GitProfile {
         int GitProfileId PK
         int ProviderId FK
-        int OwnerTypeId FK
+        int IsOrganization "0|1 v3.8.0 replaces OwnerType"
         string OwnerName
         string ProfileUrl
         int AcceptanceId FK
@@ -71,22 +72,19 @@ erDiagram
         int HasError
         string LastGitSha256
     }
-    LogEntry {
-        int LogEntryId PK
-        int PipelineId FK
+    ShaRegistry {
+        int ShaRegistryId PK "v3.8.0 replaces root LogEntry/ErrorLogEntry"
+        int RepoVersionId FK
         string GitSha256
-        int LineNumber
-        string LogText
-        int LogSeverityId FK
-        string FilePath
-        int OccurredAt
-    }
-    ErrorLogEntry {
-        int ErrorLogEntryId PK
-        int PipelineId FK
-        string GitSha256
-        int LineNumber
-        string LogText
+        string ShaDbPath "logs RepoVersionId Sha sqlite"
+        int FirstSeenAt
+        int LastSeenAt
+        int EntryCount
+        int ErrorCount
+        int LastSeverityId FK
+        string LastStatus "Green Red Pending"
+        int LastFailureAt
+        int LastSuccessAt
     }
     App {
         int AppId PK
@@ -111,17 +109,27 @@ erDiagram
         string BranchName
         string PipelineName
         string GitSha256
-        int ActionTypeId FK
+        int PipelineActionTypeId FK
         int HasError
         string Summary
         int OccurredAt
     }
-    Action {
-        int ActionId PK
-        int ActionTypeId FK
+    PipelineAction {
+        int PipelineActionId PK "v3.8.0 renamed from Action"
+        int PipelineActionTypeId FK
         int RepoVersionId FK
         int PipelineId FK
         int ProfileId FK
+        int OccurredAt
+    }
+    SystemEvent {
+        int SystemEventId PK "NEW v3.8.0"
+        int SystemEventTypeId FK
+        int ActorProfileId FK
+        string TargetType "Profile GitProfile Repo App SshKey"
+        int TargetId
+        string Summary
+        string DetailJson
         int OccurredAt
     }
     AuditTrail {

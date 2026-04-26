@@ -1,23 +1,34 @@
 graph TD
-    GP[GitProfile<br/>provider + owner + acceptance]
+    GP[GitProfile<br/>provider + IsOrganization + acceptance<br/>v3.8.0: IsOrganization replaces OwnerType]
     R[Repo<br/>RootRepoName / RootRepoUrl]
     RV[RepoVersion<br/>VersionSuffix v0..vN]
     P[Pipeline<br/>BranchName + PipelineName + HasError]
-    H[History<br/>per-RepoVersion timeline]
-    A[Action<br/>enum-typed action log]
+    H[History<br/>per-RepoVersion git timeline]
+    PA[PipelineAction<br/>v3.8.0 renamed from Action<br/>RepoVersion + Pipeline scoped]
+    SE[SystemEvent<br/>NEW v3.8.0<br/>non-Git business events:<br/>ProfileCreated KeyRevoked AppCreated...]
+    AT[AuditTrail<br/>HTTP forensics<br/>every request route + status]
     APP[App<br/>AppName + AppSlug + Status]
     AL[AppLink<br/>polymorphic GP or Repo]
     PR[Profile<br/>credentials owner]
 
-    GP --> R
-    R --> RV
-    RV --> P
-    RV --> H
-    RV --> A
-    P --> A
+    subgraph RootDB[Root SQLite DB - control plane]
+        GP --> R
+        R --> RV
+        RV --> P
+        RV --> H
+        RV --> PA
+        P --> PA
+        PR --> APP
+        APP --> AL
+        AL -->|LinkType=GitProfile| GP
+        AL -->|LinkType=Repo| R
+        APP -.attribution.-> H
+        PR --> SE
+        PR --> AT
+        SR[ShaRegistry<br/>v3.8.0<br/>maps RepoVersion+SHA -> per-SHA db file<br/>+ rolled-up summary stats]
+        RV --> SR
+    end
 
-    PR --> APP
-    APP --> AL
-    AL -->|LinkType=GitProfile| GP
-    AL -->|LinkType=Repo| R
-    APP -.attribution.-> H
+    subgraph PerShaDB[Per-SHA SQLite files - one per RepoVersion+SHA]
+        SR -.opens lazily.-> SHADB[wp-content/uploads/git-logs/logs/RepoVersionId/Sha.sqlite<br/>LogEntry / ErrorLogEntry / PipelineRun / StatusSnapshot / ShaMeta]
+    end

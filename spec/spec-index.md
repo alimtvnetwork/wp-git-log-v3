@@ -786,15 +786,15 @@
 
 | File | Title | Version |
 |------|-------|---------|
-| `spec/22-git-logs-v2/00-overview.md` | Git Logs v2 — Spec Overview | 2.8.7 |
-| `spec/22-git-logs-v2/01-glossary-and-enums.md` | Glossary and Enum Catalog (v2) | 2.0.0 |
-| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 2.7.0 |
+| `spec/22-git-logs-v2/00-overview.md` | Git Logs v2 — Spec Overview | 3.8.0 |
+| `spec/22-git-logs-v2/01-glossary-and-enums.md` | Glossary and Enum Catalog (v2) | 3.8.0 |
+| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 3.8.0 |
 | `spec/22-git-logs-v2/03-admin-ui.md` | Admin UI (v2) | 2.0.0 |
 | `spec/22-git-logs-v2/04-rest-api-endpoints.md` | REST API Endpoints (v2) | 2.8.3 |
 | `spec/22-git-logs-v2/05-auth-and-validation.md` | Authentication and Validation (v2) | 2.1.0 |
 | `spec/22-git-logs-v2/06-migrations-and-logger.md` | Migrations and Logger (v2) | 2.0.0 |
 | `spec/22-git-logs-v2/07-app-entity.md` | App Entity (v2) | 2.0.0 |
-| `spec/22-git-logs-v2/08-history-and-action.md` | History, Action, and AuditTrail (v2) | 2.0.0 |
+| `spec/22-git-logs-v2/08-history-and-action.md` | History, PipelineAction, SystemEvent, and AuditTrail (v2) | 3.0.0 |
 | `spec/22-git-logs-v2/14-endpoint-examples.md` | Endpoint Examples (v2) | 2.2.0 |
 | `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.8.7 |
 | `spec/22-git-logs-v2/16-seed-data.md` | Seed Data (v2) | 2.7.0 |
@@ -816,9 +816,10 @@
 | `spec/22-git-logs-v2/33-bats-test-skeleton.md` | Bats Test Skeleton (v2) | 2.7.0 |
 | `spec/22-git-logs-v2/34-phpunit-test-skeleton.md` | PHPUnit Test Skeleton (v2) | 2.7.0 |
 | `spec/22-git-logs-v2/35-reference-ci-yml.md` | Reference CI Workflow (.github/workflows/ci.yml) | 2.7.0 |
-| `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 2.5.0 |
+| `spec/22-git-logs-v2/39-split-db-log-storage.md` | Split-DB Log Storage (per-SHA SQLite) | 1.0.0 |
+| `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 3.8.0 |
 | `spec/22-git-logs-v2/98-changelog.md` | Changelog (v2) |  |
-| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 2.8.7 |
+| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.0 |
 
 ## 🗄️ App Database
 
@@ -859,8 +860,8 @@
 
 | File | Title | Version |
 |------|-------|---------|
-| `spec/26-gitlogs-diagrams/00-overview.md` | Gitlogs Diagrams | 1.0.0 |
-| `spec/26-gitlogs-diagrams/97-acceptance-criteria.md` | Acceptance Criteria — Gitlogs Diagrams | 1.1.0 |
+| `spec/26-gitlogs-diagrams/00-overview.md` | Gitlogs Diagrams | 1.2.0 |
+| `spec/26-gitlogs-diagrams/97-acceptance-criteria.md` | Acceptance Criteria — Gitlogs Diagrams | 1.2.0 |
 | `spec/26-gitlogs-diagrams/98-changelog.md` | Changelog — Gitlogs Diagrams | 1.0.0 |
 | `spec/26-gitlogs-diagrams/99-consistency-report.md` | Consistency Report — Gitlogs Diagrams | 1.0.0 |
 

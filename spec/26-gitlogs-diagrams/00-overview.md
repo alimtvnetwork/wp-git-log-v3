@@ -1,9 +1,11 @@
 # Gitlogs Diagrams
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-25
+**Version:** 1.2.0  
+**Updated:** 2026-04-26
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).
+
+> **v1.2.0 (2026-04-26):** ER + domain diagrams regenerated to reflect Git Logs v3.8.0 domain-model overhaul — `Action`→`PipelineAction`, new `SystemEvent` table, `GitProfile.IsOrganization` boolean replaces `OwnerType` lookup, split-DB boundary (`ShaRegistry` in root DB; `LogEntry`/`ErrorLogEntry` moved to per-SHA SQLite files under `logs/<RepoVersionId>/<GitSha256>.sqlite` per [§39](../22-git-logs-v2/39-split-db-log-storage.md)).
 
 ## Inventory
 
