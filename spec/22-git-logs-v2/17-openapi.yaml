@@ -211,6 +211,109 @@ components:
         RequestId:  { type: string }
         HttpStatus: { type: integer }
 
+    # ---------------------------------------------------------------------
+    # NDJSON streaming frames (added v2.9.3 Phase 11; spec ref §04 §11.3)
+    # ---------------------------------------------------------------------
+    # Wire format: one JSON object per line, separated by exactly one `\n`
+    # (LF, U+000A) — never CRLF. Discriminator field is `Type`. Five frame
+    # types are normative; mid-stream `Error` is a sixth defined in §11.3.
+    # The OpenAPI document describes the *envelope* shape; clients MUST
+    # parse line-by-line and switch on `Type` rather than treating the body
+    # as a single JSON document.
+    NdjsonHeaderFrame:
+      type: object
+      required: [Type, Schema, StreamId, Endpoint, RequestId, ServerTimeMs]
+      properties:
+        Type:         { type: string, enum: [Header] }
+        Schema:       { type: string, enum: ['git-logs-v2/ndjson@1'], description: 'Stable schema identifier; bump on breaking change.' }
+        StreamId:     { type: string, format: uuid, description: 'Server-assigned UUID; required for resume via ?stream-id=.' }
+        Endpoint:     { type: string, description: 'Logical endpoint name (e.g. /get-logs).' }
+        RequestId:    { type: string, description: 'Mirrors the response RequestId for correlation with audit logs.' }
+        ServerTimeMs: { type: integer, format: int64, description: 'Server epoch ms at stream start.' }
+        Filters:      { type: object, additionalProperties: true, description: 'Echo of resolved query parameters (RepoUrl, Branch, PipelineId, Severity, Limit, Cursor, after-seq).' }
+
+    NdjsonLogFrame:
+      type: object
+      required: [Type, Seq, LogId, PipelineId, Sha, Severity, LogText, CreatedAt]
+      properties:
+        Type:       { type: string, enum: [Log] }
+        Seq:        { type: integer, format: int64, description: 'Monotonic per-stream sequence number; clients use this for ?after-seq= resume.' }
+        LogId:      { type: integer, format: int64 }
+        PipelineId: { type: integer, format: int64 }
+        Sha:        { type: string, description: 'Full git SHA the log row belongs to (per-SHA SQLite source).' }
+        Severity:   { $ref: '#/components/schemas/LogSeverity' }
+        LogText:    { type: string }
+        CreatedAt:  { type: integer, format: int64 }
+        Truncated:  { type: boolean, description: 'Present and true iff LogText was truncated to fit ConfigKv.NdjsonMaxFrameBytes (default 256 KiB).' }
+
+    NdjsonErrorLogFrame:
+      type: object
+      required: [Type, Seq, ErrorLogId, PipelineId, Sha, LogText, CreatedAt]
+      properties:
+        Type:       { type: string, enum: [ErrorLog] }
+        Seq:        { type: integer, format: int64 }
+        ErrorLogId: { type: integer, format: int64 }
+        PipelineId: { type: integer, format: int64 }
+        Sha:        { type: string }
+        LogText:    { type: string }
+        CreatedAt:  { type: integer, format: int64 }
+        Truncated:  { type: boolean }
+
+    NdjsonProgressFrame:
+      type: object
+      required: [Type, Seq, RowsEmitted, ElapsedMs]
+      properties:
+        Type:        { type: string, enum: [Progress] }
+        Seq:         { type: integer, format: int64 }
+        RowsEmitted: { type: integer, format: int64 }
+        ElapsedMs:   { type: integer, format: int64 }
+        CurrentSha:  { type: string, description: 'SHA the cursor is currently walking; helps clients show "now reading SHA abc123…".' }
+
+    NdjsonEndFrame:
+      type: object
+      required: [Type, Seq, Status, RowsEmitted, ElapsedMs]
+      properties:
+        Type:        { type: string, enum: [End] }
+        Seq:         { type: integer, format: int64 }
+        Status:      { type: string, enum: [Complete, Truncated, Error], description: 'Truncated = NdjsonMaxRowsPerStream cap hit; Error = preceded by an Error frame.' }
+        RowsEmitted: { type: integer, format: int64 }
+        ElapsedMs:   { type: integer, format: int64 }
+        NextAfterSeq: { type: integer, format: int64, description: 'On Status=Truncated, the Seq value to pass as ?after-seq= to resume.' }
+
+    NdjsonErrorFrame:
+      type: object
+      required: [Type, Seq, Code, Message]
+      description: |
+        Mid-stream error frame, emitted only when Header has already flushed
+        but the cursor cannot continue. The stream MUST then emit one End
+        frame with Status:"Error" and close. If the failure happens *before*
+        Header flushes, the server returns a conventional ErrorEnvelope
+        instead and never enters NDJSON mode.
+      properties:
+        Type:    { type: string, enum: [Error] }
+        Seq:     { type: integer, format: int64 }
+        Code:    { $ref: '#/components/schemas/ErrorCode' }
+        Message: { type: string }
+
+    NdjsonFrame:
+      description: 'Discriminated union of all valid NDJSON frame types. Use the `Type` field to discriminate.'
+      oneOf:
+        - $ref: '#/components/schemas/NdjsonHeaderFrame'
+        - $ref: '#/components/schemas/NdjsonLogFrame'
+        - $ref: '#/components/schemas/NdjsonErrorLogFrame'
+        - $ref: '#/components/schemas/NdjsonProgressFrame'
+        - $ref: '#/components/schemas/NdjsonEndFrame'
+        - $ref: '#/components/schemas/NdjsonErrorFrame'
+      discriminator:
+        propertyName: Type
+        mapping:
+          Header:   '#/components/schemas/NdjsonHeaderFrame'
+          Log:      '#/components/schemas/NdjsonLogFrame'
+          ErrorLog: '#/components/schemas/NdjsonErrorLogFrame'
+          Progress: '#/components/schemas/NdjsonProgressFrame'
+          End:      '#/components/schemas/NdjsonEndFrame'
+          Error:    '#/components/schemas/NdjsonErrorFrame'
+
   responses:
     BadRequest:        { description: Validation error,        content: { application/json: { schema: { $ref: '#/components/schemas/ErrorEnvelope' } } } }
     Unauthorized:      { description: Auth failed,             content: { application/json: { schema: { $ref: '#/components/schemas/ErrorEnvelope' } } } }
