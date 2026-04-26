@@ -84,7 +84,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 28 | [28-example-github-actions.md](./28-example-github-actions.md) | Drop-in workflow YAML for Lane B push + fixed |
 | 29 | [29-uninstall-policy.md](./29-uninstall-policy.md) | DB retention modes on plugin removal |
 | 30 | [30-threat-model.md](./30-threat-model.md) | STRIDE pass over the v2 attack surface |
-| 39 | [39-split-db-log-storage.md](./39-split-db-log-storage.md) | **NEW v3.8.0** — Per-SHA SQLite log storage (root DB keeps only `ShaRegistry`; logs live in `logs/<RepoVersionId>/<GitSha256>.sqlite`) |
+| 39 | [39-split-db-log-storage.md](./39-split-db-log-storage.md) | **v3.8.0 introduced; v2.9.0 active.** Per-SHA SQLite log storage. Root DB keeps only `ShaRegistry` + 3 ConfigKv keys (`ShaLogsRoot`, `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`); logs live in `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`. See §15 `GL-SHA-DB-*` codes, §22 prune, §23 backup manifest, §29 wipe. |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
