@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.12  
-**Updated:** 2026-04-26 (Phase 12: Phase 9 Follow-ups — AC-73..AC-75 added for `Pipeline.PreviousHasError` state-transition matrix, back-fill correctness, single-statement write atomicity; AC-67 extended to mention optional `Header.StateTransition` field)
+**Version:** 3.8.13  
+**Updated:** 2026-04-26 (Phase 13: Deepen Scaffolded ACs — 8 high-traffic one-liner ACs rewritten with full GWT body + concrete §-cross-refs: AC-02 Profile schema absence-of-password-column, AC-03 migration semver ordering + 12-marker baseline, AC-12 streaming ingest size-cap incrementality + atomicity, AC-14 AckResponse Retrieval URL contract, AC-17 App columns incl. forbidden Phase B1 fields, AC-18 AppLink XOR + CASCADE, AC-22 §26 6-file Mermaid inventory + render contract, AC-30 ErrorEnvelope shape + RequestId mirroring + NDJSON error split. AC count unchanged at 75.)
 
 ---
 
