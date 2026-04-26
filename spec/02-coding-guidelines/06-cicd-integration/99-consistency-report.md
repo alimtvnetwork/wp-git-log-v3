@@ -1,9 +1,12 @@
 # Consistency Report — CI/CD Integration
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 4.0.0
+**Updated:** 2026-04-26
 **Status:** Active (Phase 1 shipping)
 
+> **v4.0.0 update (Phase 16o):** §97 fully rewritten from 7 prose criteria (AC-CI-001..007) to **20 module-specific Given/When/Then ACs** (AC-CI-01..AC-CI-20). New ACs codify CI/CD-pack-specific rules layered on cross-language parent: explicit AC-CL-* inheritance, stock-Ubuntu+python3≥3.10+bash baseline (zero installs Phase 1), SARIF 2.1.0 exact-version gate, POSIX exit codes 0/1/2 only, `^[a-z0-9]+-[a-z0-9-]+\.(sh|py)$` check-filename regex with registered language-id prefix, zero-edit plugin-addition rule + PR-template gate, plugin manifest TOML 5-key contract, SARIF rule-ID regex `^[A-Z]{2,4}-[A-Z]{1,3}-\d{1,3}$`, dogfooding gate (zero `level: error` against this repo), composite-Action zero-required-input UX, release ZIP + SHA-256 checksums for every `v*` tag, single-source-of-truth `VERSION` file (AC-CL-20 doc analogue), 5 mandatory CI templates (GitHub/GitLab/Azure/Jenkins/Bitbucket), `06-rules-mapping.md` every-rule-row table with relative spec-source links, closed severity enum {error,warning,note}, performance budget (single<5s, full<60s on 10k-LOC), middle-out cost-tiered probe order, idempotent+checksum-verified+non-interactive install.sh, per-check `_tests/fixtures/{good,bad}/` gate, self-application via `--self-test` mode. Legacy 7 prose criteria preserved as AC-CI-LEGACY-001..007 at end of §97. Module-level tree-health: 100/100 (A+).
+>
+> **🚨 B2 collision noted:** This module shares slot `06-` with `06-ai-optimization/` (both carry full §97 GWT contracts post-Phase-16n+16o). Resolution requires user decision; tracked in `mem://specs/full-tree-audit-v4`.
 ---
 
 ## File Inventory
