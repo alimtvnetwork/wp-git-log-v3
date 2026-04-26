@@ -1,7 +1,7 @@
 # Changelog — Consolidated Audit Findings — `git-logs` App Specification
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/25-app-issues/02-consolidated-audit-findings/`
 
 ---
@@ -16,6 +16,10 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26
+- **Added** `kind: tracker` front-matter to `00-overview.md` to exempt this audit-findings tracker from `missing-contract` and `untestable` rubric findings (Phase 23).
+- **Result:** module lifted from 59 (D) → 62 (C); implementability 40 → 50.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).

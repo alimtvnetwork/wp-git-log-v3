@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 31  
-**Mean weighted score:** **78.5/100**  
-**Mean implementability:** **54.3/100**
+**Mean weighted score:** **78.7/100**  
+**Mean implementability:** **54.9/100**
 
 ## Methodology v2
 
@@ -13,12 +13,12 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 3, **A** = 14, **B** = 40, **C** = 18, **D** = 4
+**A+** = 3, **A** = 14, **B** = 40, **C** = 21, **D** = 1
 
 ## Findings by category
 | Category | Count |
 |---|---:|
-| missing-contract | 28 |
+| missing-contract | 25 |
 | drift | 12 |
 | broken-link | 8 |
 | untestable | 1 |
@@ -26,7 +26,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Findings by severity
 | Severity | Count |
 |---|---:|
-| high | 37 |
+| high | 34 |
 | low | 12 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
@@ -51,9 +51,9 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Bottom 15 (lowest implementability)
 | Rank | Module | Overall | Impl | Grade | Top finding |
 |---:|---|---:|---:|:-:|---|
-| 1 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 59 | 10 | D | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
-| 2 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 59 | 10 | D | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
-| 3 | [`.`](./..md) | 59 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
+| 1 | [`.`](./..md) | 59 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
+| 2 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 65 | 30 | C | _no findings_ |
+| 3 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 65 | 30 | C | _no findings_ |
 | 4 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 67 | 30 | C | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 | 5 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 67 | 30 | C | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
 | 6 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 67 | 30 | C | No inlined contract (SQL DDL / JSON schema / TS enum) in module body |
@@ -85,10 +85,10 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
 | [`.`](./..md) | 30 | 50 | 100 | 100 | 100 | 10 | 100 | **59** | D | 0 |
-| [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 10 | 55 | 100 | 100 | 100 | 90 | 100 | **59** | D | 0 |
-| [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 10 | 55 | 100 | 100 | 100 | 90 | 100 | **59** | D | 0 |
-| [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 40 | 75 | 40 | 50 | 100 | 90 | 100 | **59** | D | 0 |
 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 40 | 80 | 40 | 50 | 100 | 100 | 90 | **61** | C | 0 |
+| [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 50 | 75 | 40 | 50 | 100 | 80 | 100 | **62** | C | 0 |
+| [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 30 | 55 | 100 | 100 | 100 | 80 | 100 | **65** | C | 0 |
+| [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 30 | 55 | 100 | 100 | 100 | 80 | 100 | **65** | C | 0 |
 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 30 | 60 | 100 | 100 | 100 | 96 | 100 | **67** | C | 0 |
 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 30 | 60 | 100 | 100 | 100 | 96 | 100 | **67** | C | 0 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 30 | 60 | 100 | 100 | 100 | 96 | 100 | **67** | C | 0 |

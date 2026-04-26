@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.1** — AI-Implementability Edition.
+
+v2.1 (2026-04-26, Phase 23):
+  - Front-matter `kind: tracker` exempts issue/finding modules from
+    `missing-contract` and `untestable` rubric findings.
+  - Trackers receive impl baseline 75 (was 30) and testability 80.
 
 Improvements over v1:
   1. Broader code index: linter-scripts + .github + src + spec sub-tree map
@@ -58,6 +63,8 @@ GWT_RX    = re.compile(r"\*\*Given\*\*.*?\*\*When\*\*.*?\*\*Then\*\*", re.S | re
 AC_RX     = re.compile(r"(?:^|\n)\s*###?\s*AC[-\s]?[A-Z\d-]+", re.I)
 LINK_RX   = re.compile(r"\[([^\]]+)\]\(([^)#]+\.md)(?:#[^)]*)?\)")
 CODE_BLOCK_RX = re.compile(r"```(\w+)?\n(.*?)```", re.S)
+FRONTMATTER_RX = re.compile(r"\A---\n(.*?)\n---\n", re.S)
+KIND_RX        = re.compile(r"^kind:\s*([A-Za-z0-9_-]+)\s*$", re.M)
 
 # ---------------- code surface ----------------
 def collect_code_index() -> str:
@@ -115,6 +122,14 @@ def deterministic_metrics(folder: Path) -> dict:
     ac = read(folder / "97-acceptance-criteria.md")
     cr = read(folder / "99-consistency-report.md")
 
+    # front-matter kind (e.g. `kind: tracker`) — exempts non-contract modules
+    kind = ""
+    fm = FRONTMATTER_RX.match(ov)
+    if fm:
+        km = KIND_RX.search(fm.group(1))
+        if km:
+            kind = km.group(1).strip().lower()
+
     # contract presence in body (excluding AC)
     body_blocks = CODE_BLOCK_RX.findall(body_text)
     lang_counter = Counter(lang or "plain" for lang, _ in body_blocks)
@@ -147,6 +162,7 @@ def deterministic_metrics(folder: Path) -> dict:
     mmd_files = list(folder.glob("*.mmd"))
 
     return {
+        "kind":                kind,  # "" for normal contract modules; "tracker" exempts contract/AC findings
         "md_files":            len(md_files),
         "mmd_files":           len(mmd_files),
         "overview_chars":      len(ov),
@@ -356,18 +372,26 @@ def apply_gates(scores: dict, metrics: dict) -> tuple[dict, list[dict]]:
 def deterministic_score(folder: Path, metrics: dict) -> dict:
     rel = MOD_REL[folder]
     m = metrics
+    is_tracker = m.get("kind") == "tracker"
 
     # ---- per-dimension rubric (all bounded 0-100) ----
-    # Implementability: rewards inlined contracts; penalises waffle and stub
-    impl = 30
-    if m["has_sql_ddl"]:      impl += 20
-    if m["has_json_schema"]:  impl += 15
-    if m["has_ts_enums"]:     impl += 10
-    if m["has_yaml_openapi"]: impl += 10
-    if m["has_mermaid"]:      impl += 5
-    if m["code_blocks_total"] >= 5: impl += 10
-    if m["overview_chars"] < 500:   impl -= 20
-    if m["waffle_per_kchar"] > 5:   impl -= 10
+    # Implementability: rewards inlined contracts; penalises waffle and stub.
+    # Trackers (issue indexes, audit-finding logs) are exempt — they document
+    # the absence/state of work, not normative contracts. Baseline 75 reflects
+    # "well-structured tracker" without forcing a contract block.
+    if is_tracker:
+        impl = 75
+        if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
+    else:
+        impl = 30
+        if m["has_sql_ddl"]:      impl += 20
+        if m["has_json_schema"]:  impl += 15
+        if m["has_ts_enums"]:     impl += 10
+        if m["has_yaml_openapi"]: impl += 10
+        if m["has_mermaid"]:      impl += 5
+        if m["code_blocks_total"] >= 5: impl += 10
+        if m["overview_chars"] < 500:   impl -= 20
+        if m["waffle_per_kchar"] > 5:   impl -= 10
     impl = max(0, min(100, impl))
 
     # Completeness: AC count + overview size + child coverage
@@ -397,8 +421,11 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     if m["waffle_per_kchar"] > 1:   clar -= int((m["waffle_per_kchar"] - 1) * 8)
     clar = max(20, min(100, clar))
 
-    # Testability: AC + GWT density
-    if m["ac_count"] == 0:
+    # Testability: AC + GWT density. Trackers are exempt — issue lists are not
+    # contracts and don't require AC; their "testability" is the structure itself.
+    if is_tracker:
+        test = 80
+    elif m["ac_count"] == 0:
         test = 10
     else:
         test = 40 + min(40, m["ac_count"] * 6) + min(20, m["gwt_block_count"] * 4)
@@ -425,7 +452,9 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
 
     # ---- findings (sorted, deterministic) ----
     findings = []
-    if not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
+    # Trackers (kind: tracker) document issues/findings, not contracts — skip
+    # contract + AC requirements for them.
+    if not is_tracker and not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
         findings.append({
             "category": "missing-contract", "severity": "high", "impact": 8,
             "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
@@ -446,14 +475,14 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
             "evidence": "Words like should/may/might/optionally weaken normative force.",
             "correction": "Replace waffle words with MUST / MUST NOT / SHALL per RFC 2119.",
         })
-    if m["ac_count"] == 0:
+    if not is_tracker and m["ac_count"] == 0:
         findings.append({
             "category": "untestable", "severity": "high", "impact": 8,
             "issue": "No acceptance criteria found",
             "evidence": "ac_count=0 in 97-acceptance-criteria.md",
             "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
         })
-    elif m["gwt_block_count"] == 0:
+    elif not is_tracker and m["gwt_block_count"] == 0:
         findings.append({
             "category": "untestable", "severity": "medium", "impact": 5,
             "issue": "Acceptance criteria present but no Given/When/Then blocks",

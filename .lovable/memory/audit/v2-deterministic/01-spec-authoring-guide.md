@@ -28,6 +28,7 @@
 
 ```json
 {
+  "kind": "",
   "md_files": 16,
   "mmd_files": 0,
   "overview_chars": 22937,

@@ -1,7 +1,7 @@
 # Changelog — Seedable Config Architecture — Issues Index
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/06-seedable-config-architecture/03-issues/`
 
 ---
@@ -16,6 +16,10 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26
+- **Added** `kind: tracker` front-matter to `00-overview.md` to exempt this issue tracker from `missing-contract` and `untestable` rubric findings (Phase 23).
+- **Result:** module lifted from 59 (D) → 65 (C); implementability 10 → 65.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
