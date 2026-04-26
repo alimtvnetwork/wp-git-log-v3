@@ -50,10 +50,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 ## Section B — Domain Model & Profiles
 
 ### AC-02 — Profile fields  `[active]`
-- **Given** a created Profile row
-- **When** the row is read from the SQLite root DB
-- **Then** it contains exactly `UserName`, `Email`, `GeneratedKeyApi`, `Token`, `TempToken` (no password column anywhere in the schema).
-- **Verifies:** brief §2, §02, §18.
+- **Given** a `Profile` row exists in the SQLite root DB (path per §39 `ConfigKv.RootDbPath`, conventionally `<plugin-data>/git-logs.db`)
+- **When** the row is read via `SELECT * FROM Profile WHERE ProfileId = :id`
+- **Then** the result MUST contain exactly these columns and no others (per §02 v3.8.6 + §18 v2.9.3 DDL): `ProfileId INTEGER PRIMARY KEY AUTOINCREMENT`, `UserName TEXT NOT NULL UNIQUE`, `Email TEXT NOT NULL`, `GeneratedKeyApi TEXT NOT NULL` (server-issued opaque token used as the WP App Password username — see §05 §3.a), `Token TEXT NOT NULL` (the long-lived bearer token paired with `GeneratedKeyApi` per §05), `TempToken TEXT NULL` (short-lived rotation slot, NULL when no rotation in flight), `CreatedAt INTEGER NOT NULL`, `UpdatedAt INTEGER NOT NULL`; AND there MUST NOT be any column named `Password`, `PasswordHash`, `Salt`, `Pepper`, or any other plaintext-or-derived secret material — the schema is intentionally password-free because authentication uses WP App Passwords (§05 Lane A) or SSH key signatures (§31 Lane B), never a Profile-stored password; AND the `UNIQUE` constraint on `UserName` MUST be enforced at the SQLite level (not application level) so concurrent inserts cannot race past a `SELECT … WHERE UserName = ?` check.
+- **Verifies:** brief §2 (Profile entity), §02 v3.8.6 (Profile table doc), §18 v2.9.3 (DDL), §05 (Lane A auth flow), §31 (Lane B auth flow), §39 (RootDbPath ConfigKv key).
 
 ### AC-07 — GitProfile URL canonicalization  `[active]`
 - **Given** a GitProfile is saved with `IsOrganization` set to 0 or 1
