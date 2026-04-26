@@ -663,9 +663,9 @@
 | `spec/14-update/25-release-pinned-installer.md` | 25-release-pinned-installer |  |
 | `spec/14-update/26-repo-major-version-migrator.md` | Repo Major-Version Migrator (v14 → v15 → v16) | 1.0.0 |
 | `spec/14-update/27-generic-installer-behavior.md` | Generic Installer Behavior Specification | 1.0.0 |
-| `spec/14-update/97-acceptance-criteria.md` | Acceptance Criteria — Update — Overview | 1.0.0 |
-| `spec/14-update/98-changelog.md` | Changelog — Update — Overview | 1.0.0 |
-| `spec/14-update/99-consistency-report.md` | Consistency Report — Generic Update | 1.0.0 |
+| `spec/14-update/97-acceptance-criteria.md` | Acceptance Criteria — Update — Overview | 2.0.0 |
+| `spec/14-update/98-changelog.md` | Changelog — Update — Overview | 1.1.0 |
+| `spec/14-update/99-consistency-report.md` | Consistency Report — Generic Update | 1.1.0 |
 | `spec/14-update/diagrams/00-overview.md` | Diagrams — Self-Update & App Update | 3.2.0 |
 | `spec/14-update/diagrams/97-acceptance-criteria.md` | Acceptance Criteria — Diagrams — Self-Update & App Update | 1.0.0 |
 | `spec/14-update/diagrams/98-changelog.md` | Changelog — Diagrams — Self-Update & App Update | 1.0.0 |
