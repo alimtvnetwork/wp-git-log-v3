@@ -1,7 +1,7 @@
 # Consistency Report: Static Analysis
 
-**Version:** 3.2.0  
-**Generated:** 2026-04-01
+**Version:** 4.0.0
+**Generated:** 2026-04-26
 **Health Score:** 100/100 (A+)
 
 ---
@@ -20,7 +20,7 @@
 | 8 | `08-python-ruff.md` | ✅ Present |
 | 9 | `09-ci-pipeline-quality-gate.md` | ✅ Present |
 | 10 | `10-cross-language-rule-matrix.md` | ✅ Present |
-| 11 | `97-acceptance-criteria.md` | ✅ Present |
+| 11 | `97-acceptance-criteria.md` | ✅ Present — v4.0.0 GWT (Phase 16p) |
 | 12 | `98-changelog.md` | ✅ Present |
 
 **Note:** TypeScript ESLint spec lives at `../../02-typescript/11-eslint-enforcement.md` (cross-referenced from overview).
@@ -49,6 +49,23 @@
 | All specs include SonarQube rule mappings | ✅ |
 | All specs use standardized integration checklist format | ✅ |
 | All specs at v1.1.0 | ✅ |
+| §97 at v4.0.0 with 20 GWT ACs | ✅ Phase 16p complete |
+
+---
+
+## Coverage Gap Analysis
+
+| SonarQube Rule | ✅ Native | 🟡 Fallback | ❌ Not Enforced | Gap Status |
+|----------------|-----------|-------------|-----------------|------------|
+| S138 (function length) | 8/8 | 0 | 0 | ✅ Closed |
+| S107 (parameter count) | 7/8 | 1 (Go) | 0 | ✅ Closed |
+| S3776 (cognitive complexity) | 6/8 | 2 (PHP, VB.NET) | 0 | 🟡 Watch |
+| S134 (nesting depth) | 7/8 | 1 (VB.NET) | 0 | ✅ Closed |
+| S1126 (redundant boolean) | 8/8 | 0 | 0 | ✅ Closed |
+| S4144 (duplicate method) | 5/8 | 3 (Go, Rust, Python) | 0 | 🟡 Watch |
+| S1481/S1144 (unused variable) | 8/8 | 0 | 0 | ✅ Closed |
+
+**Coverage Summary:** 49/56 native (87.5%), 7/56 fallback (12.5%), 0/56 not enforced.
 
 ---
 
@@ -64,6 +81,8 @@
 
 | Date | Version | Action |
 |------|---------|--------|
-| 2026-04-01 | 1.2.0 | Added `97-acceptance-criteria.md` and `98-changelog.md`, total 10→12 |
-| 2026-04-01 | 1.1.0 | Added `10-cross-language-rule-matrix.md`, total 9→10 |
-| 2026-04-01 | 1.0.0 | Initial report — 9 files, all v1.1.0, cross-spec consistency verified |
+| 2026-04-26 | 4.0.0 | Phase 16p: §97 rewritten with 20 GWT ACs (AC-SA-01..AC-SA-20); coverage gap analysis added; legacy stubs preserved |
+| 2026-04-01 | 3.2.0 | Banner bump; stub checkboxes refreshed |
+| 2026-04-01 | 1.2.0 | Added `10-cross-language-rule-matrix.md`, `97-acceptance-criteria.md`, `98-changelog.md` |
+| 2026-04-01 | 1.1.0 | Added `09-ci-pipeline-quality-gate.md`, `99-consistency-report.md`; all 8 language specs bumped to v1.1.0 |
+| 2026-03-31 | 1.0.0 | Initial report — 9 files, all v1.1.0, cross-spec consistency verified |

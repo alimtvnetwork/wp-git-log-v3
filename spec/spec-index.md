@@ -131,9 +131,9 @@
 | `spec/02-coding-guidelines/01-cross-language/16-static-analysis/08-python-ruff.md` | Python — Ruff / Pylint / Flake8 Enforcement | 3.2.0 |
 | `spec/02-coding-guidelines/01-cross-language/16-static-analysis/09-ci-pipeline-quality-gate.md` | Unified CI Pipeline & Quality Gate Specification | 3.2.0 |
 | `spec/02-coding-guidelines/01-cross-language/16-static-analysis/10-cross-language-rule-matrix.md` | Cross-Language Rule Matrix | 1.0.0 |
-| `spec/02-coding-guidelines/01-cross-language/16-static-analysis/97-acceptance-criteria.md` | Acceptance Criteria: Static Analysis & Linter Enforcement | 3.2.0 |
-| `spec/02-coding-guidelines/01-cross-language/16-static-analysis/98-changelog.md` | Changelog: Static Analysis & Linter Enforcement |  |
-| `spec/02-coding-guidelines/01-cross-language/16-static-analysis/99-consistency-report.md` | Consistency Report: Static Analysis | 3.2.0 |
+| `spec/02-coding-guidelines/01-cross-language/16-static-analysis/97-acceptance-criteria.md` | Acceptance Criteria: Static Analysis & Linter Enforcement | 4.0.0 |
+| `spec/02-coding-guidelines/01-cross-language/16-static-analysis/98-changelog.md` | Changelog: Static Analysis & Linter Enforcement | 4.0.0 |
+| `spec/02-coding-guidelines/01-cross-language/16-static-analysis/99-consistency-report.md` | Consistency Report: Static Analysis | 4.0.0 |
 | `spec/02-coding-guidelines/01-cross-language/17-regex-usage-guidelines.md` | Regex Usage Guidelines | 3.2.0 |
 | `spec/02-coding-guidelines/01-cross-language/18-code-mutation-avoidance.md` | Code Mutation Avoidance | 3.2.0 |
 | `spec/02-coding-guidelines/01-cross-language/19-null-pointer-safety.md` | Null Pointer Safety | 3.2.0 |

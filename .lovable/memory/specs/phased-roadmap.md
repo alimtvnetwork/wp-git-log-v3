@@ -323,24 +323,22 @@ First P2 §97. Rewrote §97 from 7 prose criteria (AC-CI-001..007) to **20 modul
 ---
 
 ## Next-pointer
-**Phase 16o complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT) + §02/06-ai-optimization §97 (20 GWT) + §02/06-cicd-integration §97 (20 GWT). **All P1 + first P2 §97s complete.**
+**Phase 16p complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT) + §02/06-ai-optimization §97 (20 GWT) + §02/06-cicd-integration §97 (20 GWT) + **§02/01/16-static-analysis §97 (20 GWT)**. **All P1 + all P2 §02 tree §97s complete.**
 
-**5 remaining §97 files with 0 GWT ACs** (post-16o), all P2:
+**4 remaining §97 files with 0 GWT ACs** (post-16p), all P2:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | **P2** | Deep nested under §02/01 |
-| 2 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 3 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 4 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 5 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `14-update/24-update-check-mechanism/` | 0 | **P2** | Sub-feature of §14 |
+| 2 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 3 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 4 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
 Remaining work:
-- ⏳ **Phase 16p** — Deepen `02-coding-guidelines/01-cross-language/16-static-analysis/97` (P2 deep nested).
 - ⏳ **Phase 16q** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16r** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user: `Environment`, `Platform`, `OwnerEmail` shape).
 - 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user: pick rename target for one of `06-ai-optimization`/`06-cicd-integration` — both now carry full §97s, so renaming is a §99-audit-row-only operation per the immutability precedent §16→§37).
 
-On next `next`: take **Phase 16p (`02-coding-guidelines/01-cross-language/16-static-analysis/97` deepen)** — second P2; deepest nested §97 in §02 tree, completes the §02 tree top-to-bottom. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16q (`14-update/24-update-check-mechanism/97` deepen)** — third P2; sub-feature of §14 update mechanism. Unless you redirect or want to unblock B1/B2 first.
 
