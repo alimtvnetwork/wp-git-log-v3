@@ -38,7 +38,7 @@
         "symbol": "--json"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-01": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-01": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
         "kind": "function",
@@ -46,7 +46,7 @@
         "symbol": "diff_against_baseline"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-02": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-02": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
         "kind": "function",
@@ -54,7 +54,7 @@
         "symbol": "diff_against_baseline"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-03": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-03": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
         "kind": "function",
@@ -62,7 +62,7 @@
         "symbol": "diff_against_baseline"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-04": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-04": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
         "kind": "function",
@@ -70,7 +70,7 @@
         "symbol": "diff_against_baseline"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-05": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-05": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
         "kind": "function",
@@ -78,7 +78,7 @@
         "symbol": "write_baseline"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-06": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-06": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
         "kind": "cli-flag",
@@ -86,7 +86,7 @@
         "symbol": "--report-only"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-07": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-07": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
         "kind": "function",
@@ -94,7 +94,7 @@
         "symbol": "run_generator"
       }
     ],
-    "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-08": [
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-08": [
       {
         "file": ".github/workflows/spec-health.yml",
         "kind": "workflow",
@@ -207,7 +207,7 @@
   },
   "code_to_ac": {
     ".github/workflows/spec-health.yml": [
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-08",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-08",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-08"
     ],
     "linter-scripts/audit-spec-vs-code-v2.py": [
@@ -231,13 +231,13 @@
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01"
     ],
     "linter-scripts/check-trace-map-regression.py": [
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-01",
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-02",
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-03",
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-04",
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-05",
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-06",
-      "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-07"
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-01",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-02",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-03",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-04",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-05",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-06",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-07"
     ],
     "linter-scripts/check-tree-health.cjs": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01",
