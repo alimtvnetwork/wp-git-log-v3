@@ -71,18 +71,15 @@ erDiagram
         string LastGitSha256
     }
     ShaRegistry {
-        int ShaRegistryId PK "v3.8.0 replaces root LogEntry/ErrorLogEntry"
-        int RepoVersionId FK
-        string GitSha256
-        string ShaDbPath "logs RepoVersionId Sha sqlite"
+        int ShaRegistryId PK "v2.9.0 split-DB pointer"
+        int PipelineId FK "UNIQUE PipelineId Sha"
+        string Sha "40 char lowercase hex"
+        string DbFilePath "ShaLogsRoot aa sha db"
+        int RowCount "mirror of per SHA file"
         int FirstSeenAt
         int LastSeenAt
-        int EntryCount
-        int ErrorCount
-        int LastSeverityId FK
-        string LastStatus "Green Red Pending"
-        int LastFailureAt
-        int LastSuccessAt
+        int FileSizeBytes
+        string Sha256 "audit checksum"
     }
     App {
         int AppId PK
