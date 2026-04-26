@@ -117,6 +117,14 @@ def deterministic_metrics(folder: Path) -> dict:
     ac = read(folder / "97-acceptance-criteria.md")
     cr = read(folder / "99-consistency-report.md")
 
+    # front-matter kind (e.g. `kind: tracker`) — exempts non-contract modules
+    kind = ""
+    fm = FRONTMATTER_RX.match(ov)
+    if fm:
+        km = KIND_RX.search(fm.group(1))
+        if km:
+            kind = km.group(1).strip().lower()
+
     # contract presence in body (excluding AC)
     body_blocks = CODE_BLOCK_RX.findall(body_text)
     lang_counter = Counter(lang or "plain" for lang, _ in body_blocks)
