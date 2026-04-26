@@ -1,10 +1,10 @@
 ---
 name: Phase 20 contract-inlining progress
-description: Tracks the 10-of-11-module contract-inlining sweep; module #10 (Go enum reference impl) landed 2026-04-26 with TS+JSON-Schema lockstep mirror.
+description: Tracks the COMPLETE 11-of-11 contract-inlining sweep; module #11 (PHP enum reference impl) landed 2026-04-26. Phase 20 done; awaiting Phase 22 re-run #2.
 type: feature
 ---
 
-# Phase 20 — Contract Inlining (status: 10 of 11 done)
+# Phase 20 — Contract Inlining (status: 11 of 11 done — COMPLETE)
 
 ## Modules upgraded (9)
 
