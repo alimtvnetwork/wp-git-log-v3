@@ -192,6 +192,14 @@ components:
         - GL-MIGRATION-PENDING
         - GL-CONFIG-MISSING
         - GL-INTERNAL
+        # Per-SHA log storage (split-DB — see §39, added v2.9.3 to mirror §15 v2.9.0 entries)
+        - GL-SHA-DB-OPEN-FAILED
+        - GL-SHA-DB-CREATE-FAILED
+        - GL-SHA-DB-CHECKSUM-MISMATCH
+        - GL-SHA-DB-QUOTA-EXCEEDED
+        # NDJSON streaming retrieval (see §04 §11, added v2.9.3 Phase 11)
+        - GL-NDJSON-CLIENT-DISCONNECT
+        - GL-NDJSON-CURSOR-LOST
 
     ErrorEnvelope:
       type: object
