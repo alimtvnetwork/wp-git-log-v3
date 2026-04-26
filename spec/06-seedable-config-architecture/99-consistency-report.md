@@ -10,7 +10,7 @@
 
 | # | File | Status | Version |
 |---|------|--------|---------|
-| 00 | `00-overview.md` | ✅ Present | 3.2.0 |
+| 00 | `00-overview.md` | ✅ Phase 20 #8 — JSON Schema 2020-12 + reference instance inlined | 3.1.0 |
 | 01 | `01-fundamentals.md` | ✅ Present | 3.2.0 |
 | 02 | `02-features/00-overview.md` | ✅ Present | — |
 | 02.01 | `02-features/01-rag-chunk-settings.md` | ✅ Present | — |
