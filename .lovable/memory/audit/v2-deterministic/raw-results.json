@@ -1491,9 +1491,9 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 30,
-        "before": 30,
+        "active": true,
+        "after": 50,
+        "before": 70,
         "cap": 50,
         "dimension": "implementability",
         "id": "G-CON-01",
@@ -1506,20 +1506,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3580,
       "ac_count": 7,
@@ -1533,12 +1522,12 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 8,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 583,
+      "overview_chars": 806,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1546,31 +1535,31 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 100
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 100
+      "testability": 80
     },
-    "verdict": "Deterministic score 68/100 (C) for spec/02-coding-guidelines/09-powershell-integration.",
-    "weighted_overall": 68
+    "verdict": "Deterministic score 76/100 (B) for spec/02-coding-guidelines/09-powershell-integration.",
+    "weighted_overall": 76
   },
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 30,
-        "before": 30,
+        "active": true,
+        "after": 50,
+        "before": 70,
         "cap": 50,
         "dimension": "implementability",
         "id": "G-CON-01",
@@ -1583,20 +1572,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "C",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2568,
       "ac_count": 5,
@@ -1612,12 +1590,12 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 7,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 891,
+      "overview_chars": 1100,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1627,22 +1605,22 @@
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 90
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 90
+      "testability": 80
     },
-    "verdict": "Deterministic score 68/100 (C) for spec/02-coding-guidelines/10-research.",
-    "weighted_overall": 68
+    "verdict": "Deterministic score 74/100 (C) for spec/02-coding-guidelines/10-research.",
+    "weighted_overall": 74
   },
   {
     "applied_gates": [
@@ -3849,9 +3827,9 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 30,
-        "before": 30,
+        "active": true,
+        "after": 50,
+        "before": 70,
         "cap": 50,
         "dimension": "implementability",
         "id": "G-CON-01",
@@ -3864,20 +3842,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 2}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2522,
       "ac_count": 5,
@@ -3893,12 +3860,12 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 9,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 2199,
+      "overview_chars": 2406,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -3908,22 +3875,22 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 90
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 90
+      "testability": 80
     },
-    "verdict": "Deterministic score 70/100 (C) for spec/10-research.",
-    "weighted_overall": 70
+    "verdict": "Deterministic score 76/100 (B) for spec/10-research.",
+    "weighted_overall": 76
   },
   {
     "applied_gates": [],
@@ -4480,9 +4447,9 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 35,
-        "before": 35,
+        "active": true,
+        "after": 50,
+        "before": 70,
         "cap": 50,
         "dimension": "implementability",
         "id": "G-CON-01",
@@ -4495,20 +4462,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "C",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2594,
       "ac_count": 5,
@@ -4524,12 +4480,12 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 9,
       "md_files": 4,
       "mmd_files": 2,
-      "overview_chars": 1438,
+      "overview_chars": 1629,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -4539,22 +4495,22 @@
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 35,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 90
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 35,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 90
+      "testability": 80
     },
-    "verdict": "Deterministic score 70/100 (C) for spec/14-update/diagrams.",
-    "weighted_overall": 70
+    "verdict": "Deterministic score 74/100 (C) for spec/14-update/diagrams.",
+    "weighted_overall": 74
   },
   {
     "applied_gates": [
@@ -5435,9 +5391,9 @@
         "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
       },
       {
-        "active": false,
-        "after": 35,
-        "before": 35,
+        "active": true,
+        "after": 50,
+        "before": 70,
         "cap": 50,
         "dimension": "implementability",
         "id": "G-CON-01",
@@ -5458,20 +5414,11 @@
         "impact": 7,
         "issue": "1 broken cross-spec link(s)",
         "severity": "high"
-      },
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
       }
     ],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [
-      "1 broken cross-spec link(s)",
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
+      "1 broken cross-spec link(s)"
     ],
     "metrics": {
       "ac_chars": 17103,
@@ -5488,12 +5435,12 @@
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 1,
       "links_total": 18,
       "md_files": 4,
       "mmd_files": 6,
-      "overview_chars": 4264,
+      "overview_chars": 4460,
       "todo_density": 0,
       "waffle_per_kchar": 0.06
     },
@@ -5503,22 +5450,22 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 92,
-      "implementability": 35,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 100
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=21, gwt=20, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=21, gwt=20, broken_links=1, waffle/kchar=0.06. Gates active: 2.",
     "scores": {
       "alignment": 90,
       "clarity": 100,
       "completeness": 90,
       "consistency": 70,
-      "implementability": 35,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 100
+      "testability": 80
     },
-    "verdict": "Deterministic score 71/100 (C) for spec/26-gitlogs-diagrams.",
-    "weighted_overall": 71
+    "verdict": "Deterministic score 75/100 (B) for spec/26-gitlogs-diagrams.",
+    "weighted_overall": 75
   },
   {
     "applied_gates": [
