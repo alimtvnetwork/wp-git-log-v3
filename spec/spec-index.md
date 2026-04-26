@@ -836,7 +836,7 @@
 |------|-------|---------|
 | `spec/22-git-logs-v2/00-overview.md` | Git Logs v2 — Spec Overview | 3.8.5 |
 | `spec/22-git-logs-v2/01-glossary-and-enums.md` | Glossary and Enum Catalog (v2) | 3.8.10 |
-| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 3.8.10 |
+| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 3.8.11 |
 | `spec/22-git-logs-v2/03-admin-ui.md` | Admin UI (v2) | 2.2.0 |
 | `spec/22-git-logs-v2/04-rest-api-endpoints.md` | REST API Endpoints (v2) | 2.9.3 |
 | `spec/22-git-logs-v2/05-auth-and-validation.md` | Authentication and Validation (v2) | 2.9.1 |
