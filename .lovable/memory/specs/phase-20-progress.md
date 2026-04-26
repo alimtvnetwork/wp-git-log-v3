@@ -1,6 +1,6 @@
 ---
 name: Phase 20 contract-inlining progress
-description: Tracks the COMPLETE 11-of-11 contract-inlining sweep; module #11 (PHP enum reference impl) landed 2026-04-26. Phase 20 done; awaiting Phase 22 re-run #2.
+description: Phase 20 COMPLETE (11/11). Phase 22B re-run verified modules #10 (Go) and #11 (PHP) both lifted 73 C → 82 B (+9, impl +25). Tree mean 78.3 → 78.5; G-CON-01 30 → 28.
 type: feature
 ---
 
