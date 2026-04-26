@@ -427,9 +427,9 @@
 | `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/97-acceptance-criteria.md` | Acceptance Criteria — AppError Package Reference | 1.0.0 |
 | `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/98-changelog.md` | Changelog — AppError Package Reference | 1.0.0 |
 | `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/99-consistency-report.md` | Consistency Report: AppError Package Reference | 3.2.0 |
-| `spec/03-error-manage/02-error-architecture/06-apperror-package/97-acceptance-criteria.md` | Acceptance Criteria — 06 Apperror Package | 2.0.0 |
-| `spec/03-error-manage/02-error-architecture/06-apperror-package/98-changelog.md` | Changelog — AppError Package | 1.0.0 |
-| `spec/03-error-manage/02-error-architecture/06-apperror-package/99-consistency-report.md` | Consistency Report: Apperror Package | 3.2.0 |
+| `spec/03-error-manage/02-error-architecture/06-apperror-package/97-acceptance-criteria.md` | Acceptance Criteria — 06 Apperror Package | 2.1.0 |
+| `spec/03-error-manage/02-error-architecture/06-apperror-package/98-changelog.md` | Changelog — AppError Package | 1.1.0 |
+| `spec/03-error-manage/02-error-architecture/06-apperror-package/99-consistency-report.md` | Consistency Report: Apperror Package | 3.3.0 |
 | `spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/00-overview.md` | Logging and Diagnostics | 3.2.0 |
 | `spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/01-react-execution-logger.md` | Specification: React Execution Logger | 3.2.0 |
 | `spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/02-session-based-logging.md` | Specification: Session-Based Logging System | 3.2.0 |

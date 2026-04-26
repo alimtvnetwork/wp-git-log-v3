@@ -1,6 +1,6 @@
 # Changelog — AppError Package
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/03-error-manage/02-error-architecture/06-apperror-package/`
 
@@ -16,6 +16,16 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26 (Phase 20 contract-inlining sweep)
+- **Added** §97 — three normative machine-parseable contract blocks under "Inlined Contracts":
+  - `go` block: full apperror package source-of-truth (AppErrType byte enum + custom JSON marshalling per AC-05; StackFrame/StackTrace + captureStack with skipFrames per AC-07; AppError struct + New/Wrap constructors per AC-01/AC-04; generic Result[T]/ResultSlice[T]/ResultMap[K,V] containers with PRIVATE fields enforcing AC-06 guard rule via Unwrap-panics-on-Err semantics).
+  - `ts` block: cross-language mirror with discriminated-union `Result<T> = { ok: true; value: T } | { ok: false; error: AppError }` emulating the Go guard rule at the TypeScript type level (frontend cannot access `.value` without narrowing through `r.ok === true`); `AppErrCode` template-literal type for the E1xxx-E14xxx domain pattern.
+  - `json` block: JSON-Schema 2020-12 wire-format validator (canonical EXxxx pattern `^E(1[0-4]|[1-9])[0-9]{1,3}$`, non-empty stack array per AC-01, required ref field for cross-service propagation).
+- **Rationale** Phase 19 deterministic re-audit scored this module 49/100 (F) flagged as a "complete orphan" — spec described Go types `Result[T]`, `AppError`, `AppErrType` extensively but had ZERO inlined source-of-truth (the previous §97 contained naked Go-syntax pseudocode without a fenced ` ```go ` block, so the auditor's `CODE_BLOCK_RX` registered 0/3 contracts and gate `G-CON-01` capped implementability ≤ 50).
+- **Expected lift** Module contracts 0/3 → 3/3; module weighted overall 49 (F) → 75+ (B); module implementability 30 → 80+. Tree-mean implementability projected +0.7pts (this module is referenced from 8+ other specs — `apperror.AppError` is the universal error type — so blast-radius is maximal).
+- **Preserved** Pre-existing AC-01..AC-07 GWT criteria unchanged. The 7-file `01-apperror-reference/` subfolder remains the deep-dive reference; the new §97 contract is the single inlined source-of-truth.
+- **Bumped** §97 v2.0.0 → v2.1.0; §98 v1.0.0 → v1.1.0; §99 v3.2.0 → v3.3.0; spec-index 3 cells refreshed.
 
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
