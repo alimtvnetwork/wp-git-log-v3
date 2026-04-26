@@ -445,10 +445,10 @@
 | `spec/03-error-manage/03-error-code-registry/03-collision-resolution-summary.md` | Collision Resolution Summary Report | 3.2.0 |
 | `spec/03-error-manage/03-error-code-registry/04-error-code-utilization-report.md` | Error Code Range Utilization Report | 3.2.0 |
 | `spec/03-error-manage/03-error-code-registry/05-overlap-validator.md` | 02 — Error Code Registry Overlap Validator | 3.2.0 |
-| `spec/03-error-manage/03-error-code-registry/07-schemas/00-overview.md` | Schemas | 3.2.0 |
+| `spec/03-error-manage/03-error-code-registry/07-schemas/00-overview.md` | Schemas | 3.3.0 |
 | `spec/03-error-manage/03-error-code-registry/07-schemas/97-acceptance-criteria.md` | Acceptance Criteria — 07 Schemas | 2.0.0 |
-| `spec/03-error-manage/03-error-code-registry/07-schemas/98-changelog.md` | Changelog — Schemas | 1.0.0 |
-| `spec/03-error-manage/03-error-code-registry/07-schemas/99-consistency-report.md` | Consistency Report: Schemas | 3.2.0 |
+| `spec/03-error-manage/03-error-code-registry/07-schemas/98-changelog.md` | Changelog — Schemas | 1.1.0 |
+| `spec/03-error-manage/03-error-code-registry/07-schemas/99-consistency-report.md` | Consistency Report: Schemas | 3.3.0 |
 | `spec/03-error-manage/03-error-code-registry/08-linter-scripts/00-overview.md` | Linter Scripts | 3.2.0 |
 | `spec/03-error-manage/03-error-code-registry/08-linter-scripts/97-acceptance-criteria.md` | Acceptance Criteria — 08 Linter Scripts | 2.0.0 |
 | `spec/03-error-manage/03-error-code-registry/08-linter-scripts/98-changelog.md` | Changelog — Linter Scripts | 1.0.0 |
