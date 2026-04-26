@@ -323,20 +323,24 @@ First P2 §97. Rewrote §97 from 7 prose criteria (AC-CI-001..007) to **20 modul
 ---
 
 ## Next-pointer
-**Phase 16q complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT) + §02/06-ai-optimization §97 (20 GWT) + §02/06-cicd-integration §97 (20 GWT) + §02/01/16-static-analysis §97 (20 GWT) + **§14/24-update-check-mechanism §97 (20 GWT)**. **All P1 + all P2 §97s complete except 16r.**
+**Phase 16r complete (2026-04-26).** ALL P1 + ALL P2 §97 GWT deepening work is now DONE. The §97 backlog is empty.
 
-**3 remaining §97 files with 0 GWT ACs** (post-16q), all P2:
+Phase 16r landed:
+- `spec/06-seedable-config-architecture/97-acceptance-criteria.md` v3.2.0 → **v4.0.0** (20 GWT ACs: AC-SC-01..20 + 2 legacy stubs preserved as AC-SC-LEGACY-001/002).
+- `spec/05-split-db-architecture/97-acceptance-criteria.md` v3.2.0 → **v4.0.0** (20 GWT ACs: AC-SD-01..20 + 2 legacy stubs preserved as AC-SD-LEGACY-001/002).
+- `spec/06-seedable-config-architecture/98-changelog.md` v1.0.0 → **v4.0.0** (Phase 16r row).
+- `spec/05-split-db-architecture/98-changelog.md` v1.0.0 → **v4.0.0** (Phase 16r row).
+- `spec/06-seedable-config-architecture/99-consistency-report.md` v3.2.0 → **v4.0.0** (Phase 16r audit row + dual-changelog observation).
+- `spec/05-split-db-architecture/99-consistency-report.md` v3.2.0 → **v4.0.0** (Phase 16r audit row + dual-changelog observation).
+- `spec/spec-index.md` 6 version cells refreshed for both modules.
 
-| # | Module | Current ACs | Priority | Notes |
-|--:|---|--:|---|---|
-| 1 | `06-seedable-config-architecture/` (root) | 0 | **P2** | Audit flagged "phantom" |
-| 2 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 3 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+**Cumulative §97 GWT inventory (post-16r):** 23 modules at full GWT — §07, §13, §14, §15, §16, §17, §22 (4 deferred deep), §26, §27, §28, §02 root, §01 root, §02/01-cross-language, §02/02-typescript, §02/03-golang, §02/04-php, §02/05-rust, §02/07-csharp, §02/06-ai-optimization, §02/06-cicd-integration, §02/01/16-static-analysis, §14/24-update-check-mechanism, **§06-seedable-config-architecture, §05-split-db-architecture**.
 
-Remaining work:
-- ⏳ **Phase 16r** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
+**0 remaining §97 files with 0 GWT ACs** (excluding `_archive/21-git-logs-v1/` which is archived and never edited).
+
+Remaining roadmap work (BLOCKED only):
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user: `Environment`, `Platform`, `OwnerEmail` shape).
 - 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user: pick rename target for one of `06-ai-optimization`/`06-cicd-integration` — both now carry full §97s, so renaming is a §99-audit-row-only operation per the immutability precedent §16→§37).
 
-On next `next`: take **Phase 16r (`06-seedable-config-architecture/97` + `05-split-db-architecture/97` deepen)** — final P2; both modules were audit-flagged as "phantom specs" (scaffolded structure with minimal content). Unless you redirect or want to unblock B1/B2 first.
+On next `next`: with §97 deepening fully done, the only pending technical work requires user input. Suggested follow-on initiatives: (a) **unblock B2** by choosing which §06 folder retains the slot; (b) **unblock B1** by providing §07 App identity field shape; (c) start **Phase 17** (§99 consistency-report deepening sweep — many `99-consistency-report.md` files are still scaffolds); (d) start **Phase 18** (run `node linter-scripts/check-tree-health.cjs --report` and fix any sub-100 modules).
 
