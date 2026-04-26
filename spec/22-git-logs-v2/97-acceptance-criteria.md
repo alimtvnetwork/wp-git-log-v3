@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.2  
-**Updated:** 2026-04-26
+**Version:** 3.8.5  
+**Updated:** 2026-04-26 (Phase 4: AC-49..AC-53 promoted from draft to active; aligned with v2.9.0 path layout + ConfigKv defaults)
 
 | # | Criterion | Source |
 |---|-----------|--------|
@@ -26,11 +26,11 @@
 | AC-19 | App inherits credentials from parent Profile; no own tokens. | locked decision 11 |
 | AC-20 | App lifecycle status enum (Active/Disabled/Archived) gates push acceptance. | locked decision 12 |
 | AC-21 | Four audit tables coexist: `AuditTrail` (HTTP forensics), `History` (per-RepoVersion git timeline), `PipelineAction` (renamed from `Action` in v3.8.0 — pipeline-bound), `SystemEvent` (NEW v3.8.0 — non-Git business events). Responsibility split documented in §08. | locked decision 13 + v3.8.0 |
-| AC-49 | Per-SHA log storage (v3.8.0): every accepted `/append-log` for a new `(RepoVersionId, GitSha256)` creates `wp-content/uploads/git-logs/logs/<RepoVersionId>/<GitSha256>.sqlite` and a `ShaRegistry` row in the root DB. `LogEntry` and `ErrorLogEntry` no longer exist in the root DB — all log lines live in the per-SHA file. | §39 |
-| AC-50 | `ShaRegistry` mirrors `EntryCount`, `ErrorCount`, `LastStatus`, `LastSeverityId`, `LastFailureAt`, `LastSuccessAt` from the per-SHA `StatusSnapshot` so dashboards never have to open the per-SHA file to render summary tiles. | §39 |
-| AC-51 | Per-SHA file is self-contained: includes denormalized `LogSeverity` lookup + `ShaMeta` single-row identity, so it can be exported / zipped / handed to support without root-DB context. | §39 |
-| AC-52 | Open per-SHA handles capped per process at `ConfigKv.MaxOpenShaDbHandles` (default 64) with LRU eviction; idle handles closed after `ConfigKv.ShaDbIdleCloseSec` seconds (default 300). | §39 |
-| AC-53 | `wp git-logs prune` walks `ShaRegistry`, deletes the per-SHA file, then deletes the row. `wp git-logs backup` zips the entire `git-logs/` directory including all `logs/` per-SHA files; manifest records each per-SHA file's row counts + sha256. Uninstall Wipe mode deletes the entire `uploads/git-logs/` folder. | §22, §23, §29, §39 |
+| AC-49 | **Active (v2.9.0).** Per-SHA log storage: every accepted `/append-log` for a new `(PipelineId, Sha)` creates `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db` and a `ShaRegistry` row in the root DB (`UNIQUE(PipelineId, Sha)`). `LogEntry` and `ErrorLogEntry` no longer exist in the root DDL — all log lines live exclusively in the per-SHA file. | §18, §39 |
+| AC-50 | **Active (v2.9.0).** `ShaRegistry` mirrors `RowCount`, `LastSeenAt`, `FileSizeBytes`, `Sha256` from the per-SHA file so dashboards and the prune planner never have to open the per-SHA file to render summary tiles or compute eligibility. | §18, §39 |
+| AC-51 | **Active (v2.9.0).** Per-SHA file is self-contained: includes denormalized `LogSeverity` lookup + `ShaMeta` single-row identity, so it can be exported / zipped / handed to support without root-DB context. | §39 |
+| AC-52 | **Active (v2.9.0).** Open per-SHA handles capped per process at `ConfigKv.MaxOpenShaDbHandles` (default `32`) with LRU eviction; idle handles closed after `ConfigKv.ShaDbIdleCloseSec` seconds (default `120`). Pool refusal raises `GL-SHA-DB-QUOTA-EXCEEDED` (HTTP 507). | §15, §39 |
+| AC-53 | **Active (v2.9.0).** `wp git-logs prune` walks `ShaRegistry` (eligibility on `LastSeenAt` + `Pipeline.HasError` + history-window guard); per row it does `rename → delete-row → unlink` for crash-safety; empty `<Sha[0:2]>/` shard folders are removed; the `<ShaLogsRoot>` root is preserved. `wp git-logs backup` writes a directory tree (`git-logs.sqlite` + `manifest.json` + `logs/<aa>/<sha>.db…`); `manifest.ShaFiles[]` records `{PipelineId, Sha, DbFilePath, RowCount, FileSizeBytes, Sha256}` for every file. Restore is all-or-nothing with `.bak`/`logs.bak.<ts>/` rollback and verifies sha256 against the manifest (drift ⇒ `GL-SHA-DB-CHECKSUM-MISMATCH`). Uninstall Wipe deletes the per-SHA tree first, root DB last, then `rmdir`'s the parent. | §15, §22, §23, §29, §39 |
 | AC-22 | Folder 26 contains: ER, domain, endpoint, auth, permission Mermaid diagrams. | brief §Diagrams |
 | AC-23 | All tables/columns/JSON keys/values use PascalCase; PKs are `INTEGER AUTOINCREMENT` named `{Table}Id`. | brief §DB.2–4 |
 | AC-24 | All typed values modeled as Enum in code AND lookup table in DB; no string-literal status comparisons. | brief §DB.5 |

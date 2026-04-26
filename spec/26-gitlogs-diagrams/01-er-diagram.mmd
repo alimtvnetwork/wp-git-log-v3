@@ -1,3 +1,7 @@
+%% v3.8.5 — Phase 4 re-render. Split-DB boundary: every entity below lives in the ROOT DB
+%% (wp-content/uploads/git-logs/git-logs.sqlite). LogEntry / ErrorLogEntry no longer exist;
+%% log lines live in per-SHA files at <ShaLogsRoot>/<aa>/<sha>.db (see §39). The ShaRegistry
+%% entity is the only pointer from root → per-SHA tree.
 erDiagram
     Profile ||--o{ RoleAssignment : has
     Role ||--o{ RoleAssignment : assigned
@@ -9,9 +13,7 @@ erDiagram
     GitProfile ||--o{ Repo : contains
     Repo ||--o{ RepoVersion : versions
     RepoVersion ||--o{ Pipeline : runs
-    RepoVersion ||--o{ ShaRegistry : seenShas
-    Pipeline ||--o{ ShaRegistry : lastSha
-    LogSeverity ||--o{ ShaRegistry : lastSeverity
+    Pipeline ||--o{ ShaRegistry : sha
     Profile ||--o{ App : owns
     AppStatus ||--o{ App : status
     App ||--o{ AppLink : links
@@ -73,18 +75,15 @@ erDiagram
         string LastGitSha256
     }
     ShaRegistry {
-        int ShaRegistryId PK "v3.8.0 replaces root LogEntry/ErrorLogEntry"
-        int RepoVersionId FK
-        string GitSha256
-        string ShaDbPath "logs RepoVersionId Sha sqlite"
+        int ShaRegistryId PK "v2.9.0 split-DB pointer"
+        int PipelineId FK "UNIQUE PipelineId Sha"
+        string Sha "40 char lowercase hex"
+        string DbFilePath "ShaLogsRoot aa sha db"
+        int RowCount "mirror of per SHA file"
         int FirstSeenAt
         int LastSeenAt
-        int EntryCount
-        int ErrorCount
-        int LastSeverityId FK
-        string LastStatus "Green Red Pending"
-        int LastFailureAt
-        int LastSuccessAt
+        int FileSizeBytes
+        string Sha256 "audit checksum"
     }
     App {
         int AppId PK
