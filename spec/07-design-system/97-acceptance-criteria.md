@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 3.4.0  
-**Updated:** 2026-04-26 (Phase 15b: Typography section AC-007..AC-011 converted from table format to full GWT subsections — Ubuntu/Poppins/mono font-loading contracts, gradient text effect cross-browser rules, heading-discipline WCAG semantics. AC IDs unchanged at AC-001..AC-034. 11 of 34 ACs now GWT; 23 await Phase 15c..15e.)
+**Version:** 3.5.0  
+**Updated:** 2026-04-26 (Phase 15c: Motion & Transitions section AC-012..AC-016 converted from table format to full GWT subsections — 300ms timing budget, JS-animation-library prohibition list, `prefers-reduced-motion` global override + per-component opt-in, link sweep direction + pseudo-element implementation, CTA slide animation contract. AC IDs unchanged at AC-001..AC-034. 16 of 34 ACs now GWT; 18 await Phase 15d..15e.)
 
 ---
 
@@ -9,7 +9,7 @@
 
 Testable criteria for validating design system compliance across all components and pages.
 
-> **Format note (Phase 15b in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006) and Typography (AC-007..AC-011)** are fully converted to GWT subsections (11 of 34 ACs total). **Motion & Transitions, Code Blocks, Navigation, Page Consistency** remain in table format pending Phase 15c..15e. AC IDs are stable across the conversion — `AC-007` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
+> **Format note (Phase 15c in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006), Typography (AC-007..AC-011), and Motion & Transitions (AC-012..AC-016)** are fully converted to GWT subsections (16 of 34 ACs total). **Code Blocks, Navigation, Page Consistency** remain in table format pending Phase 15d..15e. AC IDs are stable across the conversion — `AC-012` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
 
 ---
 

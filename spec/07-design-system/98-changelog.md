@@ -1,6 +1,6 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/07-design-system/`
 
@@ -16,6 +16,16 @@
 ---
 
 ## Releases
+
+### 1.3.0 — 2026-04-26
+- **Phase 15c — Convert §97 Motion & Transitions section from table-row to GWT format.** Continuation of the §07 structural conversion (Phases 15a + 15b prior). AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 5 ACs in the **Motion & Transitions** section converted from one-row table format (~70 chars each) to full Given/When/Then subsections (1703-3816 chars each, **24-54× depth**) with concrete contracts + cross-refs to `06-motion-transitions.md`, `09-button-system.md`, `tailwind.config.ts`, `src/index.css`, `package.json` dependency audit, WCAG 2.1 §2.3.3, MDN `prefers-reduced-motion` reference.
+- **AC-012** (≤300ms hover) — fixed timing vocabulary {150/200/300ms}, `cubic-bezier(0.4,0,0.2,1)` mandate, symmetric in/out durations, reduced-motion collapse to ≤10ms.
+- **AC-013** (no JS animation libraries) — exhaustive forbidden list (framer-motion, react-spring, react-motion, gsap, anime.js, lottie-*, mo.js, popmotion, react-transition-group, velocity-animate), narrow exception allowlist (tailwindcss-animate, embla-carousel-react, recharts/d3 for data viz only).
+- **AC-014** (`prefers-reduced-motion`) — exact global CSS override (`0.01ms` not `0` so `transitionend` still fires), per-component opt-in pattern via `@media (prefers-reduced-motion: no-preference)`, scroll-behavior override, parallax/auto-play disable rule.
+- **AC-015** (link underline sweep) — pseudo-element implementation with `right: 0` anchor for natural reverse direction, `position: relative` parent requirement, no-`text-decoration` mixing rule, focus-visible instant-fullwidth state, reduced-motion fallback.
+- **AC-016** (CTA slide text) — two-stacked-spans `overflow: hidden` pattern with `translateY` mechanics, vertical-only direction (horizontal reserved for navigation), reversibility on mouse-out, reduced-motion fallback to instant tint, `aria-hidden="true"` on duplicate text for screen-reader correctness.
+- Updated top-of-file Format note to reflect 16/34 ACs now GWT.
+- Banner v1.2.0 → v1.3.0; lockstep §97 v3.4.0 → v3.5.0 + §99 v3.4.0 → v3.5.0 + spec-index updated.
 
 ### 1.2.0 — 2026-04-26
 - **Phase 15b — Convert §97 Typography section from table-row to GWT format.** Continuation of the §07 structural conversion started by Phase 15a. AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 5 ACs in the **Typography** section converted from one-row table format (~70 chars each) to full Given/When/Then subsections (1209-4005 chars each, **17-57× depth**) with concrete contracts + cross-refs to `03-typography.md`, `index.html` font-loading, `tailwind.config.ts` font registration, `02-theme-variable-architecture.md`, `07-code-blocks.md`, `12-page-creation-rules.md`, WCAG 2.1 §1.3.1/§2.4.6.

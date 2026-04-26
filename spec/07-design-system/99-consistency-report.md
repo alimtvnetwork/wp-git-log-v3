@@ -1,7 +1,9 @@
 # Consistency Report
 
-**Version:** 3.4.0  
+**Version:** 3.5.0  
 **Updated:** 2026-04-26
+
+> **v3.5.0 update (Phase 15c):** §97 Motion & Transitions section converted from table-row to GWT — 5 ACs (AC-012..AC-016) deepened from ~70 chars/row to 1703-3816 chars/AC (24-54× depth) with full G/W/T bodies + cross-refs to `06-motion-transitions.md`, `09-button-system.md`, `tailwind.config.ts`, WCAG 2.1 §2.3.3. **16 of 34 ACs now GWT** (Theme & Variables + Typography + Motion); 18 ACs await Phase 15d..15e (Code Blocks, Navigation, Page Consistency). AC IDs unchanged (still AC-001..AC-034 sequential). Banner v3.4.0 → v3.5.0.
 
 > **v3.4.0 update (Phase 15b):** §97 Typography section converted from table-row to GWT — 5 ACs (AC-007..AC-011) deepened from ~70 chars/row to 1209-4005 chars/AC (17-57× depth) with full G/W/T bodies + cross-refs to `03-typography.md`, `index.html` font-loading, `tailwind.config.ts` font registration, WCAG 2.1 §1.3.1/§2.4.6. **11 of 34 ACs now GWT** (Theme & Variables + Typography); 23 ACs await Phase 15c..15e (Motion & Transitions, Code Blocks, Navigation, Page Consistency). AC IDs unchanged (still AC-001..AC-034 sequential). Banner v3.3.0 → v3.4.0.
 
