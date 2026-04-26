@@ -45,11 +45,11 @@ const DEFAULT_REPO_BASE =
 
 const KIND_VARIANT: Record<string, string> = {
   function: "bg-primary/10 text-primary border-primary/20",
-  endpoint: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
-  config: "bg-amber-500/10 text-amber-700 dark:text-amber-400 border-amber-500/20",
-  workflow: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",
-  "cli-flag": "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
-  "env-var": "bg-pink-500/10 text-pink-600 dark:text-pink-400 border-pink-500/20",
+  endpoint: "bg-trace-endpoint/10 text-trace-endpoint border-trace-endpoint/20",
+  config: "bg-trace-config/10 text-trace-config border-trace-config/20",
+  workflow: "bg-trace-workflow/10 text-trace-workflow border-trace-workflow/20",
+  "cli-flag": "bg-trace-cli-flag/10 text-trace-cli-flag border-trace-cli-flag/20",
+  "env-var": "bg-trace-env-var/10 text-trace-env-var border-trace-env-var/20",
 };
 
 function KindBadge({ kind }: { kind: TraceKind }) {
