@@ -390,9 +390,9 @@
 | `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/11-queue-navigation.md` | Error Queue Navigation | 2.2.0 |
 | `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/12-code-examples.md` | React Code Examples | 2.2.0 |
 | `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/13-file-reference.md` | File Reference | 2.2.0 |
-| `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/97-acceptance-criteria.md` | Acceptance Criteria — 03 Error Modal Reference | 2.0.0 |
-| `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/98-changelog.md` | Changelog — Error Modal — Frontend Specification (Index) | 1.0.0 |
-| `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/99-consistency-report.md` | Consistency Report: Error Modal Reference | 3.2.0 |
+| `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/97-acceptance-criteria.md` | Acceptance Criteria — 03 Error Modal Reference | 2.1.0 |
+| `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/98-changelog.md` | Changelog — Error Modal — Frontend Specification (Index) | 1.1.0 |
+| `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/99-consistency-report.md` | Consistency Report: Error Modal Reference | 3.3.0 |
 | `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes.md` | Error Modal — Color Theme & Design Token Reference | 2.1.0 |
 | `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/00-overview.md` | Color Theme & Design Token Reference (Index) | 2.1.0 |
 | `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/01-design-tokens.md` | Design System Tokens & Error Level Colors | 2.1.0 |
