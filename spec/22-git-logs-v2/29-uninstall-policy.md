@@ -1,7 +1,7 @@
 # Uninstall Policy (v2)
 
-**Version:** 2.5.0  
-**Updated:** 2026-04-25
+**Version:** 2.9.0  
+**Updated:** 2026-04-26 (Phase 3: Wipe mode now also deletes the per-SHA `<ShaLogsRoot>/` tree — see §39)
 
 What happens to the SQLite database, uploads, and DB rows when an operator removes the plugin. Defines the contract for `register_uninstall_hook` and the `uninstall.php` file at the plugin root.
 
