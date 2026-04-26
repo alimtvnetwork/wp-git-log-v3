@@ -372,7 +372,10 @@ def apply_gates(scores: dict, metrics: dict) -> tuple[dict, list[dict]]:
 def deterministic_score(folder: Path, metrics: dict) -> dict:
     rel = MOD_REL[folder]
     m = metrics
-    is_tracker = m.get("kind") == "tracker"
+    kind_val = m.get("kind", "")
+    is_tracker = kind_val == "tracker"
+    is_index   = kind_val == "index"  # placement-rule router; intentionally empty until populated
+    is_exempt  = is_tracker or is_index
 
     # ---- per-dimension rubric (all bounded 0-100) ----
     # Implementability: rewards inlined contracts; penalises waffle and stub.
