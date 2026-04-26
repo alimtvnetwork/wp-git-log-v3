@@ -1,7 +1,7 @@
 # Changelog — Split DB Architecture — Issues Index
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/05-split-db-architecture/03-issues/`
 
 ---
