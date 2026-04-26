@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25
+**Version:** 2.0.0
+**Updated:** 2026-04-26 (Phase 16d-v: Deepen §28 §97 — 12 new module-specific GWT ACs added (AC-28-29..AC-28-40) closing the v1.1 deferred error-code coverage + provider auto-fill gaps. AC count 28 → 40. AC-28-01..AC-28-28 preserved verbatim.)
 
 Each AC is written **Given / When / Then** so it can be lifted directly into a test (bats / phpunit / go test). When this file and a normative source disagree, the normative source wins and this file MUST be patched.
 
