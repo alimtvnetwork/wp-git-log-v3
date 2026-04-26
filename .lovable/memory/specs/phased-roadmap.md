@@ -103,4 +103,4 @@ Landed in folder 26 v2.1.0:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 10** (Diagram Render Pass — re-render all `.mmd` → `.svg` in `26-gitlogs-diagrams/` after Phases 4–9 schema changes land)
+**Top pending = Phase B1** (BLOCKED on user — §07 App identity fields: confirm `Environment`, `Platform`, `OwnerEmail` shape). All numbered phases 0–10 complete. Next unblocked candidate = "Phase 11 — Deferred follow-ups pickup" (Phase 8 streaming ConfigKv/error-code/OpenAPI/AC seeding + Phase 9 PreviousHasError ACs/UI/NDJSON Header label exposure) — propose only on explicit user `next` after acknowledging.
