@@ -147,4 +147,187 @@ The DDL is idempotent. The service runs it on first call to
 
 ---
 
-*Database Schema — v1.0.0 — 2026-04-20*
+## 6. Code Mirror — `UpdateStatusEnum` (Phase 20 normative)
+
+> **Status:** Normative. Section §2 declares the lookup table is
+> "mirrored in code as `UpdateStatusEnum`". The two reference
+> implementations below ARE that mirror — they MUST stay in lockstep
+> with the seed rows in §2 (same id ↔ same name ↔ same label).
+> Adding a sixth status means: insert seed row → add enum case in
+> BOTH languages → bump module version → §98 changelog row.
+
+### 6.1 TypeScript reference (numeric enum, 1-based to match `UpdateStatusId`)
+
+```typescript
+// src/update/UpdateStatusEnum.ts
+// Source-of-truth pairing: spec/14-update/24-update-check-mechanism/04-database-schema.md §2
+
+export enum UpdateStatus {
+  UpToDate      = 1,
+  UpdateFound   = 2,
+  UpdateApplied = 3,
+  Failed        = 4,
+  Migrated      = 5,
+}
+
+export const UpdateStatusName = {
+  [UpdateStatus.UpToDate]:      "UpToDate",
+  [UpdateStatus.UpdateFound]:   "UpdateFound",
+  [UpdateStatus.UpdateApplied]: "UpdateApplied",
+  [UpdateStatus.Failed]:        "Failed",
+  [UpdateStatus.Migrated]:      "Migrated",
+} as const satisfies Record<UpdateStatus, string>;
+
+export const UpdateStatusLabel = {
+  [UpdateStatus.UpToDate]:      "Up to date",
+  [UpdateStatus.UpdateFound]:   "Update available",
+  [UpdateStatus.UpdateApplied]: "Update applied",
+  [UpdateStatus.Failed]:        "Last check failed",
+  [UpdateStatus.Migrated]:      "Project moved to a new repo",
+} as const satisfies Record<UpdateStatus, string>;
+
+/** Strict parse — throws on unknown name (no silent fallback). */
+export function parseUpdateStatus(name: string): UpdateStatus {
+  const entry = Object.entries(UpdateStatusName).find(([, n]) => n === name);
+  if (!entry) {
+    throw new Error(`Unknown UpdateStatus: ${JSON.stringify(name)}`);
+  }
+  return Number(entry[0]) as UpdateStatus;
+}
+```
+
+### 6.2 Go reference (typed alias, same numeric pairing)
+
+```go
+// internal/update/update_status_enum.go
+// Source-of-truth pairing: spec/14-update/24-update-check-mechanism/04-database-schema.md §2
+
+package update
+
+import "fmt"
+
+type UpdateStatus uint8
+
+const (
+    UpdateStatusUpToDate      UpdateStatus = 1
+    UpdateStatusUpdateFound   UpdateStatus = 2
+    UpdateStatusUpdateApplied UpdateStatus = 3
+    UpdateStatusFailed        UpdateStatus = 4
+    UpdateStatusMigrated      UpdateStatus = 5
+)
+
+func (s UpdateStatus) Name() string {
+    switch s {
+    case UpdateStatusUpToDate:      return "UpToDate"
+    case UpdateStatusUpdateFound:   return "UpdateFound"
+    case UpdateStatusUpdateApplied: return "UpdateApplied"
+    case UpdateStatusFailed:        return "Failed"
+    case UpdateStatusMigrated:      return "Migrated"
+    default: return fmt.Sprintf("UpdateStatus(%d)", s)
+    }
+}
+
+func (s UpdateStatus) Label() string {
+    switch s {
+    case UpdateStatusUpToDate:      return "Up to date"
+    case UpdateStatusUpdateFound:   return "Update available"
+    case UpdateStatusUpdateApplied: return "Update applied"
+    case UpdateStatusFailed:        return "Last check failed"
+    case UpdateStatusMigrated:      return "Project moved to a new repo"
+    default: return ""
+    }
+}
+
+// ParseUpdateStatus — strict, no silent fallback.
+func ParseUpdateStatus(name string) (UpdateStatus, error) {
+    switch name {
+    case "UpToDate":      return UpdateStatusUpToDate,      nil
+    case "UpdateFound":   return UpdateStatusUpdateFound,   nil
+    case "UpdateApplied": return UpdateStatusUpdateApplied, nil
+    case "Failed":        return UpdateStatusFailed,        nil
+    case "Migrated":      return UpdateStatusMigrated,      nil
+    default:
+        return 0, fmt.Errorf("unknown UpdateStatus: %q", name)
+    }
+}
+```
+
+---
+
+## 7. Wire-Format JSON Schema 2020-12 (`UpdateChecker` row → JSON)
+
+> Used by `09-json-fallback-store.md` AND by the optional `--json` output
+> of the `update-check` CLI command. Field set is a 1-to-1 projection of
+> the SQL columns in §1, with PascalCase keys preserved.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specs.local/14-update/24-update-check-mechanism/update-checker.schema.json",
+  "title": "UpdateCheckerRow",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "CurrentVersion",
+    "HasUpdate",
+    "UpdateStatusId",
+    "CheckIntervalHours"
+  ],
+  "properties": {
+    "UpdateCheckerId":    { "type": "integer", "minimum": 1 },
+    "CurrentVersion":     { "type": "string",  "pattern": "^V\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$" },
+    "LatestVersion":      { "type": ["string", "null"], "pattern": "^V\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$" },
+    "HasUpdate":          { "type": "boolean" },
+    "UpdateStatusId":     { "type": "integer", "enum": [1, 2, 3, 4, 5] },
+    "OwnerKind":          { "type": ["string", "null"], "enum": ["User", "Organization", null] },
+    "Owner":              { "type": ["string", "null"] },
+    "CurrentRepo":        { "type": ["string", "null"], "pattern": "^[A-Za-z0-9._-]+(?:-v\\d+)?$" },
+    "LatestReleaseUrl":   { "type": ["string", "null"], "format": "uri" },
+    "WindowsInstallUrl":  { "type": ["string", "null"], "format": "uri" },
+    "WindowsInstallCmd":  { "type": ["string", "null"] },
+    "UnixInstallUrl":     { "type": ["string", "null"], "format": "uri" },
+    "UnixInstallCmd":     { "type": ["string", "null"] },
+    "Checksum":           { "type": ["string", "null"], "pattern": "^[Ss]ha256:[0-9a-fA-F]{64}$" },
+    "PublishedAt":        { "type": ["string", "null"], "format": "date-time" },
+    "MinSupportedFrom":   { "type": ["string", "null"], "pattern": "^V\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$" },
+    "NewRepoUrl":         { "type": ["string", "null"], "format": "uri" },
+    "Notes":              { "type": ["string", "null"] },
+    "RawJson":            { "type": ["string", "null"] },
+    "LastCheckedAt":      { "type": ["string", "null"], "format": "date-time" },
+    "NextCheckDueAt":     { "type": ["string", "null"], "format": "date-time" },
+    "CheckIntervalHours": { "type": "integer", "minimum": 1, "maximum": 168, "default": 12 },
+    "ErrorMessage":       { "type": ["string", "null"] },
+    "ErrorAt":            { "type": ["string", "null"], "format": "date-time" },
+    "Description":        { "type": ["string", "null"] },
+    "CreatedAt":          { "type": "string", "format": "date-time" },
+    "UpdatedAt":          { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if":   { "properties": { "HasUpdate": { "const": true } } },
+      "then": { "required":   ["LatestVersion"] }
+    },
+    {
+      "if":   { "properties": { "UpdateStatusId": { "const": 4 } } },
+      "then": { "required":   ["ErrorMessage", "ErrorAt"] }
+    }
+  ]
+}
+```
+
+---
+
+## 8. Acceptance — Code/Schema/Seed Conformance
+
+**Given** a contributor adds, removes, or renames a row in the §2
+`UpdateStatus` seed table,  
+**When** CI runs the conformance check (`linter-scripts/check-update-status-mirror.py`),  
+**Then** the test MUST pass only if (a) `UpdateStatusEnum` cases in
+TypeScript and Go each contain exactly the same `(id, name, label)`
+triples, (b) the JSON-Schema `UpdateStatusId.enum` array matches the
+seed-row id set, and (c) `parseUpdateStatus` / `ParseUpdateStatus`
+round-trip every name without silent fallback.
+
+---
+
+*Database Schema — v1.1.0 — 2026-04-26*
