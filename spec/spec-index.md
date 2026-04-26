@@ -223,7 +223,7 @@
 | `spec/02-coding-guidelines/05-rust/04-memory-safety.md` | Rust Memory Safety | 3.2.0 |
 | `spec/02-coding-guidelines/05-rust/05-testing-standards.md` | Rust Testing Standards | 3.2.0 |
 | `spec/02-coding-guidelines/05-rust/06-ffi-platform.md` | Rust FFI & Platform Abstraction | 3.2.0 |
-| `spec/02-coding-guidelines/05-rust/97-acceptance-criteria.md` | Rust Coding Standards — Acceptance Criteria | 3.2.0 |
+| `spec/02-coding-guidelines/05-rust/97-acceptance-criteria.md` | Rust Coding Standards — Acceptance Criteria | 4.0.0 |
 | `spec/02-coding-guidelines/05-rust/98-changelog.md` | Changelog: Rust Standards | 3.2.0 |
 | `spec/02-coding-guidelines/05-rust/99-consistency-report.md` | Consistency Report — Rust Coding Standards | 3.2.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/00-overview.md` | AI Optimization | 3.2.0 |

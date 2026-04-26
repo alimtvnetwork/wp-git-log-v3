@@ -294,33 +294,38 @@ Third language child to inherit AC-CL-*. Rewrote §97 from 7 table-row criteria 
 
 ---
 
-## Next-pointer
-**Phase 16k complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT).
+## ✅ Phase 16l — §02/05-rust §97 deepen (DONE, v4.0.0)
 
-**9 remaining §97 files with 0 GWT ACs** (post-16k), priority order:
+Fourth language child to inherit AC-CL-*. Rewrote §97 from 18 stub checkboxes (AC-01..AC-06) to **20 module-specific GWT ACs** (AC-RS-01..AC-RS-20) covering: explicit AC-CL-* inheritance with the SOLE documented AC-CL-12 file-naming waiver (snake_case `.rs` files per Rust convention) (AC-RS-01); Rust 1.75+ + edition pinned + `rust-toolchain.toml` (AC-RS-02); `thiserror` for domain errors / `anyhow` with `.context()` for application + `Box<dyn Error>` FORBIDDEN (AC-RS-03); `panic!`/`unwrap`/`expect`/`todo!`/`unreachable!`/`unimplemented!` FORBIDDEN outside main/tests with clippy deny lints (AC-RS-04); `// SAFETY:` comment + `# Safety` rustdoc on every `unsafe` + `#![forbid(unsafe_code)]` for non-FFI crates (AC-RS-05); Tokio sole runtime, mixing async-std/smol FORBIDDEN (AC-RS-06); Rust API guidelines naming (AC-RS-07); `#[serde(rename_all = "PascalCase")]` per AC-CL-09 (AC-RS-08); bounded `mpsc::channel(N)` only (AC-RS-09); cancellation-safe `tokio::select!` (AC-RS-10); borrow > Arc > clone, `Rc<T>` FORBIDDEN with Tokio (AC-RS-11); AAA tests + trait-mocked OS deps + integration tests in `tests/` (AC-RS-12); `PlatformApi` per-OS modules (AC-RS-13); FFI safety docs + `#[repr(C)]` + null checks (AC-RS-14); `cargo clippy --workspace --all-targets --all-features -- -D warnings` + `clippy::pedantic` + `cargo deny` + `cargo audit` (AC-RS-15); `Cargo.lock` checked in for binaries + caret-with-patch + git deps SHA-pinned (AC-RS-16); `tracing` structured logging + `println!`/`eprintln!`/`dbg!` FORBIDDEN (AC-RS-17); `#![deny(missing_docs)]` + `# Panics`/`# Errors`/`# Safety` rustdoc + doctest compile (AC-RS-18); lifetime elision idiom (AC-RS-19); self-application doctest harness (AC-RS-20). Legacy 18 stubs preserved as AC-RS-LEGACY-* at end. Lockstep: §98 v3.2.0 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
+## Next-pointer
+**Phase 16l complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT).
+
+**8 remaining §97 files with 0 GWT ACs** (post-16l), priority order:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/05-rust/` | 0 | **P1** | Inherits §02/01 — fourth language child |
-| 2 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
-| 3 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
-| 4 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
-| 5 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 6 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 7 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 8 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 9 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `02-coding-guidelines/07-csharp/` | 0 | **P1** | Fifth language child |
+| 2 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
+| 3 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
+| 4 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 5 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 6 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 7 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 8 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
 🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04.
 
 Remaining work:
-- ⏳ **Phase 16l** — Deepen `02-coding-guidelines/05-rust/97` (P1 — fourth language child).
 - ⏳ **Phase 16m** — Deepen `02-coding-guidelines/07-csharp/97` (P1 — fifth language child).
 - ⏳ **Phase 16n** — Deepen `02-coding-guidelines/06-ai-optimization/97` (P1).
+- ⏳ **Phase 16o** — Deepen `02-coding-guidelines/01-cross-language/16-static-analysis/97` (P2 deep nested).
 - ⏳ **Phase 16p** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16q** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user).
 - 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user).
 
-On next `next`: take **Phase 16l (`02-coding-guidelines/05-rust/97` deepen)** — P1 fourth language child after TS/Go/PHP. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16m (`02-coding-guidelines/07-csharp/97` deepen)** — P1 fifth and final mainstream language child. Unless you redirect or want to unblock B1/B2 first.
 
