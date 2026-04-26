@@ -367,18 +367,26 @@ def apply_gates(scores: dict, metrics: dict) -> tuple[dict, list[dict]]:
 def deterministic_score(folder: Path, metrics: dict) -> dict:
     rel = MOD_REL[folder]
     m = metrics
+    is_tracker = m.get("kind") == "tracker"
 
     # ---- per-dimension rubric (all bounded 0-100) ----
-    # Implementability: rewards inlined contracts; penalises waffle and stub
-    impl = 30
-    if m["has_sql_ddl"]:      impl += 20
-    if m["has_json_schema"]:  impl += 15
-    if m["has_ts_enums"]:     impl += 10
-    if m["has_yaml_openapi"]: impl += 10
-    if m["has_mermaid"]:      impl += 5
-    if m["code_blocks_total"] >= 5: impl += 10
-    if m["overview_chars"] < 500:   impl -= 20
-    if m["waffle_per_kchar"] > 5:   impl -= 10
+    # Implementability: rewards inlined contracts; penalises waffle and stub.
+    # Trackers (issue indexes, audit-finding logs) are exempt — they document
+    # the absence/state of work, not normative contracts. Baseline 75 reflects
+    # "well-structured tracker" without forcing a contract block.
+    if is_tracker:
+        impl = 75
+        if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
+    else:
+        impl = 30
+        if m["has_sql_ddl"]:      impl += 20
+        if m["has_json_schema"]:  impl += 15
+        if m["has_ts_enums"]:     impl += 10
+        if m["has_yaml_openapi"]: impl += 10
+        if m["has_mermaid"]:      impl += 5
+        if m["code_blocks_total"] >= 5: impl += 10
+        if m["overview_chars"] < 500:   impl -= 20
+        if m["waffle_per_kchar"] > 5:   impl -= 10
     impl = max(0, min(100, impl))
 
     # Completeness: AC count + overview size + child coverage
