@@ -145,10 +145,20 @@ Second slice of the §07 structural conversion. AC IDs preserved:
 
 ---
 
-## ⏳ Phase 15c..15e — Convert remaining §07 §97 sections to GWT (PENDING)
+## ✅ Phase 15c — Convert §07 §97 Motion & Transitions to GWT (DONE, v3.5.0)
+
+Third slice of the §07 structural conversion. AC IDs preserved:
+- §07 §97 banner v3.4.0 → v3.5.0; AC count unchanged at 34 (verified).
+- **5 ACs converted (AC-012..AC-016 Motion & Transitions)** from one-row table format (~70 chars each) to full GWT subsections (1703-3816 chars each, **24-54× depth**) with concrete contracts + cross-refs to `06-motion-transitions.md`, `09-button-system.md`, `tailwind.config.ts`, `src/index.css`, `package.json` dependency audit, WCAG 2.1 §2.3.3, MDN `prefers-reduced-motion`.
+- AC-012 ≤300ms hover (fixed timing vocabulary {150/200/300ms}, `cubic-bezier(0.4,0,0.2,1)` mandate, symmetric in/out); AC-013 no-JS-animation (exhaustive forbidden list — framer-motion/gsap/lottie/etc — narrow exception allowlist); AC-014 `prefers-reduced-motion` (exact global override with `0.01ms` not `0`, per-component opt-in pattern, scroll/parallax/auto-play disable); AC-015 link underline sweep (`::after` pseudo-element with `right:0` anchor, `position: relative` parent, no-`text-decoration` mixing, focus-visible instant); AC-016 CTA slide text (two-stacked-spans `overflow:hidden` with `translateY`, vertical-only direction, `aria-hidden` on duplicate).
+- Format note bumped to reflect 16/34 ACs now GWT.
+- Lockstep §98 v1.2.0 → v1.3.0 + §99 v3.4.0 → v3.5.0 + spec-index updated.
+
+---
+
+## ⏳ Phase 15d..15e — Convert remaining §07 §97 sections to GWT (PENDING)
 
 Same surgery, section by section:
-- **15c — Motion & Transitions (AC-012..AC-016)** — 5 ACs covering 300ms hover cap, no-JS-animation rule, `prefers-reduced-motion`, link underline sweep, CTA slide animation.
 - **15d — Code Blocks (AC-017..AC-025)** — 9 ACs covering dark-bg-in-both-themes, language badge, font-size controls, line pin/select, fullscreen, copy button, tree prefixes.
 - **15e — Navigation + Page Consistency (AC-026..AC-034)** — 9 ACs covering header hover, menu underline, dropdown tint, sidebar mobile collapse, Ctrl+B toggle, section patterns, font discipline, state language, responsive breakpoints.
 
@@ -165,4 +175,4 @@ Same surgery, section by section:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 15c (Motion & Transitions section).** All numbered phases 0–14 complete; Phases 15a + 15b done (11 of 34 §07 ACs now GWT). **Unblocked candidates:** Phase 15c → 15d → 15e (continuing the §07 §97 GWT conversion). Phase B1 remains blocked on user. On next `next`, take **Phase 15c** unless the user redirects.
+**Top pending = Phase 15d (Code Blocks section, 9 ACs — biggest remaining batch).** All numbered phases 0–14 complete; Phases 15a + 15b + 15c done (16 of 34 §07 ACs now GWT). **Unblocked candidates:** Phase 15d → 15e (continuing the §07 §97 GWT conversion). Phase B1 remains blocked on user. On next `next`, take **Phase 15d** unless the user redirects.
