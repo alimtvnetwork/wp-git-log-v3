@@ -156,11 +156,21 @@ Third slice of the §07 structural conversion. AC IDs preserved:
 
 ---
 
-## ⏳ Phase 15d..15e — Convert remaining §07 §97 sections to GWT (PENDING)
+## ✅ Phase 15d — Convert §07 §97 Code Blocks to GWT (DONE, v3.6.0)
 
-Same surgery, section by section:
-- **15d — Code Blocks (AC-017..AC-025)** — 9 ACs covering dark-bg-in-both-themes, language badge, font-size controls, line pin/select, fullscreen, copy button, tree prefixes.
-- **15e — Navigation + Page Consistency (AC-026..AC-034)** — 9 ACs covering header hover, menu underline, dropdown tint, sidebar mobile collapse, Ctrl+B toggle, section patterns, font discipline, state language, responsive breakpoints.
+Fourth slice of the §07 structural conversion. AC IDs preserved:
+- §07 §97 banner v3.5.0 → v3.6.0; AC count unchanged at 34 (verified).
+- **9 ACs converted (AC-017..AC-025 Code Blocks)** from one-row table format (~80 chars each) to full GWT subsections (2100-4200 chars each, **26-52× depth**) with concrete contracts + cross-refs to `07-code-blocks.md`, `02-theme-variable-architecture.md`, `src/index.css` (lines 264–605), `src/components/markdown/codeBlockBuilder.ts`, AC-001/AC-012/AC-014.
+- AC-017 fixed-dark-bg contract (static HSL, exception to token-only rule); AC-018 language badge (7px dot + 10-language color mapping, `--lang-accent` injection); AC-019 font-size controls (12-32px bounds, `localStorage` persistence, 150ms animate); AC-020 line pin (React state toggle, 3 visual markers, hover-vs-pin precedence); AC-021 shift-click range (bidirectional, idempotent, selection bar trigger); AC-022 fullscreen (2rem inset, backdrop overlay, `z-index` stack, scale animation); AC-023 Escape exit (immediate, restore all state, cleanup listeners, `beforeunload` safeguard); AC-024 copy button (Clipboard API + fallback, 2s success state, `aria-live`); AC-025 tree prefixes (📁/📄 emoji, guide characters, "STRUCTURE" label).
+- Format note bumped to reflect 25/34 ACs now GWT.
+- Lockstep §98 v1.3.0 → v1.4.0 + §99 v3.5.0 → v3.6.0 + spec-index updated.
+
+---
+
+## ⏳ Phase 15e — Convert §07 §97 Navigation + Page Consistency to GWT (PENDING)
+
+Final slice of the §07 structural conversion:
+- **15e — Navigation + Page Consistency (AC-026..AC-034)** — 9 ACs covering header icon hover scale, menu gradient underline sweep, dropdown primary-tinted hover, sidebar mobile collapse, Ctrl+B toggle, section pattern templates, font discipline, state language, responsive breakpoints.
 
 ---
 
@@ -175,4 +185,4 @@ Same surgery, section by section:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 15d (Code Blocks section, 9 ACs — biggest remaining batch).** All numbered phases 0–14 complete; Phases 15a + 15b + 15c done (16 of 34 §07 ACs now GWT). **Unblocked candidates:** Phase 15d → 15e (continuing the §07 §97 GWT conversion). Phase B1 remains blocked on user. On next `next`, take **Phase 15d** unless the user redirects.
+**Top pending = Phase 15e (Navigation + Page Consistency section, 9 ACs — final batch).** All numbered phases 0–15d complete; 25 of 34 §07 ACs now GWT. **Unblocked candidates:** Phase 15e (final §07 GWT conversion). Phase B1 remains blocked on user. On next `next`, take **Phase 15e** unless the user redirects.
