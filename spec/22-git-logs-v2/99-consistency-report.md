@@ -136,6 +136,27 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 | `98-changelog.md` | Added v3.8.1 row. |
 | `99-consistency-report.md` | Tombstoned `OwnerType` seed-coverage row; flipped Q1 status in v3.8.0 audit table; this audit table added. Banner v3.8.0 → v3.8.1. |
 
+## v3.8.2 Audit — Q2 PipelineAction rename + SystemEvent lockstep
+
+| File | Change |
+|------|--------|
+| `18-schema.sql` | `CREATE TABLE ActionType` → `PipelineActionType`; `CREATE TABLE Action` → `PipelineAction` (PK rename, FK rename, added `RepoVersionId NOT NULL` + `ProfileId` FK + 2 indexes); `History.ActionTypeId` → `PipelineActionTypeId`; **NEW** `CREATE TABLE SystemEventType` lookup; **NEW** `CREATE TABLE SystemEvent` with loose-polymorphic Target + 3 indexes; `INSERT INTO ActionType` → `INSERT INTO PipelineActionType` (4 rows); **NEW** `INSERT INTO SystemEventType` (16 rows); `ConfigKv.PluginVersion` 2.8.8 → 2.8.9; `MigrationState` markers 2.8.8 + 2.8.9 appended; banner v2.8.8 → v2.8.9. |
+| `03-admin-ui.md` | History menu item gains "Activity tab" note for SystemEvent; Action menu item reworded (UI label retained, backing table renamed); History columns relabel `ActionType` → `PipelineActionType`. Banner v2.1.0 → v2.2.0. |
+| `01-glossary-and-enums.md` | Banner v3.8.0 → v3.8.1 (entries already correct from v3.8.0 doc-only pass). |
+| `97-acceptance-criteria.md` | Added AC-56 (no `Action`/`ActionType` tables), AC-57 (`SystemEvent` columns + indexes), AC-58 (16 `SystemEventType` seeds in canonical order), AC-59 (Activity tab + Action menu wording). Banner v3.8.1 → v3.8.2. |
+| `98-changelog.md` | Added v3.8.2 row. |
+| `99-consistency-report.md` | Flipped Q2 status in v3.8.0 audit table; this audit table added; seed-coverage table updated for new lookup counts. Banner v3.8.1 → v3.8.2. |
+
+**SQLite validation (in-memory `executescript` of `18-schema.sql`):**
+- `PipelineActionType` = 4 rows (Append/Fixed/Clear/ClearAll) ✅
+- `SystemEventType` = 16 rows ✅
+- `AuditActionType` = 25 rows (unchanged) ✅
+- `Permission` = 17, `LogSeverity` = 6, `Acceptance` = 3, `AppStatus` = 3, `AppLinkType` = 2, `UserStatus` = 3, `Provider` = 2 ✅
+- `ConfigKv` = 10 defaults (`PluginVersion='2.8.9'`) ✅
+- `MigrationState` = 8 markers (2.0.0/2.5.0/2.6.0/2.7.0/2.8.0/2.8.7/2.8.8/2.8.9) ✅
+- Legacy tables `Action`/`ActionType`/`OwnerType` confirmed **absent**. ✅
+- New tables `PipelineAction`/`PipelineActionType`/`SystemEvent`/`SystemEventType` confirmed **present**. ✅
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. new §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-53; v3.8.0 domain-model overhaul landed with full lockstep on overview/schema/glossary/§08/AC/changelog/diagrams. Only blockers: (a) §07 user decision (App identity), (b) §18 DDL rewrite queued.
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-59; v3.8.2 Q2 PipelineAction rename + SystemEvent fully landed in §18 + §03 + §01 + §97 with full lockstep on changelog/consistency. Only blockers: (a) §07 user decision (App identity), (b) Q3 split-DB DDL queued (LogEntry/ErrorLogEntry → ShaRegistry + per-SHA files; §15 `GL-SHA-DB-*` codes; §22/§23/§29 lifecycle).
