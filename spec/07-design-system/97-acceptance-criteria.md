@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-26 (Phase 15a: Theme & Variables section converted from table-row format to full GWT subsections — AC-001..AC-006 deepened with concrete contracts + cross-refs. AC IDs unchanged. Sections AC-007..AC-034 still in table format pending Phase 15b..15e.)
+**Version:** 3.4.0  
+**Updated:** 2026-04-26 (Phase 15b: Typography section AC-007..AC-011 converted from table format to full GWT subsections — Ubuntu/Poppins/mono font-loading contracts, gradient text effect cross-browser rules, heading-discipline WCAG semantics. AC IDs unchanged at AC-001..AC-034. 11 of 34 ACs now GWT; 23 await Phase 15c..15e.)
 
 ---
 
@@ -9,7 +9,7 @@
 
 Testable criteria for validating design system compliance across all components and pages.
 
-> **Format note (Phase 15a in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006)** is fully converted to GWT subsections. **Typography, Motion & Transitions, Code Blocks, Navigation, Page Consistency** remain in table format pending Phase 15b..15e. AC IDs are stable across the conversion — `AC-001` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
+> **Format note (Phase 15b in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006) and Typography (AC-007..AC-011)** are fully converted to GWT subsections (11 of 34 ACs total). **Motion & Transitions, Code Blocks, Navigation, Page Consistency** remain in table format pending Phase 15c..15e. AC IDs are stable across the conversion — `AC-007` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
 
 ---
 
