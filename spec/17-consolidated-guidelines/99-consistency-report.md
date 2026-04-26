@@ -1,6 +1,6 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 3.6.0  
+**Version:** 4.0.0
 **Updated:** 2026-04-26
 
 > **v3.6.0 update:** Phase 14 deepened §97 ACs AC-01..AC-04 from ~209-260 chars to 1941-2254 chars each (8–10× depth) — full GWT + concrete cross-refs to linter scripts and slot-immutability precedent. AC count unchanged at 5. No §17 sibling files added or removed; no contract changes — purely AC-body deepening per `mem://specs/full-tree-audit-v4.md` open backlog. Banner v3.5.0 → v3.6.0.
