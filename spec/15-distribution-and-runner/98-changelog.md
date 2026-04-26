@@ -1,7 +1,7 @@
 # Changelog — Distribution and Runner
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 2.0.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/15-distribution-and-runner/`
 
 ---
@@ -16,6 +16,14 @@
 ---
 
 ## Releases
+
+### 2.0.0 — 2026-04-26
+- **Phase 16d-i — §97 Depth Pass.** Per `mem://specs/full-tree-audit-v4.md` open backlog item ("deepen scaffolded AC content for high-traffic modules"), expanded `97-acceptance-criteria.md` from 5 generic scaffold ACs to **20 module-specific GWT ACs** (AC-01..AC-05 retained as universal scaffold floor; AC-06..AC-20 added). Each new AC averages 1500-2200 chars with explicit `**Given** / **When** / **Then**` triplet and a `**Verifies:**` cross-ref line.
+- **Doc-only — no schema bump, no DDL change, no installer/runner code changes.** This is a contract clarification, not a behavior change.
+- **§97 acceptance-criteria changes (AC-06..AC-20):** (a) **AC-06 Installer one-liner shape** — Bash + PowerShell parity, idempotent, dependency pre-check, exit code mapping per §13 (`1`/`2`/`3`/`4`), 60s SLO; (b) **AC-07 Default install layout** — exactly 4 folders (`spec`, `linters`, `linter-scripts`, `linters-cicd`), pinned to release SHA not main HEAD, additive (never destructive), `--force` required to overwrite; (c) **AC-08 install-config.json schema** — strict JSON, default folder list locked, single-component paths only, lockstep with §00 table enforced by CI; (d) **AC-09 Bash+PowerShell parity** — byte-identical output modulo line endings, shared flag surface (`--dest`, `--folders`, `--ref`, `--force`, `--dry-run`, `--verbose`, `--help`), partial-parity forbidden; (e) **AC-10 Runner sub-command dispatch** — exact 4-row contract from §00 (`<no-args>` / `lint` / `slides` / `help`), unknown sub-cmd exits `2`, post-cmd flag forwarding, pre-cmd flags reserved; (f) **AC-11 Back-compat for legacy no-args** — identical observable behavior preserved, no deprecation banners on no-args path, removal requires major bump + 2 minor deprecation cycles; (g) **AC-12 Release artifact set** — all 8 items required (linters zip, slides zip, install.sh, install.ps1, linters-install.sh, install-config.json, checksums.txt, plus codeload-sourced tree), filename patterns exact, missing any blocks release; (h) **AC-13 checksums.txt format** — `sha256sum`-compatible (two spaces), every asset checksummed, installers MUST verify before extract (supply-chain protection), mismatch = exit `4`; (i) **AC-14 linters-install.sh rename** — uploaded with rename to avoid colliding with top-level install.sh, internal self-references must reflect new name; (j) **AC-15 Install destination defaults** — `.` default, `mkdir -p` semantics, EACCES detected before download, refuses install into source repo (symlink-resolved); (k) **AC-16 Release pipeline** — tag-driven only, pinned to tag's SHA not branch HEAD, atomic publish (draft until checksum-verified then promoted), no auto-publish to npm/PyPI; (l) **AC-17 slides browser-open** — OS-appropriate opener (`xdg-open`/`open`/`Start-Process`), `--no-open` skip, attached process for `Ctrl-C`, exit `0` on `SIGINT` (not `130`); (m) **AC-18 --ref reproducible install** — accepts tag or full SHA only (branches forbidden — defeat reproducibility), codeload override, exit `3` on missing ref; (n) **AC-19 Cross-references intact** — links to §12/§13/§16 + spec-slides resolve, content stays consistent with each, lockstep maintenance required; (o) **AC-20 Module-specific files versioned** — each sibling has H1+banner, content elaborates §00 (no contradiction), `**Verifies:**` MUST cite both §00 and the relevant sibling, §00 wins on conflict.
+- **Banner v1.0.0 → v2.0.0** (major bump per the "depth materially better" rule — 4× AC count + each new AC adds explicit verification cross-refs that change reviewer posture).
+- **Lockstep:** §99 banner v1.0.0 → v2.0.0; spec-index entry for §97 + §98 + §99 bumped to 2.0.0; phased-roadmap Phase 16d-i marked done.
+- **Scope discipline (Phase 16d-i ONLY):** §00 / §01 / §02 / §03 / §04 untouched (the ACs cite existing normative content from those sections, NOT new contracts). Sibling contract files remain at v1.0.0 — they were never the target.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
