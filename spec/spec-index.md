@@ -801,7 +801,7 @@
 | `spec/22-git-logs-v2/16-test-plan.md` | Test Plan (v2) — SUPERSEDED | 2.7.0 |
 | `spec/22-git-logs-v2/19-permission-matrix.md` | Permission Matrix (v2) | 2.3.0 |
 | `spec/22-git-logs-v2/20-observability.md` | Observability (v2) | 2.3.0 |
-| `spec/22-git-logs-v2/21-i18n.md` | Internationalization (i18n) (v2) | 2.3.0 |
+
 | `spec/22-git-logs-v2/22-retention-and-pruning.md` | Retention & Pruning (v2) | 2.5.0 |
 | `spec/22-git-logs-v2/23-backup-restore.md` | Backup & Restore (v2) | 2.5.0 |
 | `spec/22-git-logs-v2/24-multisite.md` | Multisite Behavior (v2) | 2.5.0 |

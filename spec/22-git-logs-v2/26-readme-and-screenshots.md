@@ -165,4 +165,4 @@ make release
   → git-logs-2.0.0.zip
 ```
 
-CI gate: `wp i18n make-pot` diff (§21) + `wp plugin check` (WordPress.org plugin checker) must both pass before tagging.
+CI gate: `wp plugin check` (WordPress.org plugin checker) must pass before tagging.

@@ -30,7 +30,7 @@
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |
 | 20-observability.md | ✅ |
-| 21-i18n.md | ✅ |
+| ~~21-i18n.md~~ | 🗑️ removed v3.7.8 — slot retired (i18n out of scope for v2; see audit row below) |
 | 22-retention-and-pruning.md | ✅ |
 | 23-backup-restore.md | ✅ |
 | 24-multisite.md | ✅ |
