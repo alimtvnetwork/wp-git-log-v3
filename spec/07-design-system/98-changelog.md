@@ -1,6 +1,6 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 1.4.0  
+**Version:** 1.5.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/07-design-system/`
 
@@ -16,6 +16,20 @@
 ---
 
 ## Releases
+
+### 1.5.0 — 2026-04-26
+- **Phase 15e — Convert §97 Navigation + Page Consistency sections from table-row to GWT format. §07 §97 conversion COMPLETE.** Final slice of the §07 structural conversion (Phases 15a + 15b + 15c + 15d prior). AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 9 ACs in the **Navigation (AC-026..AC-030) + Page Consistency (AC-031..AC-034)** sections converted from one-row table format (~70 chars each) to full Given/When/Then subsections (1900-3500 chars each, **27-50× depth**) with concrete contracts + cross-refs to `08-header-navigation.md`, `10-sidebar-system.md`, `11-section-patterns.md`, `12-page-creation-rules.md`, `tailwind.config.ts`, `index.html`, `src/components/ui/sidebar.tsx`, AC-001/AC-007/AC-008/AC-009/AC-010/AC-012/AC-014/AC-026/AC-029, WCAG 2.1 §1.3.1/§2.4.7/§2.5.5.
+- **AC-026** (header icon scale) — `scale(1.05)` on hover + `scale(0.95)` on active for tactile feedback, no-bounce/no-spring rule, color + bg combo, reduced-motion collapses scale only.
+- **AC-027** (menu gradient underline) — `::after` pseudo-element with `transform-origin` flip from `bottom right` (resting) to `bottom left` (hover), heading-gradient tokens (NOT primary), focus-visible instant, distinct from prose link sweep (AC-015).
+- **AC-028** (dropdown hover) — `hsl(var(--primary) / 0.08)` subtle tint + primary text color, 150ms on both bg+color, contained-vs-linear distinction from nav items, keyboard focus parity.
+- **AC-029** (mobile Sheet) — slides from left at 200ms, backdrop `hsl(0 0% 0% / 0.5)` no-blur for perf, hamburger trigger md:hidden, auto-close on file-select/escape/outside-click/breakpoint-grow, shadcn Sheet primitive mandate.
+- **AC-030** (Ctrl+B toggle) — global window keydown listener, `Ctrl||Cmd + B`, `preventDefault` to suppress browser bookmarks, input-guard (skip when typing in input/textarea/contenteditable), 200ms width animation, localStorage persistence, mobile opens Sheet instead.
+- **AC-031** (section pattern composition) — `Header → [Hero] → N × [Section Pattern] → [CTA] → [Footer]` flow, no ad-hoc section layouts (must add to `11-section-patterns.md` first), shared header/footer components, `<main>` landmark, fixed py-* rhythm.
+- **AC-032** (font registry enforcement) — only Ubuntu/Poppins/Ubuntu Mono/JetBrains Mono allowed, no per-page font loading, no generic fallbacks (serif/cursive), no inline `style="font-family"`, spec-first registration gate.
+- **AC-033** (state language) — REQUIRED `:hover` + `:active` + `:focus-visible` + `:disabled` on every interactive element, `--ring` token for focus indicator (NEVER `--primary`), 2px minimum thickness, no-hover-only rule per Rule 5, `aria-disabled` for SR.
+- **AC-034** (responsive breakpoints) — md/lg Tailwind breakpoints (768px/1024px), mobile-first utility ordering, single-column on mobile + Sheet sidebar + 44px touch targets per WCAG §2.5.5, 2-col tablet + icon-only header, 3-col desktop + full sidebar, no horizontal scroll, responsive images via `srcset` or `max-width: 100%`.
+- Updated top-of-file Format note to reflect **34/34 ACs now GWT — conversion COMPLETE**.
+- Banner v1.4.0 → v1.5.0; lockstep §97 v3.6.0 → v3.7.0 + §99 v3.6.0 → v3.7.0 + spec-index updated.
 
 ### 1.4.0 — 2026-04-26
 - **Phase 15d — Convert §97 Code Blocks section from table-row to GWT format.** Continuation of the §07 structural conversion (Phases 15a + 15b + 15c prior). AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 9 ACs in the **Code Blocks** section converted from one-row table format (~80 chars each) to full Given/When/Then subsections (2100-4200 chars each, **26-52× depth**) with concrete contracts + cross-refs to `07-code-blocks.md`, `02-theme-variable-architecture.md`, `src/index.css` (lines 264–605), `src/components/markdown/codeBlockBuilder.ts`, AC-001/AC-012/AC-014.

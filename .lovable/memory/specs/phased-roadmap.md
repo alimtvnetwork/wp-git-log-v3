@@ -167,10 +167,14 @@ Fourth slice of the §07 structural conversion. AC IDs preserved:
 
 ---
 
-## ⏳ Phase 15e — Convert §07 §97 Navigation + Page Consistency to GWT (PENDING)
+## ✅ Phase 15e — Convert §07 §97 Navigation + Page Consistency to GWT (DONE, v3.7.0) — §07 §97 CONVERSION COMPLETE
 
-Final slice of the §07 structural conversion:
-- **15e — Navigation + Page Consistency (AC-026..AC-034)** — 9 ACs covering header icon hover scale, menu gradient underline sweep, dropdown primary-tinted hover, sidebar mobile collapse, Ctrl+B toggle, section pattern templates, font discipline, state language, responsive breakpoints.
+Final slice of the §07 structural conversion. AC IDs preserved:
+- §07 §97 banner v3.6.0 → v3.7.0; AC count unchanged at 34 (verified: AC-001..AC-034 sequential, zero gaps).
+- **9 ACs converted (AC-026..AC-030 Navigation + AC-031..AC-034 Page Consistency)** from one-row table format (~70 chars each) to full GWT subsections (1900-3500 chars each, **27-50× depth**) with concrete contracts + cross-refs to `08-header-navigation.md`, `10-sidebar-system.md`, `11-section-patterns.md`, `12-page-creation-rules.md`, `tailwind.config.ts`, `index.html`, `src/components/ui/sidebar.tsx`, AC-001/AC-007/AC-008/AC-009/AC-010/AC-012/AC-014/AC-026/AC-029, WCAG 2.1 §1.3.1/§2.4.7/§2.5.5.
+- AC-026 header icon scale (1.05 hover + 0.95 active, no-bounce); AC-027 menu gradient underline (`::after` + `transform-origin` flip, heading-gradient tokens); AC-028 dropdown primary-tinted hover (0.08 alpha + primary text); AC-029 mobile Sheet (slide from left at 200ms, backdrop no-blur, auto-close on file-select/escape/outside-click/breakpoint-grow); AC-030 Ctrl+B toggle (global window listener, input-guard, localStorage persistence, mobile opens Sheet); AC-031 section pattern composition (Header → Hero → N×Section → CTA → Footer, no ad-hoc layouts); AC-032 font registry enforcement (only Ubuntu/Poppins/Mono, no per-page loading, no inline `style="font-family"`); AC-033 state language (REQUIRED hover+active+focus-visible+disabled, `--ring` token NEVER `--primary`, 2px min); AC-034 responsive breakpoints (md/lg, mobile-first, 44px touch targets, no horizontal scroll).
+- **Format note bumped to reflect 34/34 ACs now GWT — conversion COMPLETE.** Zero table rows remain in §07 §97.
+- Lockstep §98 v1.4.0 → v1.5.0 + §99 v3.6.0 → v3.7.0 + spec-index updated.
 
 ---
 
@@ -185,4 +189,4 @@ Final slice of the §07 structural conversion:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 15e (Navigation + Page Consistency section, 9 ACs — final batch).** All numbered phases 0–15d complete; 25 of 34 §07 ACs now GWT. **Unblocked candidates:** Phase 15e (final §07 GWT conversion). Phase B1 remains blocked on user. On next `next`, take **Phase 15e** unless the user redirects.
+**ALL §07 §97 GWT phases complete (15a + 15b + 15c + 15d + 15e).** 34 of 34 §07 ACs now GWT, zero table rows remain. **No unblocked phases remain in the active queue.** Phase B1 remains blocked on user. **On next `next`**: consult `mem://specs/full-tree-audit-v4.md` for the next deepening backlog target — likely candidates: §13 generic-cli §97 (40+ table rows), §14 update §97 (extensive scaffolded ACs), or §22 git-logs §97 follow-up depth pass on AC-04/AC-05/AC-25/AC-34 left lean in Phase 13. Or take a different track: tree-health re-audit, or deepen another module flagged in the audit.

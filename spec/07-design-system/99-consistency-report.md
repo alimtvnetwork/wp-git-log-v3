@@ -1,7 +1,9 @@
 # Consistency Report
 
-**Version:** 3.6.0  
+**Version:** 3.7.0  
 **Updated:** 2026-04-26
+
+> **v3.7.0 update (Phase 15e — §07 §97 conversion COMPLETE):** §97 Navigation + Page Consistency sections converted from table-row to GWT — 9 ACs (AC-026..AC-034) deepened from ~70 chars/row to 1900-3500 chars/AC (27-50× depth) with full G/W/T bodies + cross-refs to `08-header-navigation.md`, `10-sidebar-system.md`, `11-section-patterns.md`, `12-page-creation-rules.md`, `tailwind.config.ts`, AC-001/AC-007/AC-008/AC-009/AC-010/AC-012/AC-014/AC-026/AC-029, WCAG 2.1 §1.3.1/§2.4.7/§2.5.5. **34 of 34 ACs now GWT — conversion COMPLETE.** Zero table rows remain in §97. AC IDs unchanged (still AC-001..AC-034 sequential). Banner v3.6.0 → v3.7.0.
 
 > **v3.6.0 update (Phase 15d):** §97 Code Blocks section converted from table-row to GWT — 9 ACs (AC-017..AC-025) deepened from ~80 chars/row to 2100-4200 chars/AC (26-52× depth) with full G/W/T bodies + cross-refs to `07-code-blocks.md`, `02-theme-variable-architecture.md`, `src/index.css` (lines 264–605), `src/components/markdown/codeBlockBuilder.ts`, AC-001/AC-012/AC-014. **25 of 34 ACs now GWT** (Theme & Variables + Typography + Motion & Transitions + Code Blocks); 9 ACs await Phase 15e (Navigation + Page Consistency). AC IDs unchanged (still AC-001..AC-034 sequential). Banner v3.5.0 → v3.6.0.
 

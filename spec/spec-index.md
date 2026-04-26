@@ -503,9 +503,9 @@
 | `spec/07-design-system/11-section-patterns.md` | Section Patterns | 3.2.0 |
 | `spec/07-design-system/12-page-creation-rules.md` | Page Creation Rules | 3.2.0 |
 | `spec/07-design-system/13-wordpress-migration.md` | WordPress Migration Compatibility | 3.2.0 |
-| `spec/07-design-system/97-acceptance-criteria.md` | Acceptance Criteria | 3.6.0 |
-| `spec/07-design-system/98-changelog.md` | Changelog — AI-Adaptable Design System | 1.4.0 |
-| `spec/07-design-system/99-consistency-report.md` | Consistency Report | 3.6.0 |
+| `spec/07-design-system/97-acceptance-criteria.md` | Acceptance Criteria | 3.7.0 |
+| `spec/07-design-system/98-changelog.md` | Changelog — AI-Adaptable Design System | 1.5.0 |
+| `spec/07-design-system/99-consistency-report.md` | Consistency Report | 3.7.0 |
 
 ## 🔬 Research
 
