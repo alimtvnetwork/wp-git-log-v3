@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.2** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.3** — AI-Implementability Edition.
+
+v2.3 (2026-04-26, Phase 25):
+  - Contract definition expanded: typed-language reference blocks
+    (≥3 of go/rust/php/csharp/java/kotlin/swift/python/cpp) and CI workflow
+    YAML (≥5 yaml/yml blocks) now satisfy G-CON-01.
+  - Implementability bonuses: +10 typed-lang, +5 CI workflow.
+  - Rationale: a Go/PHP/CI-CD spec with dozens of reference snippets IS a
+    contract for an AI generating that language; rubric no longer assumes
+    every contract is SQL/JSON/TS.
 
 v2.2 (2026-04-26, Phase 24):
   - Front-matter `kind: index` exempts placement-rule routers (intentionally
