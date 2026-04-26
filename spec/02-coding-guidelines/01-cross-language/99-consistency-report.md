@@ -1,8 +1,10 @@
 # Consistency Report: Cross-Language Guidelines
 
-**Version:** 3.2.0  
-**Generated:** 2026-04-01
+**Version:** 4.0.0
+**Generated:** 2026-04-26
 **Health Score:** 100/100 (A+)
+
+> **v4.0.0 update (Phase 16h):** §97 fully rewritten from 6 stub checkbox criteria to **20 module-specific Given/When/Then ACs** (AC-CL-01..AC-CL-20). New ACs codify the parent contract that every language subfolder under §02 (TS/Go/PHP/Rust/C#) MUST inherit: inheritance + waiver discipline, positive boolean naming, strict typing, casting elimination, cyclomatic complexity + nesting limits, magic-value extraction, PascalCase wire-format keys, language-idiomatic function names with cross-language semantic-verb consistency, DB naming, slug naming, explicit nullability, lazy evaluation, regex hygiene, code mutation avoidance, Result over throwing, `types/` folder convention, test naming, DRY rule-of-three. Legacy AC-01/AC-02 checkboxes preserved as AC-CL-LEGACY-01-A..02-C at end of §97. Module-level tree-health: 100/100 (A+).
 
 ---
 
