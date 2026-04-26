@@ -738,9 +738,9 @@
 | `spec/17-consolidated-guidelines/29-blind-ai-audit-v3.md` | 29 — Blind-AI Implementability Audit — v3.0 (Post Phase 6A/6B/6D) | 3.0.0 |
 | `spec/17-consolidated-guidelines/30-readme-improvement-suggestions.md` | README Improvement Suggestions |  |
 | `spec/17-consolidated-guidelines/31-full-tree-ai-audit-v4.md` | 31 — Full Spec-Tree AI-Implementability Audit (v4.0) | 4.0.0 |
-| `spec/17-consolidated-guidelines/97-acceptance-criteria.md` | Acceptance Criteria — Consolidated Guidelines | 1.1.0 |
-| `spec/17-consolidated-guidelines/98-changelog.md` | Changelog — Consolidated Guidelines | 1.1.0 |
-| `spec/17-consolidated-guidelines/99-consistency-report.md` | Consistency Report — Consolidated Guidelines | 3.6.0 |
+| `spec/17-consolidated-guidelines/97-acceptance-criteria.md` | Acceptance Criteria — Consolidated Guidelines | 2.0.0 |
+| `spec/17-consolidated-guidelines/98-changelog.md` | Changelog — Consolidated Guidelines | 2.0.0 |
+| `spec/17-consolidated-guidelines/99-consistency-report.md` | Consistency Report — Consolidated Guidelines | 4.0.0 |
 
 ## 🔌 WP Plugin How-To
 

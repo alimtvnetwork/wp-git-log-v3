@@ -1,9 +1,9 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 3.6.0  
+**Version:** 4.0.0
 **Updated:** 2026-04-26
 
-> **v3.6.0 update:** Phase 14 deepened §97 ACs AC-01..AC-04 from ~209-260 chars to 1941-2254 chars each (8–10× depth) — full GWT + concrete cross-refs to linter scripts and slot-immutability precedent. AC count unchanged at 5. No §17 sibling files added or removed; no contract changes — purely AC-body deepening per `mem://specs/full-tree-audit-v4.md` open backlog. Banner v3.5.0 → v3.6.0.
+> **v4.0.0 update:** Phase 16d-iii deepened §97 from 5 generic scaffold ACs to **20 module-specific GWT ACs** (AC-06..AC-20 added; AC-01..AC-05 preserved). New ACs cover: standalone self-contained contract (AC-06), bidirectional mapping integrity (AC-07), blind-AI readiness scoring (AC-08), gap analysis currency (AC-09), linter inventory completeness (AC-10), linter authoring guide coverage (AC-11), folder-mapping matrix accuracy (AC-12), coverage heatmap truthfulness (AC-13), reverse index completeness (AC-14), README improvement tracking (AC-15), research file placement rules (AC-16), app file placement rules (AC-17), database convention consolidation (AC-18), design system consolidation (AC-19), WP plugin convention consolidation (AC-20). AC count 5 → 20. Banner v3.6.0 → v4.0.0.
 
 > **v3.5.0 update:** Added [`31-full-tree-ai-audit-v4.md`](./31-full-tree-ai-audit-v4.md) — first audit covering the **entire** `spec/` tree. Headline score **45/100 (F)** — supersedes the partial-scope verdicts of `25/26/29` for whole-tree readiness.
 
