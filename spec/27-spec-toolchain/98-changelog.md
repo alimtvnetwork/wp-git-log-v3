@@ -16,6 +16,11 @@
 
 ## Releases
 
+### 1.1.0 — 2026-04-26
+- **Added** §17 [`17-check-trace-map-regression.md`](./17-check-trace-map-regression.md) and `linter-scripts/check-trace-map-regression.py` — CI gate that runs `generate-trace-map.py` and fails the build when `ac_traced` drops or `ac_drifted`/`code_orphan`/`missing_ac`/`missing_file` grow against the committed baseline at `.lovable/memory/audit/trace-map-baseline.json`.
+- **Added** new step **Trace-map regression gate** in `.github/workflows/spec-health.yml`; gate is also surfaced in the `$GITHUB_STEP_SUMMARY`.
+- **Added** 8 new acceptance criteria (AC-17-01..AC-17-08) and matching `linter-scripts/trace-map.toml` entries — module trace coverage rose from 16 → 24 ACs.
+
 ### 1.0.0 — 2026-04-25
 - **Added** module created to spec the toolchain. Closes the largest single audit-v2 finding category (`missing-spec` × 32) by giving every executable artifact a home.
 - **Added** 28 per-artifact spec sections covering all current `linter-scripts/` files and `.github/workflows/spec-health.yml`.
