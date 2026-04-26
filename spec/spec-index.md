@@ -65,9 +65,9 @@
 | `spec/01-spec-authoring-guide/09-exceptions.md` | Exceptions & Special Cases | 3.2.0 |
 | `spec/01-spec-authoring-guide/10-mandatory-linter-infrastructure.md` | Mandatory Linter Infrastructure | 3.2.0 |
 | `spec/01-spec-authoring-guide/11-root-readme-conventions.md` | Root README Conventions | 1.0.0 |
-| `spec/01-spec-authoring-guide/97-acceptance-criteria.md` | Spec Authoring Guide — Acceptance Criteria | 3.2.0 |
-| `spec/01-spec-authoring-guide/98-changelog.md` | Spec Authoring Guide — Changelog | 3.2.0 |
-| `spec/01-spec-authoring-guide/99-consistency-report.md` | Consistency Report — Spec Authoring Guide | 3.2.0 |
+| `spec/01-spec-authoring-guide/97-acceptance-criteria.md` | Spec Authoring Guide — Acceptance Criteria | 4.0.0 |
+| `spec/01-spec-authoring-guide/98-changelog.md` | Spec Authoring Guide — Changelog | 4.0.0 |
+| `spec/01-spec-authoring-guide/99-consistency-report.md` | Consistency Report — Spec Authoring Guide | 4.0.0 |
 
 ## 📐 Coding Guidelines
 
