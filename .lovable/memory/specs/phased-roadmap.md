@@ -94,4 +94,4 @@ Landed in v3.8.8:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 7** (AC Quality Pass — convert all ACs to GWT format; add ACs for SshKey/SshNonce/replay/lane-downgrade)
+**Top pending = Phase 8** (API Streaming Spec — define NDJSON streaming format for log retrieval in `04-rest-api-endpoints.md`)
