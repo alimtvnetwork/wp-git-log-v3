@@ -809,7 +809,7 @@
 | `spec/22-git-logs-v2/26-readme-and-screenshots.md` | WP.org Readme + Screenshots (v2) | 2.5.0 |
 | `spec/22-git-logs-v2/27-wp-cli-reference.md` | WP-CLI Reference (v2) | 2.5.0 |
 | `spec/22-git-logs-v2/28-example-github-actions.md` | Example GitHub Actions Workflow (v2) | 2.7.0 |
-| `spec/22-git-logs-v2/29-uninstall-policy.md` | Uninstall Policy (v2) | 2.5.0 |
+| `spec/22-git-logs-v2/29-uninstall-policy.md` | Uninstall Policy (v2) | 2.9.0 |
 | `spec/22-git-logs-v2/30-threat-model.md` | Threat Model (v2) | 2.7.0 |
 | `spec/22-git-logs-v2/31-ssh-key-auth.md` | SSH Key Authentication (v2.x) | 2.7.0 |
 | `spec/22-git-logs-v2/32-cli-test-plan.md` | CLI Test Plan (v2) | 2.7.0 |
