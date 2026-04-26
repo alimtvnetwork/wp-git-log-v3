@@ -681,9 +681,9 @@
 | `spec/15-distribution-and-runner/02-runner-contract.md` | Runner Contract | 1.0.0 |
 | `spec/15-distribution-and-runner/03-release-pipeline.md` | Release Pipeline | 1.0.0 |
 | `spec/15-distribution-and-runner/04-install-config.md` | Install Config | 1.0.0 |
-| `spec/15-distribution-and-runner/97-acceptance-criteria.md` | Acceptance Criteria — Distribution and Runner | 1.0.0 |
-| `spec/15-distribution-and-runner/98-changelog.md` | Changelog — Distribution and Runner | 1.0.0 |
-| `spec/15-distribution-and-runner/99-consistency-report.md` | Consistency Report — Distribution and Runner | 1.0.0 |
+| `spec/15-distribution-and-runner/97-acceptance-criteria.md` | Acceptance Criteria — Distribution and Runner | 2.0.0 |
+| `spec/15-distribution-and-runner/98-changelog.md` | Changelog — Distribution and Runner | 2.0.0 |
+| `spec/15-distribution-and-runner/99-consistency-report.md` | Consistency Report — Distribution and Runner | 2.0.0 |
 
 ## 🚀 Generic Release
 
