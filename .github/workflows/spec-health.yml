@@ -7,12 +7,16 @@ on:
       - 'spec/**'
       - 'linter-scripts/check-tree-health.cjs'
       - 'linter-scripts/generate-spec-index.cjs'
+      - 'linter-scripts/check-spec-cross-links.py'
+      - 'linter-scripts/spec-cross-links.allowlist'
       - '.github/workflows/spec-health.yml'
   pull_request:
     paths:
       - 'spec/**'
       - 'linter-scripts/check-tree-health.cjs'
       - 'linter-scripts/generate-spec-index.cjs'
+      - 'linter-scripts/check-spec-cross-links.py'
+      - 'linter-scripts/spec-cross-links.allowlist'
 
 jobs:
   health-gate:
@@ -49,6 +53,9 @@ jobs:
             echo "✅ Spec artifacts up to date."
           fi
 
+      - name: Spec cross-link gate (zero broken links allowed)
+        run: python3 linter-scripts/check-spec-cross-links.py --github
+
       - name: Spec tree health gate (threshold 100)
         env:
           SPEC_HEALTH_MIN: '100'
@@ -64,6 +71,9 @@ jobs:
       - name: Summary
         if: always()
         run: |
+          echo "## Spec Cross-Link Result" >> "$GITHUB_STEP_SUMMARY"
+          python3 linter-scripts/check-spec-cross-links.py --json 2>&1 | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{d[\"count\"]} broken link(s)' if d['count'] else '✅ All cross-links resolve.')" >> "$GITHUB_STEP_SUMMARY" || true
+          echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "## Spec Tree Health Result" >> "$GITHUB_STEP_SUMMARY"
           node linter-scripts/check-tree-health.cjs --report 2>&1 | head -10 >> "$GITHUB_STEP_SUMMARY" || true
           echo "" >> "$GITHUB_STEP_SUMMARY"
