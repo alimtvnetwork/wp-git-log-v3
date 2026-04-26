@@ -1,7 +1,7 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
@@ -16,6 +16,15 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26
+- **Phase 14 — Deepen Scaffolded ACs in §17 §97.** Per `mem://specs/full-tree-audit-v4.md` open backlog item ("deepen scaffolded AC content for high-traffic modules"), expanded the 4 shortest one-liner ACs in §97 from ~209-260 chars each to **1941-2254 chars each (8–10× depth)** with full Given/When/Then bodies + concrete cross-refs to linter scripts, regex specifics, and the slot-immutability precedent.
+- **AC-01** Module entry point — exact 6-rule structural contract (H1 keyword check, ISO-8601 date, ≥1 H2 with body, no `TODO`/`TBD`/`FIXME` outside fenced code).
+- **AC-02** Sibling links — 6-rule cross-link contract (real targets, no orphans, lowercase kebab, anchor resolution, slot-immutability prevents `../16-...` resolving, auto-fix proposals MUST be applied or suppressed).
+- **AC-03** Naming convention — 6-rule regex contract with positive/negative examples (`02_coding.md` ❌, `02-Coding.md` ❌), `97`/`98`/`99` reserved-slot rule, slot-collision precedent (§22 → §25 in v3.7.0), exhaustive special-file allowlist.
+- **AC-04** Consistency report — 7-rule freshness contract (auto-fill scaffold INSUFFICIENT alone, status-marker requirement, measured-not-narrated Health Score per `mem://index.md` Core rule, freshness-relative-to-siblings rule, version-≥-overview lockstep ordering).
+- AC-05 already deep (1803 chars) — left as-is. AC count unchanged at 5.
+- Banner v1.0.0 → v1.1.0; lockstep §98 + §99 + spec-index updated.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
