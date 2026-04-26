@@ -1,7 +1,7 @@
 # Acceptance Criteria — Consolidated Guidelines
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26 (Phase 14: Deepen Scaffolded ACs — AC-01..AC-04 rewritten with full GWT bodies + concrete cross-refs to linter scripts, naming-convention regex specifics, slot-immutability precedent, and lockstep ordering. AC count unchanged at 5. AC-05 already deep — left as-is.)
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
