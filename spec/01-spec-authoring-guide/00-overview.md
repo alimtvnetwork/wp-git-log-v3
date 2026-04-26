@@ -1,7 +1,7 @@
 # Spec Authoring Guide
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Updated:** 2026-04-26  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None

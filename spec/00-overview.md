@@ -1,7 +1,8 @@
 # Specification Root
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Updated:** 2026-04-26  
+**Kind:** index  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

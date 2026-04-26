@@ -1,8 +1,8 @@
 # Linter Scripts
 
-**Version:** 3.2.0  
+**Version:** 1.1.0  
 **Status:** Active  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-26  
 **AI Confidence:** High  
 **Ambiguity:** None
 
