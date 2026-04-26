@@ -17,6 +17,9 @@
 
 ## Releases
 
+### 2.0.0 — 2026-04-26
+- **Phase 16d-iii — Deepen §17 consolidated-guidelines §97.** Per `mem://specs/full-tree-audit-v4.md` open backlog item ("deepen scaffolded AC content for high-traffic modules"), expanded §97 from 5 generic scaffold ACs to **20 module-specific GWT ACs** (AC-06..AC-20 added; AC-01..AC-05 preserved verbatim). New ACs cover: standalone self-contained contract (AC-06), bidirectional mapping integrity (AC-07), blind-AI readiness scoring (AC-08), gap analysis currency (AC-09), linter inventory completeness (AC-10), linter authoring guide coverage (AC-11), folder-mapping matrix accuracy (AC-12), coverage heatmap truthfulness (AC-13), reverse index completeness (AC-14), README improvement tracking (AC-15), research file placement rules (AC-16), app file placement rules (AC-17), database convention consolidation (AC-18), design system consolidation (AC-19), WP plugin convention consolidation (AC-20). Each new AC averages 1500-2200 chars with explicit `**Given** / **When** / **Then**` triplet plus `**Verifies:**` cross-ref. Banner v1.1.0 → v2.0.0; lockstep §99 + spec-index updated.
+
 ### 1.1.0 — 2026-04-26
 - **Phase 14 — Deepen Scaffolded ACs in §17 §97.** Per `mem://specs/full-tree-audit-v4.md` open backlog item ("deepen scaffolded AC content for high-traffic modules"), expanded the 4 shortest one-liner ACs in §97 from ~209-260 chars each to **1941-2254 chars each (8–10× depth)** with full Given/When/Then bodies + concrete cross-refs to linter scripts, regex specifics, and the slot-immutability precedent.
 - **AC-01** Module entry point — exact 6-rule structural contract (H1 keyword check, ISO-8601 date, ≥1 H2 with body, no `TODO`/`TBD`/`FIXME` outside fenced code).
