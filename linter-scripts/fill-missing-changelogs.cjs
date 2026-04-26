@@ -15,19 +15,18 @@ const SPEC_DIR = path.resolve(__dirname, '..', 'spec');
 const TODAY = new Date().toISOString().slice(0, 10);
 
 function listModules(dir, prefix = '') {
+  // Recursively walk every sub-folder under spec/ (excluding _archive and dotfiles).
+  // A "module" is any folder containing 00-overview.md.
   const out = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === '_archive') continue;
     const full = path.join(dir, entry.name);
     const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
-    out.push({ rel, full });
-    for (const sub of fs.readdirSync(full, { withFileTypes: true })) {
-      if (!sub.isDirectory() || sub.name.startsWith('.')) continue;
-      const subFull = path.join(full, sub.name);
-      if (fs.existsSync(path.join(subFull, '00-overview.md'))) {
-        out.push({ rel: `${rel}/${sub.name}`, full: subFull });
-      }
+    if (fs.existsSync(path.join(full, '00-overview.md'))) {
+      out.push({ rel, full });
     }
+    // Recurse — fixes the prior 2-level-deep cap that left ~17 sub-modules unfilled.
+    out.push(...listModules(full, rel));
   }
   return out;
 }
