@@ -391,7 +391,11 @@ INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('UninstallMode',         'Preserve', strftime('%s','now')),  -- §29 ∈ {Preserve,Archive,Wipe}
     ('AllowedReadOrigins',    '',         strftime('%s','now')),  -- §30 S3 CORS allowlist (CSV; empty = none)
     -- v2.7 additions
-    ('SshReplayWindowSec',    '300',      strftime('%s','now'));  -- §31 SSH timestamp skew tolerance
+    ('SshReplayWindowSec',    '300',      strftime('%s','now')),  -- §31 SSH timestamp skew tolerance
+    -- v2.9 additions (Q3 Split-DB, §39)
+    ('ShaLogsRoot',           'logs',     strftime('%s','now')),  -- root folder for per-SHA .db files (relative to plugin data dir)
+    ('MaxOpenShaDbHandles',   '32',       strftime('%s','now')),  -- LRU cache cap for open per-SHA SQLite handles
+    ('ShaDbIdleCloseSec',     '120',      strftime('%s','now')); -- idle seconds before a per-SHA handle is closed
 
 -- Migration marker — last
 INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
