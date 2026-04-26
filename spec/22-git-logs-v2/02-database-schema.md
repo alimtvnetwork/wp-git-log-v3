@@ -348,3 +348,160 @@ Indexes: `(RepoId, IsActive)`, `(OwnedByProfileId)`. Uniqueness on `Fingerprint`
 Unique: `(SshKeyId, Nonce)`.  
 Retention: `ReplayWindowSeconds` only (default 300s). Pruned on every request (LIMIT `SshNonceJanitorBatch`) and via daily WP-cron. No long-term forensic copy.
 
+---
+
+## Canonical DDL Excerpt (Phase 20 normative contract)
+
+> **Status:** Normative excerpt. Full root-DB schema lives in
+> [`18-schema.sql`](./18-schema.sql) (465 lines, executable). Per-SHA file
+> schema lives in [`39-split-db-log-storage.md`](./39-split-db-log-storage.md).
+> The block below is the canonical AI-readable reference covering every
+> structural pattern used in this module: lookup, core entity, FK reuse,
+> polymorphic FK with CHECK, JSON config, and split-DB pointer.
+
+```sql
+-- =====================================================================
+-- Git Logs v2 — Canonical structural DDL excerpt (root DB).
+-- Demonstrates: PascalCase singular tables, {Table}Id PKs,
+-- INTEGER booleans with CHECK, FK reuse, polymorphic FK, ConfigKv,
+-- and the split-DB ShaRegistry pointer.
+-- Engine: SQLite 3.35+. Conventions per spec/04-database-conventions.
+-- =====================================================================
+
+PRAGMA foreign_keys = ON;
+PRAGMA journal_mode = WAL;
+
+-- ---- Lookup pattern (one row per enum value) ------------------------
+CREATE TABLE LogSeverity (
+    LogSeverityId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name          TEXT    NOT NULL UNIQUE,   -- 'Debug' | 'Info' | 'Warn' | 'Error' | 'Fatal'
+    Numeric       INTEGER NOT NULL UNIQUE    -- monotonic for filtering
+);
+
+CREATE TABLE PipelineActionType (
+    PipelineActionTypeId INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL UNIQUE                -- 'AppendLog' | 'FixedLog' | 'StartRun' | …
+);
+
+-- ---- Core entity (Profile = authenticated WP user) ------------------
+CREATE TABLE Profile (
+    ProfileId       INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserName        TEXT    NOT NULL UNIQUE,
+    Email           TEXT    NOT NULL,
+    GeneratedKeyApi TEXT    NOT NULL,
+    Token           TEXT    NOT NULL,
+    TempToken       TEXT    NOT NULL,
+    UserStatusId    INTEGER NOT NULL,
+    CreatedAt       INTEGER NOT NULL,        -- Unix seconds, UTC
+    UpdatedAt       INTEGER NOT NULL,
+    FOREIGN KEY (UserStatusId) REFERENCES UserStatus(UserStatusId)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+);
+CREATE INDEX Idx_Profile_TempToken ON Profile (TempToken);
+
+-- ---- Boolean replaces lookup (v3.8.0 IsOrganization decision) -------
+CREATE TABLE GitProfile (
+    GitProfileId       INTEGER PRIMARY KEY AUTOINCREMENT,
+    ProviderId         INTEGER NOT NULL,
+    IsOrganization     INTEGER NOT NULL DEFAULT 0
+                        CHECK (IsOrganization IN (0, 1)),
+    OwnerName          TEXT    NOT NULL,
+    ProfileUrl         TEXT    NOT NULL,
+    AcceptanceId       INTEGER NOT NULL,
+    SelectedRepoUrl    TEXT    NULL,
+    IsRestrictInBranch INTEGER NOT NULL DEFAULT 0
+                        CHECK (IsRestrictInBranch IN (0, 1)),
+    StrictBranch       TEXT    NULL,
+    OwnedByProfileId   INTEGER NOT NULL,
+    CreatedAt          INTEGER NOT NULL,
+    UpdatedAt          INTEGER NOT NULL,
+    UNIQUE (ProviderId, OwnerName, ProfileUrl),
+    FOREIGN KEY (ProviderId)       REFERENCES Provider(ProviderId),
+    FOREIGN KEY (AcceptanceId)     REFERENCES Acceptance(AcceptanceId),
+    FOREIGN KEY (OwnedByProfileId) REFERENCES Profile(ProfileId),
+    -- Conditional NOT NULL via CHECK
+    CHECK (IsRestrictInBranch = 0 OR StrictBranch IS NOT NULL)
+);
+
+-- ---- Polymorphic FK pattern with CHECK constraint -------------------
+CREATE TABLE AppLink (
+    AppLinkId          INTEGER PRIMARY KEY AUTOINCREMENT,
+    AppId              INTEGER NOT NULL,
+    AppLinkTypeId      INTEGER NOT NULL,                 -- 'GitProfile' | 'Repo'
+    TargetGitProfileId INTEGER NULL,
+    TargetRepoId       INTEGER NULL,
+    IsActive           INTEGER NOT NULL DEFAULT 1
+                        CHECK (IsActive IN (0, 1)),
+    CreatedAt          INTEGER NOT NULL,
+    DisconnectedAt     INTEGER NULL,
+    FOREIGN KEY (AppId)              REFERENCES App(AppId)              ON DELETE CASCADE,
+    FOREIGN KEY (AppLinkTypeId)      REFERENCES AppLinkType(AppLinkTypeId),
+    FOREIGN KEY (TargetGitProfileId) REFERENCES GitProfile(GitProfileId) ON DELETE CASCADE,
+    FOREIGN KEY (TargetRepoId)       REFERENCES Repo(RepoId)             ON DELETE CASCADE,
+    -- Exactly one target column populated, matching AppLinkTypeId
+    CHECK (
+        (TargetGitProfileId IS NOT NULL AND TargetRepoId IS NULL)
+     OR (TargetGitProfileId IS NULL     AND TargetRepoId IS NOT NULL)
+    )
+);
+
+-- ---- Pipeline transition tracking (v2.9.2 Phase 9) ------------------
+CREATE TABLE Pipeline (
+    PipelineId       INTEGER PRIMARY KEY AUTOINCREMENT,
+    RepoVersionId    INTEGER NOT NULL,
+    BranchName       TEXT    NOT NULL,
+    PipelineName     TEXT    NOT NULL,
+    HasError         INTEGER NOT NULL DEFAULT 0 CHECK (HasError         IN (0, 1)),
+    PreviousHasError INTEGER NOT NULL DEFAULT 0 CHECK (PreviousHasError IN (0, 1)),
+    LastGitSha256    TEXT    NULL,
+    UpdatedAt        INTEGER NOT NULL,
+    UNIQUE (RepoVersionId, BranchName, PipelineName),
+    FOREIGN KEY (RepoVersionId) REFERENCES RepoVersion(RepoVersionId) ON DELETE CASCADE
+);
+
+-- ---- Split-DB pointer (root DB → per-SHA SQLite file) ---------------
+CREATE TABLE ShaRegistry (
+    ShaRegistryId   INTEGER PRIMARY KEY AUTOINCREMENT,
+    RepoVersionId   INTEGER NOT NULL,
+    GitSha256       TEXT    NOT NULL,
+    ShaDbPath       TEXT    NOT NULL,        -- relative to ConfigKv.ShaLogsRoot
+    FirstSeenAt     INTEGER NOT NULL,
+    LastSeenAt      INTEGER NOT NULL,
+    EntryCount      INTEGER NOT NULL DEFAULT 0,
+    ErrorCount      INTEGER NOT NULL DEFAULT 0,
+    LastSeverityId  INTEGER NULL,
+    LastStatus      TEXT    NOT NULL DEFAULT 'Pending'
+                     CHECK (LastStatus IN ('Green', 'Red', 'Pending')),
+    LastFailureAt   INTEGER NULL,
+    LastSuccessAt   INTEGER NULL,
+    UNIQUE (RepoVersionId, GitSha256),
+    FOREIGN KEY (RepoVersionId)  REFERENCES RepoVersion(RepoVersionId)  ON DELETE CASCADE,
+    FOREIGN KEY (LastSeverityId) REFERENCES LogSeverity(LogSeverityId)
+);
+CREATE INDEX Idx_ShaRegistry_RepoVersionId_LastSeenAt ON ShaRegistry (RepoVersionId, LastSeenAt);
+CREATE INDEX Idx_ShaRegistry_LastStatus_LastSeenAt    ON ShaRegistry (LastStatus,    LastSeenAt);
+
+-- ---- Single-row settings table (ConfigKv) ---------------------------
+CREATE TABLE ConfigKv (
+    ConfigKvId INTEGER PRIMARY KEY AUTOINCREMENT,
+    KeyName    TEXT    NOT NULL UNIQUE,
+    ValueText  TEXT    NULL,
+    UpdatedAt  INTEGER NOT NULL
+);
+-- Seed examples (full set in 16-seed-data.md):
+--   ('ShaLogsRoot',          'logs',  …)
+--   ('MaxOpenShaDbHandles',  '32',    …)
+--   ('ShaDbIdleCloseSec',    '120',   …)
+--   ('ReplayWindowSeconds',  '300',   …)
+```
+
+### Acceptance — Schema Conformance
+
+**Given** an AI agent or contributor authors a new migration touching any
+table in this module,  
+**When** the resulting SQL is run through `linter-scripts/check-forbidden-strings.py`
+AND diff-checked against `18-schema.sql`,  
+**Then** zero forbidden tokens appear, every new table follows the
+`{TableName}Id INTEGER PRIMARY KEY AUTOINCREMENT` pattern shown above,
+and every boolean column carries a `CHECK (Col IN (0, 1))` clause.
+
