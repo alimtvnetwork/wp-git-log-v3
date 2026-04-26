@@ -1,7 +1,12 @@
+---
+kind: index
+description: Diagram index for self-update / app-update workflows. Indexes Mermaid (.mmd) files, not contract code blocks — exempt from missing-contract rubric findings.
+---
+
 # Diagrams — Self-Update & App Update
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16
+**Version:** 3.3.0  
+**Updated:** 2026-04-26
 
 ---
 
