@@ -1,6 +1,6 @@
 # Glossary and Enum Catalog (v2)
 
-**Version:** 3.8.3  
+**Version:** 3.8.6  
 **Updated:** 2026-04-26 (Q3 Split-DB: glossary entries for `PerShaDb`, `ShaLogsRoot`)
 
 ---
@@ -29,6 +29,9 @@
 | SystemEvent | **v3.8.0** — Business state changes that aren't Git pushes (ProfileCreated, KeyRevoked, AppCreated, RoleAssigned, …). Loose polymorphic target. |
 | AuditTrail | System-wide append-only log of every endpoint hit and transaction outcome. |
 | MigrationState | DB-config row marking a plugin version as migrated (boot-time idempotent). |
+| SshKey | **v2.9.1 (Phase 5)** — Public key registered for Lane B (CI/CD) signing. Deploy-key model: each `SshKey` row binds to exactly one `RepoId`. Stored fields: `Fingerprint` (`SHA256:` + base64 of SHA-256 of public key, RFC 4716), `KeyType`, `PublicKey` (full OpenSSH single-line), `OwnedByProfileId`, `IsActive`, `LastUsedAt`, `RevokedAt`. Authoritative for SSH lane authentication; replaces `TempToken` when `ConfigKv.SshAuthMode = required`. See §31. |
+| Ed25519Signature | **v2.9.1 (Phase 5)** — OpenSSH-format signature (PEM-armored `-----BEGIN SSH SIGNATURE-----` block) produced by `ssh-keygen -Y sign -n git-logs@v2 -H sha512` over the canonical `GL-SSHSIG-V1` signing string (HTTP method, path, timestamp, nonce, sha256-hex of body). Verified server-side via `ssh-keygen -Y verify` or `phpseclib`. Ed25519 is the recommended `KeyType` (compact, fast, no parameter pitfalls); `ssh-rsa` and `ecdsa-sha2-*` also accepted. See §31 step 8. |
+| SshNonce | Replay-defense row — `(SshKeyId, Nonce)` unique within `SshReplayWindowSec` (default 300s). Pruned on every request (LIMIT `SshNonceJanitorBatch`, default 100) and via daily WP-cron. No long-term forensic copy. |
 
 ---
 

@@ -1,5 +1,5 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.9.0 — Q3 Split-DB: drop LogEntry/ErrorLogEntry, add ShaRegistry)
+-- Git Logs Plugin — schema + lookup seeds (v2.9.1 — Phase 5 SSH-Key Lane B: add SshKey + SshNonce tables, 2 ConfigKv keys)
 -- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
@@ -291,6 +291,39 @@ CREATE TABLE IF NOT EXISTS AuditTrail (
 CREATE INDEX IF NOT EXISTS IxAuditTrailRequest ON AuditTrail(RequestId);
 
 -- ---------------------------------------------------------------------------
+-- SSH-Key Lane B (v2.9.1, Phase 5 — see §31)
+--   Deploy-key model: one SshKey row binds to exactly one Repo.
+--   SshNonce is replay defense — rows pruned to ReplayWindowSeconds.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS SshKey (
+    SshKeyId          INTEGER PRIMARY KEY AUTOINCREMENT,
+    Fingerprint       TEXT    NOT NULL UNIQUE,                    -- 'SHA256:' + base64(sha256(pubkey))
+    RepoId            INTEGER NOT NULL REFERENCES Repo(RepoId) ON DELETE CASCADE,
+    KeyType           TEXT    NOT NULL,                           -- ssh-ed25519 | ssh-rsa | ecdsa-sha2-nistp256 | …
+    PublicKey         TEXT    NOT NULL,                           -- full OpenSSH single-line pubkey
+    Label             TEXT,
+    OwnedByProfileId  INTEGER NOT NULL REFERENCES Profile(ProfileId),
+    IsActive          INTEGER NOT NULL DEFAULT 1 CHECK (IsActive IN (0,1)),
+    LastUsedAt        INTEGER,
+    CreatedAt         INTEGER NOT NULL,
+    RevokedAt         INTEGER
+);
+
+CREATE INDEX IF NOT EXISTS IxSshKeyRepoActive ON SshKey(RepoId, IsActive);
+CREATE INDEX IF NOT EXISTS IxSshKeyOwner      ON SshKey(OwnedByProfileId);
+
+CREATE TABLE IF NOT EXISTS SshNonce (
+    SshNonceId  INTEGER PRIMARY KEY AUTOINCREMENT,
+    SshKeyId    INTEGER NOT NULL REFERENCES SshKey(SshKeyId) ON DELETE CASCADE,
+    Nonce       TEXT    NOT NULL,                                  -- client-supplied, ≥16 bytes base64
+    SeenAt      INTEGER NOT NULL,
+    UNIQUE (SshKeyId, Nonce)
+);
+
+CREATE INDEX IF NOT EXISTS IxSshNonceSeenAt ON SshNonce(SeenAt);
+
+-- ---------------------------------------------------------------------------
 -- Operational
 -- ---------------------------------------------------------------------------
 
@@ -380,7 +413,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.9.0',    strftime('%s','now')),
+    ('PluginVersion',         '2.9.1',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
@@ -395,7 +428,10 @@ INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     -- v2.9 additions (Q3 Split-DB, §39)
     ('ShaLogsRoot',           'logs',     strftime('%s','now')),  -- root folder for per-SHA .db files (relative to plugin data dir)
     ('MaxOpenShaDbHandles',   '32',       strftime('%s','now')),  -- LRU cache cap for open per-SHA SQLite handles
-    ('ShaDbIdleCloseSec',     '120',      strftime('%s','now')); -- idle seconds before a per-SHA handle is closed
+    ('ShaDbIdleCloseSec',     '120',      strftime('%s','now')),  -- idle seconds before a per-SHA handle is closed
+    -- v2.9.1 additions (Phase 5 SSH-Key Lane B, §31)
+    ('SshAuthMode',           'optional', strftime('%s','now')),  -- §31 lane gate ∈ {optional, preferred, required}
+    ('SshNonceJanitorBatch',  '100',      strftime('%s','now')); -- §31 max SshNonce rows pruned per request
 
 -- Migration marker — last
 INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
@@ -407,6 +443,7 @@ INSERT OR IGNORE INTO MigrationState (PluginVersion, AppliedAt, Checksum) VALUES
     ('2.8.7', strftime('%s','now'), NULL),  -- §18/§15 audit alignment
     ('2.8.8', strftime('%s','now'), NULL),  -- Q1 IsOrganization (column rename + table drop)
     ('2.8.9', strftime('%s','now'), NULL),  -- Q2 PipelineAction rename + SystemEvent
-    ('2.9.0', strftime('%s','now'), NULL);  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
+    ('2.9.0', strftime('%s','now'), NULL),  -- Q3 Split-DB: drop LogEntry/ErrorLogEntry from root, add ShaRegistry + 3 ConfigKv
+    ('2.9.1', strftime('%s','now'), NULL);  -- Phase 5: SSH-Key Lane B canonical schema (SshKey + SshNonce + 2 ConfigKv)
 
 COMMIT;

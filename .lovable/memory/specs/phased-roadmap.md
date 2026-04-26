@@ -41,12 +41,16 @@ Landed in v3.8.5:
 
 ---
 
-## ⏳ Phase 5 — SSH-Key Lane B: Schema & Errors
-**Files:** `18-schema.sql`, `15-error-codes.md`, `01-glossary-and-enums.md`
-- Add `SshKey` table to §18 DDL (already specified in §31; sync to canonical schema file)
-- Add 7 `GL-SSH-*` error codes
-- Add 3 `AuditActionType` seeds: `SshKeyRegister`, `SshKeyRevoke`, `SshKeyRotate`
-- Glossary entries for `SshKey`, `Ed25519Signature`
+## ✅ Phase 5 — SSH-Key Lane B: Schema & Errors (DONE, v3.8.6)
+
+Landed in v3.8.6 / schema v2.9.1:
+- §18: `CREATE TABLE SshKey` (11 cols) + 2 indexes; `CREATE TABLE SshNonce` + 1 index; 2 new ConfigKv (`SshAuthMode='optional'`, `SshNonceJanitorBatch='100'`); PluginVersion 2.9.0→2.9.1; MigrationState 2.9.1 appended. Banner v2.9.0→v2.9.1.
+- §01: 3 new glossary rows (`SshKey`, `Ed25519Signature`, `SshNonce`). Banner v3.8.3→v3.8.6.
+- §02: banner v3.8.3→v3.8.6 (existing SshKey/SshNonce sub-sections now backed by canonical DDL).
+- §15: banner v2.9.0→v2.9.1 — 9 SSH lane codes already present, now backed by canonical schema.
+- §31: banner v2.7.0→v2.9.1 with canonical-DDL note.
+- AuditActionType seeds verified: `SshKeyRegister`(22), `SshKeyRevoke`(23), `SshKeyRotate`(24) already present.
+- In-memory SQLite validation: 31 tables, 15 ConfigKv, 10 MigrationState markers, 3 SshKey* AuditActionTypes.
 
 ## ⏳ Phase 6 — SSH-Key Lane B: Flow & Threat Doc
 **Files:** `05-auth-and-validation.md`, `28-example-github-actions.md`, `30-threat-model.md`
@@ -86,4 +90,4 @@ Landed in v3.8.5:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 5** (SSH-Key Lane B: Schema & Errors)
+**Top pending = Phase 6** (SSH-Key Lane B: Flow & Threat Doc)

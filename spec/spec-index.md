@@ -787,8 +787,8 @@
 | File | Title | Version |
 |------|-------|---------|
 | `spec/22-git-logs-v2/00-overview.md` | Git Logs v2 — Spec Overview | 3.8.5 |
-| `spec/22-git-logs-v2/01-glossary-and-enums.md` | Glossary and Enum Catalog (v2) | 3.8.3 |
-| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 3.8.3 |
+| `spec/22-git-logs-v2/01-glossary-and-enums.md` | Glossary and Enum Catalog (v2) | 3.8.6 |
+| `spec/22-git-logs-v2/02-database-schema.md` | Database Schema (v2, SQLite) | 3.8.6 |
 | `spec/22-git-logs-v2/03-admin-ui.md` | Admin UI (v2) | 2.2.0 |
 | `spec/22-git-logs-v2/04-rest-api-endpoints.md` | REST API Endpoints (v2) | 2.8.3 |
 | `spec/22-git-logs-v2/05-auth-and-validation.md` | Authentication and Validation (v2) | 2.1.0 |
@@ -796,7 +796,7 @@
 | `spec/22-git-logs-v2/07-app-entity.md` | App Entity (v2) | 2.0.0 |
 | `spec/22-git-logs-v2/08-history-and-action.md` | History, PipelineAction, SystemEvent, and AuditTrail (v2) | 3.0.0 |
 | `spec/22-git-logs-v2/14-endpoint-examples.md` | Endpoint Examples (v2) | 2.2.0 |
-| `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.9.0 |
+| `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.9.1 |
 | `spec/22-git-logs-v2/16-seed-data.md` | Seed Data (v2) | 2.7.1 |
 | `spec/22-git-logs-v2/16-test-plan.md` | Test Plan (v2) — SUPERSEDED | 2.7.0 |
 | `spec/22-git-logs-v2/19-permission-matrix.md` | Permission Matrix (v2) | 2.3.0 |
@@ -811,7 +811,7 @@
 | `spec/22-git-logs-v2/28-example-github-actions.md` | Example GitHub Actions Workflow (v2) | 2.7.0 |
 | `spec/22-git-logs-v2/29-uninstall-policy.md` | Uninstall Policy (v2) | 2.9.0 |
 | `spec/22-git-logs-v2/30-threat-model.md` | Threat Model (v2) | 2.7.0 |
-| `spec/22-git-logs-v2/31-ssh-key-auth.md` | SSH Key Authentication (v2.x) | 2.7.0 |
+| `spec/22-git-logs-v2/31-ssh-key-auth.md` | SSH Key Authentication (v2.x) | 2.9.1 |
 | `spec/22-git-logs-v2/32-cli-test-plan.md` | CLI Test Plan (v2) | 2.7.0 |
 | `spec/22-git-logs-v2/33-bats-test-skeleton.md` | Bats Test Skeleton (v2) | 2.7.0 |
 | `spec/22-git-logs-v2/34-phpunit-test-skeleton.md` | PHPUnit Test Skeleton (v2) | 2.7.0 |
@@ -819,7 +819,7 @@
 | `spec/22-git-logs-v2/39-split-db-log-storage.md` | Split-DB Log Storage (per-SHA SQLite) | 1.0.0 |
 | `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 3.8.5 |
 | `spec/22-git-logs-v2/98-changelog.md` | Changelog (v2) |  |
-| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.5 |
+| `spec/22-git-logs-v2/99-consistency-report.md` | Consistency Report (v2) | 3.8.6 |
 
 ## 🗄️ App Database
 
