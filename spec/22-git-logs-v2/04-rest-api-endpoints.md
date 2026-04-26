@@ -1,7 +1,7 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.9.2  
-**Updated:** 2026-04-26 (Phase 8: NDJSON streaming retrieval format defined for endpoints #5/#6/#7/#8/#9/#10 — opt-in via `Accept: application/x-ndjson`, frame schema, error-mid-stream handling, backpressure & flush cadence, sentinel close frame)
+**Version:** 2.9.3  
+**Updated:** 2026-04-26 (Phase 12: §11.3.1 `Header` frame extended with optional `StateTransition` field exposing the four-value `Pipeline.PreviousHasError`-derived label per §97 AC-73/AC-74; emitted only on single-pipeline scopes #7–#10; previous Phase 8 v2.9.2 NDJSON streaming retrieval contract unchanged)
 **Namespace:** `/wp-json/git-logs/v2`
 
 ---
