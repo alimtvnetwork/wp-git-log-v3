@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 3.4.0  
-**Updated:** 2026-04-26 (Phase 15b: Typography section AC-007..AC-011 converted from table format to full GWT subsections — Ubuntu/Poppins/mono font-loading contracts, gradient text effect cross-browser rules, heading-discipline WCAG semantics. AC IDs unchanged at AC-001..AC-034. 11 of 34 ACs now GWT; 23 await Phase 15c..15e.)
+**Version:** 3.5.0  
+**Updated:** 2026-04-26 (Phase 15c: Motion & Transitions section AC-012..AC-016 converted from table format to full GWT subsections — 300ms timing budget, JS-animation-library prohibition list, `prefers-reduced-motion` global override + per-component opt-in, link sweep direction + pseudo-element implementation, CTA slide animation contract. AC IDs unchanged at AC-001..AC-034. 16 of 34 ACs now GWT; 18 await Phase 15d..15e.)
 
 ---
 
@@ -9,7 +9,7 @@
 
 Testable criteria for validating design system compliance across all components and pages.
 
-> **Format note (Phase 15b in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006) and Typography (AC-007..AC-011)** are fully converted to GWT subsections (11 of 34 ACs total). **Motion & Transitions, Code Blocks, Navigation, Page Consistency** remain in table format pending Phase 15c..15e. AC IDs are stable across the conversion — `AC-007` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
+> **Format note (Phase 15c in flight):** Sections in this file are mid-conversion from table-row format to full Given/When/Then format. **Theme & Variables (AC-001..AC-006), Typography (AC-007..AC-011), and Motion & Transitions (AC-012..AC-016)** are fully converted to GWT subsections (16 of 34 ACs total). **Code Blocks, Navigation, Page Consistency** remain in table format pending Phase 15d..15e. AC IDs are stable across the conversion — `AC-012` means the same criterion in both formats. Tooling that scrapes ACs by ID continues to work; tooling that requires GWT prose can use the converted sections as canonical and treat the table sections as one-line summaries until they are converted.
 
 ---
 
@@ -86,13 +86,36 @@ Testable criteria for validating design system compliance across all components 
 
 ## Motion & Transitions
 
-| # | Criterion | Source |
-|---|-----------|--------|
-| AC-012 | All hover transitions complete within 300ms | `06-motion-transitions.md` |
-| AC-013 | No JavaScript animation libraries used for visual effects | `06-motion-transitions.md` |
-| AC-014 | `prefers-reduced-motion` media query disables animations | `06-motion-transitions.md` |
-| AC-015 | Link underline sweeps right-to-left on hover | `06-motion-transitions.md` |
-| AC-016 | CTA buttons use slide text animation, not simple color change | `09-button-system.md` |
+### AC-012: All hover transitions complete within 300ms
+- **Given** any interactive element with a hover state (buttons, links, cards, navigation items, dropdowns, form controls, icon buttons)
+- **When** the user moves their pointer onto the element and the `:hover` styles take effect
+- **Then** the `transition-duration` MUST be ≤ 300ms for every animatable property (color, background-color, border-color, transform, opacity, box-shadow); AND the canonical durations are: 150ms for color/background swaps (fast feedback), 200ms for transforms (scale, translate), 300ms for compound effects (gradient sweeps, shadow expansions) — values OUTSIDE the 150/200/300ms set are FORBIDDEN unless justified inline with a comment, because the design system relies on a small fixed timing vocabulary so transitions feel coherent across surfaces; AND the `transition-timing-function` MUST be `cubic-bezier(0.4, 0, 0.2, 1)` (Tailwind's `ease-in-out` default) — `linear` is FORBIDDEN for hover effects (mechanical feel), `ease-in` is FORBIDDEN (slow start feels laggy on quick mouse-overs); AND every hover transition MUST also define the REVERSE transition (mouse-out) with the same duration — asymmetric durations (e.g. 150ms in, 300ms out) cause visual "stickiness" and are FORBIDDEN; AND when `prefers-reduced-motion: reduce` is active per AC-014, the transition MUST collapse to ≤ 10ms (effectively instant) — the hover effect itself MAY still apply (e.g. color change), only the animation between states is suppressed.
+- **Source:** `06-motion-transitions.md` (timing vocabulary + easing function), `tailwind.config.ts` (`transitionDuration` extension if non-default values are needed), AC-014 (reduced-motion override), AC-016 (CTA-specific composition built on this baseline).
+
+### AC-013: No JavaScript animation libraries used for visual effects
+- **Given** the project's dependency tree (`package.json` + lock file)
+- **When** the dependency list is audited
+- **Then** the project MUST NOT depend on ANY of: `framer-motion`, `react-spring`, `react-motion`, `gsap`, `anime.js`, `lottie-web`, `lottie-react`, `mo.js`, `popmotion`, `react-transition-group`, `velocity-animate`, or any other runtime JavaScript animation library — these add 30-200KB of bundle weight, conflict with the design system's CSS-first motion vocabulary per AC-012, and bypass the `prefers-reduced-motion` automatic respect that pure CSS gives for free; AND visual transitions MUST be implemented with CSS (`transition`, `@keyframes`, `animation` property) OR with the Tailwind `animate-*` utilities backed by `tailwind.config.ts` `keyframes` + `animation` registration; AND the ONLY exceptions are: (a) `tailwindcss-animate` (the official shadcn animation plugin, ~2KB, registers utility classes but emits pure CSS), (b) `embla-carousel-react` and similar UI libraries where the animation is intrinsic to the widget's behavior (carousel scroll, drawer slide), (c) third-party charting libraries (`recharts`, `d3`) where the animation is part of data visualization, NOT decoration; AND animating React state via `requestAnimationFrame` loops in user-land code is FORBIDDEN — if a CSS-only solution is impossible, the implementation MUST be approved as a documented exception in `06-motion-transitions.md` before merge.
+- **Source:** `06-motion-transitions.md` (CSS-first principle), `package.json` (dependency audit surface), `tailwind.config.ts` (`keyframes`/`animation` extensions), AC-014 (reduced-motion compatibility — CSS gets it free, JS libs MUST be wrapped manually).
+
+### AC-014: `prefers-reduced-motion` media query disables animations
+- **Given** the user has set `prefers-reduced-motion: reduce` in their OS accessibility preferences (macOS: System Settings → Accessibility → Display → Reduce motion; Windows: Settings → Ease of Access → Display → Show animations; iOS: Settings → Accessibility → Motion → Reduce Motion)
+- **When** the application loads
+- **Then** `src/index.css` MUST contain a global rule that suppresses transitions and animations: `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; } }` — the `0.01ms` (not `0`) is intentional so JavaScript that listens for `transitionend` still fires; AND component-level `@keyframes` animations MUST individually respect the media query if they are essential to the UI (e.g. loading spinners — wrap in `@media (prefers-reduced-motion: no-preference) { ... }` so the spin only runs when motion is allowed, and provide a static fallback indicator); AND `scroll-behavior: smooth` MUST be overridden to `auto` so users with reduced-motion preference don't experience smooth-scroll which can trigger vestibular issues; AND the rule MUST live in `index.css` GLOBAL scope, NOT in a component-scoped CSS module — global enforcement is the only way to catch every transition without per-component opt-in; AND parallax effects, auto-playing video, and infinite scroll auto-advance MUST be DISABLED entirely (not just slowed) when reduced-motion is active.
+- **Source:** `06-motion-transitions.md` (reduced-motion contract), `src/index.css` (global override location), WCAG 2.1 §2.3.3 (animation from interactions), MDN `prefers-reduced-motion` reference, AC-012 (transitions collapse to ≤10ms), AC-013 (CSS-first means free reduced-motion compliance).
+
+### AC-015: Link underline sweeps right-to-left on hover
+- **Given** any inline text link (`<a>` element with text content, NOT navigation menu items which use the gradient-underline sweep per AC-027)
+- **When** the user hovers over the link
+- **Then** an underline MUST animate from the RIGHT edge of the link to the LEFT edge over 300ms (per AC-012), revealing the underline progressively; AND the underline MUST be implemented via a `::after` pseudo-element with `position: absolute`, `bottom: 0`, `right: 0`, `width: 0`, `height: 1px` (or `2px` for emphasis links), `background-color: hsl(var(--primary))` (or the link's current color via `currentColor`), and `transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1)` — on hover, `width: 100%` triggers the sweep; AND the parent link MUST be `position: relative` so the absolute pseudo-element anchors correctly; AND on mouse-out the underline MUST sweep BACK from full-width to zero in the SAME direction (right-to-left out, then right-to-left in on next hover) — using `right: 0` for the anchor achieves this naturally because `width` shrinks toward `right`; AND the link MUST NOT use `text-decoration: underline` simultaneously with the pseudo-element underline — pick one, the pseudo-element is the design-system standard because `text-decoration` cannot animate width on most browsers; AND focus-visible state MUST show the underline at full width without animation (instant) so keyboard users get immediate feedback; AND when `prefers-reduced-motion: reduce` is active per AC-014, the underline MUST appear instantly at full width on hover/focus (no sweep animation).
+- **Source:** `06-motion-transitions.md` (sweep direction + pseudo-element implementation), AC-012 (300ms baseline), AC-014 (reduced-motion override), AC-027 (navigation menu items use a DIFFERENT sweep — gradient + left-to-right — so the patterns are intentionally distinct).
+
+### AC-016: CTA buttons use slide text animation, not simple color change
+- **Given** any primary call-to-action button (the `Button` component with `variant="default"` or `variant="premium"` per `09-button-system.md`)
+- **When** the user hovers over the button
+- **Then** the button's text MUST animate via a slide effect — typically the visible text translates UP and a duplicate text element below translates UP into view (giving the illusion of the text being replaced by an identical copy with a subtle "press-up" feel); the implementation MUST use `transform: translateY(...)` on TWO stacked text spans inside an `overflow: hidden` button body, with the original at `translateY(0)` → `translateY(-100%)` and the duplicate at `translateY(100%)` → `translateY(0)`, BOTH with `transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1)`; AND a SIMPLE `background-color` change alone is FORBIDDEN for primary CTAs — that's the secondary/ghost variant pattern; AND the slide MUST be REVERSIBLE on mouse-out (text slides back down to original position); AND the button background MAY ALSO change (e.g. gradient angle shift, glow intensification) BUT the slide animation is the REQUIRED differentiator that signals "this is the primary action"; AND when `prefers-reduced-motion: reduce` is active per AC-014, the slide MUST be replaced with an instant background tint change (the visual emphasis of "this is hovered" remains, only the motion is suppressed); AND the slide direction MUST be vertical (up) — horizontal slides are reserved for navigation transitions per the design system's directional vocabulary; AND the duplicate text MUST be `aria-hidden="true"` so screen readers announce the button label only once.
+- **Source:** `09-button-system.md` (CTA variant contract + slide implementation), `06-motion-transitions.md` (vertical-direction reservation), AC-012 (300ms + cubic-bezier baseline), AC-014 (reduced-motion fallback), AC-006 (the new background color after hover MUST still meet WCAG AA against the foreground text).
+
 
 ## Code Blocks
 
