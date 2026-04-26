@@ -148,10 +148,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** brief §Endpoints, §04, §17.
 
 ### AC-12 — Streaming ingestion  `[active]`
-- **Given** an `/append-log` request
-- **When** the client sends `Transfer-Encoding: chunked`
-- **Then** the server reads the body as a stream (no full-buffer requirement) and applies §10 size caps incrementally.
-- **Verifies:** brief §Endpoints.2.b, §04.
+- **Given** a client sends a request to `/append-log` (endpoint #1 per §04) carrying `Transfer-Encoding: chunked` (no `Content-Length` header) — typically used by CI runners forwarding live `tail -f` output
+- **When** the server begins parsing the request body
+- **Then** the server MUST consume the body as a stream — reading and parsing one JSON value (or one NDJSON line, if §04 §11 ingestion-side streaming is later adopted) at a time — and MUST NOT buffer the entire body into memory before validation begins; AND the §10 size caps (`ConfigKv.MaxPushPayloadBytes` default 1 MiB, `MaxLinesPerPush` default 10 000, `MaxLineBytes` default 64 KiB) MUST be enforced INCREMENTALLY against running counters: as soon as any threshold is crossed mid-stream, the server MUST abort by returning `GL-PAYLOAD-TOO-LARGE` (HTTP 413) per §15 with a partial-ingest indicator in the error envelope's `Message` (e.g. `"aborted at line 8217 of …"`); AND chunks already accepted before the abort MUST be rolled back (the entire `/append-log` request is atomic per AC-13's sticky-`HasError` contract — a partial commit would corrupt the per-SHA cursor); AND the server MUST set a hard wall-clock cap of `ConfigKv.AppendLogMaxStreamSec` (recommended default 30 s) to prevent slow-loris ingest exhausting the PHP-FPM worker pool — exceeding the cap MUST return `GL-INGEST-TIMEOUT` per §15; AND when the request omits `Transfer-Encoding: chunked` and instead sends `Content-Length: N`, the server MAY (but is not required to) enable streaming — buffered ingest is acceptable for known-bounded payloads under the size caps.
+- **Verifies:** brief §Endpoints.2.b (chunked ingest), §04 (endpoint #1 contract), §10 (size cap matrix), §15 (`GL-PAYLOAD-TOO-LARGE`, `GL-INGEST-TIMEOUT`), AC-13 (atomicity coupling).
 
 ### AC-13 — HasError sticky until fixed-log  `[active]`
 - **Given** an `/append-log` with `HasError=true` is accepted for a Pipeline
