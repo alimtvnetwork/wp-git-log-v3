@@ -1,17 +1,16 @@
 # Schemas
 
-**Version:** 3.2.0  
+**Version:** 3.3.0  
 **Status:** Active  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-26  
 **AI Confidence:** High  
 **Ambiguity:** None
 
 ---
 
-
 ## Keywords
 
-`error`, `code`, `registry`, `schemas`
+`error`, `code`, `registry`, `schemas`, `json-schema`
 
 ---
 
@@ -24,24 +23,271 @@
 | Ambiguity assigned | ✅ |
 | Keywords present | ✅ |
 | Scoring table present | ✅ |
+| Inlined contracts present | ✅ |
 
+---
 
 ## Purpose
 
-Error code registry JSON schemas.
+Error code registry JSON schemas. This module is the source of truth for both:
+
+1. **`error-code.schema.json`** — single-project error code definitions (used by Go libraries and TypeScript validators).
+2. **`error-codes-index.schema.json`** — per-module index files (used by ecosystem-wide aggregators).
+
+Both schemas target **JSON Schema Draft 2020-12-compatible** validators (also valid under Draft 7 for legacy tooling).
+
+---
+
+## Inlined Contracts
+
+> Both schemas are inlined here as the source of truth. Sibling `.json` files are bit-for-bit copies maintained by `linter-scripts/sync-schemas.cjs`.
+
+### Contract 1 — `error-code.schema.json` (Single-Project Error Code Definitions)
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Error Code Schema",
+  "description": "Schema for validating standardized error codes (supports both prefixed and integer formats)",
+  "type": "object",
+  "definitions": {
+    "ErrorCode": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Z]{2,4}-[0-9]{3}-[0-9]{2}$",
+          "description": "Prefixed format: PROJECT-CATEGORY-NUMBER (e.g., SM-400-01)",
+          "examples": ["GEN-100-01", "SM-400-01", "LM-300-02", "PS-9500-01"]
+        },
+        {
+          "type": "integer",
+          "minimum": 1000,
+          "maximum": 99999,
+          "description": "Integer format for Go CLI tools (e.g., 7001, 9301, 14200)",
+          "examples": [7001, 9301, 14200]
+        },
+        {
+          "type": "string",
+          "pattern": "^[0-9]{4,5}$",
+          "description": "Integer format as string for Go CLI tools",
+          "examples": ["7001", "9301", "14200"]
+        }
+      ]
+    },
+    "ErrorEntry": {
+      "type": "object",
+      "required": ["Code", "Name", "Message"],
+      "properties": {
+        "Code": { "$ref": "#/definitions/ErrorCode" },
+        "Name": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "description": "Constant name in UPPER_SNAKE_CASE",
+          "examples": ["CONFIG_MISSING", "AUTH_REQUIRED", "DB_CONNECTION"]
+        },
+        "Message": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 200,
+          "description": "Human-readable error message"
+        },
+        "Category": {
+          "type": "string",
+          "enum": [
+            "general", "authentication", "authorization", "validation",
+            "business_logic", "database", "external_services",
+            "file_system", "network"
+          ]
+        },
+        "Severity": {
+          "type": "string",
+          "enum": ["info", "warning", "error", "critical"],
+          "default": "error"
+        },
+        "Recoverable": { "type": "boolean", "default": true },
+        "UserVisible": { "type": "boolean", "default": true },
+        "HttpStatus": { "type": "integer", "minimum": 100, "maximum": 599 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "Project": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,4}$",
+      "description": "Project prefix (2-4 uppercase letters)"
+    },
+    "Version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "Errors": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/ErrorEntry" }
+    }
+  },
+  "required": ["Project", "Errors"],
+  "additionalProperties": false
+}
+```
+
+### Contract 2 — `error-codes-index.schema.json` (Per-Module Index Files)
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Module Error Codes Index Schema",
+  "description": "Schema for validating per-module error-codes.json index files used across the ecosystem. Supports integer codes, local ERR_xxxx PHP codes, and prefixed E{x}xxx Go codes.",
+  "type": "object",
+  "required": ["Title", "Project", "Categories", "Stats"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "Title": { "type": "string", "minLength": 5 },
+    "Description": { "type": "string" },
+    "Version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "Generated": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "Source": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "null" }
+      ]
+    },
+    "Project": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,4}(-[A-Z]{2,4})?$",
+      "description": "Project prefix (e.g., AB, WSP, SM-CG)"
+    },
+    "Range": { "$ref": "#/definitions/Range" },
+    "Ranges": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Range" },
+      "minItems": 1
+    },
+    "Format": { "type": "string" },
+    "Note": { "type": "string" },
+    "ReassignedFrom": { "type": "string" },
+    "RemappedFrom": { "type": "string" },
+    "ExitCodes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/ExitCodeEntry" }
+    },
+    "Categories": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Category" }
+    },
+    "Stats": { "$ref": "#/definitions/Stats" }
+  },
+  "oneOf": [
+    { "required": ["Range"] },
+    { "required": ["Ranges"] }
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Range": {
+      "type": "object",
+      "required": ["Min", "Max"],
+      "properties": {
+        "Min": { "type": "integer", "minimum": 0 },
+        "Max": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "Category": {
+      "type": "object",
+      "required": ["Name", "Codes"],
+      "properties": {
+        "Name": { "type": "string", "minLength": 1 },
+        "Range": { "$ref": "#/definitions/Range" },
+        "LocalRange": { "type": "string" },
+        "EcosystemRange": { "$ref": "#/definitions/Range" },
+        "Prefix": { "type": "string" },
+        "Source": { "type": "string" },
+        "Codes": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/CodeEntry" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "CodeEntry": {
+      "type": "object",
+      "required": ["Constant", "Description", "Retryable"],
+      "properties": {
+        "Code": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "pattern": "^E[0-9]{4}$" }
+          ]
+        },
+        "LocalCode": {
+          "oneOf": [
+            { "type": "string", "pattern": "^ERR_[0-9]{4}$" },
+            { "type": "integer", "minimum": 1000 }
+          ]
+        },
+        "Constant": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]*$"
+        },
+        "Description": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 200
+        },
+        "Retryable": { "type": "boolean" },
+        "Http": { "type": "integer", "minimum": 100, "maximum": 599 },
+        "Exit": { "type": "integer", "minimum": 0, "maximum": 255 }
+      },
+      "additionalProperties": false
+    },
+    "ExitCodeEntry": {
+      "type": "object",
+      "required": ["Code", "Constant", "Description"],
+      "properties": {
+        "Code": { "type": "integer", "minimum": 0, "maximum": 255 },
+        "Constant": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]*$" },
+        "Description": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "Stats": {
+      "type": "object",
+      "required": ["TotalCodes", "RetryableCodes"],
+      "properties": {
+        "TotalCodes": { "type": "integer", "minimum": 0 },
+        "TotalCategories": { "type": "integer", "minimum": 0 },
+        "RetryableCodes": { "type": "integer", "minimum": 0 },
+        "RangeUtilization": { "type": "string" },
+        "EcosystemRemapStatus": {
+          "type": "string",
+          "enum": ["pending", "complete"]
+        },
+        "Note": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+```
 
 ---
 
 ## Document Inventory
 
-| File |
-|------|
-| 99-consistency-report.md |
+| File | Purpose |
+|------|---------|
+| `00-overview.md` | This document — inlined contracts + module purpose |
+| `error-code.schema.json` | Single-project schema (mirrored above) |
+| `error-codes-index.schema.json` | Per-module index schema (mirrored above) |
+| `97-acceptance-criteria.md` | GWT criteria validating schema constraints |
+| `98-changelog.md` | Version history |
+| `99-consistency-report.md` | Health/inventory snapshot |
 
-
-| 99-consistency-report.md |
 ---
 
 ## Cross-References
 
-_See parent folder's `00-overview.md` for broader context._
+- [Module acceptance criteria](./97-acceptance-criteria.md)
+- [Module changelog](./98-changelog.md)
+- [Module consistency report](./99-consistency-report.md)
+- _See parent folder's `00-overview.md` for broader context._
