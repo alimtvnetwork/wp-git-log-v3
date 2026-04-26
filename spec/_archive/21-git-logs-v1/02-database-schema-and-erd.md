@@ -1,7 +1,7 @@
 > ⚠️ **DEPRECATED — Legacy v1 Spec (folder 21)**  
 > This document is preserved for historical reference only. **Do not implement against it.**  
-> The active specification is **v2** in [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
-> See [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md) for the current canonical source.  
+> The active specification is **v2** in [`spec/22-git-logs-v2/`](../../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
+> See [`spec/22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) for the current canonical source.  
 > Deprecated: 2026-04-25
 
 ---
@@ -18,7 +18,7 @@
 
 ## Overview
 
-This document defines the complete persistent data model for the `git-logs` WordPress plugin. The schema is engineered to satisfy the project's database conventions ([../04-database-conventions/01-naming-conventions.md](../04-database-conventions/01-naming-conventions.md), [../04-database-conventions/02-schema-design.md](../04-database-conventions/02-schema-design.md), [../04-database-conventions/05-relationship-diagrams.md](../04-database-conventions/05-relationship-diagrams.md)).
+This document defines the complete persistent data model for the `git-logs` WordPress plugin. The schema is engineered to satisfy the project's database conventions ([../../04-database-conventions/01-naming-conventions.md](../../04-database-conventions/01-naming-conventions.md), [../../04-database-conventions/02-schema-design.md](../../04-database-conventions/02-schema-design.md), [../../04-database-conventions/05-relationship-diagrams.md](../../04-database-conventions/05-relationship-diagrams.md)).
 
 It describes:
 - 7 entity tables (`User`, `RefreshToken`, `Repository`, `Pipeline`, `LogEntry`, `AuditTrail`, plus the WordPress bridge view)
@@ -228,7 +228,7 @@ CREATE INDEX IdxLogEntry_CreatedAt       ON LogEntry(CreatedAt);
 ### 3.6 `AuditTrail`
 
 **Purpose:** Append-only record of every endpoint hit (auth or anonymous) and every business transaction (token issue/revoke, repo CRUD, log push, log query, auth fail).  
-**Category:** Transactional / Audit → requires `Notes` (audit-only variant per [../04-database-conventions/02-schema-design.md §6.1](../04-database-conventions/02-schema-design.md)).  
+**Category:** Transactional / Audit → requires `Notes` (audit-only variant per [../../04-database-conventions/02-schema-design.md §6.1](../../04-database-conventions/02-schema-design.md)).  
 **Expected volume:** > 2,000,000,000 rows (BIGINT PK).
 
 | Column | Type | Constraints | Description |
@@ -280,7 +280,7 @@ CREATE UNIQUE INDEX IdxUserRole_UserRole ON UserRole(UserId, RoleId);
 CREATE INDEX        IdxUserRole_RoleId   ON UserRole(RoleId);
 ```
 
-> Pure junction table — `Description`/`Notes`/`Comments` not required (per Rule 12 / §6.1 of [02-schema-design.md](../04-database-conventions/02-schema-design.md)).
+> Pure junction table — `Description`/`Notes`/`Comments` not required (per Rule 12 / §6.1 of [02-schema-design.md](../../04-database-conventions/02-schema-design.md)).
 
 ---
 
@@ -656,11 +656,11 @@ Per the locked decision in [00-overview.md](./00-overview.md): log retention is 
 
 | Reference | Location |
 |-----------|----------|
-| DB naming conventions (canonical) | [../04-database-conventions/01-naming-conventions.md](../04-database-conventions/01-naming-conventions.md) |
-| Schema design rules | [../04-database-conventions/02-schema-design.md](../04-database-conventions/02-schema-design.md) |
-| Relationship diagram patterns | [../04-database-conventions/05-relationship-diagrams.md](../04-database-conventions/05-relationship-diagrams.md) |
-| ORM and views | [../04-database-conventions/03-orm-and-views.md](../04-database-conventions/03-orm-and-views.md) |
-| REST API JSON format (PascalCase keys) | [../04-database-conventions/06-rest-api-format.md](../04-database-conventions/06-rest-api-format.md) |
+| DB naming conventions (canonical) | [../../04-database-conventions/01-naming-conventions.md](../../04-database-conventions/01-naming-conventions.md) |
+| Schema design rules | [../../04-database-conventions/02-schema-design.md](../../04-database-conventions/02-schema-design.md) |
+| Relationship diagram patterns | [../../04-database-conventions/05-relationship-diagrams.md](../../04-database-conventions/05-relationship-diagrams.md) |
+| ORM and views | [../../04-database-conventions/03-orm-and-views.md](../../04-database-conventions/03-orm-and-views.md) |
+| REST API JSON format (PascalCase keys) | [../../04-database-conventions/06-rest-api-format.md](../../04-database-conventions/06-rest-api-format.md) |
 | Glossary & enums | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |
 | Audit trail behavior | ./10-audit-trail.md (`10-audit-trail` — removed in v1 deprecation) |
 

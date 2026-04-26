@@ -1,7 +1,7 @@
 > ⚠️ **DEPRECATED — Legacy v1 Spec (folder 21)**  
 > This document is preserved for historical reference only. **Do not implement against it.**  
-> The active specification is **v2** in [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
-> See [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md) for the current canonical source.  
+> The active specification is **v2** in [`spec/22-git-logs-v2/`](../../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
+> See [`spec/22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) for the current canonical source.  
 > Deprecated: 2026-04-25
 
 ---
@@ -38,7 +38,7 @@ This document covers the **internal diagnostic stream**. CI/CD log ingestion is 
 | Audit trail schema | [./02-database-schema-and-erd.md](./02-database-schema-and-erd.md) §3.6 |
 | Audit trail behavior | ./10-audit-trail.md (`10-audit-trail` — removed in v1 deprecation) *(planned)* |
 | Error management | [./11-error-management.md](./11-error-management.md) *(planned)* |
-| Foundational error mgmt | [../03-error-manage/00-overview.md](../03-error-manage/00-overview.md) |
+| Foundational error mgmt | [../../03-error-manage/00-overview.md](../../03-error-manage/00-overview.md) |
 | Glossary & enums | [./01-glossary-and-enums.md](./01-glossary-and-enums.md) |
 
 ---

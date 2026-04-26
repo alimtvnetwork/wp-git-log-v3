@@ -1,7 +1,7 @@
 > ⚠️ **DEPRECATED — Legacy v1 Spec (folder 21)**  
 > This document is preserved for historical reference only. **Do not implement against it.**  
-> The active specification is **v2** in [`spec/22-git-logs-v2/`](../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
-> See [`spec/22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md) for the current canonical source.  
+> The active specification is **v2** in [`spec/22-git-logs-v2/`](../../22-git-logs-v2/00-overview.md) (SQLite, no JWT, SSH-key auth).  
+> See [`spec/22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) for the current canonical source.  
 > Deprecated: 2026-04-25
 
 ---
@@ -471,7 +471,7 @@ Setup: 60-req/60s sliding window, `R50` resolved.
 
 | # | Item | Notes |
 |---|------|-------|
-| OI-ALLOW-01 | HS256 verifier storage | Section 3 step 6 introduces `Repository.LogSenderTokenVerifier` (AEAD-encrypted). Alternative: switch envelope to **Ed25519 / RS256** so only a public key is stored — eliminates symmetric secret at rest. Decide before implementation; affects schema. Tracked as finding [F-02](../25-app-issues/02-consolidated-audit-findings/00-overview.md). |
+| OI-ALLOW-01 | HS256 verifier storage | Section 3 step 6 introduces `Repository.LogSenderTokenVerifier` (AEAD-encrypted). Alternative: switch envelope to **Ed25519 / RS256** so only a public key is stored — eliminates symmetric secret at rest. Decide before implementation; affects schema. Tracked as finding [F-02](../../25-app-issues/02-consolidated-audit-findings/00-overview.md). |
 | OI-ALLOW-02 | Token rotation grace window | Default 24 h; should it be admin-configurable per-repo? |
 | OI-ALLOW-03 | `OwnerWildcard` + per-repo rate limit | Currently buckets by resolved `RepositoryId`; should an `OwnerWildcard` row instead bucket by `(RepositoryId, owner, repo-from-payload)` to avoid one noisy repo starving siblings? |
 | OI-ALLOW-04 | Whether to expose a `/repos/check` dry-run endpoint for CI to validate config | UX nicety; needs rate limit of its own. |
