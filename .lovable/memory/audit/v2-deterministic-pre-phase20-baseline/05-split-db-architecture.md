@@ -1,0 +1,75 @@
+# Audit v2 — `spec/05-split-db-architecture`
+
+**Date:** 2026-04-25  
+**Auditor:** Deterministic rubric (no AI)  
+**Implementability Score:** **91/100 (A)**  
+**Blast radius:** 9/10
+
+> Deterministic score 91/100 (A) for spec/05-split-db-architecture.
+
+
+**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.
+
+---
+
+## 7-Dimension Scores (v2 weights)
+
+| Dimension | Weight | Score | Contribution |
+|---|---:|---:|---:|
+| Implementability | 35% | 75 | 26.2 |
+| Completeness | 20% | 100 | 20.0 |
+| Alignment | 15% | 100 | 15.0 |
+| Consistency | 10% | 100 | 10.0 |
+| Clarity | 10% | 100 | 10.0 |
+| Testability | 7% | 100 | 7.0 |
+| Maintainability | 3% | 100 | 3.0 |
+
+## Deterministic Metrics (pre-AI)
+
+```json
+{
+  "md_files": 7,
+  "mmd_files": 0,
+  "overview_chars": 3931,
+  "ac_chars": 22965,
+  "ac_count": 23,
+  "gwt_block_count": 20,
+  "consistency_report": true,
+  "code_blocks_total": 27,
+  "code_blocks_by_lang": {
+    "plain": 7,
+    "bash": 1,
+    "sql": 3,
+    "go": 14,
+    "json": 1,
+    "text": 1
+  },
+  "has_sql_ddl": true,
+  "has_json_schema": true,
+  "has_ts_enums": false,
+  "has_yaml_openapi": false,
+  "has_mermaid": false,
+  "links_total": 7,
+  "links_broken": 0,
+  "todo_density": 0,
+  "waffle_per_kchar": 0.06,
+  "child_modules": 2
+}
+```
+
+## Implementability Blockers
+
+_(none — AI can build this)_
+
+## Code Mapping
+
+**Implemented by:** _(none — pure-doc spec)_
+**Expected but missing:** _(none)_
+**Orphan code candidates:** _(none)_
+
+## Findings
+
+| # | Category | Sev | Impact | Issue |
+|---:|---|:-:|:-:|---|
+
+### Detail + Proposed Corrections

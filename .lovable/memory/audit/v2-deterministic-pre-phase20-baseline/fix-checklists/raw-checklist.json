@@ -1,0 +1,2324 @@
+{
+  "category_counts": {
+    "broken-link": 41,
+    "drift": 9,
+    "maintainability": 72,
+    "missing-contract": 30,
+    "untestable": 49
+  },
+  "checklists": [
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/05-split-db-architecture/03-issues/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/05-split-db-architecture/03-issues/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/05-split-db-architecture/03-issues`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/05-split-db-architecture/03-issues` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/05-split-db-architecture/03-issues/"
+        },
+        {
+          "ac_test": "Given `spec/05-split-db-architecture/03-issues/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/05-split-db-architecture/03-issues/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "D",
+      "implementability": 10,
+      "module": "05-split-db-architecture/03-issues",
+      "score": 54
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/06-seedable-config-architecture/03-issues/00-overview.md`, When grepped, Then it MUST contain at least one ```toml fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```toml``` fenced block containing the TOML configuration block. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/06-seedable-config-architecture/03-issues/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/06-seedable-config-architecture/03-issues`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/06-seedable-config-architecture/03-issues` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/06-seedable-config-architecture/03-issues/"
+        },
+        {
+          "ac_test": "Given `spec/06-seedable-config-architecture/03-issues/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/06-seedable-config-architecture/03-issues/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "D",
+      "implementability": 10,
+      "module": "06-seedable-config-architecture/03-issues",
+      "score": 54
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/./00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/./00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/./97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/./97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/./98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/./98-changelog.md"
+        }
+      ],
+      "effort_min_total": 95,
+      "grade": "D",
+      "implementability": 30,
+      "module": ".",
+      "score": 59
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/10-research/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/10-research/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/10-research`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/10-research` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/10-research/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/10-research/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/10-research/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "02-coding-guidelines/10-research",
+      "score": 63
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/22-app-issues/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/22-app-issues/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/22-app-issues`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/22-app-issues` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/22-app-issues/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/22-app-issues/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/22-app-issues/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "02-coding-guidelines/22-app-issues",
+      "score": 63
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/07-schemas/00-overview.md`, When grepped, Then it MUST contain at least one ```json fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```json``` fenced block containing the JSON Schema document. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/03-error-manage/03-error-code-registry/07-schemas/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/07-schemas/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/03-error-code-registry/07-schemas/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry/07-schemas`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry/07-schemas` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/03-error-code-registry/07-schemas/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/07-schemas/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/03-error-code-registry/07-schemas/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 45,
+      "grade": "C",
+      "implementability": 30,
+      "module": "03-error-manage/03-error-code-registry/07-schemas",
+      "score": 63
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/08-linter-scripts/00-overview.md`, When grepped, Then it MUST contain at least one ```ts fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```ts``` fenced block containing the TypeScript discriminated-union for error codes. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/03-error-manage/03-error-code-registry/08-linter-scripts/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/08-linter-scripts/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/03-error-code-registry/08-linter-scripts/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry/08-linter-scripts`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry/08-linter-scripts` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/03-error-code-registry/08-linter-scripts/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/08-linter-scripts/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/03-error-code-registry/08-linter-scripts/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 45,
+      "grade": "C",
+      "implementability": 30,
+      "module": "03-error-manage/03-error-code-registry/08-linter-scripts",
+      "score": 63
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/25-app-issues/01-phase-2-git-logs-audit/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/25-app-issues/01-phase-2-git-logs-audit/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/25-app-issues/01-phase-2-git-logs-audit`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/25-app-issues/01-phase-2-git-logs-audit` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/25-app-issues/01-phase-2-git-logs-audit/"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 1 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 10,
+          "priority": "P3",
+          "target_file": "spec/25-app-issues/01-phase-2-git-logs-audit/*.md"
+        },
+        {
+          "ac_test": "Given `spec/25-app-issues/01-phase-2-git-logs-audit/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/25-app-issues/01-phase-2-git-logs-audit/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 50,
+      "grade": "C",
+      "implementability": 30,
+      "module": "25-app-issues/01-phase-2-git-logs-audit",
+      "score": 64
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/21-app/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/21-app/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/21-app/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/21-app/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/21-app`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/21-app` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/21-app/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/21-app/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/21-app/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 45,
+      "grade": "C",
+      "implementability": 30,
+      "module": "02-coding-guidelines/21-app",
+      "score": 65
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/23-app-database/00-overview.md`, When grepped, Then it MUST contain at least one ```sql fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```sql``` fenced block containing the CREATE TABLE / CREATE INDEX statements. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/23-app-database/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/23-app-database/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/23-app-database/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/23-app-database/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/23-app-database/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "02-coding-guidelines/23-app-database",
+      "score": 67
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/24-app-design-system-and-ui/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/24-app-design-system-and-ui/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/24-app-design-system-and-ui/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/24-app-design-system-and-ui/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/24-app-design-system-and-ui/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/24-app-design-system-and-ui/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "02-coding-guidelines/24-app-design-system-and-ui",
+      "score": 67
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/09-powershell-integration/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/09-powershell-integration/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/09-powershell-integration/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (7).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/09-powershell-integration/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/09-powershell-integration/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/09-powershell-integration/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "02-coding-guidelines/09-powershell-integration",
+      "score": 68
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/06-apperror-package/00-overview.md`, When grepped, Then it MUST contain at least one ```ts fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```ts``` fenced block containing the TypeScript discriminated-union for error codes. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/03-error-manage/02-error-architecture/06-apperror-package/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/06-apperror-package/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (8).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/06-apperror-package/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/06-apperror-package`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/06-apperror-package` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/06-apperror-package/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/06-apperror-package/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/06-apperror-package/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 45,
+      "grade": "C",
+      "implementability": 30,
+      "module": "03-error-manage/02-error-architecture/06-apperror-package",
+      "score": 69
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/24-app-design-system-and-ui/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/24-app-design-system-and-ui/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/24-app-design-system-and-ui/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/24-app-design-system-and-ui/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/24-app-design-system-and-ui/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/24-app-design-system-and-ui/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "24-app-design-system-and-ui",
+      "score": 69
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/10-research/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/10-research/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/10-research/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/10-research/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 35,
+      "grade": "C",
+      "implementability": 30,
+      "module": "10-research",
+      "score": 70
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/23-app-database/00-overview.md`, When grepped, Then it MUST contain at least one ```sql fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```sql``` fenced block containing the CREATE TABLE / CREATE INDEX statements. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/23-app-database/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/23-app-database/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/23-app-database/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/23-app-database/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/23-app-database/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "23-app-database",
+      "score": 71
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/25-app-issues/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/25-app-issues/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/25-app-issues/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/25-app-issues/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 35,
+      "grade": "C",
+      "implementability": 30,
+      "module": "25-app-issues",
+      "score": 72
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/11-security/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/11-security/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/11-security/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/11-security/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/11-security/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/11-security/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 30,
+      "module": "02-coding-guidelines/11-security",
+      "score": 73
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/26-gitlogs-diagrams/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/26-gitlogs-diagrams/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/26-gitlogs-diagrams/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/26-gitlogs-diagrams/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/26-gitlogs-diagrams/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/26-gitlogs-diagrams/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 95,
+      "grade": "D",
+      "implementability": 35,
+      "module": "26-gitlogs-diagrams",
+      "score": 59
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/14-update/diagrams/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/14-update/diagrams/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/14-update/diagrams`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/14-update/diagrams` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/14-update/diagrams/"
+        },
+        {
+          "ac_test": "Given `spec/14-update/diagrams/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/14-update/diagrams/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 35,
+      "module": "14-update/diagrams",
+      "score": 65
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/01-spec-authoring-guide/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/01-spec-authoring-guide/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/01-spec-authoring-guide/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (4).",
+          "action": "Rewrite 4 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 20,
+          "priority": "P1",
+          "target_file": "spec/01-spec-authoring-guide/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/01-spec-authoring-guide`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/01-spec-authoring-guide` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 55,
+          "priority": "P1",
+          "target_file": "spec/01-spec-authoring-guide/"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 2 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 20,
+          "priority": "P3",
+          "target_file": "spec/01-spec-authoring-guide/*.md"
+        },
+        {
+          "ac_test": "Given `spec/01-spec-authoring-guide/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/01-spec-authoring-guide/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 130,
+      "grade": "D",
+      "implementability": 40,
+      "module": "01-spec-authoring-guide",
+      "score": 54
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/25-app-issues/02-consolidated-audit-findings/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/25-app-issues/02-consolidated-audit-findings/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/25-app-issues/02-consolidated-audit-findings`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/25-app-issues/02-consolidated-audit-findings` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 70,
+          "priority": "P1",
+          "target_file": "spec/25-app-issues/02-consolidated-audit-findings/"
+        },
+        {
+          "ac_test": "Given `spec/25-app-issues/02-consolidated-audit-findings/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/25-app-issues/02-consolidated-audit-findings/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 105,
+      "grade": "D",
+      "implementability": 40,
+      "module": "25-app-issues/02-consolidated-audit-findings",
+      "score": 59
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/01-enum-specification/00-overview.md`, When grepped, Then it MUST contain at least one ```ts fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```ts``` fenced block containing the TypeScript `enum` or `as const` literal union. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/03-golang/01-enum-specification/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/01-enum-specification/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/03-golang/01-enum-specification/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/01-enum-specification/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/03-golang/01-enum-specification/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 95,
+      "grade": "C",
+      "implementability": 40,
+      "module": "02-coding-guidelines/03-golang/01-enum-specification",
+      "score": 63
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/03-golang/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (2).",
+          "action": "Rewrite 2 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 10,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/03-golang/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/03-golang/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 45,
+      "grade": "C",
+      "implementability": 40,
+      "module": "02-coding-guidelines/03-golang",
+      "score": 68
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/09-templates/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (8).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/03-error-code-registry/09-templates/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry/09-templates`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry/09-templates` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/03-error-code-registry/09-templates/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/09-templates/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/03-error-code-registry/09-templates/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "C",
+      "implementability": 40,
+      "module": "03-error-manage/03-error-code-registry/09-templates",
+      "score": 68
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/08-file-folder-naming/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/08-file-folder-naming/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/08-file-folder-naming`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/08-file-folder-naming` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/08-file-folder-naming/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/08-file-folder-naming/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/08-file-folder-naming/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 40,
+      "module": "02-coding-guidelines/08-file-folder-naming",
+      "score": 69
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/18-wp-plugin-how-to/02-enums-and-coding-style/00-overview.md`, When grepped, Then it MUST contain at least one ```ts fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```ts``` fenced block containing the TypeScript `enum` or `as const` literal union. Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/18-wp-plugin-how-to/02-enums-and-coding-style/00-overview.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/18-wp-plugin-how-to/02-enums-and-coding-style`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/18-wp-plugin-how-to/02-enums-and-coding-style` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/18-wp-plugin-how-to/02-enums-and-coding-style/"
+        },
+        {
+          "ac_test": "Given `spec/18-wp-plugin-how-to/02-enums-and-coding-style/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/18-wp-plugin-how-to/02-enums-and-coding-style/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "C",
+      "implementability": 40,
+      "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
+      "score": 69
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/07-csharp/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/07-csharp/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/07-csharp/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (7).",
+          "action": "Rewrite 7 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 35,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/07-csharp/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/07-csharp/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/07-csharp/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 70,
+      "grade": "C",
+      "implementability": 40,
+      "module": "02-coding-guidelines/07-csharp",
+      "score": 71
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/04-golang-standards-reference/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/03-golang/04-golang-standards-reference/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/04-golang-standards-reference/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (10).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/03-golang/04-golang-standards-reference/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/03-golang/04-golang-standards-reference`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/03-golang/04-golang-standards-reference` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/03-golang/04-golang-standards-reference/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/03-golang/04-golang-standards-reference/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/03-golang/04-golang-standards-reference/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 45,
+      "grade": "C",
+      "implementability": 40,
+      "module": "02-coding-guidelines/03-golang/04-golang-standards-reference",
+      "score": 72
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/27-spec-toolchain/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/27-spec-toolchain/00-overview.md"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 6 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 60,
+          "priority": "P3",
+          "target_file": "spec/27-spec-toolchain/*.md"
+        },
+        {
+          "ac_test": "Given `spec/27-spec-toolchain/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/27-spec-toolchain/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 95,
+      "grade": "C",
+      "implementability": 40,
+      "module": "27-spec-toolchain",
+      "score": 73
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/04-php/00-overview.md`, When grepped, Then it MUST contain at least one ```text fenced code block \u226510 non-blank lines.",
+          "action": "Inline a ```text``` fenced block containing the normative contract block (DDL / schema / enum / OpenAPI). Do not link to a sibling file \u2014 paste the contract directly.",
+          "category": "missing-contract",
+          "effort_min": 30,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/04-php/00-overview.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/04-php/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (8).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/04-php/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/04-php/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/04-php/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "B",
+      "implementability": 40,
+      "module": "02-coding-guidelines/04-php",
+      "score": 79
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (8).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "B",
+      "implementability": 45,
+      "module": "03-error-manage",
+      "score": 81
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/16-static-analysis/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/16-static-analysis/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 2 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 20,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/16-static-analysis/*.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/16-static-analysis/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/16-static-analysis/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 85,
+      "grade": "C",
+      "implementability": 50,
+      "module": "02-coding-guidelines/01-cross-language/16-static-analysis",
+      "score": 64
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 50,
+      "module": "03-error-manage/02-error-architecture/04-error-modal/04-color-themes",
+      "score": 64
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 50,
+      "module": "03-error-manage/02-error-architecture/04-error-modal/02-react-components",
+      "score": 66
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/02-typescript/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (2).",
+          "action": "Rewrite 2 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 10,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/02-typescript/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 1 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 10,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/02-typescript/*.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/02-typescript/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/02-typescript/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 25,
+      "grade": "C",
+      "implementability": 50,
+      "module": "02-coding-guidelines/02-typescript",
+      "score": 70
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/12-cicd-pipeline-workflows/01-browser-extension-deploy`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/12-cicd-pipeline-workflows/01-browser-extension-deploy` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/"
+        },
+        {
+          "ac_test": "Given `spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "C",
+      "implementability": 50,
+      "module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
+      "score": 70
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/04-code-style/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (9).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/04-code-style/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language/04-code-style`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language/04-code-style` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/04-code-style/"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 3 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 30,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/04-code-style/*.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/04-code-style/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/04-code-style/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 45,
+      "grade": "C",
+      "implementability": 50,
+      "module": "02-coding-guidelines/01-cross-language/04-code-style",
+      "score": 72
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/12-cicd-pipeline-workflows/02-go-binary-deploy`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/12-cicd-pipeline-workflows/02-go-binary-deploy` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/12-cicd-pipeline-workflows/02-go-binary-deploy/"
+        },
+        {
+          "ac_test": "Given `spec/12-cicd-pipeline-workflows/02-go-binary-deploy/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/12-cicd-pipeline-workflows/02-go-binary-deploy/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "C",
+      "implementability": 50,
+      "module": "12-cicd-pipeline-workflows/02-go-binary-deploy",
+      "score": 72
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/app-issues/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (7).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/app-issues/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/app-issues`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/app-issues` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/app-issues/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/app-issues/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/01-error-resolution/app-issues/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "C",
+      "implementability": 50,
+      "module": "03-error-manage/01-error-resolution/app-issues",
+      "score": 73
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/02-boolean-principles/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (11).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/02-boolean-principles/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language/02-boolean-principles`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language/02-boolean-principles` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 10,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/02-boolean-principles/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/02-boolean-principles/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/02-boolean-principles/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 20,
+      "grade": "C",
+      "implementability": 50,
+      "module": "02-coding-guidelines/01-cross-language/02-boolean-principles",
+      "score": 74
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (9).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "C",
+      "implementability": 50,
+      "module": "02-coding-guidelines/01-cross-language/15-master-coding-guidelines",
+      "score": 74
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/01-error-resolution/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "C",
+      "implementability": 50,
+      "module": "03-error-manage/01-error-resolution",
+      "score": 74
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/05-debugging-guides/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (9).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/05-debugging-guides/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/05-debugging-guides`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/05-debugging-guides` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/05-debugging-guides/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/05-debugging-guides/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/01-error-resolution/05-debugging-guides/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "C",
+      "implementability": 50,
+      "module": "03-error-manage/01-error-resolution/05-debugging-guides",
+      "score": 74
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 55,
+      "module": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
+      "score": 66
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/05-response-envelope/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (7).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/05-response-envelope/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/05-response-envelope`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/05-response-envelope` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/05-response-envelope/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/05-response-envelope/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/05-response-envelope/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 55,
+      "module": "03-error-manage/02-error-architecture/05-response-envelope",
+      "score": 75
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/05-rust/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (6).",
+          "action": "Rewrite 6 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 30,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/05-rust/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/05-rust/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/05-rust/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 35,
+      "grade": "B",
+      "implementability": 60,
+      "module": "02-coding-guidelines/05-rust",
+      "score": 79
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/06-ai-optimization/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/06-ai-optimization/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 65,
+      "module": "02-coding-guidelines/06-ai-optimization",
+      "score": 69
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/11-security/01-axios-version-control/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/02-coding-guidelines/11-security/01-axios-version-control/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/11-security/01-axios-version-control/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/11-security/01-axios-version-control/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 65,
+      "module": "02-coding-guidelines/11-security/01-axios-version-control",
+      "score": 71
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 65,
+      "module": "03-error-manage/02-error-architecture/04-error-modal/01-copy-formats",
+      "score": 71
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/07-design-system/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/07-design-system/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/07-design-system/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/07-design-system/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "C",
+      "implementability": 65,
+      "module": "07-design-system",
+      "score": 71
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/12-cicd-pipeline-workflows/03-reusable-ci-guards`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/12-cicd-pipeline-workflows/03-reusable-ci-guards` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/12-cicd-pipeline-workflows/03-reusable-ci-guards/"
+        },
+        {
+          "ac_test": "Given `spec/12-cicd-pipeline-workflows/03-reusable-ci-guards/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/12-cicd-pipeline-workflows/03-reusable-ci-guards/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "B",
+      "implementability": 65,
+      "module": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
+      "score": 78
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/15-distribution-and-runner`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/15-distribution-and-runner` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/15-distribution-and-runner/"
+        },
+        {
+          "ac_test": "Given `spec/15-distribution-and-runner/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/15-distribution-and-runner/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "B",
+      "implementability": 65,
+      "module": "15-distribution-and-runner",
+      "score": 78
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/03-retrospectives/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (9).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/03-retrospectives/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/03-retrospectives`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/03-retrospectives` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/03-retrospectives/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/03-retrospectives/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/01-error-resolution/03-retrospectives/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 65,
+      "module": "03-error-manage/01-error-resolution/03-retrospectives",
+      "score": 79
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (11).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 65,
+      "module": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
+      "score": 79
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "B",
+      "implementability": 65,
+      "module": "03-error-manage/02-error-architecture",
+      "score": 80
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/03-error-code-registry` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/03-error-code-registry/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/03-error-code-registry/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/03-error-code-registry/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "B",
+      "implementability": 65,
+      "module": "03-error-manage/03-error-code-registry",
+      "score": 80
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/04-php/07-php-standards-reference/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (11).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/04-php/07-php-standards-reference/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/04-php/07-php-standards-reference`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/04-php/07-php-standards-reference` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/04-php/07-php-standards-reference/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/04-php/07-php-standards-reference/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/04-php/07-php-standards-reference/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 65,
+      "module": "02-coding-guidelines/04-php/07-php-standards-reference",
+      "score": 81
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (8).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/04-error-modal`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/04-error-modal` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 65,
+      "module": "03-error-manage/02-error-architecture/04-error-modal",
+      "score": 81
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (9).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 65,
+      "module": "03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference",
+      "score": 81
+    },
+    {
+      "actions": [],
+      "effort_min_total": 0,
+      "grade": "B",
+      "implementability": 65,
+      "module": "11-powershell-integration",
+      "score": 82
+    },
+    {
+      "actions": [],
+      "effort_min_total": 0,
+      "grade": "B",
+      "implementability": 65,
+      "module": "16-generic-release",
+      "score": 82
+    },
+    {
+      "actions": [],
+      "effort_min_total": 0,
+      "grade": "B",
+      "implementability": 65,
+      "module": "14-update",
+      "score": 84
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (5).",
+          "action": "Rewrite 5 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 25,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 35,
+      "grade": "B",
+      "implementability": 70,
+      "module": "02-coding-guidelines",
+      "score": 79
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/14-update/24-update-check-mechanism/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/14-update/24-update-check-mechanism/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/14-update/24-update-check-mechanism/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/14-update/24-update-check-mechanism/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 65,
+      "grade": "B",
+      "implementability": 75,
+      "module": "14-update/24-update-check-mechanism",
+      "score": 75
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/06-seedable-config-architecture/02-features`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/06-seedable-config-architecture/02-features` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/06-seedable-config-architecture/02-features/"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 1 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 10,
+          "priority": "P3",
+          "target_file": "spec/06-seedable-config-architecture/02-features/*.md"
+        },
+        {
+          "ac_test": "Given `spec/06-seedable-config-architecture/02-features/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/06-seedable-config-architecture/02-features/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 20,
+      "grade": "B",
+      "implementability": 75,
+      "module": "06-seedable-config-architecture/02-features",
+      "score": 78
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/05-split-db-architecture/02-features`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/05-split-db-architecture/02-features` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/05-split-db-architecture/02-features/"
+        },
+        {
+          "ac_test": "Given `spec/05-split-db-architecture/02-features/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/05-split-db-architecture/02-features/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "B",
+      "implementability": 75,
+      "module": "05-split-db-architecture/02-features",
+      "score": 79
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/04-verification-patterns/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (7).",
+          "action": "Rewrite 1 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/04-verification-patterns/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/04-verification-patterns`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/03-error-manage/01-error-resolution/04-verification-patterns` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/03-error-manage/01-error-resolution/04-verification-patterns/"
+        },
+        {
+          "ac_test": "Given `spec/03-error-manage/01-error-resolution/04-verification-patterns/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/03-error-manage/01-error-resolution/04-verification-patterns/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 75,
+      "module": "03-error-manage/01-error-resolution/04-verification-patterns",
+      "score": 80
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/13-generic-cli`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/13-generic-cli` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/13-generic-cli/"
+        },
+        {
+          "ac_test": "Given `spec/13-generic-cli/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/13-generic-cli/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 10,
+      "grade": "B",
+      "implementability": 75,
+      "module": "13-generic-cli",
+      "score": 81
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/05-split-db-architecture/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (2).",
+          "action": "Rewrite 2 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 10,
+          "priority": "P1",
+          "target_file": "spec/05-split-db-architecture/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/05-split-db-architecture/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/05-split-db-architecture/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "B",
+      "implementability": 75,
+      "module": "05-split-db-architecture",
+      "score": 82
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/06-cicd-integration/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (7).",
+          "action": "Rewrite 7 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 35,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/06-cicd-integration/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/06-cicd-integration/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/06-cicd-integration/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 40,
+      "grade": "A",
+      "implementability": 75,
+      "module": "02-coding-guidelines/06-cicd-integration",
+      "score": 85
+    },
+    {
+      "actions": [],
+      "effort_min_total": 0,
+      "grade": "A",
+      "implementability": 75,
+      "module": "12-cicd-pipeline-workflows",
+      "score": 88
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/22-git-logs-v2/97-acceptance-criteria.md`, When parsed, Then it MUST contain \u22653 `### AC-` headings each followed by a `**Given** \u2026 **When** \u2026 **Then**` block.",
+          "action": "Run `python3 linter-scripts/generate-gwt-acceptance.py` to scaffold ACs, then hand-edit each into a Given/When/Then triplet.",
+          "category": "untestable",
+          "effort_min": 60,
+          "priority": "P0",
+          "target_file": "spec/22-git-logs-v2/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 2 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 20,
+          "priority": "P3",
+          "target_file": "spec/22-git-logs-v2/*.md"
+        },
+        {
+          "ac_test": "Given `spec/22-git-logs-v2/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/22-git-logs-v2/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 85,
+      "grade": "B",
+      "implementability": 85,
+      "module": "22-git-logs-v2",
+      "score": 76
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/06-seedable-config-architecture/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (2).",
+          "action": "Rewrite 2 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 10,
+          "priority": "P1",
+          "target_file": "spec/06-seedable-config-architecture/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `spec/06-seedable-config-architecture/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/06-seedable-config-architecture/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 15,
+      "grade": "A",
+      "implementability": 85,
+      "module": "06-seedable-config-architecture",
+      "score": 85
+    },
+    {
+      "actions": [],
+      "effort_min_total": 0,
+      "grade": "A",
+      "implementability": 85,
+      "module": "04-database-conventions",
+      "score": 89
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md`, When parsed, Then `gwt_block_count` MUST equal `ac_count` (2).",
+          "action": "Rewrite 2 acceptance criterion/criteria into Given/When/Then form.",
+          "category": "untestable",
+          "effort_min": 10,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md"
+        },
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/02-coding-guidelines/01-cross-language` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/"
+        },
+        {
+          "ac_test": "Given `spec/02-coding-guidelines/01-cross-language/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/02-coding-guidelines/01-cross-language/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 20,
+      "grade": "B",
+      "implementability": 95,
+      "module": "02-coding-guidelines/01-cross-language",
+      "score": 84
+    },
+    {
+      "actions": [
+        {
+          "ac_test": "Given `python3 linter-scripts/check-spec-cross-links.py --root spec/17-consolidated-guidelines`, When run, Then exit code MUST be 0.",
+          "action": "Run `python3 linter-scripts/check-spec-cross-links.py --root spec/17-consolidated-guidelines` then either (a) fix each path or (b) add the link to `linter-scripts/spec-cross-links.allowlist` with a justification comment.",
+          "category": "broken-link",
+          "effort_min": 5,
+          "priority": "P1",
+          "target_file": "spec/17-consolidated-guidelines/"
+        },
+        {
+          "ac_test": "Given the module body, When grep'd for `TODO|TBD|FIXME|XXX|HACK`, Then 0 matches.",
+          "action": "Resolve 6 TODO/TBD/FIXME marker(s). Either implement the missing detail or move the marker into a tracked AC.",
+          "category": "drift",
+          "effort_min": 60,
+          "priority": "P3",
+          "target_file": "spec/17-consolidated-guidelines/*.md"
+        },
+        {
+          "ac_test": "Given `spec/17-consolidated-guidelines/98-changelog.md`, When read, Then top-most version row MUST be dated 2026-04-25 and reference the fixes above.",
+          "action": "After applying the above fixes, bump version (\u2265 minor) and add a row to `98-changelog.md` summarising what changed.",
+          "category": "maintainability",
+          "effort_min": 5,
+          "priority": "P3",
+          "target_file": "spec/17-consolidated-guidelines/98-changelog.md"
+        }
+      ],
+      "effort_min_total": 70,
+      "grade": "B",
+      "implementability": 95,
+      "module": "17-consolidated-guidelines",
+      "score": 84
+    },
+    {
+      "actions": [],
+      "effort_min_total": 0,
+      "grade": "A+",
+      "implementability": 95,
+      "module": "18-wp-plugin-how-to",
+      "score": 95
+    }
+  ],
+  "generated": "2026-04-25",
+  "modules_analysed": 78,
+  "priority_counts": {
+    "P0": 43,
+    "P1": 77,
+    "P3": 81
+  },
+  "total_actions": 201,
+  "total_effort_minutes": 2930
+}

@@ -1,0 +1,3053 @@
+{
+  "active_firings": 45,
+  "dim_loss": {
+    "completeness": 5,
+    "consistency": 850,
+    "testability": 70
+  },
+  "fire_counts": {
+    "G-AC-02": 5,
+    "G-LINK-01": 39,
+    "G-TODO-01": 1
+  },
+  "generated": "2026-04-25",
+  "modules_analysed": 78,
+  "modules_capped": 42,
+  "passive_counts": {
+    "G-AC-01": 13,
+    "G-AC-02": 5,
+    "G-CON-01": 30,
+    "G-CON-02": 2,
+    "G-LINK-01": 2,
+    "G-LINK-02": 2,
+    "G-TODO-01": 2
+  },
+  "passive_firings": 56,
+  "per_module": [
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 59,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": ".",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        },
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 59,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 60,
+          "before": 64,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "delta": 0,
+      "final_overall": 54,
+      "final_scores": {
+        "alignment": 40,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 50,
+        "implementability": 40,
+        "maintainability": 90,
+        "testability": 60
+      },
+      "module": "01-spec-authoring-guide",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        },
+        {
+          "active": false,
+          "after": 50,
+          "before": 50,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        },
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 60,
+          "dimension": "alignment",
+          "id": "G-LINK-02",
+          "rationale": "\u22653 broken links suggests structural drift; alignment with the wider spec tree is unreliable."
+        }
+      ],
+      "raw_overall": 54,
+      "raw_scores": {
+        "alignment": 40,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 50,
+        "implementability": 40,
+        "maintainability": 90,
+        "testability": 64
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 60,
+          "before": 70,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        },
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 3,
+      "final_overall": 79,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 70,
+        "implementability": 70,
+        "maintainability": 100,
+        "testability": 60
+      },
+      "module": "02-coding-guidelines",
+      "passive_gates": [],
+      "raw_overall": 82,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 92,
+        "implementability": 70,
+        "maintainability": 100,
+        "testability": 70
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 3,
+      "final_overall": 84,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 70,
+        "implementability": 95,
+        "maintainability": 100,
+        "testability": 52
+      },
+      "module": "02-coding-guidelines/01-cross-language",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 52,
+          "before": 52,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "raw_overall": 87,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 92,
+        "implementability": 95,
+        "maintainability": 100,
+        "testability": 52
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 84,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 74,
+      "final_scores": {
+        "alignment": 80,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "02-coding-guidelines/01-cross-language/02-boolean-principles",
+      "passive_gates": [],
+      "raw_overall": 76,
+      "raw_scores": {
+        "alignment": 80,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 84,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        },
+        {
+          "active": true,
+          "after": 70,
+          "before": 75,
+          "cap": 70,
+          "dimension": "completeness",
+          "id": "G-TODO-01",
+          "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+        }
+      ],
+      "delta": 3,
+      "final_overall": 72,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 90,
+        "testability": 100
+      },
+      "module": "02-coding-guidelines/01-cross-language/04-code-style",
+      "passive_gates": [],
+      "raw_overall": 75,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 50,
+        "maintainability": 90,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 74,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "02-coding-guidelines/01-cross-language/15-master-coding-guidelines",
+      "passive_gates": [],
+      "raw_overall": 76,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 92,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 64,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 90,
+        "testability": 10
+      },
+      "module": "02-coding-guidelines/01-cross-language/16-static-analysis",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 64,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 90,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 70,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 90,
+        "testability": 52
+      },
+      "module": "02-coding-guidelines/02-typescript",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 52,
+          "before": 52,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "raw_overall": 70,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 90,
+        "testability": 52
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 68,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 52
+      },
+      "module": "02-coding-guidelines/03-golang",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 52,
+          "before": 52,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        },
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 68,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 52
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 63,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "02-coding-guidelines/03-golang/01-enum-specification",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        },
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 63,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 3,
+      "final_overall": 72,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 70,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "02-coding-guidelines/03-golang/04-golang-standards-reference",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 75,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 92,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 79,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 100,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "02-coding-guidelines/04-php",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 79,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 100,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 81,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "02-coding-guidelines/04-php/07-php-standards-reference",
+      "passive_gates": [],
+      "raw_overall": 83,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 60,
+          "before": 76,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "delta": 1,
+      "final_overall": 79,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 100,
+        "implementability": 60,
+        "maintainability": 100,
+        "testability": 60
+      },
+      "module": "02-coding-guidelines/05-rust",
+      "passive_gates": [],
+      "raw_overall": 80,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 100,
+        "implementability": 60,
+        "maintainability": 100,
+        "testability": 76
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 69,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "02-coding-guidelines/06-ai-optimization",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 69,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 60,
+          "before": 80,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 85,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 60
+      },
+      "module": "02-coding-guidelines/06-cicd-integration",
+      "passive_gates": [],
+      "raw_overall": 87,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 80
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 60,
+          "before": 80,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 71,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 60
+      },
+      "module": "02-coding-guidelines/07-csharp",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 73,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 80
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 69,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "02-coding-guidelines/08-file-folder-naming",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 68,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "02-coding-guidelines/09-powershell-integration",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 68,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 3,
+      "final_overall": 63,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 70,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "02-coding-guidelines/10-research",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 66,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 92,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 73,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "02-coding-guidelines/11-security",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 73,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 71,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "02-coding-guidelines/11-security/01-axios-version-control",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 65,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 70,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "02-coding-guidelines/21-app",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 67,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 92,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 3,
+      "final_overall": 63,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 70,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "02-coding-guidelines/22-app-issues",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 66,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 92,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 67,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "02-coding-guidelines/23-app-database",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 67,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 67,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "02-coding-guidelines/24-app-design-system-and-ui",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 67,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 81,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 100,
+        "consistency": 100,
+        "implementability": 45,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage",
+      "passive_gates": [],
+      "raw_overall": 81,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 100,
+        "consistency": 100,
+        "implementability": 45,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 74,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "03-error-manage/01-error-resolution",
+      "passive_gates": [],
+      "raw_overall": 76,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 92,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 79,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/01-error-resolution/03-retrospectives",
+      "passive_gates": [],
+      "raw_overall": 81,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 80,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 70,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/01-error-resolution/04-verification-patterns",
+      "passive_gates": [],
+      "raw_overall": 82,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 92,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 74,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/01-error-resolution/05-debugging-guides",
+      "passive_gates": [],
+      "raw_overall": 76,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 92,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 73,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/01-error-resolution/app-issues",
+      "passive_gates": [],
+      "raw_overall": 75,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 80,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "03-error-manage/02-error-architecture",
+      "passive_gates": [],
+      "raw_overall": 82,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 81,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/02-error-architecture/04-error-modal",
+      "passive_gates": [],
+      "raw_overall": 83,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 71,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "03-error-manage/02-error-architecture/04-error-modal/01-copy-formats",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 66,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "03-error-manage/02-error-architecture/04-error-modal/02-react-components",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 66,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 81,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference",
+      "passive_gates": [],
+      "raw_overall": 83,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 64,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "03-error-manage/02-error-architecture/04-error-modal/04-color-themes",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 64,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 75,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 55,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/02-error-architecture/05-response-envelope",
+      "passive_gates": [],
+      "raw_overall": 77,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 55,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 69,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 70,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/02-error-architecture/06-apperror-package",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 90,
+        "consistency": 92,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 66,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 55,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 66,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 55,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 79,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
+      "passive_gates": [],
+      "raw_overall": 81,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 80,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "03-error-manage/03-error-code-registry",
+      "passive_gates": [],
+      "raw_overall": 82,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 63,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 70,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "03-error-manage/03-error-code-registry/07-schemas",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 65,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 92,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 63,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 70,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "03-error-manage/03-error-code-registry/08-linter-scripts",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 65,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 92,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 3,
+      "final_overall": 68,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 70,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 100
+      },
+      "module": "03-error-manage/03-error-code-registry/09-templates",
+      "passive_gates": [],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 92,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 100
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 89,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 85,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "04-database-conventions",
+      "passive_gates": [],
+      "raw_overall": 89,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 85,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 82,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 52
+      },
+      "module": "05-split-db-architecture",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 52,
+          "before": 52,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "raw_overall": 82,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 52
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 79,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 70,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "05-split-db-architecture/02-features",
+      "passive_gates": [],
+      "raw_overall": 81,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 92,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 54,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 70,
+        "implementability": 10,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "05-split-db-architecture/03-issues",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        },
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 30,
+          "dimension": "implementability",
+          "id": "G-CON-02",
+          "rationale": "Overview <500 chars is a stub; no AI can implement from this."
+        }
+      ],
+      "raw_overall": 56,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 92,
+        "implementability": 10,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 85,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 85,
+        "maintainability": 100,
+        "testability": 52
+      },
+      "module": "06-seedable-config-architecture",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 52,
+          "before": 52,
+          "cap": 60,
+          "dimension": "testability",
+          "id": "G-AC-02",
+          "rationale": "ACs exist but none use Given/When/Then \u2014 testability degraded."
+        }
+      ],
+      "raw_overall": 85,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 85,
+        "maintainability": 100,
+        "testability": 52
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 78,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 70,
+        "implementability": 75,
+        "maintainability": 90,
+        "testability": 90
+      },
+      "module": "06-seedable-config-architecture/02-features",
+      "passive_gates": [],
+      "raw_overall": 80,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 60,
+        "consistency": 92,
+        "implementability": 75,
+        "maintainability": 90,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 54,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 70,
+        "implementability": 10,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "06-seedable-config-architecture/03-issues",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        },
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 30,
+          "dimension": "implementability",
+          "id": "G-CON-02",
+          "rationale": "Overview <500 chars is a stub; no AI can implement from this."
+        }
+      ],
+      "raw_overall": 56,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 92,
+        "implementability": 10,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 71,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "07-design-system",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 70,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "10-research",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 70,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 82,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "11-powershell-integration",
+      "passive_gates": [],
+      "raw_overall": 82,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 88,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "12-cicd-pipeline-workflows",
+      "passive_gates": [],
+      "raw_overall": 88,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 70,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
+      "passive_gates": [],
+      "raw_overall": 72,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 92,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 72,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "12-cicd-pipeline-workflows/02-go-binary-deploy",
+      "passive_gates": [],
+      "raw_overall": 74,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 50,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 78,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
+      "passive_gates": [],
+      "raw_overall": 80,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 81,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "13-generic-cli",
+      "passive_gates": [],
+      "raw_overall": 83,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 84,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "14-update",
+      "passive_gates": [],
+      "raw_overall": 84,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 75,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "14-update/24-update-check-mechanism",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 75,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 50,
+        "consistency": 100,
+        "implementability": 75,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 65,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 70,
+        "implementability": 35,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "14-update/diagrams",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 35,
+          "before": 35,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 67,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 65,
+        "consistency": 92,
+        "implementability": 35,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 78,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "15-distribution-and-runner",
+      "passive_gates": [],
+      "raw_overall": 80,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 82,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "16-generic-release",
+      "passive_gates": [],
+      "raw_overall": 82,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 100,
+        "implementability": 65,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 84,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 70,
+        "implementability": 95,
+        "maintainability": 90,
+        "testability": 90
+      },
+      "module": "17-consolidated-guidelines",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 55,
+          "before": 55,
+          "cap": 70,
+          "dimension": "completeness",
+          "id": "G-TODO-01",
+          "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+        }
+      ],
+      "raw_overall": 86,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 55,
+        "consistency": 92,
+        "implementability": 95,
+        "maintainability": 90,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 95,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 95,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "18-wp-plugin-how-to",
+      "passive_gates": [],
+      "raw_overall": 95,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 95,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 69,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 70,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 92,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 76,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 85,
+        "maintainability": 90,
+        "testability": 10
+      },
+      "module": "22-git-logs-v2",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        }
+      ],
+      "raw_overall": 76,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 85,
+        "maintainability": 90,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 71,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "23-app-database",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 71,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 80,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 69,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      },
+      "module": "24-app-design-system-and-ui",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 69,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 96
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 72,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "25-app-issues",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 72,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 85,
+        "consistency": 100,
+        "implementability": 30,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [
+        {
+          "active": true,
+          "after": 70,
+          "before": 92,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        }
+      ],
+      "delta": 2,
+      "final_overall": 64,
+      "final_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 70,
+        "implementability": 30,
+        "maintainability": 90,
+        "testability": 90
+      },
+      "module": "25-app-issues/01-phase-2-git-logs-audit",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 30,
+          "before": 30,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 66,
+      "raw_scores": {
+        "alignment": 90,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 92,
+        "implementability": 30,
+        "maintainability": 90,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 59,
+      "final_scores": {
+        "alignment": 40,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 50,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 90
+      },
+      "module": "25-app-issues/02-consolidated-audit-findings",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        },
+        {
+          "active": false,
+          "after": 50,
+          "before": 50,
+          "cap": 70,
+          "dimension": "consistency",
+          "id": "G-LINK-01",
+          "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
+        },
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 60,
+          "dimension": "alignment",
+          "id": "G-LINK-02",
+          "rationale": "\u22653 broken links suggests structural drift; alignment with the wider spec tree is unreliable."
+        }
+      ],
+      "raw_overall": 59,
+      "raw_scores": {
+        "alignment": 40,
+        "clarity": 100,
+        "completeness": 75,
+        "consistency": 50,
+        "implementability": 40,
+        "maintainability": 100,
+        "testability": 90
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 59,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 35,
+        "maintainability": 100,
+        "testability": 10
+      },
+      "module": "26-gitlogs-diagrams",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 10,
+          "before": 10,
+          "cap": 20,
+          "dimension": "testability",
+          "id": "G-AC-01",
+          "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
+        },
+        {
+          "active": false,
+          "after": 35,
+          "before": 35,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        }
+      ],
+      "raw_overall": 59,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 40,
+        "consistency": 100,
+        "implementability": 35,
+        "maintainability": 100,
+        "testability": 10
+      }
+    },
+    {
+      "active_gates": [],
+      "delta": 0,
+      "final_overall": 73,
+      "final_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 90,
+        "testability": 100
+      },
+      "module": "27-spec-toolchain",
+      "passive_gates": [
+        {
+          "active": false,
+          "after": 40,
+          "before": 40,
+          "cap": 50,
+          "dimension": "implementability",
+          "id": "G-CON-01",
+          "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
+        },
+        {
+          "active": false,
+          "after": 70,
+          "before": 70,
+          "cap": 70,
+          "dimension": "completeness",
+          "id": "G-TODO-01",
+          "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+        }
+      ],
+      "raw_overall": 73,
+      "raw_scores": {
+        "alignment": 100,
+        "clarity": 100,
+        "completeness": 70,
+        "consistency": 100,
+        "implementability": 40,
+        "maintainability": 90,
+        "testability": 100
+      }
+    }
+  ]
+}
