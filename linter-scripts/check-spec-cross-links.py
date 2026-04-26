@@ -51,9 +51,24 @@ def slugify(text: str) -> str:
     return text.strip("-")
 
 
+_INLINE_CODE_RE = re.compile(r"(`+)(?:(?!\1).)+?\1", re.DOTALL)
+
+
+def strip_inline_code(line: str) -> str:
+    """Replace inline-code spans with same-length runs of spaces so any
+    bracket/paren sequences inside backticks (e.g. PCRE regexes shown in
+    table cells) cannot be mistaken for markdown links by ``MD_LINK_RE``.
+    Preserves character offsets so line/column numbers stay accurate.
+    """
+    def _blank(match: re.Match[str]) -> str:
+        return " " * (match.end() - match.start())
+    return _INLINE_CODE_RE.sub(_blank, line)
+
+
 def strip_code_fences(text: str) -> str:
-    """Replace fenced code blocks with blank lines so example links inside
-    aren't validated. Preserves line numbers for accurate reporting.
+    """Replace fenced code blocks with blank lines and inline-code spans
+    with spaces so example links inside aren't validated. Preserves line
+    numbers (and column offsets) for accurate reporting.
     """
     out_lines: list[str] = []
     in_fence = False
@@ -71,7 +86,10 @@ def strip_code_fences(text: str) -> str:
             in_fence = False
             out_lines.append("")
             continue
-        out_lines.append("" if in_fence else line)
+        if in_fence:
+            out_lines.append("")
+        else:
+            out_lines.append(strip_inline_code(line))
     return "\n".join(out_lines)
 
 
