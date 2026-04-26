@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 31  
-**Mean weighted score:** **78.3/100**  
-**Mean implementability:** **53.7/100**
+**Mean weighted score:** **78.5/100**  
+**Mean implementability:** **54.3/100**
 
 ## Methodology v2
 
@@ -13,12 +13,12 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 3, **A** = 14, **B** = 38, **C** = 20, **D** = 4
+**A+** = 3, **A** = 14, **B** = 40, **C** = 18, **D** = 4
 
 ## Findings by category
 | Category | Count |
 |---|---:|
-| missing-contract | 30 |
+| missing-contract | 28 |
 | drift | 12 |
 | broken-link | 8 |
 | untestable | 1 |
@@ -26,7 +26,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Findings by severity
 | Severity | Count |
 |---|---:|
-| high | 39 |
+| high | 37 |
 | low | 12 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
@@ -103,11 +103,9 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`23-app-database`](./23-app-database.md) | 30 | 80 | 100 | 100 | 100 | 96 | 100 | **71** | C | 0 |
 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 35 | 90 | 90 | 70 | 100 | 100 | 100 | **71** | C | 0 |
 | [`25-app-issues`](./25-app-issues.md) | 30 | 85 | 100 | 100 | 100 | 90 | 100 | **72** | C | 4 |
-| [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 40 | 75 | 100 | 100 | 100 | 90 | 100 | **73** | C | 0 |
 | [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 40 | 75 | 100 | 100 | 100 | 90 | 100 | **73** | C | 0 |
 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 30 | 90 | 100 | 100 | 100 | 96 | 100 | **73** | C | 2 |
 | [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 40 | 70 | 100 | 100 | 100 | 100 | 100 | **73** | C | 2 |
-| [`18-wp-plugin-how-to/02-enums-and-coding-style`](./18-wp-plugin-how-to__02-enums-and-coding-style.md) | 40 | 75 | 100 | 100 | 100 | 90 | 100 | **73** | C | 0 |
 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 40 | 80 | 100 | 100 | 100 | 100 | 100 | **75** | B | 0 |
 | [`03-error-manage/02-error-architecture/04-error-modal/04-color-themes`](./03-error-manage__02-error-architecture__04-error-modal__04-color-themes.md) | 50 | 65 | 100 | 100 | 100 | 90 | 100 | **75** | B | 2 |
 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 50 | 65 | 100 | 100 | 100 | 90 | 100 | **75** | B | 0 |
@@ -130,12 +128,14 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage`](./03-error-manage.md) | 45 | 100 | 100 | 100 | 100 | 100 | 100 | **81** | B | 8 |
 | [`15-distribution-and-runner`](./15-distribution-and-runner.md) | 65 | 90 | 90 | 70 | 100 | 100 | 100 | **81** | B | 2 |
 | [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 65 | 70 | 100 | 100 | 100 | 100 | 90 | **81** | B | 2 |
+| [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 4 |
 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 2 |
 | [`03-error-manage/02-error-architecture/04-error-modal/01-copy-formats`](./03-error-manage__02-error-architecture__04-error-modal__01-copy-formats.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 4 |
 | [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 55 | 90 | 100 | 100 | 100 | 100 | 100 | **82** | B | 6 |
 | [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 75 | 60 | 100 | 100 | 100 | 90 | 90 | **82** | B | 5 |
 | [`11-powershell-integration`](./11-powershell-integration.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 2 |
 | [`12-cicd-pipeline-workflows/03-reusable-ci-guards`](./12-cicd-pipeline-workflows__03-reusable-ci-guards.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 2 |
+| [`18-wp-plugin-how-to/02-enums-and-coding-style`](./18-wp-plugin-how-to__02-enums-and-coding-style.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 4 |
 | [`02-coding-guidelines/05-rust`](./02-coding-guidelines__05-rust.md) | 60 | 85 | 100 | 100 | 100 | 100 | 90 | **83** | B | 3 |
 | [`03-error-manage/02-error-architecture/05-response-envelope`](./03-error-manage__02-error-architecture__05-response-envelope.md) | 65 | 75 | 100 | 100 | 100 | 100 | 100 | **83** | B | 4 |
 | [`02-coding-guidelines/06-ai-optimization`](./02-coding-guidelines__06-ai-optimization.md) | 65 | 80 | 100 | 100 | 100 | 100 | 100 | **84** | B | 4 |
