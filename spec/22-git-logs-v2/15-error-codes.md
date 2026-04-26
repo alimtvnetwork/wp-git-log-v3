@@ -1,7 +1,7 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.8.7  
-**Updated:** 2026-04-25
+**Version:** 2.9.0  
+**Updated:** 2026-04-26 (Phase 3: 4 `GL-SHA-DB-*` codes for per-SHA split-DB)
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
 
