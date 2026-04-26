@@ -22,12 +22,13 @@ Landed in v3.8.3:
 
 ---
 
-## ⏳ Phase 3 — Split-DB Error Codes & Cross-Section Updates
-**Files:** `15-error-codes.md`, `22-retention-and-pruning.md`, `23-backup-restore.md`, `29-uninstall-policy.md`
-- Add 4 `GL-SHA-DB-*` error codes (open/create/checksum/quota)
-- §22 Pruning: walk `ShaRegistry`, delete per-SHA `.db` files, then row
-- §23 Backup: manifest enumerates per-SHA files with row counts + sha256
-- §29 Uninstall: Wipe mode deletes `logs/` folder root
+## ✅ Phase 3 — Split-DB Error Codes & Cross-Section Updates (DONE, v3.8.4)
+
+Landed in v3.8.4:
+- §15: 4 new `GL-SHA-DB-*` codes (`OPEN-FAILED` 503, `CREATE-FAILED` 500, `CHECKSUM-MISMATCH` 500, `QUOTA-EXCEEDED` 507) under new section *Per-SHA log storage*. Banner v2.8.7→v2.9.0.
+- §22: rewritten — eligibility on `ShaRegistry.LastSeenAt`, rename→delete-row→unlink crash-safety with `*.pruning` recovery, exit code 4 for FS errors, empty-shard cleanup. Banner v2.5.0→v2.9.0.
+- §23: backup is now a directory tree; manifest gains `ShaFiles[]` with `{PipelineId,Sha,DbFilePath,RowCount,FileSizeBytes,Sha256}` + `ShaFileTotal`; restore is all-or-nothing with `.bak` rollback; new pre-v2.9.0 cross-version migration row. Banner v2.5.0→v2.9.0.
+- §29: lifecycle table gained "Per-SHA tree" column; Wipe deletes `<ShaLogsRoot>/` first, then root DB, then `rmdir` parent. Banner v2.5.0→v2.9.0.
 
 ## ⏳ Phase 4 — Split-DB Doc Closure
 **Files:** `00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`, `spec-index.md`, `26-gitlogs-diagrams/`
@@ -85,4 +86,4 @@ Landed in v3.8.3:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 3** (Split-DB Error Codes & Cross-Section Updates)
+**Top pending = Phase 4** (Split-DB Doc Closure)

@@ -1,7 +1,7 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.8.7  
-**Updated:** 2026-04-25
+**Version:** 2.9.0  
+**Updated:** 2026-04-26 (Phase 3: 4 `GL-SHA-DB-*` codes for per-SHA split-DB)
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
 
@@ -82,6 +82,17 @@ Validation order fixed by §31 (steps 1–10). See [`31-ssh-key-auth.md`](./31-s
 | GL-MIGRATION-PENDING | 503 | Plugin booting; migration not yet applied. | Retry after a few seconds. |
 | GL-CONFIG-MISSING | 500 | Required `ConfigKv` key absent (corrupted DB). | Re-run activator. |
 | GL-INTERNAL | 500 | Unhandled exception. `RequestId` correlates with WP error log. | Report to maintainer with `RequestId`. |
+
+## Per-SHA log storage (split-DB — see §39)
+
+Codes raised by the per-SHA SQLite handle pool when reading/writing `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`. Path resolved from `ShaRegistry.DbFilePath`.
+
+| Code | HTTP | Cause | Caller action |
+|------|------|-------|---------------|
+| GL-SHA-DB-OPEN-FAILED | 503 | Per-SHA `.db` file exists in `ShaRegistry` but cannot be opened (FS error, permissions, locked by another process). | Retry; check FS perms on `<ShaLogsRoot>` tree. |
+| GL-SHA-DB-CREATE-FAILED | 500 | First-write to a new SHA: cannot create the `.db` file or its `<Sha[0:2]>` shard folder (disk full, EROFS, EACCES). | Free disk; verify the data dir is writable. |
+| GL-SHA-DB-CHECKSUM-MISMATCH | 500 | At backup/restore or scheduled audit: stored `Sha256` in `ShaRegistry` does not match recomputed file hash. | Restore from backup; quarantine the file; do not return partial logs. |
+| GL-SHA-DB-QUOTA-EXCEEDED | 507 | Open-handle pool already at `MaxOpenShaDbHandles` and no idle handle is older than `ShaDbIdleCloseSec`; pool refused a new open. | Retry; tune `MaxOpenShaDbHandles` / `ShaDbIdleCloseSec` in `ConfigKv`. |
 
 ---
 

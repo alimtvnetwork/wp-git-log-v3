@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.3  
+**Version:** 3.8.4  
 **Updated:** 2026-04-26
 
 ---
@@ -170,6 +170,19 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase 2 scope discipline:** §15 error codes (`GL-SHA-DB-*`), §22 prune walk, §23 backup manifest, §29 wipe, §97 ACs (AC-49..AC-53 promotion), §00 inventory row, Mermaid re-render, root `spec-index.md` bump are **deferred to Phases 3–4** per `mem://specs/phased-roadmap.md`.
 
+## v3.8.4 Audit — Phase 3 Split-DB error codes & cross-section updates
+
+| File | Change |
+|------|--------|
+| `15-error-codes.md` | Added new section *Per-SHA log storage (split-DB — see §39)* with 4 codes: `GL-SHA-DB-OPEN-FAILED` (503), `GL-SHA-DB-CREATE-FAILED` (500), `GL-SHA-DB-CHECKSUM-MISMATCH` (500), `GL-SHA-DB-QUOTA-EXCEEDED` (507). Banner v2.8.7 → v2.9.0. |
+| `22-retention-and-pruning.md` | Rewrite: row-level `DELETE FROM LogEntry`/`ErrorLogEntry` removed; eligibility now `ShaRegistry.LastSeenAt` + `Pipeline.HasError` + history-window guard; rename → delete-row → unlink crash-safety with `*.pruning` recovery; new exit code 4 for FS errors; empty-shard `<aa>/` cleanup; audit JSON keys updated. Banner v2.5.0 → v2.9.0. |
+| `23-backup-restore.md` | Backup is now a directory tree (`git-logs.sqlite` + `manifest.json` + `logs/<aa>/<sha>.db…`); each per-SHA file copied via Online Backup API + integrity_check + sha256. Manifest gains `ShaFiles[]` + `ShaFileTotal`. Restore is all-or-nothing with `.bak` rollback. New `--skip-sha-checksum` flag. New cross-version row pre-v2.9.0 → v2.9.0+. `verify` walks `ShaRegistry`. Banner v2.5.0 → v2.9.0. |
+| `29-uninstall-policy.md` | Lifecycle table gained "Per-SHA tree" column. `Preserve` retains tree + records `ShaFileCount`; `Archive` renames tree to `<ShaLogsRoot>.archive-<unix>/`; `Wipe` deletes tree first then root, then `rmdir` parent. Banner v2.5.0 → v2.9.0. |
+| `98-changelog.md` | Added v3.8.4 row. |
+| `99-consistency-report.md` | This audit table added; Phase-3 deferred-list line in v3.8.3 audit superseded by Phase-4-only deferral note in Health Score; banner v3.8.3 → v3.8.4. |
+
+**Phase 3 scope discipline:** §00 inventory row for §39, §97 ACs (AC-49..AC-53 promotion to active), Mermaid re-render, root `spec-index.md` bump are **deferred to Phase 4** per `mem://specs/phased-roadmap.md`. Phases 5–10 untouched.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §02↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-59; v3.8.3 Phase 2 split-DB schema surgery landed in §18 + §02 + §01 with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 3 (§15 `GL-SHA-DB-*` codes + §22/§23/§29 lifecycle); (c) Phase 4 (§00/§97 promote AC-49..AC-53 + Mermaid re-render + spec-index bump).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §02↔§15↔§22↔§23↔§29↔§39 ↔ §05-split-db-architecture); AC coverage AC-01..AC-59; v3.8.4 Phase 3 split-DB error codes + lifecycle landed in §15 + §22 + §23 + §29 with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 4 (§00 §39 row, §97 AC-49..AC-53 promotion, Mermaid re-render, root `spec-index.md`); (c) Phases 5–10 (SSH-Key Lane B, AC GWT pass, NDJSON streaming, `PreviousHasError`, diagram render).

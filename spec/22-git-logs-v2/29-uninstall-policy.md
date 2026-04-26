@@ -1,7 +1,7 @@
 # Uninstall Policy (v2)
 
-**Version:** 2.5.0  
-**Updated:** 2026-04-25
+**Version:** 2.9.0  
+**Updated:** 2026-04-26 (Phase 3: Wipe mode now also deletes the per-SHA `<ShaLogsRoot>/` tree — see §39)
 
 What happens to the SQLite database, uploads, and DB rows when an operator removes the plugin. Defines the contract for `register_uninstall_hook` and the `uninstall.php` file at the plugin root.
 
@@ -33,11 +33,13 @@ require_once __DIR__ . '/inc/Bootstrap/Uninstaller.php';
 
 `Uninstaller::run()` consults `ConfigKv.UninstallMode` (default `Preserve`) and dispatches:
 
-| `UninstallMode` | DB file | Audit row | Reinstall behavior |
-|-----------------|---------|-----------|---------------------|
-| `Preserve` (default) | Untouched at `wp-content/uploads/git-logs/git-logs.sqlite`. A sidecar `.uninstalled` marker file written with timestamp + plugin version. | `AuditTrail.AuditActionType=PluginUninstall` (new seed ID 21) with `Detail.Mode='Preserve'`. | Reinstalling the plugin auto-detects the file, removes the marker, runs migrator, resumes. |
-| `Archive` | Renamed to `git-logs.sqlite.archive-<unix>` plus `.archive-<unix>.json` manifest (same shape as `wp git-logs backup`). | `Detail.Mode='Archive'`, `ArchiveFile=<name>`. | Reinstall starts with an empty DB; operator can `wp git-logs restore --from=...archive-...` later. |
-| `Wipe` | DB file + WAL + SHM + the entire `uploads/git-logs/` folder deleted. | `Detail.Mode='Wipe'` written to PHP error log only (no DB to write to). | Reinstall starts fresh. |
+| `UninstallMode` | DB file | Per-SHA tree | Audit row | Reinstall behavior |
+|-----------------|---------|--------------|-----------|---------------------|
+| `Preserve` (default) | Untouched at `wp-content/uploads/git-logs/git-logs.sqlite`. A sidecar `.uninstalled` marker file written with timestamp + plugin version. | Untouched at `wp-content/uploads/git-logs/<ShaLogsRoot>/`. | `AuditTrail.AuditActionType=PluginUninstall` (seed ID 21) with `Detail.Mode='Preserve'` and `Detail.ShaFileCount=<N>`. | Reinstalling the plugin auto-detects the file + tree, removes the marker, runs migrator, walks `ShaRegistry` and re-asserts every per-SHA file is present (missing files surface as `GL-SHA-DB-OPEN-FAILED` in Site Health), resumes. |
+| `Archive` | Renamed to `git-logs.sqlite.archive-<unix>` plus `.archive-<unix>.json` manifest (same shape as `wp git-logs backup`, §23). | Entire `<ShaLogsRoot>/` tree renamed to `<ShaLogsRoot>.archive-<unix>/` next to the root archive. Manifest's `ShaFiles[]` covers the renamed tree. | `Detail.Mode='Archive'`, `ArchiveFile=<name>`, `ArchiveShaTree=<dir>`, `ShaFileCount=<N>`. | Reinstall starts with an empty DB; operator can `wp git-logs restore --from=...archive-...` later (restore re-attaches the archived per-SHA tree). |
+| `Wipe` | Root DB file + WAL + SHM deleted. | Entire `wp-content/uploads/git-logs/<ShaLogsRoot>/` tree deleted recursively (every `<aa>/<sha>.db{,-wal,-shm}`, every shard folder, then the `<ShaLogsRoot>` folder itself). After both deletes succeed the parent `wp-content/uploads/git-logs/` folder is also `rmdir`'d (ignore ENOTEMPTY). | `Detail.Mode='Wipe'` and `Detail.ShaFileCount=<N>` written to PHP error log only (no DB to write to). | Reinstall starts fresh — no root DB, no per-SHA tree. |
+
+Wipe-mode delete order is **per-SHA tree first, root DB last**. Rationale: if the FS delete of the per-SHA tree fails partway, the root DB is still authoritative — Site Health will show `ShaRegistry` rows whose files vanished and the operator can retry. Doing it the other way round would leave orphan `.db` files with no registry to enumerate them.
 
 `UninstallMode` is set via `wp git-logs config set UninstallMode <mode>` and surfaced in the admin Settings screen with a yellow warning on `Wipe`.
 
