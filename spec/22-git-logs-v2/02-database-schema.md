@@ -1,8 +1,8 @@
 # Database Schema (v2, SQLite)
 
-**Version:** 3.8.0  
+**Version:** 3.8.3  
 **Updated:** 2026-04-26  
-**Engine:** SQLite (root DB file owned by plugin) + per-SHA SQLite files under `wp-content/uploads/git-logs/logs/` — see §39
+**Engine:** SQLite (root DB file owned by plugin) + per-SHA SQLite files under `wp-content/uploads/git-logs/<ShaLogsRoot>/` — see §39. **v3.8.3 (Q3 Split-DB):** root DDL no longer ships `LogEntry` / `ErrorLogEntry`; those tables live exclusively in per-SHA files. Root DB now ships `ShaRegistry` (canonical pointer + summary) plus 3 new `ConfigKv` keys (`ShaLogsRoot`, `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`).
 
 ---
 
