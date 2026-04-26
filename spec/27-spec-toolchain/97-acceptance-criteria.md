@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 2.0.0
+**Updated:** 2026-04-26 (Phase 16d-iv: Deepen §27 §97 — 10 new module-specific GWT ACs added (AC-T-11..AC-T-20). AC count 10 → 20. AC-T-01..AC-T-10 preserved verbatim.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
