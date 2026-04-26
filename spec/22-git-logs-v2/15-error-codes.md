@@ -1,6 +1,6 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.9.1  
+**Version:** 2.9.3  
 **Updated:** 2026-04-26 (Phase 5: schema-side `SshKey`/`SshNonce` shipped in §18 v2.9.1; existing 9 SSH codes now backed by canonical DDL)
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
