@@ -1,8 +1,8 @@
 # Consistency Report
 
-> **Version:** 1.0.0
+> **Version:** 2.0.0
 > **Parent:** [00-overview.md](./00-overview.md)
-> **Audit date:** 2026-04-20
+> **Audit date:** 2026-04-26
 
 ---
 
@@ -26,6 +26,7 @@ confirm zero contradictions before handing off to implementer AIs.
 | Hook returns < 50 ms; never blocks | 00, 07, 97 | ✅ Consistent |
 | Schema Rule 10/11/12 columns present | 04, 09, 97 | ✅ Consistent |
 | `UpdateStatus` enum values: `UpToDate`, `UpdateFound`, `UpdateApplied`, `Failed`, `Migrated` | 04, 05, 09 | ✅ Consistent (note: `Migrated` added in 04 §2; surfaces in 09 via `NewRepoUrl` flow described in 03/06/07) |
+| §97 v2.0.0 GWT rewrite consistency | 97, 98, 99 | ✅ Consistent — 20 GWT ACs (AC-UCM-01..20) + 34 legacy traceability notes |
 
 ---
 
@@ -43,6 +44,7 @@ confirm zero contradictions before handing off to implementer AIs.
 | [Database naming](../../02-coding-guidelines/01-cross-language/07-database-naming.md) | 04 | ✅ PK = `UpdateCheckerId`, lookup PK = `UpdateStatusId` |
 | [Enum standards](../../17-consolidated-guidelines/04-enum-standards.md) | 04, 05 | ✅ Strict `ParseUpdateStatus()` mandated |
 | [Error handling — apperror](mem://architecture/error-handling) | 08 | ✅ File + line metadata required |
+| [§14 parent §97 AC-06..AC-20](../97-acceptance-criteria.md) | 97 (AC-UCM-01) | ✅ Inheritance documented in AC-UCM-01 |
 
 ---
 
@@ -73,4 +75,4 @@ This subsystem is **ready for hand-off** to an implementer AI.
 
 ---
 
-*Consistency Report — v1.0.0 — 2026-04-20*
+*Consistency Report — v2.0.0 — 2026-04-26*

@@ -704,10 +704,10 @@
 | `spec/14-update/24-update-check-mechanism/07-pre-command-hook.md` | Pre-Command Hook — Interval Gate & Trailing Warning | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/08-error-handling.md` | Error Handling Policy | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/09-json-fallback-store.md` | JSON Fallback Store | 1.0.0 |
-| `spec/14-update/24-update-check-mechanism/97-acceptance-criteria.md` | Acceptance Criteria | 1.0.0 |
-| `spec/14-update/24-update-check-mechanism/97-changelog.md` | Changelog — Update Check Mechanism |  |
+| `spec/14-update/24-update-check-mechanism/97-acceptance-criteria.md` | Acceptance Criteria — Update Check Mechanism | 2.0.0 |
+| `spec/14-update/24-update-check-mechanism/98-changelog.md` | Changelog — Update Check Mechanism | 2.0.0 |
 | `spec/14-update/24-update-check-mechanism/98-changelog.md` | Changelog — Update Check Mechanism — Overview | 1.0.0 |
-| `spec/14-update/24-update-check-mechanism/99-consistency-report.md` | Consistency Report | 1.0.0 |
+| `spec/14-update/24-update-check-mechanism/99-consistency-report.md` | Consistency Report — Update Check Mechanism | 2.0.0 |
 | `spec/14-update/25-release-pinned-installer.md` | 25-release-pinned-installer |  |
 | `spec/14-update/26-repo-major-version-migrator.md` | Repo Major-Version Migrator (v14 → v15 → v16) | 1.0.0 |
 | `spec/14-update/27-generic-installer-behavior.md` | Generic Installer Behavior Specification | 1.0.0 |
