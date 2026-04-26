@@ -85,4 +85,4 @@ Landed in v3.8.3:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 2** (Split-DB Schema Surgery)
+**Top pending = Phase 3** (Split-DB Error Codes & Cross-Section Updates)
