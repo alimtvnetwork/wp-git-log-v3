@@ -157,6 +157,7 @@ def deterministic_metrics(folder: Path) -> dict:
     mmd_files = list(folder.glob("*.mmd"))
 
     return {
+        "kind":                kind,  # "" for normal contract modules; "tracker" exempts contract/AC findings
         "md_files":            len(md_files),
         "mmd_files":           len(mmd_files),
         "overview_chars":      len(ov),
