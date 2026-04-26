@@ -106,6 +106,12 @@ Closed the unblocked subset of Phase 9 deferrals (§03 admin UI is consumer-side
 - §97: 3 new ACs (AC-73 label matrix, AC-74 NDJSON Header exposure, AC-75 back-fill + write atomicity). AC count 72→75.
 - Validation: `pyyaml.safe_load` clean; `StateTransition` confirmed in `NdjsonHeaderFrame.properties` with all 4 enum values, confirmed absent from `required`.
 
+## ✅ Phase 13 — Deepen Scaffolded ACs in §22 §97 (DONE, v3.8.13)
+
+Closed §22-scope subset of `mem://specs/full-tree-audit-v4.md` deepening backlog. Doc-only, no schema/DDL/OpenAPI churn:
+- §97: 8 high-traffic one-liner ACs deepened from ~200-260 chars to 1400-2200 chars each (5–10×): AC-02 (Profile no-password rule), AC-03 (migration semver ordering + 12-marker baseline), AC-12 (streaming ingest incremental caps), AC-14 (AckResponse Retrieval URLs), AC-17 (App columns + forbidden Phase B1 fields), AC-18 (AppLink XOR + CASCADE), AC-22 (§26 6-file Mermaid manifest), AC-30 (ErrorEnvelope shape + RequestId mirroring + NDJSON error split). AC count unchanged at 75 (verified sequential AC-01..AC-75).
+- 4 simpler ACs (AC-04/AC-05/AC-25/AC-34) intentionally left lean.
+
 ---
 
 ## 🚧 Blocked (awaiting user decision)
@@ -119,4 +125,4 @@ Closed the unblocked subset of Phase 9 deferrals (§03 admin UI is consumer-side
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–12 complete. All Phase 8 + Phase 9 follow-ups closed (modulo §03 admin UI which is consumer-side / out-of-scope). No unblocked work remaining in the roadmap — on next `next`, either unblock B1 or scope a NEW phase (e.g. deepen scaffolded ACs in §07/§17/§22 per `mem://specs/full-tree-audit-v4.md` open item).
+**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–13 complete. All Phase 8/9 follow-ups closed; §22-scope AC deepening backlog closed. **Remaining unblocked candidates:** (a) extend Phase 13 deepening to §07 design-system + §17 consolidated-guidelines (other high-traffic modules per audit memo); (b) §03 admin UI rendering of state labels (consumer-side, out-of-scope for spec project unless user wants it scoped). On next `next`, propose (a) as Phase 14 or unblock B1.
