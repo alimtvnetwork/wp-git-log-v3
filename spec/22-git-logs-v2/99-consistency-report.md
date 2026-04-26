@@ -40,6 +40,8 @@
 | 28-example-github-actions.md | ✅ |
 | 29-uninstall-policy.md | ✅ |
 | 30-threat-model.md | ✅ |
+| 36-why-v1-archived.md | ✅ (added 2026-04-25) |
+| 37-blind-ai-gap-analysis.md | ✅ (added 2026-04-25) |
 | 97-acceptance-criteria.md | ✅ (AC-01..AC-41) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
