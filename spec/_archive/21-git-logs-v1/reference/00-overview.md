@@ -2,7 +2,7 @@
 
 **Status:** ⚠️ Read-only reference — fed v2 design, do not modify  
 **Parent:** [`../00-overview.md`](../00-overview.md) (legacy v1, deprecated)  
-**Successor spec:** [`../../22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) (v2.8.7 authoritative)
+**Successor spec:** [`../../../22-git-logs-v2/00-overview.md`](../../../22-git-logs-v2/00-overview.md) (v2.8.7 authoritative)
 
 ---
 
@@ -31,7 +31,7 @@ It exists for **provenance and traceability only** — to let future readers see
 | Reference | Location |
 |-----------|----------|
 | Parent (legacy v1) | [`../00-overview.md`](../00-overview.md) |
-| Successor (v2.8.7) | [`../../22-git-logs-v2/00-overview.md`](../../22-git-logs-v2/00-overview.md) |
+| Successor (v2.8.7) | [`../../../22-git-logs-v2/00-overview.md`](../../../22-git-logs-v2/00-overview.md) |
 | v1 ↔ v2 mapping trail | `mem://specs/git-logs.md` (queued-decisions log) |
 
 ---
