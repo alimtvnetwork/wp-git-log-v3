@@ -8,7 +8,7 @@
 > Deterministic score 76/100 (B) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.2. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.19. Gates active: 1.
 
 ---
 
@@ -52,7 +52,7 @@
   "links_total": 34,
   "links_broken": 1,
   "todo_density": 0,
-  "waffle_per_kchar": 0.2,
+  "waffle_per_kchar": 0.19,
   "child_modules": 0
 }
 ```

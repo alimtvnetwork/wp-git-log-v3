@@ -8,7 +8,7 @@
 > Deterministic score 84/100 (B) for spec/03-error-manage/01-error-resolution/03-retrospectives.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.31. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.3. Gates active: 0.
 
 ---
 
@@ -52,7 +52,7 @@
   "links_total": 6,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.31,
+  "waffle_per_kchar": 0.3,
   "child_modules": 0
 }
 ```

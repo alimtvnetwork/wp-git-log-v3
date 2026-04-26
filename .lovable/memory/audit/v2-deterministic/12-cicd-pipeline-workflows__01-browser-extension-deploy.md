@@ -8,7 +8,7 @@
 > Deterministic score 75/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.21. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.
 
 ---
 
@@ -50,7 +50,7 @@
   "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.21,
+  "waffle_per_kchar": 0.2,
   "child_modules": 0
 }
 ```

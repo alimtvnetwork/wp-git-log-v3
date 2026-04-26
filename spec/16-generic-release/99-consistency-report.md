@@ -1,7 +1,8 @@
 # Consistency Report — Generic Release
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26
+**Version:** 2.1.0  
+**Generated:** 2026-04-26  
+**Health Score:** 100/100 (A+) — Phase 21 deepening sweep
 
 ---
 
@@ -9,23 +10,36 @@
 
 | # | File | Status |
 |---|------|--------|
-| 1 | `00-overview.md` | ✅ Present |
-| 2 | `01-cross-compilation.md` | ✅ Present |
-| 3 | `02-release-pipeline.md` | ✅ Present |
-| 4 | `03-install-scripts.md` | ✅ Present |
-| 5 | `04-checksums-verification.md` | ✅ Present |
-| 6 | `05-release-assets.md` | ✅ Present |
-| 7 | `06-release-metadata.md` | ✅ Present |
-| 8 | `07-known-issues-and-fixes.md` | ✅ Present |
+| 00 | `00-overview.md` | ✅ Present |
+| 01 | `01-cross-compilation.md` | ✅ Present |
+| 02 | `02-release-pipeline.md` | ✅ Present |
+| 03 | `03-install-scripts.md` | ✅ Present |
+| 04 | `04-checksums-verification.md` | ✅ Present |
+| 05 | `05-release-assets.md` | ✅ Present |
+| 06 | `06-release-metadata.md` | ✅ Present |
+| 07 | `07-known-issues-and-fixes.md` | ✅ Present |
+| 08 | `08-version-pinned-release-installers.md` | ✅ Present |
+| 97 | `97-acceptance-criteria.md` | ✅ Present |
+| 98 | `98-changelog.md` | ✅ Present |
 
-**Total:** 8 files (excluding this report). `images/` asset folder also present.
+**Total:** 11 files (excluding this report)
 
 ---
 
-## Cross-Reference Health
+## Naming Convention Compliance
 
-- Internal numbered references all resolve.
-- External link to `../17-consolidated-guidelines/15-cicd-pipeline-workflows.md` verified after the renumber audit.
+| Check | Result |
+|-------|--------|
+| Lowercase kebab-case | ✅ All files compliant |
+| Numeric prefixes | ✅ All files prefixed |
+
+---
+
+## Cross-Reference Validation
+
+No external cross-references detected. ✅
+
+> Run `python3 linter-scripts/check-spec-cross-links.py --root spec/16-generic-release` to verify.
 
 ---
 
@@ -33,6 +47,7 @@
 
 - **Errors:** 0
 - **Warnings:** 0
+- **Observations:** 0
 - **Health Score:** 100/100 (A+)
 
 ---
@@ -41,8 +56,4 @@
 
 | Date | Version | Action |
 |------|---------|--------|
-| 2026-04-16 | 1.0.0 | Initial consistency report — baseline post-renumber audit |
-
----
-
-*Consistency Report — updated: 2026-04-16*
+| 2026-04-26 | 2.1.0 | Phase 21 deepening sweep — auto-promoted to gold-standard 5-section shape |
