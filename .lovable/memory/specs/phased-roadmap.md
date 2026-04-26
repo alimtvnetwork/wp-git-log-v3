@@ -61,9 +61,12 @@ Landed in v3.8.7:
 
 ---
 
-## ⏳ Phase 7 — AC Quality Pass
-**Files:** `97-acceptance-criteria.md`
-- Convert all ACs to GWT (Given/When/Then) format
+## ✅ Phase 7 — AC Quality Pass (DONE, v3.8.8)
+
+Landed in v3.8.8:
+- §97 banner v3.8.5→v3.8.8. Every AC (AC-01..AC-59) rewritten from one-line table rows into Given/When/Then stanzas + `Verifies:` cross-refs + `[active]`/`[draft]`/`[deprecated]` status badges. Reorganized into 9 thematic sections (A UI · B Domain · C Auth/Lane · D Endpoints · E Logging/Migrations · F Audit · G Schema/Diagrams · H Per-SHA Split-DB · I SSH-Key Lane B).
+- 7 new ACs added in Section I, all `[active]`: AC-60 SshKey registration shape; AC-61 SshNonce replay defense (skew + per-key uniqueness + janitor); AC-62 lane gating via `SshAuthMode` + mixed-lane `GL-SSH-LANE-CONFLICT`; AC-63 signature stripping defense (header-completeness ordered first + mandatory HTTPS); AC-64 SshKey rotation flow (`IsActive=0` no-cache reject + dual SystemEvent + dual AuditTrail); AC-65 deploy-key one-Repo blast radius (FK CASCADE + `LastUsedAt` anomaly + rate cap); AC-66 canonical signing string + `git-logs@v2` namespace + `-H sha512`.
+- AC-38 amended to list SSH AuditActionType seeds (22/23/24). AC count 59 → 66.
 
 ## ⏳ Phase 8 — API Streaming Spec
 **Files:** `04-rest-api-endpoints.md`
@@ -91,4 +94,4 @@ Landed in v3.8.7:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 7** (AC Quality Pass — convert all ACs to GWT format; add ACs for SshKey/SshNonce/replay/lane-downgrade)
+**Top pending = Phase 8** (API Streaming Spec — define NDJSON streaming format for log retrieval in `04-rest-api-endpoints.md`)

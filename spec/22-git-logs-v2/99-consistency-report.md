@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.7  
+**Version:** 3.8.8  
 **Updated:** 2026-04-26
 
 ---
@@ -224,6 +224,18 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase 6 scope discipline:** AC additions for SshKey/SshNonce/replay/lane-downgrade are **deferred to Phase 7** (AC GWT pass). §15/§18/§31 untouched (already at v2.9.1 from Phase 5). Phases 7–10 untouched. Phase B1 still blocked on user.
 
+## v3.8.8 Audit — Phase 7 AC Quality Pass
+
+| File | Change |
+|------|--------|
+| `97-acceptance-criteria.md` | **Full rewrite.** Banner v3.8.5 → v3.8.8. Every AC (AC-01..AC-59) converted from one-line table rows into full **Given / When / Then** stanzas with explicit `Verifies:` cross-refs to source sections. Status badges `[active]`/`[draft]`/`[deprecated]` introduced; all current ACs land at `[active]` for v2.9.1. Reorganized into 9 thematic sections (A UI · B Domain · C Auth/Lane · D Endpoints · E Logging/Migrations · F Audit · G Schema/Diagrams · H Per-SHA Split-DB · I SSH-Key Lane B). **7 new ACs added** (AC-60..AC-66) — all in Section I, all `[active]` — covering: SshKey registration shape + audit hooks (AC-60); SshNonce replay defense via skew + per-key uniqueness + janitor (AC-61); lane gating via `SshAuthMode` + mixed-lane conflict (AC-62); signature stripping defense via header-completeness ordering + mandatory HTTPS (AC-63); SshKey rotation via `IsActive=0` no-cache reject + dual SystemEvent + dual AuditTrail (AC-64); deploy-key one-Repo blast radius via FK CASCADE + `LastUsedAt` anomaly + rate cap (AC-65); canonical signing string `GL-SSHSIG-V1\nMETHOD\nPATH\nTIMESTAMP\nNONCE\nsha256(body)` + `git-logs@v2` namespace + `-H sha512` (AC-66). AC-38 amended to list SSH lane AuditActionType seeds (22/23/24). AC count 59 → 66. |
+| `98-changelog.md` | v3.8.8 row added. |
+| `99-consistency-report.md` | This audit table added; banner v3.8.7 → v3.8.8. |
+
+**Phase 7 scope discipline:** §05/§15/§18/§28/§30/§31 untouched (already at v2.9.1 from Phases 5–6); only §97 was rewritten. Phases 8–10 untouched. Phase B1 still blocked on user.
+
+**AC inventory check:** 66 ACs total (AC-01..AC-66). No AC numbers reused; gaps preserved. All carry GWT format + `Verifies:` pointer + status badge.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain); AC coverage AC-01..AC-59; ER diagram reflects v2.9.0 split-DB shape; v3.8.7 Phase 6 SSH-Key Lane B flow + threat doc landed in §05 + §28 + §30 with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 7 (AC GWT pass + new ACs for SshKey/SshNonce/replay/lane-downgrade); (c) Phase 8 (NDJSON streaming on §04); (d) Phase 9 (`Pipeline.PreviousHasError`); (e) Phase 10 (diagram .svg render).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain); AC coverage AC-01..AC-66 (66 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; v3.8.8 Phase 7 AC GWT pass landed in §97 (rewrite + AC-60..AC-66 SSH coverage) with full lockstep on changelog/consistency. Open follow-ups (per phased roadmap): (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 8 (NDJSON streaming on §04); (c) Phase 9 (`Pipeline.PreviousHasError` flag in §18 + §02 + §01); (d) Phase 10 (Mermaid `.mmd` → `.svg` render pass).
