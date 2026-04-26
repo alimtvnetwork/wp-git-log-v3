@@ -14,7 +14,9 @@
 
 ## Inlined Contracts
 
-> Required artifacts inlined here so each AC is self-contained — a mediocre AI does not need to chase cross-links.
+> Required artifacts inlined here so each AC is self-contained — a mediocre AI does not need to chase cross-links. Three normative machine-parseable contract blocks (TypeScript, JSON Schema, YAML) follow the human-readable text summary; downstream linters and the deterministic spec auditor parse the fenced blocks by language tag.
+
+### Human-readable summary
 
 ```text
 PARENT_FOLDER:        spec/02-coding-guidelines/
@@ -39,6 +41,177 @@ CODE_RED_RULES:
   R5 Never hallucinate; ask clarifying questions for unclear requirements.
   R6 Functions 8-15 lines; files <300 lines; React components <100 lines.
 REQUIRED_PER_SUBFOLDER:  00-overview.md, 97-acceptance-criteria.md, 98-changelog.md, 99-consistency-report.md
+```
+
+### Normative TypeScript contract (CODE-RED rules + naming matrix)
+
+```ts
+// Authoritative type-level contract for the §02 Coding Guidelines parent module.
+// Any implementer (human or AI) MUST conform to these types when generating code,
+// linters, or downstream specs. This block is the source of truth for AC-CG-03..AC-CG-09.
+
+/** The six CODE-RED rules — every language subfolder MUST honour all six. */
+export enum CodeRedRule {
+  R1_ErrorManagementFirst    = "R1",
+  R2_BooleansPositivelyNamed = "R2",
+  R3_ZeroNestingEarlyReturn  = "R3",
+  R4_DbTablesSingularPascal  = "R4",
+  R5_NoHallucinationAskFirst = "R5",
+  R6_SizeLimitsEnforced      = "R6",
+}
+
+/** Hard size limits for R6. Lines counted excluding blank lines and comments. */
+export interface R6SizeLimits {
+  readonly functionMinLines: 8;
+  readonly functionMaxLines: 15;
+  readonly fileMaxLines: 300;
+  readonly reactComponentMaxLines: 100;
+}
+
+/** Naming-case policy per language. Rust is the only intentional exception. */
+export type NamingCase = "PascalCase" | "snake_case" | "camelCase";
+
+export interface LanguageNamingPolicy {
+  readonly language: "Go" | "TypeScript" | "PHP" | "CSharp" | "Rust";
+  readonly identifiers: NamingCase;
+  readonly dbColumns: NamingCase;
+  readonly enumValues: NamingCase;
+}
+
+export const NAMING_MATRIX: readonly LanguageNamingPolicy[] = [
+  { language: "Go",         identifiers: "PascalCase", dbColumns: "PascalCase", enumValues: "PascalCase" },
+  { language: "TypeScript", identifiers: "PascalCase", dbColumns: "PascalCase", enumValues: "PascalCase" },
+  { language: "PHP",        identifiers: "PascalCase", dbColumns: "PascalCase", enumValues: "PascalCase" },
+  { language: "CSharp",     identifiers: "PascalCase", dbColumns: "PascalCase", enumValues: "PascalCase" },
+  { language: "Rust",       identifiers: "snake_case", dbColumns: "PascalCase", enumValues: "PascalCase" },
+] as const;
+
+/** R2 — boolean prefix allowlist. Any boolean identifier failing this regex MUST be renamed. */
+export const BOOLEAN_PREFIX_ALLOWLIST = ["is", "has", "should", "can", "will", "did", "was"] as const;
+export const BOOLEAN_NAME_REGEX = /^(is|has|should|can|will|did|was)[A-Z]/;
+
+/** R4 — primary-key contract. Every table named `{Table}` MUST have PK column `{Table}Id`. */
+export interface PrimaryKeyContract {
+  readonly tableName: string;                  // singular PascalCase, e.g. "User"
+  readonly primaryKeyColumn: `${string}Id`;    // e.g. "UserId"
+  readonly columnType: "INTEGER PRIMARY KEY AUTOINCREMENT";
+}
+
+/** Folder governance — every language subfolder MUST satisfy this shape. */
+export interface SubfolderGovernance {
+  readonly folderSlot: number;                 // 1..20 = core, 21+ = app-specific
+  readonly requiredFiles: readonly [
+    "00-overview.md",
+    "97-acceptance-criteria.md",
+    "98-changelog.md",
+    "99-consistency-report.md"
+  ];
+  readonly minGwtAcceptanceCriteria: 5;
+  readonly enforcedCodeRedRules: readonly CodeRedRule[];
+}
+```
+
+### Normative JSON Schema (subfolder structural contract)
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.spec/02-coding-guidelines/subfolder.schema.json",
+  "title": "CodingGuidelinesSubfolder",
+  "description": "Structural contract every subfolder under spec/02-coding-guidelines/ MUST satisfy. Verified by linter-scripts/check-tree-health.cjs and audit-spec-vs-code-v2.py.",
+  "type": "object",
+  "required": ["folderSlot", "requiredFiles", "minGwtAcceptanceCriteria"],
+  "properties": {
+    "folderSlot": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Numeric prefix. 1-20 = core language/cross-cutting, 21+ = app-specific. Once shipped, immutable."
+    },
+    "requiredFiles": {
+      "type": "array",
+      "minItems": 4,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      }
+    },
+    "minGwtAcceptanceCriteria": {
+      "const": 5,
+      "description": "Each 97-acceptance-criteria.md MUST contain >= 5 ### AC- headings, each with explicit Given/When/Then markers."
+    },
+    "enforcedCodeRedRules": {
+      "type": "array",
+      "items": { "enum": ["R1", "R2", "R3", "R4", "R5", "R6"] },
+      "minItems": 6,
+      "description": "Language subfolders MUST enforce all six CODE-RED rules. App subfolders (21+) MAY scope to a subset but MUST document the exclusion."
+    },
+    "namingCase": {
+      "type": "object",
+      "properties": {
+        "identifiers": { "enum": ["PascalCase", "snake_case", "camelCase"] },
+        "dbColumns":   { "enum": ["PascalCase"] },
+        "enumValues":  { "enum": ["PascalCase"] }
+      },
+      "required": ["identifiers", "dbColumns", "enumValues"]
+    }
+  },
+  "additionalProperties": true
+}
+```
+
+### Normative YAML (numbering ranges + linter wiring)
+
+```yaml
+# Authoritative numbering and tooling wiring for spec/02-coding-guidelines/.
+# Parsed by linter-scripts/check-tree-health.cjs and the deterministic spec auditor.
+parent_folder: spec/02-coding-guidelines/
+numbering_ranges:
+  core:
+    min: 1
+    max: 20
+    purpose: "Language-agnostic cross-cutting guidelines (cross-language, language-specific, AI-opt, security, naming)."
+  app_specific:
+    min: 21
+    max: 99
+    purpose: "Application-tier conventions that build on core but are scoped to product surface area."
+required_files_per_subfolder:
+  - 00-overview.md
+  - 97-acceptance-criteria.md
+  - 98-changelog.md
+  - 99-consistency-report.md
+language_subfolders:
+  - { slot: "01", name: "cross-language",          policy: "All six CODE-RED rules; defines defaults." }
+  - { slot: "02", name: "typescript",              policy: "PascalCase identifiers, dbColumns, enumValues." }
+  - { slot: "03", name: "golang",                  policy: "PascalCase across the board; idiomatic Go err returns satisfy R1." }
+  - { slot: "04", name: "php",                     policy: "PascalCase across the board; PSR-12 base." }
+  - { slot: "05", name: "rust",                    policy: "snake_case identifiers (intentional exception); PascalCase DB and enums." }
+  - { slot: "06", name: "ai-optimization",         policy: "Canonical home for R5; other subfolders MUST NOT duplicate." }
+  - { slot: "06", name: "cicd-integration",        policy: "Slot collision flagged; rename pending B2 user decision." }
+  - { slot: "07", name: "csharp",                  policy: "PascalCase across the board; PascalCase enums map to .NET conventions." }
+  - { slot: "08", name: "file-folder-naming",      policy: "Defines lowercase-kebab-case for all repo paths; supersedes language defaults for filenames." }
+  - { slot: "09", name: "powershell-integration",  policy: "Placeholder; populate or archive per AC-CG-17." }
+  - { slot: "10", name: "research",                policy: "Placeholder; populate or archive per AC-CG-17." }
+  - { slot: "11", name: "security",                policy: "Version-pinned per AC-CG-16; axios subfolder canonical." }
+app_subfolders:
+  - { slot: "21", name: "app",                      status: "active" }
+  - { slot: "22", name: "app-issues",               status: "deprecated; canonical at spec/25-app-issues/" }
+  - { slot: "23", name: "app-database",             status: "active" }
+  - { slot: "24", name: "app-design-system-and-ui", status: "active" }
+linters:
+  tree_health:    "node linter-scripts/check-tree-health.cjs --report --min=95"
+  cross_links:    "python3 linter-scripts/check-spec-cross-links.py"
+  forbidden:      "python3 linter-scripts/check-forbidden-strings.py"
+  spec_audit:     "AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py"
+gates:
+  module_tree_health_min: 95
+  per_subfolder_required_files: 4
+  per_subfolder_min_gwt_acs:    5
 ```
 
 ---
