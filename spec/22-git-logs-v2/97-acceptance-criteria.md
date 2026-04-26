@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.11  
-**Updated:** 2026-04-26 (Phase 11: Streaming Follow-ups Pickup — AC-67..AC-72 added for §04 §11 NDJSON streaming behavior; status legend extended to v2.9.3)
+**Version:** 3.8.12  
+**Updated:** 2026-04-26 (Phase 12: Phase 9 Follow-ups — AC-73..AC-75 added for `Pipeline.PreviousHasError` state-transition matrix, back-fill correctness, single-statement write atomicity; AC-67 extended to mention optional `Header.StateTransition` field)
 
 ---
 
