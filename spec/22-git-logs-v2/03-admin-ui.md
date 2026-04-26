@@ -1,6 +1,6 @@
 # Admin UI (v2)
 
-**Version:** 2.1.0  
+**Version:** 2.2.0  
 **Updated:** 2026-04-26
 
 ---
@@ -13,8 +13,8 @@
 4. **GitProfile** — list, add, edit GitProfiles.
 5. **Repo** — list of master Repos. Click → opens History for that Repo.
 6. **RepoVersion** — list of RepoVersion variants per Repo, with link to History filtered by version.
-7. **History** — per-RepoVersion timeline (App, Branch, Pipeline, Action, HasError, OccurredAt).
-8. **Action** — enum-typed action log.
+7. **History** — per-RepoVersion timeline (App, Branch, Pipeline, PipelineActionType, HasError, OccurredAt). Includes an **Activity** tab (filter chip: *Git events / System events / All*) backed by `SystemEvent` for non-Git business changes (ProfileCreated, RoleAssigned, AppCreated, SshKeyRevoked, GitProfileAcceptanceChanged, …). **v3.8.0**: column relabel `ActionType` → `PipelineActionType`.
+8. **Action** — enum-typed pipeline-action log (label kept for UX continuity; backed by `PipelineAction` table renamed in v3.8.0). Filters: PipelineActionType, RepoVersion, Pipeline, Profile, date range.
 
 > Items marked `format:hide` in the mind-map (notes under GitProfile, etc.) are not rendered in UI.
 
@@ -62,5 +62,6 @@ Validation: server normalizes URL, parses owner/repo, derives `RootRepoName` for
 
 - **Repo list** → click row → **History** view filtered to that Repo's RepoVersions.
 - **RepoVersion list** → click row → **History** filtered to one variant.
-- **History** columns: OccurredAt, App, Branch, Pipeline, ActionType, HasError, Summary.
-- **Action** view: raw enum log with filters (ActionType, RepoVersion, Profile, date range).
+- **History** columns: OccurredAt, App, Branch, Pipeline, PipelineActionType, HasError, Summary. **v3.8.0**: column relabel from `ActionType` → `PipelineActionType`.
+- **History → Activity tab**: SystemEvent feed (Actor, EventType, Target, Summary, OccurredAt). Filter chip toggles between *Git events* (History rows), *System events* (SystemEvent rows), or *All* (interleaved by `OccurredAt`).
+- **Action** view: raw `PipelineAction` enum log with filters (PipelineActionType, RepoVersion, Pipeline, Profile, date range). **v3.8.0**: backing table renamed `Action` → `PipelineAction`; UI label retained.

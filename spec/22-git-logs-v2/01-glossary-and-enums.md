@@ -1,6 +1,6 @@
 # Glossary and Enum Catalog (v2)
 
-**Version:** 3.8.0  
+**Version:** 3.8.1  
 **Updated:** 2026-04-26
 
 ---
