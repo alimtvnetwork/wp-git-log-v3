@@ -450,7 +450,7 @@ paths:
         - { name: stream-id, in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId for resume correlation.' }
       responses:
         '200':
-          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          description: 'OK — JSON page by default; NDJSON stream when Accept application/x-ndjson.'
           headers:
             X-Content-Type-Options: { schema: { type: string }, description: 'Set to nosniff on NDJSON responses.' }
             Transfer-Encoding:      { schema: { type: string }, description: 'chunked on NDJSON responses; absent on JSON.' }
@@ -479,7 +479,7 @@ paths:
         - { name: stream-id,  in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId.' }
       responses:
         '200':
-          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          description: 'OK — JSON page by default; NDJSON stream when Accept application/x-ndjson.'
           content:
             application/json:
               schema: { $ref: '#/components/schemas/LogPage' }
@@ -504,7 +504,7 @@ paths:
         - { name: stream-id, in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId.' }
       responses:
         '200':
-          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          description: 'OK — JSON page by default; NDJSON stream when Accept application/x-ndjson.'
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ErrorLogPage' }
@@ -527,7 +527,7 @@ paths:
         - { name: stream-id,  in: query, schema: { type: string, format: uuid }, description: 'NDJSON only — original Header.StreamId.' }
       responses:
         '200':
-          description: OK — JSON page by default; NDJSON stream when `Accept: application/x-ndjson`.
+          description: 'OK — JSON page by default; NDJSON stream when Accept application/x-ndjson.'
           content:
             application/json:
               schema: { $ref: '#/components/schemas/ErrorLogPage' }
