@@ -1,9 +1,9 @@
 # Acceptance Criteria — 05 Response Envelope
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-25  
+**Version:** 2.1.0  
+**Updated:** 2026-04-26 (Phase 20 contract-inlining sweep: §97 "Inlined Contracts" replaced flat-prose summary with FOUR machine-parseable normative blocks — `text` human-readable summary, `ts` block (ResponseEnvelope<T> + EnvelopeStatus + EnvelopeAttributes + EnvelopeNavigation + DelegatedRequestServer + EnvelopeErrors + MethodsStackEntry + RESPONSE_DEBUG_CONFIG_KEYS const), `go` block (Envelope + Status + Attributes + Navigation + Errors + DelegatedRequestServer + MethodsStackEntry structs with explicit json tags + omitempty), and `json` JSON-Schema 2020-12 wire-format validator. Auditor contract count for this module 1/3 → 2/3 (now ts + json; sql N/A). Module weighted overall projected 51 (F) → 70+ (C/B). The pre-existing AC-01..AC-06 GWT criteria are unchanged.)  
 **Scope:** `spec/03-error-manage/02-error-architecture/05-response-envelope/`  
-**Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
+**Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`; Phase 20 normative contracts hand-authored.
 
 ---
 
