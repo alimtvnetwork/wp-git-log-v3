@@ -1,6 +1,6 @@
 # Threat Model (v2)
 
-**Version:** 2.7.0  
+**Version:** 2.9.1  
 **Updated:** 2026-04-25
 
 STRIDE pass over the v2 attack surface. Each row names the threat, the affected asset, the v2 mitigation, and any residual risk deferred to v3.
