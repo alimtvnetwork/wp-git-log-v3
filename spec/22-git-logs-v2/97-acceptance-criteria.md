@@ -86,10 +86,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** locked decisions 10–12 (App entity scope), §02 v3.8.6 (App + AppStatus table doc), §18 v2.9.3 (DDL + FK constraints), §01 (AppStatus enum), §07 (Phase B1 blocked fields).
 
 ### AC-18 — Polymorphic AppLink  `[active]`
-- **Given** an `AppLink` row is inserted
-- **When** the CHECK constraint runs
-- **Then** exactly one of `RepoId` / `GitProfileId` MUST be non-NULL (XOR via CHECK), so the link target is unambiguous.
-- **Verifies:** locked decision 10, §18.
+- **Given** an `AppLink` row insert is attempted (per §02 v3.8.6 + §18 v2.9.3 DDL — this table associates an `App` with EITHER a specific `Repo` OR a specific `GitProfile` for credential-inheritance scoping per §07 locked decision 10)
+- **When** the row is committed
+- **Then** the SQLite-level `CHECK` constraint MUST enforce XOR semantics: `CHECK ((RepoId IS NOT NULL) <> (GitProfileId IS NOT NULL))` — i.e. exactly one of the two FK columns is non-NULL, never both, never neither; AND inserting a row with both columns NULL MUST fail with SQLite error code 19 (`SQLITE_CONSTRAINT_CHECK`) — application-layer guards alone are NOT sufficient; AND inserting a row with both columns set MUST also fail with the same constraint error; AND the table MUST carry composite UNIQUE constraints `UNIQUE (AppId, RepoId)` and `UNIQUE (AppId, GitProfileId)` so a single App cannot link to the same Repo or GitProfile twice (the NULL side is exempt by SQLite's standard UNIQUE-with-NULL semantics, which is the desired behavior); AND both FKs MUST use `ON DELETE CASCADE` so deleting the parent `App`, `Repo`, or `GitProfile` automatically prunes the dangling link rows; AND the polymorphic discriminator is implicit (which column is non-NULL) — the table MUST NOT carry an explicit `LinkType TEXT` column because the XOR CHECK already encodes it and a separate column risks drift between `LinkType` and the actual non-NULL FK.
+- **Verifies:** locked decision 10 (polymorphic linking design), §02 v3.8.6 (AppLink table doc), §18 v2.9.3 (DDL + CHECK + UNIQUE + FK CASCADE).
 
 ### AC-19 — App credential inheritance  `[active]`
 - **Given** an App linked to a parent Profile
