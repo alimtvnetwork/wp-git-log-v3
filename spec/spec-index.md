@@ -192,9 +192,9 @@
 | `spec/02-coding-guidelines/03-golang/06-string-slice-internals.md` | Go String & Slice Internals | 3.2.0 |
 | `spec/02-coding-guidelines/03-golang/07-code-severity-taxonomy.md` | Code Severity Taxonomy | 3.2.0 |
 | `spec/02-coding-guidelines/03-golang/08-pathutil-fileutil-spec.md` | Go Utility Packages: `pathutil` and `fileutil` | 1.0.0 |
-| `spec/02-coding-guidelines/03-golang/97-acceptance-criteria.md` | Golang Standards — Acceptance Criteria | 3.2.0 |
-| `spec/02-coding-guidelines/03-golang/98-changelog.md` | Golang Standards — Changelog | 3.2.0 |
-| `spec/02-coding-guidelines/03-golang/99-consistency-report.md` | Consistency Report: Golang Standards | 3.2.0 |
+| `spec/02-coding-guidelines/03-golang/97-acceptance-criteria.md` | Golang Standards — Acceptance Criteria | 4.0.0 |
+| `spec/02-coding-guidelines/03-golang/98-changelog.md` | Golang Standards — Changelog | 4.0.0 |
+| `spec/02-coding-guidelines/03-golang/99-consistency-report.md` | Consistency Report: Golang Standards | 4.0.0 |
 | `spec/02-coding-guidelines/04-php/00-overview.md` | PHP Standards | 3.2.0 |
 | `spec/02-coding-guidelines/04-php/01-enums.md` | PHP Enums — Complete Reference | 7.1.0 |
 | `spec/02-coding-guidelines/04-php/02-forbidden-patterns.md` | PHP Forbidden Patterns — Quick Reference Checklist | 4.0.0 |
