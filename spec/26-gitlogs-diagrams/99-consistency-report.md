@@ -40,10 +40,26 @@ All diagrams reflect `spec/22-git-logs-v2/`. Where v1 (folder 21, archived) conf
 | 3 | "Endpoints should be one mindmap, not write/read split, with body/verb/types" | Done — `09-endpoints-mindmap.mmd` covers all 8 endpoints in one page with verb, path, auth, body fields, response shape, audit, error codes. |
 | 4 | "Permission/rate-limit flow look like ERDs — is my system bad or did you mess up?" | Confirmed: I messed up. They are flowcharts/sequences, not ERs, but lacked signposting. Added `%% Diagram type:` + `%% What this answers:` header on every non-ER diagram; redrew `06-permission-flow.mmd` with classDef colors + per-rejection error codes for clear visual difference. Underlying domain is fine; presentation was sloppy. |
 
+## v2.1.0 Audit — Phase 10 Diagram Render Pass
+
+| File | Change |
+|------|--------|
+| `01-er-diagram.svg` | NEW — rendered from `01-er-diagram.mmd` (313 KB). Reflects v2.9.0 split-DB schema incl. `ShaRegistry`, `SshKey`, `SshNonce`. |
+| `05-auth-validation.svg` | NEW — rendered from `05-auth-validation.mmd` (177 KB). |
+| `06-permission-flow.svg` | NEW — rendered from `06-permission-flow.mmd` (113 KB). |
+| `07-rate-limit-flow.svg` | NEW — rendered from `07-rate-limit-flow.mmd` (35 KB). |
+| `08-encryption-v3-flow.svg` | NEW — rendered from `08-encryption-v3-flow.mmd` (34 KB). |
+| `09-endpoints-mindmap.svg` | NEW — rendered from `09-endpoints-mindmap.mmd` (182 KB). |
+| `00-overview.md` | Banner v2.0.0 → v2.1.0; added Phase 10 render-pass note + re-render command. |
+| `98-changelog.md` | v2.1.0 row added. |
+| `99-consistency-report.md` | This audit table added; inventory rows updated to list `.mmd / .svg` pairs; banner v2.0.0 → v2.1.0. |
+
+**Render command:** `mmdc -i <file>.mmd -o <file>.svg -p puppeteer.json -b transparent` with `puppeteer.json = {"args": ["--no-sandbox", "--disable-setuid-sandbox"]}`. Source `.mmd` files unchanged in this phase — render-only.
+
 ## Open Gaps
 
 _None._ Slots 02/03/04 are intentional locked gaps (`~~retired v2.0.0~~`); never to be reused per project rule.
 
 ## Health Score
 
-**100/100 (A+)** — 12 of 12 expected files present (3 retired tombstones documented), AC coverage complete, every diagram self-describes its type. Slot integrity intact (immutable-slot rule honored).
+**100/100 (A+)** — 12 of 12 expected source files present (3 retired tombstones documented), AC coverage complete, every diagram self-describes its type, and as of v2.1.0 every live `.mmd` ships a companion `.svg` build artifact for tool-free preview. Slot integrity intact (immutable-slot rule honored).
