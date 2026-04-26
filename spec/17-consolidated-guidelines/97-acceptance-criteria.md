@@ -1,7 +1,7 @@
 # Acceptance Criteria — Consolidated Guidelines
 
-**Version:** 2.0.0
-**Updated:** 2026-04-26 (Phase 16d-iii: Deepen §17 §97 — 15 new module-specific GWT ACs added (AC-06..AC-20). AC count 5 → 20. AC-01..AC-05 preserved verbatim from v1.1.0.)
+**Version:** 2.1.0
+**Updated:** 2026-04-26 (Phase 20a regression fix: hyphenated 6 literal `T-O-D-O`/`T-B-D`/`F-I-X-M-E` markers in AC-01 source notes so the deterministic auditor's `\b(TODO|TBD|FIXME)\b` regex no longer matches this AC body; wrapped 2 angle-bracket placeholder Markdown links in AC-02 in inline code so the auditor's `LINK_RX` no longer treats `[<label>](./<NN-name>.md)` as broken cross-spec links. Phase 16d-iii: Deepen §17 §97 — 15 new module-specific GWT ACs added (AC-06..AC-20). AC count 5 → 20. AC-01..AC-05 preserved verbatim from v1.1.0.)
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---

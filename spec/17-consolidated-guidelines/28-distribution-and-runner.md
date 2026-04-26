@@ -1,7 +1,7 @@
 # 28 — Distribution and Runner (Consolidated)
 
-> **Version:** 1.0.0
-> **Updated:** 2026-04-22
+> **Version:** 1.1.0
+> **Updated:** 2026-04-26 (Phase 20a regression fix: §10 cross-references — converted broken external link `../../spec-slides/00-overview.md` to plain text annotation since `spec-slides/` is a planned external repo that does not yet exist in this monorepo. The original link was being counted as a broken cross-spec link by the deterministic audit.)
 > **Type:** Consolidated Guideline — Phase 6B promotion
 > **Source module:** [`spec/15-distribution-and-runner/`](../15-distribution-and-runner/)
 > **Status:** Authoritative digest — a blind AI can implement the install + runner surface from this file alone.
