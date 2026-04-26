@@ -142,6 +142,18 @@ def deterministic_metrics(folder: Path) -> dict:
     has_json = lang_counter.get("json", 0)
     has_ts   = lang_counter.get("ts", 0) + lang_counter.get("typescript", 0)
     has_yaml = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0)
+    # v2.3: typed-language reference blocks (go/php/csharp/rust/etc.) are also
+    # contracts for language-specific coding-guideline modules. Function
+    # signatures, type definitions, and idiomatic patterns are normative for
+    # an AI generating code in that language. Threshold ≥3 blocks rules out
+    # incidental snippets and requires sustained, reference-grade content.
+    TYPED_LANGS = ("go", "golang", "rust", "php", "csharp", "cs", "c#",
+                   "java", "kotlin", "swift", "python", "py", "cpp", "c++", "c")
+    typed_lang_blocks = sum(lang_counter.get(l, 0) for l in TYPED_LANGS)
+    has_typed_lang_contract = typed_lang_blocks >= 3
+    # v2.3: CI workflow YAML (≥5 blocks) is a normative contract for
+    # CI/CD pipeline modules — distinct from generic single-snippet YAML.
+    has_ci_workflow = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0) >= 5
 
     # cross-spec link health
     links = LINK_RX.findall(body_text)
