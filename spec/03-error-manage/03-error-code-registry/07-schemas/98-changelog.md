@@ -1,6 +1,6 @@
 # Changelog — Schemas
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/03-error-manage/03-error-code-registry/07-schemas/`
 
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-26
+- **Added** Phase-20 contract inlining: both `error-code.schema.json` and `error-codes-index.schema.json` are now inlined as fenced ```json``` blocks in `00-overview.md` (v3.3.0). Resolves P0 missing-contract gate G-CON-01 from fix-checklist (`.lovable/memory/audit/v2-deterministic/fix-checklists/03-error-manage__03-error-code-registry__07-schemas.md`).
+- **Changed** `99-consistency-report.md` bumped to v3.3.0.
+- **Changed** `00-overview.md` bumped to v3.3.0 with new "Inlined Contracts" section.
 
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
