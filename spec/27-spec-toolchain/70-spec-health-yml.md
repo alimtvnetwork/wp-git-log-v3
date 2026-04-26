@@ -39,7 +39,12 @@ Single job `health-gate` running:
 
 1. Checkout.
 2. Set up Node.
-3. Run `node linter-scripts/check-tree-health.cjs --min=80 --report`.
+3. Self-heal missing consistency reports, AC, and changelogs (idempotent fillers).
+4. Regenerate `spec-index.md` and fail if drift detected.
+5. **Spec cross-link gate** — run `python3 linter-scripts/check-spec-cross-links.py --github`. Fails on any broken internal markdown link not in the allowlist.
+6. **Spec tree health gate** — run `node linter-scripts/check-tree-health.cjs --min=100 --report`.
+7. **Trace-map regression gate** — run `python3 linter-scripts/check-trace-map-regression.py`.
+8. Summary to GitHub step summary.
 
 ## Acceptance criteria
 
@@ -51,19 +56,24 @@ Single job `health-gate` running:
 ### AC-70-02 — Trigger paths cover this toolchain module
 - **Given** the workflow's `on.push.paths` and `on.pull_request.paths`,
 - **When** they are inspected,
-- **Then** they SHOULD include `spec/27-spec-toolchain/**` and `linter-scripts/**` so changes here re-run the gate. (Current file matches `spec/**` which already covers `spec/27-spec-toolchain/**`; expanding `linter-scripts/**` is a tracked enhancement — see §99.)
+- **Then** they MUST include `spec/**`, `linter-scripts/check-spec-cross-links.py`, `linter-scripts/spec-cross-links.allowlist`, `linter-scripts/check-tree-health.cjs`, and `linter-scripts/generate-spec-index.cjs` so changes to any gate re-run the workflow.
 
-### AC-70-03 — Threshold is ≥ 80
+### AC-70-03 — Cross-link gate runs before tree-health gate
+- **Given** the workflow job steps,
+- **When** their order is read,
+- **Then** the cross-link gate MUST run before the tree-health gate because it is faster and fails on a narrower class of error.
+
+### AC-70-04 — Tree-health threshold is 100
 - **Given** the `health-gate` job step,
 - **When** the `check-tree-health.cjs` invocation is read,
-- **Then** `--min=` MUST be ≥ `80`.
+- **Then** `--min=` MUST be `100` (locked v3.7.7).
 
-### AC-70-04 — Job name is stable
+### AC-70-05 — Job name is stable
 - **Given** the workflow,
 - **When** the `name:` of the only job is read,
 - **Then** it MUST be `Spec tree health gate` (used by branch-protection required-checks).
 
-## Cross-references
-
-- §05 [`05-check-tree-health.md`](./05-check-tree-health.md) — the gate this workflow invokes.
-- §10 [`10-generate-spec-index.md`](./10-generate-spec-index.md) — auxiliary trigger path.
+### AC-70-06 — Summary step always runs
+- **Given** any preceding gate failure,
+- **When** the workflow reaches the Summary step,
+- **Then** `if: always()` MUST be present so results are written to the GitHub step summary even when a gate fails.
