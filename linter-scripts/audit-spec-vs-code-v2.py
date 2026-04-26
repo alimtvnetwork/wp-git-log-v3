@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.1** — AI-Implementability Edition.
+
+v2.1 (2026-04-26, Phase 23):
+  - Front-matter `kind: tracker` exempts issue/finding modules from
+    `missing-contract` and `untestable` rubric findings.
+  - Trackers receive impl baseline 75 (was 30) and testability 80.
 
 Improvements over v1:
   1. Broader code index: linter-scripts + .github + src + spec sub-tree map
