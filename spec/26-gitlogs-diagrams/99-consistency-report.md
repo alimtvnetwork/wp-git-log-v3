@@ -1,6 +1,6 @@
 # Consistency Report — Gitlogs Diagrams
 
-**Version:** 2.0.0  
+**Version:** 2.1.0  
 **Updated:** 2026-04-26
 
 ## File Inventory
