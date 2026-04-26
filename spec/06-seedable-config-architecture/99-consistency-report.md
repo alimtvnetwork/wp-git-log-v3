@@ -1,6 +1,6 @@
 # Consistency Report: Seedable Config Architecture
 
-**Version:** 4.0.0  
+**Version:** 4.1.0  
 **Generated:** 2026-04-26  
 **Health Score:** 100/100 (A+)
 
@@ -10,7 +10,7 @@
 
 | # | File | Status | Version |
 |---|------|--------|---------|
-| 00 | `00-overview.md` | ✅ Present | 3.2.0 |
+| 00 | `00-overview.md` | ✅ Phase 20 #8 — JSON Schema 2020-12 + reference instance inlined | 3.1.0 |
 | 01 | `01-fundamentals.md` | ✅ Present | 3.2.0 |
 | 02 | `02-features/00-overview.md` | ✅ Present | — |
 | 02.01 | `02-features/01-rag-chunk-settings.md` | ✅ Present | — |
@@ -22,7 +22,7 @@
 | 97 | `97-acceptance-criteria.md` | ✅ Phase 16r v4.0.0 GWT | 4.0.0 |
 | 97b | `97-changelog.md` | ✅ Present (legacy changelog) | 3.2.0 |
 | 98 | `98-acceptance-criteria.md` | ✅ Present (legacy GWT, superseded by §97 v4.0.0) | 3.2.0 |
-| 98b | `98-changelog.md` | ✅ Present (Phase 16r companion) | 4.0.0 |
+| 98b | `98-changelog.md` | ✅ Present (Phase 16r companion + Phase 20 #8) | 4.1.0 |
 
 **Total:** 13 files (excluding this report)
 
@@ -62,3 +62,4 @@ All internal cross-references resolve. ✅
 | 2026-03-22 | 2.0.0 | Regenerated — inventory synchronized with disk contents |
 | 2026-04-03 | 3.0.0 | Restructured to app project template (fundamentals + features/ + issues/) |
 | 2026-04-26 | 4.0.0 | Phase 16r §97 GWT rewrite (20 ACs) + §98-changelog.md companion at v4.0.0 |
+| 2026-04-26 | 4.1.0 | Phase 20 #8 — JSON Schema 2020-12 + reference instance inlined in §00; G-CON-01 audit gate cleared |
