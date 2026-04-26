@@ -30,14 +30,14 @@ Landed in v3.8.4:
 - §23: backup is now a directory tree; manifest gains `ShaFiles[]` with `{PipelineId,Sha,DbFilePath,RowCount,FileSizeBytes,Sha256}` + `ShaFileTotal`; restore is all-or-nothing with `.bak` rollback; new pre-v2.9.0 cross-version migration row. Banner v2.5.0→v2.9.0.
 - §29: lifecycle table gained "Per-SHA tree" column; Wipe deletes `<ShaLogsRoot>/` first, then root DB, then `rmdir` parent. Banner v2.5.0→v2.9.0.
 
-## ⏳ Phase 4 — Split-DB Doc Closure
-**Files:** `00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`, `spec-index.md`, `26-gitlogs-diagrams/`
-- §00 inventory: add §39 row
-- §97 ACs: promote AC-49..AC-53 (split-DB) from draft to active
-- §98 changelog: v3.8.3 row
-- §99 consistency: flip Q3 status
-- Re-render Mermaid diagrams: show split-DB boundary
-- Update root `spec-index.md`
+## ✅ Phase 4 — Split-DB Doc Closure (DONE, v3.8.5)
+
+Landed in v3.8.5:
+- §00: §39 inventory row refreshed for v2.9.0 path layout (`<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`) + cross-refs to §15/§22/§23/§29. Banner v3.8.0→v3.8.5.
+- §97: AC-49..AC-53 promoted from draft to **Active (v2.9.0)**, rewritten to match shipped DDL (`(PipelineId, Sha)` key, real ConfigKv defaults 32/120, GL-SHA-DB-* code refs, manifest `ShaFiles[]`, Wipe per-SHA-tree-first). Banner v3.8.2→v3.8.5.
+- Root `spec/spec-index.md`: 9 version cells refreshed for files touched in Phases 2–4.
+- `26-gitlogs-diagrams/01-er-diagram.mmd`: re-rendered for split-DB boundary — top annotation, stale edges removed, `ShaRegistry` entity rewritten to v2.9.0 columns.
+- §98 v3.8.5 row + §99 Phase 4 audit table + Health Score updated.
 
 ---
 
