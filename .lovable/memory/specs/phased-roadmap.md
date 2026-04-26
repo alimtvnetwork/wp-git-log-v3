@@ -100,4 +100,4 @@ Landed in v3.8.10 / schema v2.9.2:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 9** (Pipeline `PreviousHasError` Flag — add boolean column to `Pipeline` table in `18-schema.sql`, document semantics + back-fill rule in `02-database-schema.md` + `01-glossary-and-enums.md`)
+**Top pending = Phase 10** (Diagram Render Pass — re-render all `.mmd` → `.svg` in `26-gitlogs-diagrams/` after Phases 4–9 schema changes land)
