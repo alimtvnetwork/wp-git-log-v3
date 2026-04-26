@@ -188,6 +188,16 @@ First module deepening pass after §07 §97 conversion completed:
 
 ---
 
+## ✅ Phase 16b — Deepen §14 update §97 with module-specific GWT ACs (DONE, v2.0.0)
+
+Second module deepening pass:
+- §14 §97 banner v1.0.0 → **v2.0.0** (major; AC count 5 → 20).
+- **15 new GWT ACs added (AC-06..AC-20)**, AC-01..AC-05 preserved.
+- AC-06 rename-first deploy (Windows-locked-file workaround, atomic same-dir rename, uniform across platforms); AC-07 detached `updater.exe` handoff (CREATE_NEW_PROCESS_GROUP|DETACHED_PROCESS, parent-PID poll, self-delete, log to `%TEMP%`); AC-08 three-branch version verification (deployed/source/declared, build-time `-ldflags -X main.Version` injection, no runtime `version.txt`); AC-09 mandatory code signing (Authenticode `signtool verify /pa`, macOS codesign+notarize, Linux GPG `.sig`, fail-on-unsigned, 30-day cert-expiry warning); AC-10 SHA-256 checksums.txt + verify-before-install (MD5/SHA-1 forbidden, signed checksums fingerprint); AC-11 idempotent install scripts (`%LOCALAPPDATA%\Programs`, `~/.local/bin`, `/usr/local/bin`, no-sudo-by-default, opt-in PATH modification); AC-12 latest-version probe (`releases/latest`, `--version=X.Y.Z` pin, no fallback guess, User-Agent); AC-13 XDG-compliant config (`$XDG_CONFIG_HOME/<binary>/update.json`, flat JSON per §13 AC-08, atomic .tmp+rename writes, 0600 perms); AC-14 ten-step `update` workflow (network → probe → compare → .partial → SHA-256 → signature → .new → detached spawn → exit ≤100ms → swap); AC-15 non-blocking 12h pre-command-hook (fire-and-forget detached child, NO daemon/cron, JSON fallback store, banner on next invocation); AC-16 startup cleanup (.old + stale .partial + old .log, silent failures, idempotent, ≤100ms cap); AC-17 atomic rollback (rename .old back, RECOVERY.md fallback if rollback itself fails); AC-18 deploy path resolution (default → build.json → --deploy-path, refuse system dirs, perm check); AC-19 `git describe --tags` last-release detection (commit-count/branch-name forbidden, conventional-commits drives bump); AC-20 cross-compilation matrix (windows/amd64+arm64, linux/amd64+arm64, darwin/amd64+arm64, CGO_ENABLED=0, `-ldflags -s -w`, fail-on-partial).
+- Lockstep §98 v1.0.0 → v1.1.0 + §99 v1.0.0 → v1.1.0 + spec-index updated.
+
+---
+
 ## 🚧 Blocked (awaiting user decision)
 - **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
 
@@ -199,10 +209,9 @@ First module deepening pass after §07 §97 conversion completed:
 - 🚧 blocked
 
 ## Next-pointer
-**Phase 16a complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) both deep. **Unblocked candidates remaining**:
-- **Phase 16b** — Deepen **§14 update §97** (currently 5 generic scaffold ACs; module covers update check mechanism — high-value ~10-15 module-specific ACs).
+**Phases 16a + 16b complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) all deep. **Unblocked candidates remaining**:
 - **Phase 16c** — Deepen **§22 git-logs §97** follow-up pass on AC-04/AC-05/AC-25/AC-34 (left lean in Phase 13).
-- **Phase 16d** — Deepen another high-traffic module flagged in `mem://specs/full-tree-audit-v4.md` (e.g. §15 distribution-and-runner, §16 generic-release, §17 consolidated-guidelines, §27 spec-toolchain, §28 universal-ci-cli — all currently scaffolded with 5 generic ACs).
+- **Phase 16d** — Deepen another high-traffic 5-AC-scaffold module: §15 distribution-and-runner, §16 generic-release, §17 consolidated-guidelines, §27 spec-toolchain, §28 universal-ci-cli.
 - Phase B1 remains blocked on user.
 
-On next `next`: take **Phase 16b (§14 update §97 deepen)** unless you redirect.
+On next `next`: take **Phase 16c (§22 git-logs §97 depth pass)** unless you redirect.
