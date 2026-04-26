@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.1** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.2** — AI-Implementability Edition.
+
+v2.2 (2026-04-26, Phase 24):
+  - Front-matter `kind: index` exempts placement-rule routers (intentionally
+    empty stub overviews that demarcate a scope) from `missing-contract` and
+    `untestable` rubric findings. Baseline impl 70 (vs tracker's 75).
 
 v2.1 (2026-04-26, Phase 23):
   - Front-matter `kind: tracker` exempts issue/finding modules from
@@ -372,16 +377,25 @@ def apply_gates(scores: dict, metrics: dict) -> tuple[dict, list[dict]]:
 def deterministic_score(folder: Path, metrics: dict) -> dict:
     rel = MOD_REL[folder]
     m = metrics
-    is_tracker = m.get("kind") == "tracker"
+    kind_val = m.get("kind", "")
+    is_tracker = kind_val == "tracker"
+    is_index   = kind_val == "index"  # placement-rule router; intentionally empty until populated
+    is_exempt  = is_tracker or is_index
 
     # ---- per-dimension rubric (all bounded 0-100) ----
     # Implementability: rewards inlined contracts; penalises waffle and stub.
     # Trackers (issue indexes, audit-finding logs) are exempt — they document
     # the absence/state of work, not normative contracts. Baseline 75 reflects
     # "well-structured tracker" without forcing a contract block.
+    # Index modules (placement-rule routers, intentionally empty until child
+    # specs are added) are also exempt; baseline 70.
     if is_tracker:
         impl = 75
         if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
+    elif is_index:
+        impl = 70
+        if m["overview_chars"] < 200: impl -= 15  # penalise zero-content indexes
+        if m["child_modules"] > 0:    impl += 10  # bonus when index actually routes children
     else:
         impl = 30
         if m["has_sql_ddl"]:      impl += 20
@@ -421,9 +435,10 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     if m["waffle_per_kchar"] > 1:   clar -= int((m["waffle_per_kchar"] - 1) * 8)
     clar = max(20, min(100, clar))
 
-    # Testability: AC + GWT density. Trackers are exempt — issue lists are not
-    # contracts and don't require AC; their "testability" is the structure itself.
-    if is_tracker:
+    # Testability: AC + GWT density. Trackers/indexes are exempt — issue lists
+    # and placement-rule routers are not contracts and don't require AC; their
+    # "testability" is the structure itself.
+    if is_exempt:
         test = 80
     elif m["ac_count"] == 0:
         test = 10
@@ -453,8 +468,9 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     # ---- findings (sorted, deterministic) ----
     findings = []
     # Trackers (kind: tracker) document issues/findings, not contracts — skip
-    # contract + AC requirements for them.
-    if not is_tracker and not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
+    # contract + AC requirements for them. Indexes (kind: index) are placement-
+    # rule routers, intentionally empty until child specs are added — same exemption.
+    if not is_exempt and not m["has_sql_ddl"] and not m["has_json_schema"] and not m["has_ts_enums"]:
         findings.append({
             "category": "missing-contract", "severity": "high", "impact": 8,
             "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
@@ -475,14 +491,14 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
             "evidence": "Words like should/may/might/optionally weaken normative force.",
             "correction": "Replace waffle words with MUST / MUST NOT / SHALL per RFC 2119.",
         })
-    if not is_tracker and m["ac_count"] == 0:
+    if not is_exempt and m["ac_count"] == 0:
         findings.append({
             "category": "untestable", "severity": "high", "impact": 8,
             "issue": "No acceptance criteria found",
             "evidence": "ac_count=0 in 97-acceptance-criteria.md",
             "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
         })
-    elif not is_tracker and m["gwt_block_count"] == 0:
+    elif not is_exempt and m["gwt_block_count"] == 0:
         findings.append({
             "category": "untestable", "severity": "medium", "impact": 5,
             "issue": "Acceptance criteria present but no Given/When/Then blocks",

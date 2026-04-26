@@ -1,6 +1,11 @@
+---
+kind: index
+description: Diagram index for git-logs WP plugin (Mermaid sources + rendered SVGs). Indexes .mmd/.svg companions of folder 22 — exempt from missing-contract rubric findings.
+---
+
 # Gitlogs Diagrams
 
-**Version:** 2.1.0  
+**Version:** 2.2.0  
 **Updated:** 2026-04-26
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).

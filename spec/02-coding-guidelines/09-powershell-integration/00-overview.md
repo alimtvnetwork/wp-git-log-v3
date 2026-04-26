@@ -1,7 +1,12 @@
+---
+kind: index
+description: Placement-rule router for PowerShell integration specs under coding guidelines. Intentionally empty until child specs are added — exempt from missing-contract / untestable rubric findings.
+---
+
 # PowerShell Integration
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16
+**Version:** 3.3.0  
+**Updated:** 2026-04-26
 
 ---
 
