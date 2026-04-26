@@ -224,8 +224,8 @@
 | `spec/02-coding-guidelines/05-rust/05-testing-standards.md` | Rust Testing Standards | 3.2.0 |
 | `spec/02-coding-guidelines/05-rust/06-ffi-platform.md` | Rust FFI & Platform Abstraction | 3.2.0 |
 | `spec/02-coding-guidelines/05-rust/97-acceptance-criteria.md` | Rust Coding Standards — Acceptance Criteria | 4.0.0 |
-| `spec/02-coding-guidelines/05-rust/98-changelog.md` | Changelog: Rust Standards | 3.2.0 |
-| `spec/02-coding-guidelines/05-rust/99-consistency-report.md` | Consistency Report — Rust Coding Standards | 3.2.0 |
+| `spec/02-coding-guidelines/05-rust/98-changelog.md` | Changelog: Rust Standards | 4.0.0 |
+| `spec/02-coding-guidelines/05-rust/99-consistency-report.md` | Consistency Report — Rust Coding Standards | 4.0.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/00-overview.md` | AI Optimization | 3.2.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/01-anti-hallucination-rules.md` | Anti-Hallucination Rules | 3.2.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/02-ai-quick-reference-checklist.md` | AI Quick Reference Checklist | 3.2.0 |
@@ -253,7 +253,7 @@
 | `spec/02-coding-guidelines/07-csharp/02-method-design.md` | C# Method Design | 1.0.0 |
 | `spec/02-coding-guidelines/07-csharp/03-error-handling.md` | C# Error Handling | 1.0.0 |
 | `spec/02-coding-guidelines/07-csharp/04-type-safety.md` | C# Type Safety | 1.0.0 |
-| `spec/02-coding-guidelines/07-csharp/97-acceptance-criteria.md` | C# Coding Standards — Acceptance Criteria | 3.2.0 |
+| `spec/02-coding-guidelines/07-csharp/97-acceptance-criteria.md` | C# Coding Standards — Acceptance Criteria | 4.0.0 |
 | `spec/02-coding-guidelines/07-csharp/98-changelog.md` | C# Coding Standards — Changelog |  |
 | `spec/02-coding-guidelines/07-csharp/99-consistency-report.md` | Consistency Report: C# Coding Standards | 3.2.0 |
 | `spec/02-coding-guidelines/08-file-folder-naming/00-overview.md` | File & Folder Naming Conventions | 3.2.0 |

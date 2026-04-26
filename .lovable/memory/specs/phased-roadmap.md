@@ -300,32 +300,37 @@ Fourth language child to inherit AC-CL-*. Rewrote §97 from 18 stub checkboxes (
 
 ---
 
-## Next-pointer
-**Phase 16l complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT).
+## ✅ Phase 16m — §02/07-csharp §97 deepen (DONE, v4.0.0)
 
-**8 remaining §97 files with 0 GWT ACs** (post-16l), priority order:
+Fifth and final mainstream-language child to inherit AC-CL-*. Rewrote §97 from 38 stub checkboxes (AC-01..AC-07) to **20 module-specific GWT ACs** (AC-CS-01..AC-CS-20) covering: explicit AC-CL-* inheritance with documented AC-CL-12 waiver for `PascalCase.cs` files (AC-CS-01); .NET 8+ LTS + `LangVersion=latest` + `Nullable=enable` + `TreatWarningsAsErrors=true` + `EnforceCodeStyleInBuild=true` (AC-CS-02); .NET naming guidelines, no SCREAMING_SNAKE_CASE consts (AC-CS-03); acronym casing differing from Go: ≥3 letters first-only (`UserId`/`HtmlParser`), 2 letters both-caps (`DbContext`/`IOStream`) (AC-CS-04); boolean prefix `Is`/`Has`/`Can`/`Should`/`Was` + no negative polarity (AC-CS-05); boolean-flag-branching params FORBIDDEN with 3 documented exemptions (AC-CS-06); one type per `PascalCase.cs` file — sole AC-CL-12 waiver (AC-CS-07); body ≤ 15 LOC + ≤ 3 params + options-record for 4+ (AC-CS-08); `Async` suffix + `CancellationToken cancellationToken = default` LAST parameter mandatory (AC-CS-09); `.Result`/`.Wait()`/`.GetAwaiter().GetResult()` FORBIDDEN, async-all-the-way (AC-CS-10); `Task.WhenAll` for independent awaits (AC-CS-11); `Result<T>`/`OneOf<T,Error>` for expected failures (AC-CS-12); `catch (Exception)` and silent swallow FORBIDDEN with documented top-level boundary exemption (AC-CS-13); `ArgumentNullException.ThrowIfNull(x)` + `nameof()` + early-return guard clauses (AC-CS-14); `record` for DTOs + `class` for behavior + `init` setters (AC-CS-15); `object` returns FORBIDDEN, generics + pattern matching only, no business-logic casts (AC-CS-16); `switch` expressions over statements + exhaustive matching + `_ => throw new UnreachableException()` (AC-CS-17); magic strings/numbers FORBIDDEN, use enums/`const`/`static readonly`/typed-record (AC-CS-18); Roslyn + StyleCop + NetAnalyzers + `.editorconfig` at repo root + CI `dotnet build -warnaserror` zero-warning gate (AC-CS-19); self-application doctest harness (AC-CS-20). Legacy 38 stubs preserved as AC-CS-LEGACY-* at end. Lockstep: §98 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
+## Next-pointer
+**Phase 16m complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT). **All 5 mainstream language children done.**
+
+**7 remaining §97 files with 0 GWT ACs** (post-16m), priority order:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/07-csharp/` | 0 | **P1** | Fifth language child |
-| 2 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
-| 3 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
-| 4 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 5 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 6 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 7 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 8 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `02-coding-guidelines/06-ai-optimization/` | 0 | **P1** | AI rules subfolder |
+| 2 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision with above |
+| 3 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 4 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 5 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 6 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 7 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
 🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04.
 
 Remaining work:
-- ⏳ **Phase 16m** — Deepen `02-coding-guidelines/07-csharp/97` (P1 — fifth language child).
-- ⏳ **Phase 16n** — Deepen `02-coding-guidelines/06-ai-optimization/97` (P1).
-- ⏳ **Phase 16o** — Deepen `02-coding-guidelines/01-cross-language/16-static-analysis/97` (P2 deep nested).
-- ⏳ **Phase 16p** — Deepen `14-update/24-update-check-mechanism/97` (P2).
-- ⏳ **Phase 16q** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
+- ⏳ **Phase 16n** — Deepen `02-coding-guidelines/06-ai-optimization/97` (P1 — last P1 §97).
+- ⏳ **Phase 16o** — Deepen `02-coding-guidelines/06-cicd-integration/97` (P2 — also B2-flagged).
+- ⏳ **Phase 16p** — Deepen `02-coding-guidelines/01-cross-language/16-static-analysis/97` (P2 deep nested).
+- ⏳ **Phase 16q** — Deepen `14-update/24-update-check-mechanism/97` (P2).
+- ⏳ **Phase 16r** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user).
 - 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user).
 
-On next `next`: take **Phase 16m (`02-coding-guidelines/07-csharp/97` deepen)** — P1 fifth and final mainstream language child. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16n (`02-coding-guidelines/06-ai-optimization/97` deepen)** — last remaining **P1** §97; this completes the §02 cross-language + language-children + AI-opt P1 batch. Unless you redirect or want to unblock B1/B2 first.
 
