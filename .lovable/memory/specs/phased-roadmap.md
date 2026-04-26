@@ -314,29 +314,33 @@ Last remaining P1 §97. Rewrote §97 from 7 stub checkboxes to **20 module-speci
 
 ---
 
-## Next-pointer
-**Phase 16n complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT) + §02/06-ai-optimization §97 (20 GWT). **All P1 §97s complete.**
+## ✅ Phase 16o — §02/06-cicd-integration §97 deepen (DONE, v4.0.0) — **First P2 + B2 collision twin codified**
 
-**6 remaining §97 files with 0 GWT ACs** (post-16n), all P2:
+First P2 §97. Rewrote §97 from 7 prose criteria (AC-CI-001..007) to **20 module-specific GWT ACs** (AC-CI-01..AC-CI-20) covering: explicit AC-CL-* inheritance (AC-CI-01); stock-Ubuntu+python3≥3.10+bash baseline with zero `pip install`/`apt-get install` Phase 1 (AC-CI-02); SARIF 2.1.0 exact-version + schema URL gate (AC-CI-03); POSIX exit codes 0/1/2 only, all others FORBIDDEN (AC-CI-04); check filename regex `^[a-z0-9]+-[a-z0-9-]+\.(sh|py)$` with registered language-id prefix (AC-CI-05); zero-edit plugin addition with PR-template gate (AC-CI-06); plugin manifest TOML 5-required-key contract (AC-CI-07); SARIF rule-ID regex `^[A-Z]{2,4}-[A-Z]{1,3}-\d{1,3}$` (AC-CI-08); dogfooding gate — zero `level: error` against this repo (AC-CI-09); composite Action zero-required-input one-liner UX (AC-CI-10); release ZIP + SHA-256 checksums.txt for every `v*` tag (AC-CI-11); single-source-of-truth `linters-cicd/VERSION` file, hardcoded duplicates FORBIDDEN per AC-CL-20 (AC-CI-12); five mandatory CI templates GitHub/GitLab/Azure/Jenkins/Bitbucket (AC-CI-13); rules-mapping table EVERY-rule-row contract with relative spec-source link (AC-CI-14); closed severity enum {error,warning,note} matching SARIF + AC-AI-14 (AC-CI-15); performance budget single-check<5s + full-run<60s on 10k-LOC fixture (AC-CI-16); middle-out probe ordering by manifest cost tier (AC-CI-17); idempotent + checksum-verified + non-interactive `install.sh` one-liner (AC-CI-18); per-check `_tests/fixtures/{good,bad}/` gate (AC-CI-19); self-application `--self-test` mode (AC-CI-20). Legacy 7 prose criteria preserved as AC-CI-LEGACY-001..007 at end. Lockstep: §98 v1.0.0 → v4.0.0 + §99 v1.0.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+**🚨 B2 collision now fully codified:** Both `02-coding-guidelines/06-ai-optimization/` (Phase 16n) AND `02-coding-guidelines/06-cicd-integration/` (Phase 16o) carry full 20-GWT §97 contracts. Both folders explicitly document the collision in their §97 module summary + §99 consistency report. Resolution requires a user decision (which folder keeps slot `06-`).
+
+---
+
+## Next-pointer
+**Phase 16o complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT) + §02/05-rust §97 (20 GWT) + §02/07-csharp §97 (20 GWT) + §02/06-ai-optimization §97 (20 GWT) + §02/06-cicd-integration §97 (20 GWT). **All P1 + first P2 §97s complete.**
+
+**5 remaining §97 files with 0 GWT ACs** (post-16o), all P2:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/06-cicd-integration/` | 0 | **P2** | 🚨 Slot collision with `06-ai-optimization` |
-| 2 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 3 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 4 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 5 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 6 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
-
-🚨 **Slot collision (B2)**: `02-coding-guidelines/` still has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04. Phase 16n shipped §97 for one of the two; deepening 16o for the other will codify the collision in two §97s simultaneously, increasing pressure to resolve B2.
+| 1 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | **P2** | Deep nested under §02/01 |
+| 2 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 3 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 4 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 5 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
 Remaining work:
-- ⏳ **Phase 16o** — Deepen `02-coding-guidelines/06-cicd-integration/97` (P2 — also B2-flagged collision twin).
 - ⏳ **Phase 16p** — Deepen `02-coding-guidelines/01-cross-language/16-static-analysis/97` (P2 deep nested).
 - ⏳ **Phase 16q** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16r** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user: `Environment`, `Platform`, `OwnerEmail` shape).
-- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user: pick rename target for one of `06-ai-optimization`/`06-cicd-integration`).
+- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user: pick rename target for one of `06-ai-optimization`/`06-cicd-integration` — both now carry full §97s, so renaming is a §99-audit-row-only operation per the immutability precedent §16→§37).
 
-On next `next`: take **Phase 16o (`02-coding-guidelines/06-cicd-integration/97` deepen)** — first P2; intentionally tackled next because shipping §97 for the other §06 makes the B2 collision impossible to ignore. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16p (`02-coding-guidelines/01-cross-language/16-static-analysis/97` deepen)** — second P2; deepest nested §97 in §02 tree, completes the §02 tree top-to-bottom. Unless you redirect or want to unblock B1/B2 first.
 
