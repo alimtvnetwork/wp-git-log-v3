@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.2  
-**Updated:** 2026-04-26
+**Version:** 3.8.5  
+**Updated:** 2026-04-26 (Phase 4: AC-49..AC-53 promoted from draft to active; aligned with v2.9.0 path layout + ConfigKv defaults)
 
 | # | Criterion | Source |
 |---|-----------|--------|
