@@ -75,10 +75,13 @@ Landed in v3.8.9:
 - 2 new error codes introduced doc-side: `GL-NDJSON-CLIENT-DISCONNECT` (499 informational), `GL-NDJSON-CURSOR-LOST` (500).
 - **Streaming follow-ups deferred:** §18 ConfigKv seeding for 4 `Ndjson*` keys, §15 entries for 2 `GL-NDJSON-*` codes, §17 OpenAPI `application/x-ndjson` content variants for endpoints #5–#10, §97 ACs for streaming behavior. Tracked under "Streaming follow-ups" in §99 Phase 8 audit.
 
-## ⏳ Phase 9 — Pipeline PreviousHasError Flag
-**Files:** `18-schema.sql`, `02-database-schema.md`, `01-glossary-and-enums.md`
-- Add `PreviousHasError` boolean to `Pipeline` table
-- Document semantics + back-fill rule
+## ✅ Phase 9 — Pipeline PreviousHasError Flag (DONE, v3.8.10 / schema v2.9.2)
+
+Landed in v3.8.10 / schema v2.9.2:
+- §18: `Pipeline` table gained `PreviousHasError INTEGER NOT NULL DEFAULT 0 CHECK (PreviousHasError IN (0,1))` immediately after `HasError`; `HasError` itself gained explicit `CHECK (HasError IN (0,1))`. Inline back-fill rule (`UPDATE Pipeline SET PreviousHasError = HasError;` on v2.9.1→v2.9.2 upgrade) and write rule (single-`UPDATE` atomicity, no read-modify-write). PluginVersion 2.9.1→2.9.2; MigrationState 2.9.2 appended (11 markers).
+- §02: banner v3.8.6→v3.8.10. Pipeline doc gains `PreviousHasError` row + state-transition labels (`first-failure`/`still-failing`/`just-recovered`/`still-green`).
+- §01: banner v3.8.6→v3.8.10. Bare `Pipeline` glossary row split into 3 — `Pipeline`, `HasError`, `PreviousHasError`.
+- **Phase 9 follow-ups deferred:** §97 ACs for `PreviousHasError` (state-transition matrix, back-fill correctness, single-statement write atomicity), §03 admin UI rendering of the four state labels, §04 NDJSON `Header` frame label exposure.
 
 ## ⏳ Phase 10 — Diagram Render Pass
 **Files:** `26-gitlogs-diagrams/`
