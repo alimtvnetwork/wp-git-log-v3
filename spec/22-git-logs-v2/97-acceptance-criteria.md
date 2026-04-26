@@ -188,10 +188,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 ## Section E — Logging, Migrations & Roles
 
 ### AC-03 — Migration runs once per version  `[active]`
-- **Given** the plugin boots at version `X.Y.Z`
-- **When** the migration runner inspects `MigrationState`
-- **Then** the V`X_Y_Z` migration runs exactly once; subsequent boots of the same version short-circuit.
-- **Verifies:** brief §3.b–e, §06, §12.
+- **Given** the plugin boots at semver `X.Y.Z` (read from `ConfigKv.PluginVersion` per §18 v2.9.3 — currently `2.9.3`)
+- **When** the migration runner executes during `plugins_loaded` action (per §06 §3.b)
+- **Then** the runner MUST consult `MigrationState` (PK = `PluginVersion TEXT`, plus `AppliedAt INTEGER NOT NULL`, `ChecksumOk INTEGER NULL` per §18) and MUST execute the migration named `V<X>_<Y>_<Z>` (e.g. `V2_9_3` for `2.9.3`) IF AND ONLY IF no row exists with `PluginVersion = 'X.Y.Z'`; AND on successful completion the runner MUST insert exactly one new `MigrationState` row with `PluginVersion = 'X.Y.Z', AppliedAt = strftime('%s','now')` — re-boots at the same version MUST short-circuit by detecting the existing row and skipping the migration entirely (NEVER re-run, NEVER re-attempt — even if the prior run partially failed; partial failures are surfaced via `ChecksumOk = 0` and require manual operator intervention per §23 backup/restore); AND the runner MUST execute migrations in strict semver-ascending order — booting at `2.9.3` against a DB last migrated at `2.9.0` MUST run `V2_9_1` then `V2_9_2` then `V2_9_3` in that order, never out-of-order, never skipping; AND each migration MUST be wrapped in `BEGIN IMMEDIATE; … COMMIT;` so a failure mid-migration leaves the DB at the prior version (no half-migrated schema); AND the runner MUST refuse to start (returning `GL-MIGRATION-PENDING` per §15 on every API call) if the DB carries `MigrationState` rows for versions NEWER than the running plugin (a downgrade scenario — the operator must manually restore from §23 backup or upgrade the plugin); AND every Phase 0..11 marker (`2.0.0`, `2.5.0`, `2.6.0`, `2.7.0`, `2.8.0`, `2.8.7`, `2.8.8`, `2.8.9`, `2.9.0`, `2.9.1`, `2.9.2`, `2.9.3` — 12 markers total) MUST be present in `MigrationState` after a fresh install applying the v2.9.3 baseline schema, NOT just the latest one (the audit trail of intermediate versions matters for §23 restore correctness).
+- **Verifies:** brief §3.b–e (migration lifecycle), §06 (plugin boot sequence), §12 (CI/CD migration coupling), §15 (`GL-MIGRATION-PENDING`), §18 v2.9.3 (`MigrationState` DDL + 12 baseline markers), §23 (backup/restore interaction).
 
 ### AC-04 — Logger level gating  `[active]`
 - **Given** `ConfigKv.LogLevelMin` is set
