@@ -1,7 +1,7 @@
 # Seed Data (v2)
 
-**Version:** 2.7.0  
-**Updated:** 2026-04-25  
+**Version:** 2.7.1  
+**Updated:** 2026-04-26  
 **Scope:** Authoritative initial-row content for every lookup table and `ConfigKv` default. Loaded by the activator on fresh install and by `MigrationState` upgrade steps. Idempotent: every seed insert MUST use `INSERT OR IGNORE` keyed on the natural unique column (`Name` or `KeyName`).
 
 ---
@@ -74,12 +74,9 @@ Seed insert idempotency uses unique `(RoleId, PermissionId)`.
 
 ---
 
-## OwnerType (introduced 2.0.0)
+## OwnerType (retired in v3.8.0)
 
-| Id | Name |
-|----|------|
-| 1 | User |
-| 2 | Organization |
+> **Retired** — replaced by `GitProfile.IsOrganization` boolean (0/1). No seed rows; the `OwnerType` lookup table is dropped from §18 schema. Tombstone kept here so historical migrations and §01 glossary cross-refs still resolve.
 
 ---
 

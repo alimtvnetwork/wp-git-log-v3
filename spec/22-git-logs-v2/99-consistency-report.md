@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.0  
+**Version:** 3.8.1  
 **Updated:** 2026-04-26
 
 ---
@@ -87,7 +87,7 @@ Cross-checked all `18-schema.sql` lookup seeds against `15-error-codes.md` runti
 | `Acceptance` | 3 | `GL-VALIDATION-REPO-NOT-ALLOWED` | ✅ |
 | `AppLinkType` | 2 | (linkage resolution, no direct code) | ✅ |
 | `Provider` | 2 | `GL-VALIDATION-REPOURL-MALFORMED` parser | ✅ |
-| `OwnerType` | 2 | (parser metadata) | ✅ |
+| ~~`OwnerType`~~ | 0 | (retired v3.8.1 — replaced by `GitProfile.IsOrganization` boolean; tombstoned in §16) | 🗑️ |
 | `LogSeverity` | 6 | (per-line truncation, no GL code per §15 note) | ✅ |
 | `ActionType` | 4 | (Append/Fixed/Clear/ClearAll dispatch) | ✅ |
 | `AuditOutcome` | 3 | (envelope outcome) | ✅ |
@@ -111,19 +111,30 @@ User reviewed `26-gitlogs-diagrams/02-domain-design.mmd` + `01-er-diagram.mmd` a
 | 1 | "Why is `RepoVersionId` inside `Action`? Naming is the issue." | Renamed `Action` → `PipelineAction` + `ActionType` → `PipelineActionType`. Documented scope (RepoVersion + Pipeline only) in §08. |
 | 2 | "History should also cover non-Git events (ProfileCreated, KeyRevoked, …)" | Introduced `SystemEvent` table with 16-value `SystemEventType` lookup; loose polymorphic (`TargetType` + `TargetId`, no FK CHECK). Four-table model documented in §08. |
 | 3 | "Where are logs streamed? Use the split-DB pattern, per-SHA SQLite." | Created §39. `LogEntry`/`ErrorLogEntry` deleted from root DB; root DB keeps only `ShaRegistry` (registry + rolled-up summary). Per-SHA file at `logs/<RepoVersionId>/<GitSha256>.sqlite` with semantic tables (`PipelineRun`, `StatusSnapshot`) that answer last-status / failure-count / pipelines-failing in O(1). |
-| 4 | "`GitProfile` doesn't mark organization vs user — needs `IsOrganization` checkbox." | Added `IsOrganization INTEGER 0/1` column on `GitProfile`; retired `OwnerType` lookup. Drives URL canonicalization + admin-UI checkbox. |
+| 4 | "`GitProfile` doesn't mark organization vs user — needs `IsOrganization` checkbox." | Added `IsOrganization INTEGER 0/1` column on `GitProfile`; retired `OwnerType` lookup. Drives URL canonicalization + admin-UI checkbox. **§18 DDL + §03 UI + §16 seed tombstone landed v3.8.1.** |
 
 Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enums.md` (OwnerType retired, PipelineActionType renamed, SystemEventType added, ShaRegistry+SystemEvent+PipelineAction terms), `02-database-schema.md` (GitProfile.IsOrganization, lookup list updated, LogEntry+ErrorLogEntry removed, ShaRegistry added, History rename, PipelineAction rename, SystemEvent added), `08-history-and-action.md` (4-table model), `97-acceptance-criteria.md` (AC-07 + AC-21 reworded, AC-49–AC-53 added), `98-changelog.md`, `99-consistency-report.md`, `26-gitlogs-diagrams/01-er-diagram.mmd` (regenerated with split boundary), `26-gitlogs-diagrams/02-domain-design.mmd` (regenerated with subgraphs).
 
 **Queued (NOT in this commit, tracked in `mem://specs/git-logs.md` queued decisions):**
-- §18 `18-schema.sql`: drop `OwnerType` table+seed, drop `LogEntry`+`ErrorLogEntry`, add `GitProfile.IsOrganization`, add `ShaRegistry`+`SystemEvent` tables, rename `Action`→`PipelineAction`, add 16 `SystemEventType` seeds, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults.
+- §18 `18-schema.sql`: ~~drop `OwnerType` table+seed~~ ✅ landed v3.8.1; ~~add `GitProfile.IsOrganization`~~ ✅ landed v3.8.1; drop `LogEntry`+`ErrorLogEntry`, add `ShaRegistry`+`SystemEvent` tables, rename `Action`→`PipelineAction`, add 16 `SystemEventType` seeds, add 4 `GL-SHA-DB-*` codes to §15, add `MaxOpenShaDbHandles`/`ShaDbIdleCloseSec`/`ShaLogsRoot` `ConfigKv` defaults. *(Q2 + Q3 still queued.)*
 - §22 retention: prune walks `ShaRegistry` + deletes per-SHA files.
 - §23 backup: manifest must list per-SHA file inventory + per-file row counts + sha256.
 - §29 uninstall: Wipe mode deletes the `logs/` folder.
-- §03 admin-ui: add "Is organization" checkbox to GitProfile create/edit screen.
+- ~~§03 admin-ui: add "Is organization" checkbox to GitProfile create/edit screen.~~ ✅ landed v3.8.1.
 - §15 error-codes: add `GL-SHA-DB-CREATE-FAILED`, `GL-SHA-DB-OPEN-FAILED`, `GL-SHA-DB-CORRUPT`, `GL-SHA-DB-NOT-FOUND`.
 - Per-SHA SVG re-render of `01-er-diagram.mmd` + `02-domain-design.mmd`.
 - `26-gitlogs-diagrams/00-overview.md` banner bump v1.1.0 → v1.2.0 + inventory note for the new split-DB callouts.
+
+## v3.8.1 Audit — Q1 IsOrganization lockstep
+
+| File | Change |
+|------|--------|
+| `03-admin-ui.md` | Removed `OwnerType (derived)` row; added `Is organization` checkbox row bound to `GitProfile.IsOrganization`. Banner v2.0.0 → v2.1.0. |
+| `16-seed-data.md` | `OwnerType` section converted to retirement tombstone (no seed rows). Banner v2.7.0 → v2.7.1. |
+| `18-schema.sql` | `CREATE TABLE OwnerType` deleted; `GitProfile.OwnerTypeId` → `IsOrganization INTEGER NOT NULL DEFAULT 0 CHECK (IsOrganization IN (0,1))`; `OwnerType` seed deleted; `ConfigKv.PluginVersion` 2.8.7 → 2.8.8; banner v2.8.7 → v2.8.8. |
+| `97-acceptance-criteria.md` | Added AC-54 (UI checkbox binding) + AC-55 (DDL constraint). Banner v3.8.0 → v3.8.1. |
+| `98-changelog.md` | Added v3.8.1 row. |
+| `99-consistency-report.md` | Tombstoned `OwnerType` seed-coverage row; flipped Q1 status in v3.8.0 audit table; this audit table added. Banner v3.8.0 → v3.8.1. |
 
 ## Health Score
 

@@ -1,7 +1,7 @@
 # Admin UI (v2)
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-25
+**Version:** 2.1.0  
+**Updated:** 2026-04-26
 
 ---
 
@@ -24,9 +24,9 @@
 
 | Field | Control | Notes |
 |-------|---------|-------|
-| Profile URL | text input | User or Org URL; trailing slash optional; canonicalized on save (with trailing slash). |
+| Profile URL | text input | User or Org URL; trailing slash optional; canonicalized on save (with trailing slash). Canonical form depends on **Is organization** below: `github.com/$org/$repo` when checked, else `github.com/$username/$repo`. |
 | Provider | select (read-only `GitHub` in v2) | |
-| OwnerType | derived (User \| Organization) from URL parse | |
+| Is organization | checkbox (default off) | **v3.8.0** — replaces derived `OwnerType`. When checked, the Profile URL is treated as an organization URL and canonicalized as `github.com/$org/$repo`; when unchecked, treated as a user URL (`github.com/$username/$repo`). Persisted as `GitProfile.IsOrganization` (0/1). |
 | Acceptance | select | `AcceptAllRepos`, `AcceptSelectedRepoOnly`, `AcceptSelectedRepoInAllVersions` |
 | Selected Repo URL | text input | Visible iff Acceptance ≠ `AcceptAllRepos` |
 | IsRestrictInBranch | checkbox (default off) | |

@@ -1,5 +1,5 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.8.7)
+-- Git Logs Plugin — schema + lookup seeds (v2.8.8 — Q1 IsOrganization)
 -- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
@@ -35,10 +35,8 @@ CREATE TABLE IF NOT EXISTS Provider (
     Name TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS OwnerType (
-    OwnerTypeId INTEGER PRIMARY KEY AUTOINCREMENT,
-    Name TEXT NOT NULL UNIQUE
-);
+-- OwnerType lookup retired in v3.8.0 — replaced by GitProfile.IsOrganization boolean.
+-- Table intentionally NOT created. See §01 glossary tombstone + §16 seed-data tombstone.
 
 CREATE TABLE IF NOT EXISTS Acceptance (
     AcceptanceId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -118,7 +116,7 @@ CREATE TABLE IF NOT EXISTS GitProfile (
     ProfileUrl          TEXT NOT NULL UNIQUE,
     ProviderId          INTEGER NOT NULL REFERENCES Provider(ProviderId),
     OwnerName           TEXT NOT NULL,
-    OwnerTypeId         INTEGER NOT NULL REFERENCES OwnerType(OwnerTypeId),
+    IsOrganization      INTEGER NOT NULL DEFAULT 0 CHECK (IsOrganization IN (0,1)), -- v3.8.0 replaces OwnerTypeId
     AcceptanceId        INTEGER NOT NULL REFERENCES Acceptance(AcceptanceId),
     SelectedRepoUrl     TEXT,
     IsRestrictInBranch  INTEGER NOT NULL DEFAULT 0,
@@ -289,8 +287,7 @@ INSERT OR IGNORE INTO Permission (PermissionId, Name) VALUES
 INSERT OR IGNORE INTO Provider (ProviderId, Name) VALUES
     (1,'GitHub'),(2,'GitLab');
 
-INSERT OR IGNORE INTO OwnerType (OwnerTypeId, Name) VALUES
-    (1,'User'),(2,'Organization');
+-- OwnerType seed retired in v3.8.0 — GitProfile.IsOrganization (0/1) replaces lookup.
 
 INSERT OR IGNORE INTO Acceptance (AcceptanceId, Name) VALUES
     (1,'AcceptAllRepos'),(2,'AcceptSelectedRepoOnly'),(3,'AcceptSelectedRepoInAllVersions');
@@ -334,7 +331,7 @@ INSERT OR IGNORE INTO RolePermission (RoleId, PermissionId) VALUES
 -- ConfigKv defaults
 INSERT OR IGNORE INTO ConfigKv (KeyName, ValueText, UpdatedAt) VALUES
     ('LogLevelMin',           'Info',     strftime('%s','now')),
-    ('PluginVersion',         '2.8.7',    strftime('%s','now')),
+    ('PluginVersion',         '2.8.8',    strftime('%s','now')),
     ('RatePerMinPerProfile',  '60',       strftime('%s','now')),
     ('MaxPushPayloadBytes',   '1048576',  strftime('%s','now')),
     ('MaxLinesPerPush',       '10000',    strftime('%s','now')),
