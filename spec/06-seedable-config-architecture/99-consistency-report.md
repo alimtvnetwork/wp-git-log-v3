@@ -62,3 +62,4 @@ All internal cross-references resolve. ✅
 | 2026-03-22 | 2.0.0 | Regenerated — inventory synchronized with disk contents |
 | 2026-04-03 | 3.0.0 | Restructured to app project template (fundamentals + features/ + issues/) |
 | 2026-04-26 | 4.0.0 | Phase 16r §97 GWT rewrite (20 ACs) + §98-changelog.md companion at v4.0.0 |
+| 2026-04-26 | 4.1.0 | Phase 20 #8 — JSON Schema 2020-12 + reference instance inlined in §00; G-CON-01 audit gate cleared |
