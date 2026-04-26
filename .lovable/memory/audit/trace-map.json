@@ -38,6 +38,70 @@
         "symbol": "--json"
       }
     ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-01": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-02": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-03": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-04": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "diff_against_baseline"
+      }
+    ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-05": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "write_baseline"
+      }
+    ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-06": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "cli-flag",
+        "note": null,
+        "symbol": "--report-only"
+      }
+    ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-07": [
+      {
+        "file": "linter-scripts/check-trace-map-regression.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "run_generator"
+      }
+    ],
+    "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-08": [
+      {
+        "file": ".github/workflows/spec-health.yml",
+        "kind": "workflow",
+        "note": null,
+        "symbol": null
+      }
+    ],
     "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01": [
       {
         "file": "linter-scripts/audit-spec-vs-code-v2.py",
@@ -143,6 +207,7 @@
   },
   "code_to_ac": {
     ".github/workflows/spec-health.yml": [
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-08",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-08"
     ],
     "linter-scripts/audit-spec-vs-code-v2.py": [
@@ -164,6 +229,15 @@
     ],
     "linter-scripts/check-spec-folder-refs.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01"
+    ],
+    "linter-scripts/check-trace-map-regression.py": [
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-01",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-02",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-03",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-04",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-05",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-06",
+      "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-07"
     ],
     "linter-scripts/check-tree-health.cjs": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01",
@@ -552,6 +626,18 @@
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-04",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-05",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-06",
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-01",
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-02",
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-03",
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-04",
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-05",
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-06",
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-01",
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-02",
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-03",
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-04",
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-05",
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-06",
     "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01",
     "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02",
     "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03",
@@ -564,6 +650,8 @@
     "27-spec-toolchain/30-audit-spec-vs-code.md#AC-30-01",
     "27-spec-toolchain/30-audit-spec-vs-code.md#AC-30-02",
     "27-spec-toolchain/30-audit-spec-vs-code.md#AC-30-03",
+    "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-09",
+    "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-10",
     "27-spec-toolchain/40-run-sh.md#AC-40-01",
     "27-spec-toolchain/40-run-sh.md#AC-40-02",
     "27-spec-toolchain/40-run-sh.md#AC-40-03",
@@ -602,7 +690,35 @@
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-04",
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-05",
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-06",
-    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-07"
+    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-07",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-01",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-02",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-03",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-04",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-05",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-06",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-07",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-08",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-09",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-10",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-11",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-12",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-13",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-14",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-15",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-16",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-17",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-18",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-19",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-20",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-21",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-22",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-23",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-24",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-25",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-26",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-27",
+    "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-28"
   ],
   "errors": {
     "missing_ac": [],
@@ -622,6 +738,8 @@
     "linter-scripts/fill-missing-consistency-reports.cjs",
     "linter-scripts/forbidden-strings.toml",
     "linter-scripts/generate-dashboard-data.cjs",
+    "linter-scripts/generate-fix-checklist.py",
+    "linter-scripts/generate-gate-report.py",
     "linter-scripts/generate-gwt-acceptance.py",
     "linter-scripts/generate-spec-index.cjs",
     "linter-scripts/generate-trace-map.py",
@@ -634,14 +752,14 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 429,
-    "ac_total": 445,
-    "ac_traced": 16,
-    "code_orphan": 23,
-    "code_referenced": 6,
-    "code_total": 29,
+    "ac_drifted": 471,
+    "ac_total": 495,
+    "ac_traced": 24,
+    "code_orphan": 25,
+    "code_referenced": 7,
+    "code_total": 32,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 16
+    "trace_entries": 24
   }
 }
