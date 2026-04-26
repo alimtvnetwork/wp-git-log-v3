@@ -83,6 +83,152 @@ This ensures configuration is always traceable, auditable, and version-aware.
 
 ---
 
+## Canonical Contracts (Phase 20 normative)
+
+> **Status:** Normative. Any seed file or migration that violates these
+> two contracts is a hard build failure. The Go reference reader and
+> the AI consumers (RAG retrieval, audit, change-detection) MUST validate
+> against the schema below before applying a merge.
+
+### 1. JSON Schema 2020-12 — `config.seed.json`
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://specs.local/06-seedable-config-architecture/config.seed.schema.json",
+  "title": "SeedableConfig",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["Version", "Categories"],
+  "properties": {
+    "Version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?$",
+      "description": "Strict SemVer 2.0.0. Drives merge-vs-skip on subsequent boots."
+    },
+    "Description": { "type": "string" },
+    "Categories": {
+      "type": "object",
+      "minProperties": 1,
+      "patternProperties": {
+        "^[A-Z][A-Za-z0-9]*$": { "$ref": "#/$defs/Category" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "Category": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["Version", "Settings"],
+      "properties": {
+        "Version":     { "$ref": "#/properties/Version" },
+        "Description": { "type": "string" },
+        "Settings": {
+          "type": "object",
+          "minProperties": 1,
+          "patternProperties": {
+            "^[A-Z][A-Za-z0-9]*$": { "$ref": "#/$defs/Setting" }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "Setting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["Type", "Default"],
+      "properties": {
+        "Type": {
+          "type": "string",
+          "enum": ["string", "int", "float", "bool", "json"]
+        },
+        "Default":        { "$ref": "#/$defs/Scalar" },
+        "Description":    { "type": "string" },
+        "AddedInVersion": { "$ref": "#/properties/Version" },
+        "Deprecated":     { "type": "boolean", "default": false },
+        "Validation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "Min":     { "type": "number" },
+            "Max":     { "type": "number" },
+            "Pattern": { "type": "string", "format": "regex" },
+            "Enum":    { "type": "array", "items": { "$ref": "#/$defs/Scalar" }, "minItems": 1, "uniqueItems": true }
+          }
+        }
+      }
+    },
+    "Scalar": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "null" },
+        { "type": "object" },
+        { "type": "array" }
+      ]
+    }
+  }
+}
+```
+
+### 2. Reference Instance — minimal valid `config.seed.json`
+
+```json
+{
+  "Version": "1.2.0",
+  "Description": "RAG + Update-check defaults for Riseup Asia stack.",
+  "Categories": {
+    "Rag": {
+      "Version": "1.1.0",
+      "Description": "Retrieval-augmented generation chunk strategy.",
+      "Settings": {
+        "ChunkSizeTokens":   { "Type": "int",  "Default": 512,  "AddedInVersion": "1.0.0", "Validation": { "Min": 64, "Max": 4096 } },
+        "ChunkOverlapTokens":{ "Type": "int",  "Default": 64,   "AddedInVersion": "1.0.0", "Validation": { "Min": 0,  "Max": 1024 } },
+        "EmbeddingModel":    { "Type": "string", "Default": "text-embedding-3-small", "AddedInVersion": "1.1.0" }
+      }
+    },
+    "Update": {
+      "Version": "1.0.0",
+      "Settings": {
+        "CheckIntervalHours":          { "Type": "int",  "Default": 12, "Validation": { "Min": 1, "Max": 168 } },
+        "BackgroundUpdateCheckEnabled":{ "Type": "bool", "Default": true }
+      }
+    },
+    "Storage": {
+      "Version": "1.0.0",
+      "Settings": {
+        "Backend": { "Type": "string", "Default": "sqlite", "Validation": { "Enum": ["sqlite", "json"] } }
+      }
+    }
+  }
+}
+```
+
+### 3. Forbidden Shapes (lint-enforced)
+
+| ❌ Forbidden | ✅ Required |
+|--------------|------------|
+| `version`, `categories` (camelCase / lowercase) | `Version`, `Categories` (PascalCase) |
+| `"Version": "1.2"`     | `"Version": "1.2.0"` (full SemVer) |
+| Untyped `Default` without `Type` | Always declare `Type` ∈ {string,int,float,bool,json} |
+| Top-level scalar setting (`"Foo": 1`) | Setting nested under a Category |
+| Unknown top-level key (e.g. `"Settings": {…}` at root) | Only `Version` / `Description` / `Categories` allowed |
+| Two seed files in same project | Single `config.seed.json` per bounded context |
+
+### Acceptance — Schema Conformance
+
+**Given** a contributor edits `config.seed.json` or commits a new one,  
+**When** CI runs `python3 linter-scripts/validate-config-seed.py`,  
+**Then** the file MUST validate against the JSON Schema above (exit 0),
+the top-level `Version` MUST be ≥ the previous committed `Version`
+(SemVer-compare), and every `Setting` whose `AddedInVersion` exceeds the
+prior commit's top-level `Version` MUST appear in the changelog row for
+the new version.
+
+---
+
 ## Cross-References
 
 | Reference | Description |
