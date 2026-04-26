@@ -411,9 +411,9 @@
 | `spec/03-error-manage/02-error-architecture/05-response-envelope/02-changelog.md` | Universal Response Envelope — Changelog | 3.2.0 |
 | `spec/03-error-manage/02-error-architecture/05-response-envelope/03-configurability.md` | Envelope Configurability | 3.2.0 |
 | `spec/03-error-manage/02-error-architecture/05-response-envelope/04-response-envelope-reference.md` | Universal Response Envelope Specification | 3.2.0 |
-| `spec/03-error-manage/02-error-architecture/05-response-envelope/97-acceptance-criteria.md` | Acceptance Criteria — 05 Response Envelope | 2.0.0 |
-| `spec/03-error-manage/02-error-architecture/05-response-envelope/98-changelog.md` | Changelog — Response Envelope | 1.0.0 |
-| `spec/03-error-manage/02-error-architecture/05-response-envelope/99-consistency-report.md` | Consistency Report: Response Envelope | 3.2.0 |
+| `spec/03-error-manage/02-error-architecture/05-response-envelope/97-acceptance-criteria.md` | Acceptance Criteria — 05 Response Envelope | 2.1.0 |
+| `spec/03-error-manage/02-error-architecture/05-response-envelope/98-changelog.md` | Changelog — Response Envelope | 1.1.0 |
+| `spec/03-error-manage/02-error-architecture/05-response-envelope/99-consistency-report.md` | Consistency Report: Response Envelope | 3.3.0 |
 | `spec/03-error-manage/02-error-architecture/06-apperror-package/00-overview.md` | AppError Package | 3.2.0 |
 | `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference.md` | AppError Package Reference |  |
 | `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/00-overview.md` | AppError Package Reference | 3.2.0 |
