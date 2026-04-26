@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.8.11  
+**Version:** 3.8.12  
 **Updated:** 2026-04-26
 
 ---
@@ -279,6 +279,22 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase 11 scope discipline:** §04 §11 doc body untouched (Phase 8 already authoritative). §02/§22/§23/§28/§29/§30/§31/§39 untouched. Phase 9 follow-ups remain deferred (§97 ACs for `PreviousHasError` state-transition matrix / back-fill correctness / single-statement write atomicity; §03 admin UI rendering of the four state-transition labels; §04 NDJSON `Header` frame extension to expose state-transition labels). Phase B1 (§07 App identity) still blocked on user decision.
 
+## v3.8.12 Audit — Phase 12 Phase 9 Follow-ups (AC + Header label exposure)
+
+| File | Change |
+|------|--------|
+| `04-rest-api-endpoints.md` | Banner v2.9.2 → v2.9.3. §11.3.1 `Header` frame example JSON gained `"StateTransition":"first-failure"`; new bullet documents the field as OPTIONAL, single-pipeline-scope-only (#7/#8/#9/#10), ABSENT entirely on repo-scope (#5/#6) and on 404 / multi-pipeline resolutions, four-value enum drawn from §01 glossary v3.8.10 per §97 AC-73, absence MUST NOT be treated as error. |
+| `17-openapi.yaml` | `info.version` 2.9.3 → 2.9.4. `NdjsonHeaderFrame` schema gained `StateTransition: { type: string, enum: [still-green, first-failure, still-failing, just-recovered] }` as OPTIONAL property (NOT in `required`); description cross-references §97 AC-73/AC-74 and notes single-pipeline-scope-only emission. |
+| `97-acceptance-criteria.md` | Banner v3.8.11 → v3.8.12. New **Section K — Pipeline.PreviousHasError State Transitions (v2.9.2)** with 3 ACs all `[active]`: AC-73 state-transition label matrix (pure function, exhaustive 4-value enum, no `unknown` / no fifth label, fresh rows label as `first-failure`); AC-74 NDJSON `Header.StateTransition` exposure (single-pipeline-scope-only, exact-string enum, ABSENT on multi/zero pipelines, OpenAPI optional+enum constraint); AC-75 back-fill correctness + single-statement write atomicity (single `UPDATE` migration NOT row-by-row, `HasError` mutations MUST update `PreviousHasError` in SAME SQL statement to close R-M-W window, ORM-split fallback REQUIRES `BEGIN IMMEDIATE` + `SELECT changes()=1`, idempotent `MigrationState` marker `2.9.2`). AC count 72 → 75. |
+| `98-changelog.md` | v3.8.12 row added. |
+| `99-consistency-report.md` | This audit table added; banner v3.8.11 → v3.8.12; Health Score footer rewritten. |
+
+**Validation evidence:**
+- *OpenAPI YAML:* `pyyaml.safe_load` clean; `NdjsonHeaderFrame.properties` lists `StateTransition` with all 4 enum values; `StateTransition` correctly absent from `required` (verified optional).
+- *Schema unchanged:* No DDL changes — Phase 12 is doc + AC + OpenAPI surface only. `PluginVersion` remains 2.9.3; `MigrationState` markers unchanged at 12.
+
+**Phase 12 scope discipline:** §03 admin UI rendering of the four state labels intentionally out-of-scope (this is a spec-only project; consumer-side UI is not authored here — AC-73 documents the contract for any future UI consumer). §02 / §18 untouched (DDL contract remains v2.9.2 from Phase 9). §15 untouched (no new error codes — `StateTransition` absence is "not-applicable", not an error). §01 untouched (glossary v3.8.10 labels already authoritative; AC-73 cites them verbatim). All Phase 9 follow-ups now closed (modulo the §03 UI bullet which is consumer-side). Phase B1 (§07 App identity) remains blocked on user.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain incl. v2.9.3 OpenAPI surface, §01↔§02↔§18 PreviousHasError chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain); AC coverage AC-01..AC-72 (72 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.3 declares both `application/json` and `application/x-ndjson` on every read endpoint; v3.8.11 Phase 11 NDJSON ConfigKv seeds + GL-NDJSON-* codes + 7 NDJSON OpenAPI schemas + 6 streaming ACs landed with full lockstep on §15/§17/§18/§97/§98/§99. **Open follow-ups (per phased roadmap):** (a) §07 user decision (App identity, Phase B1 blocked); (b) Phase 9 follow-ups (§97 ACs for `PreviousHasError` state-transition + back-fill + write atomicity, §03 admin UI label rendering, §04 NDJSON `Header` frame label exposure). All Phase 8 streaming follow-ups now closed by Phase 11.
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain incl. v2.9.4 OpenAPI Header.StateTransition exposure, §15↔§17↔§18↔§97 NDJSON Phase 11 chain); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.4 declares both `application/json` and `application/x-ndjson` on every read endpoint and surfaces optional `Header.StateTransition`; v3.8.12 Phase 12 (Phase 9 follow-ups subset) closed via 3 new §97 ACs (AC-73/AC-74/AC-75) + §04 §11.3.1 Header doc + §17 schema extension, with full lockstep on §04/§17/§97/§98/§99. **Open follow-ups (per phased roadmap):** (a) §07 user decision (App identity, Phase B1 blocked); (b) §03 admin UI rendering of the four state labels — consumer-side, out-of-scope for this spec project. All Phase 8 + Phase 9 follow-ups now closed.

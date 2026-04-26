@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Git Logs Plugin API
-  version: 2.9.3
+  version: 2.9.4
   description: |
     REST API for the Git Logs WordPress plugin.
     Source spec: spec/22-git-logs-v2/04-rest-api-endpoints.md
@@ -231,6 +231,17 @@ components:
         RequestId:    { type: string, description: 'Mirrors the response RequestId for correlation with audit logs.' }
         ServerTimeMs: { type: integer, format: int64, description: 'Server epoch ms at stream start.' }
         Filters:      { type: object, additionalProperties: true, description: 'Echo of resolved query parameters (RepoUrl, Branch, PipelineId, Severity, Limit, Cursor, after-seq).' }
+        StateTransition:
+          type: string
+          enum: [still-green, first-failure, still-failing, just-recovered]
+          description: |
+            Optional (added v2.9.3 Phase 12). Pipeline run-state label derived
+            from the (PreviousHasError, HasError) tuple per §97 AC-73. Emitted
+            ONLY on single-pipeline scopes (endpoints #7–#10) when the request
+            resolves to exactly one Pipeline row. ABSENT entirely on repo-scope
+            endpoints (#5/#6) and on 404 / multi-pipeline resolutions per
+            §97 AC-74. Never null, never "unknown" — absence means
+            "not-applicable".
 
     NdjsonLogFrame:
       type: object

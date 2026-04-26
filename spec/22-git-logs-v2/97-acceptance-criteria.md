@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.11  
-**Updated:** 2026-04-26 (Phase 11: Streaming Follow-ups Pickup — AC-67..AC-72 added for §04 §11 NDJSON streaming behavior; status legend extended to v2.9.3)
+**Version:** 3.8.12  
+**Updated:** 2026-04-26 (Phase 12: Phase 9 Follow-ups — AC-73..AC-75 added for `Pipeline.PreviousHasError` state-transition matrix, back-fill correctness, single-statement write atomicity; AC-67 extended to mention optional `Header.StateTransition` field)
 
 ---
 
@@ -442,6 +442,28 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **When** either `ConfigKv.NdjsonProgressEveryRows` rows have been emitted since the last `Progress` (default `10000`) OR `ConfigKv.NdjsonProgressEveryMs` milliseconds have elapsed since the last `Progress` (default `2000`), whichever fires first
 - **Then** the server MUST emit one `Progress` frame carrying `Seq` (continuing the monotonic sequence), `RowsEmitted` (cumulative since `Header`), `ElapsedMs` (cumulative since `Header`), and OPTIONALLY `CurrentSha` (the SHA the cursor is currently inside); AND if either ConfigKv key is set to `0`, that trigger MUST be disabled (rows-only or time-only progress); AND if both are `0`, NO `Progress` frames MUST be emitted at all.
 - **Verifies:** §04 §11.5 (`NdjsonProgressEveryRows`, `NdjsonProgressEveryMs`), §04 §11.3 `Progress` frame schema.
+
+---
+
+## Section K — Pipeline.PreviousHasError State Transitions (v2.9.2) — NEW in Phase 12
+
+### AC-73 — State-transition label matrix  `[active]`
+- **Given** a `Pipeline` row exists with `HasError ∈ {0,1}` and `PreviousHasError ∈ {0,1}` (both columns `NOT NULL` per §18 v2.9.2 DDL)
+- **When** any consumer (admin UI per §03, NDJSON `Header` frame per §04 §11.3 + AC-74, audit/analytics per §22) needs to label the pipeline's current run state
+- **Then** the label MUST be derived purely from the `(PreviousHasError, HasError)` tuple per the §01 glossary v3.8.10 mapping: `(0,0) → "still-green"`, `(0,1) → "first-failure"`, `(1,1) → "still-failing"`, `(1,0) → "just-recovered"`; AND no other label values are permitted (the four are an exhaustive enum); AND consumers MUST NOT invent a fifth label such as `"unknown"` or `"initial"` — newly-inserted rows whose first observation is a failure MUST be labeled `"first-failure"` (because the back-fill rule of AC-75 ensures `PreviousHasError=0` for fresh rows by virtue of the column `DEFAULT 0`); AND label derivation MUST be a pure function (no DB lookup beyond the two columns already on the row) so the same `(PreviousHasError, HasError)` tuple ALWAYS produces the same label across all consumers.
+- **Verifies:** §01 glossary v3.8.10 (`PreviousHasError` row), §02 v3.8.10 (`Pipeline.PreviousHasError`), §18 v2.9.2 (DDL + `CHECK (PreviousHasError IN (0,1))`), §03 (admin UI consumer), §04 §11.3 + AC-74 (NDJSON Header consumer).
+
+### AC-74 — NDJSON Header.StateTransition exposure  `[active]`
+- **Given** an NDJSON streaming response is being opened for any read endpoint scoped to a single `PipelineId` (i.e. `/get-pipeline-logs` or `/get-pipeline-error-logs` per §04 §11.7 endpoints #7–#10) AND the request matches exactly one `Pipeline` row
+- **When** the server composes the `Header` frame per AC-68
+- **Then** the `Header` frame MAY (but is not required to) carry an OPTIONAL `StateTransition` field whose value is the AC-73 label derived from the row's current `(PreviousHasError, HasError)` tuple; AND when present, the value MUST be one of the four AC-73 enum strings exactly (no casing variants, no whitespace); AND when the request resolves to zero pipelines (404 case) or to multiple pipelines (e.g. `/get-logs` repo+branch scope), the `StateTransition` field MUST be absent from the `Header` frame entirely (NEVER emit `null`, NEVER emit `"unknown"`); AND the field's absence MUST NOT be treated as an error by clients — older spec versions and broader-scope endpoints simply omit it; AND if the field is present, the OpenAPI `NdjsonHeaderFrame` schema (§17 v2.9.3+) MUST declare it as an optional string with the four-value enum constraint matching AC-73.
+- **Verifies:** §04 §11.3 (`Header` frame), §17 (`components.schemas.NdjsonHeaderFrame`), AC-68 (frame ordering + Header semantics), AC-73 (label enum).
+
+### AC-75 — Back-fill correctness + single-statement write atomicity  `[active]`
+- **Given** a v2.9.1 → v2.9.2 schema upgrade is being applied OR a server-side mutation is updating `Pipeline.HasError`
+- **When** the migration runs OR a row is updated
+- **Then** the migration MUST execute exactly `UPDATE Pipeline SET PreviousHasError = HasError;` as a single SQL statement (so every existing row's first post-upgrade transition is labeled `still-green` or `still-failing` per AC-73, NEVER spuriously labeled `first-failure` or `just-recovered`) — the migration MUST NOT use a row-by-row loop and MUST NOT default `PreviousHasError` to `0` for rows whose `HasError=1` (which would produce a fake `just-recovered` label on the next clean run); AND every server-side mutation of `HasError` MUST also update `PreviousHasError` in the SAME SQL statement using a `CASE` or self-referencing `UPDATE` so the read-modify-write window is zero (e.g. `UPDATE Pipeline SET PreviousHasError = HasError, HasError = :new_value, UpdatedAt = strftime('%s','now') WHERE PipelineId = :id`) — clients MUST NOT issue a separate `SELECT HasError` followed by `UPDATE … SET HasError, PreviousHasError` because two concurrent writers could observe the same `OLD.HasError` and produce inconsistent transition labels; AND if the application layer cannot express this atomically (e.g. an ORM that always splits read+write), the spec REQUIRES wrapping the mutation in a `BEGIN IMMEDIATE; … COMMIT;` SQLite transaction to serialize concurrent writers AND verifying via `SELECT changes() = 1` that exactly one row was touched (zero-row updates indicate a stale `PipelineId`, multi-row updates indicate a missing `WHERE PipelineId = :id` clause); AND `MigrationState` MUST record marker `2.9.2` exactly once per database after the back-fill `UPDATE` succeeds — re-running the migration MUST be a no-op (idempotent) because the `UPDATE` re-executes harmlessly on already-back-filled rows (`PreviousHasError = HasError` is the steady-state invariant immediately after each write and immediately after back-fill, but diverges briefly between writes — that's the whole point).
+- **Verifies:** §18 v2.9.2 (DDL + back-fill comment block + write-rule comment block), §02 v3.8.10 (`Pipeline.PreviousHasError` doc), §01 v3.8.10 (`PreviousHasError` glossary entry — back-fill rule + write rule).
 
 ---
 

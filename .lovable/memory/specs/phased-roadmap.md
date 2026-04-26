@@ -98,6 +98,14 @@ Absorbed all Phase 8 streaming deferrals + AC coverage:
 - §97: 6 new ACs (AC-67..AC-72) — opt-in, frame ordering, resume, disconnect, frame cap, Progress cadence. AC count 66→72.
 - Validation: `pyyaml.safe_load` clean; in-memory SQLite confirms 19 ConfigKv rows, 12 MigrationState markers.
 
+## ✅ Phase 12 — Phase 9 Follow-ups (DONE, v3.8.12 / OpenAPI v2.9.4)
+
+Closed the unblocked subset of Phase 9 deferrals (§03 admin UI is consumer-side, intentionally out-of-scope for this spec-only project):
+- §04 §11.3.1: `Header` frame example + bullet documents OPTIONAL `StateTransition` (4-value enum, single-pipeline-scope only). Banner v2.9.2→v2.9.3.
+- §17: `info.version` 2.9.3→2.9.4. `NdjsonHeaderFrame` gained optional `StateTransition` enum property (NOT in `required`).
+- §97: 3 new ACs (AC-73 label matrix, AC-74 NDJSON Header exposure, AC-75 back-fill + write atomicity). AC count 72→75.
+- Validation: `pyyaml.safe_load` clean; `StateTransition` confirmed in `NdjsonHeaderFrame.properties` with all 4 enum values, confirmed absent from `required`.
+
 ---
 
 ## 🚧 Blocked (awaiting user decision)
@@ -111,4 +119,4 @@ Absorbed all Phase 8 streaming deferrals + AC coverage:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–11 complete. Next unblocked candidate = "Phase 12 — Phase 9 follow-ups" (§97 ACs for `Pipeline.PreviousHasError` state-transition matrix / back-fill correctness / single-statement write atomicity; §03 admin UI rendering of the four state labels; §04 NDJSON `Header` frame label exposure) — propose only on explicit user `next` after acknowledging.
+**Top pending = Phase B1 (BLOCKED on user — §07 App identity fields).** All numbered phases 0–12 complete. All Phase 8 + Phase 9 follow-ups closed (modulo §03 admin UI which is consumer-side / out-of-scope). No unblocked work remaining in the roadmap — on next `next`, either unblock B1 or scope a NEW phase (e.g. deepen scaffolded ACs in §07/§17/§22 per `mem://specs/full-tree-audit-v4.md` open item).
