@@ -1,7 +1,7 @@
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.8.0  
-**Updated:** 2026-04-26  
+**Version:** 3.8.5  
+**Updated:** 2026-04-26 (Phase 4: §39 inventory row refreshed for v2.9.0 path layout; AC-49..AC-53 promoted to active in §97; root spec-index bumped)  
 **Status:** Draft  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
