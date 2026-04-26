@@ -134,15 +134,23 @@ First slice of the §07 structural conversion. AC IDs preserved across format ch
 
 ---
 
-## ⏳ Phase 15b..15e — Convert remaining §07 §97 sections to GWT (PENDING)
+## ✅ Phase 15b — Convert §07 §97 Typography to GWT (DONE, v3.4.0)
 
-Same surgery as 15a, applied section by section to keep each batch reviewable:
-- **15b — Typography (AC-007..AC-011)** — 5 ACs covering Ubuntu/Poppins/Mono fonts, gradient headings, heading-level discipline.
+Second slice of the §07 structural conversion. AC IDs preserved:
+- §07 §97 banner v3.3.0 → v3.4.0; AC count unchanged at 34 (verified).
+- **5 ACs converted (AC-007..AC-011 Typography)** from one-row table format (~70 chars each) to full GWT subsections (1209-4005 chars each, **17-57× depth**) with concrete contracts + cross-refs to `03-typography.md`, `index.html` font-loading, `tailwind.config.ts` font registration, `02-theme-variable-architecture.md`, `07-code-blocks.md`, `12-page-creation-rules.md`, WCAG 2.1 §1.3.1/§2.4.6.
+- AC-007 Ubuntu headings (font stack, Google Fonts `display=swap`, `tailwind.config.ts` `fontFamily.heading`); AC-008 Poppins body (weights 300-700, default `fontFamily.sans` override); AC-009 Ubuntu Mono / JetBrains Mono code (full mono stack, ligatures-off-by-default with `format:ligatures` opt-in); AC-010 gradient H1/H2 (4-property cross-browser contract, token-only stops, accessibility decoupling); AC-011 no-skipped-levels (exactly-one-`<h1>`, monotonic descent, `level`/`as` polymorphic prop requirement).
+- Format note bumped to reflect 11/34 ACs now GWT.
+- Lockstep §98 v1.1.0 → v1.2.0 + §99 v3.3.0 → v3.4.0 + spec-index updated.
+
+---
+
+## ⏳ Phase 15c..15e — Convert remaining §07 §97 sections to GWT (PENDING)
+
+Same surgery, section by section:
 - **15c — Motion & Transitions (AC-012..AC-016)** — 5 ACs covering 300ms hover cap, no-JS-animation rule, `prefers-reduced-motion`, link underline sweep, CTA slide animation.
 - **15d — Code Blocks (AC-017..AC-025)** — 9 ACs covering dark-bg-in-both-themes, language badge, font-size controls, line pin/select, fullscreen, copy button, tree prefixes.
 - **15e — Navigation + Page Consistency (AC-026..AC-034)** — 9 ACs covering header hover, menu underline, dropdown tint, sidebar mobile collapse, Ctrl+B toggle, section patterns, font discipline, state language, responsive breakpoints.
-
-Each phase: deepen the section's ACs in place, bump §97/§98/§99 banners, update spec-index, mark done in this roadmap. Order is suggested but not forced — pick whichever section is highest-traffic next.
 
 ---
 
@@ -157,4 +165,4 @@ Each phase: deepen the section's ACs in place, bump §97/§98/§99 banners, upda
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 15b (Typography section).** All numbered phases 0–14 complete; Phase 15a (Theme & Variables) done. **Unblocked candidates:** Phase 15b → 15c → 15d → 15e (continuing the §07 §97 GWT conversion section by section). Phase B1 remains blocked on user. On next `next`, take **Phase 15b** unless the user redirects.
+**Top pending = Phase 15c (Motion & Transitions section).** All numbered phases 0–14 complete; Phases 15a + 15b done (11 of 34 §07 ACs now GWT). **Unblocked candidates:** Phase 15c → 15d → 15e (continuing the §07 §97 GWT conversion). Phase B1 remains blocked on user. On next `next`, take **Phase 15c** unless the user redirects.

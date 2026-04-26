@@ -1,6 +1,6 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/07-design-system/`
 
@@ -16,6 +16,16 @@
 ---
 
 ## Releases
+
+### 1.2.0 — 2026-04-26
+- **Phase 15b — Convert §97 Typography section from table-row to GWT format.** Continuation of the §07 structural conversion started by Phase 15a. AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 5 ACs in the **Typography** section converted from one-row table format (~70 chars each) to full Given/When/Then subsections (1209-4005 chars each, **17-57× depth**) with concrete contracts + cross-refs to `03-typography.md`, `index.html` font-loading, `tailwind.config.ts` font registration, `02-theme-variable-architecture.md`, `07-code-blocks.md`, `12-page-creation-rules.md`, WCAG 2.1 §1.3.1/§2.4.6.
+- **AC-007** (Ubuntu headings) — exact font stack, Google Fonts loading with `display=swap`, `tailwind.config.ts` `fontFamily.heading` registration, no-Poppins-mixing rule, child-component override prohibition.
+- **AC-008** (Poppins body) — exact font stack with weights 300-700, `display=swap`, `tailwind.config.ts` `fontFamily.sans` default override, inline-`<code>` escape hatch to mono per AC-009.
+- **AC-009** (Ubuntu Mono / JetBrains Mono code) — full monospace stack, dual font-loading (Ubuntu Mono 400/700 + JetBrains Mono 400/500/700), `font-feature-settings: "liga" 0;` ligatures-off-by-default, `format:ligatures` opt-in directive, inline-vs-block parity.
+- **AC-010** (gradient H1/H2) — 4-property cross-browser gradient text contract (`background-image` + `background-clip` + `-webkit-background-clip` + `color: transparent` / `-webkit-text-fill-color`), token-only gradient stops per AC-001, H3..H6 exclusion, multi-line continuity, accessibility decoupling (gradient is decoration, semantic level carries meaning).
+- **AC-011** (no skipped levels) — exactly-one-`<h1>` rule, monotonically descending sequence, screen-reader outline rationale, `level`/`as` polymorphic prop requirement for reusable wrappers, visual-vs-semantic decoupling via Tailwind utilities.
+- Updated top-of-file Format note to reflect 11/34 ACs now GWT (Theme & Variables + Typography both converted).
+- Banner v1.1.0 → v1.2.0; lockstep §97 v3.3.0 → v3.4.0 + §99 v3.3.0 → v3.4.0 + spec-index updated.
 
 ### 1.1.0 — 2026-04-26
 - **Phase 15a — Convert §97 Theme & Variables section from table-row to GWT format.** Per `mem://specs/full-tree-audit-v4.md` deepening backlog + Phase 14 close-out. AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 6 ACs in the **Theme & Variables** section converted from one-row-per-AC table format to full Given/When/Then subsections with concrete contracts + cross-refs to `01-design-principles.md`, `02-theme-variable-architecture.md`, `src/index.css`, `tailwind.config.ts`, the theme provider, WCAG 2.1 §1.4.3/§1.4.11.
