@@ -49,6 +49,9 @@ jobs:
             echo "✅ Spec artifacts up to date."
           fi
 
+      - name: Spec cross-link gate (zero broken links allowed)
+        run: python3 linter-scripts/check-spec-cross-links.py --github
+
       - name: Spec tree health gate (threshold 100)
         env:
           SPEC_HEALTH_MIN: '100'
