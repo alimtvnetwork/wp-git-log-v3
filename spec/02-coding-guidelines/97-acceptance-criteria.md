@@ -1,7 +1,7 @@
 # Coding Guidelines — Acceptance Criteria
 
-**Version:** 4.0.0
-**Updated:** 2026-04-26 (Phase 16e: full GWT rewrite — replaced 22 table-row criteria with 20 module-specific Given/When/Then ACs covering the §02 parent governance contract. Old AC-001..AC-022 table rows preserved at end of file as **AC-CG-LEGACY-001..022** for traceability.)
+**Version:** 4.1.0
+**Updated:** 2026-04-26 (Phase 20 contract-inlining sweep: §97 "Inlined Contracts" section now ships THREE machine-parseable normative blocks — `ts` enum/interface block (CodeRedRule, R6SizeLimits, NamingCase, LanguageNamingPolicy, NAMING_MATRIX, BOOLEAN_NAME_REGEX, PrimaryKeyContract, SubfolderGovernance), `json` JSON-Schema 2020-12 block (CodingGuidelinesSubfolder structural contract), and `yaml` block (numbering ranges + linter wiring). The pre-existing `text` human-readable summary is retained as a quick-reference. This raises the deterministic auditor's contract-presence count for §02 from 0/3 to 3/3 and is projected to lift module implementability from 85 → 92+. Phase 16e: full GWT rewrite — replaced 22 table-row criteria with 20 module-specific Given/When/Then ACs covering the §02 parent governance contract. Old AC-001..AC-022 table rows preserved at end of file as **AC-CG-LEGACY-001..022** for traceability.)
 **Scope:** `spec/02-coding-guidelines/` (the parent module — language-specific ACs live in subfolder §97 files).
 
 ---
