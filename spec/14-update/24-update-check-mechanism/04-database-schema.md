@@ -1,6 +1,6 @@
 # Database Schema — UpdateChecker & UpdateStatus
 
-> **Version:** 1.0.0
+> **Version:** 1.1.0
 > **Parent:** [00-overview.md](./00-overview.md)
 
 ---
