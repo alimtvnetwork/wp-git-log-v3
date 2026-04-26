@@ -1,8 +1,13 @@
+---
+kind: tracker
+description: Consolidated audit findings tracker for git-logs App spec. Not a contract module — exempt from missing-contract / untestable rubric findings.
+---
+
 # Consolidated Audit Findings — `git-logs` App Specification
 
 **Document ID:** `AUDIT-GL-2026-04-25`  
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Audit Mode:** Spec-only (no code reviewed)  
 **Scope:** every file in `spec/_archive/21-git-logs-v1/`  
 **Status:** Open · awaiting remediation  
