@@ -160,10 +160,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** brief §Endpoints.2.c, §04.
 
 ### AC-14 — Structured ack with Retrieval hints  `[active]`
-- **Given** any write endpoint returns 200/202
+- **Given** any write endpoint (`/append-log` #1, `/fixed-log` #2, `/clear-log` #3, `/clear-log-all` #4 per §04) returns a successful response (HTTP 200 or 202)
 - **When** the response body is parsed
-- **Then** it contains a `Retrieval` block with the canonical read-back URL(s) for the just-written entity.
-- **Verifies:** brief §Endpoints.1.a–b, §04.
+- **Then** the JSON body MUST conform to the `AckResponse` schema in §17 OpenAPI v2.9.4 — at minimum: `Status: "Ok"`, `RequestId` (UUID, mirrored to `AuditTrail.RequestId` per AC-30), `WrittenCount` (rows accepted into per-SHA storage), `Pipeline` (echo of the resolved `{PipelineId, Branch, Sha}`), AND a `Retrieval` block; AND the `Retrieval` block MUST contain canonical read-back URLs for the entity just written: `Retrieval.PipelineLogs` = absolute URL to `/get-pipeline-logs?PipelineId=<id>` (read all logs for this pipeline run), `Retrieval.PipelineErrorLogs` = absolute URL to `/get-pipeline-error-logs?PipelineId=<id>` (read only error rows), `Retrieval.RepoLogs` = absolute URL to `/get-logs?RepoUrl=<url>&Branch=<branch>` (read across the whole branch); AND each URL MUST be absolute (include scheme + host + `/wp-json/git-logs/v2/` namespace) so CI runners can paste it verbatim into chat/PR-comment integrations without further URL composition; AND the URLs MUST be the JSON-page form by default — clients wanting NDJSON streaming opt in by adding `Accept: application/x-ndjson` per AC-67, NOT by mutating the `Retrieval` URLs; AND the `Retrieval` block MUST also be present on `/clear-log` and `/clear-log-all` responses, where the URLs return empty pages (this proves the clear succeeded and is auditable); AND `Retrieval` URLs MUST NEVER include credentials or tokens — authentication is the caller's responsibility per §05.
+- **Verifies:** brief §Endpoints.1.a–b (ack contract), §04 (write endpoints #1–#4), §17 v2.9.4 (`AckResponse` schema), AC-30 (RequestId mirroring), AC-67 (NDJSON opt-in).
 
 ### AC-30 — Error envelope shape + RequestId mirroring  `[active]`
 - **Given** any endpoint rejects a request
