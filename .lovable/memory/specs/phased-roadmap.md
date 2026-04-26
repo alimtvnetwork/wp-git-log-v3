@@ -178,6 +178,16 @@ Final slice of the §07 structural conversion. AC IDs preserved:
 
 ---
 
+## ✅ Phase 16a — Deepen §13 generic-cli §97 with module-specific GWT ACs (DONE, v2.0.0)
+
+First module deepening pass after §07 §97 conversion completed:
+- §13 §97 banner v1.0.0 → **v2.0.0** (major bump because AC count tripled and the new ACs validate a different surface — the CLI implementation — distinct from the original 5 which validate the spec module structure).
+- **15 new GWT ACs added (AC-06..AC-20)**, AC-01..AC-05 preserved verbatim.
+- AC-06 single-switch subcommand dispatch (no cobra/urfave); AC-07 kebab-case per-command flagsets + flag-name constants; AC-08 three-layer config precedence (defaults → JSON file → flags) + flat-JSON-only contract; AC-09 pluggable `--format` (terminal/json/csv/markdown) + TTY-detect color suppression + RFC-4180 CSV; AC-10 fixed five-value exit code contract (0 success, 1 generic, 2 misuse, 3 config, 4 batch partial) + stderr discipline; AC-11 50-line function / 400-line file / camelCase-PascalCase / no-magic-strings code style; AC-12 compile-time `//go:embed` help + interception before flag parse; AC-13 `pkg/dateformat/` three layouts (display `2006-01-02 15:04:05 MST`, filename `2006-01-02-150405`, ISO8601 RFC-3339); AC-14 `pkg/constants/` category split (flags/commands/paths/formats/exit) + `<Category><Name>` naming; AC-15 `--verbose` to stderr + secret redaction + zero-overhead when disabled; AC-16 progress to stderr + 500ms appearance + non-TTY suppression; AC-17 batch `exec` exit-4-on-partial + `[item]` prefix + deterministic parallel; AC-18 generated-not-handwritten shell completion + hidden `__complete` provider; AC-19 fixed terminal palette (green/red/yellow/cyan/gray) + box-drawing headers + ASCII fallback; AC-20 post-install `doctor` + interactive shell-profile injection + `--json` mode.
+- Lockstep §98 v1.0.0 → v1.1.0 + §99 v1.0.0 → v1.1.0 + spec-index updated.
+
+---
+
 ## 🚧 Blocked (awaiting user decision)
 - **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
 
@@ -189,4 +199,10 @@ Final slice of the §07 structural conversion. AC IDs preserved:
 - 🚧 blocked
 
 ## Next-pointer
-**ALL §07 §97 GWT phases complete (15a + 15b + 15c + 15d + 15e).** 34 of 34 §07 ACs now GWT, zero table rows remain. **No unblocked phases remain in the active queue.** Phase B1 remains blocked on user. **On next `next`**: consult `mem://specs/full-tree-audit-v4.md` for the next deepening backlog target — likely candidates: §13 generic-cli §97 (40+ table rows), §14 update §97 (extensive scaffolded ACs), or §22 git-logs §97 follow-up depth pass on AC-04/AC-05/AC-25/AC-34 left lean in Phase 13. Or take a different track: tree-health re-audit, or deepen another module flagged in the audit.
+**Phase 16a complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) both deep. **Unblocked candidates remaining**:
+- **Phase 16b** — Deepen **§14 update §97** (currently 5 generic scaffold ACs; module covers update check mechanism — high-value ~10-15 module-specific ACs).
+- **Phase 16c** — Deepen **§22 git-logs §97** follow-up pass on AC-04/AC-05/AC-25/AC-34 (left lean in Phase 13).
+- **Phase 16d** — Deepen another high-traffic module flagged in `mem://specs/full-tree-audit-v4.md` (e.g. §15 distribution-and-runner, §16 generic-release, §17 consolidated-guidelines, §27 spec-toolchain, §28 universal-ci-cli — all currently scaffolded with 5 generic ACs).
+- Phase B1 remains blocked on user.
+
+On next `next`: take **Phase 16b (§14 update §97 deepen)** unless you redirect.
