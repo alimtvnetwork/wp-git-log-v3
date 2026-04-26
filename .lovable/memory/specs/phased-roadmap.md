@@ -288,33 +288,39 @@ Second language child to inherit AC-CL-*. Rewrote §97 from 6 stub checkboxes to
 
 ---
 
-## Next-pointer
-**Phase 16j complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT).
+## ✅ Phase 16k — §02/04-php §97 deepen (DONE, v4.0.0)
 
-**10 remaining §97 files with 0 GWT ACs** (post-16j), priority order:
+Third language child to inherit AC-CL-*. Rewrote §97 from 7 table-row criteria (AC-01..AC-07) to **20 module-specific GWT ACs** (AC-PHP-01..AC-PHP-20) covering: explicit AC-CL-* inheritance (AC-PHP-01); PHP 8.1+ + `declare(strict_types=1)` mandatory first statement (AC-PHP-02); string-backed enums with PascalCase cases AND PascalCase values (AC-PHP-03); mandatory `isEqual(self $other): bool` on every enum (AC-PHP-04); `ResultHelper::ok|failed|error|errorWithCode|errorFromException` only on service returns (AC-PHP-05); `ResponseKeyType::Foo->value` array keys, no string literals (AC-PHP-06); role-based identifier casing (AC-PHP-07); boolean `is`/`has`/`can`/`should` camelCase prefix, no snake_case, no negative polarity (AC-PHP-08); `use`-imported globals with no leading backslash, grouped imports (AC-PHP-09); `safeExecute(fn() => ...)` REST wrap + `wp_die()` FORBIDDEN (AC-PHP-10); blank-line discipline before `if`/`throw`/`return` (AC-PHP-11); constructor property promotion + `readonly` for DTOs (AC-PHP-12); type declarations on every parameter and return (AC-PHP-13); `RiseupAsia\Exceptions\BaseException` hierarchy (AC-PHP-14); `phpstan --level=8` + `psalm` zero-issue gate, no baseline files (AC-PHP-15); PSR-4 file-per-class (AC-PHP-16); PHPUnit 10+ `#[Test]` attribute, no `@test` PHPDoc (AC-PHP-17); composer caret-with-patch + `composer.lock` checked in (AC-PHP-18); PSR-3 `LoggerInterface` structured logging (AC-PHP-19); self-application doctest (AC-PHP-20). Legacy AC-01..AC-07 preserved as AC-PHP-LEGACY-* at end. Lockstep: §98 v3.2.0 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
+## Next-pointer
+**Phase 16k complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT) + §02/03-golang §97 (20 GWT) + §02/04-php §97 (20 GWT).
+
+**9 remaining §97 files with 0 GWT ACs** (post-16k), priority order:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/04-php/` | 7 (table) | **P1** | Has rows but no GWT |
-| 2 | `02-coding-guidelines/05-rust/` | 0 | P1 | Inherits §02/01 |
-| 3 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
-| 4 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
-| 5 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
-| 6 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 7 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 8 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 9 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 10 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `02-coding-guidelines/05-rust/` | 0 | **P1** | Inherits §02/01 — fourth language child |
+| 2 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
+| 3 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
+| 4 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
+| 5 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 6 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 7 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 8 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 9 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
 🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04.
 
 Remaining work:
-- ⏳ **Phase 16k** — Deepen `02-coding-guidelines/04-php/97` (P1 — third language child; convert 7 table rows to GWT).
-- ⏳ **Phase 16l–16n** — Deepen Rust/C#/AI-Opt subfolder §97 files (P1 batch).
+- ⏳ **Phase 16l** — Deepen `02-coding-guidelines/05-rust/97` (P1 — fourth language child).
+- ⏳ **Phase 16m** — Deepen `02-coding-guidelines/07-csharp/97` (P1 — fifth language child).
+- ⏳ **Phase 16n** — Deepen `02-coding-guidelines/06-ai-optimization/97` (P1).
 - ⏳ **Phase 16p** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16q** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user).
 - 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user).
 
-On next `next`: take **Phase 16k (`02-coding-guidelines/04-php/97` deepen)** — P1 third language child; converts existing 7 table rows + adds GWT depth. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16l (`02-coding-guidelines/05-rust/97` deepen)** — P1 fourth language child after TS/Go/PHP. Unless you redirect or want to unblock B1/B2 first.
 
