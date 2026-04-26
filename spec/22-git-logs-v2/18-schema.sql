@@ -291,6 +291,39 @@ CREATE TABLE IF NOT EXISTS AuditTrail (
 CREATE INDEX IF NOT EXISTS IxAuditTrailRequest ON AuditTrail(RequestId);
 
 -- ---------------------------------------------------------------------------
+-- SSH-Key Lane B (v2.9.1, Phase 5 — see §31)
+--   Deploy-key model: one SshKey row binds to exactly one Repo.
+--   SshNonce is replay defense — rows pruned to ReplayWindowSeconds.
+-- ---------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS SshKey (
+    SshKeyId          INTEGER PRIMARY KEY AUTOINCREMENT,
+    Fingerprint       TEXT    NOT NULL UNIQUE,                    -- 'SHA256:' + base64(sha256(pubkey))
+    RepoId            INTEGER NOT NULL REFERENCES Repo(RepoId) ON DELETE CASCADE,
+    KeyType           TEXT    NOT NULL,                           -- ssh-ed25519 | ssh-rsa | ecdsa-sha2-nistp256 | …
+    PublicKey         TEXT    NOT NULL,                           -- full OpenSSH single-line pubkey
+    Label             TEXT,
+    OwnedByProfileId  INTEGER NOT NULL REFERENCES Profile(ProfileId),
+    IsActive          INTEGER NOT NULL DEFAULT 1 CHECK (IsActive IN (0,1)),
+    LastUsedAt        INTEGER,
+    CreatedAt         INTEGER NOT NULL,
+    RevokedAt         INTEGER
+);
+
+CREATE INDEX IF NOT EXISTS IxSshKeyRepoActive ON SshKey(RepoId, IsActive);
+CREATE INDEX IF NOT EXISTS IxSshKeyOwner      ON SshKey(OwnedByProfileId);
+
+CREATE TABLE IF NOT EXISTS SshNonce (
+    SshNonceId  INTEGER PRIMARY KEY AUTOINCREMENT,
+    SshKeyId    INTEGER NOT NULL REFERENCES SshKey(SshKeyId) ON DELETE CASCADE,
+    Nonce       TEXT    NOT NULL,                                  -- client-supplied, ≥16 bytes base64
+    SeenAt      INTEGER NOT NULL,
+    UNIQUE (SshKeyId, Nonce)
+);
+
+CREATE INDEX IF NOT EXISTS IxSshNonceSeenAt ON SshNonce(SeenAt);
+
+-- ---------------------------------------------------------------------------
 -- Operational
 -- ---------------------------------------------------------------------------
 
