@@ -1,6 +1,6 @@
 # Changelog — Response Envelope
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/03-error-manage/02-error-architecture/05-response-envelope/`
 
