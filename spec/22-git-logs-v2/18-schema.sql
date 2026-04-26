@@ -1,5 +1,5 @@
 -- ============================================================================
--- Git Logs Plugin — schema + lookup seeds (v2.8.7)
+-- Git Logs Plugin — schema + lookup seeds (v2.8.8 — Q1 IsOrganization)
 -- Source spec: spec/22-git-logs-v2/02-database-schema.md, 37-seed-data.md, 31-ssh-key-auth.md
 -- Engine: SQLite 3.35+ (single root file)
 -- Conventions: PascalCase tables/columns; PK = {Table}Id INTEGER PK AUTOINCREMENT.
