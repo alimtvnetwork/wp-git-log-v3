@@ -1,8 +1,8 @@
 # Seedable Config Architecture + Changelog Versioning (also known as CW Config)
 
-> **Version:** 3.0.0  
+> **Version:** 3.1.0  
 > **Created:** 2026-02-01  
-> **Updated:** 2026-04-03  
+> **Updated:** 2026-04-26  
 > **Status:** Active  
 > **AI Confidence:** Production-Ready  
 > **Ambiguity:** Low  
