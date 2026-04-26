@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.8.13  
-**Updated:** 2026-04-26 (Phase 13: Deepen Scaffolded ACs — 8 high-traffic one-liner ACs rewritten with full GWT body + concrete §-cross-refs: AC-02 Profile schema absence-of-password-column, AC-03 migration semver ordering + 12-marker baseline, AC-12 streaming ingest size-cap incrementality + atomicity, AC-14 AckResponse Retrieval URL contract, AC-17 App columns incl. forbidden Phase B1 fields, AC-18 AppLink XOR + CASCADE, AC-22 §26 6-file Mermaid inventory + render contract, AC-30 ErrorEnvelope shape + RequestId mirroring + NDJSON error split. AC count unchanged at 75.)
+**Version:** 3.9.0  
+**Updated:** 2026-04-26 (Phase 16c: Depth pass on the four lean ACs left from Phase 13 — AC-04 Logger level gating (constant-time integer compare at call boundary, sink-side filtering forbidden, request-scoped cache, fixed 6-level mapping `Trace=0..Fatal=5`, near-silence emergency mode at `Fatal`), AC-05 Diagnostic dedup window (rolling 60s, fingerprint = `(source, level, template, ctx_hash)`, error/fatal carve-out, process-local LRU bounded at 1024, `[deduped: N within 60s]` suffix on window expiry, per-worker not cross-worker), AC-25 `format:hide` not rendered (omitted from DOM entirely — not CSS-hidden, not opacity-zeroed, not off-screen positioned; defense-in-depth against view-source/DevTools/screen-reader leakage; subtractive-not-additive; empty container shells must collapse; distinct from RBAC AC-06/AC-39 hiding), AC-34 Multisite per-site DB (per-`blog_id` SQLite file at `wp_upload_dir()`-derived path, shared file forbidden even when network-activated, no cross-site fan-out, `switch_to_blog`/`restore_current_blog` connection invalidation, lazy per-site migration on first access, `wp_delete_site` cleanup of orphan DBs). AC count unchanged at 75.)
 
 ---
 
