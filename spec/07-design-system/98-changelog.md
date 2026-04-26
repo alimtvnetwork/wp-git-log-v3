@@ -1,6 +1,6 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 1.3.0  
+**Version:** 1.4.0  
 **Updated:** 2026-04-26  
 **Scope:** `spec/07-design-system/`
 
@@ -16,6 +16,20 @@
 ---
 
 ## Releases
+
+### 1.4.0 — 2026-04-26
+- **Phase 15d — Convert §97 Code Blocks section from table-row to GWT format.** Continuation of the §07 structural conversion (Phases 15a + 15b + 15c prior). AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 9 ACs in the **Code Blocks** section converted from one-row table format (~80 chars each) to full Given/When/Then subsections (2100-4200 chars each, **26-52× depth**) with concrete contracts + cross-refs to `07-code-blocks.md`, `02-theme-variable-architecture.md`, `src/index.css` (lines 264–605), `src/components/markdown/codeBlockBuilder.ts`, AC-001/AC-012/AC-014.
+- **AC-017** (fixed dark background) — static HSL mandate (`hsl(220,14%,11%)`), exception to token-only rule, theme-invariant header/line-number backgrounds, syntax-highlighting tokens exempt.
+- **AC-018** (language badge) — 7px dot + glow, 10-language color mapping (static brand colors, NOT theme tokens), `--lang-accent` inline injection, "TEXT" fallback.
+- **AC-019** (font size controls) — 12-32px bounds, 2px step, 18px default, proportional line-number scaling (`* 0.7`), `localStorage` persistence, 150ms animate, `aria-label` on controls, clamp on corrupted storage.
+- **AC-020** (line pin) — toggle via React state, `line-pinned` class with 3 visual markers (bg + border + number color), unpin on re-click, hover-vs-pin precedence (pin wins), full-gutter click target.
+- **AC-021** (shift-click range) — bidirectional range selection, idempotent (no unpin), triggers selection bar, anchor-of-1 fallback, `event.shiftKey` at click time, visual parity with single-pin.
+- **AC-022** (fullscreen) — 2rem inset, backdrop overlay (`blur(4px)`, `z-40`), block at `z-50`, language-accent shadow, body `overflow: hidden`, 300ms scale settle animation.
+- **AC-023** (Escape exit) — immediate exit, restore inline position + body overflow + remove backdrop + return focus, overlay-click secondary trigger, idempotent, cleanup all listeners, `beforeunload` safeguard.
+- **AC-024** (copy button) — full content copy (including off-screen), Clipboard API primary + `textarea` fallback, success state with green tint + "Copied ✓" label, 2-second timer with reset, `aria-label` + `aria-live` for a11y.
+- **AC-025** (tree prefixes) — 📁/📄 emoji prefixes, bold/muted styling, guide characters at `muted-foreground/0.5`, ellipsis at `accent`, comments italic, "STRUCTURE" label, indentation preserved.
+- Updated top-of-file Format note to reflect 25/34 ACs now GWT.
+- Banner v1.3.0 → v1.4.0; lockstep §97 v3.5.0 → v3.6.0 + §99 v3.5.0 → v3.6.0 + spec-index updated.
 
 ### 1.3.0 — 2026-04-26
 - **Phase 15c — Convert §97 Motion & Transitions section from table-row to GWT format.** Continuation of the §07 structural conversion (Phases 15a + 15b prior). AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 5 ACs in the **Motion & Transitions** section converted from one-row table format (~70 chars each) to full Given/When/Then subsections (1703-3816 chars each, **24-54× depth**) with concrete contracts + cross-refs to `06-motion-transitions.md`, `09-button-system.md`, `tailwind.config.ts`, `src/index.css`, `package.json` dependency audit, WCAG 2.1 §2.3.3, MDN `prefers-reduced-motion` reference.
