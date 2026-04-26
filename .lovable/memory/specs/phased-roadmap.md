@@ -236,10 +236,9 @@ Expanded §16 §97 from 5 generic scaffold ACs (AC-01..AC-05 retained) to **20 m
 - ✅ done · ⏳ pending · 🚧 blocked
 
 ## Next-pointer
-**Phases 16a + 16b + 16c + 16d-i + 16d-ii complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT). **Unblocked candidates remaining:**
-- **Phase 16d-iii** — Deepen **§17 consolidated-guidelines §97** (5-AC scaffold; umbrella-policy module).
+**Phases 16a + 16b + 16c + 16d-i + 16d-ii + 16d-iii complete.** §07 §97 (34/34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT). **Unblocked candidates remaining:**
 - **Phase 16d-iv** — Deepen **§27 spec-toolchain §97** (5-AC scaffold; covers the `linter-scripts/` toolchain itself — many self-referential ACs).
 - **Phase 16d-v** — Deepen **§28 universal-ci-cli §97** (5-AC scaffold).
 - Phase B1 remains blocked on user.
 
-On next `next`: take **Phase 16d-iii (§17 consolidated-guidelines §97 deepen)** unless you redirect.
+On next `next`: take **Phase 16d-iv (§27 spec-toolchain §97 deepen)** unless you redirect.
