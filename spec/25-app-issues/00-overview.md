@@ -1,7 +1,12 @@
+---
+kind: index
+description: Top-level routing index for app issue analysis (parent of two child trackers). Exempt from missing-contract / untestable rubric findings — child trackers carry their own kind:tracker exemption.
+---
+
 # App Issues
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Updated:** 2026-04-26
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

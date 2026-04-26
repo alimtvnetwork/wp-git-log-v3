@@ -1,7 +1,12 @@
+---
+kind: index
+description: Top-level routing index for app-specific database specs. Intentionally empty until child specs are added — exempt from missing-contract / untestable rubric findings.
+---
+
 # App Database
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Updated:** 2026-04-26  
 **AI Confidence:** Draft  
 **Ambiguity:** None
 
