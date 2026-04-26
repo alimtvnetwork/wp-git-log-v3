@@ -61,7 +61,7 @@ These are gaps in the **server** (folder 22) that the CLI spec depends on:
 | Check | Result |
 |-------|--------|
 | Every subcommand in §04 has at least one AC referencing it | ✅ (detect→AC-01/02/03; lint/build/test/run→AC-05..14, 19..23; doctor→AC-15/16/24/26; clear→implicit; push-fixed→AC-17/18) |
-| Every `GLCI-*` code in §07 is reachable from some AC OR is documented as "warn-only" | ⚠ 4 codes (`GLCI-EXEC-RUNNER-CRASHED`, `GLCI-EXEC-TIMEOUT`, `GLCI-PUSH-STREAM-BROKEN`, `GLCI-DETECT-MULTIPLE-MODULES`) lack a direct AC. Acceptable for v1.0.0; tracked for v1.1 |
+| Every `GLCI-*` code in §07 is reachable from some AC OR is documented as "warn-only" | ✅ Closed in v2.0.0 — AC-28-29 covers `GLCI-EXEC-RUNNER-CRASHED`, AC-28-30 `GLCI-EXEC-TIMEOUT`, AC-28-31 `GLCI-PUSH-STREAM-BROKEN`, AC-28-32 `GLCI-DETECT-MULTIPLE-MODULES` |
 | Every enum in §01 has at least one AC referencing it | ✅ |
 | `17-openapi-client.yaml` paths ⊆ `22/17-openapi.yaml` paths | ✅ (asserted by AC-28-28) |
 | `18-config-schema.json` validates the §05 example glci.toml | ✅ (asserted by AC-28-27) |

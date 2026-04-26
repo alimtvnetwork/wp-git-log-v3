@@ -991,7 +991,7 @@
 | `spec/28-universal-ci-cli/07-error-catalog.md` | Error Catalog | 1.0.0 |
 | `spec/28-universal-ci-cli/08-ci-provider-bindings.md` | CI Provider Bindings | 1.0.0 |
 | `spec/28-universal-ci-cli/09-output-classification.md` | Output Classification | 1.0.0 |
-| `spec/28-universal-ci-cli/97-acceptance-criteria.md` | Acceptance Criteria | 1.0.0 |
+| `spec/28-universal-ci-cli/97-acceptance-criteria.md` | Acceptance Criteria | 2.0.0 |
 | `spec/28-universal-ci-cli/98-changelog.md` | Changelog |  |
 | `spec/28-universal-ci-cli/99-consistency-report.md` | Consistency Report |  |
 
