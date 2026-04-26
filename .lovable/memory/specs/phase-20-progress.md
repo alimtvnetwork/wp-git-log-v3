@@ -32,7 +32,6 @@ Pre-Phase-20 baseline: `.lovable/memory/audit/v2-deterministic-pre-phase20-basel
 
 ## Remaining Phase 20 queue
 
-* **#10** — `02-coding-guidelines/03-golang/01-enum-specification` (Go enum reference impl, already 70-ish C-tier).
 * **#11** — `18-wp-plugin-how-to/02-enums-and-coding-style` (PHP enum reference impl — currently 73 C, impl=40).
 
 ## Next-bottleneck recommendations from the audit
