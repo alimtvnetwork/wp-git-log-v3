@@ -193,6 +193,8 @@ def deterministic_metrics(folder: Path) -> dict:
         "has_json_schema":     has_json > 0,
         "has_ts_enums":        has_ts > 0,
         "has_yaml_openapi":    has_yaml > 0,
+        "has_typed_lang_contract": has_typed_lang_contract,  # v2.3
+        "has_ci_workflow":     has_ci_workflow,              # v2.3
         "has_mermaid":         len(mmd_files) > 0,
         "links_total":         total,
         "links_broken":        broken,
