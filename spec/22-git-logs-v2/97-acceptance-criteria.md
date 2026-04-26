@@ -166,10 +166,10 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **Verifies:** brief §Endpoints.1.a–b (ack contract), §04 (write endpoints #1–#4), §17 v2.9.4 (`AckResponse` schema), AC-30 (RequestId mirroring), AC-67 (NDJSON opt-in).
 
 ### AC-30 — Error envelope shape + RequestId mirroring  `[active]`
-- **Given** any endpoint rejects a request
+- **Given** any endpoint (write #1–#4, read #5–#10, admin #11+) rejects a request for any reason — validation failure, auth failure, rate-limit hit, internal error, or any of the 30+ `GL-*` codes registered in §15
 - **When** the response body is read
-- **Then** it matches `{Status, Code, Message, RequestId, HttpStatus}` AND `RequestId` appears in the corresponding `AuditTrail.RequestId` row.
-- **Verifies:** §15, §10.
+- **Then** the body MUST conform exactly to the `ErrorEnvelope` schema in §17 v2.9.4 `components.schemas.ErrorEnvelope`: `{Status: "Error", Code: <GL-* enum>, Message: <human-readable string>, RequestId: <UUID>, HttpStatus: <int matching the response status code>}` — and MUST NOT include any other top-level keys (no `details`, no `stack`, no `data` — those leak implementation detail and break client parsers); AND `Code` MUST be drawn from the `ErrorCode` enum in §17 (currently 30+ values incl. all `GL-NDJSON-*` and `GL-SHA-DB-*` codes per Phase 11); AND `RequestId` MUST be a UUIDv4 generated server-side (not client-supplied — clients sending an `X-Request-Id` header MUST have it ignored to prevent log-injection); AND the SAME `RequestId` MUST appear in the corresponding `AuditTrail.RequestId` row written for this request (so a customer reporting "I got error req_abc" can be cross-referenced to a single audit row); AND `HttpStatus` MUST equal the response's actual HTTP status code (no envelope claiming 400 inside a 200 response — that's a contract violation that breaks middleware error handling); AND `Message` MUST be safe to display verbatim to end users — it MUST NOT contain stack traces, file paths, SQL fragments, or any internal-only detail; AND on NDJSON streaming responses (per AC-67/AC-68), errors that occur BEFORE the `Header` frame flushes MUST use this envelope shape (the response is still conventional JSON); errors AFTER `Header` flushes MUST use the in-stream `NdjsonErrorFrame` per §17 instead — the envelope is for pre-stream failures only.
+- **Verifies:** §15 (full `GL-*` code catalog), §10 (RequestId generation rule), §17 v2.9.4 (`ErrorEnvelope` + `ErrorCode` enum + `NdjsonErrorFrame`), §22 (`AuditTrail` correlation), AC-67/AC-68 (NDJSON error frame split).
 
 ### AC-37 — Prometheus metrics endpoint  `[active]`
 - **Given** the metrics endpoint `GET /wp-json/git-logs/v2/metrics`
