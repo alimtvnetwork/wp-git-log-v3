@@ -1,5 +1,9 @@
-%% Encryption-at-rest (v3 deferred plan)
-%% Source: spec/22-git-logs-v2/11-encryption-deferred-plan.md
+%% Diagram type: flowchart / sequenceDiagram (NOT an ER diagram)
+%% What this answers: "If/when v3 encryption-at-rest ships, what is the
+%%   key-derivation chain (MasterKey -> DataKey -> LookupKey), where does
+%%   the migration ALTER + per-row encrypt run, and how is idempotency
+%%   guaranteed via MigrationState?"
+%% Authoritative source: spec/22-git-logs-v2/11-encryption-deferred-plan.md
 
 flowchart TD
     A[Install or Upgrade to v3] --> B{GITLOGS_MASTER_KEY env set}
