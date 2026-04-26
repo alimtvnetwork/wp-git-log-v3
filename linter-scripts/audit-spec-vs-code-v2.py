@@ -416,6 +416,12 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         if m["has_json_schema"]:  impl += 15
         if m["has_ts_enums"]:     impl += 10
         if m["has_yaml_openapi"]: impl += 10
+        # v2.3: typed-language reference contracts (Go/PHP/C#/Rust/etc.)
+        # are normative for language-specific coding-guideline modules.
+        if m.get("has_typed_lang_contract"): impl += 10
+        # v2.3: CI workflow YAML (≥5 blocks) is a normative contract for
+        # CI/CD pipeline modules.
+        if m.get("has_ci_workflow"):         impl += 5
         if m["has_mermaid"]:      impl += 5
         if m["code_blocks_total"] >= 5: impl += 10
         if m["overview_chars"] < 500:   impl -= 20
