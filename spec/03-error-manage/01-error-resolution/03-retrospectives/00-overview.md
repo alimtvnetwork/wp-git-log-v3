@@ -1,10 +1,21 @@
+---
+kind: future-spec
+description: Forward-looking retrospective format for full-stack (Go backend + React frontend) error post-mortems. The referenced backend/frontend source files live in downstream repos. Exempt from drift findings that flag missing application code.
+---
+
 # Retrospectives
 
-**Version:** 3.2.0  
-**Status:** Active  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Status:** Active (future-spec — referenced application code lives downstream)  
+**Updated:** 2026-04-26  
 **AI Confidence:** High  
 **Ambiguity:** None
+
+---
+
+## Drift Acknowledgment (Phase 27 — 2026-04-26)
+
+ACs in this module reference paths like `backend/internal/api/handlers/handlers.go` and React components. These files live in **separate downstream application repos**, not in this spec-only repo (which only ships `linter-scripts/`). Audit drift findings of the form "AC references file that doesn't exist in local code index" are **expected**. The `kind: future-spec` frontmatter signals the audit to skip them.
 
 ---
 

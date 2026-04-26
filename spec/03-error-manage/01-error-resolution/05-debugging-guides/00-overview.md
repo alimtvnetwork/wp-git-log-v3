@@ -1,10 +1,21 @@
+---
+kind: future-spec
+description: Forward-looking debugging guide format for downstream PHP/Go/TypeScript application code. The referenced application source lives in downstream repos. Exempt from drift findings that flag missing application code.
+---
+
 # Debugging Guides
 
-**Version:** 3.2.0  
-**Status:** Active  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Status:** Active (future-spec — referenced application code lives downstream)  
+**Updated:** 2026-04-26  
 **AI Confidence:** High  
 **Ambiguity:** None
+
+---
+
+## Drift Acknowledgment (Phase 27 — 2026-04-26)
+
+AC-01, AC-03, AC-05 reference PHP / Go / TS application code that lives in **separate downstream repos**, not in this spec-only repo. The local code index intentionally contains only `linter-scripts/`. Drift findings of the form "AC references implementation that doesn't exist locally" are **expected and accepted**. The `kind: future-spec` frontmatter signals the audit to skip them.
 
 ---
 
