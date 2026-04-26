@@ -232,7 +232,7 @@
 | `spec/02-coding-guidelines/06-ai-optimization/03-common-ai-mistakes.md` | Common AI Mistakes | 3.2.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/04-condensed-master-guidelines.md` | Condensed Master Coding Guidelines — AI Context Reference | 3.2.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/05-enum-naming-quick-reference.md` | Enum Naming Quick Reference — All Languages | 3.2.0 |
-| `spec/02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md` | Acceptance Criteria: AI Optimization | 3.2.0 |
+| `spec/02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md` | Acceptance Criteria — AI Optimization | 4.0.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/98-changelog.md` | Changelog — AI Optimization | 1.0.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/99-consistency-report.md` | Consistency Report — AI Optimization | 3.2.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/00-overview.md` | CI/CD Integration — Coding-Guidelines Linter Pack | 1.0.0 |
@@ -254,8 +254,8 @@
 | `spec/02-coding-guidelines/07-csharp/03-error-handling.md` | C# Error Handling | 1.0.0 |
 | `spec/02-coding-guidelines/07-csharp/04-type-safety.md` | C# Type Safety | 1.0.0 |
 | `spec/02-coding-guidelines/07-csharp/97-acceptance-criteria.md` | C# Coding Standards — Acceptance Criteria | 4.0.0 |
-| `spec/02-coding-guidelines/07-csharp/98-changelog.md` | C# Coding Standards — Changelog |  |
-| `spec/02-coding-guidelines/07-csharp/99-consistency-report.md` | Consistency Report: C# Coding Standards | 3.2.0 |
+| `spec/02-coding-guidelines/07-csharp/98-changelog.md` | C# Coding Standards — Changelog | 4.0.0 |
+| `spec/02-coding-guidelines/07-csharp/99-consistency-report.md` | Consistency Report: C# Coding Standards | 4.0.0 |
 | `spec/02-coding-guidelines/08-file-folder-naming/00-overview.md` | File & Folder Naming Conventions | 3.2.0 |
 | `spec/02-coding-guidelines/08-file-folder-naming/01-cross-language.md` | File & Folder Naming — Cross-Language Rules | 3.2.0 |
 | `spec/02-coding-guidelines/08-file-folder-naming/02-php-wordpress.md` | File & Folder Naming — PHP / WordPress | 3.2.0 |
