@@ -90,4 +90,4 @@ Landed in v3.8.6 / schema v2.9.1:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 5** (SSH-Key Lane B: Schema & Errors)
+**Top pending = Phase 6** (SSH-Key Lane B: Flow & Threat Doc)
