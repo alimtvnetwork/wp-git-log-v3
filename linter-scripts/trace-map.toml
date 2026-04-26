@@ -116,3 +116,52 @@ kind   = "function"
 ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-10"
 files  = ["linter-scripts/check-spec-cross-links.py"]
 kind   = "function"
+
+# ===== §27 spec-toolchain — trace-map regression gate (15) =====
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-01"
+files  = ["linter-scripts/check-trace-map-regression.py"]
+symbol = "diff_against_baseline"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-02"
+files  = ["linter-scripts/check-trace-map-regression.py"]
+symbol = "diff_against_baseline"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-03"
+files  = ["linter-scripts/check-trace-map-regression.py"]
+symbol = "diff_against_baseline"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-04"
+files  = ["linter-scripts/check-trace-map-regression.py"]
+symbol = "diff_against_baseline"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-05"
+files  = ["linter-scripts/check-trace-map-regression.py"]
+symbol = "write_baseline"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-06"
+files  = ["linter-scripts/check-trace-map-regression.py"]
+symbol = "--report-only"
+kind   = "cli-flag"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-07"
+files  = ["linter-scripts/check-trace-map-regression.py"]
+symbol = "run_generator"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-check-trace-map-regression.md#AC-15-08"
+files  = [".github/workflows/spec-health.yml"]
+kind   = "workflow"
