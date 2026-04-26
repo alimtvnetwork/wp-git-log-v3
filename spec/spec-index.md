@@ -698,16 +698,16 @@
 | `spec/14-update/24-update-check-mechanism/01-fundamentals.md` | Fundamentals — Discovery Algorithm | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/02-status-script-json.md` | Status Script JSON Contract | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/03-combined-json.md` | Combined Discovery JSON | 1.0.0 |
-| `spec/14-update/24-update-check-mechanism/04-database-schema.md` | Database Schema — UpdateChecker & UpdateStatus | 1.0.0 |
+| `spec/14-update/24-update-check-mechanism/04-database-schema.md` | Database Schema — UpdateChecker & UpdateStatus | 1.1.0 |
 | `spec/14-update/24-update-check-mechanism/05-update-checker-service.md` | UpdateCheckerService — Reusable Module Contract | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/06-cli-commands.md` | CLI Commands — `update-check` & `do-update` | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/07-pre-command-hook.md` | Pre-Command Hook — Interval Gate & Trailing Warning | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/08-error-handling.md` | Error Handling Policy | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/09-json-fallback-store.md` | JSON Fallback Store | 1.0.0 |
 | `spec/14-update/24-update-check-mechanism/97-acceptance-criteria.md` | Acceptance Criteria — Update Check Mechanism | 2.0.0 |
-| `spec/14-update/24-update-check-mechanism/98-changelog.md` | Changelog — Update Check Mechanism | 2.0.0 |
+| `spec/14-update/24-update-check-mechanism/98-changelog.md` | Changelog — Update Check Mechanism | 2.1.0 |
 | `spec/14-update/24-update-check-mechanism/98-changelog.md` | Changelog — Update Check Mechanism — Overview | 1.0.0 |
-| `spec/14-update/24-update-check-mechanism/99-consistency-report.md` | Consistency Report — Update Check Mechanism | 2.0.0 |
+| `spec/14-update/24-update-check-mechanism/99-consistency-report.md` | Consistency Report — Update Check Mechanism | 2.1.0 |
 | `spec/14-update/25-release-pinned-installer.md` | 25-release-pinned-installer |  |
 | `spec/14-update/26-repo-major-version-migrator.md` | Repo Major-Version Migrator (v14 → v15 → v16) | 1.0.0 |
 | `spec/14-update/27-generic-installer-behavior.md` | Generic Installer Behavior Specification | 1.0.0 |
