@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 2.5.0  
-**Updated:** 2026-04-25
+**Version:** 3.8.0  
+**Updated:** 2026-04-26
 
 | # | Criterion | Source |
 |---|-----------|--------|
@@ -11,7 +11,7 @@
 | AC-04 | Logger supports Trace/Debug/Info/Warn/Error/Fatal; `LogLevelMin` in `ConfigKv` disables Info/Debug at runtime. | brief §3.f |
 | AC-05 | Duplicate diagnostic log lines deduplicate within a 60s window. | brief §3.g |
 | AC-06 | Roles/Permissions live in plugin SQLite, not WP. Authorization checks `RolePermission`, never the role name. | brief §4–5 |
-| AC-07 | GitProfile supports User and Organization URLs; trailing slash optional; canonicalized on save. | brief §Domain.2 |
+| AC-07 | GitProfile supports User and Organization URLs via `IsOrganization` boolean (v3.8.0 — replaces `OwnerType` lookup); trailing slash optional; canonicalized on save as `github.com/$org/$repo` when `IsOrganization=1` else `github.com/$username/$repo`. | brief §Domain.2 + v3.8.0 |
 | AC-08 | GitProfile.Acceptance ∈ { AcceptAllRepos, AcceptSelectedRepoOnly, AcceptSelectedRepoInAllVersions }. | brief §Domain.3.b |
 | AC-09 | `IsRestrictInBranch` toggles visibility and enforcement of `StrictBranch`. | brief §Domain.3.f |
 | AC-10 | Repo stores root URL stripped of `-vN`; RepoVersion stores each variant linked back to Repo. | brief §Domain.5 |
@@ -25,7 +25,12 @@
 | AC-18 | App↔Repo / App↔GitProfile linkage uses polymorphic `AppLink` with exactly-one-target CHECK. | locked decision 10 |
 | AC-19 | App inherits credentials from parent Profile; no own tokens. | locked decision 11 |
 | AC-20 | App lifecycle status enum (Active/Disabled/Archived) gates push acceptance. | locked decision 12 |
-| AC-21 | Three audit tables coexist: `AuditTrail`, `History`, `Action`, with the responsibility split documented in 08. | locked decision 13 |
+| AC-21 | Four audit tables coexist: `AuditTrail` (HTTP forensics), `History` (per-RepoVersion git timeline), `PipelineAction` (renamed from `Action` in v3.8.0 — pipeline-bound), `SystemEvent` (NEW v3.8.0 — non-Git business events). Responsibility split documented in §08. | locked decision 13 + v3.8.0 |
+| AC-49 | Per-SHA log storage (v3.8.0): every accepted `/append-log` for a new `(RepoVersionId, GitSha256)` creates `wp-content/uploads/git-logs/logs/<RepoVersionId>/<GitSha256>.sqlite` and a `ShaRegistry` row in the root DB. `LogEntry` and `ErrorLogEntry` no longer exist in the root DB — all log lines live in the per-SHA file. | §39 |
+| AC-50 | `ShaRegistry` mirrors `EntryCount`, `ErrorCount`, `LastStatus`, `LastSeverityId`, `LastFailureAt`, `LastSuccessAt` from the per-SHA `StatusSnapshot` so dashboards never have to open the per-SHA file to render summary tiles. | §39 |
+| AC-51 | Per-SHA file is self-contained: includes denormalized `LogSeverity` lookup + `ShaMeta` single-row identity, so it can be exported / zipped / handed to support without root-DB context. | §39 |
+| AC-52 | Open per-SHA handles capped per process at `ConfigKv.MaxOpenShaDbHandles` (default 64) with LRU eviction; idle handles closed after `ConfigKv.ShaDbIdleCloseSec` seconds (default 300). | §39 |
+| AC-53 | `wp git-logs prune` walks `ShaRegistry`, deletes the per-SHA file, then deletes the row. `wp git-logs backup` zips the entire `git-logs/` directory including all `logs/` per-SHA files; manifest records each per-SHA file's row counts + sha256. Uninstall Wipe mode deletes the entire `uploads/git-logs/` folder. | §22, §23, §29, §39 |
 | AC-22 | Folder 26 contains: ER, domain, endpoint, auth, permission Mermaid diagrams. | brief §Diagrams |
 | AC-23 | All tables/columns/JSON keys/values use PascalCase; PKs are `INTEGER AUTOINCREMENT` named `{Table}Id`. | brief §DB.2–4 |
 | AC-24 | All typed values modeled as Enum in code AND lookup table in DB; no string-literal status comparisons. | brief §DB.5 |

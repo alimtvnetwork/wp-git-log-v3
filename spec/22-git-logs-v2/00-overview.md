@@ -1,7 +1,7 @@
 # Git Logs v2 — Spec Overview
 
-**Version:** 2.8.7  
-**Updated:** 2026-04-25  
+**Version:** 3.8.0  
+**Updated:** 2026-04-26  
 **Status:** Draft  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
@@ -84,6 +84,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 28 | [28-example-github-actions.md](./28-example-github-actions.md) | Drop-in workflow YAML for Lane B push + fixed |
 | 29 | [29-uninstall-policy.md](./29-uninstall-policy.md) | DB retention modes on plugin removal |
 | 30 | [30-threat-model.md](./30-threat-model.md) | STRIDE pass over the v2 attack surface |
+| 39 | [39-split-db-log-storage.md](./39-split-db-log-storage.md) | **NEW v3.8.0** — Per-SHA SQLite log storage (root DB keeps only `ShaRegistry`; logs live in `logs/<RepoVersionId>/<GitSha256>.sqlite`) |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
