@@ -233,8 +233,8 @@
 | `spec/02-coding-guidelines/06-ai-optimization/04-condensed-master-guidelines.md` | Condensed Master Coding Guidelines — AI Context Reference | 3.2.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/05-enum-naming-quick-reference.md` | Enum Naming Quick Reference — All Languages | 3.2.0 |
 | `spec/02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md` | Acceptance Criteria — AI Optimization | 4.0.0 |
-| `spec/02-coding-guidelines/06-ai-optimization/98-changelog.md` | Changelog — AI Optimization | 1.0.0 |
-| `spec/02-coding-guidelines/06-ai-optimization/99-consistency-report.md` | Consistency Report — AI Optimization | 3.2.0 |
+| `spec/02-coding-guidelines/06-ai-optimization/98-changelog.md` | Changelog — AI Optimization | 4.0.0 |
+| `spec/02-coding-guidelines/06-ai-optimization/99-consistency-report.md` | Consistency Report — AI Optimization | 4.0.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/00-overview.md` | CI/CD Integration — Coding-Guidelines Linter Pack | 1.0.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/01-sarif-contract.md` | SARIF 2.1.0 Output Contract | 1.0.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/02-plugin-model.md` | Plugin Model — Adding a New Language | 1.0.0 |
@@ -243,10 +243,10 @@
 | `spec/02-coding-guidelines/06-cicd-integration/05-distribution.md` | Distribution | 1.0.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/06-rules-mapping.md` | Rules Mapping — Spec → Check → Severity | 1.0.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/07-performance.md` | Performance — Probe Order, Parallelism, Timeouts | 1.0.0 |
-| `spec/02-coding-guidelines/06-cicd-integration/97-acceptance-criteria.md` | Acceptance Criteria — CI/CD Integration | 1.0.0 |
-| `spec/02-coding-guidelines/06-cicd-integration/98-changelog.md` | Changelog — CI/CD Integration — Coding-Guidelines Linter Pack | 1.0.0 |
+| `spec/02-coding-guidelines/06-cicd-integration/97-acceptance-criteria.md` | Acceptance Criteria — CI/CD Integration | 4.0.0 |
+| `spec/02-coding-guidelines/06-cicd-integration/98-changelog.md` | Changelog — CI/CD Integration — Coding-Guidelines Linter Pack | 4.0.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/98-faq.md` | FAQ — Linter Pack Consumer Questions | 1.0.0 |
-| `spec/02-coding-guidelines/06-cicd-integration/99-consistency-report.md` | Consistency Report — CI/CD Integration | 1.0.0 |
+| `spec/02-coding-guidelines/06-cicd-integration/99-consistency-report.md` | Consistency Report — CI/CD Integration | 4.0.0 |
 | `spec/02-coding-guidelines/06-cicd-integration/99-troubleshooting.md` | Troubleshooting — Linter Pack Operations | 1.0.0 |
 | `spec/02-coding-guidelines/07-csharp/00-overview.md` | C# Coding Standards | 3.2.0 |
 | `spec/02-coding-guidelines/07-csharp/01-naming-and-conventions.md` | C# Naming and Conventions | 1.0.0 |
