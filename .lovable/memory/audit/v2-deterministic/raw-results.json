@@ -830,62 +830,43 @@
     "weighted_overall": 76
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 40,
-        "before": 40,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
-    "blast_radius": 0,
+    "applied_gates": [],
+    "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 3, \"go\": 55, \"markdown\": 1, \"plain\": 11}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2792,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 3,
-        "go": 55,
+        "go": 56,
+        "json": 1,
         "markdown": 1,
-        "plain": 11
+        "plain": 11,
+        "ts": 1
       },
-      "code_blocks_total": 70,
+      "code_blocks_total": 73,
       "consistency_report": true,
       "gwt_block_count": 5,
-      "has_json_schema": false,
+      "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
       "links_total": 16,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 5774,
+      "overview_chars": 11012,
       "todo_density": 0,
-      "waffle_per_kchar": 0.11
+      "waffle_per_kchar": 0.09
     },
     "module": "02-coding-guidelines/03-golang/01-enum-specification",
     "raw_scores": {
@@ -893,22 +874,22 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 40,
+      "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 40,
+      "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 73/100 (C) for spec/02-coding-guidelines/03-golang/01-enum-specification.",
-    "weighted_overall": 73
+    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/03-golang/01-enum-specification.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [
@@ -4885,59 +4866,40 @@
     "weighted_overall": 95
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 40,
-        "before": 40,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
-    "blast_radius": 0,
+    "applied_gates": [],
+    "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 1, \"php\": 12, \"plain\": 8}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum) in module body",
-        "severity": "high"
-      }
-    ],
-    "grade": "C",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum) in module body"
-    ],
+    "findings": [],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2763,
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 1,
-        "php": 12,
-        "plain": 8
+        "json": 1,
+        "php": 13,
+        "plain": 8,
+        "ts": 1
       },
-      "code_blocks_total": 21,
+      "code_blocks_total": 24,
       "consistency_report": true,
       "gwt_block_count": 5,
-      "has_json_schema": false,
+      "has_json_schema": true,
       "has_mermaid": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_yaml_openapi": false,
       "links_broken": 0,
       "links_total": 27,
       "md_files": 8,
       "mmd_files": 0,
-      "overview_chars": 2088,
+      "overview_chars": 7474,
       "todo_density": 0,
       "waffle_per_kchar": 0.19
     },
@@ -4947,22 +4909,22 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 40,
+      "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 40,
+      "implementability": 65,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 73/100 (C) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
-    "weighted_overall": 73
+    "verdict": "Deterministic score 82/100 (B) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [
