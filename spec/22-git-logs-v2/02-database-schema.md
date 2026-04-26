@@ -150,36 +150,29 @@ Unique: `(RepoVersionId, BranchName, PipelineName)`.
 
 ---
 
-## LogEntry
+## ShaRegistry (root DB — points at per-SHA log files)
+
+> **v3.8.0 split-DB:** `LogEntry` and `ErrorLogEntry` no longer live in the root DB. The root DB stores only the **registry** of which SHAs exist, where their per-SHA SQLite file is, and rolled-up summary stats sufficient to answer dashboard questions without opening the per-SHA file.
 
 | Column | Type | Notes |
 |--------|------|-------|
-| LogEntryId | INTEGER PK AI | |
-| PipelineId | INTEGER FK → Pipeline | |
-| GitSha256 | TEXT NOT NULL | |
-| LineNumber | INTEGER NOT NULL | Order within batch |
-| LogText | TEXT NOT NULL | |
-| LogSeverityId | INTEGER FK → LogSeverity | |
-| FilePath | TEXT NULL | From request `FilePaths` |
-| OccurredAt | INTEGER NOT NULL | |
+| ShaRegistryId | INTEGER PK AI | |
+| RepoVersionId | INTEGER FK → RepoVersion | |
+| GitSha256 | TEXT NOT NULL | Full SHA-256 hex |
+| ShaDbPath | TEXT NOT NULL | Relative to `ShaLogsRoot` (`ConfigKv`), e.g. `<RepoVersionId>/<GitSha256>.sqlite` |
+| FirstSeenAt | INTEGER NOT NULL | |
+| LastSeenAt | INTEGER NOT NULL | |
+| EntryCount | INTEGER NOT NULL DEFAULT 0 | Mirrored from per-SHA `StatusSnapshot` on every `/append-log` ack |
+| ErrorCount | INTEGER NOT NULL DEFAULT 0 | Same source |
+| LastSeverityId | INTEGER FK → LogSeverity NULL | |
+| LastStatus | TEXT NOT NULL DEFAULT 'Pending' | `Green` \| `Red` \| `Pending` — derived from latest `PipelineRun.HasError` across this SHA |
+| LastFailureAt | INTEGER NULL | |
+| LastSuccessAt | INTEGER NULL | |
 
-Index: `(PipelineId, GitSha256, LineNumber)`.
+Unique: `(RepoVersionId, GitSha256)`.  
+Index: `(RepoVersionId, LastSeenAt)`, `(LastStatus, LastSeenAt)`.
 
----
-
-## ErrorLogEntry
-
-| Column | Type | Notes |
-|--------|------|-------|
-| ErrorLogEntryId | INTEGER PK AI | |
-| PipelineId | INTEGER FK → Pipeline | |
-| GitSha256 | TEXT NOT NULL | |
-| LineNumber | INTEGER NOT NULL | |
-| LogText | TEXT NOT NULL | |
-| FilePath | TEXT NULL | |
-| OccurredAt | INTEGER NOT NULL | |
-
-Index: `(PipelineId, GitSha256, LineNumber)`.
+> Full per-SHA schema (`LogEntry`, `ErrorLogEntry`, `PipelineRun`, `StatusSnapshot`, `ShaMeta`, denormalized `LogSeverity` copy) lives in §39.
 
 ---
 
@@ -225,7 +218,7 @@ CHECK: exactly one of `TargetGitProfileId`/`TargetRepoId` is non-null and matche
 | BranchName | TEXT NOT NULL | |
 | PipelineName | TEXT NULL | |
 | GitSha256 | TEXT NULL | |
-| ActionTypeId | INTEGER FK → ActionType | |
+| PipelineActionTypeId | INTEGER FK → PipelineActionType | **v3.8.0** — was `ActionTypeId` |
 | HasError | INTEGER 0/1 NOT NULL | Snapshot at event |
 | Summary | TEXT NULL | Short message |
 | OccurredAt | INTEGER NOT NULL | |
@@ -234,16 +227,38 @@ Index: `(RepoVersionId, OccurredAt)`.
 
 ---
 
-## Action (enum-typed action log; lighter than History)
+## PipelineAction (enum-typed pipeline log; renamed from `Action` in v3.8.0)
+
+> Scope clarification (v3.8.0): rows are **always** bound to a `RepoVersion` and (usually) a `Pipeline`. Non-pipeline business events (ProfileCreated, KeyRevoked, AppCreated, …) belong in `SystemEvent` below. Endpoint forensics belong in `AuditTrail`.
 
 | Column | Type | Notes |
 |--------|------|-------|
-| ActionId | INTEGER PK AI | |
-| ActionTypeId | INTEGER FK → ActionType | |
+| PipelineActionId | INTEGER PK AI | Was `ActionId` |
+| PipelineActionTypeId | INTEGER FK → PipelineActionType | Was `ActionTypeId` |
 | RepoVersionId | INTEGER FK → RepoVersion | |
 | PipelineId | INTEGER FK → Pipeline NULL | |
 | ProfileId | INTEGER FK → Profile NULL | Caller, if resolvable |
 | OccurredAt | INTEGER NOT NULL | |
+
+---
+
+## SystemEvent (business state changes — v3.8.0, NEW)
+
+> Answers: "Show me the user-visible activity feed of meaningful changes (someone created a profile, revoked a key, accepted a GitProfile, changed branch restriction, …)."  
+> Distinct from `AuditTrail` (HTTP forensics) and `History` (per-RepoVersion git events).
+
+| Column | Type | Notes |
+|--------|------|-------|
+| SystemEventId | INTEGER PK AI | |
+| SystemEventTypeId | INTEGER FK → SystemEventType | |
+| ActorProfileId | INTEGER FK → Profile NULL | Acting Profile (NULL for system events) |
+| TargetType | TEXT NULL | Loose polymorphic tag: `Profile` \| `GitProfile` \| `Repo` \| `App` \| `SshKey` \| `RoleAssignment` |
+| TargetId | INTEGER NULL | PK of the row in the table named by `TargetType` (no FK CHECK — survives row deletion) |
+| Summary | TEXT NULL | Short human label, e.g. `"Profile 'alice' created"` |
+| DetailJson | TEXT NULL | JSON blob of the relevant changed fields |
+| OccurredAt | INTEGER NOT NULL | |
+
+Index: `(SystemEventTypeId, OccurredAt)`, `(ActorProfileId, OccurredAt)`, `(TargetType, TargetId, OccurredAt)`.
 
 ---
 
