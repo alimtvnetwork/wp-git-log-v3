@@ -97,4 +97,4 @@ Landed in v3.8.9:
 - 🚧 blocked
 
 ## Next-pointer
-**Top pending = Phase 8** (API Streaming Spec — define NDJSON streaming format for log retrieval in `04-rest-api-endpoints.md`)
+**Top pending = Phase 9** (Pipeline `PreviousHasError` Flag — add boolean column to `Pipeline` table in `18-schema.sql`, document semantics + back-fill rule in `02-database-schema.md` + `01-glossary-and-enums.md`)
