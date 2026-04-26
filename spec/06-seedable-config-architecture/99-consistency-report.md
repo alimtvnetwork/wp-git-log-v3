@@ -22,7 +22,7 @@
 | 97 | `97-acceptance-criteria.md` | ✅ Phase 16r v4.0.0 GWT | 4.0.0 |
 | 97b | `97-changelog.md` | ✅ Present (legacy changelog) | 3.2.0 |
 | 98 | `98-acceptance-criteria.md` | ✅ Present (legacy GWT, superseded by §97 v4.0.0) | 3.2.0 |
-| 98b | `98-changelog.md` | ✅ Present (Phase 16r companion) | 4.0.0 |
+| 98b | `98-changelog.md` | ✅ Present (Phase 16r companion + Phase 20 #8) | 4.1.0 |
 
 **Total:** 13 files (excluding this report)
 
