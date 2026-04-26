@@ -1,8 +1,16 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-26  
+**Version:** 3.0.0
+**Updated:** 2026-04-26
 **Scope:** `spec/26-gitlogs-diagrams/`
+
+---
+
+## [3.0.0] — 2026-04-26 (Phase 16g: §97 full GWT rewrite)
+
+- **Changed** §97 — full GWT rewrite. Replaced 9 table-row criteria (AC-D-01..AC-D-11, with 02/03/04 already retired) with **20 module-specific Given/When/Then ACs** (AC-DG-01..AC-DG-20) covering: ER schema parity with §22 (entities + cardinalities, forbidden v1 entities), auth validation order with `GL-*` reject codes, RBAC RolePermission-union resolution, header-comment contract (`%% Diagram type:` + `%% What this answers:` mandatory for non-ER), emoji-free + Mermaid-CLI rendering, JWT/RS256/JWKS forbidden, endpoints mindmap covering all 8 REST endpoints, encryption v3 7-node derivation chain, slot 02/03/04 locked-gap immutability, `.mmd` ↔ `.svg` lockstep build artifact rule, kebab-case ASCII node IDs, `GL-*` codes cross-validated against §22 §14 registry, `puppeteer.json` reproducibility, governance rule "§26 trails §22 — never leads", and self-application audit.
+- **Preserved** legacy table-row criteria as AC-DG-LEGACY-01..11 (with 02/03/04 retired) at end of §97.
+- **Bumped** §97 v2.0.0 → v3.0.0 (major; AC contract type changed from table-row to GWT). §98 v2.1.0 → v3.0.0. §99 v2.1.0 → v3.0.0.
 
 ---
 
