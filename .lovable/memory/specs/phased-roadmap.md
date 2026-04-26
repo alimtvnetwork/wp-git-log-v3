@@ -276,35 +276,40 @@ Parent contract for ALL language subfolders under §02. Rewrote §97 from 6 stub
 
 ---
 
-## Next-pointer
-**Phase 16h complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT).
+## ✅ Phase 16i — §02/02-typescript §97 deepen (DONE, v4.0.0)
 
-**12 remaining §97 files with 0 GWT ACs** (post-16h), priority order:
+First language child to inherit AC-CL-*. Rewrote §97 from 6 stub checkboxes to **20 module-specific GWT ACs** (AC-TS-01..AC-TS-20) covering: explicit AC-CL-01..AC-CL-20 inheritance (AC-TS-01); 6-flag strict tsconfig including `noUncheckedIndexedAccess` + `exactOptionalPropertyTypes` (AC-TS-02); `any` forbidden, `unknown` + narrowing only escape (AC-TS-03); `as const` string-literal-union enums NEVER `enum` keyword (AC-TS-04); `Promise.all` for independent async — CODE-RED rule (AC-TS-05); discriminated unions with `never` exhaustive checks (AC-TS-06); `AppError` discriminated union over `throw new Error` (AC-TS-07); functional components + hooks only (AC-TS-08); Zustand for client / React Query for server — never inverse (AC-TS-09); `async` returns `Promise<Result<T,AppError>>` (AC-TS-10); Zod schema at every external boundary (AC-TS-11); `noUncheckedIndexedAccess` enforces `T | undefined` (AC-TS-12); kebab-case files + PascalCase exports (AC-TS-13); `@typescript-eslint/recommended-type-checked` + `--max-warnings 0` (AC-TS-14); `interface` for shapes / `type` for unions (AC-TS-15); generic constraints required (AC-TS-16); import grouping external→internal-alias→relative + named over default (AC-TS-17); `react-hooks/exhaustive-deps` as error (AC-TS-18); Vitest + RTL behavior-named tests (AC-TS-19); self-application doctest (AC-TS-20). Legacy AC-01/AC-02 preserved as AC-TS-LEGACY-* at end. Lockstep: §98 v3.2.0 → v4.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
+## Next-pointer
+**Phase 16i complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT) + §01 §97 (20 GWT) + §26 §97 (20 GWT) + §02/01-cross-language §97 (20 GWT) + §02/02-typescript §97 (20 GWT).
+
+**11 remaining §97 files with 0 GWT ACs** (post-16i), priority order:
 
 | # | Module | Current ACs | Priority | Notes |
 |--:|---|--:|---|---|
-| 1 | `02-coding-guidelines/02-typescript/` | 0 | **P1** | Inherits §02/01; high code-blast radius |
-| 2 | `02-coding-guidelines/03-golang/` | 0 | P1 | Inherits §02/01 |
-| 3 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
-| 4 | `02-coding-guidelines/05-rust/` | 0 | P1 | Inherits §02/01 |
-| 5 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
-| 6 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
-| 7 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
-| 8 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
-| 9 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
-| 10 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 11 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
-| 12 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
+| 1 | `02-coding-guidelines/03-golang/` | 0 | **P1** | Inherits §02/01 |
+| 2 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
+| 3 | `02-coding-guidelines/05-rust/` | 0 | P1 | Inherits §02/01 |
+| 4 | `02-coding-guidelines/07-csharp/` | 0 | P1 | Inherits §02/01 |
+| 5 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules |
+| 6 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | 🚨 Slot collision |
+| 7 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 8 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 9 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 10 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom" |
+| 11 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do NOT edit |
 
 🚨 **Slot collision (B2)**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 / AC-SAG-04 (immutable slots).
 
 Remaining work:
-- ⏳ **Phase 16i** — Deepen `02-coding-guidelines/02-typescript/97` (P1 — first language child to inherit §02/01).
-- ⏳ **Phase 16j–16o** — Deepen Go/PHP/Rust/C#/AI-Opt subfolder §97 files (P1 batch).
+- ⏳ **Phase 16j** — Deepen `02-coding-guidelines/03-golang/97` (P1 — second language child).
+- ⏳ **Phase 16k–16n** — Deepen PHP/Rust/C#/AI-Opt subfolder §97 files (P1 batch).
 - ⏳ **Phase 16p** — Deepen `14-update/24-update-check-mechanism/97` (P2).
 - ⏳ **Phase 16q** — Deepen `06-seedable-config-architecture/97` + `05-split-db-architecture/97` (P2 audit-flagged "phantom specs").
-- 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user — confirm `Environment`, `Platform`, `OwnerEmail` shape).
-- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user — pick rename target).
+- 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user).
+- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user).
 
-On next `next`: take **Phase 16i (`02-coding-guidelines/02-typescript/97` deepen)** — P1, first language child whose §97 will reference the AC-CL-* parent contract just shipped. Unless you redirect or want to unblock B1/B2 first.
+On next `next`: take **Phase 16j (`02-coding-guidelines/03-golang/97` deepen)** — P1 second language child after TypeScript. Unless you redirect or want to unblock B1/B2 first.
 
