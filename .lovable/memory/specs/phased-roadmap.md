@@ -254,11 +254,45 @@ Expanded §28 §97 from 28 ACs to **40 module-specific GWT ACs** (AC-28-29..AC-2
 
 ---
 
+## ✅ Phase 16e — §02 coding-guidelines §97 deepen (DONE, v4.0.0)
+
+Re-scan of all §97 files surfaced **15 modules with 0 GWT ACs** (table-row scaffolds only). Highest-impact target: **§02 coding-guidelines §97** (the parent governance module for all language subfolders). Rewrote from 22 table-row criteria to **20 module-specific GWT ACs** (AC-CG-01..AC-CG-20) covering numbering ranges, four-required-files rule, six CODE-RED rules (R1–R6), hybrid PascalCase / Rust-snake_case naming policy, AC-count compliance per subfolder, lockstep rule for consolidated review guides, cross-link health, language-vs-cross-language hierarchy, app-specific subfolder boundary, AI-rules canonicalization (`06-ai-optimization`), dependency version pinning, placeholder subfolder remediation, migration-history freshness, module tree-health gate ≥ 95, and recursive self-application (dogfooding). Legacy AC-001..022 preserved as AC-CG-LEGACY-001..022 for traceability. Lockstep: §98 v1.0.0 → v2.0.0 + §99 v3.2.0 → v4.0.0 + spec-index regenerated. Tree-health: **100/100 (A+)** maintained.
+
+---
+
 ## Next-pointer
-**All Phase 16d sub-phases complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT). **All unblocked deepening phases done.**
+**Phase 16e complete.** §07 §97 (34 GWT) + §13 §97 (20 GWT) + §14 §97 (20 GWT) + §22 §97 (4 deferred ACs deep) + §15 §97 (20 GWT) + §16 §97 (20 GWT) + §17 §97 (20 GWT) + §27 §97 (20 GWT) + §28 §97 (40 GWT) + §02 §97 (20 GWT).
+
+**Phase 16e scan exposed 15 §97 files with 0 GWT ACs.** Highest-impact remaining targets, in priority order (parent-before-child rule):
+
+| # | Module | Current ACs | Priority | Notes |
+|--:|---|--:|---|---|
+| 1 | `01-spec-authoring-guide/` | 0 | **P0** | The spec that authors all OTHER specs — must dogfood first |
+| 2 | `26-gitlogs-diagrams/` | 0 | P0 | Diagrams are part of §22 governance contract |
+| 3 | `02-coding-guidelines/01-cross-language/` | 0 | P0 | Parent of all language rules |
+| 4 | `02-coding-guidelines/02-typescript/` | 0 | P1 | High code-blast radius |
+| 5 | `02-coding-guidelines/03-golang/` | 0 | P1 | High code-blast radius |
+| 6 | `02-coding-guidelines/04-php/` | 7 (table) | P1 | Has rows but no GWT |
+| 7 | `02-coding-guidelines/05-rust/` | 0 | P1 | High code-blast radius |
+| 8 | `02-coding-guidelines/07-csharp/` | 0 | P1 | High code-blast radius |
+| 9 | `02-coding-guidelines/06-ai-optimization/` | 0 | P1 | AI rules — this AI literally needs them |
+| 10 | `02-coding-guidelines/06-cicd-integration/` | 0 | P2 | Numbering collision with `06-ai-optimization` (slot 06 reused — needs Triage) |
+| 11 | `02-coding-guidelines/01-cross-language/16-static-analysis/` | 0 | P2 | Deep nested |
+| 12 | `02-coding-guidelines/97-acceptance-criteria.md` (parent) | ✅ 20 | DONE | Phase 16e |
+| 13 | `14-update/24-update-check-mechanism/` | 0 | P2 | Sub-feature of §14 |
+| 14 | `_archive/21-git-logs-v1/` | 0 | N/A | Archived; do not edit |
+| 15 | `06-seedable-config-architecture/` (root) | 0 | P2 | Audit flagged "phantom spec" |
+| 16 | `05-split-db-architecture/` (root) | 0 | P2 | Audit flagged "phantom spec" |
+
+🚨 **Slot collision discovered**: `02-coding-guidelines/` has BOTH `06-ai-optimization/` AND `06-cicd-integration/` — violates AC-CG-01 (immutable slots). This needs a Phase-1-Triage-style rename (precedent: §22→§25). Flagging for user decision.
 
 Remaining work:
+- ⏳ **Phase 16f** — Deepen `01-spec-authoring-guide/97` (P0 — dogfooding the spec-authoring spec).
+- ⏳ **Phase 16g** — Deepen `26-gitlogs-diagrams/97` (P0 — completes §22 governance contract).
+- ⏳ **Phase 16h** — Deepen `02-coding-guidelines/01-cross-language/97` (P0 — parent of all language rules).
+- ⏳ **Phase 16i–16o** — Deepen TS/Go/PHP/Rust/C#/AI-Opt/Security subfolder §97 files (P1 batch).
 - 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user — confirm `Environment`, `Platform`, `OwnerEmail` shape).
-- Optional future passes: deepen any remaining 5-AC scaffold modules surfaced by a fresh `mem://specs/full-tree-audit-v4.md` re-run.
+- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user — pick rename target for `06-cicd-integration/` → `12-cicd-integration/`?).
 
-On next `next`: re-scan the spec tree for any remaining 5-AC scaffold §97 files and propose the next deepening target, OR await user input on Phase B1.
+On next `next`: take **Phase 16f (`01-spec-authoring-guide/97` deepen)** — highest priority because it's the spec governing how all other specs are authored. Unless you redirect.
+

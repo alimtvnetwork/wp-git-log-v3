@@ -299,9 +299,9 @@
 | `spec/02-coding-guidelines/24-app-design-system-and-ui/97-acceptance-criteria.md` | Acceptance Criteria — 24 App Design System And Ui | 2.0.0 |
 | `spec/02-coding-guidelines/24-app-design-system-and-ui/98-changelog.md` | Changelog — App Design System & UI | 2.0.0 |
 | `spec/02-coding-guidelines/24-app-design-system-and-ui/99-consistency-report.md` | Consistency Report — 24-app-design-system-and-ui | 1.0.0 |
-| `spec/02-coding-guidelines/97-acceptance-criteria.md` | Coding Guidelines — Acceptance Criteria | 3.2.0 |
-| `spec/02-coding-guidelines/98-changelog.md` | Changelog — Coding Guidelines | 1.0.0 |
-| `spec/02-coding-guidelines/99-consistency-report.md` | Consistency Report — Coding Guidelines | 3.2.0 |
+| `spec/02-coding-guidelines/97-acceptance-criteria.md` | Coding Guidelines — Acceptance Criteria | 4.0.0 |
+| `spec/02-coding-guidelines/98-changelog.md` | Changelog — Coding Guidelines | 2.0.0 |
+| `spec/02-coding-guidelines/99-consistency-report.md` | Consistency Report — Coding Guidelines | 4.0.0 |
 | `spec/02-coding-guidelines/consolidated-review-guide-condensed.md` | Consolidated Review Guide — Condensed |  |
 | `spec/02-coding-guidelines/consolidated-review-guide.md` | Consolidated Code Review Guide | 3.2.0 |
 
