@@ -5056,17 +5056,7 @@
     "weighted_overall": 86
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 84,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5074,14 +5064,6 @@
       "orphan_code": []
     },
     "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=79, links_broken=2",
-        "impact": 7,
-        "issue": "2 broken cross-spec link(s)",
-        "severity": "high"
-      },
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
@@ -5091,10 +5073,8 @@
         "severity": "low"
       }
     ],
-    "grade": "C",
-    "implementability_blockers": [
-      "2 broken cross-spec link(s)"
-    ],
+    "grade": "B",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 13558,
       "ac_count": 19,
@@ -5119,8 +5099,8 @@
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
       "kind": "meta-toolchain",
-      "links_broken": 2,
-      "links_total": 79,
+      "links_broken": 0,
+      "links_total": 77,
       "md_files": 40,
       "mmd_files": 0,
       "overview_chars": 11070,
@@ -5129,26 +5109,26 @@
     },
     "module": "27-spec-toolchain",
     "raw_scores": {
-      "alignment": 80,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 84,
+      "consistency": 100,
       "implementability": 55,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=2, waffle/kchar=0.18. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
-      "alignment": 80,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 55,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/27-spec-toolchain.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 78/100 (B) for spec/27-spec-toolchain.",
+    "weighted_overall": 78
   },
   {
     "applied_gates": [],
