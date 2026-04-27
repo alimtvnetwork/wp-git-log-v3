@@ -1,9 +1,9 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.11.0  
+**Version:** 1.12.0  
 **Updated:** 2026-04-27  
-**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script v2.16) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91 self-test) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94 self-test)  
-**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×2)  
+**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script v2.16) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94) + [`linter-scripts/test/test-audit-deterministic-stability.sh`](../../linter-scripts/test/test-audit-deterministic-stability.sh) (Phase 95)  
+**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×3 incl. determinism)  
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
 
 ---
