@@ -219,6 +219,18 @@ SLOT_IMMUTABILITY:         once a numbered slot ships, it is permanent;
 
 ---
 
+### AC-SAG-24 — Every `.mmd` file MUST parse cleanly with the mermaid library (Phase 97)
+
+- **Given** any file under `spec/**` matching the glob `*.mmd`,
+- **When** `node linter-scripts/check-mermaid-syntax.mjs` is invoked locally OR the "Mermaid diagram syntax gate" CI step runs,
+- **Then** the file MUST parse without error using the official `mermaid` library (≥ v11) under a `jsdom` + `DOMPurify` shim, and the gate MUST report `<N>/<N> files parsed cleanly`.
+- **And** common author mistakes that fail this gate include: (a) a bare `%%` line as a comment-block separator (mermaid mis-tokenises it as a `%%{init}%%` directive — use `%% --` instead), (b) unquoted node labels containing `@` or other reserved chars (e.g. `B[actions/checkout@v6]` must be `B["actions/checkout@v6"]`), (c) missing directive (`flowchart TD`, `graph TD`, `mindmap`, `sequenceDiagram`, `stateDiagram-v2`, …) before the first node.
+- **And** the check MUST be deterministic and side-effect-free: zero file writes, zero network calls, zero environment dependencies beyond `node` + the project's `node_modules`.
+- **And** if a contributor adds a new `.mmd` file with a syntax error, the gate MUST fail the PR with `<file path>` + first parser error line, NOT a stack trace from the mermaid library itself.
+- **Verifies:** `linter-scripts/check-mermaid-syntax.mjs` + `.github/workflows/spec-health.yml` "Mermaid diagram syntax gate (Phase 97)" step + `package.json` devDependencies (`mermaid` ≥ 11, `jsdom` ≥ 20).
+
+---
+
 
 ## Legacy Index (preserved for traceability)
 
