@@ -67,16 +67,21 @@ function bannerUpdated(text) {
 //   ## v4.0.0 — 2026-04-26
 //   ## [4.1.0] — 2026-04-26
 //   ## [2026-03-30] v2.0.0 ...
-// Heuristic: any heading line (## or ###) that contains BOTH a date and
-// either a `vN` token, a bracketed/bare SemVer, or starts with a SemVer.
+//   | 3.8.7 | 2026-04-27 | … |     ← table-row format (folder 22)
 function releaseDates(text) {
   const out = [];
   for (const ln of text.split(/\r?\n/)) {
-    if (!/^#{2,3}\s+/.test(ln)) continue;
+    const isHeading = /^#{2,3}\s+/.test(ln);
+    const isTableRow = /^\|\s*v?\d+\.\d+\.\d+\s*\|/.test(ln);
+    if (!isHeading && !isTableRow) continue;
     const d = firstDate(ln);
     if (!d) continue;
-    const hasVer = /\bv?\d+\.\d+\.\d+\b|\[\d+\.\d+\.\d+\]/.test(ln);
-    if (hasVer) out.push(d);
+    if (isHeading) {
+      const hasVer = /\bv?\d+\.\d+\.\d+\b|\[\d+\.\d+\.\d+\]/.test(ln);
+      if (hasVer) out.push(d);
+    } else {
+      out.push(d);
+    }
   }
   return out;
 }
