@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.9** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.15** — AI-Implementability Edition.
+
+v2.15 (2026-04-27, Phase 86):
+  - Cumulative schema-bonus cap with diminishing returns (normal contract
+    branch only). The strongest contract bonus applies at full weight; every
+    subsequent contract bonus is halved (floor); contract-bonus subtotal
+    hard-capped at 50. Pre-v2.15 a kitchen-sink module with all six contract
+    types stacked +70 (SQL+JSON+TS+OpenAPI+typed-lang+CI), absorbed silently
+    by the 100-cap. New formula: 20 + 15//2 + 10//2 + 10//2 + 10//2 + 5//2 = 41.
+  - Net effect on current corpus: 0 modules currently exceed +50 schema
+    subtotal, so mean weighted / impl unchanged. Locks in rubric purity for
+    future kitchen-sink contributions.
 
 v2.9 (2026-04-27, Phase 46):
   - Root index spec (`spec/00-overview.md`, MOD_REL == ".") now receives the
