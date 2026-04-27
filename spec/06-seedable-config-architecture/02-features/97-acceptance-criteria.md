@@ -46,6 +46,27 @@ This document defines testable acceptance criteria for the **Seedable Config Arc
 
 ---
 
+### AC-06: Module overview is non-trivial and version-banner-stamped
+- **Given** the module file `spec/06-seedable-config-architecture/02-features/00-overview.md`
+- **When** the file is read by `linter-scripts/audit-spec-vs-code-v2.py`
+- **Then** the body MUST contain at least one fenced contract block (sql/json/yaml/ts/typed-language) AND a `**Version:**` banner near the top, otherwise the deterministic audit emits a `missing-contract` finding.
+- **Source:** `linter-scripts/audit-spec-vs-code-v2.py` (rubric v2.13).
+
+### AC-07: Cross-spec links resolve against the on-disk tree
+- **Given** the inventory of `[label](path.md)` links in this module's `00-overview.md`
+- **When** `python3 linter-scripts/check-spec-cross-links.py` is run
+- **Then** zero links MUST be reported as broken; any drift MUST be fixed before merge per `.github/workflows/spec-health.yml` Phase 81 strict gate.
+- **Source:** `linter-scripts/check-spec-cross-links.py`.
+
+### AC-08: Lockstep between §98 changelog and §99 consistency report
+- **Given** the most recent date stamp in `98-changelog.md`
+- **When** `node linter-scripts/check-lockstep.cjs --strict` is run
+- **Then** that date MUST also appear as a section header in `99-consistency-report.md`; the strict gate (Phase 81) blocks merge on any mismatch.
+- **Source:** `linter-scripts/check-lockstep.cjs`.
+
+
+---
+
 ## Module-Specific Files
 
 The following files in this module also constitute acceptance surface — each must remain valid markdown with a top-level H1 and version banner:
