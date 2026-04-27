@@ -277,3 +277,25 @@ export type GoStandardRule = {
   message:  string;
 };
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-go-standards-check.mmd` for the gofmt → vet → golangci-lint → test gate chain.
+
+```mermaid
+flowchart TD
+    A[Go File Edit] --> B[gofmt + goimports]
+    B --> C[go vet ./...]
+    C --> D{vet clean?}
+    D -- No --> E[Block: GO-VET-001]
+    D -- Yes --> F[golangci-lint run]
+    F --> G{Lint clean?}
+    G -- No --> E
+    G -- Yes --> H[go test -race ./...]
+    H --> I{Tests pass?}
+    I -- No --> E
+    I -- Yes --> J[Merge]
+```

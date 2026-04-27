@@ -135,3 +135,27 @@ components:
               severity: { type: string, enum: [error, warning, notice] }
               message:  { type: string }
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-php-standards-check.mmd` for the php -l → phpcs → phpstan → phpunit gate chain.
+
+```mermaid
+flowchart TD
+    A[PHP File Edit] --> B[php -l syntax check]
+    B --> C{Parse OK?}
+    C -- No --> D[Block: PHP-SYNTAX-001]
+    C -- Yes --> E[phpcs --standard=PSR12]
+    E --> F{Style clean?}
+    F -- No --> D
+    F -- Yes --> G[phpstan analyse]
+    G --> H{Static analysis clean?}
+    H -- No --> D
+    H -- Yes --> I[phpunit]
+    I --> J{Tests pass?}
+    J -- No --> D
+    J -- Yes --> K[Merge]
+```

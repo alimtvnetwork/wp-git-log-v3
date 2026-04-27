@@ -235,3 +235,25 @@ components:
         warnings:       { type: integer, minimum: 0 }
         ruleset:        { type: string }
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-csharp-quality-gate.mmd` for the dotnet build → format → StyleCop → test gate chain.
+
+```mermaid
+flowchart TD
+    A[C# File Edit] --> B[dotnet build]
+    B --> C{Build OK?}
+    C -- No --> D[Block: CS-BUILD-001]
+    C -- Yes --> E[dotnet format --verify-no-changes]
+    E --> F[StyleCop analyzers]
+    F --> G{Analyzers clean?}
+    G -- No --> D
+    G -- Yes --> H[dotnet test]
+    H --> I{Tests pass?}
+    I -- No --> D
+    I -- Yes --> J[Merge]
+```

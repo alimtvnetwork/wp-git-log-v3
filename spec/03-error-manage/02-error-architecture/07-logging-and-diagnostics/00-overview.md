@@ -185,3 +185,24 @@ components:
         span_id:   { type: string }
         attributes: { type: object, additionalProperties: true }
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-logging-pipeline.mmd` for the log emission → enrichment → sink → alerting flow.
+
+```mermaid
+flowchart TD
+    A[Event Emitted] --> B{Severity Filter}
+    B -- Debug/Trace --> C[Local stdout only]
+    B -- Info+ --> D[Structured JSON log]
+    D --> E[Add correlation ID]
+    E --> F[Add context: user, request, span]
+    F --> G[Emit to log sink]
+    G --> H{Severity >= Error?}
+    H -- Yes --> I[Forward to diagnostics aggregator]
+    H -- No --> J[Persist to log store]
+    I --> K[Trigger alert if rule matches]
+```

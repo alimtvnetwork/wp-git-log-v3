@@ -129,3 +129,23 @@ components:
               due_date: { type: string, format: date }
               status:   { type: string, enum: [open, in_progress, done] }
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-retrospective.mmd` for the incident → retro → action-item closure flow.
+
+```mermaid
+flowchart TD
+    A[Incident Closed] --> B[Schedule retrospective]
+    B --> C[Collect: timeline, root cause, impact]
+    C --> D[Identify action items]
+    D --> E[Assign owners + due dates]
+    E --> F[Publish retro doc]
+    F --> G[Link from incident registry]
+    G --> H{Action items complete?}
+    H -- No --> I[Track in backlog]
+    H -- Yes --> J[Close retro loop]
+```

@@ -259,3 +259,24 @@ components:
         severity: { type: string, enum: [fatal, error, warning, info] }
         layout:   { type: string, enum: [compact, detailed, full-screen] }
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-modal-reference-lookup.mmd` for the error-modal reference lookup → render → action flow.
+
+```mermaid
+flowchart TD
+    A[Error Modal Triggered] --> B[Lookup error code in reference]
+    B --> C{Reference Entry Found?}
+    C -- No --> D[Fallback: generic modal]
+    C -- Yes --> E[Load: title, body, severity, actions]
+    E --> F[Render modal with reference data]
+    F --> G[User clicks action]
+    G --> H{Action type}
+    H -- Retry --> I[Re-invoke origin]
+    H -- Dismiss --> J[Close modal]
+    H -- Link --> K[Open external doc]
+```

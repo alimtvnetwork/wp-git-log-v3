@@ -267,3 +267,22 @@ components:
           type: array
           items: { type: string }
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-template-instantiation.mmd` for the template-based error-code generation flow.
+
+```mermaid
+flowchart TD
+    A[New Error Domain Added] --> B[Select template: api/db/auth/ui]
+    B --> C[Fill placeholders: code, title, body]
+    C --> D[Generate i18n stubs from template]
+    D --> E[Generate language constants from template]
+    E --> F{Template Linter Pass?}
+    F -- No --> G[Block: TPL-001]
+    F -- Yes --> H[Insert into registry]
+    H --> I[CI regenerates downstream artifacts]
+```
