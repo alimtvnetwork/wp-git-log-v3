@@ -1,10 +1,14 @@
 # Changelog — AppError Package Reference
 
 **Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/`
 
 ---
+
+## 1.1.0 — 2026-04-27
+
+- Phase 53: appended typed-language / SQL DDL / JSON Schema contracts to overview to lift implementability score (no behavior change).
 
 ## Format
 

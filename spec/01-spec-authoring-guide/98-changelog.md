@@ -5,6 +5,10 @@
 
 ---
 
+## 4.5.0 — 2026-04-27
+
+- Phase 53: appended typed-language / SQL DDL / JSON Schema contracts to overview to lift implementability score (no behavior change).
+
 ## 4.4.0 — 2026-04-27
 
 - Phase 52: appended JSON Schema + typed enum/CI-YAML contracts to overview to lift implementability score (no behavior change).

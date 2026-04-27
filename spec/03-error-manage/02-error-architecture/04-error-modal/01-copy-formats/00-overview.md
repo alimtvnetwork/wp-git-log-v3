@@ -2,7 +2,7 @@
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
 > **Version:** 3.2.0  
-> **Updated:** 2026-03-31  
+> **Updated:** 2026-04-27  
 > **Status:** Active  
 > **AI Confidence:** 95%  
 > **Ambiguity Score:** 5%  
@@ -108,3 +108,82 @@ See [01-compact-report.md § Backend error.log.txt Section](./01-compact-report.
 ---
 
 *Copy format index — updated: 2026-03-31*
+
+---
+
+## Inlined Contracts (Phase 53 — boost)
+
+### Error-modal copy template — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats/template.schema.json",
+  "title": "ErrorModalCopyTemplate",
+  "type": "object",
+  "required": ["error_code", "title", "body", "audience"],
+  "additionalProperties": false,
+  "properties": {
+    "error_code": { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+    "audience":   { "enum": ["end-user","operator","developer"] },
+    "title":      { "type": "string", "minLength": 1, "maxLength": 80 },
+    "body":       { "type": "string", "minLength": 1, "maxLength": 600 },
+    "next_steps": {
+      "type": "array", "maxItems": 3,
+      "items": { "type": "string", "minLength": 1, "maxLength": 140 }
+    },
+    "tone":       { "enum": ["neutral","apologetic","urgent","instructional"] },
+    "placeholders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name","type"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+          "type": { "enum": ["string","integer","iso-date","duration"] },
+          "max_length": { "type": "integer", "minimum": 1, "maximum": 200 }
+        }
+      }
+    },
+    "translations": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z]{2}(-[A-Z]{2})?$": {
+          "type": "object",
+          "required": ["title","body"],
+          "additionalProperties": false,
+          "properties": {
+            "title": { "type": "string", "minLength": 1, "maxLength": 80 },
+            "body":  { "type": "string", "minLength": 1, "maxLength": 600 }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Copy-tone & audience enums (TypeScript)
+
+```ts
+export enum CopyTone {
+  Neutral       = "neutral",
+  Apologetic    = "apologetic",
+  Urgent        = "urgent",
+  Instructional = "instructional",
+}
+
+export enum CopyAudience {
+  EndUser   = "end-user",
+  Operator  = "operator",
+  Developer = "developer",
+}
+
+export enum CopyPlaceholderType {
+  String   = "string",
+  Integer  = "integer",
+  IsoDate  = "iso-date",
+  Duration = "duration",
+}
+```

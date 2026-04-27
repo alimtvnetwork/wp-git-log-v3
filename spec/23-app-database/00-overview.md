@@ -262,3 +262,159 @@ python3 linter-scripts/check-forbidden-strings.py
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-27_
+
+---
+
+## Inlined Contracts (Phase 53 — SQL DDL lever)
+
+### Canonical app-database schema (SQL DDL, PostgreSQL 15+)
+
+```sql
+-- =========================================================================
+-- Canonical schema for the App database. Every implementing repo MUST
+-- materialize these tables EXACTLY (same names, same columns, same types,
+-- same constraints). Migrations may add columns/indexes but MUST NOT
+-- rename or remove anything declared here.
+-- =========================================================================
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- Owning user/profile (mirror of auth.users, never duplicates auth fields)
+CREATE TABLE IF NOT EXISTS app_profile (
+    profile_id       uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id          uuid        NOT NULL UNIQUE,
+    display_name     text        NOT NULL CHECK (length(display_name) BETWEEN 1 AND 120),
+    created_at       timestamptz NOT NULL DEFAULT now(),
+    updated_at       timestamptz NOT NULL DEFAULT now()
+);
+
+-- App registration (one row per registered application)
+CREATE TABLE IF NOT EXISTS app (
+    app_id           uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+    profile_id       uuid        NOT NULL REFERENCES app_profile(profile_id) ON DELETE CASCADE,
+    app_name         text        NOT NULL CHECK (length(app_name) BETWEEN 1 AND 120),
+    app_slug         text        NOT NULL CHECK (app_slug ~ '^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$'),
+    description      text        CHECK (description IS NULL OR length(description) <= 4000),
+    app_status       text        NOT NULL DEFAULT 'active'
+                                  CHECK (app_status IN ('active','disabled','archived')),
+    created_at       timestamptz NOT NULL DEFAULT now(),
+    updated_at       timestamptz NOT NULL DEFAULT now(),
+    UNIQUE (profile_id, app_slug)
+);
+CREATE INDEX IF NOT EXISTS app_profile_idx        ON app(profile_id);
+CREATE INDEX IF NOT EXISTS app_status_idx         ON app(app_status) WHERE app_status <> 'archived';
+
+-- Polymorphic link from App → (GitProfile | Repo). Exactly one target per row.
+CREATE TABLE IF NOT EXISTS app_link (
+    app_link_id      uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+    app_id           uuid        NOT NULL REFERENCES app(app_id) ON DELETE CASCADE,
+    link_type        text        NOT NULL CHECK (link_type IN ('git_profile','repo')),
+    target_git_profile_id uuid,
+    target_repo_id        uuid,
+    is_active        boolean     NOT NULL DEFAULT true,
+    connected_at     timestamptz NOT NULL DEFAULT now(),
+    disconnected_at  timestamptz,
+    CHECK (
+        (link_type = 'git_profile' AND target_git_profile_id IS NOT NULL AND target_repo_id IS NULL)
+     OR (link_type = 'repo'        AND target_repo_id        IS NOT NULL AND target_git_profile_id IS NULL)
+    ),
+    CHECK (is_active = true OR disconnected_at IS NOT NULL)
+);
+CREATE INDEX IF NOT EXISTS app_link_app_active_idx
+    ON app_link(app_id) WHERE is_active = true;
+CREATE INDEX IF NOT EXISTS app_link_repo_idx
+    ON app_link(target_repo_id) WHERE is_active = true AND link_type = 'repo';
+CREATE INDEX IF NOT EXISTS app_link_gitprofile_idx
+    ON app_link(target_git_profile_id) WHERE is_active = true AND link_type = 'git_profile';
+
+-- Audit trail (append-only)
+CREATE TABLE IF NOT EXISTS audit_trail (
+    audit_id         uuid        PRIMARY KEY DEFAULT gen_random_uuid(),
+    actor_user_id    uuid        NOT NULL,
+    action_type      text        NOT NULL CHECK (action_type IN ('AppCreate','AppUpdate','AppLinkChange','AppArchive','AppDelete')),
+    subject_app_id   uuid        REFERENCES app(app_id) ON DELETE SET NULL,
+    detail_json      jsonb       NOT NULL DEFAULT '{}'::jsonb,
+    occurred_at      timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS audit_trail_subject_idx ON audit_trail(subject_app_id, occurred_at DESC);
+CREATE INDEX IF NOT EXISTS audit_trail_actor_idx   ON audit_trail(actor_user_id, occurred_at DESC);
+
+-- Updated-at trigger (shared)
+CREATE OR REPLACE FUNCTION app_set_updated_at() RETURNS trigger
+LANGUAGE plpgsql AS $$
+BEGIN NEW.updated_at := now(); RETURN NEW; END $$;
+
+DROP TRIGGER IF EXISTS app_profile_set_updated_at ON app_profile;
+CREATE TRIGGER app_profile_set_updated_at
+    BEFORE UPDATE ON app_profile
+    FOR EACH ROW EXECUTE FUNCTION app_set_updated_at();
+
+DROP TRIGGER IF EXISTS app_set_updated_at_trg ON app;
+CREATE TRIGGER app_set_updated_at_trg
+    BEFORE UPDATE ON app
+    FOR EACH ROW EXECUTE FUNCTION app_set_updated_at();
+```
+
+### Row-Level Security policies (SQL DDL)
+
+```sql
+ALTER TABLE app_profile ENABLE ROW LEVEL SECURITY;
+ALTER TABLE app         ENABLE ROW LEVEL SECURITY;
+ALTER TABLE app_link    ENABLE ROW LEVEL SECURITY;
+ALTER TABLE audit_trail ENABLE ROW LEVEL SECURITY;
+
+-- Profile: a user may read & update only their own row.
+CREATE POLICY app_profile_self_select ON app_profile
+    FOR SELECT TO authenticated USING (user_id = auth.uid());
+CREATE POLICY app_profile_self_update ON app_profile
+    FOR UPDATE TO authenticated USING (user_id = auth.uid());
+
+-- App: scoped to the owning profile.
+CREATE POLICY app_owner_all ON app
+    FOR ALL TO authenticated
+    USING      (profile_id IN (SELECT profile_id FROM app_profile WHERE user_id = auth.uid()))
+    WITH CHECK (profile_id IN (SELECT profile_id FROM app_profile WHERE user_id = auth.uid()));
+
+-- AppLink: scoped via parent app.
+CREATE POLICY app_link_owner_all ON app_link
+    FOR ALL TO authenticated
+    USING (app_id IN (
+        SELECT app_id FROM app
+        WHERE profile_id IN (SELECT profile_id FROM app_profile WHERE user_id = auth.uid())
+    ))
+    WITH CHECK (app_id IN (
+        SELECT app_id FROM app
+        WHERE profile_id IN (SELECT profile_id FROM app_profile WHERE user_id = auth.uid())
+    ));
+
+-- Audit trail: read-only for owners; inserts go through SECURITY DEFINER fn.
+CREATE POLICY audit_owner_select ON audit_trail
+    FOR SELECT TO authenticated
+    USING (subject_app_id IN (
+        SELECT app_id FROM app
+        WHERE profile_id IN (SELECT profile_id FROM app_profile WHERE user_id = auth.uid())
+    ));
+```
+
+### Status enum (TypeScript mirror)
+
+```ts
+export enum AppStatus {
+  Active   = "active",
+  Disabled = "disabled",
+  Archived = "archived",
+}
+
+export enum AppLinkType {
+  GitProfile = "git_profile",
+  Repo       = "repo",
+}
+
+export enum AuditActionType {
+  AppCreate     = "AppCreate",
+  AppUpdate     = "AppUpdate",
+  AppLinkChange = "AppLinkChange",
+  AppArchive    = "AppArchive",
+  AppDelete     = "AppDelete",
+}
+```

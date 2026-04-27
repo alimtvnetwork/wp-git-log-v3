@@ -7,7 +7,7 @@ drift_acknowledged: 2026-04-26
 
 **Version:** 3.2.0  
 **Status:** Active  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-27  
 **AI Confidence:** High  
 **Ambiguity:** None
 
@@ -195,3 +195,61 @@ Consolidated reference, audit logs, contradiction checks.
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+---
+
+## Inlined Contracts (Phase 53 — boost)
+
+### Cross-language guideline index — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/01-cross-language/index.schema.json",
+  "title": "CrossLanguageGuidelineIndex",
+  "type": "object",
+  "required": ["entries"],
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["slug","title","topic","applies_to"],
+        "additionalProperties": false,
+        "properties": {
+          "slug":  { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "title": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "topic": { "enum": ["naming","types","errors","logging","testing","docs","style","security","perf"] },
+          "applies_to": {
+            "type": "array", "minItems": 1, "uniqueItems": true,
+            "items": { "enum": ["ts","js","go","php","csharp","python","rust","sql","yaml","shell","all"] }
+          },
+          "supersedes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+```
+
+### Cross-language topic & language enums (TypeScript)
+
+```ts
+export enum CrossLangTopic {
+  Naming   = "naming",
+  Types    = "types",
+  Errors   = "errors",
+  Logging  = "logging",
+  Testing  = "testing",
+  Docs     = "docs",
+  Style    = "style",
+  Security = "security",
+  Perf     = "perf",
+}
+
+export enum SupportedLanguage {
+  Ts = "ts", Js = "js", Go = "go", Php = "php", Csharp = "csharp",
+  Python = "python", Rust = "rust", Sql = "sql", Yaml = "yaml", Shell = "shell", All = "all",
+}
+```

@@ -2,11 +2,15 @@
 
 
 **Version:** 4.0.0
-**Last Updated:** 2026-04-26
+**Last Updated:** 2026-04-27
 
 All notable changes to the Cross-Language Coding Guidelines specification are documented here.
 
 ---
+
+## 4.1.0 — 2026-04-27
+
+- Phase 53: appended typed-language / SQL DDL / JSON Schema contracts to overview to lift implementability score (no behavior change).
 
 ## v4.0.0 — 2026-04-26 (Phase 16h: §97 full GWT rewrite)
 

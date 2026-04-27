@@ -6,6 +6,10 @@
 
 ---
 
+## 4.1.0 — 2026-04-27
+
+- Phase 53: appended typed-language / SQL DDL / JSON Schema contracts to overview to lift implementability score (no behavior change).
+
 ## Format
 
 - Versions follow [SemVer](https://semver.org/): MAJOR.MINOR.PATCH.
