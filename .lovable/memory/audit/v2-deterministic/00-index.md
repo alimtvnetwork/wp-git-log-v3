@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 87  
 **Code files indexed:** 35  
-**Mean weighted score:** **96.4/100**  
-**Mean implementability:** **99.7/100**
+**Mean weighted score:** **96.5/100**  
+**Mean implementability:** **99.8/100**
 
 ## Methodology v2
 
@@ -47,9 +47,9 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Bottom 15 (lowest implementability)
 | Rank | Module | Overall | Impl | Grade | Top finding |
 |---:|---|---:|---:|:-:|---|
-| 1 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 88 | 90 | A | _no findings_ |
-| 2 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 88 | 90 | A | _no findings_ |
-| 3 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 90 | 90 | A | _no findings_ |
+| 1 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 92 | 95 | A | _no findings_ |
+| 2 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 92 | 95 | A | _no findings_ |
+| 3 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 92 | 95 | A | _no findings_ |
 | 4 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 90 | 100 | A | 5 TODO/TBD/FIXME marker(s) in module body |
 | 5 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 92 | 100 | A | 30 TODO/TBD/FIXME marker(s) in module body |
 | 6 | [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 93 | 100 | A | 1 TODO/TBD/FIXME marker(s) in module body |
@@ -80,10 +80,10 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Full ranking
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
-| [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 90 | 65 | 100 | 100 | 100 | 80 | 100 | **88** | A | 0 |
-| [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 90 | 65 | 100 | 100 | 100 | 80 | 100 | **88** | A | 0 |
 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 55 | 100 | 100 | 100 | 90 | 90 | **90** | A | 7 |
-| [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 90 | 75 | 100 | 100 | 100 | 80 | 100 | **90** | A | 0 |
+| [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 95 | 75 | 100 | 100 | 100 | 80 | 100 | **92** | A | 3 |
+| [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 95 | 75 | 100 | 100 | 100 | 80 | 100 | **92** | A | 3 |
+| [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 95 | 75 | 100 | 100 | 100 | 80 | 100 | **92** | A | 3 |
 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 100 | 70 | 100 | 100 | 100 | 80 | 90 | **92** | A | 2 |
 | [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 100 | 70 | 100 | 100 | 100 | 90 | 90 | **93** | A | 5 |
 | [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 7 |

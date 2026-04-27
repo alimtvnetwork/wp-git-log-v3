@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **88/100 (A)**  
-**Blast radius:** 0/10
+**Implementability Score:** **92/100 (A)**  
+**Blast radius:** 3/10
 
-> Deterministic score 88/100 (A) for spec/06-seedable-config-architecture/03-issues.
+> Deterministic score 92/100 (A) for spec/06-seedable-config-architecture/03-issues.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,8 +16,8 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
-| Completeness | 20% | 65 | 13.0 |
+| Implementability | 35% | 95 | 33.2 |
+| Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -31,17 +31,18 @@
   "kind": "tracker",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 1966,
+  "overview_chars": 3277,
   "ac_chars": 2656,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 6,
+  "code_blocks_total": 7,
   "code_blocks_by_lang": {
     "yaml": 5,
+    "sql": 1,
     "bash": 1
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": true,
