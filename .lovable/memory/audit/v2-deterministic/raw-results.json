@@ -45,7 +45,7 @@
       "clarity": 100,
       "completeness": 100,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -55,12 +55,12 @@
       "clarity": 100,
       "completeness": 100,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 95/100 (A+) for spec/..",
-    "weighted_overall": 95
+    "verdict": "Deterministic score 97/100 (A+) for spec/..",
+    "weighted_overall": 97
   },
   {
     "applied_gates": [],
@@ -1459,7 +1459,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -1469,12 +1469,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/02-coding-guidelines/10-research.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/10-research.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -1691,7 +1691,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "A",
+    "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2942,
@@ -1726,7 +1726,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -1736,12 +1736,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/21-app.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 95/100 (A+) for spec/02-coding-guidelines/21-app.",
+    "weighted_overall": 95
   },
   {
     "applied_gates": [],
@@ -1855,7 +1855,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -1865,12 +1865,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/02-coding-guidelines/22-app-issues.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/22-app-issues.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -1948,7 +1948,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "A",
+    "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3619,
@@ -1983,7 +1983,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -1993,12 +1993,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/23-app-database.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 95/100 (A+) for spec/02-coding-guidelines/23-app-database.",
+    "weighted_overall": 95
   },
   {
     "applied_gates": [],
@@ -2076,7 +2076,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "A",
+    "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3800,
@@ -2111,7 +2111,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -2121,12 +2121,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/24-app-design-system-and-ui.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 95/100 (A+) for spec/02-coding-guidelines/24-app-design-system-and-ui.",
+    "weighted_overall": 95
   },
   {
     "applied_gates": [],
@@ -4194,7 +4194,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -4204,12 +4204,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/10-research.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 94/100 (A) for spec/10-research.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -4845,7 +4845,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "A",
+    "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2594,
@@ -4884,7 +4884,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 100,
       "maintainability": 100,
       "testability": 80
     },
@@ -4894,12 +4894,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 100,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/14-update/diagrams.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 96/100 (A+) for spec/14-update/diagrams.",
+    "weighted_overall": 96
   },
   {
     "applied_gates": [],
@@ -5615,7 +5615,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
@@ -5625,12 +5625,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/25-app-issues.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 94/100 (A) for spec/25-app-issues.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -5811,7 +5811,7 @@
       "clarity": 100,
       "completeness": 100,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 100,
       "maintainability": 100,
       "testability": 80
     },
@@ -5821,12 +5821,12 @@
       "clarity": 100,
       "completeness": 100,
       "consistency": 100,
-      "implementability": 90,
+      "implementability": 100,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 95/100 (A+) for spec/26-gitlogs-diagrams.",
-    "weighted_overall": 95
+    "verdict": "Deterministic score 99/100 (A+) for spec/26-gitlogs-diagrams.",
+    "weighted_overall": 99
   },
   {
     "applied_gates": [],
