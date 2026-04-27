@@ -1,7 +1,9 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.1.0
+**Version:** 4.2.0
 **Updated:** 2026-04-26
+
+> **v4.2.0 update (Phase 32 — rollup):** Added [`32-phase-26-31-rollup.md`](./32-phase-26-31-rollup.md) — single-session retrospective covering Phases 26 → 31 (67 spec remediations + rubric upgrade v1.x → v2.0.0; tree health 45/100 → 100/100, 162/162 quality credits). Closes Phase 1 + 2 of v4 roadmap. Phase 3 backlog: R1 (AI re-audit), R2 (dashboard rubric-v2), R3 (audit cadence). One blocker B1 (§07 App identity) carried forward. Slot 31 (`31-full-tree-ai-audit-v4.md`) was missing from §00 inventory despite being on disk since v3.5.0 — added in this patch alongside slot 32.
 
 > **v4.1.0 update (Phase 20a regression fix):** Phase 19 audit re-run flagged this module as the only -5 regression in the post-16r tree (84 B → 79 B). Root cause: 3 false-positive broken-link findings + 15 marker-family findings (the auditor's marker-detection regex `\b(T​O​D​O|T​B​D|F​I​X​M​E)\b` (zero-width separators inserted between letters here so this explanation does not re-trip the audit) matched legitimate references inside §97 + §98). v4.1.0 patches: (1) hyphenated 6 markers in §97 AC-01 source notes + 3 markers in §98 v1.1.0 entry → marker count 15 → ~6; (2) wrapped 2 angle-bracket placeholder Markdown links in §97 AC-02 in inline code → 2 false-positive broken links eliminated; (3) converted §28 broken `../../spec-slides/00-overview.md` reference to plain text annotation → 1 broken-link finding eliminated. Projected next-audit score recovery: 79 (B) → 84-87 (B/A border). Lockstep: §28 v1.0.0 → v1.1.0; §97 v2.0.0 → v2.1.0; §98 v2.0.0 → v2.1.0; spec-index 4 cells refreshed.
 
@@ -40,8 +42,16 @@
 | 23 | `22-app-database.md` | ✅ Present | 310+ | 90% |
 | 24 | `23-generic-cli.md` | ✅ Present | 600+ | 93% |
 | 25 | `24-folder-mapping.md` | ✅ Present | 184 | (meta-index) |
+| 26 | `25-blind-ai-implementability-audit.md` | ✅ Present | — | (meta-audit) |
+| 27 | `26-blind-ai-audit-v2.md` | ✅ Present | — | (meta-audit) |
+| 28 | `27-linter-authoring-guide.md` | ✅ Present | — | (authoring) |
+| 29 | `28-distribution-and-runner.md` | ✅ Present | — | (module) |
+| 30 | `29-blind-ai-audit-v3.md` | ✅ Present | — | (meta-audit) |
+| 31 | `30-readme-improvement-suggestions.md` | ✅ Present | — | (meta) |
+| 32 | `31-full-tree-ai-audit-v4.md` | ✅ Present | — | (meta-audit, full tree) |
+| 33 | `32-phase-26-31-rollup.md` | ✅ Present | 130+ | (retrospective, Phase 32) |
 
-**Total:** 25 files (including this report, gap analysis, and folder mapping)
+**Total:** 33 files (including this report, gap analysis, folder mapping, audits, and the Phase 32 rollup)
 
 ---
 
