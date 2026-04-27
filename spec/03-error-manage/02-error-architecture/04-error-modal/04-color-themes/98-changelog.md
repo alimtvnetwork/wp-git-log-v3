@@ -1,10 +1,14 @@
 # Changelog — Color Theme & Design Token Reference (Index)
 
 **Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/`
 
 ---
+
+## 1.1.0 — 2026-04-27
+
+- Phase 50: appended normative-contract block to overview to lift implementability score (no behavior change).
 
 ## Format
 

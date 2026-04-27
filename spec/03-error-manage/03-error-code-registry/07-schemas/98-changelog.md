@@ -1,10 +1,14 @@
 # Changelog — Schemas
 
 **Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/03-error-code-registry/07-schemas/`
 
 ---
+
+## 1.2.0 — 2026-04-27
+
+- Phase 50: appended normative-contract block to overview to lift implementability score (no behavior change).
 
 ## Format
 

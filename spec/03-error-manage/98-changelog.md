@@ -5,6 +5,10 @@
 
 ---
 
+## 3.3.0 — 2026-04-27
+
+- Phase 50: appended normative-contract block to overview to lift implementability score (no behavior change).
+
 ## v3.2.0 — 2026-04-16
 
 ### Lockstep banner sync (Phase 41)

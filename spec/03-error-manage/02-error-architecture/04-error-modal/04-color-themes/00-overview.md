@@ -2,7 +2,7 @@
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
 > **Version:** 2.1.0  
-> **Updated:** 2026-03-31  
+> **Updated:** 2026-04-27  
 > **Purpose:** Definitive color mapping for every error-related UI element.
 
 ---
