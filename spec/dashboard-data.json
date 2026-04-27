@@ -1,22 +1,803 @@
 {
-  "Generated": "2026-04-25",
+  "Generated": "2026-04-27",
   "Health": {
     "Score": 100,
     "Grade": "A+",
-    "Deductions": []
+    "RubricVersion": "2.0.0",
+    "Deductions": [
+      "2 broken links (-4)"
+    ],
+    "LegacyScore": 96
+  },
+  "RubricV2": {
+    "RubricVersion": "2.0.0",
+    "Weights": {
+      "required": 60,
+      "recommended": 25,
+      "quality": 15
+    },
+    "Score": 100,
+    "Required": {
+      "Earned": 108,
+      "Max": 108,
+      "PctOfTotal": 60
+    },
+    "Recommended": {
+      "Earned": 108,
+      "Max": 108,
+      "PctOfTotal": 25
+    },
+    "Quality": {
+      "Earned": 162,
+      "Max": 162,
+      "PctOfTotal": 15
+    },
+    "ModuleCount": 54,
+    "Modules": [
+      {
+        "Module": "01-spec-authoring-guide",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/01-cross-language",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/02-typescript",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/03-golang",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/04-php",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/05-rust",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/06-ai-optimization",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/06-cicd-integration",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/07-csharp",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/08-file-folder-naming",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/09-powershell-integration",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/10-research",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/11-security",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/21-app",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/22-app-issues",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/23-app-database",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "02-coding-guidelines/24-app-design-system-and-ui",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "03-error-manage",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "03-error-manage/01-error-resolution",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "03-error-manage/02-error-architecture",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "03-error-manage/03-error-code-registry",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "04-database-conventions",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "05-split-db-architecture",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "05-split-db-architecture/02-features",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "05-split-db-architecture/03-issues",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "06-seedable-config-architecture",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "06-seedable-config-architecture/02-features",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "06-seedable-config-architecture/03-issues",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "07-design-system",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "10-research",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "11-powershell-integration",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "12-cicd-pipeline-workflows",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "12-cicd-pipeline-workflows/02-go-binary-deploy",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "13-generic-cli",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "14-update",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "14-update/24-update-check-mechanism",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "14-update/diagrams",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "15-distribution-and-runner",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "16-generic-release",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "17-consolidated-guidelines",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "18-wp-plugin-how-to",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "18-wp-plugin-how-to/02-enums-and-coding-style",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "22-git-logs-v2",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "23-app-database",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "24-app-design-system-and-ui",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "25-app-issues",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "25-app-issues/01-phase-2-git-logs-audit",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "25-app-issues/02-consolidated-audit-findings",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "26-gitlogs-diagrams",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "27-spec-toolchain",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
+        "Module": "28-universal-ci-cli",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      }
+    ]
   },
   "Links": {
-    "TotalChecked": 2071,
-    "Ok": 2059,
-    "Broken": 0,
-    "ExternalAllowed": 12,
+    "TotalChecked": 2726,
+    "Ok": 2715,
+    "Broken": 2,
+    "ExternalAllowed": 9,
     "ExternalAllowedDetails": [
-      {
-        "Source": "00-overview.md",
-        "Line": 61,
-        "Target": "./dashboard-data.json",
-        "Resolved": "dashboard-data.json"
-      },
       {
         "Source": "01-spec-authoring-guide/11-root-readme-conventions.md",
         "Line": 228,
@@ -43,7 +824,7 @@
       },
       {
         "Source": "02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md",
-        "Line": 59,
+        "Line": 64,
         "Target": "../../../../linters-cicd/codegen/README.md",
         "Resolved": "../linters-cicd/codegen/README.md"
       },
@@ -61,7 +842,7 @@
       },
       {
         "Source": "15-distribution-and-runner/00-overview.md",
-        "Line": 91,
+        "Line": 96,
         "Target": "../../spec-slides/00-overview.md",
         "Resolved": "../spec-slides/00-overview.md"
       },
@@ -70,40 +851,44 @@
         "Line": 103,
         "Target": "../../spec-slides/",
         "Resolved": "../spec-slides"
-      },
-      {
-        "Source": "17-consolidated-guidelines/28-distribution-and-runner.md",
-        "Line": 234,
-        "Target": "../../spec-slides/00-overview.md",
-        "Resolved": "../spec-slides/00-overview.md"
-      },
-      {
-        "Source": "health-dashboard.md",
-        "Line": 46,
-        "Target": "./dashboard-data.json",
-        "Resolved": "dashboard-data.json"
       }
     ],
-    "BrokenDetails": []
+    "BrokenDetails": [
+      {
+        "Source": "01-spec-authoring-guide/97-acceptance-criteria.md",
+        "Line": 114,
+        "Text": "link",
+        "Target": "../foo",
+        "Resolved": "foo"
+      },
+      {
+        "Source": "02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md",
+        "Line": 111,
+        "Text": "AH-<L><N>",
+        "Target": "...",
+        "Resolved": "02-coding-guidelines/06-ai-optimization/..."
+      }
+    ]
   },
   "RequiredFiles": {
     "MissingOverview": [],
     "MissingConsistency": []
   },
   "Inventory": {
-    "TotalFolders": 80,
-    "TotalMdFiles": 641,
+    "TotalFolders": 79,
+    "TotalMdFiles": 818,
     "Folders": [
       {
         "Folder": "",
-        "MdFiles": 5,
-        "Subfolders": 22,
+        "MdFiles": 6,
+        "Subfolders": 24,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": false,
         "Files": [
           "00-overview.md",
+          "98-changelog.md",
           "99-consistency-report.md",
           "folder-structure-root.md",
           "health-dashboard.md",
@@ -139,15 +924,16 @@
       },
       {
         "Folder": "02-coding-guidelines",
-        "MdFiles": 5,
+        "MdFiles": 6,
         "Subfolders": 16,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md",
           "consolidated-review-guide-condensed.md",
           "consolidated-review-guide.md"
@@ -197,12 +983,12 @@
       },
       {
         "Folder": "02-coding-guidelines/01-cross-language/02-boolean-principles",
-        "MdFiles": 7,
+        "MdFiles": 9,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-naming-prefixes.md",
@@ -210,17 +996,19 @@
           "03-parameters-and-conditions.md",
           "04-quick-reference.md",
           "05-exemptions-and-api.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/01-cross-language/04-code-style",
-        "MdFiles": 9,
+        "MdFiles": 11,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-braces-and-nesting.md",
@@ -230,17 +1018,19 @@
           "05-multi-line-formatting.md",
           "06-comments-and-documentation.md",
           "07-checklist.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/01-cross-language/15-master-coding-guidelines",
-        "MdFiles": 9,
+        "MdFiles": 11,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-naming-and-database.md",
@@ -250,6 +1040,8 @@
           "05-magic-strings-and-organization.md",
           "06-advanced-patterns.md",
           "07-checklist.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
@@ -328,12 +1120,12 @@
       },
       {
         "Folder": "02-coding-guidelines/03-golang/01-enum-specification",
-        "MdFiles": 7,
+        "MdFiles": 9,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-enum-pattern.md",
@@ -341,17 +1133,19 @@
           "03-folder-structure.md",
           "04-validation-checklist.md",
           "05-info-object-pattern.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/03-golang/04-golang-standards-reference",
-        "MdFiles": 8,
+        "MdFiles": 10,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-file-and-function-rules.md",
@@ -360,6 +1154,8 @@
           "04-naming-and-organization.md",
           "05-enums-and-dry.md",
           "06-concurrency-and-patterns.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
@@ -388,12 +1184,12 @@
       },
       {
         "Folder": "02-coding-guidelines/04-php/07-php-standards-reference",
-        "MdFiles": 7,
+        "MdFiles": 9,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-naming-and-errors.md",
@@ -401,6 +1197,8 @@
           "03-initialization-and-booleans.md",
           "04-code-style.md",
           "05-forbidden-and-database.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
@@ -427,11 +1225,11 @@
       },
       {
         "Folder": "02-coding-guidelines/06-ai-optimization",
-        "MdFiles": 8,
+        "MdFiles": 9,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
@@ -441,16 +1239,17 @@
           "04-condensed-master-guidelines.md",
           "05-enum-naming-quick-reference.md",
           "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/06-cicd-integration",
-        "MdFiles": 12,
+        "MdFiles": 13,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
@@ -462,6 +1261,7 @@
           "06-rules-mapping.md",
           "07-performance.md",
           "97-acceptance-criteria.md",
+          "98-changelog.md",
           "98-faq.md",
           "99-consistency-report.md",
           "99-troubleshooting.md"
@@ -488,12 +1288,12 @@
       },
       {
         "Folder": "02-coding-guidelines/08-file-folder-naming",
-        "MdFiles": 7,
+        "MdFiles": 9,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-cross-language.md",
@@ -501,107 +1301,131 @@
           "03-golang.md",
           "04-typescript-javascript.md",
           "05-rust-csharp.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/09-powershell-integration",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/10-research",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/11-security",
-        "MdFiles": 2,
+        "MdFiles": 4,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/11-security/01-axios-version-control",
-        "MdFiles": 4,
+        "MdFiles": 6,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-implementation-rules.md",
           "02-security-notes.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/21-app",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
-        "Folder": "02-coding-guidelines/25-app-issues",
-        "MdFiles": 1,
+        "Folder": "02-coding-guidelines/22-app-issues",
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/23-app-database",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
         "Folder": "02-coding-guidelines/24-app-design-system-and-ui",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
@@ -622,106 +1446,118 @@
       },
       {
         "Folder": "03-error-manage/01-error-resolution",
-        "MdFiles": 5,
+        "MdFiles": 7,
         "Subfolders": 4,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-error-documentation-guideline.md",
           "00-overview.md",
           "01-cross-reference-diagram.md",
           "02-debugging-cheat-sheet.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/01-error-resolution/03-retrospectives",
-        "MdFiles": 6,
+        "MdFiles": 8,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-health-endpoint-mismatch.md",
           "02-retry-debounce-dedup-fixes.md",
           "03-zip-finalization-before-return.md",
           "04-activation-endpoint-mismatch.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/01-error-resolution/04-verification-patterns",
-        "MdFiles": 3,
+        "MdFiles": 5,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-frontend-backend-sync.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/01-error-resolution/05-debugging-guides",
-        "MdFiles": 5,
+        "MdFiles": 7,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-debugging-php.md",
           "02-debugging-go.md",
           "03-debugging-typescript.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/01-error-resolution/app-issues",
-        "MdFiles": 4,
+        "MdFiles": 6,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "2026-04-02-url-error-casing-fix.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md",
           "error-management-file-path-and-missing-file-code-red-rule.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture",
-        "MdFiles": 5,
+        "MdFiles": 7,
         "Subfolders": 4,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-error-handling-reference.md",
           "02-go-delegation-fix.md",
           "03-notification-colors.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/04-error-modal",
-        "MdFiles": 8,
+        "MdFiles": 10,
         "Subfolders": 4,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-copy-formats.md",
@@ -730,17 +1566,19 @@
           "04-color-themes.md",
           "05-error-history-persistence.md",
           "06-suppress-global-error.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/04-error-modal/01-copy-formats",
-        "MdFiles": 11,
+        "MdFiles": 13,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-compact-report.md",
@@ -752,17 +1590,19 @@
           "07-envelope-error-response.md",
           "08-session-diagnostics.md",
           "09-generator-code-reference.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/04-error-modal/02-react-components",
-        "MdFiles": 10,
+        "MdFiles": 12,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-typescript-interfaces.md",
@@ -773,17 +1613,19 @@
           "06-component-source.md",
           "07-report-generator.md",
           "08-integration-guide.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference",
-        "MdFiles": 15,
+        "MdFiles": 17,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-data-model.md",
@@ -799,64 +1641,72 @@
           "11-queue-navigation.md",
           "12-code-examples.md",
           "13-file-reference.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/04-error-modal/04-color-themes",
-        "MdFiles": 5,
+        "MdFiles": 7,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-design-tokens.md",
           "02-backend-tab-colors.md",
           "03-frontend-and-ui-colors.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/05-response-envelope",
-        "MdFiles": 6,
+        "MdFiles": 8,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-adr.md",
           "02-changelog.md",
           "03-configurability.md",
           "04-response-envelope-reference.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/06-apperror-package",
-        "MdFiles": 3,
+        "MdFiles": 5,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-apperror-reference.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
-        "MdFiles": 9,
+        "MdFiles": 11,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-overview-and-stack.md",
@@ -866,32 +1716,36 @@
           "05-apperrtype-enums.md",
           "05-usage-and-adapters.md",
           "06-serialization-and-guards.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
-        "MdFiles": 4,
+        "MdFiles": 6,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-react-execution-logger.md",
           "02-session-based-logging.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/03-error-code-registry",
-        "MdFiles": 7,
+        "MdFiles": 9,
         "Subfolders": 3,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-registry.md",
@@ -899,57 +1753,65 @@
           "03-collision-resolution-summary.md",
           "04-error-code-utilization-report.md",
           "05-overlap-validator.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/03-error-code-registry/07-schemas",
-        "MdFiles": 2,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/03-error-code-registry/08-linter-scripts",
-        "MdFiles": 2,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "03-error-manage/03-error-code-registry/09-templates",
-        "MdFiles": 3,
+        "MdFiles": 5,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-error-codes-template.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "04-database-conventions",
-        "MdFiles": 9,
+        "MdFiles": 11,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-naming-conventions.md",
@@ -959,16 +1821,18 @@
           "05-relationship-diagrams.md",
           "06-rest-api-format.md",
           "07-split-db-pattern.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "05-split-db-architecture",
-        "MdFiles": 6,
+        "MdFiles": 7,
         "Subfolders": 2,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
@@ -976,17 +1840,18 @@
           "97-acceptance-criteria.md",
           "97-changelog.md",
           "98-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "05-split-db-architecture/02-features",
-        "MdFiles": 7,
+        "MdFiles": 9,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-cli-examples.md",
@@ -994,28 +1859,33 @@
           "03-database-flow-diagrams.md",
           "04-rbac-casbin.md",
           "05-user-scoped-isolation.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "05-split-db-architecture/03-issues",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
         "Folder": "06-seedable-config-architecture",
-        "MdFiles": 6,
+        "MdFiles": 7,
         "Subfolders": 2,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
@@ -1023,17 +1893,18 @@
           "97-acceptance-criteria.md",
           "97-changelog.md",
           "98-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "06-seedable-config-architecture/02-features",
-        "MdFiles": 8,
+        "MdFiles": 10,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-rag-chunk-settings.md",
@@ -1042,28 +1913,33 @@
           "04-rag-test-coverage-matrix.md",
           "05-validation-data-seeding.md",
           "06-update-check-keys.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "06-seedable-config-architecture/03-issues",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
         "Folder": "07-design-system",
-        "MdFiles": 16,
+        "MdFiles": 17,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
@@ -1081,30 +1957,33 @@
           "12-page-creation-rules.md",
           "13-wordpress-migration.md",
           "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "10-research",
-        "MdFiles": 2,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "11-powershell-integration",
-        "MdFiles": 13,
+        "MdFiles": 15,
         "Subfolders": 3,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-configuration-schema.md",
@@ -1115,6 +1994,8 @@
           "05-firewall-rules.md",
           "06-php-known-issues.md",
           "25-multi-site-deployment.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md",
           "changelog.md",
           "parallel-work-sync-output.md",
@@ -1123,12 +2004,12 @@
       },
       {
         "Folder": "12-cicd-pipeline-workflows",
-        "MdFiles": 19,
+        "MdFiles": 21,
         "Subfolders": 4,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-ci-pipeline.md",
@@ -1147,49 +2028,55 @@
           "08-terminal-output-standards.md",
           "09-binary-icon-branding.md",
           "10-release-pipeline-issues-rca.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md",
           "readme.md"
         ]
       },
       {
         "Folder": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
-        "MdFiles": 4,
+        "MdFiles": 6,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-ci-pipeline.md",
           "02-release-pipeline.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "12-cicd-pipeline-workflows/02-go-binary-deploy",
-        "MdFiles": 5,
+        "MdFiles": 7,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-ci-pipeline.md",
           "02-release-pipeline.md",
           "03-complete-workflow-reference.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
-        "MdFiles": 12,
+        "MdFiles": 14,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-forbidden-name-guard.md",
@@ -1201,18 +2088,20 @@
           "07-shared-cli-wrapper.md",
           "08-config-schema.md",
           "09-workflow-templates.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-ai-implementation-guide.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "13-generic-cli",
-        "MdFiles": 22,
+        "MdFiles": 24,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "02-project-structure.md",
@@ -1235,17 +2124,19 @@
           "19-shell-completion.md",
           "20-terminal-output-design.md",
           "21-post-install-shell-activation.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "14-update",
-        "MdFiles": 29,
+        "MdFiles": 31,
         "Subfolders": 3,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-self-update-overview.md",
@@ -1274,17 +2165,19 @@
           "25-release-pinned-installer.md",
           "26-repo-major-version-migrator.md",
           "27-generic-installer-behavior.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md",
           "readme.md"
         ]
       },
       {
         "Folder": "14-update/24-update-check-mechanism",
-        "MdFiles": 13,
+        "MdFiles": 14,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
@@ -1299,46 +2192,52 @@
           "09-json-fallback-store.md",
           "97-acceptance-criteria.md",
           "97-changelog.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "14-update/diagrams",
-        "MdFiles": 1,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
-          "00-overview.md"
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
         ]
       },
       {
         "Folder": "15-distribution-and-runner",
-        "MdFiles": 6,
+        "MdFiles": 8,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-install-contract.md",
           "02-runner-contract.md",
           "03-release-pipeline.md",
           "04-install-config.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "16-generic-release",
-        "MdFiles": 10,
+        "MdFiles": 12,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-cross-compilation.md",
@@ -1349,17 +2248,19 @@
           "06-release-metadata.md",
           "07-known-issues-and-fixes.md",
           "08-version-pinned-release-installers.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "17-consolidated-guidelines",
-        "MdFiles": 32,
+        "MdFiles": 36,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-spec-authoring.md",
@@ -1392,17 +2293,21 @@
           "28-distribution-and-runner.md",
           "29-blind-ai-audit-v3.md",
           "30-readme-improvement-suggestions.md",
+          "31-full-tree-ai-audit-v4.md",
+          "32-phase-26-31-rollup.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       },
       {
         "Folder": "18-wp-plugin-how-to",
-        "MdFiles": 25,
+        "MdFiles": 27,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "00-quick-start.md",
@@ -1426,6 +2331,8 @@
           "19-micro-orm-and-root-db.md",
           "20-end-to-end-walkthrough.md",
           "21-ping-endpoint.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md",
           "changelog.md",
           "readme.md"
@@ -1433,109 +2340,26 @@
       },
       {
         "Folder": "18-wp-plugin-how-to/02-enums-and-coding-style",
-        "MdFiles": 6,
+        "MdFiles": 8,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
+        "HasChangelog": true,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "01-enum-architecture.md",
           "02-enum-metadata-pattern.md",
           "03-self-update-status-enum.md",
           "04-action-type-enum.md",
-          "99-consistency-report.md"
-        ]
-      },
-      {
-        "Folder": "21-git-logs",
-        "MdFiles": 11,
-        "Subfolders": 2,
-        "HasOverview": true,
-        "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": true,
-        "Files": [
-          "00-overview.md",
-          "01-glossary-and-enums.md",
-          "02-database-schema-and-erd.md",
-          "05-auth-jwt-flow.md",
-          "08-allowlist-and-wildcard-matching.md",
-          "11-error-management.md",
-          "12-logging-strategy.md",
-          "16-jwt-onboarding-and-token-usage.md",
-          "17-spec-consistency-checklist.md",
           "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
-        ]
-      },
-      {
-        "Folder": "21-git-logs/diagrams",
-        "MdFiles": 1,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md"
-        ]
-      },
-      {
-        "Folder": "21-git-logs/reference",
-        "MdFiles": 4,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": true,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md",
-          "00-verbatim-brief.md",
-          "99-consistency-report.md",
-          "Gitlogs_App.md"
-        ]
-      },
-      {
-        "Folder": "25-app-issues",
-        "MdFiles": 1,
-        "Subfolders": 2,
-        "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md"
-        ]
-      },
-      {
-        "Folder": "25-app-issues/01-phase-2-git-logs-audit",
-        "MdFiles": 1,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md"
-        ]
-      },
-      {
-        "Folder": "25-app-issues/02-consolidated-audit-findings",
-        "MdFiles": 1,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md"
         ]
       },
       {
         "Folder": "22-git-logs-v2",
-        "MdFiles": 33,
+        "MdFiles": 35,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1557,7 +2381,6 @@
           "16-test-plan.md",
           "19-permission-matrix.md",
           "20-observability.md",
-          
           "22-retention-and-pruning.md",
           "23-backup-restore.md",
           "24-multisite.md",
@@ -1572,6 +2395,9 @@
           "33-bats-test-skeleton.md",
           "34-phpunit-test-skeleton.md",
           "35-reference-ci-yml.md",
+          "36-why-v1-archived.md",
+          "37-blind-ai-gap-analysis.md",
+          "39-split-db-log-storage.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md"
@@ -1579,39 +2405,163 @@
       },
       {
         "Folder": "23-app-database",
-        "MdFiles": 1,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md"
-        ]
-      },
-      {
-        "Folder": "24-app-design-system-and-ui",
-        "MdFiles": 1,
-        "Subfolders": 0,
-        "HasOverview": true,
-        "HasConsistency": false,
-        "HasChangelog": false,
-        "HasAcceptance": false,
-        "Files": [
-          "00-overview.md"
-        ]
-      },
-      {
-        "Folder": "26-gitlogs-diagrams",
-        "MdFiles": 3,
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
-        "HasChangelog": false,
+        "HasChangelog": true,
         "HasAcceptance": true,
         "Files": [
           "00-overview.md",
           "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "24-app-design-system-and-ui",
+        "MdFiles": 4,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "25-app-issues",
+        "MdFiles": 4,
+        "Subfolders": 2,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "25-app-issues/01-phase-2-git-logs-audit",
+        "MdFiles": 4,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "25-app-issues/02-consolidated-audit-findings",
+        "MdFiles": 4,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "26-gitlogs-diagrams",
+        "MdFiles": 4,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "27-spec-toolchain",
+        "MdFiles": 37,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "01-check-spec-cross-links.md",
+          "02-check-spec-folder-refs.md",
+          "03-check-forbidden-strings.md",
+          "04-check-forbidden-spec-paths.md",
+          "05-check-tree-health.md",
+          "06-check-root-readme.md",
+          "07-check-readme-canonicals.md",
+          "08-check-readme-install-section.md",
+          "09-check-memory-mirror-drift.md",
+          "10-generate-spec-index.md",
+          "11-generate-dashboard-data.md",
+          "12-suggest-spec-cross-link-fixes.md",
+          "13-generate-gwt-acceptance.md",
+          "14-generate-trace-map.md",
+          "15-generate-fix-checklist.md",
+          "16-generate-gate-report.md",
+          "17-check-trace-map-regression.md",
+          "20-fill-missing-acceptance-criteria.md",
+          "21-fill-missing-changelogs.md",
+          "22-fill-missing-consistency-reports.md",
+          "30-audit-spec-vs-code.md",
+          "31-audit-spec-vs-code-v2.md",
+          "40-run-sh.md",
+          "41-run-ps1.md",
+          "50-validate-guidelines-py.md",
+          "51-validate-guidelines-go.md",
+          "52-check-axios-version.md",
+          "60-forbidden-strings-toml.md",
+          "61-spec-cross-links-allowlist.md",
+          "62-spec-folder-refs-allowlist.md",
+          "63-readme-cross-links-md.md",
+          "70-spec-health-yml.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md",
+          "trace-map.md"
+        ]
+      },
+      {
+        "Folder": "28-universal-ci-cli",
+        "MdFiles": 13,
+        "Subfolders": 0,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "01-glossary-and-enums.md",
+          "02-architecture.md",
+          "03-runtime-detection.md",
+          "04-command-surface.md",
+          "05-config-resolution.md",
+          "06-log-shipping-contract.md",
+          "07-error-catalog.md",
+          "08-ci-provider-bindings.md",
+          "09-output-classification.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
           "99-consistency-report.md"
         ]
       }
