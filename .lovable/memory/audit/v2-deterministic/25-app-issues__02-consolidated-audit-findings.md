@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **92/100 (A)**  
+**Implementability Score:** **95/100 (A+)**  
 **Blast radius:** 3/10
 
-> Deterministic score 92/100 (A) for spec/25-app-issues/02-consolidated-audit-findings.
+> Deterministic score 95/100 (A+) for spec/25-app-issues/02-consolidated-audit-findings.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.04. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 95 | 33.2 |
-| Completeness | 20% | 75 | 15.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -32,9 +32,9 @@
   "md_files": 4,
   "mmd_files": 1,
   "overview_chars": 32421,
-  "ac_chars": 2692,
-  "ac_count": 5,
-  "gwt_block_count": 5,
+  "ac_chars": 4043,
+  "ac_count": 8,
+  "gwt_block_count": 8,
   "consistency_report": true,
   "code_blocks_total": 29,
   "code_blocks_by_lang": {

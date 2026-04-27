@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **96/100 (A+)**  
+**Implementability Score:** **99/100 (A+)**  
 **Blast radius:** 6/10
 
-> Deterministic score 96/100 (A+) for spec/14-update/diagrams.
+> Deterministic score 99/100 (A+) for spec/14-update/diagrams.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 100 | 35.0 |
-| Completeness | 20% | 85 | 17.0 |
+| Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -32,9 +32,9 @@
   "md_files": 4,
   "mmd_files": 3,
   "overview_chars": 5351,
-  "ac_chars": 2594,
-  "ac_count": 5,
-  "gwt_block_count": 5,
+  "ac_chars": 3919,
+  "ac_count": 8,
+  "gwt_block_count": 8,
   "consistency_report": true,
   "code_blocks_total": 9,
   "code_blocks_by_lang": {

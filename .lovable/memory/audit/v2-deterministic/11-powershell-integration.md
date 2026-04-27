@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **94/100 (A)**  
+**Implementability Score:** **98/100 (A+)**  
 **Blast radius:** 7/10
 
-> Deterministic score 94/100 (A) for spec/11-powershell-integration.
+> Deterministic score 98/100 (A+) for spec/11-powershell-integration.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.1. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.1. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 100 | 35.0 |
-| Completeness | 20% | 75 | 15.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 90 | 6.3 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -32,9 +32,9 @@
   "md_files": 16,
   "mmd_files": 1,
   "overview_chars": 18339,
-  "ac_chars": 2914,
-  "ac_count": 5,
-  "gwt_block_count": 5,
+  "ac_chars": 4246,
+  "ac_count": 8,
+  "gwt_block_count": 8,
   "consistency_report": true,
   "code_blocks_total": 88,
   "code_blocks_by_lang": {
