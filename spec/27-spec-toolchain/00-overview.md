@@ -99,7 +99,8 @@ Numbering convention inside this module:
 
 | # | Spec file | Code artifact | Purpose |
 |---|-----------|---------------|---------|
-| 70 | [70-spec-health-yml.md](./70-spec-health-yml.md) | `.github/workflows/spec-health.yml` | Wires §05 + §10 into GitHub Actions |
+| 70 | [70-spec-health-yml.md](./70-spec-health-yml.md) | `.github/workflows/spec-health.yml` | Wires §05 + §10 into GitHub Actions (event-driven) |
+| 71 | [71-spec-monthly-audit-yml.md](./71-spec-monthly-audit-yml.md) | `.github/workflows/spec-monthly-audit.yml` | Monthly cadence audit; dashboard parity check; auto-opens issue on regression (Phase 35) |
 
 ---
 
