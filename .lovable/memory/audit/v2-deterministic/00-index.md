@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 35  
-**Mean weighted score:** **90.7/100**  
-**Mean implementability:** **84.3/100**
+**Mean weighted score:** **90.9/100**  
+**Mean implementability:** **84.8/100**
 
 ## Methodology v2
 
@@ -92,26 +92,26 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 75 | 75 | 100 | 100 | 100 | 80 | 100 | **85** | A | 0 |
 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
 | [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 75 | 75 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
-| [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 85 | 60 | 100 | 100 | 100 | 90 | 90 | **86** | A | 5 |
 | [`11-powershell-integration`](./11-powershell-integration.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 2 |
 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 70 | 90 | 100 | 100 | 100 | 80 | 100 | **86** | A | 4 |
-| [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 85 | 65 | 100 | 100 | 100 | 90 | 100 | **87** | A | 5 |
-| [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
-| [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
-| [`03-error-manage/02-error-architecture/04-error-modal/01-copy-formats`](./03-error-manage__02-error-architecture__04-error-modal__01-copy-formats.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
-| [`03-error-manage/02-error-architecture/04-error-modal/02-react-components`](./03-error-manage__02-error-architecture__04-error-modal__02-react-components.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
-| [`03-error-manage/02-error-architecture/04-error-modal/04-color-themes`](./03-error-manage__02-error-architecture__04-error-modal__04-color-themes.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
-| [`03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference`](./03-error-manage__02-error-architecture__06-apperror-package__01-apperror-reference.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
+| [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 90 | 60 | 100 | 100 | 100 | 90 | 90 | **88** | A | 5 |
+| [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 90 | 65 | 100 | 100 | 100 | 90 | 100 | **89** | A | 5 |
 | [`18-wp-plugin-how-to/02-enums-and-coding-style`](./18-wp-plugin-how-to__02-enums-and-coding-style.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
 | [`25-app-issues`](./25-app-issues.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 4 |
 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 90 | 70 | 100 | 100 | 100 | 80 | 90 | **89** | A | 2 |
 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 85 | 80 | 100 | 100 | 100 | 96 | 100 | **90** | A | 4 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 85 | 80 | 100 | 100 | 100 | 96 | 100 | **90** | A | 4 |
 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 55 | 100 | 100 | 100 | 90 | 90 | **90** | A | 7 |
+| [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
 | [`02-coding-guidelines/05-rust`](./02-coding-guidelines__05-rust.md) | 85 | 85 | 100 | 100 | 100 | 100 | 90 | **91** | A | 5 |
+| [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
 | [`03-error-manage/01-error-resolution`](./03-error-manage__01-error-resolution.md) | 85 | 85 | 100 | 100 | 100 | 90 | 100 | **91** | A | 10 |
 | [`03-error-manage/02-error-architecture`](./03-error-manage__02-error-architecture.md) | 85 | 85 | 100 | 100 | 100 | 90 | 100 | **91** | A | 10 |
+| [`03-error-manage/02-error-architecture/04-error-modal/01-copy-formats`](./03-error-manage__02-error-architecture__04-error-modal__01-copy-formats.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
+| [`03-error-manage/02-error-architecture/04-error-modal/02-react-components`](./03-error-manage__02-error-architecture__04-error-modal__02-react-components.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
+| [`03-error-manage/02-error-architecture/04-error-modal/04-color-themes`](./03-error-manage__02-error-architecture__04-error-modal__04-color-themes.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
+| [`03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference`](./03-error-manage__02-error-architecture__06-apperror-package__01-apperror-reference.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 85 | 85 | 100 | 100 | 100 | 90 | 100 | **91** | A | 10 |
 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
 | [`12-cicd-pipeline-workflows/02-go-binary-deploy`](./12-cicd-pipeline-workflows__02-go-binary-deploy.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |

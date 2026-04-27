@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **89/100 (A)**  
+**Implementability Score:** **91/100 (A)**  
 **Blast radius:** 4/10
 
-> Deterministic score 89/100 (A) for spec/02-coding-guidelines/08-file-folder-naming.
+> Deterministic score 91/100 (A) for spec/02-coding-guidelines/08-file-folder-naming.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 85 | 29.8 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,13 +30,13 @@
 {
   "kind": "",
   "md_files": 9,
-  "mmd_files": 0,
-  "overview_chars": 12564,
+  "mmd_files": 1,
+  "overview_chars": 13140,
   "ac_chars": 2756,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 44,
+  "code_blocks_total": 45,
   "code_blocks_by_lang": {
     "text": 1,
     "json": 2,
@@ -45,6 +45,7 @@
     "php": 2,
     "python": 1,
     "yaml": 1,
+    "mermaid": 1,
     "plain": 34,
     "bash": 1
   },
@@ -55,7 +56,7 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 26,
   "links_broken": 0,
   "todo_density": 0,
