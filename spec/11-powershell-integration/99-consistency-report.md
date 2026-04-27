@@ -67,3 +67,10 @@ No external cross-references detected. ✅
 ## 2026-04-27 — Phase 57 impl-sweep
 
 - Phase 57: appended Go/PHP/Python PsInvocation validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).
+
+### 2026-04-27 — Phase 70 deepening
+
+- Lifecycle Mermaid diagram present: `lifecycle-powershell-bootstrap-flow.mmd`.
+- CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
+- Implementability raised 75 → 85 (deterministic audit).
+

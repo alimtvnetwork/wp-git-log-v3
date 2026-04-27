@@ -1611,14 +1611,14 @@
         "json": 5,
         "plain": 3,
         "ts": 1,
-        "yaml": 1
+        "yaml": 6
       },
-      "code_blocks_total": 12,
+      "code_blocks_total": 17,
       "consistency_report": true,
       "gwt_block_count": 5,
-      "has_ci_workflow": false,
+      "has_ci_workflow": true,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -1628,10 +1628,10 @@
       "links_broken": 0,
       "links_total": 14,
       "md_files": 6,
-      "mmd_files": 0,
-      "overview_chars": 5555,
+      "mmd_files": 1,
+      "overview_chars": 7069,
       "todo_density": 0,
-      "waffle_per_kchar": 0.38
+      "waffle_per_kchar": 0.36
     },
     "module": "02-coding-guidelines/11-security/01-axios-version-control",
     "raw_scores": {
@@ -1639,22 +1639,22 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 85,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.38. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.36. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 85,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/02-coding-guidelines/11-security/01-axios-version-control.",
-    "weighted_overall": 86
+    "verdict": "Deterministic score 89/100 (A) for spec/02-coding-guidelines/11-security/01-axios-version-control.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [],
@@ -2384,14 +2384,14 @@
         "javascript": 2,
         "json": 4,
         "typescript": 1,
-        "yaml": 1
+        "yaml": 6
       },
-      "code_blocks_total": 12,
+      "code_blocks_total": 17,
       "consistency_report": true,
       "gwt_block_count": 6,
-      "has_ci_workflow": false,
+      "has_ci_workflow": true,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -2401,33 +2401,33 @@
       "links_broken": 0,
       "links_total": 8,
       "md_files": 5,
-      "mmd_files": 0,
-      "overview_chars": 1083,
+      "mmd_files": 1,
+      "overview_chars": 2606,
       "todo_density": 0,
-      "waffle_per_kchar": 0.12
+      "waffle_per_kchar": 0.11
     },
     "module": "03-error-manage/01-error-resolution/04-verification-patterns",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 85,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 85,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
-    "weighted_overall": 86
+    "verdict": "Deterministic score 92/100 (A) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
+    "weighted_overall": 92
   },
   {
     "applied_gates": [],
@@ -4231,14 +4231,14 @@
         "plain": 10,
         "powershell": 40,
         "python": 1,
-        "yaml": 2
+        "yaml": 7
       },
-      "code_blocks_total": 81,
+      "code_blocks_total": 86,
       "consistency_report": true,
       "gwt_block_count": 5,
-      "has_ci_workflow": false,
+      "has_ci_workflow": true,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
@@ -4248,8 +4248,8 @@
       "links_broken": 0,
       "links_total": 40,
       "md_files": 16,
-      "mmd_files": 0,
-      "overview_chars": 15277,
+      "mmd_files": 1,
+      "overview_chars": 16793,
       "todo_density": 0,
       "waffle_per_kchar": 0.11
     },
@@ -4259,7 +4259,7 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 85,
       "maintainability": 100,
       "testability": 90
     },
@@ -4269,12 +4269,12 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 85,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/11-powershell-integration.",
-    "weighted_overall": 86
+    "verdict": "Deterministic score 89/100 (A) for spec/11-powershell-integration.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [],
@@ -5565,27 +5565,28 @@
         "php": 1,
         "python": 1,
         "text": 2,
-        "ts": 1
+        "ts": 1,
+        "yaml": 5
       },
-      "code_blocks_total": 10,
+      "code_blocks_total": 15,
       "consistency_report": true,
       "gwt_block_count": 5,
-      "has_ci_workflow": false,
+      "has_ci_workflow": true,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
-      "has_yaml_openapi": false,
+      "has_yaml_openapi": true,
       "kind": "",
       "links_broken": 0,
       "links_total": 13,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 35905,
+      "mmd_files": 1,
+      "overview_chars": 37417,
       "todo_density": 0,
-      "waffle_per_kchar": 0.11
+      "waffle_per_kchar": 0.1
     },
     "module": "25-app-issues/01-phase-2-git-logs-audit",
     "raw_scores": {
@@ -5593,22 +5594,22 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 75,
+      "implementability": 95,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/25-app-issues/01-phase-2-git-logs-audit.",
-    "weighted_overall": 86
+    "verdict": "Deterministic score 93/100 (A) for spec/25-app-issues/01-phase-2-git-logs-audit.",
+    "weighted_overall": 93
   },
   {
     "applied_gates": [],
