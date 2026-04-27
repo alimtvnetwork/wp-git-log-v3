@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **96/100 (A+)**  
-**Blast radius:** 6/10
+**Implementability Score:** **98/100 (A+)**  
+**Blast radius:** 9/10
 
-> Deterministic score 96/100 (A+) for spec/02-coding-guidelines/11-security.
+> Deterministic score 98/100 (A+) for spec/02-coding-guidelines/11-security.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 95 | 33.2 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,12 +31,12 @@
   "kind": "future-spec",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 16394,
+  "overview_chars": 17625,
   "ac_chars": 3192,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 16,
+  "code_blocks_total": 17,
   "code_blocks_by_lang": {
     "plain": 1,
     "text": 2,
@@ -46,9 +46,10 @@
     "php": 1,
     "python": 1,
     "yaml": 6,
-    "mermaid": 1
+    "mermaid": 1,
+    "sql": 1
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": true,

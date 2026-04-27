@@ -578,3 +578,35 @@ export interface ContractError {
 }
 ```
 
+
+
+### Module Run Audit Schema — Phase 78 Normative
+
+The following SQL DDL is normative for any consumer that persists per-module
+execution telemetry. It MUST be applied verbatim (column names, types,
+constraints) so downstream dashboards remain comparable across modules.
+
+```sql
+CREATE TABLE IF NOT EXISTS module_run_audit_p78 (
+    run_id           BIGSERIAL PRIMARY KEY,
+    module_slug      TEXT        NOT NULL,
+    phase_label      TEXT        NOT NULL DEFAULT 'phase-78',
+    started_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
+    finished_at      TIMESTAMPTZ NULL,
+    duration_ms      INTEGER     NULL CHECK (duration_ms IS NULL OR duration_ms >= 0),
+    exit_code        SMALLINT    NOT NULL DEFAULT 0,
+    contract_hash    CHAR(64)    NOT NULL,
+    implementability SMALLINT    NOT NULL CHECK (implementability BETWEEN 0 AND 100),
+    UNIQUE (module_slug, contract_hash)
+);
+
+CREATE INDEX IF NOT EXISTS idx_mra_p78_slug_started
+    ON module_run_audit_p78 (module_slug, started_at DESC);
+
+CREATE INDEX IF NOT EXISTS idx_mra_p78_exit
+    ON module_run_audit_p78 (exit_code)
+    WHERE exit_code <> 0;
+```
+
+This contract enables AI agents to generate idempotent migrations and
+verification queries directly from the spec.

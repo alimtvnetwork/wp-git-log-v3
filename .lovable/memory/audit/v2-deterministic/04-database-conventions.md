@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **93/100 (A)**  
+**Implementability Score:** **94/100 (A)**  
 **Blast radius:** 7/10
 
-> Deterministic score 93/100 (A) for spec/04-database-conventions.
+> Deterministic score 94/100 (A) for spec/04-database-conventions.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.16. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.15. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 95 | 33.2 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,15 +30,15 @@
 {
   "kind": "",
   "md_files": 11,
-  "mmd_files": 0,
-  "overview_chars": 10484,
+  "mmd_files": 1,
+  "overview_chars": 11715,
   "ac_chars": 2759,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 85,
+  "code_blocks_total": 86,
   "code_blocks_by_lang": {
-    "sql": 25,
+    "sql": 26,
     "bash": 2,
     "go": 16,
     "php": 7,
@@ -54,11 +54,11 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 69,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.16,
+  "waffle_per_kchar": 0.15,
   "child_modules": 0
 }
 ```

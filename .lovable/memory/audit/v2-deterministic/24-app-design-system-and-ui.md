@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **96/100 (A+)**  
-**Blast radius:** 4/10
+**Implementability Score:** **98/100 (A+)**  
+**Blast radius:** 7/10
 
-> Deterministic score 96/100 (A+) for spec/24-app-design-system-and-ui.
+> Deterministic score 98/100 (A+) for spec/24-app-design-system-and-ui.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.17. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.17. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 95 | 33.2 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,12 +31,12 @@
   "kind": "module",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 18990,
+  "overview_chars": 20221,
   "ac_chars": 6598,
   "ac_count": 11,
   "gwt_block_count": 10,
   "consistency_report": true,
-  "code_blocks_total": 18,
+  "code_blocks_total": 19,
   "code_blocks_by_lang": {
     "css": 1,
     "ts": 2,
@@ -48,9 +48,10 @@
     "python": 1,
     "php": 1,
     "yaml": 6,
-    "mermaid": 1
+    "mermaid": 1,
+    "sql": 1
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": true,
