@@ -255,3 +255,21 @@ components:
         lint_findings: { type: integer, minimum: 0 }
         audited_at:    { type: string, format: date-time }
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-go-module-flow.mmd` for the Go module composition order across sub-rulesets.
+
+```mermaid
+flowchart TD
+    A[New Go Module] --> B[Apply enum specification]
+    B --> C[Apply Go standards reference]
+    C --> D[Apply file/folder naming]
+    D --> E{All sub-rulesets pass?}
+    E -- No --> F[Block: GO-MASTER-001]
+    E -- Yes --> G[Build + test]
+    G --> H[Publish]
+```

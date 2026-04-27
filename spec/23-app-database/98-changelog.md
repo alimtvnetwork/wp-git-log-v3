@@ -53,3 +53,8 @@
 ## 2026-04-27 — Phase 58 impl-sweep
 
 - Phase 58: appended MigrationManifest JSON Schema to satisfy `has_json_schema` rubric (impl 70 → 85).
+
+## 2026-04-27 — Phase 68 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 68 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

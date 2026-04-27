@@ -416,3 +416,23 @@ components:
             warning: { type: integer }
             info:    { type: integer }
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-error-manage-overview.mmd` for the three-pillar error-management domain composition.
+
+```mermaid
+flowchart TD
+    A[Error Domain] --> B[01: Error Resolution Process]
+    A --> C[02: Error Architecture]
+    A --> D[03: Error Code Registry]
+    B --> E[Triage + Fix + Retro]
+    C --> F[AppError + Modal + Envelope + Logging]
+    D --> G[Schemas + Templates + Linters]
+    E --> H[Closed Incident]
+    F --> H
+    G --> H
+```

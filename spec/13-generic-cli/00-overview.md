@@ -100,3 +100,24 @@ go run linter-scripts/validate-guidelines.go --path spec --max-lines 15
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-cli-invocation.mmd` for the argv → parse → validate → execute → exit-code flow.
+
+```mermaid
+flowchart TD
+    A[User Invokes CLI] --> B[Parse argv]
+    B --> C{Subcommand recognized?}
+    C -- No --> D[Print help + exit 2]
+    C -- Yes --> E[Resolve config from precedence chain]
+    E --> F[Validate flags + args]
+    F --> G{Valid?}
+    G -- No --> H[Emit AppError + exit 1]
+    G -- Yes --> I[Execute command handler]
+    I --> J[Marshal output JSON/text]
+    J --> K[Exit with status code]
+```

@@ -81,3 +81,9 @@ These slots are immutable once shipped (per project memory rule).
 ## 2026-04-27 — Phase 61 impl-sweep
 
 - Phase 61: appended App UI Component Registry API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
+
+## 2026-04-27 — Phase 68 audit
+
+- Mermaid lifecycle diagram present (`has_mermaid=true`).
+- Lockstep & tree-health gates: PASS.
+- Implementability promoted from 85 → 90.

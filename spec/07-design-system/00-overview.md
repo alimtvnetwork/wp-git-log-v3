@@ -386,3 +386,23 @@ components:
         value:       { type: string }
         description: { type: string }
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-design-token-flow.mmd` for the HSL token → tailwind → component → theme-switch render flow.
+
+```mermaid
+flowchart TD
+    A[Design Token Authored in HSL] --> B[index.css :root + .dark]
+    B --> C[tailwind.config.ts maps to semantic name]
+    C --> D[Component imports semantic class]
+    D --> E{Theme switch?}
+    E -- Light --> F[--primary from :root]
+    E -- Dark --> G[--primary from .dark]
+    F --> H[Render]
+    G --> H
+    H --> I[Visual regression test]
+```

@@ -531,3 +531,24 @@ components:
         a11y_audited:     { type: boolean }
         deprecated:       { type: boolean }
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-component-render.mmd` for the page-mount → theme → variant → responsive → a11y render flow.
+
+```mermaid
+flowchart TD
+    A[Page Mount] --> B[Resolve theme from context]
+    B --> C[Apply HSL design tokens]
+    C --> D[Render shadcn primitives w/ variants]
+    D --> E{Responsive breakpoint}
+    E -- Mobile --> F[Sidebar collapsed]
+    E -- Desktop --> G[Sidebar expanded]
+    F --> H[Hydrate interactive parts]
+    G --> H
+    H --> I[Attach a11y attrs]
+    I --> J[Visible to user]
+```

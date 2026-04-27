@@ -263,3 +263,24 @@ components:
         trace_id:  { type: string }
         details:   { type: object, additionalProperties: true }
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-apperror-package.mmd` for the AppError package New → Wrap → As → marshal lifecycle.
+
+```mermaid
+flowchart TD
+    A[Origin Site] --> B[apperror.New code, msg]
+    B --> C[Optionally apperror.Wrap cause]
+    C --> D[Carry through call stack]
+    D --> E[At boundary: apperror.As]
+    E --> F{Is AppError?}
+    F -- Yes --> G[Marshal to envelope]
+    F -- No --> H[Wrap as Internal AppError]
+    H --> G
+    G --> I[Log via diagnostics]
+    I --> J[Return to caller]
+```
