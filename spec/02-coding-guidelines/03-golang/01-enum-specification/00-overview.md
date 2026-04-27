@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Enum Specification
 
 **Version:** 3.3.0  
@@ -329,3 +334,15 @@ Use this schema in any HTTP boundary that accepts a `providerType` field:
 ---
 
 *Universal enum standard for Go CLI ecosystem.*
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+'Applies To' projects live in downstream Go application repos. Spec-only repo holds the enum contract.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

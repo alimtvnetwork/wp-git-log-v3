@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Linter Scripts
 
 **Version:** 1.1.0  
@@ -115,3 +120,15 @@ schema below before processing.
 - Acceptance criteria: [`./97-acceptance-criteria.md`](./97-acceptance-criteria.md)
 - Changelog: [`./98-changelog.md`](./98-changelog.md)
 - Consistency report: [`./99-consistency-report.md`](./99-consistency-report.md)
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Entry-point invocation in `run.sh`/`run.ps1` is owned by downstream distribution repo; spec-only repo defines the contract.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

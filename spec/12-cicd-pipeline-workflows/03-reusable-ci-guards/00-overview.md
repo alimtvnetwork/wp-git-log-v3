@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Reusable CI Guards — AI-Implementation Guide
 
 **Version:** 1.0.0
@@ -112,3 +117,15 @@ All six patterns share these properties — copy them when extending:
 ---
 
 *Reusable CI guards overview — v1.0.0 — 2026-04-21*
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Guards described as app-code targets; meta-linter usage in this spec repo is a derived application of the same patterns. Both interpretations are valid.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

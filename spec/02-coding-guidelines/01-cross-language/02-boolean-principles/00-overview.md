@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Boolean Principles
 
 **Version:** 3.2.0  
@@ -73,3 +78,15 @@ in-memory semantic-inverse pairs documented in
 - [Master Coding Guidelines](../15-master-coding-guidelines/00-overview.md) — Consolidated reference
 - [Issues & Fixes Log](../01-issues-and-fixes-log.md) — Historical fixes
 - [apperror Package — Result Guard Rule](../../../03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/06-serialization-and-guards.md#12-result-guard-rule--mandatory-error-check-before-value-access)
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Codegen tool path references downstream linter implementation; spec-only repo does not house the codegen artifact.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

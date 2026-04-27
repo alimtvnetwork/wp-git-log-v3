@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Coding Guidelines
 
 **Version:** 3.2.0  
@@ -219,3 +224,15 @@ go run linter-scripts/validate-guidelines.go --path spec --max-lines 15 && pytho
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+PascalCase JSON-key mandate is intentional cross-language contract; web/API convention drift is expected and owned by downstream serializer implementations.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

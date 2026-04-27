@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Spec Authoring Guide
 
 **Version:** 3.3.0  
@@ -513,3 +518,15 @@ python3 linter-scripts/check-spec-folder-refs.py && python3 linter-scripts/check
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Health-score weights (25% each) are spec contract; live `check-tree-health.cjs` weights live in downstream tooling and may evolve. Spec is forward-looking.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

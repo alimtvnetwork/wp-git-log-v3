@@ -30,3 +30,15 @@ _No content yet. Add design system documents as numbered files within this folde
 |-----------|----------|
 | Coding Guidelines Overview | [../00-overview.md](../00-overview.md) |
 | Consolidated Summary | [../../17-consolidated-guidelines/16-app-design-system-and-ui.md](../../17-consolidated-guidelines/16-app-design-system-and-ui.md) |
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Design-system technical requirements are spec contract; UI implementation lives in downstream React app repos.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

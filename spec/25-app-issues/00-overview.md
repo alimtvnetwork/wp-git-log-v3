@@ -61,3 +61,15 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+AC-AI-000 issue-file format is forward-looking; concrete issue files will be authored as work progresses.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

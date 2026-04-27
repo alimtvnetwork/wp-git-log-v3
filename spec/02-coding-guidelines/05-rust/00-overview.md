@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Rust Coding Standards
 
 **Version:** 3.2.0  
@@ -85,3 +90,15 @@ This override exists because Rust's compiler actively enforces `snake_case` for 
 | 97-acceptance-criteria.md | — |
 | 98-changelog.md | — |
 | 99-consistency-report.md | — |
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Rust standards are forward-looking; no Rust implementation exists in this repo. Future Rust projects in downstream repos must conform.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+
