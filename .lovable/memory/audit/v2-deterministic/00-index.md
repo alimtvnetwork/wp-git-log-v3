@@ -3,7 +3,7 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 35  
-**Mean weighted score:** **81.6/100**  
+**Mean weighted score:** **81.7/100**  
 **Mean implementability:** **62.3/100**
 
 ## Methodology v2
@@ -13,12 +13,12 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 4, **A** = 25, **B** = 37, **C** = 12, **D** = 1
+**A+** = 5, **A** = 24, **B** = 37, **C** = 12, **D** = 1
 
 ## Findings by category
 | Category | Count |
 |---|---:|
-| drift | 10 |
+| drift | 9 |
 | missing-contract | 6 |
 | broken-link | 6 |
 | untestable | 1 |
@@ -27,7 +27,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | Severity | Count |
 |---|---:|
 | high | 13 |
-| low | 10 |
+| low | 9 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
 | Rank | Module | Score | Grade | Blast | Top blocker |
@@ -37,9 +37,9 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 3 | [`03-error-manage/02-error-architecture`](./03-error-manage__02-error-architecture.md) | 88 | A | 10 | _none_ |
 | 4 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 88 | A | 10 | _none_ |
 | 5 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 93 | A | 10 | _none_ |
-| 6 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 94 | A | 10 | _none_ |
-| 7 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 95 | A+ | 10 | _none_ |
-| 8 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 96 | A+ | 10 | 1 broken cross-spec link(s) |
+| 6 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 95 | A+ | 10 | _none_ |
+| 7 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 96 | A+ | 10 | 1 broken cross-spec link(s) |
+| 8 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 98 | A+ | 10 | _none_ |
 | 9 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 95 | A+ | 9 | _none_ |
 | 10 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 96 | A+ | 9 | _none_ |
 | 11 | [`03-error-manage`](./03-error-manage.md) | 81 | B | 8 | _none_ |
@@ -70,11 +70,11 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
 |---:|---|---:|---:|:-:|
-| 1 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 96 | 100 | A+ |
-| 2 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 96 | 100 | A+ |
-| 3 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 95 | 85 | A+ |
-| 4 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 95 | 85 | A+ |
-| 5 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 94 | 100 | A |
+| 1 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 98 | 100 | A+ |
+| 2 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 96 | 100 | A+ |
+| 3 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 96 | 100 | A+ |
+| 4 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 95 | 85 | A+ |
+| 5 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 95 | 85 | A+ |
 | 6 | [`02-coding-guidelines/06-cicd-integration`](./02-coding-guidelines__06-cicd-integration.md) | 94 | 90 | A |
 | 7 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 94 | 100 | A |
 | 8 | [`04-database-conventions`](./04-database-conventions.md) | 93 | 95 | A |
@@ -121,8 +121,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`02-coding-guidelines/01-cross-language/16-static-analysis`](./02-coding-guidelines__01-cross-language__16-static-analysis.md) | 55 | 85 | 100 | 100 | 100 | 100 | 90 | **81** | B | 0 |
 | [`03-error-manage`](./03-error-manage.md) | 45 | 100 | 100 | 100 | 100 | 100 | 100 | **81** | B | 8 |
 | [`15-distribution-and-runner`](./15-distribution-and-runner.md) | 65 | 90 | 90 | 70 | 100 | 100 | 100 | **81** | B | 2 |
-| [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 65 | 70 | 100 | 100 | 100 | 100 | 90 | **81** | B | 2 |
-| [`02-coding-guidelines/01-cross-language/04-code-style`](./02-coding-guidelines__01-cross-language__04-code-style.md) | 60 | 80 | 100 | 100 | 100 | 100 | 90 | **82** | B | 2 |
 | [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 50 | 100 | 100 | 100 | 100 | 100 | 100 | **82** | B | 2 |
 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 2 |
 | [`03-error-manage/01-error-resolution`](./03-error-manage__01-error-resolution.md) | 60 | 85 | 100 | 100 | 100 | 90 | 100 | **82** | B | 10 |
@@ -131,9 +129,11 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 55 | 90 | 100 | 100 | 100 | 100 | 100 | **82** | B | 6 |
 | [`11-powershell-integration`](./11-powershell-integration.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 2 |
 | [`03-error-manage/02-error-architecture/05-response-envelope`](./03-error-manage__02-error-architecture__05-response-envelope.md) | 65 | 75 | 100 | 100 | 100 | 100 | 100 | **83** | B | 4 |
+| [`02-coding-guidelines/01-cross-language/04-code-style`](./02-coding-guidelines__01-cross-language__04-code-style.md) | 60 | 90 | 100 | 100 | 100 | 100 | 100 | **84** | B | 2 |
 | [`02-coding-guidelines/01-cross-language/15-master-coding-guidelines`](./02-coding-guidelines__01-cross-language__15-master-coding-guidelines.md) | 60 | 90 | 100 | 100 | 100 | 100 | 100 | **84** | B | 2 |
 | [`03-error-manage/02-error-architecture/07-logging-and-diagnostics`](./03-error-manage__02-error-architecture__07-logging-and-diagnostics.md) | 65 | 80 | 100 | 100 | 100 | 100 | 100 | **84** | B | 4 |
 | [`23-app-database`](./23-app-database.md) | 60 | 90 | 100 | 100 | 100 | 100 | 100 | **84** | B | 3 |
+| [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 65 | 85 | 100 | 100 | 100 | 100 | 90 | **84** | B | 2 |
 | [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
 | [`02-coding-guidelines/05-rust`](./02-coding-guidelines__05-rust.md) | 70 | 85 | 100 | 100 | 100 | 100 | 90 | **86** | A | 3 |
 | [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 75 | 75 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
@@ -156,10 +156,10 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
 | [`14-update`](./14-update.md) | 80 | 100 | 100 | 100 | 100 | 100 | 100 | **93** | A | 6 |
 | [`14-update/24-update-check-mechanism`](./14-update__24-update-check-mechanism.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 7 |
-| [`02-coding-guidelines`](./02-coding-guidelines.md) | 100 | 70 | 100 | 100 | 100 | 100 | 90 | **94** | A | 10 |
 | [`02-coding-guidelines/06-cicd-integration`](./02-coding-guidelines__06-cicd-integration.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 100 | 70 | 100 | 100 | 100 | 100 | 90 | **94** | A | 5 |
 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 9 |
 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 10 |
 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 100 | 100 | 90 | 70 | 100 | 100 | 100 | **96** | A+ | 10 |
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 85 | 100 | 100 | 100 | 90 | 100 | **96** | A+ | 9 |
+| [`02-coding-guidelines`](./02-coding-guidelines.md) | 100 | 90 | 100 | 100 | 100 | 100 | 90 | **98** | A+ | 10 |

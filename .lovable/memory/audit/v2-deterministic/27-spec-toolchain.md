@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "meta-toolchain",
   "md_files": 40,
   "mmd_files": 0,
-  "overview_chars": 10807,
+  "overview_chars": 11070,
   "ac_chars": 13558,
   "ac_count": 19,
   "gwt_block_count": 19,
@@ -55,7 +55,7 @@
   "has_mermaid": false,
   "links_total": 167,
   "links_broken": 0,
-  "todo_density": 30,
+  "todo_density": 17,
   "waffle_per_kchar": 0.18,
   "child_modules": 0
 }
@@ -75,11 +75,11 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 30 TODO/TBD/FIXME marker(s) in module body |
+| 1 | drift | low | 3/10 | 17 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 30 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 17 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=30
+- **Evidence:** todo_density=17
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
