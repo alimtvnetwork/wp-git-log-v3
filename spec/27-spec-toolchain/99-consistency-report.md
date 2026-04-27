@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.3.0
+**Version:** 2.4.0
 **Updated:** 2026-04-26
+
+> **v2.4.0 update (Phase 37):** Added [`23-scaffold-spec-module.md`](./23-scaffold-spec-module.md) + `linter-scripts/scaffold-spec-module.cjs`. Emits a v2.0.0-rubric-compliant module skeleton (§00/§97/§98/§99) so newly created modules pass `check-tree-health.cjs --strict` on first run. 5 ACs (AC-23-01..05) covering strict-pass guarantee, slot-collision refusal, idempotency, slug/slot validation, and quality-credit anchor presence. Bijection 29/29 → 30/30. Companion to §20–§22 healers — prevents the next thin-§99 wave (cf. Phase 31 remediation).
 
 > **v2.3.0 update (Phase 36):** Added `--strict` flag to `check-tree-health.cjs` (threshold 100 + fails on any single module below full marks). Wired into `spec-monthly-audit.yml`. [`05-check-tree-health.md`](./05-check-tree-health.md) v1.0.0 → v2.0.0 — rubric v2.0.0 fully documented (was still describing v1.x); 3 new ACs (AC-05-04..AC-05-06) for rubric weighting + `--strict` semantics; AC-05-02 corrected to match percentage-based scoring. Verified strict pass at 54/54 modules full marks.
 
@@ -35,6 +37,7 @@
 | 20-fill-missing-acceptance-criteria.md | ✅ | Filler |
 | 21-fill-missing-changelogs.md | ✅ | Filler |
 | 22-fill-missing-consistency-reports.md | ✅ | Filler |
+| 23-scaffold-spec-module.md | ✅ | Scaffolder (Phase 37) |
 | 30-audit-spec-vs-code.md | ✅ | Auditor v1 |
 | 31-audit-spec-vs-code-v2.md | ✅ | Auditor v2 |
 | 40-run-sh.md | ✅ | Runner (bash) |
@@ -76,6 +79,7 @@
 | `linter-scripts/fill-missing-acceptance-criteria.cjs` | [20](./20-fill-missing-acceptance-criteria.md) | ✅ |
 | `linter-scripts/fill-missing-changelogs.cjs` | [21](./21-fill-missing-changelogs.md) | ✅ |
 | `linter-scripts/fill-missing-consistency-reports.cjs` | [22](./22-fill-missing-consistency-reports.md) | ✅ |
+| `linter-scripts/scaffold-spec-module.cjs` | [23](./23-scaffold-spec-module.md) | ✅ (Phase 37) |
 | `linter-scripts/audit-spec-vs-code.py` | [30](./30-audit-spec-vs-code.md) | ✅ |
 | `linter-scripts/audit-spec-vs-code-v2.py` | [31](./31-audit-spec-vs-code-v2.md) | ✅ |
 | `linter-scripts/run.sh` | [40](./40-run-sh.md) | ✅ |
@@ -90,7 +94,7 @@
 | `.github/workflows/spec-health.yml` | [70](./70-spec-health-yml.md) | ✅ |
 | `.github/workflows/spec-monthly-audit.yml` | [71](./71-spec-monthly-audit-yml.md) | ✅ (Phase 35) |
 
-**Bijection: 29/29 ✅** — every executable / configuration artifact has exactly one spec section.
+**Bijection: 30/30 ✅** — every executable / configuration artifact has exactly one spec section.
 
 **Subdirectory:** `linter-scripts/installer-templates/` is intentionally not specced here — it is a *content directory* not a *script*. If installer templates ever get their own conventions, add a sibling module (slot 28+) and reference from §00.
 

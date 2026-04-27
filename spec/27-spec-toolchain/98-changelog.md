@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.6.0
+**Version:** 2.7.0
 **Updated:** 2026-04-26
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,14 @@
 ---
 
 ## Releases
+
+### 2.7.0 — 2026-04-26 (Phase 37 — `scaffold-spec-module.cjs` prevents thin-§99 wave)
+- **Added** `linter-scripts/scaffold-spec-module.cjs` — emits a v2.0.0-rubric-compliant module skeleton (§00 + §97 + §98 + §99). Generated §99 hits all 3 quality-credit anchors (≥30 non-blank lines, "Validation History" heading, "File Inventory" heading) so a freshly scaffolded module passes `check-tree-health.cjs --strict` on its very first run with `req=2/2 rec=2/2 q=3/3`.
+- **Added** [`23-scaffold-spec-module.md`](./23-scaffold-spec-module.md) v1.0.0 — full spec doc with usage, slot-collision-safety rationale, and 5 ACs (AC-23-01 strict-pass guarantee, AC-23-02 collision refusal, AC-23-03 idempotency, AC-23-04 input validation, AC-23-05 quality-credit anchor presence).
+- **Changed** §00 inventory — added slot 23 row under "Fillers / scaffolders" group; bumped overview banner v1.0.0 → v1.1.0.
+- **Changed** §99 — added 23-scaffold-spec-module.md row to module file inventory and `linter-scripts/scaffold-spec-module.cjs` row to code-artifact bijection (29/29 → 30/30); banner v2.3.0 → v2.4.0.
+- **Rationale:** Phase 31 had to deepen 9 thin §99 reports retroactively. Phase 37 makes "do it right" the path of least resistance for new modules — they start at 100/100 quality credits instead of needing remediation later. Companion to §20–§22 healers (which fix existing modules); this scaffolder prevents new modules from ever needing healing.
+- **Verified:** smoke test on slot 99 → `req=2/2 rec=2/2 q=3/3[depth,history,inventory]` first try; collision check on slot 27 correctly refused with helpful error. Tree health remains 100/100 strict pass on 54 modules.
 
 ### 2.6.0 — 2026-04-26 (Phase 36 — `--strict` flag enforces module-level perfection)
 - **Added** `--strict` flag to `linter-scripts/check-tree-health.cjs`. Equivalent to `--min=100` AND additionally fails if any single module has missing required/recommended files OR quality credits below max. Closes the loophole where composite rounds to 100 while individual modules slip credits.
