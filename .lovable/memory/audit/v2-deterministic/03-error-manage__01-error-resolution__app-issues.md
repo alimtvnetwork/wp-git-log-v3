@@ -8,7 +8,7 @@
 > Deterministic score 78/100 (B) for spec/03-error-manage/01-error-resolution/app-issues.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.06. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.08. Gates active: 0.
 
 ---
 
@@ -53,7 +53,7 @@
   "links_total": 17,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.06,
+  "waffle_per_kchar": 0.08,
   "child_modules": 0
 }
 ```

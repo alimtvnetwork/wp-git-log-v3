@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **67/100 (C)**  
+**Implementability Score:** **71/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 67/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.
+> Deterministic score 71/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.
 
 
 **Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 30 | 10.5 |
-| Completeness | 20% | 60 | 12.0 |
+| Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -28,16 +28,18 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 655,
+  "overview_chars": 4443,
   "ac_chars": 3308,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 0,
-  "code_blocks_by_lang": {},
+  "code_blocks_total": 1,
+  "code_blocks_by_lang": {
+    "text": 1
+  },
   "has_sql_ddl": false,
   "has_json_schema": false,
   "has_ts_enums": false,
@@ -45,7 +47,7 @@
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_mermaid": false,
-  "links_total": 6,
+  "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.0,
@@ -73,5 +75,5 @@
 
 #### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={}
+- **Evidence:** code_blocks_by_lang={"text": 1}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

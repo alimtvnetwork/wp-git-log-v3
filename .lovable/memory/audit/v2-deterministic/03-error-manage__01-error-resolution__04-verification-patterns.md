@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **84/100 (B)**  
+**Implementability Score:** **86/100 (A)**  
 **Blast radius:** 4/10
 
-> Deterministic score 84/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.
+> Deterministic score 86/100 (A) for spec/03-error-manage/01-error-resolution/04-verification-patterns.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.25. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.12. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 75 | 26.2 |
-| Completeness | 20% | 65 | 13.0 |
+| Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 5,
   "mmd_files": 0,
-  "overview_chars": 727,
+  "overview_chars": 1083,
   "ac_chars": 3686,
   "ac_count": 7,
   "gwt_block_count": 6,
@@ -54,7 +54,7 @@
   "links_total": 8,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.25,
+  "waffle_per_kchar": 0.12,
   "child_modules": 0
 }
 ```

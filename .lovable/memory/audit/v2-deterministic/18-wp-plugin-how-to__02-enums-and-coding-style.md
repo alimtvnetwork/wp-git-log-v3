@@ -8,7 +8,7 @@
 > Deterministic score 86/100 (A) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.19. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.34. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 8,
   "mmd_files": 0,
-  "overview_chars": 7474,
+  "overview_chars": 7750,
   "ac_chars": 2763,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -54,7 +54,7 @@
   "links_total": 27,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.19,
+  "waffle_per_kchar": 0.34,
   "child_modules": 0
 }
 ```

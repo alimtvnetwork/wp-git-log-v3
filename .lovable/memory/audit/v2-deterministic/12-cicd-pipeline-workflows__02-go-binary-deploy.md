@@ -8,7 +8,7 @@
 > Deterministic score 79/100 (B) for spec/12-cicd-pipeline-workflows/02-go-binary-deploy.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.02. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 7,
   "mmd_files": 0,
-  "overview_chars": 2109,
+  "overview_chars": 3163,
   "ac_chars": 2721,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -52,7 +52,7 @@
   "links_total": 43,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.02,
+  "waffle_per_kchar": 0.04,
   "child_modules": 0
 }
 ```

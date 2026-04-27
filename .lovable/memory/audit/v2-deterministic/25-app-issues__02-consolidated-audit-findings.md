@@ -8,7 +8,7 @@
 > Deterministic score 62/100 (C) for spec/25-app-issues/02-consolidated-audit-findings.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.03. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.04. Gates active: 1.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "tracker",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 29146,
+  "overview_chars": 29544,
   "ac_chars": 2692,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -51,7 +51,7 @@
   "links_total": 32,
   "links_broken": 13,
   "todo_density": 0,
-  "waffle_per_kchar": 0.03,
+  "waffle_per_kchar": 0.04,
   "child_modules": 0
 }
 ```

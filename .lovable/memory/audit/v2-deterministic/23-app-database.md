@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **77/100 (B)**  
-**Blast radius:** 0/10
+**Implementability Score:** **84/100 (B)**  
+**Blast radius:** 3/10
 
-> Deterministic score 77/100 (B) for spec/23-app-database.
+> Deterministic score 84/100 (B) for spec/23-app-database.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,38 +16,39 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
-| Completeness | 20% | 80 | 16.0 |
+| Implementability | 35% | 60 | 21.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 80 | 5.6 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
 ```json
 {
-  "kind": "index",
+  "kind": "module",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 2287,
-  "ac_chars": 3012,
-  "ac_count": 6,
-  "gwt_block_count": 5,
+  "overview_chars": 9788,
+  "ac_chars": 5833,
+  "ac_count": 11,
+  "gwt_block_count": 10,
   "consistency_report": true,
-  "code_blocks_total": 1,
+  "code_blocks_total": 10,
   "code_blocks_by_lang": {
+    "sql": 9,
     "bash": 1
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": false,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_mermaid": false,
-  "links_total": 10,
+  "links_total": 11,
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.0,

@@ -8,7 +8,7 @@
 > Deterministic score 96/100 (A+) for spec/02-coding-guidelines/01-cross-language.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=1, waffle/kchar=0.16. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=1, waffle/kchar=0.22. Gates active: 1.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 31,
   "mmd_files": 0,
-  "overview_chars": 7220,
+  "overview_chars": 7547,
   "ac_chars": 16790,
   "ac_count": 23,
   "gwt_block_count": 20,
@@ -60,7 +60,7 @@
   "links_total": 125,
   "links_broken": 1,
   "todo_density": 0,
-  "waffle_per_kchar": 0.16,
+  "waffle_per_kchar": 0.22,
   "child_modules": 4
 }
 ```

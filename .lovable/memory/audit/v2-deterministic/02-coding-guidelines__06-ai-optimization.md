@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **87/100 (A)**  
+**Implementability Score:** **89/100 (A)**  
 **Blast radius:** 4/10
 
-> Deterministic score 87/100 (A) for spec/02-coding-guidelines/06-ai-optimization.
+> Deterministic score 89/100 (A) for spec/02-coding-guidelines/06-ai-optimization.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.1. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 75 | 26.2 |
-| Completeness | 20% | 80 | 16.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 9,
   "mmd_files": 0,
-  "overview_chars": 1647,
+  "overview_chars": 2113,
   "ac_chars": 19240,
   "ac_count": 23,
   "gwt_block_count": 20,
@@ -56,7 +56,7 @@
   "links_total": 46,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.12,
+  "waffle_per_kchar": 0.1,
   "child_modules": 0
 }
 ```

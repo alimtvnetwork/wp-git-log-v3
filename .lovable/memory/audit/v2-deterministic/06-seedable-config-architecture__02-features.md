@@ -8,7 +8,7 @@
 > Deterministic score 86/100 (A) for spec/06-seedable-config-architecture/02-features.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 10,
   "mmd_files": 0,
-  "overview_chars": 972,
+  "overview_chars": 1236,
   "ac_chars": 2854,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -54,7 +54,7 @@
   "links_total": 27,
   "links_broken": 0,
   "todo_density": 1,
-  "waffle_per_kchar": 0.13,
+  "waffle_per_kchar": 0.09,
   "child_modules": 0
 }
 ```

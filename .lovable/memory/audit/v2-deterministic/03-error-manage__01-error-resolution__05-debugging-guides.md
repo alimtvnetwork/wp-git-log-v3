@@ -8,7 +8,7 @@
 > Deterministic score 82/100 (B) for spec/03-error-manage/01-error-resolution/05-debugging-guides.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.02. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 7,
   "mmd_files": 0,
-  "overview_chars": 820,
+  "overview_chars": 1576,
   "ac_chars": 5631,
   "ac_count": 9,
   "gwt_block_count": 8,
@@ -56,7 +56,7 @@
   "links_total": 13,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.02,
+  "waffle_per_kchar": 0.0,
   "child_modules": 0
 }
 ```

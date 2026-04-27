@@ -8,7 +8,7 @@
 > Deterministic score 87/100 (A) for spec/05-split-db-architecture/02-features.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.01. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.
 
 ---
 
@@ -55,7 +55,7 @@
   "links_total": 19,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.01,
+  "waffle_per_kchar": 0.07,
   "child_modules": 0
 }
 ```

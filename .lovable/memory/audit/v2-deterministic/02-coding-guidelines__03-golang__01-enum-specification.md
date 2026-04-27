@@ -8,7 +8,7 @@
 > Deterministic score 86/100 (A) for spec/02-coding-guidelines/03-golang/01-enum-specification.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.14. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 9,
   "mmd_files": 0,
-  "overview_chars": 11012,
+  "overview_chars": 11406,
   "ac_chars": 2792,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -55,7 +55,7 @@
   "links_total": 16,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.09,
+  "waffle_per_kchar": 0.14,
   "child_modules": 0
 }
 ```

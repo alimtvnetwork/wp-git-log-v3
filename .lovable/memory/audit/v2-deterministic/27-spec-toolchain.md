@@ -8,7 +8,7 @@
 > Deterministic score 78/100 (B) for spec/27-spec-toolchain.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.18. Gates active: 0.
 
 ---
 
@@ -29,20 +29,20 @@
 ```json
 {
   "kind": "",
-  "md_files": 37,
+  "md_files": 40,
   "mmd_files": 0,
-  "overview_chars": 8720,
+  "overview_chars": 10807,
   "ac_chars": 13558,
   "ac_count": 19,
   "gwt_block_count": 19,
   "consistency_report": true,
-  "code_blocks_total": 34,
+  "code_blocks_total": 39,
   "code_blocks_by_lang": {
-    "bash": 27,
+    "bash": 29,
     "toml": 2,
     "json": 1,
+    "plain": 4,
     "powershell": 1,
-    "plain": 1,
     "ini": 1,
     "markdown": 1
   },
@@ -53,10 +53,10 @@
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_mermaid": false,
-  "links_total": 131,
+  "links_total": 167,
   "links_broken": 0,
-  "todo_density": 7,
-  "waffle_per_kchar": 0.12,
+  "todo_density": 30,
+  "waffle_per_kchar": 0.18,
   "child_modules": 0
 }
 ```
@@ -75,11 +75,11 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 7 TODO/TBD/FIXME marker(s) in module body |
+| 1 | drift | low | 3/10 | 30 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 7 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 30 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=7
+- **Evidence:** todo_density=30
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

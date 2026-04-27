@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **68/100 (C)**  
+**Implementability Score:** **70/100 (C)**  
 **Blast radius:** 0/10
 
-> Deterministic score 68/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.
+> Deterministic score 70/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 
@@ -17,12 +17,12 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 30 | 10.5 |
-| Completeness | 20% | 70 | 14.0 |
+| Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 90 | 6.3 |
-| Maintainability | 3% | 90 | 2.7 |
+| Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -31,13 +31,14 @@
   "kind": "",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 26938,
+  "overview_chars": 28829,
   "ac_chars": 2652,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 2,
+  "code_blocks_total": 3,
   "code_blocks_by_lang": {
+    "text": 1,
     "bash": 2
   },
   "has_sql_ddl": false,
@@ -49,8 +50,8 @@
   "has_mermaid": false,
   "links_total": 13,
   "links_broken": 0,
-  "todo_density": 1,
-  "waffle_per_kchar": 0.09,
+  "todo_density": 0,
+  "waffle_per_kchar": 0.11,
   "child_modules": 0
 }
 ```
@@ -69,17 +70,11 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
-| 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
+| 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
-- **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=1
-- **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
-
-#### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
+#### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"bash": 2}
+- **Evidence:** code_blocks_by_lang={"bash": 2, "text": 1}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

@@ -8,7 +8,7 @@
 > Deterministic score 81/100 (B) for spec/28-universal-ci-cli.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=40, gwt=40, broken_links=0, waffle/kchar=0.15. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=40, gwt=40, broken_links=0, waffle/kchar=0.18. Gates active: 0.
 
 ---
 
@@ -56,7 +56,7 @@
   "links_total": 23,
   "links_broken": 0,
   "todo_density": 4,
-  "waffle_per_kchar": 0.15,
+  "waffle_per_kchar": 0.18,
   "child_modules": 0
 }
 ```

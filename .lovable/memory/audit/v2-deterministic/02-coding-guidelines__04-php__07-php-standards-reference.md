@@ -8,7 +8,7 @@
 > Deterministic score 89/100 (A) for spec/02-coding-guidelines/04-php/07-php-standards-reference.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.17. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 9,
   "mmd_files": 0,
-  "overview_chars": 2038,
+  "overview_chars": 2378,
   "ac_chars": 6427,
   "ac_count": 11,
   "gwt_block_count": 10,
@@ -54,7 +54,7 @@
   "links_total": 34,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.12,
+  "waffle_per_kchar": 0.17,
   "child_modules": 0
 }
 ```

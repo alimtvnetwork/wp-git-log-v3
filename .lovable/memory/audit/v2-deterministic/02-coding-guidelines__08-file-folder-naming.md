@@ -31,13 +31,14 @@
   "kind": "",
   "md_files": 9,
   "mmd_files": 0,
-  "overview_chars": 2882,
+  "overview_chars": 4609,
   "ac_chars": 2756,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 36,
+  "code_blocks_total": 37,
   "code_blocks_by_lang": {
+    "text": 1,
     "plain": 34,
     "php": 1,
     "bash": 1
@@ -77,5 +78,5 @@
 
 #### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"bash": 1, "php": 1, "plain": 34}
+- **Evidence:** code_blocks_by_lang={"bash": 1, "php": 1, "plain": 34, "text": 1}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.
