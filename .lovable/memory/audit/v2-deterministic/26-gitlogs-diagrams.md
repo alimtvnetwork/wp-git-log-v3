@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **92/100 (A)**  
+**Implementability Score:** **95/100 (A+)**  
 **Blast radius:** 6/10
 
-> Deterministic score 92/100 (A) for spec/26-gitlogs-diagrams.
+> Deterministic score 95/100 (A+) for spec/26-gitlogs-diagrams.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=21, gwt=20, broken_links=0, waffle/kchar=0.07. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 80 | 28.0 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,24 +30,25 @@
 {
   "kind": "index",
   "md_files": 4,
-  "mmd_files": 6,
-  "overview_chars": 6694,
+  "mmd_files": 7,
+  "overview_chars": 8211,
   "ac_chars": 17103,
   "ac_count": 21,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 4,
+  "code_blocks_total": 9,
   "code_blocks_by_lang": {
     "json": 1,
     "ts": 1,
-    "text": 2
+    "text": 2,
+    "yaml": 5
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
   "has_ts_enums": true,
-  "has_yaml_openapi": false,
+  "has_yaml_openapi": true,
   "has_typed_lang_contract": false,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": false,
   "has_mermaid": true,
   "links_total": 14,

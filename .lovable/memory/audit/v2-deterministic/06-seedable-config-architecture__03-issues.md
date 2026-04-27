@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **81/100 (B)**  
+**Implementability Score:** **86/100 (A)**  
 **Blast radius:** 0/10
 
-> Deterministic score 81/100 (B) for spec/06-seedable-config-architecture/03-issues.
+> Deterministic score 86/100 (A) for spec/06-seedable-config-architecture/03-issues.
 
 
 **Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,8 +16,8 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 75 | 26.2 |
-| Completeness | 20% | 55 | 11.0 |
+| Implementability | 35% | 85 | 29.8 |
+| Completeness | 20% | 65 | 13.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -30,24 +30,25 @@
 {
   "kind": "tracker",
   "md_files": 4,
-  "mmd_files": 0,
-  "overview_chars": 405,
+  "mmd_files": 1,
+  "overview_chars": 1966,
   "ac_chars": 2656,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 1,
+  "code_blocks_total": 6,
   "code_blocks_by_lang": {
+    "yaml": 5,
     "bash": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": false,
   "has_ts_enums": false,
-  "has_yaml_openapi": false,
+  "has_yaml_openapi": true,
   "has_typed_lang_contract": false,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 6,
   "links_broken": 0,
   "todo_density": 0,
