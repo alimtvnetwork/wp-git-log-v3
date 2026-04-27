@@ -87,3 +87,20 @@ if is_tracker:
    now too lenient).
 5. **B1** — `spec/22-git-logs-v2/07-app-entity.md` decision (user input).
 6. **R1** — Real-AI re-audit (Lovable Cloud required).
+
+---
+
+## Retrospective (added in Phase 92)
+
+Outcome map for the "Next phases (queued)" list above:
+
+| # | Original queued task | Actual outcome |
+|---|---|---|
+| 1 | Phase 83 — audit `weighted_overall < 95` modules (~3 trackers at 92) | ✅ **Shipped in Phase 83**: rubric v2.14 (tightened TODO regex + `todo_audit_exempt: true` opt-out) + AC injection on 30 modules. Result: **mean weighted 96.5 → 98.0**, all 87 modules ≥ 95. |
+| 2 | Phase 84 — cumulative schema-bonus cap | ❌ **REJECTED in Phase 86.** Empirical test on the corpus showed mean impl 99.8 → 89.2 with 76 modules unfairly downgraded. The "kitchen-sink gaming" attack was theoretical with no corpus evidence. Source comment + `phase-86-schema-cap-rejected.md` preserve the rejected design. **Do not re-propose without new corpus data.** |
+| 3 | Phase 85 — document new flags + v2.13 in `spec/27-spec-toolchain/` | ✅ **Shipped in Phase 85**: §31 v1.7.0 → v1.8.0 with **AC-31-17 → AC-31-22** (one AC per rubric version v2.9–v2.14) + Rubric Changelog table + `Source` line annotated with script v2.14 marker. |
+| 4 | Phase 86 — bump CI floors to `weighted=96 / impl=99` | ✅ **Shipped in Phase 84** (one phase earlier than queued, and tighter than queued: `weighted=97 / impl=99`). The queued `96/99` numbers were superseded by Phase 83's stronger result that lifted mean weighted to 98.0. |
+| 5 | B1 decision | 🚧 Still pending user input. |
+| 6 | R1 real-AI re-audit | 🚧 Still blocked on Lovable Cloud. |
+
+Note: this memo's queued numbering used Phases 83–86 sequentially; the actual delivery order was 83 → 84 (CI floors) → 85 (toolchain doc) → 86 (schema cap **rejected**). The renumbering happened because Phase 84's CI-floor work was promoted ahead of the toolchain-doc sweep once Phase 83's wins made the old floors visibly lenient.
