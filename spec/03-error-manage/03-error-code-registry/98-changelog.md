@@ -38,6 +38,10 @@
 
 - Phase 61: appended Error Code Registry Admin API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
 
+## 2026-04-27 — Phase 128 (minor)
+
+- **Added** `06-lint-rule-catalog.md` v1.0.0 — canonical SoT for `<DOMAIN>-<NAME>-NNN` lint rule IDs (`DB-FREETEXT-001`, `MISSING-DESC-001`, `WAIVER-MALFORMED-001`, `MIG-{NAMING,HEADERS,TARGET,NULLABLE}-001`). Closes Phase 126 Candidate O — 17+ cross-folder cite sites previously had no canonical definition. Pre-req for Phase 117 containment harness.
+
 ## 2026-04-27 — Phase 65 (impl 85→90)
 
 - Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 65 Reference` block in `00-overview.md`.

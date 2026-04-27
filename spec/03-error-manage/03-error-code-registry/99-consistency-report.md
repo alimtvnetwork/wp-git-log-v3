@@ -16,10 +16,11 @@
 | 03 | `03-collision-resolution-summary.md` | ✅ Present |
 | 04 | `04-error-code-utilization-report.md` | ✅ Present |
 | 05 | `05-overlap-validator.md` | ✅ Present |
+| 06 | `06-lint-rule-catalog.md` | ✅ Present (Phase 128, v1.0.0) |
 | 97 | `97-acceptance-criteria.md` | ✅ Present |
 | 98 | `98-changelog.md` | ✅ Present |
 
-**Total:** 8 files (excluding this report)
+**Total:** 9 files (excluding this report)
 
 ---
 
