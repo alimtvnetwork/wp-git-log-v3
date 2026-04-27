@@ -39,6 +39,7 @@ Upgraded all `00-overview.md` files across the entire spec tree to include the f
 
 | Phase | Scope | Files |
 |-------|-------|-------|
+| 2026-04-26 | minor | Phase 30: Documented rubric v2.0.0 (Required 60% / Recommended 25% / §99 Quality 15%). Replaced Phase-27c drift note with concrete rubric versioning. |
 | 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
 | 1 | Module-level overviews (01–36, 99) | 31 |
 | 2 | Module 01 sub-folders | 12 |
