@@ -63,6 +63,7 @@ Numbering convention inside this module:
 | 20 | [20-fill-missing-acceptance-criteria.md](./20-fill-missing-acceptance-criteria.md) | `linter-scripts/fill-missing-acceptance-criteria.cjs` | Scaffold `97-acceptance-criteria.md` |
 | 21 | [21-fill-missing-changelogs.md](./21-fill-missing-changelogs.md) | `linter-scripts/fill-missing-changelogs.cjs` | Scaffold `98-changelog.md` |
 | 22 | [22-fill-missing-consistency-reports.md](./22-fill-missing-consistency-reports.md) | `linter-scripts/fill-missing-consistency-reports.cjs` | Scaffold `99-consistency-report.md` |
+| 23 | [23-scaffold-spec-module.md](./23-scaffold-spec-module.md) | `linter-scripts/scaffold-spec-module.cjs` | Scaffold a NEW module skeleton (§00/§97/§98/§99) — passes `--strict` on first run (Phase 37) |
 
 ### Auditors (AI-driven)
 
