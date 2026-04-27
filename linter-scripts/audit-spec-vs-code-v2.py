@@ -149,6 +149,10 @@ OUT = ROOT / (".lovable/memory/audit/v2-deterministic" if DETERMINISTIC else ".l
 OUT.mkdir(parents=True, exist_ok=True)
 MODEL = "google/gemini-2.5-flash"
 TODAY = "2026-04-25"
+# v2.17 (Phase 99): static rubric version surfaced in summary outputs so a
+# reader of 00-index.md / EXECUTIVE-SUMMARY.md knows which scoring rules
+# produced the verdict. Bump this on every rubric change (see docstring).
+RUBRIC_VERSION = "v2.17"
 
 WEIGHTS = {
     "implementability": 35,
