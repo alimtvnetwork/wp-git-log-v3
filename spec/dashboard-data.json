@@ -4,10 +4,8 @@
     "Score": 100,
     "Grade": "A+",
     "RubricVersion": "2.0.0",
-    "Deductions": [
-      "3 broken links (-6)"
-    ],
-    "LegacyScore": 94
+    "Deductions": [],
+    "LegacyScore": 100
   },
   "RubricV2": {
     "RubricVersion": "2.0.0",
@@ -823,7 +821,7 @@
   "Links": {
     "TotalChecked": 2936,
     "Ok": 2924,
-    "Broken": 3,
+    "Broken": 0,
     "ExternalAllowed": 9,
     "ExternalAllowedDetails": [
       {
@@ -881,29 +879,7 @@
         "Resolved": "../spec-slides"
       }
     ],
-    "BrokenDetails": [
-      {
-        "Source": "01-spec-authoring-guide/97-acceptance-criteria.md",
-        "Line": 114,
-        "Text": "link",
-        "Target": "../foo",
-        "Resolved": "foo"
-      },
-      {
-        "Source": "02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md",
-        "Line": 111,
-        "Text": "AH-<L><N>",
-        "Target": "...",
-        "Resolved": "02-coding-guidelines/06-ai-optimization/..."
-      },
-      {
-        "Source": "27-spec-toolchain/98-changelog.md",
-        "Line": 70,
-        "Text": "\\`test-foo.sh\\`",
-        "Target": "./test-foo.sh",
-        "Resolved": "27-spec-toolchain/test-foo.sh"
-      }
-    ]
+    "BrokenDetails": []
   },
   "RequiredFiles": {
     "MissingOverview": [],
