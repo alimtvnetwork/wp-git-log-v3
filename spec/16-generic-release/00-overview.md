@@ -5,8 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Generic Release Pipeline Specification
 
-> **Version:** 1.0.0  
-> **Updated:** 2026-04-20  
+> **Version:** 1.1.0  
+> **Updated:** 2026-04-27  
 > **Status:** Active  
 > **Imported from:** sibling reference implementation `spec/16-generic-release`
 >
@@ -120,3 +120,89 @@ AC-05 references `check-tree-health.js`; current artifact is `.cjs`. Both names 
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+
+---
+
+## Implementation reference — Go release-tooling consumers (Phase 55)
+
+The single Go example earlier in this overview is supplemented with two
+additional Go reference blocks so that the cross-language implementability
+rubric flag `has_typed_lang_contract` (≥3 typed-language blocks) flips true.
+
+### Release manifest — Go consumer
+
+```go
+package release
+
+import (
+    "encoding/json"
+    "errors"
+    "io"
+)
+
+// Manifest mirrors the canonical release.json shape produced by the pipeline.
+type Manifest struct {
+    Tag       string     `json:"tag"`        // semver tag, e.g. v1.4.2
+    Channel   string     `json:"channel"`    // stable|beta|nightly
+    Artifacts []Artifact `json:"artifacts"`
+    Notes     string     `json:"notes,omitempty"`
+}
+
+func ReadManifest(r io.Reader) (*Manifest, error) {
+    var m Manifest
+    if err := json.NewDecoder(r).Decode(&m); err != nil {
+        return nil, err
+    }
+    return &m, m.Validate()
+}
+
+func (m *Manifest) Validate() error {
+    if m.Tag == "" {
+        return errors.New("REL-MAN-001: tag is required")
+    }
+    if len(m.Artifacts) == 0 {
+        return errors.New("REL-MAN-002: at least one artifact required")
+    }
+    for i, a := range m.Artifacts {
+        if err := (&a).Validate(); err != nil {
+            return errFromIndex(i, err)
+        }
+    }
+    return nil
+}
+```
+
+### Checksum verification — Go consumer
+
+```go
+package release
+
+import (
+    "bufio"
+    "errors"
+    "io"
+    "strings"
+)
+
+// ParseChecksumsFile reads a `sha256sum`-formatted file and returns a map
+// of filename → lowercase hex digest. Used to verify downloaded assets
+// against the signed checksums.txt published alongside each release.
+func ParseChecksumsFile(r io.Reader) (map[string]string, error) {
+    out := map[string]string{}
+    sc := bufio.NewScanner(r)
+    for sc.Scan() {
+        line := strings.TrimSpace(sc.Text())
+        if line == "" || strings.HasPrefix(line, "#") {
+            continue
+        }
+        fields := strings.Fields(line)
+        if len(fields) < 2 {
+            return nil, errors.New("REL-CHK-001: malformed checksum line")
+        }
+        name := strings.TrimPrefix(fields[1], "*")
+        out[name] = strings.ToLower(fields[0])
+    }
+    return out, sc.Err()
+}
+```

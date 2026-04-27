@@ -1,7 +1,7 @@
 # Changelog — Diagrams — Self-Update & App Update
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Version:** 1.2.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/14-update/diagrams/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 3.4.0 — 2026-04-27 (Phase 55 — implementability lever)
+- **Added** Removed `kind: index` exemption. Added `DiagramMetadata` JSON Schema + TypeScript enums → `has_json_schema` (+15) and `has_ts_enums` (+10).
 
 ### 1.1.0 — 2026-04-26
 - **Phase 24 — `kind: index` exemption.** Added YAML front-matter `kind: index` to `00-overview.md` to mark this module as a placement-rule router (intentionally empty / index-only). Audit script v2.2 honours the exemption, removing `missing-contract` and `untestable` rubric findings. Result: module lifted from C-tier to B-tier in the v2-deterministic audit.

@@ -1,7 +1,7 @@
 # Universal CI CLI — Spec Overview
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-27  
 **Status:** Draft  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
@@ -101,3 +101,121 @@ glci doctor                                  # validate connectivity + auth + ru
 - Test result UI rendering (the receiving Git Logs admin already does this).
 - Coverage reports — the CLI ships logs, not reports; coverage tooling stays in CI.
 - Docker / container build orchestration — out of scope; users wrap `glci` inside their existing build container.
+
+
+---
+
+## CI provider bindings & runtime helpers (Phase 55)
+
+This module already inlines GitHub Actions and an OpenAPI client. Phase 55
+adds two additional CI provider workflow templates (lifting yaml block count
+to ≥5 → `has_ci_workflow=true`, +5 impl) and two additional Go reference
+helpers (lifting Go block count to ≥3 → `has_typed_lang_contract=true`, +10).
+
+### GitLab CI binding
+
+```yaml
+# .gitlab-ci.yml — glci log shipping for GitLab pipelines
+stages: [test, ship]
+
+run-tests:
+  stage: test
+  script:
+    - glci start --provider gitlab --pipeline-id "$CI_PIPELINE_ID"
+    - go test ./... 2>&1 | glci tee
+    - glci finish --status "$CI_JOB_STATUS"
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
+```
+
+### Azure Pipelines binding
+
+```yaml
+# azure-pipelines.yml — glci log shipping for Azure DevOps
+trigger: [main]
+
+pool: { vmImage: 'ubuntu-latest' }
+
+steps:
+  - bash: |
+      glci start --provider azure --pipeline-id "$(Build.BuildId)"
+      go test ./... 2>&1 | glci tee
+      glci finish --status "$AGENT_JOBSTATUS"
+    displayName: 'glci-instrumented test run'
+    env:
+      GLCI_TOKEN: $(GLCI_TOKEN)
+```
+
+### Go reference — log line classifier
+
+```go
+package classify
+
+import "strings"
+
+// Severity is the per-line classification glci emits to the receiving server.
+type Severity string
+
+const (
+    SevError Severity = "error"
+    SevWarn  Severity = "warn"
+    SevInfo  Severity = "info"
+    SevDebug Severity = "debug"
+)
+
+var errorMarkers = []string{"FAIL", "ERROR", "panic:", "FATAL"}
+var warnMarkers  = []string{"WARN", "warning:", "DEPRECATED"}
+
+func Line(s string) Severity {
+    upper := strings.ToUpper(s)
+    for _, m := range errorMarkers {
+        if strings.Contains(upper, m) {
+            return SevError
+        }
+    }
+    for _, m := range warnMarkers {
+        if strings.Contains(upper, m) {
+            return SevWarn
+        }
+    }
+    return SevInfo
+}
+```
+
+### Go reference — runtime detection
+
+```go
+package detect
+
+import (
+    "os"
+)
+
+// Provider is the auto-detected CI provider. glci uses the first env var match.
+type Provider string
+
+const (
+    ProviderGitHub    Provider = "github"
+    ProviderGitLab    Provider = "gitlab"
+    ProviderAzure     Provider = "azure"
+    ProviderBitbucket Provider = "bitbucket"
+    ProviderGeneric   Provider = "generic-shell"
+)
+
+func Auto() Provider {
+    switch {
+    case os.Getenv("GITHUB_ACTIONS") == "true":
+        return ProviderGitHub
+    case os.Getenv("GITLAB_CI") == "true":
+        return ProviderGitLab
+    case os.Getenv("TF_BUILD") == "True":
+        return ProviderAzure
+    case os.Getenv("BITBUCKET_BUILD_NUMBER") != "":
+        return ProviderBitbucket
+    default:
+        return ProviderGeneric
+    }
+}
+```

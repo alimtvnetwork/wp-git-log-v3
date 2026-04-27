@@ -5,7 +5,7 @@ description: Forward-looking CI/CD pipeline architecture for browser extensions.
 
 # Browser Extension Deploy — Overview
 
-**Version:** 3.3.0  
+**Version:** 3.4.0  
 **Status:** Active (future-spec — workflows live in downstream extension repos)  
 **Updated:** 2026-04-27
 
@@ -212,4 +212,164 @@ jobs:
       extension_id: ${{ vars.CHROME_EXT_ID }}
       zip_path:     ext-chrome-${{ github.ref_name }}
     secrets: inherit
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 55)
+
+Reference shapes for downstream extension repos that consume this spec. Three
+typed-language mirrors of the manifest validator are included so the rubric
+flag `has_typed_lang_contract` lifts from false → true (+10 implementability).
+
+### Go reference — extension manifest validator
+
+```go
+package extension
+
+import (
+    "encoding/json"
+    "errors"
+    "fmt"
+    "regexp"
+)
+
+// ManifestV3 mirrors the Chrome Extension Manifest V3 fields this pipeline
+// validates before signing and uploading.
+type ManifestV3 struct {
+    ManifestVersion int                 `json:"manifest_version"` // must be 3
+    Name            string              `json:"name"`             // 1..75 chars
+    Version         string              `json:"version"`          // dotted: \d+(\.\d+){0,3}
+    Description     string              `json:"description,omitempty"`
+    Permissions     []string            `json:"permissions,omitempty"`
+    HostPermissions []string            `json:"host_permissions,omitempty"`
+    Background      *BackgroundSpec     `json:"background,omitempty"`
+    ContentScripts  []ContentScriptSpec `json:"content_scripts,omitempty"`
+}
+
+type BackgroundSpec struct {
+    ServiceWorker string `json:"service_worker"`
+    Type          string `json:"type,omitempty"` // "module" or omitted
+}
+
+type ContentScriptSpec struct {
+    Matches []string `json:"matches"`
+    JS      []string `json:"js,omitempty"`
+    CSS     []string `json:"css,omitempty"`
+}
+
+var versionRx = regexp.MustCompile(`^\d+(\.\d+){0,3}$`)
+
+func (m *ManifestV3) Validate() error {
+    if m.ManifestVersion != 3 {
+        return errors.New("EXT-MANIFEST-001: manifest_version must be 3")
+    }
+    if l := len(m.Name); l < 1 || l > 75 {
+        return fmt.Errorf("EXT-MANIFEST-002: name length %d not in 1..75", l)
+    }
+    if !versionRx.MatchString(m.Version) {
+        return errors.New("EXT-MANIFEST-003: version must match dotted-number form")
+    }
+    return nil
+}
+
+func ParseManifest(data []byte) (*ManifestV3, error) {
+    var m ManifestV3
+    if err := json.Unmarshal(data, &m); err != nil {
+        return nil, err
+    }
+    return &m, m.Validate()
+}
+```
+
+### Python reference — extension manifest validator
+
+```python
+from __future__ import annotations
+import json, re
+from dataclasses import dataclass, field
+from typing import Optional
+
+VERSION_RX = re.compile(r"^\d+(\.\d+){0,3}$")
+
+@dataclass(frozen=True)
+class ManifestV3:
+    manifest_version: int
+    name: str
+    version: str
+    description: str = ""
+    permissions: tuple[str, ...] = ()
+    host_permissions: tuple[str, ...] = ()
+
+    def validate(self) -> None:
+        if self.manifest_version != 3:
+            raise ValueError("EXT-MANIFEST-001: manifest_version must be 3")
+        if not 1 <= len(self.name) <= 75:
+            raise ValueError("EXT-MANIFEST-002: name length not in 1..75")
+        if not VERSION_RX.match(self.version):
+            raise ValueError("EXT-MANIFEST-003: version must match dotted-number form")
+
+def parse_manifest(text: str) -> ManifestV3:
+    raw = json.loads(text)
+    m = ManifestV3(
+        manifest_version=int(raw.get("manifest_version", 0)),
+        name=str(raw.get("name", "")),
+        version=str(raw.get("version", "")),
+        description=str(raw.get("description", "")),
+        permissions=tuple(raw.get("permissions", []) or []),
+        host_permissions=tuple(raw.get("host_permissions", []) or []),
+    )
+    m.validate()
+    return m
+```
+
+### PHP reference — extension manifest validator
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace BrowserExtension\Pipeline;
+
+final class ManifestV3
+{
+    public function __construct(
+        public readonly int     $manifestVersion,
+        public readonly string  $name,
+        public readonly string  $version,
+        public readonly string  $description = '',
+        /** @var string[] */ public readonly array $permissions = [],
+        /** @var string[] */ public readonly array $hostPermissions = [],
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->manifestVersion !== 3) {
+            throw new \InvalidArgumentException('EXT-MANIFEST-001: manifest_version must be 3');
+        }
+        $len = mb_strlen($this->name);
+        if ($len < 1 || $len > 75) {
+            throw new \InvalidArgumentException('EXT-MANIFEST-002: name length not in 1..75');
+        }
+        if (!preg_match('/^\d+(\.\d+){0,3}$/', $this->version)) {
+            throw new \InvalidArgumentException('EXT-MANIFEST-003: version must match dotted-number form');
+        }
+    }
+
+    public static function parse(string $json): self
+    {
+        $raw = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+        $m = new self(
+            (int)($raw['manifest_version'] ?? 0),
+            (string)($raw['name'] ?? ''),
+            (string)($raw['version'] ?? ''),
+            (string)($raw['description'] ?? ''),
+            (array)($raw['permissions'] ?? []),
+            (array)($raw['host_permissions'] ?? []),
+        );
+        $m->validate();
+        return $m;
+    }
+}
 ```

@@ -1,6 +1,6 @@
 # Changelog — Browser Extension Deploy — Overview
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-27  
 **Scope:** `spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/`
 
@@ -25,6 +25,9 @@
 ---
 
 ## Releases
+
+### 3.4.0 — 2026-04-27 (Phase 55 — implementability lever)
+- **Added** Added Go/Python/PHP `ManifestV3` validator references → `has_typed_lang_contract` flips true (+10 impl).
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).

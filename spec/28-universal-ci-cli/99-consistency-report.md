@@ -1,6 +1,6 @@
 # Consistency Report
 
-**Generated:** 2026-04-26
+**Generated:** 2026-04-27
 **Module version:** 2.0.0
 
 > **v2.0.0 update:** Phase 16d-v deepened §97 from 28 ACs to **40 module-specific GWT ACs** (AC-28-29..AC-28-40 added; AC-28-01..AC-28-28 preserved). New ACs close all four v1.1-deferred error codes (`GLCI-EXEC-RUNNER-CRASHED`, `GLCI-EXEC-TIMEOUT`, `GLCI-PUSH-STREAM-BROKEN`, `GLCI-DETECT-MULTIPLE-MODULES`) AND extend coverage to GitLab/Azure/Bitbucket/generic-shell provider auto-fill, telemetry prohibition (Locked Decision #10), streaming buffer cap, per-runtime tool selection (TS/Go/PHP), and direct invocation of `glci push-fixed`/`glci clear`. The "Internal Consistency Checks" row noting "4 codes lack a direct AC" is now **closed** — all 28 GLCI-* codes have direct AC coverage. Banner v1.0.0 → v2.0.0.
@@ -103,4 +103,5 @@ These are gaps in the **server** (folder 22) that the CLI spec depends on:
 
 This module's full lockstep history is mirrored in `98-changelog.md`; entries
 above summarize only the audit-/validation-bearing milestones for `28-universal-ci-cli`.
+| 2026-04-27 | 1.1.0 | Phase 55 — implementability lever (CI YAML / typed-language reference) |
 
