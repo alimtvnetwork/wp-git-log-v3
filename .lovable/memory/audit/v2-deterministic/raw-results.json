@@ -203,12 +203,12 @@
       "has_yaml_openapi": true,
       "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 32,
+      "links_total": 33,
       "md_files": 6,
       "mmd_files": 0,
-      "overview_chars": 12788,
+      "overview_chars": 13031,
       "todo_density": 2,
-      "waffle_per_kchar": 0.12
+      "waffle_per_kchar": 0.11
     },
     "module": "02-coding-guidelines",
     "raw_scores": {
@@ -220,7 +220,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
