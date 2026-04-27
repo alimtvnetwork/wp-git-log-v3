@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **86/100 (A)**  
-**Blast radius:** 4/10
+**Implementability Score:** **92/100 (A)**  
+**Blast radius:** 6/10
 
-> Deterministic score 86/100 (A) for spec/26-gitlogs-diagrams.
+> Deterministic score 92/100 (A) for spec/26-gitlogs-diagrams.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=21, gwt=20, broken_links=0, waffle/kchar=0.07. Gates active: 0.
@@ -16,8 +16,8 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 70 | 24.5 |
-| Completeness | 20% | 90 | 18.0 |
+| Implementability | 35% | 80 | 28.0 |
+| Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -54,7 +54,7 @@
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.07,
-  "child_modules": 0
+  "child_modules": 1
 }
 ```
 

@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **82/100 (B)**  
-**Blast radius:** 0/10
+**Implementability Score:** **88/100 (A)**  
+**Blast radius:** 2/10
 
-> Deterministic score 82/100 (B) for spec/02-coding-guidelines/21-app.
+> Deterministic score 88/100 (A) for spec/02-coding-guidelines/21-app.
 
 
 **Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,8 +16,8 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 70 | 24.5 |
-| Completeness | 20% | 70 | 14.0 |
+| Implementability | 35% | 80 | 28.0 |
+| Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -50,7 +50,7 @@
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.0,
-  "child_modules": 0
+  "child_modules": 1
 }
 ```
 
