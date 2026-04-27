@@ -1,7 +1,9 @@
 # Consistency Report
 
 **Generated:** 2026-04-27
-**Module version:** 2.0.0
+**Module version:** 2.1.0
+
+> **v2.1.0 update (Phase 119 — §07 ↔ §97 GLCI-* containment drift repair):** Added 2 codes to §07-error-catalog.md surfaced by Phase 118's AC-31-31 bounding sweep as referenced-but-undefined in §97: `GLCI-EXEC-DEPS-MISSING` (Execution table, Exit=1, TypeScript+PHP scope per AC-28-37/AC-28-39) and `GLCI-STREAM-MALFORMED` (Push transport table, Exit=4, distinguished from adjacent `GLCI-PUSH-STREAM-BROKEN` per AC-28-26). The third Phase-118-flagged token `GLCI-TELEMETRY-` was re-classified on inspection as a **negative reference** (§97 line 231 explicitly states no telemetry codes exist per Locked Decision #10) and NOT a real drift. GLCI-* code count: 27 → **29**. The prior v2.0.0 claim "all 28 GLCI-* codes have direct AC coverage" is superseded — now **29 codes**, all with direct AC coverage, AND the inverse §97 ⊆ §07 containment verified empirically by Phase 118 re-sweep. §07 v1.0.0 → v1.1.0; §98 v[2.0.0] → [2.1.0]. No new §97 ACs (AC-28-26 / AC-28-37 / AC-28-39 already cite the codes; this is catalog hygiene, not coverage extension). Mechanical regression guard (`test-glci-error-code-containment.sh`) remains in the Phase 117 backlog pending user go/no-go.
 
 > **v2.0.0 update:** Phase 16d-v deepened §97 from 28 ACs to **40 module-specific GWT ACs** (AC-28-29..AC-28-40 added; AC-28-01..AC-28-28 preserved). New ACs close all four v1.1-deferred error codes (`GLCI-EXEC-RUNNER-CRASHED`, `GLCI-EXEC-TIMEOUT`, `GLCI-PUSH-STREAM-BROKEN`, `GLCI-DETECT-MULTIPLE-MODULES`) AND extend coverage to GitLab/Azure/Bitbucket/generic-shell provider auto-fill, telemetry prohibition (Locked Decision #10), streaming buffer cap, per-runtime tool selection (TS/Go/PHP), and direct invocation of `glci push-fixed`/`glci clear`. The "Internal Consistency Checks" row noting "4 codes lack a direct AC" is now **closed** — all 28 GLCI-* codes have direct AC coverage. Banner v1.0.0 → v2.0.0.
 
