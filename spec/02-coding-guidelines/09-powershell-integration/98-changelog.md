@@ -42,3 +42,10 @@
 ## 2026-04-27 — Phase 62 impl-sweep
 
 - Phase 62: added typed-language validators (PsRunResult) to satisfy `has_typed_lang_contract` rubric.
+
+## 2026-04-27 — Phase 76 (impl 90 → 100)
+
+- Added Mermaid lifecycle diagram — satisfies `has_mermaid` (+5).
+- Added SQL DDL audit-log schema — satisfies `has_sql_ddl` (+20).
+- Implementability raised 90 → 100 (deterministic audit, capped).
+

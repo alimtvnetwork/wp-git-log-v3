@@ -264,3 +264,42 @@ export type CliInvocation = {
   duration_ms: number;
 };
 ```
+
+
+### Audit-Log Schema — Phase 76 Reference
+
+The following normative SQL DDL defines the audit-log table that records
+every invocation of the workflow described in this module. Implementations
+MUST create this table (or its dialect-equivalent) in the operational
+database.
+
+```sql
+CREATE TABLE IF NOT EXISTS module_run_audit (
+    id              BIGSERIAL PRIMARY KEY,
+    module_slug     TEXT        NOT NULL,
+    invoked_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    invoked_by      TEXT        NOT NULL,
+    git_sha         TEXT        NOT NULL,
+    inputs_hash     TEXT        NOT NULL,
+    exit_code       INTEGER     NOT NULL,
+    duration_ms     INTEGER     NOT NULL,
+    error_code      TEXT        NULL,
+    error_message   TEXT        NULL,
+    completed_at    TIMESTAMPTZ NULL,
+    CONSTRAINT chk_exit_code_nonneg CHECK (exit_code >= 0),
+    CONSTRAINT chk_duration_nonneg  CHECK (duration_ms >= 0)
+);
+
+CREATE INDEX IF NOT EXISTS idx_module_run_audit_module_slug
+    ON module_run_audit (module_slug);
+
+CREATE INDEX IF NOT EXISTS idx_module_run_audit_invoked_at_desc
+    ON module_run_audit (invoked_at DESC);
+
+CREATE INDEX IF NOT EXISTS idx_module_run_audit_failed
+    ON module_run_audit (module_slug, invoked_at DESC)
+    WHERE exit_code <> 0;
+```
+
+See `lifecycle-28-universal-ci-cli.mmd` for the visual workflow.
+

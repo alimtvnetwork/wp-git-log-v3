@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **91/100 (A)**  
-**Blast radius:** 4/10
+**Implementability Score:** **94/100 (A)**  
+**Blast radius:** 7/10
 
-> Deterministic score 91/100 (A) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
+> Deterministic score 94/100 (A) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.23. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.22. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,13 +30,13 @@
 {
   "kind": "future-spec",
   "md_files": 6,
-  "mmd_files": 0,
-  "overview_chars": 12821,
+  "mmd_files": 1,
+  "overview_chars": 14188,
   "ac_chars": 2715,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 26,
+  "code_blocks_total": 27,
   "code_blocks_by_lang": {
     "plain": 4,
     "json": 1,
@@ -45,20 +45,21 @@
     "python": 1,
     "php": 1,
     "typescript": 1,
+    "sql": 1,
     "bash": 5
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
   "has_ci_workflow": true,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.23,
+  "waffle_per_kchar": 0.22,
   "child_modules": 0
 }
 ```

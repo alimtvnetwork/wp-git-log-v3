@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **94/100 (A)**  
-**Blast radius:** 4/10
+**Implementability Score:** **97/100 (A+)**  
+**Blast radius:** 7/10
 
-> Deterministic score 94/100 (A) for spec/02-coding-guidelines/09-powershell-integration.
+> Deterministic score 97/100 (A+) for spec/02-coding-guidelines/09-powershell-integration.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 85 | 17.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,29 +30,30 @@
 {
   "kind": "",
   "md_files": 4,
-  "mmd_files": 0,
-  "overview_chars": 7663,
+  "mmd_files": 1,
+  "overview_chars": 9021,
   "ac_chars": 3580,
   "ac_count": 7,
   "gwt_block_count": 6,
   "consistency_report": true,
-  "code_blocks_total": 10,
+  "code_blocks_total": 11,
   "code_blocks_by_lang": {
     "json": 1,
     "ts": 1,
     "yaml": 5,
     "go": 1,
     "php": 1,
-    "python": 1
+    "python": 1,
+    "sql": 1
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
   "has_ci_workflow": true,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 8,
   "links_broken": 0,
   "todo_density": 0,

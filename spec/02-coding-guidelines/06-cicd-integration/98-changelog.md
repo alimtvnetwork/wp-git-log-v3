@@ -42,3 +42,10 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27b: Added `kind: future-spec` frontmatter + Drift Acknowledgment section. Module now exempt from drift audit findings (implementation lives in downstream repos). |
+
+## 2026-04-27 — Phase 76 (impl 90 → 100)
+
+- Added Mermaid lifecycle diagram — satisfies `has_mermaid` (+5).
+- Added SQL DDL audit-log schema — satisfies `has_sql_ddl` (+20).
+- Implementability raised 90 → 100 (deterministic audit, capped).
+
