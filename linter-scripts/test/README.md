@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-27 (Phase 98)
+**Last updated:** 2026-04-27 (Phase 102)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -42,12 +42,14 @@ PR so any regression fails the build at the assertion level (with
 | 1 | [`test-audit-cli-thresholds.sh`](./test-audit-cli-thresholds.sh) | 91 | `audit-spec-vs-code-v2.py` `--min-weighted=N` / `--min-impl=N` exit-code contract | 6 | ~3 s | [AC-31-22](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 2 | [`test-audit-explain-contract.sh`](./test-audit-explain-contract.sh) | 94 | `audit-spec-vs-code-v2.py --explain=<substring>` stdout structure, exit codes, no-side-effects | 14 | ~6 s | [AC-31-23](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) + [AC-31-25](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 3 | [`test-audit-deterministic-stability.sh`](./test-audit-deterministic-stability.sh) | 95 | `audit-spec-vs-code-v2.py` produces byte-identical `raw-results.json` across two runs under `AUDIT_DETERMINISTIC=1` | 7 | ~12 s | [AC-31-26](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
+| 4 | [`test-readme-inventory.sh`](./test-readme-inventory.sh) | 102 | This README's inventory table is in sync with the actual `test-*.sh` files on disk; required structural sections present; every script linked + executable | 14+ | ~1 s | [AC-31-27](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 
-**Totals:** 3 scripts · 27 assertions · ~21 s of CI time.
+**Totals:** 4 scripts · 41+ assertions · ~22 s of CI time.
 
-All three scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
+All four scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
 as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
-`Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`).
+`Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`,
+`Self-test README inventory parity (Phase 102)`).
 
 ---
 
