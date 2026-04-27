@@ -1,6 +1,6 @@
 # Changelog — Coding Guidelines
 
-**Version:** 2.2.0
+**Version:** 2.3.0
 **Updated:** 2026-04-27
 **Scope:** `spec/02-coding-guidelines/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 2.3.0 — 2026-04-27 (Phase 47 — slot-06 co-location documentation fix)
+- **Fixed** §00 "Language & Cross-Language Standards" inventory table missing the `06-cicd-integration/` row (folder physically exists with full §00/§97/§98/§99 from Phase 16r §28 closure but was omitted from the documentation index). Added the row directly beneath `06-ai-optimization/` to make the slot-06 co-location explicit and discoverable. Also added the missing row to §99 subfolder inventory and corrected `**Total:**` from "14 subfolders (~121 files)" to "15 subfolders (~128 files)".
+- **Decided** Co-location (NOT rename) per the **§16→§37 immutability precedent** (once a slot has shipped a §97, the slot label is frozen — rename would invalidate every downstream cross-ref). Both `06-ai-optimization/` and `06-cicd-integration/` retain slot 06; readers/auditors disambiguate by the trailing slug.
+- **Closed** B2 backlog item without folder rename, AC churn, or §97 contract change. Doc-only patch.
+- **Bumped** §99 v4.2.0 → v4.3.0.
 
 ### 2.2.0 — 2026-04-27 (Phase 39b — TODO-marker exemption)
 - **Added** §00 "Audit Marker Exemption" section documenting that the 2026-04-27 AI-implementability audit's `todo_count: 7` was a substring false-positive: every TODO/TBD/FIXME hit in this folder is either AC content (rules ABOUT how `// TODO:` comments must be formatted in downstream code, e.g., `02-typescript/08-typescript-standards-reference.md:312`), enumerations of forbidden constructs (`05-rust/97-acceptance-criteria.md:97` listing `todo!()` as a Rust no-go), cross-language policy (`01-cross-language/04-code-style/06-comments-and-documentation.md:83`), or English-word fragments (`06-cicd-integration/03-language-roadmap.md:53` "todo → shipping" phase name). Module is exempt from substring-based `todo_density` heuristics; future auditor SHOULD switch to a regex that excludes fenced code blocks and back-tick-quoted strings (Phase 39b follow-up R4).

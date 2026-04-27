@@ -139,6 +139,7 @@ IMPORTANT — AI INSTRUCTION:
 | 04 | [PHP](./04-php/00-overview.md) | PHP coding standards, enums, forbidden patterns, naming, spacing/imports, ResponseKeyType | 12 |
 | 05 | [Rust](./05-rust/00-overview.md) | Rust standards: naming, error handling, async, memory safety, FFI | 10 |
 | 06 | [AI Optimization](./06-ai-optimization/00-overview.md) | Anti-hallucination rules, AI quick-reference checklist, common AI mistakes, enum naming reference | 8 |
+| 06 | [CI/CD Integration](./06-cicd-integration/00-overview.md) | Coding-guidelines linter pack: per-language CI wiring, shared gates, language-roadmap (co-located at slot 06 by arrival precedent §16→§37 — both retain full §97/§98/§99) | 7 |
 | 07 | [C#](./07-csharp/00-overview.md) | C# standards: naming, method design, error handling, type safety | 5 |
 
 #### Infrastructure & Convention Standards
