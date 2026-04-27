@@ -1,9 +1,9 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.12.0  
+**Version:** 1.13.0  
 **Updated:** 2026-04-27  
-**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script v2.16) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94) + [`linter-scripts/test/test-audit-deterministic-stability.sh`](../../linter-scripts/test/test-audit-deterministic-stability.sh) (Phase 95)  
-**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×3 incl. determinism)  
+**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script v2.16) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94) + [`linter-scripts/test/test-audit-deterministic-stability.sh`](../../linter-scripts/test/test-audit-deterministic-stability.sh) (Phase 95) + [`linter-scripts/test/README.md`](../../linter-scripts/test/README.md) (Phase 98)  
+**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×3 incl. determinism + **inventory README**)
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
 
 ---
@@ -273,6 +273,15 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** the self-test MUST exit `0` only when all 7 assertions pass; otherwise exit `1` with a per-assertion ✅/❌ summary on stdout AND, on byte-identity failure, print up to 20 differing lines (pure-bash `paste`+`awk` line-diff since the CI base image lacks `diff`).
 - **And** any non-determinism regression (added wall-clock timestamp, unsorted dict iteration, hash-seeded sampling, removed `sort_keys=True`, reordered `findings` list) MUST cause this self-test to fail in CI even when the production audit gate (`--min-weighted=97 --min-impl=99`) still passes — because the production gate runs the audit only once and cannot detect determinism bugs by construction.
 - **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` lines 122–131 (`DETERMINISTIC` env-var read + `OUT` path branching) and lines 1077–1083 (`sorted(results, key=lambda r: r["module"])` + `sort_keys=DETERMINISTIC` JSON serialisation).
+
+### AC-31-27 — `linter-scripts/test/` MUST have an inventory README (Phase 98)
+- **Given** the directory `linter-scripts/test/` containing one or more contract self-tests for any `linter-scripts/` script,
+- **When** a contributor adds, removes, or modifies a self-test script in that directory,
+- **Then** the file `linter-scripts/test/README.md` MUST be updated **in the same PR** so its **Test inventory** table accurately reflects: (a) every `test-*.sh` script present, (b) the Phase number that introduced it, (c) the script-under-test it locks, (d) the assertion count, (e) the locked AC ID. The README MUST also keep the **Coverage triad** table aligned with the inventory — every self-test must be present in both tables, with the "blind spot" column explaining why the production gate cannot catch the regression on its own.
+- **And** the README MUST link to each test script via relative path, link to each locked AC via relative path into `spec/`, and link to each test's post-merge phase memo under `.lovable/memory/audit/v2-deterministic/`.
+- **And** the README MUST contain a copy-pasteable template (the "Adding a new self-test" section) so a new contributor can follow the exact convention without reverse-engineering existing scripts. The template MUST cover: shebang, header comment block (Phase + locked contract + blind-spot rationale + spec link + memo link), `set -euo pipefail`, `assert` helper, summary block with `Results: N passed, N failed` line, and CI wiring instructions (workflow step + lockstep AC + memo).
+- **And** the README's last-updated date MUST be bumped on every modification.
+- **Verifies:** `linter-scripts/test/README.md` (inventory, coverage triad, local execution, template, see-also sections) + lockstep with the actual contents of `linter-scripts/test/`.
 
 ## Rubric changelog (v2.9 → v2.16)
 
