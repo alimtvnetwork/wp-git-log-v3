@@ -1,9 +1,10 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.2.0
+**Version:** 4.3.0
 **Last Updated:** 2026-04-27
 
-> **v4.2.0 update (Phase 48 — §01 implementability lift):** Added a JSON-Schema 2020-12 `SpecModule` contract (~70 lines, `json` fence) at end of §00. Replaces the prior `text`-fenced summary (auditor counts `text` as 0/3 contracts under G-CON-01; `json` counts as a real contract). Also wrapped bare `C-XXX` in §09 line 193 inside inline backticks so the auditor's `INLINE_CODE_RX` strip pass excludes it from `todo_density` (was contributing the sole drift-LOW finding). Pre-Phase-48 audit had §01 at the **lowest implementability score in the entire tree** (impl=40); projected post-fix impl ≥ 75, weighted ≥ 87. Lockstep: §00 v3.4.0 → v3.5.0; §98 v4.2.0 → v4.3.0.
+> **v4.3.0 update (Phase 89 — front-matter keys reference):** Added a "Front-matter keys reference (Phase 89)" section to §00 documenting the `kind:` rubric branch selector (5 enum values: active-spec / future-spec / tracker / index / meta-toolchain — each with impl baseline, bonus structure, cap, and when to use) and the `todo_audit_exempt: true` opt-out (v2.14, reviewer-gated to auditor-self-reference modules). Added AC-SAG-21 (kind: branch selection) and AC-SAG-22 (todo_audit_exempt opt-out) in §97. These ACs mirror `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` AC-31-15..AC-31-22 covering rubric v2.10–v2.14. Lockstep: §00 v3.5.0 → v3.6.0; §97 v4.0.0 → v4.1.0; §98 v4.5.0 → v4.6.0.
+
 
 > **v4.1.0 update (Phase 38):** Added [`12-queued-decisions-trail.md`](./12-queued-decisions-trail.md) v1.0.0 — codifies the queued-decisions trail format (Q-identifier scheme, 4 status markers, lockstep edits, audit-recovery procedure, 5 ACs). Closes the gap where the project-memory Core lockstep rule referenced `mem://specs/git-logs.md` as a *demonstrated* format without ever specifying it. Inventory now also reflects slot 11 (`11-root-readme-conventions.md`, present since Phase 24 but missed in earlier §99 inventory rebuild).
 
