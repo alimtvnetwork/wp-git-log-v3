@@ -18,7 +18,7 @@
 | Consistency     | 100 | §99 present + bijection table maintained |
 | Clarity         | 100 | waffle/kchar = 0.08 (excellent) |
 | Testability     | 10 | Zero GWT blocks → fires gate `G-AC-02` (cap=60) and `G-AC-01`-adjacent |
-| Maintainability | 90 | 2 unresolved TODO/FIXME markers |
+| Maintainability | 100 | 0 unresolved markers (Phase 39b — both resolved 2026-04-27) |
 
 **An AI given v2 today can build ~76% of the plugin without asking a human.** The 24% gap is enumerated below with file/line targets.
 
@@ -111,13 +111,13 @@ Each gap below is paired with the **exact file + section to patch** so a human c
   Repeat for §10–§13.
 - **Effort:** ~10 min (5 stub files of 3 lines each).
 
-### GAP-V2-07 — Two raw TODO/FIXME markers in body [LOW]
+### GAP-V2-07 — Two raw TODO/FIXME markers in body [LOW — RESOLVED 2026-04-27, Phase 39b]
 
-- **Symptom:** `30-threat-model.md:62` ("TODO: add seed") and `32-cli-test-plan.md:202` ("TODO comment linking the GitHub issue"). Auditor counts `todo_density = 2`, currently below the gate `G-TODO-01` threshold (≥3) but cosmetic.
-- **Fix target:**
-  - `30-threat-model.md:62` — add the `AuditActionType.ConfigChange` seed to `18-schema.sql` and remove the parenthetical TODO.
-  - `32-cli-test-plan.md:202` — replace "TODO comment linking…" with "linking the issue tracked in `mem://specs/git-logs.md`".
-- **Effort:** ~5 min each.
+- **Original symptom:** `30-threat-model.md:66` ("TODO: add seed") and `32-cli-test-plan.md:202` ("TODO comment linking the GitHub issue"). Auditor counted `todo_density = 2`.
+- **Resolution:**
+  - `30-threat-model.md:66` — replaced parenthetical "(TODO: add seed)" with explicit reference "(seed id 25, shipped in v2.8.0 — see `16-seed-data.md` and `18-schema.sql:409`)". Confirmed `ConfigChange` seed already lives in `18-schema.sql:409`; backfilled the corresponding row into `16-seed-data.md` AuditActionType table (id 25).
+  - `32-cli-test-plan.md:202` — replaced "TODO comment linking the GitHub issue" with the explicit `# QUARANTINE(<issue-ref>): <reason>` comment-format contract, enforceable by `linter-scripts/check-quarantine-tracking.py`.
+- **Outcome:** `todo_density = 0`. Maintainability dimension lifted from 90 → 100.
 
 ### GAP-V2-08 — `16` slot collision [COSMETIC]
 
@@ -192,7 +192,7 @@ Legend: ✅ kept, ✏ changed shape, ❌ removed, ➕ new in v2.
 | 6 | GAP-V2-06 (5 stub files for §09–§13) | `spec/22-git-logs-v2/0{9..13}-*.md` | 10m | +2 |
 | 7 | GAP-V2-10 (rate-limit caps in §04) | `04-rest-api-endpoints.md` | 10m | +2 |
 | 8 | GAP-V2-08 (rename `16-seed-data` → `37`) | filesystem + grep cross-refs | 5m | +1 |
-| 9 | GAP-V2-07 (resolve 2 TODO markers) | `30-threat-model.md`, `32-cli-test-plan.md` | 10m | +1 |
+| 9 | ~~GAP-V2-07 (resolve 2 TODO markers)~~ ✅ Phase 39b 2026-04-27 | `30-threat-model.md`, `32-cli-test-plan.md`, `16-seed-data.md` | 10m | +1 |
 | 10 | GAP-V2-09 (link client CLI from §00) | `00-overview.md` | 2m | +1 |
 
 **Total effort:** ~2h 22m. **Projected score:** 100/100 (A+).
