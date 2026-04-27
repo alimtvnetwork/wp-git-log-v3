@@ -1,6 +1,6 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.1.0
+**Version:** 2.2.0
 **Updated:** 2026-04-26
 
 > **v2.1.0 update (Phase 34):** Propagated rubric v2.0.0 from `check-tree-health.cjs` into `generate-dashboard-data.cjs`. New top-level `RubricV2` block in `dashboard-data.json`; `Health.Score` now driven by rubric (legacy deduction-based score retained as `Health.LegacyScore`). [`11-generate-dashboard-data.md`](./11-generate-dashboard-data.md) v1.0.0 → v1.1.0; AC-11-01 schema corrected (was a 3-key shape that never matched the actual output); AC-11-04 added (parity with `check-tree-health.cjs`). Verified: dashboard reports 100/100 (A+), 162/162 quality credits, parity confirmed.
