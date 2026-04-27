@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.4.0
-**Updated:** 2026-04-27 (Phase 101: added AC-SAG-25 pinning `mermaid` and `jsdom` to exact versions and requiring any major-version bump to re-run the syntax gate locally before merge. Phase 97: added AC-SAG-24 requiring every `spec/**/*.mmd` file to parse cleanly with the mermaid library under a jsdom shim, locked by a new CI gate. Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
+**Version:** 4.5.0
+**Updated:** 2026-04-27 (Phase 105: cross-referenced AC-SAG-25 to its general form AC-31-30 in §27 — "grammar-defining-library pinning pattern" applicable to any future linter-scripts gate built on a parser/schema/AST library. Phase 101: added AC-SAG-25 pinning `mermaid` and `jsdom` to exact versions and requiring any major-version bump to re-run the syntax gate locally before merge. Phase 97: added AC-SAG-24 requiring every `spec/**/*.mmd` file to parse cleanly with the mermaid library under a jsdom shim, locked by a new CI gate. Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
