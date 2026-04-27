@@ -527,11 +527,23 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
         # v2.9: evidenced-tracker bonuses — a tracker that documents process
         # via a Mermaid lifecycle diagram or a CI workflow contract earns
-        # credit even though it isn't a contract-bearing spec itself. Capped
-        # at 85 by hard ceiling below to preserve the rubric's tier ordering.
+        # credit even though it isn't a contract-bearing spec itself.
         if m.get("has_mermaid"):     impl += 5
         if m.get("has_ci_workflow"): impl += 5
-        impl = min(impl, 85)
+        # v2.13 (Phase 82): contract-bearing tracker bonus — a tracker that
+        # ALSO inlines a typed contract (SQL DDL / TS enum / JSON schema /
+        # OpenAPI / typed-language reference) supplies an authoritative
+        # schema for the issues it tracks. Each contract type adds +5; the
+        # cap raises 85 → 95 only when at least one fires, so prose-only
+        # trackers remain capped at 85.
+        contract_bonus = 0
+        if m["has_sql_ddl"]:                  contract_bonus += 5
+        if m["has_ts_enums"]:                 contract_bonus += 5
+        if m["has_json_schema"]:              contract_bonus += 5
+        if m["has_yaml_openapi"]:             contract_bonus += 5
+        if m.get("has_typed_lang_contract"):  contract_bonus += 5
+        impl += contract_bonus
+        impl = min(impl, 95 if contract_bonus > 0 else 85)
     elif is_index:
         impl = 70
         if m["overview_chars"] < 200: impl -= 15  # penalise zero-content indexes

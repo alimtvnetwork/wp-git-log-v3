@@ -673,3 +673,35 @@ jobs:
 ```
 
 See [`lifecycle-25-app-issues-02-consolidated-audit-findings-lifecycle.mmd`](./lifecycle-25-app-issues-02-consolidated-audit-findings-lifecycle.mmd) for the visual lifecycle.
+
+### Tracker Issue Log Schema — Phase 82 Normative
+
+The following SQL DDL is normative for any consumer that persists structured
+issue records derived from this tracker. It MUST be applied verbatim so
+downstream dashboards and migrations remain interoperable across trackers.
+
+```sql
+CREATE TABLE IF NOT EXISTS tracker_issue_p82 (
+    issue_id        BIGSERIAL PRIMARY KEY,
+    tracker_slug    TEXT        NOT NULL,
+    external_ref    TEXT        NULL,
+    title           TEXT        NOT NULL,
+    severity        SMALLINT    NOT NULL CHECK (severity BETWEEN 1 AND 5),
+    status          TEXT        NOT NULL CHECK (status IN ('open','in_progress','blocked','resolved','wontfix')),
+    opened_at       TIMESTAMPTZ NOT NULL DEFAULT now(),
+    resolved_at     TIMESTAMPTZ NULL,
+    resolution_hash CHAR(64)    NULL,
+    UNIQUE (tracker_slug, external_ref)
+);
+
+CREATE INDEX IF NOT EXISTS idx_tracker_issue_p82_open
+    ON tracker_issue_p82 (tracker_slug, opened_at DESC)
+    WHERE status IN ('open','in_progress','blocked');
+
+CREATE INDEX IF NOT EXISTS idx_tracker_issue_p82_severity
+    ON tracker_issue_p82 (severity DESC, opened_at DESC)
+    WHERE status <> 'resolved';
+```
+
+Consuming AI agents can generate verification queries and idempotent
+migrations from this contract without inspecting consumer code.
