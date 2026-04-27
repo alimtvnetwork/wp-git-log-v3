@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Master Coding Guidelines
 
 **Version:** 3.2.0  
@@ -48,3 +53,15 @@ Previously a single 1122-line file, now split into focused modules under 300 lin
 ---
 
 ## Cross-References
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Master guidelines target multiple regional linter implementations (Go/Python/TS) that live in downstream repos. Cross-implementation drift is acknowledged and tracked outside this spec-only repository.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+

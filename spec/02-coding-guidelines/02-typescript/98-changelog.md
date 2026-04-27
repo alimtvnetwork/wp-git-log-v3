@@ -37,3 +37,7 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 ---
 
 *Keep this file updated when specs change.*
+
+| Date | Bump | Notes |
+|------|------|-------|
+| 2026-04-26 | minor | Phase 27b: Added `kind: future-spec` frontmatter + Drift Acknowledgment section. Module now exempt from drift audit findings (implementation lives in downstream repos). |

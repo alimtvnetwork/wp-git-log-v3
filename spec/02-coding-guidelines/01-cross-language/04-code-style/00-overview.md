@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Cross-Language Code Style — Braces, Nesting, Spacing & Function Size
 
 **Version:** 3.2.0  
@@ -59,3 +64,15 @@ These rules are the **single source of truth** — language-specific specs refer
 - [Go Enum Specification](../../03-golang/01-enum-specification/00-overview.md) — Go enum pattern
 - [TypeScript Enums](../../02-typescript/00-overview.md) — TypeScript string enums
 - [PHP Enum Classes](../../04-php/01-enums.md) — PHP backed enum patterns
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Spec mandates 15-line function limit; implementation in `linter-scripts/validate-guidelines.go` enforces this rule but exact threshold synchronization is owned by the downstream linter repo. Treated as forward-looking contract.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+
