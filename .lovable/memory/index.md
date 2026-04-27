@@ -6,7 +6,7 @@ Markdown spec docs live under `spec/`; numbered `NN-name/` folders, each with `0
 Never touch `.release/`. Bump at least minor version on code changes.
 Do NOT append boilerplate "If you have any question..." or "Do you understand?..." blocks.
 Always list remaining tasks at end of session; on `next`, find pending work from memory if task list is empty AND EXECUTE the next task, never just list.
-Spec edits keep these in lockstep: target file banner + §98 changelog row + §99 health/inventory + `mem://specs/git-logs.md` queued-decisions trail.
+Spec edits keep these in lockstep: target file banner + §98 changelog row + §99 health/inventory + `mem://specs/<slug>.md` queued-decisions trail. Format spec: `spec/01-spec-authoring-guide/12-queued-decisions-trail.md`.
 File slots are immutable once shipped — never reuse a number; if content moves, rename the slot and add a §99 audit row (precedent: §16 → §37 in v2.8.6).
 Full-tree audit baseline: 45/100 (F) per `spec/17-consolidated-guidelines/31-full-tree-ai-audit-v4.md`. Folder-17 partial audits (25/26/29) score 99.8 but do NOT cover the rest.
 Session-persistence regression observed twice — verify file presence at start of each session before declaring "fixed".
