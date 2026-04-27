@@ -210,8 +210,11 @@ def deterministic_metrics(folder: Path) -> dict:
     # CI/CD pipeline modules — distinct from generic single-snippet YAML.
     has_ci_workflow = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0) >= 5
 
-    # cross-spec link health
-    links = LINK_RX.findall(body_text)
+    # cross-spec link health — v2.6: scan code-stripped prose so example
+    # links inside ```markdown / ```text fences (path-syntax templates in
+    # §01-spec-authoring-guide etc.) don't get counted as broken.
+    prose_for_links = strip_code(body_text)
+    links = LINK_RX.findall(prose_for_links)
     broken = 0; total = 0
     for _, target in links:
         if target.startswith(("http://","https://","mailto:")):
