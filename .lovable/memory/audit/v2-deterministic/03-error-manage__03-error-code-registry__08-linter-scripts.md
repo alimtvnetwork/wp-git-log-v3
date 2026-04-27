@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **71/100 (C)**  
-**Blast radius:** 0/10
+**Implementability Score:** **76/100 (B)**  
+**Blast radius:** 2/10
 
-> Deterministic score 71/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.
+> Deterministic score 76/100 (B) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 30 | 10.5 |
+| Implementability | 35% | 45 | 15.8 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,17 +31,18 @@
   "kind": "future-spec",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 4443,
+  "overview_chars": 6067,
   "ac_chars": 3308,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 1,
+  "code_blocks_total": 2,
   "code_blocks_by_lang": {
-    "text": 1
+    "text": 1,
+    "json": 1
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
@@ -57,7 +58,7 @@
 
 ## Implementability Blockers
 
-- No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
+_(none — AI can build this)_
 
 ## Code Mapping
 
@@ -69,11 +70,5 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
 
 ### Detail + Proposed Corrections
-
-#### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
-- **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"text": 1}
-- **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.
