@@ -287,6 +287,12 @@ def deterministic_metrics(folder: Path) -> dict:
     waffle = len(WAFFLE_RX.findall(prose_text))
     waffle_per_kchar = round(waffle / chars * 1000, 2)
     todo_count = len(TODO_RX.findall(prose_text))
+    # v2.14 (Phase 83): per-module front-matter opt-out for the TODO penalty.
+    # Auditor-self-reference modules legitimately quote TODO markers when
+    # documenting how the TODO detector works. Setting `todo_audit_exempt: true`
+    # in the overview front-matter zeroes todo_count for completeness scoring.
+    if fm and TODO_EXEMPT_RX.search(fm.group(1)):
+        todo_count = 0
 
     # mermaid + other companion artefacts
     mmd_files = list(folder.glob("*.mmd"))
