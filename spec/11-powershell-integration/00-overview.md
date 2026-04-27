@@ -561,3 +561,20 @@ jobs:
 
 See [`lifecycle-powershell-bootstrap-flow.mmd`](lifecycle-powershell-bootstrap-flow.mmd) for the visual lifecycle.
 
+
+### TypeScript Enum Mirror — Phase 75
+
+```ts
+// Mirror of the typed-language ContractError enum for TS consumers.
+export enum ContractCode {
+  OK = "OK",
+  INVALID_INPUT = "INVALID_INPUT",
+  POLICY_VIOLATION = "POLICY_VIOLATION",
+}
+
+export interface ContractError {
+  code: ContractCode;
+  message: string;
+}
+```
+

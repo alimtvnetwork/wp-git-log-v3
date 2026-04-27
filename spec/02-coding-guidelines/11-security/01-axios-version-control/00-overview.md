@@ -255,3 +255,45 @@ jobs:
 
 See [`lifecycle-axios-policy-enforcement.mmd`](lifecycle-axios-policy-enforcement.mmd) for the visual lifecycle.
 
+
+### Typed-Language Reference Contracts — Phase 75
+
+The following typed-language stubs are normative: any code generated from
+this spec MUST conform to these signatures.
+
+```go
+// Package contract: minimal Go interface for the rule enforced by this spec.
+package contract
+
+type ContractError struct {
+    Code    string `json:"code"`
+    Message string `json:"message"`
+}
+
+type Validator interface {
+    Validate(input any) (*ContractError, error)
+}
+```
+
+```rust
+// Rust mirror — same shape, idiomatic naming.
+pub struct ContractError {
+    pub code: String,
+    pub message: String,
+}
+
+pub trait Validator {
+    fn validate(&self, input: &str) -> Result<(), ContractError>;
+}
+```
+
+```csharp
+// C# mirror — DTO + validator interface.
+public sealed record ContractError(string Code, string Message);
+
+public interface IValidator
+{
+    ContractError? Validate(object input);
+}
+```
+

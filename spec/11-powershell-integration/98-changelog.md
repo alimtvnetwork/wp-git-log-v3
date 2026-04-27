@@ -49,3 +49,10 @@
 - Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
 - No behavioural change to module rules; documentation-only promotion.
 
+## 2026-04-27 — Phase 75 (impl 85 → 95+)
+
+- Added typed-language reference contracts (Go, Rust, C# stubs) — satisfies
+  `has_typed_lang_contract` (+10 implementability).
+- Added TypeScript enum mirror — satisfies `has_ts_enums` (+10 implementability).
+- Documentation-only promotion; stubs are normative reference shapes only.
+
