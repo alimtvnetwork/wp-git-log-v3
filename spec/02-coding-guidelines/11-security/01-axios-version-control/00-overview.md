@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Axios Version Control Policy
 
 **Version:** 3.2.0  
@@ -110,3 +115,15 @@ IMPORTANT — AI INSTRUCTION:
 ```
 
 *Axios version control policy — moved to coding guidelines 2026-04-02*
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+`check-axios-version.sh` lives in downstream JS-tooling repo; spec-only repo holds the version-pinning contract.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

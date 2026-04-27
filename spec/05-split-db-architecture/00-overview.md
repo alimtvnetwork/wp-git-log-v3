@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Split Database Architecture
 
 > **Version:** 3.0.0  
@@ -119,3 +124,15 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Split-DB architecture is a forward-looking pattern; database/auth implementations (`internal/db/*`, `internal/auth/*`) live in downstream Go application repos.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

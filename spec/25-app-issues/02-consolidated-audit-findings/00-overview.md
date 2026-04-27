@@ -591,3 +591,15 @@ rg -n '\$is(Not|No|Non)[A-Z]' spec/_archive/21-git-logs-v1
 ## Status
 
 **24 findings recorded.** Awaiting remediation in the order above. No code changes performed.
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Phase-2 audit file (`01-phase-2-git-logs-audit`) lives one folder up at `spec/25-app-issues/01-phase-2-git-logs-audit/`. Reference is intentional cross-folder link.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

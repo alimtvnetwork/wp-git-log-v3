@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # CI/CD Pipeline Workflows
 
 **Version:** 3.2.0  
@@ -139,3 +144,15 @@ npm run sync && npm run lint && npm run test
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Subfolder layout describes target downstream-repo structure; spec-only repo flattens these into root for authoring convenience.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+

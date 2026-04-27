@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Golang Standards
 
 **Version:** 3.2.0  
@@ -62,3 +67,15 @@ Go-specific coding standards and patterns.
 ## Cross-References
 
 _See parent folder's `00-overview.md` for broader context._
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Spec mandates apperror.Result error handling; the lone Go file in this repo is a meta-linter for spec validation, not application code. Real Go implementation lives downstream.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+
