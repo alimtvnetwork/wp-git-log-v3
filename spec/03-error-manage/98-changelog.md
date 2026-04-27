@@ -1,9 +1,13 @@
 # Error Management — Changelog
 
-**Version:** 3.2.0  
+**Version:** 3.4.0  
 **Last Updated:** 2026-04-27
 
 ---
+
+## 3.4.0 — 2026-04-27
+
+- Phase 128: added `03-error-code-registry/06-lint-rule-catalog.md` (v1.0.0) — canonical SoT for 7 cross-folder lint rule IDs. Pre-req for Phase 117 containment harness (Candidate O).
 
 ## 3.3.0 — 2026-04-27
 

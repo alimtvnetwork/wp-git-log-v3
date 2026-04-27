@@ -71,3 +71,8 @@ No external cross-references detected. ✅
 - CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
 - Implementability raised 90 → 95 (deterministic audit).
 
+### 2026-04-27 — Phase 128 lint-rule catalog
+
+- Added `06-lint-rule-catalog.md` (v1.0.0) — canonical SoT for 7 lint rule IDs cited across §02/§04/§05/§06/§17. Closes Phase 126 Candidate O. Inventory: 8 → 9 module files.
+- Lockstep: §97 acceptance surface updated, §98 changelog row appended.
+
