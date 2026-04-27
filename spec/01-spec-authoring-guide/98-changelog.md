@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.11.0
+**Version:** 4.12.0
 **Last Updated:** 2026-04-27
 
 ---
+
+## 4.12.0 — 2026-04-27
+
+- Phase 115: added **AC-SAG-27** at §97 — the **enumeration-restatement vs API-surface-use** distinction surfaced during Phase 114's AC-31-31 bounding sweep, promoted from §31 inline prose to a §01 meta-spec contract because the underlying triage discipline ("is this an enumeration or an API surface?") applies whenever any spec module considers a parity test, not only within §27. Specifies: (a) the two definitions (enumeration-restatement = same finite set restated across N≥3 sites with same domain semantics and no canonical SoT; API-surface-use = each site cites a distinct subset of a larger set whose canonical enumeration lives in a single SoT); (b) the four diagnostic questions Q1–Q4 (same set?, same semantics?, no single SoT?, silent drift risk?) — `NO` to ANY disqualifies the candidate from AC-31-31 parity-test treatment; (c) the routing rule (all four `YES` → register AC-31-31 row + author parity test; any `NO` → record dismissal in §31's "Currently-NOT-qualifying enumerations" paragraph, no parity test); (d) the worked Phase-114 dismissal record as a 5-row table (audit CLI flags / per-script exit codes / audit-script exit-code table / CI threshold floors / gate-cap thresholds) preserved as the canonical training set; (e) the promotion rationale (§01 governs how every future spec author thinks about cross-file contracts; without AC-SAG-27, future contributors authoring parity tests in `spec/22-git-logs-v2/` or `spec/04-database-conventions/` would re-derive triage from scratch and might author category-error parity tests that lock API surfaces); (f) the declarative-with-runtime-companion structure (the worked-dismissal table is kept in lockstep with §31's dismissal paragraph; reviewer attention against the cross-referenced lockstep catches new parity tests landing without a registry row). No code change in this phase — pure declarative contract promotion. Lockstep: §97 v4.6.0 → v4.7.0; §99 v4.8.0 → v4.9.0. CI gate count unchanged at **13**; `RUBRIC_VERSION` unchanged at **v2.22** (no script changes). The AC-31-31 registry at §27 remains at 4 rows; §31's "Currently-NOT-qualifying enumerations" paragraph is now the §27-side mirror of §97's worked-dismissal table.
 
 ## 4.11.0 — 2026-04-27
 
