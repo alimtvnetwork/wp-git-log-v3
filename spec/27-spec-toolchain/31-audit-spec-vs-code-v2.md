@@ -128,8 +128,8 @@ After the rubric computes raw per-dimension scores, a fixed table of **hard gate
 | `G-LINK-02` | alignment | 60 | `links_broken >= 3` |
 | `G-AC-01`   | testability | 20 | `ac_count == 0` |
 | `G-AC-02`   | testability | 60 | `ac_count > 0 and gwt_block_count == 0` |
-| `G-CON-01`  | implementability | 50 | No `sql/json/ts/yaml` contract block in body |
-| `G-CON-02`  | implementability | 30 | `overview_chars < 500` |
+| `G-CON-01`  | implementability | 50 | No `sql/json/ts/yaml` contract block in body (skip when `kind ∈ {tracker, index, meta-toolchain}`, v2.7; `meta-toolchain` also satisfies via `has_normative_contract` text-block, v2.8) |
+| `G-CON-02`  | implementability | 30 | `overview_chars < 500` (skip when `kind ∈ {tracker, index}`, v2.7) |
 | `G-WAF-01`  | clarity | 70 | `waffle_per_kchar > 3` |
 | `G-WAF-02`  | clarity | 50 | `waffle_per_kchar > 6` |
 | `G-CR-01`   | maintainability | 60 | Missing `99-consistency-report.md` |

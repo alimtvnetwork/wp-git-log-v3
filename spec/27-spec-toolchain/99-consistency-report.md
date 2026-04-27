@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.11.0
+**Version:** 2.12.0
 **Updated:** 2026-04-27
+
+> **v2.12.0 update (Phase 45):** Cleared the §27 implementability bottleneck (55 → 90, weighted 78 → 89). Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.7 → **v2.8** with `has_normative_contract` metric + dedicated `meta-toolchain` rubric branch (baseline 75, `+10` text-contract, `+5` ≥30 md_files). Inlined "Normative Contract — Toolchain Bijection" `text` block into [`00-overview.md`](./00-overview.md) v1.6.0 → v1.7.0 (8 number ranges, 7 INVs, 3 DELs, 5 FAILs). [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.6.0 → v1.7.0 with **AC-31-16**. Measured: **mean weighted 82.3 → 84.3** ✅ (target hit); mean implementability 65.6 → 67.8; tree health 100/100 strict.
 
 > **v2.11.0 update (Phase 42):** Auditor `linter-scripts/audit-spec-vs-code-v2.py` v2.6 → **v2.7** — `skip_kinds` extended to `{tracker, index, meta-toolchain}` on `G-CON-01` and `{tracker, index}` on `G-CON-02` (rubric already exempted these kinds; gates now mirror). Inlined JSON-Schema contracts in 5 C-tier specs (`08-file-folder-naming`, `11-security`, `08-linter-scripts`, `09-templates`, `01-phase-2-git-logs-audit`). Fixed self-inflicted broken-link FP in `27-spec-toolchain` by rewriting two prose example mentions abstractly. [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.5.0 → v1.6.0 with **AC-31-15**. Measured: **C-tier modules 11 → 0; mean weighted 82.3 → 84.1**; tree health 100/100 strict.
 
