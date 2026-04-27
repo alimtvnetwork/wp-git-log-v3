@@ -41,3 +41,8 @@
 ## 2026-04-27 — Phase 62 impl-sweep
 
 - Phase 62: appended Go Standards Reference API OpenAPI to satisfy `has_yaml_openapi` rubric; added TS enum mirror to satisfy `has_ts_enums` rubric.
+
+## 2026-04-27 — Phase 67 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 67 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

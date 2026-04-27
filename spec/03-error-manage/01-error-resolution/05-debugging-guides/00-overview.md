@@ -191,3 +191,23 @@ components:
           type: array
           items: { type: string }
 ```
+
+
+## Phase 67 Reference
+
+### Lifecycle Diagram (Phase 67)
+
+See `lifecycle-debug-guide.mmd` for the recurring-issue → debug-guide authoring → publication flow.
+
+```mermaid
+flowchart TD
+    A[Recurring Issue Identified] --> B[Author debug guide]
+    B --> C[Steps: reproduce → diagnose → fix]
+    C --> D[Add code snippets + log examples]
+    D --> E[Cross-link to error codes]
+    E --> F{Peer Review Pass?}
+    F -- No --> G[Revise]
+    G --> F
+    F -- Yes --> H[Publish to debugging-guides/]
+    H --> I[Index in error-resolution overview]
+```
