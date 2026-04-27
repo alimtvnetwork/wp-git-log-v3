@@ -1,6 +1,23 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.16** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.17** — AI-Implementability Edition.
+
+v2.17 (2026-04-27, Phase 99):
+  - **No rubric change.** Metadata + output-header sync only:
+    * `RUBRIC_VERSION` constant lifted from "v2.16" to "v2.17" so the
+      generated `00-index.md` and `EXECUTIVE-SUMMARY.md` advertise the
+      current QA-tooling baseline (Phases 81/90/91/94/95/97/98).
+    * The two summary outputs gain a "QA tooling baseline" footer line
+      enumerating the gates that surround the score: Phase 81's
+      `--min-weighted` / `--min-impl` floors, Phase 90's `--explain`
+      debugger, the Phase 91/94/95 self-test triad, Phase 97's mermaid
+      syntax gate, and Phase 98's inventory README. A reader of the
+      audit output now knows the score is one signal among 8 strict
+      gates, not the only signal.
+  - Determinism guarantee preserved: `RUBRIC_VERSION` is a static string,
+    not derived from time/env. The Phase 95 self-test continues to pass
+    byte-identically (sha256 hash will shift exactly once on the v2.17
+    rollout, then re-stabilise).
 
 v2.16 (2026-04-27, Phase 90):
   - New `--explain=<substring>` CLI flag for debugging score outliers.
