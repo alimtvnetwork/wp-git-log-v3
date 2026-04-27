@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.4** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.5** — AI-Implementability Edition.
+
+v2.5 (2026-04-27, Phase R5):
+  - Meta-token sequence exemption: the canonical reference form
+    `TODO/TBD/FIXME` (or any 2+ slash-joined work-tracking tokens) is now
+    stripped before counting individual hits. Spec content that *defines*
+    the audit (changelog rows, AC text, fix-checklist categories) no
+    longer self-penalises. Real `TODO:` work markers still count.
+  - New frontmatter `kind: meta-toolchain` exempts auditor-self-reference
+    modules entirely from G-TODO-01.
 
 v2.4 (2026-04-27, Phase R4):
   - TODO/TBD/FIXME and waffle-word scanners now strip fenced code blocks
