@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **96/100 (A+)**  
-**Blast radius:** 4/10
+**Implementability Score:** **98/100 (A+)**  
+**Blast radius:** 7/10
 
-> Deterministic score 96/100 (A+) for spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics.
+> Deterministic score 98/100 (A+) for spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.19. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.19. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 95 | 33.2 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,23 +31,24 @@
   "kind": "future-spec",
   "md_files": 6,
   "mmd_files": 1,
-  "overview_chars": 6604,
+  "overview_chars": 7835,
   "ac_chars": 5648,
   "ac_count": 11,
   "gwt_block_count": 10,
   "consistency_report": true,
-  "code_blocks_total": 47,
+  "code_blocks_total": 48,
   "code_blocks_by_lang": {
     "python": 1,
     "yaml": 6,
     "mermaid": 1,
+    "sql": 1,
     "plain": 14,
     "typescript": 14,
     "tsx": 1,
     "json": 8,
     "go": 2
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": true,

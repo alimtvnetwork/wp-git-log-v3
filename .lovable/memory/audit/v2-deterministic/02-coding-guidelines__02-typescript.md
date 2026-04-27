@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **96/100 (A+)**  
-**Blast radius:** 4/10
+**Implementability Score:** **98/100 (A+)**  
+**Blast radius:** 7/10
 
-> Deterministic score 96/100 (A+) for spec/02-coding-guidelines/02-typescript.
+> Deterministic score 98/100 (A+) for spec/02-coding-guidelines/02-typescript.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 95 | 33.2 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,12 +31,12 @@
   "kind": "future-spec",
   "md_files": 16,
   "mmd_files": 1,
-  "overview_chars": 12526,
+  "overview_chars": 13757,
   "ac_chars": 16692,
   "ac_count": 23,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 89,
+  "code_blocks_total": 90,
   "code_blocks_by_lang": {
     "json": 1,
     "ts": 1,
@@ -45,12 +45,13 @@
     "python": 1,
     "yaml": 6,
     "mermaid": 2,
+    "sql": 1,
     "typescript": 73,
     "bash": 1,
     "javascript": 1,
     "text": 1
   },
-  "has_sql_ddl": false,
+  "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": true,
