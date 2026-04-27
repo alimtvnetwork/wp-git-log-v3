@@ -84,8 +84,9 @@
 | `linter-scripts/spec-folder-refs.allowlist` | [62](./62-spec-folder-refs-allowlist.md) | ✅ |
 | `linter-scripts/readme-cross-links.md` | [63](./63-readme-cross-links-md.md) | ✅ |
 | `.github/workflows/spec-health.yml` | [70](./70-spec-health-yml.md) | ✅ |
+| `.github/workflows/spec-monthly-audit.yml` | [71](./71-spec-monthly-audit-yml.md) | ✅ (Phase 35) |
 
-**Bijection: 28/28 ✅** — every executable / configuration artifact has exactly one spec section.
+**Bijection: 29/29 ✅** — every executable / configuration artifact has exactly one spec section.
 
 **Subdirectory:** `linter-scripts/installer-templates/` is intentionally not specced here — it is a *content directory* not a *script*. If installer templates ever get their own conventions, add a sibling module (slot 28+) and reference from §00.
 
