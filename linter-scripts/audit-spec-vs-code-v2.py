@@ -97,12 +97,21 @@ INLINE_CODE_RX = re.compile(r"`[^`\n]+`")
 FRONTMATTER_RX = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 KIND_RX        = re.compile(r"^kind:\s*([A-Za-z0-9_-]+)\s*$", re.M)
 
+TODO_TOKEN = r"(?:TODO|TBD|FIXME|XXX|HACK)"
+META_TOKEN_SEQ_RX = re.compile(rf"\b{TODO_TOKEN}(?:/{TODO_TOKEN}){{1,4}}\b")
+
 def strip_code(text: str) -> str:
-    """Remove fenced code blocks and inline code so TODO/waffle scanners
-    see prose only. Tokens like TODO inside ```python blocks are not
-    spec-level incompleteness markers."""
+    """Remove fenced code blocks, inline code, and meta-token sequences
+    so TODO/waffle scanners see prose only.
+
+    v2.4: strips ```...``` fences and `inline` spans.
+    v2.5: also strips slash-joined meta references like `TODO/TBD/FIXME`
+    that occur in audit-self-reference content (changelog rows, AC text,
+    fix-checklist category labels). Standalone `TODO:` work markers in
+    prose still count."""
     no_fences = CODE_BLOCK_RX.sub("", text)
-    return INLINE_CODE_RX.sub("", no_fences)
+    no_inline = INLINE_CODE_RX.sub("", no_fences)
+    return META_TOKEN_SEQ_RX.sub("", no_inline)
 
 # ---------------- code surface ----------------
 def collect_code_index() -> str:
