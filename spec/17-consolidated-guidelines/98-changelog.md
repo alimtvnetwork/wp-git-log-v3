@@ -17,6 +17,12 @@
 
 ## Releases
 
+### 2.2.0 — 2026-04-26 (Phase 32 — Phase 26-31 rollup)
+- **Added** `32-phase-26-31-rollup.md` — single-session retrospective covering Phases 26 → 31 (67 spec remediations + rubric upgrade v1.x → v2.0.0). Documents pattern catalogue (`kind: future-spec`, inline JSON-schema text blocks, §99 quality headings, lockstep edits) and handoff notes for future AI sessions.
+- **Added** §00 inventory rows for slots 31 and 32 (slot 31 was missing from inventory despite being on disk since v3.5.0).
+- **Outcome:** Closes Phase 1 + 2 of `31-full-tree-ai-audit-v4.md` roadmap. Phase 3 remains: R1 (AI re-audit deferred on `lovable_ai` runtime), R2 (dashboard rubric-v2 propagation), R3 (audit cadence formalisation). One user-blocked decision (B1, §07 App identity fields) carried forward.
+- Banner v2.1.0 → v2.2.0; lockstep §99 + memory + `spec/00-overview.md` (no change — slot already inventoried) updated.
+
 ### 2.1.0 — 2026-04-26 (Phase 20a regression fix)
 - **Fixed** §97 — hyphenated 6 literal `T-O-D-O`/`T-B-D`/`F-I-X-M-E` markers in AC-01 source notes so the deterministic auditor's marker-detection regex `\b(T​O​D​O|T​B​D|F​I​X​M​E)\b` (zero-width separators inserted between letters here so this explanation does not re-trip the audit) no longer flags this AC body as containing 6 unfinished-work markers.
 - **Fixed** §97 — rewrote 2 angle-bracket placeholder Markdown links in AC-02 with spacing inside the brackets and parens (`[ <label> ]( ./<NN-name>.md )` form) so the auditor's link regex `\[([^\]]+)\]\(([^)#]+\.md)(?:#[^)]*)?\)` (which requires no spaces between `]` and `(`) no longer treats them as cross-spec links to nonexistent files.
