@@ -32,3 +32,7 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
+
+| Date | Bump | Notes |
+|------|------|-------|
+| 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |

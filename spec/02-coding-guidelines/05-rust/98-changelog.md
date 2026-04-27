@@ -20,3 +20,7 @@
 ## [1.0.0] — 2026-03-09
 
 - Initial Rust standards: naming, error handling, async, memory safety, testing, FFI
+
+| Date | Bump | Notes |
+|------|------|-------|
+| 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
