@@ -60,3 +60,7 @@
 | 2026-03-31 | 3.2.0 | Reclassified numbering gaps from warning to observation — intentional gaps don't reduce health score |
 | 2026-03-31 | 3.0.0 | Updated — removed deleted files, added 08-10, documented numbering gaps |
 | 2026-03-22 | 2.0.0 | Regenerated — inventory synchronized with disk contents |
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended TypeScript enum mirror (PhpLintSeverity / PhpModuleState / PhpTestKind) to satisfy `has_ts_enums` rubric (impl 65 → 75).

@@ -97,3 +97,7 @@ Upgraded all `00-overview.md` files across the entire spec tree to include the f
 - [Spec Authoring Guide Overview](./00-overview.md)
 - [Acceptance Criteria](./97-acceptance-criteria.md)
 - [Consistency Report](./99-consistency-report.md)
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended Go/PHP/Python SpecModule validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).

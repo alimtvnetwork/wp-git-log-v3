@@ -273,3 +273,110 @@ export enum SecurityFindingSeverity {
   Info    = "info",
 }
 ```
+
+
+---
+
+## Phase 57 Reference: Typed-Language Security Validators
+
+The security guidelines define a normative `SecurityFinding` shape and an
+allowlist-based dependency policy. Reference implementations in Go, PHP and
+Python below are validated by CI.
+
+### Go
+
+```go
+package security
+
+import (
+    "errors"
+    "fmt"
+)
+
+type Severity string
+
+const (
+    SeverityCritical Severity = "critical"
+    SeverityHigh     Severity = "high"
+    SeverityMedium   Severity = "medium"
+    SeverityLow      Severity = "low"
+)
+
+type SecurityFinding struct {
+    ID          string   `json:"id"`
+    Severity    Severity `json:"severity"`
+    Package     string   `json:"package"`
+    Version     string   `json:"version"`
+    FixedIn     string   `json:"fixed_in,omitempty"`
+    Description string   `json:"description"`
+}
+
+var ErrUnpinnedDep = errors.New("security: dependency is not version-pinned")
+
+func (f SecurityFinding) Validate() error {
+    if f.ID == "" || f.Package == "" || f.Version == "" {
+        return fmt.Errorf("security: id/package/version are required")
+    }
+    switch f.Severity {
+    case SeverityCritical, SeverityHigh, SeverityMedium, SeverityLow:
+    default:
+        return fmt.Errorf("security: invalid severity %q", f.Severity)
+    }
+    return nil
+}
+```
+
+### PHP
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Lovable\Security;
+
+final class SecurityFinding
+{
+    public function __construct(
+        public readonly string $id,
+        public readonly string $severity, // critical|high|medium|low
+        public readonly string $package,
+        public readonly string $version,
+        public readonly ?string $fixedIn,
+        public readonly string $description,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->id === '' || $this->package === '' || $this->version === '') {
+            throw new \InvalidArgumentException('id/package/version are required');
+        }
+        if (!\in_array($this->severity, ['critical','high','medium','low'], true)) {
+            throw new \InvalidArgumentException("invalid severity: {$this->severity}");
+        }
+    }
+}
+```
+
+### Python
+
+```python
+from dataclasses import dataclass
+from typing import Optional
+
+VALID_SEVERITIES = {"critical", "high", "medium", "low"}
+
+@dataclass(frozen=True)
+class SecurityFinding:
+    id: str
+    severity: str
+    package: str
+    version: str
+    fixed_in: Optional[str]
+    description: str
+
+    def validate(self) -> None:
+        if not (self.id and self.package and self.version):
+            raise ValueError("id/package/version are required")
+        if self.severity not in VALID_SEVERITIES:
+            raise ValueError(f"invalid severity: {self.severity}")
+```

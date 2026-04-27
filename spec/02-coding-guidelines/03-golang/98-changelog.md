@@ -46,3 +46,7 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended TypeScript enum mirror (GoLintSeverity / GoModuleState / GoTestKind) to satisfy `has_ts_enums` rubric (impl 65 → 75).

@@ -254,3 +254,100 @@ export enum LinterReportFormat {
   }
 }
 ```
+
+
+---
+
+## Phase 57 Reference: Typed-Language Linter Result Validators
+
+The error-code-registry linter scripts emit a normative `LinterResult` shape.
+Reference implementations below ensure cross-language parity.
+
+### Go
+
+```go
+package linterscripts
+
+import (
+    "errors"
+    "fmt"
+)
+
+type LinterResult struct {
+    Script     string `json:"script"`
+    ExitCode   int    `json:"exit_code"`
+    Findings   int    `json:"findings"`
+    DurationMs int64  `json:"duration_ms"`
+    Passed     bool   `json:"passed"`
+}
+
+var ErrInvalidExit = errors.New("linter-scripts: exit code must be 0..255")
+
+func (r LinterResult) Validate() error {
+    if r.Script == "" {
+        return errors.New("linter-scripts: script is required")
+    }
+    if r.ExitCode < 0 || r.ExitCode > 255 {
+        return fmt.Errorf("%w: %d", ErrInvalidExit, r.ExitCode)
+    }
+    if r.Findings < 0 {
+        return errors.New("linter-scripts: findings must be >= 0")
+    }
+    return nil
+}
+```
+
+### PHP
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Lovable\ErrorCode\LinterScripts;
+
+final class LinterResult
+{
+    public function __construct(
+        public readonly string $script,
+        public readonly int $exitCode,
+        public readonly int $findings,
+        public readonly int $durationMs,
+        public readonly bool $passed,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->script === '') {
+            throw new \InvalidArgumentException('script is required');
+        }
+        if ($this->exitCode < 0 || $this->exitCode > 255) {
+            throw new \InvalidArgumentException("invalid exit code: {$this->exitCode}");
+        }
+        if ($this->findings < 0) {
+            throw new \InvalidArgumentException('findings must be >= 0');
+        }
+    }
+}
+```
+
+### Python
+
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class LinterResult:
+    script: str
+    exit_code: int
+    findings: int
+    duration_ms: int
+    passed: bool
+
+    def validate(self) -> None:
+        if not self.script:
+            raise ValueError("script is required")
+        if not (0 <= self.exit_code <= 255):
+            raise ValueError(f"invalid exit code: {self.exit_code}")
+        if self.findings < 0:
+            raise ValueError("findings must be >= 0")
+```

@@ -136,3 +136,46 @@ public enum AsyncMethodSuffixPolicy
     Forbidden = 1, // sync wrappers MUST NOT carry the suffix
 }
 ```
+
+
+---
+
+## Phase 57 Reference: TypeScript Enum Mirror
+
+The C# coding guidelines define a fixed set of StyleCop/SonarQube severities
+and a module-state enum used by audit reporting. The TypeScript mirror is
+consumed by the dashboard.
+
+```typescript
+// Severities accepted by the C# linter pipeline (StyleCop + SonarQube).
+export enum CSharpLintSeverity {
+  Error   = "error",
+  Warning = "warning",
+  Info    = "info",
+  Hidden  = "hidden",
+}
+
+// Module state recorded by the spec-authoring audit for a C# module.
+export enum CSharpModuleState {
+  Planned     = "planned",
+  InProgress  = "in_progress",
+  Implemented = "implemented",
+  Deprecated  = "deprecated",
+}
+
+// Allowed C# test kinds enforced by the CI policy.
+export enum CSharpTestKind {
+  Unit        = "unit",
+  Integration = "integration",
+  E2E         = "e2e",
+  Bench       = "bench",
+}
+
+export type CSharpLintFinding = {
+  rule:     string;
+  severity: CSharpLintSeverity;
+  file:     string;
+  line:     number;
+  message:  string;
+};
+```

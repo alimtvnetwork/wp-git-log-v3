@@ -382,3 +382,110 @@ Spec describes a Go/React orchestrator runner; current spec-only repo only conta
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
 
+
+
+---
+
+## Phase 57 Reference: Typed-Language PowerShell Invocation Validators
+
+The PowerShell integration contract defines a normative `PsInvocation` shape
+that orchestrators in Go, PHP, and Python must validate before dispatching to
+`pwsh`.
+
+### Go
+
+```go
+package powershell
+
+import (
+    "errors"
+    "fmt"
+    "strings"
+)
+
+type PsInvocation struct {
+    Script       string            `json:"script"`         // path or -Command literal
+    Args         []string          `json:"args,omitempty"`
+    ExecutionPolicy string         `json:"execution_policy"` // RemoteSigned|Bypass|AllSigned
+    NoProfile    bool              `json:"no_profile"`
+    Env          map[string]string `json:"env,omitempty"`
+    TimeoutSec   int               `json:"timeout_sec"`
+}
+
+var ErrInvalidPolicy = errors.New("powershell: invalid execution policy")
+
+func (p PsInvocation) Validate() error {
+    if strings.TrimSpace(p.Script) == "" {
+        return errors.New("powershell: script is required")
+    }
+    switch p.ExecutionPolicy {
+    case "RemoteSigned", "Bypass", "AllSigned":
+    default:
+        return fmt.Errorf("%w: %q", ErrInvalidPolicy, p.ExecutionPolicy)
+    }
+    if p.TimeoutSec <= 0 || p.TimeoutSec > 3600 {
+        return fmt.Errorf("powershell: timeout_sec must be 1..3600, got %d", p.TimeoutSec)
+    }
+    return nil
+}
+```
+
+### PHP
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Lovable\PowerShell;
+
+final class PsInvocation
+{
+    public function __construct(
+        public readonly string $script,
+        public readonly array  $args,
+        public readonly string $executionPolicy,
+        public readonly bool   $noProfile,
+        public readonly array  $env,
+        public readonly int    $timeoutSec,
+    ) {}
+
+    public function validate(): void
+    {
+        if (\trim($this->script) === '') {
+            throw new \InvalidArgumentException('script is required');
+        }
+        if (!\in_array($this->executionPolicy, ['RemoteSigned','Bypass','AllSigned'], true)) {
+            throw new \InvalidArgumentException("invalid policy: {$this->executionPolicy}");
+        }
+        if ($this->timeoutSec < 1 || $this->timeoutSec > 3600) {
+            throw new \InvalidArgumentException("invalid timeout: {$this->timeoutSec}");
+        }
+    }
+}
+```
+
+### Python
+
+```python
+from dataclasses import dataclass, field
+from typing import Dict, List
+
+VALID_POLICIES = {"RemoteSigned", "Bypass", "AllSigned"}
+
+@dataclass(frozen=True)
+class PsInvocation:
+    script: str
+    args: List[str] = field(default_factory=list)
+    execution_policy: str = "RemoteSigned"
+    no_profile: bool = True
+    env: Dict[str, str] = field(default_factory=dict)
+    timeout_sec: int = 300
+
+    def validate(self) -> None:
+        if not self.script.strip():
+            raise ValueError("script is required")
+        if self.execution_policy not in VALID_POLICIES:
+            raise ValueError(f"invalid policy: {self.execution_policy}")
+        if not (1 <= self.timeout_sec <= 3600):
+            raise ValueError(f"invalid timeout: {self.timeout_sec}")
+```

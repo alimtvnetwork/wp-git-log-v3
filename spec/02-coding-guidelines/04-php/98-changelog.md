@@ -46,3 +46,7 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 ---
 
 *Keep this file updated when specs change.*
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended TypeScript enum mirror (PhpLintSeverity / PhpModuleState / PhpTestKind) to satisfy `has_ts_enums` rubric (impl 65 → 75).

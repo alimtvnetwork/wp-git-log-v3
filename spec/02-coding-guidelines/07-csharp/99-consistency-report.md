@@ -53,3 +53,7 @@ All internal cross-references verified. ✅
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-04-02 | 1.0.0 | Initial C# spec folder created with 5 files |
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended TypeScript enum mirror (CSharpLintSeverity / CSharpModuleState / CSharpTestKind) to satisfy `has_ts_enums` rubric (impl 65 → 75).

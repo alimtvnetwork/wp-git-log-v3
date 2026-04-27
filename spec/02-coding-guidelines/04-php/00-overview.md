@@ -191,3 +191,45 @@ abstract class DomainException extends \RuntimeException
     }
 }
 ```
+
+
+---
+
+## Phase 57 Reference: TypeScript Enum Mirror
+
+The PHP coding guidelines define a fixed set of PHPCS severity levels and a
+module-state enum for audit reporting. The TypeScript mirror below is consumed
+by the dashboard.
+
+```typescript
+// PHPCS severities surfaced by the linter pipeline.
+export enum PhpLintSeverity {
+  Error   = "error",
+  Warning = "warning",
+  Notice  = "notice",
+}
+
+// Module state recorded by the spec-authoring audit for a PHP module.
+export enum PhpModuleState {
+  Planned     = "planned",
+  InProgress  = "in_progress",
+  Implemented = "implemented",
+  Deprecated  = "deprecated",
+}
+
+// Allowed PHP test kinds enforced by the CI policy.
+export enum PhpTestKind {
+  Unit        = "unit",
+  Integration = "integration",
+  Feature     = "feature",
+  E2E         = "e2e",
+}
+
+export type PhpLintFinding = {
+  rule:     string;
+  severity: PhpLintSeverity;
+  file:     string;
+  line:     number;
+  message:  string;
+};
+```
