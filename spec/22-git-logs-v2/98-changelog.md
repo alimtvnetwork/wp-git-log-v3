@@ -1,5 +1,8 @@
 # Changelog (v2)
 
+**Updated:** 2026-04-27
+
+
 | Version | Date | Notes |
 |---------|------|-------|
 | 3.8.7 | 2026-04-27 | **Phase 39b — TODO marker resolution + exemption note.** Closed `GAP-V2-07` (2 unresolved TODO/FIXME markers): (a) `30-threat-model.md:66` v2.9.1→v2.9.2 — replaced "(TODO: add seed)" with explicit reference to `ConfigChange` seed id 25 (already shipped in `18-schema.sql:409`); confirmed via grep audit. (b) `32-cli-test-plan.md:202` v2.7.0→v2.7.1 — replaced "with a TODO comment linking the GitHub issue" with the explicit `# QUARANTINE(<issue-ref>): <reason>` comment-format contract enforceable by `linter-scripts/check-quarantine-tracking.py`. (c) `16-seed-data.md` v2.7.1→v2.7.2 — backfilled AuditActionType row 25 (`ConfigChange`, introduced 2.8.0) so the markdown seed table matches `18-schema.sql:409`; updated insertion-order narrative to cover 21–24 then 25. (d) `37-blind-ai-gap-analysis.md` v1.0.0→v1.1.0 — flipped GAP-V2-07 entry to `[LOW — RESOLVED 2026-04-27, Phase 39b]`, lifted Maintainability dimension 90→100, marked roadmap row #9 as ✅. (e) §00 v3.8.6→v3.8.7 gained "Audit Marker Exemption" section documenting that the remaining grep hits in `37-blind-ai-gap-analysis.md` are historical narrative inside the resolved retrospective — they describe what was fixed, not open work — and are required by the lockstep audit-trail rule. **Lockstep:** §99 v3.9.1→v3.9.2; memory `mem://index.md` Phase 39b row appended. **Scope discipline (Phase 39b ONLY):** §02 / §18 / §97 untouched; no AC IDs added or removed; no DDL change. The two real markers were doc-hygiene only; their closure raises maintainability score without touching contracts. |

@@ -1,5 +1,8 @@
 # C# Coding Standards — Changelog
 
+**Updated:** 2026-04-26
+
+
 **Module:** `07-csharp`
 **Version:** 4.0.0
 

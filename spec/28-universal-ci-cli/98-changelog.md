@@ -1,5 +1,8 @@
 # Changelog
 
+**Updated:** 2026-04-26
+
+
 All notable changes to `spec/28-universal-ci-cli/`.
 
 ## [2.0.0] — 2026-04-26

@@ -56,12 +56,12 @@ jobs:
         # modules slip; --strict closes that loophole.
         run: node linter-scripts/check-tree-health.cjs --strict --report
 
-      - name: Spec lockstep gate (Phase 40 — warn-only baseline)
+      - name: Spec lockstep gate (Phase 41 — strict)
         id: lockstep
-        # Phase 40: Enforces banner ↔ §98 ↔ §99 sync. Warn-only until Phase 41
-        # sweeps the 24-module baseline to zero; then the flag flips to --strict.
+        # Phase 41: Baseline cleared (24 → 0 drifted modules). Flag flipped to
+        # --strict so any future banner / §98 / §99 desync hard-fails CI.
         # Spec: spec/27-spec-toolchain/24-check-lockstep.md
-        run: node linter-scripts/check-lockstep.cjs
+        run: node linter-scripts/check-lockstep.cjs --strict
 
       - name: Dashboard data parity check (rubric v2.0.0)
         id: dashboard

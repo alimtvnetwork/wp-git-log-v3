@@ -5,6 +5,15 @@
 
 ---
 
+## v3.2.0 — 2026-04-16
+
+### Lockstep banner sync (Phase 41)
+
+- §00 banner bumped to **v3.2.0** on 2026-04-16 with no corresponding §98 entry. This release row closes the gap so the Phase 40 lockstep gate (`linter-scripts/check-lockstep.cjs`, rule **L2**) is satisfied: every §00 banner date now has a witnessing changelog row dated `>= §00 Updated`.
+- Added retroactively on 2026-04-27; no spec content changed at this version — purely a witness entry.
+
+---
+
 ## v2.2.0 — 2026-04-02
 
 ### Domain Convenience Constructors + Error Merge
