@@ -523,3 +523,23 @@ components:
         deprecated:       { type: boolean }
         replaced_by:      { type: string }
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-schema-validation.mmd` for the error-code schema edit → AJV → backward-compat → publish flow.
+
+```mermaid
+flowchart TD
+    A[Error Code Schema Edit] --> B[JSON Schema Lint]
+    B --> C{Valid Draft-07?}
+    C -- No --> D[Reject: SCHEMA-001]
+    C -- Yes --> E[AJV Compile]
+    E --> F[Snapshot Test vs Registry]
+    F --> G{Backwards Compatible?}
+    G -- No --> H[Block: SCHEMA-BREAK]
+    G -- Yes --> I[Publish to Registry]
+    I --> J[Downstream Consumers Re-validate]
+```

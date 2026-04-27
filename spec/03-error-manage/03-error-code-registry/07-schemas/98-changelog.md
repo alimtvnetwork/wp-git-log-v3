@@ -45,3 +45,8 @@
 ## 2026-04-27 — Phase 58 impl-sweep
 
 - Phase 58: appended ErrorCodeRegistry OpenAPI contract to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
+
+## 2026-04-27 — Phase 65 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 65 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

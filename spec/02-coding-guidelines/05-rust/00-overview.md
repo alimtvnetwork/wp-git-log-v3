@@ -143,3 +143,25 @@ authoritative shape and MUST validate every emitted record.
   "additionalProperties": false
 }
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-rust-build.mmd` for the Rust check → clippy → fmt → test → release pipeline.
+
+```mermaid
+flowchart TD
+    A[cargo check] --> B{Compile OK?}
+    B -- No --> C[rustc errors → AppError mapping]
+    B -- Yes --> D[cargo clippy --all-targets]
+    D --> E{Clippy Clean?}
+    E -- No --> F[Block: RUST-LINT-001]
+    E -- Yes --> G[cargo fmt --check]
+    G --> H[cargo test]
+    H --> I{All Pass?}
+    I -- No --> F
+    I -- Yes --> J[cargo build --release]
+    J --> K[Sign + Publish]
+```

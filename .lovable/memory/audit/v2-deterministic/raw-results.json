@@ -997,18 +997,19 @@
       "child_modules": 0,
       "code_blocks_by_lang": {
         "json": 1,
+        "mermaid": 1,
         "plain": 5,
         "rust": 50,
         "sql": 2,
         "text": 1,
         "toml": 1
       },
-      "code_blocks_total": 60,
+      "code_blocks_total": 61,
       "consistency_report": true,
       "gwt_block_count": 20,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": true,
       "has_ts_enums": false,
@@ -1018,8 +1019,8 @@
       "links_broken": 0,
       "links_total": 16,
       "md_files": 10,
-      "mmd_files": 0,
-      "overview_chars": 5112,
+      "mmd_files": 1,
+      "overview_chars": 5668,
       "todo_density": 1,
       "waffle_per_kchar": 0.21
     },
@@ -1029,7 +1030,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 90,
       "testability": 100
     },
@@ -1039,12 +1040,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 91/100 (A) for spec/02-coding-guidelines/05-rust.",
-    "weighted_overall": 91
+    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/05-rust.",
+    "weighted_overall": 93
   },
   {
     "applied_gates": [],
@@ -1464,6 +1465,7 @@
       "code_blocks_by_lang": {
         "go": 1,
         "json": 2,
+        "mermaid": 1,
         "php": 1,
         "plain": 1,
         "python": 1,
@@ -1471,12 +1473,12 @@
         "ts": 1,
         "yaml": 1
       },
-      "code_blocks_total": 10,
+      "code_blocks_total": 11,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -1486,10 +1488,10 @@
       "links_broken": 0,
       "links_total": 10,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 14436,
+      "mmd_files": 1,
+      "overview_chars": 15002,
       "todo_density": 0,
-      "waffle_per_kchar": 0.1
+      "waffle_per_kchar": 0.09
     },
     "module": "02-coding-guidelines/11-security",
     "raw_scores": {
@@ -1497,22 +1499,22 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/02-coding-guidelines/11-security.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/11-security.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -1906,18 +1908,19 @@
         "go": 2,
         "json": 1,
         "markdown": 1,
+        "mermaid": 1,
         "php": 2,
         "plain": 7,
         "ts": 1,
         "typescript": 5,
         "yaml": 1
       },
-      "code_blocks_total": 23,
+      "code_blocks_total": 24,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -1927,8 +1930,8 @@
       "links_broken": 0,
       "links_total": 20,
       "md_files": 7,
-      "mmd_files": 0,
-      "overview_chars": 5741,
+      "mmd_files": 1,
+      "overview_chars": 6220,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1938,7 +1941,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
@@ -1948,12 +1951,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 91/100 (A) for spec/03-error-manage/01-error-resolution.",
-    "weighted_overall": 91
+    "verdict": "Deterministic score 93/100 (A) for spec/03-error-manage/01-error-resolution.",
+    "weighted_overall": 93
   },
   {
     "applied_gates": [],
@@ -2244,18 +2247,19 @@
         "css": 1,
         "go": 8,
         "json": 1,
+        "mermaid": 1,
         "php": 3,
         "plain": 6,
         "tsx": 5,
         "typescript": 2,
         "yaml": 1
       },
-      "code_blocks_total": 28,
+      "code_blocks_total": 29,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -2265,8 +2269,8 @@
       "links_broken": 0,
       "links_total": 24,
       "md_files": 7,
-      "mmd_files": 0,
-      "overview_chars": 3893,
+      "mmd_files": 1,
+      "overview_chars": 4467,
       "todo_density": 0,
       "waffle_per_kchar": 0.13
     },
@@ -2276,7 +2280,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
@@ -2286,12 +2290,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 91/100 (A) for spec/03-error-manage/02-error-architecture.",
-    "weighted_overall": 91
+    "verdict": "Deterministic score 93/100 (A) for spec/03-error-manage/02-error-architecture.",
+    "weighted_overall": 93
   },
   {
     "applied_gates": [],
@@ -2936,17 +2940,18 @@
         "go": 3,
         "json": 1,
         "markdown": 1,
+        "mermaid": 1,
         "plain": 6,
         "powershell": 1,
         "typescript": 5,
         "yaml": 1
       },
-      "code_blocks_total": 20,
+      "code_blocks_total": 21,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -2956,8 +2961,8 @@
       "links_broken": 0,
       "links_total": 22,
       "md_files": 9,
-      "mmd_files": 0,
-      "overview_chars": 6061,
+      "mmd_files": 1,
+      "overview_chars": 6595,
       "todo_density": 0,
       "waffle_per_kchar": 0.07
     },
@@ -2967,7 +2972,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
@@ -2977,12 +2982,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 91/100 (A) for spec/03-error-manage/03-error-code-registry.",
-    "weighted_overall": 91
+    "verdict": "Deterministic score 93/100 (A) for spec/03-error-manage/03-error-code-registry.",
+    "weighted_overall": 93
   },
   {
     "applied_gates": [],
@@ -3002,18 +3007,19 @@
       "code_blocks_by_lang": {
         "go": 1,
         "json": 3,
+        "mermaid": 1,
         "php": 1,
         "python": 1,
         "text": 1,
         "ts": 1,
         "yaml": 1
       },
-      "code_blocks_total": 9,
+      "code_blocks_total": 10,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -3023,8 +3029,8 @@
       "links_broken": 0,
       "links_total": 9,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 16691,
+      "mmd_files": 1,
+      "overview_chars": 17240,
       "todo_density": 0,
       "waffle_per_kchar": 0.12
     },
@@ -3034,7 +3040,7 @@
       "clarity": 100,
       "completeness": 80,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 96
     },
@@ -3044,12 +3050,12 @@
       "clarity": 100,
       "completeness": 80,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 90/100 (A) for spec/03-error-manage/03-error-code-registry/07-schemas.",
-    "weighted_overall": 90
+    "verdict": "Deterministic score 92/100 (A) for spec/03-error-manage/03-error-code-registry/07-schemas.",
+    "weighted_overall": 92
   },
   {
     "applied_gates": [],
@@ -3069,18 +3075,19 @@
       "code_blocks_by_lang": {
         "go": 1,
         "json": 2,
+        "mermaid": 1,
         "php": 1,
         "python": 1,
         "text": 2,
         "ts": 1,
         "yaml": 1
       },
-      "code_blocks_total": 9,
+      "code_blocks_total": 10,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -3090,8 +3097,8 @@
       "links_broken": 0,
       "links_total": 6,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 12789,
+      "mmd_files": 1,
+      "overview_chars": 13328,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -3101,7 +3108,7 @@
       "clarity": 100,
       "completeness": 80,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 96
     },
@@ -3111,12 +3118,12 @@
       "clarity": 100,
       "completeness": 80,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 90/100 (A) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
-    "weighted_overall": 90
+    "verdict": "Deterministic score 92/100 (A) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
+    "weighted_overall": 92
   },
   {
     "applied_gates": [],
@@ -4718,17 +4725,18 @@
       "code_blocks_by_lang": {
         "bash": 1,
         "json": 1,
+        "mermaid": 1,
         "php": 13,
         "plain": 8,
         "ts": 1,
         "yaml": 1
       },
-      "code_blocks_total": 25,
+      "code_blocks_total": 26,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -4738,10 +4746,10 @@
       "links_broken": 0,
       "links_total": 25,
       "md_files": 8,
-      "mmd_files": 0,
-      "overview_chars": 8830,
+      "mmd_files": 1,
+      "overview_chars": 9343,
       "todo_density": 0,
-      "waffle_per_kchar": 0.33
+      "waffle_per_kchar": 0.32
     },
     "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
     "raw_scores": {
@@ -4749,22 +4757,22 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.33. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.32. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 89/100 (A) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
-    "weighted_overall": 89
+    "verdict": "Deterministic score 91/100 (A) for spec/18-wp-plugin-how-to/02-enums-and-coding-style.",
+    "weighted_overall": 91
   },
   {
     "applied_gates": [

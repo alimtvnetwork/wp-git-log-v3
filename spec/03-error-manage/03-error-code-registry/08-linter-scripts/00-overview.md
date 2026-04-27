@@ -415,3 +415,24 @@ components:
         duration_ms: { type: integer, minimum: 0 }
         passed:      { type: boolean }
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-linter-execution.mmd` for the pre-commit linter chain and short-circuit semantics.
+
+```mermaid
+flowchart TD
+    A[Pre-commit Hook Triggers] --> B[Load forbidden-strings.toml]
+    B --> C[Walk repo tree]
+    C --> D{Forbidden Match Found?}
+    D -- Yes --> E[Emit ERR-LINT-### + exit 1]
+    D -- No --> F[check-spec-cross-links]
+    F --> G[check-tree-health]
+    G --> H[check-lockstep]
+    H --> I{All Pass?}
+    I -- No --> E
+    I -- Yes --> J[Allow Commit]
+```

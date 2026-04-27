@@ -126,3 +126,24 @@ components:
           items: { type: string }
         status:       { type: string, enum: [planned, implemented, deprecated] }
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-error-architecture.mmd` for the end-to-end error architecture across origin → boundary → render.
+
+```mermaid
+flowchart TD
+    A[Origin: panic/throw/return err] --> B[Wrap as AppError]
+    B --> C[Attach: Code, Severity, Cause]
+    C --> D[Propagate via Result/Either]
+    D --> E[Boundary: HTTP/CLI/UI]
+    E --> F[Marshal to Response Envelope]
+    F --> G[Log via diagnostics]
+    G --> H{Severity}
+    H -- Critical --> I[Modal]
+    H -- Warning --> J[Toast]
+    H -- Info --> K[Inline Banner]
+```

@@ -283,3 +283,23 @@ enforcement:
     - vendor/**
     - build/**
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-enum-coding-style.mmd` for the WP plugin enum authoring → PHPCS → PHPUnit gate flow.
+
+```mermaid
+flowchart TD
+    A[Enum Class Authored] --> B[Apply WP PSR-4 Naming]
+    B --> C[Add cases + label method]
+    C --> D[Register in Plugin Bootstrap]
+    D --> E{PHPCS Ruleset Pass?}
+    E -- No --> F[Block: WP-ENUM-001]
+    E -- Yes --> G[PHPUnit Cases Test]
+    G --> H{All Branches Covered?}
+    H -- No --> F
+    H -- Yes --> I[Merge]
+```
