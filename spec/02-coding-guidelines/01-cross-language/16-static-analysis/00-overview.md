@@ -203,3 +203,102 @@ export enum AnalysisLanguage {
   Python = "python", Rust = "rust", Yaml = "yaml", Shell = "shell",
 }
 ```
+
+
+---
+
+## Phase 62 Reference: Static Analysis Result Validators
+
+The following Go / PHP / Python validators are normative reference
+implementations of the AnalysisResult contract.
+
+### Go
+
+```go
+package staticanalysis
+
+import (
+    "errors"
+    "fmt"
+)
+
+type AnalysisResult struct {
+    ID        string `json:"id"`
+    Status    string `json:"status"`
+    Message   string `json:"message"`
+    DurationMs int64 `json:"duration_ms"`
+}
+
+var ErrInvalidStatus = errors.New("staticanalysis: invalid status")
+
+func (r AnalysisResult) Validate() error {
+    if r.ID == "" {
+        return errors.New("staticanalysis: id is required")
+    }
+    switch r.Status {
+    case "ok", "warning", "error":
+    default:
+        return fmt.Errorf("%w: %q", ErrInvalidStatus, r.Status)
+    }
+    if r.DurationMs < 0 {
+        return errors.New("staticanalysis: duration_ms must be >= 0")
+    }
+    return nil
+}
+```
+
+### PHP
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Lovable\\StaticAnalysis;
+
+final class AnalysisResult
+{
+    public function __construct(
+        public readonly string $id,
+        public readonly string $status,
+        public readonly string $message,
+        public readonly int    $durationMs,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->id === '') {
+            throw new \\InvalidArgumentException('id is required');
+        }
+        if (!\\in_array($this->status, ['ok','warning','error'], true)) {
+            throw new \\InvalidArgumentException("invalid status: {$this->status}");
+        }
+        if ($this->durationMs < 0) {
+            throw new \\InvalidArgumentException('durationMs must be >= 0');
+        }
+    }
+}
+```
+
+### Python
+
+```python
+from dataclasses import dataclass
+
+VALID_STATUSES = {"ok", "warning", "error"}
+
+@dataclass(frozen=True)
+class AnalysisResult:
+    id: str
+    status: str
+    message: str
+    duration_ms: int
+
+    def validate(self) -> None:
+        if not self.id:
+            raise ValueError("id is required")
+        if self.status not in VALID_STATUSES:
+            raise ValueError(f"invalid status: {self.status}")
+        if self.duration_ms < 0:
+            raise ValueError("duration_ms must be >= 0")
+```
+

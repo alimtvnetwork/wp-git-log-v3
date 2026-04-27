@@ -200,3 +200,102 @@ jobs:
           Install-Module PSScriptAnalyzer -Force -Scope CurrentUser
           Invoke-ScriptAnalyzer -Path . -Recurse -Severity Error -IncludeRule PSAvoidUsingPlainTextForPassword,PSAvoidUsingConvertToSecureStringWithPlainText -EnableExit
 ```
+
+
+---
+
+## Phase 62 Reference: PowerShell Integration Validators
+
+The following Go / PHP / Python validators are normative reference
+implementations of the PsRunResult contract.
+
+### Go
+
+```go
+package powershell
+
+import (
+    "errors"
+    "fmt"
+)
+
+type PsRunResult struct {
+    ID        string `json:"id"`
+    Status    string `json:"status"`
+    Message   string `json:"message"`
+    DurationMs int64 `json:"duration_ms"`
+}
+
+var ErrInvalidStatus = errors.New("powershell: invalid status")
+
+func (r PsRunResult) Validate() error {
+    if r.ID == "" {
+        return errors.New("powershell: id is required")
+    }
+    switch r.Status {
+    case "ok", "warning", "error":
+    default:
+        return fmt.Errorf("%w: %q", ErrInvalidStatus, r.Status)
+    }
+    if r.DurationMs < 0 {
+        return errors.New("powershell: duration_ms must be >= 0")
+    }
+    return nil
+}
+```
+
+### PHP
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Lovable\\PowerShell;
+
+final class PsRunResult
+{
+    public function __construct(
+        public readonly string $id,
+        public readonly string $status,
+        public readonly string $message,
+        public readonly int    $durationMs,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->id === '') {
+            throw new \\InvalidArgumentException('id is required');
+        }
+        if (!\\in_array($this->status, ['ok','warning','error'], true)) {
+            throw new \\InvalidArgumentException("invalid status: {$this->status}");
+        }
+        if ($this->durationMs < 0) {
+            throw new \\InvalidArgumentException('durationMs must be >= 0');
+        }
+    }
+}
+```
+
+### Python
+
+```python
+from dataclasses import dataclass
+
+VALID_STATUSES = {"ok", "warning", "error"}
+
+@dataclass(frozen=True)
+class PsRunResult:
+    id: str
+    status: str
+    message: str
+    duration_ms: int
+
+    def validate(self) -> None:
+        if not self.id:
+            raise ValueError("id is required")
+        if self.status not in VALID_STATUSES:
+            raise ValueError(f"invalid status: {self.status}")
+        if self.duration_ms < 0:
+            raise ValueError("duration_ms must be >= 0")
+```
+

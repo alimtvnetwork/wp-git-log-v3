@@ -52,3 +52,7 @@ No external cross-references detected. ✅
 | 2026-04-26 | 3.3.0 | Phase 21 deepening sweep — auto-promoted to gold-standard 5-section shape |
 | 2026-04-27 | 3.4.0 | Phase 56 — typed-language reference sweep |
 
+
+## 2026-04-27 — Phase 62 impl-sweep
+
+- Phase 62: appended Error Code Template Library API OpenAPI to satisfy `has_yaml_openapi` rubric.

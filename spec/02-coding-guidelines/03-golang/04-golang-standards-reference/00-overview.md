@@ -180,3 +180,100 @@ func TestAdd(t *testing.T) {
     }
 }
 ```
+
+
+---
+
+## Phase 62 Reference: Go Standards Reference API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Go Standards Reference API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/go-standards/v1
+paths:
+  /standards:
+    get:
+      summary: List supported Go standards
+      operationId: listStandards
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/GoStandard" }
+  /standards/{name}/rules:
+    get:
+      summary: Get rules for a standard
+      operationId: getRules
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/GoRule" }
+components:
+  schemas:
+    GoStandard:
+      type: object
+      required: [name, version]
+      properties:
+        name:    { type: string, enum: [effective-go, golangci-lint, gofmt, goimports, govet] }
+        version: { type: string }
+    GoRule:
+      type: object
+      required: [code, severity]
+      properties:
+        code:     { type: string }
+        severity: { type: string, enum: [error, warning, info] }
+        message:  { type: string }
+```
+
+
+---
+
+## Phase 62 Reference: TypeScript Enum Mirror
+
+```typescript
+// TypeScript enum mirror of the Go standards severity ladder.
+
+export enum GoStandardSeverity {
+  Error   = "error",
+  Warning = "warning",
+  Info    = "info",
+}
+
+export enum GoStandardName {
+  EffectiveGo   = "effective-go",
+  GolangciLint  = "golangci-lint",
+  Gofmt         = "gofmt",
+  Goimports     = "goimports",
+  Govet         = "govet",
+}
+
+export enum GoRuleStatus {
+  Active     = "active",
+  Deprecated = "deprecated",
+  Removed    = "removed",
+}
+
+export type GoStandardRule = {
+  code:     string;
+  severity: GoStandardSeverity;
+  status:   GoRuleStatus;
+  message:  string;
+};
+```

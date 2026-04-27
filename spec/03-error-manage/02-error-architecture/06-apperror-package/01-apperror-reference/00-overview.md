@@ -108,3 +108,64 @@ export enum FactoryLanguage {
   Csharp = "csharp",
 }
 ```
+
+
+---
+
+## Phase 62 Reference: AppError Package Reference API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: AppError Package Reference API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/apperror-ref/v1
+paths:
+  /constructors:
+    get:
+      summary: List all AppError constructors
+      operationId: listConstructors
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/AppErrorCtor" }
+  /constructors/{name}:
+    get:
+      summary: Get a constructor signature
+      operationId: getConstructor
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string, pattern: "^New[A-Z][A-Za-z0-9]+Error$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AppErrorCtor" }
+components:
+  schemas:
+    AppErrorCtor:
+      type: object
+      required: [name, code, severity, params]
+      properties:
+        name:     { type: string }
+        code:     { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        severity: { type: string, enum: [fatal, error, warning, info] }
+        params:
+          type: array
+          items:
+            type: object
+            properties:
+              name: { type: string }
+              type: { type: string }
+              required: { type: boolean }
+```

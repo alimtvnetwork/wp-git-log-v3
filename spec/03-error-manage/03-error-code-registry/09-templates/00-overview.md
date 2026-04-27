@@ -200,3 +200,70 @@ class Template:
             out = out.replace("{" + name + "}", str(bindings[name]))
         return out
 ```
+
+
+---
+
+## Phase 62 Reference: Error Code Template Library API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Code Template Library API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/code-templates/v1
+paths:
+  /templates:
+    get:
+      summary: List error-code templates
+      operationId: listTemplates
+      parameters:
+        - in: query
+          name: language
+          schema: { type: string, enum: [go, php, typescript, csharp, python, rust] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/CodeTemplate" }
+  /templates/{id}/render:
+    post:
+      summary: Render a template with substitutions
+      operationId: renderTemplate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema: { type: string }
+components:
+  schemas:
+    CodeTemplate:
+      type: object
+      required: [id, language, body]
+      properties:
+        id:        { type: string }
+        language:  { type: string }
+        body:      { type: string }
+        variables:
+          type: array
+          items: { type: string }
+```
