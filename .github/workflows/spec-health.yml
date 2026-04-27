@@ -165,6 +165,21 @@ jobs:
         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-28)
         run: bash linter-scripts/test/test-qa-baseline-footer.sh
 
+      - name: Memo retrospective headings gate (Phase 104)
+        # Phase 104: locks AC-31-29 mechanically. Scans phase memos under
+        # .lovable/memory/audit/v2-deterministic/phase-NNN-*.md at or above
+        # the Phase 100 cutoff and FAILS if any contains a forward-looking
+        # H2/H3 section heading (Next phases, Remaining Tasks, Future work,
+        # TODO, Roadmap, ...). Phase 100 retired the forward-looking
+        # cadence after empirical evidence that recent memos were already
+        # self-contained retrospectives. Pending work belongs ONLY in the
+        # chat reply's "Remaining Tasks" table — the single source of
+        # truth — and the AC's `Verifies` clause for code-locked items.
+        # Without this gate, AC-31-29 was enforced only by reviewer
+        # attention and the Phase 100 verdict could silently regress.
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-29)
+        run: python3 linter-scripts/check-memo-retrospective-headings.py
+
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
         # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC
