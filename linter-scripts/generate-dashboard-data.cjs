@@ -364,11 +364,13 @@ function main() {
   const linkResult = validateLinks(mdFiles);
   const requiredFiles = checkRequiredFiles(allDirs);
   const inventory = buildInventory(allDirs);
-  const health = computeHealth(linkResult, requiredFiles, inventory);
+  const rubricV2 = buildRubricV2(allDirs);
+  const health = computeHealth(linkResult, requiredFiles, rubricV2);
 
   const report = {
     Generated: new Date().toISOString().slice(0, 10),
     Health: health,
+    RubricV2: rubricV2,
     Links: {
       TotalChecked: linkResult.Total.Checked,
       Ok: linkResult.Total.Ok,
