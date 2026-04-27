@@ -525,10 +525,21 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     if is_tracker:
         impl = 75
         if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
+        # v2.9: evidenced-tracker bonuses — a tracker that documents process
+        # via a Mermaid lifecycle diagram or a CI workflow contract earns
+        # credit even though it isn't a contract-bearing spec itself. Capped
+        # at 85 by hard ceiling below to preserve the rubric's tier ordering.
+        if m.get("has_mermaid"):     impl += 5
+        if m.get("has_ci_workflow"): impl += 5
+        impl = min(impl, 85)
     elif is_index:
         impl = 70
         if m["overview_chars"] < 200: impl -= 15  # penalise zero-content indexes
         if m["child_modules"] > 0:    impl += 10  # bonus when index actually routes children
+        # v2.9: evidenced-index bonuses — same rationale as trackers.
+        if m.get("has_mermaid"):     impl += 5
+        if m.get("has_ci_workflow"): impl += 5
+        impl = min(impl, 90)
     elif is_meta_toolchain:
         impl = 75
         if m.get("has_normative_contract"): impl += 10  # text-fenced contract block

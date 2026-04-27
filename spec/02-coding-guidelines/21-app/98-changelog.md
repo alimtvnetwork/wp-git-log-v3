@@ -39,3 +39,10 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+## 2026-04-27 — Phase 74 (evidenced index/tracker bonus)
+
+- Added Mermaid lifecycle diagram and 5-stage CI workflow contract.
+- Activates v2.9 evidenced-tracker / evidenced-index bonus (+5 each).
+- Documentation-only promotion.
+

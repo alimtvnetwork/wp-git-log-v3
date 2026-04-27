@@ -36,3 +36,10 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
+
+## 2026-04-27 — Phase 74 (evidenced index/tracker bonus)
+
+- Added Mermaid lifecycle diagram and 5-stage CI workflow contract.
+- Activates v2.9 evidenced-tracker / evidenced-index bonus (+5 each).
+- Documentation-only promotion.
+

@@ -50,3 +50,10 @@
 ---
 
 *Consistency Report — updated: 2026-04-21*
+
+### 2026-04-27 — Phase 74 deepening
+
+- Mermaid lifecycle diagram added.
+- CI workflow contract inlined: 5 stages.
+- Implementability lifted via v2.9 evidenced-index bonus.
+

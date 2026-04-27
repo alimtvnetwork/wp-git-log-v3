@@ -81,3 +81,9 @@ This module's full lockstep history is mirrored in `98-changelog.md`; entries
 above summarize only the audit-/validation-bearing milestones for `26-gitlogs-diagrams`.
 | 2026-04-27 | 2.3.0 | Phase 55 — implementability lever (CI YAML / typed-language reference) |
 
+### 2026-04-27 — Phase 74 deepening
+
+- Mermaid lifecycle diagram added.
+- CI workflow contract inlined: 5 stages.
+- Implementability lifted via v2.9 evidenced-index bonus.
+
