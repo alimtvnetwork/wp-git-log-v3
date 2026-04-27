@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-27 (Phase 112)
+**Last updated:** 2026-04-27 (Phase 113)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -45,14 +45,15 @@ PR so any regression fails the build at the assertion level (with
 | 4 | [`test-readme-inventory.sh`](./test-readme-inventory.sh) | 102 | This README's inventory table is in sync with the actual `test-*.sh` files on disk; required structural sections present; every script linked + executable | 14+ | ~1 s | [AC-31-27](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 5 | [`test-qa-baseline-footer.sh`](./test-qa-baseline-footer.sh) | 103 | The audit script's "QA tooling baseline" footer (in `00-index.md` + `EXECUTIVE-SUMMARY.md`) is consistent with `RUBRIC_VERSION` constant + `.github/workflows/spec-health.yml` step list — declared gate count = footer rows = workflow gate steps | 11+ | ~3 s | [AC-31-28](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 6 | [`test-overview-inventory-parity.sh`](./test-overview-inventory-parity.sh) | 112 | The §27 inventory triangle: every executable artifact under `linter-scripts/` + `.github/workflows/` is tracked in either `spec/27-spec-toolchain/00-overview.md` (specced) OR the Phase 107 orphan ledger memo (acknowledged); every overview-listed code path exists on disk; structural anchors intact | 6+ | ~1 s | [AC-31-31](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
+| 7 | [`test-weights-parity.sh`](./test-weights-parity.sh) | 113 | The 7-dimension `WEIGHTS` triangle: `audit-spec-vs-code-v2.py` `WEIGHTS` dict ↔ `generate-gate-report.py` `WEIGHTS` dict ↔ `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` `## Weights` table — pairwise dict-equality + AC-31-02 invariants (impl == 35, total == 100) + dimension count == 7 | 8 | ~1 s | [AC-31-31 row #4](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) (extends [AC-31-02](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md)) |
 
-**Totals:** 6 scripts · 58+ assertions · ~26 s of CI time.
+**Totals:** 7 scripts · 66+ assertions · ~27 s of CI time.
 
-All six scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
+All seven scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
 as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
 `Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`,
 `Self-test README inventory parity (Phase 102)`, `Self-test QA baseline footer (Phase 103)`,
-`Self-test §27 inventory parity triangle (Phase 112)`).
+`Self-test §27 inventory parity triangle (Phase 112)`, `Self-test WEIGHTS dimension-table parity (Phase 113)`).
 
 ---
 
