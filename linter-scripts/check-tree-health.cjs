@@ -22,7 +22,14 @@
  * Usage:
  *   node linter-scripts/check-tree-health.cjs            # uses default threshold 75
  *   node linter-scripts/check-tree-health.cjs --min=80   # custom threshold
+ *   node linter-scripts/check-tree-health.cjs --strict   # equivalent to --min=100; also fails
+ *                                                        # on ANY module with quality < max,
+ *                                                        # even if composite still rounds to 100
  *   node linter-scripts/check-tree-health.cjs --report   # print per-module breakdown
+ *
+ * --strict (Phase 36) converts "100/100" from aspirational to enforced. CI
+ * workflows that expect zero regression should pass --strict; default
+ * behaviour stays at threshold 75 to avoid breaking ad-hoc local runs.
  */
 const fs = require('fs');
 const path = require('path');
@@ -32,7 +39,8 @@ const ARCHIVE_PREFIX = '_archive';
 
 const args = process.argv.slice(2);
 const minArg = args.find((a) => a.startsWith('--min='));
-const MIN_SCORE = minArg ? parseInt(minArg.split('=')[1], 10) : 75;
+const STRICT = args.includes('--strict');
+const MIN_SCORE = STRICT ? 100 : (minArg ? parseInt(minArg.split('=')[1], 10) : 75);
 const SHOW_REPORT = args.includes('--report');
 
 const REQUIRED = ['00-overview.md', '99-consistency-report.md'];
