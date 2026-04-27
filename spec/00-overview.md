@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # Specification Root
 
-**Version:** 3.3.0  
+**Version:** 3.4.0  
 **Updated:** 2026-04-26  
 **Kind:** index  
 **AI Confidence:** Production-Ready  
