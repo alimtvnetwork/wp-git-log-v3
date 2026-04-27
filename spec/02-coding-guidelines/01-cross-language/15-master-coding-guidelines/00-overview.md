@@ -65,3 +65,77 @@ Master guidelines target multiple regional linter implementations (Go/Python/TS)
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
 
+
+---
+
+## Inlined Contracts (Phase 53 — boost)
+
+### Master rule registry — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/01-cross-language/15-master-coding-guidelines/registry.schema.json",
+  "title": "MasterRuleRegistry",
+  "type": "object",
+  "required": ["rules"],
+  "additionalProperties": false,
+  "properties": {
+    "rules": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "category", "applies_to_languages", "severity", "summary"],
+        "additionalProperties": false,
+        "properties": {
+          "rule_id":  { "type": "string", "pattern": "^MR-\\d{3}$" },
+          "category": { "enum": ["naming","structure","error-handling","testing","security","performance","documentation","style"] },
+          "applies_to_languages": {
+            "type": "array", "minItems": 1, "uniqueItems": true,
+            "items": { "enum": ["ts","js","go","php","csharp","python","rust","sql","yaml","shell","all"] }
+          },
+          "severity": { "enum": ["blocker","major","minor","info"] },
+          "summary":  { "type": "string", "minLength": 1, "maxLength": 200 },
+          "rationale": { "type": "string", "maxLength": 4000 },
+          "enforced_by": {
+            "type": "array",
+            "items": { "enum": ["compiler","linter","formatter","review","runtime"] },
+            "uniqueItems": true
+          },
+          "supersedes": { "type": "string", "pattern": "^MR-\\d{3}$" }
+        }
+      }
+    }
+  }
+}
+```
+
+### Rule category & enforcement enums (TypeScript)
+
+```ts
+export enum RuleCategory {
+  Naming        = "naming",
+  Structure     = "structure",
+  ErrorHandling = "error-handling",
+  Testing       = "testing",
+  Security      = "security",
+  Performance   = "performance",
+  Documentation = "documentation",
+  Style         = "style",
+}
+
+export enum EnforcementMechanism {
+  Compiler  = "compiler",
+  Linter    = "linter",
+  Formatter = "formatter",
+  Review    = "review",
+  Runtime   = "runtime",
+}
+
+export enum RuleSeverity {
+  Blocker = "blocker",
+  Major   = "major",
+  Minor   = "minor",
+  Info    = "info",
+}
+```

@@ -127,3 +127,59 @@ IMPORTANT — AI INSTRUCTION:
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+---
+
+## Inlined Contracts (Phase 53 — boost)
+
+### Axios version-pin manifest — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/11-security/01-axios-version-control/pin.schema.json",
+  "title": "AxiosVersionPin",
+  "type": "object",
+  "required": ["pinned_version", "minimum_safe_version", "package_managers"],
+  "additionalProperties": false,
+  "properties": {
+    "pinned_version":       { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "minimum_safe_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "forbidden_versions": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[<>=~^]?\\d+\\.\\d+\\.\\d+([-+][A-Za-z0-9.-]+)?$" },
+      "uniqueItems": true
+    },
+    "package_managers": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "enum": ["npm","yarn","pnpm","bun"] }
+    },
+    "manifest_paths": {
+      "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1
+    },
+    "lockfile_paths": {
+      "type": "array", "items": { "type": "string", "minLength": 1 }
+    },
+    "audit_severity_floor": { "enum": ["low","moderate","high","critical"], "default": "high" }
+  }
+}
+```
+
+### Version-control violation enum (TypeScript)
+
+```ts
+export enum AxiosPinViolation {
+  UnpinnedRange       = "unpinned-range",       // ^x.y.z, ~x.y.z, *
+  ForbiddenVersion    = "forbidden-version",    // CVE-affected
+  BelowMinimumSafe    = "below-minimum-safe",
+  LockfileMismatch    = "lockfile-mismatch",
+  MultipleMajorsInTree = "multiple-majors-in-tree",
+}
+
+export enum AuditSeverityFloor {
+  Low      = "low",
+  Moderate = "moderate",
+  High     = "high",
+  Critical = "critical",
+}
+```

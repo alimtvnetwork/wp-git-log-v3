@@ -679,3 +679,89 @@ _Inlined-contract section last updated: 2026-04-27 (Phase 48 — implementabilit
   }
 }
 ```
+
+## Inlined Contracts (Phase 53 — typed-language reference lever)
+
+### Reference TypeScript types — ConsistencyReport authoring
+
+```ts
+// Canonical authoring shapes — every linter that touches consistency reports
+// MUST type its IO against these interfaces.
+export enum DriftCategory {
+  Drift       = "drift",
+  StaleLink   = "stale-link",
+  VersionSkew = "version-skew",
+  Scaffold    = "scaffold",
+  TodoDensity = "todo-density",
+}
+
+export enum DriftSeverity {
+  Blocker = "blocker",
+  Major   = "major",
+  Minor   = "minor",
+  Info    = "info",
+}
+
+export interface DriftFinding {
+  category: DriftCategory;
+  severity: DriftSeverity;
+  summary: string;
+  file?: string;
+  line?: number;
+}
+
+export interface InventoryDelta {
+  expected_files: readonly string[];
+  present_files:  readonly string[];
+  missing_files:  readonly string[];
+}
+```
+
+### Reference TypeScript types — Lockstep enforcement
+
+```ts
+export interface LockstepStatus {
+  overview_updated:  string;  // ISO date
+  changelog_updated: string;
+  report_updated:    string;
+  in_lockstep:       boolean;
+}
+
+export type LockstepCheck =
+  | { ok: true;  module: string; status: LockstepStatus }
+  | { ok: false; module: string; reason: LockstepFailureReason; status: LockstepStatus };
+
+export enum LockstepFailureReason {
+  ReportOlderThanOverview   = "L1",
+  ChangelogMissingRow       = "L2",
+  ChangelogBannerStale      = "L3",
+  MissingFile               = "L4",
+}
+```
+
+### Reference TypeScript types — Audit module record
+
+```ts
+export enum AuditDimension {
+  Implementability = "implementability",
+  Completeness     = "completeness",
+  Alignment        = "alignment",
+  Consistency      = "consistency",
+  Clarity          = "clarity",
+  Testability      = "testability",
+  Maintainability  = "maintainability",
+}
+
+export type DimensionScores = Readonly<Record<AuditDimension, number>>;
+
+export interface AuditModuleRecord {
+  module: string;                 // path relative to spec/
+  weighted_overall: number;       // 0..100
+  grade: "A+" | "A" | "B" | "C" | "D" | "F";
+  raw_scores: DimensionScores;
+  scores:     DimensionScores;    // post-gate caps applied
+  applied_gates: ReadonlyArray<{ id: string; dimension: AuditDimension; cap: number; active: boolean }>;
+  blast_radius: number;           // 0..10
+  implementability_blockers: readonly string[];
+}
+```

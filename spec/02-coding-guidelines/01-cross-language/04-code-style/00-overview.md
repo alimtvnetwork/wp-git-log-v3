@@ -76,3 +76,67 @@ Spec mandates 15-line function limit; implementation in `linter-scripts/validate
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
 
+
+---
+
+## Inlined Contracts (Phase 53 — boost)
+
+### Code-style ruleset — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/01-cross-language/04-code-style/ruleset.schema.json",
+  "title": "CrossLanguageCodeStyleRuleset",
+  "type": "object",
+  "required": ["indentation", "line_length", "trailing_whitespace", "final_newline"],
+  "additionalProperties": false,
+  "properties": {
+    "indentation": {
+      "type": "object",
+      "required": ["style", "size"],
+      "additionalProperties": false,
+      "properties": {
+        "style": { "enum": ["space", "tab"] },
+        "size":  { "type": "integer", "minimum": 2, "maximum": 8 }
+      }
+    },
+    "line_length":         { "type": "integer", "minimum": 80, "maximum": 200 },
+    "trailing_whitespace": { "const": false, "description": "trailing whitespace forbidden" },
+    "final_newline":       { "const": true,  "description": "files must end with LF" },
+    "encoding":            { "enum": ["utf-8", "utf-8-bom"], "default": "utf-8" },
+    "newline_style":       { "enum": ["lf", "crlf"], "default": "lf" },
+    "max_blank_lines":     { "type": "integer", "minimum": 1, "maximum": 3, "default": 2 },
+    "import_grouping": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stdlib_first":     { "const": true },
+        "third_party_next": { "const": true },
+        "local_last":       { "const": true },
+        "blank_between_groups": { "const": true }
+      }
+    }
+  }
+}
+```
+
+### Style-violation enum (TypeScript)
+
+```ts
+export enum CodeStyleViolation {
+  IndentationMixedTabsSpaces = "indentation-mixed-tabs-spaces",
+  LineTooLong                = "line-too-long",
+  TrailingWhitespace         = "trailing-whitespace",
+  MissingFinalNewline        = "missing-final-newline",
+  CrlfInUnixFile             = "crlf-in-unix-file",
+  ExcessiveBlankLines        = "excessive-blank-lines",
+  ImportGroupingViolation    = "import-grouping-violation",
+}
+
+export enum CodeStyleFixability {
+  Auto    = "auto",
+  Assist  = "assist",
+  Manual  = "manual",
+}
+```
