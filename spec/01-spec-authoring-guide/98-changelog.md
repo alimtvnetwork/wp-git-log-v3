@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.6.0
+**Version:** 4.7.0
 **Last Updated:** 2026-04-27
 
 ---
+
+## 4.7.0 — 2026-04-27
+
+- Phase 93: rewrote `lifecycle-spec-authoring.mmd` from a 10-node skeleton (authoring → "Linters Pass?" → merge) into a fully-typed 32-node flowchart with 6 styled classes that faithfully renders the actual pipeline built across Phases 81–91. New nodes cover (a) the 5 `kind:` branching paths from the entry node, (b) the 6-step local linter pipeline (`generate-spec-index.cjs` → cross-links → tree-health `--strict` → lockstep `--strict` → `audit-spec-vs-code-v2.py` with `AUDIT_DETERMINISTIC=1` → trace-map regression), (c) the 6-gate CI sequence in `.github/workflows/spec-health.yml` including the Phase 91 CLI self-test step, (d) the failure-recovery loop pointing back through `--explain=<module>` to the author phase, and (e) the post-merge phase-memo step. Replaced the inline mermaid excerpt in §00 ("Lifecycle Diagram") with a high-level summary that delegates to the `.mmd` file as the canonical source. Added **AC-SAG-23** in §97 mandating (i) the `.mmd` file as canonical SoT, (ii) lockstep with the inline excerpt (`.mmd` wins on contradiction), and (iii) lockstep with `linter-scripts/run.sh` + `.github/workflows/spec-health.yml` whenever a gate is added/removed. Lockstep: §00 v3.6.0 → v3.7.0; §97 v4.1.0 → v4.2.0; §99 v4.3.0 → v4.4.0.
 
 ## 4.6.0 — 2026-04-27
 
