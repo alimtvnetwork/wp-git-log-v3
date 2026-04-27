@@ -75,3 +75,156 @@ The CI pipeline uses a **SHA-based passthrough gate** to skip redundant validati
 ---
 
 *Overview — updated: 2026-04-10*
+
+---
+
+## Inlined Contracts (Phase 52 — boost)
+
+### Reusable workflow inputs — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/12-cicd-pipeline-workflows/02-go-binary-deploy/inputs.schema.json",
+  "title": "GoBinaryDeployInputs",
+  "type": "object",
+  "required": ["module_path", "version", "platforms", "binary_name"],
+  "additionalProperties": false,
+  "properties": {
+    "module_path":  { "type": "string", "pattern": "^[a-z0-9._/-]+$" },
+    "version":      { "type": "string", "pattern": "^v?\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.-]+)?$" },
+    "binary_name":  { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+    "platforms": {
+      "type": "array", "minItems": 1,
+      "items": { "enum": ["linux/amd64","linux/arm64","darwin/amd64","darwin/arm64","windows/amd64","windows/arm64"] },
+      "uniqueItems": true
+    },
+    "checksum_algo": { "enum": ["sha256", "sha512"], "default": "sha256" },
+    "sign_with_cosign": { "type": "boolean", "default": true }
+  }
+}
+```
+
+### Required reusable workflow (CI YAML #1)
+
+```yaml
+name: go-binary-build
+on:
+  workflow_call:
+    inputs:
+      module_path:  { type: string, required: true }
+      version:      { type: string, required: true }
+      goos:         { type: string, required: true }
+      goarch:       { type: string, required: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: { go-version: "1.22" }
+      - env: { GOOS: "${{ inputs.goos }}", GOARCH: "${{ inputs.goarch }}", CGO_ENABLED: "0" }
+        run: go build -trimpath -ldflags="-s -w -X main.version=${{ inputs.version }}" -o dist/bin ${{ inputs.module_path }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bin-${{ inputs.goos }}-${{ inputs.goarch }}-${{ inputs.version }}
+          path: dist/bin
+```
+
+### Required reusable workflow (CI YAML #2)
+
+```yaml
+name: go-binary-test
+on:
+  workflow_call:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with: { go-version: "1.22" }
+      - run: go test -race -coverprofile=cover.out ./...
+      - run: go vet ./...
+      - run: go run honnef.co/go/tools/cmd/staticcheck@latest ./...
+```
+
+### Required reusable workflow (CI YAML #3)
+
+```yaml
+name: go-binary-checksum
+on:
+  workflow_call:
+    inputs:
+      version: { type: string, required: true }
+jobs:
+  checksum:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { pattern: "bin-*-${{ inputs.version }}", path: artifacts/, merge-multiple: false }
+      - run: |
+          cd artifacts
+          find . -type f -name bin -exec sh -c 'sha256sum "$1" > "$1.sha256"' _ {} \;
+      - uses: actions/upload-artifact@v4
+        with: { name: checksums-${{ inputs.version }}, path: "artifacts/**/*.sha256" }
+```
+
+### Required reusable workflow (CI YAML #4)
+
+```yaml
+name: go-binary-sign
+on:
+  workflow_call:
+    inputs:
+      version: { type: string, required: true }
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+      - uses: sigstore/cosign-installer@v3
+      - run: |
+          for f in $(find . -type f -name bin); do
+            cosign sign-blob --yes --output-signature "$f.sig" --output-certificate "$f.crt" "$f"
+          done
+```
+
+### Required reusable workflow (CI YAML #5)
+
+```yaml
+name: go-binary-release-orchestrator
+on:
+  push:
+    tags: ["v*.*.*"]
+jobs:
+  test:
+    uses: ./.github/workflows/go-binary-test.yml
+  build-matrix:
+    needs: test
+    strategy:
+      matrix:
+        include:
+          - { goos: linux,   goarch: amd64 }
+          - { goos: linux,   goarch: arm64 }
+          - { goos: darwin,  goarch: amd64 }
+          - { goos: darwin,  goarch: arm64 }
+          - { goos: windows, goarch: amd64 }
+    uses: ./.github/workflows/go-binary-build.yml
+    with:
+      module_path: ./cmd/app
+      version:     ${{ github.ref_name }}
+      goos:        ${{ matrix.goos }}
+      goarch:      ${{ matrix.goarch }}
+  checksum:
+    needs: build-matrix
+    uses: ./.github/workflows/go-binary-checksum.yml
+    with: { version: "${{ github.ref_name }}" }
+  sign:
+    needs: checksum
+    uses: ./.github/workflows/go-binary-sign.yml
+    with: { version: "${{ github.ref_name }}" }
+```

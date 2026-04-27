@@ -90,3 +90,74 @@ Codegen tool path references downstream linter implementation; spec-only repo do
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+---
+
+## Inlined Contracts (Phase 52 — boost)
+
+### Boolean naming-rule registry — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/01-cross-language/02-boolean-principles/rules.schema.json",
+  "title": "BooleanNamingRules",
+  "type": "object",
+  "required": ["required_prefixes", "forbidden_patterns"],
+  "additionalProperties": false,
+  "properties": {
+    "required_prefixes": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": { "enum": ["is", "has", "can", "should", "will", "did", "was", "are", "must", "needs"] }
+    },
+    "forbidden_patterns": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["pattern", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "pattern": { "type": "string", "minLength": 1 },
+          "reason":  { "type": "string", "minLength": 1 },
+          "example_bad": { "type": "string" },
+          "example_ok":  { "type": "string" }
+        }
+      }
+    },
+    "negation_policy": {
+      "type": "object",
+      "required": ["forbid_double_negative", "prefer_positive"],
+      "additionalProperties": false,
+      "properties": {
+        "forbid_double_negative": { "const": true },
+        "prefer_positive":        { "const": true }
+      }
+    }
+  }
+}
+```
+
+### Boolean prefix enum (TypeScript)
+
+```ts
+export enum BooleanPrefix {
+  Is     = "is",
+  Has    = "has",
+  Can    = "can",
+  Should = "should",
+  Will   = "will",
+  Did    = "did",
+  Was    = "was",
+  Are    = "are",
+  Must   = "must",
+  Needs  = "needs",
+}
+
+export enum BooleanViolationKind {
+  MissingPrefix      = "missing-prefix",
+  DoubleNegative     = "double-negative",
+  AmbiguousNegation  = "ambiguous-negation",
+  NoisySuffix        = "noisy-suffix",   // e.g. "isFlag", "isStatus"
+  StringMasquerade   = "string-masquerade", // string holding "true"/"false"
+}
+```

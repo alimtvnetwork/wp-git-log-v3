@@ -144,3 +144,62 @@ External TypeScript ESLint spec reference targets downstream JS-tooling repo; in
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+---
+
+## Inlined Contracts (Phase 52 — boost)
+
+### Static-analysis tool registry — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/01-cross-language/16-static-analysis/registry.schema.json",
+  "title": "StaticAnalysisToolRegistry",
+  "type": "object",
+  "required": ["language", "tools"],
+  "additionalProperties": false,
+  "properties": {
+    "language": { "enum": ["ts", "js", "go", "php", "csharp", "python", "rust", "yaml", "shell"] },
+    "tools": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "blocking", "config_path"],
+        "additionalProperties": false,
+        "properties": {
+          "name":        { "type": "string", "minLength": 1 },
+          "version_pin": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+          "blocking":    { "type": "boolean" },
+          "config_path": { "type": "string", "minLength": 1 },
+          "rule_count":  { "type": "integer", "minimum": 0 },
+          "phase":       { "enum": ["pre-commit", "ci-pr", "ci-merge", "nightly"] }
+        }
+      }
+    }
+  }
+}
+```
+
+### Severity & phase enums (TypeScript)
+
+```ts
+export enum AnalysisSeverity {
+  Blocker = "blocker",
+  Major   = "major",
+  Minor   = "minor",
+  Info    = "info",
+}
+
+export enum AnalysisPhase {
+  PreCommit = "pre-commit",
+  CiPr      = "ci-pr",
+  CiMerge   = "ci-merge",
+  Nightly   = "nightly",
+}
+
+export enum AnalysisLanguage {
+  Ts = "ts", Js = "js", Go = "go", Php = "php", Csharp = "csharp",
+  Python = "python", Rust = "rust", Yaml = "yaml", Shell = "shell",
+}
+```

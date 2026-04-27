@@ -69,3 +69,147 @@ The build graph has a **diamond dependency**: the SDK is built first, then multi
 ---
 
 *Overview — updated: 2026-04-09*
+
+---
+
+## Inlined Contracts (Phase 52 — boost)
+
+### Reusable workflow inputs — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/12-cicd-pipeline-workflows/01-browser-extension-deploy/inputs.schema.json",
+  "title": "BrowserExtensionDeployInputs",
+  "type": "object",
+  "required": ["target_browser", "extension_id", "version", "manifest_path"],
+  "additionalProperties": false,
+  "properties": {
+    "target_browser": { "enum": ["chrome", "firefox", "edge", "opera"] },
+    "extension_id":   { "type": "string", "pattern": "^[a-z0-9]{32}$|^\\{[0-9a-fA-F-]{36}\\}$|^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+$" },
+    "version":        { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(\\.\\d+)?$" },
+    "manifest_path":  { "type": "string", "minLength": 1 },
+    "release_channel": { "enum": ["dev", "beta", "stable"] },
+    "auto_publish":   { "type": "boolean", "default": false }
+  }
+}
+```
+
+### Required reusable workflow (CI YAML #1)
+
+```yaml
+name: browser-extension-build
+on:
+  workflow_call:
+    inputs:
+      target_browser: { type: string, required: true }
+      version:        { type: string, required: true }
+      manifest_path:  { type: string, required: true }
+    secrets:
+      STORE_API_KEY:  { required: true }
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm ci
+      - run: npm run build:${{ inputs.target_browser }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ext-${{ inputs.target_browser }}-${{ inputs.version }}
+          path: dist/${{ inputs.target_browser }}/
+```
+
+### Required reusable workflow (CI YAML #2)
+
+```yaml
+name: browser-extension-validate
+on:
+  workflow_call:
+    inputs:
+      manifest_path: { type: string, required: true }
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npx web-ext lint --source-dir=$(dirname ${{ inputs.manifest_path }})
+      - run: jq -e '.manifest_version >= 3' ${{ inputs.manifest_path }}
+```
+
+### Required reusable workflow (CI YAML #3)
+
+```yaml
+name: browser-extension-publish-chrome
+on:
+  workflow_call:
+    inputs:
+      extension_id: { type: string, required: true }
+      zip_path:     { type: string, required: true }
+    secrets:
+      CHROME_CLIENT_ID:     { required: true }
+      CHROME_CLIENT_SECRET: { required: true }
+      CHROME_REFRESH_TOKEN: { required: true }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: ${{ inputs.zip_path }} }
+      - name: Upload to Chrome Web Store
+        run: |
+          curl -X PUT \
+            -H "Authorization: Bearer $TOKEN" \
+            -T ${{ inputs.zip_path }} \
+            "https://www.googleapis.com/upload/chromewebstore/v1.1/items/${{ inputs.extension_id }}"
+```
+
+### Required reusable workflow (CI YAML #4)
+
+```yaml
+name: browser-extension-publish-firefox
+on:
+  workflow_call:
+    inputs:
+      extension_id: { type: string, required: true }
+      xpi_path:     { type: string, required: true }
+    secrets:
+      AMO_JWT_ISSUER: { required: true }
+      AMO_JWT_SECRET: { required: true }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { name: ${{ inputs.xpi_path }} }
+      - run: npx web-ext sign --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET
+```
+
+### Required reusable workflow (CI YAML #5)
+
+```yaml
+name: browser-extension-release-orchestrator
+on:
+  push:
+    tags: ["v*.*.*"]
+jobs:
+  build:
+    uses: ./.github/workflows/browser-extension-build.yml
+    with:
+      target_browser: chrome
+      version:        ${{ github.ref_name }}
+      manifest_path:  src/manifest.json
+  validate:
+    needs: build
+    uses: ./.github/workflows/browser-extension-validate.yml
+    with: { manifest_path: src/manifest.json }
+  publish:
+    needs: validate
+    uses: ./.github/workflows/browser-extension-publish-chrome.yml
+    with:
+      extension_id: ${{ vars.CHROME_EXT_ID }}
+      zip_path:     ext-chrome-${{ github.ref_name }}
+    secrets: inherit
+```
