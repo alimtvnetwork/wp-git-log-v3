@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # CI/CD Integration — Coding-Guidelines Linter Pack
 
 > **Version:** 1.0.0
@@ -94,3 +99,15 @@ under `linters-cicd/action.yml`.
 
 - **Md. Alim Ul Karim** — Creator & Lead Architect
 - **Riseup Asia LLC** — Sponsor
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Spec mandates `linters-cicd/` directory; current repo uses `linter-scripts/`. Rename is a downstream packaging concern tracked by the distribution repo.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+

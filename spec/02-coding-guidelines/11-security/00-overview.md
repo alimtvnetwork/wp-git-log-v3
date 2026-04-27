@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Security Guidelines
 
 **Version:** 2.1.0  
@@ -139,3 +144,15 @@ forbidden-string detection across every language target.
 ---
 
 *Security guidelines — single source of truth for all security-related coding policies.*
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Sub-module `01-axios-version-control/` referenced by ACs lives in downstream JS tooling repo. Spec-only repo holds the contract; implementation is external.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+

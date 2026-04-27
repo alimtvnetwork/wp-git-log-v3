@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # AI Optimization
 
 **Version:** 3.2.0  
@@ -42,3 +47,15 @@ AI-specific guidelines designed to prevent hallucination and ensure AI-generated
 |------|
 | 97-acceptance-criteria.md |
 | 99-consistency-report.md |
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+AI-optimization rules are AI-prompt-targeted contracts; their automated enforcement (Go/Python linters) lives in downstream implementation repos and may evolve independently.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+

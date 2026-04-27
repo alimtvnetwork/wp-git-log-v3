@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Distribution and Runner
 
 **Version:** 1.0.0
@@ -118,3 +123,15 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Spec mandates `run.sh`/`run.ps1` at repo root; current repo houses them in `linter-scripts/`. Relocation is a packaging concern owned by the release pipeline (downstream).
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+

@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # PowerShell Integration for Project Runner
 
 > **Spec Version:** 2.25.0  
@@ -365,3 +370,15 @@ pwsh -NoProfile -Command "Invoke-ScriptAnalyzer -Path scripts -Recurse -Severity
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Spec describes a Go/React orchestrator runner; current spec-only repo only contains a linter-scripts runner stub. Full orchestrator implementation lives in downstream Go/React project repos.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+

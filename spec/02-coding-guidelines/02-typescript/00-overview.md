@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # TypeScript Standards
 
 **Version:** 3.2.0  
@@ -66,3 +71,15 @@ TypeScript-specific coding standards, enum definitions, and type safety enforcem
 | Parent Overview | `../00-overview.md` |
 | Cross-Language Rules | `../01-cross-language/00-overview.md` |
 | Coding Guidelines Memory | `../../../.lovable/memories/constraints/coding-guidelines.md` |
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Status:** Forward-looking spec — drift expected.
+
+Spec describes ESLint/SonarQube enforcement; current repo ships custom Go/Python linter scripts. ESLint integration is forward-looking and lives in downstream JS tooling repo.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
+
