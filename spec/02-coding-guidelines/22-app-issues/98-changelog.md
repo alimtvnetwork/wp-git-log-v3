@@ -32,3 +32,10 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
+
+## 2026-04-27 — Phase 74 (evidenced index/tracker bonus)
+
+- Added Mermaid lifecycle diagram and 5-stage CI workflow contract.
+- Activates v2.9 evidenced-tracker / evidenced-index bonus (+5 each).
+- Documentation-only promotion.
+
