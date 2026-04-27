@@ -59,8 +59,8 @@ as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
 
 ## Coverage triad: what each test catches
 
-The six tests together form a **complete blind-spot coverage matrix** for
-the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–6):
+The seven tests together form a **complete blind-spot coverage matrix** for
+the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–7):
 
 | Blind spot | Why production gate misses it | Self-test catching it |
 |---|---|---|
@@ -70,14 +70,17 @@ the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–6):
 | Self-test added/removed without updating this README | Reviewer-attention only; AC-31-27 was unenforced | **Phase 102** (filesystem ↔ inventory parity, structural sections, executable bit) |
 | QA-baseline footer drifting from `RUBRIC_VERSION` / workflow / declared count | Production audit gate still passes while docs lie; AC-31-28 was unenforced | **Phase 103** (4-way enumeration consistency: script constant ↔ 00-index ↔ EXECUTIVE-SUMMARY ↔ workflow steps) |
 | New script silently added to `linter-scripts/` or `.github/workflows/` without a §27 spec row OR an entry in the Phase 107 orphan ledger | `check-tree-health.cjs` allow-list inference is permissive (Phase 107 found 8 silent orphans); AC-31-31 / INV-01 / INV-02 were unenforced | **Phase 112** (3-way triangle: §27 overview ↔ filesystem ↔ Phase 107 orphan memo) |
+| Dimension `WEIGHTS` drifting between `audit-spec-vs-code-v2.py`, `generate-gate-report.py`, and §31's `## Weights` table | AC-31-02's runtime assertion only catches in-script drift in the audit script alone; gate-report and §31 docs were unenforced and could silently produce divergent scoring | **Phase 113** (3-way dict-equality + AC-31-02 invariants + dimension count == 7) |
 
-If you add a seventh contract guarantee to the audit script (or any other
-linter), add a seventh self-test here following the same template — see
+If you add an eighth contract guarantee to the audit script (or any other
+linter), add an eighth self-test here following the same template — see
 **"Adding a new self-test"** below. The Phase 102 gate will fail on your
 PR if you forget to add the row; the Phase 103 gate will fail if you wire
 the new step into the workflow without bumping the audit footer's
 gate-count enumeration in lockstep; the Phase 112 gate will fail if you
-add a script without updating §27 §00-overview or the Phase 107 ledger.
+add a script without updating §27 §00-overview or the Phase 107 ledger;
+the Phase 113 gate will fail if you change scoring weights in only one
+of the three sites that restate them.
 
 ---
 
