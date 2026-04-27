@@ -52,3 +52,24 @@ Remaining non-100 modules:
 4. **B1** — `spec/22-git-logs-v2/07-app-entity.md` `App` identity decision
    (user input required).
 5. **R1** — Real-AI re-audit of 87 modules (Lovable Cloud required).
+
+---
+
+## Retrospective (added in Phase 88, 2026-04-27)
+
+How the queued phases above actually played out:
+
+| Queued | Actual phase | Outcome |
+|---|---|---|
+| Phase 79 — meta-toolchain ceiling lift | Phase 79 (kept) | ✓ §27 impl 85 → 95; mean weighted 95.8 → 95.9 |
+| Phase 80 — cumulative schema-bonus cap | **Deferred** | Re-queued for Phase 86 — see below |
+| Phase 81 — strict tree-health in CI | Phase 81 (kept) | ✓ Three strict gates wired (tree, lockstep, audit floors `--min-weighted=95 --min-impl=98`) |
+
+The "cumulative schema-bonus cap" item was eventually investigated in **Phase 86**
+and **REJECTED** after empirical testing showed it would punish legitimate
+multi-contract modules (mean impl 99.8 → 89.2). See
+`phase-86-schema-cap-rejected.md`. **Do not re-propose without re-reading that memo.**
+
+Current state (as of Phase 88): mean weighted 98.0, mean impl 99.8 (vs the 95.8/98.2
+this memo recorded as its post-state).
+
