@@ -1,4 +1,5 @@
 ---
+kind: index
 description: Git Logs Diagram Conventions — child module of `26-gitlogs-diagrams/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
 ---
 

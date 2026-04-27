@@ -1,4 +1,5 @@
 ---
+kind: index
 description: App-Specific Coding Rules — child module of `02-coding-guidelines/21-app/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
 ---
 

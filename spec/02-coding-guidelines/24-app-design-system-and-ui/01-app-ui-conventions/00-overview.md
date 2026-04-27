@@ -1,4 +1,5 @@
 ---
+kind: index
 description: App UI Conventions — child module of `02-coding-guidelines/24-app-design-system-and-ui/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
 ---
 

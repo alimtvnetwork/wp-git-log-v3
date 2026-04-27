@@ -1,4 +1,5 @@
 ---
+kind: index
 description: Research Index — child module of `02-coding-guidelines/10-research/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
 ---
 

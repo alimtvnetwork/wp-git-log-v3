@@ -1,4 +1,5 @@
 ---
+kind: index
 description: Update Diagram Conventions — child module of `14-update/diagrams/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
 ---
 
