@@ -1,7 +1,9 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26
+
+> **v4.1.0 update (Phase 38):** Added [`12-queued-decisions-trail.md`](./12-queued-decisions-trail.md) v1.0.0 — codifies the queued-decisions trail format (Q-identifier scheme, 4 status markers, lockstep edits, audit-recovery procedure, 5 ACs). Closes the gap where the project-memory Core lockstep rule referenced `mem://specs/git-logs.md` as a *demonstrated* format without ever specifying it. Inventory now also reflects slot 11 (`11-root-readme-conventions.md`, present since Phase 24 but missed in earlier §99 inventory rebuild).
 
 > **v4.0.0 update (Phase 16f):** §97 fully rewritten from 18 table-row criteria to **20 module-specific Given/When/Then ACs** (AC-SAG-01..AC-SAG-20). The new ACs codify the meta-spec contract for authoring every OTHER spec in the tree — four-required-files rule, naming regex, reserved prefixes, slot immutability, seven `00-overview.md` sections, GWT depth requirement, lockstep rule, three template patterns, `.lovable/memories/` plural canonical, linter infrastructure mandate, root-readme format, score-honesty rule, reliability-report gate, dogfooding self-application, and forbidden manual edits to `spec-index.md`. Legacy AC-001..018 preserved as AC-SAG-LEGACY-001..018 at end of §97 for traceability. **Dogfooding verified**: this module satisfies all 20 ACs against itself (AC-SAG-18). Module-level tree-health: 100/100 (A+).
 
