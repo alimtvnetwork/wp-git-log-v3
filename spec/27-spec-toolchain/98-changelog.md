@@ -16,6 +16,17 @@
 
 ## Releases
 
+### 2.11.0 — 2026-04-27 (Phase R4 — Audit prose-only TODO/waffle scanning)
+- **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.3 → **v2.4**: TODO/TBD/FIXME and waffle-word scanners now strip fenced code blocks (```` ``` ````) and inline `code` spans before counting. Tokens that appear inside code samples (variable names, comments demonstrating forbidden patterns, schema placeholders) no longer trigger the `G-TODO-01` cap or inflate `waffle_per_kchar`.
+- **Added** `strip_code(text)` helper + `INLINE_CODE_RX` regex; applied to `body_text` for both `todo_density` and `waffle_per_kchar` metrics. AC-only text path unchanged (ACs already strip prose to GWT blocks).
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.2.0 → **v1.3.0**: methodology bullets flagged "prose only (v2.4)"; new **AC-31-11** ("TODO/waffle scanners ignore code samples").
+- **Verified** measured impact across 5 sample modules:
+  - `02-coding-guidelines/01-cross-language/04-code-style`: TODO 3 → 2 (drops below G-TODO-01 threshold; one false finding cleared).
+  - `27-spec-toolchain`: TODO 25 → 17 (8 false positives removed — all inside script-spec code samples).
+  - `22-git-logs-v2`, `04-error-modal/01-copy-formats`, `14-update/24-update-check-mechanism`: unchanged (no TODOs embedded in code).
+- **Unblocks** R1 (re-run AI audit on `lovable_ai` runtime with honest prose-only metrics).
+- **Verified** `python3 -c "import ast; ast.parse(open('linter-scripts/audit-spec-vs-code-v2.py').read())"` → syntax OK; `node linter-scripts/check-lockstep.cjs --strict` continues to pass.
+
 ### 2.10.0 — 2026-04-27 (Phase 41 — Lockstep baseline sweep + strict flip)
 - **Cleared** the 24-module Phase 40 adoption baseline:
   - **L1 (17 modules):** §99 banners bumped to match §00 dates (mechanical sweep). Modules: `02-coding-guidelines/01-cross-language/04-code-style`, `02-coding-guidelines/{09-powershell-integration,10-research,21-app,22-app-issues,23-app-database,24-app-design-system-and-ui}`, `03-error-manage`, `03-error-manage/02-error-architecture`, `03-error-manage/02-error-architecture/04-error-modal`, `05-split-db-architecture/03-issues`, `06-seedable-config-architecture/03-issues`, `10-research`, `14-update/diagrams`, `25-app-issues`, `25-app-issues/01-phase-2-git-logs-audit`, `25-app-issues/02-consolidated-audit-findings`.
