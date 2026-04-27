@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 4.0.0  
-**Generated:** 2026-04-25  
-**Health Score:** 100/100 (A+) 🎯 — measured by `linter-scripts/check-tree-health.cjs`. Major bump locks the post-Phase-2c milestone: 208/208 required + recommended files across 52 modules; CI threshold pinned at 100; four idempotent self-heal generators wired into `bash linter-scripts/run.sh` and `.github/workflows/spec-health.yml`. Trajectory from F-baseline: 45 → 71 → 81 → 90 → 100 (+55).
+**Version:** 4.0.1  
+**Generated:** 2026-04-26  
+**Health Score:** 100/100 (A+) 🎯 — measured by `linter-scripts/check-tree-health.cjs`. v4.0.1 syncs the root inventory with the filesystem (slots 27, 28 added; phantom slot-22 collision row removed). Trajectory: 45 → 71 → 81 → 90 → 100.
 
 ---
 
@@ -54,6 +54,8 @@
 | `24-app-design-system-and-ui/` | ✅ | — (placeholder) |
 | `25-app-issues/` | ✅ | — (placeholder; renamed from `22-app-issues/` in v3.7.0) |
 | `26-gitlogs-diagrams/` | ✅ | ✅ |
+| `27-spec-toolchain/` | ✅ | ✅ (added to root inventory v4.0.1, Phase 29) |
+| `28-universal-ci-cli/` | ✅ | ✅ (added to root inventory v4.0.1, Phase 29) |
 
 ---
 
@@ -90,4 +92,5 @@
 | 2026-04-25 | 3.5.0 | Cross-repo allowlist; 45→0 broken links; v1 cleanup |
 | 2026-04-25 | 3.6.0 | Folder-scoped 100/100 (later corrected by v4 audit as not tree-wide) |
 | 2026-04-25 | 3.7.0 | **Phase 1 Triage executed.** Renamed `22-app-issues/` → `25-app-issues/` (slot collision resolved). Archived `21-git-logs/` → `_archive/21-git-logs-v1/`. Honest score restored to **78/100 (B)** pending Phase 2 content fill. |
+| 2026-04-26 | 4.0.1 | **Phase 29.** Synced `00-overview.md` inventory with filesystem: removed phantom slot-22 collision row (already resolved on disk in v3.7.0), added rows 27-spec-toolchain + 28-universal-ci-cli. B2 blocker closed. Tree health 100/100. |
 
