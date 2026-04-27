@@ -151,6 +151,7 @@ The following files in this module also constitute acceptance surface — each M
 - `06-release-metadata.md`
 - `07-known-issues-and-fixes.md`
 - `08-version-pinned-release-installers.md`
+- `09-placeholder-tokens.md`
 
 ---
 
