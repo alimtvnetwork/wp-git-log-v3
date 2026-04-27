@@ -1,7 +1,7 @@
 # Phase-2 Spec Issues Report — `git-logs` App
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Version:** 1.2.0  
+**Updated:** 2026-04-27  
 **Phase:** 2 (Spec-only audit, no code)  
 **Audit Target:** `spec/_archive/21-git-logs-v1/`  
 **Status:** Open  
