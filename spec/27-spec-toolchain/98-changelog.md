@@ -16,6 +16,21 @@
 
 ## Releases
 
+### 2.12.0 — 2026-04-27 (Phase R5 — Auditor self-reference exemption)
+- **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.4 → **v2.5** to eliminate the last G-TODO-01 false positive class (auditor self-reference):
+  - **Meta-token sequence strip**: new `META_TOKEN_SEQ_RX = /\b(TODO|TBD|FIXME|XXX|HACK)(\/(TODO|TBD|FIXME|XXX|HACK)){1,4}\b/` removes canonical reference forms like `TODO/TBD/FIXME` (changelog rows, AC text, fix-checklist labels) before counting individual tokens. Standalone `TODO:` markers in prose still count.
+  - **`kind: meta-toolchain` frontmatter**: new gate-skip mechanism. Gates may declare `skip_kinds: set[str]`; G-TODO-01 now declares `{"meta-toolchain"}` and is bypassed entirely (not even recorded as passive) for matching modules.
+- **Added** `kind: meta-toolchain` frontmatter to `spec/27-spec-toolchain/00-overview.md` (banner v1.5.0 → v1.6.0).
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.3.0 → **v1.4.0**: G-TODO-01 trigger row notes the skip; **AC-31-12** (meta-token strip) and **AC-31-13** (`kind: meta-toolchain` exemption) added.
+- **Verified** measured impact (`AUDIT_DETERMINISTIC=1`):
+  - **Total G-TODO-01 active firings: 1 → 0** ✅
+  - `02-coding-guidelines` 94 (A) → **98 (A+)** — meta-token strip dropped TODO 8 → 2; G-TODO-01 cleared.
+  - `02-coding-guidelines/01-cross-language/04-code-style` 82 → 84 — TODO 2 → 0.
+  - `22-git-logs-v2` TODO 14 → 10; `17-consolidated-guidelines` 8 → 5 — both already above gate-clear, no score change but cleaner metric.
+  - `27-spec-toolchain` TODO 17 (unchanged), but `kind: meta-toolchain` exempts G-TODO-01. Score held at 78 — bottlenecked by impl=55, not completeness (Phase 42 territory).
+  - **A+ tier: 4 → 5**; mean 81.6 → 81.7.
+- **Verified** `python3 -c "import ast; ast.parse(...)"` → syntax OK; `node linter-scripts/check-lockstep.cjs --strict` continues to pass; tree health 100/100.
+
 ### 2.11.0 — 2026-04-27 (Phase R4 — Audit prose-only TODO/waffle scanning)
 - **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.3 → **v2.4**: TODO/TBD/FIXME and waffle-word scanners now strip fenced code blocks (```` ``` ````) and inline `code` spans before counting. Tokens that appear inside code samples (variable names, comments demonstrating forbidden patterns, schema placeholders) no longer trigger the `G-TODO-01` cap or inflate `waffle_per_kchar`.
 - **Added** `strip_code(text)` helper + `INLINE_CODE_RX` regex; applied to `body_text` for both `todo_density` and `waffle_per_kchar` metrics. AC-only text path unchanged (ACs already strip prose to GWT blocks).
