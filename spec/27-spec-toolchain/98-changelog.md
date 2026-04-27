@@ -17,7 +17,7 @@
 ## Releases
 
 ### 2.13.0 — 2026-04-27 (Phase 43 — Broken-link false-positive fix)
-- **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.5 → **v2.6**: cross-spec link extraction now runs against `strip_code(body_text)` (the same code-stripped prose feed used by the TODO/waffle scanners) instead of the raw body. Markdown links inside fenced ```` ```markdown / ```text ```` template blocks — e.g. `01-spec-authoring-guide`'s path-syntax examples like `[Architecture](./01-architecture.md)` — are *documentation*, not real references, and must not be treated as broken just because the example file does not exist.
+- **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.5 → **v2.6**: cross-spec link extraction now runs against `strip_code(body_text)` (the same code-stripped prose feed used by the TODO/waffle scanners) instead of the raw body. Markdown links inside fenced ```` ```markdown / ```text ```` template blocks — e.g. `01-spec-authoring-guide`'s path-syntax examples like `` `[Architecture](./01-architecture.md)` `` — are *documentation*, not real references, and must not be treated as broken just because the example file does not exist.
 - **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.4.0 → **v1.5.0**: methodology bullet (cross-spec link health) now annotated "prose only (v2.6)"; **AC-31-14** added (prose-only link extraction contract).
 - **Verified** measured impact (`AUDIT_DETERMINISTIC=1`):
   - **Total broken links across 79 modules: 30 → 0** ✅ (2573 valid links scanned).

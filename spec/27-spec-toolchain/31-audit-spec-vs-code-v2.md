@@ -167,7 +167,7 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **Then** the `G-TODO-01` gate MUST be bypassed entirely (not even recorded as passive in `applied_gates`). Other gates apply normally.
 
 ### AC-31-14 — Cross-spec link extraction is prose-only (v2.6)
-- **Given** a module whose `body_text` contains markdown links inside fenced ```` ```markdown ```` or ```` ```text ```` template blocks (e.g. `01-spec-authoring-guide`'s path-syntax examples like `[Architecture](./01-architecture.md)`),
+- **Given** a module whose `body_text` contains markdown links inside fenced ```` ```markdown ```` or ```` ```text ```` template blocks (e.g. `01-spec-authoring-guide`'s path-syntax examples like `` `[Architecture](./01-architecture.md)` ``),
 - **When** the deterministic metrics are computed,
 - **Then** those example links MUST NOT contribute to `metrics.links_total` or `metrics.links_broken`. Implementation: `LINK_RX.findall` runs against `strip_code(body_text)` (the same code-stripped prose used by the TODO/waffle scanners), NOT against the raw body. Standalone markdown links in prose still count and are still validated against the filesystem.
 
