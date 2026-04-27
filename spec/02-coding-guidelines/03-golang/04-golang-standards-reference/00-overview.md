@@ -76,3 +76,107 @@ PascalCase Go file naming is intentional house-style contract; standard Go snake
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+## Inlined Contracts (Phase 51 — boost)
+
+### golangci-lint required ruleset — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/03-golang/04-golang-standards-reference/golangci.schema.json",
+  "title": "GolangciLintRequiredConfig",
+  "type": "object",
+  "required": ["run", "linters"],
+  "additionalProperties": true,
+  "properties": {
+    "run": {
+      "type": "object",
+      "required": ["timeout", "tests"],
+      "additionalProperties": true,
+      "properties": {
+        "timeout": { "type": "string", "pattern": "^\\d+(s|m)$" },
+        "tests":   { "const": true }
+      }
+    },
+    "linters": {
+      "type": "object",
+      "required": ["enable", "disable-all"],
+      "additionalProperties": true,
+      "properties": {
+        "disable-all": { "const": true },
+        "enable": {
+          "type": "array", "minItems": 5,
+          "items": { "enum": ["govet","staticcheck","errcheck","ineffassign","unused","gocritic","revive","gosec","gosimple"] },
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
+```
+
+### Reference idiomatic patterns (typed-language contract)
+
+```go
+// Pattern: context as first arg, error as last return.
+package svc
+
+import "context"
+
+type Service interface {
+    Get(ctx context.Context, id string) (*Entity, error)
+    List(ctx context.Context, q Query)  ([]*Entity, error)
+    Put(ctx context.Context, e *Entity) error
+}
+
+type Entity struct {
+    ID   string `json:"id"`
+    Name string `json:"name"`
+}
+```
+
+```go
+// Pattern: option struct + functional options for extensibility.
+package client
+
+import "time"
+
+type Option func(*Client)
+
+type Client struct {
+    timeout time.Duration
+    retries int
+}
+
+func WithTimeout(d time.Duration) Option { return func(c *Client) { c.timeout = d } }
+func WithRetries(n int) Option           { return func(c *Client) { c.retries = n } }
+
+func New(opts ...Option) *Client {
+    c := &Client{timeout: 5 * time.Second, retries: 3}
+    for _, o := range opts { o(c) }
+    return c
+}
+```
+
+```go
+// Pattern: table-driven tests are mandatory for any pure function.
+package math_test
+
+import "testing"
+
+func TestAdd(t *testing.T) {
+    cases := []struct{ name string; a, b, want int }{
+        {"zero", 0, 0, 0},
+        {"pos",  2, 3, 5},
+        {"neg", -1, 1, 0},
+    }
+    for _, tc := range cases {
+        t.Run(tc.name, func(t *testing.T) {
+            if got := tc.a + tc.b; got != tc.want {
+                t.Fatalf("got %d, want %d", got, tc.want)
+            }
+        })
+    }
+}
+```

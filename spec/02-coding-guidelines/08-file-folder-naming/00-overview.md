@@ -155,3 +155,72 @@ The naming rules for every supported language collapse to one machine-readable c
 ---
 
 *Single source of truth for file & folder naming across all languages.*
+
+---
+
+## Inlined Contracts (Phase 51 — boost)
+
+### Naming-rule registry — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/08-file-folder-naming/rules.schema.json",
+  "title": "FileFolderNamingRules",
+  "type": "object",
+  "required": ["folders", "files"],
+  "additionalProperties": false,
+  "properties": {
+    "folders": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["scope", "case", "pattern"],
+        "additionalProperties": false,
+        "properties": {
+          "scope":   { "enum": ["spec", "src", "tests", "linters", "scripts", "docs"] },
+          "case":    { "enum": ["kebab", "snake", "camel", "pascal"] },
+          "pattern": { "type": "string", "minLength": 1 },
+          "examples_ok":  { "type": "array", "items": { "type": "string" } },
+          "examples_bad": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "files": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["lang", "case", "pattern"],
+        "additionalProperties": false,
+        "properties": {
+          "lang":    { "enum": ["ts", "tsx", "js", "go", "php", "csharp", "python", "md", "json", "yaml", "sql"] },
+          "case":    { "enum": ["kebab", "snake", "camel", "pascal", "lowercase"] },
+          "pattern": { "type": "string", "minLength": 1 },
+          "max_chars": { "type": "integer", "minimum": 1, "maximum": 255 }
+        }
+      }
+    }
+  }
+}
+```
+
+### Naming-case enum (TypeScript)
+
+```ts
+export enum NamingCase {
+  Kebab     = "kebab",       // foo-bar
+  Snake     = "snake",       // foo_bar
+  Camel     = "camel",       // fooBar
+  Pascal    = "pascal",      // FooBar
+  Lowercase = "lowercase",   // foobar
+}
+
+export enum NamingScope {
+  Spec    = "spec",
+  Src     = "src",
+  Tests   = "tests",
+  Linters = "linters",
+  Scripts = "scripts",
+  Docs    = "docs",
+}
+```

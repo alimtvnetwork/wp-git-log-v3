@@ -224,3 +224,88 @@ npm run lint && npm run test
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-27_
+
+---
+
+## Inlined Contracts (Phase 51 — boost)
+
+### App design-token registry — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/24-app-design-system-and-ui/tokens.schema.json",
+  "title": "AppDesignTokens",
+  "type": "object",
+  "required": ["color", "spacing", "radius", "shadow"],
+  "additionalProperties": false,
+  "properties": {
+    "color": {
+      "type": "object", "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9-]*$": { "$ref": "#/$defs/themePair" }
+      }
+    },
+    "spacing": {
+      "type": "object", "additionalProperties": false,
+      "patternProperties": {
+        "^(0|0\\.5|1|1\\.5|2|3|4|6|8|12|16|24|32|48|64)$": { "type": "string", "pattern": "^\\d+(\\.\\d+)?(rem|px)$" }
+      }
+    },
+    "radius": {
+      "type": "object", "additionalProperties": false,
+      "patternProperties": {
+        "^(none|sm|md|lg|xl|2xl|full)$": { "type": "string", "pattern": "^(0|\\d+(\\.\\d+)?(rem|px)|9999px)$" }
+      }
+    },
+    "shadow": {
+      "type": "object", "additionalProperties": false,
+      "patternProperties": {
+        "^(sm|md|lg|xl|2xl|inner|none)$": { "type": "string" }
+      }
+    }
+  },
+  "$defs": {
+    "themePair": {
+      "type": "object", "required": ["light", "dark"], "additionalProperties": false,
+      "properties": {
+        "light": { "type": "string", "pattern": "^\\d{1,3}\\s+\\d{1,3}%\\s+\\d{1,3}%$" },
+        "dark":  { "type": "string", "pattern": "^\\d{1,3}\\s+\\d{1,3}%\\s+\\d{1,3}%$" }
+      }
+    }
+  }
+}
+```
+
+### App-shell variant + breakpoint enums (TypeScript)
+
+```ts
+export enum AppShellVariant {
+  Marketing = "marketing",
+  Console   = "console",
+  Settings  = "settings",
+  Modal     = "modal",
+}
+
+export enum Breakpoint {
+  Sm = 640,
+  Md = 768,
+  Lg = 1024,
+  Xl = 1280,
+  Xxl = 1536,
+}
+
+export enum SemanticColor {
+  Background       = "background",
+  Foreground       = "foreground",
+  Primary          = "primary",
+  PrimaryForeground = "primary-foreground",
+  Secondary        = "secondary",
+  Muted            = "muted",
+  Accent           = "accent",
+  Destructive      = "destructive",
+  Border           = "border",
+  Input            = "input",
+  Ring             = "ring",
+}
+```

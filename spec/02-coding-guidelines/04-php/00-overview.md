@@ -79,3 +79,115 @@ PHP-specific coding standards and patterns for the RiseupAsia namespace.
 - [Cross-Language Guidelines](../01-cross-language/00-overview.md)
 - [Go Standards](../03-golang/00-overview.md) — for PHP–Go parity
 - [Parent Overview](../00-overview.md)
+
+## Inlined Contracts (Phase 51 — boost)
+
+### composer.json invariants — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/04-php/composer-invariants.schema.json",
+  "title": "PhpComposerInvariants",
+  "type": "object",
+  "required": ["name", "type", "require", "autoload"],
+  "additionalProperties": true,
+  "properties": {
+    "name":    { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+$" },
+    "type":    { "enum": ["library", "wordpress-plugin", "project"] },
+    "require": {
+      "type": "object",
+      "required": ["php"],
+      "additionalProperties": true,
+      "properties": {
+        "php": { "type": "string", "pattern": "^\\^?(8\\.[1-9]|[9]\\.\\d+)" }
+      }
+    },
+    "autoload": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["psr-4"],
+      "properties": {
+        "psr-4": { "type": "object", "minProperties": 1 }
+      }
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "platform-check": { "const": true },
+        "sort-packages":  { "const": true }
+      }
+    }
+  }
+}
+```
+
+### Canonical PHP contract (typed-language reference)
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace RiseupAsia\Spec;
+
+/**
+ * Canonical LogLevel enum — must match §02/02 TS + §02/07 C# 1:1.
+ */
+enum LogLevel: int
+{
+    case Fatal = 0;
+    case Error = 1;
+    case Warn  = 2;
+    case Info  = 3;
+    case Debug = 4;
+    case Trace = 5;
+}
+```
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace RiseupAsia\Spec;
+
+/**
+ * Result discriminated union — every fallible function MUST return Result.
+ *
+ * @template T
+ */
+final readonly class Result
+{
+    public function __construct(
+        public mixed $value = null,
+        public ?\Throwable $error = null,
+    ) {}
+
+    public static function ok(mixed $v): self    { return new self(value: $v); }
+    public static function err(\Throwable $e): self { return new self(error: $e); }
+
+    public function isOk(): bool  { return $this->error === null; }
+    public function isErr(): bool { return $this->error !== null; }
+}
+```
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace RiseupAsia\Spec;
+
+/**
+ * Required base exception type. All domain exceptions MUST extend this.
+ */
+abstract class DomainException extends \RuntimeException
+{
+    public function __construct(
+        public readonly string $code,
+        string $message,
+        ?\Throwable $previous = null,
+    ) {
+        parent::__construct($message, 0, $previous);
+    }
+}
+```

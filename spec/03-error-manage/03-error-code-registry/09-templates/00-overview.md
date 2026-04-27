@@ -70,3 +70,70 @@ Error code registry templates. Every new error code MUST be authored from the ca
 ## Cross-References
 
 _See parent folder's `00-overview.md` for broader context._
+
+---
+
+## Inlined Contracts (Phase 51 — boost)
+
+### Error-code template manifest — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/03-error-code-registry/09-templates/manifest.schema.json",
+  "title": "ErrorTemplateManifest",
+  "type": "object",
+  "required": ["template_id", "language", "render_target", "body"],
+  "additionalProperties": false,
+  "properties": {
+    "template_id":   { "type": "string", "pattern": "^tpl-[a-z0-9-]+$" },
+    "language":      { "enum": ["ts", "go", "php", "csharp", "python", "rust", "json", "markdown"] },
+    "render_target": { "enum": ["registry-entry", "modal-copy", "log-line", "doc-block"] },
+    "body":          { "type": "string", "minLength": 1 },
+    "placeholders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+          "type": { "enum": ["string", "integer", "boolean", "iso-date", "code"] },
+          "required": { "type": "boolean", "default": true }
+        }
+      }
+    },
+    "owner_module": { "type": "string", "pattern": "^spec/\\d{2}-[a-z0-9-]+(/.*)?$" }
+  }
+}
+```
+
+### Render-target + placeholder-type TypeScript enums
+
+```ts
+export enum TemplateRenderTarget {
+  RegistryEntry = "registry-entry",
+  ModalCopy     = "modal-copy",
+  LogLine       = "log-line",
+  DocBlock      = "doc-block",
+}
+
+export enum TemplatePlaceholderType {
+  String   = "string",
+  Integer  = "integer",
+  Boolean  = "boolean",
+  IsoDate  = "iso-date",
+  Code     = "code",
+}
+
+export enum TemplateLanguage {
+  Ts       = "ts",
+  Go       = "go",
+  Php      = "php",
+  Csharp   = "csharp",
+  Python   = "python",
+  Rust     = "rust",
+  Json     = "json",
+  Markdown = "markdown",
+}
+```
