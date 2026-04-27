@@ -27,6 +27,7 @@
 | 12 | `11-environment-variable-setup.md` | 1.0.0 | ✅ Present |
 | 13 | `12-terminal-output-standards.md` | 1.0.0 | ✅ Present |
 | 14 | `13-binary-icon-branding.md` | 1.0.0 | ✅ Present |
+| 15 | `11-technical-interface.md` | 1.0.0 | ✅ Present |
 
 ### Subfolder: 01-browser-extension-deploy
 

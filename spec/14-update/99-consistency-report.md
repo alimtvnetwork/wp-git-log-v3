@@ -22,8 +22,9 @@
 | 7 | `06-cleanup.md` | ✅ Present |
 | 8 | `07-console-safe-handoff.md` | ✅ Present |
 | 9 | `08-repo-path-sync.md` | ✅ Present |
+| 10 | `28-update-interface-contract.md` | ✅ Present |
 
-**Total:** 9 files (excluding this report)
+**Total:** 10 files (excluding this report; sibling files 09–27 and subfolder 24-update-check-mechanism tracked separately)
 
 ---
 
