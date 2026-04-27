@@ -71,3 +71,67 @@ AC-05 verification link points to `03-initialization-and-booleans.md` in sibling
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+
+---
+
+## Phase 60 Reference: PHP Standards Reference API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: PHP Standards Reference API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/php-standards/v1
+paths:
+  /standards:
+    get:
+      summary: List supported PHP standards
+      operationId: listStandards
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/PhpStandard" }
+  /rulesets/{name}:
+    get:
+      summary: Fetch a ruleset by name
+      operationId: getRuleset
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PhpRuleset" }
+components:
+  schemas:
+    PhpStandard:
+      type: object
+      required: [name, version]
+      properties:
+        name:    { type: string, enum: [PSR-1, PSR-2, PSR-12, WordPress, Symfony] }
+        version: { type: string }
+    PhpRuleset:
+      type: object
+      properties:
+        name:    { type: string }
+        rules:
+          type: array
+          items:
+            type: object
+            properties:
+              code:     { type: string }
+              severity: { type: string, enum: [error, warning, notice] }
+              message:  { type: string }
+```

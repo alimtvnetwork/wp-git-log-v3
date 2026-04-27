@@ -350,3 +350,69 @@ class ErrorEnvelope:
         if self.severity not in VALID_SEVERITIES:
             raise ValueError(f"invalid severity: {self.severity}")
 ```
+
+
+---
+
+## Phase 60 Reference: Error Management Aggregate API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Management Aggregate API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-mgmt/v1
+paths:
+  /summary:
+    get:
+      summary: Get aggregate error metrics
+      operationId: getSummary
+      parameters:
+        - in: query
+          name: window
+          schema: { type: string, enum: [1h, 24h, 7d, 30d] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorSummary" }
+  /codes/{code}/trend:
+    get:
+      summary: Get trend data for a single error code
+      operationId: getTrend
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema: { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bucket: { type: string, format: date-time }
+                    count:  { type: integer, minimum: 0 }
+components:
+  schemas:
+    ErrorSummary:
+      type: object
+      properties:
+        window:      { type: string }
+        total:       { type: integer, minimum: 0 }
+        by_severity:
+          type: object
+          properties:
+            fatal:   { type: integer }
+            error:   { type: integer }
+            warning: { type: integer }
+            info:    { type: integer }
+```
