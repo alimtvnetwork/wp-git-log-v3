@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **91/100 (A)**  
+**Implementability Score:** **95/100 (A+)**  
 **Blast radius:** 6/10
 
-> Deterministic score 91/100 (A) for spec/03-error-manage/02-error-architecture/06-apperror-package.
+> Deterministic score 95/100 (A+) for spec/03-error-manage/02-error-architecture/06-apperror-package.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 75 | 26.2 |
+| Implementability | 35% | 85 | 29.8 |
 | Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,24 +31,25 @@
   "kind": "",
   "md_files": 5,
   "mmd_files": 0,
-  "overview_chars": 5438,
+  "overview_chars": 7168,
   "ac_chars": 15685,
   "ac_count": 8,
   "gwt_block_count": 7,
   "consistency_report": true,
-  "code_blocks_total": 8,
+  "code_blocks_total": 9,
   "code_blocks_by_lang": {
     "json": 2,
     "ts": 2,
     "php": 1,
     "python": 1,
+    "yaml": 1,
     "text": 1,
     "go": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
   "has_ts_enums": true,
-  "has_yaml_openapi": false,
+  "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_normative_contract": false,

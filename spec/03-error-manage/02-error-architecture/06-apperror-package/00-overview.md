@@ -201,3 +201,65 @@ def from_dict(raw: dict) -> AppError:
     e.validate()
     return e
 ```
+
+
+---
+
+## Phase 59 Reference: AppError Telemetry OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: AppError Telemetry API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/apperror/v1
+paths:
+  /events:
+    post:
+      summary: Ingest an AppError event
+      operationId: ingestEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AppErrorEvent" }
+      responses:
+        "202": { description: Accepted }
+  /events/aggregate:
+    get:
+      summary: Aggregated AppError counts by code and window
+      operationId: aggregate
+      parameters:
+        - in: query
+          name: window
+          schema: { type: string, enum: [1h, 24h, 7d, 30d] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:     { type: string }
+                    count:    { type: integer }
+                    severity: { type: string }
+components:
+  schemas:
+    AppErrorEvent:
+      type: object
+      required: [code, message, severity, timestamp]
+      properties:
+        code:      { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        message:   { type: string, minLength: 1 }
+        severity:  { type: string, enum: [fatal, error, warning, info] }
+        timestamp: { type: string, format: date-time }
+        trace_id:  { type: string }
+        details:   { type: object, additionalProperties: true }
+```

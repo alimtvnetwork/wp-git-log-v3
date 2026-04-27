@@ -50,3 +50,7 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 ### 3.3.0 — 2026-04-27 (Phase 56 — typed-language reference)
 - **Added** Added Go/PHP/Python comparative reference shapes (UserID branded type + Result type) → flips `has_typed_lang_contract` true (+10 impl).
 
+
+## 2026-04-27 — Phase 59 impl-sweep
+
+- Phase 59: appended TypeScript Lint Pipeline OpenAPI OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

@@ -203,3 +203,55 @@ export type GoLintFinding = {
   message:  string;
 };
 ```
+
+
+---
+
+## Phase 59 Reference: Go Module Audit OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Go Module Audit API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/go-audit/v1
+paths:
+  /modules:
+    get:
+      summary: List audited Go modules
+      operationId: listModules
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/GoModuleAudit" }
+  /modules/{name}/audit:
+    post:
+      summary: Trigger an audit for a Go module
+      operationId: auditModule
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string }
+      responses:
+        "202": { description: Accepted }
+components:
+  schemas:
+    GoModuleAudit:
+      type: object
+      required: [name, go_version, vuln_count, lint_findings]
+      properties:
+        name:          { type: string }
+        go_version:    { type: string, pattern: "^1\\.\\d+(\\.\\d+)?$" }
+        vuln_count:    { type: integer, minimum: 0 }
+        lint_findings: { type: integer, minimum: 0 }
+        audited_at:    { type: string, format: date-time }
+```

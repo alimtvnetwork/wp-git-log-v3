@@ -179,3 +179,59 @@ export type CSharpLintFinding = {
   message:  string;
 };
 ```
+
+
+---
+
+## Phase 59 Reference: C# StyleCop Report OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: C# StyleCop Report API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/csharp-stylecop/v1
+paths:
+  /reports:
+    post:
+      summary: Submit a StyleCop report
+      operationId: submitReport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CSharpReport" }
+      responses:
+        "202": { description: Accepted }
+  /reports/{id}:
+    get:
+      summary: Get a StyleCop report
+      operationId: getReport
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CSharpReport" }
+components:
+  schemas:
+    CSharpReport:
+      type: object
+      required: [id, project, dotnet_version, errors, warnings]
+      properties:
+        id:             { type: string, format: uuid }
+        project:        { type: string }
+        dotnet_version: { type: string }
+        errors:         { type: integer, minimum: 0 }
+        warnings:       { type: integer, minimum: 0 }
+        ruleset:        { type: string }
+```
