@@ -75,3 +75,48 @@ flowchart TD
 | Lifecycle diagram source | [`./lifecycle-issue-template.mmd`](./lifecycle-issue-template.mmd) |
 | Changelog | [`./98-changelog.md`](./98-changelog.md) |
 | Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```json
+{
+  "id": "APP-ISS-001",
+  "category": "bug",
+  "fields": [
+    {"key": "summary", "label": "Summary", "required": true},
+    {"key": "reproSteps", "label": "Reproduction Steps", "required": true},
+    {"key": "expected", "label": "Expected Behavior", "required": true},
+    {"key": "actual", "label": "Actual Behavior", "required": true},
+    {"key": "environment", "label": "Environment", "required": true}
+  ]
+}
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# Validate a template against the schema
+python3 -m jsonschema -i app-iss-001.json schema.json && echo OK
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```

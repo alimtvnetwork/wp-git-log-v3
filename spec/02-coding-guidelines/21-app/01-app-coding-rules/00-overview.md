@@ -64,3 +64,45 @@ flowchart TD
 | Lifecycle diagram source | [`./lifecycle-coding-override.mmd`](./lifecycle-coding-override.mmd) |
 | Changelog | [`./98-changelog.md`](./98-changelog.md) |
 | Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```json
+{
+  "id": "APP-COD-001",
+  "overrides": "02-coding-guidelines/01-cross-language/04-code-style#max-line-length",
+  "rule": "App layer permits 120-char lines (vs 100 in master) due to JSX prop density",
+  "rationale": "JSX requires longer lines to remain readable; refactoring fights the framework",
+  "status": "active",
+  "authoredAt": "2026-04-27"
+}
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# Verify all overrides reference an existing master rule
+for f in $(grep -l 'overrides:' *.md); do echo "checking $f"; done
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```

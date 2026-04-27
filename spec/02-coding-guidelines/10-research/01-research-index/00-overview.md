@@ -65,3 +65,44 @@ flowchart TD
 | Lifecycle diagram source | [`./lifecycle-research-entry.mmd`](./lifecycle-research-entry.mmd) |
 | Changelog | [`./98-changelog.md`](./98-changelog.md) |
 | Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```json
+{
+  "id": "RES-2026-001",
+  "title": "Game-engine evaluation: Bevy vs Godot for embedded sims",
+  "owner": "research-team",
+  "status": "active",
+  "openedAt": "2026-04-27"
+}
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# List all active research entries
+ls 02-coding-guidelines/10-research/ | grep -v '^00\|^9' | sort
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```

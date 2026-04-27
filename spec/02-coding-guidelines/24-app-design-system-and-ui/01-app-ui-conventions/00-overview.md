@@ -67,3 +67,48 @@ flowchart TD
 | Lifecycle diagram source | [`./lifecycle-component-authoring.mmd`](./lifecycle-component-authoring.mmd) |
 | Changelog | [`./98-changelog.md`](./98-changelog.md) |
 | Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```tsx
+// Compliant component example
+import { cva } from "class-variance-authority";
+
+const dialogVariants = cva("bg-background text-foreground", {
+  variants: { tone: { default: "border-border", critical: "border-destructive" } }
+});
+
+export function ConfirmDialog(props: { tone?: "default" | "critical" }) {
+  // PascalCase + Dialog suffix ✓, semantic tokens only ✓
+  return <div className={dialogVariants({ tone: props.tone ?? "default" })} role="dialog" aria-modal="true" />;
+}
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# Lint App UI components for naming + token compliance
+bunx eslint 'src/components/**/*.{ts,tsx}' --rule 'app-ui/naming: error'
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```

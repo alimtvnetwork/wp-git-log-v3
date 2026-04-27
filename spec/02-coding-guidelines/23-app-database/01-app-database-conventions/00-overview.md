@@ -66,3 +66,47 @@ flowchart TD
 | Lifecycle diagram source | [`./lifecycle-app-migration.mmd`](./lifecycle-app-migration.mmd) |
 | Changelog | [`./98-changelog.md`](./98-changelog.md) |
 | Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```sql
+-- Example: forward migration adding a column
+-- File: migrations/20260427_120000_app_add_optional_note.sql
+ALTER TABLE AppTableExample
+ADD COLUMN OptionalNote TEXT NULL;
+
+-- Verification query
+SELECT name, type, "notnull", dflt_value
+FROM pragma_table_info('AppTableExample')
+WHERE name = 'OptionalNote';
+-- Expect: notnull=0, dflt_value=NULL
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# Run the forbidden-strings linter on App-DB migrations
+python3 linter-scripts/check-forbidden-strings.py migrations/
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```

@@ -67,3 +67,48 @@ flowchart TD
 | Lifecycle diagram source | [`./lifecycle-diagram-pairing.mmd`](./lifecycle-diagram-pairing.mmd) |
 | Changelog | [`./98-changelog.md`](./98-changelog.md) |
 | Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```json
+{
+  "source": "01-er-diagram.mmd",
+  "rendered": "01-er-diagram.svg",
+  "renderCmd": "mmdc -i 01-er-diagram.mmd -o 01-er-diagram.svg",
+  "renderedSha256": "<filled-by-CI>"
+}
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# CI diff-check: re-render and compare SHA-256
+for mmd in spec/26-gitlogs-diagrams/*.mmd; do
+  svg="${mmd%.mmd}.svg"
+  fresh=$(mktemp --suffix=.svg)
+  mmdc -i "$mmd" -o "$fresh" >/dev/null
+  diff -q <(sha256sum < "$svg" | cut -d' ' -f1) <(sha256sum < "$fresh" | cut -d' ' -f1) || { echo "STALE: $svg"; exit 1; }
+done
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```

@@ -70,3 +70,42 @@ flowchart TD
 | Lifecycle diagram source | [`./lifecycle-diagram-validation.mmd`](./lifecycle-diagram-validation.mmd) |
 | Changelog | [`./98-changelog.md`](./98-changelog.md) |
 | Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```mermaid
+%% header: purpose=self-update happy path; author=update-team; updated=2026-04-27
+flowchart TD
+    A[Check Manifest] -->|new version| B[Download Asset]
+    B -->|verified| C[Stage Install]
+    C -->|atomic swap| D[Restart Process]
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# Render and verify all 14-update diagrams
+for f in spec/14-update/diagrams/*.mmd; do mmdc -i "$f" -o "${f%.mmd}.svg"; done
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```
