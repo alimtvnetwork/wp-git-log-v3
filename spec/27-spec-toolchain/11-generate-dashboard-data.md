@@ -1,7 +1,7 @@
 # 11 — generate-dashboard-data.cjs
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-26  
 **Source:** [`linter-scripts/generate-dashboard-data.cjs`](../../linter-scripts/generate-dashboard-data.cjs)  
 **Category:** Generator
 
@@ -14,7 +14,22 @@ Scan the `spec/` tree and emit `spec/dashboard-data.json` consumed by [`spec/hea
 1. Validate all markdown cross-references (broken-link detection).
 2. Check required files (`00-overview.md`, `99-consistency-report.md`).
 3. Count files per subfolder.
-4. Output a JSON report.
+4. **(v1.1.0, Phase 34)** Compute per-module rubric-v2.0.0 quality credits — mirrors [`05-check-tree-health.md`](./05-check-tree-health.md) so the dashboard score equals the CI gate score.
+5. Output a JSON report.
+
+## Rubric v2.0.0 (Phase 34 propagation)
+
+The generator now mirrors the rubric used by `check-tree-health.cjs`:
+
+| Dimension | Weight | Credit |
+|-----------|-------:|--------|
+| Required | 60 % | 1 per `00-overview.md`, 1 per `99-consistency-report.md` |
+| Recommended | 25 % | 1 per `97-acceptance-criteria.md`, 1 per `98-changelog.md` |
+| Quality | 15 % | 1 per §99 ≥30 non-blank lines + 1 per Validation History heading + 1 per File/Module Inventory heading |
+
+`Health.Score` and `Health.Grade` are now driven by the rubric. The legacy
+deduction-based score is retained as `Health.LegacyScore` for back-compat
+with any tooling that depended on the previous behaviour.
 
 ## Usage
 
@@ -48,7 +63,12 @@ node linter-scripts/generate-dashboard-data.cjs --quiet
 ### AC-11-01 — JSON schema is stable
 - **Given** the generated `spec/dashboard-data.json`,
 - **When** parsed,
-- **Then** it MUST contain top-level keys `modules`, `brokenLinks`, `summary` with the same shape across runs.
+- **Then** it MUST contain top-level keys `Generated`, `Health`, `RubricV2`, `Links`, `RequiredFiles`, `Inventory` with the same shape across runs.
+
+### AC-11-04 — Rubric parity with `check-tree-health.cjs`
+- **Given** a clean spec tree (both linters return success),
+- **When** `RubricV2.Score` is read from `dashboard-data.json` and compared to the score reported by `check-tree-health.cjs --report`,
+- **Then** the two scores MUST be equal (rubric v2.0.0 is the single source of truth).
 
 ### AC-11-02 — `--quiet` produces no stderr
 - **Given** a successful run with `--quiet`,

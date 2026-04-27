@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.3.0
+**Version:** 2.4.0
 **Updated:** 2026-04-26
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,11 @@
 ---
 
 ## Releases
+
+### 2.4.0 — 2026-04-26 (Phase 34 — Dashboard rubric-v2 propagation)
+- **Changed** `linter-scripts/generate-dashboard-data.cjs` — added `buildRubricV2()` mirroring `check-tree-health.cjs` Phase 30 rubric (60% Required / 25% Recommended / 15% Quality). `Health.Score` and `Health.Grade` now driven by rubric v2.0.0; legacy deduction-based score retained as `Health.LegacyScore` for back-compat. New top-level `RubricV2` block in JSON output with per-module breakdown (`Required`/`Recommended`/`QualityScore` + `QualityHits`).
+- **Changed** [`11-generate-dashboard-data.md`](./11-generate-dashboard-data.md) v1.0.0 → v1.1.0 — documented rubric v2.0.0; AC-11-01 schema corrected (was: `modules`/`brokenLinks`/`summary`; now: `Generated`/`Health`/`RubricV2`/`Links`/`RequiredFiles`/`Inventory`); added AC-11-04 (rubric parity with `check-tree-health.cjs`).
+- **Verified:** `node linter-scripts/generate-dashboard-data.cjs` reports 100/100 (A+) [rubric v2.0.0], parity with `check-tree-health.cjs` 100/100. 162/162 quality credits across 54 modules.
 
 ### 2.3.0 — 2026-04-26
 - **Phase 25 — Typed-language + CI-workflow contract recognition.** Audit script `audit-spec-vs-code-v2.py` upgraded to v2.3. Two new normative contract shapes added to G-CON-01: (a) `has_typed_lang_contract` — ≥3 fenced blocks tagged `go|rust|php|csharp|java|kotlin|swift|python|cpp|c`; (b) `has_ci_workflow` — ≥5 `yaml|yml` blocks. Implementability bonuses: +10 typed-lang, +5 CI workflow. Rationale: a Go/PHP/CI-CD spec with dozens of reference snippets IS a contract for an AI generating that language. Zero spec content modified — pure rubric calibration. Tree mean **79.7 → 81.2** (+1.5, **first time above 80**), implementability **57.8 → 62.2** (+4.4), G-CON-01 firings **13 → 6** (−7). A-tier modules **17 → 28** (+11).

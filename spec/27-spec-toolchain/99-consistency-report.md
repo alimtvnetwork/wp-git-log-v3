@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.0.0
+**Version:** 2.1.0
 **Updated:** 2026-04-26
+
+> **v2.1.0 update (Phase 34):** Propagated rubric v2.0.0 from `check-tree-health.cjs` into `generate-dashboard-data.cjs`. New top-level `RubricV2` block in `dashboard-data.json`; `Health.Score` now driven by rubric (legacy deduction-based score retained as `Health.LegacyScore`). [`11-generate-dashboard-data.md`](./11-generate-dashboard-data.md) v1.0.0 → v1.1.0; AC-11-01 schema corrected (was a 3-key shape that never matched the actual output); AC-11-04 added (parity with `check-tree-health.cjs`). Verified: dashboard reports 100/100 (A+), 162/162 quality credits, parity confirmed.
 
 > **v2.0.0 update:** Phase 16d-iv deepened §97 from 10 ACs to **20 module-specific GWT ACs** (AC-T-11..AC-T-20 added; AC-T-01..AC-T-10 preserved). New ACs cover stderr discipline, filler tight-loop idempotency, generator determinism, auditor JSON contract, config self-validation, runner cross-platform equivalence, trace-map round-trip, twin byte-equivalence, CI trigger-path completeness, and `trace-map.md` informational status. Banner v1.1.0 → v2.0.0.
 
