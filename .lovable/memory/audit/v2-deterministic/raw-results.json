@@ -82,6 +82,7 @@
         "html": 2,
         "json": 2,
         "markdown": 26,
+        "mermaid": 1,
         "php": 1,
         "plain": 41,
         "python": 1,
@@ -89,12 +90,12 @@
         "ts": 3,
         "yaml": 1
       },
-      "code_blocks_total": 83,
+      "code_blocks_total": 84,
       "consistency_report": true,
       "gwt_block_count": 21,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -104,8 +105,8 @@
       "links_broken": 0,
       "links_total": 47,
       "md_files": 17,
-      "mmd_files": 0,
-      "overview_chars": 39919,
+      "mmd_files": 1,
+      "overview_chars": 40473,
       "todo_density": 0,
       "waffle_per_kchar": 0.42
     },
@@ -115,7 +116,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
@@ -125,12 +126,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/01-spec-authoring-guide.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 94/100 (A) for spec/01-spec-authoring-guide.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -301,18 +302,19 @@
         "csharp": 1,
         "go": 14,
         "json": 1,
+        "mermaid": 1,
         "php": 12,
         "python": 1,
         "ts": 1,
         "typescript": 12,
         "yaml": 1
       },
-      "code_blocks_total": 43,
+      "code_blocks_total": 44,
       "consistency_report": true,
       "gwt_block_count": 10,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -322,10 +324,10 @@
       "links_broken": 0,
       "links_total": 32,
       "md_files": 9,
-      "mmd_files": 0,
-      "overview_chars": 7341,
+      "mmd_files": 1,
+      "overview_chars": 7861,
       "todo_density": 0,
-      "waffle_per_kchar": 0.32
+      "waffle_per_kchar": 0.31
     },
     "module": "02-coding-guidelines/01-cross-language/02-boolean-principles",
     "raw_scores": {
@@ -333,22 +335,22 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.32. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.31. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -368,18 +370,19 @@
       "code_blocks_by_lang": {
         "go": 25,
         "json": 1,
+        "mermaid": 1,
         "php": 21,
         "plain": 1,
         "ts": 1,
         "typescript": 18,
         "yaml": 1
       },
-      "code_blocks_total": 68,
+      "code_blocks_total": 69,
       "consistency_report": true,
       "gwt_block_count": 8,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -389,8 +392,8 @@
       "links_broken": 0,
       "links_total": 41,
       "md_files": 11,
-      "mmd_files": 0,
-      "overview_chars": 6514,
+      "mmd_files": 1,
+      "overview_chars": 7030,
       "todo_density": 0,
       "waffle_per_kchar": 0.17
     },
@@ -400,7 +403,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
@@ -410,12 +413,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -435,18 +438,19 @@
       "code_blocks_by_lang": {
         "go": 15,
         "json": 1,
+        "mermaid": 1,
         "php": 15,
         "plain": 3,
         "ts": 1,
         "typescript": 2,
         "yaml": 1
       },
-      "code_blocks_total": 38,
+      "code_blocks_total": 39,
       "consistency_report": true,
       "gwt_block_count": 8,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -456,8 +460,8 @@
       "links_broken": 0,
       "links_total": 57,
       "md_files": 11,
-      "mmd_files": 0,
-      "overview_chars": 5565,
+      "mmd_files": 1,
+      "overview_chars": 6043,
       "todo_density": 0,
       "waffle_per_kchar": 0.09
     },
@@ -467,7 +471,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
@@ -477,12 +481,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -589,7 +593,7 @@
         "go": 1,
         "javascript": 1,
         "json": 1,
-        "mermaid": 1,
+        "mermaid": 2,
         "php": 1,
         "python": 1,
         "text": 1,
@@ -597,12 +601,12 @@
         "typescript": 73,
         "yaml": 1
       },
-      "code_blocks_total": 83,
+      "code_blocks_total": 84,
       "consistency_report": true,
       "gwt_block_count": 20,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -612,8 +616,8 @@
       "links_broken": 0,
       "links_total": 79,
       "md_files": 16,
-      "mmd_files": 0,
-      "overview_chars": 10620,
+      "mmd_files": 1,
+      "overview_chars": 11134,
       "todo_density": 0,
       "waffle_per_kchar": 0.21
     },
@@ -623,7 +627,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
@@ -633,12 +637,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/02-typescript.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/02-typescript.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -1065,6 +1069,7 @@
       "code_blocks_by_lang": {
         "go": 11,
         "json": 1,
+        "mermaid": 1,
         "php": 4,
         "plain": 2,
         "rust": 3,
@@ -1072,12 +1077,12 @@
         "typescript": 13,
         "yaml": 1
       },
-      "code_blocks_total": 36,
+      "code_blocks_total": 37,
       "consistency_report": true,
       "gwt_block_count": 20,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -1087,8 +1092,8 @@
       "links_broken": 0,
       "links_total": 46,
       "md_files": 9,
-      "mmd_files": 0,
-      "overview_chars": 4038,
+      "mmd_files": 1,
+      "overview_chars": 4570,
       "todo_density": 0,
       "waffle_per_kchar": 0.09
     },
@@ -1098,7 +1103,7 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
@@ -1108,12 +1113,12 @@
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 93/100 (A) for spec/02-coding-guidelines/06-ai-optimization.",
-    "weighted_overall": 93
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines/06-ai-optimization.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -2177,6 +2182,7 @@
       "code_blocks_by_lang": {
         "go": 1,
         "json": 1,
+        "mermaid": 1,
         "php": 1,
         "plain": 8,
         "python": 1,
@@ -2184,12 +2190,12 @@
         "typescript": 1,
         "yaml": 1
       },
-      "code_blocks_total": 15,
+      "code_blocks_total": 16,
       "consistency_report": true,
       "gwt_block_count": 6,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -2199,8 +2205,8 @@
       "links_broken": 0,
       "links_total": 17,
       "md_files": 6,
-      "mmd_files": 0,
-      "overview_chars": 6183,
+      "mmd_files": 1,
+      "overview_chars": 6685,
       "todo_density": 0,
       "waffle_per_kchar": 0.07
     },
@@ -2210,7 +2216,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
@@ -2220,12 +2226,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/03-error-manage/01-error-resolution/app-issues.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 94/100 (A) for spec/03-error-manage/01-error-resolution/app-issues.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],
@@ -2669,18 +2675,19 @@
       "code_blocks_by_lang": {
         "go": 3,
         "json": 7,
+        "mermaid": 1,
         "php": 1,
         "python": 1,
         "text": 1,
         "ts": 1,
         "yaml": 1
       },
-      "code_blocks_total": 15,
+      "code_blocks_total": 16,
       "consistency_report": true,
       "gwt_block_count": 6,
       "has_ci_workflow": false,
       "has_json_schema": true,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
@@ -2690,8 +2697,8 @@
       "links_broken": 0,
       "links_total": 9,
       "md_files": 8,
-      "mmd_files": 0,
-      "overview_chars": 5431,
+      "mmd_files": 1,
+      "overview_chars": 5923,
       "todo_density": 0,
       "waffle_per_kchar": 0.06
     },
@@ -2701,7 +2708,7 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
@@ -2711,12 +2718,12 @@
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 92/100 (A) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
-    "weighted_overall": 92
+    "verdict": "Deterministic score 94/100 (A) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [],

@@ -200,3 +200,22 @@ components:
         duration_ms: { type: integer, minimum: 0 }
 paths: {}
 ```
+
+
+## Phase 66 Reference
+
+### Lifecycle Diagram (Phase 66)
+
+See `lifecycle-response-envelope.mmd` for the handler-result → envelope → HTTP status mapping.
+
+```mermaid
+flowchart TD
+    A[Handler Returns Result] --> B{Success or Error?}
+    B -- Success --> C[Wrap in data envelope]
+    B -- Error --> D[Wrap AppError in error envelope]
+    C --> E[Attach meta: requestId, timing]
+    D --> E
+    E --> F[Serialize JSON]
+    F --> G[Set HTTP Status from envelope]
+    G --> H[Send Response]
+```

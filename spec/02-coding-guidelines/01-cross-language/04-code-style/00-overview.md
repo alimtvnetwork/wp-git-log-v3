@@ -203,3 +203,24 @@ enforcement:
     - node_modules/**
     - .lovable/**
 ```
+
+
+## Phase 66 Reference
+
+### Lifecycle Diagram (Phase 66)
+
+See `lifecycle-code-style-enforcement.mmd` for the editor → pre-commit → CI style enforcement chain.
+
+```mermaid
+flowchart TD
+    A[File Saved] --> B[Editor formatOnSave]
+    B --> C[Pre-commit: language formatter]
+    C --> D{Diff after format?}
+    D -- Yes --> E[Auto-stage formatted version]
+    D -- No --> F[Linter Pass]
+    E --> F
+    F --> G[CI: format --check]
+    G --> H{Drift?}
+    H -- Yes --> I[Block: STYLE-001]
+    H -- No --> J[Merge]
+```

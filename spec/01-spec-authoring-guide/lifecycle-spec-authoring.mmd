@@ -1,0 +1,11 @@
+flowchart TD
+    A[New Spec Module Proposed] --> B[Apply naming conventions]
+    B --> C[Create required files: 00, 97, 98, 99]
+    C --> D[Author overview from template]
+    D --> E[Define ACs in GWT format]
+    E --> F[Add cross-references]
+    F --> G{Linters Pass?}
+    G -- No --> H[Fix violations]
+    H --> G
+    G -- Yes --> I[Tree-health audit]
+    I --> J[Merge to spec/]

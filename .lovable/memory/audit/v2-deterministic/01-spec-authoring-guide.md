@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **93/100 (A)**  
+**Implementability Score:** **94/100 (A)**  
 **Blast radius:** 4/10
 
-> Deterministic score 93/100 (A) for spec/01-spec-authoring-guide.
+> Deterministic score 94/100 (A) for spec/01-spec-authoring-guide.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=25, gwt=21, broken_links=0, waffle/kchar=0.42. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 85 | 29.8 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,13 +30,13 @@
 {
   "kind": "future-spec",
   "md_files": 17,
-  "mmd_files": 0,
-  "overview_chars": 39919,
+  "mmd_files": 1,
+  "overview_chars": 40473,
   "ac_chars": 23174,
   "ac_count": 25,
   "gwt_block_count": 21,
   "consistency_report": true,
-  "code_blocks_total": 83,
+  "code_blocks_total": 84,
   "code_blocks_by_lang": {
     "plain": 41,
     "text": 2,
@@ -47,6 +47,7 @@
     "php": 1,
     "python": 1,
     "yaml": 1,
+    "mermaid": 1,
     "markdown": 26,
     "html": 2
   },
@@ -57,7 +58,7 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 47,
   "links_broken": 0,
   "todo_density": 0,

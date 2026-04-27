@@ -189,3 +189,22 @@ components:
               status:  { type: string, enum: [pass, warn, fail] }
               count:   { type: integer, minimum: 0 }
 ```
+
+
+## Phase 66 Reference
+
+### Lifecycle Diagram (Phase 66)
+
+See `lifecycle-master-guideline.mmd` for the master cross-language guideline composition order.
+
+```mermaid
+flowchart TD
+    A[Code Authored] --> B[Apply Boolean Principles]
+    B --> C[Apply Code Style]
+    C --> D[Apply File/Folder Naming]
+    D --> E[Apply Security Rules]
+    E --> F[Apply Static Analysis]
+    F --> G{All Sub-rulesets Pass?}
+    G -- No --> H[Block: MASTER-LINT-NNN]
+    G -- Yes --> I[Merge]
+```

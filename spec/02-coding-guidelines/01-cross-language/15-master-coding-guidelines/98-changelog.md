@@ -41,3 +41,8 @@
 ## 2026-04-27 — Phase 60 impl-sweep
 
 - Phase 60: appended Master Coding Guidelines Compliance API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
+
+## 2026-04-27 — Phase 66 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 66 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

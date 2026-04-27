@@ -41,3 +41,8 @@
 ## 2026-04-27 — Phase 58 impl-sweep
 
 - Phase 58: appended cross-language `.code-style.yaml` contract to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
+
+## 2026-04-27 — Phase 66 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 66 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

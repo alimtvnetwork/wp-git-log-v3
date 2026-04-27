@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 35  
-**Mean weighted score:** **91.1/100**  
-**Mean implementability:** **85.3/100**
+**Mean weighted score:** **91.2/100**  
+**Mean implementability:** **85.8/100**
 
 ## Methodology v2
 
@@ -111,20 +111,12 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`12-cicd-pipeline-workflows/03-reusable-ci-guards`](./12-cicd-pipeline-workflows__03-reusable-ci-guards.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
 | [`18-wp-plugin-how-to/02-enums-and-coding-style`](./18-wp-plugin-how-to__02-enums-and-coding-style.md) | 90 | 75 | 100 | 100 | 100 | 90 | 100 | **91** | A | 4 |
 | [`.`](./..md) | 80 | 100 | 100 | 100 | 100 | 80 | 100 | **92** | A | 10 |
-| [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 85 | 85 | 100 | 100 | 100 | 100 | 100 | **92** | A | 4 |
-| [`03-error-manage/02-error-architecture/05-response-envelope`](./03-error-manage__02-error-architecture__05-response-envelope.md) | 85 | 85 | 100 | 100 | 100 | 100 | 100 | **92** | A | 4 |
 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 90 | 80 | 100 | 100 | 100 | 96 | 100 | **92** | A | 4 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 90 | 80 | 100 | 100 | 100 | 96 | 100 | **92** | A | 4 |
-| [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
-| [`02-coding-guidelines/01-cross-language/02-boolean-principles`](./02-coding-guidelines__01-cross-language__02-boolean-principles.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
-| [`02-coding-guidelines/01-cross-language/04-code-style`](./02-coding-guidelines__01-cross-language__04-code-style.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
-| [`02-coding-guidelines/01-cross-language/15-master-coding-guidelines`](./02-coding-guidelines__01-cross-language__15-master-coding-guidelines.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`02-coding-guidelines/01-cross-language/16-static-analysis`](./02-coding-guidelines__01-cross-language__16-static-analysis.md) | 90 | 85 | 100 | 100 | 100 | 100 | 90 | **93** | A | 4 |
-| [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`02-coding-guidelines/04-php/07-php-standards-reference`](./02-coding-guidelines__04-php__07-php-standards-reference.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`02-coding-guidelines/05-rust`](./02-coding-guidelines__05-rust.md) | 90 | 85 | 100 | 100 | 100 | 100 | 90 | **93** | A | 5 |
-| [`02-coding-guidelines/06-ai-optimization`](./02-coding-guidelines__06-ai-optimization.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`03-error-manage/01-error-resolution`](./03-error-manage__01-error-resolution.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
 | [`03-error-manage/01-error-resolution/03-retrospectives`](./03-error-manage__01-error-resolution__03-retrospectives.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
@@ -142,9 +134,17 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`23-app-database`](./23-app-database.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 7 |
 | [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 90 | 85 | 100 | 100 | 100 | 100 | 90 | **93** | A | 4 |
+| [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`02-coding-guidelines/01-cross-language/02-boolean-principles`](./02-coding-guidelines__01-cross-language__02-boolean-principles.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`02-coding-guidelines/01-cross-language/04-code-style`](./02-coding-guidelines__01-cross-language__04-code-style.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`02-coding-guidelines/01-cross-language/15-master-coding-guidelines`](./02-coding-guidelines__01-cross-language__15-master-coding-guidelines.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`02-coding-guidelines/06-ai-optimization`](./02-coding-guidelines__06-ai-optimization.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`02-coding-guidelines/06-cicd-integration`](./02-coding-guidelines__06-cicd-integration.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`02-coding-guidelines/09-powershell-integration`](./02-coding-guidelines__09-powershell-integration.md) | 90 | 85 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 90 | 90 | 100 | 100 | 100 | 96 | 100 | **94** | A | 6 |
+| [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 90 | 85 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`03-error-manage/02-error-architecture/05-response-envelope`](./03-error-manage__02-error-architecture__05-response-envelope.md) | 90 | 85 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`15-distribution-and-runner`](./15-distribution-and-runner.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`16-generic-release`](./16-generic-release.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 100 | 70 | 100 | 100 | 100 | 100 | 90 | **94** | A | 5 |
