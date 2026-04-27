@@ -19,10 +19,11 @@
 | 06 | `06-release-metadata.md` | ✅ Present |
 | 07 | `07-known-issues-and-fixes.md` | ✅ Present |
 | 08 | `08-version-pinned-release-installers.md` | ✅ Present |
+| 09 | `09-placeholder-tokens.md` | ✅ Present (Phase 123, v1.0.0) |
 | 97 | `97-acceptance-criteria.md` | ✅ Present |
 | 98 | `98-changelog.md` | ✅ Present |
 
-**Total:** 11 files (excluding this report)
+**Total:** 12 files (excluding this report)
 
 ---
 

@@ -1,6 +1,6 @@
 # Changelog — Generic Release Pipeline Specification
 
-**Version:** 2.1.0  
+**Version:** 2.2.0  
 **Updated:** 2026-04-27  
 **Scope:** `spec/16-generic-release/`
 
@@ -16,6 +16,10 @@
 ---
 
 ## Releases
+
+### 2.2.0 — 2026-04-27 (Phase 123 — placeholder catalog)
+- **Added** `09-placeholder-tokens.md` v1.0.0 — canonical SoT for 6 install-script placeholder tokens across 2 families (legacy `<NAME>_PLACEHOLDER` + modern `__<NAME>__`). Closes Phase 121 Candidate N — placeholders previously restated across §03/§08/§12/§14/§17 with no canonical catalog. Pre-req for Phase 117 containment harness. Inventory 11 → 12 files.
+- **Doc-only — no behavior change.** All 6 tokens already in active use; this catalogues them.
 
 ### 1.1.0 — 2026-04-27 (Phase 55 — implementability lever)
 - **Added** Added 2 Go consumer references (Manifest reader + checksums.txt parser) so total Go block count ≥3 → `has_typed_lang_contract` flips true (+10 impl).
