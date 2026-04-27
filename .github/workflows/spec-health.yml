@@ -197,8 +197,27 @@ jobs:
         # attention — exactly the drift Phase 107 documented when it found
         # 8 orphans had silently accumulated.
         # Spec: spec/27-spec-toolchain/00-overview.md (Inventory + Normative Contract)
-        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-31)
+         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-31)
         run: bash linter-scripts/test/test-overview-inventory-parity.sh
+
+      - name: Self-test WEIGHTS dimension-table parity (Phase 113)
+        # Phase 113: locks AC-31-31 row #4 mechanically. The 7-dimension
+        # scoring weights are restated verbatim across 3 sites:
+        #   1. linter-scripts/audit-spec-vs-code-v2.py        (WEIGHTS dict — source of truth)
+        #   2. linter-scripts/generate-gate-report.py         (WEIGHTS dict — duplicated for offline analysis)
+        #   3. spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (## Weights markdown table)
+        # Without this gate, AC-31-02's runtime assertion (implementability == 35
+        # AND total == 100) catches in-script drift in the audit script alone,
+        # but a contributor adjusting the gate-report's WEIGHTS independently
+        # — or letting §31's documented table drift from either script — would
+        # silently produce divergent scoring. Phase 109's AC-31-31 codified
+        # this exact failure mode as the canonical 3-file enumeration trigger.
+        # The test extracts WEIGHTS from both Python files and the §31 markdown
+        # table, asserts pairwise dict-equality, re-checks AC-31-02's invariants
+        # (implementability == 35, total == 100), and confirms the dimension
+        # count is exactly 7 (matches §00-overview's "7 dimensions" prose).
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-02, AC-31-31 row #4)
+        run: bash linter-scripts/test/test-weights-parity.sh
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at

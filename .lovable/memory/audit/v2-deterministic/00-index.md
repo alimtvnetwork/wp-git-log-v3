@@ -1,7 +1,7 @@
 # Spec-vs-Code Audit **v2** — Summary
 
 **Date:** 2026-04-25  
-**Rubric:** v2.21  
+**Rubric:** v2.22  
 **Modules audited:** 87  
 **Code files indexed:** 37  
 **Mean weighted score:** **98.0/100**  
@@ -169,8 +169,8 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`14-update`](./14-update.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 10 |
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 9 |
 
-## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112)
-This audit runs rubric **v2.21**. The score above is one of **12 strict CI gates** that surround it:
+## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113)
+This audit runs rubric **v2.22**. The score above is one of **13 strict CI gates** that surround it:
 
 1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.
 2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).
@@ -184,5 +184,6 @@ This audit runs rubric **v2.21**. The score above is one of **12 strict CI gates
 10. **QA baseline footer self-test** (`test/test-qa-baseline-footer.sh`, Phase 103) — this very enumeration ↔ `spec-health.yml` step list ↔ `RUBRIC_VERSION` constant; mechanises AC-31-28.
 11. **Memo retrospective headings** (`check-memo-retrospective-headings.py`, Phase 104) — phase memos at or above the Phase 100 cutoff MUST NOT contain forward-looking H2/H3 sections (`Next phases`, `Remaining Tasks`, `Future work`, `TODO`, `Roadmap`, …); mechanises AC-31-29 and Phase 100's retired-cadence verdict.
 12. **§27 inventory parity triangle** (`test/test-overview-inventory-parity.sh`, Phase 112) — every executable artifact under `linter-scripts/` + `.github/workflows/` is tracked in either `spec/27-spec-toolchain/00-overview.md` (specced) OR the Phase 107 orphan ledger memo (acknowledged); every overview-listed code path exists on disk; mechanises AC-31-31 + INV-01/INV-02.
+13. **WEIGHTS dimension-table parity** (`test/test-weights-parity.sh`, Phase 113) — `audit-spec-vs-code-v2.py` `WEIGHTS` dict ↔ `generate-gate-report.py` `WEIGHTS` dict ↔ `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` `## Weights` table; mechanises AC-31-31 row #4 + AC-31-02 across-files extension.
 
-Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).
+Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).

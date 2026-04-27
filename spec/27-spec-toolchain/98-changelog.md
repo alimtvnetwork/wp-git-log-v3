@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.27.0
+**Version:** 2.28.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,15 @@
 ---
 
 ## Releases
+
+### 2.28.0 — 2026-04-27 (Phase 113 — WEIGHTS dimension-table parity self-test)
+- **Added** `linter-scripts/test/test-weights-parity.sh` — the **second parity self-test authored under AC-31-31** (registry row #4). Discovered during a Phase 113 sweep of `.lovable/memory/` and `linter-scripts/` for previously-unregistered 3+ file enumerations. The 7-dimension scoring weights are restated **verbatim** across `audit-spec-vs-code-v2.py` (`WEIGHTS` dict — source of truth), `generate-gate-report.py` (`WEIGHTS` dict — duplicated for offline analysis), and `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` (`## Weights` markdown table). AC-31-02's runtime `assert sum(WEIGHTS.values()) == 100` catches in-script drift in the audit script alone but does NOT mandate parity with the gate-report or with §31's documented table. The new test extracts WEIGHTS from both Python files via regex and from §31 via `## Weights` heading anchor, asserts pairwise dict-equality, re-checks AC-31-02's invariants as defence-in-depth, and confirms the dimension count is exactly 7 (matches §00-overview's "7 dimensions" prose). 8/8 assertions ✅ at landing.
+- **Added** new step `Self-test WEIGHTS dimension-table parity (Phase 113)` to `.github/workflows/spec-health.yml` after the Phase 112 §27 inventory triangle step. CI gate count: **12 → 13**.
+- **Changed** `linter-scripts/audit-spec-vs-code-v2.py` `RUBRIC_VERSION` v2.21 → **v2.22**. Regenerated the "QA tooling baseline" footer in `00-index.md` to enumerate **13 strict CI gates** (was 12) with the new gate row #13; section title updated to *"QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113)"*; `EXECUTIVE-SUMMARY.md` cross-reference updated to "13 strict CI gates"; onboarding link annotation updated to reference self-test rows `#5–#7, #9, #10, #12, #13`.
+- **Changed** `linter-scripts/test/test-qa-baseline-footer.sh` (Phase 103) — extended awk pattern with `Self-test WEIGHTS dimension-table parity` so the 4-way enumeration consistency check now expects 13/13 alignment. Test still passes 11/11 assertions, now at 13 gates.
+- **Changed** `linter-scripts/test/README.md` — added 7th rows in the inventory + coverage-triad tables; local execution + see-also memo lists extended (Phase 113); totals updated 6 scripts / 58+ assertions / ~26 s → **7 scripts / 66+ assertions / ~27 s**; "Last updated" bumped to Phase 113; "Adding a new self-test" callout extended with the Phase 113 gate's failure mode.
+- **Changed** §31 v1.20.0 → **v1.21.0**: header `Source` gains `test-weights-parity.sh` as 12th artefact; Category appends `+ WEIGHTS dimension-table parity`; AC-31-31 registry table extended with row #4 (the WEIGHTS triangle, locking AC-31-02 cross-file extension); AC-31-31 `Verifies` clause extended with the new self-test; rubric changelog extended with **v2.22** Phase 113 row.
+- **Verifies:** Phase 113 parity test passes 8/8 (audit-script `WEIGHTS` == gate-report `WEIGHTS` == §31 `## Weights` table; `implementability == 35`; total == 100; dimension count == 7); Phase 103 footer test passes 11/11 at 13-gate alignment (v2.22 / 13 declared / 13 footer / 13 workflow); Phase 102 README test passes 20/20 at 7 inventoried scripts; Phase 112 §27 inventory test still passes 6/6 (orthogonal triangle, unaffected). AC-31-31 registry now has 4 rows. The contract continues to operate prospectively — Phase 113 was authored using AC-31-31's 3-step protocol verbatim, exactly as Phase 112 was.
 
 ### 2.27.0 — 2026-04-27 (Phase 112 — §27 inventory parity triangle self-test)
 - **Added** `linter-scripts/test/test-overview-inventory-parity.sh` — the **first parity self-test authored under AC-31-31** (Phase 109's multi-file enumeration parity contract). Closes the INV-01/INV-02 drift Phase 107 documented (8 silent orphans had accumulated under `linter-scripts/`). Asserts the 3-way triangle: every executable artifact under `linter-scripts/*.{py,cjs,mjs,sh,go,ps1}` + `.github/workflows/*.yml` is tracked in either `spec/27-spec-toolchain/00-overview.md` (specced) OR the Phase 107 orphan ledger memo (acknowledged); every overview-listed code path exists on disk; the orphan ledger is not stale; structural anchors (Inventory H2, Normative Contract block, AC-31-31/INV-01 cross-reference) are intact. Baseline at landing: 34 on-disk = 31 specced + 3 production orphans + 5 `test/` files (excluded; covered by Phase 102 README parity).
