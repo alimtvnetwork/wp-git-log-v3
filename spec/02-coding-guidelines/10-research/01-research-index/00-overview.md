@@ -253,3 +253,21 @@ CREATE INDEX IF NOT EXISTS idx_mra_p78_exit
 
 This contract enables AI agents to generate idempotent migrations and
 verification queries directly from the spec.
+
+### Module Status Enum — Phase 78 Normative
+
+```ts
+export enum ModuleEntryStatus {
+  Draft = "draft",
+  UnderReview = "under_review",
+  Published = "published",
+  Archived = "archived",
+}
+
+export interface ModuleIndexEntry {
+  slug: string;
+  title: string;
+  status: ModuleEntryStatus;
+  publishedAt: string | null;
+}
+```
