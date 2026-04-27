@@ -47,7 +47,7 @@
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_mermaid": true,
-  "links_total": 18,
+  "links_total": 14,
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.07,

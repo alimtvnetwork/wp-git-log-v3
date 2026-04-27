@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.9.0
+**Version:** 2.10.0
 **Updated:** 2026-04-27
+
+> **v2.10.0 update (Phase 43):** Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.5 → **v2.6** to clear the broken-link false-positive class. `LINK_RX.findall` now runs against `strip_code(body_text)` so markdown links inside fenced ```` ```markdown / ```text ```` template blocks (e.g. `01-spec-authoring-guide`'s path-syntax examples) no longer count toward `links_total` / `links_broken`. [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.4.0 → v1.5.0 with new **AC-31-14**. Measured: **broken links 30 → 0 across 79 modules** (2573 valid links scanned); G-LINK-01 + G-LINK-02 caps lifted on 5 modules; `01-spec-authoring-guide` 70 (C) → B-tier expected; mean weighted 81.7 → 82.3.
 
 > **v2.9.0 update (Phase R5):** Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.4 → **v2.5** to clear the last G-TODO-01 false positives (auditor self-reference). Added `META_TOKEN_SEQ_RX` (strips canonical `TODO/TBD/FIXME` references) and per-gate `skip_kinds` mechanism (G-TODO-01 now bypassed when `kind: meta-toolchain`). Added `kind: meta-toolchain` frontmatter to `27-spec-toolchain/00-overview.md` (v1.5.0 → v1.6.0). [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.3.0 → v1.4.0 with new **AC-31-12** + **AC-31-13**. Measured: **G-TODO-01 active firings 1 → 0**; `02-coding-guidelines` 94 (A) → 98 (A+); A+ tier 4 → 5; mean 81.6 → 81.7. `27-spec-toolchain` itself held at 78 — bottlenecked by impl=55 (Phase 42 target), not completeness.
 

@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.12.0
+**Version:** 2.13.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,17 @@
 ---
 
 ## Releases
+
+### 2.13.0 — 2026-04-27 (Phase 43 — Broken-link false-positive fix)
+- **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.5 → **v2.6**: cross-spec link extraction now runs against `strip_code(body_text)` (the same code-stripped prose feed used by the TODO/waffle scanners) instead of the raw body. Markdown links inside fenced ```` ```markdown / ```text ```` template blocks — e.g. `01-spec-authoring-guide`'s path-syntax examples like `[Architecture](./01-architecture.md)` — are *documentation*, not real references, and must not be treated as broken just because the example file does not exist.
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.4.0 → **v1.5.0**: methodology bullet (cross-spec link health) now annotated "prose only (v2.6)"; **AC-31-14** added (prose-only link extraction contract).
+- **Verified** measured impact (`AUDIT_DETERMINISTIC=1`):
+  - **Total broken links across 79 modules: 30 → 0** ✅ (2573 valid links scanned).
+  - `01-spec-authoring-guide`: 13 broken → 0 (every "broken" was a path-syntax example inside a ```` ```markdown ```` fence).
+  - `25-app-issues/02-consolidated-audit-findings`: 13 broken → 0 (planned-but-unwritten sub-files referenced inside a fenced template).
+  - `02-coding-guidelines/01-cross-language` + `/02-boolean-principles` + `13-generic-cli` + `15-distribution-and-runner`: 1 each → 0.
+  - `01-spec-authoring-guide` weighted score 70 (C) → expected B-tier on next pass; G-LINK-01 + G-LINK-02 caps lifted on 5 modules.
+  - **Mean weighted score: 81.7 → 82.3** (+0.6); A+ tier holds at 5; F-tier still 0.
 
 ### 2.12.0 — 2026-04-27 (Phase R5 — Auditor self-reference exemption)
 - **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.4 → **v2.5** to eliminate the last G-TODO-01 false positive class (auditor self-reference):

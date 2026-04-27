@@ -1,6 +1,19 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.5** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.6** — AI-Implementability Edition.
+
+v2.6 (2026-04-27, Phase 43):
+  - Cross-spec link extraction now runs against code-stripped prose, not
+    the raw body. Markdown links inside fenced ```markdown / ```text
+    template blocks (e.g. §01-spec-authoring-guide's path-syntax examples)
+    no longer count toward `links_total` / `links_broken`. Example links
+    are *documentation*, not real references; the scanner must not treat
+    `[Architecture](./01-architecture.md)` inside a code fence as broken
+    just because the example file does not exist.
+  - Effect: §01 broken-link count drops 13 → 0; §25/02 drops 13 → 0;
+    §02/01-cross-language drops 1 → 0; total project broken links 30 → ~3.
+  - Implementation: new `prose_for_links` (= strip_code(body_text)) feeds
+    LINK_RX.findall, while strip_code() is unchanged for waffle/TODO use.
 
 v2.5 (2026-04-27, Phase R5):
   - Meta-token sequence exemption: the canonical reference form
@@ -197,8 +210,11 @@ def deterministic_metrics(folder: Path) -> dict:
     # CI/CD pipeline modules — distinct from generic single-snippet YAML.
     has_ci_workflow = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0) >= 5
 
-    # cross-spec link health
-    links = LINK_RX.findall(body_text)
+    # cross-spec link health — v2.6: scan code-stripped prose so example
+    # links inside ```markdown / ```text fences (path-syntax templates in
+    # §01-spec-authoring-guide etc.) don't get counted as broken.
+    prose_for_links = strip_code(body_text)
+    links = LINK_RX.findall(prose_for_links)
     broken = 0; total = 0
     for _, target in links:
         if target.startswith(("http://","https://","mailto:")):
