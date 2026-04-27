@@ -69,3 +69,17 @@ elif is_meta_toolchain:
 3. **Phase 82** — Cumulative schema-bonus cap (cosmetic anti-double-count).
 4. **B1** — `spec/22-git-logs-v2/07-app-entity.md` decision (user input).
 5. **R1** — Real-AI re-audit (Lovable Cloud required).
+
+---
+
+## Retrospective (added in Phase 88, 2026-04-27)
+
+| Queued | Actual phase | Outcome |
+|---|---|---|
+| Phase 80 — investigate impl=90 indexes | Phase 80 (kept) | ✓ Index ceiling lift via v2.10–v2.11 contract bonuses; mean weighted 95.9 → 96.3 |
+| Phase 81 — wire strict gates into CI | Phase 81 (kept) | ✓ Three strict gates wired with `--min-weighted=95 --min-impl=98` floors |
+| Phase 82 — cumulative schema-bonus cap | **Re-scoped** | Phase 82 became "tracker ceiling lift via contract bonus" (rubric v2.13, mean impl 99.5 → 99.8). The "schema-bonus cap" idea was deferred to Phase 86 and **REJECTED** after empirical test showed it would unfairly punish 76 legitimate multi-contract modules (mean impl 99.8 → 89.2). See `phase-86-schema-cap-rejected.md` before re-proposing. |
+
+Current state (as of Phase 88): mean weighted 98.0, mean impl 99.8 (vs the 95.9/98.3
+this memo recorded as its post-state).
+
