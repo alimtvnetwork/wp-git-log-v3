@@ -150,6 +150,21 @@ jobs:
         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-27)
         run: bash linter-scripts/test/test-readme-inventory.sh
 
+      - name: Self-test QA baseline footer (Phase 103)
+        # Phase 103: locks AC-31-28 mechanically. Re-runs the audit and asserts
+        # that (a) `**Rubric:** v<X>.<Y>` appears in both 00-index.md and
+        # EXECUTIVE-SUMMARY.md sourced from the script's RUBRIC_VERSION
+        # constant, (b) the QA tooling baseline footer's self-declared count
+        # ("one of N strict CI gates") matches the number of numbered gate
+        # rows AND the number of quality-gate steps in this very workflow,
+        # and (c) the link to linter-scripts/test/README.md is preserved.
+        # Without this gate, AC-31-28 was enforced only by reviewer
+        # attention: a contributor adding a workflow step without updating
+        # the audit footer (or vice versa) would silently drift, and the
+        # production audit gate would still pass while the docs lied.
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-28)
+        run: bash linter-scripts/test/test-qa-baseline-footer.sh
+
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
         # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC
