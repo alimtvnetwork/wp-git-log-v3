@@ -844,7 +844,136 @@ def render_module_report(rel: str, r: dict, metrics: dict) -> str:
                f"- **Proposed correction:** {f['correction']}", ""]
     return "\n".join(md)
 
+# v2.16 (Phase 90): --explain=<substring> CLI flag for debugging score outliers.
+# Prints, for the first matching module: which rubric branch was taken, every
+# bonus that fired (with its delta), every gate that capped a dimension (with
+# before/after), and the final weighted breakdown. Pure-add diagnostic — does
+# not write any files, does not run AI, exits 0/1 only based on whether a
+# match was found. Compatible with --min-weighted / --min-impl (which are
+# ignored when --explain is present, since explain audits a single module
+# and threshold gates only make sense across the corpus).
+def explain_module(substring: str) -> int:
+    """Print a human-readable rubric trace for the first module matching `substring`.
+    Returns process exit code (0 = match found and explained, 1 = no match)."""
+    matches = [m for m in ALL_MODULES if substring in MOD_REL[m]]
+    if not matches:
+        print(f"✗ --explain: no module matched substring {substring!r}", file=sys.stderr)
+        print(f"  hint: 87 modules are auditable; substring is matched against the relative path under spec/", file=sys.stderr)
+        return 1
+    if len(matches) > 1:
+        print(f"⚠ --explain: substring {substring!r} matched {len(matches)} modules; using first ({MOD_REL[matches[0]]!r})", file=sys.stderr)
+        for m in matches[:5]:
+            print(f"    - {MOD_REL[m]}", file=sys.stderr)
+        print(f"  hint: pass a more specific substring to disambiguate", file=sys.stderr)
+    folder = matches[0]
+    rel = MOD_REL[folder]
+    metrics = deterministic_metrics(folder)
+    result = deterministic_score(folder, metrics)
+    raw = result["raw_scores"]
+    final = result["scores"]
+    gates = result["applied_gates"]
+    overall = weighted(final)
+    g = grade_of(overall)
+
+    # Rubric branch selector
+    kind = (metrics.get("kind") or "").lower()
+    if kind == "tracker":           branch = "tracker"
+    elif kind == "index":           branch = "index"
+    elif kind == "meta-toolchain":  branch = "meta-toolchain"
+    else:                           branch = "normal-contract"
+
+    print(f"\n=== --explain: spec/{rel} ===")
+    print(f"Branch       : {branch}  (kind={kind or '(omitted)'})")
+    print(f"Final score  : {overall}/100 ({g})  |  impl={final['implementability']}  blast={'<n/a in explain>'}")
+    print(f"")
+    print(f"--- Per-dimension scores ---")
+    print(f"  {'Dimension':<18} {'Weight':>6}  {'Raw':>5}  {'Final':>6}  {'Δ':>4}  Contribution")
+    for d, w in WEIGHTS.items():
+        delta = final[d] - raw[d]
+        delta_str = f"{delta:+d}" if delta else "  ·"
+        contrib = round(final[d] * w / 100, 1)
+        print(f"  {d:<18} {w:>5}%  {raw[d]:>5}  {final[d]:>6}  {delta_str:>4}  {contrib}")
+    print(f"")
+    print(f"--- Implementability bonuses fired ({branch} branch) ---")
+    bonuses = []
+    if branch == "tracker":
+        bonuses.append(("baseline", 75))
+        if metrics["overview_chars"] < 200:        bonuses.append(("overview<200 chars", -15))
+        if metrics.get("has_mermaid"):              bonuses.append(("has_mermaid (v2.9)", +5))
+        if metrics.get("has_ci_workflow"):          bonuses.append(("has_ci_workflow (v2.9)", +5))
+        for k, v in (("has_sql_ddl",5),("has_ts_enums",5),("has_json_schema",5),
+                     ("has_yaml_openapi",5),("has_typed_lang_contract",5)):
+            if metrics.get(k): bonuses.append((f"{k} (v2.13 contract bonus)", +v))
+        bonuses.append(("cap (85 prose-only / 95 with ≥1 contract — v2.13)", "min"))
+    elif branch == "index":
+        bonuses.append(("baseline", 70))
+        if metrics["overview_chars"] < 200:        bonuses.append(("overview<200 chars", -15))
+        if metrics["child_modules"] > 0:           bonuses.append((f"child_modules={metrics['child_modules']}>0", +10))
+        if metrics.get("has_mermaid"):              bonuses.append(("has_mermaid (v2.9)", +5))
+        if metrics.get("has_ci_workflow"):          bonuses.append(("has_ci_workflow (v2.9)", +5))
+        for k, v in (("has_sql_ddl",5),("has_ts_enums",5),("has_json_schema",5),
+                     ("has_yaml_openapi",5),("has_typed_lang_contract",5)):
+            if metrics.get(k): bonuses.append((f"{k} (v2.11 contract bonus)", +v))
+        bonuses.append(("cap (90 prose-only / 100 with ≥1 contract — v2.11)", "min"))
+    elif branch == "meta-toolchain":
+        bonuses.append(("baseline", 75))
+        if metrics.get("has_normative_contract"):   bonuses.append(("has_normative_contract (v2.8)", +10))
+        if metrics["md_files"] >= 30:               bonuses.append((f"md_files={metrics['md_files']}>=30 (v2.8)", +5))
+        if metrics.get("has_mermaid"):              bonuses.append(("has_mermaid (v2.10)", +5))
+        if metrics.get("has_ci_workflow"):          bonuses.append(("has_ci_workflow (v2.10)", +5))
+        if metrics["overview_chars"] < 500:         bonuses.append(("overview<500 chars", -20))
+        bonuses.append(("cap 100 (v2.10)", "min"))
+    else:
+        bonuses.append(("baseline", 30))
+        if metrics["has_sql_ddl"]:                  bonuses.append(("has_sql_ddl", +20))
+        if metrics["has_json_schema"]:              bonuses.append(("has_json_schema", +15))
+        if metrics["has_ts_enums"]:                 bonuses.append(("has_ts_enums", +10))
+        if metrics["has_yaml_openapi"]:             bonuses.append(("has_yaml_openapi", +10))
+        if metrics.get("has_typed_lang_contract"):  bonuses.append(("has_typed_lang_contract (v2.3)", +10))
+        if metrics.get("has_ci_workflow"):          bonuses.append(("has_ci_workflow (v2.3)", +5))
+        if metrics["has_mermaid"]:                  bonuses.append(("has_mermaid", +5))
+        if metrics["code_blocks_total"] >= 5:       bonuses.append((f"code_blocks_total={metrics['code_blocks_total']}>=5", +10))
+        if metrics["overview_chars"] < 500:         bonuses.append(("overview<500 chars", -20))
+        if metrics["waffle_per_kchar"] > 5:         bonuses.append((f"waffle/kchar={metrics['waffle_per_kchar']}>5", -10))
+        bonuses.append(("cap 100 (v2.15: additive bonuses kept; see phase-86 memo)", "min"))
+    for label, delta in bonuses:
+        if delta == "min":
+            print(f"  └─ {label}")
+        else:
+            sign = "+" if isinstance(delta, int) and delta >= 0 else ""
+            print(f"  {sign}{delta:>3}  {label}")
+    print(f"")
+    print(f"--- Hard gates ---")
+    active = [g for g in gates if g["active"]]
+    if not active:
+        print(f"  (none capped — raw rubric score equals final score)")
+    else:
+        for g in active:
+            print(f"  ⚠ {g['id']:<12} dimension={g['dimension']:<18} cap={g['cap']:>3}  before={g['before']:>3}  after={g['after']:>3}  ({g['rationale']})")
+    passive = [g for g in gates if not g["active"]]
+    if passive:
+        print(f"  ({len(passive)} other gates fired predicate but rubric was already at/below cap)")
+    print(f"")
+    print(f"--- Key metrics ---")
+    keys = ("ac_count","gwt_block_count","links_total","links_broken","todo_density",
+            "waffle_per_kchar","overview_chars","md_files","child_modules",
+            "code_blocks_total")
+    for k in keys:
+        if k in metrics: print(f"  {k:<22} {metrics[k]}")
+    print(f"")
+    print(f"For the full machine-readable report run the audit, then read:")
+    print(f"  .lovable/memory/audit/v2-deterministic/{rel.replace('/','__') or '_root'}.md")
+    return 0
+
 def main():
+    # v2.16 (Phase 90): --explain short-circuits the normal audit loop.
+    explain_target = None
+    for a in sys.argv[1:]:
+        if a.startswith("--explain="):
+            explain_target = a.split("=", 1)[1]
+    if explain_target is not None:
+        sys.exit(explain_module(explain_target))
+
     only = os.environ.get("AUDIT_ONLY")
     mods = [m for m in ALL_MODULES if not only or only in MOD_REL[m]]
     print(f"v2 auditing {len(mods)} modules vs {CODE_INDEX_LINES} code files...", file=sys.stderr)
