@@ -26,9 +26,9 @@
       "PctOfTotal": 25
     },
     "Quality": {
-      "Earned": 168,
+      "Earned": 167,
       "Max": 168,
-      "PctOfTotal": 15
+      "PctOfTotal": 14.9
     },
     "ModuleCount": 56,
     "Modules": [
@@ -682,12 +682,11 @@
         "RequiredMax": 2,
         "Recommended": 2,
         "RecommendedMax": 2,
-        "QualityScore": 3,
+        "QualityScore": 2,
         "QualityMax": 3,
         "QualityHits": [
           "depth",
-          "history",
-          "inventory"
+          "history"
         ]
       },
       {
