@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **93/100 (A)**  
+**Implementability Score:** **94/100 (A)**  
 **Blast radius:** 5/10
 
-> Deterministic score 93/100 (A) for spec/13-generic-cli.
+> Deterministic score 94/100 (A) for spec/13-generic-cli.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 85 | 29.8 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,15 +30,16 @@
 {
   "kind": "",
   "md_files": 24,
-  "mmd_files": 0,
-  "overview_chars": 5356,
+  "mmd_files": 1,
+  "overview_chars": 5927,
   "ac_chars": 23395,
   "ac_count": 20,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 155,
+  "code_blocks_total": 156,
   "code_blocks_by_lang": {
     "bash": 3,
+    "mermaid": 1,
     "plain": 66,
     "go": 76,
     "json": 2,
@@ -54,7 +55,7 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 93,
   "links_broken": 0,
   "todo_density": 0,

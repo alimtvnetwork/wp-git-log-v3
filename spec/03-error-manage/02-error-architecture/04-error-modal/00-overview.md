@@ -244,3 +244,23 @@ components:
         theme:    { type: string, enum: [light, dark, auto] }
 paths: {}
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-modal-domain.mmd` for the error-modal domain assembly: copy + theme + component + reference.
+
+```mermaid
+flowchart TD
+    A[AppError Reaches UI Boundary] --> B[Resolve copy format]
+    B --> C[Resolve color theme by severity]
+    C --> D[Mount React component]
+    D --> E[Lookup reference entry]
+    E --> F[Render modal with all parts assembled]
+    F --> G[User interaction]
+    G --> H{Action}
+    H -- Retry --> I[Re-invoke origin]
+    H -- Dismiss --> J[Unmount]
+```

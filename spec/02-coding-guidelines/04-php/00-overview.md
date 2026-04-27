@@ -289,3 +289,21 @@ components:
         warnings:    { type: integer, minimum: 0 }
         ruleset:     { type: string }
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-php-module-flow.mmd` for the PHP module composition order across sub-rulesets.
+
+```mermaid
+flowchart TD
+    A[New PHP Module] --> B[Apply PSR-4 autoloading]
+    B --> C[Apply PHP standards reference]
+    C --> D[Apply WP-specific naming if applicable]
+    D --> E{All sub-rulesets pass?}
+    E -- No --> F[Block: PHP-MASTER-001]
+    E -- Yes --> G[Composer install + test]
+    G --> H[Publish]
+```

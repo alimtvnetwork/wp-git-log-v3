@@ -146,3 +146,8 @@
 ## 2026-04-27 — Phase 60 impl-sweep
 
 - Phase 60: appended Error Management Aggregate API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
+
+## 2026-04-27 — Phase 68 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 68 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

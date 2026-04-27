@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **95/100 (A+)**  
+**Implementability Score:** **96/100 (A+)**  
 **Blast radius:** 10/10
 
-> Deterministic score 95/100 (A+) for spec/03-error-manage/02-error-architecture/04-error-modal.
+> Deterministic score 96/100 (A+) for spec/03-error-manage/02-error-architecture/04-error-modal.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 85 | 29.8 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,18 +30,19 @@
 {
   "kind": "",
   "md_files": 10,
-  "mmd_files": 0,
-  "overview_chars": 7010,
+  "mmd_files": 1,
+  "overview_chars": 7557,
   "ac_chars": 4468,
   "ac_count": 8,
   "gwt_block_count": 7,
   "consistency_report": true,
-  "code_blocks_total": 84,
+  "code_blocks_total": 85,
   "code_blocks_by_lang": {
     "go": 1,
     "php": 1,
     "python": 1,
     "yaml": 1,
+    "mermaid": 1,
     "plain": 14,
     "typescript": 24,
     "json": 3,
@@ -55,7 +56,7 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 54,
   "links_broken": 0,
   "todo_density": 0,

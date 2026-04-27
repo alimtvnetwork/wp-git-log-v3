@@ -261,3 +261,23 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-seedable-config.mmd` for the config-key spec → seed migration → runtime → update flow.
+
+```mermaid
+flowchart TD
+    A[Config Key Defined in Spec] --> B[Author seed migration]
+    B --> C[Validation helper registers schema]
+    C --> D[Apply migration on deploy]
+    D --> E[Runtime reads via config service]
+    E --> F{Update check finds new keys?}
+    F -- Yes --> G[Run incremental seed migration]
+    F -- No --> H[Cached config]
+    G --> E
+    H --> I[App consumes config]
+```

@@ -459,3 +459,26 @@ authoritative shape.
   "additionalProperties": false
 }
 ```
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-app-link-resolution.mmd` for the inbound-push → AppLink resolution → status gate → attribution flow.
+
+```mermaid
+flowchart TD
+    A[Inbound CI Push w/ RepoUrl] --> B[Resolve Repo + GitProfile]
+    B --> C[Query active AppLink rows]
+    C --> D{Repo-typed match?}
+    D -- Yes --> E[Use Repo link App]
+    D -- No --> F{GitProfile-typed match?}
+    F -- Yes --> G[Use GitProfile link App]
+    F -- No --> H[Reject: GL-APP-NOT-LINKED]
+    E --> I[Check AppStatus]
+    G --> I
+    I --> J{Active?}
+    J -- No --> K[Reject: GL-APP-NOT-ACTIVE]
+    J -- Yes --> L[Attribute History row + audit]
+```

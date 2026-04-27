@@ -102,3 +102,25 @@ detached process so the user is never blocked.
 ---
 
 *Update Check Mechanism Overview — v1.0.0 — 2026-04-20*
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-update-check.mmd` for the scheduled update-check → manifest → verify → notify flow.
+
+```mermaid
+flowchart TD
+    A[Scheduled Check Tick] --> B[Read current version + channel]
+    B --> C[GET release manifest]
+    C --> D{HTTP OK?}
+    D -- No --> E[Log + retry with backoff]
+    D -- Yes --> F[Compare versions semver]
+    F --> G{Newer available?}
+    G -- No --> H[Sleep until next tick]
+    G -- Yes --> I[Verify checksum + signature]
+    I --> J{Verified?}
+    J -- No --> K[Reject: UPDATE-VERIFY-001]
+    J -- Yes --> L[Notify user / auto-install per policy]
+```

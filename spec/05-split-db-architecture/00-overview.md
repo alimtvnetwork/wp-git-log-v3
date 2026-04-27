@@ -136,3 +136,24 @@ Split-DB architecture is a forward-looking pattern; database/auth implementation
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+
+## Phase 68 Reference
+
+### Lifecycle Diagram (Phase 68)
+
+See `lifecycle-split-db.mmd` for the request → user-DB resolution → RBAC → query → audit flow.
+
+```mermaid
+flowchart TD
+    A[Request Arrives] --> B[Resolve UserId from auth]
+    B --> C{Personal DB exists?}
+    C -- No --> D[Provision user_<id>.sqlite from migration]
+    C -- Yes --> E[Open existing personal DB]
+    D --> E
+    E --> F[Apply RBAC policy via Casbin]
+    F --> G{Authorized?}
+    G -- No --> H[403]
+    G -- Yes --> I[Execute query on user DB]
+    I --> J[Audit to shared system DB]
+```

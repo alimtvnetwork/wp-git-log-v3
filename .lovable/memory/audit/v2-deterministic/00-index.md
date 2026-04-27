@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 35  
-**Mean weighted score:** **91.3/100**  
-**Mean implementability:** **86.3/100**
+**Mean weighted score:** **91.5/100**  
+**Mean implementability:** **87.1/100**
 
 ## Methodology v2
 
@@ -33,14 +33,14 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 3 | [`03-error-manage/02-error-architecture`](./03-error-manage__02-error-architecture.md) | 93 | A | 10 | _none_ |
 | 4 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 93 | A | 10 | _none_ |
 | 5 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 93 | A | 10 | _none_ |
-| 6 | [`03-error-manage`](./03-error-manage.md) | 95 | A+ | 10 | _none_ |
-| 7 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 95 | A+ | 10 | _none_ |
-| 8 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 95 | A+ | 10 | _none_ |
+| 6 | [`03-error-manage`](./03-error-manage.md) | 96 | A+ | 10 | _none_ |
+| 7 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 96 | A+ | 10 | _none_ |
+| 8 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 96 | A+ | 10 | _none_ |
 | 9 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 98 | A+ | 10 | _none_ |
 | 10 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 100 | A+ | 10 | _none_ |
-| 11 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 95 | A+ | 9 | _none_ |
+| 11 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 96 | A+ | 9 | _none_ |
 | 12 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 96 | A+ | 9 | _none_ |
-| 13 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 95 | A+ | 8 | _none_ |
+| 13 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 96 | A+ | 8 | _none_ |
 | 14 | [`14-update`](./14-update.md) | 96 | A+ | 8 | _none_ |
 | 15 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 90 | A | 7 | _none_ |
 
@@ -68,14 +68,14 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 |---:|---|---:|---:|:-:|
 | 1 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 100 | 100 | A+ |
 | 2 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 98 | 100 | A+ |
-| 3 | [`14-update`](./14-update.md) | 96 | 90 | A+ |
-| 4 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 96 | 100 | A+ |
-| 5 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 95 | 85 | A+ |
-| 6 | [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 95 | 85 | A+ |
-| 7 | [`03-error-manage`](./03-error-manage.md) | 95 | 85 | A+ |
-| 8 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 95 | 85 | A+ |
-| 9 | [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 95 | 85 | A+ |
-| 10 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 95 | 85 | A+ |
+| 3 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 96 | 90 | A+ |
+| 4 | [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 96 | 90 | A+ |
+| 5 | [`03-error-manage`](./03-error-manage.md) | 96 | 90 | A+ |
+| 6 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 96 | 90 | A+ |
+| 7 | [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 96 | 90 | A+ |
+| 8 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 96 | 90 | A+ |
+| 9 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 96 | 90 | A+ |
+| 10 | [`14-update`](./14-update.md) | 96 | 90 | A+ |
 
 ## Full ranking
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
@@ -119,12 +119,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/02-error-architecture`](./03-error-manage__02-error-architecture.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
 | [`04-database-conventions`](./04-database-conventions.md) | 95 | 75 | 100 | 100 | 100 | 90 | 100 | **93** | A | 7 |
-| [`07-design-system`](./07-design-system.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
-| [`13-generic-cli`](./13-generic-cli.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 5 |
-| [`14-update/24-update-check-mechanism`](./14-update__24-update-check-mechanism.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 7 |
-| [`23-app-database`](./23-app-database.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 7 |
-| [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 4 |
 | [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 90 | 85 | 100 | 100 | 100 | 100 | 90 | **93** | A | 4 |
 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`02-coding-guidelines/01-cross-language/02-boolean-principles`](./02-coding-guidelines__01-cross-language__02-boolean-principles.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
@@ -145,16 +140,21 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/02-error-architecture/05-response-envelope`](./03-error-manage__02-error-architecture__05-response-envelope.md) | 90 | 85 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`03-error-manage/02-error-architecture/07-logging-and-diagnostics`](./03-error-manage__02-error-architecture__07-logging-and-diagnostics.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`07-design-system`](./07-design-system.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`13-generic-cli`](./13-generic-cli.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 5 |
+| [`14-update/24-update-check-mechanism`](./14-update__24-update-check-mechanism.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 7 |
 | [`15-distribution-and-runner`](./15-distribution-and-runner.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`16-generic-release`](./16-generic-release.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 100 | 70 | 100 | 100 | 100 | 100 | 90 | **94** | A | 5 |
-| [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 8 |
-| [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 6 |
-| [`03-error-manage`](./03-error-manage.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 10 |
-| [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 10 |
-| [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 6 |
-| [`05-split-db-architecture`](./05-split-db-architecture.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 9 |
-| [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 85 | 100 | 100 | 100 | 100 | 100 | 100 | **95** | A+ | 10 |
+| [`23-app-database`](./23-app-database.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 7 |
+| [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 8 |
+| [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 6 |
+| [`03-error-manage`](./03-error-manage.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 10 |
+| [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 10 |
+| [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 6 |
+| [`05-split-db-architecture`](./05-split-db-architecture.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 9 |
+| [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 10 |
 | [`14-update`](./14-update.md) | 90 | 100 | 100 | 100 | 100 | 100 | 100 | **96** | A+ | 8 |
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 85 | 100 | 100 | 100 | 90 | 100 | **96** | A+ | 9 |
 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 100 | 90 | 100 | 100 | 100 | 100 | 90 | **98** | A+ | 10 |
