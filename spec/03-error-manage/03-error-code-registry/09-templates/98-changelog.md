@@ -1,7 +1,7 @@
 # Changelog — Templates
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Version:** 1.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/03-error-code-registry/09-templates/`
 
 ---
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-27 (Phase 42 — Inlined contract + cleanup)
+- **Added** machine-readable JSON-Schema "Template Envelope" block in §00 (`ErrorCodeTemplate`). Codifies error-code regex, domain enum, severity enum, message/remediation min-lengths, and SemVer `since` field. Promotes module from C-tier to B-tier in deterministic audit v2.7.
+- **Fixed** §00 Document Inventory had a duplicated table; collapsed to a single canonical inventory.
+- **Bumped** §00 banner v3.2.0 → v3.3.0 (synchronized with new contract content).
 
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).

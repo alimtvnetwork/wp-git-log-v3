@@ -402,9 +402,11 @@ HARD_GATES = [
      "rationale": "ACs exist but none use Given/When/Then — testability degraded."},
     {"id": "G-CON-01",  "dimension": "implementability","cap": 50,
      "predicate": lambda m: not (m["has_sql_ddl"] or m["has_json_schema"] or m["has_ts_enums"] or m["has_yaml_openapi"] or m.get("has_typed_lang_contract") or m.get("has_ci_workflow")),
+     "skip_kinds": {"tracker", "index", "meta-toolchain"},  # v2.7: rubric already exempts these — gate must too
      "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) — an AI cannot generate code from prose alone."},
     {"id": "G-CON-02",  "dimension": "implementability","cap": 30,
      "predicate": lambda m: m["overview_chars"] < 500,
+     "skip_kinds": {"tracker", "index"},  # v2.7: trackers/indexes are intentionally short
      "rationale": "Overview <500 chars is a stub; no AI can implement from this."},
     {"id": "G-WAF-01",  "dimension": "clarity",         "cap": 70,
      "predicate": lambda m: m["waffle_per_kchar"] > 3,

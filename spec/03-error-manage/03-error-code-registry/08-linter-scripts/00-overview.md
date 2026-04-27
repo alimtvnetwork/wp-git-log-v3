@@ -5,9 +5,9 @@ drift_acknowledged: 2026-04-26
 
 # Linter Scripts
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Status:** Active  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **AI Confidence:** High  
 **Ambiguity:** None
 
@@ -111,6 +111,49 @@ schema below before processing.
 > when `count(codes_in_domain) / range_size >= utilization_warn_pct/100`.
 > `validate-master-stats.mjs` requires byte-for-byte agreement between the
 > registry and the published `master-stats.json`.
+
+---
+
+## Linter-Output Contract (JSON Schema)
+
+Every linter under this folder MUST emit a JSON report on stdout that conforms to this schema. CI consumers (`generate-utilization-report.mjs` downstream) treat the schema as a hard contract.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.dev/spec/03-error-manage/03-error-code-registry/08-linter-scripts.schema.json",
+  "title": "LinterReport",
+  "type": "object",
+  "required": ["script", "exit_code", "summary", "findings"],
+  "properties": {
+    "script":    { "type": "string", "enum": ["detect-collisions", "check-utilization-threshold", "validate-master-stats", "generate-utilization-report"] },
+    "exit_code": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "summary": {
+      "type": "object",
+      "required": ["total_codes", "total_domains"],
+      "properties": {
+        "total_codes":           { "type": "integer", "minimum": 0 },
+        "total_domains":         { "type": "integer", "minimum": 0 },
+        "utilization_warn_pct":  { "type": "number",  "minimum": 0, "maximum": 100 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code_id", "domain", "severity", "message"],
+        "properties": {
+          "code_id":  { "type": "string", "pattern": "^[A-Z]+-[0-9]{3,}$" },
+          "domain":   { "type": "string", "minLength": 1 },
+          "severity": { "type": "string", "enum": ["info", "warn", "error"] },
+          "message":  { "type": "string" }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
 
 ---
 

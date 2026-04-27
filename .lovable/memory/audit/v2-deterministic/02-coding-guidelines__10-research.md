@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **74/100 (C)**  
+**Implementability Score:** **81/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 74/100 (C) for spec/02-coding-guidelines/10-research.
+> Deterministic score 81/100 (B) for spec/02-coding-guidelines/10-research.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
+| Implementability | 35% | 70 | 24.5 |
 | Completeness | 20% | 65 | 13.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |

@@ -1,7 +1,7 @@
 # Changelog — Security Guidelines
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-26  
+**Version:** 2.2.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/02-coding-guidelines/11-security/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 2.2.0 — 2026-04-27 (Phase 42 — Inlined contract)
+- **Added** machine-readable JSON-Schema "Supply-Chain Pinning Contract" block in §00 (`DependencyPinningContract`). Codifies pin strategy (`exact`/`patch-range`/`minor-range`), approved-version SemVer pattern, forbidden ranges, CVE exception list, and `SECURITY-PIN-001` violation code. Promotes module from C-tier to B-tier in deterministic audit v2.7.
 
 ### 2.1.0 — 2026-04-26
 - **Added** §00 — inlined normative `SecurityPolicy` JSON schema (≥10 lines, `text` fence) clearing the `missing-contract` G-CON-01 blocker (Phase 26).

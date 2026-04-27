@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.10.0
+**Version:** 2.11.0
 **Updated:** 2026-04-27
+
+> **v2.11.0 update (Phase 42):** Auditor `linter-scripts/audit-spec-vs-code-v2.py` v2.6 → **v2.7** — `skip_kinds` extended to `{tracker, index, meta-toolchain}` on `G-CON-01` and `{tracker, index}` on `G-CON-02` (rubric already exempted these kinds; gates now mirror). Inlined JSON-Schema contracts in 5 C-tier specs (`08-file-folder-naming`, `11-security`, `08-linter-scripts`, `09-templates`, `01-phase-2-git-logs-audit`). Fixed self-inflicted broken-link FP in `27-spec-toolchain` by rewriting two prose example mentions abstractly. [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.5.0 → v1.6.0 with **AC-31-15**. Measured: **C-tier modules 11 → 0; mean weighted 82.3 → 84.1**; tree health 100/100 strict.
 
 > **v2.10.0 update (Phase 43):** Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.5 → **v2.6** to clear the broken-link false-positive class. `LINK_RX.findall` now runs against `strip_code(body_text)` so markdown links inside fenced ```` ```markdown / ```text ```` template blocks (e.g. `01-spec-authoring-guide`'s path-syntax examples) no longer count toward `links_total` / `links_broken`. [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.4.0 → v1.5.0 with new **AC-31-14**. Measured: **broken links 30 → 0 across 79 modules** (2573 valid links scanned); G-LINK-01 + G-LINK-02 caps lifted on 5 modules; `01-spec-authoring-guide` 70 (C) → B-tier expected; mean weighted 81.7 → 82.3.
 
