@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 2.4.0
+**Version:** 2.5.0
 **Updated:** 2026-04-27
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 2.5.0 — 2026-04-27 (Phase 130 — full-tree audit v5 publication)
+- **Added** [`33-full-tree-ai-audit-v5.md`](./33-full-tree-ai-audit-v5.md) — supersedes audit-v4 by mechanically re-validating all 4 critical findings against the current tree state. **3 of 4 resolved**: root slot collision (slot 22 alone now; app-issues moved to 25), broken-link count (32→0 via Phase 129 waiver semantics), legacy `21-git-logs/` folder (deleted entirely). Only finding #1 (session-persistence regression) remains open. Defers numeric re-score to R1 (real-AI re-audit, blocked on Lovable Cloud).
+- **Added** supersession banner to [`31-full-tree-ai-audit-v4.md`](./31-full-tree-ai-audit-v4.md) pointing readers to v5 first.
+- **Updated** §99 inventory: file count 33 → 34, new slot 33 row added.
+- **Slot discipline:** initially attempted slot 32 (collision with `32-phase-26-31-rollup.md`); detected immediately, moved to 33 per Core memory rule "file slots are immutable once shipped."
 
 ### 2.4.0 — 2026-04-27 (Phase 39b — TODO-marker exemption)
 - **Added** §00 "Audit Marker Exemption" section documenting that the 2026-04-27 AI-implementability audit's `todo_count: 5` was a substring false-positive: every match in this folder lives inside the worked Python example block in `27-linter-authoring-guide.md` (lines 361–424), which **defines** the `check-stale-todos.py` linter. The strings (`STALE-TODO`, `findings.append`, etc.) are source code teaching how to *detect* TODOs, not actual TODOs. Module is exempt from the substring-based `todo_density` heuristic; the example must remain literal so the linter is reproducible. Future auditor SHOULD restrict the scan to outside fenced code blocks (Phase 39b follow-up R4).
