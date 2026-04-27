@@ -25,7 +25,7 @@
   - `03-error-manage/03-error-code-registry/08-linter-scripts` v1.1.0 → v1.2.0 (`LinterReport` JSON Schema).
   - `03-error-manage/03-error-code-registry/09-templates` v3.2.0 → v3.3.0 (`ErrorCodeTemplate` JSON Schema; also collapsed duplicated Document Inventory table).
   - `25-app-issues/01-phase-2-git-logs-audit` v1.1.0 → v1.2.0 (`Phase2IssueRecord` JSON Schema).
-- **Fixed** broken-link false positive in `27-spec-toolchain` itself: wrapped two prose mentions of `[Architecture](./01-architecture.md)` in inline backticks (`98-changelog.md` row 20, `31-audit-spec-vs-code-v2.md` line 170) so they're stripped by `INLINE_CODE_RX`. Drops `links_broken` 2 → 0 on the toolchain root, lifting `G-LINK-01`.
+- **Fixed** broken-link false positive in `27-spec-toolchain` itself: rewrote prose mentions of an example architecture markdown link in `98-changelog.md` row 20 and `31-audit-spec-vs-code-v2.md` line 170 to describe the example abstractly (without the literal target path), since quad-backtick fence-escape sequences confuse `INLINE_CODE_RX`. Drops `links_broken` 2 → 0 on the toolchain root, lifting `G-LINK-01`.
 - **Verified** measured impact (`AUDIT_DETERMINISTIC=1`):
   - **C-tier modules: 11 → 0** ✅ (all 11 cleared in a single sweep).
   - **Mean weighted score: 82.3 → 84.1** (+1.8).
@@ -34,7 +34,7 @@
   - Tree health 100/100 strict, byte-identical re-runs verified.
 
 ### 2.13.0 — 2026-04-27 (Phase 43 — Broken-link false-positive fix)
-- **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.5 → **v2.6**: cross-spec link extraction now runs against `strip_code(body_text)` (the same code-stripped prose feed used by the TODO/waffle scanners) instead of the raw body. Markdown links inside fenced ```` ```markdown / ```text ```` template blocks — e.g. `01-spec-authoring-guide`'s path-syntax examples like `` `[Architecture](./01-architecture.md)` `` — are *documentation*, not real references, and must not be treated as broken just because the example file does not exist.
+- **Fixed** `linter-scripts/audit-spec-vs-code-v2.py` v2.5 → **v2.6**: cross-spec link extraction now runs against `strip_code(body_text)` (the same code-stripped prose feed used by the TODO/waffle scanners) instead of the raw body. Markdown links inside fenced markdown/text template blocks — e.g. `01-spec-authoring-guide`'s path-syntax examples — are *documentation*, not real references, and must not be treated as broken just because the example file does not exist.
 - **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.4.0 → **v1.5.0**: methodology bullet (cross-spec link health) now annotated "prose only (v2.6)"; **AC-31-14** added (prose-only link extraction contract).
 - **Verified** measured impact (`AUDIT_DETERMINISTIC=1`):
   - **Total broken links across 79 modules: 30 → 0** ✅ (2573 valid links scanned).
