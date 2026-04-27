@@ -7,7 +7,7 @@ description: Forward-looking CI/CD pipeline architecture for browser extensions.
 
 **Version:** 3.3.0  
 **Status:** Active (future-spec — workflows live in downstream extension repos)  
-**Updated:** 2026-04-26
+**Updated:** 2026-04-27
 
 ---
 

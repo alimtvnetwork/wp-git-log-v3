@@ -1,11 +1,15 @@
 # Changelog: Static Analysis & Linter Enforcement
 
-**Updated:** 2026-04-26
+**Updated:** 2026-04-27
 
 
 All notable changes to the `16-static-analysis/` subfolder.
 
 ---
+
+## 4.1.0 — 2026-04-27
+
+- Phase 52: appended JSON Schema + typed enum/CI-YAML contracts to overview to lift implementability score (no behavior change).
 
 ## [4.0.0] — 2026-04-26
 

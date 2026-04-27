@@ -7,7 +7,7 @@ description: Forward-looking debugging guide format for downstream PHP/Go/TypeSc
 
 **Version:** 3.3.0  
 **Status:** Active (future-spec — referenced application code lives downstream)  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **AI Confidence:** High  
 **Ambiguity:** None
 
