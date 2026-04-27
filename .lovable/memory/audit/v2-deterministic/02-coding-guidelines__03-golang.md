@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **88/100 (A)**  
-**Blast radius:** 6/10
+**Implementability Score:** **91/100 (A)**  
+**Blast radius:** 8/10
 
-> Deterministic score 88/100 (A) for spec/02-coding-guidelines/03-golang.
+> Deterministic score 91/100 (A) for spec/02-coding-guidelines/03-golang.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.33. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.33. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 65 | 22.8 |
+| Implementability | 35% | 75 | 26.2 |
 | Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,21 +31,22 @@
   "kind": "future-spec",
   "md_files": 11,
   "mmd_files": 0,
-  "overview_chars": 3674,
+  "overview_chars": 4693,
   "ac_chars": 16626,
   "ac_count": 23,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 49,
+  "code_blocks_total": 50,
   "code_blocks_by_lang": {
     "json": 1,
     "go": 45,
+    "typescript": 1,
     "plain": 2,
     "text": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
-  "has_ts_enums": false,
+  "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
