@@ -168,11 +168,13 @@ function extractLinks(filePath, content) {
 function validateLinks(mdFiles) {
   const broken = [];
   const externalAllowed = [];
-  const total = { Checked: 0, Ok: 0, Broken: 0, ExternalAllowed: 0 };
+  const waived = [];
+  const total = { Checked: 0, Ok: 0, Broken: 0, ExternalAllowed: 0, Waived: 0 };
 
   for (const filePath of mdFiles) {
     const content = fs.readFileSync(filePath, "utf8");
     const links = extractLinks(filePath, content);
+    const sourceRel = path.relative(SPEC_ROOT, filePath);
 
     for (const link of links) {
       total.Checked++;
@@ -184,15 +186,22 @@ function validateLinks(mdFiles) {
       } else if (isExternalRepoRef(resolvedRel)) {
         total.ExternalAllowed++;
         externalAllowed.push({
-          Source: path.relative(SPEC_ROOT, filePath),
+          Source: sourceRel,
           Line: link.Line,
           Target: link.Target,
           Resolved: resolvedRel,
         });
+      } else if (isWaivedLink(sourceRel, link.Line, link.Target)) {
+        total.Waived++;
+        waived.push({
+          Source: sourceRel,
+          Line: link.Line,
+          Target: link.Target,
+        });
       } else {
         total.Broken++;
         broken.push({
-          Source: path.relative(SPEC_ROOT, filePath),
+          Source: sourceRel,
           Line: link.Line,
           Text: link.Text,
           Target: link.Target,
@@ -202,7 +211,7 @@ function validateLinks(mdFiles) {
     }
   }
 
-  return { Broken: broken, ExternalAllowed: externalAllowed, Total: total };
+  return { Broken: broken, ExternalAllowed: externalAllowed, Waived: waived, Total: total };
 }
 
 // ── 2. Required-file checks ────────────────────────────────
