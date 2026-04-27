@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **92/100 (A)**  
+**Implementability Score:** **94/100 (A)**  
 **Blast radius:** 4/10
 
-> Deterministic score 92/100 (A) for spec/03-error-manage/03-error-code-registry/07-schemas.
+> Deterministic score 94/100 (A) for spec/03-error-manage/03-error-code-registry/07-schemas.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
+| Implementability | 35% | 95 | 33.2 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,12 +31,12 @@
   "kind": "",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 17240,
+  "overview_chars": 18632,
   "ac_chars": 3227,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 10,
+  "code_blocks_total": 15,
   "code_blocks_by_lang": {
     "json": 3,
     "text": 1,
@@ -44,7 +44,7 @@
     "go": 1,
     "php": 1,
     "python": 1,
-    "yaml": 1,
+    "yaml": 6,
     "mermaid": 1
   },
   "has_sql_ddl": false,
@@ -52,13 +52,13 @@
   "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": true,
   "has_mermaid": true,
   "links_total": 9,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.12,
+  "waffle_per_kchar": 0.11,
   "child_modules": 0
 }
 ```

@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **94/100 (A)**  
+**Implementability Score:** **96/100 (A+)**  
 **Blast radius:** 4/10
 
-> Deterministic score 94/100 (A) for spec/03-error-manage/01-error-resolution/03-retrospectives.
+> Deterministic score 96/100 (A+) for spec/03-error-manage/01-error-resolution/03-retrospectives.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.43. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.42. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
+| Implementability | 35% | 95 | 33.2 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,14 +31,14 @@
   "kind": "future-spec",
   "md_files": 8,
   "mmd_files": 1,
-  "overview_chars": 4031,
+  "overview_chars": 5423,
   "ac_chars": 4774,
   "ac_count": 9,
   "gwt_block_count": 8,
   "consistency_report": true,
-  "code_blocks_total": 40,
+  "code_blocks_total": 45,
   "code_blocks_by_lang": {
-    "yaml": 1,
+    "yaml": 6,
     "mermaid": 1,
     "json": 2,
     "typescript": 26,
@@ -51,13 +51,13 @@
   "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": false,
   "has_mermaid": true,
   "links_total": 6,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.43,
+  "waffle_per_kchar": 0.42,
   "child_modules": 0
 }
 ```

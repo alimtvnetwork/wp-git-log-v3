@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **91/100 (A)**  
+**Implementability Score:** **93/100 (A)**  
 **Blast radius:** 4/10
 
-> Deterministic score 91/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes.
+> Deterministic score 93/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
+| Implementability | 35% | 95 | 33.2 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,12 +31,12 @@
   "kind": "",
   "md_files": 7,
   "mmd_files": 1,
-  "overview_chars": 9132,
+  "overview_chars": 10524,
   "ac_chars": 2830,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 19,
+  "code_blocks_total": 24,
   "code_blocks_by_lang": {
     "text": 1,
     "json": 1,
@@ -44,7 +44,7 @@
     "go": 1,
     "php": 1,
     "python": 1,
-    "yaml": 1,
+    "yaml": 6,
     "mermaid": 1,
     "css": 2,
     "typescript": 3,
@@ -57,7 +57,7 @@
   "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": true,
   "has_mermaid": true,
   "links_total": 15,

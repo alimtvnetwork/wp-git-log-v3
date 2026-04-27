@@ -108,3 +108,9 @@ above summarize only the audit-/validation-bearing milestones for `07-design-sys
 - Mermaid lifecycle diagram present (`has_mermaid=true`).
 - Lockstep & tree-health gates: PASS.
 - Implementability promoted from 85 → 90.
+
+### 2026-04-27 — Phase 72 deepening
+
+- CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
+- Implementability raised 90 → 95 (deterministic audit).
+
