@@ -133,6 +133,38 @@ forbidden-string detection across every language target.
 
 ---
 
+## Supply-Chain Pinning Contract (JSON Schema)
+
+Every dependency declared in `package.json`, `composer.json`, `go.mod`, or `Cargo.toml` MUST resolve against this contract. The CI guard `linter-scripts/check-axios-version.sh` is the reference implementation; analogous guards inherit the same shape.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.dev/spec/11-security.schema.json",
+  "title": "DependencyPinningContract",
+  "type": "object",
+  "required": ["ecosystem", "package", "policy"],
+  "properties": {
+    "ecosystem": { "type": "string", "enum": ["npm", "composer", "go-mod", "cargo"] },
+    "package":   { "type": "string", "minLength": 1 },
+    "policy": {
+      "type": "object",
+      "required": ["pin_strategy", "approved_versions"],
+      "properties": {
+        "pin_strategy":     { "type": "string", "enum": ["exact", "patch-range", "minor-range"], "default": "exact" },
+        "approved_versions":{ "type": "array",  "items": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z.-]+)?$" }, "minItems": 1 },
+        "forbidden_ranges": { "type": "array",  "items": { "type": "string" } },
+        "cve_exceptions":   { "type": "array",  "items": { "type": "string", "pattern": "^CVE-[0-9]{4}-[0-9]{4,}$" } }
+      }
+    },
+    "violation_code": { "type": "string", "const": "SECURITY-PIN-001" }
+  },
+  "additionalProperties": false
+}
+```
+
+---
+
 ## Cross-References
 
 | Reference | Location |

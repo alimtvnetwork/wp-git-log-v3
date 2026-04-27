@@ -541,6 +541,35 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 
 ---
 
+## Issue Record Contract (JSON Schema)
+
+Every issue triaged into this report MUST conform to the following machine-readable shape. Downstream tracker importers consume this schema verbatim.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.dev/spec/25-app-issues/01-phase-2-git-logs-audit.schema.json",
+  "title": "Phase2IssueRecord",
+  "type": "object",
+  "required": ["id", "title", "reproduction", "cause", "fix", "prevention", "status"],
+  "properties": {
+    "id":            { "type": "string", "pattern": "^P2-GL-[0-9]{2}$", "description": "Stable issue identifier (Phase-2 git-logs)." },
+    "title":         { "type": "string", "minLength": 8 },
+    "audit_target":  { "type": "string", "default": "spec/_archive/21-git-logs-v1/" },
+    "reproduction":  { "type": "string", "minLength": 12 },
+    "cause":         { "type": "string", "minLength": 12 },
+    "fix":           { "type": "string", "minLength": 12 },
+    "prevention":    { "type": "string", "minLength": 12 },
+    "severity":      { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+    "status":        { "type": "string", "enum": ["open", "in-progress", "resolved", "wont-fix"] },
+    "blocks_phase3": { "type": "boolean", "default": false }
+  },
+  "additionalProperties": false
+}
+```
+
+---
+
 ## Cross-References
 
 | Reference | Location |

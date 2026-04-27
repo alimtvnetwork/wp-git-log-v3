@@ -108,6 +108,40 @@ csharp_folder:     ^[A-Z][A-Za-z0-9]*$
 
 ---
 
+## Naming-Convention Contract (JSON Schema)
+
+The naming rules for every supported language collapse to one machine-readable contract. Validators (`linter-scripts/check-spec-folder-refs.py`, `check-forbidden-spec-paths.sh`) consume this schema verbatim.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.dev/spec/08-file-folder-naming.schema.json",
+  "title": "FileAndFolderNamingContract",
+  "type": "object",
+  "required": ["language", "file_pattern", "folder_pattern"],
+  "properties": {
+    "language": { "type": "string", "enum": ["php", "go", "typescript", "javascript", "rust", "csharp", "spec-md"] },
+    "file_pattern":   { "type": "string", "format": "regex", "description": "PCRE applied to the basename." },
+    "folder_pattern": { "type": "string", "format": "regex", "description": "PCRE applied to each path segment." },
+    "spec_slot_immutability": {
+      "type": "object",
+      "description": "Reserved spec slots that may NEVER be reused once shipped.",
+      "properties": {
+        "reserved_slots": { "type": "array", "items": { "type": "string", "enum": ["00", "97", "98", "99"] } },
+        "numeric_prefix": { "type": "string", "format": "regex", "default": "^[0-9]{2}-[a-z0-9-]+$" }
+      },
+      "required": ["reserved_slots", "numeric_prefix"]
+    },
+    "violation_code": { "type": "string", "const": "NAMING-001" }
+  },
+  "additionalProperties": false
+}
+```
+
+> **Enforcement.** A path failing its applicable pattern raises `NAMING-001`; the PR check blocks merge. Spec files additionally validate uniqueness of the `NN-` numeric prefix per parent directory and immutability of slots `00`, `97`, `98`, `99`.
+
+---
+
 ## Cross-References
 
 | Reference | Location |
