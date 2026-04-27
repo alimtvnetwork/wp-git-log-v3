@@ -22,7 +22,14 @@
  * Usage:
  *   node linter-scripts/check-tree-health.cjs            # uses default threshold 75
  *   node linter-scripts/check-tree-health.cjs --min=80   # custom threshold
+ *   node linter-scripts/check-tree-health.cjs --strict   # equivalent to --min=100; also fails
+ *                                                        # on ANY module with quality < max,
+ *                                                        # even if composite still rounds to 100
  *   node linter-scripts/check-tree-health.cjs --report   # print per-module breakdown
+ *
+ * --strict (Phase 36) converts "100/100" from aspirational to enforced. CI
+ * workflows that expect zero regression should pass --strict; default
+ * behaviour stays at threshold 75 to avoid breaking ad-hoc local runs.
  */
 const fs = require('fs');
 const path = require('path');
@@ -32,7 +39,8 @@ const ARCHIVE_PREFIX = '_archive';
 
 const args = process.argv.slice(2);
 const minArg = args.find((a) => a.startsWith('--min='));
-const MIN_SCORE = minArg ? parseInt(minArg.split('=')[1], 10) : 75;
+const STRICT = args.includes('--strict');
+const MIN_SCORE = STRICT ? 100 : (minArg ? parseInt(minArg.split('=')[1], 10) : 75);
 const SHOW_REPORT = args.includes('--report');
 
 const REQUIRED = ['00-overview.md', '99-consistency-report.md'];
@@ -146,6 +154,28 @@ function main() {
     console.error(`✗ FAIL: tree health ${score} is below threshold ${MIN_SCORE}`);
     process.exit(1);
   }
+
+  if (STRICT) {
+    // Strict mode: also fail on any module that is not at full marks.
+    // Composite score can round to 100 while individual modules slip; strict
+    // closes that loophole so CI cannot regress silently.
+    const imperfect = breakdown.filter(
+      (b) => b.missing.length > 0 || b.quality < b.qualityMax
+    );
+    if (imperfect.length > 0) {
+      console.error(`✗ FAIL: --strict mode — ${imperfect.length} module(s) below full marks:`);
+      for (const b of imperfect) {
+        const gaps = [];
+        if (b.missing.length) gaps.push(`missing: ${b.missing.join(', ')}`);
+        if (b.quality < b.qualityMax) gaps.push(`quality ${b.quality}/${b.qualityMax}`);
+        console.error(`    ${b.rel}  →  ${gaps.join('; ')}`);
+      }
+      process.exit(1);
+    }
+    console.log(`✓ PASS: tree health ${score} ≥ threshold ${MIN_SCORE} (strict — all ${modules.length} modules at full marks)`);
+    return;
+  }
+
   console.log(`✓ PASS: tree health ${score} ≥ threshold ${MIN_SCORE}`);
 }
 

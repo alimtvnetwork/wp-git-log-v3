@@ -49,11 +49,12 @@ jobs:
         id: links
         run: python3 linter-scripts/check-spec-cross-links.py --github
 
-      - name: Spec tree health gate (rubric v2.0.0, threshold 100)
+      - name: Spec tree health gate (rubric v2.0.0, --strict)
         id: health
-        env:
-          SPEC_HEALTH_MIN: '100'
-        run: node linter-scripts/check-tree-health.cjs --min="$SPEC_HEALTH_MIN" --report
+        # Phase 36: --strict converts threshold from 100 to "ALL modules at
+        # full marks". Composite score can round to 100 while individual
+        # modules slip; --strict closes that loophole.
+        run: node linter-scripts/check-tree-health.cjs --strict --report
 
       - name: Dashboard data parity check (rubric v2.0.0)
         id: dashboard

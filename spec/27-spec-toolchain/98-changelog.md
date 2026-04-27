@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.5.0
+**Version:** 2.6.0
 **Updated:** 2026-04-26
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,12 @@
 ---
 
 ## Releases
+
+### 2.6.0 — 2026-04-26 (Phase 36 — `--strict` flag enforces module-level perfection)
+- **Added** `--strict` flag to `linter-scripts/check-tree-health.cjs`. Equivalent to `--min=100` AND additionally fails if any single module has missing required/recommended files OR quality credits below max. Closes the loophole where composite rounds to 100 while individual modules slip credits.
+- **Changed** `.github/workflows/spec-monthly-audit.yml` health step from `--min=100` to `--strict --report` so the monthly audit catches per-module regressions even when composite stays clean.
+- **Changed** [`05-check-tree-health.md`](./05-check-tree-health.md) v1.0.0 → v2.0.0 — full rubric v2.0.0 documented (was still describing 4-credit v1.x scoring); added AC-05-04 (rubric weighting), AC-05-05 (`--strict` module-level), AC-05-06 (`--strict` implies threshold 100); fixed AC-05-02 (was claiming missing required file fails regardless of score, which is no longer accurate under percentage-based rubric).
+- **Verified:** `node linter-scripts/check-tree-health.cjs --strict` → `✓ PASS: tree health 100 ≥ threshold 100 (strict — all 54 modules at full marks)`. Default mode unchanged.
 
 ### 2.5.0 — 2026-04-26 (Phase 35 — Audit cadence formalisation, R3)
 - **Added** `.github/workflows/spec-monthly-audit.yml` — time-driven monthly cadence audit (cron `17 3 1 * *` + `workflow_dispatch`). Steps: cross-link gate → tree health gate (rubric v2.0.0 threshold 100) → dashboard-parity check (Phase 34 invariant) → trace-map regression → markdown summary → auto-open GitHub issue on failure (labels `spec-audit`, `regression`, `automated`).

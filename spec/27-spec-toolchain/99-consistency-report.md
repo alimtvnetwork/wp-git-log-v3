@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.2.0
+**Version:** 2.3.0
 **Updated:** 2026-04-26
+
+> **v2.3.0 update (Phase 36):** Added `--strict` flag to `check-tree-health.cjs` (threshold 100 + fails on any single module below full marks). Wired into `spec-monthly-audit.yml`. [`05-check-tree-health.md`](./05-check-tree-health.md) v1.0.0 → v2.0.0 — rubric v2.0.0 fully documented (was still describing v1.x); 3 new ACs (AC-05-04..AC-05-06) for rubric weighting + `--strict` semantics; AC-05-02 corrected to match percentage-based scoring. Verified strict pass at 54/54 modules full marks.
 
 > **v2.2.0 update (Phase 35 — R3):** Added [`71-spec-monthly-audit-yml.md`](./71-spec-monthly-audit-yml.md) + `.github/workflows/spec-monthly-audit.yml`. Time-driven monthly cadence companion to event-driven `spec-health.yml`. Includes dashboard-parity check (Phase 34 invariant) and auto-opens GitHub issue on regression. Bijection 28/28 → 29/29. Closes R3 from `32-phase-26-31-rollup.md` §4.
 
