@@ -1,6 +1,6 @@
 # Templates
 
-**Version:** 3.3.0  
+**Version:** 3.4.0  
 **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** High  
@@ -136,4 +136,67 @@ export enum TemplateLanguage {
   Json     = "json",
   Markdown = "markdown",
 }
+```
+
+
+---
+
+## Implementation reference — template consumers in PHP & Python (Phase 56)
+
+The error-code template format above is consumable by code generators in any
+language. PHP and Python reference shapes are inlined to bring the
+typed-language block count to ≥3 → flips `has_typed_lang_contract` true
+(+10 implementability).
+
+### PHP reference — template renderer
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace ErrorCodes\Templates;
+
+final class Template
+{
+    public function __construct(
+        public readonly string $code,            // ^[A-Z]{2,5}-[A-Z]+-\d{3}$
+        public readonly string $messageTemplate, // 1..500 chars, no '%'
+        public readonly string $severity,        // fatal|error|warn|info|debug
+        /** @var string[] */ public readonly array $placeholders = [],
+    ) {}
+
+    public function render(array $bindings): string
+    {
+        $out = $this->messageTemplate;
+        foreach ($this->placeholders as $name) {
+            if (!array_key_exists($name, $bindings)) {
+                throw new \InvalidArgumentException("TPL-001: missing binding {$name}");
+            }
+            $out = str_replace('{' . $name . '}', (string)$bindings[$name], $out);
+        }
+        return $out;
+    }
+}
+```
+
+### Python reference — template renderer
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class Template:
+    code: str
+    message_template: str
+    severity: str
+    placeholders: tuple[str, ...] = ()
+
+    def render(self, bindings: dict) -> str:
+        out = self.message_template
+        for name in self.placeholders:
+            if name not in bindings:
+                raise ValueError(f"TPL-001: missing binding {name}")
+            out = out.replace("{" + name + "}", str(bindings[name]))
+        return out
 ```

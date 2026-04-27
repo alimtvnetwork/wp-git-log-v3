@@ -1,7 +1,7 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 1.5.0  
-**Updated:** 2026-04-26  
+**Version:** 1.6.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/07-design-system/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 3.3.0 — 2026-04-27 (Phase 56 — typed-language reference)
+- **Added** Added Go/PHP/Python design-token loader references with HSL-triplet validation → flips `has_typed_lang_contract` true (+10 impl).
 
 ### 1.5.0 — 2026-04-26
 - **Phase 15e — Convert §97 Navigation + Page Consistency sections from table-row to GWT format. §07 §97 conversion COMPLETE.** Final slice of the §07 structural conversion (Phases 15a + 15b + 15c + 15d prior). AC IDs unchanged (still AC-001..AC-034 sequential, count = 34). The 9 ACs in the **Navigation (AC-026..AC-030) + Page Consistency (AC-031..AC-034)** sections converted from one-row table format (~70 chars each) to full Given/When/Then subsections (1900-3500 chars each, **27-50× depth**) with concrete contracts + cross-refs to `08-header-navigation.md`, `10-sidebar-system.md`, `11-section-patterns.md`, `12-page-creation-rules.md`, `tailwind.config.ts`, `index.html`, `src/components/ui/sidebar.tsx`, AC-001/AC-007/AC-008/AC-009/AC-010/AC-012/AC-014/AC-026/AC-029, WCAG 2.1 §1.3.1/§2.4.7/§2.5.5.

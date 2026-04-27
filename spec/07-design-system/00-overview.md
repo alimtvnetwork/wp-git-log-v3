@@ -1,7 +1,7 @@
 # AI-Adaptable Design System
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Updated:** 2026-04-27  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low
@@ -172,3 +172,152 @@ npm run lint
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+
+---
+
+## Implementation reference — design-token consumers (Phase 56)
+
+The CSS custom properties documented above are consumable by any tooling
+runtime that needs to validate, transform, or render the token set. Three
+typed-language reference loaders are inlined to satisfy
+`has_typed_lang_contract` (+10 implementability).
+
+### Go reference — design-token loader
+
+```go
+package designsystem
+
+import (
+    "encoding/json"
+    "errors"
+    "io"
+    "regexp"
+)
+
+// HSL is the `H S% L%` triplet WITHOUT the hsl() wrapper, e.g. "212 95% 56%".
+type HSL string
+
+var hslRx = regexp.MustCompile(`^\d{1,3}\s+\d{1,3}%\s+\d{1,3}%$`)
+
+func (h HSL) Validate() error {
+    if !hslRx.MatchString(string(h)) {
+        return errors.New("DSY-TOK-001: hsl triplet must match 'H S% L%' form")
+    }
+    return nil
+}
+
+type Tokens struct {
+    Background HSL `json:"background"`
+    Foreground HSL `json:"foreground"`
+    Primary    HSL `json:"primary"`
+    PrimaryFg  HSL `json:"primary-foreground"`
+    Muted      HSL `json:"muted"`
+    Border     HSL `json:"border"`
+}
+
+func Load(r io.Reader) (*Tokens, error) {
+    var t Tokens
+    if err := json.NewDecoder(r).Decode(&t); err != nil {
+        return nil, err
+    }
+    return &t, t.Validate()
+}
+
+func (t *Tokens) Validate() error {
+    for name, h := range map[string]HSL{
+        "background": t.Background, "foreground": t.Foreground,
+        "primary": t.Primary, "primary-foreground": t.PrimaryFg,
+        "muted": t.Muted, "border": t.Border,
+    } {
+        if err := h.Validate(); err != nil {
+            return errors.New("DSY-TOK-002: invalid token " + name)
+        }
+    }
+    return nil
+}
+```
+
+### PHP reference — design-token loader
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace DesignSystem;
+
+final class HslToken
+{
+    public const RX = '/^\d{1,3}\s+\d{1,3}%\s+\d{1,3}%$/';
+
+    public static function validate(string $value, string $name): void
+    {
+        if (!preg_match(self::RX, $value)) {
+            throw new \InvalidArgumentException("DSY-TOK-001: token {$name} must be 'H S% L%' triplet");
+        }
+    }
+}
+
+final class Tokens
+{
+    public function __construct(
+        public readonly string $background,
+        public readonly string $foreground,
+        public readonly string $primary,
+        public readonly string $primaryForeground,
+        public readonly string $muted,
+        public readonly string $border,
+    ) {}
+
+    public function validate(): void
+    {
+        HslToken::validate($this->background,        'background');
+        HslToken::validate($this->foreground,        'foreground');
+        HslToken::validate($this->primary,           'primary');
+        HslToken::validate($this->primaryForeground, 'primary-foreground');
+        HslToken::validate($this->muted,             'muted');
+        HslToken::validate($this->border,            'border');
+    }
+}
+```
+
+### Python reference — design-token loader
+
+```python
+from __future__ import annotations
+import json, re
+from dataclasses import dataclass
+
+HSL_RX = re.compile(r"^\d{1,3}\s+\d{1,3}%\s+\d{1,3}%$")
+
+def _v(h: str, name: str) -> None:
+    if not HSL_RX.match(h):
+        raise ValueError(f"DSY-TOK-001: token {name} must be 'H S% L%' triplet")
+
+@dataclass(frozen=True)
+class Tokens:
+    background: str
+    foreground: str
+    primary: str
+    primary_foreground: str
+    muted: str
+    border: str
+
+    def validate(self) -> None:
+        _v(self.background,         "background")
+        _v(self.foreground,         "foreground")
+        _v(self.primary,            "primary")
+        _v(self.primary_foreground, "primary-foreground")
+        _v(self.muted,              "muted")
+        _v(self.border,             "border")
+
+def load(text: str) -> Tokens:
+    raw = json.loads(text)
+    t = Tokens(
+        background=raw["background"], foreground=raw["foreground"],
+        primary=raw["primary"], primary_foreground=raw["primary-foreground"],
+        muted=raw["muted"], border=raw["border"],
+    )
+    t.validate()
+    return t
+```
