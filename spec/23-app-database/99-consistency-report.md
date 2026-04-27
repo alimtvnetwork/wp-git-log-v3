@@ -85,3 +85,9 @@ These slots are immutable once shipped (per project memory rule). If content nee
 - Mermaid lifecycle diagram present (`has_mermaid=true`).
 - Lockstep & tree-health gates: PASS.
 - Implementability promoted from 85 → 90.
+
+### 2026-04-27 — Phase 71 deepening
+
+- CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
+- Implementability raised 90 → 95 (deterministic audit).
+

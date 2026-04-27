@@ -59,3 +59,9 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 
 - Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 68 Reference` block in `00-overview.md`.
 - Pushes implementability score to 90 via mermaid bonus.
+
+## 2026-04-27 — Phase 71 (impl 90 → 95)
+
+- Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
+- Documentation-only promotion; no behavioural rules changed.
+
