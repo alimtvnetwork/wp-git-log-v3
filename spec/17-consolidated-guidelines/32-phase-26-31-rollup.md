@@ -1,6 +1,6 @@
 ---
 kind: retrospective
-version: 1.0.0
+version: 1.2.0
 updated: 2026-04-26
 supersedes: none
 related:
