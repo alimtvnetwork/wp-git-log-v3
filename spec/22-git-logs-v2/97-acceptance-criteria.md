@@ -478,4 +478,4 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - [GH-Actions SSH example §28](./28-example-github-actions.md)
 - [Threat model §30](./30-threat-model.md)
 - [SSH-Key Lane B reference §31](./31-ssh-key-auth.md)
-- [Per-SHA storage §39](./39-per-sha-storage.md)
+- [Split-DB log storage §39](./39-split-db-log-storage.md)
