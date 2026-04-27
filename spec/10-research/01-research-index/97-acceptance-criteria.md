@@ -1,16 +1,36 @@
 # Acceptance Criteria — Top-Level Research Index
 
-**Version:** 1.0.0  
+**Version:** 2.0.0
 **Updated:** 2026-04-27
 
 ---
 
-### TOP-RES-01: New top-level study  `[high]`
-- **Given** A research scope spans multiple domains and does not fit under any single guideline.
-- **When** The change is reviewed in PR.
-- **Then** A new child subfolder is created here with the standard 4-file layout.
+### RESEARCH-01: Inlined contract validates  `[critical]`
+- **Given** The contract block in `00-overview.md`.
+- **When** The contract is parsed by its language tooling (jsonschema/tsc/sqlite).
+- **Then** Parsing MUST succeed with zero diagnostics.
 
-### TOP-RES-02: Research → spec promotion  `[medium]`
-- **Given** A research finding is adopted as a normative spec.
-- **When** The change is reviewed in PR.
-- **Then** The original research subfolder is preserved with a `promoted_to:` frontmatter pointer to the new spec module.
+### RESEARCH-02: Schema-required fields enforced  `[critical]`
+- **Given** A new entry conforming to the contract.
+- **When** A required field is omitted.
+- **Then** Validation MUST fail with a clear "missing required field" error citing the field name.
+
+### RESEARCH-03: ID pattern enforced  `[high]`
+- **Given** An entry with an `id` field.
+- **When** The id does not match the documented regex pattern.
+- **Then** Validation MUST fail and the offending value MUST be echoed in the error.
+
+### RESEARCH-04: Lifecycle diagram present and valid  `[high]`
+- **Given** This subfolder.
+- **When** Listing files.
+- **Then** Exactly one `lifecycle-*.mmd` file MUST exist and parse as a valid Mermaid `flowchart TD`.
+
+### RESEARCH-05: Forward-only updates  `[medium]`
+- **Given** A change to the contract block.
+- **When** Reviewed in PR.
+- **Then** Removed fields MUST first be marked deprecated for at least one minor version before deletion; renamed fields MUST add the new name and keep the old one as an alias for one minor version.
+
+### RESEARCH-06: Cross-references stay valid  `[medium]`
+- **Given** This subfolder's `00-overview.md`.
+- **When** `linter-scripts/check-spec-cross-links.py` runs.
+- **Then** Exit code MUST be 0; all relative links MUST resolve.

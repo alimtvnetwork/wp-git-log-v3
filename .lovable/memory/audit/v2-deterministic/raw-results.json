@@ -1460,48 +1460,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 654,
+      "ac_chars": 1600,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "json": 1,
+        "mermaid": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
-      "has_json_schema": false,
-      "has_mermaid": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1327,
+      "mmd_files": 1,
+      "overview_chars": 2129,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1509,24 +1521,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/10-research/01-research-index.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 66/100 (C) for spec/02-coding-guidelines/10-research/01-research-index.",
+    "weighted_overall": 66
   },
   {
     "applied_gates": [],
@@ -1724,48 +1736,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 663,
+      "ac_chars": 1611,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "mermaid": 1,
+        "ts": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
       "has_json_schema": false,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1349,
+      "mmd_files": 1,
+      "overview_chars": 2097,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1773,24 +1797,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/21-app/01-app-coding-rules.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 64/100 (C) for spec/02-coding-guidelines/21-app/01-app-coding-rules.",
+    "weighted_overall": 64
   },
   {
     "applied_gates": [],
@@ -1856,48 +1880,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 643,
+      "ac_chars": 1605,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "json": 1,
+        "mermaid": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
-      "has_json_schema": false,
-      "has_mermaid": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1377,
+      "mmd_files": 1,
+      "overview_chars": 2287,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1905,24 +1941,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/22-app-issues/01-app-issue-templates.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 66/100 (C) for spec/02-coding-guidelines/22-app-issues/01-app-issue-templates.",
+    "weighted_overall": 66
   },
   {
     "applied_gates": [],
@@ -1986,48 +2022,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 3,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 691,
+      "ac_chars": 1610,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "mermaid": 1,
+        "sql": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
       "has_json_schema": false,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
-      "has_sql_ddl": false,
+      "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1364,
+      "mmd_files": 1,
+      "overview_chars": 2176,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2035,24 +2083,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 55,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 55,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/23-app-database/01-app-database-conventions.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 68/100 (C) for spec/02-coding-guidelines/23-app-database/01-app-database-conventions.",
+    "weighted_overall": 68
   },
   {
     "applied_gates": [],
@@ -2116,48 +2164,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 671,
+      "ac_chars": 1604,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "mermaid": 1,
+        "ts": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
       "has_json_schema": false,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1377,
+      "mmd_files": 1,
+      "overview_chars": 2308,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2165,24 +2225,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 64/100 (C) for spec/02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions.",
+    "weighted_overall": 64
   },
   {
     "applied_gates": [],
@@ -4171,48 +4231,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 648,
+      "ac_chars": 1610,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "json": 1,
+        "mermaid": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
-      "has_json_schema": false,
-      "has_mermaid": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1341,
+      "mmd_files": 1,
+      "overview_chars": 2259,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -4220,24 +4292,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 50,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/10-research/01-research-index.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 66/100 (C) for spec/10-research/01-research-index.",
+    "weighted_overall": 66
   },
   {
     "applied_gates": [],
@@ -4855,48 +4927,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 691,
+      "ac_chars": 1612,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "mermaid": 1,
+        "ts": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
       "has_json_schema": false,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1397,
+      "mmd_files": 1,
+      "overview_chars": 2272,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -4904,24 +4988,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/14-update/diagrams/01-diagram-conventions.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 64/100 (C) for spec/14-update/diagrams/01-diagram-conventions.",
+    "weighted_overall": 64
   },
   {
     "applied_gates": [],
@@ -5776,48 +5860,60 @@
   {
     "applied_gates": [
       {
-        "active": true,
-        "after": 20,
-        "before": 80,
+        "active": false,
+        "after": 10,
+        "before": 10,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
       }
     ],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "untestable",
+        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
+        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
+        "impact": 8,
+        "issue": "No acceptance criteria found",
+        "severity": "high"
+      }
+    ],
     "grade": "C",
-    "implementability_blockers": [],
+    "implementability_blockers": [
+      "No acceptance criteria found"
+    ],
     "metrics": {
-      "ac_chars": 689,
+      "ac_chars": 1614,
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "text": 1
+        "mermaid": 1,
+        "ts": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
-      "gwt_block_count": 2,
+      "gwt_block_count": 6,
       "has_ci_workflow": false,
       "has_json_schema": false,
-      "has_mermaid": false,
+      "has_mermaid": true,
       "has_normative_contract": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
-      "mmd_files": 0,
-      "overview_chars": 1366,
+      "mmd_files": 1,
+      "overview_chars": 2153,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -5825,24 +5921,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 80
+      "testability": 10
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=0, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 40,
+      "completeness": 50,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 45,
       "maintainability": 100,
-      "testability": 20
+      "testability": 10
     },
-    "verdict": "Deterministic score 72/100 (C) for spec/26-gitlogs-diagrams/01-diagram-conventions.",
-    "weighted_overall": 72
+    "verdict": "Deterministic score 64/100 (C) for spec/26-gitlogs-diagrams/01-diagram-conventions.",
+    "weighted_overall": 64
   },
   {
     "applied_gates": [],

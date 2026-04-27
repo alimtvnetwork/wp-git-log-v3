@@ -1,11 +1,10 @@
 ---
-kind: index
-description: Git Logs Diagram Conventions — child module of `26-gitlogs-diagrams/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
+description: Git Logs Diagram Conventions — content child module of `26-gitlogs-diagrams/`. Carries an inlined contract, Mermaid lifecycle diagram, and full GWT acceptance criteria.
 ---
 
 # Git Logs Diagram Conventions
 
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Updated:** 2026-04-27
 **Parent:** [`../00-overview.md`](../00-overview.md)
 
@@ -13,20 +12,48 @@ description: Git Logs Diagram Conventions — child module of `26-gitlogs-diagra
 
 ## Overview
 
-Subfolder defining conventions for all `26-gitlogs-diagrams/` Mermaid + SVG companion files. Each `.mmd` source MUST have a paired `.svg` rendering committed alongside it, generated via `mmdc -i X.mmd -o X.svg`.
+Normative conventions for `26-gitlogs-diagrams/`. Each `.mmd` MUST have a paired `.svg` rendered via `mmdc`. CI MUST diff-check the SVG matches a fresh render.
 
 ---
 
 ## Inlined Contract
 
-```text
-INVARIANT-1: This subfolder MUST contain at least the four required files
-             (00-overview.md, 97-acceptance-criteria.md, 98-changelog.md,
-             99-consistency-report.md) at all times.
-INVARIANT-2: Any new sibling subfolder added under the parent MUST follow
-             this same 4-file layout to remain auditable.
-INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
-             {parent}/98-changelog.md entry on the same PR.
+```ts
+// Git Logs diagram pairing contract
+export interface DiagramPair {
+  /** Source Mermaid file, e.g. "01-er-diagram.mmd" */
+  source: string;          // ^\d{2}-[a-z0-9-]+\.mmd$
+  /** Rendered SVG file, MUST share base name with source */
+  rendered: string;        // ^\d{2}-[a-z0-9-]+\.svg$
+  /** mmdc command used to render */
+  renderCmd: string;       // e.g. "mmdc -i 01-er-diagram.mmd -o 01-er-diagram.svg"
+  /** SHA-256 of the SVG for CI diff-check */
+  renderedSha256: string;
+}
+
+export const GLD_PAIRING_RX = {
+  source:   /^\d{2}-[a-z0-9-]+\.mmd$/,
+  rendered: /^\d{2}-[a-z0-9-]+\.svg$/
+};
+```
+
+---
+
+## Lifecycle Diagram
+
+See [`lifecycle-diagram-pairing.mmd`](./lifecycle-diagram-pairing.mmd) for the complete authoring → validation → publication lifecycle.
+
+```mermaid
+flowchart TD
+    A[New Diagram Authored] --> B[Author X.mmd]
+    B --> C[Run: mmdc -i X.mmd -o X.svg]
+    C --> D[Commit Both Files Same PR]
+    D --> E[CI: Re-render X.mmd]
+    E --> F{SHA-256 of new SVG == committed SVG?}
+    F -- No --> G[Block: GLD-001 stale render]
+    F -- Yes --> H[Merge]
+    H --> I{Diagram Retired?}
+    I -- Yes --> J[Delete BOTH .mmd and .svg]
 ```
 
 ---
@@ -36,5 +63,7 @@ INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
 | Reference | Location |
 |-----------|----------|
 | Parent index | [`../00-overview.md`](../00-overview.md) |
-| Parent acceptance criteria | [`../97-acceptance-criteria.md`](../97-acceptance-criteria.md) |
-| Parent changelog | [`../98-changelog.md`](../98-changelog.md) |
+| Acceptance criteria | [`./97-acceptance-criteria.md`](./97-acceptance-criteria.md) |
+| Lifecycle diagram source | [`./lifecycle-diagram-pairing.mmd`](./lifecycle-diagram-pairing.mmd) |
+| Changelog | [`./98-changelog.md`](./98-changelog.md) |
+| Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |

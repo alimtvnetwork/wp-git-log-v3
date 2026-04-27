@@ -1,11 +1,10 @@
 ---
-kind: index
-description: Top-Level Research Index — child module of `10-research/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
+description: Top-Level Research Index — content child module of `10-research/`. Carries an inlined contract, Mermaid lifecycle diagram, and full GWT acceptance criteria.
 ---
 
 # Top-Level Research Index
 
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Updated:** 2026-04-27
 **Parent:** [`../00-overview.md`](../00-overview.md)
 
@@ -13,20 +12,46 @@ description: Top-Level Research Index — child module of `10-research/` populat
 
 ## Overview
 
-Tracker subfolder enumerating top-level research investigations not bound to a specific coding-guideline domain. Cross-cutting research (e.g., game-engine evaluations, framework comparisons) lives here.
+Top-level research entries that span multiple coding-guideline domains (e.g., game-engine evaluations, framework comparisons). Same schema as the coding-guideline-scoped research index.
 
 ---
 
 ## Inlined Contract
 
-```text
-INVARIANT-1: This subfolder MUST contain at least the four required files
-             (00-overview.md, 97-acceptance-criteria.md, 98-changelog.md,
-             99-consistency-report.md) at all times.
-INVARIANT-2: Any new sibling subfolder added under the parent MUST follow
-             this same 4-file layout to remain auditable.
-INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
-             {parent}/98-changelog.md entry on the same PR.
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TopLevelResearchEntry",
+  "type": "object",
+  "required": ["id", "title", "domains", "owner", "status", "openedAt"],
+  "properties": {
+    "id":       { "type": "string", "pattern": "^TOP-RES-\\d{4}-\\d{3}$" },
+    "title":    { "type": "string", "minLength": 5 },
+    "domains":  { "type": "array", "minItems": 2, "items": { "type": "string" }, "description": "MUST be at least 2 spec module relpaths to qualify as top-level" },
+    "owner":    { "type": "string" },
+    "status":   { "type": "string", "enum": ["proposed", "active", "completed", "withdrawn", "promoted"] },
+    "openedAt": { "type": "string", "format": "date" },
+    "promotedTo": { "type": ["string", "null"] }
+  }
+}
+```
+
+---
+
+## Lifecycle Diagram
+
+See [`lifecycle-top-research.mmd`](./lifecycle-top-research.mmd) for the complete authoring → validation → publication lifecycle.
+
+```mermaid
+flowchart TD
+    A[Cross-Domain Research Proposed] --> B{Spans 2+ Domains?}
+    B -- No --> C[Reject: belongs in domain-scoped index]
+    B -- Yes --> D[Allocate TOP-RES-NNNN-NNN]
+    D --> E[Active]
+    E --> F[Completed]
+    F --> G{Promotable?}
+    G -- Yes --> H[Promote to New Spec Module]
+    G -- No --> I[Archive]
 ```
 
 ---
@@ -36,5 +61,7 @@ INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
 | Reference | Location |
 |-----------|----------|
 | Parent index | [`../00-overview.md`](../00-overview.md) |
-| Parent acceptance criteria | [`../97-acceptance-criteria.md`](../97-acceptance-criteria.md) |
-| Parent changelog | [`../98-changelog.md`](../98-changelog.md) |
+| Acceptance criteria | [`./97-acceptance-criteria.md`](./97-acceptance-criteria.md) |
+| Lifecycle diagram source | [`./lifecycle-top-research.mmd`](./lifecycle-top-research.mmd) |
+| Changelog | [`./98-changelog.md`](./98-changelog.md) |
+| Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |

@@ -1,11 +1,10 @@
 ---
-kind: index
-description: App UI Conventions — child module of `02-coding-guidelines/24-app-design-system-and-ui/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
+description: App UI Conventions — content child module of `02-coding-guidelines/24-app-design-system-and-ui/`. Carries an inlined contract, Mermaid lifecycle diagram, and full GWT acceptance criteria.
 ---
 
 # App UI Conventions
 
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Updated:** 2026-04-27
 **Parent:** [`../00-overview.md`](../00-overview.md)
 
@@ -13,20 +12,48 @@ description: App UI Conventions — child module of `02-coding-guidelines/24-app
 
 ## Overview
 
-Tracker subfolder for App-layer UI conventions that complement `24-app-design-system-and-ui/`. Houses naming rules, component composition patterns, and accessibility requirements specific to the App's UI codebase.
+App-layer UI naming, composition, and a11y conventions. Enforces PascalCase component names, suffix patterns (Modal, Drawer, Sheet), and WCAG AA baseline.
 
 ---
 
 ## Inlined Contract
 
-```text
-INVARIANT-1: This subfolder MUST contain at least the four required files
-             (00-overview.md, 97-acceptance-criteria.md, 98-changelog.md,
-             99-consistency-report.md) at all times.
-INVARIANT-2: Any new sibling subfolder added under the parent MUST follow
-             this same 4-file layout to remain auditable.
-INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
-             {parent}/98-changelog.md entry on the same PR.
+```ts
+// App UI convention contract
+export type ComponentSuffix = "Modal" | "Drawer" | "Sheet" | "Dialog" | "Popover" | "Toast" | "Banner";
+
+export interface AppComponentConvention {
+  /** PascalCase, optionally ending in one of ComponentSuffix */
+  name: string;            // ^[A-Z][A-Za-z0-9]*(Modal|Drawer|Sheet|Dialog|Popover|Toast|Banner)?$
+  /** WCAG criterion this component must satisfy at minimum */
+  wcagBaseline: "AA" | "AAA";
+  /** semantic design tokens used (no raw colors permitted) */
+  tokens: string[];        // e.g. ["--primary", "--background"]
+  /** roving-tabindex required for composite widgets */
+  rovingTabindex: boolean;
+}
+
+export const APP_UI_NAMING_RX = /^[A-Z][A-Za-z0-9]*(Modal|Drawer|Sheet|Dialog|Popover|Toast|Banner)?$/;
+```
+
+---
+
+## Lifecycle Diagram
+
+See [`lifecycle-component-authoring.mmd`](./lifecycle-component-authoring.mmd) for the complete authoring → validation → publication lifecycle.
+
+```mermaid
+flowchart TD
+    A[New App Component] --> B{Name Matches APP_UI_NAMING_RX?}
+    B -- No --> C[Block: APP-UI-001]
+    B -- Yes --> D[Use Semantic Tokens Only]
+    D --> E{Raw Color Detected?}
+    E -- Yes --> C
+    E -- No --> F[Apply WCAG Baseline]
+    F --> G{Composite Widget?}
+    G -- Yes --> H[Add Roving Tabindex]
+    G -- No --> I[Done]
+    H --> I
 ```
 
 ---
@@ -36,5 +63,7 @@ INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
 | Reference | Location |
 |-----------|----------|
 | Parent index | [`../00-overview.md`](../00-overview.md) |
-| Parent acceptance criteria | [`../97-acceptance-criteria.md`](../97-acceptance-criteria.md) |
-| Parent changelog | [`../98-changelog.md`](../98-changelog.md) |
+| Acceptance criteria | [`./97-acceptance-criteria.md`](./97-acceptance-criteria.md) |
+| Lifecycle diagram source | [`./lifecycle-component-authoring.mmd`](./lifecycle-component-authoring.mmd) |
+| Changelog | [`./98-changelog.md`](./98-changelog.md) |
+| Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |

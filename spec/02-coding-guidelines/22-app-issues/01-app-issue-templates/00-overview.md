@@ -1,11 +1,10 @@
 ---
-kind: index
-description: App Issue Templates — child module of `02-coding-guidelines/22-app-issues/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
+description: App Issue Templates — content child module of `02-coding-guidelines/22-app-issues/`. Carries an inlined contract, Mermaid lifecycle diagram, and full GWT acceptance criteria.
 ---
 
 # App Issue Templates
 
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Updated:** 2026-04-27
 **Parent:** [`../00-overview.md`](../00-overview.md)
 
@@ -13,20 +12,56 @@ description: App Issue Templates — child module of `02-coding-guidelines/22-ap
 
 ## Overview
 
-Tracker subfolder for App-layer issue templates: bug reports, regression reports, and UX defect templates. Mirrors the structure of `03-error-manage/01-error-resolution/app-issues/` but at the coding-guideline taxonomy level.
+Schema-validated issue templates for App-layer bug reports, regressions, and UX defects. Each template enforces required reproduction fields.
 
 ---
 
 ## Inlined Contract
 
-```text
-INVARIANT-1: This subfolder MUST contain at least the four required files
-             (00-overview.md, 97-acceptance-criteria.md, 98-changelog.md,
-             99-consistency-report.md) at all times.
-INVARIANT-2: Any new sibling subfolder added under the parent MUST follow
-             this same 4-file layout to remain auditable.
-INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
-             {parent}/98-changelog.md entry on the same PR.
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AppIssueTemplate",
+  "type": "object",
+  "required": ["id", "category", "fields"],
+  "properties": {
+    "id":       { "type": "string", "pattern": "^APP-ISS-\\d{3}$" },
+    "category": { "type": "string", "enum": ["bug", "regression", "ux-defect", "perf", "a11y"] },
+    "fields": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["key", "label", "required"],
+        "properties": {
+          "key":      { "type": "string", "pattern": "^[a-z][a-zA-Z0-9]*$" },
+          "label":    { "type": "string" },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "supersededBy": { "type": ["string", "null"] }
+  }
+}
+```
+
+---
+
+## Lifecycle Diagram
+
+See [`lifecycle-issue-template.mmd`](./lifecycle-issue-template.mmd) for the complete authoring → validation → publication lifecycle.
+
+```mermaid
+flowchart TD
+    A[New Issue Category Needed] --> B[Author Template APP-ISS-NNN]
+    B --> C[Define Required Fields]
+    C --> D[Validate Against JSON Schema]
+    D --> E{Schema Pass?}
+    E -- No --> F[Block: ISS-TPL-001]
+    E -- Yes --> G[Publish Template]
+    G --> H[Used by Issue Forms]
+    H --> I{Replacement Authored?}
+    I -- Yes --> J[Mark superseded_by]
 ```
 
 ---
@@ -36,5 +71,7 @@ INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
 | Reference | Location |
 |-----------|----------|
 | Parent index | [`../00-overview.md`](../00-overview.md) |
-| Parent acceptance criteria | [`../97-acceptance-criteria.md`](../97-acceptance-criteria.md) |
-| Parent changelog | [`../98-changelog.md`](../98-changelog.md) |
+| Acceptance criteria | [`./97-acceptance-criteria.md`](./97-acceptance-criteria.md) |
+| Lifecycle diagram source | [`./lifecycle-issue-template.mmd`](./lifecycle-issue-template.mmd) |
+| Changelog | [`./98-changelog.md`](./98-changelog.md) |
+| Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |

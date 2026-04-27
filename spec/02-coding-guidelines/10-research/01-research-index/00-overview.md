@@ -1,11 +1,10 @@
 ---
-kind: index
-description: Research Index — child module of `02-coding-guidelines/10-research/` populated in Phase 69 to lift the parent index from impl=70 to impl=80 (child_modules>0 bonus).
+description: Research Index — content child module of `02-coding-guidelines/10-research/`. Carries an inlined contract, Mermaid lifecycle diagram, and full GWT acceptance criteria.
 ---
 
 # Research Index
 
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Updated:** 2026-04-27
 **Parent:** [`../00-overview.md`](../00-overview.md)
 
@@ -13,20 +12,46 @@ description: Research Index — child module of `02-coding-guidelines/10-researc
 
 ## Overview
 
-Tracker subfolder enumerating active research investigations under the coding-guidelines domain. Each individual study is added here as a numbered child module once its scope is approved.
+Catalog of active research investigations under coding-guidelines. Each entry tracks scope, owner, status, and promotion path to a normative spec.
 
 ---
 
 ## Inlined Contract
 
-```text
-INVARIANT-1: This subfolder MUST contain at least the four required files
-             (00-overview.md, 97-acceptance-criteria.md, 98-changelog.md,
-             99-consistency-report.md) at all times.
-INVARIANT-2: Any new sibling subfolder added under the parent MUST follow
-             this same 4-file layout to remain auditable.
-INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
-             {parent}/98-changelog.md entry on the same PR.
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ResearchEntry",
+  "type": "object",
+  "required": ["id", "title", "owner", "status", "openedAt"],
+  "properties": {
+    "id":         { "type": "string", "pattern": "^RES-\\d{4}-\\d{3}$" },
+    "title":      { "type": "string", "minLength": 5 },
+    "owner":      { "type": "string" },
+    "status":     { "type": "string", "enum": ["proposed", "active", "completed", "withdrawn", "promoted"] },
+    "openedAt":   { "type": "string", "format": "date" },
+    "closedAt":   { "type": ["string", "null"], "format": "date" },
+    "promotedTo": { "type": ["string", "null"], "description": "spec module relpath if status=promoted" }
+  },
+  "additionalProperties": false
+}
+```
+
+---
+
+## Lifecycle Diagram
+
+See [`lifecycle-research-entry.mmd`](./lifecycle-research-entry.mmd) for the complete authoring → validation → publication lifecycle.
+
+```mermaid
+flowchart TD
+    A[Research Proposed] --> B{Scope Approved?}
+    B -- No --> C[Withdrawn]
+    B -- Yes --> D[Active]
+    D --> E[Completed]
+    E --> F{Adoptable?}
+    F -- Yes --> G[Promoted to Spec]
+    F -- No --> H[Archived as Reference]
 ```
 
 ---
@@ -36,5 +61,7 @@ INVARIANT-3: Promotion or removal of entries here MUST emit a corresponding
 | Reference | Location |
 |-----------|----------|
 | Parent index | [`../00-overview.md`](../00-overview.md) |
-| Parent acceptance criteria | [`../97-acceptance-criteria.md`](../97-acceptance-criteria.md) |
-| Parent changelog | [`../98-changelog.md`](../98-changelog.md) |
+| Acceptance criteria | [`./97-acceptance-criteria.md`](./97-acceptance-criteria.md) |
+| Lifecycle diagram source | [`./lifecycle-research-entry.mmd`](./lifecycle-research-entry.mmd) |
+| Changelog | [`./98-changelog.md`](./98-changelog.md) |
+| Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |

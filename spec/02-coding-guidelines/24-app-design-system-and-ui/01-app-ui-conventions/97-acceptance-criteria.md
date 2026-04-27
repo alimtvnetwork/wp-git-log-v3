@@ -1,16 +1,36 @@
 # Acceptance Criteria — App UI Conventions
 
-**Version:** 1.0.0  
+**Version:** 2.0.0
 **Updated:** 2026-04-27
 
 ---
 
-### APP-UI-01: Component naming convention  `[high]`
-- **Given** A new App UI component category is introduced.
-- **When** The change is reviewed in PR.
-- **Then** Its naming pattern (PascalCase, suffix conventions like `*Modal`, `*Drawer`) is documented here with examples.
+### APPUICON-01: Inlined contract validates  `[critical]`
+- **Given** The contract block in `00-overview.md`.
+- **When** The contract is parsed by its language tooling (jsonschema/tsc/sqlite).
+- **Then** Parsing MUST succeed with zero diagnostics.
 
-### APP-UI-02: A11y override  `[medium]`
-- **Given** An App UI pattern requires an a11y override beyond the design system baseline.
-- **When** The change is reviewed in PR.
-- **Then** The override is documented with WCAG criterion references and a justification for why the baseline is insufficient.
+### APPUICON-02: Schema-required fields enforced  `[critical]`
+- **Given** A new entry conforming to the contract.
+- **When** A required field is omitted.
+- **Then** Validation MUST fail with a clear "missing required field" error citing the field name.
+
+### APPUICON-03: ID pattern enforced  `[high]`
+- **Given** An entry with an `id` field.
+- **When** The id does not match the documented regex pattern.
+- **Then** Validation MUST fail and the offending value MUST be echoed in the error.
+
+### APPUICON-04: Lifecycle diagram present and valid  `[high]`
+- **Given** This subfolder.
+- **When** Listing files.
+- **Then** Exactly one `lifecycle-*.mmd` file MUST exist and parse as a valid Mermaid `flowchart TD`.
+
+### APPUICON-05: Forward-only updates  `[medium]`
+- **Given** A change to the contract block.
+- **When** Reviewed in PR.
+- **Then** Removed fields MUST first be marked deprecated for at least one minor version before deletion; renamed fields MUST add the new name and keep the old one as an alias for one minor version.
+
+### APPUICON-06: Cross-references stay valid  `[medium]`
+- **Given** This subfolder's `00-overview.md`.
+- **When** `linter-scripts/check-spec-cross-links.py` runs.
+- **Then** Exit code MUST be 0; all relative links MUST resolve.
