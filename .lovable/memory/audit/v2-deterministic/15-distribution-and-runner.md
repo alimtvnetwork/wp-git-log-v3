@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **86/100 (A)**  
+**Implementability Score:** **91/100 (A)**  
 **Blast radius:** 2/10
 
-> Deterministic score 86/100 (A) for spec/15-distribution-and-runner.
+> Deterministic score 91/100 (A) for spec/15-distribution-and-runner.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.08. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.07. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 65 | 22.8 |
+| Implementability | 35% | 80 | 28.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,31 +31,32 @@
   "kind": "future-spec",
   "md_files": 8,
   "mmd_files": 0,
-  "overview_chars": 5932,
+  "overview_chars": 11353,
   "ac_chars": 22436,
   "ac_count": 20,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 14,
+  "code_blocks_total": 22,
   "code_blocks_by_lang": {
     "plain": 3,
     "json": 4,
     "bash": 4,
-    "powershell": 1,
-    "yaml": 2
+    "yaml": 7,
+    "go": 3,
+    "powershell": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": true,
-  "has_typed_lang_contract": false,
-  "has_ci_workflow": false,
+  "has_typed_lang_contract": true,
+  "has_ci_workflow": true,
   "has_normative_contract": false,
   "has_mermaid": false,
   "links_total": 11,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.08,
+  "waffle_per_kchar": 0.07,
   "child_modules": 0
 }
 ```

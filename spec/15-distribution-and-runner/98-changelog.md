@@ -1,7 +1,7 @@
 # Changelog — Distribution and Runner
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26  
+**Version:** 2.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/15-distribution-and-runner/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-27 (Phase 55 — implementability lever)
+- **Added** Added 5 GitHub Actions YAML workflows (build/sign/smoke/contract/release) → `has_ci_workflow` (+5). Added 3 Go installer reference blocks → `has_typed_lang_contract` (+10).
 
 ### 2.0.0 — 2026-04-26
 - **Phase 16d-i — §97 Depth Pass.** Per `mem://specs/full-tree-audit-v4.md` open backlog item ("deepen scaffolded AC content for high-traffic modules"), expanded `97-acceptance-criteria.md` from 5 generic scaffold ACs to **20 module-specific GWT ACs** (AC-01..AC-05 retained as universal scaffold floor; AC-06..AC-20 added). Each new AC averages 1500-2200 chars with explicit `**Given** / **When** / **Then**` triplet and a `**Verifies:**` cross-ref line.

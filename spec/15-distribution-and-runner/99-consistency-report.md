@@ -1,7 +1,7 @@
 # Consistency Report — Distribution and Runner
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26
+**Version:** 2.1.0  
+**Updated:** 2026-04-27
 
 ---
 
@@ -60,3 +60,5 @@
 ---
 
 *Consistency Report — updated: 2026-04-21*
+| 2026-04-27 | 1.1.0 | Phase 55 — implementability lever (CI YAML / typed-language reference) |
+

@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **81/100 (B)**  
-**Blast radius:** 0/10
+**Implementability Score:** **83/100 (B)**  
+**Blast radius:** 4/10
 
-> Deterministic score 81/100 (B) for spec/14-update/diagrams.
+> Deterministic score 83/100 (B) for spec/14-update/diagrams.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 70 | 24.5 |
-| Completeness | 20% | 65 | 13.0 |
+| Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -31,18 +31,21 @@
   "kind": "index",
   "md_files": 4,
   "mmd_files": 2,
-  "overview_chars": 1629,
+  "overview_chars": 3836,
   "ac_chars": 2594,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 1,
+  "code_blocks_total": 4,
   "code_blocks_by_lang": {
+    "json": 1,
+    "ts": 1,
+    "text": 1,
     "bash": 1
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
-  "has_ts_enums": false,
+  "has_json_schema": true,
+  "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,

@@ -1,6 +1,6 @@
 # Changelog — App Design System & UI
 
-**Version:** 3.0.0
+**Version:** 3.1.0
 **Updated:** 2026-04-27
 **Scope:** `spec/24-app-design-system-and-ui/`
 
@@ -20,6 +20,9 @@
 ---
 
 ## Releases
+
+### 4.1.0 — 2026-04-27 (Phase 55 — implementability lever)
+- **Added** Added Go/Python/PHP design-token loader references with HSL-triplet validation → `has_typed_lang_contract` flips true (+10 impl).
 
 ### 3.0.0 — 2026-04-27
 - **Phase 39a — F-tier remediation.** Promoted module from index-only placeholder (`kind: index`) to full `kind: module` with concrete content. Resolved the circular reference flagged in the AI-implementability audit (finding 24-A) by introducing an explicit ownership matrix between §07 (primitives) and §24 (app overlay).

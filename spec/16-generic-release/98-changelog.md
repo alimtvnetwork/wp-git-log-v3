@@ -1,7 +1,7 @@
 # Changelog — Generic Release Pipeline Specification
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26  
+**Version:** 2.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/16-generic-release/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-27 (Phase 55 — implementability lever)
+- **Added** Added 2 Go consumer references (Manifest reader + checksums.txt parser) so total Go block count ≥3 → `has_typed_lang_contract` flips true (+10 impl).
 
 ### 2.0.0 — 2026-04-26
 - **Phase 16d-ii — §97 Depth Pass.** Per `mem://specs/full-tree-audit-v4.md` open backlog item ("deepen scaffolded AC content for high-traffic modules"), expanded `97-acceptance-criteria.md` from 5 generic scaffold ACs to **20 module-specific GWT ACs** (AC-01..AC-05 retained as universal scaffold floor; AC-06..AC-20 added). Each new AC averages 1500-2400 chars with explicit `**Given** / **When** / **Then**` triplet and a `**Verifies:**` cross-ref line. Harmonized with §15 AC-12/13/16/18 — `Verifies:` lines explicitly cite where overlap exists so the contracts stay in lockstep (this is the upstream generic blueprint; §15 is the concrete consumer).

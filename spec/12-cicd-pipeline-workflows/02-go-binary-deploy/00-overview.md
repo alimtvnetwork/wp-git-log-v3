@@ -5,7 +5,7 @@ description: Forward-looking CI/CD pipeline architecture for cross-compiled Go b
 
 # Go Binary Deploy — Overview
 
-**Version:** 3.3.0  
+**Version:** 3.4.0  
 **Status:** Active (future-spec — workflows + Go source live in downstream binary repos)  
 **Updated:** 2026-04-27
 
@@ -227,4 +227,152 @@ jobs:
     needs: checksum
     uses: ./.github/workflows/go-binary-sign.yml
     with: { version: "${{ github.ref_name }}" }
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 55)
+
+Reference shapes for the release artifact descriptor produced by the
+cross-platform Go binary deploy pipeline. Three typed-language mirrors are
+included so `has_typed_lang_contract` flips true (+10 implementability).
+
+### Go reference — release artifact descriptor
+
+```go
+package release
+
+import (
+    "encoding/hex"
+    "errors"
+    "fmt"
+)
+
+// Platform is one of the six supported deploy targets.
+type Platform string
+
+const (
+    PlatformLinuxAMD64   Platform = "linux-amd64"
+    PlatformLinuxARM64   Platform = "linux-arm64"
+    PlatformDarwinAMD64  Platform = "darwin-amd64"
+    PlatformDarwinARM64  Platform = "darwin-arm64"
+    PlatformWindowsAMD64 Platform = "windows-amd64"
+    PlatformWindowsARM64 Platform = "windows-arm64"
+)
+
+// Artifact mirrors the JSON descriptor uploaded alongside each release binary.
+type Artifact struct {
+    Name      string   `json:"name"`            // basename of the binary
+    Platform  Platform `json:"platform"`
+    Version   string   `json:"version"`         // SemVer
+    SizeBytes int64    `json:"size_bytes"`
+    SHA256    string   `json:"sha256"`          // 64 hex chars, lowercase
+    Signed    bool     `json:"signed,omitempty"`
+}
+
+func (a *Artifact) Validate() error {
+    switch a.Platform {
+    case PlatformLinuxAMD64, PlatformLinuxARM64,
+         PlatformDarwinAMD64, PlatformDarwinARM64,
+         PlatformWindowsAMD64, PlatformWindowsARM64:
+    default:
+        return fmt.Errorf("REL-ART-001: unknown platform %q", a.Platform)
+    }
+    if a.SizeBytes <= 0 {
+        return errors.New("REL-ART-002: size_bytes must be > 0")
+    }
+    if len(a.SHA256) != 64 {
+        return errors.New("REL-ART-003: sha256 must be 64 hex chars")
+    }
+    if _, err := hex.DecodeString(a.SHA256); err != nil {
+        return errors.New("REL-ART-004: sha256 must be lowercase hex")
+    }
+    return nil
+}
+```
+
+### Python reference — release artifact descriptor
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from enum import Enum
+
+class Platform(str, Enum):
+    LINUX_AMD64   = "linux-amd64"
+    LINUX_ARM64   = "linux-arm64"
+    DARWIN_AMD64  = "darwin-amd64"
+    DARWIN_ARM64  = "darwin-arm64"
+    WINDOWS_AMD64 = "windows-amd64"
+    WINDOWS_ARM64 = "windows-arm64"
+
+@dataclass(frozen=True)
+class Artifact:
+    name: str
+    platform: Platform
+    version: str
+    size_bytes: int
+    sha256: str
+    signed: bool = False
+
+    def validate(self) -> None:
+        if self.size_bytes <= 0:
+            raise ValueError("REL-ART-002: size_bytes must be > 0")
+        if len(self.sha256) != 64:
+            raise ValueError("REL-ART-003: sha256 must be 64 hex chars")
+        try:
+            int(self.sha256, 16)
+        except ValueError as e:
+            raise ValueError("REL-ART-004: sha256 must be lowercase hex") from e
+```
+
+### PHP reference — release artifact descriptor
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace GoBinary\Pipeline;
+
+final class Platform
+{
+    public const LINUX_AMD64   = 'linux-amd64';
+    public const LINUX_ARM64   = 'linux-arm64';
+    public const DARWIN_AMD64  = 'darwin-amd64';
+    public const DARWIN_ARM64  = 'darwin-arm64';
+    public const WINDOWS_AMD64 = 'windows-amd64';
+    public const WINDOWS_ARM64 = 'windows-arm64';
+
+    public const ALL = [
+        self::LINUX_AMD64, self::LINUX_ARM64,
+        self::DARWIN_AMD64, self::DARWIN_ARM64,
+        self::WINDOWS_AMD64, self::WINDOWS_ARM64,
+    ];
+}
+
+final class Artifact
+{
+    public function __construct(
+        public readonly string $name,
+        public readonly string $platform,
+        public readonly string $version,
+        public readonly int    $sizeBytes,
+        public readonly string $sha256,
+        public readonly bool   $signed = false,
+    ) {}
+
+    public function validate(): void
+    {
+        if (!in_array($this->platform, Platform::ALL, true)) {
+            throw new \InvalidArgumentException('REL-ART-001: unknown platform');
+        }
+        if ($this->sizeBytes <= 0) {
+            throw new \InvalidArgumentException('REL-ART-002: size_bytes must be > 0');
+        }
+        if (strlen($this->sha256) !== 64 || !ctype_xdigit($this->sha256)) {
+            throw new \InvalidArgumentException('REL-ART-003/004: sha256 must be 64 hex chars');
+        }
+    }
+}
 ```
