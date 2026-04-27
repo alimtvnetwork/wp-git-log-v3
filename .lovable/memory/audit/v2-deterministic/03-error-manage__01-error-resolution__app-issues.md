@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **78/100 (B)**  
-**Blast radius:** 2/10
+**Implementability Score:** **85/100 (A)**  
+**Blast radius:** 4/10
 
-> Deterministic score 78/100 (B) for spec/03-error-manage/01-error-resolution/app-issues.
+> Deterministic score 85/100 (A) for spec/03-error-manage/01-error-resolution/app-issues.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.08. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.08. Gates active: 0.
 
 ---
 
@@ -16,8 +16,8 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
-| Completeness | 20% | 75 | 15.0 |
+| Implementability | 35% | 65 | 22.8 |
+| Completeness | 20% | 85 | 17.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -31,20 +31,22 @@
   "kind": "",
   "md_files": 6,
   "mmd_files": 0,
-  "overview_chars": 1338,
+  "overview_chars": 2858,
   "ac_chars": 4185,
   "ac_count": 7,
   "gwt_block_count": 6,
   "consistency_report": true,
-  "code_blocks_total": 11,
+  "code_blocks_total": 13,
   "code_blocks_by_lang": {
+    "json": 1,
+    "ts": 1,
     "plain": 8,
     "go": 1,
     "typescript": 1,
     "php": 1
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,

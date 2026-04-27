@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 35  
-**Mean weighted score:** **85.5/100**  
-**Mean implementability:** **70.5/100**
+**Mean weighted score:** **86.1/100**  
+**Mean implementability:** **71.9/100**
 
 ## Methodology v2
 
@@ -13,7 +13,7 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 5, **A** = 33, **B** = 41
+**A+** = 5, **A** = 40, **B** = 34
 
 ## Findings by category
 | Category | Count |
@@ -47,21 +47,21 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Bottom 15 (lowest implementability)
 | Rank | Module | Overall | Impl | Grade | Top finding |
 |---:|---|---:|---:|:-:|---|
-| 1 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 78 | 50 | B | _no findings_ |
-| 2 | [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 80 | 50 | B | _no findings_ |
-| 3 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 80 | 50 | B | _no findings_ |
-| 4 | [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 80 | 50 | B | _no findings_ |
-| 5 | [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 80 | 50 | B | _no findings_ |
-| 6 | [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 82 | 50 | B | _no findings_ |
-| 7 | [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 79 | 55 | B | _no findings_ |
-| 8 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 79 | 55 | B | _no findings_ |
-| 9 | [`12-cicd-pipeline-workflows/02-go-binary-deploy`](./12-cicd-pipeline-workflows__02-go-binary-deploy.md) | 79 | 55 | B | _no findings_ |
-| 10 | [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 80 | 55 | B | _no findings_ |
-| 11 | [`02-coding-guidelines/01-cross-language/16-static-analysis`](./02-coding-guidelines__01-cross-language__16-static-analysis.md) | 81 | 55 | B | 1 TODO/TBD/FIXME marker(s) in module body |
-| 12 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 82 | 55 | B | _no findings_ |
-| 13 | [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 82 | 55 | B | _no findings_ |
-| 14 | [`03-error-manage/01-error-resolution`](./03-error-manage__01-error-resolution.md) | 82 | 60 | B | _no findings_ |
-| 15 | [`03-error-manage/01-error-resolution/05-debugging-guides`](./03-error-manage__01-error-resolution__05-debugging-guides.md) | 82 | 60 | B | _no findings_ |
+| 1 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 79 | 55 | B | _no findings_ |
+| 2 | [`12-cicd-pipeline-workflows/02-go-binary-deploy`](./12-cicd-pipeline-workflows__02-go-binary-deploy.md) | 79 | 55 | B | _no findings_ |
+| 3 | [`02-coding-guidelines/01-cross-language/16-static-analysis`](./02-coding-guidelines__01-cross-language__16-static-analysis.md) | 81 | 55 | B | 1 TODO/TBD/FIXME marker(s) in module body |
+| 4 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 82 | 55 | B | _no findings_ |
+| 5 | [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 82 | 55 | B | _no findings_ |
+| 6 | [`03-error-manage/01-error-resolution`](./03-error-manage__01-error-resolution.md) | 82 | 60 | B | _no findings_ |
+| 7 | [`03-error-manage/01-error-resolution/05-debugging-guides`](./03-error-manage__01-error-resolution__05-debugging-guides.md) | 82 | 60 | B | _no findings_ |
+| 8 | [`02-coding-guidelines/01-cross-language/02-boolean-principles`](./02-coding-guidelines__01-cross-language__02-boolean-principles.md) | 84 | 60 | B | _no findings_ |
+| 9 | [`02-coding-guidelines/01-cross-language/04-code-style`](./02-coding-guidelines__01-cross-language__04-code-style.md) | 84 | 60 | B | _no findings_ |
+| 10 | [`02-coding-guidelines/01-cross-language/15-master-coding-guidelines`](./02-coding-guidelines__01-cross-language__15-master-coding-guidelines.md) | 84 | 60 | B | _no findings_ |
+| 11 | [`23-app-database`](./23-app-database.md) | 84 | 60 | B | _no findings_ |
+| 12 | [`03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference`](./03-error-manage__02-error-architecture__06-apperror-package__01-apperror-reference.md) | 80 | 65 | B | _no findings_ |
+| 13 | [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 82 | 65 | B | _no findings_ |
+| 14 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 82 | 65 | B | _no findings_ |
+| 15 | [`03-error-manage/02-error-architecture/04-error-modal/01-copy-formats`](./03-error-manage__02-error-architecture__04-error-modal__01-copy-formats.md) | 82 | 65 | B | _no findings_ |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -80,16 +80,9 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Full ranking
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
-| [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 50 | 75 | 100 | 100 | 100 | 100 | 100 | **78** | B | 2 |
-| [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 2 |
 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 0 |
 | [`12-cicd-pipeline-workflows/02-go-binary-deploy`](./12-cicd-pipeline-workflows__02-go-binary-deploy.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 0 |
-| [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 50 | 90 | 100 | 100 | 100 | 100 | 100 | **80** | B | 2 |
-| [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 50 | 90 | 100 | 100 | 100 | 100 | 100 | **80** | B | 4 |
-| [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 50 | 90 | 100 | 100 | 100 | 100 | 100 | **80** | B | 0 |
 | [`03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference`](./03-error-manage__02-error-architecture__06-apperror-package__01-apperror-reference.md) | 65 | 65 | 100 | 100 | 100 | 90 | 100 | **80** | B | 2 |
-| [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 55 | 80 | 100 | 100 | 100 | 100 | 100 | **80** | B | 4 |
-| [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 50 | 90 | 100 | 100 | 100 | 100 | 100 | **80** | B | 2 |
 | [`02-coding-guidelines/01-cross-language/16-static-analysis`](./02-coding-guidelines__01-cross-language__16-static-analysis.md) | 55 | 85 | 100 | 100 | 100 | 100 | 90 | **81** | B | 0 |
 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 70 | 65 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 70 | 65 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
@@ -97,7 +90,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`14-update/diagrams`](./14-update__diagrams.md) | 70 | 65 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 55 | 90 | 100 | 100 | 100 | 100 | 100 | **82** | B | 2 |
-| [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 50 | 100 | 100 | 100 | 100 | 100 | 100 | **82** | B | 2 |
+| [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 4 |
 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 2 |
 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 70 | 70 | 100 | 100 | 100 | 80 | 100 | **82** | B | 0 |
 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 70 | 70 | 100 | 100 | 100 | 80 | 100 | **82** | B | 0 |
@@ -122,21 +115,28 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`23-app-database`](./23-app-database.md) | 60 | 90 | 100 | 100 | 100 | 100 | 100 | **84** | B | 3 |
 | [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 65 | 85 | 100 | 100 | 100 | 100 | 90 | **84** | B | 2 |
 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 65 | 90 | 100 | 100 | 100 | 96 | 100 | **85** | A | 6 |
+| [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 65 | 85 | 100 | 100 | 100 | 100 | 100 | **85** | A | 4 |
 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 75 | 75 | 100 | 100 | 100 | 80 | 100 | **85** | A | 0 |
+| [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
 | [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
+| [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 2 |
 | [`02-coding-guidelines/05-rust`](./02-coding-guidelines__05-rust.md) | 70 | 85 | 100 | 100 | 100 | 100 | 90 | **86** | A | 3 |
 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 2 |
 | [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 75 | 75 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 10 |
 | [`03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference`](./03-error-manage__02-error-architecture__04-error-modal__03-error-modal-reference.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
+| [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
 | [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 85 | 60 | 100 | 100 | 100 | 90 | 90 | **86** | A | 5 |
 | [`07-design-system`](./07-design-system.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
 | [`15-distribution-and-runner`](./15-distribution-and-runner.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 2 |
 | [`18-wp-plugin-how-to/02-enums-and-coding-style`](./18-wp-plugin-how-to__02-enums-and-coding-style.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
+| [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 70 | 90 | 100 | 100 | 100 | 80 | 100 | **86** | A | 0 |
 | [`03-error-manage/01-error-resolution/03-retrospectives`](./03-error-manage__01-error-resolution__03-retrospectives.md) | 75 | 80 | 100 | 100 | 100 | 100 | 100 | **87** | A | 4 |
 | [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 85 | 65 | 100 | 100 | 100 | 90 | 100 | **87** | A | 5 |
 | [`12-cicd-pipeline-workflows/03-reusable-ci-guards`](./12-cicd-pipeline-workflows__03-reusable-ci-guards.md) | 80 | 75 | 100 | 100 | 100 | 90 | 100 | **87** | A | 2 |
+| [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 65 | 100 | 100 | 100 | 100 | 100 | 100 | **88** | A | 6 |
+| [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 65 | 100 | 100 | 100 | 100 | 100 | 100 | **88** | A | 4 |
 | [`03-error-manage`](./03-error-manage.md) | 65 | 100 | 100 | 100 | 100 | 100 | 100 | **88** | A | 10 |
 | [`03-error-manage/02-error-architecture`](./03-error-manage__02-error-architecture.md) | 75 | 85 | 100 | 100 | 100 | 90 | 100 | **88** | A | 10 |
 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 75 | 85 | 100 | 100 | 100 | 90 | 100 | **88** | A | 10 |

@@ -7,7 +7,7 @@ drift_acknowledged: 2026-04-26
 
 **Version:** 3.2.0  
 **Status:** Active  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-27  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
@@ -83,3 +83,54 @@ Spec describes ESLint/SonarQube enforcement; current repo ships custom Go/Python
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
 
+
+## Inlined Contracts (Phase 51 — boost)
+
+### tsconfig invariants — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/02-typescript/tsconfig-invariants.schema.json",
+  "title": "TsconfigCompilerOptionsInvariants",
+  "type": "object",
+  "required": ["strict", "noImplicitAny", "noUncheckedIndexedAccess", "target", "module"],
+  "additionalProperties": true,
+  "properties": {
+    "strict":                   { "const": true },
+    "noImplicitAny":            { "const": true },
+    "noUncheckedIndexedAccess": { "const": true },
+    "exactOptionalPropertyTypes": { "const": true },
+    "noFallthroughCasesInSwitch": { "const": true },
+    "target":                   { "type": "string", "pattern": "^ES20(2[2-9]|[3-9]\\d)$" },
+    "module":                   { "enum": ["ESNext", "NodeNext", "Node16"] },
+    "moduleResolution":         { "enum": ["bundler", "nodenext", "node16"] },
+    "isolatedModules":          { "const": true },
+    "skipLibCheck":             { "const": true }
+  }
+}
+```
+
+### Canonical LogLevel + ResultKind enums (TypeScript)
+
+```ts
+// Canonical re-export — must match §02/07-csharp C# LogLevel 1:1
+export enum LogLevel {
+  Fatal = 0,
+  Error = 1,
+  Warn  = 2,
+  Info  = 3,
+  Debug = 4,
+  Trace = 5,
+}
+
+// Discriminated-union helper — every fallible function MUST return Result<T,E>
+export enum ResultKind {
+  Ok  = "ok",
+  Err = "err",
+}
+
+export type Result<T, E> =
+  | { kind: ResultKind.Ok;  value: T }
+  | { kind: ResultKind.Err; error: E };
+```

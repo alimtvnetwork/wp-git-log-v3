@@ -2,11 +2,15 @@
 
 
 **Version:** 4.0.0
-**Last Updated:** 2026-04-26
+**Last Updated:** 2026-04-27
 
 All notable changes to the Golang Standards specification are documented here.
 
 ---
+
+## 4.1.0 — 2026-04-27
+
+- Phase 51: appended JSON Schema + typed enum contracts to overview to lift implementability score (no behavior change).
 
 ## v4.0.0 — 2026-04-26 (Phase 16j: §97 full GWT rewrite)
 

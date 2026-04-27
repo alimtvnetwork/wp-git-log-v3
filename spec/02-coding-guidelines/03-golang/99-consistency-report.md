@@ -1,7 +1,7 @@
 # Consistency Report: Golang Standards
 
 **Version:** 4.0.0
-**Generated:** 2026-04-26
+**Generated:** 2026-04-27
 **Health Score:** 100/100 (A+)
 
 > **v4.0.0 update (Phase 16j):** §97 fully rewritten from 6 stub checkbox criteria to **20 module-specific Given/When/Then ACs** (AC-GO-01..AC-GO-20). New ACs codify Go-specific rules layered on cross-language parent: explicit AC-CL-* inheritance, Go 1.22+ pinned, ALL-CAPS acronyms, `apperror.Result[T]` over panics, `errors.Is`/`As` over `==`, `context.Context` first param, defer placement discipline, `type X string` enums NOT iota, generics over `interface{}`, goroutine cancellation discipline, channel direction in signatures, 11-linter `golangci-lint` config + CI zero-warning gate, 1-3 letter receiver names, pointer/value receiver consistency, explicit `json:"PascalCase"` tags per AC-CL-09, table-driven `t.Run` tests, dependency hygiene + no vendoring, `log/slog` over `fmt.Println`, self-application doctest. Legacy AC-01/AC-02 preserved as AC-GO-LEGACY-01-A..02-C at end of §97. Module-level tree-health: 100/100 (A+).

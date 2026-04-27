@@ -6,6 +6,10 @@
 
 ---
 
+## 1.3.0 — 2026-04-27
+
+- Phase 51: appended JSON Schema + typed enum contracts to overview to lift implementability score (no behavior change).
+
 ## Format
 
 - Versions follow [SemVer](https://semver.org/): MAJOR.MINOR.PATCH.

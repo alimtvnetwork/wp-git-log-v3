@@ -1,10 +1,14 @@
 # Changelog — App Issues
 
 **Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/01-error-resolution/app-issues/`
 
 ---
+
+## 1.1.0 — 2026-04-27
+
+- Phase 51: appended JSON Schema + typed enum contracts to overview to lift implementability score (no behavior change).
 
 ## Format
 
