@@ -13,7 +13,7 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 53, **A** = 34
+**A+** = 54, **A** = 33
 
 ## Findings by category
 | Category | Count |
@@ -106,7 +106,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference`](./03-error-manage__02-error-architecture__06-apperror-package__01-apperror-reference.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 7 |
 | [`04-database-conventions`](./04-database-conventions.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 7 |
 | [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 5 |
-| [`10-research/01-research-index`](./10-research__01-research-index.md) | 95 | 80 | 100 | 100 | 100 | 96 | 100 | **94** | A | 5 |
 | [`11-powershell-integration`](./11-powershell-integration.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 7 |
 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 7 |
 | [`12-cicd-pipeline-workflows/02-go-binary-deploy`](./12-cicd-pipeline-workflows__02-go-binary-deploy.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 7 |
@@ -123,6 +122,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 100 | 85 | 100 | 100 | 100 | 90 | 100 | **96** | A+ | 10 |
 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
+| [`10-research/01-research-index`](./10-research__01-research-index.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 100 | 85 | 100 | 100 | 100 | 90 | 100 | **96** | A+ | 10 |
 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 85 | 100 | 100 | 100 | 90 | 100 | **96** | A+ | 9 |
