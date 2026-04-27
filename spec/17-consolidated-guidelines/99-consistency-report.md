@@ -42,8 +42,16 @@
 | 23 | `22-app-database.md` | ✅ Present | 310+ | 90% |
 | 24 | `23-generic-cli.md` | ✅ Present | 600+ | 93% |
 | 25 | `24-folder-mapping.md` | ✅ Present | 184 | (meta-index) |
+| 26 | `25-blind-ai-implementability-audit.md` | ✅ Present | — | (meta-audit) |
+| 27 | `26-blind-ai-audit-v2.md` | ✅ Present | — | (meta-audit) |
+| 28 | `27-linter-authoring-guide.md` | ✅ Present | — | (authoring) |
+| 29 | `28-distribution-and-runner.md` | ✅ Present | — | (module) |
+| 30 | `29-blind-ai-audit-v3.md` | ✅ Present | — | (meta-audit) |
+| 31 | `30-readme-improvement-suggestions.md` | ✅ Present | — | (meta) |
+| 32 | `31-full-tree-ai-audit-v4.md` | ✅ Present | — | (meta-audit, full tree) |
+| 33 | `32-phase-26-31-rollup.md` | ✅ Present | 130+ | (retrospective, Phase 32) |
 
-**Total:** 25 files (including this report, gap analysis, and folder mapping)
+**Total:** 33 files (including this report, gap analysis, folder mapping, audits, and the Phase 32 rollup)
 
 ---
 
