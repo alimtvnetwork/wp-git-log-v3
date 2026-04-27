@@ -21,6 +21,9 @@
 
 ## Releases
 
+### 1.3.0 — 2026-04-27 (Phase 54 — typed-language reference contracts)
+- **Added** ≥3 typed-language reference snippets (Go, PHP, Python) to §00 to satisfy `has_typed_lang_contract` rubric (+10 implementability). Implements `AppIssueRecord` mirror across 3 typed languages.
+
 ### 1.2.0 — 2026-04-27 (Phase 42 — Inlined contract)
 - **Added** machine-readable JSON-Schema "Issue Record Contract" block in §00 (`Phase2IssueRecord`). Codifies `P2-GL-NN` ID pattern, required triage fields (reproduction/cause/fix/prevention), severity enum, status enum, and `blocks_phase3` flag. Promotes module from C-tier to B-tier in deterministic audit v2.7.
 

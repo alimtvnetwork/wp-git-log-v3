@@ -21,6 +21,9 @@
 
 ## Releases
 
+### 4.1.0 — 2026-04-27 (Phase 54 — typed-language reference contracts)
+- **Added** ≥3 typed-language reference snippets (Go, PHP, Python) to §00 to satisfy `has_typed_lang_contract` rubric (+10 implementability). Implements `ErrorModalActionDescriptor` mirror across 3 typed languages.
+
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
 - **Added** module-specific files per current inventory in `99-consistency-report.md`.

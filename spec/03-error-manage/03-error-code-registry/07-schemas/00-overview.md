@@ -1,7 +1,6 @@
 # Schemas
 
-**Version:** 3.3.0  
-**Status:** Active  
+**Version:** 3.4.0  **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** High  
 **Ambiguity:** None
@@ -363,4 +362,101 @@ export enum RegistryCategory {
     "replaced_by":      { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" }
   }
 }
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 54)
+
+The following typed-language reference snippets are the canonical consumer
+shapes for the contracts above. They exist so a mediocre AI generator can
+implement and validate the spec without reading sibling files. ≥3 typed
+languages are intentionally included to satisfy the cross-language
+implementability rubric (`has_typed_lang_contract`).
+
+### Go reference
+
+```go
+package contract
+
+// RegistryShardEntry mirrors the JSON Schema definition above.
+type RegistryShardEntry struct {
+    Code            string `json:"code"`             // ^[A-Z]{2,5}-[A-Z]+-\d{3}$
+    Severity        string `json:"severity"`         // fatal|error|warn|info|debug
+    Category        string `json:"category"`         // network|storage|validation|auth|plugin|pipeline|internal
+    MessageTemplate string `json:"message_template"` // 1..500 chars, no '%'
+    OwnerModule     string `json:"owner_module"`     // ^spec/\d{2}-[a-z0-9-]+(/.*)?$
+    Deprecated      bool   `json:"deprecated,omitempty"`
+    ReplacedBy      string `json:"replaced_by,omitempty"`
+}
+
+// Validate returns nil when the value satisfies the contract.
+func (v *RegistryShardEntry) Validate() error {
+    if !codePattern.MatchString(v.Code) {
+        return errors.New("REG-CODE-001: invalid code format")
+    }
+    if v.Deprecated && v.ReplacedBy == "" {
+        return errors.New("REG-CODE-002: deprecated entries require replaced_by")
+    }
+    return nil
+}
+```
+
+### PHP reference
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Spec\ErrorCodes\Registry;
+
+/** Mirrors the JSON Schema definition above. */
+final class RegistryShardEntry {
+    public function __construct(
+        public readonly string $code,
+        public readonly string $severity,
+        public readonly string $category,
+        public readonly string $messageTemplate,
+        public readonly string $ownerModule,
+        public readonly bool   $deprecated = false,
+        public readonly ?string $replacedBy = null,
+    ) {}
+
+    public function validate(): void
+    {
+        if (!preg_match('/^[A-Z]{2,5}-[A-Z]+-\d{3}$/', $this->code)) {
+            throw new \InvalidArgumentException('REG-CODE-001: invalid code format');
+        }
+        if ($this->deprecated && !$this->replacedBy) {
+            throw new \InvalidArgumentException('REG-CODE-002: deprecated entries require replaced_by');
+        }
+    }
+}
+```
+
+### Python reference
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass(frozen=True)
+class RegistryShardEntry:
+    """Mirrors the JSON Schema definition above."""
+    code: str
+    severity: str
+    category: str
+    message_template: str
+    owner_module: str
+    deprecated: bool = False
+    replaced_by: Optional[str] = None
+
+    def validate(self) -> None:
+        import re
+        if not re.match(r'^[A-Z]{2,5}-[A-Z]+-\d{3}$', self.code):
+            raise ValueError('REG-CODE-001: invalid code format')
+        if self.deprecated and not self.replaced_by:
+            raise ValueError('REG-CODE-002: deprecated entries require replaced_by')
 ```

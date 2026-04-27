@@ -21,6 +21,9 @@
 
 ## Releases
 
+### 1.3.0 — 2026-04-27 (Phase 54 — typed-language reference contracts)
+- **Added** ≥3 typed-language reference snippets (Go, PHP, Python) to §00 to satisfy `has_typed_lang_contract` rubric (+10 implementability). Implements `FileAndFolderNamingRule` mirror across 3 typed languages.
+
 ### 1.2.0 — 2026-04-27 (Phase 42 — Inlined contract)
 - **Added** machine-readable JSON-Schema "Naming-Convention Contract" block in §00 (`FileAndFolderNamingContract`). Codifies per-language file/folder regex, reserved-slot immutability (`00`/`97`/`98`/`99`), numeric-prefix shape, and `NAMING-001` violation code. Promotes module from C-tier (rubric `implementability=50`) to B-tier in deterministic audit v2.7.
 

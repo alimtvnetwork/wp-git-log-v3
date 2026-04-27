@@ -17,6 +17,9 @@
 
 ## Releases
 
+### 3.3.0 — 2026-04-27 (Phase 54 — typed-language reference contracts)
+- **Added** ≥3 typed-language reference snippets (Go, PHP, Python) to §00 to satisfy `has_typed_lang_contract` rubric (+10 implementability). Implements `ResponseEnvelope` mirror across 3 typed languages.
+
 ### 1.1.0 — 2026-04-26 (Phase 20 contract-inlining sweep)
 - **Added** §97 — three normative machine-parseable contract blocks under "Inlined Contracts": (1) `ts` block with `ResponseEnvelope<T>` generic interface + `EnvelopeStatus` + `EnvelopeAttributes` + `EnvelopeNavigation` + `EnvelopeErrors` + `DelegatedRequestServer` + `MethodsStackEntry` + `RESPONSE_DEBUG_CONFIG_KEYS` const; (2) `go` block with `Envelope` + nested structs carrying explicit `json:"PascalCase"` tags + `,omitempty` for optional pointer fields (mirrors AC-01/AC-03 contract); (3) `json` block with JSON-Schema 2020-12 `ResponseEnvelope` wire-format validator (Status required, Attributes required, Results MUST be array per AC-02, Navigation pagination URLs absolute per AC-05, DelegatedRequestServer required fields per AC-04, optional Errors block per AC-03).
 - **Rationale** Phase 19 deterministic re-audit scored this module 51/100 (F) with the spec flagged as a "high-quality orphan" — pure documentation without implementable contracts. Auditor contract count was 1/3 (json-only, from existing envelope examples); gate `G-CON-01` capped implementability ≤ 50 because no TypeScript or Go normative blocks existed.

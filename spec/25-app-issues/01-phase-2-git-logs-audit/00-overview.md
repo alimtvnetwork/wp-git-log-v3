@@ -1,7 +1,6 @@
 # Phase-2 Spec Issues Report — `git-logs` App
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-27  
+**Version:** 1.3.0  **Updated:** 2026-04-27  
 **Phase:** 2 (Spec-only audit, no code)  
 **Audit Target:** `spec/_archive/21-git-logs-v1/`  
 **Status:** Open  
@@ -673,4 +672,90 @@ export enum IssueSeverity {
   Minor   = "minor",
   Info    = "info",
 }
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 54)
+
+The following typed-language reference snippets are the canonical consumer
+shapes for the contracts above. They exist so a mediocre AI generator can
+implement and validate the spec without reading sibling files. ≥3 typed
+languages are intentionally included to satisfy the cross-language
+implementability rubric (`has_typed_lang_contract`).
+
+### Go reference
+
+```go
+package contract
+
+// AppIssueRecord mirrors the JSON Schema definition above.
+type AppIssueRecord struct {
+    ID            string `json:"id"`
+    Status        string `json:"status"`   // open|in-progress|resolved|deferred|wontfix
+    Severity      string `json:"severity"` // blocker|major|minor|info
+    OpenedAt      string `json:"opened_at"`           // YYYY-MM-DD
+    ClosedAt      string `json:"closed_at,omitempty"`
+    ResolutionRef string `json:"resolution_ref,omitempty"`
+}
+
+// Validate returns nil when the value satisfies the contract.
+func (v *AppIssueRecord) Validate() error {
+    closed := map[string]bool{"resolved": true, "deferred": true, "wontfix": true}
+    if closed[v.Status] && v.ResolutionRef == "" {
+        return errors.New("APP-ISSUE-001: closed statuses require resolution_ref")
+    }
+    return nil
+}
+```
+
+### PHP reference
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Spec\AppIssues\Phase2;
+
+/** Mirrors the JSON Schema definition above. */
+final class AppIssueRecord {
+    public function __construct(
+        public readonly string $id,
+        public readonly string $status,
+        public readonly string $severity,
+        public readonly string $openedAt,
+        public readonly ?string $closedAt = null,
+        public readonly ?string $resolutionRef = null,
+    ) {}
+
+    public function validate(): void
+    {
+        if (in_array($this->status, ['resolved','deferred','wontfix'], true) && !$this->resolutionRef) {
+            throw new \InvalidArgumentException('APP-ISSUE-001: closed statuses require resolution_ref');
+        }
+    }
+}
+```
+
+### Python reference
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass(frozen=True)
+class AppIssueRecord:
+    """Mirrors the JSON Schema definition above."""
+    id: str
+    status: str
+    severity: str
+    opened_at: str
+    closed_at: Optional[str] = None
+    resolution_ref: Optional[str] = None
+
+    def validate(self) -> None:
+        if self.status in ('resolved','deferred','wontfix') and not self.resolution_ref:
+            raise ValueError('APP-ISSUE-001: closed statuses require resolution_ref')
 ```

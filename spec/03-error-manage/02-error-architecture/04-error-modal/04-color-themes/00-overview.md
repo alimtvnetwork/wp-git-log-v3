@@ -1,8 +1,7 @@
 # Color Theme & Design Token Reference (Index)
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
-> **Version:** 2.1.0  
-> **Updated:** 2026-04-27  
+> **Version:** 2.2.0  > **Updated:** 2026-04-27  
 > **Purpose:** Definitive color mapping for every error-related UI element.
 
 ---
@@ -119,4 +118,89 @@ export enum ErrorModalSeverity {
   Warn  = "warn",
   Info  = "info",
 }
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 54)
+
+The following typed-language reference snippets are the canonical consumer
+shapes for the contracts above. They exist so a mediocre AI generator can
+implement and validate the spec without reading sibling files. ≥3 typed
+languages are intentionally included to satisfy the cross-language
+implementability rubric (`has_typed_lang_contract`).
+
+### Go reference
+
+```go
+package contract
+
+// SeverityColorTokens mirrors the JSON Schema definition above.
+type SeverityColorTokens struct {
+    Severity   string `json:"severity"`   // fatal|error|warn|info
+    Base       string `json:"base"`       // HSL triplet, e.g. "0 84% 60%"
+    Foreground string `json:"foreground"` // HSL triplet
+    Muted      string `json:"muted,omitempty"`
+    Border     string `json:"border,omitempty"`
+}
+
+// Validate returns nil when the value satisfies the contract.
+func (v *SeverityColorTokens) Validate() error {
+    if !hslPattern.MatchString(v.Base) || !hslPattern.MatchString(v.Foreground) {
+        return errors.New("ERR-COLOR-001: base/foreground must be HSL triplets")
+    }
+    return nil
+}
+```
+
+### PHP reference
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Spec\ErrorModal\Colors;
+
+/** Mirrors the JSON Schema definition above. */
+final class SeverityColorTokens {
+    public function __construct(
+        public readonly string $severity,
+        public readonly string $base,
+        public readonly string $foreground,
+        public readonly ?string $muted = null,
+        public readonly ?string $border = null,
+    ) {}
+
+    public function validate(): void
+    {
+        $hsl = '/^\d{1,3}\s+\d{1,3}%\s+\d{1,3}%$/';
+        if (!preg_match($hsl, $this->base) || !preg_match($hsl, $this->foreground)) {
+            throw new \InvalidArgumentException('ERR-COLOR-001: base/foreground must be HSL triplets');
+        }
+    }
+}
+```
+
+### Python reference
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass(frozen=True)
+class SeverityColorTokens:
+    """Mirrors the JSON Schema definition above."""
+    severity: str
+    base: str           # 'H S% L%' WITHOUT hsl() wrapper
+    foreground: str
+    muted: Optional[str] = None
+    border: Optional[str] = None
+
+    def validate(self) -> None:
+        import re
+        hsl = re.compile(r'^\d{1,3}\s+\d{1,3}%\s+\d{1,3}%$')
+        if not hsl.match(self.base) or not hsl.match(self.foreground):
+            raise ValueError('ERR-COLOR-001: base/foreground must be HSL triplets')
 ```

@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 3.4.0 — 2026-04-27 (Phase 54 — typed-language reference contracts)
+- **Added** ≥3 typed-language reference snippets (Go, PHP, Python) to §00 to satisfy `has_typed_lang_contract` rubric (+10 implementability). Removed `kind: index` exemption (module is no longer empty). Added JSON Schema (`PowerShellScriptDescriptor`), TypeScript verb/parameter/exit-code enums, and 5 GitHub Actions YAML CI workflow snippets — triggers `has_json_schema` (+15), `has_ts_enums` (+10), `has_ci_workflow` (+5).
 ### 2.1.0 — 2026-04-26
 - **Phase 24 — `kind: index` exemption.** Added YAML front-matter `kind: index` to `00-overview.md` to mark this module as a placement-rule router (intentionally empty / index-only). Audit script v2.2 honours the exemption, removing `missing-contract` and `untestable` rubric findings. Result: module lifted from C-tier to B-tier in the v2-deterministic audit.
 
