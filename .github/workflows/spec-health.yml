@@ -125,6 +125,16 @@ jobs:
         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-26)
         run: bash linter-scripts/test/test-audit-deterministic-stability.sh
 
+      - name: Mermaid diagram syntax gate (Phase 97)
+        # Phase 97: parses every spec/**/*.mmd file with the mermaid library
+        # under a jsdom + DOMPurify shim. Catches broken diagram syntax
+        # pre-merge — previously a `.mmd` file could be malformed and CI
+        # would happily pass because no gate ever opened it. Pure parser
+        # invocation: no rendering, no Chromium, no network. Locks the
+        # `.mmd`-as-source-of-truth contract from Phase 93 (AC-SAG-23).
+        # Spec: spec/01-spec-authoring-guide/97-acceptance-criteria.md (AC-SAG-24)
+        run: node linter-scripts/check-mermaid-syntax.mjs
+
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
         # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC
