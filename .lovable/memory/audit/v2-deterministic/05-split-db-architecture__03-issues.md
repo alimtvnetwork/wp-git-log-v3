@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **65/100 (C)**  
+**Implementability Score:** **81/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 65/100 (C) for spec/05-split-db-architecture/03-issues.
+> Deterministic score 81/100 (B) for spec/05-split-db-architecture/03-issues.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 2.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 30 | 10.5 |
+| Implementability | 35% | 75 | 26.2 |
 | Completeness | 20% | 55 | 11.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |

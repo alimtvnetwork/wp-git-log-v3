@@ -1339,17 +1339,7 @@
     "weighted_overall": 73
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1393,31 +1383,21 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/02-coding-guidelines/09-powershell-integration.",
-    "weighted_overall": 76
+    "verdict": "Deterministic score 83/100 (B) for spec/02-coding-guidelines/09-powershell-integration.",
+    "weighted_overall": 83
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1425,7 +1405,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2568,
@@ -1463,18 +1443,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/02-coding-guidelines/10-research.",
-    "weighted_overall": 74
+    "verdict": "Deterministic score 81/100 (B) for spec/02-coding-guidelines/10-research.",
+    "weighted_overall": 81
   },
   {
     "applied_gates": [
@@ -1622,17 +1602,7 @@
     "weighted_overall": 82
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1676,31 +1646,21 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 70,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/02-coding-guidelines/21-app.",
-    "weighted_overall": 75
+    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/21-app.",
+    "weighted_overall": 82
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1708,7 +1668,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2576,
@@ -1746,31 +1706,21 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/02-coding-guidelines/22-app-issues.",
-    "weighted_overall": 74
+    "verdict": "Deterministic score 81/100 (B) for spec/02-coding-guidelines/22-app-issues.",
+    "weighted_overall": 81
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1814,31 +1764,21 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 70,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/02-coding-guidelines/23-app-database.",
-    "weighted_overall": 75
+    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/23-app-database.",
+    "weighted_overall": 82
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -1882,18 +1822,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 70,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/02-coding-guidelines/24-app-design-system-and-ui.",
-    "weighted_overall": 75
+    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/24-app-design-system-and-ui.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [],
@@ -3386,26 +3326,7 @@
     "weighted_overall": 87
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 75,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      },
-      {
-        "active": true,
-        "after": 30,
-        "before": 50,
-        "cap": 30,
-        "dimension": "implementability",
-        "id": "G-CON-02",
-        "rationale": "Overview <500 chars is a stub; no AI can implement from this."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3413,7 +3334,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2628,
@@ -3451,18 +3372,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 2.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 55,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 65/100 (C) for spec/05-split-db-architecture/03-issues.",
-    "weighted_overall": 65
+    "verdict": "Deterministic score 81/100 (B) for spec/05-split-db-architecture/03-issues.",
+    "weighted_overall": 81
   },
   {
     "applied_gates": [],
@@ -3606,26 +3527,7 @@
     "weighted_overall": 86
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 75,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      },
-      {
-        "active": true,
-        "after": 30,
-        "before": 50,
-        "cap": 30,
-        "dimension": "implementability",
-        "id": "G-CON-02",
-        "rationale": "Overview <500 chars is a stub; no AI can implement from this."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3633,7 +3535,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2656,
@@ -3671,18 +3573,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 2.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 55,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 65/100 (C) for spec/06-seedable-config-architecture/03-issues.",
-    "weighted_overall": 65
+    "verdict": "Deterministic score 81/100 (B) for spec/06-seedable-config-architecture/03-issues.",
+    "weighted_overall": 81
   },
   {
     "applied_gates": [],
@@ -3750,17 +3652,7 @@
     "weighted_overall": 86
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -3806,18 +3698,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/10-research.",
-    "weighted_overall": 76
+    "verdict": "Deterministic score 83/100 (B) for spec/10-research.",
+    "weighted_overall": 83
   },
   {
     "applied_gates": [],
@@ -4345,17 +4237,7 @@
     "weighted_overall": 93
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -4363,7 +4245,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "C",
+    "grade": "B",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2594,
@@ -4401,18 +4283,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 74/100 (C) for spec/14-update/diagrams.",
-    "weighted_overall": 74
+    "verdict": "Deterministic score 81/100 (B) for spec/14-update/diagrams.",
+    "weighted_overall": 81
   },
   {
     "applied_gates": [],
@@ -4990,17 +4872,7 @@
     "weighted_overall": 80
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 80,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5008,7 +4880,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2530,
@@ -5046,18 +4918,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 85,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 78/100 (B) for spec/25-app-issues.",
-    "weighted_overall": 78
+    "verdict": "Deterministic score 89/100 (A) for spec/25-app-issues.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [
@@ -5142,17 +5014,7 @@
     "weighted_overall": 70
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 75,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5160,7 +5022,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2692,
@@ -5199,31 +5061,21 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/25-app-issues/02-consolidated-audit-findings.",
-    "weighted_overall": 76
+    "verdict": "Deterministic score 85/100 (A) for spec/25-app-issues/02-consolidated-audit-findings.",
+    "weighted_overall": 85
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 0,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5231,7 +5083,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 17103,
@@ -5269,18 +5121,18 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=21, gwt=20, broken_links=0, waffle/kchar=0.07. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=21, gwt=20, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 90,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/26-gitlogs-diagrams.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 86/100 (A) for spec/26-gitlogs-diagrams.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [
