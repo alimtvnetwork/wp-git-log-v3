@@ -1,6 +1,20 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.9** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.15** — AI-Implementability Edition.
+
+v2.15 (2026-04-27, Phase 86):
+  - Rubric-hygiene investigation REJECTED. Considered diminishing-returns
+    schema-bonus cap (strongest contract at full weight, subsequent bonuses
+    halved, subtotal capped at 50) to address theoretical kitchen-sink
+    stacking. Empirical test on the 87-module corpus: mean implementability
+    99.8 → 89.2, mean weighted 98.0 → 94.1; 76 normal-contract modules
+    legitimately satisfy ≥3 contract types and were unfairly penalised.
+  - Decision: keep the v2.3 additive contract-bonus model; the existing
+    100-cap on `impl` already prevents pathological stacking. Multi-contract
+    breadth (e.g. §22-git-logs-v2 with SQL+TS+JSON+YAML) genuinely encodes
+    more invariants and warrants the full bonus.
+  - Net effect: zero rubric or score change; documents the rejected
+    alternative in source for future contributors who might re-propose it.
 
 v2.9 (2026-04-27, Phase 46):
   - Root index spec (`spec/00-overview.md`, MOD_REL == ".") now receives the
@@ -607,6 +621,14 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         if m["code_blocks_total"] >= 5: impl += 10
         if m["overview_chars"] < 500:   impl -= 20
         if m["waffle_per_kchar"] > 5:   impl -= 10
+        # v2.15 (Phase 86): kitchen-sink soft cap. The 100-cap below absorbs
+        # all stacking, but we preserve a record of the rubric-hygiene
+        # discussion: contract bonuses are intentionally additive because
+        # multi-contract modules (e.g. §22-git-logs-v2 with SQL+TS+JSON+YAML)
+        # genuinely encode more invariants and warrant the implementability
+        # boost. Diminishing-returns variant tested in Phase 86 dropped mean
+        # impl 99.8→89.2 by punishing legitimate breadth and was rejected.
+        # Decision: keep full additive bonuses; rely on the existing 100-cap.
     impl = max(0, min(100, impl))
 
     # Completeness: AC count + overview size + child coverage
