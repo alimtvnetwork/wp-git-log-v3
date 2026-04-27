@@ -42,7 +42,8 @@
 | 61-spec-cross-links-allowlist.md | ✅ | Config |
 | 62-spec-folder-refs-allowlist.md | ✅ | Config |
 | 63-readme-cross-links-md.md | ✅ | Config |
-| 70-spec-health-yml.md | ✅ | CI workflow |
+| 70-spec-health-yml.md | ✅ | CI workflow (event-driven) |
+| 71-spec-monthly-audit-yml.md | ✅ | CI workflow (cadence — Phase 35) |
 | 97-acceptance-criteria.md | ✅ | AC-T-01..AC-T-10 |
 | 98-changelog.md | ✅ | v1.0.0 |
 | 99-consistency-report.md | ✅ | This file |
