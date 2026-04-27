@@ -82,8 +82,11 @@ if (fs.existsSync(WAIVER_FILE)) {
   for (const raw of fs.readFileSync(WAIVER_FILE, "utf8").split("\n")) {
     const line = raw.trim();
     if (!line || line.startsWith("#")) continue;
-    // Key shape: "<source-relpath>:<line>:<target>"
-    WAIVED_LINKS.add(line);
+    // Allowlist entries are written relative to repo root (e.g. "spec/foo.md:42:bar"),
+    // but our sourceRel is relative to SPEC_ROOT. Strip a leading "spec/" if present
+    // so both forms match. Key shape stored: "<source-relpath>:<line>:<target>".
+    const normalized = line.startsWith("spec/") ? line.slice(5) : line;
+    WAIVED_LINKS.add(normalized);
   }
 }
 
