@@ -403,9 +403,13 @@ function main() {
     console.log("║        SPEC HEALTH DASHBOARD GENERATOR          ║");
     console.log("╚══════════════════════════════════════════════════╝\n");
 
-    console.log(`  Health Score:  ${health.Score}/100 (${health.Grade})`);
+    console.log(`  Health Score:  ${health.Score}/100 (${health.Grade})  [rubric v${health.RubricVersion}]`);
+    console.log(`    └─ Required:    ${rubricV2.Required.Earned}/${rubricV2.Required.Max}  (${rubricV2.Required.PctOfTotal}/${RUBRIC_WEIGHTS.required})`);
+    console.log(`    └─ Recommended: ${rubricV2.Recommended.Earned}/${rubricV2.Recommended.Max}  (${rubricV2.Recommended.PctOfTotal}/${RUBRIC_WEIGHTS.recommended})`);
+    console.log(`    └─ Quality:     ${rubricV2.Quality.Earned}/${rubricV2.Quality.Max}  (${rubricV2.Quality.PctOfTotal}/${RUBRIC_WEIGHTS.quality})`);
     if (health.Deductions.length > 0) {
-      health.Deductions.forEach((d) => console.log(`    └─ ${d}`));
+      console.log(`    └─ Legacy deductions (LegacyScore=${health.LegacyScore}):`);
+      health.Deductions.forEach((d) => console.log(`        · ${d}`));
     }
 
     console.log(`\n  Files scanned: ${mdFiles.length}`);
