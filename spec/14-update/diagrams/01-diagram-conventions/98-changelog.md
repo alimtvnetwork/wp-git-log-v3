@@ -1,5 +1,9 @@
 # Changelog — Update Diagram Conventions
 
+**Version:** 2.0.0  
+**Updated:** 2026-04-27
+
+
 ## 2026-04-27 — 2.0.0 (Phase 69b)
 
 - Promoted from index-stub (Phase 69) to content module.

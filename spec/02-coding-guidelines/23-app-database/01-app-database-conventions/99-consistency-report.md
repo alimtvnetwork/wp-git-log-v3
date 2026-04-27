@@ -1,5 +1,9 @@
 # Consistency Report — App Database Conventions
 
+**Version:** 2.0.0  
+**Updated:** 2026-04-27
+
+
 ## 2026-04-27 — Phase 69b content audit
 
 - Inlined contract present and parseable.
