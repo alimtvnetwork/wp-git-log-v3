@@ -30,3 +30,7 @@ spec/02-coding-guidelines/02-typescript/11-eslint-enforcement.md:137:../../../es
 spec/15-distribution-and-runner/00-overview.md:96:../../spec-slides/00-overview.md
 spec/15-distribution-and-runner/02-runner-contract.md:103:../../spec-slides/
 spec/17-consolidated-guidelines/28-distribution-and-runner.md:234:../../spec-slides/00-overview.md
+# Phase 129 (2026-04-27): documentation examples — markdown links inside prose that demonstrate forbidden/template patterns, not real refs.
+spec/01-spec-authoring-guide/97-acceptance-criteria.md:114:../foo
+spec/02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md:111:...
+spec/27-spec-toolchain/98-changelog.md:70:./test-foo.sh
