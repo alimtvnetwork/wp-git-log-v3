@@ -1,11 +1,11 @@
 # AI-Implementability Audit v2 — Executive Summary
 
 **Date:** 2026-04-25  
-**Verdict:** Mean **93.5/100** weighted, **91.8/100** implementability across 87 modules.
+**Verdict:** Mean **93.8/100** weighted, **92.5/100** implementability across 87 modules.
 
 ## TL;DR
 
-- A mediocre AI could implement **~91.8%** of features from the spec alone.
+- A mediocre AI could implement **~92.5%** of features from the spec alone.
 - 0 F-tier modules; 0 D-tier; 85 A-tier.
 - Top blocker categories: `drift` (8)
 
