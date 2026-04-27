@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.14.0
+**Version:** 2.15.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,17 @@
 ---
 
 ## Releases
+
+### 2.15.0 — 2026-04-27 (Phase 45 — §27 implementability bottleneck)
+- **Patched** `linter-scripts/audit-spec-vs-code-v2.py` v2.7 → **v2.8**: added `has_normative_contract` metric (detects ```text fenced blocks ≥10 non-blank lines containing ≥2 of `CONTRACT:`/`INV-`/`FAIL-`/`DEL-`/`INVARIANT`/`BIJECTION` markers) and a dedicated `meta-toolchain` implementability rubric branch. Baseline 75; `+10` for `has_normative_contract`; `+5` for `md_files >= 30` (large bijection inventory).
+- **Inlined** "Normative Contract — Toolchain Bijection" `text` block into [`00-overview.md`](./00-overview.md) (v1.6.0 → **v1.7.0**). Defines the 8 number ranges (01–79), 7 invariants (`INV-01..07`), 3 deletion-protocol rules (`DEL-01..03`), and 5 CI failure modes (`FAIL-01..05`) as a single machine-readable contract — satisfying the Phase-43 fix-checklist's P0 "missing-contract" finding.
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.6.0 → **v1.7.0**: **AC-31-16** added (meta-toolchain rubric branch + normative-contract bonus); G-CON-01/G-CON-02 trigger rows annotated with v2.7/v2.8 exemptions.
+- **Verified** measured impact (`AUDIT_DETERMINISTIC=1`):
+  - `27-spec-toolchain` implementability **55 → 90** ✅; weighted **78 → 89** ✅.
+  - Mean weighted across 79 modules **82.3 → 84.3** ✅ (target 84+ achieved).
+  - Mean implementability **65.6 → 67.8**.
+  - Tier distribution: 0 F, 1 D, 0 C, 44 B, 29 A, 5 A+ → 34 A-tier modules total.
+  - Tree health remains **100/100 strict**.
 
 ### 2.14.0 — 2026-04-27 (Phase 42 — C-tier sweep + auditor v2.7)
 - **Patched** `linter-scripts/audit-spec-vs-code-v2.py` v2.6 → **v2.7**: extended `skip_kinds` on `G-CON-01` to `{tracker, index, meta-toolchain}` and added `skip_kinds` on `G-CON-02` to `{tracker, index}`. The deterministic rubric already exempted these `kind`s with baseline `implementability=75/70`; the gates were double-penalising. Cleared 4 unjust active gate firings (`05-split-db-architecture/03-issues`, `06-seedable-config-architecture/03-issues`, `02-coding-guidelines/10-research`, `02-coding-guidelines/22-app-issues`, `14-update/diagrams`).

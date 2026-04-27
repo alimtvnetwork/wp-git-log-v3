@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.6** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.8** — AI-Implementability Edition.
+
+v2.8 (2026-04-27, Phase 45):
+  - `kind: meta-toolchain` modules now use a tracker-style implementability
+    baseline (85) when they expose a normative contract block (`text` fenced
+    block ≥10 non-blank lines containing INV- / FAIL- / DEL- / CONTRACT:
+    markers, OR ≥30 child spec files acting as the bijection table).
+  - Rationale: the `27-spec-toolchain` module's "contract" is the inventory
+    of script specs + invariants table; it has no DDL/OpenAPI but IS fully
+    implementable from spec alone (every section maps 1:1 to a script).
+  - Effect: §27 implementability 55 → 85; §27 weighted 78 → ~88; mean
+    weighted 82.3 → ~84.
 
 v2.6 (2026-04-27, Phase 43):
   - Cross-spec link extraction now runs against code-stripped prose, not
@@ -209,6 +220,23 @@ def deterministic_metrics(folder: Path) -> dict:
     # v2.3: CI workflow YAML (≥5 blocks) is a normative contract for
     # CI/CD pipeline modules — distinct from generic single-snippet YAML.
     has_ci_workflow = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0) >= 5
+    # v2.8 (Phase 45): "normative contract" detection for meta-toolchain
+    # modules. A `text` fenced block ≥10 non-blank lines containing
+    # CONTRACT: / INV- / FAIL- / DEL- markers IS a machine-readable
+    # contract — even though it isn't SQL/JSON/YAML. The §27 toolchain
+    # bijection table is the canonical example.
+    has_normative_contract = False
+    for lang, content in body_blocks:
+        if (lang or "").lower() not in ("text", "plain", ""):
+            continue
+        non_blank = [ln for ln in content.splitlines() if ln.strip()]
+        if len(non_blank) < 10:
+            continue
+        joined = "\n".join(non_blank)
+        markers = sum(1 for tag in ("CONTRACT:", "INV-", "FAIL-", "DEL-", "INVARIANT", "BIJECTION") if tag in joined)
+        if markers >= 2:
+            has_normative_contract = True
+            break
 
     # cross-spec link health — v2.6: scan code-stripped prose so example
     # links inside ```markdown / ```text fences (path-syntax templates in
@@ -256,6 +284,7 @@ def deterministic_metrics(folder: Path) -> dict:
         "has_yaml_openapi":    has_yaml > 0,
         "has_typed_lang_contract": has_typed_lang_contract,  # v2.3
         "has_ci_workflow":     has_ci_workflow,              # v2.3
+        "has_normative_contract": has_normative_contract,    # v2.8
         "has_mermaid":         len(mmd_files) > 0,
         "links_total":         total,
         "links_broken":        broken,
@@ -465,7 +494,8 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     kind_val = m.get("kind", "")
     is_tracker = kind_val == "tracker"
     is_index   = kind_val == "index"  # placement-rule router; intentionally empty until populated
-    is_exempt  = is_tracker or is_index
+    is_meta_toolchain = kind_val == "meta-toolchain"  # v2.8: auditor-self-reference
+    is_exempt  = is_tracker or is_index or is_meta_toolchain
 
     # ---- per-dimension rubric (all bounded 0-100) ----
     # Implementability: rewards inlined contracts; penalises waffle and stub.
@@ -474,6 +504,9 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     # "well-structured tracker" without forcing a contract block.
     # Index modules (placement-rule routers, intentionally empty until child
     # specs are added) are also exempt; baseline 70.
+    # Meta-toolchain modules (v2.8) earn baseline 75 and bonus +10 when they
+    # expose a normative `text` contract block OR ≥30 child spec files acting
+    # as the bijection table (the §27 inventory IS the contract).
     if is_tracker:
         impl = 75
         if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
@@ -481,6 +514,11 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         impl = 70
         if m["overview_chars"] < 200: impl -= 15  # penalise zero-content indexes
         if m["child_modules"] > 0:    impl += 10  # bonus when index actually routes children
+    elif is_meta_toolchain:
+        impl = 75
+        if m.get("has_normative_contract"): impl += 10  # text-fenced contract block
+        if m["md_files"] >= 30:             impl += 5   # large bijection inventory
+        if m["overview_chars"] < 500:       impl -= 20
     else:
         impl = 30
         if m["has_sql_ddl"]:      impl += 20

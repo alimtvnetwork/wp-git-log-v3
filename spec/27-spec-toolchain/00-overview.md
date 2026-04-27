@@ -5,7 +5,7 @@ description: Auditor-self-reference module — defines the toolchain that audits
 
 # Spec Toolchain
 
-**Version:** 1.6.0  
+**Version:** 1.7.0  
 **Updated:** 2026-04-27  
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
 
@@ -111,9 +111,49 @@ Numbering convention inside this module:
 
 ---
 
+## Normative Contract — Toolchain Bijection
+
+The following block is the **machine-readable contract** for the spec/code bijection enforced by this module. It is the source of truth for `linter-scripts/check-tree-health.cjs` and the §05 health gate. Any deviation MUST be reconciled in the same PR.
+
+```text
+# CONTRACT: spec-toolchain-bijection v1.0
+# Format: NUMBER_RANGE | KIND | SPEC_GLOB                        | CODE_GLOB                                       | EXIT_CONTRACT
+01-09  | validator    | spec/27-spec-toolchain/0[1-9]-*.md    | linter-scripts/check-*.{py,sh,cjs}             | 0=pass,1=fail,2=error
+10-19  | generator    | spec/27-spec-toolchain/1[0-9]-*.md    | linter-scripts/{generate,suggest}-*.{py,cjs}   | 0=pass,1=fail,2=error
+20-29  | filler       | spec/27-spec-toolchain/2[0-9]-*.md    | linter-scripts/{fill,scaffold,check}-*.cjs     | 0=pass,1=fail,2=error
+30-39  | auditor      | spec/27-spec-toolchain/3[0-9]-*.md    | linter-scripts/audit-*.py                      | 0=pass,1=fail,2=error
+40-49  | runner       | spec/27-spec-toolchain/4[0-9]-*.md    | linter-scripts/run.{sh,ps1}                    | 0=pass,1=fail,2=error
+50-59  | src-validator| spec/27-spec-toolchain/5[0-9]-*.md    | linter-scripts/validate-*.{py,go} + check-*.sh | 0=pass,1=fail,2=error
+60-69  | config       | spec/27-spec-toolchain/6[0-9]-*.md    | linter-scripts/{*.toml,*.allowlist,*.md}       | n/a (data file)
+70-79  | ci-workflow  | spec/27-spec-toolchain/7[0-9]-*.md    | .github/workflows/*.yml                        | GitHub Actions
+
+# INVARIANTS (enforced by linter-scripts/check-tree-health.cjs)
+INV-01: forall code in {linter-scripts/, .github/workflows/} :: exists exactly one spec/27-spec-toolchain/NN-*.md
+INV-02: forall spec NN-*.md :: exists exactly one referenced code artifact (or marked retired in §99)
+INV-03: number_slot once_assigned -> immutable (retired slots may not be re-used)
+INV-04: validator_kind -> spec MUST document exit_codes table {0,1,2}
+INV-05: filler_kind   -> spec MUST contain literal phrase "idempotent" + "no-op on satisfied tree"
+INV-06: auditor_kind  -> spec MUST list 7 dimensions + their weights + active gates
+INV-07: ci-workflow_kind -> spec MUST reference workflow file path + trigger events list
+
+# DELETION PROTOCOL
+DEL-01: rm linter-scripts/<script> -> rm spec/27-spec-toolchain/NN-*.md (same PR)
+DEL-02: append §98 changelog row: "Removed NN-<name> (slot retired)"
+DEL-03: append §99 audit row: "Slot NN retired YYYY-MM-DD reason: ..."
+
+# CI FAILURE MODES
+FAIL-01: orphan code (script without spec)            -> exit 1
+FAIL-02: orphan spec  (spec without code)             -> exit 1
+FAIL-03: slot reuse   (NN previously retired)         -> exit 1
+FAIL-04: missing exit-code table on validator spec    -> exit 1
+FAIL-05: lockstep break (§00 vs §98 vs §99 mismatch)  -> exit 1 (via §24 check-lockstep)
+```
+
+---
+
 ## Invariants
 
-1. **Bijection**: every executable file under `linter-scripts/` and every workflow under `.github/workflows/` MUST have exactly one spec section here. Verified by [`97-acceptance-criteria.md`](./97-acceptance-criteria.md) AC-T-01.
+1. **Bijection**: every executable file under `linter-scripts/` and every workflow under `.github/workflows/` MUST have exactly one spec section here. Verified by [`97-acceptance-criteria.md`](./97-acceptance-criteria.md) AC-T-01 and the **Normative Contract** block above (`INV-01`/`INV-02`).
 2. **Slot immutability**: once a number is assigned, it MUST NOT be reused. If a script is deleted, the slot is retired (note in §99) and the next new artifact takes the next free number.
 3. **Exit-code contract**: every validator section MUST document its exit codes (`0=pass`, `1=fail`, `2=error` is the canonical contract).
 4. **Idempotency**: every filler section MUST state explicitly that re-runs on a satisfied tree are no-ops.

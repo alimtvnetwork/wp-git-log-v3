@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **78/100 (B)**  
+**Implementability Score:** **89/100 (A)**  
 **Blast radius:** 2/10
 
-> Deterministic score 78/100 (B) for spec/27-spec-toolchain.
+> Deterministic score 89/100 (A) for spec/27-spec-toolchain.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.18. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.17. Gates active: 0.
 
 ---
 
@@ -16,12 +16,12 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 55 | 19.2 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 70 | 14.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 100 | 7.0 |
+| Testability | 7% | 80 | 5.6 |
 | Maintainability | 3% | 90 | 2.7 |
 
 ## Deterministic Metrics (pre-AI)
@@ -31,13 +31,14 @@
   "kind": "meta-toolchain",
   "md_files": 40,
   "mmd_files": 0,
-  "overview_chars": 11070,
+  "overview_chars": 14003,
   "ac_chars": 13558,
   "ac_count": 19,
   "gwt_block_count": 19,
   "consistency_report": true,
-  "code_blocks_total": 39,
+  "code_blocks_total": 40,
   "code_blocks_by_lang": {
+    "text": 1,
     "bash": 29,
     "toml": 2,
     "json": 1,
@@ -52,11 +53,12 @@
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
+  "has_normative_contract": true,
   "has_mermaid": false,
   "links_total": 77,
   "links_broken": 0,
   "todo_density": 30,
-  "waffle_per_kchar": 0.18,
+  "waffle_per_kchar": 0.17,
   "child_modules": 0
 }
 ```

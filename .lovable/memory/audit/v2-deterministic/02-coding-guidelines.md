@@ -54,6 +54,7 @@
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
+  "has_normative_contract": false,
   "has_mermaid": false,
   "links_total": 32,
   "links_broken": 0,
