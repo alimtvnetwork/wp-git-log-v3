@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.1.0
-**Updated:** 2026-04-27 (Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out] documenting the front-matter keys read by `audit-spec-vs-code-v2.py` v2.10–v2.14.)
+**Version:** 4.2.0
+**Updated:** 2026-04-27 (Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
