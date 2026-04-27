@@ -1050,6 +1050,7 @@ def main():
 
     idx = [f"# Spec-vs-Code Audit **v2** — Summary\n",
            f"**Date:** {TODAY}  ",
+           f"**Rubric:** {RUBRIC_VERSION}  ",
            f"**Modules audited:** {len(valid)}  ",
            f"**Code files indexed:** {CODE_INDEX_LINES}  ",
            f"**Mean weighted score:** **{mean}/100**  ",
