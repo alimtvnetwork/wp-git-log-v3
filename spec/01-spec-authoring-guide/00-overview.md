@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # Spec Authoring Guide
 
-**Version:** 3.3.0  
+**Version:** 3.4.0  
 **Updated:** 2026-04-26  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
@@ -190,6 +190,7 @@ spec/13-wp-plugin/03-exam-manager/
 | 09 | [09-exceptions.md](./09-exceptions.md) | Rules | All known exception cases with folder structure examples |
 | 10 | [10-mandatory-linter-infrastructure.md](./10-mandatory-linter-infrastructure.md) | Rules | Mandatory linter scripts — AI must verify presence before validation |
 | 11 | [11-root-readme-conventions.md](./11-root-readme-conventions.md) | Rules | **MANDATORY** root `readme.md` format — centered icon, hero block, author/company template, badges, §9 release-blocker checklist |
+| 12 | [12-queued-decisions-trail.md](./12-queued-decisions-trail.md) | Rules | Queued-decisions trail format for high-flux modules — Q-identifier scheme, status markers, lockstep edits with §98/§99 (Phase 38) |
 
 ---
 
