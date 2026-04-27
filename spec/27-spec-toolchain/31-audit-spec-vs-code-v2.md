@@ -235,6 +235,19 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** when `<substring>` matches >1 module, the script MUST list the first 5 candidate paths to stderr and operate on the first match (substring is matched against the same `MOD_REL` keys used by `AUDIT_ONLY`).
 - **And** the flag MUST NOT write any files, MUST NOT call the AI gateway, and MUST NOT touch `.lovable/memory/audit/v2-deterministic/`. It is a pure-stdout diagnostic and short-circuits the normal audit loop entirely.
 
+### AC-31-24 — CLI threshold contract self-test (Phase 91)
+- **Given** the script `linter-scripts/test/test-audit-cli-thresholds.sh`,
+- **When** invoked from CI (`spec-health.yml`, step *Audit CLI threshold contract self-test*),
+- **Then** it MUST execute six cases against `audit-spec-vs-code-v2.py` with `AUDIT_DETERMINISTIC=1`:
+  (a) `--min-weighted=200` MUST exit `1` (unsatisfiable floor breaches),
+  (b) `--min-weighted=0` MUST exit `0` (satisfiable floor passes),
+  (c) `--min-impl=200` MUST exit `1`,
+  (d) `--min-impl=0` MUST exit `0`,
+  (e) `--min-weighted=0 --min-impl=0` MUST exit `0` (combined satisfiable),
+  (f) `--min-weighted=0 --min-impl=200` MUST exit `1` (logical-OR breach semantics: either floor failing fails the run).
+- **And** the self-test MUST exit `0` only when all 6 cases match expected exit codes; otherwise exit `1` with a per-case ✅/❌ summary on stdout.
+- **And** the self-test MUST NOT write any files and MUST NOT depend on the current absolute scores — it depends only on the comparison-operator contract being intact (locking v2.12 from silent-inversion regressions when scores sit comfortably above the production floor of 97/99).
+
 ## Rubric changelog (v2.9 → v2.16)
 
 | Version | Phase | Change | Score effect |
@@ -247,6 +260,7 @@ A companion script renders these into a human report — see §16 [`16-generate-
 | v2.14 | 83 | TODO regex tightened to require `:` / `(name):` / ` -` suffix; new `todo_audit_exempt: true` front-matter opt-out for auditor-self-reference modules. | Prevents false-positive TODO penalties on gap-analysis / changelog content. |
 | v2.15 | 86 | Cumulative schema-bonus cap REJECTED after empirical test (mean impl 99.8 → 89.2; 76 multi-contract modules unfairly penalised). Source comment + memo preserve the rejected design. | None (zero rubric change shipped). |
 | v2.16 | 90 | New `--explain=<substring>` CLI flag prints rubric branch, fired bonuses, capped gates, and per-dimension trace for any module. Pure-add diagnostic. | None (no scoring change; debugging tool only). |
+| v2.16-test | 91 | CLI threshold contract self-test (`linter-scripts/test/test-audit-cli-thresholds.sh`) wired into `spec-health.yml`. Locks v2.12 exit-code semantics from silent-inversion regressions. | None (no rubric change; CI safety net only). |
 
 
 ## Cross-references
