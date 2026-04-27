@@ -87,12 +87,20 @@ jobs:
 
       - name: Summary
         if: always()
+        env:
+          AUDIT_DETERMINISTIC: '1'
         run: |
           echo "## Spec Cross-Link Result" >> "$GITHUB_STEP_SUMMARY"
           python3 linter-scripts/check-spec-cross-links.py --json 2>&1 | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{d[\"count\"]} broken link(s)' if d['count'] else '✅ All cross-links resolve.')" >> "$GITHUB_STEP_SUMMARY" || true
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "## Spec Tree Health Result" >> "$GITHUB_STEP_SUMMARY"
-          node linter-scripts/check-tree-health.cjs --report 2>&1 | head -10 >> "$GITHUB_STEP_SUMMARY" || true
+          echo "## Spec Tree Health Result (strict)" >> "$GITHUB_STEP_SUMMARY"
+          node linter-scripts/check-tree-health.cjs --strict --report 2>&1 | head -10 >> "$GITHUB_STEP_SUMMARY" || true
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Lockstep Gate Result" >> "$GITHUB_STEP_SUMMARY"
+          node linter-scripts/check-lockstep.cjs 2>&1 | tail -8 >> "$GITHUB_STEP_SUMMARY" || true
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "## AI-Implementability Audit v2" >> "$GITHUB_STEP_SUMMARY"
+          python3 linter-scripts/audit-spec-vs-code-v2.py 2>&1 | tail -3 >> "$GITHUB_STEP_SUMMARY" || true
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "## Trace-map Regression Result" >> "$GITHUB_STEP_SUMMARY"
           python3 linter-scripts/check-trace-map-regression.py --report-only 2>&1 | tail -10 >> "$GITHUB_STEP_SUMMARY" || true
