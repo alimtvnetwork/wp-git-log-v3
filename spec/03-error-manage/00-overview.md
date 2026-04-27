@@ -186,3 +186,56 @@ DEL-01  per-language emission patterns delegated to §02 language sub-modules
 DEL-02  registry schema authority lives in §03/03-error-code-registry/07-schemas
 DEL-03  installer/runner error surfacing delegated to §15 distribution-and-runner
 ```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### ErrorEvent TypeScript enums
+
+```ts
+// Canonical severity ladder. MUST match the registry schema in §03/03/07.
+export enum ErrorSeverity {
+  Fatal = "fatal",
+  Error = "error",
+  Warn  = "warn",
+  Info  = "info",
+  Debug = "debug",
+}
+
+// High-level domain taxonomy. Sub-domains live in registry shards.
+export enum ErrorDomain {
+  Network    = "network",
+  Storage    = "storage",
+  Validation = "validation",
+  Auth       = "auth",
+  Plugin     = "plugin",
+  Pipeline   = "pipeline",
+  Internal   = "internal",
+}
+```
+
+### ErrorEvent payload — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/error-event.schema.json",
+  "title": "ErrorEvent",
+  "type": "object",
+  "required": ["code", "severity", "domain", "message", "occurred_at"],
+  "additionalProperties": false,
+  "properties": {
+    "code":        { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+    "severity":    { "enum": ["fatal", "error", "warn", "info", "debug"] },
+    "domain":      { "enum": ["network","storage","validation","auth","plugin","pipeline","internal"] },
+    "message":     { "type": "string", "minLength": 1, "maxLength": 500 },
+    "details":     { "type": "string", "maxLength": 4000 },
+    "trace_id":    { "type": "string", "pattern": "^[0-9a-f]{16,64}$" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "owner_module":{ "type": "string", "pattern": "^spec/\\d{2}-[a-z0-9-]+(/.*)?$" },
+    "retry_policy":{ "type": "object", "properties": {
+      "max_attempts": { "type": "integer", "minimum": 0, "maximum": 10 },
+      "backoff_ms":   { "type": "integer", "minimum": 0 }
+    }, "required": ["max_attempts"], "additionalProperties": false }
+  }
+}
+```

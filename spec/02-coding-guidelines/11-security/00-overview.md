@@ -216,3 +216,60 @@ DEL-01  TLS termination, WAF, and network policy are owned by deployment platfor
 DEL-02  per-language idiomatic guidance lives in each §02 language sub-module
 DEL-03  axios pinning specifically delegated to §02/11/01-axios-version-control sub-spec
 ```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Required dependency-pin manifest schema (JSON Schema 2020-12)
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/11-security/dep-pin.schema.json",
+  "title": "DependencyPinManifest",
+  "type": "object",
+  "required": ["language", "manifest_path", "dependencies"],
+  "additionalProperties": false,
+  "properties": {
+    "language":      { "enum": ["js", "ts", "go", "php", "csharp", "python", "rust"] },
+    "manifest_path": { "type": "string", "minLength": 1 },
+    "lockfile_path": { "type": "string" },
+    "dependencies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "version", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "name":    { "type": "string", "pattern": "^[a-zA-Z0-9._/@-]+$" },
+          "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.-]+)?$" },
+          "source":  { "enum": ["registry", "git", "vendored", "first-party"] },
+          "integrity": { "type": "string", "pattern": "^sha(256|384|512)-[A-Za-z0-9+/=]+$" }
+        }
+      }
+    }
+  }
+}
+```
+
+### Required SecurityFinding TypeScript enum (forbidden categories)
+
+```ts
+// Used by linter-scripts/check-forbidden-strings.py output
+export enum SecurityFindingCategory {
+  PlaintextSecret    = "plaintext-secret",
+  UnpinnedDependency = "unpinned-dependency",
+  RawNetworkClient   = "raw-network-client",
+  UnvalidatedInput   = "unvalidated-input",
+  PiiInError         = "pii-in-error",
+  HandRolledCrypto   = "hand-rolled-crypto",
+  ClientSideAuth     = "client-side-authoritative",
+}
+
+export enum SecurityFindingSeverity {
+  Blocker = "blocker",
+  Major   = "major",
+  Minor   = "minor",
+  Info    = "info",
+}
+```

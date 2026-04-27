@@ -613,3 +613,64 @@ DEL-01  Phase-2 audit is read-only; produces issues only, never mutates app code
 DEL-02  Resolution work is delegated to per-issue downstream phases (3+)
 DEL-03  Re-audit cadence: quarterly OR when §22 spec version minor-bumps
 ```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Issue record — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/25-app-issues/01/issue-record.schema.json",
+  "title": "Phase2IssueRecord",
+  "type": "object",
+  "required": ["issue_id", "severity", "status", "summary", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "issue_id":  { "type": "string", "pattern": "^P2-GLA-\\d{3}$" },
+    "severity":  { "enum": ["blocker", "major", "minor", "info"] },
+    "status":    { "enum": ["open", "in-progress", "resolved", "deferred", "wontfix"] },
+    "summary":   { "type": "string", "minLength": 1, "maxLength": 200 },
+    "details":   { "type": "string" },
+    "sources": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path"],
+        "additionalProperties": false,
+        "properties": {
+          "path":    { "type": "string", "minLength": 1 },
+          "anchor":  { "type": "string" },
+          "line":    { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "resolution_ref": { "type": "string", "description": "Required when status ∈ {resolved, deferred, wontfix}" },
+    "opened_at":      { "type": "string", "format": "date" },
+    "closed_at":      { "type": "string", "format": "date" }
+  },
+  "allOf": [
+    { "if": { "properties": { "status": { "enum": ["resolved","deferred","wontfix"] } } },
+      "then": { "required": ["resolution_ref"] } }
+  ]
+}
+```
+
+### Issue status enum (TypeScript)
+
+```ts
+export enum IssueStatus {
+  Open       = "open",
+  InProgress = "in-progress",
+  Resolved   = "resolved",
+  Deferred   = "deferred",
+  WontFix    = "wontfix",
+}
+
+export enum IssueSeverity {
+  Blocker = "blocker",
+  Major   = "major",
+  Minor   = "minor",
+  Info    = "info",
+}
+```

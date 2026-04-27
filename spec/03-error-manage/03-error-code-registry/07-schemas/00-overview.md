@@ -318,3 +318,49 @@ DEL-01  shard merging is owned by §03/08-linter-scripts (not this module)
 DEL-02  runtime emission of error events is owned by per-language §02 modules
 DEL-03  schema evolution requires §03/03/98-changelog minor bump + migration note
 ```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Severity & Category TypeScript enums
+
+```ts
+export enum RegistrySeverity {
+  Fatal = "fatal",
+  Error = "error",
+  Warn  = "warn",
+  Info  = "info",
+  Debug = "debug",
+}
+
+export enum RegistryCategory {
+  Network    = "network",
+  Storage    = "storage",
+  Validation = "validation",
+  Auth       = "auth",
+  Plugin     = "plugin",
+  Pipeline   = "pipeline",
+  Internal   = "internal",
+}
+```
+
+### Per-shard registry entry — JSON Schema 2020-12 (additional)
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/03/07/shard-entry.schema.json",
+  "title": "RegistryShardEntry",
+  "type": "object",
+  "required": ["code", "severity", "category", "message_template", "owner_module"],
+  "additionalProperties": false,
+  "properties": {
+    "code":             { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+    "severity":         { "enum": ["fatal","error","warn","info","debug"] },
+    "category":         { "enum": ["network","storage","validation","auth","plugin","pipeline","internal"] },
+    "message_template": { "type": "string", "pattern": "^[^%]*$", "minLength": 1, "maxLength": 500 },
+    "owner_module":     { "type": "string", "pattern": "^spec/\\d{2}-[a-z0-9-]+(/.*)?$" },
+    "deprecated":       { "type": "boolean", "default": false },
+    "replaced_by":      { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" }
+  }
+}
+```

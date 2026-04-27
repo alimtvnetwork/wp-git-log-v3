@@ -201,3 +201,56 @@ DEL-01  shard schema authority lives in §03/03/07-schemas
 DEL-02  CI wiring is owned by downstream distribution repo
 DEL-03  publishing the merged registry artifact is owned by §03 release pipeline
 ```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Linter exit-code & report enums (TypeScript)
+
+```ts
+export enum LinterExitCode {
+  Clean           = 0,
+  SchemaViolation = 1,
+  IoError         = 2,
+  Internal        = 3,
+}
+
+export enum LinterReportFormat {
+  Json     = "json",
+  Markdown = "markdown",
+  Text     = "text",
+}
+```
+
+### Linter report — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/03/08/linter-report.schema.json",
+  "title": "LinterReport",
+  "type": "object",
+  "required": ["script", "input", "exit_code", "findings", "generated_at"],
+  "additionalProperties": false,
+  "properties": {
+    "script":       { "type": "string", "minLength": 1 },
+    "input":        { "type": "string", "minLength": 1 },
+    "exit_code":    { "type": "integer", "enum": [0, 1, 2, 3] },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "message"],
+        "additionalProperties": false,
+        "properties": {
+          "severity": { "enum": ["blocker", "major", "minor", "info"] },
+          "code":     { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+          "message":  { "type": "string", "minLength": 1, "maxLength": 1000 },
+          "path":     { "type": "string" },
+          "line":     { "type": "integer", "minimum": 1 }
+        }
+      }
+    }
+  }
+}
+```

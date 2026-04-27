@@ -108,3 +108,55 @@ DEL-01  color values delegated to §03/02/04/04-color-themes
 DEL-02  copy/i18n delegated to §03/01-error-resolution
 DEL-03  registry lookup of codes delegated to §03/03-error-code-registry
 ```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### ErrorModal props — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/02/04/02-react-components/props.schema.json",
+  "title": "ErrorModalProps",
+  "type": "object",
+  "required": ["code", "severity", "message"],
+  "additionalProperties": false,
+  "properties": {
+    "code":     { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+    "severity": { "enum": ["fatal", "error", "warn", "info"] },
+    "message":  { "type": "string", "minLength": 1, "maxLength": 500 },
+    "details":  { "type": "string", "maxLength": 4000 },
+    "traceId":  { "type": "string", "pattern": "^[0-9a-f]{16,64}$" },
+    "actions": {
+      "type": "array", "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "id":    { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+          "kind":  { "enum": ["primary", "secondary", "destructive", "link"] }
+        }
+      }
+    }
+  }
+}
+```
+
+### Action kind enum (TypeScript)
+
+```ts
+export enum ErrorModalActionKind {
+  Primary     = "primary",
+  Secondary   = "secondary",
+  Destructive = "destructive",
+  Link        = "link",
+}
+
+export enum ErrorModalDismissBehavior {
+  EscapeAndBackdrop = "escape-and-backdrop",
+  EscapeOnly        = "escape-only",
+  Forbidden         = "forbidden", // fatal severity
+}
+```

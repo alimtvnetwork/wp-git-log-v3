@@ -90,3 +90,49 @@ DEL-01  cross-language naming inherited from §02/01-cross-language
 DEL-02  security floor inherited from §02/11-security
 DEL-03  logging emission contract inherited from §02/02-typescript/10-log-level-enum
 ```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Required project-file invariants — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/07-csharp/csproj-invariants.schema.json",
+  "title": "CSharpProjectInvariants",
+  "type": "object",
+  "required": ["TargetFramework", "Nullable", "TreatWarningsAsErrors", "AnalysisLevel"],
+  "additionalProperties": true,
+  "properties": {
+    "TargetFramework":        { "type": "string", "pattern": "^net([89]\\.0|\\d{2,}\\.0)$" },
+    "Nullable":               { "const": "enable" },
+    "TreatWarningsAsErrors":  { "const": true },
+    "AnalysisLevel":          { "type": "string", "pattern": "^(latest|latest-recommended|preview|\\d+(\\.\\d+)?)$" },
+    "LangVersion":            { "type": "string", "pattern": "^(latest|preview|\\d+(\\.\\d+)?)$" },
+    "EnableNETAnalyzers":     { "const": true },
+    "GenerateDocumentationFile": { "const": true }
+  }
+}
+```
+
+### LogLevel enum (canonical re-export, must match §02/02 TS enum 1:1)
+
+```csharp
+namespace Spec.CodingGuidelines.Csharp;
+
+public enum LogLevel
+{
+    Fatal = 0,
+    Error = 1,
+    Warn  = 2,
+    Info  = 3,
+    Debug = 4,
+    Trace = 5,
+}
+
+public enum AsyncMethodSuffixPolicy
+{
+    Required = 0,  // every async method MUST end with "Async"
+    Forbidden = 1, // sync wrappers MUST NOT carry the suffix
+}
+```
