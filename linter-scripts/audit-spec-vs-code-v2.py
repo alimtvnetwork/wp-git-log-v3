@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.3** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.4** — AI-Implementability Edition.
+
+v2.4 (2026-04-27, Phase R4):
+  - TODO/TBD/FIXME and waffle-word scanners now strip fenced code blocks
+    (```...```) and inline `code` spans before counting. Tokens that appear
+    inside code samples (legitimate variable names, comments demonstrating
+    a forbidden pattern, schema placeholders, etc.) no longer trigger the
+    G-TODO-01 finding or inflate the waffle ratio. Prose-only scanning.
 
 v2.3 (2026-04-26, Phase 25):
   - Contract definition expanded: typed-language reference blocks
