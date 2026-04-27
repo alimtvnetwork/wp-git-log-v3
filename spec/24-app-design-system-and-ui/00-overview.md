@@ -1,20 +1,20 @@
 ---
-kind: index
-description: Top-level routing index for app-specific design system & UI specs. Intentionally empty until child specs are added — exempt from missing-contract / untestable rubric findings.
+kind: module
+description: App-specific UI overlay on top of the core design system (§07). Declares app-only token extensions, layout containers, and the application shell pattern. NOT a redefinition of §07 — strictly additive.
 ---
 
 # App Design System & UI
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-26  
-**AI Confidence:** Draft  
+**Version:** 4.0.0
+**Updated:** 2026-04-27
+**AI Confidence:** High
 **Ambiguity:** None
 
 ---
 
 ## Keywords
 
-`app-design-system` · `app-ui` · `theming` · `components` · `layout`
+`app-overlay` · `app-tokens` · `app-shell` · `layout-container` · `semantic-tokens` · `dark-light-parity`
 
 ---
 
@@ -27,12 +27,27 @@ description: Top-level routing index for app-specific design system & UI specs. 
 | Ambiguity assigned | ✅ |
 | Keywords present | ✅ |
 | Scoring table present | ✅ |
+| Inline token contracts | ✅ |
+| Inline layout contracts | ✅ |
+| Relationship to §07 disambiguated | ✅ |
 
 ---
 
-## Purpose
+## Relationship to §07 (Core Design System)
 
-Application-specific design system and UI specifications. Covers component patterns, theming decisions, layout conventions, and visual standards specific to this application.
+This module is **NOT** a parallel design system. It is a strict, **additive overlay** on the canonical system defined in [`spec/07-design-system/`](../07-design-system/00-overview.md). The contract:
+
+| Concern | Owner | Rule |
+|---------|-------|------|
+| Color/spacing/typography primitives (`--background`, `--primary`, `--space-*`, `--font-*`) | **§07** | App MUST consume these as-is. App MUST NOT redefine, shadow, or override them. |
+| App-only semantic aliases (e.g., `--app-toolbar-bg`, `--app-canvas`) | **§24 (this file)** | Defined here as additional tokens. They MUST be derived from §07 primitives — never from raw HSL literals. |
+| Component primitives (Button, Input, Card) | **§07** | App imports the existing primitives. |
+| Composite app components (AppShell, AppToolbar, AppSidebarNested) | **§24** | Defined here, built **only** from §07 primitives. |
+| Page layout / route shells | **§24** | Defined here. |
+
+**Disambiguation:** if a token, component, or pattern is generic enough to appear on a marketing page → it lives in §07. If it only makes sense inside the authenticated app shell → it lives in §24. There is **no overlap**; if a §07 token would suffice, do not create an `--app-*` alias.
+
+This explicit ownership matrix resolves the previous circular reference flagged in the AI-implementability audit (`ai-implementability-2026-04-27.md`, finding 24-A).
 
 ---
 
@@ -40,31 +55,165 @@ Application-specific design system and UI specifications. Covers component patte
 
 | # | File | Purpose |
 |---|------|---------|
-| — | *(empty — awaiting content)* | — |
+| 00 | `00-overview.md` | Module router + inline app token/layout contracts (this file) |
+| 97 | `97-acceptance-criteria.md` | Given/When/Then verification rules |
+| 98 | `98-changelog.md` | Module version history |
+| 99 | `99-consistency-report.md` | Health/inventory + open items |
+
+> **Slot policy:** Slots 01–96 are reserved for future per-component or per-page deep-dives (e.g., `01-app-shell.md`, `02-app-toolbar.md`). The current overlay is small enough to fit in `00-overview.md`.
+
+---
+
+## Inlined Contracts
+
+### App-only semantic tokens
+
+Add these to `src/index.css` **after** the §07 token block, inside the same `:root` and `.dark` selectors. Every value MUST be expressed via an existing §07 token — no raw HSL literals.
+
+```css
+:root {
+  /* App canvas — the scrollable region behind app content */
+  --app-canvas:           var(--background);
+  --app-canvas-foreground: var(--foreground);
+
+  /* App toolbar — top action bar inside the authenticated shell */
+  --app-toolbar-bg:       var(--card);
+  --app-toolbar-fg:       var(--card-foreground);
+  --app-toolbar-border:   var(--border);
+  --app-toolbar-height:   3.5rem;     /* 56px — fixed; do not vary by route */
+
+  /* App sidebar — secondary nav inside the shell */
+  --app-sidebar-bg:       var(--card);
+  --app-sidebar-fg:       var(--card-foreground);
+  --app-sidebar-width:    16rem;      /* 256px collapsed expanded default */
+  --app-sidebar-width-collapsed: 4rem;
+
+  /* App status colors — derived from §07 brand/accent, app-scoped */
+  --app-status-success:   142 71% 45%;   /* HSL components, dark-mode override below */
+  --app-status-warning:   38 92% 50%;
+  --app-status-danger:    0 84% 60%;
+}
+
+.dark {
+  --app-status-success:   142 71% 55%;
+  --app-status-warning:   38 92% 60%;
+  --app-status-danger:    0 84% 65%;
+}
+```
+
+> ⚠️ The three `--app-status-*` tokens are the **only** places in §24 where raw HSL components appear, because §07 deliberately does not ship semantic status colors (it stays neutral/brand). All other `--app-*` tokens MUST `var(--…)` into §07.
+
+### Tailwind extension
+
+Add the app tokens to `tailwind.config.ts` so they are usable as utilities:
+
+```ts
+// tailwind.config.ts (excerpt — additive only)
+extend: {
+  colors: {
+    'app-canvas':         'hsl(var(--app-canvas))',
+    'app-toolbar':        'hsl(var(--app-toolbar-bg))',
+    'app-toolbar-fg':     'hsl(var(--app-toolbar-fg))',
+    'app-sidebar':        'hsl(var(--app-sidebar-bg))',
+    'app-status-success': 'hsl(var(--app-status-success))',
+    'app-status-warning': 'hsl(var(--app-status-warning))',
+    'app-status-danger':  'hsl(var(--app-status-danger))',
+  },
+  spacing: {
+    'app-toolbar':           'var(--app-toolbar-height)',
+    'app-sidebar':           'var(--app-sidebar-width)',
+    'app-sidebar-collapsed': 'var(--app-sidebar-width-collapsed)',
+  },
+}
+```
+
+### Layout container — the App Shell
+
+Every authenticated route MUST be wrapped in the App Shell. Public/marketing routes MUST NOT use it.
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│  AppToolbar  (fixed top, height = --app-toolbar-height)      │
+├──────────┬───────────────────────────────────────────────────┤
+│ AppSide  │  AppCanvas                                        │
+│ bar      │   (overflow-y-auto; padding via §07 --space-4)    │
+│ (fixed)  │                                                   │
+│          │                                                   │
+└──────────┴───────────────────────────────────────────────────┘
+```
+
+Reference React skeleton (semantic tokens only — never raw colors):
+
+```tsx
+// src/components/app/AppShell.tsx
+import { ReactNode } from "react";
+
+export function AppShell({ children }: { children: ReactNode }) {
+  return (
+    <div className="min-h-screen bg-app-canvas text-foreground">
+      <header
+        className="fixed inset-x-0 top-0 h-app-toolbar bg-app-toolbar
+                   text-app-toolbar-fg border-b border-border z-40"
+        role="banner"
+      >
+        {/* AppToolbar contents */}
+      </header>
+      <aside
+        className="fixed left-0 top-app-toolbar bottom-0 w-app-sidebar
+                   bg-app-sidebar border-r border-border z-30"
+        role="navigation"
+        aria-label="Primary"
+      >
+        {/* AppSidebar contents */}
+      </aside>
+      <main
+        className="pt-app-toolbar pl-app-sidebar"
+        role="main"
+      >
+        <div className="p-4">{children}</div>
+      </main>
+    </div>
+  );
+}
+```
+
+### Responsive breakpoints (binding)
+
+The app overlay reuses §07's Tailwind defaults; **no app-specific breakpoints are defined**. Behaviour at `< md` (768px):
+
+- Sidebar collapses to `--app-sidebar-width-collapsed` (4rem); icons only.
+- `<main>` left-padding switches to `pl-app-sidebar-collapsed`.
+
+### Theme parity rule
+
+Every `--app-*` token MUST resolve to a real value in BOTH `:root` and `.dark` (either via direct declaration or via inheritance through a §07 token that itself has both). CI verifies this — see AC-ADS-04.
 
 ---
 
 ## Cross-References
 
-- [Design System (Core)](../07-design-system/00-overview.md) — Foundational design system spec
-- [Git Logs v1 (legacy)](../_archive/21-git-logs-v1/00-overview.md) — App-specific features and workflows (deprecated v1)
+- [Design System (Core, §07)](../07-design-system/00-overview.md) — Source of all primitive tokens
+- [§07 Theme Variable Architecture](../07-design-system/02-theme-variable-architecture.md) — Token registry consumed by this overlay
+- [§07 Spacing & Layout](../07-design-system/04-spacing-layout.md) — Spacing scale this overlay reuses
+- [§07 Sidebar System](../07-design-system/10-sidebar-system.md) — Primitive consumed by AppSidebar
 - [Consolidated Design System](../17-consolidated-guidelines/07-design-system.md) — Consolidated summary
+- [AI-implementability audit, finding 24-A](../../.lovable/memory/audit/ai-implementability-2026-04-27.md) — Original circular-reference issue resolved by this module
 
 ---
 
-*App design system & UI — created 2026-04-10, renumbered 23→24 on 2026-04-16*
+*App design system & UI — created 2026-04-10, renumbered 23→24 on 2026-04-16, populated as overlay in v4.0.0 (2026-04-27, Phase 39a).*
 
 ---
 
 ## Verification
 
-_Auto-generated section — see `spec/24-app-design-system-and-ui/97-acceptance-criteria.md` for the full criteria index._
+_See `spec/24-app-design-system-and-ui/97-acceptance-criteria.md` for the full Given/When/Then suite._
 
-### AC-ADS-000: App design-system conformance: Overview
+### AC-ADS-000: App design-system overlay conformance: Overview
 
-**Given** Scan app UI for raw colors and untokenized spacing; render Storybook (or equivalent) snapshot suite.  
-**When** Run the verification command shown below.  
-**Then** All components consume semantic tokens; snapshot diff is empty in light and dark themes.
+**Given** A working tree with `src/index.css`, `tailwind.config.ts`, and the app components.
+**When** Run the verification command shown below.
+**Then** No raw color literals appear in app components; every `--app-*` token resolves in both light and dark modes; the AppShell renders without overlapping fixed regions.
 
 **Verification command:**
 
@@ -74,4 +223,4 @@ npm run lint && npm run test
 
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
-_Verification section last updated: 2026-04-21_
+_Verification section last updated: 2026-04-27_
