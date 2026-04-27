@@ -1,7 +1,7 @@
 # Consistency Report — 09-powershell-integration
 
 **Version:** 3.4.0  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **Scope:** `spec/02-coding-guidelines/09-powershell-integration/`
 
 ---
