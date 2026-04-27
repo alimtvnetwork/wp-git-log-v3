@@ -225,7 +225,7 @@ def deterministic_metrics(folder: Path) -> dict:
         "has_mermaid":         len(mmd_files) > 0,
         "links_total":         total,
         "links_broken":        broken,
-        "todo_density":        len(TODO_RX.findall(body_text)),
+        "todo_density":        todo_count,
         "waffle_per_kchar":    waffle_per_kchar,
         "child_modules":       len(CHILDREN.get(MOD_REL[folder], [])),
     }
