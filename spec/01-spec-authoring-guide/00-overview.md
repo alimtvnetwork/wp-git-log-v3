@@ -624,6 +624,59 @@ The following JSON-Schema (Draft 2020-12) is the **machine-readable contract** e
 
 _Inlined-contract section last updated: 2026-04-27 (Phase 48 — implementability lift, §01 impl 40 → ≥75 projected)._
 
+---
+
+## Front-matter keys reference (Phase 89)
+
+`00-overview.md` MAY declare YAML front-matter at file head to control how the
+deterministic auditor (`linter-scripts/audit-spec-vs-code-v2.py`) scores the
+module. Keys are optional; omitted keys default to "normal contract module".
+
+### `kind:` — rubric branch selector
+
+| Value | Auditor branch | Impl baseline | When to use |
+|-------|----------------|--------------:|-------------|
+| _(omitted)_ or `active-spec` | normal contract module | 30 (+ contract bonuses, capped 100) | Default — modules expected to inline a typed contract (SQL DDL, JSON schema, TS enums, OpenAPI, or ≥3 typed-language reference blocks). |
+| `future-spec` | normal contract module + drift exemption | 30 | Spec describes future state; current code may differ. Also requires `drift_acknowledged: <YYYY-MM-DD>`. |
+| `tracker` | tracker branch | 75 (+5 mermaid, +5 ci-workflow, +5/contract; cap 85 prose-only / 95 with ≥1 typed contract — v2.13) | Issue/finding ledgers, audit-result lists. Exempts `G-CON-01` (no inlined contract) and `G-CON-02` (overview <500 chars). |
+| `index` | index branch | 70 (+10 if `child_modules > 0`, +5 mermaid, +5 ci-workflow, +5/contract; cap 90 prose-only / 100 with ≥1 typed contract — v2.11) | Placement-rule routers — folders whose only purpose is to demarcate scope and route children. Same gate exemptions as `tracker`. |
+| `meta-toolchain` | meta-toolchain branch | 75 (+10 if `has_normative_contract`, +5 if `md_files >= 30`, +5 mermaid, +5 ci-workflow; cap 100 — v2.10) | Auditor-self-reference modules (currently only `27-spec-toolchain`). Exempts `G-CON-01` and `G-TODO-01`. A `text` fenced block with ≥10 non-blank lines containing ≥2 of `CONTRACT:`, `INV-`, `FAIL-`, `DEL-`, `INVARIANT`, `BIJECTION` qualifies as `has_normative_contract`. |
+
+The `kind:` enum is also encoded in the OpenAPI `SpecAudit` schema lower in
+this overview (search for `enum: [future-spec, module, index, tracker,
+meta-toolchain]`).
+
+### `todo_audit_exempt: true` — opt out of TODO-density penalty (v2.14)
+
+```yaml
+---
+kind: meta-toolchain
+todo_audit_exempt: true
+---
+```
+
+When set, `metrics.todo_count` is forced to `0` regardless of how many real
+`TODO:` markers appear in prose, AND completeness scoring will not penalise
+the module for them.
+
+**Use only when** the module legitimately quotes work-tracker markers in prose
+because it documents the TODO detector itself (currently `spec/27-spec-toolchain/`).
+Misuse will silently mask actual unresolved work — reviewers should reject
+this opt-in for any module that is not auditor-self-reference content.
+
+The detector itself was tightened in v2.14 to require the canonical work-tracker
+shape (`TODO:` / `TODO(name):` / `TODO -`); narrative mentions like "marked TODO"
+or "TODO/FIXME density" no longer match. Most modules therefore do **not** need
+this opt-out.
+
+### `drift_acknowledged: <YYYY-MM-DD>` — paired with `kind: future-spec`
+
+Required when `kind: future-spec` is set. Documents the date on which the spec
+author acknowledged that current code does not satisfy the spec yet. Trace-map
+regression checks treat such modules' AC drift as expected, not as a finding.
+
+
+
 
 ## Inlined Contracts (Phase 52 — additional)
 
