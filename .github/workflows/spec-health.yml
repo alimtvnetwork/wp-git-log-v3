@@ -5,18 +5,13 @@ on:
     branches: [main]
     paths:
       - 'spec/**'
-      - 'linter-scripts/check-tree-health.cjs'
-      - 'linter-scripts/generate-spec-index.cjs'
-      - 'linter-scripts/check-spec-cross-links.py'
-      - 'linter-scripts/spec-cross-links.allowlist'
+      - 'linter-scripts/**'
       - '.github/workflows/spec-health.yml'
   pull_request:
     paths:
       - 'spec/**'
-      - 'linter-scripts/check-tree-health.cjs'
-      - 'linter-scripts/generate-spec-index.cjs'
-      - 'linter-scripts/check-spec-cross-links.py'
-      - 'linter-scripts/spec-cross-links.allowlist'
+      - 'linter-scripts/**'
+      - '.github/workflows/spec-health.yml'
 
 jobs:
   health-gate:
