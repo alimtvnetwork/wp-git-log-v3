@@ -31,12 +31,24 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install Node dependencies (mermaid, jsdom)
+        # Phase 97: mermaid + jsdom are required by check-mermaid-syntax.mjs.
+        # Both are already declared in package.json devDependencies; this step
+        # makes them resolvable to `node` via the local node_modules tree.
+        run: bun install --frozen-lockfile
+
       - name: Verify required scripts exist
         run: |
           test -f linter-scripts/check-tree-health.cjs || { echo "❌ check-tree-health.cjs missing"; exit 1; }
           test -f linter-scripts/generate-spec-index.cjs || { echo "❌ generate-spec-index.cjs missing"; exit 1; }
           test -f linter-scripts/check-lockstep.cjs || { echo "❌ check-lockstep.cjs missing"; exit 1; }
           test -f linter-scripts/audit-spec-vs-code-v2.py || { echo "❌ audit-spec-vs-code-v2.py missing"; exit 1; }
+          test -f linter-scripts/check-mermaid-syntax.mjs || { echo "❌ check-mermaid-syntax.mjs missing"; exit 1; }
           echo "✅ All required scripts present."
 
       - name: Self-heal missing consistency reports, AC, and changelogs
@@ -112,6 +124,16 @@ jobs:
         # byte-size match, JSON validity, module count, and sort ordering.
         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-26)
         run: bash linter-scripts/test/test-audit-deterministic-stability.sh
+
+      - name: Mermaid diagram syntax gate (Phase 97)
+        # Phase 97: parses every spec/**/*.mmd file with the mermaid library
+        # under a jsdom + DOMPurify shim. Catches broken diagram syntax
+        # pre-merge — previously a `.mmd` file could be malformed and CI
+        # would happily pass because no gate ever opened it. Pure parser
+        # invocation: no rendering, no Chromium, no network. Locks the
+        # `.mmd`-as-source-of-truth contract from Phase 93 (AC-SAG-23).
+        # Spec: spec/01-spec-authoring-guide/97-acceptance-criteria.md (AC-SAG-24)
+        run: node linter-scripts/check-mermaid-syntax.mjs
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at

@@ -115,3 +115,17 @@ else
   echo "⏭️  Skipped (node not installed or script missing)."
 fi
 
+# ── Step 6: Mermaid diagram syntax gate (Phase 97) ────────────────
+echo ""
+echo "═══ Step 6 — Mermaid diagram syntax gate ═══"
+if command -v node &>/dev/null && [ -f "$SCRIPT_DIR/check-mermaid-syntax.mjs" ]; then
+  if node "$SCRIPT_DIR/check-mermaid-syntax.mjs"; then
+    echo "✅ Mermaid syntax gate passed."
+  else
+    echo "❌ Mermaid syntax errors found in spec/**/*.mmd."
+    exit 1
+  fi
+else
+  echo "⏭️  Skipped (node not installed or script missing)."
+fi
+

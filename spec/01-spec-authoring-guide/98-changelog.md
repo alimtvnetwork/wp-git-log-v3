@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.7.0
+**Version:** 4.8.0
 **Last Updated:** 2026-04-27
 
 ---
+
+## 4.8.0 — 2026-04-27
+
+- Phase 97: added a new mermaid diagram syntax gate. New script `linter-scripts/check-mermaid-syntax.mjs` walks `spec/**/*.mmd` (106 files at ship time) and parses each with the official `mermaid` library (≥ v11) under a `jsdom` + `DOMPurify` shim. Pure parser invocation — no rendering, no Chromium, no network. The check found and fixed two pre-existing latent syntax errors: (1) `spec/01-spec-authoring-guide/lifecycle-spec-authoring.mmd` had a bare `%%` line in its comment header which mermaid mis-tokenises as a `%%{init}%%` directive — fixed by changing it to `%% --` (semantically a separator, parses cleanly); (2) `spec/12-cicd-pipeline-workflows/images/ci-pipeline-flow.mmd` had unquoted node labels containing `@` (e.g. `B[actions/checkout@v6]`) — fixed by quoting all labels. Wired into CI as the new "Mermaid diagram syntax gate (Phase 97)" step in `.github/workflows/spec-health.yml`, after the Phase 95 determinism test and before the trace-map regression gate. Added a new `bun install --frozen-lockfile` step (with `oven-sh/setup-bun@v2` action) earlier in the workflow so `mermaid` and `jsdom` (already declared in `package.json` devDependencies) resolve to `node`. Added **AC-SAG-24** in §97 documenting the contract, the three common author mistakes that fail it (bare `%%`, unquoted `@` labels, missing directive), and the determinism + side-effect-free guarantees. Lockstep: §97 v4.2.0 → v4.3.0; §99 v4.4.0 → v4.5.0. Final result: 106/106 `.mmd` files now parse cleanly.
 
 ## 4.7.0 — 2026-04-27
 
