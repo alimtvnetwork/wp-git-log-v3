@@ -71,3 +71,8 @@ No external cross-references detected. ✅
 - SQL DDL audit-log schema inlined.
 - Implementability raised 90 → 100.
 
+
+### 2026-04-27 — Phase 123 placeholder catalog
+
+- Added `09-placeholder-tokens.md` (v1.0.0) — canonical SoT for 6 install-script placeholder tokens across 2 syntactic families. Closes Phase 121 Candidate N. Inventory: 11 → 12 module files.
+- Lockstep: §97 acceptance surface updated (slot 09 added), §98 changelog row appended (banner 2.1.0 → 2.2.0).
