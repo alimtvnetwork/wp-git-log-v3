@@ -31,14 +31,15 @@
   "kind": "",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 8949,
+  "overview_chars": 10258,
   "ac_chars": 3227,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 2,
+  "code_blocks_total": 3,
   "code_blocks_by_lang": {
-    "json": 2
+    "json": 2,
+    "text": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
@@ -46,7 +47,7 @@
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
-  "has_normative_contract": false,
+  "has_normative_contract": true,
   "has_mermaid": false,
   "links_total": 9,
   "links_broken": 0,

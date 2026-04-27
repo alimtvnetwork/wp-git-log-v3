@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **81/100 (B)**  
+**Implementability Score:** **84/100 (B)**  
 **Blast radius:** 8/10
 
-> Deterministic score 81/100 (B) for spec/03-error-manage.
+> Deterministic score 84/100 (B) for spec/03-error-manage.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=8, gwt=7, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 45 | 15.8 |
+| Implementability | 35% | 55 | 19.2 |
 | Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,15 +31,16 @@
   "kind": "future-spec",
   "md_files": 5,
   "mmd_files": 0,
-  "overview_chars": 5893,
+  "overview_chars": 7185,
   "ac_chars": 4252,
   "ac_count": 8,
   "gwt_block_count": 7,
   "consistency_report": true,
-  "code_blocks_total": 4,
+  "code_blocks_total": 5,
   "code_blocks_by_lang": {
     "json": 1,
     "bash": 1,
+    "text": 1,
     "plain": 2
   },
   "has_sql_ddl": false,
@@ -48,7 +49,7 @@
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
-  "has_normative_contract": false,
+  "has_normative_contract": true,
   "has_mermaid": false,
   "links_total": 14,
   "links_broken": 0,
