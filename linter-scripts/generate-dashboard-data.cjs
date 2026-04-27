@@ -7,7 +7,15 @@
  *   1. Validate all markdown cross-references (broken link detection)
  *   2. Check for required files (00-overview.md, 99-consistency-report.md)
  *   3. Count files per subfolder
- *   4. Output a JSON report to spec/dashboard-data.json
+ *   4. Compute per-module rubric-v2.0.0 quality credits
+ *      (mirrors `linter-scripts/check-tree-health.cjs` Phase 30 rubric)
+ *   5. Output a JSON report to spec/dashboard-data.json
+ *
+ * Rubric (v2.0.0, propagated Phase 34):
+ *   Required (60%): 00-overview.md, 99-consistency-report.md
+ *   Recommended (25%): 97-acceptance-criteria.md, 98-changelog.md
+ *   Quality (15%): §99 ≥30 non-blank lines + Validation History heading
+ *                  + File/Module/Document Inventory heading
  *
  * Usage:  node linter-scripts/generate-dashboard-data.cjs [--json] [--quiet]
  */
