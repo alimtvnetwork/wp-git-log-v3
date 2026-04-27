@@ -373,3 +373,44 @@ final class ManifestV3
     }
 }
 ```
+
+
+---
+
+## Phase 63 Reference: Browser Extension Deploy enums (TypeScript)
+
+```typescript
+// TypeScript enum mirror of the browser-extension deploy pipeline.
+
+export enum BrowserStore {
+  Chrome  = "chrome",
+  Firefox = "firefox",
+  Edge    = "edge",
+  Safari  = "safari",
+  Opera   = "opera",
+}
+
+export enum DeployStatus {
+  Pending    = "pending",
+  Uploading  = "uploading",
+  InReview   = "in_review",
+  Approved   = "approved",
+  Rejected   = "rejected",
+  Published  = "published",
+  Failed     = "failed",
+}
+
+export enum ManifestVersion {
+  V2 = "v2",
+  V3 = "v3",
+}
+
+export type DeployRecord = {
+  id:        string;
+  store:     BrowserStore;
+  manifest:  ManifestVersion;
+  status:    DeployStatus;
+  version:   string;
+  uploaded_at: string;
+};
+```

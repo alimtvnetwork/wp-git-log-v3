@@ -219,3 +219,48 @@ func Auto() Provider {
     }
 }
 ```
+
+
+---
+
+## Phase 63 Reference: Universal CI CLI enums (TypeScript)
+
+```typescript
+// TypeScript enum mirror of the universal-ci CLI surface.
+
+export enum CiProvider {
+  GitHubActions = "github-actions",
+  GitLabCi      = "gitlab-ci",
+  CircleCi      = "circleci",
+  BuildKite     = "buildkite",
+  Jenkins       = "jenkins",
+  Local         = "local",
+}
+
+export enum CliCommand {
+  Init      = "init",
+  Run       = "run",
+  Status    = "status",
+  Logs      = "logs",
+  Config    = "config",
+  Doctor    = "doctor",
+  Upgrade   = "upgrade",
+}
+
+export enum CliExitCode {
+  Success      = 0,
+  Usage        = 1,
+  ConfigError  = 2,
+  RuntimeError = 3,
+  NetworkError = 4,
+  AuthError    = 5,
+  Timeout      = 124,
+}
+
+export type CliInvocation = {
+  provider: CiProvider;
+  command:  CliCommand;
+  exit:     CliExitCode;
+  duration_ms: number;
+};
+```

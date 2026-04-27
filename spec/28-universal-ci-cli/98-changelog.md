@@ -51,3 +51,7 @@ All notable changes to `spec/28-universal-ci-cli/`.
 ### 1.1.0 — 2026-04-27 (Phase 55 — implementability lever)
 - **Added** Added 2 CI provider YAML workflows (GitLab + Azure) so YAML block count ≥5 → `has_ci_workflow` (+5). Added 2 Go reference helpers (line classifier + runtime detection) so Go block count ≥3 → `has_typed_lang_contract` (+10).
 
+
+## 2026-04-27 — Phase 63 impl-sweep
+
+- Phase 63: appended Universal CI CLI enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).

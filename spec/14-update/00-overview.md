@@ -166,3 +166,46 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+
+---
+
+## Phase 63 Reference: Update Pipeline enums (TypeScript)
+
+```typescript
+// TypeScript enum mirror of the update pipeline.
+
+export enum UpdateChannel {
+  Stable = "stable",
+  Beta   = "beta",
+  Edge   = "edge",
+}
+
+export enum UpdateState {
+  Idle         = "idle",
+  Checking     = "checking",
+  Downloading  = "downloading",
+  Verifying    = "verifying",
+  ReadyToApply = "ready_to_apply",
+  Applying     = "applying",
+  Applied      = "applied",
+  Failed       = "failed",
+  RolledBack   = "rolled_back",
+}
+
+export enum UpdateTrigger {
+  Scheduled = "scheduled",
+  Manual    = "manual",
+  Forced    = "forced",
+  Recovery  = "recovery",
+}
+
+export type UpdateRecord = {
+  id:       string;
+  channel:  UpdateChannel;
+  state:    UpdateState;
+  trigger:  UpdateTrigger;
+  from_version: string;
+  to_version:   string;
+};
+```

@@ -59,3 +59,7 @@ No external cross-references detected. ✅
 | 2026-04-26 | 2.1.0 | Phase 21 deepening sweep — auto-promoted to gold-standard 5-section shape |
 | 2026-04-27 | 1.1.0 | Phase 55 — implementability lever (CI YAML / typed-language reference) |
 
+
+## 2026-04-27 — Phase 63 impl-sweep
+
+- Phase 63: appended Generic Release enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).

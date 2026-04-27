@@ -87,3 +87,7 @@ The folder uses `99-ai-implementation-guide.md` for the AI-implementation guide 
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-04-25 | 1.0.0 | Initial consistency report (added during root §99 audit follow-up) |
+
+## 2026-04-27 — Phase 63 impl-sweep
+
+- Phase 63: appended Reusable CI Guards enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).

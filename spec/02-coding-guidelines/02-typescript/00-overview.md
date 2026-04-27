@@ -315,3 +315,26 @@ components:
         line:     { type: integer, minimum: 1 }
         message:  { type: string }
 ```
+
+
+---
+
+## Phase 63 Reference: TypeScript Lint Lifecycle Diagram
+
+```mermaid
+stateDiagram-v2
+    [*] --> SourceChanged : developer edit
+    SourceChanged --> Formatting : prettier
+    Formatting --> StaticCheck : eslint
+    StaticCheck --> TypeCheck : tsc --noEmit
+    TypeCheck --> UnitTests : vitest run
+    UnitTests --> CoverageGate : istanbul
+    CoverageGate --> Passing : >= threshold
+    CoverageGate --> Failing : < threshold
+    StaticCheck --> Failing : lint error
+    TypeCheck --> Failing : type error
+    UnitTests --> Failing : test failure
+    Passing --> Mergeable : CI green
+    Failing --> SourceChanged : developer fixes
+    Mergeable --> [*]
+```

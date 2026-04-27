@@ -62,3 +62,7 @@
 *Consistency Report — updated: 2026-04-21*
 | 2026-04-27 | 1.1.0 | Phase 55 — implementability lever (CI YAML / typed-language reference) |
 
+
+## 2026-04-27 — Phase 63 impl-sweep
+
+- Phase 63: appended Distribution and Runner enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).

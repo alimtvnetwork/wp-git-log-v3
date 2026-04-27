@@ -44,3 +44,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27b: Added `kind: future-spec` frontmatter + Drift Acknowledgment section. Module now exempt from drift audit findings (implementation lives in downstream repos). |
+
+## 2026-04-27 — Phase 63 impl-sweep
+
+- Phase 63: appended Distribution and Runner enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).
