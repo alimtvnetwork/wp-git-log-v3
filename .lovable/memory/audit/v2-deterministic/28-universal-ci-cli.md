@@ -53,7 +53,7 @@
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_mermaid": false,
-  "links_total": 23,
+  "links_total": 19,
   "links_broken": 0,
   "todo_density": 1,
   "waffle_per_kchar": 0.18,

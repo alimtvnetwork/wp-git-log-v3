@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **62/100 (C)**  
+**Implementability Score:** **76/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 62/100 (C) for spec/01-spec-authoring-guide.
+> Deterministic score 76/100 (B) for spec/01-spec-authoring-guide.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=25, gwt=21, broken_links=13, waffle/kchar=0.44. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=25, gwt=21, broken_links=0, waffle/kchar=0.44. Gates active: 0.
 
 ---
 
@@ -18,8 +18,8 @@
 |---|---:|---:|---:|
 | Implementability | 35% | 40 | 14.0 |
 | Completeness | 20% | 85 | 17.0 |
-| Alignment | 15% | 40 | 6.0 |
-| Consistency | 10% | 50 | 5.0 |
+| Alignment | 15% | 100 | 15.0 |
+| Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 90 | 2.7 |
@@ -51,8 +51,8 @@
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_mermaid": false,
-  "links_total": 74,
-  "links_broken": 13,
+  "links_total": 47,
+  "links_broken": 0,
   "todo_density": 1,
   "waffle_per_kchar": 0.44,
   "child_modules": 0
@@ -61,7 +61,6 @@
 
 ## Implementability Blockers
 
-- 13 broken cross-spec link(s)
 - No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 
 ## Code Mapping
@@ -74,23 +73,17 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | broken-link | high | 7/10 | 13 broken cross-spec link(s) |
-| 2 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
-| 3 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
+| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
+| 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [HIGH] 13 broken cross-spec link(s)
-- **Category:** broken-link  |  **Impact:** 7/10
-- **Evidence:** links_total=74, links_broken=13
-- **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
-
-#### 2. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
 - **Evidence:** todo_density=1
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
 
-#### 3. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
+#### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
 - **Evidence:** code_blocks_by_lang={"bash": 3, "html": 2, "markdown": 26, "plain": 41, "text": 2}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

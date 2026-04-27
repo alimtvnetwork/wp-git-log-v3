@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **62/100 (C)**  
+**Implementability Score:** **76/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 62/100 (C) for spec/25-app-issues/02-consolidated-audit-findings.
+> Deterministic score 76/100 (B) for spec/25-app-issues/02-consolidated-audit-findings.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.04. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 1.
 
 ---
 
@@ -18,8 +18,8 @@
 |---|---:|---:|---:|
 | Implementability | 35% | 50 | 17.5 |
 | Completeness | 20% | 75 | 15.0 |
-| Alignment | 15% | 40 | 6.0 |
-| Consistency | 10% | 50 | 5.0 |
+| Alignment | 15% | 100 | 15.0 |
+| Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 80 | 5.6 |
 | Maintainability | 3% | 100 | 3.0 |
@@ -48,8 +48,8 @@
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_mermaid": false,
-  "links_total": 32,
-  "links_broken": 13,
+  "links_total": 15,
+  "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.04,
   "child_modules": 0
@@ -58,7 +58,7 @@
 
 ## Implementability Blockers
 
-- 13 broken cross-spec link(s)
+_(none — AI can build this)_
 
 ## Code Mapping
 
@@ -70,11 +70,5 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | broken-link | high | 7/10 | 13 broken cross-spec link(s) |
 
 ### Detail + Proposed Corrections
-
-#### 1. [HIGH] 13 broken cross-spec link(s)
-- **Category:** broken-link  |  **Impact:** 7/10
-- **Evidence:** links_total=32, links_broken=13
-- **Proposed correction:** Run linter-scripts/check-spec-cross-links.py and fix every reported link.
