@@ -913,5 +913,27 @@ def main():
     print(f"\n✓ Wrote {OUT}/00-index.md + EXECUTIVE-SUMMARY.md + {len(valid)} module reports", file=sys.stderr)
     print(f"  Mean weighted: {mean}/100  |  Mean implementability: {mean_impl}/100", file=sys.stderr)
 
+    # v2.12 (Phase 81): CI threshold gate. When --min-weighted=N and/or
+    # --min-impl=N flags are passed, exit non-zero if the means fall below
+    # those thresholds. Lets CI lock in the current quality bar without
+    # requiring a separate post-processing script.
+    min_weighted = None
+    min_impl_arg = None
+    for a in sys.argv[1:]:
+        if a.startswith("--min-weighted="):
+            min_weighted = int(a.split("=", 1)[1])
+        elif a.startswith("--min-impl="):
+            min_impl_arg = int(a.split("=", 1)[1])
+    failed = False
+    if min_weighted is not None and mean < min_weighted:
+        print(f"✗ FAIL: weighted mean {mean} < threshold {min_weighted}", file=sys.stderr)
+        failed = True
+    if min_impl_arg is not None and mean_impl < min_impl_arg:
+        print(f"✗ FAIL: implementability mean {mean_impl} < threshold {min_impl_arg}", file=sys.stderr)
+        failed = True
+    if (min_weighted is not None or min_impl_arg is not None) and not failed:
+        print(f"✓ PASS: thresholds met", file=sys.stderr)
+    sys.exit(1 if failed else 0)
+
 if __name__ == "__main__":
     main()
