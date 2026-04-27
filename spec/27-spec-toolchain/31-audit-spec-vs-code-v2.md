@@ -1,7 +1,7 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-25  
+**Version:** 1.3.0  
+**Updated:** 2026-04-27  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
 **Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates**)  
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
@@ -16,11 +16,11 @@ AI-implementability audit. Asks: *"Could a mediocre AI ship a working implementa
 
 1. Broader code index: `linter-scripts/` + `.github/` + `src/` presence.
 2. Deterministic pre-checks computed BEFORE AI scoring (so AI can be calibrated):
-   - waffle ratio (should/may/might/optionally per 1k chars)
+   - waffle ratio (should/may/might/optionally per 1k chars) — **prose only** (v2.4)
    - contract presence (DDL, JSON, TS enums, YAML/OpenAPI, Mermaid)
    - cross-spec link health (broken count)
    - AC count + Given/When/Then block count
-   - TODO/TBD/FIXME density
+   - TODO/TBD/FIXME density — **prose only** (v2.4); tokens inside fenced code blocks and inline `code` spans are excluded
 3. AI receives metrics + raw digest, must justify scores against them.
 4. Outputs blast-radius (0–10): how many other specs would benefit from fixing this one.
 
@@ -150,6 +150,11 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **Given** any audited module,
 - **When** the result envelope is read,
 - **Then** it MUST contain `raw_scores` (pre-gate) and `scores` (post-gate), and `weighted(scores) <= weighted(raw_scores)` for every module.
+
+### AC-31-11 — TODO/waffle scanners ignore code samples (v2.4)
+- **Given** a module whose only `TODO`/`FIXME` tokens appear inside fenced code blocks (```` ``` ````) or inline `code` spans,
+- **When** the deterministic metrics are computed,
+- **Then** `metrics.todo_density` MUST equal `0` AND the `G-TODO-01` gate MUST NOT fire. The same prose-only rule applies to `WAFFLE_RX` so `waffle_per_kchar` reflects spec narrative, not code samples.
 
 ## Cross-references
 

@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.3** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.4** — AI-Implementability Edition.
+
+v2.4 (2026-04-27, Phase R4):
+  - TODO/TBD/FIXME and waffle-word scanners now strip fenced code blocks
+    (```...```) and inline `code` spans before counting. Tokens that appear
+    inside code samples (legitimate variable names, comments demonstrating
+    a forbidden pattern, schema placeholders, etc.) no longer trigger the
+    G-TODO-01 finding or inflate the waffle ratio. Prose-only scanning.
 
 v2.3 (2026-04-26, Phase 25):
   - Contract definition expanded: typed-language reference blocks
@@ -77,8 +84,16 @@ GWT_RX    = re.compile(r"\*\*Given\*\*.*?\*\*When\*\*.*?\*\*Then\*\*", re.S | re
 AC_RX     = re.compile(r"(?:^|\n)\s*###?\s*AC[-\s]?[A-Z\d-]+", re.I)
 LINK_RX   = re.compile(r"\[([^\]]+)\]\(([^)#]+\.md)(?:#[^)]*)?\)")
 CODE_BLOCK_RX = re.compile(r"```(\w+)?\n(.*?)```", re.S)
+INLINE_CODE_RX = re.compile(r"`[^`\n]+`")
 FRONTMATTER_RX = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 KIND_RX        = re.compile(r"^kind:\s*([A-Za-z0-9_-]+)\s*$", re.M)
+
+def strip_code(text: str) -> str:
+    """Remove fenced code blocks and inline code so TODO/waffle scanners
+    see prose only. Tokens like TODO inside ```python blocks are not
+    spec-level incompleteness markers."""
+    no_fences = CODE_BLOCK_RX.sub("", text)
+    return INLINE_CODE_RX.sub("", no_fences)
 
 # ---------------- code surface ----------------
 def collect_code_index() -> str:
@@ -179,10 +194,13 @@ def deterministic_metrics(folder: Path) -> dict:
     ac_ids = AC_RX.findall(ac)
     gwt_blocks = len(GWT_RX.findall(ac))
 
-    # waffle
-    chars = max(len(body_text), 1)
-    waffle = len(WAFFLE_RX.findall(body_text))
+    # waffle + TODO scanning — strip code blocks/inline code so tokens
+    # inside fenced samples don't pollute prose-level metrics (v2.4).
+    prose_text = strip_code(body_text)
+    chars = max(len(prose_text), 1)
+    waffle = len(WAFFLE_RX.findall(prose_text))
     waffle_per_kchar = round(waffle / chars * 1000, 2)
+    todo_count = len(TODO_RX.findall(prose_text))
 
     # mermaid + other companion artefacts
     mmd_files = list(folder.glob("*.mmd"))
@@ -207,7 +225,7 @@ def deterministic_metrics(folder: Path) -> dict:
         "has_mermaid":         len(mmd_files) > 0,
         "links_total":         total,
         "links_broken":        broken,
-        "todo_density":        len(TODO_RX.findall(body_text)),
+        "todo_density":        todo_count,
         "waffle_per_kchar":    waffle_per_kchar,
         "child_modules":       len(CHILDREN.get(MOD_REL[folder], [])),
     }
