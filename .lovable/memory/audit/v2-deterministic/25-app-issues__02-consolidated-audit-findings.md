@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **88/100 (A)**  
+**Implementability Score:** **90/100 (A)**  
 **Blast radius:** 0/10
 
-> Deterministic score 88/100 (A) for spec/25-app-issues/02-consolidated-audit-findings.
+> Deterministic score 90/100 (A) for spec/25-app-issues/02-consolidated-audit-findings.
 
 
 **Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 85 | 29.8 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |

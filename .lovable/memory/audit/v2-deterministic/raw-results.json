@@ -3857,7 +3857,7 @@
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 80
     },
@@ -3867,12 +3867,12 @@
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/05-split-db-architecture/03-issues.",
-    "weighted_overall": 86
+    "verdict": "Deterministic score 88/100 (A) for spec/05-split-db-architecture/03-issues.",
+    "weighted_overall": 88
   },
   {
     "applied_gates": [],
@@ -4066,7 +4066,7 @@
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 80
     },
@@ -4076,12 +4076,12 @@
       "clarity": 100,
       "completeness": 65,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/06-seedable-config-architecture/03-issues.",
-    "weighted_overall": 86
+    "verdict": "Deterministic score 88/100 (A) for spec/06-seedable-config-architecture/03-issues.",
+    "weighted_overall": 88
   },
   {
     "applied_gates": [],
@@ -5755,7 +5755,7 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 80
     },
@@ -5765,12 +5765,12 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 85,
+      "implementability": 90,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 88/100 (A) for spec/25-app-issues/02-consolidated-audit-findings.",
-    "weighted_overall": 88
+    "verdict": "Deterministic score 90/100 (A) for spec/25-app-issues/02-consolidated-audit-findings.",
+    "weighted_overall": 90
   },
   {
     "applied_gates": [],
