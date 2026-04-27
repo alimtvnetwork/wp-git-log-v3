@@ -60,3 +60,20 @@ optional; absent flags preserve legacy behaviour (always exit 0 on success).
    the new audit flags as part of the toolchain bijection.
 5. **B1** — `spec/22-git-logs-v2/07-app-entity.md` decision (user input).
 6. **R1** — Real-AI re-audit (Lovable Cloud required).
+
+---
+
+## Retrospective (added in Phase 92)
+
+Outcome map for the "Next phases (queued)" list above:
+
+| # | Original queued task | Actual outcome |
+|---|---|---|
+| 1 | Phase 82 — evidenced-tracker contract bonus (cap 90) | ✅ **Shipped in Phase 82** but with **cap 95** (stronger than queued; rubric v2.13). |
+| 2 | Phase 83 — audit `weighted_overall < 95` modules | ✅ **Shipped in Phase 83**: rubric v2.14 (TODO regex tightening + `todo_audit_exempt`) + AC injection on 30 modules; mean weighted 96.5 → **98.0**. |
+| 3 | Phase 84 — cumulative schema-bonus cap | ❌ **REJECTED in Phase 86** after empirical test: mean impl 99.8 → 89.2; 76 multi-contract modules unfairly penalised. Source comment + memo `phase-86-schema-cap-rejected.md` preserve rejected design. **Do not re-propose without new corpus data.** |
+| 4 | Phase 85 — `27-spec-toolchain/72-min-thresholds.md` | ❌ **Superseded by Phase 85's chosen approach**: documented the new flags in `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` (script's own spec, AC-31-20) instead of creating a new `72-*` slot. Bijection is preserved without expanding the toolchain numbering. |
+| 5 | B1 decision | 🚧 Still pending user input. |
+| 6 | R1 real-AI re-audit | 🚧 Still blocked on Lovable Cloud. |
+
+Floors quoted at the time (`weighted=95 / impl=98`) were tightened to **97 / 99** in Phase 84 after Phases 82–83 lifted the means. See `phase-84-ci-floor-tighten.md`.
