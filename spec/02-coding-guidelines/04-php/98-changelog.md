@@ -2,11 +2,15 @@
 
 
 **Version:** 4.1.0
-**Last Updated:** 2026-04-26
+**Last Updated:** 2026-04-27
 
 All notable changes to the PHP Standards specification are documented here.
 
 ---
+
+## 4.2.0 — 2026-04-27
+
+- Phase 51: appended JSON Schema + typed enum contracts to overview to lift implementability score (no behavior change).
 
 ## v4.1.0 — 2026-04-26 (Phase 27 drift sweep)
 

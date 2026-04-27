@@ -1,7 +1,7 @@
 # App Issues
 
 **Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-27  
 **AI Confidence:** High  
 **Ambiguity:** None
 
