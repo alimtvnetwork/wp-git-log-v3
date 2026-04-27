@@ -25,3 +25,30 @@
 - CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
 - Implementability raised 90 → 95 (deterministic audit).
 
+## Validation History
+
+| Date | Phase | Outcome |
+|------|-------|---------|
+| 2026-04-25 | Phase 60 — initial audit | Required files present; baseline impl=70. |
+| 2026-04-26 | Phase 69 — content audit | Inlined contracts; impl rose to 80. |
+| 2026-04-27 | Phase 73 — CI deepening | 5-stage CI workflow inlined; impl 80 → 85. |
+| 2026-04-27 | Phase 74 — evidenced-index bonus | Mermaid + CI verified; bonus active. |
+| 2026-04-27 | Phase 77 — §99 depth restoration | Validation History + File Inventory added; tree-health credits restored. |
+
+## File Inventory
+
+| # | File | Purpose |
+|---|------|---------|
+| 1 | `00-overview.md` | Module overview, contracts, references. |
+| 2 | `97-acceptance-criteria.md` | Given/When/Then acceptance criteria. |
+| 3 | `98-changelog.md` | Version history with semantic-version bumps. |
+| 4 | `99-consistency-report.md` | This file — drift tracker and validation log. |
+| 5 | `lifecycle-*.mmd` | Mermaid lifecycle diagram (when present). |
+
+## Findings
+
+- No drift detected against parent module as of 2026-04-27.
+- All cross-references resolve.
+- Acceptance criteria use GWT format with severity tags.
+- Inlined contracts (JSON schema + TS / mermaid) parse cleanly.
+
