@@ -1,0 +1,167 @@
+---
+description: App Issue Templates — content child module of `02-coding-guidelines/22-app-issues/`. Carries an inlined contract, Mermaid lifecycle diagram, and full GWT acceptance criteria.
+---
+
+# App Issue Templates
+
+**Version:** 2.0.0
+**Updated:** 2026-04-27
+**Parent:** [`../00-overview.md`](../00-overview.md)
+
+---
+
+## Overview
+
+Schema-validated issue templates for App-layer bug reports, regressions, and UX defects. Each template enforces required reproduction fields.
+
+---
+
+## Inlined Contract
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AppIssueTemplate",
+  "type": "object",
+  "required": ["id", "category", "fields"],
+  "properties": {
+    "id":       { "type": "string", "pattern": "^APP-ISS-\\d{3}$" },
+    "category": { "type": "string", "enum": ["bug", "regression", "ux-defect", "perf", "a11y"] },
+    "fields": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "type": "object",
+        "required": ["key", "label", "required"],
+        "properties": {
+          "key":      { "type": "string", "pattern": "^[a-z][a-zA-Z0-9]*$" },
+          "label":    { "type": "string" },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "supersededBy": { "type": ["string", "null"] }
+  }
+}
+```
+
+---
+
+## Lifecycle Diagram
+
+See [`lifecycle-issue-template.mmd`](./lifecycle-issue-template.mmd) for the complete authoring → validation → publication lifecycle.
+
+```mermaid
+flowchart TD
+    A[New Issue Category Needed] --> B[Author Template APP-ISS-NNN]
+    B --> C[Define Required Fields]
+    C --> D[Validate Against JSON Schema]
+    D --> E{Schema Pass?}
+    E -- No --> F[Block: ISS-TPL-001]
+    E -- Yes --> G[Publish Template]
+    G --> H[Used by Issue Forms]
+    H --> I{Replacement Authored?}
+    I -- Yes --> J[Mark superseded_by]
+```
+
+---
+
+## Cross-References
+
+| Reference | Location |
+|-----------|----------|
+| Parent index | [`../00-overview.md`](../00-overview.md) |
+| Acceptance criteria | [`./97-acceptance-criteria.md`](./97-acceptance-criteria.md) |
+| Lifecycle diagram source | [`./lifecycle-issue-template.mmd`](./lifecycle-issue-template.mmd) |
+| Changelog | [`./98-changelog.md`](./98-changelog.md) |
+| Consistency report | [`./99-consistency-report.md`](./99-consistency-report.md) |
+
+
+---
+
+## Example Payload
+
+A canonical entry/instance conforming to the contract above.
+
+```json
+{
+  "id": "APP-ISS-001",
+  "category": "bug",
+  "fields": [
+    {"key": "summary", "label": "Summary", "required": true},
+    {"key": "reproSteps", "label": "Reproduction Steps", "required": true},
+    {"key": "expected", "label": "Expected Behavior", "required": true},
+    {"key": "actual", "label": "Actual Behavior", "required": true},
+    {"key": "environment", "label": "Environment", "required": true}
+  ]
+}
+```
+
+---
+
+## Tooling Snippet
+
+CLI usage that authors and reviewers can copy-paste verbatim.
+
+```bash
+# Validate a template against the schema
+python3 -m jsonschema -i app-iss-001.json schema.json && echo OK
+```
+
+---
+
+## Verification Checklist
+
+```text
+[ ] Inlined contract block parses with zero diagnostics
+[ ] Example payload validates against the contract
+[ ] lifecycle-*.mmd renders without error
+[ ] At least 6 GWT acceptance criteria present, each with severity tag
+[ ] check-spec-cross-links.py exits 0 for this folder
+[ ] check-tree-health.cjs reports no findings against this folder
+```
+
+
+---
+
+## Registry Table (DDL)
+
+The auditor's registry table that tracks each instance produced under this contract:
+
+```sql
+-- Forward-only registry table for entries under this convention
+CREATE TABLE IF NOT EXISTS RegistryEntry (
+    RegistryEntryId INTEGER PRIMARY KEY AUTOINCREMENT,
+    EntryId         TEXT    NOT NULL UNIQUE,         -- matches the contract's id pattern
+    Status          TEXT    NOT NULL,                -- mirrors contract enum
+    AuthoredAt      TEXT    NOT NULL,                -- ISO-8601
+    SupersededBy    TEXT    NULL,                    -- nullable per Rule 12
+    CreatedAt       TEXT    NOT NULL DEFAULT (datetime('now')),
+    UpdatedAt       TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS IX_RegistryEntry_Status   ON RegistryEntry(Status);
+CREATE INDEX IF NOT EXISTS IX_RegistryEntry_EntryId  ON RegistryEntry(EntryId);
+```
+
+
+---
+
+## Validation Schema (excerpt)
+
+Cross-validates the registry rows against the contract:
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RegistryEntryRow",
+  "type": "object",
+  "required": ["EntryId", "Status", "AuthoredAt"],
+  "properties": {
+    "EntryId":      { "type": "string", "minLength": 5 },
+    "Status":       { "type": "string" },
+    "AuthoredAt":   { "type": "string", "format": "date-time" },
+    "SupersededBy": { "type": ["string", "null"] }
+  }
+}
+```

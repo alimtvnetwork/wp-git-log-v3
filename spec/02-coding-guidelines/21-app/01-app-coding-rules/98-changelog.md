@@ -1,0 +1,17 @@
+# Changelog — App-Specific Coding Rules
+
+**Version:** 2.0.0  
+**Updated:** 2026-04-27
+
+
+## 2026-04-27 — 2.0.0 (Phase 69b)
+
+- Promoted from index-stub (Phase 69) to content module.
+- Added inlined contract block (JSON Schema / TypeScript interface / SQL DDL as appropriate).
+- Added Mermaid lifecycle diagram as standalone `*.mmd` file AND inlined in `00-overview.md`.
+- Expanded acceptance criteria from 2 to 6, all in GWT format with severity tags.
+- Removed `kind: index` frontmatter — module now carries normative content.
+
+## 2026-04-27 — 1.0.0 (Phase 69)
+
+- Initial creation as index-stub child to lift parent from impl=70 to impl=80.

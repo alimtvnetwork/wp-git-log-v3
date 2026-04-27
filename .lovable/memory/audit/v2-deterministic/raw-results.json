@@ -1398,19 +1398,19 @@
   },
   {
     "applied_gates": [],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2568,
       "ac_count": 5,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {
         "bash": 1
       },
@@ -1438,9 +1438,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -1448,14 +1448,79 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/02-coding-guidelines/10-research.",
-    "weighted_overall": 81
+    "verdict": "Deterministic score 87/100 (A) for spec/02-coding-guidelines/10-research.",
+    "weighted_overall": 87
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 5,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1618,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 3,
+        "mermaid": 1,
+        "sql": 1,
+        "text": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": false,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4390,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "02-coding-guidelines/10-research/01-research-index",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 89/100 (A) for spec/02-coding-guidelines/10-research/01-research-index.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [],
@@ -1593,19 +1658,19 @@
   },
   {
     "applied_gates": [],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2942,
       "ac_count": 6,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {},
       "code_blocks_total": 0,
       "consistency_report": true,
@@ -1631,9 +1696,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 80,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -1641,30 +1706,96 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 80,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/21-app.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 88/100 (A) for spec/02-coding-guidelines/21-app.",
+    "weighted_overall": 88
   },
   {
     "applied_gates": [],
-    "blast_radius": 0,
+    "blast_radius": 7,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1629,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 2,
+        "mermaid": 1,
+        "sql": 1,
+        "text": 1,
+        "ts": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": true,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4559,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "02-coding-guidelines/21-app/01-app-coding-rules",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 92/100 (A) for spec/02-coding-guidelines/21-app/01-app-coding-rules.",
+    "weighted_overall": 92
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 2,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2576,
       "ac_count": 5,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {
         "bash": 1
       },
@@ -1692,9 +1823,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -1702,30 +1833,95 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/02-coding-guidelines/22-app-issues.",
-    "weighted_overall": 81
+    "verdict": "Deterministic score 87/100 (A) for spec/02-coding-guidelines/22-app-issues.",
+    "weighted_overall": 87
   },
   {
     "applied_gates": [],
-    "blast_radius": 0,
+    "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1623,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 3,
+        "mermaid": 1,
+        "sql": 1,
+        "text": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": false,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4795,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "02-coding-guidelines/22-app-issues/01-app-issue-templates",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 89/100 (A) for spec/02-coding-guidelines/22-app-issues/01-app-issue-templates.",
+    "weighted_overall": 89
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 2,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3619,
       "ac_count": 6,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {},
       "code_blocks_total": 0,
       "consistency_report": true,
@@ -1751,9 +1947,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 80,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -1761,30 +1957,95 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 80,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/23-app-database.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 88/100 (A) for spec/02-coding-guidelines/23-app-database.",
+    "weighted_overall": 88
   },
   {
     "applied_gates": [],
-    "blast_radius": 0,
+    "blast_radius": 5,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1628,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 1,
+        "mermaid": 1,
+        "sql": 3,
+        "text": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": false,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4624,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "02-coding-guidelines/23-app-database/01-app-database-conventions",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 89/100 (A) for spec/02-coding-guidelines/23-app-database/01-app-database-conventions.",
+    "weighted_overall": 89
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 2,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3800,
       "ac_count": 6,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {},
       "code_blocks_total": 0,
       "consistency_report": true,
@@ -1810,9 +2071,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 80,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -1820,14 +2081,81 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 80,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/24-app-design-system-and-ui.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 88/100 (A) for spec/02-coding-guidelines/24-app-design-system-and-ui.",
+    "weighted_overall": 88
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 7,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1622,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 1,
+        "mermaid": 1,
+        "sql": 1,
+        "text": 1,
+        "ts": 1,
+        "tsx": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": true,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4898,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 92/100 (A) for spec/02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions.",
+    "weighted_overall": 92
   },
   {
     "applied_gates": [],
@@ -3754,19 +4082,19 @@
   },
   {
     "applied_gates": [],
-    "blast_radius": 0,
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2522,
       "ac_count": 5,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {
         "bash": 2
       },
@@ -3794,9 +4122,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -3804,14 +4132,79 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/10-research.",
-    "weighted_overall": 83
+    "verdict": "Deterministic score 89/100 (A) for spec/10-research.",
+    "weighted_overall": 89
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 5,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1628,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 3,
+        "mermaid": 1,
+        "sql": 1,
+        "text": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": false,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4578,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "10-research/01-research-index",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 80,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 89/100 (A) for spec/10-research/01-research-index.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [],
@@ -4364,19 +4757,19 @@
   },
   {
     "applied_gates": [],
-    "blast_radius": 4,
+    "blast_radius": 6,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2594,
       "ac_count": 5,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {
         "bash": 1,
         "json": 1,
@@ -4407,9 +4800,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -4417,14 +4810,80 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/14-update/diagrams.",
-    "weighted_overall": 83
+    "verdict": "Deterministic score 89/100 (A) for spec/14-update/diagrams.",
+    "weighted_overall": 89
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 7,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1630,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 1,
+        "mermaid": 2,
+        "sql": 1,
+        "text": 1,
+        "ts": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": true,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4617,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "14-update/diagrams/01-diagram-conventions",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 92/100 (A) for spec/14-update/diagrams/01-diagram-conventions.",
+    "weighted_overall": 92
   },
   {
     "applied_gates": [],
@@ -5215,7 +5674,7 @@
   },
   {
     "applied_gates": [],
-    "blast_radius": 4,
+    "blast_radius": 6,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
@@ -5227,7 +5686,7 @@
     "metrics": {
       "ac_chars": 17103,
       "ac_count": 21,
-      "child_modules": 0,
+      "child_modules": 1,
       "code_blocks_by_lang": {
         "json": 1,
         "text": 2,
@@ -5257,9 +5716,9 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 90,
+      "completeness": 100,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
@@ -5267,14 +5726,80 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 90,
+      "completeness": 100,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 86/100 (A) for spec/26-gitlogs-diagrams.",
-    "weighted_overall": 86
+    "verdict": "Deterministic score 92/100 (A) for spec/26-gitlogs-diagrams.",
+    "weighted_overall": 92
+  },
+  {
+    "applied_gates": [],
+    "blast_radius": 7,
+    "code_mapping": {
+      "expected_but_missing": [],
+      "implemented_by": [],
+      "orphan_code": []
+    },
+    "findings": [],
+    "grade": "A",
+    "implementability_blockers": [],
+    "metrics": {
+      "ac_chars": 1632,
+      "ac_count": 6,
+      "child_modules": 0,
+      "code_blocks_by_lang": {
+        "bash": 1,
+        "json": 2,
+        "mermaid": 1,
+        "sql": 1,
+        "text": 1,
+        "ts": 1
+      },
+      "code_blocks_total": 7,
+      "consistency_report": true,
+      "gwt_block_count": 6,
+      "has_ci_workflow": false,
+      "has_json_schema": true,
+      "has_mermaid": true,
+      "has_normative_contract": false,
+      "has_sql_ddl": true,
+      "has_ts_enums": true,
+      "has_typed_lang_contract": false,
+      "has_yaml_openapi": false,
+      "kind": "",
+      "links_broken": 0,
+      "links_total": 0,
+      "md_files": 4,
+      "mmd_files": 1,
+      "overview_chars": 4631,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.0
+    },
+    "module": "26-gitlogs-diagrams/01-diagram-conventions",
+    "raw_scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 80,
+      "consistency": 100,
+      "implementability": 90,
+      "maintainability": 100,
+      "testability": 96
+    },
+    "verdict": "Deterministic score 92/100 (A) for spec/26-gitlogs-diagrams/01-diagram-conventions.",
+    "weighted_overall": 92
   },
   {
     "applied_gates": [],

@@ -1,14 +1,14 @@
-# Audit v2 — `spec/02-coding-guidelines/24-app-design-system-and-ui`
+# Audit v2 — `spec/02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **88/100 (A)**  
-**Blast radius:** 2/10
+**Implementability Score:** **92/100 (A)**  
+**Blast radius:** 7/10
 
-> Deterministic score 88/100 (A) for spec/02-coding-guidelines/24-app-design-system-and-ui.
+> Deterministic score 92/100 (A) for spec/02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,41 +16,49 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 80 | 28.0 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 80 | 5.6 |
+| Testability | 7% | 96 | 6.7 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
 ```json
 {
-  "kind": "index",
+  "kind": "",
   "md_files": 4,
-  "mmd_files": 0,
-  "overview_chars": 1333,
-  "ac_chars": 3800,
+  "mmd_files": 1,
+  "overview_chars": 4898,
+  "ac_chars": 1622,
   "ac_count": 6,
-  "gwt_block_count": 5,
+  "gwt_block_count": 6,
   "consistency_report": true,
-  "code_blocks_total": 0,
-  "code_blocks_by_lang": {},
-  "has_sql_ddl": false,
-  "has_json_schema": false,
-  "has_ts_enums": false,
+  "code_blocks_total": 7,
+  "code_blocks_by_lang": {
+    "ts": 1,
+    "mermaid": 1,
+    "tsx": 1,
+    "bash": 1,
+    "text": 1,
+    "sql": 1,
+    "json": 1
+  },
+  "has_sql_ddl": true,
+  "has_json_schema": true,
+  "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
   "has_normative_contract": false,
-  "has_mermaid": false,
-  "links_total": 8,
+  "has_mermaid": true,
+  "links_total": 0,
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.0,
-  "child_modules": 1
+  "child_modules": 0
 }
 ```
 
