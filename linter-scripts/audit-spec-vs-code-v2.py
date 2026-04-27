@@ -3,15 +3,18 @@
 Spec-vs-Code Audit **v2.15** — AI-Implementability Edition.
 
 v2.15 (2026-04-27, Phase 86):
-  - Cumulative schema-bonus cap with diminishing returns (normal contract
-    branch only). The strongest contract bonus applies at full weight; every
-    subsequent contract bonus is halved (floor); contract-bonus subtotal
-    hard-capped at 50. Pre-v2.15 a kitchen-sink module with all six contract
-    types stacked +70 (SQL+JSON+TS+OpenAPI+typed-lang+CI), absorbed silently
-    by the 100-cap. New formula: 20 + 15//2 + 10//2 + 10//2 + 10//2 + 5//2 = 41.
-  - Net effect on current corpus: 0 modules currently exceed +50 schema
-    subtotal, so mean weighted / impl unchanged. Locks in rubric purity for
-    future kitchen-sink contributions.
+  - Rubric-hygiene investigation REJECTED. Considered diminishing-returns
+    schema-bonus cap (strongest contract at full weight, subsequent bonuses
+    halved, subtotal capped at 50) to address theoretical kitchen-sink
+    stacking. Empirical test on the 87-module corpus: mean implementability
+    99.8 → 89.2, mean weighted 98.0 → 94.1; 76 normal-contract modules
+    legitimately satisfy ≥3 contract types and were unfairly penalised.
+  - Decision: keep the v2.3 additive contract-bonus model; the existing
+    100-cap on `impl` already prevents pathological stacking. Multi-contract
+    breadth (e.g. §22-git-logs-v2 with SQL+TS+JSON+YAML) genuinely encodes
+    more invariants and warrants the full bonus.
+  - Net effect: zero rubric or score change; documents the rejected
+    alternative in source for future contributors who might re-propose it.
 
 v2.9 (2026-04-27, Phase 46):
   - Root index spec (`spec/00-overview.md`, MOD_REL == ".") now receives the
