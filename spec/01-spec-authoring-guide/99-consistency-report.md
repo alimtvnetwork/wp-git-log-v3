@@ -37,6 +37,8 @@
 | 08 | `08-cross-references.md` | ✅ Present |
 | 09 | `09-exceptions.md` | ✅ Present |
 | 10 | `10-mandatory-linter-infrastructure.md` | ✅ Present |
+| 11 | `11-root-readme-conventions.md` | ✅ Present |
+| 12 | `12-queued-decisions-trail.md` | ✅ Present (Phase 38) |
 | 97 | `97-acceptance-criteria.md` | ✅ Present |
 | 98 | `98-changelog.md` | ✅ Present |
 | 99 | `99-consistency-report.md` | ✅ Present |
