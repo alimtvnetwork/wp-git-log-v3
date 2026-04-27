@@ -194,10 +194,13 @@ def deterministic_metrics(folder: Path) -> dict:
     ac_ids = AC_RX.findall(ac)
     gwt_blocks = len(GWT_RX.findall(ac))
 
-    # waffle
-    chars = max(len(body_text), 1)
-    waffle = len(WAFFLE_RX.findall(body_text))
+    # waffle + TODO scanning — strip code blocks/inline code so tokens
+    # inside fenced samples don't pollute prose-level metrics (v2.4).
+    prose_text = strip_code(body_text)
+    chars = max(len(prose_text), 1)
+    waffle = len(WAFFLE_RX.findall(prose_text))
     waffle_per_kchar = round(waffle / chars * 1000, 2)
+    todo_count = len(TODO_RX.findall(prose_text))
 
     # mermaid + other companion artefacts
     mmd_files = list(folder.glob("*.mmd"))
