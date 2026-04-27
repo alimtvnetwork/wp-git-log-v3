@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.6** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.8** — AI-Implementability Edition.
+
+v2.8 (2026-04-27, Phase 45):
+  - `kind: meta-toolchain` modules now use a tracker-style implementability
+    baseline (85) when they expose a normative contract block (`text` fenced
+    block ≥10 non-blank lines containing INV- / FAIL- / DEL- / CONTRACT:
+    markers, OR ≥30 child spec files acting as the bijection table).
+  - Rationale: the `27-spec-toolchain` module's "contract" is the inventory
+    of script specs + invariants table; it has no DDL/OpenAPI but IS fully
+    implementable from spec alone (every section maps 1:1 to a script).
+  - Effect: §27 implementability 55 → 85; §27 weighted 78 → ~88; mean
+    weighted 82.3 → ~84.
 
 v2.6 (2026-04-27, Phase 43):
   - Cross-spec link extraction now runs against code-stripped prose, not
