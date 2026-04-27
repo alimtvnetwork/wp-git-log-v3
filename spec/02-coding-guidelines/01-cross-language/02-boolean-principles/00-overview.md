@@ -222,3 +222,23 @@ components:
               line:   { type: integer, minimum: 1 }
               snippet: { type: string }
 ```
+
+
+## Phase 66 Reference
+
+### Lifecycle Diagram (Phase 66)
+
+See `lifecycle-boolean-naming.mmd` for the boolean-naming linter decision tree.
+
+```mermaid
+flowchart TD
+    A[Boolean Variable Authored] --> B{Has is/has/can/should prefix?}
+    B -- No --> C[Reject: BOOL-001]
+    B -- Yes --> D{Negation in name?}
+    D -- Yes (isNotReady) --> E[Reject: BOOL-002 invert]
+    D -- No --> F{Returns bool from function?}
+    F -- Yes --> G[Verify same prefix rule]
+    F -- No --> H[Lint Pass]
+    G --> H
+    H --> I[Merge]
+```

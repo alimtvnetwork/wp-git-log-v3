@@ -933,3 +933,24 @@ components:
         grade:            { type: string, enum: [A, B, C, D, F] }
         audited_at:       { type: string, format: date-time }
 ```
+
+
+## Phase 66 Reference
+
+### Lifecycle Diagram (Phase 66)
+
+See `lifecycle-spec-authoring.mmd` for the module-authoring → linter → tree-health → merge flow.
+
+```mermaid
+flowchart TD
+    A[New Spec Module Proposed] --> B[Apply naming conventions]
+    B --> C[Create required files: 00, 97, 98, 99]
+    C --> D[Author overview from template]
+    D --> E[Define ACs in GWT format]
+    E --> F[Add cross-references]
+    F --> G{Linters Pass?}
+    G -- No --> H[Fix violations]
+    H --> G
+    G -- Yes --> I[Tree-health audit]
+    I --> J[Merge to spec/]
+```

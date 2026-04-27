@@ -338,3 +338,25 @@ stateDiagram-v2
     Failing --> SourceChanged : developer fixes
     Mergeable --> [*]
 ```
+
+
+## Phase 66 Reference
+
+### Lifecycle Diagram (Phase 66)
+
+See `lifecycle-ts-quality-gate.mmd` for the TypeScript tsc → eslint → prettier → vitest gate chain.
+
+```mermaid
+flowchart TD
+    A[TS File Edit] --> B[tsc --noEmit]
+    B --> C{Type Errors?}
+    C -- Yes --> D[Block: TS-TYPE-001]
+    C -- No --> E[eslint + @typescript-eslint]
+    E --> F{Lint Errors?}
+    F -- Yes --> D
+    F -- No --> G[prettier --check]
+    G --> H[vitest run]
+    H --> I{Tests Pass?}
+    I -- No --> D
+    I -- Yes --> J[Merge]
+```

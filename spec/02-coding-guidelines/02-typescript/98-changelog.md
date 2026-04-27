@@ -58,3 +58,8 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 ## 2026-04-27 — Phase 63 impl-sweep
 
 - Phase 63: appended TypeScript Lint Lifecycle Diagram mermaid diagram to satisfy `has_mermaid` rubric (impl 85 → 90).
+
+## 2026-04-27 — Phase 66 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 66 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

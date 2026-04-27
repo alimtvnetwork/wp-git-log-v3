@@ -122,3 +122,24 @@ components:
         total_cost_usd:  { type: number, minimum: 0 }
         error_rate:      { type: number, minimum: 0, maximum: 1 }
 ```
+
+
+## Phase 66 Reference
+
+### Lifecycle Diagram (Phase 66)
+
+See `lifecycle-ai-optimization.mmd` for the AI-implementability scoring loop on spec edits.
+
+```mermaid
+flowchart TD
+    A[Spec Module Edited] --> B[Compute waffle_per_kchar]
+    B --> C{< threshold?}
+    C -- No --> D[Block: AI-OPT-001]
+    C -- Yes --> E[Verify GWT density]
+    E --> F[Verify contract presence]
+    F --> G[Verify cross-link validity]
+    G --> H{Mediocre AI can ship?}
+    H -- No --> I[Add inlined contracts]
+    I --> E
+    H -- Yes --> J[Merge]
+```
