@@ -406,3 +406,24 @@ components:
           items: { type: string }
         stringer_generated: { type: boolean }
 ```
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-enum-validation.mmd` for the Go enum authoring → linter → coverage gate flow.
+
+```mermaid
+flowchart TD
+    A[Enum Type Authored] --> B[Implement String method]
+    B --> C[Implement Parse function]
+    C --> D[Implement IsValid method]
+    D --> E[Generate Info Object]
+    E --> F{golangci-lint Pass?}
+    F -- No --> G[Block Merge: ENUM-LINT-001]
+    F -- Yes --> H[Unit Tests]
+    H --> I{Coverage 100%?}
+    I -- No --> G
+    I -- Yes --> J[Merge]
+```

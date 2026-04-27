@@ -320,3 +320,23 @@ components:
         secondary_action_label: { type: string, maxLength: 24 }
 paths_extra: {}
 ```
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-copy-rendering.mmd` for the error → i18n → template → modal copy pipeline.
+
+```mermaid
+flowchart TD
+    A[Error Raised] --> B[Lookup AppError.Code]
+    B --> C[Resolve i18n Key]
+    C --> D{Locale Available?}
+    D -- No --> E[Fallback to en-US]
+    D -- Yes --> F[Render Title + Body]
+    E --> F
+    F --> G[Apply Copy Format Template]
+    G --> H[Inject Variables]
+    H --> I[Display in Modal]
+```

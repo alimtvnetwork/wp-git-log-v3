@@ -265,3 +265,26 @@ components:
             danger:  { type: string, pattern: "^hsl\\(.+\\)$" }
             warning: { type: string, pattern: "^hsl\\(.+\\)$" }
 ```
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-theme-resolution.mmd` for severity → token → light/dark resolution.
+
+```mermaid
+flowchart TD
+    A[Modal Opens] --> B[Read Severity from AppError]
+    B --> C{Severity}
+    C -- Critical --> D[Apply --error-critical tokens]
+    C -- Warning --> E[Apply --error-warning tokens]
+    C -- Info --> F[Apply --error-info tokens]
+    D --> G{Theme Mode}
+    E --> G
+    F --> G
+    G -- Light --> H[Light HSL palette]
+    G -- Dark --> I[Dark HSL palette]
+    H --> J[Render]
+    I --> J
+```

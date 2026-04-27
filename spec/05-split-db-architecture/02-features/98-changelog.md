@@ -29,3 +29,8 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
+
+## 2026-04-27 — Phase 64 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 64 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.
