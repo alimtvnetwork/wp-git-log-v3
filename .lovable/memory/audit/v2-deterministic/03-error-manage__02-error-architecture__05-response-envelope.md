@@ -8,7 +8,7 @@
 > Deterministic score 83/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.04. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.07. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 8,
   "mmd_files": 0,
-  "overview_chars": 863,
+  "overview_chars": 1133,
   "ac_chars": 16646,
   "ac_count": 7,
   "gwt_block_count": 6,
@@ -53,7 +53,7 @@
   "links_total": 9,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.04,
+  "waffle_per_kchar": 0.07,
   "child_modules": 0
 }
 ```

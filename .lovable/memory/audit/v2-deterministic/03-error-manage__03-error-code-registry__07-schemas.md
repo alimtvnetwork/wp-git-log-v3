@@ -8,7 +8,7 @@
 > Deterministic score 76/100 (B) for spec/03-error-manage/03-error-code-registry/07-schemas.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.15. Gates active: 0.
 
 ---
 
@@ -50,7 +50,7 @@
   "links_total": 9,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.07,
+  "waffle_per_kchar": 0.15,
   "child_modules": 0
 }
 ```

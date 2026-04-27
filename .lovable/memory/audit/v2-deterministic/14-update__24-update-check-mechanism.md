@@ -8,7 +8,7 @@
 > Deterministic score 93/100 (A) for spec/14-update/24-update-check-mechanism.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=55, gwt=20, broken_links=0, waffle/kchar=0.04. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=55, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 14,
   "mmd_files": 0,
-  "overview_chars": 5211,
+  "overview_chars": 5237,
   "ac_chars": 32550,
   "ac_count": 55,
   "gwt_block_count": 20,
@@ -58,7 +58,7 @@
   "links_total": 63,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.04,
+  "waffle_per_kchar": 0.06,
   "child_modules": 0
 }
 ```

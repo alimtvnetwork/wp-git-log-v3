@@ -8,7 +8,7 @@
 > Deterministic score 73/100 (C) for spec/02-coding-guidelines/11-security.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.12. Gates active: 0.
 
 ---
 
@@ -28,17 +28,18 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 2282,
+  "overview_chars": 5346,
   "ac_chars": 3192,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 1,
+  "code_blocks_total": 2,
   "code_blocks_by_lang": {
-    "plain": 1
+    "plain": 1,
+    "text": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": false,
@@ -50,7 +51,7 @@
   "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.13,
+  "waffle_per_kchar": 0.12,
   "child_modules": 1
 }
 ```
@@ -75,5 +76,5 @@
 
 #### 1. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
 - **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"plain": 1}
+- **Evidence:** code_blocks_by_lang={"plain": 1, "text": 1}
 - **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

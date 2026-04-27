@@ -30,7 +30,7 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"plain\": 1}",
+        "evidence": "code_blocks_by_lang={\"plain\": 1, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
         "severity": "high"
@@ -54,9 +54,10 @@
       "ac_count": 0,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "plain": 1
+        "plain": 1,
+        "text": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
       "gwt_block_count": 0,
       "has_ci_workflow": false,
@@ -66,12 +67,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 26,
-      "md_files": 5,
+      "links_total": 28,
+      "md_files": 6,
       "mmd_files": 0,
-      "overview_chars": 4201,
+      "overview_chars": 6493,
       "todo_density": 0,
       "waffle_per_kchar": 0.03
     },
@@ -138,23 +139,23 @@
       {
         "category": "broken-link",
         "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=66, links_broken=11",
+        "evidence": "links_total=74, links_broken=13",
         "impact": 7,
-        "issue": "11 broken cross-spec link(s)",
+        "issue": "13 broken cross-spec link(s)",
         "severity": "high"
       },
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=2",
+        "evidence": "todo_density=1",
         "impact": 3,
-        "issue": "2 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       },
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 3, \"html\": 2, \"markdown\": 23, \"plain\": 40, \"text\": 1}",
+        "evidence": "code_blocks_by_lang={\"bash\": 3, \"html\": 2, \"markdown\": 26, \"plain\": 41, \"text\": 2}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
         "severity": "high"
@@ -162,7 +163,7 @@
     ],
     "grade": "C",
     "implementability_blockers": [
-      "11 broken cross-spec link(s)",
+      "13 broken cross-spec link(s)",
       "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
     ],
     "metrics": {
@@ -172,11 +173,11 @@
       "code_blocks_by_lang": {
         "bash": 3,
         "html": 2,
-        "markdown": 23,
-        "plain": 40,
-        "text": 1
+        "markdown": 26,
+        "plain": 41,
+        "text": 2
       },
-      "code_blocks_total": 69,
+      "code_blocks_total": 74,
       "consistency_report": true,
       "gwt_block_count": 21,
       "has_ci_workflow": false,
@@ -186,48 +187,67 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
-      "links_broken": 11,
-      "links_total": 66,
-      "md_files": 16,
+      "kind": "future-spec",
+      "links_broken": 13,
+      "links_total": 74,
+      "md_files": 17,
       "mmd_files": 0,
-      "overview_chars": 22937,
-      "todo_density": 2,
-      "waffle_per_kchar": 0.3
+      "overview_chars": 26231,
+      "todo_density": 1,
+      "waffle_per_kchar": 0.44
     },
     "module": "01-spec-authoring-guide",
     "raw_scores": {
       "alignment": 40,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 85,
       "consistency": 50,
       "implementability": 40,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=25, gwt=21, broken_links=11, waffle/kchar=0.3. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=25, gwt=21, broken_links=13, waffle/kchar=0.44. Gates active: 0.",
     "scores": {
       "alignment": 40,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 85,
       "consistency": 50,
       "implementability": 40,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 61/100 (C) for spec/01-spec-authoring-guide.",
-    "weighted_overall": 61
+    "verdict": "Deterministic score 62/100 (C) for spec/01-spec-authoring-guide.",
+    "weighted_overall": 62
   },
   {
-    "applied_gates": [],
+    "applied_gates": [
+      {
+        "active": true,
+        "after": 70,
+        "before": 80,
+        "cap": 70,
+        "dimension": "completeness",
+        "id": "G-TODO-01",
+        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
+      }
+    ],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
-    "grade": "A+",
+    "findings": [
+      {
+        "category": "drift",
+        "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        "evidence": "todo_density=8",
+        "impact": 3,
+        "issue": "8 TODO/TBD/FIXME marker(s) in module body",
+        "severity": "low"
+      }
+    ],
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 31913,
@@ -254,37 +274,37 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 32,
       "md_files": 6,
       "mmd_files": 0,
-      "overview_chars": 10823,
-      "todo_density": 0,
-      "waffle_per_kchar": 0.17
+      "overview_chars": 12788,
+      "todo_density": 8,
+      "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 100,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 100,
-      "maintainability": 100,
+      "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.17. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.12. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 100,
+      "completeness": 70,
       "consistency": 100,
       "implementability": 100,
-      "maintainability": 100,
+      "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 100/100 (A+) for spec/02-coding-guidelines.",
-    "weighted_overall": 100
+    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines.",
+    "weighted_overall": 94
   },
   {
     "applied_gates": [
@@ -345,14 +365,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 1,
       "links_total": 125,
       "md_files": 31,
       "mmd_files": 0,
-      "overview_chars": 7220,
+      "overview_chars": 7547,
       "todo_density": 0,
-      "waffle_per_kchar": 0.16
+      "waffle_per_kchar": 0.22
     },
     "module": "02-coding-guidelines/01-cross-language",
     "raw_scores": {
@@ -364,7 +384,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=1, waffle/kchar=0.16. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=1, waffle/kchar=0.22. Gates active: 1.",
     "scores": {
       "alignment": 90,
       "clarity": 100,
@@ -430,14 +450,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 1,
       "links_total": 34,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 3375,
+      "overview_chars": 3781,
       "todo_density": 0,
-      "waffle_per_kchar": 0.19
+      "waffle_per_kchar": 0.32
     },
     "module": "02-coding-guidelines/01-cross-language/02-boolean-principles",
     "raw_scores": {
@@ -449,7 +469,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.19. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=1, waffle/kchar=0.32. Gates active: 1.",
     "scores": {
       "alignment": 90,
       "clarity": 100,
@@ -463,17 +483,7 @@
     "weighted_overall": 80
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 75,
-        "cap": 70,
-        "dimension": "completeness",
-        "id": "G-TODO-01",
-        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -484,9 +494,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=3",
+        "evidence": "todo_density=2",
         "impact": 3,
-        "issue": "3 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "2 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -512,37 +522,37 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 41,
       "md_files": 11,
       "mmd_files": 0,
-      "overview_chars": 2589,
-      "todo_density": 3,
-      "waffle_per_kchar": 0.08
+      "overview_chars": 3108,
+      "todo_density": 2,
+      "waffle_per_kchar": 0.18
     },
     "module": "02-coding-guidelines/01-cross-language/04-code-style",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 60,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.08. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 60,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
-    "weighted_overall": 80
+    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [],
@@ -575,37 +585,37 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 57,
       "md_files": 11,
       "mmd_files": 0,
-      "overview_chars": 1564,
+      "overview_chars": 2057,
       "todo_density": 0,
-      "waffle_per_kchar": 0.12
+      "waffle_per_kchar": 0.1
     },
     "module": "02-coding-guidelines/01-cross-language/15-master-coding-guidelines",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 60,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 60,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 84/100 (B) for spec/02-coding-guidelines/01-cross-language/15-master-coding-guidelines.",
+    "weighted_overall": 84
   },
   {
     "applied_gates": [],
@@ -619,9 +629,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=2",
+        "evidence": "todo_density=1",
         "impact": 3,
-        "issue": "2 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -654,37 +664,37 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 155,
       "md_files": 13,
       "mmd_files": 0,
-      "overview_chars": 5988,
-      "todo_density": 2,
-      "waffle_per_kchar": 0.17
+      "overview_chars": 6304,
+      "todo_density": 1,
+      "waffle_per_kchar": 0.06
     },
     "module": "02-coding-guidelines/01-cross-language/16-static-analysis",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 55,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.17. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 55,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 80/100 (B) for spec/02-coding-guidelines/01-cross-language/16-static-analysis.",
-    "weighted_overall": 80
+    "verdict": "Deterministic score 81/100 (B) for spec/02-coding-guidelines/01-cross-language/16-static-analysis.",
+    "weighted_overall": 81
   },
   {
     "applied_gates": [],
@@ -694,16 +704,7 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "drift",
-        "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=1",
-        "impact": 3,
-        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
-        "severity": "low"
-      }
-    ],
+    "findings": [],
     "grade": "B",
     "implementability_blockers": [],
     "metrics": {
@@ -726,37 +727,37 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 79,
       "md_files": 16,
       "mmd_files": 0,
-      "overview_chars": 3035,
-      "todo_density": 1,
-      "waffle_per_kchar": 0.2
+      "overview_chars": 3502,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.22
     },
     "module": "02-coding-guidelines/02-typescript",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 50,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.22. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 50,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/02-coding-guidelines/02-typescript.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 80/100 (B) for spec/02-coding-guidelines/02-typescript.",
+    "weighted_overall": 80
   },
   {
     "applied_gates": [],
@@ -766,16 +767,7 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "drift",
-        "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=1",
-        "impact": 3,
-        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
-        "severity": "low"
-      }
-    ],
+    "findings": [],
     "grade": "B",
     "implementability_blockers": [],
     "metrics": {
@@ -797,37 +789,37 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 28,
       "md_files": 11,
       "mmd_files": 0,
-      "overview_chars": 1170,
-      "todo_density": 1,
-      "waffle_per_kchar": 0.18
+      "overview_chars": 1638,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.34
     },
     "module": "02-coding-guidelines/03-golang",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 50,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.34. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 50,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 79/100 (B) for spec/02-coding-guidelines/03-golang.",
-    "weighted_overall": 79
+    "verdict": "Deterministic score 80/100 (B) for spec/02-coding-guidelines/03-golang.",
+    "weighted_overall": 80
   },
   {
     "applied_gates": [],
@@ -862,14 +854,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 16,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 11012,
+      "overview_chars": 11406,
       "todo_density": 0,
-      "waffle_per_kchar": 0.09
+      "waffle_per_kchar": 0.14
     },
     "module": "02-coding-guidelines/03-golang/01-enum-specification",
     "raw_scores": {
@@ -881,7 +873,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -923,14 +915,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 38,
       "md_files": 10,
       "mmd_files": 0,
-      "overview_chars": 2742,
+      "overview_chars": 3176,
       "todo_density": 0,
-      "waffle_per_kchar": 0.1
+      "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines/03-golang/04-golang-standards-reference",
     "raw_scores": {
@@ -942,7 +934,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=10, gwt=9, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -985,14 +977,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 42,
       "md_files": 12,
       "mmd_files": 0,
-      "overview_chars": 2063,
+      "overview_chars": 3241,
       "todo_density": 0,
-      "waffle_per_kchar": 0.13
+      "waffle_per_kchar": 0.15
     },
     "module": "02-coding-guidelines/04-php",
     "raw_scores": {
@@ -1004,7 +996,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1049,14 +1041,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 34,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 2038,
+      "overview_chars": 2378,
       "todo_density": 0,
-      "waffle_per_kchar": 0.12
+      "waffle_per_kchar": 0.17
     },
     "module": "02-coding-guidelines/04-php/07-php-standards-reference",
     "raw_scores": {
@@ -1068,7 +1060,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.17. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1122,14 +1114,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 16,
       "md_files": 10,
       "mmd_files": 0,
-      "overview_chars": 3191,
+      "overview_chars": 3617,
       "todo_density": 1,
-      "waffle_per_kchar": 0.25
+      "waffle_per_kchar": 0.22
     },
     "module": "02-coding-guidelines/05-rust",
     "raw_scores": {
@@ -1141,7 +1133,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.25. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.22. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1188,37 +1180,37 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 46,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 1647,
+      "overview_chars": 2113,
       "todo_density": 0,
-      "waffle_per_kchar": 0.12
+      "waffle_per_kchar": 0.1
     },
     "module": "02-coding-guidelines/06-ai-optimization",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 87/100 (A) for spec/02-coding-guidelines/06-ai-optimization.",
-    "weighted_overall": 87
+    "verdict": "Deterministic score 89/100 (A) for spec/02-coding-guidelines/06-ai-optimization.",
+    "weighted_overall": 89
   },
   {
     "applied_gates": [],
@@ -1257,12 +1249,12 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 46,
       "md_files": 13,
       "mmd_files": 0,
-      "overview_chars": 3154,
+      "overview_chars": 3598,
       "todo_density": 0,
       "waffle_per_kchar": 0.13
     },
@@ -1325,7 +1317,7 @@
       "mmd_files": 0,
       "overview_chars": 1982,
       "todo_density": 0,
-      "waffle_per_kchar": 0.31
+      "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines/07-csharp",
     "raw_scores": {
@@ -1337,7 +1329,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.31. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1372,7 +1364,7 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 1, \"php\": 1, \"plain\": 34}",
+        "evidence": "code_blocks_by_lang={\"bash\": 1, \"php\": 1, \"plain\": 34, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
         "severity": "high"
@@ -1389,9 +1381,10 @@
       "code_blocks_by_lang": {
         "bash": 1,
         "php": 1,
-        "plain": 34
+        "plain": 34,
+        "text": 1
       },
-      "code_blocks_total": 36,
+      "code_blocks_total": 37,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -1406,7 +1399,7 @@
       "links_total": 26,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 2882,
+      "overview_chars": 4609,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1593,7 +1586,7 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"plain\": 1}",
+        "evidence": "code_blocks_by_lang={\"plain\": 1, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
         "severity": "high"
@@ -1608,9 +1601,10 @@
       "ac_count": 6,
       "child_modules": 1,
       "code_blocks_by_lang": {
-        "plain": 1
+        "plain": 1,
+        "text": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 2,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -1620,14 +1614,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 10,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 2282,
+      "overview_chars": 5346,
       "todo_density": 0,
-      "waffle_per_kchar": 0.13
+      "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines/11-security",
     "raw_scores": {
@@ -1639,7 +1633,7 @@
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1683,14 +1677,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 14,
       "md_files": 6,
       "mmd_files": 0,
-      "overview_chars": 3375,
+      "overview_chars": 3779,
       "todo_density": 0,
-      "waffle_per_kchar": 0.3
+      "waffle_per_kchar": 0.39
     },
     "module": "02-coding-guidelines/11-security/01-axios-version-control",
     "raw_scores": {
@@ -1702,7 +1696,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.39. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1756,7 +1750,7 @@
       "links_total": 8,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1074,
+      "overview_chars": 1327,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1962,7 +1956,7 @@
       "links_total": 8,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 989,
+      "overview_chars": 1333,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2019,12 +2013,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 14,
       "md_files": 5,
       "mmd_files": 0,
-      "overview_chars": 5430,
+      "overview_chars": 5893,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2091,7 +2085,7 @@
       "mmd_files": 0,
       "overview_chars": 2072,
       "todo_density": 0,
-      "waffle_per_kchar": 0.04
+      "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/01-error-resolution",
     "raw_scores": {
@@ -2103,7 +2097,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2148,14 +2142,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 6,
       "md_files": 8,
       "mmd_files": 0,
-      "overview_chars": 962,
+      "overview_chars": 1767,
       "todo_density": 0,
-      "waffle_per_kchar": 0.3
+      "waffle_per_kchar": 0.45
     },
     "module": "03-error-manage/01-error-resolution/03-retrospectives",
     "raw_scores": {
@@ -2167,7 +2161,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.3. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.45. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2189,7 +2183,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3686,
@@ -2212,37 +2206,37 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 8,
       "md_files": 5,
       "mmd_files": 0,
-      "overview_chars": 727,
+      "overview_chars": 1083,
       "todo_density": 0,
-      "waffle_per_kchar": 0.25
+      "waffle_per_kchar": 0.12
     },
     "module": "03-error-manage/01-error-resolution/04-verification-patterns",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.25. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 84/100 (B) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
-    "weighted_overall": 84
+    "verdict": "Deterministic score 86/100 (A) for spec/03-error-manage/01-error-resolution/04-verification-patterns.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [],
@@ -2278,14 +2272,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 13,
       "md_files": 7,
       "mmd_files": 0,
-      "overview_chars": 820,
+      "overview_chars": 1576,
       "todo_density": 0,
-      "waffle_per_kchar": 0.02
+      "waffle_per_kchar": 0.0
     },
     "module": "03-error-manage/01-error-resolution/05-debugging-guides",
     "raw_scores": {
@@ -2297,7 +2291,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.02. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2348,7 +2342,7 @@
       "mmd_files": 0,
       "overview_chars": 1338,
       "todo_density": 0,
-      "waffle_per_kchar": 0.06
+      "waffle_per_kchar": 0.08
     },
     "module": "03-error-manage/01-error-resolution/app-issues",
     "raw_scores": {
@@ -2360,7 +2354,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2415,7 +2409,7 @@
       "mmd_files": 0,
       "overview_chars": 2427,
       "todo_density": 0,
-      "waffle_per_kchar": 0.11
+      "waffle_per_kchar": 0.13
     },
     "module": "03-error-manage/02-error-architecture",
     "raw_scores": {
@@ -2427,7 +2421,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2606,7 +2600,7 @@
       "links_total": 30,
       "md_files": 12,
       "mmd_files": 0,
-      "overview_chars": 2918,
+      "overview_chars": 3196,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2796,9 +2790,9 @@
       "links_total": 9,
       "md_files": 8,
       "mmd_files": 0,
-      "overview_chars": 863,
+      "overview_chars": 1133,
       "todo_density": 0,
-      "waffle_per_kchar": 0.04
+      "waffle_per_kchar": 0.07
     },
     "module": "03-error-manage/02-error-architecture/05-response-envelope",
     "raw_scores": {
@@ -2810,7 +2804,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.04. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2925,7 +2919,7 @@
       "mmd_files": 0,
       "overview_chars": 1974,
       "todo_density": 0,
-      "waffle_per_kchar": 0.08
+      "waffle_per_kchar": 0.21
     },
     "module": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
     "raw_scores": {
@@ -2937,7 +2931,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.21. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -2982,14 +2976,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 6,
       "md_files": 6,
       "mmd_files": 0,
-      "overview_chars": 802,
+      "overview_chars": 1220,
       "todo_density": 0,
-      "waffle_per_kchar": 0.1
+      "waffle_per_kchar": 0.21
     },
     "module": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
     "raw_scores": {
@@ -3001,7 +2995,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.21. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3048,14 +3042,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 22,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 3690,
+      "overview_chars": 4151,
       "todo_density": 0,
-      "waffle_per_kchar": 0.05
+      "waffle_per_kchar": 0.07
     },
     "module": "03-error-manage/03-error-code-registry",
     "raw_scores": {
@@ -3067,7 +3061,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.05. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3115,7 +3109,7 @@
       "mmd_files": 0,
       "overview_chars": 8949,
       "todo_density": 0,
-      "waffle_per_kchar": 0.07
+      "waffle_per_kchar": 0.15
     },
     "module": "03-error-manage/03-error-code-registry/07-schemas",
     "raw_scores": {
@@ -3127,7 +3121,7 @@
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3162,7 +3156,7 @@
       {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={}",
+        "evidence": "code_blocks_by_lang={\"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
         "severity": "high"
@@ -3176,8 +3170,10 @@
       "ac_chars": 3308,
       "ac_count": 6,
       "child_modules": 0,
-      "code_blocks_by_lang": {},
-      "code_blocks_total": 0,
+      "code_blocks_by_lang": {
+        "text": 1
+      },
+      "code_blocks_total": 1,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -3187,12 +3183,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 6,
+      "links_total": 10,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 655,
+      "overview_chars": 4443,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -3200,7 +3196,7 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 60,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
@@ -3210,14 +3206,14 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 60,
+      "completeness": 80,
       "consistency": 100,
       "implementability": 30,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 67/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
-    "weighted_overall": 67
+    "verdict": "Deterministic score 71/100 (C) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.",
+    "weighted_overall": 71
   },
   {
     "applied_gates": [],
@@ -3320,9 +3316,9 @@
       "links_total": 69,
       "md_files": 11,
       "mmd_files": 0,
-      "overview_chars": 10176,
+      "overview_chars": 10484,
       "todo_density": 0,
-      "waffle_per_kchar": 0.13
+      "waffle_per_kchar": 0.16
     },
     "module": "04-database-conventions",
     "raw_scores": {
@@ -3334,7 +3330,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.16. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3380,14 +3376,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 7,
       "md_files": 7,
       "mmd_files": 0,
-      "overview_chars": 3931,
+      "overview_chars": 4382,
       "todo_density": 0,
-      "waffle_per_kchar": 0.06
+      "waffle_per_kchar": 0.11
     },
     "module": "05-split-db-architecture",
     "raw_scores": {
@@ -3399,7 +3395,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3452,7 +3448,7 @@
       "mmd_files": 0,
       "overview_chars": 816,
       "todo_density": 0,
-      "waffle_per_kchar": 0.01
+      "waffle_per_kchar": 0.07
     },
     "module": "05-split-db-architecture/02-features",
     "raw_scores": {
@@ -3464,7 +3460,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.01. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3599,7 +3595,7 @@
       "mmd_files": 0,
       "overview_chars": 9055,
       "todo_density": 0,
-      "waffle_per_kchar": 0.05
+      "waffle_per_kchar": 0.09
     },
     "module": "06-seedable-config-architecture",
     "raw_scores": {
@@ -3611,7 +3607,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.05. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3670,9 +3666,9 @@
       "links_total": 27,
       "md_files": 10,
       "mmd_files": 0,
-      "overview_chars": 972,
+      "overview_chars": 1236,
       "todo_density": 1,
-      "waffle_per_kchar": 0.13
+      "waffle_per_kchar": 0.09
     },
     "module": "06-seedable-config-architecture/02-features",
     "raw_scores": {
@@ -3684,7 +3680,7 @@
       "maintainability": 90,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3816,7 +3812,7 @@
       "mmd_files": 0,
       "overview_chars": 7892,
       "todo_density": 0,
-      "waffle_per_kchar": 0.15
+      "waffle_per_kchar": 0.2
     },
     "module": "07-design-system",
     "raw_scores": {
@@ -3828,7 +3824,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3933,10 +3929,10 @@
         "md": 1,
         "php": 1,
         "plain": 10,
-        "powershell": 39,
+        "powershell": 40,
         "yaml": 2
       },
-      "code_blocks_total": 77,
+      "code_blocks_total": 78,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -3946,14 +3942,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 34,
-      "md_files": 15,
+      "links_total": 40,
+      "md_files": 16,
       "mmd_files": 0,
-      "overview_chars": 11739,
+      "overview_chars": 12221,
       "todo_density": 0,
-      "waffle_per_kchar": 0.09
+      "waffle_per_kchar": 0.11
     },
     "module": "11-powershell-integration",
     "raw_scores": {
@@ -3965,7 +3961,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3996,14 +3992,14 @@
       "code_blocks_by_lang": {
         "bash": 47,
         "go": 10,
-        "json": 2,
+        "json": 3,
         "markdown": 9,
         "plain": 69,
         "powershell": 8,
         "typescript": 1,
-        "yaml": 38
+        "yaml": 39
       },
-      "code_blocks_total": 184,
+      "code_blocks_total": 186,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": true,
@@ -4013,14 +4009,14 @@
       "has_ts_enums": true,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 106,
-      "md_files": 21,
+      "links_total": 111,
+      "md_files": 22,
       "mmd_files": 0,
-      "overview_chars": 8789,
+      "overview_chars": 9208,
       "todo_density": 0,
-      "waffle_per_kchar": 0.17
+      "waffle_per_kchar": 0.2
     },
     "module": "12-cicd-pipeline-workflows",
     "raw_scores": {
@@ -4032,7 +4028,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.17. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4075,37 +4071,37 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 10,
       "md_files": 6,
       "mmd_files": 0,
-      "overview_chars": 1886,
+      "overview_chars": 2766,
       "todo_density": 0,
-      "waffle_per_kchar": 0.2
+      "waffle_per_kchar": 0.26
     },
     "module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 55,
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.26. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 65,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 55,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 77/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.",
-    "weighted_overall": 77
+    "verdict": "Deterministic score 79/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.",
+    "weighted_overall": 79
   },
   {
     "applied_gates": [],
@@ -4137,14 +4133,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 43,
       "md_files": 7,
       "mmd_files": 0,
-      "overview_chars": 2109,
+      "overview_chars": 3163,
       "todo_density": 0,
-      "waffle_per_kchar": 0.02
+      "waffle_per_kchar": 0.04
     },
     "module": "12-cicd-pipeline-workflows/02-go-binary-deploy",
     "raw_scores": {
@@ -4156,7 +4152,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.02. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.04. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4203,14 +4199,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 53,
       "md_files": 14,
       "mmd_files": 0,
-      "overview_chars": 5856,
+      "overview_chars": 6301,
       "todo_density": 0,
-      "waffle_per_kchar": 0.12
+      "waffle_per_kchar": 0.08
     },
     "module": "12-cicd-pipeline-workflows/03-reusable-ci-guards",
     "raw_scores": {
@@ -4222,7 +4218,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4341,13 +4337,13 @@
       "code_blocks_by_lang": {
         "bash": 70,
         "go": 34,
-        "json": 7,
+        "json": 8,
         "markdown": 2,
         "plain": 76,
         "powershell": 33,
         "yaml": 7
       },
-      "code_blocks_total": 229,
+      "code_blocks_total": 230,
       "consistency_report": true,
       "gwt_block_count": 20,
       "has_ci_workflow": true,
@@ -4359,12 +4355,12 @@
       "has_yaml_openapi": true,
       "kind": "",
       "links_broken": 0,
-      "links_total": 137,
-      "md_files": 31,
+      "links_total": 146,
+      "md_files": 32,
       "mmd_files": 0,
       "overview_chars": 7401,
       "todo_density": 0,
-      "waffle_per_kchar": 0.28
+      "waffle_per_kchar": 0.33
     },
     "module": "14-update",
     "raw_scores": {
@@ -4376,7 +4372,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.28. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.33. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4430,9 +4426,9 @@
       "links_total": 63,
       "md_files": 14,
       "mmd_files": 0,
-      "overview_chars": 5211,
+      "overview_chars": 5237,
       "todo_density": 0,
-      "waffle_per_kchar": 0.04
+      "waffle_per_kchar": 0.06
     },
     "module": "14-update/24-update-check-mechanism",
     "raw_scores": {
@@ -4444,7 +4440,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=55, gwt=20, broken_links=0, waffle/kchar=0.04. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=55, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4580,14 +4576,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 1,
       "links_total": 25,
       "md_files": 8,
       "mmd_files": 0,
-      "overview_chars": 5469,
+      "overview_chars": 5932,
       "todo_density": 0,
-      "waffle_per_kchar": 0.06
+      "waffle_per_kchar": 0.08
     },
     "module": "15-distribution-and-runner",
     "raw_scores": {
@@ -4599,7 +4595,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=1, waffle/kchar=0.06. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=1, waffle/kchar=0.08. Gates active: 1.",
     "scores": {
       "alignment": 90,
       "clarity": 100,
@@ -4647,14 +4643,14 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": true,
-      "kind": "",
+      "kind": "future-spec",
       "links_broken": 0,
       "links_total": 41,
       "md_files": 12,
       "mmd_files": 0,
-      "overview_chars": 5168,
+      "overview_chars": 5528,
       "todo_density": 0,
-      "waffle_per_kchar": 0.2
+      "waffle_per_kchar": 0.27
     },
     "module": "16-generic-release",
     "raw_scores": {
@@ -4666,7 +4662,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.27. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4701,9 +4697,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=6",
+        "evidence": "todo_density=8",
         "impact": 3,
-        "issue": "6 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "8 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -4746,12 +4742,12 @@
       "has_yaml_openapi": true,
       "kind": "",
       "links_broken": 0,
-      "links_total": 143,
-      "md_files": 35,
+      "links_total": 146,
+      "md_files": 36,
       "mmd_files": 0,
-      "overview_chars": 7300,
-      "todo_density": 6,
-      "waffle_per_kchar": 0.06
+      "overview_chars": 9194,
+      "todo_density": 8,
+      "waffle_per_kchar": 0.09
     },
     "module": "17-consolidated-guidelines",
     "raw_scores": {
@@ -4763,7 +4759,7 @@
       "maintainability": 90,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4822,7 +4818,7 @@
       "mmd_files": 0,
       "overview_chars": 6330,
       "todo_density": 0,
-      "waffle_per_kchar": 0.07
+      "waffle_per_kchar": 0.2
     },
     "module": "18-wp-plugin-how-to",
     "raw_scores": {
@@ -4834,7 +4830,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4884,9 +4880,9 @@
       "links_total": 27,
       "md_files": 8,
       "mmd_files": 0,
-      "overview_chars": 7474,
+      "overview_chars": 7750,
       "todo_density": 0,
-      "waffle_per_kchar": 0.19
+      "waffle_per_kchar": 0.34
     },
     "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
     "raw_scores": {
@@ -4898,7 +4894,7 @@
       "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.34. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4913,15 +4909,6 @@
   },
   {
     "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
       {
         "active": false,
         "after": 70,
@@ -4940,28 +4927,18 @@
     },
     "findings": [
       {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=64, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      },
-      {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=12",
+        "evidence": "todo_density=14",
         "impact": 3,
-        "issue": "12 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "14 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
     "grade": "A",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 61197,
+      "ac_chars": 61207,
       "ac_count": 68,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4985,51 +4962,41 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": true,
       "has_yaml_openapi": true,
-      "kind": "",
-      "links_broken": 1,
+      "kind": "future-spec",
+      "links_broken": 0,
       "links_total": 64,
       "md_files": 35,
       "mmd_files": 0,
-      "overview_chars": 6779,
-      "todo_density": 12,
-      "waffle_per_kchar": 0.09
+      "overview_chars": 9273,
+      "todo_density": 14,
+      "waffle_per_kchar": 0.13
     },
     "module": "22-git-logs-v2",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 100,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=68, gwt=68, broken_links=1, waffle/kchar=0.09. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=68, gwt=68, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 70,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 100,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 89/100 (A) for spec/22-git-logs-v2.",
-    "weighted_overall": 89
+    "verdict": "Deterministic score 94/100 (A) for spec/22-git-logs-v2.",
+    "weighted_overall": 94
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
-    "blast_radius": 0,
+    "applied_gates": [],
+    "blast_radius": 3,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
@@ -5039,28 +5006,29 @@
     "grade": "B",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3012,
-      "ac_count": 6,
+      "ac_chars": 5833,
+      "ac_count": 11,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 1
+        "bash": 1,
+        "sql": 9
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 10,
       "consistency_report": true,
-      "gwt_block_count": 5,
+      "gwt_block_count": 10,
       "has_ci_workflow": false,
       "has_json_schema": false,
       "has_mermaid": false,
-      "has_sql_ddl": false,
+      "has_sql_ddl": true,
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "module",
       "links_broken": 0,
-      "links_total": 10,
+      "links_total": 11,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 2287,
+      "overview_chars": 9788,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -5068,38 +5036,28 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 60,
       "maintainability": 100,
-      "testability": 80
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
-      "implementability": 50,
+      "implementability": 60,
       "maintainability": 100,
-      "testability": 80
+      "testability": 100
     },
-    "verdict": "Deterministic score 77/100 (B) for spec/23-app-database.",
-    "weighted_overall": 77
+    "verdict": "Deterministic score 84/100 (B) for spec/23-app-database.",
+    "weighted_overall": 84
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 50,
-        "before": 70,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
-    "blast_radius": 0,
+    "applied_gates": [],
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
@@ -5109,53 +5067,57 @@
     "grade": "B",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 2823,
-      "ac_count": 6,
+      "ac_chars": 6598,
+      "ac_count": 11,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 1
+        "bash": 1,
+        "css": 1,
+        "plain": 2,
+        "ts": 1,
+        "tsx": 1
       },
-      "code_blocks_total": 1,
+      "code_blocks_total": 6,
       "consistency_report": true,
-      "gwt_block_count": 5,
+      "gwt_block_count": 10,
       "has_ci_workflow": false,
       "has_json_schema": false,
       "has_mermaid": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "index",
+      "kind": "module",
       "links_broken": 0,
-      "links_total": 9,
+      "links_total": 14,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 2028,
+      "overview_chars": 8870,
       "todo_density": 0,
-      "waffle_per_kchar": 0.0
+      "waffle_per_kchar": 0.2
     },
     "module": "24-app-design-system-and-ui",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
-      "consistency": 100,
-      "implementability": 70,
-      "maintainability": 100,
-      "testability": 80
-    },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
-    "scores": {
-      "alignment": 100,
-      "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
-      "testability": 80
+      "testability": 100
     },
-    "verdict": "Deterministic score 77/100 (B) for spec/24-app-design-system-and-ui.",
-    "weighted_overall": 77
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
+    "scores": {
+      "alignment": 100,
+      "clarity": 100,
+      "completeness": 90,
+      "consistency": 100,
+      "implementability": 50,
+      "maintainability": 100,
+      "testability": 100
+    },
+    "verdict": "Deterministic score 80/100 (B) for spec/24-app-design-system-and-ui.",
+    "weighted_overall": 80
   },
   {
     "applied_gates": [
@@ -5200,7 +5162,7 @@
       "links_total": 10,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 2241,
+      "overview_chars": 2580,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -5247,17 +5209,9 @@
     },
     "findings": [
       {
-        "category": "drift",
-        "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=1",
-        "impact": 3,
-        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
-        "severity": "low"
-      },
-      {
         "category": "missing-contract",
         "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 2}",
+        "evidence": "code_blocks_by_lang={\"bash\": 2, \"text\": 1}",
         "impact": 8,
         "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
         "severity": "high"
@@ -5272,9 +5226,10 @@
       "ac_count": 5,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 2
+        "bash": 2,
+        "text": 1
       },
-      "code_blocks_total": 2,
+      "code_blocks_total": 3,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -5289,32 +5244,32 @@
       "links_total": 13,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 26938,
-      "todo_density": 1,
-      "waffle_per_kchar": 0.09
+      "overview_chars": 28829,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.11
     },
     "module": "25-app-issues/01-phase-2-git-logs-audit",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 30,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 90
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 75,
       "consistency": 100,
       "implementability": 30,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 68/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.",
-    "weighted_overall": 68
+    "verdict": "Deterministic score 70/100 (C) for spec/25-app-issues/01-phase-2-git-logs-audit.",
+    "weighted_overall": 70
   },
   {
     "applied_gates": [
@@ -5389,9 +5344,9 @@
       "links_total": 32,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 29146,
+      "overview_chars": 29544,
       "todo_density": 0,
-      "waffle_per_kchar": 0.03
+      "waffle_per_kchar": 0.04
     },
     "module": "25-app-issues/02-consolidated-audit-findings",
     "raw_scores": {
@@ -5403,7 +5358,7 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.03. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=13, waffle/kchar=0.04. Gates active: 1.",
     "scores": {
       "alignment": 40,
       "clarity": 100,
@@ -5420,15 +5375,6 @@
     "applied_gates": [
       {
         "active": true,
-        "after": 70,
-        "before": 92,
-        "cap": 70,
-        "dimension": "consistency",
-        "id": "G-LINK-01",
-        "rationale": "Any broken cross-spec link caps consistency at 70 \u2014 readers cannot trust references."
-      },
-      {
-        "active": true,
         "after": 50,
         "before": 70,
         "cap": 50,
@@ -5443,20 +5389,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "broken-link",
-        "correction": "Run linter-scripts/check-spec-cross-links.py and fix every reported link.",
-        "evidence": "links_total=18, links_broken=1",
-        "impact": 7,
-        "issue": "1 broken cross-spec link(s)",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "1 broken cross-spec link(s)"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 17103,
       "ac_count": 21,
@@ -5475,36 +5410,36 @@
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
       "kind": "index",
-      "links_broken": 1,
+      "links_broken": 0,
       "links_total": 18,
       "md_files": 4,
       "mmd_files": 6,
       "overview_chars": 4460,
       "todo_density": 0,
-      "waffle_per_kchar": 0.06
+      "waffle_per_kchar": 0.07
     },
     "module": "26-gitlogs-diagrams",
     "raw_scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 92,
+      "consistency": 100,
       "implementability": 70,
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=21, gwt=20, broken_links=1, waffle/kchar=0.06. Gates active: 2.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=21, gwt=20, broken_links=0, waffle/kchar=0.07. Gates active: 1.",
     "scores": {
-      "alignment": 90,
+      "alignment": 100,
       "clarity": 100,
       "completeness": 90,
-      "consistency": 70,
+      "consistency": 100,
       "implementability": 50,
       "maintainability": 100,
       "testability": 80
     },
-    "verdict": "Deterministic score 75/100 (B) for spec/26-gitlogs-diagrams.",
-    "weighted_overall": 75
+    "verdict": "Deterministic score 79/100 (B) for spec/26-gitlogs-diagrams.",
+    "weighted_overall": 79
   },
   {
     "applied_gates": [
@@ -5528,9 +5463,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=7",
+        "evidence": "todo_density=30",
         "impact": 3,
-        "issue": "7 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "30 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -5541,15 +5476,15 @@
       "ac_count": 19,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 27,
+        "bash": 29,
         "ini": 1,
         "json": 1,
         "markdown": 1,
-        "plain": 1,
+        "plain": 4,
         "powershell": 1,
         "toml": 2
       },
-      "code_blocks_total": 34,
+      "code_blocks_total": 39,
       "consistency_report": true,
       "gwt_block_count": 19,
       "has_ci_workflow": false,
@@ -5561,12 +5496,12 @@
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
-      "links_total": 131,
-      "md_files": 37,
+      "links_total": 167,
+      "md_files": 40,
       "mmd_files": 0,
-      "overview_chars": 8720,
-      "todo_density": 7,
-      "waffle_per_kchar": 0.12
+      "overview_chars": 10807,
+      "todo_density": 30,
+      "waffle_per_kchar": 0.18
     },
     "module": "27-spec-toolchain",
     "raw_scores": {
@@ -5578,7 +5513,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -5651,7 +5586,7 @@
       "mmd_files": 0,
       "overview_chars": 6408,
       "todo_density": 4,
-      "waffle_per_kchar": 0.15
+      "waffle_per_kchar": 0.18
     },
     "module": "28-universal-ci-cli",
     "raw_scores": {
@@ -5663,7 +5598,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=40, gwt=40, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=40, gwt=40, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,

@@ -8,7 +8,7 @@
 > Deterministic score 93/100 (A) for spec/14-update.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.28. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.33. Gates active: 0.
 
 ---
 
@@ -29,19 +29,19 @@
 ```json
 {
   "kind": "",
-  "md_files": 31,
+  "md_files": 32,
   "mmd_files": 0,
   "overview_chars": 7401,
   "ac_chars": 26925,
   "ac_count": 20,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 229,
+  "code_blocks_total": 230,
   "code_blocks_by_lang": {
     "plain": 76,
     "bash": 70,
     "powershell": 33,
-    "json": 7,
+    "json": 8,
     "go": 34,
     "yaml": 7,
     "markdown": 2
@@ -53,10 +53,10 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": true,
   "has_mermaid": false,
-  "links_total": 137,
+  "links_total": 146,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.28,
+  "waffle_per_kchar": 0.33,
   "child_modules": 2
 }
 ```

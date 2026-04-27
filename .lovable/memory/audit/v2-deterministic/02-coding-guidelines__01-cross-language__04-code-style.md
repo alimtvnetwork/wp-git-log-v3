@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **80/100 (B)**  
+**Implementability Score:** **82/100 (B)**  
 **Blast radius:** 2/10
 
-> Deterministic score 80/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.
+> Deterministic score 82/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.08. Gates active: 1.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.18. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 60 | 21.0 |
-| Completeness | 20% | 70 | 14.0 |
+| Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 11,
   "mmd_files": 0,
-  "overview_chars": 2589,
+  "overview_chars": 3108,
   "ac_chars": 4713,
   "ac_count": 9,
   "gwt_block_count": 8,
@@ -52,8 +52,8 @@
   "has_mermaid": false,
   "links_total": 41,
   "links_broken": 0,
-  "todo_density": 3,
-  "waffle_per_kchar": 0.08,
+  "todo_density": 2,
+  "waffle_per_kchar": 0.18,
   "child_modules": 0
 }
 ```
@@ -72,11 +72,11 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 3 TODO/TBD/FIXME marker(s) in module body |
+| 1 | drift | low | 3/10 | 2 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 3 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 2 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=3
+- **Evidence:** todo_density=2
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

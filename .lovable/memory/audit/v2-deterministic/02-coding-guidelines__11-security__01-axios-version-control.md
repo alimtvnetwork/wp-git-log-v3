@@ -8,7 +8,7 @@
 > Deterministic score 82/100 (B) for spec/02-coding-guidelines/11-security/01-axios-version-control.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.3. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.39. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 6,
   "mmd_files": 0,
-  "overview_chars": 3375,
+  "overview_chars": 3779,
   "ac_chars": 2740,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -53,7 +53,7 @@
   "links_total": 14,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.3,
+  "waffle_per_kchar": 0.39,
   "child_modules": 0
 }
 ```

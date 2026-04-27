@@ -8,7 +8,7 @@
 > Deterministic score 95/100 (A+) for spec/05-split-db-architecture.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.06. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 7,
   "mmd_files": 0,
-  "overview_chars": 3931,
+  "overview_chars": 4382,
   "ac_chars": 22965,
   "ac_count": 23,
   "gwt_block_count": 20,
@@ -55,7 +55,7 @@
   "links_total": 7,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.06,
+  "waffle_per_kchar": 0.11,
   "child_modules": 2
 }
 ```

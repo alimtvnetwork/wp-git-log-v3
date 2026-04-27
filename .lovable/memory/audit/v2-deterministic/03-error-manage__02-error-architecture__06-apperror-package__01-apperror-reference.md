@@ -8,7 +8,7 @@
 > Deterministic score 80/100 (B) for spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.08. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.21. Gates active: 0.
 
 ---
 
@@ -54,7 +54,7 @@
   "links_total": 29,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.08,
+  "waffle_per_kchar": 0.21,
   "child_modules": 0
 }
 ```

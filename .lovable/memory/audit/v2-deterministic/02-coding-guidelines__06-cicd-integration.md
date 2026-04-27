@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 13,
   "mmd_files": 0,
-  "overview_chars": 3154,
+  "overview_chars": 3598,
   "ac_chars": 22357,
   "ac_count": 28,
   "gwt_block_count": 20,

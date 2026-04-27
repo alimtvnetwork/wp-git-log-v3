@@ -8,7 +8,7 @@
 > Deterministic score 90/100 (A) for spec/17-consolidated-guidelines.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.06. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -29,9 +29,9 @@
 ```json
 {
   "kind": "",
-  "md_files": 35,
+  "md_files": 36,
   "mmd_files": 0,
-  "overview_chars": 7300,
+  "overview_chars": 9194,
   "ac_chars": 11825,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -65,10 +65,10 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_mermaid": false,
-  "links_total": 143,
+  "links_total": 146,
   "links_broken": 0,
-  "todo_density": 6,
-  "waffle_per_kchar": 0.06,
+  "todo_density": 8,
+  "waffle_per_kchar": 0.09,
   "child_modules": 0
 }
 ```
@@ -87,11 +87,11 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 6 TODO/TBD/FIXME marker(s) in module body |
+| 1 | drift | low | 3/10 | 8 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 6 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 8 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=6
+- **Evidence:** todo_density=8
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

@@ -8,7 +8,7 @@
 > Deterministic score 93/100 (A) for spec/12-cicd-pipeline-workflows.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.17. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.
 
 ---
 
@@ -28,24 +28,24 @@
 
 ```json
 {
-  "kind": "",
-  "md_files": 21,
+  "kind": "future-spec",
+  "md_files": 22,
   "mmd_files": 0,
-  "overview_chars": 8789,
+  "overview_chars": 9208,
   "ac_chars": 3100,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 184,
+  "code_blocks_total": 186,
   "code_blocks_by_lang": {
     "plain": 69,
     "bash": 47,
-    "yaml": 38,
+    "yaml": 39,
     "markdown": 9,
     "powershell": 8,
     "typescript": 1,
     "go": 10,
-    "json": 2
+    "json": 3
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
@@ -54,10 +54,10 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": true,
   "has_mermaid": false,
-  "links_total": 106,
+  "links_total": 111,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.17,
+  "waffle_per_kchar": 0.2,
   "child_modules": 3
 }
 ```

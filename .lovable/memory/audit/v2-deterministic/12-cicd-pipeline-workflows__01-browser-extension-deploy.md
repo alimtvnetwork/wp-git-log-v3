@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **77/100 (B)**  
+**Implementability Score:** **79/100 (B)**  
 **Blast radius:** 0/10
 
-> Deterministic score 77/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
+> Deterministic score 79/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.26. Gates active: 0.
 
 ---
 
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 55 | 19.2 |
-| Completeness | 20% | 65 | 13.0 |
+| Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 6,
   "mmd_files": 0,
-  "overview_chars": 1886,
+  "overview_chars": 2766,
   "ac_chars": 2715,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -52,7 +52,7 @@
   "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.2,
+  "waffle_per_kchar": 0.26,
   "child_modules": 0
 }
 ```

@@ -8,7 +8,7 @@
 > Deterministic score 87/100 (A) for spec/03-error-manage/01-error-resolution/03-retrospectives.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.3. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.45. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 8,
   "mmd_files": 0,
-  "overview_chars": 962,
+  "overview_chars": 1767,
   "ac_chars": 4774,
   "ac_count": 9,
   "gwt_block_count": 8,
@@ -54,7 +54,7 @@
   "links_total": 6,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.3,
+  "waffle_per_kchar": 0.45,
   "child_modules": 0
 }
 ```

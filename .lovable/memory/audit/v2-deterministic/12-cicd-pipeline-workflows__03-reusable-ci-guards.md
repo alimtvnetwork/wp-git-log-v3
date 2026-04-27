@@ -8,7 +8,7 @@
 > Deterministic score 87/100 (A) for spec/12-cicd-pipeline-workflows/03-reusable-ci-guards.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.08. Gates active: 0.
 
 ---
 
@@ -28,10 +28,10 @@
 
 ```json
 {
-  "kind": "",
+  "kind": "future-spec",
   "md_files": 14,
   "mmd_files": 0,
-  "overview_chars": 5856,
+  "overview_chars": 6301,
   "ac_chars": 2999,
   "ac_count": 5,
   "gwt_block_count": 5,
@@ -56,7 +56,7 @@
   "links_total": 53,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.12,
+  "waffle_per_kchar": 0.08,
   "child_modules": 0
 }
 ```
