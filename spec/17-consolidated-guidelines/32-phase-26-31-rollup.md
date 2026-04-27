@@ -86,9 +86,10 @@ queued-decisions trail (where applicable).
 | ~~R2~~ | ~~Propagate rubric v2.0.0 emission to `linter-scripts/generate-dashboard-data.cjs`~~ — **CLOSED Phase 34 (2026-04-26)**: `Health.Score` now rubric-driven; new `RubricV2` JSON block; legacy preserved as `Health.LegacyScore`. Dashboard reports 100/100 (A+), parity with health gate confirmed. | Implementation | ✅ Closed |
 | ~~R3~~ | ~~Formalise full-tree audit cadence~~ — **CLOSED Phase 35 (2026-04-26)**: `.github/workflows/spec-monthly-audit.yml` + `spec/27-spec-toolchain/71-spec-monthly-audit-yml.md`. Monthly cron + `workflow_dispatch` + dashboard-parity check + auto-issue-on-failure. | Process | ✅ Closed |
 
-Phase 1 + 2 of the v4 roadmap are fully closed. Phase 3 has one closed
-item (rubric formalisation in `01-spec-authoring-guide`) and three open
-items (R1–R3 above).
+Phase 1 + 2 of the v4 roadmap are fully closed. Phase 3 status (as of
+v1.2.0): rubric formalisation closed in Phase 30, R2 closed in Phase 34,
+R3 closed in Phase 35. Only **R1** remains open (AI re-audit, blocked on
+`lovable_ai` runtime in CI).
 
 ---
 
