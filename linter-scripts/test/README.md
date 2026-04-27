@@ -101,9 +101,10 @@ bash linter-scripts/test/test-audit-cli-thresholds.sh
 bash linter-scripts/test/test-audit-explain-contract.sh
 bash linter-scripts/test/test-audit-deterministic-stability.sh
 bash linter-scripts/test/test-readme-inventory.sh
+bash linter-scripts/test/test-qa-baseline-footer.sh
 ```
 
-Run all four sequentially:
+Run all five sequentially:
 
 ```bash
 for t in linter-scripts/test/test-*.sh; do
@@ -200,4 +201,5 @@ Then:
   [Phase 95](../../.lovable/memory/audit/v2-deterministic/phase-95-determinism-stability.md) ·
   [Phase 97](../../.lovable/memory/audit/v2-deterministic/phase-97-mermaid-syntax-gate.md) ·
   [Phase 98](../../.lovable/memory/audit/v2-deterministic/phase-98-test-readme.md) ·
-  [Phase 102](../../.lovable/memory/audit/v2-deterministic/phase-102-readme-inventory-test.md)
+  [Phase 102](../../.lovable/memory/audit/v2-deterministic/phase-102-readme-inventory-test.md) ·
+  [Phase 103](../../.lovable/memory/audit/v2-deterministic/phase-103-qa-baseline-footer-test.md)
