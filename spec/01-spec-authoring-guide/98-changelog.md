@@ -1,7 +1,15 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.1.0
+**Version:** 4.2.0
 **Last Updated:** 2026-04-26
+
+---
+
+## [4.2.0] — 2026-04-26 (Phase 38 — queued-decisions trail format formalised)
+
+- **Added** [`12-queued-decisions-trail.md`](./12-queued-decisions-trail.md) v1.0.0 — codifies the queued-decisions trail format that has been used informally in `mem://specs/git-logs.md` since v3.7.x. Defines: file location (`mem://specs/<slug>.md`), Q-identifier monotonicity rule, 4 status markers (`🔄`/`✅`/`❌`/`⏸`), landing-time replacement (not append) rule, lockstep edit set (banner + §98 + §99 + memory), audit-recovery procedure for broken chains, when-applicable matrix (≥3 multi-session decisions OR ≥2 SemVer/week OR user-blocked decision present), worked example from git-logs Q1 + Q3, 5 ACs (AC-12-01..05).
+- **Changed** §00 inventory — added slot 12 row; bumped overview banner v3.3.0 → v3.4.0.
+- **Rationale:** project memory Core rule says "Spec edits keep these in lockstep: target file banner + §98 changelog row + §99 health/inventory + `mem://specs/git-logs.md` queued-decisions trail" — but until now the trail format itself was undocumented, only demonstrated. Phase 38 closes the gap so any future AI can apply the rule from the spec alone, without having to reverse-engineer it from `mem://specs/git-logs.md`.
 
 ---
 
