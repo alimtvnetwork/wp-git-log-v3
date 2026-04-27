@@ -1,7 +1,7 @@
 # Error Catalog
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25
+**Version:** 1.1.0  
+**Updated:** 2026-04-27
 
 All `GLCI-*` codes the CLI itself emits. Server-originated `GL-*` codes are surfaced verbatim per [`spec/22-git-logs-v2/15-error-codes.md`](../22-git-logs-v2/15-error-codes.md). Adding a new code requires a row here.
 
@@ -48,6 +48,7 @@ All `GLCI-*` codes the CLI itself emits. Server-originated `GL-*` codes are surf
 | GLCI-EXEC-RUNNER-FAILED | 1 | A runner exited non-zero | Read `ErrorLogs[]` in the admin UI |
 | GLCI-EXEC-RUNNER-CRASHED | 1 | Runner died with signal (SIGSEGV, SIGKILL) | Inspect `ErrorLogs[]`; OOM likely |
 | GLCI-EXEC-TIMEOUT | 1 | Phase exceeded `phase_timeout_secs` (default 1800) | Raise timeout or split tests |
+| GLCI-EXEC-DEPS-MISSING | 1 | Per-runtime dependency directory absent before phase invocation: `node_modules/` for TypeScript (AC-28-37), `vendor/` for PHP (AC-28-39). Go is not subject to this code (modules cache lives outside the repo). The CLI MUST NOT install dependencies implicitly. | Run `<pm> install` (TS — `npm`/`pnpm`/`bun`/`yarn`) or `composer install` (PHP) before re-invoking the phase. |
 
 ## Push (transport)
 
@@ -58,6 +59,7 @@ All `GLCI-*` codes the CLI itself emits. Server-originated `GL-*` codes are surf
 | GLCI-PUSH-BAD-RESPONSE | 4 | Server returned 2xx but body could not be parsed as ack envelope | Server/CLI version mismatch — check changelog |
 | GLCI-PUSH-STREAM-BROKEN | 4 | Streaming connection dropped mid-flight after retry | Switch to batched mode for unstable links |
 | GLCI-PUSH-PAYLOAD-TOO-LARGE | 4 | Server returned 413 | Lower `batch_max_bytes` or split phases |
+| GLCI-STREAM-MALFORMED | 4 | While `--stream` is active, the server closed the chunked connection mid-frame (TCP reset, HTTP/2 GOAWAY, or NDJSON parse error reported by the server as `400 GLCI-STREAM-MALFORMED` per AC-28-26). Distinct from `GLCI-PUSH-STREAM-BROKEN`: that code indicates the underlying connection dropped after retries; this code indicates the server actively rejected the stream framing. | Re-invoke; if persistent, switch to batched mode (`shipping.mode=batched`) and capture the malformed frame for server-side debugging. |
 
 ## Auth (server-surfaced; exit 3)
 
