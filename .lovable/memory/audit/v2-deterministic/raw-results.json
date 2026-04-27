@@ -71,12 +71,21 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [],
+    "findings": [
+      {
+        "category": "drift",
+        "correction": "Resolve or convert markers to tracked acceptance criteria.",
+        "evidence": "todo_density=1",
+        "impact": 3,
+        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
+        "severity": "low"
+      }
+    ],
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 23174,
-      "ac_count": 25,
+      "ac_chars": 25497,
+      "ac_count": 27,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 3,
@@ -91,11 +100,11 @@
         "sql": 1,
         "text": 2,
         "ts": 3,
-        "yaml": 6
+        "yaml": 7
       },
-      "code_blocks_total": 90,
+      "code_blocks_total": 91,
       "consistency_report": true,
-      "gwt_block_count": 21,
+      "gwt_block_count": 23,
       "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": true,
@@ -109,32 +118,32 @@
       "links_total": 47,
       "md_files": 17,
       "mmd_files": 1,
-      "overview_chars": 43096,
-      "todo_density": 0,
-      "waffle_per_kchar": 0.42
+      "overview_chars": 46271,
+      "todo_density": 1,
+      "waffle_per_kchar": 0.43
     },
     "module": "01-spec-authoring-guide",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 90,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 100,
-      "maintainability": 100,
+      "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=25, gwt=21, broken_links=0, waffle/kchar=0.42. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=27, gwt=23, broken_links=0, waffle/kchar=0.43. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 90,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 100,
-      "maintainability": 100,
+      "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 98/100 (A+) for spec/01-spec-authoring-guide.",
-    "weighted_overall": 98
+    "verdict": "Deterministic score 97/100 (A+) for spec/01-spec-authoring-guide.",
+    "weighted_overall": 97
   },
   {
     "applied_gates": [],

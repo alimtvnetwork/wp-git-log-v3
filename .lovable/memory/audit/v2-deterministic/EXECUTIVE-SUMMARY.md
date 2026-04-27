@@ -7,7 +7,7 @@
 
 - A mediocre AI could implement **~99.8%** of features from the spec alone.
 - 0 F-tier modules; 0 D-tier; 87 A-tier.
-- Top blocker categories: `drift` (2)
+- Top blocker categories: `drift` (3)
 
 ## To raise the mean to 80+:
 1. Inline contracts (DDL/enums/JSON-schemas) into the highest blast-radius modules first — see table above.
