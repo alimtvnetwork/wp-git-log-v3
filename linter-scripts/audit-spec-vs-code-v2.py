@@ -539,7 +539,19 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         # v2.9: evidenced-index bonuses — same rationale as trackers.
         if m.get("has_mermaid"):     impl += 5
         if m.get("has_ci_workflow"): impl += 5
-        impl = min(impl, 90)
+        # v2.11: contract-bearing index bonus — an index that ALSO inlines a
+        # typed contract (SQL DDL / TS enum / JSON schema / OpenAPI / typed
+        # language reference) functions as both router AND contract authority.
+        # Each contract type adds +5; cap raised to 100 only when at least one
+        # fires, so prose-only indexes remain capped at 90.
+        contract_bonus = 0
+        if m["has_sql_ddl"]:                  contract_bonus += 5
+        if m["has_ts_enums"]:                 contract_bonus += 5
+        if m["has_json_schema"]:              contract_bonus += 5
+        if m["has_yaml_openapi"]:             contract_bonus += 5
+        if m.get("has_typed_lang_contract"):  contract_bonus += 5
+        impl += contract_bonus
+        impl = min(impl, 100 if contract_bonus > 0 else 90)
     elif is_meta_toolchain:
         impl = 75
         if m.get("has_normative_contract"): impl += 10  # text-fenced contract block
