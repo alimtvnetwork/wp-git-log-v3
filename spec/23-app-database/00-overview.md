@@ -418,3 +418,44 @@ export enum AuditActionType {
   AppDelete     = "AppDelete",
 }
 ```
+
+
+---
+
+## Phase 58 Reference: App Database Migration Manifest JSON Schema
+
+Every app database migration MUST be described by a `MigrationManifest` record
+that the runner validates before applying SQL. The JSON Schema below is the
+authoritative shape.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.dev/spec/23-app-database/migration-manifest.schema.json",
+  "title": "MigrationManifest",
+  "type": "object",
+  "required": ["id", "version", "applied_at", "checksum", "statements"],
+  "properties": {
+    "id":         { "type": "string", "pattern": "^[0-9]{14}_[a-z0-9_]+$" },
+    "version":    { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "applied_at": { "type": "string", "format": "date-time" },
+    "checksum":   { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "direction":  { "type": "string", "enum": ["up", "down"] },
+    "statements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "sql"],
+        "properties": {
+          "kind": { "type": "string", "enum": ["ddl", "dml", "index", "trigger", "view", "policy"] },
+          "sql":  { "type": "string", "minLength": 1 },
+          "rollback": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```

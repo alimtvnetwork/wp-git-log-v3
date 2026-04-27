@@ -53,3 +53,7 @@ No external cross-references detected. ✅
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-04-26 | 1.2.0 | Phase 21 deepening sweep — auto-promoted to gold-standard 5-section shape |
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended `.wp-plugin-style.yaml` contract to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

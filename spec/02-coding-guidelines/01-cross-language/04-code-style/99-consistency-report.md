@@ -70,3 +70,7 @@
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-03-31 | 1.0.0 | Initial report — subfolder created from monolithic file |
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended cross-language `.code-style.yaml` contract to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

@@ -45,3 +45,7 @@
 | 2026-03-31 | 1.2.0 | Added `04-condensed-master-guidelines.md`, updated inventory to 7 files |
 | 2026-03-31 | 1.1.0 | Added missing `97-acceptance-criteria.md`, updated inventory |
 | 2026-03-31 | 1.0.0 | Initial report |
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended AI Optimization Telemetry OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

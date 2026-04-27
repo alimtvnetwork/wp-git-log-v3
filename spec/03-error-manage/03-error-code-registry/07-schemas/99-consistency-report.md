@@ -51,3 +51,7 @@ No external cross-references detected. ✅
 | 2026-03-21 | 1.0.0 | Initial consistency report created |
 | 2026-04-27 | 3.4.0 | Phase 54 — typed-language reference sweep (Go/PHP/Python) for impl-rubric lift |
 
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended ErrorCodeRegistry OpenAPI contract to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

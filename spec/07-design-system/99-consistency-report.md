@@ -98,3 +98,7 @@ This module's full lockstep history is mirrored in `98-changelog.md`; entries
 above summarize only the audit-/validation-bearing milestones for `07-design-system`.
 | 2026-04-27 | 3.3.0 | Phase 56 — typed-language reference sweep |
 
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended Design Tokens OpenAPI contract to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

@@ -45,3 +45,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended `.wp-plugin-style.yaml` contract to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

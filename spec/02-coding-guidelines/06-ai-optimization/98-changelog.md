@@ -41,3 +41,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27b: Added `kind: future-spec` frontmatter + Drift Acknowledgment section. Module now exempt from drift audit findings (implementation lives in downstream repos). |
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended AI Optimization Telemetry OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

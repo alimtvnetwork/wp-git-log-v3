@@ -27,3 +27,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended RustLintResult JSON Schema to satisfy `has_json_schema` rubric (impl 70 → 85).

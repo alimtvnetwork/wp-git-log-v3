@@ -140,3 +140,66 @@ export enum CodeStyleFixability {
   Manual  = "manual",
 }
 ```
+
+
+---
+
+## Phase 58 Reference: Cross-Language Style Config (YAML)
+
+The cross-language code-style rules are mirrored into a single `.code-style.yaml`
+that every language-specific linter consumes (Prettier, gofmt, php-cs-fixer,
+rustfmt). The schema below is normative.
+
+```yaml
+# .code-style.yaml — cross-language style configuration v1.0.0
+version: 1.0.0
+languages:
+  typescript:
+    indent: 2
+    quotes: single
+    semicolons: true
+    trailing_comma: all
+    print_width: 100
+  javascript:
+    indent: 2
+    quotes: single
+    semicolons: true
+    trailing_comma: all
+    print_width: 100
+  go:
+    indent: tab
+    line_length: 120
+    imports: goimports
+    test_pkg_suffix: _test
+  php:
+    indent: 4
+    standard: PSR-12
+    short_array_syntax: true
+    line_length: 120
+  python:
+    indent: 4
+    quotes: double
+    line_length: 100
+    formatter: black
+  rust:
+    edition: "2021"
+    indent: 4
+    max_width: 100
+    formatter: rustfmt
+  csharp:
+    indent: 4
+    line_length: 120
+    style_cop: enabled
+naming:
+  files:    kebab-case
+  classes:  PascalCase
+  functions: camelCase
+  constants: SCREAMING_SNAKE_CASE
+enforcement:
+  ci_required: true
+  fail_on_warning: false
+  exempt_paths:
+    - vendor/**
+    - node_modules/**
+    - .lovable/**
+```
