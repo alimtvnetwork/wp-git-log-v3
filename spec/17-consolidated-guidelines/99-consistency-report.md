@@ -1,7 +1,7 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.2.0
-**Updated:** 2026-04-26
+**Version:** 4.3.0
+**Updated:** 2026-04-27
 
 > **v4.2.0 update (Phase 32 — rollup):** Added [`32-phase-26-31-rollup.md`](./32-phase-26-31-rollup.md) — single-session retrospective covering Phases 26 → 31 (67 spec remediations + rubric upgrade v1.x → v2.0.0; tree health 45/100 → 100/100, 162/162 quality credits). Closes Phase 1 + 2 of v4 roadmap. Phase 3 backlog: R1 (AI re-audit), R2 (dashboard rubric-v2), R3 (audit cadence). One blocker B1 (§07 App identity) carried forward. Slot 31 (`31-full-tree-ai-audit-v4.md`) was missing from §00 inventory despite being on disk since v3.5.0 — added in this patch alongside slot 32.
 
@@ -116,6 +116,7 @@
 | 2026-04-16 | 3.2.0 | Cross-reference validation after error-manage restructuring, coding-guidelines flattening, global version bump to 3.1.0. Dashboard: 0 broken links. |
 | 2026-04-16 | 3.3.0 | Reflected recent expansions: `01-spec-authoring.md` 90%→95% (330+ lines), `16-app-design-system-and-ui.md` 88%→93% (530+ lines), `22-app-database.md` added (310+ lines, 90%), placeholders 11/12/13 expanded to 88%. Added implementability summary table. Total: 23 files, 17 at 90%+. |
 | 2026-04-22 | 3.4.0 | Added `24-folder-mapping.md` — bidirectional source-folder ↔ consolidated-file index with coverage heatmap, reverse index, and blind-spot tracking. Registered `23-generic-cli.md` in inventory. Total: 25 files. |
+| 2026-04-27 | 4.3.0 | Phase 39b: Added §00 "Audit Marker Exemption" — `todo_count: 5` was substring false-positive (all hits inside Python example block in `27-linter-authoring-guide.md` lines 361–424 that *defines* `check-stale-todos.py`). Banner v3.2.0→v3.3.0; §98 v2.3.0→v2.4.0. |
 
 ---
 
