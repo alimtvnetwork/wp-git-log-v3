@@ -327,36 +327,10 @@ above summarize only the audit-/validation-bearing milestones for `22-git-logs-v
 
 ---
 
-## File Inventory
-
-| File | Status |
-|------|--------|
-| `00-overview.md` | ✅ Present |
-| `01-glossary-and-enums.md` | ✅ Present |
-| `02-database-schema.md` | ✅ Present |
-| `03-admin-ui.md` | ✅ Present |
-| `04-rest-api-endpoints.md` | ✅ Present |
-| `05-auth-and-validation.md` | ✅ Present |
-| `06-migrations-and-logger.md` | ✅ Present |
-| `07-app-entity.md` | ✅ Present |
-| `08-history-and-action.md` | ✅ Present |
-| `14-endpoint-examples.md` | ✅ Present |
-| `15-error-codes.md` | ✅ Present |
-| `16-seed-data.md` | ✅ Present |
-| `16-test-plan.md` | ✅ Present |
-| `19-permission-matrix.md` | ✅ Present |
-| `20-observability.md` | ✅ Present |
-| `22-retention-and-pruning.md` | ✅ Present |
-| `23-backup-restore.md` | ✅ Present |
-| `24-multisite.md` | ✅ Present |
-| `25-headless-auth-notes.md` | ✅ Present |
-| `26-readme-and-screenshots.md` | ✅ Present |
-| `27-wp-cli-reference.md` | ✅ Present |
-| `28-example-github-actions.md` | ✅ Present |
-| `29-uninstall-policy.md` | ✅ Present |
-| `30-threat-model.md` | ✅ Present |
-| `31-ssh-key-auth.md` | ✅ Present |
-
-Inventory mirrors the on-disk layout of `22-git-logs-v2/` as of 2026-04-26. See
-`98-changelog.md` for the file-level revision trail.
+<!-- Phase 135: stale duplicate "File Inventory" block removed (2026-04-27).
+     The authoritative inventory lives at the top of this file (lines 8–48)
+     and already tracks §32–§37, §39, §97–§99 with version annotations.
+     The duplicate block was a drift trap: it was last refreshed 2026-04-26
+     and silently fell out of sync when §32–§35 (test scaffolds), §36/§37
+     (audit memos) and §39 (split-DB) landed. Single source of truth wins. -->
 
