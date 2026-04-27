@@ -1095,6 +1095,23 @@ def main():
         s = r["scores"]
         idx.append(f"| [`{r['module']}`](./{r['module'].replace('/','__') or '_root'}.md) | {s['implementability']} | {s['completeness']} | {s['alignment']} | {s['consistency']} | {s['clarity']} | {s['testability']} | {s['maintainability']} | **{r['weighted_overall']}** | {r['grade']} | {r['blast_radius']} |")
 
+    # Phase 99: surface QA-tooling baseline so a reader of this output knows
+    # the score is one signal among 8 strict gates, not the only signal.
+    idx += ["", "## QA tooling baseline (Phase 99)",
+            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **8 strict CI gates** that surround it:",
+            "",
+            "1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.",
+            "2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).",
+            "3. **Lockstep** (`check-lockstep.cjs --strict`) — §97/§98/§99 versions advance together (0-finding bar).",
+            f"4. **Audit thresholds** (this script, `--min-weighted=N --min-impl=N`) — Phase 81 floors; current bar 97/99, current score above.",
+            "5. **CLI threshold self-test** (`test/test-audit-cli-thresholds.sh`, Phase 91) — locks the `--min-*` exit-code contract.",
+            "6. **`--explain` self-test** (`test/test-audit-explain-contract.sh`, Phase 94) — locks the Phase 90 debug-flag contract.",
+            "7. **Determinism self-test** (`test/test-audit-deterministic-stability.sh`, Phase 95) — `sha256(raw-results.json)` identical across 2 runs.",
+            "8. **Mermaid syntax** (`check-mermaid-syntax.mjs`, Phase 97) — every `spec/**/*.mmd` parses cleanly.",
+            "",
+            "Inventory + onboarding for the self-test triad (#5–#7): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
+            ""]
+
     (OUT / "00-index.md").write_text("\n".join(idx))
     # In deterministic mode, sort by module name and sort_keys for byte-identical output.
     json_results = sorted(results, key=lambda r: r["module"]) if DETERMINISTIC else results
