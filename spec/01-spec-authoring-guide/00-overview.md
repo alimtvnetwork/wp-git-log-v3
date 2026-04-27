@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # Spec Authoring Guide
 
-**Version:** 3.5.0  
+**Version:** 3.6.0  
 **Updated:** 2026-04-27  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
