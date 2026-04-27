@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **97/100 (A+)**  
+**Implementability Score:** **98/100 (A+)**  
 **Blast radius:** 5/10
 
-> Deterministic score 97/100 (A+) for spec/06-seedable-config-architecture/02-features.
+> Deterministic score 98/100 (A+) for spec/06-seedable-config-architecture/02-features.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.08. Gates active: 0.
@@ -17,12 +17,12 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 100 | 35.0 |
-| Completeness | 20% | 85 | 17.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
-| Maintainability | 3% | 90 | 2.7 |
+| Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -56,7 +56,7 @@
   "has_mermaid": true,
   "links_total": 27,
   "links_broken": 0,
-  "todo_density": 1,
+  "todo_density": 0,
   "waffle_per_kchar": 0.08,
   "child_modules": 0
 }
@@ -76,11 +76,5 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
-
-#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
-- **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=1
-- **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

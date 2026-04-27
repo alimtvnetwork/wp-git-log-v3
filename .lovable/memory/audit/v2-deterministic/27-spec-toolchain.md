@@ -58,7 +58,7 @@
   "has_mermaid": true,
   "links_total": 77,
   "links_broken": 0,
-  "todo_density": 30,
+  "todo_density": 16,
   "waffle_per_kchar": 0.17,
   "child_modules": 0
 }
@@ -78,11 +78,11 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 30 TODO/TBD/FIXME marker(s) in module body |
+| 1 | drift | low | 3/10 | 16 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 30 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 16 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=30
+- **Evidence:** todo_density=16
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **94/100 (A)**  
+**Implementability Score:** **97/100 (A+)**  
 **Blast radius:** 7/10
 
-> Deterministic score 94/100 (A) for spec/17-consolidated-guidelines.
+> Deterministic score 97/100 (A+) for spec/17-consolidated-guidelines.
 
 
 **Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.09. Gates active: 0.
@@ -17,7 +17,7 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 100 | 35.0 |
-| Completeness | 20% | 70 | 14.0 |
+| Completeness | 20% | 85 | 17.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
@@ -68,7 +68,7 @@
   "has_mermaid": false,
   "links_total": 44,
   "links_broken": 0,
-  "todo_density": 5,
+  "todo_density": 1,
   "waffle_per_kchar": 0.09,
   "child_modules": 0
 }
@@ -88,11 +88,11 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 5 TODO/TBD/FIXME marker(s) in module body |
+| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
 
-#### 1. [LOW] 5 TODO/TBD/FIXME marker(s) in module body
+#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
 - **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=5
+- **Evidence:** todo_density=1
 - **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

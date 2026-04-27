@@ -3,7 +3,7 @@
 **Date:** 2026-04-25  
 **Modules audited:** 87  
 **Code files indexed:** 35  
-**Mean weighted score:** **97.8/100**  
+**Mean weighted score:** **97.9/100**  
 **Mean implementability:** **99.8/100**
 
 ## Methodology v2
@@ -13,23 +13,23 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 84, **A** = 3
+**A+** = 85, **A** = 2
 
 ## Findings by category
 | Category | Count |
 |---|---:|
-| drift | 8 |
+| drift | 4 |
 
 ## Findings by severity
 | Severity | Count |
 |---|---:|
-| low | 8 |
+| low | 4 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
 | Rank | Module | Score | Grade | Blast | Top blocker |
 |---:|---|---:|:-:|:-:|---|
-| 1 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 98 | A+ | 10 | _none_ |
-| 2 | [`.`](./..md) | 99 | A+ | 10 | _none_ |
+| 1 | [`.`](./..md) | 99 | A+ | 10 | _none_ |
+| 2 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 99 | A+ | 10 | _none_ |
 | 3 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 100 | A+ | 10 | _none_ |
 | 4 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 100 | A+ | 10 | _none_ |
 | 5 | [`03-error-manage`](./03-error-manage.md) | 100 | A+ | 10 | _none_ |
@@ -50,18 +50,18 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 1 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 95 | 95 | A+ | _no findings_ |
 | 2 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 95 | 95 | A+ | _no findings_ |
 | 3 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 95 | 95 | A+ | _no findings_ |
-| 4 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 92 | 100 | A | 30 TODO/TBD/FIXME marker(s) in module body |
-| 5 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 94 | 100 | A | 5 TODO/TBD/FIXME marker(s) in module body |
-| 6 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 94 | 100 | A | 10 TODO/TBD/FIXME marker(s) in module body |
-| 7 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 96 | 100 | A+ | _no findings_ |
-| 8 | [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 96 | 100 | A+ | _no findings_ |
-| 9 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 96 | 100 | A+ | _no findings_ |
-| 10 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 96 | 100 | A+ | _no findings_ |
-| 11 | [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 96 | 100 | A+ | _no findings_ |
-| 12 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 96 | 100 | A+ | _no findings_ |
-| 13 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 96 | 100 | A+ | _no findings_ |
-| 14 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 96 | 100 | A+ | _no findings_ |
-| 15 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 96 | 100 | A+ | _no findings_ |
+| 4 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 92 | 100 | A | 16 TODO/TBD/FIXME marker(s) in module body |
+| 5 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 94 | 100 | A | 4 TODO/TBD/FIXME marker(s) in module body |
+| 6 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 96 | 100 | A+ | _no findings_ |
+| 7 | [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 96 | 100 | A+ | _no findings_ |
+| 8 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 96 | 100 | A+ | _no findings_ |
+| 9 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 96 | 100 | A+ | _no findings_ |
+| 10 | [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 96 | 100 | A+ | _no findings_ |
+| 11 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 96 | 100 | A+ | _no findings_ |
+| 12 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 96 | 100 | A+ | _no findings_ |
+| 13 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 96 | 100 | A+ | _no findings_ |
+| 14 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 96 | 100 | A+ | _no findings_ |
+| 15 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 96 | 100 | A+ | _no findings_ |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -81,7 +81,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 100 | 70 | 100 | 100 | 100 | 80 | 90 | **92** | A | 2 |
-| [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 70 | 100 | 100 | 100 | 100 | 90 | **94** | A | 7 |
 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 100 | 70 | 100 | 100 | 100 | 100 | 90 | **94** | A | 5 |
 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 95 | 90 | 100 | 100 | 100 | 80 | 100 | **95** | A+ | 3 |
 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 95 | 90 | 100 | 100 | 100 | 80 | 100 | **95** | A+ | 3 |
@@ -96,8 +95,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
-| [`02-coding-guidelines/01-cross-language/16-static-analysis`](./02-coding-guidelines__01-cross-language__16-static-analysis.md) | 100 | 85 | 100 | 100 | 100 | 100 | 90 | **97** | A+ | 7 |
-| [`02-coding-guidelines/05-rust`](./02-coding-guidelines__05-rust.md) | 100 | 85 | 100 | 100 | 100 | 100 | 90 | **97** | A+ | 5 |
 | [`02-coding-guidelines/09-powershell-integration`](./02-coding-guidelines__09-powershell-integration.md) | 100 | 85 | 100 | 100 | 100 | 100 | 100 | **97** | A+ | 7 |
 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 100 | 90 | 100 | 100 | 100 | 80 | 100 | **97** | A+ | 4 |
 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 100 | 90 | 100 | 100 | 100 | 80 | 100 | **97** | A+ | 4 |
@@ -105,17 +102,17 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 100 | 85 | 100 | 100 | 100 | 100 | 100 | **97** | A+ | 7 |
 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 100 | 85 | 100 | 100 | 100 | 100 | 100 | **97** | A+ | 7 |
 | [`03-error-manage/02-error-architecture/05-response-envelope`](./03-error-manage__02-error-architecture__05-response-envelope.md) | 100 | 85 | 100 | 100 | 100 | 100 | 100 | **97** | A+ | 7 |
-| [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 100 | 85 | 100 | 100 | 100 | 100 | 90 | **97** | A+ | 5 |
-| [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 100 | 85 | 100 | 100 | 100 | 100 | 90 | **97** | A+ | 7 |
+| [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 85 | 100 | 100 | 100 | 100 | 90 | **97** | A+ | 7 |
 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
-| [`02-coding-guidelines`](./02-coding-guidelines.md) | 100 | 90 | 100 | 100 | 100 | 100 | 90 | **98** | A+ | 10 |
 | [`02-coding-guidelines/01-cross-language/02-boolean-principles`](./02-coding-guidelines__01-cross-language__02-boolean-principles.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/01-cross-language/04-code-style`](./02-coding-guidelines__01-cross-language__04-code-style.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/01-cross-language/15-master-coding-guidelines`](./02-coding-guidelines__01-cross-language__15-master-coding-guidelines.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
+| [`02-coding-guidelines/01-cross-language/16-static-analysis`](./02-coding-guidelines__01-cross-language__16-static-analysis.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/03-golang/01-enum-specification`](./02-coding-guidelines__03-golang__01-enum-specification.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/04-php/07-php-standards-reference`](./02-coding-guidelines__04-php__07-php-standards-reference.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
+| [`02-coding-guidelines/05-rust`](./02-coding-guidelines__05-rust.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 5 |
 | [`02-coding-guidelines/06-ai-optimization`](./02-coding-guidelines__06-ai-optimization.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/06-cicd-integration`](./02-coding-guidelines__06-cicd-integration.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
@@ -133,6 +130,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`04-database-conventions`](./04-database-conventions.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 5 |
+| [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 5 |
 | [`07-design-system`](./07-design-system.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`11-powershell-integration`](./11-powershell-integration.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
@@ -146,7 +144,9 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`23-app-database`](./23-app-database.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
+| [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`.`](./..md) | 100 | 100 | 100 | 100 | 100 | 80 | 100 | **99** | A+ | 10 |
+| [`02-coding-guidelines`](./02-coding-guidelines.md) | 100 | 95 | 100 | 100 | 100 | 100 | 90 | **99** | A+ | 10 |
 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 100 | 100 | 100 | 100 | 100 | 80 | 100 | **99** | A+ | 4 |
 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 100 | 100 | 100 | 100 | 100 | 80 | 100 | **99** | A+ | 4 |
 | [`10-research`](./10-research.md) | 100 | 100 | 100 | 100 | 100 | 80 | 100 | **99** | A+ | 4 |
