@@ -182,3 +182,88 @@ FAIL-05: lockstep break (§00 vs §98 vs §99 mismatch)  -> exit 1 (via §24 che
 
 **Evidence verified:** `rg -n -i '\bTODO\b|\bTBD\b|\bFIXME\b' spec/27-spec-toolchain/` — every hit reviewed and classified above.
 
+
+## CI Workflow Integration — Phase 79 Normative
+
+The following YAML workflow stages are normative for any consumer that wires
+this toolchain into a CI pipeline. Each fenced `yaml` block is a stage that
+MUST be present and ordered as shown.
+
+```yaml
+name: spec-toolchain-stage-1-detect
+on: [push, pull_request]
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash linter-scripts/run.sh detect
+```
+
+```yaml
+name: spec-toolchain-stage-2-validate
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    needs: [detect]
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 linter-scripts/check-spec-cross-links.py
+      - run: python3 linter-scripts/check-spec-folder-refs.py
+```
+
+```yaml
+name: spec-toolchain-stage-3-lint
+on: [push, pull_request]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    needs: [validate]
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          AUDIT_DETERMINISTIC: "1"
+        run: python3 linter-scripts/audit-spec-vs-code-v2.py
+```
+
+```yaml
+name: spec-toolchain-stage-4-tree-health
+on: [push, pull_request]
+jobs:
+  tree-health:
+    runs-on: ubuntu-latest
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+      - run: node linter-scripts/check-tree-health.cjs --strict
+```
+
+```yaml
+name: spec-toolchain-stage-5-lockstep
+on: [push, pull_request]
+jobs:
+  lockstep:
+    runs-on: ubuntu-latest
+    needs: [tree-health]
+    steps:
+      - uses: actions/checkout@v4
+      - run: node linter-scripts/check-lockstep.cjs
+```
+
+```yaml
+name: spec-toolchain-stage-6-promote
+on:
+  push:
+    branches: [main]
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    needs: [lockstep]
+    steps:
+      - uses: actions/checkout@v4
+      - run: bash linter-scripts/run.sh promote
+```
+
+See [`lifecycle-27-spec-toolchain.mmd`](./lifecycle-27-spec-toolchain.mmd) for
+the visual end-to-end flow.
