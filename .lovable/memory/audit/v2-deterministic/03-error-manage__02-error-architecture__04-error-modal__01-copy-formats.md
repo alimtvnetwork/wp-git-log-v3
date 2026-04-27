@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **94/100 (A)**  
+**Implementability Score:** **98/100 (A+)**  
 **Blast radius:** 7/10
 
-> Deterministic score 94/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats.
+> Deterministic score 98/100 (A+) for spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats.
 
 
 **Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 89 | 31.1 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
