@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 87  
 **Code files indexed:** 35  
-**Mean weighted score:** **93.5/100**  
-**Mean implementability:** **91.8/100**
+**Mean weighted score:** **93.8/100**  
+**Mean implementability:** **92.5/100**
 
 ## Methodology v2
 
@@ -55,13 +55,13 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 6 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 88 | 80 | A | _no findings_ |
 | 7 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 88 | 80 | A | _no findings_ |
 | 8 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 88 | 80 | A | _no findings_ |
-| 9 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 89 | 80 | A | _no findings_ |
-| 10 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 89 | 80 | A | _no findings_ |
-| 11 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 89 | 80 | A | _no findings_ |
-| 12 | [`10-research`](./10-research.md) | 89 | 80 | A | _no findings_ |
-| 13 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 89 | 80 | A | _no findings_ |
-| 14 | [`14-update/diagrams`](./14-update__diagrams.md) | 89 | 80 | A | _no findings_ |
-| 15 | [`25-app-issues`](./25-app-issues.md) | 89 | 80 | A | _no findings_ |
+| 9 | [`10-research`](./10-research.md) | 89 | 80 | A | _no findings_ |
+| 10 | [`14-update/diagrams`](./14-update__diagrams.md) | 89 | 80 | A | _no findings_ |
+| 11 | [`25-app-issues`](./25-app-issues.md) | 89 | 80 | A | _no findings_ |
+| 12 | [`.`](./..md) | 92 | 80 | A | _no findings_ |
+| 13 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 92 | 80 | A | _no findings_ |
+| 14 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 89 | 85 | A | _no findings_ |
+| 15 | [`11-powershell-integration`](./11-powershell-integration.md) | 89 | 85 | A | _no findings_ |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -88,12 +88,8 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 80 | 80 | 100 | 100 | 100 | 80 | 100 | **88** | A | 2 |
 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 80 | 80 | 100 | 100 | 100 | 80 | 100 | **88** | A | 2 |
 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 80 | 80 | 100 | 100 | 100 | 80 | 100 | **88** | A | 2 |
-| [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
-| [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
-| [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
 | [`10-research`](./10-research.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 2 |
-| [`10-research/01-research-index`](./10-research__01-research-index.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
 | [`11-powershell-integration`](./11-powershell-integration.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 2 |
 | [`14-update/diagrams`](./14-update__diagrams.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 6 |
 | [`25-app-issues`](./25-app-issues.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 4 |
@@ -120,9 +116,13 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 90 | 85 | 100 | 100 | 100 | 100 | 90 | **93** | A | 4 |
 | [`02-coding-guidelines/06-cicd-integration`](./02-coding-guidelines__06-cicd-integration.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`02-coding-guidelines/09-powershell-integration`](./02-coding-guidelines__09-powershell-integration.md) | 90 | 85 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
+| [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 95 | 80 | 100 | 100 | 100 | 96 | 100 | **94** | A | 5 |
+| [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 95 | 80 | 100 | 100 | 100 | 96 | 100 | **94** | A | 5 |
+| [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 95 | 80 | 100 | 100 | 100 | 96 | 100 | **94** | A | 5 |
 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 95 | 80 | 100 | 100 | 100 | 96 | 100 | **94** | A | 4 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 95 | 80 | 100 | 100 | 100 | 96 | 100 | **94** | A | 4 |
 | [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 100 | 75 | 100 | 100 | 100 | 90 | 100 | **94** | A | 5 |
+| [`10-research/01-research-index`](./10-research__01-research-index.md) | 95 | 80 | 100 | 100 | 100 | 96 | 100 | **94** | A | 5 |
 | [`15-distribution-and-runner`](./15-distribution-and-runner.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`16-generic-release`](./16-generic-release.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`22-git-logs-v2`](./22-git-logs-v2.md) | 100 | 70 | 100 | 100 | 100 | 100 | 90 | **94** | A | 5 |
