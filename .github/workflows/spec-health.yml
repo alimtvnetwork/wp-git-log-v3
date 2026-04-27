@@ -87,7 +87,19 @@ jobs:
         # modules sit comfortably above the floor (98.0/99.8). Six cases
         # cover satisfiable + unsatisfiable floors, individually and combined.
         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-22)
-        run: bash linter-scripts/test/test-audit-cli-thresholds.sh
+         run: bash linter-scripts/test/test-audit-cli-thresholds.sh
+
+      - name: Audit --explain contract self-test (Phase 94)
+        # Phase 94: locks the v2.16 (Phase 90) --explain=<substring> contract
+        # under CI. Without this, a refactor could silently break the primary
+        # contributor-facing debugging tool and CI would still pass because
+        # --explain is never invoked in the normal audit gate. 14 assertions
+        # cover single-match (exit 0 + stdout structure), no-match (exit 1 +
+        # stderr hint), multi-match (exit 0 + warning + first 5 candidates +
+        # full report), and the no-side-effects guarantee (sha256 snapshot
+        # of .lovable/memory/audit/v2-deterministic/ before and after).
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-23)
+        run: bash linter-scripts/test/test-audit-explain-contract.sh
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
