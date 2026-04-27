@@ -259,6 +259,21 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** the self-test MUST exit `0` only when all 14 assertions across the 4 scenarios pass; otherwise exit `1` with a per-assertion ✅/❌ summary on stdout.
 - **And** the self-test MUST NOT depend on absolute audit scores or the AI gateway (deterministic mode forced; checks structural contract only).
 
+### AC-31-26 — Determinism / JSON-stability self-test (Phase 95)
+- **Given** the script `linter-scripts/test/test-audit-deterministic-stability.sh`,
+- **When** invoked from CI (`spec-health.yml`, step *Audit determinism / JSON-stability self-test*) with `AUDIT_DETERMINISTIC=1`,
+- **Then** it MUST execute `audit-spec-vs-code-v2.py` **twice** with identical environment + arguments and assert all of:
+  (a) **Both runs exit `0`** (the audit pipeline itself doesn't error out).
+  (b) **Both runs write `raw-results.json`** to `.lovable/memory/audit/v2-deterministic/`.
+  (c) **`raw-results.json` is byte-identical across both runs** — measured via `sha256sum` of the file contents. Identical hashes → determinism contract intact.
+  (d) **Byte size matches** — secondary sanity check that catches truncation regressions independently of hash.
+  (e) **Both runs produce valid JSON** with `len(results) >= 80` (the corpus currently has 87 modules; the floor permits future shrinkage but catches catastrophic loss).
+  (f) **Module count matches** between runs (`len(run1) == len(run2)`).
+  (g) **Modules sorted by name** in the JSON output (the deterministic-mode sort guarantee that makes diffs reviewable).
+- **And** the self-test MUST exit `0` only when all 7 assertions pass; otherwise exit `1` with a per-assertion ✅/❌ summary on stdout AND, on byte-identity failure, print up to 20 differing lines (pure-bash `paste`+`awk` line-diff since the CI base image lacks `diff`).
+- **And** any non-determinism regression (added wall-clock timestamp, unsorted dict iteration, hash-seeded sampling, removed `sort_keys=True`, reordered `findings` list) MUST cause this self-test to fail in CI even when the production audit gate (`--min-weighted=97 --min-impl=99`) still passes — because the production gate runs the audit only once and cannot detect determinism bugs by construction.
+- **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` lines 122–131 (`DETERMINISTIC` env-var read + `OUT` path branching) and lines 1077–1083 (`sorted(results, key=lambda r: r["module"])` + `sort_keys=DETERMINISTIC` JSON serialisation).
+
 ## Rubric changelog (v2.9 → v2.16)
 
 | Version | Phase | Change | Score effect |
@@ -273,6 +288,7 @@ A companion script renders these into a human report — see §16 [`16-generate-
 | v2.16 | 90 | New `--explain=<substring>` CLI flag prints rubric branch, fired bonuses, capped gates, and per-dimension trace for any module. Pure-add diagnostic. | None (no scoring change; debugging tool only). |
 | v2.16-test1 | 91 | CLI threshold contract self-test (`linter-scripts/test/test-audit-cli-thresholds.sh`) wired into `spec-health.yml`. Locks v2.12 exit-code semantics from silent-inversion regressions. | None (no rubric change; CI safety net only). |
 | v2.16-test2 | 94 | `--explain` contract self-test (`linter-scripts/test/test-audit-explain-contract.sh`) wired into `spec-health.yml`. Locks v2.16 single-match / no-match / multi-match / no-side-effects contract from silent-break regressions. | None (no rubric change; CI safety net only). |
+| v2.16-test3 | 95 | Determinism / JSON-stability self-test (`linter-scripts/test/test-audit-deterministic-stability.sh`) wired into `spec-health.yml`. Locks `AUDIT_DETERMINISTIC=1` byte-identical guarantee — runs the audit twice and asserts `sha256(raw-results.json)` matches. Catches non-determinism regressions the production gate cannot see (single-run gate by construction). | None (no rubric change; CI safety net only). |
 
 
 ## Cross-references
