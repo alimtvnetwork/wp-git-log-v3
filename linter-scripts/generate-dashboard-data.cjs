@@ -242,9 +242,73 @@ function buildInventory(dirs) {
   return inventory;
 }
 
-// ── 4. Health score ─────────────────────────────────────────
+// ── 4a. Per-module rubric v2.0.0 quality scoring ────────────
 
-function computeHealth(linkResult, requiredFiles, inventory) {
+function scoreModuleQuality(modAbsPath) {
+  const reportPath = path.join(modAbsPath, "99-consistency-report.md");
+  if (!fs.existsSync(reportPath)) {
+    return { score: 0, max: 3, hits: [] };
+  }
+  const text = fs.readFileSync(reportPath, "utf8");
+  const nonBlankLines = text.split("\n").filter((l) => l.trim().length > 0).length;
+  let score = 0;
+  const hits = [];
+  if (nonBlankLines >= QUALITY_MIN_LINES) { score += 1; hits.push("depth"); }
+  if (QUALITY_HISTORY_RE.test(text)) { score += 1; hits.push("history"); }
+  if (QUALITY_INVENTORY_RE.test(text)) { score += 1; hits.push("inventory"); }
+  return { score, max: 3, hits };
+}
+
+function buildRubricV2(allDirs) {
+  // Same module-discovery rules as check-tree-health.cjs:
+  // - Top-level numbered folders under spec/
+  // - One level of nested folders that have their own 00-overview.md
+  const modules = [];
+  for (const dir of allDirs) {
+    if (dir === SPEC_ROOT) continue;
+    const rel = path.relative(SPEC_ROOT, dir);
+    if (rel.split(path.sep).length > 2) continue;
+    const hasOverview = fs.existsSync(path.join(dir, "00-overview.md"));
+    if (rel.includes(path.sep) && !hasOverview) continue;
+    const required = REQUIRED_FILES.filter((f) => fs.existsSync(path.join(dir, f))).length;
+    const recommended = RECOMMENDED_FILES.filter((f) => fs.existsSync(path.join(dir, f))).length;
+    const quality = scoreModuleQuality(dir);
+    modules.push({
+      Module: rel,
+      Required: required,
+      RequiredMax: REQUIRED_FILES.length,
+      Recommended: recommended,
+      RecommendedMax: RECOMMENDED_FILES.length,
+      QualityScore: quality.score,
+      QualityMax: quality.max,
+      QualityHits: quality.hits,
+    });
+  }
+  const totalRequired = modules.reduce((s, m) => s + m.Required, 0);
+  const maxRequired = modules.length * REQUIRED_FILES.length;
+  const totalRecommended = modules.reduce((s, m) => s + m.Recommended, 0);
+  const maxRecommended = modules.length * RECOMMENDED_FILES.length;
+  const totalQuality = modules.reduce((s, m) => s + m.QualityScore, 0);
+  const maxQuality = modules.length * 3;
+  const reqPct = maxRequired ? (totalRequired / maxRequired) * RUBRIC_WEIGHTS.required : 0;
+  const recPct = maxRecommended ? (totalRecommended / maxRecommended) * RUBRIC_WEIGHTS.recommended : 0;
+  const qPct = maxQuality ? (totalQuality / maxQuality) * RUBRIC_WEIGHTS.quality : 0;
+  const score = Math.round(reqPct + recPct + qPct);
+  return {
+    RubricVersion: RUBRIC_VERSION,
+    Weights: RUBRIC_WEIGHTS,
+    Score: score,
+    Required: { Earned: totalRequired, Max: maxRequired, PctOfTotal: Math.round(reqPct * 10) / 10 },
+    Recommended: { Earned: totalRecommended, Max: maxRecommended, PctOfTotal: Math.round(recPct * 10) / 10 },
+    Quality: { Earned: totalQuality, Max: maxQuality, PctOfTotal: Math.round(qPct * 10) / 10 },
+    ModuleCount: modules.length,
+    Modules: modules,
+  };
+}
+
+// ── 4b. Health score (legacy deduction-based, preserved) ────
+
+function computeHealth(linkResult, requiredFiles, rubricV2) {
   let score = 100;
   const deductions = [];
 
@@ -272,15 +336,23 @@ function computeHealth(linkResult, requiredFiles, inventory) {
     );
   }
 
+  // Rubric v2.0.0 is now the authoritative score; legacy kept for back-compat.
+  const rubricScore = rubricV2.Score;
   const grade =
-    score >= 95 ? "A+" :
-    score >= 90 ? "A" :
-    score >= 85 ? "B+" :
-    score >= 80 ? "B" :
-    score >= 70 ? "C" :
-    score >= 60 ? "D" : "F";
+    rubricScore >= 95 ? "A+" :
+    rubricScore >= 90 ? "A" :
+    rubricScore >= 85 ? "B+" :
+    rubricScore >= 80 ? "B" :
+    rubricScore >= 70 ? "C" :
+    rubricScore >= 60 ? "D" : "F";
 
-  return { Score: Math.max(score, 0), Grade: grade, Deductions: deductions };
+  return {
+    Score: rubricScore,
+    Grade: grade,
+    RubricVersion: RUBRIC_VERSION,
+    Deductions: deductions,
+    LegacyScore: Math.max(score, 0),
+  };
 }
 
 // ── Main ────────────────────────────────────────────────────
