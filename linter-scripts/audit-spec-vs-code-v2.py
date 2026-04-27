@@ -494,7 +494,8 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     kind_val = m.get("kind", "")
     is_tracker = kind_val == "tracker"
     is_index   = kind_val == "index"  # placement-rule router; intentionally empty until populated
-    is_exempt  = is_tracker or is_index
+    is_meta_toolchain = kind_val == "meta-toolchain"  # v2.8: auditor-self-reference
+    is_exempt  = is_tracker or is_index or is_meta_toolchain
 
     # ---- per-dimension rubric (all bounded 0-100) ----
     # Implementability: rewards inlined contracts; penalises waffle and stub.
@@ -503,6 +504,9 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
     # "well-structured tracker" without forcing a contract block.
     # Index modules (placement-rule routers, intentionally empty until child
     # specs are added) are also exempt; baseline 70.
+    # Meta-toolchain modules (v2.8) earn baseline 75 and bonus +10 when they
+    # expose a normative `text` contract block OR ≥30 child spec files acting
+    # as the bijection table (the §27 inventory IS the contract).
     if is_tracker:
         impl = 75
         if m["overview_chars"] < 200: impl -= 15  # still penalise empty trackers
@@ -510,6 +514,11 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         impl = 70
         if m["overview_chars"] < 200: impl -= 15  # penalise zero-content indexes
         if m["child_modules"] > 0:    impl += 10  # bonus when index actually routes children
+    elif is_meta_toolchain:
+        impl = 75
+        if m.get("has_normative_contract"): impl += 10  # text-fenced contract block
+        if m["md_files"] >= 30:             impl += 5   # large bijection inventory
+        if m["overview_chars"] < 500:       impl -= 20
     else:
         impl = 30
         if m["has_sql_ddl"]:      impl += 20
