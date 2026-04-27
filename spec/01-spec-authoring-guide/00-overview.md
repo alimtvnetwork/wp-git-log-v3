@@ -988,25 +988,37 @@ components:
 ```
 
 
-## Phase 66 Reference
+## Phase 66 / 93 Reference
 
-### Lifecycle Diagram (Phase 66)
+### Lifecycle Diagram (Phase 66, expanded in Phase 93)
 
-See `lifecycle-spec-authoring.mmd` for the module-authoring → linter → tree-health → merge flow.
+The canonical, machine-readable source of truth is
+[`lifecycle-spec-authoring.mmd`](./lifecycle-spec-authoring.mmd) — a fully
+typed flowchart with `kind:` branching (5 paths), the local linter pipeline
+(6 scripts), and the CI gate sequence (6 gates including the Phase 91 CLI
+self-test). The inline excerpt below is a high-level summary; consult the
+`.mmd` file for the complete pipeline.
 
 ```mermaid
 flowchart TD
-    A[New Spec Module Proposed] --> B[Apply naming conventions]
-    B --> C[Create required files: 00, 97, 98, 99]
-    C --> D[Author overview from template]
-    D --> E[Define ACs in GWT format]
-    E --> F[Add cross-references]
-    F --> G{Linters Pass?}
-    G -- No --> H[Fix violations]
-    H --> G
-    G -- Yes --> I[Tree-health audit]
-    I --> J[Merge to spec/]
+    A[New module<br/>or edit] --> B{Pick kind:<br/>active / future /<br/>tracker / index /<br/>meta-toolchain}
+    B --> C[Author overview<br/>+ ACs in GWT<br/>+ cross-refs<br/>+ optional contracts]
+    C --> D[Sync §98 + §99<br/>same date]
+    D --> E{Local: linter-scripts/run.sh<br/>6 checks}
+    E -- fail --> F[Fix or run<br/>--explain=&lt;module&gt;]
+    F --> C
+    E -- pass --> G[Push + PR]
+    G --> H{CI: spec-health.yml<br/>6 gates STRICT}
+    H -- fail --> F
+    H -- pass --> I[Reviewer<br/>checks paired updates]
+    I --> J([Merge to main])
+    J --> K[Phase memo<br/>.lovable/memory/audit/]
 ```
+
+The 6 local-linter and 6 CI-gate steps map 1:1 between local and CI (CI adds
+nothing the author cannot run beforehand). See `lifecycle-spec-authoring.mmd`
+for the full node graph including Phase 84 floors (`--min-weighted=97
+--min-impl=99`) and Phase 91 self-test wiring.
 
 ### CI Workflow — Phase 72 Reference
 
