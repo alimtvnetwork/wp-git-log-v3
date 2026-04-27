@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **77/100 (B)**  
-**Blast radius:** 2/10
+**Implementability Score:** **82/100 (B)**  
+**Blast radius:** 4/10
 
-> Deterministic score 77/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components.
+> Deterministic score 82/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
+| Implementability | 35% | 65 | 22.8 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,27 +31,29 @@
   "kind": "",
   "md_files": 12,
   "mmd_files": 0,
-  "overview_chars": 3196,
+  "overview_chars": 6055,
   "ac_chars": 2960,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 22,
+  "code_blocks_total": 25,
   "code_blocks_by_lang": {
     "plain": 2,
+    "text": 1,
+    "json": 1,
+    "ts": 2,
     "typescript": 15,
     "css": 1,
-    "ts": 1,
     "tsx": 2,
     "bash": 1
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,
-  "has_normative_contract": false,
+  "has_normative_contract": true,
   "has_mermaid": false,
   "links_total": 30,
   "links_broken": 0,

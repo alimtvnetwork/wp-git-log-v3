@@ -189,3 +189,87 @@ Sub-module `01-axios-version-control/` referenced by ACs lives in downstream JS 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
 
 **Phase 27d (2026-04-26):** Version banner (3.2.0) vs AC version (2.0.0) — AC tracks its own minor cycle independent of overview. Intentional decoupling.
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: coding-guidelines/security
+PURPOSE: cross-language security floor for all generated and hand-written code
+SCOPE: applies to every §02 language sub-module unless explicitly exempted
+
+INV-01  no plaintext secrets in source, fixtures, snapshots, or example commands
+INV-02  every outbound HTTP call MUST go through the project's vetted client (no raw net libs)
+INV-03  every dependency version MUST be pinned (no floating ^ ~ * tags in lockstep manifests)
+INV-04  every input crossing a trust boundary MUST be validated against an explicit schema
+INV-05  every error path MUST avoid leaking PII, tokens, paths, or stack traces to end users
+INV-06  every cryptographic primitive MUST be the platform-default high-level API (no hand-rolled crypto)
+INV-07  every authentication check MUST happen server-side; client checks are advisory only
+
+FAIL-01 secret detected by repo scanner → CI blocks merge (severity=blocker)
+FAIL-02 unpinned dependency in lockstep manifest → CI blocks merge
+FAIL-03 raw http/socket usage outside the vetted client → code review rejects
+FAIL-04 user-controlled string concatenated into SQL/shell/eval → code review rejects
+
+DEL-01  TLS termination, WAF, and network policy are owned by deployment platform
+DEL-02  per-language idiomatic guidance lives in each §02 language sub-module
+DEL-03  axios pinning specifically delegated to §02/11/01-axios-version-control sub-spec
+```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Required dependency-pin manifest schema (JSON Schema 2020-12)
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/02-coding-guidelines/11-security/dep-pin.schema.json",
+  "title": "DependencyPinManifest",
+  "type": "object",
+  "required": ["language", "manifest_path", "dependencies"],
+  "additionalProperties": false,
+  "properties": {
+    "language":      { "enum": ["js", "ts", "go", "php", "csharp", "python", "rust"] },
+    "manifest_path": { "type": "string", "minLength": 1 },
+    "lockfile_path": { "type": "string" },
+    "dependencies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "version", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "name":    { "type": "string", "pattern": "^[a-zA-Z0-9._/@-]+$" },
+          "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(-[A-Za-z0-9.-]+)?$" },
+          "source":  { "enum": ["registry", "git", "vendored", "first-party"] },
+          "integrity": { "type": "string", "pattern": "^sha(256|384|512)-[A-Za-z0-9+/=]+$" }
+        }
+      }
+    }
+  }
+}
+```
+
+### Required SecurityFinding TypeScript enum (forbidden categories)
+
+```ts
+// Used by linter-scripts/check-forbidden-strings.py output
+export enum SecurityFindingCategory {
+  PlaintextSecret    = "plaintext-secret",
+  UnpinnedDependency = "unpinned-dependency",
+  RawNetworkClient   = "raw-network-client",
+  UnvalidatedInput   = "unvalidated-input",
+  PiiInError         = "pii-in-error",
+  HandRolledCrypto   = "hand-rolled-crypto",
+  ClientSideAuth     = "client-side-authoritative",
+}
+
+export enum SecurityFindingSeverity {
+  Blocker = "blocker",
+  Major   = "major",
+  Minor   = "minor",
+  Info    = "info",
+}
+```

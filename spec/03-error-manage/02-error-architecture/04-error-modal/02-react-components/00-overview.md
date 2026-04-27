@@ -2,7 +2,7 @@
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
 > **Version:** 4.0.0  
-> **Updated:** 2026-04-01
+> **Updated:** 2026-04-27
 > **AI Confidence:** 95%  
 > **Ambiguity Score:** 5%  
 > **Purpose:** Portable React code for rebuilding the Global Error Modal in any project.
@@ -81,3 +81,82 @@ Header `Updated` vs footer `updated` timestamp drift is a known dual-source arti
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: error-modal/react-components
+PURPOSE: define the React component surface and props shape for rendering error events
+SCOPE: TSX components consumed by every error-surfacing page in the app
+
+INV-01  the public component MUST be named <ErrorModal> exported from index.ts
+INV-02  required props: code:string, severity:'fatal'|'error'|'warn'|'info', message:string
+INV-03  optional props: details?:string, actions?:Action[], onDismiss?:()=>void, traceId?:string
+INV-04  the modal MUST trap focus while open and restore focus on close
+INV-05  the modal MUST be dismissible via Escape unless severity === 'fatal'
+INV-06  every action button MUST carry a stable testid: error-modal-action-<slug>
+INV-07  the component MUST consume color tokens from the §03/02/04/04-color-themes contract
+
+FAIL-01 hardcoded color literal in component → lint fails
+FAIL-02 missing aria-modal / role="alertdialog" → a11y gate fails
+FAIL-03 escape closes a fatal modal → unit test fails (regression)
+FAIL-04 focus escapes the modal while open → e2e gate fails
+
+DEL-01  color values delegated to §03/02/04/04-color-themes
+DEL-02  copy/i18n delegated to §03/01-error-resolution
+DEL-03  registry lookup of codes delegated to §03/03-error-code-registry
+```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### ErrorModal props — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/02/04/02-react-components/props.schema.json",
+  "title": "ErrorModalProps",
+  "type": "object",
+  "required": ["code", "severity", "message"],
+  "additionalProperties": false,
+  "properties": {
+    "code":     { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+    "severity": { "enum": ["fatal", "error", "warn", "info"] },
+    "message":  { "type": "string", "minLength": 1, "maxLength": 500 },
+    "details":  { "type": "string", "maxLength": 4000 },
+    "traceId":  { "type": "string", "pattern": "^[0-9a-f]{16,64}$" },
+    "actions": {
+      "type": "array", "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "id":    { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+          "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+          "kind":  { "enum": ["primary", "secondary", "destructive", "link"] }
+        }
+      }
+    }
+  }
+}
+```
+
+### Action kind enum (TypeScript)
+
+```ts
+export enum ErrorModalActionKind {
+  Primary     = "primary",
+  Secondary   = "secondary",
+  Destructive = "destructive",
+  Link        = "link",
+}
+
+export enum ErrorModalDismissBehavior {
+  EscapeAndBackdrop = "escape-and-backdrop",
+  EscapeOnly        = "escape-only",
+  Forbidden         = "forbidden", // fatal severity
+}
+```

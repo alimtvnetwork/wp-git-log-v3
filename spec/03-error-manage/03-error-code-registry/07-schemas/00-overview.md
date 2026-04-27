@@ -2,7 +2,7 @@
 
 **Version:** 3.3.0  
 **Status:** Active  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **AI Confidence:** High  
 **Ambiguity:** None
 
@@ -291,3 +291,76 @@ Both schemas target **JSON Schema Draft 2020-12-compatible** validators (also va
 - [Module changelog](./98-changelog.md)
 - [Module consistency report](./99-consistency-report.md)
 - _See parent folder's `00-overview.md` for broader context._
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: error-code-registry/schemas
+PURPOSE: define machine-readable JSON Schemas governing the error-code registry artifacts
+SCOPE: validates error-codes-master.json + per-domain shards prior to publication
+
+INV-01  every schema MUST be JSON Schema 2020-12 with explicit $id and $schema
+INV-02  every error code MUST match pattern ^[A-Z]{2,5}-[A-Z]+-\d{3}$
+INV-03  each code MUST carry: code, severity, category, message_template, owner_module
+INV-04  severity ∈ {fatal, error, warn, info, debug}
+INV-05  category MUST resolve to a known domain in §03-error-manage taxonomy
+INV-06  message_template MUST use {placeholder} syntax; positional %s/%d forbidden
+INV-07  owner_module MUST be a valid spec/<NN>-* path string
+
+FAIL-01 duplicate code across shards → registry build aborts (severity=blocker)
+FAIL-02 missing required field → validator exits non-zero with field path
+FAIL-03 unknown severity or category → validator exits non-zero
+FAIL-04 message_template contains positional formatter → validator exits non-zero
+
+DEL-01  shard merging is owned by §03/08-linter-scripts (not this module)
+DEL-02  runtime emission of error events is owned by per-language §02 modules
+DEL-03  schema evolution requires §03/03/98-changelog minor bump + migration note
+```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Severity & Category TypeScript enums
+
+```ts
+export enum RegistrySeverity {
+  Fatal = "fatal",
+  Error = "error",
+  Warn  = "warn",
+  Info  = "info",
+  Debug = "debug",
+}
+
+export enum RegistryCategory {
+  Network    = "network",
+  Storage    = "storage",
+  Validation = "validation",
+  Auth       = "auth",
+  Plugin     = "plugin",
+  Pipeline   = "pipeline",
+  Internal   = "internal",
+}
+```
+
+### Per-shard registry entry — JSON Schema 2020-12 (additional)
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/03/07/shard-entry.schema.json",
+  "title": "RegistryShardEntry",
+  "type": "object",
+  "required": ["code", "severity", "category", "message_template", "owner_module"],
+  "additionalProperties": false,
+  "properties": {
+    "code":             { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+    "severity":         { "enum": ["fatal","error","warn","info","debug"] },
+    "category":         { "enum": ["network","storage","validation","auth","plugin","pipeline","internal"] },
+    "message_template": { "type": "string", "pattern": "^[^%]*$", "minLength": 1, "maxLength": 500 },
+    "owner_module":     { "type": "string", "pattern": "^spec/\\d{2}-[a-z0-9-]+(/.*)?$" },
+    "deprecated":       { "type": "boolean", "default": false },
+    "replaced_by":      { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" }
+  }
+}
+```

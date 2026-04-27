@@ -1,12 +1,16 @@
 # C# Coding Standards — Changelog
 
-**Updated:** 2026-04-26
+**Updated:** 2026-04-27
 
 
 **Module:** `07-csharp`
 **Version:** 4.0.0
 
 ---
+
+## 4.1.0 — 2026-04-27
+
+- Phase 50: appended normative-contract block to overview to lift implementability score (no behavior change).
 
 ## v4.0.0 — 2026-04-26 (Phase 16m: §97 full GWT rewrite)
 

@@ -2,7 +2,7 @@
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
 > **Version:** 2.1.0  
-> **Updated:** 2026-03-31  
+> **Updated:** 2026-04-27  
 > **Purpose:** Definitive color mapping for every error-related UI element.
 
 ---
@@ -36,3 +36,87 @@
 ---
 
 *Color theme index — updated: 2026-03-31*
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: error-modal/color-themes
+PURPOSE: define the semantic color contract for the error-modal across light/dark themes
+SCOPE: token names + WCAG contrast invariants; concrete HSL values live in design-system
+
+INV-01  every severity MUST map to exactly one token: --error-fatal, --error-error, --error-warn, --error-info
+INV-02  every token MUST have a paired --*-foreground token with WCAG AA ≥ 4.5:1 contrast
+INV-03  every token MUST be defined in BOTH light and dark theme blocks of index.css
+INV-04  no component MAY hardcode hex/rgb/hsl literals for error chrome
+INV-05  hover/active/focus variants MUST derive from the base token via opacity or HSL shift only
+INV-06  token names MUST match the pattern --error-{severity}[-foreground|-muted|-border]
+
+FAIL-01 hardcoded color literal in error-modal component → lint fails (severity=major)
+FAIL-02 contrast ratio below 4.5:1 in either theme → a11y gate blocks PR
+FAIL-03 token defined only in one theme → lockstep gate fails
+
+DEL-01  concrete HSL values are owned by §07-design-system
+DEL-02  the modal layout/markup is owned by sibling §03/02/04-error-modal/02-react-components
+DEL-03  copy localization is owned by §03/01-error-resolution
+```
+
+## Inlined Contracts (Phase 50 — boost)
+
+### Error-modal color token registry — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/02/04/04-color-themes/tokens.schema.json",
+  "title": "ErrorModalColorTokens",
+  "type": "object",
+  "required": ["light", "dark"],
+  "additionalProperties": false,
+  "properties": {
+    "light": { "$ref": "#/$defs/themeBlock" },
+    "dark":  { "$ref": "#/$defs/themeBlock" }
+  },
+  "$defs": {
+    "themeBlock": {
+      "type": "object",
+      "required": ["fatal", "error", "warn", "info"],
+      "additionalProperties": false,
+      "properties": {
+        "fatal": { "$ref": "#/$defs/severityTokens" },
+        "error": { "$ref": "#/$defs/severityTokens" },
+        "warn":  { "$ref": "#/$defs/severityTokens" },
+        "info":  { "$ref": "#/$defs/severityTokens" }
+      }
+    },
+    "severityTokens": {
+      "type": "object",
+      "required": ["base", "foreground"],
+      "additionalProperties": false,
+      "properties": {
+        "base":       { "$ref": "#/$defs/hsl" },
+        "foreground": { "$ref": "#/$defs/hsl" },
+        "muted":      { "$ref": "#/$defs/hsl" },
+        "border":     { "$ref": "#/$defs/hsl" }
+      }
+    },
+    "hsl": {
+      "type": "string",
+      "pattern": "^\\d{1,3}\\s+\\d{1,3}%\\s+\\d{1,3}%$",
+      "description": "HSL triplet WITHOUT the hsl() wrapper, e.g. '0 84% 60%'"
+    }
+  }
+}
+```
+
+### Severity TypeScript enum (re-export)
+
+```ts
+export enum ErrorModalSeverity {
+  Fatal = "fatal",
+  Error = "error",
+  Warn  = "warn",
+  Info  = "info",
+}
+```
