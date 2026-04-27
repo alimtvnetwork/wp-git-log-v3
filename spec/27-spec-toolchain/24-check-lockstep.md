@@ -4,10 +4,24 @@ kind: tooling-spec
 
 # `check-lockstep.cjs` — Lockstep Enforcement Gate
 
-> **Version:** 1.0.0
+> **Version:** 1.1.0
 > **Created:** 2026-04-27
-> **Status:** Active (warn-only baseline; CI strict gate gated behind Phase 41 remediation)
+> **Updated:** 2026-04-27
+> **Status:** Active (CI strict gate — Phase 41 baseline cleared, `--strict` enforced in `spec-monthly-audit.yml`)
 > **Parent:** [00-overview.md](./00-overview.md)
+
+---
+
+## Phase 41 — Strict mode flipped
+
+The Phase 40 adoption baseline (24 modules drifted: 8 L0 / 17 L1 / 3 L2) was cleared in Phase 41 via:
+
+- 17 stale §99 banner-date bumps (mechanical, via `/tmp/sweep-l1.cjs`).
+- 5 missing §98 `Updated:` banners injected (via `/tmp/sweep-l0-banners.cjs`).
+- 2 missing release rows added (`spec/98-changelog.md` v3.4.1, `spec/03-error-manage/98-changelog.md` v3.2.0 witness row).
+- 2 banner additions to `14-update/24-update-check-mechanism/` §00 + §99 (canonical `Updated:` line alongside existing `Created:` / `Audit date:`).
+
+Result: **79/79 enforced modules pass; 3 skipped (no §98/§99 by design).** The workflow flag `node linter-scripts/check-lockstep.cjs` was changed to `... --strict` in `.github/workflows/spec-monthly-audit.yml` step "Spec lockstep gate (Phase 41 — strict)".
 
 ---
 
