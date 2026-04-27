@@ -55,3 +55,10 @@ All notable changes to `spec/28-universal-ci-cli/`.
 ## 2026-04-27 — Phase 63 impl-sweep
 
 - Phase 63: appended Universal CI CLI enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).
+
+## 2026-04-27 — Phase 76 (impl 90 → 100)
+
+- Added Mermaid lifecycle diagram — satisfies `has_mermaid` (+5).
+- Added SQL DDL audit-log schema — satisfies `has_sql_ddl` (+20).
+- Implementability raised 90 → 100 (deterministic audit, capped).
+
