@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **94/100 (A)**  
+**Implementability Score:** **98/100 (A+)**  
 **Blast radius:** 5/10
 
-> Deterministic score 94/100 (A) for spec/22-git-logs-v2.
+> Deterministic score 98/100 (A+) for spec/22-git-logs-v2.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=68, gwt=68, broken_links=0, waffle/kchar=0.13. Gates active: 0.
@@ -17,12 +17,12 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 100 | 35.0 |
-| Completeness | 20% | 70 | 14.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
-| Maintainability | 3% | 90 | 2.7 |
+| Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 35,
   "mmd_files": 0,
-  "overview_chars": 9273,
+  "overview_chars": 9435,
   "ac_chars": 61207,
   "ac_count": 68,
   "gwt_block_count": 68,
@@ -58,7 +58,7 @@
   "has_mermaid": false,
   "links_total": 44,
   "links_broken": 0,
-  "todo_density": 4,
+  "todo_density": 0,
   "waffle_per_kchar": 0.13,
   "child_modules": 0
 }
@@ -78,11 +78,5 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 4 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
-
-#### 1. [LOW] 4 TODO/TBD/FIXME marker(s) in module body
-- **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=4
-- **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
