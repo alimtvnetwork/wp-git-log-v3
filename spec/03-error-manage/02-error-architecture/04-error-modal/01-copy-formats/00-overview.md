@@ -2,7 +2,7 @@
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
 > **Version:** 3.2.0  
-> **Updated:** 2026-03-31  
+> **Updated:** 2026-04-27  
 > **Status:** Active  
 > **AI Confidence:** 95%  
 > **Ambiguity Score:** 5%  
