@@ -212,5 +212,5 @@ The following table-row criteria from v2.0.0 are preserved verbatim. They are NO
 - [Module consistency report](./99-consistency-report.md)
 - [§22 Git Logs v2 overview (authoritative source)](../22-git-logs-v2/00-overview.md)
 - [§22 Database schema](../22-git-logs-v2/02-database-schema.md)
-- [§22 Auth validation](../22-git-logs-v2/05-auth-and-token-flow.md)
+- [§22 Auth validation](../22-git-logs-v2/05-auth-and-validation.md)
 - [Spec authoring guide AC-SAG-04 (slot immutability)](../01-spec-authoring-guide/97-acceptance-criteria.md)
