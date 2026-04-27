@@ -84,7 +84,7 @@ queued-decisions trail (where applicable).
 | **B1** | `spec/22-git-logs-v2/07-app-entity.md` — confirm whether to add `Environment`, `Platform`, `OwnerEmail` to App entity, or lock current schema. | Decision | User |
 | **R1** | Re-run `audit-spec-vs-code-v2.py` once `lovable_ai` runtime is available in CI (deferred from Phase 27e). | Validation | CI |
 | **R2** | Propagate rubric v2.0.0 emission to `linter-scripts/generate-dashboard-data.cjs` so the docs viewer dashboard reflects 162-credit quality scoring. | Implementation | Future phase |
-| **R3** | Formalise full-tree audit cadence (Phase 3 roadmap item, never closed) — add CI guard + monthly cadence note. | Process | Future phase |
+| ~~R3~~ | ~~Formalise full-tree audit cadence~~ — **CLOSED Phase 35 (2026-04-26)**: `.github/workflows/spec-monthly-audit.yml` + `spec/27-spec-toolchain/71-spec-monthly-audit-yml.md`. Monthly cron + `workflow_dispatch` + dashboard-parity check + auto-issue-on-failure. | Process | ✅ Closed |
 
 Phase 1 + 2 of the v4 roadmap are fully closed. Phase 3 has one closed
 item (rubric formalisation in `01-spec-authoring-guide`) and three open
