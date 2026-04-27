@@ -1,6 +1,17 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.15** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.16** — AI-Implementability Edition.
+
+v2.16 (2026-04-27, Phase 90):
+  - New `--explain=<substring>` CLI flag for debugging score outliers.
+    Prints, for the first matching module: rubric branch taken, every bonus
+    that fired with its delta, every gate that capped a dimension (with
+    before/after), per-dimension scores (raw vs final + Δ + contribution),
+    and key metrics. Pure-add diagnostic — does not write files, does not
+    call AI, exits 0 if a match was found and 1 otherwise. Disambiguates
+    multi-match by listing the first 5 candidates and using the first.
+  - Use cases: rubric debugging, contributor onboarding, explaining why a
+    specific module dropped a grade after a change.
 
 v2.15 (2026-04-27, Phase 86):
   - Rubric-hygiene investigation REJECTED. Considered diminishing-returns
