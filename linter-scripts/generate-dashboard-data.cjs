@@ -31,6 +31,15 @@ const quiet = args.includes("--quiet");
 const SPEC_ROOT = path.resolve(__dirname, "..", "spec");
 const ARCHIVE_SEGMENTS = ["_archive", "archive"];
 
+// ── Rubric v2.0.0 (mirrors check-tree-health.cjs Phase 30) ──
+const RUBRIC_VERSION = "2.0.0";
+const REQUIRED_FILES = ["00-overview.md", "99-consistency-report.md"];
+const RECOMMENDED_FILES = ["97-acceptance-criteria.md", "98-changelog.md"];
+const RUBRIC_WEIGHTS = { required: 60, recommended: 25, quality: 15 };
+const QUALITY_MIN_LINES = 30;
+const QUALITY_HISTORY_RE = /^##+\s+(Validation History|Findings|Audit History|Change History)/im;
+const QUALITY_INVENTORY_RE = /^##+\s+(File Inventory|Module Inventory|Top-Level Modules|Document Inventory|Modules)/im;
+
 // Cross-repo path prefixes that resolve OUTSIDE this repo's spec/ tree
 // (e.g., gitmap-v3 sibling repo, monorepo siblings like scripts/, docs/,
 // linters-cicd/, eslint-plugins/, spec-slides/). These targets cannot be
