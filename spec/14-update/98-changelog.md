@@ -1,8 +1,15 @@
 # Changelog — Update — Overview
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-27  
 **Scope:** `spec/14-update/`
+
+---
+
+## 1.3.0 — 2026-04-27 (Phase 124 — cite-direction fix)
+
+- **Changed** AC-20 `Given` and `Source` lines now dual-cite the upstream generic blueprint `../16-generic-release/01-cross-compilation.md` alongside the local `16-cross-compilation.md` and `17-release-pipeline.md`. Adds a "deviation MUST be justified in §99" clause. Closes the AC-SAG-25 cite-direction gap surfaced by Phase 121's reframe (§14 → §16, not §16 → §14 as originally proposed).
+- §97 banner 2.0.0 → 2.1.0; §99 audit row appended.
 
 ---
 

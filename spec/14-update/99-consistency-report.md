@@ -63,3 +63,10 @@
 - SQL DDL audit-log schema inlined.
 - Implementability raised 90 → 100.
 
+
+### 2026-04-27 — Phase 124 cite-direction fix
+
+- AC-20 (cross-compilation) now dual-cites upstream generic `../16-generic-release/01-cross-compilation.md` alongside local `16-cross-compilation.md` / `17-release-pipeline.md`. The 6-target matrix and CGO discipline originate in §16 (generic blueprint, `kind: future-spec`); §14 is the consumer.
+- AC text strengthened with "deviation MUST be justified in §99" clause for any divergence from upstream targets / CGO exemptions.
+- §97 banner 2.0.0 → 2.1.0; §98 banner 1.2.0 → 1.3.0.
+- Closes AC-SAG-25 cite-direction gap (Phase 121 reframe — direction is §14 → §16, not §16 → §14).

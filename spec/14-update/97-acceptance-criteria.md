@@ -1,8 +1,10 @@
 # Acceptance Criteria — Update — Overview
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26  
+**Version:** 2.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/14-update/`
+
+> **v2.1.0 (Phase 124):** AC-20 `Given` and `Source` lines now explicitly cite the upstream generic blueprint [`../16-generic-release/01-cross-compilation.md`](../16-generic-release/01-cross-compilation.md) in addition to the local `16-cross-compilation.md` / `17-release-pipeline.md`. The cross-compilation target list and CGO discipline originate in §16 (kind: future-spec generic blueprint); §14 is the concrete consumer. Closes the AC-SAG-25 cite-direction gap surfaced by Phase 121's reframe (§14 → §16, not the inverted §16 → §14 originally proposed).
 
 > **v2.0.0 (Phase 16b):** Added 15 module-specific Given/When/Then ACs (AC-06..AC-20) covering rename-first deploy, Windows handoff, version verification, code signing, SHA-256 checksum verification, install script version probe, updater binary, config file location/XDG, update command workflow, non-blocking parallel update check (12h interval, fire-and-forget), JSON fallback store, deploy-path resolution, cleanup, atomic rollback, and generic installer behavior. The 5 generic structural ACs (AC-01..AC-05) are preserved verbatim — they validate the spec module itself; AC-06+ validate the **update/installer implementation** that consumes the spec.
 
@@ -139,10 +141,10 @@ This document defines testable acceptance criteria for the **Update — Overview
 - **Source:** `10-last-release-detection.md`, `15-release-versioning.md`, AC-08 (SemVer parse), AC-12 (latest-release API).
 
 ### AC-20: Cross-compilation produces all documented platform artifacts
-- **Given** a build pipeline per `16-cross-compilation.md` and `17-release-pipeline.md`
+- **Given** a build pipeline per local `16-cross-compilation.md` and `17-release-pipeline.md`, both of which MUST consume the upstream generic blueprint at [`../16-generic-release/01-cross-compilation.md`](../16-generic-release/01-cross-compilation.md)
 - **When** the release pipeline runs
-- **Then** every release MUST produce binaries for AT LEAST these platform×arch combinations: `windows/amd64`, `windows/arm64`, `linux/amd64`, `linux/arm64`, `darwin/amd64` (Intel Mac), `darwin/arm64` (Apple Silicon) — six artifacts minimum; AND each Go binary MUST be built with `CGO_ENABLED=0` (static linkage so no libc version mismatch on target hosts) UNLESS the binary explicitly requires CGO (which MUST be documented in `16-cross-compilation.md` with the rationale); AND each binary MUST be built with `-ldflags "-s -w -X main.Version=<version> -X main.BuildTime=<iso8601>"` to strip debug info AND embed the version per AC-08 AND embed the build time in RFC-3339 per §13 AC-13; AND the artifact filename MUST follow `<binary>-<os>-<arch>[.exe]` (e.g. `mycli-windows-amd64.exe`, `mycli-linux-arm64`) — `.exe` suffix on Windows ONLY; AND the build pipeline MUST FAIL the release if ANY platform fails to build — partial-platform releases (e.g. ship Linux but not Windows because of a transient build error) are FORBIDDEN; AND pipelines MUST run on a CI host with reproducible toolchain pinning (`go.mod` `toolchain` directive OR `.tool-versions` for asdf/mise) so the same source produces the same binary byte-for-byte across rebuilds.
-- **Source:** `16-cross-compilation.md`, `17-release-pipeline.md`, AC-08 (SemVer + version embedding), §13 AC-13 (RFC-3339 timestamp).
+- **Then** every release MUST produce binaries for AT LEAST these platform×arch combinations: `windows/amd64`, `windows/arm64`, `linux/amd64`, `linux/arm64`, `darwin/amd64` (Intel Mac), `darwin/arm64` (Apple Silicon) — six artifacts minimum (parity with `../16-generic-release/01-cross-compilation.md` "Default Targets"); AND each Go binary MUST be built with `CGO_ENABLED=0` (static linkage so no libc version mismatch on target hosts) UNLESS the binary explicitly requires CGO (which MUST be documented in `16-cross-compilation.md` with the rationale); AND each binary MUST be built with `-ldflags "-s -w -X main.Version=<version> -X main.BuildTime=<iso8601>"` to strip debug info AND embed the version per AC-08 AND embed the build time in RFC-3339 per §13 AC-13; AND the artifact filename MUST follow `<binary>-<os>-<arch>[.exe]` (e.g. `mycli-windows-amd64.exe`, `mycli-linux-arm64`) — `.exe` suffix on Windows ONLY; AND the build pipeline MUST FAIL the release if ANY platform fails to build — partial-platform releases (e.g. ship Linux but not Windows because of a transient build error) are FORBIDDEN; AND pipelines MUST run on a CI host with reproducible toolchain pinning (`go.mod` `toolchain` directive OR `.tool-versions` for asdf/mise) so the same source produces the same binary byte-for-byte across rebuilds; AND any deviation from the upstream generic target list (additions, removals, or CGO exemptions) MUST be justified in the local `16-cross-compilation.md` and recorded in §99.
+- **Source:** local `16-cross-compilation.md`, local `17-release-pipeline.md`, upstream generic [`../16-generic-release/01-cross-compilation.md`](../16-generic-release/01-cross-compilation.md), AC-08 (SemVer + version embedding), §13 AC-13 (RFC-3339 timestamp).
 
 ---
 
