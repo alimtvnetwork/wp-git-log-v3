@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **89/100 (A)**  
+**Implementability Score:** **92/100 (A)**  
 **Blast radius:** 2/10
 
-> Deterministic score 89/100 (A) for spec/27-spec-toolchain.
+> Deterministic score 92/100 (A) for spec/27-spec-toolchain.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.17. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 70 | 14.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,15 +30,16 @@
 {
   "kind": "meta-toolchain",
   "md_files": 40,
-  "mmd_files": 0,
-  "overview_chars": 14003,
+  "mmd_files": 1,
+  "overview_chars": 15899,
   "ac_chars": 13558,
   "ac_count": 19,
   "gwt_block_count": 19,
   "consistency_report": true,
-  "code_blocks_total": 40,
+  "code_blocks_total": 46,
   "code_blocks_by_lang": {
     "text": 1,
+    "yaml": 6,
     "bash": 29,
     "toml": 2,
     "json": 1,
@@ -50,11 +51,11 @@
   "has_sql_ddl": false,
   "has_json_schema": true,
   "has_ts_enums": false,
-  "has_yaml_openapi": false,
+  "has_yaml_openapi": true,
   "has_typed_lang_contract": false,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": true,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 77,
   "links_broken": 0,
   "todo_density": 30,
