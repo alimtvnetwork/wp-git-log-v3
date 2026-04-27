@@ -52,3 +52,7 @@
 ## 2026-04-27 — Phase 57 impl-sweep
 
 - Phase 57: appended Go/PHP/Python SecurityFinding validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).
+
+## 2026-04-27 — Phase 59 impl-sweep
+
+- Phase 59: appended Security Scan Pipeline OpenAPI OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

@@ -247,3 +247,71 @@ class Err(Generic[E]):
 # Mirrors TS `type Result<T,E> = { ok: true; value: T } | { ok: false; error: E }`.
 Result = Union[Ok[T], Err[E]]
 ```
+
+
+---
+
+## Phase 59 Reference: TypeScript Lint Pipeline OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: TypeScript Lint Pipeline API
+  version: 1.0.0
+  description: Submit and query TypeScript lint results from CI runs.
+servers:
+  - url: https://api.lovable.dev/ts-lint/v1
+paths:
+  /runs:
+    post:
+      summary: Submit a lint run
+      operationId: submitRun
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TsLintRun" }
+      responses:
+        "202": { description: Accepted }
+  /runs/{id}:
+    get:
+      summary: Get lint run results
+      operationId: getRun
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TsLintRun" }
+        "404": { description: Not found }
+components:
+  schemas:
+    TsLintRun:
+      type: object
+      required: [id, repo, commit, exit_code, findings]
+      properties:
+        id:        { type: string, format: uuid }
+        repo:      { type: string }
+        commit:    { type: string, pattern: "^[0-9a-f]{40}$" }
+        exit_code: { type: integer, minimum: 0, maximum: 255 }
+        findings:
+          type: array
+          items: { $ref: "#/components/schemas/TsLintFinding" }
+    TsLintFinding:
+      type: object
+      required: [rule, severity, file, line, message]
+      properties:
+        rule:     { type: string }
+        severity: { type: string, enum: [error, warning, info] }
+        file:     { type: string }
+        line:     { type: integer, minimum: 1 }
+        message:  { type: string }
+```

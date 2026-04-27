@@ -233,3 +233,59 @@ export type PhpLintFinding = {
   message:  string;
 };
 ```
+
+
+---
+
+## Phase 59 Reference: PHP Compliance OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: PHP Compliance API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/php-compliance/v1
+paths:
+  /reports:
+    post:
+      summary: Submit a PHPCS report
+      operationId: submitReport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PhpComplianceReport" }
+      responses:
+        "202": { description: Accepted }
+  /reports/{id}:
+    get:
+      summary: Get a compliance report
+      operationId: getReport
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PhpComplianceReport" }
+components:
+  schemas:
+    PhpComplianceReport:
+      type: object
+      required: [id, repo, php_version, errors, warnings]
+      properties:
+        id:          { type: string, format: uuid }
+        repo:        { type: string }
+        php_version: { type: string, pattern: "^[78]\\.\\d+(\\.\\d+)?$" }
+        errors:      { type: integer, minimum: 0 }
+        warnings:    { type: integer, minimum: 0 }
+        ruleset:     { type: string }
+```

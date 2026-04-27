@@ -50,3 +50,7 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 ## 2026-04-27 — Phase 57 impl-sweep
 
 - Phase 57: appended TypeScript enum mirror (GoLintSeverity / GoModuleState / GoTestKind) to satisfy `has_ts_enums` rubric (impl 65 → 75).
+
+## 2026-04-27 — Phase 59 impl-sweep
+
+- Phase 59: appended Go Module Audit OpenAPI OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

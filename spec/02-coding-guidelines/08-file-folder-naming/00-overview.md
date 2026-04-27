@@ -310,3 +310,64 @@ class FileAndFolderNamingRule:
         if not 1 <= self.max_chars <= 255:
             raise ValueError('NAMING-001: max_chars must be 1..255')
 ```
+
+
+---
+
+## Phase 59 Reference: File/Folder Naming Audit OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: File/Folder Naming Audit API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/naming-audit/v1
+paths:
+  /scan:
+    post:
+      summary: Scan a repository for naming-rule violations
+      operationId: scanRepo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [repo, branch]
+              properties:
+                repo:   { type: string }
+                branch: { type: string }
+      responses:
+        "202": { description: Accepted }
+  /scan/{id}/results:
+    get:
+      summary: Get scan results
+      operationId: getResults
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/NamingViolation" }
+components:
+  schemas:
+    NamingViolation:
+      type: object
+      required: [path, rule, expected]
+      properties:
+        path:     { type: string }
+        rule:     { type: string, enum: [kebab-case, snake_case, PascalCase, camelCase, SCREAMING_SNAKE_CASE] }
+        expected: { type: string }
+        actual:   { type: string }
+```

@@ -380,3 +380,66 @@ class SecurityFinding:
         if self.severity not in VALID_SEVERITIES:
             raise ValueError(f"invalid severity: {self.severity}")
 ```
+
+
+---
+
+## Phase 59 Reference: Security Scan Pipeline OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Security Scan Pipeline API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/security-scan/v1
+paths:
+  /scans:
+    post:
+      summary: Trigger a security scan
+      operationId: triggerScan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [repo, scan_kind]
+              properties:
+                repo:      { type: string }
+                scan_kind: { type: string, enum: [sca, sast, secret, container] }
+      responses:
+        "202": { description: Accepted }
+  /scans/{id}/findings:
+    get:
+      summary: List findings for a scan
+      operationId: listFindings
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/SecurityFinding" }
+components:
+  schemas:
+    SecurityFinding:
+      type: object
+      required: [id, severity, package, version]
+      properties:
+        id:          { type: string }
+        severity:    { type: string, enum: [critical, high, medium, low] }
+        package:     { type: string }
+        version:     { type: string }
+        fixed_in:    { type: string }
+        description: { type: string }
+```

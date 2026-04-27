@@ -204,3 +204,43 @@ def parse(text: str) -> Payload:
     p.validate()
     return p
 ```
+
+
+---
+
+## Phase 59 Reference: Error Modal Render Contract OpenAPI
+
+The following OpenAPI 3.1 contract is normative. CI MUST validate any
+implementation that exposes this surface.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Modal Render Contract
+  version: 1.0.0
+components:
+  schemas:
+    ErrorModalProps:
+      type: object
+      required: [title, code, severity, message]
+      properties:
+        title:    { type: string, minLength: 1, maxLength: 80 }
+        code:     { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        severity: { type: string, enum: [fatal, error, warning, info] }
+        message:  { type: string, minLength: 1, maxLength: 500 }
+        details:  { type: string }
+        primary_action:
+          type: object
+          properties:
+            label:  { type: string, minLength: 1, maxLength: 24 }
+            kind:   { type: string, enum: [retry, dismiss, contact, navigate] }
+            target: { type: string }
+        secondary_action:
+          type: object
+          properties:
+            label:  { type: string, maxLength: 24 }
+            kind:   { type: string, enum: [retry, dismiss, contact, navigate] }
+        copy_id:  { type: string }
+        theme:    { type: string, enum: [light, dark, auto] }
+paths: {}
+```
