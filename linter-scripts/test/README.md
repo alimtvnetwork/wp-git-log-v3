@@ -55,18 +55,20 @@ as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
 
 ## Coverage triad: what each test catches
 
-The three tests together form a **complete blind-spot coverage triad** for
-the audit subsystem:
+The four tests together form a **complete blind-spot coverage matrix** for
+the audit subsystem (gates 1–3) plus the meta-suite itself (gate 4):
 
 | Blind spot | Why production gate misses it | Self-test catching it |
 |---|---|---|
 | Comparison-operator inversion (`<` vs `≤`, `≥` vs `>`) | All scores currently above floor; bug invisible | **Phase 91** (6 cases at the boundary) |
 | `--explain` diagnostic tool silently broken | Production gate never invokes `--explain` | **Phase 94** (14 assertions across single-match / no-match / multi-match) |
 | Non-determinism introduced into the rubric | Production gate runs only once per build | **Phase 95** (sha256 byte-identity across two runs) |
+| Self-test added/removed without updating this README | Reviewer-attention only; AC-31-27 was unenforced | **Phase 102** (filesystem ↔ inventory parity, structural sections, executable bit) |
 
-If you add a fourth contract guarantee to the audit script (or any other
-linter), add a fourth self-test here following the same template — see
-**"Adding a new self-test"** below.
+If you add a fifth contract guarantee to the audit script (or any other
+linter), add a fifth self-test here following the same template — see
+**"Adding a new self-test"** below. The Phase 102 gate will fail on your
+PR if you forget to add the row.
 
 ---
 
@@ -94,9 +96,10 @@ Run any single test directly:
 bash linter-scripts/test/test-audit-cli-thresholds.sh
 bash linter-scripts/test/test-audit-explain-contract.sh
 bash linter-scripts/test/test-audit-deterministic-stability.sh
+bash linter-scripts/test/test-readme-inventory.sh
 ```
 
-Run all three sequentially:
+Run all four sequentially:
 
 ```bash
 for t in linter-scripts/test/test-*.sh; do
