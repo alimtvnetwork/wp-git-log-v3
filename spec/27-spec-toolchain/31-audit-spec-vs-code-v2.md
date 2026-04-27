@@ -1,9 +1,9 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.14.0  
+**Version:** 1.15.0  
 **Updated:** 2026-04-27  
-**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script **v2.17**) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94) + [`linter-scripts/test/test-audit-deterministic-stability.sh`](../../linter-scripts/test/test-audit-deterministic-stability.sh) (Phase 95) + [`linter-scripts/test/README.md`](../../linter-scripts/test/README.md) (Phase 98)  
-**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×3 incl. determinism + **inventory README** + **QA-baseline footer**)
+**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script **v2.18**) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94) + [`linter-scripts/test/test-audit-deterministic-stability.sh`](../../linter-scripts/test/test-audit-deterministic-stability.sh) (Phase 95) + [`linter-scripts/test/README.md`](../../linter-scripts/test/README.md) (Phase 98) + [`linter-scripts/test/test-readme-inventory.sh`](../../linter-scripts/test/test-readme-inventory.sh) (Phase 102)  
+**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×4 incl. determinism + README parity + **inventory README** + **QA-baseline footer**)
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
 
 ---
@@ -281,19 +281,19 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** the README MUST link to each test script via relative path, link to each locked AC via relative path into `spec/`, and link to each test's post-merge phase memo under `.lovable/memory/audit/v2-deterministic/`.
 - **And** the README MUST contain a copy-pasteable template (the "Adding a new self-test" section) so a new contributor can follow the exact convention without reverse-engineering existing scripts. The template MUST cover: shebang, header comment block (Phase + locked contract + blind-spot rationale + spec link + memo link), `set -euo pipefail`, `assert` helper, summary block with `Results: N passed, N failed` line, and CI wiring instructions (workflow step + lockstep AC + memo).
 - **And** the README's last-updated date MUST be bumped on every modification.
-- **Verifies:** `linter-scripts/test/README.md` (inventory, coverage triad, local execution, template, see-also sections) + lockstep with the actual contents of `linter-scripts/test/`.
+- **Verifies:** `linter-scripts/test/README.md` (inventory, coverage triad, local execution, template, see-also sections) + `linter-scripts/test/test-readme-inventory.sh` (Phase 102 — mechanically enforces this AC: parses the README inventory and asserts symmetric set parity with `ls test-*.sh`, plus per-script executable bit and required structural sections) + lockstep with the actual contents of `linter-scripts/test/`.
 
-### AC-31-28 — Audit summary outputs MUST advertise rubric version + QA tooling baseline (Phase 99)
-- **Given** the audit script `linter-scripts/audit-spec-vs-code-v2.py` (v2.17 or later),
+### AC-31-28 — Audit summary outputs MUST advertise rubric version + QA tooling baseline (Phase 99, expanded Phase 102)
+- **Given** the audit script `linter-scripts/audit-spec-vs-code-v2.py` (v2.18 or later),
 - **When** the script runs in any mode (deterministic or normal) and writes its summary outputs to `OUT/`,
 - **Then** both `00-index.md` and `EXECUTIVE-SUMMARY.md` MUST contain a `**Rubric:** v<X>.<Y>` line in the header block, sourced from the `RUBRIC_VERSION` module-level constant. The constant MUST be a static string (not derived from time, env, or filesystem state) so the Phase 95 determinism self-test continues to pass byte-identically.
-- **And** `00-index.md` MUST contain a "QA tooling baseline (Phase 99)" section after the "Full ranking" table that enumerates the **8 strict CI gates** that surround the score: (1) cross-links, (2) tree-health strict, (3) lockstep strict, (4) audit thresholds, (5) Phase 91 CLI threshold self-test, (6) Phase 94 `--explain` self-test, (7) Phase 95 determinism self-test, (8) Phase 97 mermaid syntax. Each entry MUST cite the script path so a contributor can locate the gate.
-- **And** the section MUST link to `linter-scripts/test/README.md` (Phase 98) as the canonical inventory + onboarding doc for the self-test triad (gates 5–7).
+- **And** `00-index.md` MUST contain a "QA tooling baseline" section after the "Full ranking" table that enumerates the **9 strict CI gates** that surround the score: (1) cross-links, (2) tree-health strict, (3) lockstep strict, (4) audit thresholds, (5) Phase 91 CLI threshold self-test, (6) Phase 94 `--explain` self-test, (7) Phase 95 determinism self-test, (8) Phase 97 mermaid syntax, (9) Phase 102 README inventory parity self-test. Each entry MUST cite the script path so a contributor can locate the gate.
+- **And** the section MUST link to `linter-scripts/test/README.md` (Phase 98) as the canonical inventory + onboarding doc for the self-test suite (gates 5–7 and 9).
 - **And** the section MUST be regenerated on every audit run — it is not a hand-edited file. Drift between the script's enumeration and the actual workflow gates is detected by lockstep with `.github/workflows/spec-health.yml` (any new gate added to the workflow must be added to the enumeration in the same PR).
 - **And** `RUBRIC_VERSION` MUST be bumped on every rubric change documented in the "Rubric changelog" table; non-rubric changes (metadata, output formatting, debugging tools) MUST also bump it but be explicitly marked "no scoring change" in the changelog row.
 - **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` `RUBRIC_VERSION` constant + `00-index.md` "QA tooling baseline" section + `EXECUTIVE-SUMMARY.md` `**Rubric:**` header + lockstep with `.github/workflows/spec-health.yml` step list.
 
-## Rubric changelog (v2.9 → v2.17)
+## Rubric changelog (v2.9 → v2.18)
 
 | Version | Phase | Change | Score effect |
 |--------:|------:|--------|--------------|
@@ -308,7 +308,8 @@ A companion script renders these into a human report — see §16 [`16-generate-
 | v2.16-test1 | 91 | CLI threshold contract self-test (`linter-scripts/test/test-audit-cli-thresholds.sh`) wired into `spec-health.yml`. Locks v2.12 exit-code semantics from silent-inversion regressions. | None (no rubric change; CI safety net only). |
 | v2.16-test2 | 94 | `--explain` contract self-test (`linter-scripts/test/test-audit-explain-contract.sh`) wired into `spec-health.yml`. Locks v2.16 single-match / no-match / multi-match / no-side-effects contract from silent-break regressions. | None (no rubric change; CI safety net only). |
 | v2.16-test3 | 95 | Determinism / JSON-stability self-test (`linter-scripts/test/test-audit-deterministic-stability.sh`) wired into `spec-health.yml`. Locks `AUDIT_DETERMINISTIC=1` byte-identical guarantee — runs the audit twice and asserts `sha256(raw-results.json)` matches. Catches non-determinism regressions the production gate cannot see (single-run gate by construction). | None (no rubric change; CI safety net only). |
-| **v2.17** | **99** | **Metadata sync**: new `RUBRIC_VERSION = "v2.17"` constant surfaced in `00-index.md` (+ `**Rubric:** v2.17` header) and `EXECUTIVE-SUMMARY.md`. New "QA tooling baseline (Phase 99)" footer in `00-index.md` enumerating the 8 strict CI gates that surround the score (cross-links + tree-health + lockstep + audit thresholds + 3 self-tests + mermaid syntax). Determinism preserved — `RUBRIC_VERSION` is a static string. | None (no rubric change; output-clarity only — readers of the audit output now know the score is one of 8 surrounding gates). |
+| v2.17 | 99 | Metadata sync: new `RUBRIC_VERSION = "v2.17"` constant surfaced in `00-index.md` (+ `**Rubric:** v2.17` header) and `EXECUTIVE-SUMMARY.md`. New "QA tooling baseline (Phase 99)" footer in `00-index.md` enumerating the 8 strict CI gates that surround the score (cross-links + tree-health + lockstep + audit thresholds + 3 self-tests + mermaid syntax). Determinism preserved — `RUBRIC_VERSION` is a static string. | None (no rubric change; output-clarity only). |
+| **v2.18** | **102** | **Gate count metadata bump**: `RUBRIC_VERSION` v2.17 → v2.18 to reflect the addition of a 9th strict CI gate — the README inventory parity self-test (`test/test-readme-inventory.sh`, locks AC-31-27 mechanically). QA tooling baseline footer regenerated to enumerate **9 strict CI gates** instead of 8; `linter-scripts/test/README.md` link annotation updated to reference the self-test suite (#5–#7 + #9). Determinism preserved — `RUBRIC_VERSION` remains a static string. | None (no rubric change; output-clarity + new safety net only). |
 
 
 ## Cross-references
