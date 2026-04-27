@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.13.0
+**Version:** 2.14.0
 **Updated:** 2026-04-27
+
+> **v2.14.0 update (Phase 91 — Audit CLI threshold contract self-test):** Added `linter-scripts/test/test-audit-cli-thresholds.sh` (executable, 6-case CLI self-test) and wired it into `.github/workflows/spec-health.yml` as the new step *Audit CLI threshold contract self-test (Phase 91)*. Locks the v2.12 (Phase 81) `--min-weighted` / `--min-impl` exit-code contract from silent-inversion regressions: unsatisfiable floors MUST exit `1`, satisfiable floors MUST exit `0`, combined floors fail on either breach (logical-OR). Without this, a refactor flipping `<` to `>` in the threshold gate would still pass CI because all 87 modules sit comfortably above the production floor (98.0 ≫ 97; 99.8 ≫ 99). Lockstep: §31 v1.9.0 → **v1.10.0** (new **AC-31-24**, header `Source` line + Category updated, rubric changelog gains `v2.16-test` row); §98 v2.16.0 → **v2.17.0**. Verification: self-test 6/6 ✅; tree-health 100/100; lockstep 0 findings; audit ✓ at 98.0/99.8 (no scoring change — CI safety net only).
 
 > **v2.13.0 update (Phase 90 — `--explain` rubric trace flag):** Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.15 → **v2.16** with new `--explain=<substring>` CLI flag. Pure-add diagnostic that prints rubric branch, fired bonuses (with deltas + originating rubric version), capped gates (with before/after), per-dimension raw-vs-final scores, and key metrics for any single module. No file writes, no AI calls; exits 0 on match / 1 on no-match. Use cases: rubric debugging, contributor onboarding, explaining grade changes after a rubric edit. [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.8.0 → **v1.9.0** with **AC-31-23** specifying the full stdout structure + exit-code + no-side-effects contract; CLI flags table gains `Since` column distinguishing v2.12 vs v2.16; rubric changelog table extended through v2.16. Lockstep: §31 v1.8.0 → v1.9.0; §98 v2.15.0 → v2.16.0. Verification: tree-health 100/100, lockstep 0 findings, audit ✓ at 98.0/99.8 — no scoring regression.
 
