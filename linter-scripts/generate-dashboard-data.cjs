@@ -71,6 +71,26 @@ function isExternalRepoRef(resolvedRel) {
     || resolvedRel === "dashboard-data.json";
 }
 
+// ── Cross-link waiver allowlist (parity with check-spec-cross-links.py) ─────
+// File format: <relpath>:<line>:<target> per line. Lines starting with # ignored.
+// Used to suppress documentation-example links (e.g. `[link](../foo)` inside
+// prose that demonstrates a forbidden pattern). Keeps dashboard in lockstep
+// with the Python CI gate which already honors the same file.
+const WAIVER_FILE = path.join(__dirname, "spec-cross-links.allowlist");
+const WAIVED_LINKS = new Set();
+if (fs.existsSync(WAIVER_FILE)) {
+  for (const raw of fs.readFileSync(WAIVER_FILE, "utf8").split("\n")) {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) continue;
+    // Key shape: "<source-relpath>:<line>:<target>"
+    WAIVED_LINKS.add(line);
+  }
+}
+
+function isWaivedLink(sourceRel, lineNum, target) {
+  return WAIVED_LINKS.has(`${sourceRel}:${lineNum}:${target}`);
+}
+
 // ── Helpers ─────────────────────────────────────────────────
 
 function isArchivePath(filePath) {
