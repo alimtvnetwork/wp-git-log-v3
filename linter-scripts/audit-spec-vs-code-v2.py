@@ -120,7 +120,15 @@ WEIGHTS = {
 assert sum(WEIGHTS.values()) == 100
 
 WAFFLE_RX = re.compile(r"\b(should|may|might|could|optionally|preferably|ideally|consider|recommended)\b", re.I)
-TODO_RX   = re.compile(r"\b(TODO|TBD|FIXME|XXX|HACK)\b")
+# v2.14 (Phase 83): tightened TODO regex. The previous `\bTODO\b` matched
+# narrative mentions ("TODO comment", "marked TODO", "TODO/FIXME density")
+# and inflated todo_density on auditor-self-reference and gap-analysis
+# modules. The new pattern requires the canonical work-tracker shape:
+#   TODO:        — colon directly after marker
+#   TODO(name):  — Conventional Commits style
+#   TODO -       — dash bullet form
+# Narrative mentions (no following : / ( / -) are correctly ignored.
+TODO_RX   = re.compile(r"\b(TODO|TBD|FIXME|XXX|HACK)(?:\s*\([^)]*\))?\s*[:\-]")
 GWT_RX    = re.compile(r"\*\*Given\*\*.*?\*\*When\*\*.*?\*\*Then\*\*", re.S | re.I)
 AC_RX     = re.compile(r"(?:^|\n)\s*###?\s*AC[-\s]?[A-Z\d-]+", re.I)
 LINK_RX   = re.compile(r"\[([^\]]+)\]\(([^)#]+\.md)(?:#[^)]*)?\)")
@@ -128,6 +136,7 @@ CODE_BLOCK_RX = re.compile(r"```(\w+)?\n(.*?)```", re.S)
 INLINE_CODE_RX = re.compile(r"`[^`\n]+`")
 FRONTMATTER_RX = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 KIND_RX        = re.compile(r"^kind:\s*([A-Za-z0-9_-]+)\s*$", re.M)
+TODO_EXEMPT_RX = re.compile(r"^todo_audit_exempt:\s*true\s*$", re.M)
 
 TODO_TOKEN = r"(?:TODO|TBD|FIXME|XXX|HACK)"
 META_TOKEN_SEQ_RX = re.compile(rf"\b{TODO_TOKEN}(?:/{TODO_TOKEN}){{1,4}}\b")
