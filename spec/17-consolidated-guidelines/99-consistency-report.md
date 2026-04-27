@@ -1,7 +1,11 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.3.0
+**Version:** 4.4.0
 **Updated:** 2026-04-27
+
+> **v4.4.0 update (Phase 130):** Added [`33-full-tree-ai-audit-v5.md`](./33-full-tree-ai-audit-v5.md) — supersedes audit-v4 by mechanically re-validating all 4 critical findings; 3 of 4 resolved between v4 publication (2026-04-25) and v5 (2026-04-27). audit-v4 banner-superseded. File count 33 → 34. No score change pending R1 (real-AI re-audit).
+
+> **v4.3.0 update (Phase 39b):** Documented Audit Marker Exemption — `todo_count: 5` audit signal was substring false-positive (matches inside `27-linter-authoring-guide.md` Python example block teaching detection of TODOs). Module exempt from substring-based `todo_density` heuristic.
 
 > **v4.2.0 update (Phase 32 — rollup):** Added [`32-phase-26-31-rollup.md`](./32-phase-26-31-rollup.md) — single-session retrospective covering Phases 26 → 31 (67 spec remediations + rubric upgrade v1.x → v2.0.0; tree health 45/100 → 100/100, 162/162 quality credits). Closes Phase 1 + 2 of v4 roadmap. Phase 3 backlog: R1 (AI re-audit), R2 (dashboard rubric-v2), R3 (audit cadence). One blocker B1 (§07 App identity) carried forward. Slot 31 (`31-full-tree-ai-audit-v4.md`) was missing from §00 inventory despite being on disk since v3.5.0 — added in this patch alongside slot 32.
 
@@ -50,8 +54,9 @@
 | 31 | `30-readme-improvement-suggestions.md` | ✅ Present | — | (meta) |
 | 32 | `31-full-tree-ai-audit-v4.md` | ✅ Present | — | (meta-audit, full tree) |
 | 33 | `32-phase-26-31-rollup.md` | ✅ Present | 130+ | (retrospective, Phase 32) |
+| 34 | `33-full-tree-ai-audit-v5.md` | ✅ Present | 110+ | (meta-audit, supersedes v4) |
 
-**Total:** 33 files (including this report, gap analysis, folder mapping, audits, and the Phase 32 rollup)
+**Total:** 34 files (including this report, gap analysis, folder mapping, audits, and the Phase 32 rollup)
 
 ---
 

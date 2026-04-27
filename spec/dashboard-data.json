@@ -819,8 +819,8 @@
     ]
   },
   "Links": {
-    "TotalChecked": 2936,
-    "Ok": 2924,
+    "TotalChecked": 2941,
+    "Ok": 2929,
     "Broken": 0,
     "ExternalAllowed": 9,
     "ExternalAllowedDetails": [
@@ -887,7 +887,7 @@
   },
   "Inventory": {
     "TotalFolders": 87,
-    "TotalMdFiles": 860,
+    "TotalMdFiles": 861,
     "Folders": [
       {
         "Folder": "",
@@ -2378,7 +2378,7 @@
       },
       {
         "Folder": "17-consolidated-guidelines",
-        "MdFiles": 36,
+        "MdFiles": 37,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2418,6 +2418,7 @@
           "30-readme-improvement-suggestions.md",
           "31-full-tree-ai-audit-v4.md",
           "32-phase-26-31-rollup.md",
+          "33-full-tree-ai-audit-v5.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md"
