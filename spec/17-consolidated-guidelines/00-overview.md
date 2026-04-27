@@ -112,3 +112,13 @@ Overview targets 100/100 health (aspirational); AC threshold of 80 is the enforc
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+---
+
+## Audit Marker Exemption (Phase 39b, 2026-04-27)
+
+**Issue:** The 2026-04-27 AI-implementability audit recorded `todo_count: 5` for this module. A subsequent grep audit confirmed **zero genuine TODO/TBD/FIXME work-tracking markers**: every match lives inside the worked example block in `27-linter-authoring-guide.md` (lines 361–424), which **defines** the `check-stale-todos.py` linter — the strings `STALE-TODO`, `findings.append`, and `print(...)` are Python source code teaching how to *detect* TODOs, not actual TODOs.
+
+**Decision:** the module is exempt from the substring-based `todo_density` heuristic. The example must remain literal so the linter implementation it describes is reproducible. Future audit iterations SHOULD restrict the scan to outside fenced code blocks (Phase 39b follow-up R4).
+
+**Evidence verified:** `rg -n -i '\bTODO\b|\bTBD\b|\bFIXME\b' spec/17-consolidated-guidelines/` — all 5 hits land in `27-linter-authoring-guide.md` between line 361 and line 424, inside ```` ```python ```` blocks.
+

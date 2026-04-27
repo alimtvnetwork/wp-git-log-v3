@@ -120,3 +120,19 @@ Numbering convention inside this module:
 - [`spec/01-spec-authoring-guide/`](../01-spec-authoring-guide/) — naming + required-files conventions enforced by §05/§20–§22.
 - [`spec/12-cicd-pipeline-workflows/`](../12-cicd-pipeline-workflows/) — broader CI patterns; §70 is the spec-health workflow specifically.
 - [`spec/17-consolidated-guidelines/`](../17-consolidated-guidelines/) — the master mirror that §09 enforces.
+
+---
+
+## Audit Marker Exemption (Phase 39b, 2026-04-27)
+
+**Issue:** The 2026-04-27 AI-implementability audit recorded `todo_count: 4` for this module. A subsequent grep audit confirmed **zero genuine TODO/TBD/FIXME work-tracking markers**: every match lives inside script-spec content that **defines** how the toolchain detects or processes TODOs:
+
+- `31-audit-spec-vs-code-v2.py.md:23` — lists "TODO/TBD/FIXME density" as one of the metrics the auditor *measures*.
+- `31-audit-spec-vs-code-v2.py.md:136` — gate `G-TODO-01` (`todo_density >= 3`) is part of the auditor's rubric.
+- `15-generate-fix-checklist.md:58` — `todo_density > 0` is a P3 fix-priority signal in the generated checklist.
+- `23-scaffold-spec-module.md:59` — describes that the scaffolder emits a `00-overview.md` with `Purpose/Scope/Out-of-scope sections marked TODO` so authors fill them in. (The string "marked TODO" is the *behaviour spec*, not an open task — the scaffolder DOES emit literal `TODO:` placeholders, by design.)
+
+**Decision:** these occurrences are part of the toolchain's enforceable contract; removing them would break the rules they define. The module is exempt from the substring-based `todo_density` heuristic. A future iteration of `audit-spec-vs-code-v2.py` SHOULD switch to a regex that excludes fenced code blocks and back-tick-quoted strings (Phase 39b follow-up R4).
+
+**Evidence verified:** `rg -n -i '\bTODO\b|\bTBD\b|\bFIXME\b' spec/27-spec-toolchain/` — every hit reviewed and classified above.
+

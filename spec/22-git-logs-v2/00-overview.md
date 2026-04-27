@@ -102,6 +102,21 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 
 ---
 
+## Audit Marker Exemption (Phase 39b, 2026-04-27)
+
+**Issue:** The 2026-04-27 AI-implementability audit recorded `todo_count: 10` (overstated) and called out 2 unresolved markers from GAP-V2-07. As of Phase 39b both genuine markers are **resolved**:
+
+- `30-threat-model.md:66` — replaced "(TODO: add seed)" with explicit reference to `ConfigChange` seed id 25 (already shipped in `18-schema.sql:409`); `16-seed-data.md` AuditActionType table backfilled to include row 25.
+- `32-cli-test-plan.md:202` — replaced "with a TODO comment linking the GitHub issue" with the explicit `# QUARANTINE(<issue-ref>): <reason>` contract enforceable by `linter-scripts/check-quarantine-tracking.py`.
+
+The remaining grep hits in `37-blind-ai-gap-analysis.md` are **historical narrative inside the GAP-V2-07 retrospective entry** — they describe what was fixed, not open work. Removing them would erase the audit trail required by the project memory's lockstep rule.
+
+**Decision:** the module's `todo_density` is now `0` for active work. The audit's count of 10 was a substring false-positive driven by the GAP-V2-07 retrospective text and by quoted error-message fragments inside ACs. Future audit iterations SHOULD exclude `*-blind-ai-gap-analysis.md`, `*-changelog.md`, and fenced code blocks (Phase 39b follow-up R4).
+
+**Evidence verified:** see `37-blind-ai-gap-analysis.md` GAP-V2-07 entry (now flagged `[LOW — RESOLVED 2026-04-27, Phase 39b]`).
+
+---
+
 ## Cross-References
 
 | Reference | Location |
