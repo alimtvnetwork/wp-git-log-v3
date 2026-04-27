@@ -77,6 +77,7 @@ The following files in this module also constitute acceptance surface — each m
 - `03-collision-resolution-summary.md`
 - `04-error-code-utilization-report.md`
 - `05-overlap-validator.md`
+- `06-lint-rule-catalog.md`
 
 ---
 
