@@ -64,6 +64,8 @@ This folder provides **standalone, self-contained AI-readable references** for e
 | 28 | [28-distribution-and-runner.md](./28-distribution-and-runner.md) | **Module** — Standalone distribution + runner spec: `install.sh`/`.ps1`, root `run.sh`/`.ps1` dispatcher, GitHub Release pipeline, `install-config.json` schema. Phase 6B promotion of `15-distribution-and-runner/` |
 | 29 | [29-blind-ai-audit-v3.md](./29-blind-ai-audit-v3.md) | **Meta** — Post Phase 6A/6B/6D audit: 8/8 stress tests pass, score 99.4 → 99.8/100 (handoff-weighted 99.9). Terminal AI-blind-readiness reached |
 | 30 | [30-readme-improvement-suggestions.md](./30-readme-improvement-suggestions.md) | **Meta** — Prioritised README rewrite plan (22 suggestions in 5 phases). Awaiting approval. Created alongside the v3.55.0 GIFs + Bundle Installers section |
+| 31 | [31-full-tree-ai-audit-v4.md](./31-full-tree-ai-audit-v4.md) | **Meta** — First full-tree (not folder-17 only) AI-implementability audit. Verdict 45/100 (F). Roadmap to 100 in 3 phases; supersedes folder-17-only verdicts of 25/26/29 for whole-tree readiness |
+| 32 | [32-phase-26-31-rollup.md](./32-phase-26-31-rollup.md) | **Retrospective** — Single-session rollup of Phases 26–31: 67 spec remediations + rubric upgrade v1.x→v2.0.0; tree health 45/100 → 100/100 (162/162 quality credits). Closes Phase 1 + 2 of v4 roadmap; documents pattern catalogue + handoff notes for future AI |
 
 ---
 
