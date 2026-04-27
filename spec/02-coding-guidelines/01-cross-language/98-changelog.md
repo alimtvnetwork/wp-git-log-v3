@@ -63,3 +63,7 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 ---
 
 *Keep this file updated when specs change.*
+
+| Date | Bump | Notes |
+|------|------|-------|
+| 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
