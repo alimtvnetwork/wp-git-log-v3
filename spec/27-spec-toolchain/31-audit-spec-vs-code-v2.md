@@ -283,7 +283,7 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** the README's last-updated date MUST be bumped on every modification.
 - **Verifies:** `linter-scripts/test/README.md` (inventory, coverage triad, local execution, template, see-also sections) + lockstep with the actual contents of `linter-scripts/test/`.
 
-## Rubric changelog (v2.9 → v2.16)
+## Rubric changelog (v2.9 → v2.17)
 
 | Version | Phase | Change | Score effect |
 |--------:|------:|--------|--------------|
@@ -298,6 +298,7 @@ A companion script renders these into a human report — see §16 [`16-generate-
 | v2.16-test1 | 91 | CLI threshold contract self-test (`linter-scripts/test/test-audit-cli-thresholds.sh`) wired into `spec-health.yml`. Locks v2.12 exit-code semantics from silent-inversion regressions. | None (no rubric change; CI safety net only). |
 | v2.16-test2 | 94 | `--explain` contract self-test (`linter-scripts/test/test-audit-explain-contract.sh`) wired into `spec-health.yml`. Locks v2.16 single-match / no-match / multi-match / no-side-effects contract from silent-break regressions. | None (no rubric change; CI safety net only). |
 | v2.16-test3 | 95 | Determinism / JSON-stability self-test (`linter-scripts/test/test-audit-deterministic-stability.sh`) wired into `spec-health.yml`. Locks `AUDIT_DETERMINISTIC=1` byte-identical guarantee — runs the audit twice and asserts `sha256(raw-results.json)` matches. Catches non-determinism regressions the production gate cannot see (single-run gate by construction). | None (no rubric change; CI safety net only). |
+| **v2.17** | **99** | **Metadata sync**: new `RUBRIC_VERSION = "v2.17"` constant surfaced in `00-index.md` (+ `**Rubric:** v2.17` header) and `EXECUTIVE-SUMMARY.md`. New "QA tooling baseline (Phase 99)" footer in `00-index.md` enumerating the 8 strict CI gates that surround the score (cross-links + tree-health + lockstep + audit thresholds + 3 self-tests + mermaid syntax). Determinism preserved — `RUBRIC_VERSION` is a static string. | None (no rubric change; output-clarity only — readers of the audit output now know the score is one of 8 surrounding gates). |
 
 
 ## Cross-references
