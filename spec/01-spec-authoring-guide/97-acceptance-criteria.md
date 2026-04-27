@@ -208,6 +208,15 @@ SLOT_IMMUTABILITY:         once a numbered slot ships, it is permanent;
 - **And** the v2.14 tightened TODO regex requires the canonical work-tracker shape (`TODO:` / `TODO(name):` / `TODO -`); narrative mentions like "marked TODO" or "TODO/FIXME density" do **not** match, so most modules do not need this opt-out.
 - **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` `TODO_EXEMPT_RX` + `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` AC-31-22.
 
+### AC-SAG-23 — `lifecycle-spec-authoring.mmd` is the canonical lifecycle source of truth (Phase 93)
+
+- **Given** the file [`lifecycle-spec-authoring.mmd`](./lifecycle-spec-authoring.mmd) in this folder,
+- **When** any contributor (human or AI) needs to understand the end-to-end module lifecycle from authoring through CI to merge,
+- **Then** the `.mmd` file MUST be the canonical reference and MUST encode (a) all 5 valid `kind:` values as branching paths from the entry node, (b) the 6-step local linter pipeline (`generate-spec-index.cjs` → `check-spec-cross-links.py` → `check-tree-health.cjs --strict` → `check-lockstep.cjs --strict` → `audit-spec-vs-code-v2.py` with `AUDIT_DETERMINISTIC=1` → `check-trace-map-regression.py`), (c) the 6-gate CI pipeline in `.github/workflows/spec-health.yml` including the Phase 91 CLI self-test step, (d) the failure-recovery loop pointing back to the author phase via the `--explain=<module>` debugging flag, and (e) the post-merge phase-memo step writing to `.lovable/memory/audit/v2-deterministic/`.
+- **And** the inline mermaid excerpt in [`00-overview.md`](./00-overview.md) "Lifecycle Diagram" section MAY be a simplified summary of the `.mmd` file but MUST NOT contradict it; on contradiction the `.mmd` file wins. Reviewers MUST update both when changing the lifecycle.
+- **And** any addition or removal of a local linter or CI gate MUST be reflected in the `.mmd` file in the same PR (lockstep with `.github/workflows/spec-health.yml` and `linter-scripts/run.sh`).
+- **Verifies:** `spec/01-spec-authoring-guide/lifecycle-spec-authoring.mmd` (32 nodes, 6 styled classes) + `00-overview.md` "Lifecycle Diagram (Phase 66, expanded in Phase 93)" section + `.github/workflows/spec-health.yml` (6 gates) + `linter-scripts/run.sh` (6 local checks).
+
 ---
 
 
