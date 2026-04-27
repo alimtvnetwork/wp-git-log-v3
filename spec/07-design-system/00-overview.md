@@ -321,3 +321,68 @@ def load(text: str) -> Tokens:
     t.validate()
     return t
 ```
+
+
+---
+
+## Phase 58 Reference: Design Token Export OpenAPI
+
+A read-only API exports the design system's token values for downstream
+consumers (Storybook, Figma plugin, marketing site). The OpenAPI contract
+below is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Design System Tokens API
+  version: 1.0.0
+  description: Read-only export of design tokens (colors, typography, spacing).
+servers:
+  - url: https://api.lovable.dev/design-system/v1
+paths:
+  /tokens:
+    get:
+      summary: List all design tokens
+      operationId: listTokens
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+            enum: [color, typography, spacing, radius, shadow, motion]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/DesignToken" }
+  /tokens/{name}:
+    get:
+      summary: Get a single token by name
+      operationId: getToken
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string, pattern: "^[a-z0-9-]+$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/DesignToken" }
+        "404":
+          description: Not found
+components:
+  schemas:
+    DesignToken:
+      type: object
+      required: [name, category, value]
+      properties:
+        name:        { type: string, pattern: "^[a-z0-9-]+$" }
+        category:    { type: string, enum: [color, typography, spacing, radius, shadow, motion] }
+        value:       { type: string }
+        description: { type: string }
+```

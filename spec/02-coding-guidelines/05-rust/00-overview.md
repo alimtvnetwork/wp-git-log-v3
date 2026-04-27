@@ -102,3 +102,44 @@ Rust standards are forward-looking; no Rust implementation exists in this repo. 
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+
+---
+
+## Phase 58 Reference: Rust Lint Result JSON Schema
+
+The Rust coding-guidelines pipeline emits a normative `RustLintResult` envelope
+that downstream dashboards and CI gates consume. The JSON Schema below is the
+authoritative shape and MUST validate every emitted record.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.dev/spec/02-coding-guidelines/05-rust/rust-lint-result.schema.json",
+  "title": "RustLintResult",
+  "type": "object",
+  "required": ["crate", "tool", "exit_code", "findings", "duration_ms"],
+  "properties": {
+    "crate":       { "type": "string", "minLength": 1 },
+    "tool":        { "type": "string", "enum": ["clippy", "rustfmt", "cargo-audit", "cargo-deny"] },
+    "exit_code":   { "type": "integer", "minimum": 0, "maximum": 255 },
+    "duration_ms": { "type": "integer", "minimum": 0 },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule", "severity", "file", "line", "message"],
+        "properties": {
+          "rule":     { "type": "string", "pattern": "^[a-z0-9_:-]+$" },
+          "severity": { "type": "string", "enum": ["error", "warning", "info", "help"] },
+          "file":     { "type": "string", "minLength": 1 },
+          "line":     { "type": "integer", "minimum": 1 },
+          "message":  { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```

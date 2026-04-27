@@ -153,3 +153,50 @@ class ResponseEnvelope:
         if self.status == 'error' and not self.errors:
             raise ValueError('ENV-002: status=error requires at least one error')
 ```
+
+
+---
+
+## Phase 58 Reference: Response Envelope OpenAPI
+
+Every backend HTTP endpoint MUST return responses that conform to the
+`ResponseEnvelope` schema below. The OpenAPI contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Response Envelope Contract
+  version: 1.0.0
+components:
+  schemas:
+    ResponseEnvelope:
+      type: object
+      required: [ok, request_id, timestamp]
+      properties:
+        ok:         { type: boolean }
+        request_id: { type: string, format: uuid }
+        timestamp:  { type: string, format: date-time }
+        data:       { description: "Present when ok=true" }
+        error:      { $ref: "#/components/schemas/ErrorBlock" }
+        meta:       { $ref: "#/components/schemas/MetaBlock" }
+      oneOf:
+        - required: [data]
+        - required: [error]
+    ErrorBlock:
+      type: object
+      required: [code, message, severity]
+      properties:
+        code:     { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        message:  { type: string, minLength: 1 }
+        severity: { type: string, enum: [fatal, error, warning, info] }
+        details:  { type: object, additionalProperties: true }
+        trace_id: { type: string }
+    MetaBlock:
+      type: object
+      properties:
+        page:        { type: integer, minimum: 1 }
+        per_page:    { type: integer, minimum: 1, maximum: 200 }
+        total:       { type: integer, minimum: 0 }
+        duration_ms: { type: integer, minimum: 0 }
+paths: {}
+```

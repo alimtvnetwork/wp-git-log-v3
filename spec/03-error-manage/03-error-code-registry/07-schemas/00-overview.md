@@ -460,3 +460,66 @@ class RegistryShardEntry:
         if self.deprecated and not self.replaced_by:
             raise ValueError('REG-CODE-002: deprecated entries require replaced_by')
 ```
+
+
+---
+
+## Phase 58 Reference: Error Code Registry OpenAPI
+
+The error-code registry exposes a read-only API for clients to look up code
+metadata. The OpenAPI contract below is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Code Registry API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-registry/v1
+paths:
+  /codes:
+    get:
+      summary: List all registered error codes
+      operationId: listCodes
+      parameters:
+        - in: query
+          name: severity
+          schema: { type: string, enum: [fatal, error, warning, info] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ErrorCodeRecord" }
+  /codes/{code}:
+    get:
+      summary: Get metadata for a single error code
+      operationId: getCode
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema: { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorCodeRecord" }
+        "404": { description: Not found }
+components:
+  schemas:
+    ErrorCodeRecord:
+      type: object
+      required: [code, severity, message_template, owner_module]
+      properties:
+        code:             { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        severity:         { type: string, enum: [fatal, error, warning, info] }
+        message_template: { type: string, minLength: 1 }
+        owner_module:     { type: string }
+        retryable:        { type: boolean }
+        deprecated:       { type: boolean }
+        replaced_by:      { type: string }
+```

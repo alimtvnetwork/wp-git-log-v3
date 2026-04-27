@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **88/100 (A)**  
-**Blast radius:** 5/10
+**Implementability Score:** **93/100 (A)**  
+**Blast radius:** 7/10
 
-> Deterministic score 88/100 (A) for spec/23-app-database.
+> Deterministic score 93/100 (A) for spec/23-app-database.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 70 | 24.5 |
+| Implementability | 35% | 85 | 29.8 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,19 +31,20 @@
   "kind": "module",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 16321,
+  "overview_chars": 17701,
   "ac_chars": 5833,
   "ac_count": 11,
   "gwt_block_count": 10,
   "consistency_report": true,
-  "code_blocks_total": 13,
+  "code_blocks_total": 14,
   "code_blocks_by_lang": {
     "sql": 11,
     "bash": 1,
-    "ts": 1
+    "ts": 1,
+    "json": 1
   },
   "has_sql_ddl": true,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,

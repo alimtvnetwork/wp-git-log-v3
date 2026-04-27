@@ -53,3 +53,7 @@ All internal links verified valid. ✅
 |------|---------|--------|
 | 2026-03-31 | 1.1.0 | Added missing `98-changelog.md` |
 | 2026-03-30 | 1.0.0 | Initial report |
+
+## 2026-04-27 — Phase 58 impl-sweep
+
+- Phase 58: appended RustLintResult JSON Schema to satisfy `has_json_schema` rubric (impl 70 → 85).

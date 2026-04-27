@@ -229,3 +229,57 @@ AC-01 mandates Version/Updated banner; current overview snippet is awaiting the 
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+
+---
+
+## Phase 58 Reference: WP Plugin Coding-Style Config (YAML)
+
+The WordPress plugin coding-style rules are normalized into a single YAML
+configuration consumed by phpcs, ESLint, and the build pipeline.
+
+```yaml
+# .wp-plugin-style.yaml — WP plugin coding-style configuration v1.0.0
+version: 1.0.0
+php:
+  standard: WordPress
+  text_domain_required: true
+  prefix: lvbl_
+  min_php: "7.4"
+  short_array_syntax: true
+  line_length: 120
+  rulesets:
+    - WordPress-Core
+    - WordPress-Docs
+    - WordPress-Extra
+javascript:
+  standard: wpcs
+  indent: tab
+  quotes: single
+  jsdoc_required: true
+  babel_preset: "@wordpress/babel-preset-default"
+naming:
+  hooks:    snake_case
+  filters:  snake_case
+  classes:  PascalCase
+  files:    class-kebab-case.php
+i18n:
+  required: true
+  text_domain: lovable-plugin
+  functions:
+    - __
+    - _e
+    - _x
+    - esc_html__
+security:
+  nonces_required: true
+  capabilities_required: true
+  escape_output: true
+  sanitize_input: true
+enforcement:
+  ci_required: true
+  fail_on_error: true
+  exempt_paths:
+    - vendor/**
+    - build/**
+```

@@ -59,3 +59,66 @@ AI-optimization rules are AI-prompt-targeted contracts; their automated enforcem
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
 
+
+
+---
+
+## Phase 58 Reference: AI Optimization Telemetry OpenAPI
+
+The AI-optimization pipeline reports prompt/response metrics for cost control
+and quality tracking. The OpenAPI contract below is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: AI Optimization Telemetry API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/ai-opt/v1
+paths:
+  /metrics:
+    post:
+      summary: Submit a single AI invocation metric
+      operationId: submitMetric
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AiMetric" }
+      responses:
+        "202": { description: Accepted }
+  /metrics/aggregate:
+    get:
+      summary: Aggregated metrics by model and time window
+      operationId: aggregateMetrics
+      parameters:
+        - in: query
+          name: window
+          schema: { type: string, enum: [1h, 24h, 7d, 30d] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AiAggregate" }
+components:
+  schemas:
+    AiMetric:
+      type: object
+      required: [model, prompt_tokens, completion_tokens, latency_ms, status]
+      properties:
+        model:             { type: string }
+        prompt_tokens:     { type: integer, minimum: 0 }
+        completion_tokens: { type: integer, minimum: 0 }
+        latency_ms:        { type: integer, minimum: 0 }
+        status:            { type: string, enum: [ok, error, timeout, rate_limited] }
+        cost_usd_micros:   { type: integer, minimum: 0 }
+    AiAggregate:
+      type: object
+      properties:
+        model:           { type: string }
+        invocations:     { type: integer, minimum: 0 }
+        avg_latency_ms:  { type: number, minimum: 0 }
+        total_cost_usd:  { type: number, minimum: 0 }
+        error_rate:      { type: number, minimum: 0, maximum: 1 }
+```
