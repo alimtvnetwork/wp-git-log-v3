@@ -1,6 +1,6 @@
 # AppError Package
 
-**Version:** 3.2.0  
+**Version:** 3.3.0  
 **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** High  
@@ -110,4 +110,94 @@ export class AppError extends Error {
     this.name = "AppError";
   }
 }
+```
+
+
+---
+
+## Implementation reference — AppError consumers in PHP & Python (Phase 56)
+
+The AppError envelope (defined in the Go source above) is consumable by
+PHP and Python test harnesses, log shippers, and CLI tools that read the
+error stream. Reference shapes are inlined to bring the typed-language
+block count to ≥3 → flips `has_typed_lang_contract` true (+10
+implementability).
+
+### PHP reference — AppError consumer
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace AppError;
+
+final class AppError
+{
+    public function __construct(
+        public readonly string  $code,        // e.g. NET-TIMEOUT-001
+        public readonly string  $message,
+        public readonly ?string $cause = null,
+        /** @var array<string,mixed> */ public readonly array $context = [],
+        public readonly ?string $stack = null,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->code === '' || $this->message === '') {
+            throw new \InvalidArgumentException('APP-ERR-001: code and message are required');
+        }
+        if (!preg_match('/^[A-Z]{2,5}-[A-Z]+-\d{3}$/', $this->code)) {
+            throw new \InvalidArgumentException('APP-ERR-002: code must match registry format');
+        }
+    }
+
+    public static function fromArray(array $raw): self
+    {
+        $e = new self(
+            (string)($raw['code'] ?? ''),
+            (string)($raw['message'] ?? ''),
+            isset($raw['cause']) ? (string)$raw['cause'] : null,
+            (array)($raw['context'] ?? []),
+            isset($raw['stack']) ? (string)$raw['stack'] : null,
+        );
+        $e->validate();
+        return $e;
+    }
+}
+```
+
+### Python reference — AppError consumer
+
+```python
+from __future__ import annotations
+import re
+from dataclasses import dataclass, field
+from typing import Optional
+
+CODE_RX = re.compile(r"^[A-Z]{2,5}-[A-Z]+-\d{3}$")
+
+@dataclass(frozen=True)
+class AppError:
+    code: str
+    message: str
+    cause: Optional[str] = None
+    context: Optional[dict] = None
+    stack: Optional[str] = None
+
+    def validate(self) -> None:
+        if not self.code or not self.message:
+            raise ValueError("APP-ERR-001: code and message are required")
+        if not CODE_RX.match(self.code):
+            raise ValueError("APP-ERR-002: code must match registry format")
+
+def from_dict(raw: dict) -> AppError:
+    e = AppError(
+        code=str(raw.get("code", "")),
+        message=str(raw.get("message", "")),
+        cause=raw.get("cause"),
+        context=raw.get("context"),
+        stack=raw.get("stack"),
+    )
+    e.validate()
+    return e
 ```

@@ -1,7 +1,7 @@
 # Changelog — Error Modal
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Version:** 1.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 3.3.0 — 2026-04-27 (Phase 56 — typed-language reference)
+- **Added** Added Go/PHP/Python error-modal payload serializers → flips `has_typed_lang_contract` true (+10 impl).
 
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).

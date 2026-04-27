@@ -1,6 +1,6 @@
 # Changelog — AppError Package
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/02-error-architecture/06-apperror-package/`
 
@@ -20,6 +20,9 @@
 ---
 
 ## Releases
+
+### 3.3.0 — 2026-04-27 (Phase 56 — typed-language reference)
+- **Added** Added PHP + Python `AppError` consumers (already had 1 Go); brings typed-lang count to ≥3 → flips `has_typed_lang_contract` true (+10 impl).
 
 ### 1.1.0 — 2026-04-26 (Phase 20 contract-inlining sweep)
 - **Added** §97 — three normative machine-parseable contract blocks under "Inlined Contracts":

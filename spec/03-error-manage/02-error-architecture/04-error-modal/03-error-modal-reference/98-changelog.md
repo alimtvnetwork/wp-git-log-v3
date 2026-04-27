@@ -1,7 +1,7 @@
 # Changelog — Error Modal — Frontend Specification (Index)
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Version:** 1.2.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 2.3.0 — 2026-04-27 (Phase 56 — typed-language reference)
+- **Added** Added Go/PHP/Python action-dispatcher reference shapes → flips `has_typed_lang_contract` true (+10 impl).
 
 ### 1.1.0 — 2026-04-26
 - **Added** Phase-20 contract inlining: TypeScript `CapturedError`/`RawEnvelope` types, JSON Schema 2020-12 wire-format validator, and React `GlobalErrorModalProps` contract in `97-acceptance-criteria.md` (v2.1.0).

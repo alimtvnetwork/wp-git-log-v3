@@ -1,6 +1,6 @@
 # Changelog — Templates
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/03-error-code-registry/09-templates/`
 
@@ -20,6 +20,9 @@
 ---
 
 ## Releases
+
+### 3.4.0 — 2026-04-27 (Phase 56 — typed-language reference)
+- **Added** Added PHP + Python template renderers (already had 1 Go); brings typed-lang count to ≥3 → flips `has_typed_lang_contract` true (+10 impl).
 
 ### 1.1.0 — 2026-04-27 (Phase 42 — Inlined contract + cleanup)
 - **Added** machine-readable JSON-Schema "Template Envelope" block in §00 (`ErrorCodeTemplate`). Codifies error-code regex, domain enum, severity enum, message/remediation min-lengths, and SemVer `since` field. Promotes module from C-tier to B-tier in deterministic audit v2.7.

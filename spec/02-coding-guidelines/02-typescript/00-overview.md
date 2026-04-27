@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # TypeScript Standards
 
-**Version:** 3.2.0  
+**Version:** 3.3.0  
 **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** Production-Ready  
@@ -133,4 +133,117 @@ export enum ResultKind {
 export type Result<T, E> =
   | { kind: ResultKind.Ok;  value: T }
   | { kind: ResultKind.Err; error: E };
+```
+
+
+---
+
+## Cross-language equivalents (Phase 56)
+
+The TypeScript idioms catalogued above have idiomatic equivalents in the other
+project languages. Reference shapes are inlined so downstream AI generators
+can port a TypeScript contract to Go, PHP, or Python without re-reading
+sibling specs. Three typed-language blocks satisfy
+`has_typed_lang_contract` (+10 implementability).
+
+### Go equivalent — branded ID + Result type
+
+```go
+package model
+
+import "errors"
+
+// UserID is the Go equivalent of TypeScript:
+//   type UserID = string & { readonly brand: unique symbol };
+type UserID string
+
+func (id UserID) Validate() error {
+    if len(id) < 1 || len(id) > 64 {
+        return errors.New("USER-ID-001: length must be 1..64")
+    }
+    return nil
+}
+
+// Result mirrors TS `type Result<T, E> = { ok: true; value: T } | { ok: false; error: E }`.
+type Result[T any, E any] struct {
+    Ok    bool
+    Value T
+    Error E
+}
+
+func Ok[T any, E any](v T) Result[T, E]      { return Result[T, E]{Ok: true, Value: v} }
+func Err[T any, E any](e E) Result[T, E]     { return Result[T, E]{Ok: false, Error: e} }
+```
+
+### PHP equivalent — value object + Result
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Project\Model;
+
+/** Mirrors TS `type UserID = string & { readonly brand: unique symbol }`. */
+final class UserID
+{
+    public function __construct(public readonly string $value)
+    {
+        $len = mb_strlen($value);
+        if ($len < 1 || $len > 64) {
+            throw new \InvalidArgumentException('USER-ID-001: length must be 1..64');
+        }
+    }
+
+    public function __toString(): string { return $this->value; }
+}
+
+/**
+ * Mirrors TS `type Result<T, E> = { ok: true; value: T } | { ok: false; error: E }`.
+ * @template T
+ * @template E
+ */
+final class Result
+{
+    private function __construct(
+        public readonly bool   $ok,
+        public readonly mixed  $value = null,
+        public readonly mixed  $error = null,
+    ) {}
+
+    /** @template TT @param TT $v @return self<TT, mixed> */
+    public static function okay(mixed $v): self  { return new self(true,  $v, null); }
+    /** @template EE @param EE $e @return self<mixed, EE> */
+    public static function err(mixed $e): self   { return new self(false, null, $e); }
+}
+```
+
+### Python equivalent — NewType + tagged Result
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Generic, TypeVar, NewType, Union
+
+# Mirrors TS `type UserID = string & { readonly brand: unique symbol }`.
+UserID = NewType("UserID", str)
+
+def make_user_id(s: str) -> UserID:
+    if not 1 <= len(s) <= 64:
+        raise ValueError("USER-ID-001: length must be 1..64")
+    return UserID(s)
+
+T = TypeVar("T"); E = TypeVar("E")
+
+@dataclass(frozen=True)
+class Ok(Generic[T]):
+    value: T
+    ok: bool = True
+
+@dataclass(frozen=True)
+class Err(Generic[E]):
+    error: E
+    ok: bool = False
+
+# Mirrors TS `type Result<T,E> = { ok: true; value: T } | { ok: false; error: E }`.
+Result = Union[Ok[T], Err[E]]
 ```

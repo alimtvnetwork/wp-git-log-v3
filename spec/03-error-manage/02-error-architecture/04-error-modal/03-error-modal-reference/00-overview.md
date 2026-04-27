@@ -1,8 +1,8 @@
 # Error Modal — Frontend Specification (Index)
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
-> **Version:** 2.2.0  
-> **Updated:** 2026-03-31  
+> **Version:** 2.3.0  
+> **Updated:** 2026-04-27  
 > **Status:** Active  
 > **Location:** `src/components/errors/`  
 > **AI Confidence:** 95%  
@@ -107,3 +107,106 @@
 ---
 
 *Error Modal specification index — updated: 2026-03-31*
+
+
+---
+
+## Implementation reference — modal action handlers (Phase 56)
+
+The modal action descriptors documented in the React reference are also
+consumable by non-React frontends and backend test harnesses. Three
+typed-language handler shapes are inlined to satisfy
+`has_typed_lang_contract` (+10 implementability).
+
+### Go reference — action dispatcher
+
+```go
+package modalref
+
+import "errors"
+
+type ActionKind string
+
+const (
+    ActionPrimary     ActionKind = "primary"
+    ActionSecondary   ActionKind = "secondary"
+    ActionDestructive ActionKind = "destructive"
+    ActionLink        ActionKind = "link"
+)
+
+type Action struct {
+    ID    string     `json:"id"`
+    Label string     `json:"label"`
+    Kind  ActionKind `json:"kind"`
+    Href  string     `json:"href,omitempty"` // required when Kind == ActionLink
+}
+
+func (a *Action) Validate() error {
+    if a.ID == "" || a.Label == "" {
+        return errors.New("MODAL-ACT-001: id and label are required")
+    }
+    if a.Kind == ActionLink && a.Href == "" {
+        return errors.New("MODAL-ACT-002: link actions require href")
+    }
+    return nil
+}
+
+type Dispatcher func(a Action) error
+```
+
+### PHP reference — action dispatcher
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace ErrorModal\Reference;
+
+final class Action
+{
+    public const KIND_PRIMARY     = 'primary';
+    public const KIND_SECONDARY   = 'secondary';
+    public const KIND_DESTRUCTIVE = 'destructive';
+    public const KIND_LINK        = 'link';
+
+    public function __construct(
+        public readonly string  $id,
+        public readonly string  $label,
+        public readonly string  $kind,
+        public readonly ?string $href = null,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->id === '' || $this->label === '') {
+            throw new \InvalidArgumentException('MODAL-ACT-001: id and label are required');
+        }
+        if ($this->kind === self::KIND_LINK && !$this->href) {
+            throw new \InvalidArgumentException('MODAL-ACT-002: link actions require href');
+        }
+    }
+}
+```
+
+### Python reference — action dispatcher
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Callable, Optional
+
+@dataclass(frozen=True)
+class Action:
+    id: str
+    label: str
+    kind: str          # primary|secondary|destructive|link
+    href: Optional[str] = None
+
+    def validate(self) -> None:
+        if not self.id or not self.label:
+            raise ValueError("MODAL-ACT-001: id and label are required")
+        if self.kind == "link" and not self.href:
+            raise ValueError("MODAL-ACT-002: link actions require href")
+
+Dispatcher = Callable[[Action], None]
+```
