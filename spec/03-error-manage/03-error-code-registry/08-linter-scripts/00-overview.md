@@ -175,3 +175,29 @@ Entry-point invocation in `run.sh`/`run.ps1` is owned by downstream distribution
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: error-code-registry/linter-scripts
+PURPOSE: define the script surface that validates, merges, and reports on error-code shards
+SCOPE: spec-side contract; downstream repos provide the executables
+
+INV-01  every linter script MUST accept --input <path> and --report <path|->
+INV-02  scripts MUST exit 0 on clean, 1 on schema violation, 2 on IO error, 3 on internal
+INV-03  scripts MUST emit machine-readable JSON when --report ends with .json
+INV-04  scripts MUST emit human-readable markdown when --report ends with .md
+INV-05  every script MUST be invokable from both run.sh and run.ps1 with identical flags
+INV-06  scripts MUST be deterministic; identical input → byte-identical report
+INV-07  scripts MUST NOT mutate inputs; read-only contract
+
+FAIL-01 non-deterministic output detected by golden-file diff → script rejected
+FAIL-02 exit code outside {0,1,2,3} → considered crash; CI fails the gate
+FAIL-03 missing --input or --report flag handling → script rejected at code-review
+
+DEL-01  shard schema authority lives in §03/03/07-schemas
+DEL-02  CI wiring is owned by downstream distribution repo
+DEL-03  publishing the merged registry artifact is owned by §03 release pipeline
+```

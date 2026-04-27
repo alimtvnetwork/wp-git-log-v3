@@ -81,3 +81,30 @@ Header `Updated` vs footer `updated` timestamp drift is a known dual-source arti
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: error-modal/react-components
+PURPOSE: define the React component surface and props shape for rendering error events
+SCOPE: TSX components consumed by every error-surfacing page in the app
+
+INV-01  the public component MUST be named <ErrorModal> exported from index.ts
+INV-02  required props: code:string, severity:'fatal'|'error'|'warn'|'info', message:string
+INV-03  optional props: details?:string, actions?:Action[], onDismiss?:()=>void, traceId?:string
+INV-04  the modal MUST trap focus while open and restore focus on close
+INV-05  the modal MUST be dismissible via Escape unless severity === 'fatal'
+INV-06  every action button MUST carry a stable testid: error-modal-action-<slug>
+INV-07  the component MUST consume color tokens from the §03/02/04/04-color-themes contract
+
+FAIL-01 hardcoded color literal in component → lint fails
+FAIL-02 missing aria-modal / role="alertdialog" → a11y gate fails
+FAIL-03 escape closes a fatal modal → unit test fails (regression)
+FAIL-04 focus escapes the modal while open → e2e gate fails
+
+DEL-01  color values delegated to §03/02/04/04-color-themes
+DEL-02  copy/i18n delegated to §03/01-error-resolution
+DEL-03  registry lookup of codes delegated to §03/03-error-code-registry
+```

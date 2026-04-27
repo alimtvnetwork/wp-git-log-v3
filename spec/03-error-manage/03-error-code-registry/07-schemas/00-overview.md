@@ -291,3 +291,30 @@ Both schemas target **JSON Schema Draft 2020-12-compatible** validators (also va
 - [Module changelog](./98-changelog.md)
 - [Module consistency report](./99-consistency-report.md)
 - _See parent folder's `00-overview.md` for broader context._
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: error-code-registry/schemas
+PURPOSE: define machine-readable JSON Schemas governing the error-code registry artifacts
+SCOPE: validates error-codes-master.json + per-domain shards prior to publication
+
+INV-01  every schema MUST be JSON Schema 2020-12 with explicit $id and $schema
+INV-02  every error code MUST match pattern ^[A-Z]{2,5}-[A-Z]+-\d{3}$
+INV-03  each code MUST carry: code, severity, category, message_template, owner_module
+INV-04  severity ∈ {fatal, error, warn, info, debug}
+INV-05  category MUST resolve to a known domain in §03-error-manage taxonomy
+INV-06  message_template MUST use {placeholder} syntax; positional %s/%d forbidden
+INV-07  owner_module MUST be a valid spec/<NN>-* path string
+
+FAIL-01 duplicate code across shards → registry build aborts (severity=blocker)
+FAIL-02 missing required field → validator exits non-zero with field path
+FAIL-03 unknown severity or category → validator exits non-zero
+FAIL-04 message_template contains positional formatter → validator exits non-zero
+
+DEL-01  shard merging is owned by §03/08-linter-scripts (not this module)
+DEL-02  runtime emission of error events is owned by per-language §02 modules
+DEL-03  schema evolution requires §03/03/98-changelog minor bump + migration note
+```

@@ -587,3 +587,29 @@ Every issue triaged into this report MUST conform to the following machine-reada
 ## Status
 
 **Phase 2 audit complete.** 25 issues recorded. No code touched. Awaiting next command.
+
+---
+
+## Normative Contract (Phase 50)
+
+```text
+CONTRACT: phase-2-git-logs-audit
+PURPOSE: enumerate, classify, and dispatch findings from the §22 git-logs-v2 audit
+SCOPE: 25 issue records produced 2026-Q1; no code-side mutations performed
+
+INV-01  every issue MUST have stable IssueId matching pattern P2-GLA-NNN
+INV-02  every issue MUST cite at least one source location (file path + line/section anchor)
+INV-03  Severity ∈ {blocker, major, minor, info} — no other values permitted
+INV-04  Status ∈ {open, in-progress, resolved, deferred, wontfix}
+INV-05  resolved/deferred/wontfix issues MUST carry a ResolutionRef (PR, ADR, or memory note)
+INV-06  the canonical count is 25; deltas require a 98-changelog entry + new IssueId
+INV-07  issue ordering MUST be IssueId ascending; reordering forbidden
+
+FAIL-01 missing ResolutionRef on closed issue → audit fails category=drift severity=major
+FAIL-02 IssueId reuse after deletion → audit fails category=integrity severity=blocker
+FAIL-03 Severity outside enum → audit fails category=schema severity=major
+
+DEL-01  Phase-2 audit is read-only; produces issues only, never mutates app code
+DEL-02  Resolution work is delegated to per-issue downstream phases (3+)
+DEL-03  Re-audit cadence: quarterly OR when §22 spec version minor-bumps
+```
