@@ -42,3 +42,10 @@
 ## 2026-04-27 — Phase 57 impl-sweep
 
 - Phase 57: appended Go/PHP/Python PsInvocation validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).
+
+## 2026-04-27 — Phase 70 (impl 75 → 85)
+
+- Added Mermaid lifecycle diagram `lifecycle-powershell-bootstrap-flow.mmd`.
+- Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
+- No behavioural change to module rules; documentation-only promotion.
+

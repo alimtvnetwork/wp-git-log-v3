@@ -37,3 +37,10 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
+
+## 2026-04-27 — Phase 70 (impl 75 → 85)
+
+- Added Mermaid lifecycle diagram `lifecycle-axios-policy-enforcement.mmd`.
+- Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
+- No behavioural change to module rules; documentation-only promotion.
+

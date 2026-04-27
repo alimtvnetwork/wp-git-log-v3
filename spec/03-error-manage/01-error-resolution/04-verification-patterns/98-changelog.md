@@ -33,3 +33,10 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+## 2026-04-27 — Phase 70 (impl 75 → 85)
+
+- Added Mermaid lifecycle diagram `lifecycle-verification-pattern-pipeline.mmd`.
+- Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
+- No behavioural change to module rules; documentation-only promotion.
+
