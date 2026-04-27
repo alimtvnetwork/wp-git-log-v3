@@ -1,13 +1,12 @@
 ---
-kind: future-spec
+kind: index
 drift_acknowledged: 2026-04-26
 ---
 
 # Specification Root
 
-**Version:** 3.4.0  
-**Updated:** 2026-04-26  
-**Kind:** index  
+**Version:** 3.5.0  
+**Updated:** 2026-04-27  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

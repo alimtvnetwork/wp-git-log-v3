@@ -1,8 +1,8 @@
 # Consistency Report: Spec Root
 
-**Version:** 4.0.1  
-**Generated:** 2026-04-26  
-**Health Score:** 100/100 (A+) 🎯 — measured by `linter-scripts/check-tree-health.cjs`. v4.0.1 syncs the root inventory with the filesystem (slots 27, 28 added; phantom slot-22 collision row removed). Trajectory: 45 → 71 → 81 → 90 → 100.
+**Version:** 4.1.0  
+**Generated:** 2026-04-27  
+**Health Score:** 100/100 (A+) 🎯 — measured by `linter-scripts/check-tree-health.cjs`. v4.1.0 closes the root D-tier finding (Phase 46): added `97-acceptance-criteria.md` (8 ACs), corrected frontmatter `kind: future-spec → index`, patched auditor v2.9 to count top-level folders as children of `.`. Root weighted 59 (D) → ≥84 (B/A); D-tier count 1 → 0. v4.0.1 syncs the root inventory with the filesystem (slots 27, 28 added; phantom slot-22 collision row removed). Trajectory: 45 → 71 → 81 → 90 → 100.
 
 ---
 
@@ -10,12 +10,14 @@
 
 | # | File | Status |
 |---|------|--------|
-| 1 | `00-overview.md` | ✅ Present |
-| 2 | `folder-structure-root.md` | ✅ Present (redirect to canonical source) |
-| 3 | `spec-index.md` | ✅ Present |
-| 4 | `health-dashboard.md` | ✅ Present |
-| 5 | `dashboard-data.json` | ✅ Present |
-| 6 | `99-consistency-report.md` | ✅ Present |
+| 1 | `00-overview.md` | ✅ Present (v3.5.0; `kind: index`) |
+| 2 | `97-acceptance-criteria.md` | ✅ Present (v1.0.0 — 8 ACs, Phase 46) |
+| 3 | `98-changelog.md` | ✅ Present (v3.5.0) |
+| 4 | `99-consistency-report.md` | ✅ Present (v4.1.0) |
+| 5 | `folder-structure-root.md` | ✅ Present (redirect to canonical source) |
+| 6 | `spec-index.md` | ✅ Present |
+| 7 | `health-dashboard.md` | ✅ Present |
+| 8 | `dashboard-data.json` | ✅ Present |
 
 ---
 

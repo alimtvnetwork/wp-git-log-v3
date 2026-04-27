@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 35  
-**Mean weighted score:** **84.3/100**  
-**Mean implementability:** **67.8/100**
+**Mean weighted score:** **84.7/100**  
+**Mean implementability:** **68.5/100**
 
 ## Methodology v2
 
@@ -13,19 +13,18 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 5, **A** = 29, **B** = 44, **D** = 1
+**A+** = 5, **A** = 30, **B** = 44
 
 ## Findings by category
 | Category | Count |
 |---|---:|
 | drift | 9 |
-| missing-contract | 2 |
-| untestable | 1 |
+| missing-contract | 1 |
 
 ## Findings by severity
 | Severity | Count |
 |---|---:|
-| high | 3 |
+| high | 1 |
 | low | 9 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
@@ -35,36 +34,36 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 2 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 86 | A | 10 | _none_ |
 | 3 | [`03-error-manage/02-error-architecture`](./03-error-manage__02-error-architecture.md) | 88 | A | 10 | _none_ |
 | 4 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 88 | A | 10 | _none_ |
-| 5 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 93 | A | 10 | _none_ |
-| 6 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 95 | A+ | 10 | _none_ |
-| 7 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 98 | A+ | 10 | _none_ |
-| 8 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 100 | A+ | 10 | _none_ |
-| 9 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 95 | A+ | 9 | _none_ |
-| 10 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 96 | A+ | 9 | _none_ |
-| 11 | [`03-error-manage`](./03-error-manage.md) | 81 | B | 8 | _none_ |
-| 12 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 90 | A | 7 | _none_ |
-| 13 | [`04-database-conventions`](./04-database-conventions.md) | 93 | A | 7 | _none_ |
-| 14 | [`14-update/24-update-check-mechanism`](./14-update__24-update-check-mechanism.md) | 93 | A | 7 | _none_ |
-| 15 | [`03-error-manage/02-error-architecture/06-apperror-package`](./03-error-manage__02-error-architecture__06-apperror-package.md) | 82 | B | 6 | _none_ |
+| 5 | [`.`](./..md) | 92 | A | 10 | _none_ |
+| 6 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 93 | A | 10 | _none_ |
+| 7 | [`06-seedable-config-architecture`](./06-seedable-config-architecture.md) | 95 | A+ | 10 | _none_ |
+| 8 | [`02-coding-guidelines`](./02-coding-guidelines.md) | 98 | A+ | 10 | _none_ |
+| 9 | [`02-coding-guidelines/01-cross-language`](./02-coding-guidelines__01-cross-language.md) | 100 | A+ | 10 | _none_ |
+| 10 | [`05-split-db-architecture`](./05-split-db-architecture.md) | 95 | A+ | 9 | _none_ |
+| 11 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 96 | A+ | 9 | _none_ |
+| 12 | [`03-error-manage`](./03-error-manage.md) | 81 | B | 8 | _none_ |
+| 13 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 90 | A | 7 | _none_ |
+| 14 | [`04-database-conventions`](./04-database-conventions.md) | 93 | A | 7 | _none_ |
+| 15 | [`14-update/24-update-check-mechanism`](./14-update__24-update-check-mechanism.md) | 93 | A | 7 | _none_ |
 
 ## Bottom 15 (lowest implementability)
 | Rank | Module | Overall | Impl | Grade | Top finding |
 |---:|---|---:|---:|:-:|---|
-| 1 | [`.`](./..md) | 59 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 2 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 76 | 40 | B | 1 TODO/TBD/FIXME marker(s) in module body |
-| 3 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 75 | 45 | B | _no findings_ |
-| 4 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 76 | 45 | B | _no findings_ |
-| 5 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 76 | 45 | B | _no findings_ |
-| 6 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 78 | 45 | B | _no findings_ |
-| 7 | [`03-error-manage`](./03-error-manage.md) | 81 | 45 | B | _no findings_ |
-| 8 | [`03-error-manage/02-error-architecture/04-error-modal/04-color-themes`](./03-error-manage__02-error-architecture__04-error-modal__04-color-themes.md) | 75 | 50 | B | _no findings_ |
-| 9 | [`03-error-manage/02-error-architecture/04-error-modal/02-react-components`](./03-error-manage__02-error-architecture__04-error-modal__02-react-components.md) | 77 | 50 | B | _no findings_ |
-| 10 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 78 | 50 | B | _no findings_ |
-| 11 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 78 | 50 | B | _no findings_ |
-| 12 | [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 80 | 50 | B | _no findings_ |
-| 13 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 80 | 50 | B | _no findings_ |
-| 14 | [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 80 | 50 | B | _no findings_ |
-| 15 | [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 80 | 50 | B | _no findings_ |
+| 1 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 76 | 40 | B | 1 TODO/TBD/FIXME marker(s) in module body |
+| 2 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 75 | 45 | B | _no findings_ |
+| 3 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 76 | 45 | B | _no findings_ |
+| 4 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 76 | 45 | B | _no findings_ |
+| 5 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 78 | 45 | B | _no findings_ |
+| 6 | [`03-error-manage`](./03-error-manage.md) | 81 | 45 | B | _no findings_ |
+| 7 | [`03-error-manage/02-error-architecture/04-error-modal/04-color-themes`](./03-error-manage__02-error-architecture__04-error-modal__04-color-themes.md) | 75 | 50 | B | _no findings_ |
+| 8 | [`03-error-manage/02-error-architecture/04-error-modal/02-react-components`](./03-error-manage__02-error-architecture__04-error-modal__02-react-components.md) | 77 | 50 | B | _no findings_ |
+| 9 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 78 | 50 | B | _no findings_ |
+| 10 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 78 | 50 | B | _no findings_ |
+| 11 | [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 80 | 50 | B | _no findings_ |
+| 12 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 80 | 50 | B | _no findings_ |
+| 13 | [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 80 | 50 | B | _no findings_ |
+| 14 | [`24-app-design-system-and-ui`](./24-app-design-system-and-ui.md) | 80 | 50 | B | _no findings_ |
+| 15 | [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 82 | 50 | B | _no findings_ |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -83,7 +82,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Full ranking
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
-| [`.`](./..md) | 30 | 50 | 100 | 100 | 100 | 10 | 100 | **59** | D | 0 |
 | [`03-error-manage/02-error-architecture/04-error-modal/04-color-themes`](./03-error-manage__02-error-architecture__04-error-modal__04-color-themes.md) | 50 | 65 | 100 | 100 | 100 | 90 | 100 | **75** | B | 2 |
 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 45 | 75 | 100 | 100 | 100 | 90 | 100 | **75** | B | 2 |
 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 40 | 85 | 100 | 100 | 100 | 100 | 90 | **76** | B | 0 |
@@ -150,6 +148,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`25-app-issues`](./25-app-issues.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 4 |
 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 90 | 70 | 100 | 100 | 100 | 80 | 90 | **89** | A | 2 |
 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 55 | 100 | 100 | 100 | 90 | 90 | **90** | A | 7 |
+| [`.`](./..md) | 80 | 100 | 100 | 100 | 100 | 80 | 100 | **92** | A | 10 |
 | [`04-database-conventions`](./04-database-conventions.md) | 95 | 75 | 100 | 100 | 100 | 90 | 100 | **93** | A | 7 |
 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
 | [`13-generic-cli`](./13-generic-cli.md) | 85 | 90 | 100 | 100 | 100 | 100 | 100 | **93** | A | 5 |

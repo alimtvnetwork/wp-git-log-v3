@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.8** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.9** — AI-Implementability Edition.
+
+v2.9 (2026-04-27, Phase 46):
+  - Root index spec (`spec/00-overview.md`, MOD_REL == ".") now receives the
+    top-level folders as children (`CHILDREN["."]`). The root index was
+    previously seeing `child_modules=0` because the parent-derivation rule
+    only fired for paths containing `/`. Effect: root spec implementability
+    climbs (with `kind: index`) from baseline 70 to 80, and weighted score
+    rises out of D-tier.
 
 v2.8 (2026-04-27, Phase 45):
   - `kind: meta-toolchain` modules now use a tracker-style implementability
@@ -171,12 +179,19 @@ ALL_MODULES = find_modules()
 MOD_REL = {m: str(m.relative_to(SPEC)) for m in ALL_MODULES}
 
 # parent -> [child rels]
+# v2.9 (Phase 46): top-level folders count as children of the root index ".",
+# so the root spec/00-overview.md correctly receives the index `child_modules > 0`
+# bonus and is not flagged as a stub router.
 CHILDREN = defaultdict(list)
 for m in ALL_MODULES:
     rel = MOD_REL[m]
+    if rel == ".":
+        continue
     if "/" in rel:
         parent = rel.rsplit("/", 1)[0]
         CHILDREN[parent].append(rel)
+    else:
+        CHILDREN["."].append(rel)
 
 def read(p, lim=None):
     try:
