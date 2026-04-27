@@ -16,6 +16,12 @@
 
 ## Releases
 
+### 2.5.0 — 2026-04-26 (Phase 35 — Audit cadence formalisation, R3)
+- **Added** `.github/workflows/spec-monthly-audit.yml` — time-driven monthly cadence audit (cron `17 3 1 * *` + `workflow_dispatch`). Steps: cross-link gate → tree health gate (rubric v2.0.0 threshold 100) → dashboard-parity check (Phase 34 invariant) → trace-map regression → markdown summary → auto-open GitHub issue on failure (labels `spec-audit`, `regression`, `automated`).
+- **Added** [`71-spec-monthly-audit-yml.md`](./71-spec-monthly-audit-yml.md) v1.0.0 — full spec for the new workflow with 6 ACs (AC-71-01..AC-71-06) covering canonical path, cron shape, `workflow_dispatch`, parity step, issue creation, and least-privilege permissions. Cadence rationale: monthly bounds worst-case backlog at ~25 items vs Phase 26-31's 67-item one-session sweep.
+- **Updated** §00 inventory + §99 file inventory + §99 code-artifact bijection (28/28 → 29/29).
+- **Closes:** R3 from `spec/17-consolidated-guidelines/32-phase-26-31-rollup.md` §4. Phase 3 backlog now: R1 only (AI re-audit, blocked on `lovable_ai` runtime in CI).
+
 ### 2.4.0 — 2026-04-26 (Phase 34 — Dashboard rubric-v2 propagation)
 - **Changed** `linter-scripts/generate-dashboard-data.cjs` — added `buildRubricV2()` mirroring `check-tree-health.cjs` Phase 30 rubric (60% Required / 25% Recommended / 15% Quality). `Health.Score` and `Health.Grade` now driven by rubric v2.0.0; legacy deduction-based score retained as `Health.LegacyScore` for back-compat. New top-level `RubricV2` block in JSON output with per-module breakdown (`Required`/`Recommended`/`QualityScore` + `QualityHits`).
 - **Changed** [`11-generate-dashboard-data.md`](./11-generate-dashboard-data.md) v1.0.0 → v1.1.0 — documented rubric v2.0.0; AC-11-01 schema corrected (was: `modules`/`brokenLinks`/`summary`; now: `Generated`/`Health`/`RubricV2`/`Links`/`RequiredFiles`/`Inventory`); added AC-11-04 (rubric parity with `check-tree-health.cjs`).
