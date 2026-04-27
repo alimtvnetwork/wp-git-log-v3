@@ -1460,22 +1460,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -1484,29 +1475,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 654,
       "ac_count": 0,
@@ -1525,12 +1496,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1315,
+      "overview_chars": 1327,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1540,22 +1511,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/02-coding-guidelines/10-research/01-research-index.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/10-research/01-research-index.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],
@@ -1753,22 +1724,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -1777,29 +1739,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 663,
       "ac_count": 0,
@@ -1818,12 +1760,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1337,
+      "overview_chars": 1349,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1833,22 +1775,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/02-coding-guidelines/21-app/01-app-coding-rules.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/21-app/01-app-coding-rules.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],
@@ -1914,22 +1856,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -1938,29 +1871,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 643,
       "ac_count": 0,
@@ -1979,12 +1892,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1365,
+      "overview_chars": 1377,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1994,22 +1907,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/02-coding-guidelines/22-app-issues/01-app-issue-templates.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/22-app-issues/01-app-issue-templates.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],
@@ -2073,22 +1986,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -2097,29 +2001,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 691,
       "ac_count": 0,
@@ -2138,12 +2022,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1352,
+      "overview_chars": 1364,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2153,22 +2037,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/02-coding-guidelines/23-app-database/01-app-database-conventions.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/23-app-database/01-app-database-conventions.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],
@@ -2232,22 +2116,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -2256,29 +2131,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 671,
       "ac_count": 0,
@@ -2297,12 +2152,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1365,
+      "overview_chars": 1377,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2312,22 +2167,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],
@@ -4316,22 +4171,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -4340,29 +4186,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 648,
       "ac_count": 0,
@@ -4381,12 +4207,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1329,
+      "overview_chars": 1341,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -4396,22 +4222,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/10-research/01-research-index.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/10-research/01-research-index.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],
@@ -5029,22 +4855,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -5053,29 +4870,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 691,
       "ac_count": 0,
@@ -5094,12 +4891,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1385,
+      "overview_chars": 1397,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -5109,22 +4906,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/14-update/diagrams/01-diagram-conventions.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/14-update/diagrams/01-diagram-conventions.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],
@@ -5979,22 +5776,13 @@
   {
     "applied_gates": [
       {
-        "active": false,
-        "after": 10,
-        "before": 10,
+        "active": true,
+        "after": 20,
+        "before": 80,
         "cap": 20,
         "dimension": "testability",
         "id": "G-AC-01",
         "rationale": "Zero acceptance criteria \u2192 nothing is objectively verifiable."
-      },
-      {
-        "active": false,
-        "after": 30,
-        "before": 30,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
       }
     ],
     "blast_radius": 0,
@@ -6003,29 +5791,9 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"text\": 1}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      },
-      {
-        "category": "untestable",
-        "correction": "Run linter-scripts/generate-gwt-acceptance.py to scaffold AC blocks.",
-        "evidence": "ac_count=0 in 97-acceptance-criteria.md",
-        "impact": 8,
-        "issue": "No acceptance criteria found",
-        "severity": "high"
-      }
-    ],
-    "grade": "D",
-    "implementability_blockers": [
-      "No acceptance criteria found",
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "findings": [],
+    "grade": "C",
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 689,
       "ac_count": 0,
@@ -6044,12 +5812,12 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "index",
       "links_broken": 0,
       "links_total": 0,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 1354,
+      "overview_chars": 1366,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -6059,22 +5827,22 @@
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=0/3, ac=0, gwt=2, broken_links=0, waffle/kchar=0.0. Gates active: 1.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 40,
       "consistency": 100,
-      "implementability": 30,
+      "implementability": 70,
       "maintainability": 100,
-      "testability": 10
+      "testability": 20
     },
-    "verdict": "Deterministic score 57/100 (D) for spec/26-gitlogs-diagrams/01-diagram-conventions.",
-    "weighted_overall": 57
+    "verdict": "Deterministic score 72/100 (C) for spec/26-gitlogs-diagrams/01-diagram-conventions.",
+    "weighted_overall": 72
   },
   {
     "applied_gates": [],

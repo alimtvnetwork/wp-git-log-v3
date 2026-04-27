@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 87  
 **Code files indexed:** 35  
-**Mean weighted score:** **88.9/100**  
-**Mean implementability:** **82.8/100**
+**Mean weighted score:** **90.2/100**  
+**Mean implementability:** **86.4/100**
 
 ## Methodology v2
 
@@ -13,19 +13,16 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 11, **A** = 66, **B** = 2, **D** = 8
+**A+** = 11, **A** = 66, **B** = 2, **C** = 8
 
 ## Findings by category
 | Category | Count |
 |---|---:|
-| missing-contract | 8 |
-| untestable | 8 |
 | drift | 8 |
 
 ## Findings by severity
 | Severity | Count |
 |---|---:|
-| high | 16 |
 | low | 8 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
@@ -50,14 +47,14 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Bottom 15 (lowest implementability)
 | Rank | Module | Overall | Impl | Grade | Top finding |
 |---:|---|---:|---:|:-:|---|
-| 1 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 2 | [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 3 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 4 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 5 | [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 6 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 7 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
-| 8 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 57 | 30 | D | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language  |
+| 1 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 72 | 70 | C | _no findings_ |
+| 2 | [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 72 | 70 | C | _no findings_ |
+| 3 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 72 | 70 | C | _no findings_ |
+| 4 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 72 | 70 | C | _no findings_ |
+| 5 | [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 72 | 70 | C | _no findings_ |
+| 6 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 72 | 70 | C | _no findings_ |
+| 7 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 72 | 70 | C | _no findings_ |
+| 8 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 72 | 70 | C | _no findings_ |
 | 9 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 81 | 75 | B | _no findings_ |
 | 10 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 81 | 75 | B | _no findings_ |
 | 11 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 85 | 75 | A | _no findings_ |
@@ -83,14 +80,14 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Full ranking
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
-| [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
-| [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
-| [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
-| [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
-| [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
-| [`10-research/01-research-index`](./10-research__01-research-index.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
-| [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
-| [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 30 | 40 | 100 | 100 | 100 | 10 | 100 | **57** | D | 0 |
+| [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
+| [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
+| [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
+| [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
+| [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
+| [`10-research/01-research-index`](./10-research__01-research-index.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
+| [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
+| [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 70 | 40 | 100 | 100 | 100 | 20 | 100 | **72** | C | 0 |
 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 75 | 75 | 100 | 100 | 100 | 80 | 100 | **85** | A | 0 |
