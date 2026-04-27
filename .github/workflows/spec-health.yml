@@ -78,7 +78,16 @@ jobs:
         # were lenient enough to allow silent backslide of the Phase 82–83 wins.
         env:
           AUDIT_DETERMINISTIC: '1'
-        run: python3 linter-scripts/audit-spec-vs-code-v2.py --min-weighted=97 --min-impl=99
+         run: python3 linter-scripts/audit-spec-vs-code-v2.py --min-weighted=97 --min-impl=99
+
+      - name: Audit CLI threshold contract self-test (Phase 91)
+        # Phase 91: locks the v2.12 --min-weighted / --min-impl exit-code
+        # contract under CI. Without this, a refactor could silently invert
+        # the comparison operator and CI would still pass because all 87
+        # modules sit comfortably above the floor (98.0/99.8). Six cases
+        # cover satisfiable + unsatisfiable floors, individually and combined.
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-22)
+        run: bash linter-scripts/test/test-audit-cli-thresholds.sh
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at

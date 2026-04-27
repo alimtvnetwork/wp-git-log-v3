@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.16.0
+**Version:** 2.17.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,12 @@
 ---
 
 ## Releases
+
+### 2.17.0 — 2026-04-27 (Phase 91 — Audit CLI threshold contract self-test)
+- **Added** `linter-scripts/test/test-audit-cli-thresholds.sh` (executable; 6-case CLI self-test). Locks the v2.12 (Phase 81) `--min-weighted` / `--min-impl` exit-code contract: unsatisfiable floors MUST exit `1`, satisfiable floors MUST exit `0`, and either floor breaching MUST fail the run (logical-OR semantics). Runs with `AUDIT_DETERMINISTIC=1`, no file writes, no AI calls. Without this self-test, a refactor could silently invert the comparison operator and CI would still pass because all 87 modules sit comfortably above the production floor (98.0 ≫ 97; 99.8 ≫ 99).
+- **Wired** new step **Audit CLI threshold contract self-test (Phase 91)** into `.github/workflows/spec-health.yml` immediately after the existing audit gate. Runs `bash linter-scripts/test/test-audit-cli-thresholds.sh`.
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.9.0 → **v1.10.0**: header `Source` line now references both the script and the self-test; Category appends `+ CLI contract self-test`. New **AC-31-24** specifies all 6 self-test cases, exit-code semantics, and the no-side-effects / score-independence guarantee. Rubric changelog table extended with a `v2.16-test` row recording the Phase 91 safety net (no rubric change).
+- **Verified**: `bash linter-scripts/test/test-audit-cli-thresholds.sh` → 6/6 ✅. All three strict gates remain green: tree-health 100/100, lockstep 0 findings, audit `--min-weighted=97 --min-impl=99` ✓ at 98.0 / 99.8.
 
 ### 2.16.0 — 2026-04-27 (Phase 90 — `--explain` rubric trace flag)
 - **Patched** `linter-scripts/audit-spec-vs-code-v2.py` v2.15 → **v2.16**: new `--explain=<substring>` CLI flag prints, for the first matching module, the rubric branch, all bonuses fired with deltas + rubric version, every gate where `active=true` (before/after), per-dimension scores (raw vs final + Δ + contribution), and key metrics. Pure-add diagnostic — short-circuits the normal audit loop, writes no files, calls no AI. Exits 0 on match, 1 on no-match. Multi-match disambiguation lists first 5 candidates and uses first.
