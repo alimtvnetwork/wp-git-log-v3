@@ -190,7 +190,7 @@ spec/
 | 1 | Non-contiguous module numbers | spec/ | ✅ Yes |
 | 2 | readme.md without prefix | Project-wide | ✅ Yes |
 | 3 | Non-markdown data files | spec/ modules | ✅ Yes |
-| 4 | Legacy C-XXX suggestion names | memories/suggestions/ | ✅ Yes (frozen) |
+| 4 | Legacy `C-XXX` suggestion names | memories/suggestions/ | ✅ Yes (frozen) |
 | 5 | Dual-purpose prefix 02 | spec/ root | ✅ Yes |
 | 6 | Memory folders without prefixes | .lovable/memories/ | ✅ Yes |
 | 7 | CLI without frontend folder | CLI modules | ✅ Yes (case-by-case) |
