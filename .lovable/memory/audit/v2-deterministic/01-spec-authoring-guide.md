@@ -8,7 +8,7 @@
 > Deterministic score 97/100 (A+) for spec/01-spec-authoring-guide.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=27, gwt=23, broken_links=0, waffle/kchar=0.43. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=28, gwt=24, broken_links=0, waffle/kchar=0.43. Gates active: 0.
 
 ---
 
@@ -31,10 +31,10 @@
   "kind": "future-spec",
   "md_files": 17,
   "mmd_files": 1,
-  "overview_chars": 46271,
-  "ac_chars": 25497,
-  "ac_count": 27,
-  "gwt_block_count": 23,
+  "overview_chars": 47102,
+  "ac_chars": 27442,
+  "ac_count": 28,
+  "gwt_block_count": 24,
   "consistency_report": true,
   "code_blocks_total": 91,
   "code_blocks_by_lang": {

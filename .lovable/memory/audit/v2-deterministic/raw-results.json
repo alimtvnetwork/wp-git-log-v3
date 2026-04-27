@@ -84,8 +84,8 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 25497,
-      "ac_count": 27,
+      "ac_chars": 27442,
+      "ac_count": 28,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 3,
@@ -104,7 +104,7 @@
       },
       "code_blocks_total": 91,
       "consistency_report": true,
-      "gwt_block_count": 23,
+      "gwt_block_count": 24,
       "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": true,
@@ -118,7 +118,7 @@
       "links_total": 47,
       "md_files": 17,
       "mmd_files": 1,
-      "overview_chars": 46271,
+      "overview_chars": 47102,
       "todo_density": 1,
       "waffle_per_kchar": 0.43
     },
@@ -132,7 +132,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=27, gwt=23, broken_links=0, waffle/kchar=0.43. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=28, gwt=24, broken_links=0, waffle/kchar=0.43. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,

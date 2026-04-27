@@ -1,9 +1,9 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.3.0
+**Version:** 4.4.0
 **Last Updated:** 2026-04-27
 
-> **v4.3.0 update (Phase 89 — front-matter keys reference):** Added a "Front-matter keys reference (Phase 89)" section to §00 documenting the `kind:` rubric branch selector (5 enum values: active-spec / future-spec / tracker / index / meta-toolchain — each with impl baseline, bonus structure, cap, and when to use) and the `todo_audit_exempt: true` opt-out (v2.14, reviewer-gated to auditor-self-reference modules). Added AC-SAG-21 (kind: branch selection) and AC-SAG-22 (todo_audit_exempt opt-out) in §97. These ACs mirror `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` AC-31-15..AC-31-22 covering rubric v2.10–v2.14. Lockstep: §00 v3.5.0 → v3.6.0; §97 v4.0.0 → v4.1.0; §98 v4.5.0 → v4.6.0.
+> **v4.4.0 update (Phase 93 — lifecycle.mmd canonical SoT):** Rewrote [`lifecycle-spec-authoring.mmd`](./lifecycle-spec-authoring.mmd) from a 10-node skeleton into a 32-node typed flowchart with 6 styled classes faithfully rendering the actual pipeline built across Phases 81–91 (5 `kind:` branching paths; 6-step local linter pipeline; 6-gate CI sequence including the Phase 91 CLI self-test; `--explain=<module>` failure-recovery loop; post-merge phase-memo step). Replaced the inline mermaid excerpt in §00 ("Lifecycle Diagram (Phase 66, expanded in Phase 93)") with a high-level summary that delegates to the `.mmd` file. Added **AC-SAG-23** in §97 mandating the `.mmd` file as canonical source of truth and locking it stepwise with `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Lockstep: §00 v3.6.0 → v3.7.0; §97 v4.1.0 → v4.2.0; §98 v4.6.0 → v4.7.0. No score regression — §01 already had `has_mermaid (+5)` from the existing skeleton; final score holds at 97/100 A+ with impl=100.
 
 
 > **v4.1.0 update (Phase 38):** Added [`12-queued-decisions-trail.md`](./12-queued-decisions-trail.md) v1.0.0 — codifies the queued-decisions trail format (Q-identifier scheme, 4 status markers, lockstep edits, audit-recovery procedure, 5 ACs). Closes the gap where the project-memory Core lockstep rule referenced `mem://specs/git-logs.md` as a *demonstrated* format without ever specifying it. Inventory now also reflects slot 11 (`11-root-readme-conventions.md`, present since Phase 24 but missed in earlier §99 inventory rebuild).
