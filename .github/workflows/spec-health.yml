@@ -69,14 +69,16 @@ jobs:
         # consistency-report entry on the same date. Held green Phases 77-80.
         run: node linter-scripts/check-lockstep.cjs --strict
 
-      - name: AI-implementability audit v2 gate (Phase 81, deterministic)
-        # Phase 81: deterministic v2 audit with floor thresholds. Locks in
-        # Phase 80 result (mean weighted 96.3, mean impl 99.5). Floors set
-        # ~1 point below current to absorb minor measurement noise while
-        # still catching genuine regressions.
+      - name: AI-implementability audit v2 gate (Phase 84, deterministic)
+        # Phase 84: tightened floors after Phase 82 (tracker ceiling lift to 95)
+        # and Phase 83 (rubric v2.14 + AC injection on 30 modules). Current
+        # state: mean weighted 98.0, mean impl 99.8, all 87 modules ≥ weighted=95.
+        # Floors set ~1 point below current to absorb minor measurement noise
+        # while still catching genuine regressions. Previous floors (95/98)
+        # were lenient enough to allow silent backslide of the Phase 82–83 wins.
         env:
           AUDIT_DETERMINISTIC: '1'
-        run: python3 linter-scripts/audit-spec-vs-code-v2.py --min-weighted=95 --min-impl=98
+        run: python3 linter-scripts/audit-spec-vs-code-v2.py --min-weighted=97 --min-impl=99
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
