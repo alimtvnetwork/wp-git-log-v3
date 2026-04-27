@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **76/100 (B)**  
-**Blast radius:** 2/10
+**Implementability Score:** **83/100 (B)**  
+**Blast radius:** 4/10
 
-> Deterministic score 76/100 (B) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.
+> Deterministic score 83/100 (B) for spec/03-error-manage/03-error-code-registry/08-linter-scripts.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 45 | 15.8 |
+| Implementability | 35% | 65 | 22.8 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,19 +31,20 @@
   "kind": "future-spec",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 7312,
+  "overview_chars": 8817,
   "ac_chars": 3308,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 3,
+  "code_blocks_total": 5,
   "code_blocks_by_lang": {
     "text": 2,
-    "json": 1
+    "json": 2,
+    "ts": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
-  "has_ts_enums": false,
+  "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
   "has_ci_workflow": false,

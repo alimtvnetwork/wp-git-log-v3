@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **80/100 (B)**  
-**Blast radius:** 0/10
+**Implementability Score:** **86/100 (A)**  
+**Blast radius:** 2/10
 
-> Deterministic score 80/100 (B) for spec/02-coding-guidelines/07-csharp.
+> Deterministic score 86/100 (A) for spec/02-coding-guidelines/07-csharp.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.11. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
+| Implementability | 35% | 65 | 22.8 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,18 +31,19 @@
   "kind": "",
   "md_files": 8,
   "mmd_files": 0,
-  "overview_chars": 3309,
+  "overview_chars": 4705,
   "ac_chars": 24619,
   "ac_count": 28,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 17,
+  "code_blocks_total": 19,
   "code_blocks_by_lang": {
     "text": 2,
-    "csharp": 15
+    "json": 1,
+    "csharp": 16
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": true,
