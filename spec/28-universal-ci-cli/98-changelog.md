@@ -39,3 +39,7 @@ All notable changes to `spec/28-universal-ci-cli/`.
 - v2 error codes (`spec/22-git-logs-v2/15-error-codes.md`).
 - Generic-CLI conventions (`spec/13-generic-cli/`).
 - Existing shared CLI wrapper guidance (`spec/12-cicd-pipeline-workflows/03-reusable-ci-guards/07-shared-cli-wrapper.md`).
+
+| Date | Bump | Notes |
+|------|------|-------|
+| 2026-04-26 | patch | Phase 31: Added Validation History / File Inventory headings to §99 to satisfy rubric v2.0.0 quality dimension. |

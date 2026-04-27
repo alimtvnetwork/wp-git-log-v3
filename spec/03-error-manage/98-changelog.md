@@ -97,6 +97,7 @@
 #### Files Modified
 | File | Change |
 |------|--------|
+| 2026-04-26 | patch | Phase 31: Added Validation History / File Inventory headings to §99 to satisfy rubric v2.0.0 quality dimension. |
 | 2026-04-26 | minor | Phase 27b: Added `kind: future-spec` frontmatter + Drift Acknowledgment section. Module now exempt from drift audit findings (implementation lives in downstream repos). |
 | `02-error-architecture/06-apperror-package/01-apperror-reference/05-apperrtype-enums.md` | Full rewrite to v2 |
 | `02-error-architecture/06-apperror-package/01-apperror-reference/02-apperror-struct.md` | Display methods + signature fixes |
