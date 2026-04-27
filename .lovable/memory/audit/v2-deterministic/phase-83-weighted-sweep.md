@@ -89,3 +89,20 @@ gate inside `deterministic_metrics()`.
 4. **Phase 87** — Cumulative schema-bonus cap (cosmetic anti-double-count).
 5. **B1** — `spec/22-git-logs-v2/07-app-entity.md` decision (user input).
 6. **R1** — Real-AI re-audit (Lovable Cloud required).
+
+---
+
+## Retrospective (added in Phase 92)
+
+Outcome map for the "Next phases (queued)" list above:
+
+| # | Original queued task | Actual outcome |
+|---|---|---|
+| 1 | Phase 84 — bump CI floors to `weighted=97 / impl=99` | ✅ **Shipped in Phase 84 as queued.** Floors are now live in `.github/workflows/spec-health.yml`, locking in the Phase 82–83 wins. |
+| 2 | Phase 85 — document v2.10–v2.14 + `todo_audit_exempt` + threshold flags in `spec/27-spec-toolchain/` | ✅ **Shipped in Phase 85**: §31 v1.7.0 → v1.8.0 with **AC-31-17 → AC-31-22** (one AC per rubric version) + Rubric Changelog table; `todo_audit_exempt` later re-documented in §01 spec authoring guide as **AC-SAG-22** (Phase 89). |
+| 3 | Phase 86 — push 22 W=96/97 modules to W=98 | ❌ **Not pursued.** After Phase 86's empirical rejection of the cumulative schema-bonus cap demonstrated that "rubric purity" critiques can punish real quality, cosmetic per-module score lifts were deprioritised in favour of (a) ratcheting CI floors tighter (Phase 84), (b) documenting what's already there (Phase 85, 87, 89), and (c) hardening the toolchain itself (Phase 90 `--explain` flag, Phase 91 CLI self-test). The 22 modules at W=96/97 are within measurement noise of the 98.0 mean and pushing them higher would require either inventing ACs (gaming) or shipping product features (out of scope for the audit subsystem). |
+| 4 | Phase 87 — cumulative schema-bonus cap | ❌ **REJECTED in Phase 86.** Empirical test: mean impl 99.8 → 89.2; 76 multi-contract modules unfairly penalised. Source comment + `phase-86-schema-cap-rejected.md` preserve rejected design. **Do not re-propose without new corpus data.** |
+| 5 | B1 decision | 🚧 Still pending user input. |
+| 6 | R1 real-AI re-audit | 🚧 Still blocked on Lovable Cloud. |
+
+Lesson captured: the queue assumed a steady cadence of "lift more modules" but the real bottleneck after Phase 83 became **operational** (CI floors, contributor docs, toolchain debuggability) rather than rubric refinement. Phases 84–91 reflect that pivot.
