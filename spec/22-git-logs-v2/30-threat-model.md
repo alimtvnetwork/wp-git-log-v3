@@ -63,7 +63,7 @@ Three boundaries:
 |---|--------|-------|------------|----------|
 | R1 | Admin claims they didn't delete a Profile / change Acceptance / restore a backup. | Audit trail | `AuditTrail` table records `AuditActionType`, `AuditOutcome`, `ProfileId`, `RouteName`, `RequestId`, `HttpStatus`, `Detail`, `OccurredAt` for every state-changing route + CLI command. | Audit table itself can be edited by anyone with DB access (T1). v3 plan: append-only journal + checksum chain. |
 | R2 | CI claims a push happened that the plugin never received. | Push acknowledgment | Successful `/append-log` returns `PipelineId` + counts; CI logs that ack alongside its own logs. AuditTrail row also written. | If both CI logs and DB are lost, no recovery. Encourage backup retention. |
-| R3 | Operator silently disables logging by setting `LogLevelMin=Fatal`. | Diagnostic visibility | Config changes via `wp git-logs config set` write `AuditTrail.AuditActionType=ConfigChange` (TODO: add seed). Admin UI Settings change does same via REST. | Direct `ConfigKv` row edit (T1) bypasses audit. |
+| R3 | Operator silently disables logging by setting `LogLevelMin=Fatal`. | Diagnostic visibility | Config changes via `wp git-logs config set` write `AuditTrail.AuditActionType=ConfigChange` (seed id 25, shipped in v2.8.0 — see `16-seed-data.md` and `18-schema.sql:409`). Admin UI Settings change does same via REST. | Direct `ConfigKv` row edit (T1) bypasses audit. |
 
 ---
 

@@ -161,8 +161,9 @@ Seed insert idempotency uses unique `(RoleId, PermissionId)`.
 | 22 | SshAuthSuccess | 2.7.0 |
 | 23 | SshAuthFail | 2.7.0 |
 | 24 | SshKeyRotated | 2.7.0 |
+| 25 | ConfigChange | 2.8.0 |
 
-> Ids 19–20 reflect rows already shipped in 2.5.0; listed here for completeness and migration order. Activator on a fresh install inserts 1–24 in one pass; upgrade from 2.6.x inserts only 21–24.
+> Ids 19–20 reflect rows already shipped in 2.5.0; listed here for completeness and migration order. Activator on a fresh install inserts 1–25 in one pass; upgrade from 2.6.x inserts 21–24, upgrade from 2.7.x inserts 25.
 
 ---
 
