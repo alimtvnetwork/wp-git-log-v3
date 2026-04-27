@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.28.0
+**Version:** 2.29.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,9 @@
 ---
 
 ## Releases
+
+### 2.29.0 — 2026-04-27 (Phase 114 — AC-31-31 contract-surface bounding sweep)
+- **Changed** §31 AC-31-31 "Currently-NOT-qualifying enumerations" paragraph extended with the **Phase 114 sweep additions**: the audit-script exit-code table (0/1/2 — only 2 sites: script + §31, direct lockstep zone, not AC-31-31); per-script exit-code tables across `check-memo-retrospective-headings.py` / `check-memory-mirror-drift.py` / `check-root-readme.py` / `check-tree-health.cjs` etc. (each shares the labels 0/1/2 but encodes **different domain semantics** per script — N independent 2-file enumerations rather than one N-file enumeration; AC-31-31 does NOT fire; inventing a cross-script "exit code 1 always means failure" parity test would be a category error); the audit CLI flag set `--min-weighted` / `--min-impl` / `--strict` / `--explain` / `--deterministic` (referenced across script + spec + workflow + 4 self-tests but each site cites only the **subset of flags it actually uses** — API surface use, not enumeration restatement; canonical list lives only in `argparse`); the CI threshold floors `--min-weighted=97 --min-impl=99` (only 2 sites: workflow + threshold-self-test, direct lockstep). **Net result: zero new parity tests required.** AC-31-31 registry remains at 4 rows and is provisionally complete for the current toolchain surface. The bounding statement explicitly notes that future contributors who introduce a new 3+ file enumeration are still bound by the AC-31-31 protocol regardless of the Phase-114 bounding language. No new CI gate, no script version bump, no rubric change — this is a contract-surface clarification commit. Memo: `.lovable/memory/audit/v2-deterministic/phase-114-ac-31-31-contract-bounding.md`. Lockstep: §31 v1.21.0 → **v1.22.0** (AC-31-31 prose extended); §99 v2.25.0 → **v2.26.0**.
 
 ### 2.28.0 — 2026-04-27 (Phase 113 — WEIGHTS dimension-table parity self-test)
 - **Added** `linter-scripts/test/test-weights-parity.sh` — the **second parity self-test authored under AC-31-31** (registry row #4). Discovered during a Phase 113 sweep of `.lovable/memory/` and `linter-scripts/` for previously-unregistered 3+ file enumerations. The 7-dimension scoring weights are restated **verbatim** across `audit-spec-vs-code-v2.py` (`WEIGHTS` dict — source of truth), `generate-gate-report.py` (`WEIGHTS` dict — duplicated for offline analysis), and `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` (`## Weights` markdown table). AC-31-02's runtime `assert sum(WEIGHTS.values()) == 100` catches in-script drift in the audit script alone but does NOT mandate parity with the gate-report or with §31's documented table. The new test extracts WEIGHTS from both Python files via regex and from §31 via `## Weights` heading anchor, asserts pairwise dict-equality, re-checks AC-31-02's invariants as defence-in-depth, and confirms the dimension count is exactly 7 (matches §00-overview's "7 dimensions" prose). 8/8 assertions ✅ at landing.
