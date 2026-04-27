@@ -69,3 +69,15 @@ GlobalErrorModal (Dialog shell)
 ---
 
 *React components index — updated: 2026-03-31*
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+Header `Updated` vs footer `updated` timestamp drift is a known dual-source artifact; canonical source is the header banner.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # PHP Coding Standards
 
 **Version:** 3.2.0  
@@ -54,3 +59,15 @@ Previously a single 841-line file, now split into focused modules under 300 line
 - [Cross-Language Code Style](../../01-cross-language/04-code-style/00-overview.md) — Braces, nesting & spacing rules (canonical)
 - [Function Naming](../../01-cross-language/10-function-naming.md) — No boolean flag parameters (all languages)
 - [Strict Typing](../../01-cross-language/13-strict-typing.md) — Type declarations & docblock rules (all languages)
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+AC-05 verification link points to `03-initialization-and-booleans.md` in sibling module — cross-folder reference is intentional.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

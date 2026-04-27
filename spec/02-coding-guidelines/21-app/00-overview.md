@@ -34,3 +34,15 @@ _No content yet. Add app-specific specs as numbered files within this folder._
 |-----------|----------|
 | App Issues | [../../25-app-issues/00-overview.md](../../25-app-issues/00-overview.md) |
 | Coding Guidelines Spec | [../00-overview.md](../00-overview.md) |
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+Overview vs AC date mismatch reflects independent revision cycles for normative vs. test contracts.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

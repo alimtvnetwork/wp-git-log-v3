@@ -156,3 +156,4 @@ Sub-module `01-axios-version-control/` referenced by ACs lives in downstream JS 
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27b note.
 
+**Phase 27d (2026-04-26):** Version banner (3.2.0) vs AC version (2.0.0) — AC tracks its own minor cycle independent of overview. Intentional decoupling.

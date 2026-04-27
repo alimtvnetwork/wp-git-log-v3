@@ -18,3 +18,15 @@
 ---
 
 *Features index — updated: 2026-04-20*
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+Overview `Updated` (2026-04-20) vs AC date (2026-04-25) — AC was bumped independently for clarification edits.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

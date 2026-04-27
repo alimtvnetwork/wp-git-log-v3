@@ -52,3 +52,15 @@ Standardized API response envelope specification.
 ## Cross-References
 
 _See parent folder's `00-overview.md` for broader context._
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+AC dated 2026-04-25 vs Overview dated 2026-04-16 — independent revision cycles, both authoritative for their scopes.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

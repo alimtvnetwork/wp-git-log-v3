@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Generic Release Pipeline Specification
 
 > **Version:** 1.0.0  
@@ -103,3 +108,15 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+AC-05 references `check-tree-health.js`; current artifact is `.cjs`. Both names refer to the same script; tooling repo owns the canonical extension.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+
