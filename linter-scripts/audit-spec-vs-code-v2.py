@@ -544,7 +544,14 @@ def deterministic_score(folder: Path, metrics: dict) -> dict:
         impl = 75
         if m.get("has_normative_contract"): impl += 10  # text-fenced contract block
         if m["md_files"] >= 30:             impl += 5   # large bijection inventory
+        # v2.10: evidenced-meta-toolchain bonuses — a toolchain spec that
+        # documents its own lifecycle (Mermaid) and CI integration (≥5 yaml
+        # workflow blocks) is materially more implementable. Same rationale
+        # as the v2.9 evidenced-tracker / evidenced-index bonuses.
+        if m.get("has_mermaid"):     impl += 5
+        if m.get("has_ci_workflow"): impl += 5
         if m["overview_chars"] < 500:       impl -= 20
+        impl = min(impl, 100)
     else:
         impl = 30
         if m["has_sql_ddl"]:      impl += 20

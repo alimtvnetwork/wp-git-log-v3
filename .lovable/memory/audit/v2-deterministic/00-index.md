@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 87  
 **Code files indexed:** 35  
-**Mean weighted score:** **95.8/100**  
-**Mean implementability:** **98.2/100**
+**Mean weighted score:** **95.9/100**  
+**Mean implementability:** **98.3/100**
 
 ## Methodology v2
 
@@ -50,18 +50,18 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 1 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 86 | 85 | A | _no findings_ |
 | 2 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 86 | 85 | A | _no findings_ |
 | 3 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 88 | 85 | A | _no findings_ |
-| 4 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 89 | 90 | A | 30 TODO/TBD/FIXME marker(s) in module body |
-| 5 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 92 | 90 | A | _no findings_ |
-| 6 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 92 | 90 | A | _no findings_ |
-| 7 | [`10-research`](./10-research.md) | 92 | 90 | A | _no findings_ |
-| 8 | [`14-update/diagrams`](./14-update__diagrams.md) | 92 | 90 | A | _no findings_ |
-| 9 | [`25-app-issues`](./25-app-issues.md) | 92 | 90 | A | _no findings_ |
-| 10 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 93 | 90 | A | _no findings_ |
-| 11 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 93 | 90 | A | _no findings_ |
-| 12 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 93 | 90 | A | _no findings_ |
-| 13 | [`.`](./..md) | 95 | 90 | A+ | _no findings_ |
-| 14 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 95 | 90 | A+ | _no findings_ |
-| 15 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 90 | 100 | A | 5 TODO/TBD/FIXME marker(s) in module body |
+| 4 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 92 | 90 | A | _no findings_ |
+| 5 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 92 | 90 | A | _no findings_ |
+| 6 | [`10-research`](./10-research.md) | 92 | 90 | A | _no findings_ |
+| 7 | [`14-update/diagrams`](./14-update__diagrams.md) | 92 | 90 | A | _no findings_ |
+| 8 | [`25-app-issues`](./25-app-issues.md) | 92 | 90 | A | _no findings_ |
+| 9 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 93 | 90 | A | _no findings_ |
+| 10 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 93 | 90 | A | _no findings_ |
+| 11 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 93 | 90 | A | _no findings_ |
+| 12 | [`.`](./..md) | 95 | 90 | A+ | _no findings_ |
+| 13 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 95 | 90 | A+ | _no findings_ |
+| 14 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 90 | 100 | A | 5 TODO/TBD/FIXME marker(s) in module body |
+| 15 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 92 | 100 | A | 30 TODO/TBD/FIXME marker(s) in module body |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -83,13 +83,13 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 85 | 65 | 100 | 100 | 100 | 80 | 100 | **86** | A | 0 |
 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 85 | 65 | 100 | 100 | 100 | 80 | 100 | **86** | A | 0 |
 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 85 | 75 | 100 | 100 | 100 | 80 | 100 | **88** | A | 0 |
-| [`27-spec-toolchain`](./27-spec-toolchain.md) | 90 | 70 | 100 | 100 | 100 | 80 | 90 | **89** | A | 2 |
 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 55 | 100 | 100 | 100 | 90 | 90 | **90** | A | 7 |
 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 90 | 85 | 100 | 100 | 100 | 80 | 100 | **92** | A | 2 |
 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 90 | 85 | 100 | 100 | 100 | 80 | 100 | **92** | A | 2 |
 | [`10-research`](./10-research.md) | 90 | 85 | 100 | 100 | 100 | 80 | 100 | **92** | A | 2 |
 | [`14-update/diagrams`](./14-update__diagrams.md) | 90 | 85 | 100 | 100 | 100 | 80 | 100 | **92** | A | 6 |
 | [`25-app-issues`](./25-app-issues.md) | 90 | 85 | 100 | 100 | 100 | 80 | 100 | **92** | A | 4 |
+| [`27-spec-toolchain`](./27-spec-toolchain.md) | 100 | 70 | 100 | 100 | 100 | 80 | 90 | **92** | A | 2 |
 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 90 | 90 | 100 | 100 | 100 | 80 | 100 | **93** | A | 2 |
 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 90 | 90 | 100 | 100 | 100 | 80 | 100 | **93** | A | 2 |
 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 90 | 90 | 100 | 100 | 100 | 80 | 100 | **93** | A | 2 |
