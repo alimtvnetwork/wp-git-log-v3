@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-27 (Phase 98)
+**Last updated:** 2026-04-27 (Phase 102)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -42,29 +42,33 @@ PR so any regression fails the build at the assertion level (with
 | 1 | [`test-audit-cli-thresholds.sh`](./test-audit-cli-thresholds.sh) | 91 | `audit-spec-vs-code-v2.py` `--min-weighted=N` / `--min-impl=N` exit-code contract | 6 | ~3 s | [AC-31-22](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 2 | [`test-audit-explain-contract.sh`](./test-audit-explain-contract.sh) | 94 | `audit-spec-vs-code-v2.py --explain=<substring>` stdout structure, exit codes, no-side-effects | 14 | ~6 s | [AC-31-23](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) + [AC-31-25](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 3 | [`test-audit-deterministic-stability.sh`](./test-audit-deterministic-stability.sh) | 95 | `audit-spec-vs-code-v2.py` produces byte-identical `raw-results.json` across two runs under `AUDIT_DETERMINISTIC=1` | 7 | ~12 s | [AC-31-26](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
+| 4 | [`test-readme-inventory.sh`](./test-readme-inventory.sh) | 102 | This README's inventory table is in sync with the actual `test-*.sh` files on disk; required structural sections present; every script linked + executable | 14+ | ~1 s | [AC-31-27](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 
-**Totals:** 3 scripts · 27 assertions · ~21 s of CI time.
+**Totals:** 4 scripts · 41+ assertions · ~22 s of CI time.
 
-All three scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
+All four scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
 as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
-`Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`).
+`Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`,
+`Self-test README inventory parity (Phase 102)`).
 
 ---
 
 ## Coverage triad: what each test catches
 
-The three tests together form a **complete blind-spot coverage triad** for
-the audit subsystem:
+The four tests together form a **complete blind-spot coverage matrix** for
+the audit subsystem (gates 1–3) plus the meta-suite itself (gate 4):
 
 | Blind spot | Why production gate misses it | Self-test catching it |
 |---|---|---|
 | Comparison-operator inversion (`<` vs `≤`, `≥` vs `>`) | All scores currently above floor; bug invisible | **Phase 91** (6 cases at the boundary) |
 | `--explain` diagnostic tool silently broken | Production gate never invokes `--explain` | **Phase 94** (14 assertions across single-match / no-match / multi-match) |
 | Non-determinism introduced into the rubric | Production gate runs only once per build | **Phase 95** (sha256 byte-identity across two runs) |
+| Self-test added/removed without updating this README | Reviewer-attention only; AC-31-27 was unenforced | **Phase 102** (filesystem ↔ inventory parity, structural sections, executable bit) |
 
-If you add a fourth contract guarantee to the audit script (or any other
-linter), add a fourth self-test here following the same template — see
-**"Adding a new self-test"** below.
+If you add a fifth contract guarantee to the audit script (or any other
+linter), add a fifth self-test here following the same template — see
+**"Adding a new self-test"** below. The Phase 102 gate will fail on your
+PR if you forget to add the row.
 
 ---
 
@@ -92,9 +96,10 @@ Run any single test directly:
 bash linter-scripts/test/test-audit-cli-thresholds.sh
 bash linter-scripts/test/test-audit-explain-contract.sh
 bash linter-scripts/test/test-audit-deterministic-stability.sh
+bash linter-scripts/test/test-readme-inventory.sh
 ```
 
-Run all three sequentially:
+Run all four sequentially:
 
 ```bash
 for t in linter-scripts/test/test-*.sh; do
@@ -190,4 +195,5 @@ Then:
   [Phase 94](../../.lovable/memory/audit/v2-deterministic/phase-94-explain-contract-test.md) ·
   [Phase 95](../../.lovable/memory/audit/v2-deterministic/phase-95-determinism-stability.md) ·
   [Phase 97](../../.lovable/memory/audit/v2-deterministic/phase-97-mermaid-syntax-gate.md) ·
-  [Phase 98](../../.lovable/memory/audit/v2-deterministic/phase-98-test-readme.md)
+  [Phase 98](../../.lovable/memory/audit/v2-deterministic/phase-98-test-readme.md) ·
+  [Phase 102](../../.lovable/memory/audit/v2-deterministic/phase-102-readme-inventory-test.md)

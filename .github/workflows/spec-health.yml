@@ -135,6 +135,21 @@ jobs:
         # Spec: spec/01-spec-authoring-guide/97-acceptance-criteria.md (AC-SAG-24)
         run: node linter-scripts/check-mermaid-syntax.mjs
 
+      - name: Self-test README inventory parity (Phase 102)
+        # Phase 102: locks AC-31-27 mechanically. Parses linter-scripts/test/
+        # README.md and asserts the "Test inventory" table lists exactly the
+        # set of test-*.sh files present on disk — no more, no fewer. Also
+        # asserts every script is executable, the required structural
+        # sections (Test inventory, Coverage triad, Adding a new self-test,
+        # Last updated) are present, and every listed script is linked via
+        # relative path. Without this gate, a contributor could add a 5th
+        # self-test (or remove an existing one) without updating the README,
+        # and AC-31-27 would be enforced only by reviewer attention. The
+        # gate self-bootstrapped: it caught its own missing inventory entry
+        # on first run, forcing the README to be updated in the same PR.
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-27)
+        run: bash linter-scripts/test/test-readme-inventory.sh
+
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
         # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC

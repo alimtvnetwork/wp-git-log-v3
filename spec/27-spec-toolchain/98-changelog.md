@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.21.0
+**Version:** 2.22.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,14 @@
 ---
 
 ## Releases
+
+### 2.22.0 — 2026-04-27 (Phase 102 — README inventory parity self-test)
+- **Added** `linter-scripts/test/test-readme-inventory.sh` — the 4th CLI contract self-test, mechanically enforcing **AC-31-27** (Phase 98). The script parses `linter-scripts/test/README.md`, extracts every `[\`test-foo.sh\`](./test-foo.sh)` markdown link from the inventory table, lists actual `test-*.sh` files in the directory, and asserts symmetric set parity (no orphan README rows; no orphan files on disk). It additionally asserts each script is executable and the README contains the four required structural sections (Test inventory, Coverage triad, Adding a new self-test, Last updated). 14 assertions, ~1 s runtime. **Self-bootstrapping**: on first run it caught its own missing inventory entry, forcing the README update in the same PR — proving the gate works.
+- **Wired** into `.github/workflows/spec-health.yml` as the new step *Self-test README inventory parity (Phase 102)*, after the Phase 97 mermaid syntax gate. Without this gate, AC-31-27 was enforced only by reviewer attention: a contributor adding a 5th `test-foo.sh` (or removing an existing one) without updating the README would not fail any check. Phase 91/94/95 self-tests check the *targets'* behaviour; Phase 102 checks the *suite's* discoverability.
+- **Bumped** `linter-scripts/audit-spec-vs-code-v2.py` v2.17 → **v2.18**: `RUBRIC_VERSION` constant updated; the "QA tooling baseline" footer in `00-index.md` regenerated to enumerate **9 strict CI gates** (was 8); link annotation updated to reference the self-test suite (#5–#7 + #9). Section title updated from "Phase 99" to "Phase 99, expanded Phase 102". `RUBRIC_VERSION` remains a static string — Phase 95 determinism self-test re-validates byte-identical output (new sha256 stable across two runs).
+- **Updated** `linter-scripts/test/README.md`: 4th row added to the **Test inventory** table; 4th row added to the **Coverage triad** table (blind spot: "Self-test added/removed without updating this README" — was reviewer-attention only); local-execution snippet expanded to all four scripts; "Adding a new self-test" template referenced; Phase 102 memo added to the see-also list; "Last updated" bumped to *Phase 102*. Totals updated: 4 scripts · 41+ assertions · ~22 s of CI time.
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.14.0 → **v1.15.0**: header `Source` line gains the new self-test (6th artefact); Category bumped from `×3 incl. determinism` to `×4 incl. determinism + README parity`; AC-31-27 `Verifies` line gains the Phase 102 self-test as the mechanical-enforcement artefact; AC-31-28 updated to enumerate **9 strict CI gates** (was 8) including the new Phase 102 row; rubric changelog table extended through **v2.18** with Phase 102 row.
+- **Verified**: All 9 strict gates green: cross-links OK; tree-health 100/100 strict; lockstep 0 findings strict; audit `--min-weighted=97 --min-impl=99` ✓ at 98.0/99.8; Phase 91 self-test 6/6 ✅; Phase 94 self-test 14/14 ✅; Phase 95 self-test 7/7 ✅; Phase 97 mermaid 106/106 ✓; **Phase 102 self-test 14/14 ✅** (4 fs-files / 4 README entries / parity intact). No scoring change — new safety net + output-clarity only. CI gate count rises 8 → 9.
 
 ### 2.21.0 — 2026-04-27 (Phase 99 — `RUBRIC_VERSION` + QA-baseline footer in audit outputs)
 - **Patched** `linter-scripts/audit-spec-vs-code-v2.py` v2.16 → **v2.17**: new module-level `RUBRIC_VERSION = "v2.17"` constant; both `00-index.md` and `EXECUTIVE-SUMMARY.md` now carry a `**Rubric:** v2.17` header line; `00-index.md` gains a new "QA tooling baseline (Phase 99)" section enumerating the **8 strict CI gates** that surround the score (cross-links + tree-health + lockstep + audit thresholds + 3 self-tests from Phases 91/94/95 + Phase 97 mermaid syntax) with link to `linter-scripts/test/README.md` (Phase 98). **Zero rubric change** — metadata + output-clarity only.
