@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.3.0
+**Version:** 2.4.0
 **Updated:** 2026-04-26
+
+> **v2.4.0 update (Phase 37):** Added [`23-scaffold-spec-module.md`](./23-scaffold-spec-module.md) + `linter-scripts/scaffold-spec-module.cjs`. Emits a v2.0.0-rubric-compliant module skeleton (§00/§97/§98/§99) so newly created modules pass `check-tree-health.cjs --strict` on first run. 5 ACs (AC-23-01..05) covering strict-pass guarantee, slot-collision refusal, idempotency, slug/slot validation, and quality-credit anchor presence. Bijection 29/29 → 30/30. Companion to §20–§22 healers — prevents the next thin-§99 wave (cf. Phase 31 remediation).
 
 > **v2.3.0 update (Phase 36):** Added `--strict` flag to `check-tree-health.cjs` (threshold 100 + fails on any single module below full marks). Wired into `spec-monthly-audit.yml`. [`05-check-tree-health.md`](./05-check-tree-health.md) v1.0.0 → v2.0.0 — rubric v2.0.0 fully documented (was still describing v1.x); 3 new ACs (AC-05-04..AC-05-06) for rubric weighting + `--strict` semantics; AC-05-02 corrected to match percentage-based scoring. Verified strict pass at 54/54 modules full marks.
 
