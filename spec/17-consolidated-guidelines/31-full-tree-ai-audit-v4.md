@@ -1,6 +1,6 @@
 # 31 — Full Spec-Tree AI-Implementability Audit (v4.0)
 
-> ⚠️ **SUPERSEDED by [`32-full-tree-ai-audit-v5.md`](./32-full-tree-ai-audit-v5.md) (2026-04-27).** v4's 45/100 baseline is stale — 3 of 4 critical findings have since been resolved. Read v5 first; v4 is retained for historical context only.
+> ⚠️ **SUPERSEDED by [`33-full-tree-ai-audit-v5.md`](./33-full-tree-ai-audit-v5.md) (2026-04-27).** v4's 45/100 baseline is stale — 3 of 4 critical findings have since been resolved. Read v5 first; v4 is retained for historical context only.
 
 > **Version:** 4.0.0
 > **Updated:** 2026-04-25
