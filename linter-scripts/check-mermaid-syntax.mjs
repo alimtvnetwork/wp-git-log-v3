@@ -35,6 +35,25 @@ function walk(dir, out = []) {
   return out;
 }
 
+// Mermaid uses DOMPurify which expects a browser-like environment. Provide
+// a minimal jsdom + DOMPurify shim so .parse() works under plain Node.
+try {
+  const { JSDOM } = await import('jsdom');
+  const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>');
+  globalThis.window = dom.window;
+  globalThis.document = dom.window.document;
+  globalThis.DOMPurify = {
+    addHook: () => {},
+    removeAllHooks: () => {},
+    sanitize: (s) => s,
+    isSupported: true,
+  };
+} catch (e) {
+  console.error('✗ jsdom not available (needed to shim mermaid DOM deps):', e.message);
+  console.error('  Install with: bun add -d jsdom');
+  process.exit(2);
+}
+
 let mermaid;
 try {
   mermaid = (await import('mermaid')).default;
