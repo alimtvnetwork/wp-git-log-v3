@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.9.0
+**Version:** 4.10.0
 **Last Updated:** 2026-04-27
 
 ---
+
+## 4.10.0 — 2026-04-27
+
+- Phase 105: cross-referenced **AC-SAG-25** (mermaid + jsdom exact-pin rule, Phase 101) to its newly-introduced general form **AC-31-30** at [`spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md`](../27-spec-toolchain/31-audit-spec-vs-code-v2.md) — the "grammar-defining-library pinning pattern" applicable to any future `linter-scripts/` quality gate built on a parser, schema-validator, or AST-walking library. AC-31-30 enumerates: (a) the trigger condition for inclusion (a script under `linter-scripts/` `import`s the library AND uses it to inspect spec content), (b) the current pinned inventory (mermaid 11.14.0, jsdom 20.0.3) plus explicitly-NOT-qualifying examples (typescript, tailwindcss, react, vite — used by `src/` only), and (c) the four-step protocol for adding a new gate built on a previously-unpinned library (tighten pin + extend inventory + author per-library instance AC + lockstep). AC-SAG-25 stays as the concrete instance; AC-31-30 is the abstract pattern. No code change in this phase — declarative contract generalisation only. Lockstep: §97 v4.4.0 → v4.5.0; §99 v4.6.0 → v4.7.0; §27 §31 v1.17.0 → v1.18.0; §27 §98 v2.24.0 → v2.25.0; §27 §99 v2.21.0 → v2.22.0. CI gate count unchanged at 11; `RUBRIC_VERSION` unchanged at v2.20.
 
 ## 4.9.0 — 2026-04-27
 
