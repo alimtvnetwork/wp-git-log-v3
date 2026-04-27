@@ -13,7 +13,7 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 5, **A** = 25, **B** = 38, **C** = 10, **D** = 1
+**A+** = 5, **A** = 25, **B** = 37, **C** = 11, **D** = 1
 
 ## Findings by category
 | Category | Count |
@@ -21,11 +21,12 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | drift | 9 |
 | missing-contract | 6 |
 | untestable | 1 |
+| broken-link | 1 |
 
 ## Findings by severity
 | Severity | Count |
 |---|---:|
-| high | 7 |
+| high | 8 |
 | low | 9 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
@@ -88,6 +89,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 30 | 55 | 100 | 100 | 100 | 80 | 100 | **65** | C | 0 |
 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 30 | 75 | 100 | 100 | 100 | 90 | 100 | **70** | C | 0 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 30 | 80 | 100 | 100 | 100 | 96 | 100 | **71** | C | 0 |
+| [`27-spec-toolchain`](./27-spec-toolchain.md) | 55 | 70 | 80 | 70 | 100 | 100 | 90 | **72** | C | 2 |
 | [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 40 | 75 | 100 | 100 | 100 | 90 | 100 | **73** | C | 0 |
 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 30 | 90 | 100 | 100 | 100 | 96 | 100 | **73** | C | 2 |
 | [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 40 | 70 | 100 | 100 | 100 | 100 | 100 | **73** | C | 2 |
@@ -107,7 +109,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 50 | 80 | 100 | 100 | 100 | 100 | 100 | **78** | B | 0 |
 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 50 | 75 | 100 | 100 | 100 | 100 | 100 | **78** | B | 2 |
 | [`25-app-issues`](./25-app-issues.md) | 50 | 85 | 100 | 100 | 100 | 80 | 100 | **78** | B | 4 |
-| [`27-spec-toolchain`](./27-spec-toolchain.md) | 55 | 70 | 100 | 100 | 100 | 100 | 90 | **78** | B | 2 |
 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 0 |
 | [`12-cicd-pipeline-workflows/02-go-binary-deploy`](./12-cicd-pipeline-workflows__02-go-binary-deploy.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 0 |
 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 50 | 90 | 100 | 100 | 100 | 80 | 100 | **79** | B | 0 |
