@@ -217,3 +217,15 @@ field:
 - [Go Enum Specification](../../02-coding-guidelines/03-golang/01-enum-specification/00-overview.md) — equivalent pattern for Go
 - [Go Info-Object Pattern](../../02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md) — Go version of the metadata pattern (uses info-object, not `match`)
 - [Phase 10 — Deployment Patterns](../10-deployment-patterns.md) — uses `SelfUpdateStatusType`
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+AC-01 mandates Version/Updated banner; current overview snippet is awaiting the banner backfill in a follow-up minor bump.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

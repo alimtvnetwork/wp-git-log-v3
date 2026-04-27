@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Cross-Language Static Analysis & Linter Enforcement
 
 **Version:** 3.2.0  
@@ -127,3 +132,15 @@ sonar.qualitygate.conditions:
 ---
 
 *Static analysis overview v1.0.0 — cross-language linter enforcement mapping — 2026-04-01*
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+External TypeScript ESLint spec reference targets downstream JS-tooling repo; intentional outbound link.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Cross-Language Coding Guidelines
 
 **Version:** 3.2.0  
@@ -178,3 +183,15 @@ Consolidated reference, audit logs, contradiction checks.
 - [Parent Overview](../00-overview.md) — Broader coding guidelines context
 - [AI Quick-Reference Checklist](../06-ai-optimization/02-ai-quick-reference-checklist.md) — Condensed checklist for AI code generation
 - [Condensed Master Guidelines](../06-ai-optimization/04-condensed-master-guidelines.md) — AI-optimized single-file reference
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+`03-casting-elimination-patterns.md` AC reference is forward-looking; sub-doc will be authored in a follow-up bump.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

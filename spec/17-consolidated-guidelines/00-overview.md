@@ -98,3 +98,15 @@ python3 linter-scripts/check-spec-cross-links.py --root spec --repo-root .
 **Expected:** exit 0. Any non-zero exit is a hard fail and blocks merge.
 
 _Verification section last updated: 2026-04-21_
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+Overview targets 100/100 health (aspirational); AC threshold of 80 is the enforceable floor. Both values are intentional.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+

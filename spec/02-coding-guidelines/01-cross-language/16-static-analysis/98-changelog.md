@@ -43,3 +43,7 @@ All notable changes to the `16-static-analysis/` subfolder.
 - `06-vb-dotnet-analyzers.md` — VB.NET static analysis spec
 - `07-nodejs-eslint.md` — Node.js static analysis spec
 - `08-python-ruff.md` — Python static analysis spec
+
+| Date | Bump | Notes |
+|------|------|-------|
+| 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |

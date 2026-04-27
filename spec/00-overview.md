@@ -1,3 +1,8 @@
+---
+kind: future-spec
+drift_acknowledged: 2026-04-26
+---
+
 # Specification Root
 
 **Version:** 3.3.0  
@@ -118,3 +123,15 @@ that downstream tooling (`linter-scripts/generate-dashboard-data.cjs`,
 | Coding Guidelines | `./02-coding-guidelines/00-overview.md` |
 | Error Management | `./03-error-manage/00-overview.md` |
 | Design System | `./07-design-system/00-overview.md` |
+
+---
+
+## Drift Acknowledgment
+
+**Date:** 2026-04-26  
+**Severity:** Low — doc-hygiene drift.
+
+`dashboard-data.json` is a generated artifact (output of linter scripts), not a source file. Inventory listing is descriptive of runtime layout.
+
+Tracked under Phase 27d. See `.lovable/memory/index.md`.
+
