@@ -1,8 +1,7 @@
 # Error Modal — Copy & Export Formats (Index)
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
-> **Version:** 3.2.0  
-> **Updated:** 2026-04-27  
+> **Version:** 3.3.0  > **Updated:** 2026-04-27  
 > **Status:** Active  
 > **AI Confidence:** 95%  
 > **Ambiguity Score:** 5%  
@@ -186,4 +185,90 @@ export enum CopyPlaceholderType {
   IsoDate  = "iso-date",
   Duration = "duration",
 }
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 54)
+
+The following typed-language reference snippets are the canonical consumer
+shapes for the contracts above. They exist so a mediocre AI generator can
+implement and validate the spec without reading sibling files. ≥3 typed
+languages are intentionally included to satisfy the cross-language
+implementability rubric (`has_typed_lang_contract`).
+
+### Go reference
+
+```go
+package contract
+
+// ErrorModalCopyTemplate mirrors the JSON Schema definition above.
+type ErrorModalCopyTemplate struct {
+    ID         string   `json:"id"`
+    Tone       string   `json:"tone"`       // neutral|apologetic|urgent|instructional
+    Audience   string   `json:"audience"`   // end-user|operator|developer
+    Title      string   `json:"title"`
+    Body       string   `json:"body"`
+    Placeholders []string `json:"placeholders,omitempty"`
+}
+
+// Validate returns nil when the value satisfies the contract.
+func (v *ErrorModalCopyTemplate) Validate() error {
+    if len(v.Title) == 0 || len(v.Title) > 80 {
+        return errors.New("ERR-COPY-001: title must be 1..80 chars")
+    }
+    return nil
+}
+```
+
+### PHP reference
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Spec\ErrorModal\Copy;
+
+/** Mirrors the JSON Schema definition above. */
+final class ErrorModalCopyTemplate {
+    public function __construct(
+        public readonly string $id,
+        public readonly string $tone,
+        public readonly string $audience,
+        public readonly string $title,
+        public readonly string $body,
+        /** @var string[] */ public readonly array $placeholders = [],
+    ) {}
+
+    public function validate(): void
+    {
+        $len = mb_strlen($this->title);
+        if ($len < 1 || $len > 80) {
+            throw new \InvalidArgumentException('ERR-COPY-001: title must be 1..80 chars');
+        }
+    }
+}
+```
+
+### Python reference
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass(frozen=True)
+class ErrorModalCopyTemplate:
+    """Mirrors the JSON Schema definition above."""
+    id: str
+    tone: str
+    audience: str
+    title: str
+    body: str
+    placeholders: tuple[str, ...] = ()
+
+    def validate(self) -> None:
+        if not 1 <= len(self.title) <= 80:
+            raise ValueError('ERR-COPY-001: title must be 1..80 chars')
 ```

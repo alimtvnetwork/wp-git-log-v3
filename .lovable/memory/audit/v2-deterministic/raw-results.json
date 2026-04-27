@@ -1230,7 +1230,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2756,
@@ -1238,13 +1238,15 @@
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 1,
+        "go": 1,
         "json": 2,
-        "php": 1,
+        "php": 2,
         "plain": 34,
+        "python": 1,
         "text": 1,
         "ts": 1
       },
-      "code_blocks_total": 40,
+      "code_blocks_total": 43,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -1253,14 +1255,14 @@
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
-      "has_typed_lang_contract": false,
+      "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
       "links_total": 26,
       "md_files": 9,
       "mmd_files": 0,
-      "overview_chars": 8316,
+      "overview_chars": 10999,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1270,7 +1272,7 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
@@ -1280,46 +1282,50 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/08-file-folder-naming.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 86/100 (A) for spec/02-coding-guidelines/08-file-folder-naming.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [],
-    "blast_radius": 0,
+    "blast_radius": 4,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3580,
       "ac_count": 7,
       "child_modules": 0,
-      "code_blocks_by_lang": {},
-      "code_blocks_total": 0,
+      "code_blocks_by_lang": {
+        "json": 1,
+        "ts": 1,
+        "yaml": 5
+      },
+      "code_blocks_total": 7,
       "consistency_report": true,
       "gwt_block_count": 6,
-      "has_ci_workflow": false,
-      "has_json_schema": false,
+      "has_ci_workflow": true,
+      "has_json_schema": true,
       "has_mermaid": false,
       "has_normative_contract": false,
       "has_sql_ddl": false,
-      "has_ts_enums": false,
+      "has_ts_enums": true,
       "has_typed_lang_contract": false,
-      "has_yaml_openapi": false,
-      "kind": "index",
+      "has_yaml_openapi": true,
+      "kind": "",
       "links_broken": 0,
       "links_total": 8,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 806,
+      "overview_chars": 5502,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1327,24 +1333,24 @@
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
-      "testability": 80
+      "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 70,
+      "implementability": 80,
       "maintainability": 100,
-      "testability": 80
+      "testability": 100
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/02-coding-guidelines/09-powershell-integration.",
-    "weighted_overall": 83
+    "verdict": "Deterministic score 90/100 (A) for spec/02-coding-guidelines/09-powershell-integration.",
+    "weighted_overall": 90
   },
   {
     "applied_gates": [],
@@ -2314,7 +2320,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3015,
@@ -2322,13 +2328,16 @@
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 1,
+        "go": 1,
         "json": 3,
         "markdown": 3,
+        "php": 1,
         "plain": 20,
+        "python": 1,
         "ts": 1,
         "typescript": 4
       },
-      "code_blocks_total": 32,
+      "code_blocks_total": 35,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -2337,14 +2346,14 @@
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
-      "has_typed_lang_contract": false,
+      "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
       "links_total": 37,
       "md_files": 13,
       "mmd_files": 0,
-      "overview_chars": 7672,
+      "overview_chars": 10049,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2354,7 +2363,7 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
@@ -2364,12 +2373,12 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 86/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [],
@@ -2380,7 +2389,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2960,
@@ -2389,14 +2398,17 @@
       "code_blocks_by_lang": {
         "bash": 1,
         "css": 1,
+        "go": 1,
         "json": 1,
+        "php": 1,
         "plain": 2,
+        "python": 1,
         "text": 1,
         "ts": 2,
         "tsx": 2,
         "typescript": 15
       },
-      "code_blocks_total": 25,
+      "code_blocks_total": 28,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -2405,14 +2417,14 @@
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
-      "has_typed_lang_contract": false,
+      "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
       "links_total": 30,
       "md_files": 12,
       "mmd_files": 0,
-      "overview_chars": 6055,
+      "overview_chars": 8107,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2422,7 +2434,7 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
@@ -2432,12 +2444,12 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 86/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [],
@@ -2512,7 +2524,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2830,
@@ -2521,14 +2533,17 @@
       "code_blocks_by_lang": {
         "bash": 1,
         "css": 2,
+        "go": 1,
         "json": 1,
+        "php": 1,
         "plain": 1,
+        "python": 1,
         "text": 1,
         "ts": 1,
         "tsx": 4,
         "typescript": 3
       },
-      "code_blocks_total": 14,
+      "code_blocks_total": 17,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -2537,14 +2552,14 @@
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
-      "has_typed_lang_contract": false,
+      "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
       "links_total": 15,
       "md_files": 7,
       "mmd_files": 0,
-      "overview_chars": 4388,
+      "overview_chars": 6955,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2554,7 +2569,7 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
@@ -2564,12 +2579,12 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 86/100 (A) for spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [],
@@ -2580,19 +2595,21 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 16646,
       "ac_count": 7,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "go": 2,
+        "go": 3,
         "json": 7,
+        "php": 1,
+        "python": 1,
         "text": 1,
         "ts": 1
       },
-      "code_blocks_total": 11,
+      "code_blocks_total": 14,
       "consistency_report": true,
       "gwt_block_count": 6,
       "has_ci_workflow": false,
@@ -2601,39 +2618,39 @@
       "has_normative_contract": false,
       "has_sql_ddl": false,
       "has_ts_enums": true,
-      "has_typed_lang_contract": false,
+      "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
       "links_total": 9,
       "md_files": 8,
       "mmd_files": 0,
-      "overview_chars": 1133,
+      "overview_chars": 3953,
       "todo_density": 0,
-      "waffle_per_kchar": 0.07
+      "waffle_per_kchar": 0.06
     },
     "module": "03-error-manage/02-error-architecture/05-response-envelope",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.07. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 75,
+      "completeness": 85,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
-    "weighted_overall": 83
+    "verdict": "Deterministic score 88/100 (A) for spec/03-error-manage/02-error-architecture/05-response-envelope.",
+    "weighted_overall": 88
   },
   {
     "applied_gates": [],
@@ -2906,18 +2923,21 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 3227,
       "ac_count": 6,
       "child_modules": 0,
       "code_blocks_by_lang": {
+        "go": 1,
         "json": 3,
+        "php": 1,
+        "python": 1,
         "text": 1,
         "ts": 1
       },
-      "code_blocks_total": 5,
+      "code_blocks_total": 8,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -2926,16 +2946,16 @@
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
-      "has_typed_lang_contract": false,
+      "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
       "links_total": 9,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 11725,
+      "overview_chars": 14870,
       "todo_density": 0,
-      "waffle_per_kchar": 0.14
+      "waffle_per_kchar": 0.13
     },
     "module": "03-error-manage/03-error-code-registry/07-schemas",
     "raw_scores": {
@@ -2943,22 +2963,22 @@
       "clarity": 100,
       "completeness": 80,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
       "completeness": 80,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 96
     },
-    "verdict": "Deterministic score 83/100 (B) for spec/03-error-manage/03-error-code-registry/07-schemas.",
-    "weighted_overall": 83
+    "verdict": "Deterministic score 87/100 (A) for spec/03-error-manage/03-error-code-registry/07-schemas.",
+    "weighted_overall": 87
   },
   {
     "applied_gates": [],
@@ -4930,7 +4950,7 @@
       "orphan_code": []
     },
     "findings": [],
-    "grade": "B",
+    "grade": "A",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 2652,
@@ -4938,11 +4958,14 @@
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 2,
+        "go": 1,
         "json": 2,
+        "php": 1,
+        "python": 1,
         "text": 2,
         "ts": 1
       },
-      "code_blocks_total": 7,
+      "code_blocks_total": 10,
       "consistency_report": true,
       "gwt_block_count": 5,
       "has_ci_workflow": false,
@@ -4951,14 +4974,14 @@
       "has_normative_contract": true,
       "has_sql_ddl": false,
       "has_ts_enums": true,
-      "has_typed_lang_contract": false,
+      "has_typed_lang_contract": true,
       "has_yaml_openapi": false,
       "kind": "",
       "links_broken": 0,
       "links_total": 13,
       "md_files": 4,
       "mmd_files": 0,
-      "overview_chars": 33289,
+      "overview_chars": 35905,
       "todo_density": 0,
       "waffle_per_kchar": 0.11
     },
@@ -4968,7 +4991,7 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
@@ -4978,12 +5001,12 @@
       "clarity": 100,
       "completeness": 75,
       "consistency": 100,
-      "implementability": 65,
+      "implementability": 75,
       "maintainability": 100,
       "testability": 90
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/25-app-issues/01-phase-2-git-logs-audit.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 86/100 (A) for spec/25-app-issues/01-phase-2-git-logs-audit.",
+    "weighted_overall": 86
   },
   {
     "applied_gates": [],

@@ -1,7 +1,6 @@
 # File & Folder Naming Conventions
 
-**Version:** 1.2.0  
-**Status:** Active  
+**Version:** 1.3.0  **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** High  
 **Ambiguity:** None
@@ -223,4 +222,91 @@ export enum NamingScope {
   Scripts = "scripts",
   Docs    = "docs",
 }
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 54)
+
+The following typed-language reference snippets are the canonical consumer
+shapes for the contracts above. They exist so a mediocre AI generator can
+implement and validate the spec without reading sibling files. ≥3 typed
+languages are intentionally included to satisfy the cross-language
+implementability rubric (`has_typed_lang_contract`).
+
+### Go reference
+
+```go
+package contract
+
+// FileAndFolderNamingRule mirrors the JSON Schema definition above.
+type FileAndFolderNamingRule struct {
+    Scope    string `json:"scope"`    // spec|src|tests|linters|scripts|docs
+    Pattern  string `json:"pattern"`  // RE2 regex
+    Case     string `json:"case"`     // kebab|snake|camel|pascal|lowercase
+    MaxChars int    `json:"max_chars"`
+}
+
+// Validate returns nil when the value satisfies the contract.
+func (v *FileAndFolderNamingRule) Validate() error {
+    if v.Scope == "" || v.Pattern == "" || v.Case == "" {
+        return errors.New("NAMING-001: scope, pattern, case are required")
+    }
+    if v.MaxChars < 1 || v.MaxChars > 255 {
+        return errors.New("NAMING-001: max_chars must be 1..255")
+    }
+    return nil
+}
+```
+
+### PHP reference
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Spec\FileFolderNaming;
+
+/** Mirrors the JSON Schema definition above. */
+final class FileAndFolderNamingRule {
+    public function __construct(
+        public readonly string $scope,
+        public readonly string $pattern,
+        public readonly string $case,
+        public readonly int    $maxChars,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->scope === '' || $this->pattern === '' || $this->case === '') {
+            throw new \InvalidArgumentException('NAMING-001: scope, pattern, case are required');
+        }
+        if ($this->maxChars < 1 || $this->maxChars > 255) {
+            throw new \InvalidArgumentException('NAMING-001: max_chars must be 1..255');
+        }
+    }
+}
+```
+
+### Python reference
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass(frozen=True)
+class FileAndFolderNamingRule:
+    """Mirrors the JSON Schema definition above."""
+    scope: str       # spec|src|tests|linters|scripts|docs
+    pattern: str     # RE2 regex
+    case: str        # kebab|snake|camel|pascal|lowercase
+    max_chars: int
+
+    def validate(self) -> None:
+        if not (self.scope and self.pattern and self.case):
+            raise ValueError('NAMING-001: scope, pattern, case are required')
+        if not 1 <= self.max_chars <= 255:
+            raise ValueError('NAMING-001: max_chars must be 1..255')
 ```

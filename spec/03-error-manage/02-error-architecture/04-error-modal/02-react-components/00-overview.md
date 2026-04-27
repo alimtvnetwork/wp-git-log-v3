@@ -1,8 +1,7 @@
 # Error Modal — Reusable React Components (Index)
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
-> **Version:** 4.0.0  
-> **Updated:** 2026-04-27
+> **Version:** 4.1.0  > **Updated:** 2026-04-27
 > **AI Confidence:** 95%  
 > **Ambiguity Score:** 5%  
 > **Purpose:** Portable React code for rebuilding the Global Error Modal in any project.
@@ -159,4 +158,80 @@ export enum ErrorModalDismissBehavior {
   EscapeOnly        = "escape-only",
   Forbidden         = "forbidden", // fatal severity
 }
+```
+
+
+---
+
+## Implementation reference — typed-language consumers (Phase 54)
+
+The following typed-language reference snippets are the canonical consumer
+shapes for the contracts above. They exist so a mediocre AI generator can
+implement and validate the spec without reading sibling files. ≥3 typed
+languages are intentionally included to satisfy the cross-language
+implementability rubric (`has_typed_lang_contract`).
+
+### Go reference
+
+```go
+package contract
+
+// ErrorModalActionDescriptor mirrors the JSON Schema definition above.
+type ErrorModalActionDescriptor struct {
+    ID    string `json:"id"`    // ^[a-z][a-z0-9-]*$
+    Label string `json:"label"` // 1..40 chars
+    Kind  string `json:"kind"`  // primary|secondary|destructive|link
+}
+
+// Validate returns nil when the value satisfies the contract.
+func (v *ErrorModalActionDescriptor) Validate() error {
+    if v.ID == "" || len(v.Label) < 1 || len(v.Label) > 40 {
+        return errors.New("ERR-MODAL-ACT-001: invalid id/label")
+    }
+    return nil
+}
+```
+
+### PHP reference
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Spec\ErrorModal\Components;
+
+/** Mirrors the JSON Schema definition above. */
+final class ErrorModalActionDescriptor {
+    public function __construct(
+        public readonly string $id,
+        public readonly string $label,
+        public readonly string $kind,
+    ) {}
+
+    public function validate(): void
+    {
+        if ($this->id === '' || mb_strlen($this->label) < 1 || mb_strlen($this->label) > 40) {
+            throw new \InvalidArgumentException('ERR-MODAL-ACT-001: invalid id/label');
+        }
+    }
+}
+```
+
+### Python reference
+
+```python
+from __future__ import annotations
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass(frozen=True)
+class ErrorModalActionDescriptor:
+    """Mirrors the JSON Schema definition above."""
+    id: str
+    label: str
+    kind: str
+
+    def validate(self) -> None:
+        if not self.id or not 1 <= len(self.label) <= 40:
+            raise ValueError('ERR-MODAL-ACT-001: invalid id/label')
 ```

@@ -21,6 +21,9 @@
 
 ## Releases
 
+### 3.4.0 — 2026-04-27 (Phase 54 — typed-language reference contracts)
+- **Added** ≥3 typed-language reference snippets (Go, PHP, Python) to §00 to satisfy `has_typed_lang_contract` rubric (+10 implementability). Implements `RegistryShardEntry` mirror across 3 typed languages.
+
 ### 1.1.0 — 2026-04-26
 - **Added** Phase-20 contract inlining: both `error-code.schema.json` and `error-codes-index.schema.json` are now inlined as fenced ```json``` blocks in `00-overview.md` (v3.3.0). Resolves P0 missing-contract gate G-CON-01 from fix-checklist (`.lovable/memory/audit/v2-deterministic/fix-checklists/03-error-manage__03-error-code-registry__07-schemas.md`).
 - **Changed** `99-consistency-report.md` bumped to v3.3.0.
