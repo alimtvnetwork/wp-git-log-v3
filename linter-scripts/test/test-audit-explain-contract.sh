@@ -163,11 +163,12 @@ echo "Case 4: no side effects (memory dir untouched)"
 SNAPSHOT_AFTER="$(mktemp)"
 ls -la "$MEMORY_DIR" 2>/dev/null | sort > "$SNAPSHOT_AFTER" || true
 
-if diff -q "$SNAPSHOT_BEFORE" "$SNAPSHOT_AFTER" >/dev/null; then
+if cmp -s "$SNAPSHOT_BEFORE" "$SNAPSHOT_AFTER"; then
   note_pass "no files added/modified in $MEMORY_DIR (AC-31-23 no-side-effects)"
 else
   note_fail "memory dir changed during --explain runs"
-  diff "$SNAPSHOT_BEFORE" "$SNAPSHOT_AFTER" | head -5
+  echo "    --- before ---"; head -3 "$SNAPSHOT_BEFORE" | sed 's/^/    /'
+  echo "    --- after ---";  head -3 "$SNAPSHOT_AFTER"  | sed 's/^/    /'
 fi
 
 # Cleanup
