@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **80/100 (B)**  
+**Implementability Score:** **83/100 (B)**  
 **Blast radius:** 4/10
 
-> Deterministic score 80/100 (B) for spec/14-update/diagrams.
+> Deterministic score 83/100 (B) for spec/14-update/diagrams.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,22 +16,22 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 60 | 21.0 |
+| Implementability | 35% | 70 | 24.5 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 90 | 6.3 |
+| Testability | 7% | 80 | 5.6 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
 ```json
 {
-  "kind": "",
+  "kind": "index",
   "md_files": 4,
   "mmd_files": 2,
-  "overview_chars": 3630,
+  "overview_chars": 3836,
   "ac_chars": 2594,
   "ac_count": 5,
   "gwt_block_count": 5,

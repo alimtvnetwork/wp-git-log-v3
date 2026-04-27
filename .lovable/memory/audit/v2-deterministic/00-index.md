@@ -4,7 +4,7 @@
 **Modules audited:** 79  
 **Code files indexed:** 35  
 **Mean weighted score:** **87.7/100**  
-**Mean implementability:** **75.8/100**
+**Mean implementability:** **76.1/100**
 
 ## Methodology v2
 
@@ -13,7 +13,7 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 5, **A** = 61, **B** = 13
+**A+** = 5, **A** = 62, **B** = 12
 
 ## Findings by category
 | Category | Count |
@@ -47,21 +47,21 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Bottom 15 (lowest implementability)
 | Rank | Module | Overall | Impl | Grade | Top finding |
 |---:|---|---:|---:|:-:|---|
-| 1 | [`14-update/diagrams`](./14-update__diagrams.md) | 80 | 60 | B | _no findings_ |
-| 2 | [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 84 | 60 | B | _no findings_ |
-| 3 | [`11-powershell-integration`](./11-powershell-integration.md) | 82 | 65 | B | _no findings_ |
-| 4 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 83 | 65 | B | _no findings_ |
-| 5 | [`03-error-manage/02-error-architecture/07-logging-and-diagnostics`](./03-error-manage__02-error-architecture__07-logging-and-diagnostics.md) | 84 | 65 | B | _no findings_ |
-| 6 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 85 | 65 | A | _no findings_ |
-| 7 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 85 | 65 | A | _no findings_ |
-| 8 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 86 | 65 | A | _no findings_ |
-| 9 | [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 86 | 65 | A | _no findings_ |
-| 10 | [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 86 | 65 | A | _no findings_ |
-| 11 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 86 | 65 | A | _no findings_ |
-| 12 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 86 | 65 | A | _no findings_ |
-| 13 | [`03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference`](./03-error-manage__02-error-architecture__04-error-modal__03-error-modal-reference.md) | 86 | 65 | A | _no findings_ |
-| 14 | [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 86 | 65 | A | _no findings_ |
-| 15 | [`07-design-system`](./07-design-system.md) | 86 | 65 | A | _no findings_ |
+| 1 | [`11-powershell-integration`](./11-powershell-integration.md) | 82 | 65 | B | _no findings_ |
+| 2 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 83 | 65 | B | _no findings_ |
+| 3 | [`03-error-manage/02-error-architecture/07-logging-and-diagnostics`](./03-error-manage__02-error-architecture__07-logging-and-diagnostics.md) | 84 | 65 | B | _no findings_ |
+| 4 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 85 | 65 | A | _no findings_ |
+| 5 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 85 | 65 | A | _no findings_ |
+| 6 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 86 | 65 | A | _no findings_ |
+| 7 | [`02-coding-guidelines/02-typescript`](./02-coding-guidelines__02-typescript.md) | 86 | 65 | A | _no findings_ |
+| 8 | [`02-coding-guidelines/03-golang/04-golang-standards-reference`](./02-coding-guidelines__03-golang__04-golang-standards-reference.md) | 86 | 65 | A | _no findings_ |
+| 9 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 86 | 65 | A | _no findings_ |
+| 10 | [`03-error-manage/02-error-architecture/04-error-modal`](./03-error-manage__02-error-architecture__04-error-modal.md) | 86 | 65 | A | _no findings_ |
+| 11 | [`03-error-manage/02-error-architecture/04-error-modal/03-error-modal-reference`](./03-error-manage__02-error-architecture__04-error-modal__03-error-modal-reference.md) | 86 | 65 | A | _no findings_ |
+| 12 | [`03-error-manage/03-error-code-registry/09-templates`](./03-error-manage__03-error-code-registry__09-templates.md) | 86 | 65 | A | _no findings_ |
+| 13 | [`07-design-system`](./07-design-system.md) | 86 | 65 | A | _no findings_ |
+| 14 | [`02-coding-guidelines/03-golang`](./02-coding-guidelines__03-golang.md) | 88 | 65 | A | _no findings_ |
+| 15 | [`02-coding-guidelines/04-php`](./02-coding-guidelines__04-php.md) | 88 | 65 | A | _no findings_ |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -80,7 +80,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Full ranking
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
-| [`14-update/diagrams`](./14-update__diagrams.md) | 60 | 75 | 100 | 100 | 100 | 90 | 100 | **80** | B | 4 |
 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 70 | 65 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 70 | 65 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
@@ -91,8 +90,8 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`11-powershell-integration`](./11-powershell-integration.md) | 65 | 75 | 100 | 100 | 100 | 90 | 100 | **82** | B | 2 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 65 | 80 | 100 | 100 | 100 | 96 | 100 | **83** | B | 4 |
 | [`10-research`](./10-research.md) | 70 | 75 | 100 | 100 | 100 | 80 | 100 | **83** | B | 0 |
+| [`14-update/diagrams`](./14-update__diagrams.md) | 70 | 75 | 100 | 100 | 100 | 80 | 100 | **83** | B | 4 |
 | [`03-error-manage/02-error-architecture/07-logging-and-diagnostics`](./03-error-manage__02-error-architecture__07-logging-and-diagnostics.md) | 65 | 80 | 100 | 100 | 100 | 100 | 100 | **84** | B | 4 |
-| [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 60 | 90 | 100 | 100 | 100 | 100 | 100 | **84** | B | 4 |
 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 65 | 90 | 100 | 100 | 100 | 96 | 100 | **85** | A | 6 |
 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 65 | 85 | 100 | 100 | 100 | 100 | 100 | **85** | A | 4 |
 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 75 | 75 | 100 | 100 | 100 | 80 | 100 | **85** | A | 0 |
@@ -116,6 +115,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`07-design-system`](./07-design-system.md) | 65 | 90 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
 | [`18-wp-plugin-how-to/02-enums-and-coding-style`](./18-wp-plugin-how-to__02-enums-and-coding-style.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
+| [`26-gitlogs-diagrams`](./26-gitlogs-diagrams.md) | 70 | 90 | 100 | 100 | 100 | 80 | 100 | **86** | A | 4 |
 | [`03-error-manage/01-error-resolution/03-retrospectives`](./03-error-manage__01-error-resolution__03-retrospectives.md) | 75 | 80 | 100 | 100 | 100 | 100 | 100 | **87** | A | 4 |
 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 75 | 80 | 100 | 100 | 100 | 96 | 100 | **87** | A | 4 |
 | [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 85 | 65 | 100 | 100 | 100 | 90 | 100 | **87** | A | 5 |
