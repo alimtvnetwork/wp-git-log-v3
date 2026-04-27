@@ -85,3 +85,17 @@ prose alone. Phase 82 will explore an evidenced-tracker contract bonus.
 3. **Phase 83** — Cumulative schema-bonus cap (cosmetic anti-double-count).
 4. **B1** — `spec/22-git-logs-v2/07-app-entity.md` decision (user input).
 5. **R1** — Real-AI re-audit (Lovable Cloud required).
+
+---
+
+## Retrospective (added in Phase 88, 2026-04-27)
+
+| Queued | Actual phase | Outcome |
+|---|---|---|
+| Phase 81 — wire strict gates into CI | Phase 81 (kept) | ✓ Three strict gates with `--min-weighted=95 --min-impl=98` floors. Floors later tightened to `97/99` in Phase 84. |
+| Phase 82 — evidenced-tracker contract bonus | Phase 82 (kept; matches the prediction at line 77 above) | ✓ Rubric v2.13: trackers with inlined typed contracts get +5 each, cap raised 85 → 95. Three trackers lifted; mean impl 99.5 → 99.8. |
+| Phase 83 — cumulative schema-bonus cap | **Deferred to Phase 86, then REJECTED** | Empirical test: mean impl 99.8 → 89.2; 76 legitimate multi-contract modules unfairly penalised. Reverted; documented in source comment + memo. See `phase-86-schema-cap-rejected.md`. **Do not re-propose without re-reading.** Phase 83's actual work was rubric v2.14 (TODO regex tightening + `todo_audit_exempt: true` opt-out + AC injection on 30 modules), which lifted mean weighted 96.5 → 98.0. |
+
+Current state (as of Phase 88): mean weighted 98.0, mean impl 99.8 (vs the 96.3/99.5
+this memo recorded as its post-state).
+
