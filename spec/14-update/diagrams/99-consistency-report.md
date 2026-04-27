@@ -1,7 +1,7 @@
 # Consistency Report — diagrams
 
 **Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Updated:** 2026-04-26  
 **Scope:** `spec/14-update/diagrams/`
 
 ---
