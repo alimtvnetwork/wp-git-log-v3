@@ -1,6 +1,6 @@
 # Spec cross-link allowlist (waivers)
 # Format: <relpath>:<line>:<target>
-# Updated 2026-04-26: 16 entries from inline-fix sweep + 10 deferred-target waivers
+# Updated 2026-04-26 (Phase 28): line numbers refreshed after Phase 27 frontmatter additions.
 # (root /scripts/, /docs/, /linters-cicd/codegen/, /eslint-plugins/, /spec-slides/
 #  — files referenced from spec but not yet present in the repo).
 
@@ -24,9 +24,9 @@ spec/01-spec-authoring-guide/11-root-readme-conventions.md:228:../../scripts/syn
 spec/01-spec-authoring-guide/11-root-readme-conventions.md:229:../../docs/principles.md
 spec/01-spec-authoring-guide/11-root-readme-conventions.md:229:../../docs/architecture.md
 spec/01-spec-authoring-guide/11-root-readme-conventions.md:229:../../docs/author.md
-spec/02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md:59:../../../../linters-cicd/codegen/README.md
+spec/02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md:64:../../../../linters-cicd/codegen/README.md
 spec/02-coding-guidelines/01-cross-language/12-no-negatives.md:275:../../../linters-cicd/codegen/README.md
 spec/02-coding-guidelines/02-typescript/11-eslint-enforcement.md:137:../../../eslint-plugins/coding-guidelines/index.js
-spec/15-distribution-and-runner/00-overview.md:91:../../spec-slides/00-overview.md
+spec/15-distribution-and-runner/00-overview.md:96:../../spec-slides/00-overview.md
 spec/15-distribution-and-runner/02-runner-contract.md:103:../../spec-slides/
 spec/17-consolidated-guidelines/28-distribution-and-runner.md:234:../../spec-slides/00-overview.md
