@@ -1,8 +1,10 @@
 # Acceptance Criteria — Update — Overview
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26  
+**Version:** 2.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/14-update/`
+
+> **v2.1.0 (Phase 124):** AC-20 `Given` and `Source` lines now explicitly cite the upstream generic blueprint [`../16-generic-release/01-cross-compilation.md`](../16-generic-release/01-cross-compilation.md) in addition to the local `16-cross-compilation.md` / `17-release-pipeline.md`. The cross-compilation target list and CGO discipline originate in §16 (kind: future-spec generic blueprint); §14 is the concrete consumer. Closes the AC-SAG-25 cite-direction gap surfaced by Phase 121's reframe (§14 → §16, not the inverted §16 → §14 originally proposed).
 
 > **v2.0.0 (Phase 16b):** Added 15 module-specific Given/When/Then ACs (AC-06..AC-20) covering rename-first deploy, Windows handoff, version verification, code signing, SHA-256 checksum verification, install script version probe, updater binary, config file location/XDG, update command workflow, non-blocking parallel update check (12h interval, fire-and-forget), JSON fallback store, deploy-path resolution, cleanup, atomic rollback, and generic installer behavior. The 5 generic structural ACs (AC-01..AC-05) are preserved verbatim — they validate the spec module itself; AC-06+ validate the **update/installer implementation** that consumes the spec.
 
