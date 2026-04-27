@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **86/100 (A)**  
+**Implementability Score:** **89/100 (A)**  
 **Blast radius:** 2/10
 
-> Deterministic score 86/100 (A) for spec/11-powershell-integration.
+> Deterministic score 89/100 (A) for spec/11-powershell-integration.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.11. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 75 | 26.2 |
+| Implementability | 35% | 85 | 29.8 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,13 +30,13 @@
 {
   "kind": "future-spec",
   "md_files": 16,
-  "mmd_files": 0,
-  "overview_chars": 15277,
+  "mmd_files": 1,
+  "overview_chars": 16793,
   "ac_chars": 2914,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 81,
+  "code_blocks_total": 86,
   "code_blocks_by_lang": {
     "plain": 10,
     "json": 20,
@@ -46,7 +46,7 @@
     "go": 1,
     "php": 2,
     "python": 1,
-    "yaml": 2,
+    "yaml": 7,
     "md": 1
   },
   "has_sql_ddl": false,
@@ -54,9 +54,9 @@
   "has_ts_enums": false,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 40,
   "links_broken": 0,
   "todo_density": 0,

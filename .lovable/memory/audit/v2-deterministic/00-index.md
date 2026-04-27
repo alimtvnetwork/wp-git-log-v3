@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 87  
 **Code files indexed:** 35  
-**Mean weighted score:** **91.9/100**  
-**Mean implementability:** **87.8/100**
+**Mean weighted score:** **92.1/100**  
+**Mean implementability:** **88.4/100**
 
 ## Methodology v2
 
@@ -50,18 +50,18 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 1 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 81 | 75 | B | _no findings_ |
 | 2 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 81 | 75 | B | _no findings_ |
 | 3 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 85 | 75 | A | _no findings_ |
-| 4 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 86 | 75 | A | _no findings_ |
-| 5 | [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 86 | 75 | A | _no findings_ |
-| 6 | [`11-powershell-integration`](./11-powershell-integration.md) | 86 | 75 | A | _no findings_ |
-| 7 | [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 86 | 75 | A | _no findings_ |
-| 8 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 87 | 80 | A | _no findings_ |
-| 9 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 87 | 80 | A | _no findings_ |
-| 10 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 88 | 80 | A | _no findings_ |
-| 11 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 88 | 80 | A | _no findings_ |
-| 12 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 88 | 80 | A | _no findings_ |
-| 13 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 89 | 80 | A | _no findings_ |
-| 14 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 89 | 80 | A | _no findings_ |
-| 15 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 89 | 80 | A | _no findings_ |
+| 4 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 87 | 80 | A | _no findings_ |
+| 5 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 87 | 80 | A | _no findings_ |
+| 6 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 88 | 80 | A | _no findings_ |
+| 7 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 88 | 80 | A | _no findings_ |
+| 8 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 88 | 80 | A | _no findings_ |
+| 9 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 89 | 80 | A | _no findings_ |
+| 10 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 89 | 80 | A | _no findings_ |
+| 11 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 89 | 80 | A | _no findings_ |
+| 12 | [`10-research`](./10-research.md) | 89 | 80 | A | _no findings_ |
+| 13 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 89 | 80 | A | _no findings_ |
+| 14 | [`14-update/diagrams`](./14-update__diagrams.md) | 89 | 80 | A | _no findings_ |
+| 15 | [`25-app-issues`](./25-app-issues.md) | 89 | 80 | A | _no findings_ |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -83,10 +83,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 75 | 75 | 100 | 100 | 100 | 80 | 100 | **85** | A | 0 |
-| [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
-| [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 75 | 75 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
-| [`11-powershell-integration`](./11-powershell-integration.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 2 |
-| [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
 | [`02-coding-guidelines/10-research`](./02-coding-guidelines__10-research.md) | 80 | 75 | 100 | 100 | 100 | 80 | 100 | **87** | A | 2 |
 | [`02-coding-guidelines/22-app-issues`](./02-coding-guidelines__22-app-issues.md) | 80 | 75 | 100 | 100 | 100 | 80 | 100 | **87** | A | 2 |
 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 80 | 80 | 100 | 100 | 100 | 80 | 100 | **88** | A | 2 |
@@ -94,11 +90,13 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`02-coding-guidelines/24-app-design-system-and-ui`](./02-coding-guidelines__24-app-design-system-and-ui.md) | 80 | 80 | 100 | 100 | 100 | 80 | 100 | **88** | A | 2 |
 | [`06-seedable-config-architecture/02-features`](./06-seedable-config-architecture__02-features.md) | 90 | 60 | 100 | 100 | 100 | 90 | 90 | **88** | A | 5 |
 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
+| [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 4 |
 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
 | [`05-split-db-architecture/02-features`](./05-split-db-architecture__02-features.md) | 90 | 65 | 100 | 100 | 100 | 90 | 100 | **89** | A | 5 |
 | [`10-research`](./10-research.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 2 |
 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 80 | 80 | 100 | 100 | 100 | 96 | 100 | **89** | A | 5 |
+| [`11-powershell-integration`](./11-powershell-integration.md) | 85 | 75 | 100 | 100 | 100 | 90 | 100 | **89** | A | 2 |
 | [`14-update/diagrams`](./14-update__diagrams.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 6 |
 | [`25-app-issues`](./25-app-issues.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 4 |
 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 90 | 70 | 100 | 100 | 100 | 80 | 90 | **89** | A | 2 |
@@ -116,6 +114,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`.`](./..md) | 80 | 100 | 100 | 100 | 100 | 80 | 100 | **92** | A | 10 |
 | [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 90 | 80 | 100 | 100 | 100 | 96 | 100 | **92** | A | 7 |
 | [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 90 | 80 | 100 | 100 | 100 | 96 | 100 | **92** | A | 7 |
+| [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 85 | 85 | 100 | 100 | 100 | 100 | 100 | **92** | A | 4 |
 | [`03-error-manage/03-error-code-registry/07-schemas`](./03-error-manage__03-error-code-registry__07-schemas.md) | 90 | 80 | 100 | 100 | 100 | 96 | 100 | **92** | A | 4 |
 | [`03-error-manage/03-error-code-registry/08-linter-scripts`](./03-error-manage__03-error-code-registry__08-linter-scripts.md) | 90 | 80 | 100 | 100 | 100 | 96 | 100 | **92** | A | 4 |
 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 90 | 80 | 100 | 100 | 100 | 96 | 100 | **92** | A | 7 |
@@ -128,6 +127,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/03-error-code-registry`](./03-error-manage__03-error-code-registry.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
 | [`04-database-conventions`](./04-database-conventions.md) | 95 | 75 | 100 | 100 | 100 | 90 | 100 | **93** | A | 7 |
 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
+| [`25-app-issues/01-phase-2-git-logs-audit`](./25-app-issues__01-phase-2-git-logs-audit.md) | 95 | 75 | 100 | 100 | 100 | 90 | 100 | **93** | A | 4 |
 | [`28-universal-ci-cli`](./28-universal-ci-cli.md) | 90 | 85 | 100 | 100 | 100 | 100 | 90 | **93** | A | 4 |
 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
 | [`02-coding-guidelines/01-cross-language/02-boolean-principles`](./02-coding-guidelines__01-cross-language__02-boolean-principles.md) | 90 | 90 | 100 | 100 | 100 | 100 | 100 | **94** | A | 4 |
