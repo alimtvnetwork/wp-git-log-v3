@@ -42,7 +42,18 @@ AI-implementability audit. Asks: *"Could a mediocre AI ship a working implementa
 python3 linter-scripts/audit-spec-vs-code-v2.py                                    # AI mode
 AUDIT_ONLY="22-git-logs-v2" python3 linter-scripts/audit-spec-vs-code-v2.py        # smoke test one module
 AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py              # deterministic mode
+AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py \
+    --min-weighted=97 --min-impl=99                                                # CI threshold gate (v2.12)
 ```
+
+### CLI flags (v2.12, Phase 81)
+
+| Flag | Type | Effect |
+|------|------|--------|
+| `--min-weighted=N` | int 0–100 | Exit non-zero when the **mean weighted score** across all audited modules falls below `N`. Stderr emits `✗ FAIL: weighted mean X < threshold N`. |
+| `--min-impl=N` | int 0–100 | Exit non-zero when the **mean implementability score** falls below `N`. Stderr emits `✗ FAIL: implementability mean X < threshold N`. |
+
+When at least one threshold is supplied AND none fail, stderr emits `✓ PASS: thresholds met`. When neither flag is supplied the script preserves its pre-v2.12 behaviour (exit 0 unless an AI-mode module errored). Used by the `spec-health.yml` workflow audit gate (currently `--min-weighted=97 --min-impl=99`, set in Phase 84).
 
 ## Modes
 
