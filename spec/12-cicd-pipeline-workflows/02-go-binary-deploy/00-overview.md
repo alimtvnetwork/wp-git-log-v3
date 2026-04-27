@@ -376,3 +376,42 @@ final class Artifact
     }
 }
 ```
+
+
+---
+
+## Phase 63 Reference: Go Binary Deploy enums (TypeScript)
+
+```typescript
+// TypeScript enum mirror of the Go binary deploy pipeline.
+
+export enum BuildPlatform {
+  LinuxAmd64   = "linux/amd64",
+  LinuxArm64   = "linux/arm64",
+  DarwinAmd64  = "darwin/amd64",
+  DarwinArm64  = "darwin/arm64",
+  WindowsAmd64 = "windows/amd64",
+}
+
+export enum ArtifactKind {
+  Binary  = "binary",
+  Tarball = "tarball",
+  Zip     = "zip",
+  Deb     = "deb",
+  Rpm     = "rpm",
+}
+
+export enum ReleaseChannel {
+  Stable = "stable",
+  Beta   = "beta",
+  Edge   = "edge",
+}
+
+export type GoBuildArtifact = {
+  platform: BuildPlatform;
+  kind:     ArtifactKind;
+  channel:  ReleaseChannel;
+  version:  string;
+  sha256:   string;
+};
+```

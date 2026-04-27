@@ -206,3 +206,45 @@ func ParseChecksumsFile(r io.Reader) (map[string]string, error) {
     return out, sc.Err()
 }
 ```
+
+
+---
+
+## Phase 63 Reference: Generic Release enums (TypeScript)
+
+```typescript
+// TypeScript enum mirror of the generic release pipeline.
+
+export enum ReleaseKind {
+  Major = "major",
+  Minor = "minor",
+  Patch = "patch",
+  Hotfix = "hotfix",
+  Prerelease = "prerelease",
+}
+
+export enum ReleaseStage {
+  Drafted   = "drafted",
+  Tagged    = "tagged",
+  Built     = "built",
+  Tested    = "tested",
+  Signed    = "signed",
+  Published = "published",
+  Withdrawn = "withdrawn",
+}
+
+export enum SignatureAlg {
+  CosignKeyless = "cosign-keyless",
+  GpgRsa        = "gpg-rsa",
+  MinisignEd25519 = "minisign-ed25519",
+}
+
+export type ReleaseRecord = {
+  id:       string;
+  kind:     ReleaseKind;
+  stage:    ReleaseStage;
+  version:  string;
+  signed_with: SignatureAlg;
+  published_at: string;
+};
+```

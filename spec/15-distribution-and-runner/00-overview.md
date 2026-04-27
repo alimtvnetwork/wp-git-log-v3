@@ -355,3 +355,46 @@ func (c Channel) Validate() error {
     }
 }
 ```
+
+
+---
+
+## Phase 63 Reference: Distribution and Runner enums (TypeScript)
+
+```typescript
+// TypeScript enum mirror of distribution + runner.
+
+export enum InstallMethod {
+  Curl     = "curl",
+  Brew     = "brew",
+  Apt      = "apt",
+  Choco    = "choco",
+  Manual   = "manual",
+  Installer = "installer",
+}
+
+export enum RunnerStatus {
+  Stopped  = "stopped",
+  Starting = "starting",
+  Running  = "running",
+  Degraded = "degraded",
+  Stopping = "stopping",
+  Crashed  = "crashed",
+}
+
+export enum DistributionTarget {
+  Linux   = "linux",
+  MacOS   = "macos",
+  Windows = "windows",
+  Docker  = "docker",
+}
+
+export type RunnerInstance = {
+  id:        string;
+  target:    DistributionTarget;
+  install:   InstallMethod;
+  status:    RunnerStatus;
+  version:   string;
+  started_at: string;
+};
+```

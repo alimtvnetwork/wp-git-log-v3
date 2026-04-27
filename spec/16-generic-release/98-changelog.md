@@ -44,3 +44,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+## 2026-04-27 — Phase 63 impl-sweep
+
+- Phase 63: appended Generic Release enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).

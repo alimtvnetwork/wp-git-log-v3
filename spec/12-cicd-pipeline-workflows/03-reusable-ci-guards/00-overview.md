@@ -129,3 +129,42 @@ Guards described as app-code targets; meta-linter usage in this spec repo is a d
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+
+---
+
+## Phase 63 Reference: Reusable CI Guards enums (TypeScript)
+
+```typescript
+// TypeScript enum mirror of the reusable CI guard system.
+
+export enum GuardKind {
+  Lockstep      = "lockstep",
+  TreeHealth    = "tree-health",
+  Forbidden     = "forbidden-strings",
+  CrossLinks    = "spec-cross-links",
+  TraceMap      = "trace-map",
+  AxiosVersion  = "axios-version",
+}
+
+export enum GuardOutcome {
+  Pass    = "pass",
+  Fail    = "fail",
+  Skip    = "skip",
+  Warning = "warning",
+}
+
+export enum GuardSeverity {
+  Blocking    = "blocking",
+  Advisory    = "advisory",
+  Informational = "informational",
+}
+
+export type GuardResult = {
+  kind:     GuardKind;
+  outcome:  GuardOutcome;
+  severity: GuardSeverity;
+  duration_ms: number;
+  findings: number;
+};
+```
