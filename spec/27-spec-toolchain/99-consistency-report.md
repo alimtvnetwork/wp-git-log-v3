@@ -1,9 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.8.0
+**Version:** 2.9.0
 **Updated:** 2026-04-27
 
-> **v2.8.0 update (Phase R4):** Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.3 → **v2.4** — TODO/waffle scanners now operate on prose only (strips fenced code blocks + inline `code` spans before regex counting). New `strip_code()` helper + `INLINE_CODE_RX`. Measured impact: §27 TODO density 25 → 17 (8 false positives in script-spec code samples), `04-code-style` 3 → 2 (clears G-TODO-01 false finding). [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.2.0 → v1.3.0 with new **AC-31-11**. Unblocks R1 (honest AI re-audit).
+> **v2.9.0 update (Phase R5):** Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.4 → **v2.5** to clear the last G-TODO-01 false positives (auditor self-reference). Added `META_TOKEN_SEQ_RX` (strips canonical `TODO/TBD/FIXME` references) and per-gate `skip_kinds` mechanism (G-TODO-01 now bypassed when `kind: meta-toolchain`). Added `kind: meta-toolchain` frontmatter to `27-spec-toolchain/00-overview.md` (v1.5.0 → v1.6.0). [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.3.0 → v1.4.0 with new **AC-31-12** + **AC-31-13**. Measured: **G-TODO-01 active firings 1 → 0**; `02-coding-guidelines` 94 (A) → 98 (A+); A+ tier 4 → 5; mean 81.6 → 81.7. `27-spec-toolchain` itself held at 78 — bottlenecked by impl=55 (Phase 42 target), not completeness.
 
 > **v2.6.0 update (Phase 40):** Added [`24-check-lockstep.md`](./24-check-lockstep.md) + `linter-scripts/check-lockstep.cjs` (v1.0.0). Mechanises the Core memory rule "§00 banner + §98 changelog row + §99 health/inventory in lockstep". 4 rules (L0/L1/L2/L3), format-tolerant, warn-only by default. Wired into `spec-monthly-audit.yml`. Bijection 30/30 → 31/31. Adoption baseline: 24/82 modules drifted (8 L0 missing banners, 17 L1 stale §99 dates, 3 L2 missing changelog rows). Phase 41 backlog: sweep baseline to zero before flipping CI flag to `--strict`. 8 ACs (AC-24-01..08).
 

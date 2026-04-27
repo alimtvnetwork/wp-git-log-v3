@@ -1,6 +1,15 @@
 #!/usr/bin/env python3
 """
-Spec-vs-Code Audit **v2.4** — AI-Implementability Edition.
+Spec-vs-Code Audit **v2.5** — AI-Implementability Edition.
+
+v2.5 (2026-04-27, Phase R5):
+  - Meta-token sequence exemption: the canonical reference form
+    `TODO/TBD/FIXME` (or any 2+ slash-joined work-tracking tokens) is now
+    stripped before counting individual hits. Spec content that *defines*
+    the audit (changelog rows, AC text, fix-checklist categories) no
+    longer self-penalises. Real `TODO:` work markers still count.
+  - New frontmatter `kind: meta-toolchain` exempts auditor-self-reference
+    modules entirely from G-TODO-01.
 
 v2.4 (2026-04-27, Phase R4):
   - TODO/TBD/FIXME and waffle-word scanners now strip fenced code blocks
@@ -88,12 +97,21 @@ INLINE_CODE_RX = re.compile(r"`[^`\n]+`")
 FRONTMATTER_RX = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 KIND_RX        = re.compile(r"^kind:\s*([A-Za-z0-9_-]+)\s*$", re.M)
 
+TODO_TOKEN = r"(?:TODO|TBD|FIXME|XXX|HACK)"
+META_TOKEN_SEQ_RX = re.compile(rf"\b{TODO_TOKEN}(?:/{TODO_TOKEN}){{1,4}}\b")
+
 def strip_code(text: str) -> str:
-    """Remove fenced code blocks and inline code so TODO/waffle scanners
-    see prose only. Tokens like TODO inside ```python blocks are not
-    spec-level incompleteness markers."""
+    """Remove fenced code blocks, inline code, and meta-token sequences
+    so TODO/waffle scanners see prose only.
+
+    v2.4: strips ```...``` fences and `inline` spans.
+    v2.5: also strips slash-joined meta references like `TODO/TBD/FIXME`
+    that occur in audit-self-reference content (changelog rows, AC text,
+    fix-checklist category labels). Standalone `TODO:` work markers in
+    prose still count."""
     no_fences = CODE_BLOCK_RX.sub("", text)
-    return INLINE_CODE_RX.sub("", no_fences)
+    no_inline = INLINE_CODE_RX.sub("", no_fences)
+    return META_TOKEN_SEQ_RX.sub("", no_inline)
 
 # ---------------- code surface ----------------
 def collect_code_index() -> str:
@@ -383,21 +401,29 @@ HARD_GATES = [
      "rationale": "Missing 99-consistency-report.md — drift cannot be tracked between releases."},
     {"id": "G-TODO-01", "dimension": "completeness",    "cap": 70,
      "predicate": lambda m: m["todo_density"] >= 3,
+     "skip_kinds": {"meta-toolchain"},  # v2.5: auditor-self-reference modules
      "rationale": "≥3 TODO/TBD/FIXME markers — module is explicitly incomplete."},
 ]
 
 def apply_gates(scores: dict, metrics: dict) -> tuple[dict, list[dict]]:
-    """Return (capped_scores, applied_gate_records)."""
+    """Return (capped_scores, applied_gate_records).
+
+    v2.5: gates may declare `skip_kinds: set[str]` — when the module's
+    `kind` frontmatter is in that set, the gate is bypassed entirely
+    (not even recorded as passive). Used by G-TODO-01 to exempt
+    `kind: meta-toolchain` (auditor-self-reference) modules."""
     capped = dict(scores)
     applied: list[dict] = []
+    kind = metrics.get("kind", "") or ""
     for gate in HARD_GATES:
+        if kind in gate.get("skip_kinds", set()):
+            continue
         if not gate["predicate"](metrics):
             continue
         dim = gate["dimension"]
         before = capped[dim]
         cap = gate["cap"]
         if before <= cap:
-            # Gate would not lower the score — record as passive (informational)
             applied.append({
                 "id": gate["id"], "dimension": dim, "cap": cap,
                 "before": before, "after": before, "active": False,

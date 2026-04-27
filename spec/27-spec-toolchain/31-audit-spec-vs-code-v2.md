@@ -1,6 +1,6 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.3.0  
+**Version:** 1.4.0  
 **Updated:** 2026-04-27  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
 **Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates**)  
@@ -133,7 +133,7 @@ After the rubric computes raw per-dimension scores, a fixed table of **hard gate
 | `G-WAF-01`  | clarity | 70 | `waffle_per_kchar > 3` |
 | `G-WAF-02`  | clarity | 50 | `waffle_per_kchar > 6` |
 | `G-CR-01`   | maintainability | 60 | Missing `99-consistency-report.md` |
-| `G-TODO-01` | completeness | 70 | `todo_density >= 3` |
+| `G-TODO-01` | completeness | 70 | `todo_density >= 3` (skip when `kind: meta-toolchain`, v2.5) |
 
 The result envelope adds two new top-level keys:
 - `raw_scores` — pre-gate rubric output (so reductions are visible).
@@ -155,6 +155,16 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **Given** a module whose only `TODO`/`FIXME` tokens appear inside fenced code blocks (```` ``` ````) or inline `code` spans,
 - **When** the deterministic metrics are computed,
 - **Then** `metrics.todo_density` MUST equal `0` AND the `G-TODO-01` gate MUST NOT fire. The same prose-only rule applies to `WAFFLE_RX` so `waffle_per_kchar` reflects spec narrative, not code samples.
+
+### AC-31-12 — Meta-token sequences are stripped (v2.5)
+- **Given** a module whose prose contains the canonical reference form `TODO/TBD/FIXME` (or any 2+ slash-joined work-tracking tokens) — typical of changelog rows, AC text, or fix-checklist category labels,
+- **When** the deterministic metrics are computed,
+- **Then** those meta-references MUST NOT contribute to `metrics.todo_density`. Standalone `TODO:` work markers in prose still count.
+
+### AC-31-13 — `kind: meta-toolchain` exempts G-TODO-01 (v2.5)
+- **Given** a module whose frontmatter declares `kind: meta-toolchain` (auditor-self-reference modules — currently `27-spec-toolchain`),
+- **When** the audit runs,
+- **Then** the `G-TODO-01` gate MUST be bypassed entirely (not even recorded as passive in `applied_gates`). Other gates apply normally.
 
 ## Cross-references
 

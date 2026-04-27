@@ -220,17 +220,7 @@
     "weighted_overall": 62
   },
   {
-    "applied_gates": [
-      {
-        "active": true,
-        "after": 70,
-        "before": 80,
-        "cap": 70,
-        "dimension": "completeness",
-        "id": "G-TODO-01",
-        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 10,
     "code_mapping": {
       "expected_but_missing": [],
@@ -241,13 +231,13 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=8",
+        "evidence": "todo_density=2",
         "impact": 3,
-        "issue": "8 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "2 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
-    "grade": "A",
+    "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
       "ac_chars": 31913,
@@ -280,31 +270,31 @@
       "md_files": 6,
       "mmd_files": 0,
       "overview_chars": 12788,
-      "todo_density": 8,
+      "todo_density": 2,
       "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 100,
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.12. Gates active: 1.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 100,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 94/100 (A) for spec/02-coding-guidelines.",
-    "weighted_overall": 94
+    "verdict": "Deterministic score 98/100 (A+) for spec/02-coding-guidelines.",
+    "weighted_overall": 98
   },
   {
     "applied_gates": [
@@ -490,16 +480,7 @@
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "drift",
-        "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=2",
-        "impact": 3,
-        "issue": "2 TODO/TBD/FIXME marker(s) in module body",
-        "severity": "low"
-      }
-    ],
+    "findings": [],
     "grade": "B",
     "implementability_blockers": [],
     "metrics": {
@@ -528,31 +509,31 @@
       "md_files": 11,
       "mmd_files": 0,
       "overview_chars": 3108,
-      "todo_density": 2,
+      "todo_density": 0,
       "waffle_per_kchar": 0.18
     },
     "module": "02-coding-guidelines/01-cross-language/04-code-style",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 60,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 100
     },
     "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 80,
+      "completeness": 90,
       "consistency": 100,
       "implementability": 60,
-      "maintainability": 90,
+      "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 82/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
-    "weighted_overall": 82
+    "verdict": "Deterministic score 84/100 (B) for spec/02-coding-guidelines/01-cross-language/04-code-style.",
+    "weighted_overall": 84
   },
   {
     "applied_gates": [],
@@ -4697,9 +4678,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=8",
+        "evidence": "todo_density=5",
         "impact": 3,
-        "issue": "8 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "5 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -4746,7 +4727,7 @@
       "md_files": 36,
       "mmd_files": 0,
       "overview_chars": 9194,
-      "todo_density": 8,
+      "todo_density": 5,
       "waffle_per_kchar": 0.09
     },
     "module": "17-consolidated-guidelines",
@@ -4929,9 +4910,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=14",
+        "evidence": "todo_density=10",
         "impact": 3,
-        "issue": "14 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "10 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -4968,7 +4949,7 @@
       "md_files": 35,
       "mmd_files": 0,
       "overview_chars": 9273,
-      "todo_density": 14,
+      "todo_density": 10,
       "waffle_per_kchar": 0.13
     },
     "module": "22-git-logs-v2",
@@ -5442,17 +5423,7 @@
     "weighted_overall": 79
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 70,
-        "before": 70,
-        "cap": 70,
-        "dimension": "completeness",
-        "id": "G-TODO-01",
-        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5463,9 +5434,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=30",
+        "evidence": "todo_density=17",
         "impact": 3,
-        "issue": "30 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "17 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -5494,13 +5465,13 @@
       "has_ts_enums": false,
       "has_typed_lang_contract": false,
       "has_yaml_openapi": false,
-      "kind": "",
+      "kind": "meta-toolchain",
       "links_broken": 0,
       "links_total": 167,
       "md_files": 40,
       "mmd_files": 0,
-      "overview_chars": 10807,
-      "todo_density": 30,
+      "overview_chars": 11070,
+      "todo_density": 17,
       "waffle_per_kchar": 0.18
     },
     "module": "27-spec-toolchain",
@@ -5527,17 +5498,7 @@
     "weighted_overall": 78
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 70,
-        "before": 70,
-        "cap": 70,
-        "dimension": "completeness",
-        "id": "G-TODO-01",
-        "rationale": "\u22653 TODO/TBD/FIXME markers \u2014 module is explicitly incomplete."
-      }
-    ],
+    "applied_gates": [],
     "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
@@ -5548,9 +5509,9 @@
       {
         "category": "drift",
         "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=4",
+        "evidence": "todo_density=1",
         "impact": 3,
-        "issue": "4 TODO/TBD/FIXME marker(s) in module body",
+        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
         "severity": "low"
       }
     ],
@@ -5585,14 +5546,14 @@
       "md_files": 13,
       "mmd_files": 0,
       "overview_chars": 6408,
-      "todo_density": 4,
+      "todo_density": 1,
       "waffle_per_kchar": 0.18
     },
     "module": "28-universal-ci-cli",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 90,
@@ -5602,13 +5563,13 @@
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 70,
+      "completeness": 85,
       "consistency": 100,
       "implementability": 65,
       "maintainability": 90,
       "testability": 100
     },
-    "verdict": "Deterministic score 81/100 (B) for spec/28-universal-ci-cli.",
-    "weighted_overall": 81
+    "verdict": "Deterministic score 84/100 (B) for spec/28-universal-ci-cli.",
+    "weighted_overall": 84
   }
 ]
