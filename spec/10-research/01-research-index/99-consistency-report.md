@@ -19,3 +19,9 @@
 - All 4 required files present.
 - Inlined invariant contract present.
 - 2 acceptance criteria in GWT format.
+
+### 2026-04-27 — Phase 73 deepening
+
+- CI workflow contract inlined: 5 stages.
+- Implementability raised 80 → 85 (deterministic audit).
+
