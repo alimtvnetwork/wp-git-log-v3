@@ -526,7 +526,12 @@ _Verification section last updated: 2026-04-21_
 **Date:** 2026-04-26  
 **Status:** Forward-looking spec — drift expected.
 
-Health-score weights (25% each) are spec contract; live `check-tree-health.cjs` weights live in downstream tooling and may evolve. Spec is forward-looking.
+Health-score weights are now versioned in the linter:
 
-This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+- **Rubric v1.x** (legacy): Required 75% / Recommended 25%.
+- **Rubric v2.0.0** (Phase 30, 2026-04-26): Required 60% / Recommended 25% / **§99 Quality 15%**.
+
+The §99 quality dimension awards 1 credit each for: ≥30 non-blank lines, presence of a `Validation History` (or `Findings`/`Audit History`) section, and presence of a `File Inventory`/`Module Inventory`/`Top-Level Modules`/`Document Inventory` section. Authors should keep `99-consistency-report.md` substantive — empty stubs no longer score full credit.
+
+This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c + Phase 30 notes.
 
