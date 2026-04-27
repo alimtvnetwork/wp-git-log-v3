@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 79  
 **Code files indexed:** 35  
-**Mean weighted score:** **84.1/100**  
-**Mean implementability:** **67.4/100**
+**Mean weighted score:** **84.3/100**  
+**Mean implementability:** **67.8/100**
 
 ## Methodology v2
 
@@ -13,7 +13,7 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 5, **A** = 28, **B** = 45, **D** = 1
+**A+** = 5, **A** = 29, **B** = 44, **D** = 1
 
 ## Findings by category
 | Category | Count |
@@ -93,7 +93,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`02-coding-guidelines/07-csharp`](./02-coding-guidelines__07-csharp.md) | 50 | 80 | 100 | 100 | 100 | 100 | 100 | **78** | B | 0 |
 | [`02-coding-guidelines/11-security`](./02-coding-guidelines__11-security.md) | 45 | 90 | 100 | 100 | 100 | 96 | 100 | **78** | B | 4 |
 | [`03-error-manage/01-error-resolution/app-issues`](./03-error-manage__01-error-resolution__app-issues.md) | 50 | 75 | 100 | 100 | 100 | 100 | 100 | **78** | B | 2 |
-| [`27-spec-toolchain`](./27-spec-toolchain.md) | 55 | 70 | 100 | 100 | 100 | 100 | 90 | **78** | B | 2 |
 | [`02-coding-guidelines/08-file-folder-naming`](./02-coding-guidelines__08-file-folder-naming.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 2 |
 | [`12-cicd-pipeline-workflows/01-browser-extension-deploy`](./12-cicd-pipeline-workflows__01-browser-extension-deploy.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 0 |
 | [`12-cicd-pipeline-workflows/02-go-binary-deploy`](./12-cicd-pipeline-workflows__02-go-binary-deploy.md) | 55 | 75 | 100 | 100 | 100 | 90 | 100 | **79** | B | 0 |
@@ -149,6 +148,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`02-coding-guidelines/04-php/07-php-standards-reference`](./02-coding-guidelines__04-php__07-php-standards-reference.md) | 75 | 90 | 100 | 100 | 100 | 100 | 100 | **89** | A | 4 |
 | [`02-coding-guidelines/06-ai-optimization`](./02-coding-guidelines__06-ai-optimization.md) | 75 | 90 | 100 | 100 | 100 | 100 | 100 | **89** | A | 4 |
 | [`25-app-issues`](./25-app-issues.md) | 80 | 85 | 100 | 100 | 100 | 80 | 100 | **89** | A | 4 |
+| [`27-spec-toolchain`](./27-spec-toolchain.md) | 90 | 70 | 100 | 100 | 100 | 80 | 90 | **89** | A | 2 |
 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 55 | 100 | 100 | 100 | 90 | 90 | **90** | A | 7 |
 | [`04-database-conventions`](./04-database-conventions.md) | 95 | 75 | 100 | 100 | 100 | 90 | 100 | **93** | A | 7 |
 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 90 | 85 | 100 | 100 | 100 | 90 | 100 | **93** | A | 10 |
