@@ -37,6 +37,7 @@
 | 20-fill-missing-acceptance-criteria.md | ✅ | Filler |
 | 21-fill-missing-changelogs.md | ✅ | Filler |
 | 22-fill-missing-consistency-reports.md | ✅ | Filler |
+| 23-scaffold-spec-module.md | ✅ | Scaffolder (Phase 37) |
 | 30-audit-spec-vs-code.md | ✅ | Auditor v1 |
 | 31-audit-spec-vs-code-v2.md | ✅ | Auditor v2 |
 | 40-run-sh.md | ✅ | Runner (bash) |
