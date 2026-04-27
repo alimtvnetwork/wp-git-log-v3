@@ -1,7 +1,16 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.2.0
-**Last Updated:** 2026-04-26
+**Version:** 4.3.0
+**Last Updated:** 2026-04-27
+
+---
+
+## [4.3.0] — 2026-04-27 (Phase 48 — §01 implementability lift)
+
+- **Added** §00 — new "Inlined Contract — Spec Module Structure" section at end-of-file with a JSON-Schema 2020-12 `SpecModule` block (~70 lines, `json` fence). Contract codifies `folder_name` regex, required-files set, naming/case/depth rules, overview frontmatter `kind` enum, lockstep version triple, AC ID pattern + GWT format, and cross-reference resolution rules. Plus 3 invariants (INV-AUTH-01..03) and 1 failure mode (FAIL-AUTH-01).
+- **Fixed** §09 line 193 — wrapped bare `C-XXX` in inline backticks so the `XXX` token is treated as code by the deterministic auditor's `INLINE_CODE_RX` strip pass (previously contributed `todo_density=1`, the sole drift-LOW finding for §01).
+- **Rationale:** Pre-Phase-48 audit showed §01 at impl=40, the *lowest implementability score in the entire tree*, with two findings: (1) HIGH `missing-contract` (impact 8/10) — replaces the v4.1.0 `text` block (auditor counts `text` as 0/3 contracts; a `json` block counts as a real contract); (2) LOW `drift` from a single `XXX` substring inside a table cell (`Legacy C-XXX suggestion names`).
+- **Bumped** §00 v3.4.0 → v3.5.0; §99 v4.1.0 → v4.2.0.
 
 ---
 
