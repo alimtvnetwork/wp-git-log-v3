@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # Coding Guidelines
 
-**Version:** 3.2.0  
+**Version:** 3.3.0  
 **Status:** Active  
 **Updated:** 2026-04-16  
 **AI Confidence:** Production-Ready  
@@ -235,4 +235,18 @@ _Verification section last updated: 2026-04-21_
 PascalCase JSON-key mandate is intentional cross-language contract; web/API convention drift is expected and owned by downstream serializer implementations.
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
+
+---
+
+## Audit Marker Exemption (Phase 39b, 2026-04-27)
+
+**Issue:** The 2026-04-27 AI-implementability audit recorded `todo_count: 7` for this module and downgraded it from A to B. A subsequent grep audit found **zero genuine TODO/TBD/FIXME work-tracking markers** in this folder. All matches are either:
+
+1. **AC-content matter** — e.g., `02-typescript/08-typescript-standards-reference.md:312` literally specifies that `// TODO:` comments MUST be paired with a ticket reference; `05-rust/97-acceptance-criteria.md:97` lists `todo!()` as a forbidden Rust construct.
+2. **Cross-language policy** — e.g., `01-cross-language/04-code-style/06-comments-and-documentation.md:83` and `01-cross-language/16-static-analysis/09-ci-pipeline-quality-gate.md:387` define the *required format* for permitted TODO comments downstream.
+3. **Folder-name fragments** — e.g., `06-cicd-integration/03-language-roadmap.md:53` ("Promotion criteria (todo → shipping)") uses "todo" as an English word in a phase-name.
+
+**Decision:** these occurrences are part of the spec's enforceable contract; removing or renaming them would break the rules they define. The module is exempt from the auditor's substring-based `todo_density` heuristic. A future iteration of `audit-spec-vs-code-v2.py` SHOULD switch to a regex that excludes fenced code blocks and quoted identifiers (tracked as Phase 39b follow-up R4).
+
+**Evidence verified:** `rg -n -i '\bTODO\b|\bTBD\b|\bFIXME\b' spec/02-coding-guidelines/` — every hit reviewed and classified above.
 

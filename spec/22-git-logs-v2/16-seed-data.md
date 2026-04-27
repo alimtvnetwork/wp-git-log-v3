@@ -1,7 +1,7 @@
 # Seed Data (v2)
 
-**Version:** 2.7.1  
-**Updated:** 2026-04-26  
+**Version:** 2.7.2  
+**Updated:** 2026-04-27  
 **Scope:** Authoritative initial-row content for every lookup table and `ConfigKv` default. Loaded by the activator on fresh install and by `MigrationState` upgrade steps. Idempotent: every seed insert MUST use `INSERT OR IGNORE` keyed on the natural unique column (`Name` or `KeyName`).
 
 ---
@@ -161,8 +161,9 @@ Seed insert idempotency uses unique `(RoleId, PermissionId)`.
 | 22 | SshAuthSuccess | 2.7.0 |
 | 23 | SshAuthFail | 2.7.0 |
 | 24 | SshKeyRotated | 2.7.0 |
+| 25 | ConfigChange | 2.8.0 |
 
-> Ids 19–20 reflect rows already shipped in 2.5.0; listed here for completeness and migration order. Activator on a fresh install inserts 1–24 in one pass; upgrade from 2.6.x inserts only 21–24.
+> Ids 19–20 reflect rows already shipped in 2.5.0; listed here for completeness and migration order. Activator on a fresh install inserts 1–25 in one pass; upgrade from 2.6.x inserts 21–24, upgrade from 2.7.x inserts 25.
 
 ---
 

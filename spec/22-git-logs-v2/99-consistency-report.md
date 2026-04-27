@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.1  
-**Updated:** 2026-04-26
+**Version:** 3.9.2  
+**Updated:** 2026-04-27
 
 ---
 

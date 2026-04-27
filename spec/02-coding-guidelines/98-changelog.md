@@ -1,7 +1,7 @@
 # Changelog — Coding Guidelines
 
-**Version:** 2.1.0
-**Updated:** 2026-04-26
+**Version:** 2.2.0
+**Updated:** 2026-04-27
 **Scope:** `spec/02-coding-guidelines/`
 
 ---
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 2.2.0 — 2026-04-27 (Phase 39b — TODO-marker exemption)
+- **Added** §00 "Audit Marker Exemption" section documenting that the 2026-04-27 AI-implementability audit's `todo_count: 7` was a substring false-positive: every TODO/TBD/FIXME hit in this folder is either AC content (rules ABOUT how `// TODO:` comments must be formatted in downstream code, e.g., `02-typescript/08-typescript-standards-reference.md:312`), enumerations of forbidden constructs (`05-rust/97-acceptance-criteria.md:97` listing `todo!()` as a Rust no-go), cross-language policy (`01-cross-language/04-code-style/06-comments-and-documentation.md:83`), or English-word fragments (`06-cicd-integration/03-language-roadmap.md:53` "todo → shipping" phase name). Module is exempt from substring-based `todo_density` heuristics; future auditor SHOULD switch to a regex that excludes fenced code blocks and back-tick-quoted strings (Phase 39b follow-up R4).
+- **Bumped** overview banner v3.2.0 → v3.3.0.
+- **Lockstep:** §99 v4.1.0 → v4.2.0; memory `mem://index.md` Phase 39b row appended.
 
 ### 2.1.0 — 2026-04-26 (Phase 20 contract-inlining sweep)
 - **Added** §97 — three normative machine-parseable contract blocks under "Inlined Contracts": (1) `ts` block with `CodeRedRule` enum, `R6SizeLimits` interface, `NamingCase` type, `LanguageNamingPolicy` interface, `NAMING_MATRIX` constant, `BOOLEAN_PREFIX_ALLOWLIST` + `BOOLEAN_NAME_REGEX`, `PrimaryKeyContract` interface, and `SubfolderGovernance` interface; (2) `json` JSON-Schema 2020-12 block (`CodingGuidelinesSubfolder`) defining the structural contract every subfolder MUST satisfy; (3) `yaml` block mirroring the numbering ranges, language-subfolder policy table, app-subfolder status, linter-script wiring, and gate thresholds.

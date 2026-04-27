@@ -1,7 +1,7 @@
 # CLI Test Plan (v2)
 
-**Version:** 2.7.0  
-**Updated:** 2026-04-25  
+**Version:** 2.7.1  
+**Updated:** 2026-04-27  
 **Scope:** End-to-end test strategy for the WP-CLI surface (`wp git-logs *`) and the PHP code that backs it. Provider-agnostic stages with a GitHub Actions reference implementation.
 
 ---
@@ -199,7 +199,7 @@ Steps 6–9 collectively guarantee every SSH-lane GL-* code from §15 is exercis
 
 ## Failure-handling rules
 
-- **Flaky test ⇒ quarantine, not retry.** Move the `@test` to `tests/bats/quarantine/` with a TODO comment linking the GitHub issue. Quarantine directory is run with `--no-tempdir-cleanup` and reports as warning, not failure.
+- **Flaky test ⇒ quarantine, not retry.** Move the `@test` to `tests/bats/quarantine/` with a tracking comment of the form `# QUARANTINE(<issue-ref>): <reason>` (e.g., `# QUARANTINE(GH-142): race in CI runner`). The tracking-comment format is mandatory so `linter-scripts/check-quarantine-tracking.py` (Phase 39b) can verify every quarantined test references a real issue. Quarantine directory is run with `--no-tempdir-cleanup` and reports as warning, not failure.
 - **Seed mismatch in Verify stage ⇒ build red.** Never auto-update `expected-schema.sql`; the spec drives the schema, not the test fixture.
 - **Skipped tests must be visible.** `bats` `skip "reason"` allowed only with a JIRA/issue reference in the reason string.
 

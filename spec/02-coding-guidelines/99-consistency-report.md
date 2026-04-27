@@ -1,7 +1,7 @@
 # Consistency Report — Coding Guidelines
 
-**Version:** 4.1.0
-**Last Updated:** 2026-04-26
+**Version:** 4.2.0
+**Last Updated:** 2026-04-27
 **Health Score:** 100/100 (A+)
 
 > **v4.1.0 update (Phase 20 contract-inlining sweep):** §97 "Inlined Contracts" section now ships THREE machine-parseable normative blocks alongside the pre-existing `text` summary — (1) `ts` block with full type-level contract (`CodeRedRule` enum, `R6SizeLimits`, `NamingCase`, `LanguageNamingPolicy`, `NAMING_MATRIX`, `BOOLEAN_NAME_REGEX`, `PrimaryKeyContract`, `SubfolderGovernance`); (2) `json` block with JSON-Schema 2020-12 `CodingGuidelinesSubfolder` structural contract; (3) `yaml` block with numbering ranges, language-subfolder policy table, app-subfolder status, linter wiring, and gate thresholds. Phase 19 audit identified 0/3 contract presence as the dominant cap on §02 implementability (gate `G-CON-01` capped score ≤ 50 absent any inlined contract block; current contributing block was `text` which the auditor counts as 0). This patch lifts contract count to 3/3. Projected impact: §02 module implementability 85 → 92+; module weighted overall 80 → 84+; tree-mean implementability +1.2pts (§02 has blast-radius 10, the maximum). Lockstep: §97 v4.0.0 → v4.1.0; §98 v2.0.0 → v2.1.0; spec-index 3 cells refreshed.
@@ -86,6 +86,7 @@
 
 | Date | Version | Action |
 |------|---------|--------|
+| 2026-04-27 | 4.2.0 | Phase 39b: Added §00 "Audit Marker Exemption" — `todo_count: 7` was substring false-positive (all hits are AC content / cross-language policy / forbidden-construct enumerations). Banner v3.2.0→v3.3.0; §98 v2.1.0→v2.2.0. |
 | 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
 | 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
 | 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |

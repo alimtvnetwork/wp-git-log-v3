@@ -1,7 +1,7 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.7.0
-**Updated:** 2026-04-26
+**Version:** 2.8.0
+**Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -15,6 +15,11 @@
 ---
 
 ## Releases
+
+### 2.8.0 — 2026-04-27 (Phase 39b — TODO-marker exemption)
+- **Added** §00 "Audit Marker Exemption" section documenting that the 2026-04-27 AI-implementability audit's `todo_count: 4` was a substring false-positive: every match lives inside script-spec content that **defines** how the toolchain detects or processes TODOs (`31-audit-spec-vs-code-v2.py.md:23` lists `TODO/TBD/FIXME density` as a measured metric; `31-audit-spec-vs-code-v2.py.md:136` defines gate `G-TODO-01`; `15-generate-fix-checklist.md:58` lists `todo_density > 0` as a P3 priority signal; `23-scaffold-spec-module.md:59` documents that the scaffolder emits placeholder sections marked TODO by design). Module is exempt from the substring-based `todo_density` heuristic; future auditor SHOULD switch to a regex that excludes fenced code blocks and back-tick-quoted strings (Phase 39b follow-up R4 — to be implemented in `audit-spec-vs-code-v2.py`).
+- **Bumped** overview banner v1.1.0 → v1.2.0.
+- **Lockstep:** §99 v2.4.0 → v2.5.0; memory `mem://index.md` Phase 39b row appended.
 
 ### 2.7.0 — 2026-04-26 (Phase 37 — `scaffold-spec-module.cjs` prevents thin-§99 wave)
 - **Added** `linter-scripts/scaffold-spec-module.cjs` — emits a v2.0.0-rubric-compliant module skeleton (§00 + §97 + §98 + §99). Generated §99 hits all 3 quality-credit anchors (≥30 non-blank lines, "Validation History" heading, "File Inventory" heading) so a freshly scaffolded module passes `check-tree-health.cjs --strict` on its very first run with `req=2/2 rec=2/2 q=3/3`.

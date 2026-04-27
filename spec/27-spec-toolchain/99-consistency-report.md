@@ -1,7 +1,7 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.4.0
-**Updated:** 2026-04-26
+**Version:** 2.5.0
+**Updated:** 2026-04-27
 
 > **v2.4.0 update (Phase 37):** Added [`23-scaffold-spec-module.md`](./23-scaffold-spec-module.md) + `linter-scripts/scaffold-spec-module.cjs`. Emits a v2.0.0-rubric-compliant module skeleton (§00/§97/§98/§99) so newly created modules pass `check-tree-health.cjs --strict` on first run. 5 ACs (AC-23-01..05) covering strict-pass guarantee, slot-collision refusal, idempotency, slug/slot validation, and quality-credit anchor presence. Bijection 29/29 → 30/30. Companion to §20–§22 healers — prevents the next thin-§99 wave (cf. Phase 31 remediation).
 
@@ -112,6 +112,7 @@ _None._
 
 | Date | Version | Action |
 |------|---------|--------|
+| 2026-04-27 | 2.5.0 | Phase 39b: Added §00 "Audit Marker Exemption" — `todo_count: 4` was substring false-positive (all hits inside script-spec content defining how the toolchain detects/processes TODOs). Banner v1.1.0→v1.2.0; §98 v2.7.0→v2.8.0. |
 | 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
 | 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
 | 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |

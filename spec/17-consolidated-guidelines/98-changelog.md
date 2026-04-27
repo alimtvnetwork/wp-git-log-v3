@@ -1,7 +1,7 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 2.3.0
-**Updated:** 2026-04-26
+**Version:** 2.4.0
+**Updated:** 2026-04-27
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 2.4.0 — 2026-04-27 (Phase 39b — TODO-marker exemption)
+- **Added** §00 "Audit Marker Exemption" section documenting that the 2026-04-27 AI-implementability audit's `todo_count: 5` was a substring false-positive: every match in this folder lives inside the worked Python example block in `27-linter-authoring-guide.md` (lines 361–424), which **defines** the `check-stale-todos.py` linter. The strings (`STALE-TODO`, `findings.append`, etc.) are source code teaching how to *detect* TODOs, not actual TODOs. Module is exempt from the substring-based `todo_density` heuristic; the example must remain literal so the linter is reproducible. Future auditor SHOULD restrict the scan to outside fenced code blocks (Phase 39b follow-up R4).
+- **Bumped** overview banner v3.2.0 → v3.3.0.
+- **Lockstep:** §99 v4.2.0 → v4.3.0; memory `mem://index.md` Phase 39b row appended.
 
 ### 2.3.0 — 2026-04-26 (Phase 35 follow-up — close R2 + R3 in rollup)
 - **Changed** `32-phase-26-31-rollup.md` v1.0.0 → v1.2.0 — marked R2 and R3 as ✅ Closed (Phase 34 + 35 respectively). Phase 3 status text updated: only R1 (AI re-audit, blocked on `lovable_ai`) remains open.
