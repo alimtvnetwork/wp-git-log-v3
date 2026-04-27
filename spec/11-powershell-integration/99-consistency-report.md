@@ -1,8 +1,10 @@
 # Consistency Report — PowerShell Integration
 
-**Version:** 3.3.0  
-**Generated:** 2026-04-26  
-**Health Score:** 100/100 (A+) — Phase 21 deepening sweep
+**Version:** 3.4.0  
+**Generated:** 2026-04-27  
+**Health Score:** 100/100 (A+) — Phase 39c interface-contract sweep
+
+> **v3.4.0 (Phase 39c):** Added `07-runner-interface.md` (CLI Param block, exit codes, dep toolchain). §97 deepened from 5 meta-ACs to 13 ACs (10 functional GWT + 3 spec-hygiene). Closes audit findings *CRITICAL — Missing Interface Definition*, *HIGH — Underspecified Dependency Management*, *HIGH — Non-Functional Acceptance Criteria*.
 
 ---
 
@@ -18,6 +20,7 @@
 | 04 | `04-error-codes.md` | ✅ Present |
 | 05 | `05-firewall-rules.md` | ✅ Present |
 | 06 | `06-php-known-issues.md` | ✅ Present |
+| 07 | `07-runner-interface.md` | ✅ Present |
 | 25 | `25-multi-site-deployment.md` | ✅ Present |
 | 97 | `97-acceptance-criteria.md` | ✅ Present |
 | 98 | `98-changelog.md` | ✅ Present |
@@ -25,7 +28,7 @@
 | — | `parallel-work-sync-output.md` | ✅ Present |
 | — | `readme.md` | ✅ Present |
 
-**Total:** 14 files (excluding this report)
+**Total:** 15 files (excluding this report)
 
 ---
 

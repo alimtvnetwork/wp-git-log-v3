@@ -1,7 +1,7 @@
 # Changelog — PowerShell Integration for Project Runner
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/11-powershell-integration/`
 
 ---
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-27
+- **Phase 39c — Added** `07-runner-interface.md` defining the authoritative PowerShell `Param()` block, exit-code table (0/2/3/4/5/10/11/12/20/30/40/99), pinned dependency toolchain (Go 1.22, Node 20.11, pnpm 9, Git 2.40) with provider priority, and JSON-Schema reference. Closes audit findings *CRITICAL — Missing Interface Definition (JSON & CLI)* and *HIGH — Underspecified Dependency Management*.
+- **Changed** §97 v1.0.0 → v2.0.0: replaced 5 meta-ACs with 10 functional GWT ACs (AC-RUN-01..10) plus 3 spec-hygiene ACs. Closes audit finding *HIGH — Non-Functional Acceptance Criteria*.
+- §00 banner v2.25.0 → v2.26.0; §99 lockstep update.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).

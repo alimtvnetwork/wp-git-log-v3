@@ -1,7 +1,9 @@
 # Consistency Report — CI/CD Pipeline Workflows
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-24
+**Version:** 3.3.0  
+**Updated:** 2026-04-27
+
+> **v3.3.0 (Phase 39c):** Added `11-technical-interface.md` (CI platform, runner OS matrix, required secrets, env vars, asset-matrix JSON Schema). Resolves audit finding *HIGH — Missing Pipeline Infrastructure Interfaces*. Inventory-numbering ambiguity (root-level vs subfolder prefix collision on `04`/`05`) is now documented as scoped, not duplicate, in §6 of the new file.
 
 ---
 
@@ -25,6 +27,7 @@
 | 12 | `11-environment-variable-setup.md` | 1.0.0 | ✅ Present |
 | 13 | `12-terminal-output-standards.md` | 1.0.0 | ✅ Present |
 | 14 | `13-binary-icon-branding.md` | 1.0.0 | ✅ Present |
+| 15 | `11-technical-interface.md` | 1.0.0 | ✅ Present |
 
 ### Subfolder: 01-browser-extension-deploy
 

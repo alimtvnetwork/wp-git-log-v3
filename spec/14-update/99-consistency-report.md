@@ -1,7 +1,9 @@
 # Consistency Report — Generic Update
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26
+**Version:** 1.2.0  
+**Updated:** 2026-04-27
+
+> **v1.2.0 (Phase 39c):** Added `28-update-interface-contract.md` — authoritative `latest.json` JSON Schema (Draft-07), `RISEUP_UPDATE_*` env-var table, canonical deploy paths, and self-update exit codes. Resolves audit finding *HIGH — Self-Update relies on undefined `latest.json` shape*. §00 banner v2.0.0 → v2.1.0.
 
 > **v1.1.0 (Phase 16b):** §97 deepened from 5 generic structural ACs to 20 ACs total — added 15 module-specific GWT ACs (AC-06..AC-20) covering rename-first deploy, Windows handoff, three-branch version verification, code signing (Authenticode/codesign+notarize/GPG), SHA-256 checksum verification, install scripts (idempotent, no-sudo, opt-in PATH), latest-version probe, XDG-compliant config, ten-step `update` workflow, non-blocking 12h pre-command-hook check, startup cleanup, atomic rollback, deploy path resolution precedence, `git describe --tags` last-release detection, and cross-compilation matrix (6 platforms minimum). §97 banner v1.0.0 → v2.0.0; §98 v1.0.0 → v1.1.0; spec-index updated.
 
@@ -20,8 +22,9 @@
 | 7 | `06-cleanup.md` | ✅ Present |
 | 8 | `07-console-safe-handoff.md` | ✅ Present |
 | 9 | `08-repo-path-sync.md` | ✅ Present |
+| 10 | `28-update-interface-contract.md` | ✅ Present |
 
-**Total:** 9 files (excluding this report)
+**Total:** 10 files (excluding this report; sibling files 09–27 and subfolder 24-update-check-mechanism tracked separately)
 
 ---
 

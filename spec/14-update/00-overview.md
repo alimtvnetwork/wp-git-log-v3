@@ -1,7 +1,7 @@
 # Update — Overview
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-17  
+**Version:** 2.1.0  
+**Updated:** 2026-04-27  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None

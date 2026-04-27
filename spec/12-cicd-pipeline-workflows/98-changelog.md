@@ -1,7 +1,7 @@
 # Changelog — CI/CD Pipeline Workflows
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
 ---
@@ -16,6 +16,10 @@
 ---
 
 ## Releases
+
+### 1.1.0 — 2026-04-27
+- **Phase 39c — Added** `11-technical-interface.md` defining CI platform, runner OS matrix, required secrets schema (SignPath, Chrome Web Store, Homebrew, Scoop), workflow env variables, permissions, and the `asset-matrix.json` JSON Schema. Closes audit finding *HIGH — Missing Pipeline Infrastructure Interfaces*.
+- §00 banner v3.2.0 → v3.3.0; §99 lockstep update.
 
 ### 1.0.0 — 2026-04-25
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
