@@ -1,7 +1,7 @@
 # CLI Test Plan (v2)
 
-**Version:** 2.7.0  
-**Updated:** 2026-04-25  
+**Version:** 2.7.1  
+**Updated:** 2026-04-27  
 **Scope:** End-to-end test strategy for the WP-CLI surface (`wp git-logs *`) and the PHP code that backs it. Provider-agnostic stages with a GitHub Actions reference implementation.
 
 ---

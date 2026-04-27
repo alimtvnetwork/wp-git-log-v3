@@ -1,7 +1,7 @@
 # Consolidated Guidelines
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.3.0  
+**Updated:** 2026-04-27  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None

@@ -5,7 +5,7 @@ description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.8.6  
+**Version:** 3.8.7  
 **Updated:** 2026-04-26 (Phase 27 drift sweep: future-spec frontmatter added so drift gate stops flagging missing downstream PHP plugin code as a regression)  
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  

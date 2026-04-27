@@ -1,7 +1,7 @@
 # Seed Data (v2)
 
-**Version:** 2.7.1  
-**Updated:** 2026-04-26  
+**Version:** 2.7.2  
+**Updated:** 2026-04-27  
 **Scope:** Authoritative initial-row content for every lookup table and `ConfigKv` default. Loaded by the activator on fresh install and by `MigrationState` upgrade steps. Idempotent: every seed insert MUST use `INSERT OR IGNORE` keyed on the natural unique column (`Name` or `KeyName`).
 
 ---
