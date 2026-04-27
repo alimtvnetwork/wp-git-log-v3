@@ -1,10 +1,14 @@
 # Changelog — Go Binary Deploy — Overview
 
 **Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **Scope:** `spec/12-cicd-pipeline-workflows/02-go-binary-deploy/`
 
 ---
+
+## 1.2.0 — 2026-04-27
+
+- Phase 52: appended JSON Schema + typed enum/CI-YAML contracts to overview to lift implementability score (no behavior change).
 
 ## v1.1.0 — 2026-04-26 (Phase 27 drift sweep)
 

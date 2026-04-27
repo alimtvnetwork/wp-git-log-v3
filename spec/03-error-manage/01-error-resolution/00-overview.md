@@ -1,7 +1,7 @@
 # Error Resolution
 
 **Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Updated:** 2026-04-27  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
@@ -58,3 +58,64 @@ Error resolution patterns, debugging guides, retrospectives, and verification pr
 - [Parent Overview](../00-overview.md) — Error Management root
 - [Error Architecture](../02-error-architecture/00-overview.md) — Cross-stack error handling
 - [Error Code Registry](../03-error-code-registry/00-overview.md) — Error code ranges
+
+---
+
+## Inlined Contracts (Phase 52 — boost)
+
+### Resolution-document — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/03-error-manage/01-error-resolution/document.schema.json",
+  "title": "ErrorResolutionDocument",
+  "type": "object",
+  "required": ["error_code", "title", "symptoms", "root_cause", "resolution"],
+  "additionalProperties": false,
+  "properties": {
+    "error_code":       { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+    "title":            { "type": "string", "minLength": 1, "maxLength": 200 },
+    "symptoms":         { "type": "string", "minLength": 10, "maxLength": 4000 },
+    "root_cause":       { "type": "string", "minLength": 10, "maxLength": 4000 },
+    "resolution":       { "type": "string", "minLength": 10, "maxLength": 4000 },
+    "prevention":       { "type": "string", "maxLength": 4000 },
+    "verification": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "expected"],
+        "additionalProperties": false,
+        "properties": {
+          "step":     { "type": "string", "minLength": 1 },
+          "expected": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "related_codes": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[A-Z]{2,5}-[A-Z]+-\\d{3}$" },
+      "uniqueItems": true
+    },
+    "owner_module": { "type": "string", "pattern": "^spec/\\d{2}-[a-z0-9-]+(/.*)?$" }
+  }
+}
+```
+
+### Resolution-doc status enum (TypeScript)
+
+```ts
+export enum ResolutionDocStatus {
+  Draft     = "draft",
+  Published = "published",
+  Outdated  = "outdated",
+  Superseded = "superseded",
+}
+
+export enum ResolutionDocAudience {
+  EndUser     = "end-user",
+  Operator    = "operator",
+  Developer   = "developer",
+  Auditor     = "auditor",
+}
+```

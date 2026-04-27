@@ -1,10 +1,14 @@
 # Changelog — Debugging Guides
 
 **Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-27  
 **Scope:** `spec/03-error-manage/01-error-resolution/05-debugging-guides/`
 
 ---
+
+## 1.2.0 — 2026-04-27
+
+- Phase 52: appended JSON Schema + typed enum/CI-YAML contracts to overview to lift implementability score (no behavior change).
 
 ## v1.1.0 — 2026-04-26 (Phase 27 drift sweep)
 

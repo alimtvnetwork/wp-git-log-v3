@@ -624,3 +624,58 @@ The following JSON-Schema (Draft 2020-12) is the **machine-readable contract** e
 
 _Inlined-contract section last updated: 2026-04-27 (Phase 48 — implementability lift, §01 impl 40 → ≥75 projected)._
 
+
+## Inlined Contracts (Phase 52 — additional)
+
+### Module 99-consistency-report — JSON Schema 2020-12
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spec.local/01-spec-authoring-guide/consistency-report.schema.json",
+  "title": "ConsistencyReportV2",
+  "type": "object",
+  "required": ["module_path", "generated", "version", "inventory", "drift_findings"],
+  "additionalProperties": false,
+  "properties": {
+    "module_path":   { "type": "string", "pattern": "^spec/\\d{2}-[a-z0-9-]+(/[\\w.-]+)*$" },
+    "generated":     { "type": "string", "format": "date" },
+    "version":       { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "inventory": {
+      "type": "object",
+      "required": ["expected_files", "present_files", "missing_files"],
+      "additionalProperties": false,
+      "properties": {
+        "expected_files": { "type": "array", "items": { "type": "string" } },
+        "present_files":  { "type": "array", "items": { "type": "string" } },
+        "missing_files":  { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "drift_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "severity", "summary"],
+        "additionalProperties": false,
+        "properties": {
+          "category":  { "enum": ["drift", "stale-link", "version-skew", "scaffold", "todo-density"] },
+          "severity":  { "enum": ["blocker", "major", "minor", "info"] },
+          "summary":   { "type": "string", "minLength": 1, "maxLength": 500 },
+          "file":      { "type": "string" },
+          "line":      { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "lockstep_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overview_updated":  { "type": "string", "format": "date" },
+        "changelog_updated": { "type": "string", "format": "date" },
+        "report_updated":    { "type": "string", "format": "date" },
+        "in_lockstep":       { "type": "boolean" }
+      }
+    }
+  }
+}
+```
