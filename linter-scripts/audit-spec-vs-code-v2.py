@@ -401,6 +401,7 @@ HARD_GATES = [
      "rationale": "Missing 99-consistency-report.md — drift cannot be tracked between releases."},
     {"id": "G-TODO-01", "dimension": "completeness",    "cap": 70,
      "predicate": lambda m: m["todo_density"] >= 3,
+     "skip_kinds": {"meta-toolchain"},  # v2.5: auditor-self-reference modules
      "rationale": "≥3 TODO/TBD/FIXME markers — module is explicitly incomplete."},
 ]
 
