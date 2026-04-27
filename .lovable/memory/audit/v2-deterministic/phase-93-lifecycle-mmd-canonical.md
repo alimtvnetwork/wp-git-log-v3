@@ -147,3 +147,26 @@ When Phase 96 (memo freshness sweep for 90–95) runs, it should record this
 phase's "discovery shift" — the queued task's premise was wrong (`.mmd`
 already existed) but the underlying intent (faithful lifecycle SoT) was
 delivered with broader scope (AC + lockstep + inline excerpt rewrite).
+
+---
+
+## Retrospective (added in Phase 96)
+
+**Discovery shift recorded.** When Phase 93 was queued (in Phase 92's
+"Remaining Tasks" table) it was titled "flesh out the 10-node skeleton
+`.mmd`". On execution the file was found to already exist with reasonable
+content but **drifted** from the actual pipeline — wrong gate names, missing
+the `--explain` recovery loop, missing 3 of the 5 `kind:` branches. The
+delivered scope was therefore broader than queued:
+
+| Original queued framing | Actual outcome |
+|---|---|
+| "Flesh out skeleton" | ✅ Full rewrite to 32 nodes reflecting real pipeline (5 `kind:` branches, 6 local linters, 6 CI gates, `--explain` loop) |
+| (implicit: just fix the diagram) | ✅ Added **AC-SAG-23** mandating the `.mmd` as canonical SoT with lockstep requirement |
+| (implicit: docs-only) | ✅ Rewrote `00-overview.md` inline excerpt to match; bumped §97 / §98 / §99 in lockstep |
+
+**Lesson for future "doc refresh" phases:** before treating a queued
+"flesh out / fill in" task as cosmetic, diff the existing artefact against
+the real system. If they have drifted, the right scope is usually
+**rewrite + lockstep AC** rather than incremental editing — the AC is what
+prevents the next drift.
