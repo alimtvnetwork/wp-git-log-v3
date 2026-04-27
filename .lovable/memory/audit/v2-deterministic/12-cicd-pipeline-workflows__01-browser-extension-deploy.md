@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **79/100 (B)**  
-**Blast radius:** 0/10
+**Implementability Score:** **84/100 (B)**  
+**Blast radius:** 2/10
 
-> Deterministic score 79/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
+> Deterministic score 84/100 (B) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.26. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.25. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 55 | 19.2 |
+| Implementability | 35% | 70 | 24.5 |
 | Completeness | 20% | 75 | 15.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,19 +31,20 @@
   "kind": "future-spec",
   "md_files": 6,
   "mmd_files": 0,
-  "overview_chars": 2766,
+  "overview_chars": 6962,
   "ac_chars": 2715,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 16,
+  "code_blocks_total": 22,
   "code_blocks_by_lang": {
     "plain": 4,
-    "yaml": 7,
+    "json": 1,
+    "yaml": 12,
     "bash": 5
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": false,
@@ -53,7 +54,7 @@
   "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.26,
+  "waffle_per_kchar": 0.25,
   "child_modules": 0
 }
 ```

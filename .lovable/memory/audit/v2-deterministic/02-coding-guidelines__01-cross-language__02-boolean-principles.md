@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **84/100 (B)**  
-**Blast radius:** 2/10
+**Implementability Score:** **89/100 (A)**  
+**Blast radius:** 4/10
 
-> Deterministic score 84/100 (B) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.
+> Deterministic score 89/100 (A) for spec/02-coding-guidelines/01-cross-language/02-boolean-principles.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.32. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.32. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 60 | 21.0 |
+| Implementability | 35% | 75 | 26.2 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,13 +31,15 @@
   "kind": "future-spec",
   "md_files": 9,
   "mmd_files": 0,
-  "overview_chars": 3781,
+  "overview_chars": 5756,
   "ac_chars": 5368,
   "ac_count": 11,
   "gwt_block_count": 10,
   "consistency_report": true,
-  "code_blocks_total": 40,
+  "code_blocks_total": 42,
   "code_blocks_by_lang": {
+    "json": 1,
+    "ts": 1,
     "php": 12,
     "typescript": 12,
     "go": 14,
@@ -45,7 +47,7 @@
     "python": 1
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": true,
