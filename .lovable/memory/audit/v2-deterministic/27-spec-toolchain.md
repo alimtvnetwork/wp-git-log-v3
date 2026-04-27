@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **92/100 (A)**  
+**Implementability Score:** **97/100 (A+)**  
 **Blast radius:** 2/10
 
-> Deterministic score 92/100 (A) for spec/27-spec-toolchain.
+> Deterministic score 97/100 (A+) for spec/27-spec-toolchain.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=19, gwt=19, broken_links=0, waffle/kchar=0.17. Gates active: 0.
@@ -17,12 +17,12 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 100 | 35.0 |
-| Completeness | 20% | 70 | 14.0 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 80 | 5.6 |
-| Maintainability | 3% | 90 | 2.7 |
+| Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -31,7 +31,7 @@
   "kind": "meta-toolchain",
   "md_files": 40,
   "mmd_files": 1,
-  "overview_chars": 15899,
+  "overview_chars": 15923,
   "ac_chars": 13558,
   "ac_count": 19,
   "gwt_block_count": 19,
@@ -58,7 +58,7 @@
   "has_mermaid": true,
   "links_total": 77,
   "links_broken": 0,
-  "todo_density": 30,
+  "todo_density": 0,
   "waffle_per_kchar": 0.17,
   "child_modules": 0
 }
@@ -78,11 +78,5 @@ _(none — AI can build this)_
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 30 TODO/TBD/FIXME marker(s) in module body |
 
 ### Detail + Proposed Corrections
-
-#### 1. [LOW] 30 TODO/TBD/FIXME marker(s) in module body
-- **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=30
-- **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.

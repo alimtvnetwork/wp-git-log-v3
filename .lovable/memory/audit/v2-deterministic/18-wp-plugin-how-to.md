@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **96/100 (A+)**  
+**Implementability Score:** **100/100 (A+)**  
 **Blast radius:** 9/10
 
-> Deterministic score 96/100 (A+) for spec/18-wp-plugin-how-to.
+> Deterministic score 100/100 (A+) for spec/18-wp-plugin-how-to.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.2. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.19. Gates active: 0.
 
 ---
 
@@ -17,11 +17,11 @@
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
 | Implementability | 35% | 100 | 35.0 |
-| Completeness | 20% | 85 | 17.0 |
+| Completeness | 20% | 100 | 20.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 90 | 6.3 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
@@ -32,9 +32,9 @@
   "md_files": 27,
   "mmd_files": 0,
   "overview_chars": 6330,
-  "ac_chars": 3314,
-  "ac_count": 5,
-  "gwt_block_count": 5,
+  "ac_chars": 4640,
+  "ac_count": 8,
+  "gwt_block_count": 8,
   "consistency_report": true,
   "code_blocks_total": 441,
   "code_blocks_by_lang": {
@@ -62,7 +62,7 @@
   "links_total": 111,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.2,
+  "waffle_per_kchar": 0.19,
   "child_modules": 1
 }
 ```

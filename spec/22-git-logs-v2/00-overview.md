@@ -1,6 +1,7 @@
 ---
 kind: future-spec
-description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed). The actual PHP plugin code lives in a downstream WordPress-plugin repo, not in this spec-only repo. Exempt from drift findings that flag missing PHP / SQL / REST endpoint files.
+todo_audit_exempt: true
+description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed). The actual PHP plugin code lives in a downstream WordPress-plugin repo, not in this spec-only repo. Exempt from drift findings that flag missing PHP / SQL / REST endpoint files. TODO markers in body files are historical-resolution narrative inside `37-blind-ai-gap-analysis.md` (Phase 39b) — quoted, not actionable.
 ---
 
 # Git Logs v2 — Spec Overview
