@@ -248,6 +248,17 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** the self-test MUST exit `0` only when all 6 cases match expected exit codes; otherwise exit `1` with a per-case ✅/❌ summary on stdout.
 - **And** the self-test MUST NOT write any files and MUST NOT depend on the current absolute scores — it depends only on the comparison-operator contract being intact (locking v2.12 from silent-inversion regressions when scores sit comfortably above the production floor of 97/99).
 
+### AC-31-25 — `--explain` contract self-test (Phase 94)
+- **Given** the script `linter-scripts/test/test-audit-explain-contract.sh`,
+- **When** invoked from CI (`spec-health.yml`, step *Audit --explain contract self-test*) with `AUDIT_DETERMINISTIC=1`,
+- **Then** it MUST execute four scenarios against `audit-spec-vs-code-v2.py --explain=<substring>` and assert all of:
+  (a) **Single match** (`--explain=01-spec-authoring-guide`): exit `0`; stdout MUST contain a `Branch` line, a `Final score` line, a `--- Per-dimension scores ---` table, a `--- Implementability bonuses fired` block, and a `--- Key metrics ---` block (5 of the AC-31-23 (a)–(f) elements).
+  (b) **No match** (`--explain=does-not-exist-XYZ-7f3a`): exit `1`; stderr MUST contain the substring `no module matched`; stdout MUST NOT contain `Branch` or `Final score` lines (no rubric trace leaked on no-match).
+  (c) **Multi-match** (`--explain=03-issues`, currently matches 2 trackers): exit `0`; combined stdout+stderr MUST match `matched [0-9]+ modules`; both candidate paths (`05-split-db-architecture/03-issues`, `06-seedable-config-architecture/03-issues`) MUST be listed; the full report for the first match MUST still print on stdout.
+  (d) **No side effects**: a sha256 hash of `ls -la .lovable/memory/audit/v2-deterministic/` taken before any `--explain` invocation MUST equal the hash taken after all 3 scenarios complete (no files added, modified, or deleted).
+- **And** the self-test MUST exit `0` only when all 14 assertions across the 4 scenarios pass; otherwise exit `1` with a per-assertion ✅/❌ summary on stdout.
+- **And** the self-test MUST NOT depend on absolute audit scores or the AI gateway (deterministic mode forced; checks structural contract only).
+
 ## Rubric changelog (v2.9 → v2.16)
 
 | Version | Phase | Change | Score effect |
@@ -260,7 +271,8 @@ A companion script renders these into a human report — see §16 [`16-generate-
 | v2.14 | 83 | TODO regex tightened to require `:` / `(name):` / ` -` suffix; new `todo_audit_exempt: true` front-matter opt-out for auditor-self-reference modules. | Prevents false-positive TODO penalties on gap-analysis / changelog content. |
 | v2.15 | 86 | Cumulative schema-bonus cap REJECTED after empirical test (mean impl 99.8 → 89.2; 76 multi-contract modules unfairly penalised). Source comment + memo preserve the rejected design. | None (zero rubric change shipped). |
 | v2.16 | 90 | New `--explain=<substring>` CLI flag prints rubric branch, fired bonuses, capped gates, and per-dimension trace for any module. Pure-add diagnostic. | None (no scoring change; debugging tool only). |
-| v2.16-test | 91 | CLI threshold contract self-test (`linter-scripts/test/test-audit-cli-thresholds.sh`) wired into `spec-health.yml`. Locks v2.12 exit-code semantics from silent-inversion regressions. | None (no rubric change; CI safety net only). |
+| v2.16-test1 | 91 | CLI threshold contract self-test (`linter-scripts/test/test-audit-cli-thresholds.sh`) wired into `spec-health.yml`. Locks v2.12 exit-code semantics from silent-inversion regressions. | None (no rubric change; CI safety net only). |
+| v2.16-test2 | 94 | `--explain` contract self-test (`linter-scripts/test/test-audit-explain-contract.sh`) wired into `spec-health.yml`. Locks v2.16 single-match / no-match / multi-match / no-side-effects contract from silent-break regressions. | None (no rubric change; CI safety net only). |
 
 
 ## Cross-references
