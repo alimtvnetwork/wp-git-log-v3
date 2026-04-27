@@ -1,7 +1,7 @@
 # Changelog — Update — Overview
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Version:** 1.2.0  
+**Updated:** 2026-04-27  
 **Scope:** `spec/14-update/`
 
 ---
@@ -16,6 +16,10 @@
 ---
 
 ## Releases
+
+### 1.2.0 — 2026-04-27
+- **Phase 39c — Added** `28-update-interface-contract.md` defining the authoritative `latest.json` JSON Schema (Draft-07), self-update env-var contract (`RISEUP_UPDATE_*`), canonical deploy paths per OS, and a self-update exit-code table. Closes audit finding *HIGH — Self-Update relies on undefined `latest.json` shape*.
+- §00 banner v2.0.0 → v2.1.0; §99 lockstep update.
 
 ### 1.1.0 — 2026-04-26
 - **Phase 16b — Deepen §97 with module-specific GWT ACs.** §97 banner v1.0.0 → v2.0.0 (major bump; AC count 5 → 20).
