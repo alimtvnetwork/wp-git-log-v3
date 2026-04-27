@@ -406,17 +406,24 @@ HARD_GATES = [
 ]
 
 def apply_gates(scores: dict, metrics: dict) -> tuple[dict, list[dict]]:
-    """Return (capped_scores, applied_gate_records)."""
+    """Return (capped_scores, applied_gate_records).
+
+    v2.5: gates may declare `skip_kinds: set[str]` — when the module's
+    `kind` frontmatter is in that set, the gate is bypassed entirely
+    (not even recorded as passive). Used by G-TODO-01 to exempt
+    `kind: meta-toolchain` (auditor-self-reference) modules."""
     capped = dict(scores)
     applied: list[dict] = []
+    kind = metrics.get("kind", "") or ""
     for gate in HARD_GATES:
+        if kind in gate.get("skip_kinds", set()):
+            continue
         if not gate["predicate"](metrics):
             continue
         dim = gate["dimension"]
         before = capped[dim]
         cap = gate["cap"]
         if before <= cap:
-            # Gate would not lower the score — record as passive (informational)
             applied.append({
                 "id": gate["id"], "dimension": dim, "cap": cap,
                 "before": before, "after": before, "active": False,
