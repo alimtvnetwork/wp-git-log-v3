@@ -140,3 +140,21 @@ jobs:
 ```
 
 See [`lifecycle-10-research-lifecycle.mmd`](./lifecycle-10-research-lifecycle.mmd) for the visual lifecycle.
+
+### Index Entry Status Enum — Phase 80 Normative
+
+```ts
+export enum IndexEntryStatus {
+  Draft = "draft",
+  Active = "active",
+  Deprecated = "deprecated",
+  Archived = "archived",
+}
+
+export interface IndexEntry {
+  slug: string;
+  title: string;
+  status: IndexEntryStatus;
+  routedTo: string | null;
+}
+```

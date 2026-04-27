@@ -116,3 +116,21 @@ jobs:
 ```
 
 See [`lifecycle-02-coding-guidelines-21-app-lifecycle.mmd`](./lifecycle-02-coding-guidelines-21-app-lifecycle.mmd) for the visual lifecycle.
+
+### Index Entry Status Enum — Phase 80 Normative
+
+```ts
+export enum IndexEntryStatus {
+  Draft = "draft",
+  Active = "active",
+  Deprecated = "deprecated",
+  Archived = "archived",
+}
+
+export interface IndexEntry {
+  slug: string;
+  title: string;
+  status: IndexEntryStatus;
+  routedTo: string | null;
+}
+```

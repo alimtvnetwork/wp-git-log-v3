@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **93/100 (A)**  
-**Blast radius:** 2/10
+**Implementability Score:** **97/100 (A+)**  
+**Blast radius:** 4/10
 
-> Deterministic score 93/100 (A) for spec/02-coding-guidelines/21-app.
+> Deterministic score 97/100 (A+) for spec/02-coding-guidelines/21-app.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 90 | 31.5 |
+| Implementability | 35% | 100 | 35.0 |
 | Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,18 +31,19 @@
   "kind": "index",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 2859,
+  "overview_chars": 3168,
   "ac_chars": 2942,
   "ac_count": 6,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 5,
+  "code_blocks_total": 6,
   "code_blocks_by_lang": {
-    "yaml": 5
+    "yaml": 5,
+    "ts": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": false,
-  "has_ts_enums": false,
+  "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": false,
   "has_ci_workflow": true,
