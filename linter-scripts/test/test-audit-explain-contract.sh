@@ -163,12 +163,14 @@ echo "Case 4: no side effects (memory dir untouched)"
 SNAPSHOT_AFTER="$(mktemp)"
 ls -la "$MEMORY_DIR" 2>/dev/null | sort > "$SNAPSHOT_AFTER" || true
 
-if cmp -s "$SNAPSHOT_BEFORE" "$SNAPSHOT_AFTER"; then
+HASH_BEFORE="$(sha256sum < "$SNAPSHOT_BEFORE" | awk '{print $1}')"
+HASH_AFTER="$(sha256sum < "$SNAPSHOT_AFTER" | awk '{print $1}')"
+if [ "$HASH_BEFORE" = "$HASH_AFTER" ]; then
   note_pass "no files added/modified in $MEMORY_DIR (AC-31-23 no-side-effects)"
 else
   note_fail "memory dir changed during --explain runs"
-  echo "    --- before ---"; head -3 "$SNAPSHOT_BEFORE" | sed 's/^/    /'
-  echo "    --- after ---";  head -3 "$SNAPSHOT_AFTER"  | sed 's/^/    /'
+  echo "    before sha256: $HASH_BEFORE"
+  echo "    after  sha256: $HASH_AFTER"
 fi
 
 # Cleanup
