@@ -17,6 +17,10 @@
 
 ## Releases
 
+### 2.3.0 — 2026-04-26 (Phase 35 follow-up — close R2 + R3 in rollup)
+- **Changed** `32-phase-26-31-rollup.md` v1.0.0 → v1.2.0 — marked R2 and R3 as ✅ Closed (Phase 34 + 35 respectively). Phase 3 status text updated: only R1 (AI re-audit, blocked on `lovable_ai`) remains open.
+- No content removed; only status flips and a paragraph rewrite. Tree-wide audit roadmap is now functionally complete except for the externally-blocked AI re-audit.
+
 ### 2.2.0 — 2026-04-26 (Phase 32 — Phase 26-31 rollup)
 - **Added** `32-phase-26-31-rollup.md` — single-session retrospective covering Phases 26 → 31 (67 spec remediations + rubric upgrade v1.x → v2.0.0). Documents pattern catalogue (`kind: future-spec`, inline JSON-schema text blocks, §99 quality headings, lockstep edits) and handoff notes for future AI sessions.
 - **Added** §00 inventory rows for slots 31 and 32 (slot 31 was missing from inventory despite being on disk since v3.5.0).
