@@ -133,7 +133,7 @@ After the rubric computes raw per-dimension scores, a fixed table of **hard gate
 | `G-WAF-01`  | clarity | 70 | `waffle_per_kchar > 3` |
 | `G-WAF-02`  | clarity | 50 | `waffle_per_kchar > 6` |
 | `G-CR-01`   | maintainability | 60 | Missing `99-consistency-report.md` |
-| `G-TODO-01` | completeness | 70 | `todo_density >= 3` |
+| `G-TODO-01` | completeness | 70 | `todo_density >= 3` (skip when `kind: meta-toolchain`, v2.5) |
 
 The result envelope adds two new top-level keys:
 - `raw_scores` — pre-gate rubric output (so reductions are visible).
