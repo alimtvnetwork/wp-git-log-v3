@@ -283,6 +283,16 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** the README's last-updated date MUST be bumped on every modification.
 - **Verifies:** `linter-scripts/test/README.md` (inventory, coverage triad, local execution, template, see-also sections) + lockstep with the actual contents of `linter-scripts/test/`.
 
+### AC-31-28 — Audit summary outputs MUST advertise rubric version + QA tooling baseline (Phase 99)
+- **Given** the audit script `linter-scripts/audit-spec-vs-code-v2.py` (v2.17 or later),
+- **When** the script runs in any mode (deterministic or normal) and writes its summary outputs to `OUT/`,
+- **Then** both `00-index.md` and `EXECUTIVE-SUMMARY.md` MUST contain a `**Rubric:** v<X>.<Y>` line in the header block, sourced from the `RUBRIC_VERSION` module-level constant. The constant MUST be a static string (not derived from time, env, or filesystem state) so the Phase 95 determinism self-test continues to pass byte-identically.
+- **And** `00-index.md` MUST contain a "QA tooling baseline (Phase 99)" section after the "Full ranking" table that enumerates the **8 strict CI gates** that surround the score: (1) cross-links, (2) tree-health strict, (3) lockstep strict, (4) audit thresholds, (5) Phase 91 CLI threshold self-test, (6) Phase 94 `--explain` self-test, (7) Phase 95 determinism self-test, (8) Phase 97 mermaid syntax. Each entry MUST cite the script path so a contributor can locate the gate.
+- **And** the section MUST link to `linter-scripts/test/README.md` (Phase 98) as the canonical inventory + onboarding doc for the self-test triad (gates 5–7).
+- **And** the section MUST be regenerated on every audit run — it is not a hand-edited file. Drift between the script's enumeration and the actual workflow gates is detected by lockstep with `.github/workflows/spec-health.yml` (any new gate added to the workflow must be added to the enumeration in the same PR).
+- **And** `RUBRIC_VERSION` MUST be bumped on every rubric change documented in the "Rubric changelog" table; non-rubric changes (metadata, output formatting, debugging tools) MUST also bump it but be explicitly marked "no scoring change" in the changelog row.
+- **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` `RUBRIC_VERSION` constant + `00-index.md` "QA tooling baseline" section + `EXECUTIVE-SUMMARY.md` `**Rubric:**` header + lockstep with `.github/workflows/spec-health.yml` step list.
+
 ## Rubric changelog (v2.9 → v2.17)
 
 | Version | Phase | Change | Score effect |
