@@ -125,3 +125,69 @@ export enum DebugStepKind {
   Escalate   = "escalate",
 }
 ```
+
+
+---
+
+## Phase 61 Reference: Debugging Guides API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Debugging Guides API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/debug-guides/v1
+paths:
+  /guides:
+    get:
+      summary: Search debugging guides
+      operationId: searchGuides
+      parameters:
+        - in: query
+          name: code
+          schema: { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        - in: query
+          name: tag
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Guide" }
+  /guides/{slug}:
+    get:
+      summary: Fetch a single guide
+      operationId: getGuide
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          schema: { type: string, pattern: "^[a-z0-9-]+$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Guide" }
+components:
+  schemas:
+    Guide:
+      type: object
+      required: [slug, title, body_md]
+      properties:
+        slug:    { type: string }
+        title:   { type: string, minLength: 5 }
+        body_md: { type: string }
+        tags:
+          type: array
+          items: { type: string }
+        related_codes:
+          type: array
+          items: { type: string }
+```

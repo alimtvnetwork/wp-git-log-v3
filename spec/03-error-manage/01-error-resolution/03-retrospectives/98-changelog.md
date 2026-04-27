@@ -34,3 +34,7 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
+
+## 2026-04-27 — Phase 61 impl-sweep
+
+- Phase 61: appended Retrospectives Index API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

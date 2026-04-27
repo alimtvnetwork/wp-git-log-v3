@@ -204,3 +204,64 @@ class SeverityColorTokens:
         if not hsl.match(self.base) or not hsl.match(self.foreground):
             raise ValueError('ERR-COLOR-001: base/foreground must be HSL triplets')
 ```
+
+
+---
+
+## Phase 61 Reference: Error Modal Color Theme API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Modal Color Theme API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-modal-themes/v1
+paths:
+  /themes:
+    get:
+      summary: List available color themes
+      operationId: listThemes
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ColorTheme" }
+  /themes/{name}:
+    get:
+      summary: Get a single theme
+      operationId: getTheme
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string, pattern: "^[a-z0-9-]+$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ColorTheme" }
+components:
+  schemas:
+    ColorTheme:
+      type: object
+      required: [name, mode, tokens]
+      properties:
+        name: { type: string }
+        mode: { type: string, enum: [light, dark, auto] }
+        tokens:
+          type: object
+          required: [bg, fg, accent, danger]
+          properties:
+            bg:      { type: string, pattern: "^hsl\\(.+\\)$" }
+            fg:      { type: string, pattern: "^hsl\\(.+\\)$" }
+            accent:  { type: string, pattern: "^hsl\\(.+\\)$" }
+            danger:  { type: string, pattern: "^hsl\\(.+\\)$" }
+            warning: { type: string, pattern: "^hsl\\(.+\\)$" }
+```

@@ -475,3 +475,59 @@ final class AppTokens
     }
 }
 ```
+
+
+---
+
+## Phase 61 Reference: App UI Component Registry API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: App UI Component Registry API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/app-ui/v1
+paths:
+  /components:
+    get:
+      summary: List registered UI components
+      operationId: listComponents
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/UiComponent" }
+  /components/{name}:
+    get:
+      summary: Get a single component
+      operationId: getComponent
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string, pattern: "^[A-Z][A-Za-z0-9]+$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/UiComponent" }
+components:
+  schemas:
+    UiComponent:
+      type: object
+      required: [name, version, category]
+      properties:
+        name:     { type: string }
+        version:  { type: string, pattern: "^\\d+\\.\\d+\\.\\d+$" }
+        category: { type: string, enum: [layout, form, navigation, feedback, data-display, overlay] }
+        props_schema_uri: { type: string, format: uri }
+        a11y_audited:     { type: boolean }
+        deprecated:       { type: boolean }
+```

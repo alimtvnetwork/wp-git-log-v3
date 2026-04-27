@@ -125,3 +125,72 @@ Inventory references `07-schemas`, `08-linter-scripts`, `09-templates` — these
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+
+---
+
+## Phase 61 Reference: Error Code Registry Admin API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Code Registry Admin API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-registry-admin/v1
+paths:
+  /codes:
+    post:
+      summary: Register a new error code
+      operationId: registerCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/CodeRecord" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CodeRecord" }
+  /codes/{code}:
+    patch:
+      summary: Update code metadata
+      operationId: updateCode
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema: { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deprecated:  { type: boolean }
+                replaced_by: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CodeRecord" }
+components:
+  schemas:
+    CodeRecord:
+      type: object
+      required: [code, severity, message_template, owner_module]
+      properties:
+        code:             { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        severity:         { type: string, enum: [fatal, error, warning, info] }
+        message_template: { type: string, minLength: 1 }
+        owner_module:     { type: string }
+        retryable:        { type: boolean }
+        deprecated:       { type: boolean }
+        replaced_by:      { type: string }
+```

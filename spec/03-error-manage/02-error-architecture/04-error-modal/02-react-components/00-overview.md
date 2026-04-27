@@ -235,3 +235,43 @@ class ErrorModalActionDescriptor:
         if not self.id or not 1 <= len(self.label) <= 40:
             raise ValueError('ERR-MODAL-ACT-001: invalid id/label')
 ```
+
+
+---
+
+## Phase 61 Reference: Error Modal React Component Registry API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Modal React Component Registry API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-modal-components/v1
+paths:
+  /components:
+    get:
+      summary: List registered modal components
+      operationId: listComponents
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ModalComponent" }
+components:
+  schemas:
+    ModalComponent:
+      type: object
+      required: [name, version, props_schema_uri]
+      properties:
+        name:             { type: string, pattern: "^[A-Z][A-Za-z0-9]+$" }
+        version:          { type: string, pattern: "^\\d+\\.\\d+\\.\\d+$" }
+        props_schema_uri: { type: string, format: uri }
+        a11y_audited:     { type: boolean }
+        deprecated:       { type: boolean }
+```

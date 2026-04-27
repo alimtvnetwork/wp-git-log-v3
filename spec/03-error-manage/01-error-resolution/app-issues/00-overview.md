@@ -145,3 +145,63 @@ class AppIssue:
     def is_closed(self) -> bool:
         return self.status in CLOSED_STATUSES
 ```
+
+
+---
+
+## Phase 61 Reference: App Issues Tracker API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: App Issues Tracker API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/app-issues/v1
+paths:
+  /issues:
+    get:
+      summary: List app issues
+      operationId: listIssues
+      parameters:
+        - in: query
+          name: status
+          schema: { type: string, enum: [open, triaged, resolved, wont_fix] }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/AppIssue" }
+  /issues:
+    post:
+      summary: Open an app issue
+      operationId: openIssue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AppIssue" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AppIssue" }
+components:
+  schemas:
+    AppIssue:
+      type: object
+      required: [title, severity, source]
+      properties:
+        id:       { type: string, format: uuid }
+        title:    { type: string, minLength: 5 }
+        severity: { type: string, enum: [critical, high, medium, low] }
+        source:   { type: string, enum: [user_report, automated_scan, internal] }
+        status:   { type: string, enum: [open, triaged, resolved, wont_fix] }
+        opened_at: { type: string, format: date-time }
+```

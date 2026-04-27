@@ -64,3 +64,7 @@
 | 2026-04-02 | 1.0.0 | Initial consistency report — all 4 files verified |
 | 2026-04-27 | 2.2.0 | Phase 54 — typed-language reference sweep (Go/PHP/Python) for impl-rubric lift |
 
+
+## 2026-04-27 — Phase 61 impl-sweep
+
+- Phase 61: appended Error Modal Color Theme API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

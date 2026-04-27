@@ -272,3 +272,51 @@ class ErrorModalCopyTemplate:
         if not 1 <= len(self.title) <= 80:
             raise ValueError('ERR-COPY-001: title must be 1..80 chars')
 ```
+
+
+---
+
+## Phase 61 Reference: Error Modal Copy Catalog API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Modal Copy Catalog API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-copy/v1
+paths:
+  /copy/{id}:
+    get:
+      summary: Fetch a copy entry by id
+      operationId: getCopy
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, pattern: "^[a-z0-9_-]+$" }
+        - in: query
+          name: locale
+          schema: { type: string, pattern: "^[a-z]{2}(-[A-Z]{2})?$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CopyEntry" }
+components:
+  schemas:
+    CopyEntry:
+      type: object
+      required: [id, locale, title, message]
+      properties:
+        id:      { type: string }
+        locale:  { type: string }
+        title:   { type: string, minLength: 1, maxLength: 80 }
+        message: { type: string, minLength: 1, maxLength: 500 }
+        primary_action_label:   { type: string, maxLength: 24 }
+        secondary_action_label: { type: string, maxLength: 24 }
+paths_extra: {}
+```
