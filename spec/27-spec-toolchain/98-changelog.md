@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.8.0
+**Version:** 2.9.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,13 @@
 ---
 
 ## Releases
+
+### 2.9.0 — 2026-04-27 (Phase 40 — Lockstep enforcement gate)
+- **Added** [`24-check-lockstep.md`](./24-check-lockstep.md) v1.0.0 + `linter-scripts/check-lockstep.cjs` v1.0.0. Enforces 4 rules (L0/L1/L2/L3) on §00 banner ↔ §98 release entries ↔ §99 banner sync. Format-tolerant (heading + table-row release entries; `Updated:`/`Generated:` banner variants). Default warn-only; `--strict` for CI gate. JSON output mode.
+- **Added** "Spec lockstep gate" step in `.github/workflows/spec-monthly-audit.yml` (warn-only baseline; flips to `--strict` after Phase 41 baseline sweep).
+- **Baseline:** 24 modules drifted at adoption (8 L0, 17 L1, 3 L2). 48 pass, 3 skipped (no §98/§99). Phase 41 backlog item: sweep to zero.
+- **Bumped** §00 banner v1.2.0 → v1.3.0; bijection 30/30 → 31/31.
+- **Lockstep:** §99 v2.5.0 → v2.6.0; memory `mem://index.md` Phase 40 row appended.
 
 ### 2.8.0 — 2026-04-27 (Phase 39b — TODO-marker exemption)
 - **Added** §00 "Audit Marker Exemption" section documenting that the 2026-04-27 AI-implementability audit's `todo_count: 4` was a substring false-positive: every match lives inside script-spec content that **defines** how the toolchain detects or processes TODOs (`31-audit-spec-vs-code-v2.py.md:23` lists `TODO/TBD/FIXME density` as a measured metric; `31-audit-spec-vs-code-v2.py.md:136` defines gate `G-TODO-01`; `15-generate-fix-checklist.md:58` lists `todo_density > 0` as a P3 priority signal; `23-scaffold-spec-module.md:59` documents that the scaffolder emits placeholder sections marked TODO by design). Module is exempt from the substring-based `todo_density` heuristic; future auditor SHOULD switch to a regex that excludes fenced code blocks and back-tick-quoted strings (Phase 39b follow-up R4 — to be implemented in `audit-spec-vs-code-v2.py`).

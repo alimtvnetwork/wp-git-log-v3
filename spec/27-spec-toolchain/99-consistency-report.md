@@ -1,9 +1,11 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.5.0
+**Version:** 2.6.0
 **Updated:** 2026-04-27
 
-> **v2.4.0 update (Phase 37):** Added [`23-scaffold-spec-module.md`](./23-scaffold-spec-module.md) + `linter-scripts/scaffold-spec-module.cjs`. Emits a v2.0.0-rubric-compliant module skeleton (§00/§97/§98/§99) so newly created modules pass `check-tree-health.cjs --strict` on first run. 5 ACs (AC-23-01..05) covering strict-pass guarantee, slot-collision refusal, idempotency, slug/slot validation, and quality-credit anchor presence. Bijection 29/29 → 30/30. Companion to §20–§22 healers — prevents the next thin-§99 wave (cf. Phase 31 remediation).
+> **v2.6.0 update (Phase 40):** Added [`24-check-lockstep.md`](./24-check-lockstep.md) + `linter-scripts/check-lockstep.cjs` (v1.0.0). Mechanises the Core memory rule "§00 banner + §98 changelog row + §99 health/inventory in lockstep". 4 rules (L0/L1/L2/L3), format-tolerant, warn-only by default. Wired into `spec-monthly-audit.yml`. Bijection 30/30 → 31/31. Adoption baseline: 24/82 modules drifted (8 L0 missing banners, 17 L1 stale §99 dates, 3 L2 missing changelog rows). Phase 41 backlog: sweep baseline to zero before flipping CI flag to `--strict`. 8 ACs (AC-24-01..08).
+
+> **v2.5.0 update (Phase 39b):** §00 banner v1.1.0 → v1.2.0 with "Audit Marker Exemption" section. AI audit's `todo_count: 4` was a substring false-positive — every match lives in script-spec content that *defines* TODO-detection metrics or scaffolder behaviour. R4 follow-up: regex-fix `audit-spec-vs-code-v2.py` to exclude fenced code blocks.
 
 > **v2.3.0 update (Phase 36):** Added `--strict` flag to `check-tree-health.cjs` (threshold 100 + fails on any single module below full marks). Wired into `spec-monthly-audit.yml`. [`05-check-tree-health.md`](./05-check-tree-health.md) v1.0.0 → v2.0.0 — rubric v2.0.0 fully documented (was still describing v1.x); 3 new ACs (AC-05-04..AC-05-06) for rubric weighting + `--strict` semantics; AC-05-02 corrected to match percentage-based scoring. Verified strict pass at 54/54 modules full marks.
 
@@ -38,6 +40,7 @@
 | 21-fill-missing-changelogs.md | ✅ | Filler |
 | 22-fill-missing-consistency-reports.md | ✅ | Filler |
 | 23-scaffold-spec-module.md | ✅ | Scaffolder (Phase 37) |
+| 24-check-lockstep.md | ✅ | Validator (Phase 40 lockstep gate) |
 | 30-audit-spec-vs-code.md | ✅ | Auditor v1 |
 | 31-audit-spec-vs-code-v2.md | ✅ | Auditor v2 |
 | 40-run-sh.md | ✅ | Runner (bash) |
