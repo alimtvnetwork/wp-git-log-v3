@@ -16,11 +16,11 @@ AI-implementability audit. Asks: *"Could a mediocre AI ship a working implementa
 
 1. Broader code index: `linter-scripts/` + `.github/` + `src/` presence.
 2. Deterministic pre-checks computed BEFORE AI scoring (so AI can be calibrated):
-   - waffle ratio (should/may/might/optionally per 1k chars)
+   - waffle ratio (should/may/might/optionally per 1k chars) — **prose only** (v2.4)
    - contract presence (DDL, JSON, TS enums, YAML/OpenAPI, Mermaid)
    - cross-spec link health (broken count)
    - AC count + Given/When/Then block count
-   - TODO/TBD/FIXME density
+   - TODO/TBD/FIXME density — **prose only** (v2.4); tokens inside fenced code blocks and inline `code` spans are excluded
 3. AI receives metrics + raw digest, must justify scores against them.
 4. Outputs blast-radius (0–10): how many other specs would benefit from fixing this one.
 
