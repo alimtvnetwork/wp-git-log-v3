@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.0.0
-**Updated:** 2026-04-26 (Phase 16f: full GWT rewrite — replaced 18 table-row criteria with 20 module-specific Given/When/Then ACs covering the contract for authoring all OTHER specs in this repository. Old AC-001..AC-018 preserved as AC-SAG-LEGACY-001..018.)
+**Version:** 4.1.0
+**Updated:** 2026-04-27 (Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out] documenting the front-matter keys read by `audit-spec-vs-code-v2.py` v2.10–v2.14.)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
@@ -191,7 +191,25 @@ SLOT_IMMUTABILITY:         once a numbered slot ships, it is permanent;
 - **Then** the change MUST come from `node linter-scripts/generate-spec-index.cjs` (deterministic, content-derived). Manual edits to `spec-index.md` are FORBIDDEN — the file's content is fully reproducible from the rest of the spec tree, and divergence introduces drift. The script MUST be re-run as part of the AC-SAG-10 lockstep on every spec edit. The output is byte-identical between Python and Go twin generators per AC-T-18 (cross-toolchain stability).
 - **Verifies:** `linter-scripts/generate-spec-index.cjs` contract + AC-SAG-10 lockstep + AC-T-18 (twin equivalence).
 
+### AC-SAG-21 — `kind:` front-matter selects the auditor rubric branch (Phase 89)
+
+- **Given** a module's `00-overview.md` declaring `kind: <value>` in YAML front-matter where `<value> ∈ {active-spec, future-spec, tracker, index, meta-toolchain}`,
+- **When** `linter-scripts/audit-spec-vs-code-v2.py` runs in deterministic mode,
+- **Then** the rubric branch chosen MUST match the value: `tracker` → tracker branch (impl baseline 75, cap 85 prose-only / 95 with ≥1 typed contract per v2.13); `index` → index branch (impl baseline 70 + 10 if `child_modules > 0`, cap 90 prose-only / 100 with ≥1 typed contract per v2.11); `meta-toolchain` → meta-toolchain branch (impl baseline 75, +10 if `has_normative_contract`, +5 if `md_files >= 30`, cap 100 per v2.10); `active-spec`/omitted/`future-spec` → normal contract module branch (impl baseline 30 + additive contract bonuses).
+- **And** an unrecognised `kind:` value MUST default to the normal contract branch (no crash, no hard error). The full enum is enumerated in §00 OpenAPI `SpecAudit` schema.
+- **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` rubric branches + `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` AC-31-15..AC-31-21.
+
+### AC-SAG-22 — `todo_audit_exempt: true` opt-out is reviewer-gated (Phase 89, v2.14)
+
+- **Given** a module's `00-overview.md` declaring `todo_audit_exempt: true` in YAML front-matter,
+- **When** `linter-scripts/audit-spec-vs-code-v2.py` runs in deterministic mode,
+- **Then** `metrics.todo_count` MUST be forced to `0` regardless of how many real `TODO:`/`TBD:`/`FIXME:` markers appear in prose, AND completeness scoring MUST NOT penalise the module for them.
+- **And** the opt-out MUST only be set on auditor-self-reference modules (modules that legitimately quote work-tracker markers because they document the TODO detector itself — currently only `spec/27-spec-toolchain/`). Reviewer MUST reject the opt-in for any other module type, since misuse silently masks unresolved work.
+- **And** the v2.14 tightened TODO regex requires the canonical work-tracker shape (`TODO:` / `TODO(name):` / `TODO -`); narrative mentions like "marked TODO" or "TODO/FIXME density" do **not** match, so most modules do not need this opt-out.
+- **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` `TODO_EXEMPT_RX` + `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` AC-31-22.
+
 ---
+
 
 ## Legacy Index (preserved for traceability)
 

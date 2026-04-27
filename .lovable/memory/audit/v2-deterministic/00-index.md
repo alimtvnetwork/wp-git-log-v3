@@ -18,12 +18,12 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Findings by category
 | Category | Count |
 |---|---:|
-| drift | 2 |
+| drift | 3 |
 
 ## Findings by severity
 | Severity | Count |
 |---|---:|
-| low | 2 |
+| low | 3 |
 
 ## 🎯 High blast-radius fixes (fix these FIRST)
 | Rank | Module | Score | Grade | Blast | Top blocker |
@@ -60,8 +60,8 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | 11 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 96 | 100 | A+ | _no findings_ |
 | 12 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 96 | 100 | A+ | _no findings_ |
 | 13 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 96 | 100 | A+ | _no findings_ |
-| 14 | [`02-coding-guidelines/09-powershell-integration`](./02-coding-guidelines__09-powershell-integration.md) | 97 | 100 | A+ | _no findings_ |
-| 15 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 97 | 100 | A+ | _no findings_ |
+| 14 | [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 97 | 100 | A+ | 1 TODO/TBD/FIXME marker(s) in module body |
+| 15 | [`02-coding-guidelines/09-powershell-integration`](./02-coding-guidelines__09-powershell-integration.md) | 97 | 100 | A+ | _no findings_ |
 
 ## Top 10 (gold standards)
 | Rank | Module | Overall | Impl | Grade |
@@ -93,6 +93,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 100 | 80 | 100 | 100 | 100 | 96 | 100 | **96** | A+ | 7 |
+| [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 100 | 85 | 100 | 100 | 100 | 100 | 90 | **97** | A+ | 7 |
 | [`02-coding-guidelines/09-powershell-integration`](./02-coding-guidelines__09-powershell-integration.md) | 100 | 85 | 100 | 100 | 100 | 100 | 100 | **97** | A+ | 7 |
 | [`02-coding-guidelines/21-app`](./02-coding-guidelines__21-app.md) | 100 | 90 | 100 | 100 | 100 | 80 | 100 | **97** | A+ | 4 |
 | [`02-coding-guidelines/23-app-database`](./02-coding-guidelines__23-app-database.md) | 100 | 90 | 100 | 100 | 100 | 80 | 100 | **97** | A+ | 4 |
@@ -102,7 +103,6 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`03-error-manage/02-error-architecture/05-response-envelope`](./03-error-manage__02-error-architecture__05-response-envelope.md) | 100 | 85 | 100 | 100 | 100 | 100 | 100 | **97** | A+ | 7 |
 | [`17-consolidated-guidelines`](./17-consolidated-guidelines.md) | 100 | 85 | 100 | 100 | 100 | 100 | 90 | **97** | A+ | 7 |
 | [`27-spec-toolchain`](./27-spec-toolchain.md) | 100 | 90 | 100 | 100 | 100 | 80 | 100 | **97** | A+ | 2 |
-| [`01-spec-authoring-guide`](./01-spec-authoring-guide.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/01-cross-language/02-boolean-principles`](./02-coding-guidelines__01-cross-language__02-boolean-principles.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/01-cross-language/04-code-style`](./02-coding-guidelines__01-cross-language__04-code-style.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
 | [`02-coding-guidelines/01-cross-language/15-master-coding-guidelines`](./02-coding-guidelines__01-cross-language__15-master-coding-guidelines.md) | 100 | 90 | 100 | 100 | 100 | 100 | 100 | **98** | A+ | 7 |
