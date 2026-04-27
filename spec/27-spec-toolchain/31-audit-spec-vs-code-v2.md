@@ -151,6 +151,11 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **When** the result envelope is read,
 - **Then** it MUST contain `raw_scores` (pre-gate) and `scores` (post-gate), and `weighted(scores) <= weighted(raw_scores)` for every module.
 
+### AC-31-11 — TODO/waffle scanners ignore code samples (v2.4)
+- **Given** a module whose only `TODO`/`FIXME` tokens appear inside fenced code blocks (```` ``` ````) or inline `code` spans,
+- **When** the deterministic metrics are computed,
+- **Then** `metrics.todo_density` MUST equal `0` AND the `G-TODO-01` gate MUST NOT fire. The same prose-only rule applies to `WAFFLE_RX` so `waffle_per_kchar` reflects spec narrative, not code samples.
+
 ## Cross-references
 
 - §13 [`13-generate-gwt-acceptance.md`](./13-generate-gwt-acceptance.md) — consumes `raw-results.json`.
