@@ -138,3 +138,7 @@
 ---
 
 *Keep this file updated when specs change.*
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended Go/PHP/Python ErrorEnvelope validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).

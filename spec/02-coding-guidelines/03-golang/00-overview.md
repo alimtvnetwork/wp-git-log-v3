@@ -160,3 +160,46 @@ func Adapt(h Handler) http.HandlerFunc {
     }
 }
 ```
+
+
+---
+
+## Phase 57 Reference: TypeScript Enum Mirror
+
+The Go coding guidelines define a fixed set of severities for `golangci-lint`
+findings and a fixed module-state enum used by the audit pipeline. The
+TypeScript mirror is consumed by dashboard tooling.
+
+```typescript
+// Severities accepted by the Go linter pipeline (mirrors golangci-lint output).
+export enum GoLintSeverity {
+  Error   = "error",
+  Warning = "warning",
+  Info    = "info",
+}
+
+// Module state recorded by the spec-authoring audit for a Go module.
+export enum GoModuleState {
+  Planned     = "planned",
+  InProgress  = "in_progress",
+  Implemented = "implemented",
+  Deprecated  = "deprecated",
+}
+
+// Allowed Go test kinds enforced by the CI policy.
+export enum GoTestKind {
+  Unit        = "unit",
+  Integration = "integration",
+  E2E         = "e2e",
+  Bench       = "bench",
+  Fuzz        = "fuzz",
+}
+
+export type GoLintFinding = {
+  rule:     string;
+  severity: GoLintSeverity;
+  file:     string;
+  line:     number;
+  message:  string;
+};
+```

@@ -64,3 +64,7 @@ All internal links verified valid. ✅
 | 2026-03-30 | 3.0.0 | Added `97-acceptance-criteria.md`. Total: 10 → 11 |
 | 2026-03-30 | 2.0.0 | Enhanced overview with scoring metrics, keywords, reliability reports, .lovable folder guidance |
 | 2026-03-30 | 1.0.0 | Initial consistency report created |
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended Go/PHP/Python SpecModule validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).

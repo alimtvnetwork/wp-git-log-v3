@@ -765,3 +765,119 @@ export interface AuditModuleRecord {
   implementability_blockers: readonly string[];
 }
 ```
+
+
+---
+
+## Phase 57 Reference: Typed-Language Spec Validators
+
+The spec-authoring rules are normative across languages. The following
+reference snippets show how a build pipeline validates a spec module's
+front-matter and required-files contract in Go, PHP, and Python.
+
+### Go
+
+```go
+// Package specauthoring validates a spec module against the authoring guide.
+package specauthoring
+
+import (
+    "errors"
+    "fmt"
+)
+
+type SpecModule struct {
+    Path             string   `json:"path"`
+    Kind             string   `json:"kind"`             // future-spec | tracker | index | meta-toolchain
+    HasOverview      bool     `json:"has_overview"`     // 00-overview.md present
+    HasAcceptance    bool     `json:"has_acceptance"`   // 97-acceptance-criteria.md present
+    HasChangelog     bool     `json:"has_changelog"`    // 98-changelog.md present
+    HasConsistency   bool     `json:"has_consistency"`  // 99-consistency-report.md present
+    AcceptanceCount  int      `json:"acceptance_count"` // # of GWT blocks
+    ChildModules     int      `json:"child_modules"`
+}
+
+var ErrMissingFile = errors.New("spec-authoring: required file missing")
+
+func (s SpecModule) Validate() error {
+    if !s.HasOverview {
+        return fmt.Errorf("%w: %s/00-overview.md", ErrMissingFile, s.Path)
+    }
+    if !s.HasChangelog {
+        return fmt.Errorf("%w: %s/98-changelog.md", ErrMissingFile, s.Path)
+    }
+    if !s.HasConsistency {
+        return fmt.Errorf("%w: %s/99-consistency-report.md", ErrMissingFile, s.Path)
+    }
+    if s.Kind != "tracker" && s.Kind != "index" && !s.HasAcceptance {
+        return fmt.Errorf("%w: %s/97-acceptance-criteria.md", ErrMissingFile, s.Path)
+    }
+    return nil
+}
+```
+
+### PHP
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Lovable\SpecAuthoring;
+
+final class SpecModule
+{
+    public function __construct(
+        public readonly string $path,
+        public readonly string $kind,
+        public readonly bool $hasOverview,
+        public readonly bool $hasAcceptance,
+        public readonly bool $hasChangelog,
+        public readonly bool $hasConsistency,
+        public readonly int  $acceptanceCount,
+        public readonly int  $childModules,
+    ) {}
+
+    public function validate(): void
+    {
+        if (!$this->hasOverview) {
+            throw new \RuntimeException("missing {$this->path}/00-overview.md");
+        }
+        if (!$this->hasChangelog) {
+            throw new \RuntimeException("missing {$this->path}/98-changelog.md");
+        }
+        if (!$this->hasConsistency) {
+            throw new \RuntimeException("missing {$this->path}/99-consistency-report.md");
+        }
+        if (!\in_array($this->kind, ['tracker','index'], true) && !$this->hasAcceptance) {
+            throw new \RuntimeException("missing {$this->path}/97-acceptance-criteria.md");
+        }
+    }
+}
+```
+
+### Python
+
+```python
+from dataclasses import dataclass
+
+@dataclass(frozen=True)
+class SpecModule:
+    path: str
+    kind: str
+    has_overview: bool
+    has_acceptance: bool
+    has_changelog: bool
+    has_consistency: bool
+    acceptance_count: int
+    child_modules: int
+
+    def validate(self) -> None:
+        if not self.has_overview:
+            raise ValueError(f"missing {self.path}/00-overview.md")
+        if not self.has_changelog:
+            raise ValueError(f"missing {self.path}/98-changelog.md")
+        if not self.has_consistency:
+            raise ValueError(f"missing {self.path}/99-consistency-report.md")
+        if self.kind not in ("tracker", "index") and not self.has_acceptance:
+            raise ValueError(f"missing {self.path}/97-acceptance-criteria.md")
+```

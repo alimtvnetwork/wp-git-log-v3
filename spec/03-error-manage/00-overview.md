@@ -239,3 +239,114 @@ export enum ErrorDomain {
   }
 }
 ```
+
+
+---
+
+## Phase 57 Reference: Typed-Language Error Envelope Validators
+
+The error-management contract defines a normative `ErrorEnvelope` shape that
+is mirrored across languages. Reference implementations below.
+
+### Go
+
+```go
+package errormanage
+
+import (
+    "errors"
+    "fmt"
+    "regexp"
+    "time"
+)
+
+var codePattern = regexp.MustCompile(`^[A-Z]{2,5}-[A-Z]+-\d{2,4}$`)
+
+type ErrorEnvelope struct {
+    Code      string                 `json:"code"`
+    Message   string                 `json:"message"`
+    Severity  string                 `json:"severity"` // fatal|error|warning|info
+    Timestamp time.Time              `json:"timestamp"`
+    TraceID   string                 `json:"trace_id,omitempty"`
+    Details   map[string]interface{} `json:"details,omitempty"`
+}
+
+var ErrInvalidCode = errors.New("error-manage: code does not match registry pattern")
+
+func (e ErrorEnvelope) Validate() error {
+    if !codePattern.MatchString(e.Code) {
+        return fmt.Errorf("%w: %q", ErrInvalidCode, e.Code)
+    }
+    if e.Message == "" {
+        return errors.New("error-manage: message is required")
+    }
+    switch e.Severity {
+    case "fatal", "error", "warning", "info":
+    default:
+        return fmt.Errorf("error-manage: invalid severity %q", e.Severity)
+    }
+    return nil
+}
+```
+
+### PHP
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Lovable\ErrorManage;
+
+final class ErrorEnvelope
+{
+    public function __construct(
+        public readonly string $code,
+        public readonly string $message,
+        public readonly string $severity, // fatal|error|warning|info
+        public readonly string $timestamp, // ISO-8601
+        public readonly ?string $traceId = null,
+        public readonly array $details = [],
+    ) {}
+
+    public function validate(): void
+    {
+        if (!\preg_match('/^[A-Z]{2,5}-[A-Z]+-\d{2,4}$/', $this->code)) {
+            throw new \InvalidArgumentException("invalid code: {$this->code}");
+        }
+        if ($this->message === '') {
+            throw new \InvalidArgumentException('message is required');
+        }
+        if (!\in_array($this->severity, ['fatal','error','warning','info'], true)) {
+            throw new \InvalidArgumentException("invalid severity: {$this->severity}");
+        }
+    }
+}
+```
+
+### Python
+
+```python
+import re
+from dataclasses import dataclass, field
+from typing import Optional, Dict, Any
+
+CODE_RE = re.compile(r"^[A-Z]{2,5}-[A-Z]+-\d{2,4}$")
+VALID_SEVERITIES = {"fatal", "error", "warning", "info"}
+
+@dataclass(frozen=True)
+class ErrorEnvelope:
+    code: str
+    message: str
+    severity: str
+    timestamp: str
+    trace_id: Optional[str] = None
+    details: Dict[str, Any] = field(default_factory=dict)
+
+    def validate(self) -> None:
+        if not CODE_RE.match(self.code):
+            raise ValueError(f"invalid code: {self.code}")
+        if not self.message:
+            raise ValueError("message is required")
+        if self.severity not in VALID_SEVERITIES:
+            raise ValueError(f"invalid severity: {self.severity}")
+```

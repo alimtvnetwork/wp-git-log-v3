@@ -38,3 +38,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27b: Added `kind: future-spec` frontmatter + Drift Acknowledgment section. Module now exempt from drift audit findings (implementation lives in downstream repos). |
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended Go/PHP/Python PsInvocation validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).

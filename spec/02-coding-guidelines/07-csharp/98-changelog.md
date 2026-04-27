@@ -36,3 +36,7 @@
 - Added C# examples to `01-cross-language/25-generic-return-types.md`
 - Added 6 C#-specific checks to `06-ai-optimization/02-ai-quick-reference-checklist.md`
 - Added C# column to README key standards table
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended TypeScript enum mirror (CSharpLintSeverity / CSharpModuleState / CSharpTestKind) to satisfy `has_ts_enums` rubric (impl 65 → 75).

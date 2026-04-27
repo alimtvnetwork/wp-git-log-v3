@@ -86,3 +86,7 @@ All internal cross-references verified. ✅
 Inventory mirrors the on-disk layout of `03-error-manage/` as of 2026-04-26. See
 `98-changelog.md` for the file-level revision trail.
 
+
+## 2026-04-27 — Phase 57 impl-sweep
+
+- Phase 57: appended Go/PHP/Python ErrorEnvelope validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).
