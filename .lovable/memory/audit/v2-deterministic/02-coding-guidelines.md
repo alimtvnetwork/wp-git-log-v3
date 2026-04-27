@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/02-coding-guidelines.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 6,
   "mmd_files": 0,
-  "overview_chars": 12788,
+  "overview_chars": 13031,
   "ac_chars": 31913,
   "ac_count": 26,
   "gwt_block_count": 21,
@@ -56,10 +56,10 @@
   "has_ci_workflow": false,
   "has_normative_contract": false,
   "has_mermaid": false,
-  "links_total": 32,
+  "links_total": 33,
   "links_broken": 0,
   "todo_density": 2,
-  "waffle_per_kchar": 0.12,
+  "waffle_per_kchar": 0.11,
   "child_modules": 16
 }
 ```
