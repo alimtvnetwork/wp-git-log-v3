@@ -1,6 +1,6 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.6.0  
+**Version:** 1.7.0  
 **Updated:** 2026-04-27  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
 **Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates**)  
@@ -175,6 +175,11 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **Given** a module whose frontmatter declares `kind: tracker` (issue ledgers) or `kind: index` (placement-rule routers),
 - **When** the audit runs,
 - **Then** `G-CON-01` (no inlined contract) MUST be bypassed entirely for both kinds, AND `G-CON-02` (overview <500 chars) MUST also be bypassed for both kinds. Rationale: the rubric (`deterministic_score`) already exempts these `kind`s with baseline `implementability=75/70`; the gates must mirror that exemption to avoid double-penalising. `meta-toolchain` is also exempted from `G-CON-01` (auditor-self-reference modules).
+
+### AC-31-16 — `meta-toolchain` rubric branch + normative-contract bonus (v2.8)
+- **Given** a module whose frontmatter declares `kind: meta-toolchain` AND whose `00-overview.md` contains either (a) a ```text fenced block ≥10 non-blank lines containing ≥2 of the markers `CONTRACT:`, `INV-`, `FAIL-`, `DEL-`, `INVARIANT`, `BIJECTION`, OR (b) ≥30 child spec files (`md_files >= 30`) acting as the bijection inventory,
+- **When** the deterministic metrics are computed,
+- **Then** `metrics.has_normative_contract` MUST be `true` AND `scores.implementability` MUST start from baseline 75 (vs the default 30 for normal contract modules), with `+10` if `has_normative_contract` and `+5` if `md_files >= 30`. The `27-spec-toolchain` module — whose "contract" is the script-spec inventory plus the inlined bijection block — MUST score `implementability >= 85`.
 
 ## Cross-references
 
