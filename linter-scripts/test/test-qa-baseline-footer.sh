@@ -120,6 +120,7 @@ WORKFLOW_GATES=$(grep -E '^      - name: ' "$WORKFLOW" | awk -F': ' '
   /Audit determinism \/ JSON-stability/       {n++}
   /Mermaid diagram syntax gate/               {n++}
   /Self-test README inventory parity/         {n++}
+  /Self-test QA baseline footer/              {n++}
   END {print n+0}
 ' )
 
