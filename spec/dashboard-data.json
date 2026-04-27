@@ -4,10 +4,8 @@
     "Score": 100,
     "Grade": "A+",
     "RubricVersion": "2.0.0",
-    "Deductions": [
-      "2 broken links (-4)"
-    ],
-    "LegacyScore": 96
+    "Deductions": [],
+    "LegacyScore": 100
   },
   "RubricV2": {
     "RubricVersion": "2.0.0",
@@ -18,21 +16,21 @@
     },
     "Score": 100,
     "Required": {
-      "Earned": 108,
-      "Max": 108,
+      "Earned": 112,
+      "Max": 112,
       "PctOfTotal": 60
     },
     "Recommended": {
-      "Earned": 108,
-      "Max": 108,
+      "Earned": 112,
+      "Max": 112,
       "PctOfTotal": 25
     },
     "Quality": {
-      "Earned": 162,
-      "Max": 162,
+      "Earned": 168,
+      "Max": 168,
       "PctOfTotal": 15
     },
-    "ModuleCount": 54,
+    "ModuleCount": 56,
     "Modules": [
       {
         "Module": "01-spec-authoring-guide",
@@ -469,6 +467,20 @@
         ]
       },
       {
+        "Module": "10-research/01-research-index",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
         "Module": "11-powershell-integration",
         "Required": 2,
         "RequiredMax": 2,
@@ -763,6 +775,20 @@
         ]
       },
       {
+        "Module": "26-gitlogs-diagrams/01-diagram-conventions",
+        "Required": 2,
+        "RequiredMax": 2,
+        "Recommended": 2,
+        "RecommendedMax": 2,
+        "QualityScore": 3,
+        "QualityMax": 3,
+        "QualityHits": [
+          "depth",
+          "history",
+          "inventory"
+        ]
+      },
+      {
         "Module": "27-spec-toolchain",
         "Required": 2,
         "RequiredMax": 2,
@@ -793,9 +819,9 @@
     ]
   },
   "Links": {
-    "TotalChecked": 2741,
-    "Ok": 2730,
-    "Broken": 2,
+    "TotalChecked": 2936,
+    "Ok": 2924,
+    "Broken": 0,
     "ExternalAllowed": 9,
     "ExternalAllowedDetails": [
       {
@@ -853,41 +879,27 @@
         "Resolved": "../spec-slides"
       }
     ],
-    "BrokenDetails": [
-      {
-        "Source": "01-spec-authoring-guide/97-acceptance-criteria.md",
-        "Line": 114,
-        "Text": "link",
-        "Target": "../foo",
-        "Resolved": "foo"
-      },
-      {
-        "Source": "02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md",
-        "Line": 111,
-        "Text": "AH-<L><N>",
-        "Target": "...",
-        "Resolved": "02-coding-guidelines/06-ai-optimization/..."
-      }
-    ]
+    "BrokenDetails": []
   },
   "RequiredFiles": {
     "MissingOverview": [],
     "MissingConsistency": []
   },
   "Inventory": {
-    "TotalFolders": 79,
-    "TotalMdFiles": 819,
+    "TotalFolders": 87,
+    "TotalMdFiles": 860,
     "Folders": [
       {
         "Folder": "",
-        "MdFiles": 6,
+        "MdFiles": 7,
         "Subfolders": 24,
         "HasOverview": true,
         "HasConsistency": true,
         "HasChangelog": true,
-        "HasAcceptance": false,
+        "HasAcceptance": true,
         "Files": [
           "00-overview.md",
+          "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md",
           "folder-structure-root.md",
@@ -897,7 +909,7 @@
       },
       {
         "Folder": "01-spec-authoring-guide",
-        "MdFiles": 16,
+        "MdFiles": 17,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -917,6 +929,7 @@
           "09-exceptions.md",
           "10-mandatory-linter-infrastructure.md",
           "11-root-readme-conventions.md",
+          "12-queued-decisions-trail.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md"
@@ -1324,6 +1337,21 @@
       {
         "Folder": "02-coding-guidelines/10-research",
         "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "02-coding-guidelines/10-research/01-research-index",
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1371,6 +1399,21 @@
       {
         "Folder": "02-coding-guidelines/21-app",
         "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "02-coding-guidelines/21-app/01-app-coding-rules",
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1385,6 +1428,21 @@
       },
       {
         "Folder": "02-coding-guidelines/22-app-issues",
+        "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "02-coding-guidelines/22-app-issues/01-app-issue-templates",
         "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
@@ -1401,6 +1459,21 @@
       {
         "Folder": "02-coding-guidelines/23-app-database",
         "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "02-coding-guidelines/23-app-database/01-app-database-conventions",
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1415,6 +1488,21 @@
       },
       {
         "Folder": "02-coding-guidelines/24-app-design-system-and-ui",
+        "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions",
         "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
@@ -1740,7 +1828,7 @@
       },
       {
         "Folder": "03-error-manage/03-error-code-registry",
-        "MdFiles": 9,
+        "MdFiles": 10,
         "Subfolders": 3,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1753,6 +1841,7 @@
           "03-collision-resolution-summary.md",
           "04-error-code-utilization-report.md",
           "05-overlap-validator.md",
+          "06-lint-rule-catalog.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md"
@@ -1964,6 +2053,21 @@
       {
         "Folder": "10-research",
         "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "10-research/01-research-index",
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1978,7 +2082,7 @@
       },
       {
         "Folder": "11-powershell-integration",
-        "MdFiles": 15,
+        "MdFiles": 16,
         "Subfolders": 3,
         "HasOverview": true,
         "HasConsistency": true,
@@ -1993,6 +2097,7 @@
           "04-error-codes.md",
           "05-firewall-rules.md",
           "06-php-known-issues.md",
+          "07-runner-interface.md",
           "25-multi-site-deployment.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
@@ -2004,7 +2109,7 @@
       },
       {
         "Folder": "12-cicd-pipeline-workflows",
-        "MdFiles": 21,
+        "MdFiles": 22,
         "Subfolders": 4,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2028,6 +2133,7 @@
           "08-terminal-output-standards.md",
           "09-binary-icon-branding.md",
           "10-release-pipeline-issues-rca.md",
+          "11-technical-interface.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md",
@@ -2131,7 +2237,7 @@
       },
       {
         "Folder": "14-update",
-        "MdFiles": 31,
+        "MdFiles": 32,
         "Subfolders": 3,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2165,6 +2271,7 @@
           "25-release-pinned-installer.md",
           "26-repo-major-version-migrator.md",
           "27-generic-installer-behavior.md",
+          "28-update-interface-contract.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md",
@@ -2199,6 +2306,21 @@
       {
         "Folder": "14-update/diagrams",
         "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "14-update/diagrams/01-diagram-conventions",
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2232,7 +2354,7 @@
       },
       {
         "Folder": "16-generic-release",
-        "MdFiles": 12,
+        "MdFiles": 13,
         "Subfolders": 1,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2248,6 +2370,7 @@
           "06-release-metadata.md",
           "07-known-issues-and-fixes.md",
           "08-version-pinned-release-installers.md",
+          "09-placeholder-tokens.md",
           "97-acceptance-criteria.md",
           "98-changelog.md",
           "99-consistency-report.md"
@@ -2481,6 +2604,21 @@
       {
         "Folder": "26-gitlogs-diagrams",
         "MdFiles": 4,
+        "Subfolders": 1,
+        "HasOverview": true,
+        "HasConsistency": true,
+        "HasChangelog": true,
+        "HasAcceptance": true,
+        "Files": [
+          "00-overview.md",
+          "97-acceptance-criteria.md",
+          "98-changelog.md",
+          "99-consistency-report.md"
+        ]
+      },
+      {
+        "Folder": "26-gitlogs-diagrams/01-diagram-conventions",
+        "MdFiles": 4,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2495,7 +2633,7 @@
       },
       {
         "Folder": "27-spec-toolchain",
-        "MdFiles": 38,
+        "MdFiles": 40,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2523,6 +2661,8 @@
           "20-fill-missing-acceptance-criteria.md",
           "21-fill-missing-changelogs.md",
           "22-fill-missing-consistency-reports.md",
+          "23-scaffold-spec-module.md",
+          "24-check-lockstep.md",
           "30-audit-spec-vs-code.md",
           "31-audit-spec-vs-code-v2.md",
           "40-run-sh.md",

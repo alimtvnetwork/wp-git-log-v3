@@ -71,6 +71,29 @@ function isExternalRepoRef(resolvedRel) {
     || resolvedRel === "dashboard-data.json";
 }
 
+// ── Cross-link waiver allowlist (parity with check-spec-cross-links.py) ─────
+// File format: <relpath>:<line>:<target> per line. Lines starting with # ignored.
+// Used to suppress documentation-example links (e.g. `[link](../foo)` inside
+// prose that demonstrates a forbidden pattern). Keeps dashboard in lockstep
+// with the Python CI gate which already honors the same file.
+const WAIVER_FILE = path.join(__dirname, "spec-cross-links.allowlist");
+const WAIVED_LINKS = new Set();
+if (fs.existsSync(WAIVER_FILE)) {
+  for (const raw of fs.readFileSync(WAIVER_FILE, "utf8").split("\n")) {
+    const line = raw.trim();
+    if (!line || line.startsWith("#")) continue;
+    // Allowlist entries are written relative to repo root (e.g. "spec/foo.md:42:bar"),
+    // but our sourceRel is relative to SPEC_ROOT. Strip a leading "spec/" if present
+    // so both forms match. Key shape stored: "<source-relpath>:<line>:<target>".
+    const normalized = line.startsWith("spec/") ? line.slice(5) : line;
+    WAIVED_LINKS.add(normalized);
+  }
+}
+
+function isWaivedLink(sourceRel, lineNum, target) {
+  return WAIVED_LINKS.has(`${sourceRel}:${lineNum}:${target}`);
+}
+
 // ── Helpers ─────────────────────────────────────────────────
 
 function isArchivePath(filePath) {
@@ -148,11 +171,13 @@ function extractLinks(filePath, content) {
 function validateLinks(mdFiles) {
   const broken = [];
   const externalAllowed = [];
-  const total = { Checked: 0, Ok: 0, Broken: 0, ExternalAllowed: 0 };
+  const waived = [];
+  const total = { Checked: 0, Ok: 0, Broken: 0, ExternalAllowed: 0, Waived: 0 };
 
   for (const filePath of mdFiles) {
     const content = fs.readFileSync(filePath, "utf8");
     const links = extractLinks(filePath, content);
+    const sourceRel = path.relative(SPEC_ROOT, filePath);
 
     for (const link of links) {
       total.Checked++;
@@ -164,15 +189,22 @@ function validateLinks(mdFiles) {
       } else if (isExternalRepoRef(resolvedRel)) {
         total.ExternalAllowed++;
         externalAllowed.push({
-          Source: path.relative(SPEC_ROOT, filePath),
+          Source: sourceRel,
           Line: link.Line,
           Target: link.Target,
           Resolved: resolvedRel,
         });
+      } else if (isWaivedLink(sourceRel, link.Line, link.Target)) {
+        total.Waived++;
+        waived.push({
+          Source: sourceRel,
+          Line: link.Line,
+          Target: link.Target,
+        });
       } else {
         total.Broken++;
         broken.push({
-          Source: path.relative(SPEC_ROOT, filePath),
+          Source: sourceRel,
           Line: link.Line,
           Text: link.Text,
           Target: link.Target,
@@ -182,7 +214,7 @@ function validateLinks(mdFiles) {
     }
   }
 
-  return { Broken: broken, ExternalAllowed: externalAllowed, Total: total };
+  return { Broken: broken, ExternalAllowed: externalAllowed, Waived: waived, Total: total };
 }
 
 // ── 2. Required-file checks ────────────────────────────────
