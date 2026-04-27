@@ -112,3 +112,48 @@ bunx eslint 'src/components/**/*.{ts,tsx}' --rule 'app-ui/naming: error'
 [ ] check-spec-cross-links.py exits 0 for this folder
 [ ] check-tree-health.cjs reports no findings against this folder
 ```
+
+
+---
+
+## Registry Table (DDL)
+
+The auditor's registry table that tracks each instance produced under this contract:
+
+```sql
+-- Forward-only registry table for entries under this convention
+CREATE TABLE IF NOT EXISTS RegistryEntry (
+    RegistryEntryId INTEGER PRIMARY KEY AUTOINCREMENT,
+    EntryId         TEXT    NOT NULL UNIQUE,         -- matches the contract's id pattern
+    Status          TEXT    NOT NULL,                -- mirrors contract enum
+    AuthoredAt      TEXT    NOT NULL,                -- ISO-8601
+    SupersededBy    TEXT    NULL,                    -- nullable per Rule 12
+    CreatedAt       TEXT    NOT NULL DEFAULT (datetime('now')),
+    UpdatedAt       TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS IX_RegistryEntry_Status   ON RegistryEntry(Status);
+CREATE INDEX IF NOT EXISTS IX_RegistryEntry_EntryId  ON RegistryEntry(EntryId);
+```
+
+
+---
+
+## Validation Schema (excerpt)
+
+Cross-validates the registry rows against the contract:
+
+```json
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RegistryEntryRow",
+  "type": "object",
+  "required": ["EntryId", "Status", "AuthoredAt"],
+  "properties": {
+    "EntryId":      { "type": "string", "minLength": 5 },
+    "Status":       { "type": "string" },
+    "AuthoredAt":   { "type": "string", "format": "date-time" },
+    "SupersededBy": { "type": ["string", "null"] }
+  }
+}
+```
