@@ -99,7 +99,19 @@ jobs:
         # full report), and the no-side-effects guarantee (sha256 snapshot
         # of .lovable/memory/audit/v2-deterministic/ before and after).
         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-23)
-        run: bash linter-scripts/test/test-audit-explain-contract.sh
+         run: bash linter-scripts/test/test-audit-explain-contract.sh
+
+      - name: Audit determinism / JSON-stability self-test (Phase 95)
+        # Phase 95: locks the AUDIT_DETERMINISTIC=1 byte-identical guarantee
+        # under CI. Runs the audit twice and asserts raw-results.json sha256
+        # is identical across runs. Determinism is the cornerstone of the
+        # entire CI quality bar (Phase 81's --min-weighted/--min-impl floors
+        # only make sense if scores are reproducible). The pre-existing
+        # audit gate doesn't catch determinism bugs because it only runs
+        # once. 7 assertions cover exit codes, file presence, byte-identity,
+        # byte-size match, JSON validity, module count, and sort ordering.
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-26)
+        run: bash linter-scripts/test/test-audit-deterministic-stability.sh
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
