@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **83/100 (B)**  
-**Blast radius:** 0/10
+**Implementability Score:** **90/100 (A)**  
+**Blast radius:** 4/10
 
-> Deterministic score 83/100 (B) for spec/02-coding-guidelines/09-powershell-integration.
+> Deterministic score 90/100 (A) for spec/02-coding-guidelines/09-powershell-integration.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,34 +16,38 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 70 | 24.5 |
-| Completeness | 20% | 75 | 15.0 |
+| Implementability | 35% | 80 | 28.0 |
+| Completeness | 20% | 85 | 17.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
-| Testability | 7% | 80 | 5.6 |
+| Testability | 7% | 100 | 7.0 |
 | Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
 ```json
 {
-  "kind": "index",
+  "kind": "",
   "md_files": 4,
   "mmd_files": 0,
-  "overview_chars": 806,
+  "overview_chars": 5502,
   "ac_chars": 3580,
   "ac_count": 7,
   "gwt_block_count": 6,
   "consistency_report": true,
-  "code_blocks_total": 0,
-  "code_blocks_by_lang": {},
+  "code_blocks_total": 7,
+  "code_blocks_by_lang": {
+    "json": 1,
+    "ts": 1,
+    "yaml": 5
+  },
   "has_sql_ddl": false,
-  "has_json_schema": false,
-  "has_ts_enums": false,
-  "has_yaml_openapi": false,
+  "has_json_schema": true,
+  "has_ts_enums": true,
+  "has_yaml_openapi": true,
   "has_typed_lang_contract": false,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": false,
   "has_mermaid": false,
   "links_total": 8,
