@@ -84,8 +84,16 @@ GWT_RX    = re.compile(r"\*\*Given\*\*.*?\*\*When\*\*.*?\*\*Then\*\*", re.S | re
 AC_RX     = re.compile(r"(?:^|\n)\s*###?\s*AC[-\s]?[A-Z\d-]+", re.I)
 LINK_RX   = re.compile(r"\[([^\]]+)\]\(([^)#]+\.md)(?:#[^)]*)?\)")
 CODE_BLOCK_RX = re.compile(r"```(\w+)?\n(.*?)```", re.S)
+INLINE_CODE_RX = re.compile(r"`[^`\n]+`")
 FRONTMATTER_RX = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 KIND_RX        = re.compile(r"^kind:\s*([A-Za-z0-9_-]+)\s*$", re.M)
+
+def strip_code(text: str) -> str:
+    """Remove fenced code blocks and inline code so TODO/waffle scanners
+    see prose only. Tokens like TODO inside ```python blocks are not
+    spec-level incompleteness markers."""
+    no_fences = CODE_BLOCK_RX.sub("", text)
+    return INLINE_CODE_RX.sub("", no_fences)
 
 # ---------------- code surface ----------------
 def collect_code_index() -> str:
