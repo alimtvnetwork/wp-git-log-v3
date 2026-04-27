@@ -1,11 +1,11 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.4.0
+**Version:** 4.6.0
 **Last Updated:** 2026-04-27
 
 ---
 
-## 4.4.0 — 2026-04-27
+## 4.6.0 — 2026-04-27
 
 - Phase 89: documented `kind:` rubric branch selector and `todo_audit_exempt: true` opt-out in §00 (new "Front-matter keys reference (Phase 89)" section). Added AC-SAG-21 and AC-SAG-22 in §97. Lockstep: §00 v3.5.0 → v3.6.0; §97 v4.0.0 → v4.1.0; §99 v4.2.0 → v4.3.0. Mirrors `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` AC-31-15..AC-31-22 (rubric versions v2.10–v2.14).
 
