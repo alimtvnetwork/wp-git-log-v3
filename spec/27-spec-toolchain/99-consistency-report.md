@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.6.0
+**Version:** 2.7.0
 **Updated:** 2026-04-27
+
+> **v2.7.0 update (Phase 41):** Phase 40 lockstep gate adoption baseline cleared (24 → 0 drifted modules). Sweep covered 17 L1 §99 banner bumps, 5 L0 §98 banner injections, and 3 outlier fixes (`14-update/24-update-check-mechanism` blockquote-style banners, `03-error-manage` 2026-04-16 witness row, root `spec/98-changelog.md` restructure with v3.4.1 SemVer heading). Workflow step "Spec lockstep gate" flipped from default to `--strict` in `.github/workflows/spec-monthly-audit.yml`. Any future banner / §98 / §99 desync hard-fails CI. [`24-check-lockstep.md`](./24-check-lockstep.md) v1.0.0 → v1.1.0. Verified: `node linter-scripts/check-lockstep.cjs --strict` → exit 0 (79 pass / 0 fail / 3 skip / 82 scanned).
 
 > **v2.6.0 update (Phase 40):** Added [`24-check-lockstep.md`](./24-check-lockstep.md) + `linter-scripts/check-lockstep.cjs` (v1.0.0). Mechanises the Core memory rule "§00 banner + §98 changelog row + §99 health/inventory in lockstep". 4 rules (L0/L1/L2/L3), format-tolerant, warn-only by default. Wired into `spec-monthly-audit.yml`. Bijection 30/30 → 31/31. Adoption baseline: 24/82 modules drifted (8 L0 missing banners, 17 L1 stale §99 dates, 3 L2 missing changelog rows). Phase 41 backlog: sweep baseline to zero before flipping CI flag to `--strict`. 8 ACs (AC-24-01..08).
 

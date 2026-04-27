@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.9.0
+**Version:** 2.10.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,17 @@
 ---
 
 ## Releases
+
+### 2.10.0 — 2026-04-27 (Phase 41 — Lockstep baseline sweep + strict flip)
+- **Cleared** the 24-module Phase 40 adoption baseline:
+  - **L1 (17 modules):** §99 banners bumped to match §00 dates (mechanical sweep). Modules: `02-coding-guidelines/01-cross-language/04-code-style`, `02-coding-guidelines/{09-powershell-integration,10-research,21-app,22-app-issues,23-app-database,24-app-design-system-and-ui}`, `03-error-manage`, `03-error-manage/02-error-architecture`, `03-error-manage/02-error-architecture/04-error-modal`, `05-split-db-architecture/03-issues`, `06-seedable-config-architecture/03-issues`, `10-research`, `14-update/diagrams`, `25-app-issues`, `25-app-issues/01-phase-2-git-logs-audit`, `25-app-issues/02-consolidated-audit-findings`.
+  - **L0 (5 modules):** Injected canonical `**Updated:**` banners under H1 in `02-coding-guidelines/01-cross-language/16-static-analysis/98-changelog.md`, `02-coding-guidelines/05-rust/98-changelog.md`, `02-coding-guidelines/07-csharp/98-changelog.md`, `22-git-logs-v2/98-changelog.md`, `28-universal-ci-cli/98-changelog.md`.
+  - **L0+L2 outliers (3):** Added canonical Updated banner alongside `Created:` in `14-update/24-update-check-mechanism/00-overview.md` and alongside `Audit date:` in its `99-consistency-report.md`. Added v3.2.0 witness changelog row to `spec/03-error-manage/98-changelog.md` (closes the 2026-04-16 banner ↔ no-changelog-row gap). Restructured `spec/98-changelog.md` (root) with v3.4.1 release heading + `Updated:` banner; legacy date-row table preserved as historical trail.
+- **Flipped** `.github/workflows/spec-monthly-audit.yml` step "Spec lockstep gate" from default to `--strict`. Any future banner / §98 / §99 desync now hard-fails CI.
+- **Verified:** `node linter-scripts/check-lockstep.cjs --strict` → exit 0; 79 pass / 0 fail / 3 skip / 82 scanned.
+- **Updated** [`24-check-lockstep.md`](./24-check-lockstep.md) v1.0.0 → v1.1.0 documenting Phase 41 remediation.
+- **Bumped** §00 banner v1.3.0 → v1.4.0; §99 v2.6.0 → v2.7.0.
+- **Lockstep:** memory `mem://index.md` Phase 41 row appended.
 
 ### 2.9.0 — 2026-04-27 (Phase 40 — Lockstep enforcement gate)
 - **Added** [`24-check-lockstep.md`](./24-check-lockstep.md) v1.0.0 + `linter-scripts/check-lockstep.cjs` v1.0.0. Enforces 4 rules (L0/L1/L2/L3) on §00 banner ↔ §98 release entries ↔ §99 banner sync. Format-tolerant (heading + table-row release entries; `Updated:`/`Generated:` banner variants). Default warn-only; `--strict` for CI gate. JSON output mode.
