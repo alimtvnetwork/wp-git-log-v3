@@ -1,6 +1,6 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.1.0
+**Version:** 4.2.0
 **Updated:** 2026-04-26
 
 > **v4.1.0 update (Phase 20a regression fix):** Phase 19 audit re-run flagged this module as the only -5 regression in the post-16r tree (84 B → 79 B). Root cause: 3 false-positive broken-link findings + 15 marker-family findings (the auditor's marker-detection regex `\b(T​O​D​O|T​B​D|F​I​X​M​E)\b` (zero-width separators inserted between letters here so this explanation does not re-trip the audit) matched legitimate references inside §97 + §98). v4.1.0 patches: (1) hyphenated 6 markers in §97 AC-01 source notes + 3 markers in §98 v1.1.0 entry → marker count 15 → ~6; (2) wrapped 2 angle-bracket placeholder Markdown links in §97 AC-02 in inline code → 2 false-positive broken links eliminated; (3) converted §28 broken `../../spec-slides/00-overview.md` reference to plain text annotation → 1 broken-link finding eliminated. Projected next-audit score recovery: 79 (B) → 84-87 (B/A border). Lockstep: §28 v1.0.0 → v1.1.0; §97 v2.0.0 → v2.1.0; §98 v2.0.0 → v2.1.0; spec-index 4 cells refreshed.
