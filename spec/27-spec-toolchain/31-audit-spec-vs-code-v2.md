@@ -227,7 +227,15 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And given** a module whose `00-overview.md` front-matter declares `todo_audit_exempt: true`,
 - **Then** `metrics.todo_count` MUST be forced to `0` regardless of how many real `TODO:` markers appear in prose, AND completeness scoring MUST NOT penalise the module for them. Rationale: auditor-self-reference modules legitimately quote TODO markers when documenting how the TODO detector works.
 
-## Rubric changelog (v2.9 → v2.14)
+### AC-31-23 — `--explain=<substring>` rubric trace flag (v2.16, Phase 90)
+- **Given** invocation `python3 linter-scripts/audit-spec-vs-code-v2.py --explain=<substring>`,
+- **When** at least one module's relative path under `spec/` contains `<substring>`,
+- **Then** the script MUST print to stdout: (a) the rubric branch (`tracker` / `index` / `meta-toolchain` / `normal-contract`), (b) per-dimension raw vs final scores with deltas and weighted contribution, (c) every implementability bonus that fired with its delta and the rubric version that introduced it, (d) every gate from `applied_gates` where `active=true` (with `id`, dimension, cap, before, after, rationale), (e) the count of passive gates whose predicate fired but didn't reduce the score, (f) the key metrics block (`ac_count`, `gwt_block_count`, `links_total`, `links_broken`, `todo_density`, `waffle_per_kchar`, `overview_chars`, `md_files`, `child_modules`, `code_blocks_total`).
+- **And** the script MUST exit `0` when at least one module matched, `1` when no module matched (with a hint message to stderr).
+- **And** when `<substring>` matches >1 module, the script MUST list the first 5 candidate paths to stderr and operate on the first match (substring is matched against the same `MOD_REL` keys used by `AUDIT_ONLY`).
+- **And** the flag MUST NOT write any files, MUST NOT call the AI gateway, and MUST NOT touch `.lovable/memory/audit/v2-deterministic/`. It is a pure-stdout diagnostic and short-circuits the normal audit loop entirely.
+
+## Rubric changelog (v2.9 → v2.16)
 
 | Version | Phase | Change | Score effect |
 |--------:|------:|--------|--------------|
@@ -237,6 +245,9 @@ A companion script renders these into a human report — see §16 [`16-generate-
 | v2.12 | 81 | New CLI flags `--min-weighted=N` and `--min-impl=N` enforce mean-score floors in CI. | Workflow gate: locks current quality bar without external script. |
 | v2.13 | 82 | Contract-bearing tracker bonus: `+5` per typed contract; cap 85 → 95 when ≥1 fires. | 3 trackers (`05-split-db.../03-issues`, `06-seedable.../03-issues`, `25-app-issues/02-...`) impl 85 → 95. |
 | v2.14 | 83 | TODO regex tightened to require `:` / `(name):` / ` -` suffix; new `todo_audit_exempt: true` front-matter opt-out for auditor-self-reference modules. | Prevents false-positive TODO penalties on gap-analysis / changelog content. |
+| v2.15 | 86 | Cumulative schema-bonus cap REJECTED after empirical test (mean impl 99.8 → 89.2; 76 multi-contract modules unfairly penalised). Source comment + memo preserve the rejected design. | None (zero rubric change shipped). |
+| v2.16 | 90 | New `--explain=<substring>` CLI flag prints rubric branch, fired bonuses, capped gates, and per-dimension trace for any module. Pure-add diagnostic. | None (no scoring change; debugging tool only). |
+
 
 ## Cross-references
 
