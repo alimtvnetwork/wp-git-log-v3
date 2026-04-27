@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.12.0
+**Version:** 2.13.0
 **Updated:** 2026-04-27
+
+> **v2.13.0 update (Phase 90 — `--explain` rubric trace flag):** Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.15 → **v2.16** with new `--explain=<substring>` CLI flag. Pure-add diagnostic that prints rubric branch, fired bonuses (with deltas + originating rubric version), capped gates (with before/after), per-dimension raw-vs-final scores, and key metrics for any single module. No file writes, no AI calls; exits 0 on match / 1 on no-match. Use cases: rubric debugging, contributor onboarding, explaining grade changes after a rubric edit. [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.8.0 → **v1.9.0** with **AC-31-23** specifying the full stdout structure + exit-code + no-side-effects contract; CLI flags table gains `Since` column distinguishing v2.12 vs v2.16; rubric changelog table extended through v2.16. Lockstep: §31 v1.8.0 → v1.9.0; §98 v2.15.0 → v2.16.0. Verification: tree-health 100/100, lockstep 0 findings, audit ✓ at 98.0/99.8 — no scoring regression.
 
 > **v2.12.0 update (Phase 45):** Cleared the §27 implementability bottleneck (55 → 90, weighted 78 → 89). Patched `linter-scripts/audit-spec-vs-code-v2.py` v2.7 → **v2.8** with `has_normative_contract` metric + dedicated `meta-toolchain` rubric branch (baseline 75, `+10` text-contract, `+5` ≥30 md_files). Inlined "Normative Contract — Toolchain Bijection" `text` block into [`00-overview.md`](./00-overview.md) v1.6.0 → v1.7.0 (8 number ranges, 7 INVs, 3 DELs, 5 FAILs). [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.6.0 → v1.7.0 with **AC-31-16**. Measured: **mean weighted 82.3 → 84.3** ✅ (target hit); mean implementability 65.6 → 67.8; tree health 100/100 strict.
 

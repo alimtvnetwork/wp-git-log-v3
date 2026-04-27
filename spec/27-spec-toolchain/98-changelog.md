@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.15.0
+**Version:** 2.16.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,11 @@
 ---
 
 ## Releases
+
+### 2.16.0 — 2026-04-27 (Phase 90 — `--explain` rubric trace flag)
+- **Patched** `linter-scripts/audit-spec-vs-code-v2.py` v2.15 → **v2.16**: new `--explain=<substring>` CLI flag prints, for the first matching module, the rubric branch, all bonuses fired with deltas + rubric version, every gate where `active=true` (before/after), per-dimension scores (raw vs final + Δ + contribution), and key metrics. Pure-add diagnostic — short-circuits the normal audit loop, writes no files, calls no AI. Exits 0 on match, 1 on no-match. Multi-match disambiguation lists first 5 candidates and uses first.
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.8.0 → **v1.9.0**: header `Source` line bumped to `(script v2.16)`, Category appends `+ --explain debugger`. Usage block adds the `--explain` invocation. CLI flags table re-titled (no longer "v2.12, Phase 81 only") and gains a `Since` column distinguishing v2.12 (`--min-weighted` / `--min-impl`) from v2.16 (`--explain`). New **AC-31-23** specifies the full `--explain` contract (stdout structure, exit codes, multi-match handling, no-side-effects guarantee). Rubric changelog table extended through v2.16, with v2.15 row recording the rejected schema-bonus cap (Phase 86) and v2.16 row recording the diagnostic addition.
+- **Verified**: `--explain=27-spec-toolchain` correctly prints `meta-toolchain` branch + 4 bonuses (75 + 10 + 5 + 5 + 5 = capped 100) + 0 active gates. `--explain=22-git-logs-v2` correctly prints `normal-contract` branch + 6 contract bonuses + 1 size bonus (30 + 60 + 10 = capped 100). `--explain=does-not-exist-XYZ` exits 1 with stderr hint. All three strict gates pass: tree-health 100/100, lockstep 0 findings, audit `--min-weighted=97 --min-impl=99` ✓ at 98.0 / 99.8 (no regression).
 
 ### 2.15.0 — 2026-04-27 (Phase 45 — §27 implementability bottleneck)
 - **Patched** `linter-scripts/audit-spec-vs-code-v2.py` v2.7 → **v2.8**: added `has_normative_contract` metric (detects ```text fenced blocks ≥10 non-blank lines containing ≥2 of `CONTRACT:`/`INV-`/`FAIL-`/`DEL-`/`INVARIANT`/`BIJECTION` markers) and a dedicated `meta-toolchain` implementability rubric branch. Baseline 75; `+10` for `has_normative_contract`; `+5` for `md_files >= 30` (large bijection inventory).
