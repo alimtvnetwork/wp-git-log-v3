@@ -70,3 +70,19 @@ All internal cross-references verified. ✅
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-03-31 | 1.0.0 | Initial consolidation from 3 archived sources |
+
+---
+
+## File Inventory
+
+| File | Status |
+|------|--------|
+| `00-overview.md` | ✅ Present |
+| `97-acceptance-criteria.md` | ✅ Present |
+| `98-changelog.md` | ✅ Present |
+| `99-consistency-report.md` | ✅ Present |
+| `structure.md` | ✅ Present |
+
+Inventory mirrors the on-disk layout of `03-error-manage/` as of 2026-04-26. See
+`98-changelog.md` for the file-level revision trail.
+

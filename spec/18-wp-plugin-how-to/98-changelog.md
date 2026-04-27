@@ -29,3 +29,7 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
+
+| Date | Bump | Notes |
+|------|------|-------|
+| 2026-04-26 | patch | Phase 31: Added Validation History / File Inventory headings to §99 to satisfy rubric v2.0.0 quality dimension. |

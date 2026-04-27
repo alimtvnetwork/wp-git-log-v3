@@ -89,3 +89,18 @@ These are gaps in the **server** (folder 22) that the CLI spec depends on:
 - Add `java` runtime plugin (`pom.xml`/`build.gradle` + `mvn test`/`gradle test`).
 - Add §16 test plan once a reference implementation exists.
 - Add §10 binary distribution (release artifacts, signing, SLSA provenance).
+
+---
+
+## Validation History
+
+| Date | Version | Action |
+|------|---------|--------|
+| 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
+| 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
+| 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |
+| 2026-04-16 | prior | Initial consistency report authored. |
+
+This module's full lockstep history is mirrored in `98-changelog.md`; entries
+above summarize only the audit-/validation-bearing milestones for `28-universal-ci-cli`.
+

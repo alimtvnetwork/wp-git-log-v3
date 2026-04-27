@@ -65,3 +65,18 @@ _None._ Slots 02/03/04 are intentional locked gaps (`~~retired v2.0.0~~`); never
 ## Health Score
 
 **100/100 (A+)** — 12 of 12 expected source files present (3 retired tombstones documented), AC coverage complete, every diagram self-describes its type, and as of v2.1.0 every live `.mmd` ships a companion `.svg` build artifact for tool-free preview. Slot integrity intact (immutable-slot rule honored).
+
+---
+
+## Validation History
+
+| Date | Version | Action |
+|------|---------|--------|
+| 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
+| 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
+| 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |
+| 2026-04-16 | prior | Initial consistency report authored. |
+
+This module's full lockstep history is mirrored in `98-changelog.md`; entries
+above summarize only the audit-/validation-bearing milestones for `26-gitlogs-diagrams`.
+
