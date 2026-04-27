@@ -49,14 +49,11 @@ function firstDate(line) {
 // "Updated" banner date: first line in file that matches `**Updated:** YYYY-MM-DD`
 // or `> **Updated:** YYYY-MM-DD` (blockquote variant).
 function bannerUpdated(text) {
-  const lines = text.split(/\r?\n/).slice(0, 30);
+  const lines = text.split(/\r?\n/).slice(0, 40);
   for (const ln of lines) {
-    if (/\bUpdated:\b/.test(ln)) {
-      const d = firstDate(ln);
-      if (d) return d;
-    }
-    // Some §11 / §22 use "Generated:" instead of "Updated:"
-    if (/\bGenerated:\b/.test(ln)) {
+    // Accept: `**Updated:** 2026-04-26`, `> **Updated:** 2026-04-26`,
+    // `Last Updated: 2026-04-26`, `**Generated:** 2026-04-26`.
+    if (/Updated\s*:|Generated\s*:/i.test(ln)) {
       const d = firstDate(ln);
       if (d) return d;
     }
