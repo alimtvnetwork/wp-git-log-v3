@@ -184,3 +184,23 @@ components:
         assignee:  { type: string }
         notes:     { type: string }
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-error-resolution.mmd` for the report → triage → fix → retrospective flow.
+
+```mermaid
+flowchart TD
+    A[Error Reported] --> B[Triage Severity]
+    B --> C{Reproducible?}
+    C -- No --> D[Request Repro Steps]
+    C -- Yes --> E[Debug Guide Lookup]
+    E --> F[Apply Fix]
+    F --> G[Add Regression Test]
+    G --> H[Write Retrospective]
+    H --> I[Update Error Registry]
+    I --> J[Close Incident]
+```

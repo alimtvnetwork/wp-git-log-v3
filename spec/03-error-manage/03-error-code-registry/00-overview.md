@@ -194,3 +194,23 @@ components:
         deprecated:       { type: boolean }
         replaced_by:      { type: string }
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-code-registry.mmd` for the error-code allocation → multilang generation → publish flow.
+
+```mermaid
+flowchart TD
+    A[New Error Identified] --> B[Allocate Code: DOMAIN-NNN]
+    B --> C[Add to Registry YAML]
+    C --> D[Generate Schema Entry]
+    D --> E[Generate i18n Stubs]
+    E --> F{Linter Pass?}
+    F -- No --> G[Block: REGISTRY-001]
+    F -- Yes --> H[Generate Constants in 5 langs]
+    H --> I[Publish Registry]
+    I --> J[Consumers Auto-import]
+```

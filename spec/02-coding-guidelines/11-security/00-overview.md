@@ -443,3 +443,27 @@ components:
         fixed_in:    { type: string }
         description: { type: string }
 ```
+
+
+## Phase 65 Reference
+
+### Lifecycle Diagram (Phase 65)
+
+See `lifecycle-security-review.mmd` for the PR security gate chain (SAST → deps → secrets → review).
+
+```mermaid
+flowchart TD
+    A[PR Opened] --> B[SAST Scan]
+    B --> C{High/Critical Finding?}
+    C -- Yes --> D[Block + SEC-001]
+    C -- No --> E[Dependency Audit]
+    E --> F{Known CVE?}
+    F -- Yes --> D
+    F -- No --> G[Secrets Scan]
+    G --> H{Hardcoded Secret?}
+    H -- Yes --> D
+    H -- No --> I[Manual Review for Authz]
+    I --> J{Approved?}
+    J -- No --> D
+    J -- Yes --> K[Merge]
+```
