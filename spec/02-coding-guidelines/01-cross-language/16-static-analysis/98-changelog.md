@@ -1,5 +1,8 @@
 # Changelog: Static Analysis & Linter Enforcement
 
+**Updated:** 2026-04-26
+
+
 All notable changes to the `16-static-analysis/` subfolder.
 
 ---
