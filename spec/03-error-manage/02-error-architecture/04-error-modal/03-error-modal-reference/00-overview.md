@@ -210,3 +210,52 @@ class Action:
 
 Dispatcher = Callable[[Action], None]
 ```
+
+
+---
+
+## Phase 62 Reference: Error Modal Reference Catalog API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Modal Reference Catalog API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-modal-ref/v1
+paths:
+  /modals/{code}:
+    get:
+      summary: Resolve modal config for an error code
+      operationId: getModalForCode
+      parameters:
+        - in: path
+          name: code
+          required: true
+          schema: { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+        - in: query
+          name: locale
+          schema: { type: string, pattern: "^[a-z]{2}(-[A-Z]{2})?$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ModalConfig" }
+        "404":
+          description: No modal registered for code
+components:
+  schemas:
+    ModalConfig:
+      type: object
+      required: [code, locale, copy_id, theme, severity]
+      properties:
+        code:     { type: string }
+        locale:   { type: string }
+        copy_id:  { type: string }
+        theme:    { type: string, enum: [light, dark, auto] }
+        severity: { type: string, enum: [fatal, error, warning, info] }
+        layout:   { type: string, enum: [compact, detailed, full-screen] }
+```

@@ -351,3 +351,67 @@ class LinterResult:
         if self.findings < 0:
             raise ValueError("findings must be >= 0")
 ```
+
+
+---
+
+## Phase 62 Reference: Error Code Linter Scripts API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Code Linter Scripts API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/code-linter/v1
+paths:
+  /scripts:
+    get:
+      summary: List registered linter scripts
+      operationId: listScripts
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/LinterScript" }
+  /runs/{id}:
+    get:
+      summary: Get a linter run result
+      operationId: getRun
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LinterRun" }
+components:
+  schemas:
+    LinterScript:
+      type: object
+      required: [name, language, exit_codes]
+      properties:
+        name:     { type: string, pattern: "^check-[a-z0-9-]+\\.(sh|cjs|py)$" }
+        language: { type: string, enum: [bash, node, python] }
+        exit_codes:
+          type: array
+          items: { type: integer, minimum: 0, maximum: 255 }
+    LinterRun:
+      type: object
+      required: [id, script, exit_code, duration_ms]
+      properties:
+        id:          { type: string, format: uuid }
+        script:      { type: string }
+        exit_code:   { type: integer, minimum: 0, maximum: 255 }
+        duration_ms: { type: integer, minimum: 0 }
+        passed:      { type: boolean }
+```

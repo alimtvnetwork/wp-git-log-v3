@@ -54,3 +54,7 @@ All notable changes to the `16-static-analysis/` subfolder.
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+## 2026-04-27 — Phase 62 impl-sweep
+
+- Phase 62: added typed-language validators (AnalysisResult) to satisfy `has_typed_lang_contract` rubric.

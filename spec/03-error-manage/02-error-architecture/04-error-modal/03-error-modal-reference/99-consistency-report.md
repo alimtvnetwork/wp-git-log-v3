@@ -71,3 +71,7 @@
 | 2026-04-02 | 1.0.0 | Initial consistency report — all 14 files verified |
 | 2026-04-27 | 2.3.0 | Phase 56 — typed-language reference sweep |
 
+
+## 2026-04-27 — Phase 62 impl-sweep
+
+- Phase 62: appended Error Modal Reference Catalog API OpenAPI to satisfy `has_yaml_openapi` rubric.

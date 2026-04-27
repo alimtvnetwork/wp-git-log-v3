@@ -86,3 +86,7 @@
 | 2026-04-01 | 1.2.0 | Added `10-cross-language-rule-matrix.md`, `97-acceptance-criteria.md`, `98-changelog.md` |
 | 2026-04-01 | 1.1.0 | Added `09-ci-pipeline-quality-gate.md`, `99-consistency-report.md`; all 8 language specs bumped to v1.1.0 |
 | 2026-03-31 | 1.0.0 | Initial report — 9 files, all v1.1.0, cross-spec consistency verified |
+
+## 2026-04-27 — Phase 62 impl-sweep
+
+- Phase 62: added typed-language validators (AnalysisResult) to satisfy `has_typed_lang_contract` rubric.

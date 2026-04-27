@@ -38,3 +38,7 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
+
+## 2026-04-27 — Phase 62 impl-sweep
+
+- Phase 62: added typed-language validators (PsRunResult) to satisfy `has_typed_lang_contract` rubric.

@@ -53,3 +53,7 @@ No external cross-references detected. ✅
 ## 2026-04-27 — Phase 57 impl-sweep
 
 - Phase 57: appended Go/PHP/Python LinterResult validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).
+
+## 2026-04-27 — Phase 62 impl-sweep
+
+- Phase 62: appended Error Code Linter Scripts API OpenAPI to satisfy `has_yaml_openapi` rubric.

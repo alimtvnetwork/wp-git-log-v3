@@ -123,3 +123,65 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.") + \
            f"{datetime.now(timezone.utc).microsecond // 1000:03d}Z"
 ```
+
+
+---
+
+## Phase 62 Reference: Logging and Diagnostics API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Logging and Diagnostics API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/logging/v1
+paths:
+  /logs:
+    post:
+      summary: Ingest a structured log entry
+      operationId: ingestLog
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LogEntry" }
+      responses:
+        "202": { description: Accepted }
+  /logs/search:
+    get:
+      summary: Search structured logs
+      operationId: searchLogs
+      parameters:
+        - in: query
+          name: level
+          schema: { type: string, enum: [debug, info, warn, error, fatal] }
+        - in: query
+          name: from
+          schema: { type: string, format: date-time }
+        - in: query
+          name: to
+          schema: { type: string, format: date-time }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/LogEntry" }
+components:
+  schemas:
+    LogEntry:
+      type: object
+      required: [timestamp, level, message]
+      properties:
+        timestamp: { type: string, format: date-time }
+        level:     { type: string, enum: [debug, info, warn, error, fatal] }
+        message:   { type: string, minLength: 1 }
+        trace_id:  { type: string }
+        span_id:   { type: string }
+        attributes: { type: object, additionalProperties: true }
+```
