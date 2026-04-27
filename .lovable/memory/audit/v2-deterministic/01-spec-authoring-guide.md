@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **76/100 (B)**  
-**Blast radius:** 0/10
+**Implementability Score:** **82/100 (B)**  
+**Blast radius:** 2/10
 
-> Deterministic score 76/100 (B) for spec/01-spec-authoring-guide.
+> Deterministic score 82/100 (B) for spec/01-spec-authoring-guide.
 
 
-**Score justification:** Deterministic rubric: contracts=0/3, ac=25, gwt=21, broken_links=0, waffle/kchar=0.44. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=25, gwt=21, broken_links=0, waffle/kchar=0.43. Gates active: 0.
 
 ---
 
@@ -16,13 +16,13 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 40 | 14.0 |
-| Completeness | 20% | 85 | 17.0 |
+| Implementability | 35% | 55 | 19.2 |
+| Completeness | 20% | 90 | 18.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
 | Clarity | 10% | 100 | 10.0 |
 | Testability | 7% | 100 | 7.0 |
-| Maintainability | 3% | 90 | 2.7 |
+| Maintainability | 3% | 100 | 3.0 |
 
 ## Deterministic Metrics (pre-AI)
 
@@ -31,21 +31,22 @@
   "kind": "future-spec",
   "md_files": 17,
   "mmd_files": 0,
-  "overview_chars": 26231,
+  "overview_chars": 30445,
   "ac_chars": 23174,
   "ac_count": 25,
   "gwt_block_count": 21,
   "consistency_report": true,
-  "code_blocks_total": 74,
+  "code_blocks_total": 75,
   "code_blocks_by_lang": {
     "plain": 41,
     "text": 2,
     "bash": 3,
+    "json": 1,
     "markdown": 26,
     "html": 2
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": false,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,
@@ -54,15 +55,15 @@
   "has_mermaid": false,
   "links_total": 47,
   "links_broken": 0,
-  "todo_density": 1,
-  "waffle_per_kchar": 0.44,
+  "todo_density": 0,
+  "waffle_per_kchar": 0.43,
   "child_modules": 0
 }
 ```
 
 ## Implementability Blockers
 
-- No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
+_(none — AI can build this)_
 
 ## Code Mapping
 
@@ -74,17 +75,5 @@
 
 | # | Category | Sev | Impact | Issue |
 |---:|---|:-:|:-:|---|
-| 1 | drift | low | 3/10 | 1 TODO/TBD/FIXME marker(s) in module body |
-| 2 | missing-contract | high | 8/10 | No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body |
 
 ### Detail + Proposed Corrections
-
-#### 1. [LOW] 1 TODO/TBD/FIXME marker(s) in module body
-- **Category:** drift  |  **Impact:** 3/10
-- **Evidence:** todo_density=1
-- **Proposed correction:** Resolve or convert markers to tracked acceptance criteria.
-
-#### 2. [HIGH] No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body
-- **Category:** missing-contract  |  **Impact:** 8/10
-- **Evidence:** code_blocks_by_lang={"bash": 3, "html": 2, "markdown": 26, "plain": 41, "text": 2}
-- **Proposed correction:** Inline at least one normative contract block in 00-overview.md or a dedicated contract file.

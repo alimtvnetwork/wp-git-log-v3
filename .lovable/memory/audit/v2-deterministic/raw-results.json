@@ -62,45 +62,16 @@
     "weighted_overall": 92
   },
   {
-    "applied_gates": [
-      {
-        "active": false,
-        "after": 40,
-        "before": 40,
-        "cap": 50,
-        "dimension": "implementability",
-        "id": "G-CON-01",
-        "rationale": "No inlined contract block (DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) \u2014 an AI cannot generate code from prose alone."
-      }
-    ],
-    "blast_radius": 0,
+    "applied_gates": [],
+    "blast_radius": 2,
     "code_mapping": {
       "expected_but_missing": [],
       "implemented_by": [],
       "orphan_code": []
     },
-    "findings": [
-      {
-        "category": "drift",
-        "correction": "Resolve or convert markers to tracked acceptance criteria.",
-        "evidence": "todo_density=1",
-        "impact": 3,
-        "issue": "1 TODO/TBD/FIXME marker(s) in module body",
-        "severity": "low"
-      },
-      {
-        "category": "missing-contract",
-        "correction": "Inline at least one normative contract block in 00-overview.md or a dedicated contract file.",
-        "evidence": "code_blocks_by_lang={\"bash\": 3, \"html\": 2, \"markdown\": 26, \"plain\": 41, \"text\": 2}",
-        "impact": 8,
-        "issue": "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body",
-        "severity": "high"
-      }
-    ],
+    "findings": [],
     "grade": "B",
-    "implementability_blockers": [
-      "No inlined contract (SQL DDL / JSON schema / TS enum / OpenAPI / typed-language reference / CI workflow) in module body"
-    ],
+    "implementability_blockers": [],
     "metrics": {
       "ac_chars": 23174,
       "ac_count": 25,
@@ -108,15 +79,16 @@
       "code_blocks_by_lang": {
         "bash": 3,
         "html": 2,
+        "json": 1,
         "markdown": 26,
         "plain": 41,
         "text": 2
       },
-      "code_blocks_total": 74,
+      "code_blocks_total": 75,
       "consistency_report": true,
       "gwt_block_count": 21,
       "has_ci_workflow": false,
-      "has_json_schema": false,
+      "has_json_schema": true,
       "has_mermaid": false,
       "has_normative_contract": false,
       "has_sql_ddl": false,
@@ -128,32 +100,32 @@
       "links_total": 47,
       "md_files": 17,
       "mmd_files": 0,
-      "overview_chars": 26231,
-      "todo_density": 1,
-      "waffle_per_kchar": 0.44
+      "overview_chars": 30445,
+      "todo_density": 0,
+      "waffle_per_kchar": 0.43
     },
     "module": "01-spec-authoring-guide",
     "raw_scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
-      "implementability": 40,
-      "maintainability": 90,
+      "implementability": 55,
+      "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=0/3, ac=25, gwt=21, broken_links=0, waffle/kchar=0.44. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=25, gwt=21, broken_links=0, waffle/kchar=0.43. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
-      "completeness": 85,
+      "completeness": 90,
       "consistency": 100,
-      "implementability": 40,
-      "maintainability": 90,
+      "implementability": 55,
+      "maintainability": 100,
       "testability": 100
     },
-    "verdict": "Deterministic score 76/100 (B) for spec/01-spec-authoring-guide.",
-    "weighted_overall": 76
+    "verdict": "Deterministic score 82/100 (B) for spec/01-spec-authoring-guide.",
+    "weighted_overall": 82
   },
   {
     "applied_gates": [],
