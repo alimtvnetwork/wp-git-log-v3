@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.10.0
+**Version:** 4.11.0
 **Last Updated:** 2026-04-27
 
 ---
+
+## 4.11.0 — 2026-04-27
+
+- Phase 111: added **AC-SAG-26** at §97 — the abstract "documentation-cadence retirement" pattern that generalises Phase 100's verdict (forward-looking phase-memo cadence retired after observed drift in Phases 78–83 / 92–93 / 96) + Phase 104's mechanical gate (`check-memo-retrospective-headings.py` with `CUTOFF_PHASE = 100`). Specifies: (a) the trigger threshold (3+ historical instances of the cadence + at least 1 of 3 drift conditions: stale-within-1-phase, adjacent-contradiction, or migration-to-canonical-SoT); (b) the retirement protocol (retirement memo with cadence definition + empirical evidence + canonical replacement SoT + CUTOFF marker + out-of-scope statement for pre-cutoff artefacts; mechanical enforcement gate under `linter-scripts/` with `CUTOFF_PHASE` constant + `spec-health.yml` wiring + `spec/27-spec-toolchain/NN-*.md` spec per INV-01 + corresponding `Verifies` AC at §27); (c) the current registered-retirements table seeded with the Phase 100/104 pair (forward-looking H2/H3 sections in phase memos → canonical replacement = chat-reply "Remaining Tasks" table); (d) the declarative-with-mechanical-companions rationale (the AC defines the protocol; reviewer attention against the registry table catches new retirements that bypass the protocol; meta-meta-linter for "what cadences should be retired?" requires longitudinal analysis the toolchain doesn't perform). No code change in this phase — pure declarative contract generalisation. Lockstep: §97 v4.5.0 → v4.6.0; §99 v4.7.0 → v4.8.0. CI gate count unchanged at **11**; `RUBRIC_VERSION` unchanged at **v2.20** (no script changes). The mechanical gate that enforces the registered retirement (Phase 104's `check-memo-retrospective-headings.py`) is unchanged — Phase 111 simply codifies the *pattern* it instantiates.
 
 ## 4.10.0 — 2026-04-27
 
