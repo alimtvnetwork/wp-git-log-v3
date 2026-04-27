@@ -3,8 +3,8 @@
 **Date:** 2026-04-25  
 **Modules audited:** 87  
 **Code files indexed:** 35  
-**Mean weighted score:** **90.7/100**  
-**Mean implementability:** **84.4/100**
+**Mean weighted score:** **91.2/100**  
+**Mean implementability:** **85.7/100**
 
 ## Methodology v2
 
@@ -13,7 +13,7 @@ Implementability = can a mediocre AI ship from spec alone, no human help.
 Deterministic metrics (waffle ratio, contract presence, broken links, GWT count) are computed before AI scoring and bound the AI's grades.
 
 ## Grade distribution
-**A+** = 11, **A** = 66, **B** = 10
+**A+** = 11, **A** = 68, **B** = 8
 
 ## Findings by category
 | Category | Count |
@@ -47,14 +47,14 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Bottom 15 (lowest implementability)
 | Rank | Module | Overall | Impl | Grade | Top finding |
 |---:|---|---:|---:|:-:|---|
-| 1 | [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 76 | 45 | B | _no findings_ |
-| 2 | [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 76 | 45 | B | _no findings_ |
-| 3 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 76 | 45 | B | _no findings_ |
-| 4 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 76 | 45 | B | _no findings_ |
-| 5 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 78 | 50 | B | _no findings_ |
-| 6 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 78 | 50 | B | _no findings_ |
-| 7 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 78 | 50 | B | _no findings_ |
-| 8 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 80 | 55 | B | _no findings_ |
+| 1 | [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 80 | 55 | B | _no findings_ |
+| 2 | [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 80 | 55 | B | _no findings_ |
+| 3 | [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 82 | 60 | B | _no findings_ |
+| 4 | [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 82 | 60 | B | _no findings_ |
+| 5 | [`10-research/01-research-index`](./10-research__01-research-index.md) | 82 | 60 | B | _no findings_ |
+| 6 | [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 83 | 65 | B | _no findings_ |
+| 7 | [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 85 | 70 | A | _no findings_ |
+| 8 | [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 85 | 70 | A | _no findings_ |
 | 9 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 81 | 75 | B | _no findings_ |
 | 10 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 81 | 75 | B | _no findings_ |
 | 11 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 85 | 75 | A | _no findings_ |
@@ -80,17 +80,17 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 ## Full ranking
 | Module | Impl | Comp | Align | Cons | Clar | Test | Maint | **Overall** | Grade | Blast |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|:-:|:-:|
-| [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 45 | 80 | 100 | 100 | 100 | 96 | 100 | **76** | B | 2 |
-| [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 45 | 80 | 100 | 100 | 100 | 96 | 100 | **76** | B | 2 |
-| [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 45 | 80 | 100 | 100 | 100 | 96 | 100 | **76** | B | 2 |
-| [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 45 | 80 | 100 | 100 | 100 | 96 | 100 | **76** | B | 2 |
-| [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 50 | 80 | 100 | 100 | 100 | 96 | 100 | **78** | B | 2 |
-| [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 50 | 80 | 100 | 100 | 100 | 96 | 100 | **78** | B | 2 |
-| [`10-research/01-research-index`](./10-research__01-research-index.md) | 50 | 80 | 100 | 100 | 100 | 96 | 100 | **78** | B | 2 |
-| [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 55 | 80 | 100 | 100 | 100 | 96 | 100 | **80** | B | 3 |
+| [`02-coding-guidelines/24-app-design-system-and-ui/01-app-ui-conventions`](./02-coding-guidelines__24-app-design-system-and-ui__01-app-ui-conventions.md) | 55 | 80 | 100 | 100 | 100 | 96 | 100 | **80** | B | 2 |
+| [`14-update/diagrams/01-diagram-conventions`](./14-update__diagrams__01-diagram-conventions.md) | 55 | 80 | 100 | 100 | 100 | 96 | 100 | **80** | B | 2 |
 | [`05-split-db-architecture/03-issues`](./05-split-db-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
 | [`06-seedable-config-architecture/03-issues`](./06-seedable-config-architecture__03-issues.md) | 75 | 55 | 100 | 100 | 100 | 80 | 100 | **81** | B | 0 |
+| [`02-coding-guidelines/10-research/01-research-index`](./02-coding-guidelines__10-research__01-research-index.md) | 60 | 80 | 100 | 100 | 100 | 96 | 100 | **82** | B | 2 |
+| [`02-coding-guidelines/22-app-issues/01-app-issue-templates`](./02-coding-guidelines__22-app-issues__01-app-issue-templates.md) | 60 | 80 | 100 | 100 | 100 | 96 | 100 | **82** | B | 2 |
+| [`10-research/01-research-index`](./10-research__01-research-index.md) | 60 | 80 | 100 | 100 | 100 | 96 | 100 | **82** | B | 2 |
+| [`02-coding-guidelines/23-app-database/01-app-database-conventions`](./02-coding-guidelines__23-app-database__01-app-database-conventions.md) | 65 | 80 | 100 | 100 | 100 | 96 | 100 | **83** | B | 3 |
+| [`02-coding-guidelines/21-app/01-app-coding-rules`](./02-coding-guidelines__21-app__01-app-coding-rules.md) | 70 | 80 | 100 | 100 | 100 | 96 | 100 | **85** | A | 4 |
 | [`25-app-issues/02-consolidated-audit-findings`](./25-app-issues__02-consolidated-audit-findings.md) | 75 | 75 | 100 | 100 | 100 | 80 | 100 | **85** | A | 0 |
+| [`26-gitlogs-diagrams/01-diagram-conventions`](./26-gitlogs-diagrams__01-diagram-conventions.md) | 70 | 80 | 100 | 100 | 100 | 96 | 100 | **85** | A | 4 |
 | [`02-coding-guidelines/11-security/01-axios-version-control`](./02-coding-guidelines__11-security__01-axios-version-control.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 4 |
 | [`03-error-manage/01-error-resolution/04-verification-patterns`](./03-error-manage__01-error-resolution__04-verification-patterns.md) | 75 | 75 | 100 | 100 | 100 | 100 | 100 | **86** | A | 4 |
 | [`11-powershell-integration`](./11-powershell-integration.md) | 75 | 75 | 100 | 100 | 100 | 90 | 100 | **86** | A | 2 |

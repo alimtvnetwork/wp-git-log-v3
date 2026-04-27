@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **78/100 (B)**  
+**Implementability Score:** **82/100 (B)**  
 **Blast radius:** 2/10
 
-> Deterministic score 78/100 (B) for spec/10-research/01-research-index.
+> Deterministic score 82/100 (B) for spec/10-research/01-research-index.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 50 | 17.5 |
+| Implementability | 35% | 60 | 21.0 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,15 +31,17 @@
   "kind": "",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 2259,
+  "overview_chars": 3178,
   "ac_chars": 1628,
   "ac_count": 6,
   "gwt_block_count": 6,
   "consistency_report": true,
-  "code_blocks_total": 2,
+  "code_blocks_total": 5,
   "code_blocks_by_lang": {
-    "json": 1,
-    "mermaid": 1
+    "json": 2,
+    "mermaid": 1,
+    "bash": 1,
+    "text": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": true,

@@ -2,13 +2,13 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **76/100 (B)**  
-**Blast radius:** 2/10
+**Implementability Score:** **85/100 (A)**  
+**Blast radius:** 4/10
 
-> Deterministic score 76/100 (B) for spec/26-gitlogs-diagrams/01-diagram-conventions.
+> Deterministic score 85/100 (A) for spec/26-gitlogs-diagrams/01-diagram-conventions.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
 
 ---
 
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 45 | 15.8 |
+| Implementability | 35% | 70 | 24.5 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,18 +31,21 @@
   "kind": "",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 2153,
+  "overview_chars": 3231,
   "ac_chars": 1632,
   "ac_count": 6,
   "gwt_block_count": 6,
   "consistency_report": true,
-  "code_blocks_total": 2,
+  "code_blocks_total": 5,
   "code_blocks_by_lang": {
     "ts": 1,
-    "mermaid": 1
+    "mermaid": 1,
+    "json": 1,
+    "bash": 1,
+    "text": 1
   },
   "has_sql_ddl": false,
-  "has_json_schema": false,
+  "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": false,
   "has_typed_lang_contract": false,

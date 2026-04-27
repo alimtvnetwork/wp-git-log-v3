@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **80/100 (B)**  
+**Implementability Score:** **83/100 (B)**  
 **Blast radius:** 3/10
 
-> Deterministic score 80/100 (B) for spec/02-coding-guidelines/23-app-database/01-app-database-conventions.
+> Deterministic score 83/100 (B) for spec/02-coding-guidelines/23-app-database/01-app-database-conventions.
 
 
 **Score justification:** Deterministic rubric: contracts=1/3, ac=6, gwt=6, broken_links=0, waffle/kchar=0.0. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 55 | 19.2 |
+| Implementability | 35% | 65 | 22.8 |
 | Completeness | 20% | 80 | 16.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -31,15 +31,17 @@
   "kind": "",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 2176,
+  "overview_chars": 3224,
   "ac_chars": 1628,
   "ac_count": 6,
   "gwt_block_count": 6,
   "consistency_report": true,
-  "code_blocks_total": 2,
+  "code_blocks_total": 5,
   "code_blocks_by_lang": {
-    "sql": 1,
-    "mermaid": 1
+    "sql": 2,
+    "mermaid": 1,
+    "bash": 1,
+    "text": 1
   },
   "has_sql_ddl": true,
   "has_json_schema": false,
