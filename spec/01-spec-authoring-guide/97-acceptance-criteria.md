@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.2.0
-**Updated:** 2026-04-27 (Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
+**Version:** 4.3.0
+**Updated:** 2026-04-27 (Phase 97: added AC-SAG-24 requiring every `spec/**/*.mmd` file to parse cleanly with the mermaid library under a jsdom shim, locked by a new CI gate. Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
