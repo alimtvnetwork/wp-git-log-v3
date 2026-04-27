@@ -62,13 +62,21 @@ function bannerUpdated(text) {
 }
 
 // All release dates in §98: lines like `### 1.2.0 — 2026-04-27`
+// Release headings vary by author. Accept any of:
+//   ### 1.2.0 — 2026-04-27
+//   ## v4.0.0 — 2026-04-26
+//   ## [4.1.0] — 2026-04-26
+//   ## [2026-03-30] v2.0.0 ...
+// Heuristic: any heading line (## or ###) that contains BOTH a date and
+// either a `vN` token, a bracketed/bare SemVer, or starts with a SemVer.
 function releaseDates(text) {
   const out = [];
   for (const ln of text.split(/\r?\n/)) {
-    if (/^###\s+\d/.test(ln)) {
-      const d = firstDate(ln);
-      if (d) out.push(d);
-    }
+    if (!/^#{2,3}\s+/.test(ln)) continue;
+    const d = firstDate(ln);
+    if (!d) continue;
+    const hasVer = /\bv?\d+\.\d+\.\d+\b|\[\d+\.\d+\.\d+\]/.test(ln);
+    if (hasVer) out.push(d);
   }
   return out;
 }
