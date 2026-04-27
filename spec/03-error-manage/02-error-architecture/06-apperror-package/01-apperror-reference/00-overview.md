@@ -169,3 +169,23 @@ components:
               type: { type: string }
               required: { type: boolean }
 ```
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-apperror-flow.mmd` for the AppError wrap → propagate → marshal → log → render flow.
+
+```mermaid
+flowchart TD
+    A[Error Origin] --> B[Wrap with AppError.New]
+    B --> C[Attach Code + Severity + Cause]
+    C --> D[Propagate Up Stack]
+    D --> E{Boundary Reached?}
+    E -- No --> D
+    E -- Yes --> F[Marshal to Response Envelope]
+    F --> G[Log via diagnostics package]
+    G --> H[Return to Caller]
+    H --> I[Modal/Toast Render]
+```

@@ -2,10 +2,10 @@
 
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
-**Implementability Score:** **87/100 (A)**  
+**Implementability Score:** **89/100 (A)**  
 **Blast radius:** 5/10
 
-> Deterministic score 87/100 (A) for spec/05-split-db-architecture/02-features.
+> Deterministic score 89/100 (A) for spec/05-split-db-architecture/02-features.
 
 
 **Score justification:** Deterministic rubric: contracts=2/3, ac=5, gwt=5, broken_links=0, waffle/kchar=0.07. Gates active: 0.
@@ -16,7 +16,7 @@
 
 | Dimension | Weight | Score | Contribution |
 |---|---:|---:|---:|
-| Implementability | 35% | 85 | 29.8 |
+| Implementability | 35% | 90 | 31.5 |
 | Completeness | 20% | 65 | 13.0 |
 | Alignment | 15% | 100 | 15.0 |
 | Consistency | 10% | 100 | 10.0 |
@@ -30,14 +30,15 @@
 {
   "kind": "",
   "md_files": 9,
-  "mmd_files": 0,
-  "overview_chars": 816,
+  "mmd_files": 1,
+  "overview_chars": 1368,
   "ac_chars": 2775,
   "ac_count": 5,
   "gwt_block_count": 5,
   "consistency_report": true,
-  "code_blocks_total": 66,
+  "code_blocks_total": 67,
   "code_blocks_by_lang": {
+    "mermaid": 1,
     "plain": 20,
     "sql": 18,
     "json": 5,
@@ -52,7 +53,7 @@
   "has_typed_lang_contract": true,
   "has_ci_workflow": false,
   "has_normative_contract": false,
-  "has_mermaid": false,
+  "has_mermaid": true,
   "links_total": 19,
   "links_broken": 0,
   "todo_density": 0,

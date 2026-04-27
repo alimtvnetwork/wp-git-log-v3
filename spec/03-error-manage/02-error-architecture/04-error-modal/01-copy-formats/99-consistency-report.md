@@ -67,3 +67,9 @@
 ## 2026-04-27 — Phase 61 impl-sweep
 
 - Phase 61: appended Error Modal Copy Catalog API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
+
+## 2026-04-27 — Phase 64 audit
+
+- Mermaid lifecycle diagram present (`has_mermaid=true`).
+- Lockstep & tree-health gates: PASS.
+- Implementability promoted from 85 → 90.

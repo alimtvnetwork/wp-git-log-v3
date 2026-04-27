@@ -17,3 +17,24 @@
 ---
 
 *Features index — updated: 2026-04-03*
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-user-scoped-db.mmd` for the per-user split-DB lifecycle: login → resolve → provision → RBAC gate → query → audit.
+
+```mermaid
+flowchart TD
+    A[User Login] --> B[Resolve UserId]
+    B --> C{User Has Personal DB?}
+    C -- No --> D[Create user_<id>.sqlite]
+    C -- Yes --> E[Open Existing DB]
+    D --> E
+    E --> F[Apply Casbin RBAC Policies]
+    F --> G{Authorized?}
+    G -- No --> H[403 Forbidden]
+    G -- Yes --> I[Execute Query]
+    I --> J[Audit Log to Shared DB]
+```

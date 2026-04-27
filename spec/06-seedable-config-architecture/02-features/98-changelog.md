@@ -33,3 +33,8 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+## 2026-04-27 — Phase 64 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 64 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.

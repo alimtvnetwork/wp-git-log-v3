@@ -275,3 +275,24 @@ components:
         a11y_audited:     { type: boolean }
         deprecated:       { type: boolean }
 ```
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-modal-mount.mmd` for the React error-modal mount/dismiss lifecycle by severity.
+
+```mermaid
+flowchart TD
+    A[useError Hook Catches Error] --> B[ErrorContext Provider Updated]
+    B --> C[ErrorModal Subscribes]
+    C --> D{Severity}
+    D -- Critical --> E[Block UI + Modal]
+    D -- Warning --> F[Toast]
+    D -- Info --> G[Inline Banner]
+    E --> H[User Acknowledges]
+    F --> H
+    H --> I[Dispatch Clear Action]
+    I --> J[Modal Unmounts]
+```

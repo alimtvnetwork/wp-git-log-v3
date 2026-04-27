@@ -30,3 +30,23 @@ Overview `Updated` (2026-04-20) vs AC date (2026-04-25) — AC was bumped indepe
 
 Tracked under Phase 27d. See `.lovable/memory/index.md`.
 
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-feature-rollout.mmd` for the seedable-feature lifecycle: authored → validated → seeded → consumed → re-seeded on update.
+
+```mermaid
+flowchart TD
+    A[Feature Flag Authored] --> B{Validation Helper Pass?}
+    B -- No --> R[Reject + Log RAG-VAL-001]
+    B -- Yes --> C[Seed via Migration]
+    C --> D[Runtime Read by App]
+    D --> E{Update Check Trigger}
+    E -- New Version --> F[Re-seed New Keys]
+    E -- No --> G[Cached Config]
+    F --> D
+    G --> D
+```

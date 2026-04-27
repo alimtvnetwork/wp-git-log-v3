@@ -371,3 +371,26 @@ components:
         expected: { type: string }
         actual:   { type: string }
 ```
+
+
+## Phase 64 Reference
+
+### Lifecycle Diagram (Phase 64)
+
+See `lifecycle-naming-enforcement.mmd` for the per-language naming-enforcement flow at pre-commit.
+
+```mermaid
+flowchart TD
+    A[New File/Folder Created] --> B{Language Detected}
+    B -- Go --> C[Enforce snake_case]
+    B -- TS/JS --> D[Enforce kebab-case]
+    B -- PHP --> E[Enforce PSR-4 PascalCase]
+    B -- Rust/C# --> F[Enforce snake_case / PascalCase]
+    C --> G[Pre-commit Hook]
+    D --> G
+    E --> G
+    F --> G
+    G --> H{Pass?}
+    H -- No --> I[Reject + FFN-001]
+    H -- Yes --> J[Allow Commit]
+```

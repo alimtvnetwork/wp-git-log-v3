@@ -37,3 +37,8 @@
 ## 2026-04-27 — Phase 62 impl-sweep
 
 - Phase 62: appended AppError Package Reference API OpenAPI to satisfy `has_yaml_openapi` rubric.
+
+## 2026-04-27 — Phase 64 (impl 85→90)
+
+- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 64 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.
