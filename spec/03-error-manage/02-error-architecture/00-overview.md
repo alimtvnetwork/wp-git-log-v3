@@ -69,3 +69,60 @@ Tier 3: Frontend (React) → Error store, Global Error Modal, toast notification
 - [Parent Overview](../00-overview.md) — Error Management root
 - [Error Resolution](../01-error-resolution/00-overview.md) — Debugging and diagnostics
 - [Error Code Registry](../03-error-code-registry/00-overview.md) — Error code ranges
+
+
+---
+
+## Phase 60 Reference: Error Architecture Inventory API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Architecture Inventory API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-architecture/v1
+paths:
+  /components:
+    get:
+      summary: List error-architecture components
+      operationId: listComponents
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/ArchComponent" }
+  /components/{name}:
+    get:
+      summary: Get a single component definition
+      operationId: getComponent
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ArchComponent" }
+components:
+  schemas:
+    ArchComponent:
+      type: object
+      required: [name, kind, owner_module]
+      properties:
+        name:         { type: string }
+        kind:         { type: string, enum: [envelope, modal, package, registry, logger] }
+        owner_module: { type: string }
+        depends_on:
+          type: array
+          items: { type: string }
+        status:       { type: string, enum: [planned, implemented, deprecated] }
+```

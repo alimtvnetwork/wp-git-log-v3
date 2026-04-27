@@ -54,3 +54,7 @@ No external cross-references detected. ✅
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-04-26 | 3.4.0 | Phase 21 deepening sweep — auto-promoted to gold-standard 5-section shape |
+
+## 2026-04-27 — Phase 60 impl-sweep
+
+- Phase 60: appended Go Enum Validator API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

@@ -139,3 +139,53 @@ export enum RuleSeverity {
   Info    = "info",
 }
 ```
+
+
+---
+
+## Phase 60 Reference: Master Coding Guidelines Compliance API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Master Coding Guidelines Compliance API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/coding-compliance/v1
+paths:
+  /repos/{repo}/compliance:
+    get:
+      summary: Get compliance summary for a repo
+      operationId: getCompliance
+      parameters:
+        - in: path
+          name: repo
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ComplianceSummary" }
+components:
+  schemas:
+    ComplianceSummary:
+      type: object
+      required: [repo, score, passing, failing]
+      properties:
+        repo:    { type: string }
+        score:   { type: integer, minimum: 0, maximum: 100 }
+        passing: { type: integer, minimum: 0 }
+        failing: { type: integer, minimum: 0 }
+        sections:
+          type: array
+          items:
+            type: object
+            properties:
+              section: { type: string }
+              status:  { type: string, enum: [pass, warn, fail] }
+              count:   { type: integer, minimum: 0 }
+```

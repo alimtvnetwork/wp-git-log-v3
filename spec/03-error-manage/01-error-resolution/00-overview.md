@@ -119,3 +119,68 @@ export enum ResolutionDocAudience {
   Auditor     = "auditor",
 }
 ```
+
+
+---
+
+## Phase 60 Reference: Error Resolution Workflow API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Error Resolution Workflow API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/error-resolution/v1
+paths:
+  /tickets:
+    post:
+      summary: Open a resolution ticket for an error code
+      operationId: openTicket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code, occurrences]
+              properties:
+                code:        { type: string, pattern: "^[A-Z]{2,5}-[A-Z]+-\\d{2,4}$" }
+                occurrences: { type: integer, minimum: 1 }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ResolutionTicket" }
+  /tickets/{id}:
+    get:
+      summary: Fetch a resolution ticket
+      operationId: getTicket
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ResolutionTicket" }
+components:
+  schemas:
+    ResolutionTicket:
+      type: object
+      required: [id, code, status, opened_at]
+      properties:
+        id:        { type: string, format: uuid }
+        code:      { type: string }
+        status:    { type: string, enum: [open, investigating, resolved, wont_fix, duplicate] }
+        opened_at: { type: string, format: date-time }
+        resolved_at: { type: string, format: date-time }
+        assignee:  { type: string }
+        notes:     { type: string }
+```

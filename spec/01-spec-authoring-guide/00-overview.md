@@ -881,3 +881,55 @@ class SpecModule:
         if self.kind not in ("tracker", "index") and not self.has_acceptance:
             raise ValueError(f"missing {self.path}/97-acceptance-criteria.md")
 ```
+
+
+---
+
+## Phase 60 Reference: Spec Authoring Audit API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Spec Authoring Audit API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/spec-audit/v1
+paths:
+  /modules:
+    get:
+      summary: List audited spec modules
+      operationId: listModules
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/SpecAudit" }
+  /modules/{path}/audit:
+    post:
+      summary: Trigger an audit for a spec module
+      operationId: auditModule
+      parameters:
+        - in: path
+          name: path
+          required: true
+          schema: { type: string }
+      responses:
+        "202": { description: Accepted }
+components:
+  schemas:
+    SpecAudit:
+      type: object
+      required: [path, kind, weighted_score, implementability]
+      properties:
+        path:             { type: string }
+        kind:             { type: string, enum: [future-spec, module, index, tracker, meta-toolchain] }
+        weighted_score:   { type: integer, minimum: 0, maximum: 100 }
+        implementability: { type: integer, minimum: 0, maximum: 100 }
+        grade:            { type: string, enum: [A, B, C, D, F] }
+        audited_at:       { type: string, format: date-time }
+```

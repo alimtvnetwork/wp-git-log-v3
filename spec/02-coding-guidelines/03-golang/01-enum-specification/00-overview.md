@@ -346,3 +346,63 @@ Use this schema in any HTTP boundary that accepts a `providerType` field:
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c note.
 
+
+
+---
+
+## Phase 60 Reference: Go Enum Validator API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Go Enum Validator API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/go-enum/v1
+paths:
+  /enums:
+    get:
+      summary: List discovered Go enums
+      operationId: listEnums
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/GoEnum" }
+  /enums/{name}/validate:
+    post:
+      summary: Validate a Go enum against the specification
+      operationId: validateEnum
+      parameters:
+        - in: path
+          name: name
+          required: true
+          schema: { type: string, pattern: "^[A-Z][A-Za-z0-9]+$" }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:      { type: boolean }
+                  violations: { type: array, items: { type: string } }
+components:
+  schemas:
+    GoEnum:
+      type: object
+      required: [name, package, values]
+      properties:
+        name:    { type: string }
+        package: { type: string }
+        values:
+          type: array
+          items: { type: string }
+        stringer_generated: { type: boolean }
+```

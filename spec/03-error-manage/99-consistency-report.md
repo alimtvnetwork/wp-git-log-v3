@@ -90,3 +90,7 @@ Inventory mirrors the on-disk layout of `03-error-manage/` as of 2026-04-26. See
 ## 2026-04-27 — Phase 57 impl-sweep
 
 - Phase 57: appended Go/PHP/Python ErrorEnvelope validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).
+
+## 2026-04-27 — Phase 60 impl-sweep
+
+- Phase 60: appended Error Management Aggregate API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

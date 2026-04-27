@@ -50,3 +50,7 @@
 |------|---------|--------|
 | 2026-03-31 | 1.0.0 | Initial consistency report |
 | 2026-04-01 | 2.0.0 | Updated for v4.0.0 React components, deprecated monolithic file, added subfolder tracking |
+
+## 2026-04-27 — Phase 60 impl-sweep
+
+- Phase 60: appended Error Architecture Inventory API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

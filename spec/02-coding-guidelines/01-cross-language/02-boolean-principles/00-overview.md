@@ -161,3 +161,64 @@ export enum BooleanViolationKind {
   StringMasquerade   = "string-masquerade", // string holding "true"/"false"
 }
 ```
+
+
+---
+
+## Phase 60 Reference: Boolean Principles Lint Report API
+
+The following OpenAPI 3.1 contract is normative.
+
+```yaml
+openapi: 3.1.0
+info:
+  title: Boolean Principles Lint Report API
+  version: 1.0.0
+servers:
+  - url: https://api.lovable.dev/boolean-lint/v1
+paths:
+  /reports:
+    post:
+      summary: Submit a boolean-principles lint report
+      operationId: submitReport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/BoolReport" }
+      responses:
+        "202": { description: Accepted }
+  /reports/{id}:
+    get:
+      summary: Fetch a boolean-principles report
+      operationId: getReport
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/BoolReport" }
+components:
+  schemas:
+    BoolReport:
+      type: object
+      required: [id, repo, violations]
+      properties:
+        id:   { type: string, format: uuid }
+        repo: { type: string }
+        violations:
+          type: array
+          items:
+            type: object
+            required: [rule, file, line]
+            properties:
+              rule:   { type: string, enum: [negative-name, double-negative, ambiguous-default, missing-prefix] }
+              file:   { type: string }
+              line:   { type: integer, minimum: 1 }
+              snippet: { type: string }
+```

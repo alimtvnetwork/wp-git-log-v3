@@ -43,3 +43,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
+
+## 2026-04-27 — Phase 60 impl-sweep
+
+- Phase 60: appended Go Enum Validator API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
