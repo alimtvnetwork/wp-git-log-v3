@@ -44,14 +44,17 @@ AUDIT_ONLY="22-git-logs-v2" python3 linter-scripts/audit-spec-vs-code-v2.py     
 AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py              # deterministic mode
 AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py \
     --min-weighted=97 --min-impl=99                                                # CI threshold gate (v2.12)
+AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py \
+    --explain=27-spec-toolchain                                                    # rubric trace for one module (v2.16)
 ```
 
-### CLI flags (v2.12, Phase 81)
+### CLI flags
 
-| Flag | Type | Effect |
-|------|------|--------|
-| `--min-weighted=N` | int 0–100 | Exit non-zero when the **mean weighted score** across all audited modules falls below `N`. Stderr emits `✗ FAIL: weighted mean X < threshold N`. |
-| `--min-impl=N` | int 0–100 | Exit non-zero when the **mean implementability score** falls below `N`. Stderr emits `✗ FAIL: implementability mean X < threshold N`. |
+| Flag | Type | Since | Effect |
+|------|------|-------|--------|
+| `--min-weighted=N` | int 0–100 | v2.12 (Phase 81) | Exit non-zero when the **mean weighted score** across all audited modules falls below `N`. Stderr emits `✗ FAIL: weighted mean X < threshold N`. |
+| `--min-impl=N` | int 0–100 | v2.12 (Phase 81) | Exit non-zero when the **mean implementability score** falls below `N`. Stderr emits `✗ FAIL: implementability mean X < threshold N`. |
+| `--explain=<substring>` | string | v2.16 (Phase 90) | Short-circuits the normal audit loop. For the first module whose relative path under `spec/` contains `<substring>`, prints: rubric branch, all bonuses fired with deltas, all gates capping any dimension (with before/after), per-dimension scores (raw vs final + Δ + contribution), and key metrics. Pure-add diagnostic — does not write files, does not call AI. Exits `0` if a match was found, `1` otherwise. Multi-match lists first 5 candidates and uses the first. |
 
 When at least one threshold is supplied AND none fail, stderr emits `✓ PASS: thresholds met`. When neither flag is supplied the script preserves its pre-v2.12 behaviour (exit 0 unless an AI-mode module errored). Used by the `spec-health.yml` workflow audit gate (currently `--min-weighted=97 --min-impl=99`, set in Phase 84).
 
