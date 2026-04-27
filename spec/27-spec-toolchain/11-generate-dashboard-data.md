@@ -63,7 +63,12 @@ node linter-scripts/generate-dashboard-data.cjs --quiet
 ### AC-11-01 — JSON schema is stable
 - **Given** the generated `spec/dashboard-data.json`,
 - **When** parsed,
-- **Then** it MUST contain top-level keys `modules`, `brokenLinks`, `summary` with the same shape across runs.
+- **Then** it MUST contain top-level keys `Generated`, `Health`, `RubricV2`, `Links`, `RequiredFiles`, `Inventory` with the same shape across runs.
+
+### AC-11-04 — Rubric parity with `check-tree-health.cjs`
+- **Given** a clean spec tree (both linters return success),
+- **When** `RubricV2.Score` is read from `dashboard-data.json` and compared to the score reported by `check-tree-health.cjs --report`,
+- **Then** the two scores MUST be equal (rubric v2.0.0 is the single source of truth).
 
 ### AC-11-02 — `--quiet` produces no stderr
 - **Given** a successful run with `--quiet`,
