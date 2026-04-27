@@ -77,3 +77,42 @@ This subsystem is **ready for hand-off** to an implementer AI.
 ---
 
 *Consistency Report — v2.1.0 — 2026-04-26*
+
+---
+
+## Validation History
+
+| Date | Version | Action |
+|------|---------|--------|
+| 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
+| 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
+| 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |
+| 2026-04-16 | prior | Initial consistency report authored. |
+
+This module's full lockstep history is mirrored in `98-changelog.md`; entries
+above summarize only the audit-/validation-bearing milestones for `14-update/24-update-check-mechanism`.
+
+---
+
+## File Inventory
+
+| File | Status |
+|------|--------|
+| `00-overview.md` | ✅ Present |
+| `01-fundamentals.md` | ✅ Present |
+| `02-status-script-json.md` | ✅ Present |
+| `03-combined-json.md` | ✅ Present |
+| `04-database-schema.md` | ✅ Present |
+| `05-update-checker-service.md` | ✅ Present |
+| `06-cli-commands.md` | ✅ Present |
+| `07-pre-command-hook.md` | ✅ Present |
+| `08-error-handling.md` | ✅ Present |
+| `09-json-fallback-store.md` | ✅ Present |
+| `97-acceptance-criteria.md` | ✅ Present |
+| `97-changelog.md` | ✅ Present |
+| `98-changelog.md` | ✅ Present |
+| `99-consistency-report.md` | ✅ Present |
+
+Inventory mirrors the on-disk layout of `14-update/24-update-check-mechanism/` as of 2026-04-26. See
+`98-changelog.md` for the file-level revision trail.
+

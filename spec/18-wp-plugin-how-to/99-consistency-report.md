@@ -113,3 +113,53 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 ---
 
 *Consistency report for spec/18-wp-plugin-how-to/ — v1.0.0 — 2026-04-16*
+
+---
+
+## Validation History
+
+| Date | Version | Action |
+|------|---------|--------|
+| 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
+| 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
+| 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |
+| 2026-04-16 | prior | Initial consistency report authored. |
+
+This module's full lockstep history is mirrored in `98-changelog.md`; entries
+above summarize only the audit-/validation-bearing milestones for `18-wp-plugin-how-to`.
+
+---
+
+## File Inventory
+
+| File | Status |
+|------|--------|
+| `00-overview.md` | ✅ Present |
+| `00-quick-start.md` | ✅ Present |
+| `01-foundation-and-architecture.md` | ✅ Present |
+| `03-traits-and-composition.md` | ✅ Present |
+| `04-logging-and-error-handling.md` | ✅ Present |
+| `05-helpers-responses-and-integration.md` | ✅ Present |
+| `06-input-validation-patterns.md` | ✅ Present |
+| `07-reference-implementations.md` | ✅ Present |
+| `08-wordpress-integration-patterns.md` | ✅ Present |
+| `09-testing-patterns.md` | ✅ Present |
+| `10-deployment-patterns.md` | ✅ Present |
+| `11-frontend-and-template-patterns.md` | ✅ Present |
+| `12-design-system.md` | ✅ Present |
+| `13-admin-ui-patterns.md` | ✅ Present |
+| `14-rest-api-conventions.md` | ✅ Present |
+| `15-settings-architecture.md` | ✅ Present |
+| `16-error-handling-extraction.md` | ✅ Present |
+| `17-data-file-patterns.md` | ✅ Present |
+| `18-frontend-javascript-patterns.md` | ✅ Present |
+| `19-micro-orm-and-root-db.md` | ✅ Present |
+| `20-end-to-end-walkthrough.md` | ✅ Present |
+| `21-ping-endpoint.md` | ✅ Present |
+| `97-acceptance-criteria.md` | ✅ Present |
+| `98-changelog.md` | ✅ Present |
+| `99-consistency-report.md` | ✅ Present |
+
+Inventory mirrors the on-disk layout of `18-wp-plugin-how-to/` as of 2026-04-26. See
+`98-changelog.md` for the file-level revision trail.
+

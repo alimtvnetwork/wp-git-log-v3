@@ -310,3 +310,53 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 ## Health Score
 
 100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.4 surfaces optional `Header.StateTransition`; v3.8.13 Phase 13 deepened 8 high-traffic ACs with no IDs/schema/OpenAPI churn. **Open follow-ups:** (a) §07 user decision (App identity, Phase B1 blocked); (b) §03 admin UI rendering of state labels — consumer-side, out-of-scope. All Phase 8/9 follow-ups closed; Phase 13 closes the §22-scope subset of the full-tree-audit-v4 deepening backlog.
+
+---
+
+## Validation History
+
+| Date | Version | Action |
+|------|---------|--------|
+| 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
+| 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
+| 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |
+| 2026-04-16 | prior | Initial consistency report authored. |
+
+This module's full lockstep history is mirrored in `98-changelog.md`; entries
+above summarize only the audit-/validation-bearing milestones for `22-git-logs-v2`.
+
+---
+
+## File Inventory
+
+| File | Status |
+|------|--------|
+| `00-overview.md` | ✅ Present |
+| `01-glossary-and-enums.md` | ✅ Present |
+| `02-database-schema.md` | ✅ Present |
+| `03-admin-ui.md` | ✅ Present |
+| `04-rest-api-endpoints.md` | ✅ Present |
+| `05-auth-and-validation.md` | ✅ Present |
+| `06-migrations-and-logger.md` | ✅ Present |
+| `07-app-entity.md` | ✅ Present |
+| `08-history-and-action.md` | ✅ Present |
+| `14-endpoint-examples.md` | ✅ Present |
+| `15-error-codes.md` | ✅ Present |
+| `16-seed-data.md` | ✅ Present |
+| `16-test-plan.md` | ✅ Present |
+| `19-permission-matrix.md` | ✅ Present |
+| `20-observability.md` | ✅ Present |
+| `22-retention-and-pruning.md` | ✅ Present |
+| `23-backup-restore.md` | ✅ Present |
+| `24-multisite.md` | ✅ Present |
+| `25-headless-auth-notes.md` | ✅ Present |
+| `26-readme-and-screenshots.md` | ✅ Present |
+| `27-wp-cli-reference.md` | ✅ Present |
+| `28-example-github-actions.md` | ✅ Present |
+| `29-uninstall-policy.md` | ✅ Present |
+| `30-threat-model.md` | ✅ Present |
+| `31-ssh-key-auth.md` | ✅ Present |
+
+Inventory mirrors the on-disk layout of `22-git-logs-v2/` as of 2026-04-26. See
+`98-changelog.md` for the file-level revision trail.
+
