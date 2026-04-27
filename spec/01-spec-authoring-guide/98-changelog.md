@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.8.0
+**Version:** 4.9.0
 **Last Updated:** 2026-04-27
 
 ---
+
+## 4.9.0 — 2026-04-27
+
+- Phase 101: pinned `mermaid` and `jsdom` to exact versions in `package.json` to lock the Phase 97 mermaid-syntax-gate's parser grammar. `"mermaid": "^11.14.0"` → `"mermaid": "11.14.0"` (dependency, used both by the app and by `linter-scripts/check-mermaid-syntax.mjs`); `"jsdom": "^20.0.3"` → `"jsdom": "20.0.3"` (devDependency, used only by the syntax-gate script). Rationale: an unpinned caret range can silently upgrade the mermaid grammar mid-PR (e.g. mermaid 11 → 12 may rename a directive), turning AC-SAG-24's parse-clean guarantee from a quality signal into a flaky one. Pinning makes any grammar change an explicit, reviewable bump. `dompurify` is transitively pinned through mermaid's own `package.json` and is NOT a direct dependency. Added **AC-SAG-25** in §97 mandating: (a) exact pins for both packages (caret/tilde FORBIDDEN), (b) major-version bumps require recording the local `bun linter-scripts/check-mermaid-syntax.mjs` output in §98 + re-running the full gate triad locally before merge (`check-mermaid-syntax.mjs`, `test-audit-deterministic-stability.sh`, `run.sh`), (c) minor/patch bumps may rely on CI alone since pinning ensures CI sees the same version as the bumper's local environment. Verified: `bun install` regenerated `bun.lock` with `mermaid@11.14.0` + `jsdom@20.0.3` exactly, and the syntax gate still reports `106/106 files parsed cleanly`. Lockstep: §97 v4.3.0 → v4.4.0; §99 v4.5.0 → v4.6.0.
 
 ## 4.8.0 — 2026-04-27
 
