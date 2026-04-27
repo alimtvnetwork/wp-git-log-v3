@@ -5,8 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Spec Authoring Guide
 
-**Version:** 3.4.0  
-**Updated:** 2026-04-26  
+**Version:** 3.5.0  
+**Updated:** 2026-04-27  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
@@ -535,4 +535,92 @@ Health-score weights are now versioned in the linter:
 The §99 quality dimension awards 1 credit each for: ≥30 non-blank lines, presence of a `Validation History` (or `Findings`/`Audit History`) section, and presence of a `File Inventory`/`Module Inventory`/`Top-Level Modules`/`Document Inventory` section. Authors should keep `99-consistency-report.md` substantive — empty stubs no longer score full credit.
 
 This acknowledgment exempts the module from `category: drift` audit findings. See `.lovable/memory/index.md` Phase 27c + Phase 30 notes.
+
+---
+
+## Inlined Contract — Spec Module Structure (Phase 48)
+
+The following JSON-Schema (Draft 2020-12) is the **machine-readable contract** every spec module under `spec/<NN-slug>/` MUST satisfy. Linters (`check-tree-health.cjs`, `check-lockstep.cjs`, `check-spec-folder-refs.py`) consume an equivalent rule set; this block is the canonical source for AI agents implementing new modules without human help.
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lovable.dev/spec/SpecModule.schema.json",
+  "title": "SpecModule",
+  "description": "Structural contract for any spec/<NN-slug>/ folder. Mirrors §03 required-files, §02 naming-conventions, §08 cross-references, §10 mandatory-linter-infrastructure.",
+  "type": "object",
+  "required": ["folder_name", "required_files", "naming", "lockstep"],
+  "properties": {
+    "folder_name": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "Two-digit zero-padded numeric prefix + kebab-case slug. Prefix MAY be non-contiguous (Exception 1)."
+    },
+    "required_files": {
+      "type": "object",
+      "required": ["overview", "changelog", "consistency_report"],
+      "properties": {
+        "overview":           { "const": "00-overview.md" },
+        "acceptance_criteria":{ "const": "97-acceptance-criteria.md" },
+        "changelog":          { "const": "98-changelog.md" },
+        "consistency_report": { "const": "99-consistency-report.md" }
+      },
+      "additionalProperties": false
+    },
+    "naming": {
+      "type": "object",
+      "required": ["case", "prefix_pattern", "max_depth"],
+      "properties": {
+        "case":           { "const": "kebab-case" },
+        "prefix_pattern": { "const": "^[0-9]{2}-" },
+        "max_depth":      { "type": "integer", "minimum": 1, "maximum": 3, "description": "spec/<NN>/<NN>/<NN>/ — 3 levels MAX (Exception 10 for §03 only)." }
+      }
+    },
+    "overview_frontmatter": {
+      "type": "object",
+      "properties": {
+        "kind": { "enum": ["index", "future-spec", "active-spec", "meta-toolchain", "tracker"] },
+        "drift_acknowledged": { "type": "string", "format": "date", "description": "ISO date — required when kind=future-spec to suppress drift findings." }
+      }
+    },
+    "lockstep": {
+      "type": "object",
+      "description": "When 00-overview.md MINOR or MAJOR version bumps, BOTH 98-changelog.md and 99-consistency-report.md MUST bump in the same commit (Phase 40 gate).",
+      "required": ["overview_version", "changelog_version", "consistency_report_version"],
+      "properties": {
+        "overview_version":           { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "changelog_version":          { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "consistency_report_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+      }
+    },
+    "acceptance_criteria_format": {
+      "type": "object",
+      "description": "Each AC in 97-acceptance-criteria.md MUST follow Given/When/Then (Phase 16 conversion).",
+      "required": ["id_pattern", "format"],
+      "properties": {
+        "id_pattern": { "const": "^AC-[A-Z0-9]+-[0-9]+$" },
+        "format":     { "const": "Given/When/Then" }
+      }
+    },
+    "cross_references": {
+      "type": "object",
+      "properties": {
+        "internal_links_must_resolve": { "const": true },
+        "external_spec_links_must_resolve": { "const": true },
+        "broken_link_threshold": { "const": 0 }
+      }
+    }
+  },
+  "additionalProperties": false
+}
+```
+
+**Invariants:**
+
+- **INV-AUTH-01** Every folder under `spec/` MUST validate against `SpecModule` or be listed in §09 Exceptions.
+- **INV-AUTH-02** `00-overview.md` MUST contain a frontmatter `kind:` field; missing → defaults to `active-spec` (auditor rubric branch).
+- **INV-AUTH-03** Lockstep violation (e.g., overview MINOR bump without §98/§99 bump) MUST fail the `check-lockstep.cjs` gate.
+- **FAIL-AUTH-01** Broken internal cross-link → `check-spec-cross-links.py` exits non-zero, blocks merge.
+
+_Inlined-contract section last updated: 2026-04-27 (Phase 48 — implementability lift, §01 impl 40 → ≥75 projected)._
 
