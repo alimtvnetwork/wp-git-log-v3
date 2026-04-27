@@ -152,7 +152,7 @@ TODAY = "2026-04-25"
 # v2.17 (Phase 99): static rubric version surfaced in summary outputs so a
 # reader of 00-index.md / EXECUTIVE-SUMMARY.md knows which scoring rules
 # produced the verdict. Bump this on every rubric change (see docstring).
-RUBRIC_VERSION = "v2.18"
+RUBRIC_VERSION = "v2.19"
 
 WEIGHTS = {
     "implementability": 35,
@@ -1096,10 +1096,12 @@ def main():
         idx.append(f"| [`{r['module']}`](./{r['module'].replace('/','__') or '_root'}.md) | {s['implementability']} | {s['completeness']} | {s['alignment']} | {s['consistency']} | {s['clarity']} | {s['testability']} | {s['maintainability']} | **{r['weighted_overall']}** | {r['grade']} | {r['blast_radius']} |")
 
     # Phase 99: surface QA-tooling baseline so a reader of this output knows
-    # the score is one signal among 9 strict gates, not the only signal.
+    # the score is one signal among 10 strict gates, not the only signal.
     # Phase 102: gate count 8 → 9 (added README inventory parity self-test).
-    idx += ["", "## QA tooling baseline (Phase 99, expanded Phase 102)",
-            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **9 strict CI gates** that surround it:",
+    # Phase 103: gate count 9 → 10 (added QA baseline footer self-test that
+    # mechanically enforces this very enumeration against spec-health.yml).
+    idx += ["", "## QA tooling baseline (Phase 99, expanded Phases 102 + 103)",
+            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **10 strict CI gates** that surround it:",
             "",
             "1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.",
             "2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).",
@@ -1110,8 +1112,9 @@ def main():
             "7. **Determinism self-test** (`test/test-audit-deterministic-stability.sh`, Phase 95) — `sha256(raw-results.json)` identical across 2 runs.",
             "8. **Mermaid syntax** (`check-mermaid-syntax.mjs`, Phase 97) — every `spec/**/*.mmd` parses cleanly.",
             "9. **README inventory parity** (`test/test-readme-inventory.sh`, Phase 102) — `linter-scripts/test/README.md` inventory ↔ filesystem in sync; mechanises AC-31-27.",
+            "10. **QA baseline footer self-test** (`test/test-qa-baseline-footer.sh`, Phase 103) — this very enumeration ↔ `spec-health.yml` step list ↔ `RUBRIC_VERSION` constant; mechanises AC-31-28.",
             "",
-            "Inventory + onboarding for the self-test suite (#5–#7, #9): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
+            "Inventory + onboarding for the self-test suite (#5–#7, #9, #10): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
             ""]
 
     (OUT / "00-index.md").write_text("\n".join(idx))
@@ -1137,7 +1140,7 @@ def main():
         "3. Resolve all broken cross-spec links (auto-detected per module).",
         "4. For every D/F module, run `linter-scripts/generate-gwt-acceptance.py` to regenerate ACs.",
         "5. Add `Status: Planned/In-Progress/Implemented` banners so alignment scores reflect intent.",
-        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phase 102) listing the 9 strict CI gates that surround this score.",
+        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103) listing the 10 strict CI gates that surround this score.",
     ]
     (OUT / "EXECUTIVE-SUMMARY.md").write_text("\n".join(exec_md))
 
