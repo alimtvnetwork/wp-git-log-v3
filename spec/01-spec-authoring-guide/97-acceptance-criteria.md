@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.0.0
-**Updated:** 2026-04-26 (Phase 16f: full GWT rewrite — replaced 18 table-row criteria with 20 module-specific Given/When/Then ACs covering the contract for authoring all OTHER specs in this repository. Old AC-001..AC-018 preserved as AC-SAG-LEGACY-001..018.)
+**Version:** 4.1.0
+**Updated:** 2026-04-27 (Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out] documenting the front-matter keys read by `audit-spec-vs-code-v2.py` v2.10–v2.14.)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
