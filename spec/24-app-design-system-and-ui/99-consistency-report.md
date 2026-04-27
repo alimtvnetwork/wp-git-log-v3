@@ -77,3 +77,7 @@ These slots are immutable once shipped (per project memory rule).
 | 2026-04-27 | 2.0.0 | Phase 39a — module promoted from index-only to full content; ownership matrix introduced to resolve circular reference with §07; AC suite expanded from 5 generic ACs to 10 concrete executable ACs. No file slot reused or renamed; immutability preserved. |
 | 2026-04-27 | 4.1.0 | Phase 55 — implementability lever (CI YAML / typed-language reference) |
 
+
+## 2026-04-27 — Phase 61 impl-sweep
+
+- Phase 61: appended App UI Component Registry API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).

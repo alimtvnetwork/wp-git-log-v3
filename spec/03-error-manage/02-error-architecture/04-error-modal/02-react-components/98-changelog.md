@@ -40,3 +40,7 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+## 2026-04-27 — Phase 61 impl-sweep
+
+- Phase 61: appended Error Modal React Component Registry API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
