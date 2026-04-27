@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.1.0
+**Version:** 2.2.0
 **Updated:** 2026-04-26
+
+> **v2.2.0 update (Phase 35 — R3):** Added [`71-spec-monthly-audit-yml.md`](./71-spec-monthly-audit-yml.md) + `.github/workflows/spec-monthly-audit.yml`. Time-driven monthly cadence companion to event-driven `spec-health.yml`. Includes dashboard-parity check (Phase 34 invariant) and auto-opens GitHub issue on regression. Bijection 28/28 → 29/29. Closes R3 from `32-phase-26-31-rollup.md` §4.
 
 > **v2.1.0 update (Phase 34):** Propagated rubric v2.0.0 from `check-tree-health.cjs` into `generate-dashboard-data.cjs`. New top-level `RubricV2` block in `dashboard-data.json`; `Health.Score` now driven by rubric (legacy deduction-based score retained as `Health.LegacyScore`). [`11-generate-dashboard-data.md`](./11-generate-dashboard-data.md) v1.0.0 → v1.1.0; AC-11-01 schema corrected (was a 3-key shape that never matched the actual output); AC-11-04 added (parity with `check-tree-health.cjs`). Verified: dashboard reports 100/100 (A+), 162/162 quality credits, parity confirmed.
 
@@ -42,7 +44,8 @@
 | 61-spec-cross-links-allowlist.md | ✅ | Config |
 | 62-spec-folder-refs-allowlist.md | ✅ | Config |
 | 63-readme-cross-links-md.md | ✅ | Config |
-| 70-spec-health-yml.md | ✅ | CI workflow |
+| 70-spec-health-yml.md | ✅ | CI workflow (event-driven) |
+| 71-spec-monthly-audit-yml.md | ✅ | CI workflow (cadence — Phase 35) |
 | 97-acceptance-criteria.md | ✅ | AC-T-01..AC-T-10 |
 | 98-changelog.md | ✅ | v1.0.0 |
 | 99-consistency-report.md | ✅ | This file |
@@ -83,8 +86,9 @@
 | `linter-scripts/spec-folder-refs.allowlist` | [62](./62-spec-folder-refs-allowlist.md) | ✅ |
 | `linter-scripts/readme-cross-links.md` | [63](./63-readme-cross-links-md.md) | ✅ |
 | `.github/workflows/spec-health.yml` | [70](./70-spec-health-yml.md) | ✅ |
+| `.github/workflows/spec-monthly-audit.yml` | [71](./71-spec-monthly-audit-yml.md) | ✅ (Phase 35) |
 
-**Bijection: 28/28 ✅** — every executable / configuration artifact has exactly one spec section.
+**Bijection: 29/29 ✅** — every executable / configuration artifact has exactly one spec section.
 
 **Subdirectory:** `linter-scripts/installer-templates/` is intentionally not specced here — it is a *content directory* not a *script*. If installer templates ever get their own conventions, add a sibling module (slot 28+) and reference from §00.
 
