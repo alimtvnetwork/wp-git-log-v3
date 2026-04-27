@@ -1,6 +1,6 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.5.0  
+**Version:** 1.6.0  
 **Updated:** 2026-04-27  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
 **Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates**)  
@@ -170,6 +170,11 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **Given** a module whose `body_text` contains markdown links inside fenced ```` ```markdown ```` or ```` ```text ```` template blocks (e.g. `01-spec-authoring-guide`'s path-syntax examples like `` `[Architecture](./01-architecture.md)` ``),
 - **When** the deterministic metrics are computed,
 - **Then** those example links MUST NOT contribute to `metrics.links_total` or `metrics.links_broken`. Implementation: `LINK_RX.findall` runs against `strip_code(body_text)` (the same code-stripped prose used by the TODO/waffle scanners), NOT against the raw body. Standalone markdown links in prose still count and are still validated against the filesystem.
+
+### AC-31-15 — `tracker` and `index` kinds skip the contract gates (v2.7)
+- **Given** a module whose frontmatter declares `kind: tracker` (issue ledgers) or `kind: index` (placement-rule routers),
+- **When** the audit runs,
+- **Then** `G-CON-01` (no inlined contract) MUST be bypassed entirely for both kinds, AND `G-CON-02` (overview <500 chars) MUST also be bypassed for both kinds. Rationale: the rubric (`deterministic_score`) already exempts these `kind`s with baseline `implementability=75/70`; the gates must mirror that exemption to avoid double-penalising. `meta-toolchain` is also exempted from `G-CON-01` (auditor-self-reference modules).
 
 ## Cross-references
 
