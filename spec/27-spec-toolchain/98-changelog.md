@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.24.0
+**Version:** 2.25.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,13 @@
 ---
 
 ## Releases
+
+### 2.25.0 — 2026-04-27 (Phase 105 — Generalise AC-SAG-25 into a grammar-defining-library pin pattern)
+- **Added** **AC-31-30** at [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) — the abstract "grammar-defining-library pinning pattern" that generalises Phase 101's AC-SAG-25 (specific to `mermaid` + `jsdom`) into a reusable contract for any future `linter-scripts/` quality gate built on a parser, schema-validator, or AST-walking library. Specifies: (a) trigger condition for inclusion in the pinned inventory (a script under `linter-scripts/` `import`s the library AND uses it to inspect spec content; libraries used only by `src/` or as transitive deps do NOT qualify), (b) the current pinned inventory as a markdown table — `mermaid` 11.14.0 + `jsdom` 20.0.3 — plus explicitly-NOT-qualifying examples (`typescript` / `react` / `vite` / `tailwindcss` / unwritten `ajv`) to prevent future scope creep, (c) the four-step protocol any new gate must follow when adding a previously-unpinned library (tighten `package.json` pin + extend inventory + author per-library instance AC modelled on AC-SAG-25 + lockstep §97/§98/§99), (d) the major-vs-minor/patch bump rules inherited from AC-SAG-25, and (e) the **declarative-not-CI-enforced** rationale: silent grammar drift is intrinsically a pre-merge phenomenon (an unpinned `^` range on the bumper's machine corrupts `bun.lock` *before* CI sees the PR), so reviewer attention against the inventory is the correct enforcement layer, not a runtime gate.
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.17.0 → **v1.18.0**: header `Source` line gains `package.json` grammar-defining-library pin block as the 9th artefact (Phase 105); Category appends `+ grammar-library pin contract`; AC-31-30 added with full inventory table.
+- **Cross-referenced** AC-SAG-25 (Phase 101) at [`spec/01-spec-authoring-guide/97-acceptance-criteria.md`](../01-spec-authoring-guide/97-acceptance-criteria.md): `Verifies` clause extended to point to AC-31-30 as the abstract general form of which AC-SAG-25 is the concrete instance. AC-SAG-25 stays as the mermaid+jsdom-specific instance (no rewrite); AC-31-30 owns the abstract pattern + inventory + addition protocol. Lockstep at §01: §97 v4.4.0 → v4.5.0; §98 v4.9.0 → v4.10.0; §99 v4.6.0 → v4.7.0.
+- **No code change in this phase** — pure declarative contract generalisation. No new linter script, no new CI step, no new self-test. CI gate count remains **11**; `RUBRIC_VERSION` remains **v2.20**.
+- **Verified**: All 11 strict gates green: cross-links OK; tree-health 100/100 strict; lockstep 0 findings strict; audit `--min-weighted=97 --min-impl=99` ✓ at 98.0/99.8; Phases 91/94/95 self-tests 6/14/7 ✅; Phase 97 mermaid 106/106 ✓; Phase 102 self-test 16/16 ✅; Phase 103 self-test 11/11 ✅; Phase 104 meta-linter ✅ (5 in-scope memos / 0 forbidden headings — Phase 105 memo included). `package.json` inventory check: `mermaid` `11.14.0` exact ✓; `jsdom` `20.0.3` exact ✓; no caret/tilde on either; `bun.lock` resolved versions match. No scoring change — pure spec lockstep.
 
 ### 2.24.0 — 2026-04-27 (Phase 104 — Memo retrospective-heading meta-linter)
 - **Added** `linter-scripts/check-memo-retrospective-headings.py` — meta-linter that scans `.lovable/memory/audit/v2-deterministic/phase-NNN-*.md` and FAILS if any memo with `NNN ≥ CUTOFF_PHASE` (= 100) contains a forward-looking H2/H3 section heading. Forbidden patterns (case-insensitive): `Next phases?`, `Next iterations?`, `Next Recommended …`, `Remaining (work|tasks?|backlog)`, `Future (work|iterations?|phases?)`, `TODO`, `Upcoming`, `Roadmap`. On failure, prints offending file + line number + raw heading + matched pattern label, plus a list of suggested retrospective replacements (`What this enables`, `Why Phase <N>'s prediction was correct`, `Closing the <X> cadence`, `Why this matters`, `Verification`, `Files touched`, `Score impact`). The cutoff makes the rule additive: pre-Phase-100 memos are historical record from the retired cadence and are out of scope.

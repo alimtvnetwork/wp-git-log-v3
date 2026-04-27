@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.4.0
-**Updated:** 2026-04-27 (Phase 101: added AC-SAG-25 pinning `mermaid` and `jsdom` to exact versions and requiring any major-version bump to re-run the syntax gate locally before merge. Phase 97: added AC-SAG-24 requiring every `spec/**/*.mmd` file to parse cleanly with the mermaid library under a jsdom shim, locked by a new CI gate. Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
+**Version:** 4.5.0
+**Updated:** 2026-04-27 (Phase 105: cross-referenced AC-SAG-25 to its general form AC-31-30 in §27 — "grammar-defining-library pinning pattern" applicable to any future linter-scripts gate built on a parser/schema/AST library. Phase 101: added AC-SAG-25 pinning `mermaid` and `jsdom` to exact versions and requiring any major-version bump to re-run the syntax gate locally before merge. Phase 97: added AC-SAG-24 requiring every `spec/**/*.mmd` file to parse cleanly with the mermaid library under a jsdom shim, locked by a new CI gate. Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
@@ -238,7 +238,7 @@ SLOT_IMMUTABILITY:         once a numbered slot ships, it is permanent;
 - **And** any PR that bumps the **major** version of `mermaid` or `jsdom` (e.g. `11.x.y` → `12.0.0`, or `20.x.y` → `21.0.0`) MUST: (1) include a note in `98-changelog.md` recording the bump and the bumper's local `bun linter-scripts/check-mermaid-syntax.mjs` run output (`<N>/<N> files parsed cleanly`), AND (2) re-run the full gate triad locally before merge: `bun linter-scripts/check-mermaid-syntax.mjs`, `bash linter-scripts/test/test-audit-deterministic-stability.sh`, and `bash linter-scripts/run.sh`.
 - **And** **minor** and **patch** bumps (e.g. `11.14.0` → `11.15.0`) MAY be made without the local re-run requirement, but the CI gate still runs and MUST pass — pinning ensures CI sees the same version as the bumper's local environment.
 - **And** the `dompurify` package is transitively pinned through mermaid's own `package.json` and is NOT a direct dependency; this AC does NOT require a separate `dompurify` pin in this repo.
-- **Verifies:** `package.json` (lines for `mermaid` and `jsdom` show no `^` or `~`) + `bun.lock` (resolved versions match the pin exactly) + `98-changelog.md` (any major-bump entry includes the gate-run output line).
+- **Verifies:** `package.json` (lines for `mermaid` and `jsdom` show no `^` or `~`) + `bun.lock` (resolved versions match the pin exactly) + `98-changelog.md` (any major-bump entry includes the gate-run output line) + **AC-31-30** at [`spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md`](../27-spec-toolchain/31-audit-spec-vs-code-v2.md) — the **general pattern** of which AC-SAG-25 is the concrete instance for mermaid+jsdom. AC-31-30 enumerates the inventory of all currently-pinned grammar-defining libraries and the four-step protocol for adding new ones.
 
 ---
 
