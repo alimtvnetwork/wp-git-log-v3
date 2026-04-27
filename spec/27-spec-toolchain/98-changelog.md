@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.20.0
+**Version:** 2.21.0
 **Updated:** 2026-04-27
 **Scope:** `spec/27-spec-toolchain/`
 
@@ -15,6 +15,12 @@
 ---
 
 ## Releases
+
+### 2.21.0 — 2026-04-27 (Phase 99 — `RUBRIC_VERSION` + QA-baseline footer in audit outputs)
+- **Patched** `linter-scripts/audit-spec-vs-code-v2.py` v2.16 → **v2.17**: new module-level `RUBRIC_VERSION = "v2.17"` constant; both `00-index.md` and `EXECUTIVE-SUMMARY.md` now carry a `**Rubric:** v2.17` header line; `00-index.md` gains a new "QA tooling baseline (Phase 99)" section enumerating the **8 strict CI gates** that surround the score (cross-links + tree-health + lockstep + audit thresholds + 3 self-tests from Phases 91/94/95 + Phase 97 mermaid syntax) with link to `linter-scripts/test/README.md` (Phase 98). **Zero rubric change** — metadata + output-clarity only.
+- **Determinism preserved**: `RUBRIC_VERSION` is a static string (not derived from time/env). Phase 95 self-test re-validates byte-identical output across runs at new sha256 `e22906c4…` (was `fdba5f87…`; one-time shift on v2.17 rollout, then re-stable).
+- **Updated** [`31-audit-spec-vs-code-v2.md`](./31-audit-spec-vs-code-v2.md) v1.13.0 → **v1.14.0**: header `Source` line bumped to `(script v2.17)`; Category appends `+ QA-baseline footer`. New **AC-31-28** mandates `**Rubric:**` header in both summary outputs, the 8-gate enumeration in `00-index.md`, the static-string requirement for `RUBRIC_VERSION`, the link to the Phase 98 README, and the bump-on-every-change rule (rubric or metadata). Rubric changelog table extended through v2.17.
+- **Verified**: All 8 strict gates remain green: cross-links OK; tree-health 100/100 strict; lockstep 0 findings strict; audit `--min-weighted=97 --min-impl=99` ✓ at 98.0/99.8; Phase 91 self-test 6/6 ✅; Phase 94 self-test 14/14 ✅; Phase 95 self-test 7/7 ✅ (new sha256 stable); Phase 97 mermaid 106/106 ✓.
 
 ### 2.20.0 — 2026-04-27 (Phase 98 — `linter-scripts/test/` inventory README)
 - **Added** `linter-scripts/test/README.md` (~180 lines) — the canonical inventory + onboarding doc for the directory's CLI contract self-tests. Sections: **Why this directory exists** (the production gates check repo state, not linter behaviour); **Test inventory** (3 scripts × Phase × locked AC × assertion count × runtime); **Coverage triad** (mapping each blind spot — comparison-operator inversion / `--explain` regression / non-determinism — to the test that catches it); **Adjacent gates** (full-tree linters in `linter-scripts/` proper); **Local execution** (single + bulk run snippets); **Adding a new self-test** (copy-pasteable shell template covering shebang, header, `assert` helper, summary, plus the 5 follow-up steps for CI wiring + lockstep AC + memo); **See also** (cross-links to spec, workflow, runner, and all 5 phase memos including Phase 97/98).

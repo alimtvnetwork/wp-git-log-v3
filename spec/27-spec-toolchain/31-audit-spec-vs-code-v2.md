@@ -1,9 +1,9 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.13.0  
+**Version:** 1.14.0  
 **Updated:** 2026-04-27  
-**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script v2.16) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94) + [`linter-scripts/test/test-audit-deterministic-stability.sh`](../../linter-scripts/test/test-audit-deterministic-stability.sh) (Phase 95) + [`linter-scripts/test/README.md`](../../linter-scripts/test/README.md) (Phase 98)  
-**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×3 incl. determinism + **inventory README**)
+**Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py) (script **v2.17**) + [`linter-scripts/test/test-audit-cli-thresholds.sh`](../../linter-scripts/test/test-audit-cli-thresholds.sh) (Phase 91) + [`linter-scripts/test/test-audit-explain-contract.sh`](../../linter-scripts/test/test-audit-explain-contract.sh) (Phase 94) + [`linter-scripts/test/test-audit-deterministic-stability.sh`](../../linter-scripts/test/test-audit-deterministic-stability.sh) (Phase 95) + [`linter-scripts/test/README.md`](../../linter-scripts/test/README.md) (Phase 98)  
+**Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates** + **CI threshold flags** + **--explain debugger** + **CLI contract self-tests** ×3 incl. determinism + **inventory README** + **QA-baseline footer**)
 **Predecessor:** §30 [`30-audit-spec-vs-code.md`](./30-audit-spec-vs-code.md)
 
 ---
@@ -283,7 +283,17 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **And** the README's last-updated date MUST be bumped on every modification.
 - **Verifies:** `linter-scripts/test/README.md` (inventory, coverage triad, local execution, template, see-also sections) + lockstep with the actual contents of `linter-scripts/test/`.
 
-## Rubric changelog (v2.9 → v2.16)
+### AC-31-28 — Audit summary outputs MUST advertise rubric version + QA tooling baseline (Phase 99)
+- **Given** the audit script `linter-scripts/audit-spec-vs-code-v2.py` (v2.17 or later),
+- **When** the script runs in any mode (deterministic or normal) and writes its summary outputs to `OUT/`,
+- **Then** both `00-index.md` and `EXECUTIVE-SUMMARY.md` MUST contain a `**Rubric:** v<X>.<Y>` line in the header block, sourced from the `RUBRIC_VERSION` module-level constant. The constant MUST be a static string (not derived from time, env, or filesystem state) so the Phase 95 determinism self-test continues to pass byte-identically.
+- **And** `00-index.md` MUST contain a "QA tooling baseline (Phase 99)" section after the "Full ranking" table that enumerates the **8 strict CI gates** that surround the score: (1) cross-links, (2) tree-health strict, (3) lockstep strict, (4) audit thresholds, (5) Phase 91 CLI threshold self-test, (6) Phase 94 `--explain` self-test, (7) Phase 95 determinism self-test, (8) Phase 97 mermaid syntax. Each entry MUST cite the script path so a contributor can locate the gate.
+- **And** the section MUST link to `linter-scripts/test/README.md` (Phase 98) as the canonical inventory + onboarding doc for the self-test triad (gates 5–7).
+- **And** the section MUST be regenerated on every audit run — it is not a hand-edited file. Drift between the script's enumeration and the actual workflow gates is detected by lockstep with `.github/workflows/spec-health.yml` (any new gate added to the workflow must be added to the enumeration in the same PR).
+- **And** `RUBRIC_VERSION` MUST be bumped on every rubric change documented in the "Rubric changelog" table; non-rubric changes (metadata, output formatting, debugging tools) MUST also bump it but be explicitly marked "no scoring change" in the changelog row.
+- **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` `RUBRIC_VERSION` constant + `00-index.md` "QA tooling baseline" section + `EXECUTIVE-SUMMARY.md` `**Rubric:**` header + lockstep with `.github/workflows/spec-health.yml` step list.
+
+## Rubric changelog (v2.9 → v2.17)
 
 | Version | Phase | Change | Score effect |
 |--------:|------:|--------|--------------|
@@ -298,6 +308,7 @@ A companion script renders these into a human report — see §16 [`16-generate-
 | v2.16-test1 | 91 | CLI threshold contract self-test (`linter-scripts/test/test-audit-cli-thresholds.sh`) wired into `spec-health.yml`. Locks v2.12 exit-code semantics from silent-inversion regressions. | None (no rubric change; CI safety net only). |
 | v2.16-test2 | 94 | `--explain` contract self-test (`linter-scripts/test/test-audit-explain-contract.sh`) wired into `spec-health.yml`. Locks v2.16 single-match / no-match / multi-match / no-side-effects contract from silent-break regressions. | None (no rubric change; CI safety net only). |
 | v2.16-test3 | 95 | Determinism / JSON-stability self-test (`linter-scripts/test/test-audit-deterministic-stability.sh`) wired into `spec-health.yml`. Locks `AUDIT_DETERMINISTIC=1` byte-identical guarantee — runs the audit twice and asserts `sha256(raw-results.json)` matches. Catches non-determinism regressions the production gate cannot see (single-run gate by construction). | None (no rubric change; CI safety net only). |
+| **v2.17** | **99** | **Metadata sync**: new `RUBRIC_VERSION = "v2.17"` constant surfaced in `00-index.md` (+ `**Rubric:** v2.17` header) and `EXECUTIVE-SUMMARY.md`. New "QA tooling baseline (Phase 99)" footer in `00-index.md` enumerating the 8 strict CI gates that surround the score (cross-links + tree-health + lockstep + audit thresholds + 3 self-tests + mermaid syntax). Determinism preserved — `RUBRIC_VERSION` is a static string. | None (no rubric change; output-clarity only — readers of the audit output now know the score is one of 8 surrounding gates). |
 
 
 ## Cross-references

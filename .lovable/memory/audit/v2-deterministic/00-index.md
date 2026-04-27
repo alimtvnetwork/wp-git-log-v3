@@ -1,6 +1,7 @@
 # Spec-vs-Code Audit **v2** — Summary
 
 **Date:** 2026-04-25  
+**Rubric:** v2.17  
 **Modules audited:** 87  
 **Code files indexed:** 36  
 **Mean weighted score:** **98.0/100**  
@@ -167,3 +168,17 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`12-cicd-pipeline-workflows`](./12-cicd-pipeline-workflows.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 10 |
 | [`14-update`](./14-update.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 10 |
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 9 |
+
+## QA tooling baseline (Phase 99)
+This audit runs rubric **v2.17**. The score above is one of **8 strict CI gates** that surround it:
+
+1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.
+2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).
+3. **Lockstep** (`check-lockstep.cjs --strict`) — §97/§98/§99 versions advance together (0-finding bar).
+4. **Audit thresholds** (this script, `--min-weighted=N --min-impl=N`) — Phase 81 floors; current bar 97/99, current score above.
+5. **CLI threshold self-test** (`test/test-audit-cli-thresholds.sh`, Phase 91) — locks the `--min-*` exit-code contract.
+6. **`--explain` self-test** (`test/test-audit-explain-contract.sh`, Phase 94) — locks the Phase 90 debug-flag contract.
+7. **Determinism self-test** (`test/test-audit-deterministic-stability.sh`, Phase 95) — `sha256(raw-results.json)` identical across 2 runs.
+8. **Mermaid syntax** (`check-mermaid-syntax.mjs`, Phase 97) — every `spec/**/*.mmd` parses cleanly.
+
+Inventory + onboarding for the self-test triad (#5–#7): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).
