@@ -1123,6 +1123,7 @@ def main():
     # Executive summary (separate, short)
     exec_md = [f"# AI-Implementability Audit v2 — Executive Summary\n",
         f"**Date:** {TODAY}  ",
+        f"**Rubric:** {RUBRIC_VERSION}  ",
         f"**Verdict:** Mean **{mean}/100** weighted, **{mean_impl}/100** implementability across {len(valid)} modules.\n",
         f"## TL;DR\n",
         f"- A mediocre AI could implement **~{mean_impl}%** of features from the spec alone.",
@@ -1134,7 +1135,7 @@ def main():
         "3. Resolve all broken cross-spec links (auto-detected per module).",
         "4. For every D/F module, run `linter-scripts/generate-gwt-acceptance.py` to regenerate ACs.",
         "5. Add `Status: Planned/In-Progress/Implemented` banners so alignment scores reflect intent.",
-        "", f"See [00-index.md](./00-index.md) for the full per-module ranking.",
+        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99) listing the 8 strict CI gates that surround this score.",
     ]
     (OUT / "EXECUTIVE-SUMMARY.md").write_text("\n".join(exec_md))
 
