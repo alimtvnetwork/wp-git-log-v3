@@ -111,9 +111,10 @@ bash linter-scripts/test/test-audit-deterministic-stability.sh
 bash linter-scripts/test/test-readme-inventory.sh
 bash linter-scripts/test/test-qa-baseline-footer.sh
 bash linter-scripts/test/test-overview-inventory-parity.sh
+bash linter-scripts/test/test-weights-parity.sh
 ```
 
-Run all six sequentially:
+Run all seven sequentially:
 
 ```bash
 for t in linter-scripts/test/test-*.sh; do
@@ -213,4 +214,5 @@ Then:
   [Phase 102](../../.lovable/memory/audit/v2-deterministic/phase-102-readme-inventory-test.md) ·
   [Phase 103](../../.lovable/memory/audit/v2-deterministic/phase-103-qa-baseline-footer-test.md) ·
   [Phase 107](../../.lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md) ·
-  [Phase 112](../../.lovable/memory/audit/v2-deterministic/phase-112-overview-inventory-parity-test.md)
+  [Phase 112](../../.lovable/memory/audit/v2-deterministic/phase-112-overview-inventory-parity-test.md) ·
+  [Phase 113](../../.lovable/memory/audit/v2-deterministic/phase-113-weights-parity-test.md)
