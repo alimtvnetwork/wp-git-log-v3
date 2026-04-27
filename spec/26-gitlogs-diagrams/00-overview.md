@@ -1,4 +1,7 @@
-
+---
+kind: index
+description: Diagram index for git-logs WP plugin (Mermaid sources + rendered SVGs). Indexes .mmd/.svg companions of folder 22 plus a Phase-55 DiagramMetadata JSON Schema contract. Index baseline scoring still applies.
+---
 # Gitlogs Diagrams
 
 **Version:** 2.3.0  

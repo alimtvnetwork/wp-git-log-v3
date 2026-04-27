@@ -1,4 +1,7 @@
-
+---
+kind: index
+description: Diagram index for self-update / app-update workflows. Indexes Mermaid (.mmd) files and a Phase-55 DiagramMetadata JSON Schema contract. Index baseline scoring still applies.
+---
 # Diagrams — Self-Update & App Update
 
 **Version:** 3.4.0  
