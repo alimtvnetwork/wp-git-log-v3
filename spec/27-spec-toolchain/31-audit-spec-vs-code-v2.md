@@ -1,6 +1,6 @@
 # 31 — audit-spec-vs-code-v2.py
 
-**Version:** 1.4.0  
+**Version:** 1.5.0  
 **Updated:** 2026-04-27  
 **Source:** [`linter-scripts/audit-spec-vs-code-v2.py`](../../linter-scripts/audit-spec-vs-code-v2.py)  
 **Category:** Auditor (AI-driven by default; **deterministic mode** + **hard scoring gates**)  
@@ -18,7 +18,7 @@ AI-implementability audit. Asks: *"Could a mediocre AI ship a working implementa
 2. Deterministic pre-checks computed BEFORE AI scoring (so AI can be calibrated):
    - waffle ratio (should/may/might/optionally per 1k chars) — **prose only** (v2.4)
    - contract presence (DDL, JSON, TS enums, YAML/OpenAPI, Mermaid)
-   - cross-spec link health (broken count)
+   - cross-spec link health (broken count) — **prose only** (v2.6); links inside fenced code blocks (e.g. `markdown` template examples) are excluded
    - AC count + Given/When/Then block count
    - TODO/TBD/FIXME density — **prose only** (v2.4); tokens inside fenced code blocks and inline `code` spans are excluded
 3. AI receives metrics + raw digest, must justify scores against them.
@@ -165,6 +165,11 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **Given** a module whose frontmatter declares `kind: meta-toolchain` (auditor-self-reference modules — currently `27-spec-toolchain`),
 - **When** the audit runs,
 - **Then** the `G-TODO-01` gate MUST be bypassed entirely (not even recorded as passive in `applied_gates`). Other gates apply normally.
+
+### AC-31-14 — Cross-spec link extraction is prose-only (v2.6)
+- **Given** a module whose `body_text` contains markdown links inside fenced ```` ```markdown ```` or ```` ```text ```` template blocks (e.g. `01-spec-authoring-guide`'s path-syntax examples like `[Architecture](./01-architecture.md)`),
+- **When** the deterministic metrics are computed,
+- **Then** those example links MUST NOT contribute to `metrics.links_total` or `metrics.links_broken`. Implementation: `LINK_RX.findall` runs against `strip_code(body_text)` (the same code-stripped prose used by the TODO/waffle scanners), NOT against the raw body. Standalone markdown links in prose still count and are still validated against the filesystem.
 
 ## Cross-references
 
