@@ -84,8 +84,8 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 29090,
-      "ac_count": 29,
+      "ac_chars": 31272,
+      "ac_count": 30,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 3,
@@ -104,7 +104,7 @@
       },
       "code_blocks_total": 91,
       "consistency_report": true,
-      "gwt_block_count": 25,
+      "gwt_block_count": 26,
       "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": true,
@@ -120,7 +120,7 @@
       "mmd_files": 1,
       "overview_chars": 47102,
       "todo_density": 1,
-      "waffle_per_kchar": 0.41
+      "waffle_per_kchar": 0.44
     },
     "module": "01-spec-authoring-guide",
     "raw_scores": {
@@ -132,7 +132,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=29, gwt=25, broken_links=0, waffle/kchar=0.41. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=30, gwt=26, broken_links=0, waffle/kchar=0.44. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,

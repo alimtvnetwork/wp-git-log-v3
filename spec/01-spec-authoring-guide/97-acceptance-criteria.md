@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.3.0
-**Updated:** 2026-04-27 (Phase 97: added AC-SAG-24 requiring every `spec/**/*.mmd` file to parse cleanly with the mermaid library under a jsdom shim, locked by a new CI gate. Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
+**Version:** 4.4.0
+**Updated:** 2026-04-27 (Phase 101: added AC-SAG-25 pinning `mermaid` and `jsdom` to exact versions and requiring any major-version bump to re-run the syntax gate locally before merge. Phase 97: added AC-SAG-24 requiring every `spec/**/*.mmd` file to parse cleanly with the mermaid library under a jsdom shim, locked by a new CI gate. Phase 93: added AC-SAG-23 making `lifecycle-spec-authoring.mmd` the canonical lifecycle source of truth, with lockstep requirements vs `00-overview.md` inline diagram + `linter-scripts/run.sh` + `.github/workflows/spec-health.yml`. Phase 89: added AC-SAG-21 [`kind:` rubric branch selector] and AC-SAG-22 [`todo_audit_exempt: true` opt-out].)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
@@ -228,6 +228,17 @@ SLOT_IMMUTABILITY:         once a numbered slot ships, it is permanent;
 - **And** the check MUST be deterministic and side-effect-free: zero file writes, zero network calls, zero environment dependencies beyond `node` + the project's `node_modules`.
 - **And** if a contributor adds a new `.mmd` file with a syntax error, the gate MUST fail the PR with `<file path>` + first parser error line, NOT a stack trace from the mermaid library itself.
 - **Verifies:** `linter-scripts/check-mermaid-syntax.mjs` + `.github/workflows/spec-health.yml` "Mermaid diagram syntax gate (Phase 97)" step + `package.json` devDependencies (`mermaid` ≥ 11, `jsdom` ≥ 20).
+
+### AC-SAG-25 — `mermaid` and `jsdom` MUST be pinned to exact versions; major-version bumps require local syntax-gate re-run (Phase 101)
+
+- **Given** the `package.json` lists `mermaid` (used both by the app and by `linter-scripts/check-mermaid-syntax.mjs`) and `jsdom` (used only by the syntax-gate script),
+- **When** either dependency is declared,
+- **Then** the version specifier MUST be an **exact pin** (e.g. `"mermaid": "11.14.0"`, `"jsdom": "20.0.3"`) — caret (`^`) and tilde (`~`) ranges are FORBIDDEN for these two packages.
+- **And** the rationale is: AC-SAG-24's parse-clean guarantee is only as stable as the mermaid grammar; an unpinned caret range silently upgrades the grammar mid-PR (e.g. mermaid 11 → 12 may rename a directive), turning the gate from a quality signal into a flaky one. Pinning makes any grammar change an explicit, reviewable bump.
+- **And** any PR that bumps the **major** version of `mermaid` or `jsdom` (e.g. `11.x.y` → `12.0.0`, or `20.x.y` → `21.0.0`) MUST: (1) include a note in `98-changelog.md` recording the bump and the bumper's local `bun linter-scripts/check-mermaid-syntax.mjs` run output (`<N>/<N> files parsed cleanly`), AND (2) re-run the full gate triad locally before merge: `bun linter-scripts/check-mermaid-syntax.mjs`, `bash linter-scripts/test/test-audit-deterministic-stability.sh`, and `bash linter-scripts/run.sh`.
+- **And** **minor** and **patch** bumps (e.g. `11.14.0` → `11.15.0`) MAY be made without the local re-run requirement, but the CI gate still runs and MUST pass — pinning ensures CI sees the same version as the bumper's local environment.
+- **And** the `dompurify` package is transitively pinned through mermaid's own `package.json` and is NOT a direct dependency; this AC does NOT require a separate `dompurify` pin in this repo.
+- **Verifies:** `package.json` (lines for `mermaid` and `jsdom` show no `^` or `~`) + `bun.lock` (resolved versions match the pin exactly) + `98-changelog.md` (any major-bump entry includes the gate-run output line).
 
 ---
 
