@@ -156,6 +156,16 @@ A companion script renders these into a human report — see §16 [`16-generate-
 - **When** the deterministic metrics are computed,
 - **Then** `metrics.todo_density` MUST equal `0` AND the `G-TODO-01` gate MUST NOT fire. The same prose-only rule applies to `WAFFLE_RX` so `waffle_per_kchar` reflects spec narrative, not code samples.
 
+### AC-31-12 — Meta-token sequences are stripped (v2.5)
+- **Given** a module whose prose contains the canonical reference form `TODO/TBD/FIXME` (or any 2+ slash-joined work-tracking tokens) — typical of changelog rows, AC text, or fix-checklist category labels,
+- **When** the deterministic metrics are computed,
+- **Then** those meta-references MUST NOT contribute to `metrics.todo_density`. Standalone `TODO:` work markers in prose still count.
+
+### AC-31-13 — `kind: meta-toolchain` exempts G-TODO-01 (v2.5)
+- **Given** a module whose frontmatter declares `kind: meta-toolchain` (auditor-self-reference modules — currently `27-spec-toolchain`),
+- **When** the audit runs,
+- **Then** the `G-TODO-01` gate MUST be bypassed entirely (not even recorded as passive in `applied_gates`). Other gates apply normally.
+
 ## Cross-references
 
 - §13 [`13-generate-gwt-acceptance.md`](./13-generate-gwt-acceptance.md) — consumes `raw-results.json`.
