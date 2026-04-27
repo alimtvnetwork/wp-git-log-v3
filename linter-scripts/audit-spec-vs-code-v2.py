@@ -220,6 +220,23 @@ def deterministic_metrics(folder: Path) -> dict:
     # v2.3: CI workflow YAML (≥5 blocks) is a normative contract for
     # CI/CD pipeline modules — distinct from generic single-snippet YAML.
     has_ci_workflow = lang_counter.get("yaml", 0) + lang_counter.get("yml", 0) >= 5
+    # v2.8 (Phase 45): "normative contract" detection for meta-toolchain
+    # modules. A `text` fenced block ≥10 non-blank lines containing
+    # CONTRACT: / INV- / FAIL- / DEL- markers IS a machine-readable
+    # contract — even though it isn't SQL/JSON/YAML. The §27 toolchain
+    # bijection table is the canonical example.
+    has_normative_contract = False
+    for lang, content in body_blocks:
+        if (lang or "").lower() not in ("text", "plain", ""):
+            continue
+        non_blank = [ln for ln in content.splitlines() if ln.strip()]
+        if len(non_blank) < 10:
+            continue
+        joined = "\n".join(non_blank)
+        markers = sum(1 for tag in ("CONTRACT:", "INV-", "FAIL-", "DEL-", "INVARIANT", "BIJECTION") if tag in joined)
+        if markers >= 2:
+            has_normative_contract = True
+            break
 
     # cross-spec link health — v2.6: scan code-stripped prose so example
     # links inside ```markdown / ```text fences (path-syntax templates in
@@ -267,6 +284,7 @@ def deterministic_metrics(folder: Path) -> dict:
         "has_yaml_openapi":    has_yaml > 0,
         "has_typed_lang_contract": has_typed_lang_contract,  # v2.3
         "has_ci_workflow":     has_ci_workflow,              # v2.3
+        "has_normative_contract": has_normative_contract,    # v2.8
         "has_mermaid":         len(mmd_files) > 0,
         "links_total":         total,
         "links_broken":        broken,
