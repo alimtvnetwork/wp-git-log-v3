@@ -177,8 +177,28 @@ jobs:
         # truth — and the AC's `Verifies` clause for code-locked items.
         # Without this gate, AC-31-29 was enforced only by reviewer
         # attention and the Phase 100 verdict could silently regress.
-        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-29)
+         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-29)
         run: python3 linter-scripts/check-memo-retrospective-headings.py
+
+      - name: Self-test §27 inventory parity triangle (Phase 112)
+        # Phase 112: locks AC-31-31 (Phase 109 multi-file enumeration parity
+        # contract) mechanically for the §27 inventory triangle. The §27
+        # inventory enumeration is restated across 3 sites — (1) the canonical
+        # tables in spec/27-spec-toolchain/00-overview.md, (2) the on-disk
+        # filesystem of linter-scripts/ + .github/workflows/, (3) the
+        # Phase 107 orphan ledger memo — and AC-31-31 therefore mandates a
+        # parity self-test. This step asserts: every executable artifact on
+        # disk is tracked either in the §27 overview table OR in the Phase 107
+        # orphan ledger (INV-01); every code path the overview claims to
+        # spec exists on disk (INV-02 / FAIL-02); the orphan ledger is not
+        # stale; and the structural anchors (Inventory H2, Normative
+        # Contract block, AC-31-31/INV-01 cross-reference) are intact.
+        # Without this gate, INV-01/INV-02 were enforced only by reviewer
+        # attention — exactly the drift Phase 107 documented when it found
+        # 8 orphans had silently accumulated.
+        # Spec: spec/27-spec-toolchain/00-overview.md (Inventory + Normative Contract)
+        # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-31)
+        run: bash linter-scripts/test/test-overview-inventory-parity.sh
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at

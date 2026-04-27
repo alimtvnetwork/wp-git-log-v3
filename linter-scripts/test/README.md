@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-27 (Phase 103)
+**Last updated:** 2026-04-27 (Phase 112)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -44,20 +44,22 @@ PR so any regression fails the build at the assertion level (with
 | 3 | [`test-audit-deterministic-stability.sh`](./test-audit-deterministic-stability.sh) | 95 | `audit-spec-vs-code-v2.py` produces byte-identical `raw-results.json` across two runs under `AUDIT_DETERMINISTIC=1` | 7 | ~12 s | [AC-31-26](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 4 | [`test-readme-inventory.sh`](./test-readme-inventory.sh) | 102 | This README's inventory table is in sync with the actual `test-*.sh` files on disk; required structural sections present; every script linked + executable | 14+ | ~1 s | [AC-31-27](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 | 5 | [`test-qa-baseline-footer.sh`](./test-qa-baseline-footer.sh) | 103 | The audit script's "QA tooling baseline" footer (in `00-index.md` + `EXECUTIVE-SUMMARY.md`) is consistent with `RUBRIC_VERSION` constant + `.github/workflows/spec-health.yml` step list — declared gate count = footer rows = workflow gate steps | 11+ | ~3 s | [AC-31-28](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
+| 6 | [`test-overview-inventory-parity.sh`](./test-overview-inventory-parity.sh) | 112 | The §27 inventory triangle: every executable artifact under `linter-scripts/` + `.github/workflows/` is tracked in either `spec/27-spec-toolchain/00-overview.md` (specced) OR the Phase 107 orphan ledger memo (acknowledged); every overview-listed code path exists on disk; structural anchors intact | 6+ | ~1 s | [AC-31-31](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) |
 
-**Totals:** 5 scripts · 52+ assertions · ~25 s of CI time.
+**Totals:** 6 scripts · 58+ assertions · ~26 s of CI time.
 
-All five scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
+All six scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
 as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
 `Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`,
-`Self-test README inventory parity (Phase 102)`, `Self-test QA baseline footer (Phase 103)`).
+`Self-test README inventory parity (Phase 102)`, `Self-test QA baseline footer (Phase 103)`,
+`Self-test §27 inventory parity triangle (Phase 112)`).
 
 ---
 
 ## Coverage triad: what each test catches
 
-The five tests together form a **complete blind-spot coverage matrix** for
-the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–5):
+The six tests together form a **complete blind-spot coverage matrix** for
+the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–6):
 
 | Blind spot | Why production gate misses it | Self-test catching it |
 |---|---|---|
@@ -66,13 +68,15 @@ the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–5):
 | Non-determinism introduced into the rubric | Production gate runs only once per build | **Phase 95** (sha256 byte-identity across two runs) |
 | Self-test added/removed without updating this README | Reviewer-attention only; AC-31-27 was unenforced | **Phase 102** (filesystem ↔ inventory parity, structural sections, executable bit) |
 | QA-baseline footer drifting from `RUBRIC_VERSION` / workflow / declared count | Production audit gate still passes while docs lie; AC-31-28 was unenforced | **Phase 103** (4-way enumeration consistency: script constant ↔ 00-index ↔ EXECUTIVE-SUMMARY ↔ workflow steps) |
+| New script silently added to `linter-scripts/` or `.github/workflows/` without a §27 spec row OR an entry in the Phase 107 orphan ledger | `check-tree-health.cjs` allow-list inference is permissive (Phase 107 found 8 silent orphans); AC-31-31 / INV-01 / INV-02 were unenforced | **Phase 112** (3-way triangle: §27 overview ↔ filesystem ↔ Phase 107 orphan memo) |
 
-If you add a sixth contract guarantee to the audit script (or any other
-linter), add a sixth self-test here following the same template — see
+If you add a seventh contract guarantee to the audit script (or any other
+linter), add a seventh self-test here following the same template — see
 **"Adding a new self-test"** below. The Phase 102 gate will fail on your
 PR if you forget to add the row; the Phase 103 gate will fail if you wire
 the new step into the workflow without bumping the audit footer's
-gate-count enumeration in lockstep.
+gate-count enumeration in lockstep; the Phase 112 gate will fail if you
+add a script without updating §27 §00-overview or the Phase 107 ledger.
 
 ---
 
@@ -102,9 +106,10 @@ bash linter-scripts/test/test-audit-explain-contract.sh
 bash linter-scripts/test/test-audit-deterministic-stability.sh
 bash linter-scripts/test/test-readme-inventory.sh
 bash linter-scripts/test/test-qa-baseline-footer.sh
+bash linter-scripts/test/test-overview-inventory-parity.sh
 ```
 
-Run all five sequentially:
+Run all six sequentially:
 
 ```bash
 for t in linter-scripts/test/test-*.sh; do
@@ -202,4 +207,6 @@ Then:
   [Phase 97](../../.lovable/memory/audit/v2-deterministic/phase-97-mermaid-syntax-gate.md) ·
   [Phase 98](../../.lovable/memory/audit/v2-deterministic/phase-98-test-readme.md) ·
   [Phase 102](../../.lovable/memory/audit/v2-deterministic/phase-102-readme-inventory-test.md) ·
-  [Phase 103](../../.lovable/memory/audit/v2-deterministic/phase-103-qa-baseline-footer-test.md)
+  [Phase 103](../../.lovable/memory/audit/v2-deterministic/phase-103-qa-baseline-footer-test.md) ·
+  [Phase 107](../../.lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md) ·
+  [Phase 112](../../.lovable/memory/audit/v2-deterministic/phase-112-overview-inventory-parity-test.md)
