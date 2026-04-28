@@ -1,10 +1,30 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.50.0
+**Version:** 2.51.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.51.0 — 2026-04-28 — Phase P21: H10 first stamp-adoption sweep — `02-coding-guidelines/*` forward-drift cluster
+- **Action**: First field application of the Phase P20 stamp pattern. Swept 10 forward-drift modules in `spec/02-coding-guidelines/*` (banner version < §98 latest release): bumped each `00-overview.md` `**Version:**` banner to match its `98-changelog.md` latest release, dropped a `<!-- h10-verified-phase: 21 -->` stamp under the banner, and prepended a `**P21 sync** ...` audit-trail bullet under the existing latest §98 release row (no new §98 release — content unchanged, only the banner version field caught up).
+- **Modules swept** (10 / 23 cluster drifters; the other 13 are reverse-drift cases — `§00 > §98 latest` — which require per-module audit of what real change justified the §00 bump, deferred to a follow-up phase per drifter):
+  - `spec/02-coding-guidelines/01-cross-language` (3.2.0 → 4.1.0)
+  - `spec/02-coding-guidelines/02-typescript` (3.3.0 → 4.1.0)
+  - `spec/02-coding-guidelines/03-golang` (3.2.0 → 4.1.0)
+  - `spec/02-coding-guidelines/04-php` (3.3.0 → 4.2.0)
+  - `spec/02-coding-guidelines/05-rust` (3.2.0 → 4.0.0)
+  - `spec/02-coding-guidelines/06-ai-optimization` (3.2.0 → 4.0.0)
+  - `spec/02-coding-guidelines/06-cicd-integration` (1.0.0 → 4.0.0)
+  - `spec/02-coding-guidelines/07-csharp` (3.2.0 → 4.1.0)
+  - `spec/02-coding-guidelines/11-security` (2.2.0 → 2.3.0)
+  - `spec/02-coding-guidelines/01-cross-language/16-static-analysis` (3.2.0 → 4.1.0)
+- **Why classify forward vs reverse drift**: forward drift (§00 < §98) is mechanically safe — the §98 audit trail already exists, the banner just lagged behind. Reverse drift (§00 > §98) means someone bumped §00 without a §98 row, which is the inverse failure mode and needs a real `## X.Y.Z — date — Phase NNN` row reconstructing what changed; that is per-module forensic work, not bulk sweep work. **P21 lesson codified**: H10 stamp-adoption sweeps MUST split forward/reverse drift before touching files; only forward drift is bulk-safe.
+- **Sweep mechanics** (single deterministic Python pass, runtime ≪ 1s): regex-replace `**Version:** X.Y.Z` → `**Version:** A.B.C`; idempotent stamp insertion (skip if `<!-- h10-verified-phase: NN -->` already present); idempotent §98 bullet insertion (skip if `P21 sync` already present in the release block). The sweep can be re-run safely without producing duplicates.
+- **Gate impact** (validates the P20 design): `matches=17 → 27` (+10); `mismatches=57 → 47` (-10); `stamped=0 → 10`; `stamped_failed=0` (gate confirms all 10 stamps are valid — banner now equals §98 latest, so future drift on these 10 files will FAIL the gate even in default advisory mode = per-file strict locked in for the cluster). Adoption progress: **10 / 74 modules opted into strict enforcement** in a single phase, no CI gate change required.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption of the existing P20 mechanism. §27's role here is purely audit-trail (§98 row + Core memory entry); the sweep itself touches only `spec/02-coding-guidelines/*`.
+- **Verified**: `python3 linter-scripts/check-version-parity.py` 87 scanned / 74 eligible / **27 matches** / 47 mismatches / **stamped=10** / stamped_failed=0 / exit 0 ✅; `node linter-scripts/check-lockstep.cjs` 87/87 / 0 findings ✅; `node linter-scripts/check-tree-health.cjs --strict` 168/168 ✅ (all 10 touched modules retained full tree-health marks); `bash linter-scripts/test/test-overview-inventory-parity.sh` 6/6 ✅; `bash linter-scripts/test/test-check-version-parity.sh` 13/13 ✅.
+- **Closes P20 task #1 first batch.** Remaining: 47 forward+reverse drifters tree-wide; ~14 forward-drift candidates still mechanically sweepable (next `02-coding-guidelines` reverse-drift batch needs §98 reconstruction work; other top-level clusters `03-error-manage/*`, `12-cicd-pipeline-workflows/*`, etc. await their own forward/reverse classification).
 
 ### 2.50.0 — 2026-04-28 — Phase P20: H10 per-file `<!-- h10-verified-phase: NNN -->` opt-in stamp pattern
 - **Action**: Extended `linter-scripts/check-version-parity.py` (Phase P15 / H10 advisory gate) with a per-file opt-in stamp under `00-overview.md` mirroring H1 / `check-99-summary-freshness.py`'s `<!-- verified-phase: NNN -->` pattern. Once a module catches its §00 banner up to its §98 latest release, an author adds `<!-- h10-verified-phase: 200 -->` inside the first 40 lines of `00-overview.md`. Any future drift on that file then fails the gate **even in default tree-wide-advisory mode** (per-file strict promotion).
