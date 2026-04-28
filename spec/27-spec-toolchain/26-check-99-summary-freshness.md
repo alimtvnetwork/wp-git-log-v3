@@ -131,6 +131,14 @@ unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 
 ## Changelog
 
+### 1.1.0 — 2026-04-28 — Phase H2
+- **Widened tracked-heading set** from `## Summary` only to also accept inventory-rubric headings (`## Module Health`, `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`, `## Document Inventory`, `## Modules`). Previously-exempt 35 inventory-rubric §99 files are now stampable.
+- **Excluded `spec/_archive/**`** from scan — archived modules are frozen.
+- **Multi-block scan**: stamp under ANY tracked heading is accepted (highest stamp wins). Previously only the FIRST tracked heading was checked, which broke files where File Inventory appeared before Summary.
+- Added 3 new self-test cases (T8 stamp under Module Health, T9 stamp under File Inventory, T10 _archive/ exclusion).
+- Adoption sweep: 46/89 → **75/87** stamped (~86%); remaining 12 are audit-log-style §99 files with no inventory or summary heading (structurally exempt — no claims to drift).
+- Acceptance criteria additions: AC-26-06 (inventory-rubric headings accepted), AC-26-07 (`_archive/` excluded), AC-26-08 (multi-block scan).
+
 ### 1.0.0 — 2026-04-28 — Phase H1
 - Initial version. Advisory-mode gate with opt-in `<!-- verified-phase: NNN -->` stamps.
 - Default `--max-age = 20` (≈ 2-3 weeks of typical phase cadence).
