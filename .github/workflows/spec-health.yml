@@ -86,11 +86,15 @@ jobs:
         # mechanically; protects against future drift.
         run: python3 linter-scripts/check-spec-folder-refs.py
 
-      - name: §99 Summary freshness gate (Phase H1)
-        # Phase H1: codifies Phase 136/139 stale-prose lesson. Advisory by default
-        # (89/89 §99 files unstamped at H1 close → exit 0). Becomes strict per-file
-        # as authors opt-in via `<!-- verified-phase: NNN -->` stamp under ## Summary.
-        run: python3 linter-scripts/check-99-summary-freshness.py
+      - name: §99 Summary freshness gate (Phase H1 / H8 / H9)
+        # Phase H1: codifies Phase 136/139 stale-prose lesson. Per-file advisory
+        # → strict via `<!-- verified-phase: NNN -->` stamp under tracked heading.
+        # Phase H8: 87/87 declared posture (81 stamped + 6 exempt). Exempt marker
+        # `<!-- freshness-exempt: <reason> -->` whole-file.
+        # Phase H9: --strict-position locks the H8 stamp-position precedent —
+        # stamps MUST live INSIDE a tracked-heading body, not on the line above.
+        # Real tree currently 0 misplaced findings → safe to flip strict.
+        run: python3 linter-scripts/check-99-summary-freshness.py --strict-position
 
 
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
