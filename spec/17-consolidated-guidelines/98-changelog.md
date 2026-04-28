@@ -1,7 +1,7 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 2.5.0
-**Updated:** 2026-04-27
+**Version:** 3.3.0
+**Updated:** 2026-04-28
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
@@ -16,6 +16,16 @@
 ---
 
 ## Releases
+
+### 3.3.0 — 2026-04-28 (Phase P25 — H10 reverse-drift dual-stream alignment)
+
+- **Changed** Aligned §98 changelog version stream with §00 banner version stream. Prior to this release, §98 tracked its own minor releases (1.0.0 → 2.5.0) while §00 banner was bumped independently per §98 internal notes (§98 v2.4.0 explicitly recorded "Bumped overview banner v3.2.0 → v3.3.0" while §98 itself stayed at 2.4.0). This decoupled-stream pattern made `check-version-parity.py` (P15/H10) flag the module as reverse-drift even though every §00 bump was internally documented inside §98 release rows.
+- **Versioning rule going forward**: §98 latest release version = §00 banner version. When §00 banner bumps, §98 gets a new release row at the same version. The two streams are now locked together (matches the convention used by every other reconciled module).
+- **No content change to module rules**, only changelog versioning hygiene. The §98 release rows 1.0.0 → 2.5.0 are preserved verbatim for audit-trail continuity; readers should interpret them as the historical "changelog-file-version stream" that ran in parallel with the "module-version stream" §00 banner now ratified at 3.3.0.
+- **Added** `<!-- h10-verified-phase: 25 -->` stamp to `00-overview.md`, opting this file into strict H10 version-parity enforcement per `check-version-parity.py` AC-29-11/12/13.
+- **Banner sync**: §00 `Updated:` 2026-04-27 → 2026-04-28.
+
+---
 
 ### 2.5.0 — 2026-04-27 (Phase 130 — full-tree audit v5 publication)
 - **Added** [`33-full-tree-ai-audit-v5.md`](./33-full-tree-ai-audit-v5.md) — supersedes audit-v4 by mechanically re-validating all 4 critical findings against the current tree state. **3 of 4 resolved**: root slot collision (slot 22 alone now; app-issues moved to 25), broken-link count (32→0 via Phase 129 waiver semantics), legacy `21-git-logs/` folder (deleted entirely). Only finding #1 (session-persistence regression) remains open. Defers numeric re-score to R1 (real-AI re-audit, blocked on Lovable Cloud).
