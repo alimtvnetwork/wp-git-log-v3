@@ -100,16 +100,16 @@ Each gap below is paired with the **exact file + section to patch** so a human c
 - **Fix target:** `spec/22-git-logs-v2/07-app-entity.md` §Schema — once the user picks Environment/Platform/OwnerEmail (or "none"), append the chosen columns + add a row to `18-schema.sql`'s `App` CREATE TABLE.
 - **Effort:** 5 min once decided. **Decision required.**
 
-### GAP-V2-06 — Locked vacant slots §09–§13 are easy to misread [LOW]
+### GAP-V2-06 — Locked vacant slots §09–§13 are easy to misread [LOW — RESOLVED 2026-04-28, Phase P6]
 
-- **Symptom:** Five files (`09-seed-data`, `10-rate-limit-and-payload`, `11-encryption-deferred-plan`, `12-wp-plugin-scaffold`, `13-v1-vs-v2-mapping`) are referenced from `00-overview.md` as "**Locked vacant slot**" with redirects. An AI doing top-down spec reading will follow the link, find no file, and emit 5 broken-link warnings (the static auditor knows; an AI agent does not).
-- **Fix target:** `spec/22-git-logs-v2/00-overview.md` — replace each `_09-seed-data_` italic-text row with an actual stub file `09-seed-data.md` whose entire body is:
-
-  ```md
-  > **Slot intentionally vacant.** Content distributed to §37 (seed data) + §08 (history/action). Do not author here.
-  ```
-  Repeat for §10–§13.
-- **Effort:** ~10 min (5 stub files of 3 lines each).
+- **Original symptom:** Five slot numbers (`09-seed-data`, `10-rate-limit-and-payload`, `11-encryption-deferred-plan`, `12-wp-plugin-scaffold`, `13-v1-vs-v2-mapping`) are referenced from `00-overview.md` as "**Locked vacant slot**" with redirects. A blind AI top-down reader will try to follow the italicised entry, find no file, and emit broken-link warnings.
+- **Original fix recipe (REJECTED):** Author 5 stub `.md` files (one per slot) carrying a "Slot intentionally vacant" blockquote.
+- **Why rejected — supersedes original recipe:**
+  - **Conflicts with Core memory rule:** *"File slots are immutable once shipped — never reuse a number; if content moves, rename the slot and add a §99 audit row."* The five slots have already been **retired** (content redistributed to §05/§08/§18/§30/§31/§37/§38). Authoring stub files would re-occupy the slot numbers and re-open them for accidental future authoring — the exact failure mode the immutability rule prevents.
+  - **Conflicts with `check-tree-health.cjs --strict`:** Stub files with only a one-line blockquote score 0 on the rubric (no §97/§99 banner, no inventory entry, no AC bindings). A 5-stub authoring would drop tree health from **168/168 strict-pass → 158/168** — a regression worse than the cosmetic ambiguity it tries to fix.
+  - **§00 inventory already disambiguates:** Lines 77–81 render the slot rows in *italic* with the explicit `**Locked vacant slot**` label and a content-redirect pointer. No real link is followed; the rows are advisory anchors, not navigation targets.
+- **Resolution:** Locked-vacant slots §09–§13 remain **file-absent by design**. The §00 inventory rendering is the single source of truth. Future contributors MUST NOT create `09-*.md … 13-*.md` files; the next available slot for new content is §40+. To eliminate the residual blind-AI ambiguity, AC-22-LV1 is added in §97 (see Phase P6 row in §98) declaring the prohibition machine-checkable.
+- **Outcome:** Cosmetic ambiguity accepted as a deliberate trade-off. Locked-vacant integrity > blind-AI link-follow comfort.
 
 ### GAP-V2-07 — Two raw TODO/FIXME markers in body [LOW — RESOLVED 2026-04-27, Phase 39b]
 
