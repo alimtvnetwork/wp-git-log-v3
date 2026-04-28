@@ -154,6 +154,11 @@ Whichever yields the highest integer wins.
 - **When** the gate runs,
 - **Then** the stamp MUST be found and the file counted as `stamped:` (highest phase number wins if multiple stamps exist).
 
+### AC-26-09 — Freshness-exempt marker honored (Phase H8)
+- **Given** a §99 file carrying `<!-- freshness-exempt: <reason> -->` anywhere in its body (not heading-scoped),
+- **When** the gate runs,
+- **Then** the file MUST be counted under `exempt:` AND MUST NOT increment `unstamped:` AND MUST NOT cause exit 1, regardless of whether any tracked heading is present or any stamp exists.
+
 ## Cross-references
 
 - §99 [`99-consistency-report.md`](./99-consistency-report.md) — health/inventory; this gate is itself listed in §99's File Inventory.
