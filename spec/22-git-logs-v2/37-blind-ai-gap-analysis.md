@@ -109,11 +109,11 @@ Each gap below is paired with the **exact file + section to patch** so a human c
 - **Resolution:** Phase P5 (§98 row 3.9.4) chose the inverse of the original recipe — rather than renaming the live `16-seed-data.md`, the smaller superseded `16-test-plan.md` stub was relocated to `38-test-plan-superseded.md` (banner v2.7.0 → v2.8.0, gained "History of slot moves" subsection). Live §16 content unchanged. 5 cross-folder referrers updated lockstep (§00 inventory, §99, `spec/spec-index.md`, `spec/dashboard-data.json`, `spec/28-universal-ci-cli/06`). `grep -rn "16-test-plan"` returns 7 hits, all intentional historical narrative; zero active links.
 - **Outcome:** slot-16 collision eliminated; immutability invariant restored.
 
-### GAP-V2-09 — No outbound CI client contract [MEDIUM — now closed]
+### GAP-V2-09 — No outbound CI client contract [MEDIUM — RESOLVED 2026-04-28, Phase P17]
 
-- **Symptom:** v2 specifies the *server* but not the matching *client*. Every team integrating CI/CD has to invent its own poster.
-- **Fix target:** **Already addressed** — `spec/28-universal-ci-cli/` now provides the canonical client contract (28 ACs, OpenAPI 3.1, JSON Schema). Cross-link from `spec/22-git-logs-v2/00-overview.md` Document Inventory.
-- **Effort:** ~2 min (one new row).
+- **Original symptom:** v2 specifies the *server* but not the matching *client*. Every team integrating CI/CD has to invent its own poster.
+- **Resolution:** `spec/28-universal-ci-cli/` already provides the canonical client contract (28 ACs, OpenAPI 3.1, JSON Schema). Phase P17 (§98 row 3.9.10) added the cross-link from §00 v3.8.8 → v3.8.9 `## Cross-References` table ("Outbound CI client (Lane B / SSH) → `../28-universal-ci-cli/00-overview.md`") so a blind-AI reading §00 top-to-bottom now discovers the client poster without leaving folder 22's overview. §00 Document Inventory rows untouched (§28-universal-ci-cli is a sibling folder, not a §22 slot — local slot numbering remains immutable per Core memory rule).
+- **Outcome:** discoverability gap closed; ceiling now bounded only by GAP-V2-05 (user-decision on §07 App identity, closed-in-spirit by Phase 147 §07 locked decision 12).
 
 ### GAP-V2-10 — Rate limit + payload caps are not in §04 [LOW — RESOLVED 2026-04-28, Phase P4]
 
