@@ -28,9 +28,9 @@ All 37 numbered spec files in §27 reference an actual code artefact under the s
 
 | # | Code artefact | Phase added | Inventory entry | Status |
 |---|---|---|---|---|
-| O1 | `linter-scripts/check-mermaid-syntax.mjs` | Phase 97 | none | ❌ orphan — no slot, no §00 row, no `NN-check-mermaid-syntax.md` |
-| O2 | `linter-scripts/check-memo-retrospective-headings.py` | Phase 104 | none | ❌ orphan — no slot, no §00 row, no `NN-check-memo-retrospective-headings.md` |
-| O3 | `linter-scripts/deepen-consistency-reports.py` | unknown (predates this audit) | none | ❌ orphan — no slot, no §00 row |
+| O1 | `linter-scripts/check-mermaid-syntax.mjs` | Phase 97 | **§27 slot 18** | ✅ migrated (Phase 108-full, 2026-04-28 → [`spec/27-spec-toolchain/18-check-mermaid-syntax.md`](../../../spec/27-spec-toolchain/18-check-mermaid-syntax.md)) |
+| O2 | `linter-scripts/check-memo-retrospective-headings.py` | Phase 104 | **§27 slot 19** | ✅ migrated (Phase 108-full, 2026-04-28 → [`spec/27-spec-toolchain/19-check-memo-retrospective-headings.md`](../../../spec/27-spec-toolchain/19-check-memo-retrospective-headings.md)) |
+| O3 | `linter-scripts/deepen-consistency-reports.py` | Phase 21 | **§27 slot 25** | ✅ migrated (Phase 108-full, 2026-04-28 → [`spec/27-spec-toolchain/25-deepen-consistency-reports.md`](../../../spec/27-spec-toolchain/25-deepen-consistency-reports.md)) |
 | O4 | `linter-scripts/test/test-audit-cli-thresholds.sh` | Phase 91 | `linter-scripts/test/README.md` only | ⚠️ orphan-by-strict-reading |
 | O5 | `linter-scripts/test/test-audit-explain-contract.sh` | Phase 94 | `linter-scripts/test/README.md` only | ⚠️ orphan-by-strict-reading |
 | O6 | `linter-scripts/test/test-audit-deterministic-stability.sh` | Phase 95 | `linter-scripts/test/README.md` only | ⚠️ orphan-by-strict-reading |
