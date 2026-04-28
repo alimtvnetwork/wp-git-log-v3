@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.64.0
+**Version:** 2.65.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.65.0 — 2026-04-28 — Phase P42: slot-level format-contract AC survey for slots 60/62/63 — NO-OP confirmed
+- **Action**: Audited §27 slots **60** (`forbidden-strings.toml`), **62** (`spec-folder-refs.allowlist`), **63** (`readme-cross-links.md`) for the same survey-binding gap that P39 closed in slot 61 (line-keyed allowlist contract). Verified via fresh `grep -E ':[0-9]+:' linter-scripts/*.allowlist linter-scripts/*.toml` at 2026-04-28: only `spec-cross-links.allowlist` uses the `<relpath>:<line>:<target>` line-keyed shape. Slot 60 is regex-keyed, slot 62 is folder-name-keyed, slot 63 is URL-keyed in a two-column markdown table. The P35 fuzzy-match contract (±5 line tolerance + `--rewrite-allowlist` + `--strict-line-match` + matching `.sh` self-test) is **structurally inapplicable** to slots 60/62/63 — no line-number discriminator to drift.
+- **Outcome**: NO-OP. AC-61-04 already names this verification explicitly ("Phase P37's surface-survey verified this is the **SOLE line-keyed allowlist** tree-wide… confirmed by `grep -l ':[0-9]'`"). P42 re-ran the grep at the current date and confirms the claim still holds; the §99 audit row preserves the trail and re-stamps the SOLE-line-keyed claim with a fresh verification date.
+- **No spec slot AC change**: No defensive "P35 contract does not apply" AC was added to slots 60/62/63 — would add maintenance burden without protecting against a real failure mode (you cannot drift a line number that does not exist).
+- **No script change, no CI workflow change, no RUBRIC_VERSION bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline** — pure verification audit + §99 row + §98 release row + lockstep version bump.
+- **Verified**: 9 critical gates green via `bash linter-scripts/test/cluster-terminal-sweep.sh` (P40 runner). §00 v2.64.0→**v2.65.0**; §98 v2.64.0→**v2.65.0**; §99 v2.61.0→**v2.62.0**.
+- **P42 lesson codified**: P39's survey-binding rule applies ONLY when the survey result describes a **format-shape contract** transferable to a sibling slot. Future surveys MUST classify the result as one of (a) **transferable-contract** → bind via slot AC per P39; (b) **structural-NO-OP** → record verification + grep evidence + date-stamp the existing claim per P42; (c) **actionable-gap** → fix the gap. Defensive ACs are forbidden — they pollute the contract surface without protecting against a real failure mode.
 
 ### 2.64.0 — 2026-04-28 — Phase P39: bind P37 surface-survey lesson into slot 61 via AC-61-04
 - **Action**: Added AC-61-04 to `spec/27-spec-toolchain/61-spec-cross-links-allowlist.md` codifying the **format-author contract** for any future line-keyed waiver format: must inherit the P35 fuzzy-match drift-resistance pattern (default ±5 tolerance + `--rewrite-allowlist` flag + `--strict-line-match` flag + spec-slot ACs equivalent to §01 AC-01-05/06/07 + `.sh` self-test per F3 policy). Closes the gap between Phase P37's mem-index lesson (which established this file as the SOLE line-keyed allowlist tree-wide) and the slot-level spec — without this AC, a future contributor introducing a new `:line:` allowlist would have no spec-level signal that drift-resistance is mandatory and would re-discover the P34 CI-silent regression class the hard way.
