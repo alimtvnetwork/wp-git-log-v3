@@ -158,8 +158,13 @@ def main(argv: list[str] | None = None) -> int:
         if bv == lr:
             matches += 1
         else:
+            try:
+                mod_path = str(overview.parent.relative_to(ROOT))
+            except ValueError:
+                # --spec-root may point outside the repo (self-tests use a tmpdir).
+                mod_path = str(overview.parent)
             entry = {
-                "module": str(overview.parent.relative_to(ROOT)),
+                "module": mod_path,
                 "banner": bv,
                 "latest_release": lr,
                 "stamped": stamp,
