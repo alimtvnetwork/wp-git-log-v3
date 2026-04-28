@@ -6,6 +6,7 @@
 > **v3.0.0 update (Phase 16g):** §97 fully rewritten from 9 table-row criteria (with 02/03/04 already retired as locked gaps) to **20 module-specific Given/When/Then ACs** (AC-DG-01..AC-DG-20). New ACs codify ER parity with §22 (entities + FK cardinalities), auth validation order with `GL-*` reject codes, RBAC RolePermission-union resolution (never role name), header-comment contract for non-ER diagrams (`%% Diagram type:` + `%% What this answers:`), emoji-free + Mermaid-CLI rendering, JWT/RS256/JWKS forbidden tokens, 8-endpoint mindmap completeness, encryption v3 7-node derivation chain, slot 02/03/04 locked-gap immutability (per AC-SAG-04), `.mmd` ↔ `.svg` build-artifact lockstep, kebab-case ASCII node IDs, `GL-*` codes cross-validated against §22 §14 registry, `puppeteer.json` reproducibility, governance rule "§26 trails §22 — never leads", and self-application audit (AC-DG-20). Legacy AC-D-01..AC-D-11 preserved as AC-DG-LEGACY-01..11 at end of §97. Module-level tree-health: 100/100 (A+).
 
 ## File Inventory
+<!-- verified-phase: 147 -->
 
 | File | Present | Notes |
 |------|---------|-------|

@@ -96,6 +96,7 @@ above summarize only the audit-/validation-bearing milestones for `14-update/24-
 ---
 
 ## File Inventory
+<!-- verified-phase: 147 -->
 
 | File | Status |
 |------|--------|
