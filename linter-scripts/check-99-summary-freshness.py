@@ -113,6 +113,56 @@ def find_summary_stamp(text: str) -> int | None:
     return best
 
 
+def find_misplaced_stamps(text: str) -> list[tuple[int, str]]:
+    """Phase H9 (2026-04-28): detect stamps placed immediately BEFORE a tracked
+    heading rather than under it. Codifies the H8 stamp-position precedent —
+    5 files in H8 had `<!-- verified-phase: NNN -->` on a blank line above
+    `## Summary` and the heading-body scanner correctly rejected them.
+
+    Returns a list of (line_number, snippet) for each stamp that:
+      - Appears OUTSIDE any tracked-heading body, AND
+      - Is followed (within the next 3 non-empty lines) by a tracked heading
+        (suggesting authorial intent was "stamp this heading").
+
+    Stamps that appear inside blockquoted narrative (e.g. §27's Validation
+    History referencing past phases) are NOT flagged — they aren't adjacent
+    to a tracked heading and represent legitimate documentation.
+    """
+    findings: list[tuple[int, str]] = []
+    headings = list(TRACKED_HEADING_RE.finditer(text))
+    # Build set of (start, end) tracked-body slices for in-body check.
+    bodies: list[tuple[int, int]] = []
+    for i, h in enumerate(headings):
+        body_start = h.end()
+        body_end = headings[i + 1].start() if i + 1 < len(headings) else len(text)
+        body = text[body_start:body_end]
+        nh = re.search(r"^##+\s+\S", body, re.MULTILINE)
+        if nh:
+            body_end = body_start + nh.start()
+        bodies.append((body_start, body_end))
+
+    def in_any_body(pos: int) -> bool:
+        return any(s <= pos < e for s, e in bodies)
+
+    lines = text.split("\n")
+    for s in STAMP_RE.finditer(text):
+        if in_any_body(s.start()):
+            continue
+        # Find line number of stamp.
+        line_no = text[:s.start()].count("\n") + 1
+        # Look at next 3 non-empty lines: is one of them a tracked heading?
+        for j in range(line_no, min(line_no + 3, len(lines))):
+            ln = lines[j].strip()
+            if not ln:
+                continue
+            if TRACKED_HEADING_RE.match(lines[j]):
+                findings.append((line_no, lines[line_no - 1].strip()))
+                break
+            # First non-empty non-heading line — not adjacent to tracked heading.
+            break
+    return findings
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report-only", action="store_true",
