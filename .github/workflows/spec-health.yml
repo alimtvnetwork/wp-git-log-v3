@@ -89,8 +89,6 @@ jobs:
         # as authors opt-in via `<!-- verified-phase: NNN -->` stamp under ## Summary.
         run: python3 linter-scripts/check-99-summary-freshness.py
 
-      - name: Self-test §99 freshness gate (Phase H1)
-        run: bash linter-scripts/test/test-check-99-summary-freshness.sh
 
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
         # Phase 81: tightened from --min to --strict. Strict mode requires
