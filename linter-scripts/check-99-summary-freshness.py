@@ -135,10 +135,14 @@ def main() -> int:
 
     stamped = 0
     unstamped = 0
+    exempt = 0
     stale: list[tuple[Path, int, int]] = []
 
     for f in files:
         text = f.read_text(encoding="utf-8", errors="ignore")
+        if EXEMPT_RE.search(text):
+            exempt += 1
+            continue
         stamp = find_summary_stamp(text)
         if stamp is None:
             unstamped += 1
@@ -148,9 +152,11 @@ def main() -> int:
         if delta > args.max_age:
             stale.append((f, stamp, delta))
 
-    print(f"§99 files scanned: {len(files)}; stamped: {stamped}; unstamped: {unstamped}")
+    print(f"§99 files scanned: {len(files)}; stamped: {stamped}; exempt: {exempt}; unstamped: {unstamped}")
     if unstamped:
         print(f"  (info) {unstamped} §99 files have no `<!-- verified-phase: NNN -->` stamp — advisory only.")
+    if exempt:
+        print(f"  (info) {exempt} §99 files carry `<!-- freshness-exempt: ... -->` and are skipped.")
 
     if stale:
         print()
