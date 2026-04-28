@@ -2072,6 +2072,7 @@
     "27-spec-toolchain/61-spec-cross-links-allowlist.md#AC-61-01",
     "27-spec-toolchain/61-spec-cross-links-allowlist.md#AC-61-02",
     "27-spec-toolchain/61-spec-cross-links-allowlist.md#AC-61-03",
+    "27-spec-toolchain/61-spec-cross-links-allowlist.md#AC-61-04",
     "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-01",
     "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-05",
     "27-spec-toolchain/63-readme-cross-links-md.md#AC-63-01",
@@ -2193,8 +2194,8 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1257,
-    "ac_total": 1347,
+    "ac_drifted": 1258,
+    "ac_total": 1348,
     "ac_traced": 90,
     "code_orphan": 29,
     "code_referenced": 25,
