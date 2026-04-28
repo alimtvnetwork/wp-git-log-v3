@@ -169,6 +169,9 @@ def main() -> int:
                         help="Never exit 1; print findings and exit 0.")
     parser.add_argument("--max-age", type=int, default=20,
                         help="Max phase delta before a stamp is stale (default: 20).")
+    parser.add_argument("--strict-position", action="store_true",
+                        help="Phase H9: also fail if any stamp appears immediately "
+                             "BEFORE a tracked heading rather than under it.")
     args = parser.parse_args()
 
     current = detect_current_phase()
@@ -187,6 +190,7 @@ def main() -> int:
     unstamped = 0
     exempt = 0
     stale: list[tuple[Path, int, int]] = []
+    misplaced: list[tuple[Path, int, str]] = []
 
     for f in files:
         text = f.read_text(encoding="utf-8", errors="ignore")
@@ -196,11 +200,16 @@ def main() -> int:
         stamp = find_summary_stamp(text)
         if stamp is None:
             unstamped += 1
-            continue
-        stamped += 1
-        delta = current - stamp
-        if delta > args.max_age:
-            stale.append((f, stamp, delta))
+        else:
+            stamped += 1
+            delta = current - stamp
+            if delta > args.max_age:
+                stale.append((f, stamp, delta))
+        # H9: position check runs on every non-exempt file (including stamped
+        # ones — a misplaced ghost stamp can hide near a tracked heading even
+        # when a correctly-placed stamp also exists in another body).
+        for line_no, snippet in find_misplaced_stamps(text):
+            misplaced.append((f, line_no, snippet))
 
     print(f"§99 files scanned: {len(files)}; stamped: {stamped}; exempt: {exempt}; unstamped: {unstamped}")
     if unstamped:
@@ -208,12 +217,31 @@ def main() -> int:
     if exempt:
         print(f"  (info) {exempt} §99 files carry `<!-- freshness-exempt: ... -->` and are skipped.")
 
+    failed = False
+
     if stale:
         print()
         print(f"❌ {len(stale)} §99 file(s) carry a stale Summary stamp (>{args.max_age} phases behind):")
         for f, stamp, delta in stale:
             rel = f.relative_to(REPO)
             print(f"  - {rel}  [stamp: Phase {stamp}, delta: {delta}]")
+        failed = True
+
+    if misplaced:
+        print()
+        label = "❌" if args.strict_position else "⚠️ "
+        mode = "strict-position" if args.strict_position else "advisory"
+        print(f"{label} {len(misplaced)} stamp(s) placed immediately BEFORE a tracked heading "
+              f"rather than under it ({mode}):")
+        for f, line_no, snippet in misplaced:
+            rel = f.relative_to(REPO)
+            print(f"  - {rel}:{line_no}  {snippet}")
+        print(f"  (Phase H8 precedent: stamps MUST live INSIDE a tracked-heading body. "
+              f"Move the stamp to the line immediately AFTER the heading.)")
+        if args.strict_position:
+            failed = True
+
+    if failed:
         if args.report_only:
             print()
             print("  --report-only: not failing.")
@@ -222,6 +250,10 @@ def main() -> int:
 
     print("✅ All stamped §99 Summary blocks are within freshness budget.")
     return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
 
 
 if __name__ == "__main__":
