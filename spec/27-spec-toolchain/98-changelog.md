@@ -15,7 +15,7 @@
 - **Verified**: validator default mode 87 scanned / 74 eligible / 15 matches / 59 mismatches / exit 0 ✅; `--strict` exit 1 ✅; `--strict --report-only` exit 0 ✅; `--json` schema valid ✅; self-test 10/10 ✅; lockstep 87/87 / 0 ✅; tree-health 168/168 strict ✅; §27-inventory 6/6 ✅ (slot 29 now specced).
 - **Closes Phase P15** definitively. Memo: implicit in this row + `mem://specs/git-logs.md` queued-decisions trail update at session close.
 
-
+### 2.48.0 — 2026-04-28 — Phase F4: bind Phase 144 `.py` regression test to AC-62-05
 - **Action**: Closed the spec-vs-code gap discovered while auditing `linter-scripts/test/` coverage. The Phase 144 sanctioned `.py` regression test `linter-scripts/test/test-check-spec-folder-refs.py` existed on disk and was acknowledged in `linter-scripts/test/README.md` "Adjacent `.py` tests" subsection, but **was unreferenced from any §27 slot** — a contributor reading the §27 spec alone could not discover that AC-62-04 has a regression-test lock.
 - **Slot 62 (`62-spec-folder-refs-allowlist.md`) v1.2.0 → v1.3.0**: added **AC-62-05** codifying the test's four-case contract (plain-entry routing, AC-62-04 inline-comment strip, whitespace-then-comment edge case, `[doc-only]` bucket isolation); extended AC-62-04's `**Verifies:**` clause with a back-reference to the test + AC-62-05; added the test to the slot's `## Cross-references` block.
 - **Why no §27 slot for the test itself**: `linter-scripts/test/` is excluded by design from `test-overview-inventory-parity.sh`'s scope rule (production scripts only), and AC-62-05 explicitly documents this so future contributors don't try to "fix" it by carving a new slot. F3 sanctioned-exception policy (`mem://index.md` Core test-file rule) governs.
