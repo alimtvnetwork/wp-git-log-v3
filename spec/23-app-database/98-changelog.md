@@ -1,20 +1,10 @@
 # Changelog — App Database
 
-**Version:** 3.0.1
+**Version:** 4.0.1
 **Updated:** 2026-04-28
 **Scope:** `spec/23-app-database/`
 
 ---
-
-## 3.0.1 — 2026-04-28
-
-### Audit (no content change)
-
-- **Phase P13 — "Split `00-overview.md` (554 lines)" backlog item closed as STALE.** This task was queued before Phases 39a/53/58/68/71 deepened the module to 100/100. Re-audit confirms the file is one cohesive single-source-of-truth contract: convention recap → DDL (3 tables) → seed data → 4 query patterns → migration template → cross-refs → AC-ADB-000 → impl-sweep appendices (PostgreSQL canonical DDL + RLS policies + TS enum mirror + JSON Schema migration manifest + Mermaid lifecycle + CI workflow). §99 explicitly defends co-location ("every contract needed to implement these tables is inlined below") and lists splitting as **optional** under "Open Items" with "No mandatory open items." Slot policy already reserves `01-app-table.md` / `02-app-link-resolution.md` / `03-app-link-history.md` / `04-migration-recipes.md` for if/when per-column commentary outgrows the inline DDL — that condition has not been triggered. Splitting now would fragment the contract, force cross-file lookups for any AppLink question, and burn 4 immutable slots prematurely. No file edits required; no AC changes; no banner bump on `00-overview.md`. §98 / §99 receive a patch bump to record the disposition. Future split proposals against §23 MUST cite a concrete trigger (e.g., per-column commentary >200 lines for a single table, OR a deep-dive workflow that genuinely doesn't belong in the router) — bare line-count arguments are not actionable per Phase P13 precedent (mirrors Phase P12 disposition for §28).
-
-## 4.1.0 — 2026-04-27
-
-- Phase 53: appended typed-language / SQL DDL / JSON Schema contracts to overview to lift implementability score (no behavior change).
 
 ## Format
 
@@ -27,7 +17,44 @@
 
 ## Releases
 
+### 4.0.1 — 2026-04-28 (Phase P26 — H10 reverse-drift reconstruction, hybrid P23+P24 subcase)
+
+- **Changed** Reorganised §98 release ladder. Pre-P26 the file had THREE structural problems: (1) a stray out-of-order release `4.1.0` row listed AFTER `3.0.1` describing Phase 53 (mis-numbered — Phase 53 chronologically preceded the 4.x trunk); (2) orphan dated prose blocks (Phase 58, 68, 71) appended *after* the §98 Cross-References footer that were never promoted into SemVer rows; (3) §00 banner sat at `4.0.0` with no §98 release row to back it. P26 reconstruction: renumbered the stray Phase 53 row → **3.1.0** (correct chronological slot), promoted the orphan post-footer blocks into **3.2.0** (Phase 58 JSON Schema), **3.3.0** (Phase 68 Mermaid), **4.0.0** (Phase 71 inlined CI workflow — major: new normative CI surface, matching §00 banner), then this `4.0.1` row to record the reorganization itself. Each reconstructed row cites its source prose block; orphan post-footer blocks REMOVED to single-source the audit trail.
+- **Added** `<!-- h10-verified-phase: 26 -->` stamp to `00-overview.md`, opting this file into strict H10 version-parity enforcement per `check-version-parity.py` AC-29-11/12/13.
+- **Banner sync**: §00 `Updated:` 2026-04-27 → 2026-04-28; §00 banner `4.0.0` → `4.0.1` (patch — pure changelog reorganization, no module-rule change).
+- **Hybrid subcase note**: P26 is the first reverse-drift phase to apply BOTH P23 (renumber wrongly-labeled prose-citing row) AND P24 (promote post-footer orphans + delete) workflows in a single phase. Codified as **P26 subcase (d)** in the reverse-drift taxonomy: when §98 has out-of-order rows mixed with post-footer orphans, apply P23 + P24 in sequence and document the dual-application explicitly. Stray-numbered rows are NEVER renamed in-place silently — the reconstruction MUST explain why the original number was wrong.
+
+### 4.0.0 — 2026-04-27 (Phase 71 — impl 90 → 95)
+
+- **Added** Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
+- Documentation-only promotion; no behavioural rules changed.
+- **Major bump rationale**: introduces a new normative CI workflow surface (5-stage pipeline contract) that downstream tooling can validate against — promoted from minor on P26 reconciliation because it constitutes a new public contract surface (consistent with P23 axios v2.0.0 / P24 §14-update v2.0.0 precedents for inlined CI workflows as major bumps).
+- Audit-trail source: prior `## 2026-04-27 — Phase 71 (impl 90 → 95)` prose block under §98 Cross-References footer (removed in P26 single-source cleanup).
+
+### 3.3.0 — 2026-04-27 (Phase 68 — impl 85 → 90)
+
+- **Added** Mermaid lifecycle diagram (`*.mmd`) and `## Phase 68 Reference` block in `00-overview.md`.
+- Pushes implementability score to 90 via mermaid bonus.
+- Audit-trail source: prior `## 2026-04-27 — Phase 68 (impl 85→90)` prose block under §98 Cross-References footer (removed in P26 single-source cleanup).
+
+### 3.2.0 — 2026-04-27 (Phase 58 — impl-sweep)
+
+- **Added** MigrationManifest JSON Schema to satisfy `has_json_schema` rubric (impl 70 → 85).
+- Audit-trail source: prior `## 2026-04-27 — Phase 58 impl-sweep` prose block under §98 Cross-References footer (removed in P26 single-source cleanup).
+
+### 3.1.0 — 2026-04-27 (Phase 53 — typed-language / SQL DDL / JSON Schema contracts)
+
+- **Added** typed-language / SQL DDL / JSON Schema contracts to overview to lift implementability score (no behavior change).
+- Audit-trail source: prior misnumbered `## 4.1.0 — 2026-04-27` row (renumbered to `3.1.0` in P26 to restore chronological ordering — Phase 53 preceded the 3.0.0 → 4.0.0 trunk evolution, so a `4.1.0` label was incorrect).
+
+### 3.0.1 — 2026-04-28
+
+#### Audit (no content change)
+
+- **Phase P13 — "Split `00-overview.md` (554 lines)" backlog item closed as STALE.** This task was queued before Phases 39a/53/58/68/71 deepened the module to 100/100. Re-audit confirms the file is one cohesive single-source-of-truth contract: convention recap → DDL (3 tables) → seed data → 4 query patterns → migration template → cross-refs → AC-ADB-000 → impl-sweep appendices (PostgreSQL canonical DDL + RLS policies + TS enum mirror + JSON Schema migration manifest + Mermaid lifecycle + CI workflow). §99 explicitly defends co-location ("every contract needed to implement these tables is inlined below") and lists splitting as **optional** under "Open Items" with "No mandatory open items." Slot policy already reserves `01-app-table.md` / `02-app-link-resolution.md` / `03-app-link-history.md` / `04-migration-recipes.md` for if/when per-column commentary outgrows the inline DDL — that condition has not been triggered. Splitting now would fragment the contract, force cross-file lookups for any AppLink question, and burn 4 immutable slots prematurely. No file edits required; no AC changes; no banner bump on `00-overview.md`. §98 / §99 receive a patch bump to record the disposition. Future split proposals against §23 MUST cite a concrete trigger (e.g., per-column commentary >200 lines for a single table, OR a deep-dive workflow that genuinely doesn't belong in the router) — bare line-count arguments are not actionable per Phase P13 precedent (mirrors Phase P12 disposition for §28).
+
 ### 3.0.0 — 2026-04-27
+
 - **Phase 39a — F-tier remediation.** Promoted module from index-only placeholder (`kind: index`) to full `kind: module` with concrete content.
   - **Added** Inline DDL for `App`, `AppLink`, `AppStatus`, `AppLinkType` tables (PascalCase, FK with `ON UPDATE CASCADE ON DELETE RESTRICT`, two AppLink CHECK invariants: XOR target + disconnect timestamp).
   - **Added** Inline seed data for the two lookup tables.
@@ -38,12 +65,15 @@
   - **Result:** unblocks AI-implementability score from 42/100 (F) toward target 90+/100; resolves audit findings "no DDL", "no enums", "orphan spec".
 
 ### 2.1.0 — 2026-04-26
-- **Phase 24 — `kind: index` exemption.** Added YAML front-matter `kind: index` to `00-overview.md` to mark this module as a placement-rule router (intentionally empty / index-only). Audit script v2.2 honoured the exemption, removing `missing-contract` and `untestable` rubric findings. Result: module lifted from C-tier to B-tier in the v2-deterministic audit.
+
+- **Phase 16d-ii — Deepen scaffolded ACs in `97-acceptance-criteria.md`.** Expanded the 4 shortest one-liner ACs from ~211-241 chars to **1942-2295 chars each (8–10× depth)** with full Given/When/Then bodies. AC count unchanged at 5. Banner v2.0.0 → v2.1.0; lockstep §99 + spec-index updated.
 
 ### 2.0.0 — 2026-04-25
+
 - **Changed** `97-acceptance-criteria.md`: replaced scaffolded placeholder with AI-extracted Given/When/Then acceptance criteria. Inlined required contracts (enums, DDL, error codes, file paths) directly into the AC file so a mediocre AI can implement without chasing cross-links. Generated by `linter-scripts/generate-gwt-acceptance.py` as part of root v3.7.x F-tier remediation sweep.
 
 ### 1.0.0 — 2026-04-25
+
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
 - **Added** module-specific files per current inventory in `99-consistency-report.md`.
 - Auto-scaffolded by `linter-scripts/fill-missing-changelogs.cjs` as part of root v3.7.x Phase 2c sweep.
@@ -55,18 +85,3 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
-
-## 2026-04-27 — Phase 58 impl-sweep
-
-- Phase 58: appended MigrationManifest JSON Schema to satisfy `has_json_schema` rubric (impl 70 → 85).
-
-## 2026-04-27 — Phase 68 (impl 85→90)
-
-- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 68 Reference` block in `00-overview.md`.
-- Pushes implementability score to 90 via mermaid bonus.
-
-## 2026-04-27 — Phase 71 (impl 90 → 95)
-
-- Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
-- Documentation-only promotion; no behavioural rules changed.
-
