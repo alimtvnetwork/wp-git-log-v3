@@ -1,10 +1,19 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.56.0
+**Version:** 2.57.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.57.0 — 2026-04-28 — Phase P27: H10 fifth reverse-drift reconstruction (`spec/24-app-design-system-and-ui`) — second P25 dual-stream subcase
+- **Action**: Fifth reverse-drift reconstruction; target `spec/24-app-design-system-and-ui` (§00 banner `4.1.0` vs §98 header `3.1.1`). Second occurrence of P25 subcase (clean ladder + decoupled header stream): §98 SemVer ladder already contained `4.1.0` (Phase 51/55) but §98 header version was tracking an independent audit-stream (last bumped 3.1.0→3.1.1 by Phase P14 STALE-disposition audit). No orphan prose to promote, no out-of-order rows, no missing ladder entries — purely a header-version sync.
+- **Reconstruction (P25 subcase)**: Bumped §98 header `3.1.1` → `4.1.1` with a new top-of-ladder reconciliation entry citing P25 precedent. Ladder body unchanged; H10 stamp added to §00; §99 patch-bumped 2.1.1 → 2.2.0 with subcase classification note.
+- **P27 lesson — P25 subcase reproducibility confirmed**: second application of P25 (after P25 itself on §17) ran in <5 tool calls — confirms P25 workflow is the cheapest reverse-drift subcase (no prose archaeology, no row-renumber, no major-version judgment call). Detection signal: §98 ladder latest matches §00 banner exactly while §98 header lags. Future drifters matching this signal MUST be batched if multiple appear (single-phase sweep candidate).
+- **Gate impact**: `matches=41 → 42` (+1); `mismatches=33 → 32` (-1); `stamped=24 → 25`; `stamped_failed=0`. Reverse-drift backlog **32 → 31**.
+- **Adoption progress**: **25 / 74 modules opted into strict enforcement** — crossing 1/3 of the tree.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption + per-module forensic reconstruction.
+- **Verified**: parity gate, lockstep, tree-health, §27-inventory, H10 self-test (see §99 v2.54.0 entry for full numbers).
 
 ### 2.56.0 — 2026-04-28 — Phase P26: H10 fourth reverse-drift reconstruction (`spec/23-app-database`) — hybrid P23+P24 subcase
 - **Action**: Fourth application of P23 reverse-drift workflow on `spec/23-app-database` (§00 banner `4.0.0` vs §98 latest `3.0.1`). **First hybrid subcase**: §98 had THREE structural problems simultaneously — (1) a stray out-of-order release `4.1.0` row listed AFTER `3.0.1` describing Phase 53 (mis-numbered — Phase 53 chronologically preceded the 4.x trunk); (2) orphan dated prose blocks (Phase 58, 68, 71) appended *after* the §98 Cross-References footer never promoted into SemVer rows; (3) §00 banner sat at `4.0.0` with no §98 release row to back it.
