@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.46.2
+**Version:** 2.46.3
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.46.3 — 2026-04-28 — Phase 21: §00-overview stale-prose sweep (banner + slot-70 description)
+- **Action**: Synced §00-overview banner from stale `v1.7.0 / 2026-04-27` → current `v2.46.2 / 2026-04-28`. Lockstep gate did not catch this because L1 (§98 latest release date >= §00 Updated) was technically satisfied (`2026-04-28 >= 2026-04-27`), but the human-readable Version field had drifted ~39 patch releases behind §98. Same Phase 20 narrative-stale class — version-string parity is not gated, only date relations are.
+- **Slot-70 row**: replaced stale "Wires §05 + §10 into GitHub Actions (event-driven)" with accurate "Per-PR/push spec-health pipeline: 17 production gates + 7 discrete self-test steps (cross-link, folder-refs, §99 freshness/stamp-bump, tree-health strict, lockstep, audit-v2 deterministic, mermaid syntax, archive-exclusion runtime, memo retro headings, etc.)". Inventory table itself was structurally correct; only the description prose was stuck at the original 2-script wiring era.
+- **No new gate, no AC-31-31 cascade**: pure narrative lockstep. Inventory parity gate (`test-overview-inventory-parity.sh`) and `check-tree-health.cjs --strict` both verified intact post-edit (6/6 + 168/168). Lockstep 87/87 / 0 findings.
+- **Lesson candidate codified**: README/overview Version-field drift relative to §98 banner is not lockstep-gated even when the date relation is technically OK — possible H10 candidate is a "Version-field parity" advisory check (§00 Version SHOULD == §98 Version when both are present). Currently 1/3 (single historical incident, low surface).
+- **Verified**: lockstep 87/87 / 0 ✅; tree-health 168/168 strict ✅; §27-inventory 6/6 ✅.
+- §98 v2.46.2 → **v2.46.3** (patch — narrative sync only). Memo: `.lovable/memory/audit/v2-deterministic/phase-21-overview-stale-prose-sweep.md`.
 
 ### 2.46.2 — 2026-04-28 — Phase H9: stamp-position structural enforcement (slot 26 v1.2.0 → v1.3.0; same gate, tighter contract)
 - **Action**: Promoted the Phase H8 stamp-position precedent ("stamps MUST live INSIDE a tracked-heading body, not adjacent") from a one-time sweep + memory rule to a structural lint inside the existing slot-26 gate. New `find_misplaced_stamps()` scans every non-exempt §99 for stamps placed OUTSIDE any tracked-heading body AND immediately ABOVE a tracked heading (within ≤3 non-empty lines).
