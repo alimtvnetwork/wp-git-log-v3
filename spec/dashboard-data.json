@@ -4,10 +4,8 @@
     "Score": 100,
     "Grade": "A+",
     "RubricVersion": "2.0.0",
-    "Deductions": [
-      "1 broken links (-2)"
-    ],
-    "LegacyScore": 98
+    "Deductions": [],
+    "LegacyScore": 100
   },
   "RubricV2": {
     "RubricVersion": "2.0.0",
@@ -821,9 +819,9 @@
     ]
   },
   "Links": {
-    "TotalChecked": 3079,
-    "Ok": 3067,
-    "Broken": 1,
+    "TotalChecked": 3073,
+    "Ok": 3064,
+    "Broken": 0,
     "ExternalAllowed": 9,
     "ExternalAllowedDetails": [
       {
@@ -881,15 +879,7 @@
         "Resolved": "../spec-slides"
       }
     ],
-    "BrokenDetails": [
-      {
-        "Source": "27-spec-toolchain/98-changelog.md",
-        "Line": 501,
-        "Text": "\\`test-foo.sh\\`",
-        "Target": "./test-foo.sh",
-        "Resolved": "27-spec-toolchain/test-foo.sh"
-      }
-    ]
+    "BrokenDetails": []
   },
   "RequiredFiles": {
     "MissingOverview": [],
