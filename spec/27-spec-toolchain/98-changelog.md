@@ -1,10 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.51.0
+**Version:** 2.52.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.52.0 — 2026-04-28 — Phase P22: H10 forward-drift backlog cleared (tree-wide)
+- **Action**: Continuing P21's stamp-adoption sweep, applied the same idempotent mechanism (`/tmp/p22-sweep.py`) to the **remaining 10 forward-drift modules tree-wide**, closing the entire forward-drift backlog. Each: §00 banner version bumped to §98 latest release; `<!-- h10-verified-phase: 22 -->` stamp dropped under banner; `**P22 sync** ...` audit-trail bullet prepended under existing §98 latest release row (no new §98 release — pure banner catch-up, content unchanged).
+- **Modules swept** (10): `spec` (root, 3.5.0→3.5.1), `spec/01-spec-authoring-guide` (3.7.0→4.13.0), `spec/03-error-manage` (3.2.0→3.4.0), `spec/05-split-db-architecture` (3.0.0→4.0.0), `spec/06-seedable-config-architecture` (3.1.0→4.1.0), `spec/13-generic-cli` (1.0.0→1.1.0), `spec/16-generic-release` (1.1.0→2.2.0), `spec/28-universal-ci-cli` (1.1.0→2.1.1), `spec/14-update/24-update-check-mechanism` (1.0.0→2.1.0), `spec/03-error-manage/03-error-code-registry/08-linter-scripts` (1.2.0→1.3.0).
+- **Largest catch-up**: `spec/01-spec-authoring-guide` (3.7.0 → 4.13.0 — 1 major + 6 minor releases of banner lag — the worst single drifter found in the P15 baseline sweep, per the original H10 surface report).
+- **Gate impact**: `matches=27 → 37` (+10); `mismatches=47 → 37` (-10); `stamped=10 → 20`; `stamped_failed=0` (gate confirms all 20 stamps valid → per-file strict locked in for 20 modules total). **Forward-drift backlog: 0 / 0 ✅**. The remaining 37 mismatches are now ALL reverse-drift (§00 > §98), the per-file forensic backlog deferred per drifter.
+- **Adoption progress**: **20 / 74 modules opted into strict enforcement** (was 10 after P21). Tree-wide `--strict` flip remains gated on per-module §98 reconstruction work for the 37 reverse-drift cases (Task #2 in the queued backlog).
+- **Why this is the natural sweep boundary**: P21 lesson (forward vs reverse drift split) establishes that bulk sweeps stop at the forward-drift boundary because reverse drift means "someone bumped §00 without a §98 row" — that requires per-module forensic reconstruction of what real change happened, NOT a banner-level mechanical bump (which would lose audit trail). P22 is therefore the **terminal forward-drift sweep** — no future H10 sweep tool should bulk-touch reverse-drift modules.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption of the existing P20 mechanism. §27's role is purely audit-trail.
+- **Verified**: `python3 linter-scripts/check-version-parity.py` 87 scanned / 74 eligible / **37 matches** / 37 mismatches / **stamped=20** / stamped_failed=0 / exit 0 ✅; `node linter-scripts/check-lockstep.cjs` 87/87 / 0 findings ✅; `node linter-scripts/check-tree-health.cjs --strict` 168/168 ✅ (all 10 newly-touched modules retained full tree-health marks); §27-inventory 6/6 ✅; H10 self-test 13/13 ✅.
+- **Closes Phase P21 task #1 (forward-drift sweep) DEFINITIVELY tree-wide.** Remaining work funnels into Task #2 (reverse-drift per-module forensic phases) and Task #3 (auto-trigger `--strict` flip when stamped=74/74).
 
 ### 2.51.0 — 2026-04-28 — Phase P21: H10 first stamp-adoption sweep — `02-coding-guidelines/*` forward-drift cluster
 - **Action**: First field application of the Phase P20 stamp pattern. Swept 10 forward-drift modules in `spec/02-coding-guidelines/*` (banner version < §98 latest release): bumped each `00-overview.md` `**Version:**` banner to match its `98-changelog.md` latest release, dropped a `<!-- h10-verified-phase: 21 -->` stamp under the banner, and prepended a `**P21 sync** ...` audit-trail bullet under the existing latest §98 release row (no new §98 release — content unchanged, only the banner version field caught up).
