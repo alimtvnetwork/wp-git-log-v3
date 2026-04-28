@@ -1,8 +1,21 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.3.0
+**Version:** 3.4.0
 **Updated:** 2026-04-28
 **Scope:** `spec/26-gitlogs-diagrams/`
+
+---
+
+## [3.4.0] — 2026-04-28 (Phase P10: SSH auth-lane diagram)
+
+- **Added** [`10-ssh-auth-validation.mmd`](./10-ssh-auth-validation.mmd) (3.3 KB source) + companion `[10-ssh-auth-validation.svg](./10-ssh-auth-validation.svg)` (~244 KB, rendered via `mmdc -i 10-ssh-auth-validation.mmd -o 10-ssh-auth-validation.svg -p puppeteer.json -b transparent`). The diagram visualizes the §22/§31 Lane B SSH-key auth **10-step server validation order**: (1) `X-GL-Auth-Mode` mode parse with `GL-SSH-LANE-CONFLICT` for mixed-lane requests; (2) header completeness → `GL-SSH-HEADER-MISSING`; (3) timestamp skew vs `ReplayWindowSeconds` → `GL-SSH-TIMESTAMP-SKEW`; (4) `SshKey` lookup by `Fingerprint` with split branches → `GL-SSH-KEY-UNKNOWN` / `GL-SSH-KEY-INACTIVE`; (5) repo binding `RepoUrl → RepoId == SshKey.RepoId` → `GL-SSH-REPO-MISMATCH`; (6) acceptance + branch (delegated to `05-auth-validation.mmd` rules 3–4) → `GL-VALIDATION-REPO-NOT-ALLOWED` / `GL-VALIDATION-BRANCH-RESTRICTED`; (7) `SshNonce` uniqueness via `INSERT OR IGNORE` → `GL-SSH-NONCE-REUSED`; (8) `ssh-keygen -Y verify` over canonical signing string with namespace `git-logs@v2` → `GL-SSH-SIGNATURE-INVALID`; (9) `OwnedByProfileId.UserStatus = Active` → `GL-AUTH-PROFILE-INACTIVE`; (10) `App.Status = Active` if linked → `GL-APP-NOT-ACTIVE`. Mode-header fall-through arrow points at `05-auth-validation.mmd` for the TempToken lane. Acceptance terminal updates `SshKey.LastUsedAt` and writes `AuditTrail.SshAuthSuccess`; reject terminal writes `AuditTrail.AuthFail`. classDef colors distinguish gates (blue), accept (green), and reject (red) nodes per the §06-permission-flow precedent.
+- **Slot choice:** Slot **10** is the first numeric slot available per **AC-DG-10** ("the next available numeric slot for new diagrams is `10-*` onward"). Slots 02/03/04 remain locked (Phase P9 audit confirmed). Header comment block conforms to AC-DG-05 (`%% Diagram type:` + `%% What this answers:`) and to the Phase 55 `DiagramMetadata` JSON Schema (`id: 10-ssh-auth-validation`, `type: flow`, `owner_module: spec/26-gitlogs-diagrams/...`, `render_target: svg`).
+- **Added** [`puppeteer.json`](./puppeteer.json) sibling render config (`{"args": ["--no-sandbox", "--disable-setuid-sandbox"], "defaultViewport": {"width": 2400, "height": 2400}}`). This file was referenced by AC-DG-18 + AC-DG-11 + AC-DG-12 + the §00 v2.1.0 Phase 10 banner ever since the GWT rewrite landed but had never actually been checked in — Phase P10 closes that pre-existing gap as a side-effect (the new diagram needed it to render). Conforms to AC-DG-18 (`--no-sandbox` for CI compatibility, viewport ≥ 2000×2000).
+- **Added** §97 **AC-DG-21** ("SSH auth-lane diagram covers all 10 §31 validation steps + 11 reject codes") — codifies the diagram's coverage contract machine-checkably. AC count 20 → 21.
+- **Bumped** §97 **AC-DG-20** active-diagram count `6 → 7` to reflect the new sibling.
+- **Bumped** §00 v2.3.0 → **v2.4.0** (banner + inventory row 10 added). §97 v3.0.0 → **v3.1.0**. §99 v3.2.0 → **v3.3.0**.
+- **Cross-walk:** No `.mmd` re-render of pre-existing diagrams (none of their source `.mmd` files changed). No §22/§31 source-of-truth edit (this folder trails §22 per AC-DG-19 governance rule). The §22 §31 spec was already authoritative at v2.9.1 (Phase 5 close) — Phase P10 simply gives it a visualization.
+- **Verified:** `node linter-scripts/check-lockstep.cjs` ✅ 87/87; `node linter-scripts/check-tree-health.cjs --strict` ✅ 168/168.
 
 ---
 
