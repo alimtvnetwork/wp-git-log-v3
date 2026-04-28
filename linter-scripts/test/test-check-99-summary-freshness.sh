@@ -36,7 +36,7 @@ PYTHONIOENCODING=utf-8 python3 "$GATE" >/tmp/h1-out 2>&1
 RC=$?
 set -e
 assert "T1 real-tree default mode exits 0" "$RC" "0"
-grep -qE "§99 files scanned: [0-9]+; stamped: [0-9]+; unstamped: [0-9]+" /tmp/h1-out && echo "  ✓ T1 reports scan/stamped/unstamped counts" || { echo "  ✗ T1 counts line missing"; FAIL=$((FAIL+1)); }
+grep -qE "§99 files scanned: [0-9]+; stamped: [0-9]+; exempt: [0-9]+; unstamped: [0-9]+" /tmp/h1-out && echo "  ✓ T1 reports scan/stamped/exempt/unstamped counts" || { echo "  ✗ T1 counts line missing"; FAIL=$((FAIL+1)); }
 
 # --- T2: real-tree --report-only also exits 0
 set +e
@@ -162,6 +162,28 @@ assert "T10 (H2) _archive/ excluded (still exits 0)" "$RC" "0"
 grep -q "files scanned: 1" /tmp/h1-out \
   && { echo "  ✓ T10 _archive/ excluded from scan count"; PASS=$((PASS+1)); } \
   || { echo "  ✗ T10 _archive/ leaked into scan"; FAIL=$((FAIL+1)); }
+
+# --- T11 (Phase H7): exempt marker is honored — file with no tracked heading
+# but carrying `<!-- freshness-exempt: audit-log-only -->` is counted exempt,
+# not unstamped, and does not trip the unstamped advisory tally for that file.
+cat > "$SANDBOX/spec/test-folder/99-consistency-report.md" <<'MD'
+# Audit-log-only §99
+<!-- freshness-exempt: audit-log-only -->
+
+## 2026-04-27 — Phase 69 audit
+Past audit-log entry, no narrative summary.
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T11 (H7) exempt marker counted as exempt (exits 0)" "$RC" "0"
+grep -q "exempt: 1" /tmp/h1-out \
+  && { echo "  ✓ T11 exempt count reported"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T11 exempt count missing"; FAIL=$((FAIL+1)); }
+grep -q "unstamped: 0" /tmp/h1-out \
+  && { echo "  ✓ T11 exempt file does not increment unstamped"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T11 exempt file leaked into unstamped tally"; FAIL=$((FAIL+1)); }
 
 echo
 echo "Results: $PASS passed, $FAIL failed"

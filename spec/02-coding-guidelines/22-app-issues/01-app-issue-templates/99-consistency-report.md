@@ -1,4 +1,5 @@
 # Consistency Report — App Issue Templates
+<!-- freshness-exempt: audit-log-only -->
 
 **Version:** 2.0.0  
 **Updated:** 2026-04-27

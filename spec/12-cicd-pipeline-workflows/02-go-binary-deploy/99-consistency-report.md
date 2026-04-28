@@ -38,8 +38,8 @@ No external cross-references detected. ✅
 
 ---
 
-<!-- verified-phase: 147 -->
 ## Summary
+<!-- verified-phase: 147 -->
 
 - **Errors:** 0
 - **Warnings:** 0

@@ -47,6 +47,12 @@ CHANGELOG_27 = SPEC / "27-spec-toolchain" / "98-changelog.md"
 
 PHASE_RE = re.compile(r"\bPhase\s+(\d{1,4})\b")
 STAMP_RE = re.compile(r"<!--\s*verified-phase:\s*(\d{1,4})\s*-->")
+# Phase H7 (2026-04-28): codifies the "audit-log-only §99" exemption.
+# Some §99 files carry only date-stamped audit-log headings (no narrative
+# Summary, no inventory rubric) and have no claims to verify. Files marking
+# `<!-- freshness-exempt: <reason> -->` anywhere in the file are counted
+# separately and excluded from the unstamped advisory tally.
+EXEMPT_RE = re.compile(r"<!--\s*freshness-exempt:\s*([a-z0-9_\-]+)\s*-->")
 # Phase H2 (2026-04-28): widened from `## Summary` only to also cover
 # inventory-rubric blocks (the 43 §99 files that ship inventory tables instead
 # of a narrative Summary). The stamp may live under any of these headings.
@@ -129,10 +135,14 @@ def main() -> int:
 
     stamped = 0
     unstamped = 0
+    exempt = 0
     stale: list[tuple[Path, int, int]] = []
 
     for f in files:
         text = f.read_text(encoding="utf-8", errors="ignore")
+        if EXEMPT_RE.search(text):
+            exempt += 1
+            continue
         stamp = find_summary_stamp(text)
         if stamp is None:
             unstamped += 1
@@ -142,9 +152,11 @@ def main() -> int:
         if delta > args.max_age:
             stale.append((f, stamp, delta))
 
-    print(f"§99 files scanned: {len(files)}; stamped: {stamped}; unstamped: {unstamped}")
+    print(f"§99 files scanned: {len(files)}; stamped: {stamped}; exempt: {exempt}; unstamped: {unstamped}")
     if unstamped:
         print(f"  (info) {unstamped} §99 files have no `<!-- verified-phase: NNN -->` stamp — advisory only.")
+    if exempt:
+        print(f"  (info) {exempt} §99 files carry `<!-- freshness-exempt: ... -->` and are skipped.")
 
     if stale:
         print()

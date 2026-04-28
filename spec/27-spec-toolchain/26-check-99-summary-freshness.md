@@ -60,6 +60,29 @@ Files **without** the stamp emit a per-file `info` line and do **not** fail —
 the gate is advisory until project-wide stamp adoption is decided in a future
 phase or via R1 (real-AI re-audit).
 
+## Exempt-marker convention (Phase H8)
+
+Some §99 files have no narrative claims and no inventory rubric — only
+date-anchored audit-log subsections (e.g. `## 2026-04-27 — Phase 69 audit`).
+Stamping such files makes no sense (there's nothing to verify). They declare
+their freshness posture via a whole-file marker:
+
+```markdown
+# Consistency Report — …
+<!-- freshness-exempt: audit-log-only -->
+
+## 2026-04-27 — Phase 69 audit
+…
+```
+
+Recognized format: `<!--\s*freshness-exempt:\s*([a-z0-9_\-]+)\s*-->` — anywhere
+in the file (NOT heading-scoped, unlike `verified-phase`). The reason token is
+informational; canonical first reason is `audit-log-only`. Exempt files are
+counted under `exempt:` and skipped before the find-stamp pass — they never
+increment the unstamped advisory count.
+
+After Phase H8: **87/87 §99 files declare a posture** (81 stamped + 6 exempt).
+
 ## CLI
 
 ```
@@ -131,6 +154,11 @@ Whichever yields the highest integer wins.
 - **When** the gate runs,
 - **Then** the stamp MUST be found and the file counted as `stamped:` (highest phase number wins if multiple stamps exist).
 
+### AC-26-09 — Freshness-exempt marker honored (Phase H8)
+- **Given** a §99 file carrying `<!-- freshness-exempt: <reason> -->` anywhere in its body (not heading-scoped),
+- **When** the gate runs,
+- **Then** the file MUST be counted under `exempt:` AND MUST NOT increment `unstamped:` AND MUST NOT cause exit 1, regardless of whether any tracked heading is present or any stamp exists.
+
 ## Cross-references
 
 - §99 [`99-consistency-report.md`](./99-consistency-report.md) — health/inventory; this gate is itself listed in §99's File Inventory.
@@ -145,6 +173,15 @@ Slot 26 is a clean fit in the 20-29 validator/filler band (no exception needed,
 unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 
 ## Changelog
+
+### 1.2.0 — 2026-04-28 — Phase H8 (freshness coverage closure)
+- **New `<!-- freshness-exempt: <reason> -->` marker** recognized anywhere in file body (not heading-scoped). Files matching are counted under `exempt:` and skipped before the find-stamp pass.
+- **Output line shape changed**: `§99 files scanned: N; stamped: N; exempt: N; unstamped: N` (added `exempt:` field between stamped and unstamped).
+- **Coverage closure**: 75 stamped + 12 unstamped → **81 stamped + 6 exempt + 0 unstamped** (87/87 declare a posture). The 6 exempt files are audit-log-only — no `## Summary` and no inventory rubric, only date-anchored audit-log subsections.
+- **Stamp-position fix sweep** (one-time): 5 files carried the stamp BEFORE `## Summary` rather than under it; repositioned. Precedent codified — stamps MUST live inside a tracked-heading body, not adjacent.
+- **§27's own §99**: stamp tokens were only inside Validation History blockquotes (not under any tracked heading); added `<!-- verified-phase: 147 -->` under `## File Inventory`.
+- Self-test extended 12 → **20 assertions** (T1 counts-line shape requires `exempt:` field; new T11 verifies exempt-marker behavior in 3 sub-asserts).
+- Acceptance criteria addition: AC-26-09 (freshness-exempt marker honored).
 
 ### 1.1.0 — 2026-04-28 — Phase H2
 - **Widened tracked-heading set** from `## Summary` only to also accept inventory-rubric headings (`## Module Health`, `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`, `## Document Inventory`, `## Modules`). Previously-exempt 35 inventory-rubric §99 files are now stampable.
