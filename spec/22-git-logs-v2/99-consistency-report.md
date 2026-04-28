@@ -27,7 +27,7 @@
 | 14-endpoint-examples.md | ✅ |
 | 15-error-codes.md | ✅ (4 new auth codes added in v2.6) |
 | 16-test-plan.md | ✅ (redirect stub → §32–§35) |
-| 17-openapi.yaml | ✅ |
+| 17-openapi.yaml | ✅ (v2.9.5 — Phase P3 `AckResponse.PreviousHasError` REQUIRED) |
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |
 | 20-observability.md | ✅ |
