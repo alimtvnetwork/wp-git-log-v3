@@ -2,7 +2,7 @@
 
 **Budget:** 40 tasks
 **Activated:** 2026-04-28
-**Counter:** 5 / 40
+**Counter:** 6 / 40
 **Status:** 🟢 active
 
 ## Counting rule
@@ -24,6 +24,7 @@ This setup task (creating prompt-01 + index + folder scaffolding) is task
 | 3 | 2026-04-28 | Phase 19 — stale-baseline advisory (Ambiguity-02 option 3) | none (resolves 02) |
 | 4 | 2026-04-28 | Phase 20 — README stale-prose sweep (linter-scripts/test/) | none |
 | 5 | 2026-04-28 | Phase 21 — §00-overview stale-prose sweep (banner + slot-70) | none |
+| 6 | 2026-04-28 | Phase 22 — fleet-wide banner-drift sweep (0 drift, H10 rejected) | none |
 
 ## Deactivation trigger
 
