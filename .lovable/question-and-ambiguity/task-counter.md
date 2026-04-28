@@ -2,7 +2,7 @@
 
 **Budget:** 40 tasks
 **Activated:** 2026-04-28
-**Counter:** 10 / 40
+**Counter:** 11 / 40
 **Status:** 🟢 active
 
 ## Counting rule
@@ -29,6 +29,7 @@ This setup task (creating prompt-01 + index + folder scaffolding) is task
 | 8 | 2026-04-28 | Phase 24 — CONTRIBUTING.md drift sweep (3 fixes, H10 rejected) | none |
 | 9 | 2026-04-28 | Phase 25 — PR-template + monthly-audit + folder-structure (clean, no-op) | 03-core-memory-gate-count-stale (self-resolved) |
 | 10 | 2026-04-28 | Phase 26 — F3 "Adjacent .py tests" subsection verification (clean) | none |
+| 11 | 2026-04-28 | Phase 27 — Root §97 AC-ROOT-01..08 freshness verification (clean) | none |
 
 ## Deactivation trigger
 
