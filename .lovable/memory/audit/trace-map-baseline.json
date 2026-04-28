@@ -3,9 +3,9 @@
     "ac_drifted": 1258,
     "ac_total": 1348,
     "ac_traced": 90,
-    "code_orphan": 29,
+    "code_orphan": 30,
     "code_referenced": 25,
-    "code_total": 54,
+    "code_total": 55,
     "missing_ac": 0,
     "missing_file": 0,
     "trace_entries": 90
