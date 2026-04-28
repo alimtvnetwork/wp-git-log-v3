@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.18
-**Updated:** 2026-04-28 (Phase P18 — §03 admin UI rendering of state labels closed: §03 v2.2.0 → v2.3.0 added `## State-Transition Label Rendering` section + History column revision; §97 v3.9.3 → v3.9.4 added AC-77 binding the rendering contract to AC-73's enum + AC-74's NDJSON consumer for cross-consumer parity. AC count 77 → 78. Closes the last §99 v3.9.6+ open follow-up "(a)" — together with P16+P17 all consumer-side and lockstep follow-ups for the v2.9.x release line are now resolved. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.19
+**Updated:** 2026-04-28 (Phase P19 — H10 §00↔§98 version-field parity catch-up: §00 v3.8.9 → v3.9.11 (catches up 8 minor releases of drift since Phase P5; pure banner bookkeeping, no inventory or content change). Sibling §26-gitlogs-diagrams got parallel parity catch-up (v2.4.0 → v3.4.0). H10 advisory delta tree-wide: 59 → 57 mismatches. AC count unchanged at 78. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
