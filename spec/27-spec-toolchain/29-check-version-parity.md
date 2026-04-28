@@ -236,7 +236,11 @@ stamped+match passes; T13 `--report-only` overrides stamp failure). Per
 the H1 lesson on workflow-step parity, the self-test is **collapsed into
 the gate's own workflow step** (no standalone self-test step) — the gate
 runs the self-test first, then runs against the real tree. This
-preserves AC-31-28 gate-count parity at 19/19/19.
+preserves AC-31-28 gate-count parity at 19/19/19. **Phase P31 update**:
+T3 was rewritten to inject drift in a sandbox instead of relying on
+real-tree mismatches (which dropped to 0 at P30 backlog clearance) —
+codifies the lesson "self-tests asserting strict-mode failure paths
+must own their own drift, not borrow from the real tree."
 
 ## Cross-references
 
