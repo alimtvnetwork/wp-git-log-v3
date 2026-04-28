@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.2.0
-**Updated:** 2026-04-28 (Phase 108-full: added AC-T-22/23/24 verifying the three migrated orphans now occupy real §27 slots 18/19/25. AC count 21 → 24.)
+**Version:** 2.3.0
+**Updated:** 2026-04-28 (Phase 30: added AC-T-25 codifying the Phase 29-discovered "advisory CI gates silently rot" lesson via the Spec-index drift gate strict-promotion. AC count 24 → 25.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -142,6 +142,12 @@
 - **When** `linter-scripts/test/test-overview-inventory-parity.sh` and `node linter-scripts/check-tree-health.cjs --strict` run,
 - **Then** both MUST exit 0 with the script counted as specced; AND the §00 inventory row in the Fillers table MUST point at the slot-25 spec; AND slot 25 satisfies the kind-range bijection (filler in 20-29 band) — no exception note required.
 - **Verifies:** INV-01, INV-02, INV-08, Phase 21 deepen-sweep origin, Phase 107 ledger row O3 (now marked migrated), Phase 108-full retrospective.
+
+### AC-T-25 — Spec-index drift gate MUST be strict (Phase 30)
+- **Given** the `Spec-index drift gate` step in `.github/workflows/spec-health.yml` (Phase 29 root-cause: previously named "Regenerate spec-index.md (drift check)" and exited 0 with a `⚠️` warning when `git status --porcelain spec/` reported a delta after `node linter-scripts/generate-spec-index.cjs`),
+- **When** any future commit causes `node linter-scripts/generate-spec-index.cjs` to produce a `spec/` filesystem delta (e.g. a file/version bump landed without re-running `bash linter-scripts/run.sh` locally),
+- **Then** the workflow step MUST `exit 1` (strict mode), printing the `git diff --stat` and a `head -100` of `git diff` so the contributor can locate the stale entries; AND the script enumeration footer in `audit-spec-vs-code-v2.py` MUST list this gate as entry #18 of the QA tooling baseline; AND `linter-scripts/test/test-qa-baseline-footer.sh`'s workflow-gates awk MUST include `/Spec-index drift gate/` so footer-rows = workflow-gates = declared-count parity holds at 18/18/18.
+- **Verifies:** AC-31-31 (multi-file enumeration parity at the 4-file site: script `RUBRIC_VERSION` + `00-index.md` footer + `EXECUTIVE-SUMMARY.md` cross-ref + `spec-health.yml` step list — gate count 17 → 18, RUBRIC v2.26 → v2.27); codifies the **Phase 29 root-cause lesson** "advisory CI gates silently rot" (second instance after the Phase H1 session-persistence-regression class — first instance never cleanly auto-detected); also codifies the **second-order lesson** "generator artifacts in `run.sh` need CI parity" (treat `spec-index.md` as a build artifact whose canonical source is the regenerator, not a hand-edited document).
 
 ---
 

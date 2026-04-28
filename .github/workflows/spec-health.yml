@@ -60,21 +60,22 @@ jobs:
           [ -f linter-scripts/fill-missing-acceptance-criteria.cjs ] && node linter-scripts/fill-missing-acceptance-criteria.cjs
           [ -f linter-scripts/fill-missing-changelogs.cjs ] && node linter-scripts/fill-missing-changelogs.cjs
 
-      - name: Regenerate spec-index.md (drift check)
-        # Phase 29 (2026-04-28) NOTE: this step is currently ADVISORY (warns
-        # but exits 0). Phase 29's audit found a 6-file / 18-line stale state
-        # had accumulated (B1 §07 v2.1→2.2, Phase 147 §97 v3.9.0→3.9.1, §27
-        # toolchain v1.7→2.46.3 + 6 new slots, §98 v3.5.0→3.5.1) because the
-        # gate is advisory. Promotion to strict (`exit 1` on drift) is the
-        # planned Phase 30 deliverable — deferred so the AC-31-31 cascade
-        # (RUBRIC v2.26→v2.27, footer 17→18, EXECUTIVE-SUMMARY, qa-baseline
-        # awk, §27 §97/§98/§99 bumps) can be coordinated in one phase per the
-        # H4→H5 "don't rush AC-31-31" playbook.
+      - name: Spec-index drift gate
+        # Phase 30 (2026-04-28): promoted from advisory to strict (Phase 29
+        # found the gate had let 6 files / 18 lines of drift accumulate
+        # silently across phases 145–28). Regen `spec/spec-index.md` and
+        # fail if `git status --porcelain spec/` shows any delta. Same
+        # exit-1-on-drift pattern as the F2 folder-refs gate. AC-31-31
+        # cascade: RUBRIC v2.26 → v2.27, footer 17 → 18, EXECUTIVE-SUMMARY
+        # back-ref, qa-baseline-footer awk, AC-T-25, §27 §97/§98/§99 bumps,
+        # Memory Core gate-count update. Mechanises AC-T-25.
         run: |
           node linter-scripts/generate-spec-index.cjs
           if [ -n "$(git status --porcelain spec/)" ]; then
-            echo "⚠️  Spec artifacts out of date. Run 'bash linter-scripts/run.sh' locally and commit results."
+            echo "❌ Spec artifacts out of date. Run 'bash linter-scripts/run.sh' locally and commit results."
             git --no-pager diff --stat spec/ | head -20
+            git --no-pager diff spec/ | head -100
+            exit 1
           else
             echo "✅ Spec artifacts up to date."
           fi

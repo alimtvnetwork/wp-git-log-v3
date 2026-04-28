@@ -152,7 +152,7 @@ TODAY = "2026-04-25"
 # v2.17 (Phase 99): static rubric version surfaced in summary outputs so a
 # reader of 00-index.md / EXECUTIVE-SUMMARY.md knows which scoring rules
 # produced the verdict. Bump this on every rubric change (see docstring).
-RUBRIC_VERSION = "v2.26"
+RUBRIC_VERSION = "v2.27"
 
 WEIGHTS = {
     "implementability": 35,
@@ -1115,7 +1115,7 @@ def main():
     # to form a two-layer defense — edits must bump (budget=0), unedited
     # stamps decay over time (budget=20)).
     idx += ["", "## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7)",
-            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **17 strict CI gates** that surround it:",
+            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **18 strict CI gates** that surround it:",
             "",
             "1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.",
             "2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).",
@@ -1134,6 +1134,7 @@ def main():
             "15. **§99 Summary freshness gate** (`check-99-summary-freshness.py`, Phase H1) — flags §99 modules whose `## Summary` block carries a `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20); advisory-by-default for unstamped files (89 of 89 unstamped at H1 close); mechanises AC-26-01..05 and codifies the Phase 136/139 stale-prose-sweep lesson.",
             "16. **§99 Stamp-bump gate** (`check-99-stamp-bump.py`, Phase H5) — when a §99 file is materially edited (any non-stamp line changed) the `<!-- verified-phase: NNN -->` stamp MUST be bumped to the current phase in the same diff; PR-event only (skips on push-to-main with no diff base); pairs with #15 as a two-layer defense (edits must bump at budget=0, unedited stamps decay at budget=20); mechanises AC-27-01..08 and turns the H1/H2 honor-system into a CI check.",
             "17. **Runtime archive-exclusion gate** (`test/test-archive-exclusion-runtime.sh`, Phase H7) — every spec-traversing linter MUST exclude `spec/_archive/` at RUNTIME (not just by source-reading); importlib-loads `check-99-summary-freshness.find_99_files()` + `audit-spec-vs-code-v2.ALL_MODULES` + `generate-trace-map.collect_ac_ids()`, asserts each enumerator returns 0 archive-leaked results; probe count floor ≥ 3; codifies the H6 lesson (runtime > source verification) so a future contributor cannot silently drop the H3 `_archive` exclusion guard during a refactor; mechanises AC-28-01..05.",
+            "18. **Spec-index drift gate** (`generate-spec-index.cjs` + `git status --porcelain spec/`, Phase 30) — `.github/workflows/spec-health.yml` regenerates `spec/spec-index.md` then fails if any `spec/` delta remains; promoted from advisory to strict in Phase 30 after Phase 29 found 6 files / 18 lines / 12 stale version entries had accumulated silently across phases 145–28 (the gate was previously a `⚠️` warning that exited 0); same exit-1-on-drift pattern as the F2 folder-refs gate; treats committed `spec-index.md` as a build artifact whose canonical source is the regenerator; mechanises AC-T-25 and codifies the Phase 29 lesson 'advisory CI gates silently rot'.",
             "",
             "Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
             ""]
@@ -1161,7 +1162,7 @@ def main():
         "3. Resolve all broken cross-spec links (auto-detected per module).",
         "4. For every D/F module, run `linter-scripts/generate-gwt-acceptance.py` to regenerate ACs.",
         "5. Add `Status: Planned/In-Progress/Implemented` banners so alignment scores reflect intent.",
-        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7) listing the 17 strict CI gates that surround this score.",
+        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7 + 30) listing the 18 strict CI gates that surround this score.",
     ]
     (OUT / "EXECUTIVE-SUMMARY.md").write_text("\n".join(exec_md))
 

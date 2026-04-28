@@ -1,10 +1,20 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.46.3
+**Version:** 2.47.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.47.0 — 2026-04-28 — Phase 30: Spec-index drift gate strict-promotion (gate #18; AC-31-31 cascade RUBRIC v2.26→v2.27)
+- **Action**: Promoted the existing `Regenerate spec-index.md (drift check)` workflow step in `.github/workflows/spec-health.yml` from advisory (`⚠️` warn + exit 0) to **strict** (`exit 1` on any `git status --porcelain spec/` delta after `node linter-scripts/generate-spec-index.cjs`). Step renamed `Regenerate spec-index.md (drift check)` → **`Spec-index drift gate`** (consistent with peer naming pattern: F2 `Spec folder-reference gate`, H7 `Runtime archive-exclusion gate`).
+- **Root cause** (Phase 29 audit): the previously-advisory gate had let 6 files / 18 lines / 12 stale version entries silently accumulate across phases 145, 147, F2, F3, H1, H4–H7, 28 (e.g. `27-spec-toolchain/00-overview.md` v1.7.0 → v2.46.3 unflushed; `22-git-logs-v2/07-app-entity.md` v2.1 → v2.2 unflushed). Same advisory-rot class as the H1 session-persistence-regression family.
+- **AC-31-31 cascade**: `RUBRIC_VERSION` v2.26 → **v2.27**; QA-baseline footer 17 → **18 strict CI gates** (added entry #18 in `audit-spec-vs-code-v2.py` ~L1137 enumerating Phase 30 + AC-T-25 + the Phase 29 lesson); EXECUTIVE-SUMMARY back-ref 17 → **18** (`+ 30` added to phase trail); `test/test-qa-baseline-footer.sh` workflow-gates awk +1 (`/Spec-index drift gate/`); §27 §00-overview slot-70 description "17 production gates" → "18 production gates"; `27-spec-toolchain/97-acceptance-criteria.md` v2.2.0 → **v2.3.0** with new **AC-T-25** codifying the strict-promotion contract + the Phase 29 lesson as the verification hook. Parity 18/18/18.
+- **No new file added**: gate is a one-line workflow promotion + step rename, not a new validator script — `linter-scripts/test/test-overview-inventory-parity.sh` does NOT need to scan for new entries (verified post-edit: 6/6 still pass).
+- **No trace-map delta**: the regenerator (`linter-scripts/generate-spec-index.cjs`, slot 11) is already trace-bound; only its CI invocation hardened. Rebaseline NOT required.
+- **Lessons codified in AC-T-25**: (1) "advisory CI gates silently rot" — second instance after H1's class; future advisory steps require an explicit phased-rollout justification or they ship strict from day 1. (2) "generator artifacts in `run.sh` need CI parity" — `spec-index.md` is now formally a build artifact whose canonical source is `generate-spec-index.cjs`; contributors must `bash linter-scripts/run.sh` before commit OR the strict gate will fail. (3) AC-31-31 cascade discipline (H4→H5 split pattern) — Phase 29 regenned the artifact, Phase 30 carries the rubric cascade.
+- **Verified**: spec-index regen produces zero delta now (just-committed in Phase 29); QA-baseline-footer 11/11 ✅ (18/18/18 parity); workflow-gates count = 18; §27-inventory 6/6 ✅; lockstep 87/87 / 0 ✅; tree-health 168/168 strict ✅; audit re-run with new RUBRIC v2.27 — sha256 stable post-rollover.
+- §98 v2.46.3 → **v2.47.0** (minor — CI gate count delta + RUBRIC bump); §99 v2.43.3 → **v2.44.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-30-spec-index-strict-promotion.md`.
 
 ### 2.46.3 — 2026-04-28 — Phase 21: §00-overview stale-prose sweep (banner + slot-70 description)
 - **Action**: Synced §00-overview banner from stale `v1.7.0 / 2026-04-27` → current `v2.46.2 / 2026-04-28`. Lockstep gate did not catch this because L1 (§98 latest release date >= §00 Updated) was technically satisfied (`2026-04-28 >= 2026-04-27`), but the human-readable Version field had drifted ~39 patch releases behind §98. Same Phase 20 narrative-stale class — version-string parity is not gated, only date relations are.

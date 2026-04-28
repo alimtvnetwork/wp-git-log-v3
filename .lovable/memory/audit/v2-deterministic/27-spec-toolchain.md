@@ -8,7 +8,7 @@
 > Deterministic score 97/100 (A+) for spec/27-spec-toolchain.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=24, gwt=24, broken_links=0, waffle/kchar=0.11. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=25, gwt=25, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 
@@ -31,10 +31,10 @@
   "kind": "meta-toolchain",
   "md_files": 46,
   "mmd_files": 1,
-  "overview_chars": 19286,
-  "ac_chars": 18519,
-  "ac_count": 24,
-  "gwt_block_count": 24,
+  "overview_chars": 19304,
+  "ac_chars": 20253,
+  "ac_count": 25,
+  "gwt_block_count": 25,
   "consistency_report": true,
   "code_blocks_total": 56,
   "code_blocks_by_lang": {
