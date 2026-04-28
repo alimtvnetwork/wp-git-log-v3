@@ -1,10 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.58.0
+**Version:** 2.59.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.59.0 — 2026-04-28 — Phase P29: H10 batch reconciliation of 8 P25-pure dual-stream drifters
+- **Action**: First batch application of P27's batching lesson. Pre-classified all 31 reverse drifters via `/tmp/p29-batch.py`; identified **8 P25-pure** candidates (clean ladder + decoupled header, no orphan promotion needed): `12-cicd-pipeline-workflows/01-browser-extension-deploy`, `02-go-binary-deploy`, `03-error-manage/03-error-code-registry/07-schemas`, `09-templates`, `02-error-architecture/06-apperror-package`, `04-error-modal/01-copy-formats`, `02-react-components`, `01-error-resolution/app-issues`.
+- **Reconstruction (P25-pure batch)**: For each: §98 header bumped to ladder-latest-patch (e.g. `1.2.0`→`3.4.1`); §00 banner bumped to same target (P27 sub-lesson); §98 reconciliation row added at top citing P25 precedent; H10 stamp dropped on §00; §99 minor-bumped with batch reconciliation note. Date sweep `2026-04-27`→`2026-04-28` across all touched files (§98 banner Updated, §00 banner Updated, §99 Generated/Updated) — required for lockstep gate.
+- **P29 lesson — batch sweep date-sync requirement**: when batch-bumping §98 release rows to today's date (`2026-04-28`), the §98 banner `Updated:` field MUST also bump to today, otherwise lockstep gate fails with `[L3] §98 banner Updated < latest release — changelog file's own banner stale`. First batch attempt missed this; second sweep added explicit date-bump step. **Future batch scripts MUST include `Updated:`/`Generated:` date sync** alongside version bumps. Codified as required step in P29 batch template.
+- **P29 lesson — batching efficiency**: 8 modules processed in ~3 tool calls (script write + script run + date-sync sweep) vs. 8×~5 tool calls = 40 if processed sequentially per P27. **Confirmed P27 batching hypothesis**: P25-pure subcase is mechanically uniform enough to batch safely; future P25-pure-only sweeps SHOULD batch all detected candidates in one phase.
+- **Pre-classification step (codified)**: `/tmp/p29-batch.py` includes a pre-flight scan that classifies each drifter as `P25-pure`, `+post-footer`, `needs-promote`, etc. before touching files. **Future reverse-drift sweep tools MUST start with classification** — running a P25 batch script over a `+post-footer` drifter would produce a wrong reconstruction (missing prose promotion).
+- **Gate impact**: `matches=43 → 51` (+8); `mismatches=31 → 23` (-8); `stamped=26 → 34` (+8); `stamped_failed=0`. Reverse-drift backlog **30 → 22**.
+- **Adoption progress**: **34 / 74 modules opted into strict enforcement** (45.9% — nearly half).
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption.
+- **Verified**: parity 87/74/51/23/stamped=34/stamped_failed=0 / exit 0 ✅; lockstep 87/87/0 ✅ (after date-sync sweep); tree-health 168/168 strict ✅.
 
 ### 2.58.0 — 2026-04-28 — Phase P28: H10 sixth reverse-drift reconstruction (`04-color-themes`) — second hybrid P26 subcase
 - **Action**: Sixth reverse-drift reconstruction; target `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes` (§00 `2.2.0` vs §98 latest `2.2.0` ladder + §98 header `1.0.0` + 3 post-footer orphan blocks). **Second hybrid subcase** (after P26): combined post-footer-prose-promote (P24) + dual-stream header-sync (P25) within a single phase.
