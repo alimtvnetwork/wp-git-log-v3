@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-27 (Phase 113)
+**Last updated:** 2026-04-28 (Phase F3 — `.sh`-only test-discovery policy codified; adjacent `.py` test acknowledged below)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -81,6 +81,55 @@ gate-count enumeration in lockstep; the Phase 112 gate will fail if you
 add a script without updating §27 §00-overview or the Phase 107 ledger;
 the Phase 113 gate will fail if you change scoring weights in only one
 of the three sites that restate them.
+
+---
+
+## Test-discovery policy (Phase F3 — keep `.sh`-only)
+
+The seven scripts above are **shell tests**, and the parity gate
+([`test-readme-inventory.sh`](./test-readme-inventory.sh)) discovers them
+via `ls test-*.sh`. This is **deliberate**, not an oversight:
+
+- **CI uniformity** — every shell test runs under the same `bash` runtime
+  the workflow already provisions; no Python venv coupling, no
+  hyphenated-module-name `importlib` dance, no per-test interpreter
+  detection.
+- **Side-effect surface** — `set -euo pipefail` + `assert` helper give us
+  a uniform pass/fail/exit-code contract. A Python `unittest`/`pytest`
+  test would need its own contract restatement (Phase 102 was authored
+  against the shell shape).
+- **Readability for spec authors** — most contributors editing
+  `spec/27-spec-toolchain/` are spec authors first, not Python
+  developers; a 30-line bash assertion file is more approachable than
+  an `importlib.util.spec_from_file_location` incantation.
+
+**Rule (codified Phase F3):** New self-tests SHOULD be `.sh`. The only
+sanctioned exception is when the script-under-test fundamentally requires
+Python introspection that bash cannot reproduce ergonomically — for
+example, exercising a `load_allowlist()` function as a unit (rather than
+its CLI surface) requires `importlib`-loading a hyphenated source file
+([`test-check-spec-folder-refs.py`](./test-check-spec-folder-refs.py),
+Phase 144 — locks AC-62-04). Such Python tests are listed in **Adjacent
+`.py` tests** below; they are NOT covered by the README inventory parity
+gate (which remains `.sh`-only by design) and instead rely on
+[`test-overview-inventory-parity.sh`](./test-overview-inventory-parity.sh)
+for filesystem-level acknowledgement.
+
+If you find yourself reaching for `.py` for any other reason (better
+assertion library, prettier diff output, etc.), that is **not** a
+sanctioned exception — write the `.sh` test instead. The cost of
+multi-runtime tests grows non-linearly; we pay the bash-test ergonomic
+tax intentionally.
+
+### Adjacent `.py` tests (acknowledged, not parity-gated)
+
+| Test script | Phase | Asserts about | Why `.py` (sanctioned exception) |
+|---|---|---|---|
+| [`test-check-spec-folder-refs.py`](./test-check-spec-folder-refs.py) | 144 | `check-spec-folder-refs.py::load_allowlist()` strips inline `# comment` trailers (AC-62-04) — 4 `tempfile`-based unit tests | Exercises an internal function, not the CLI; loading the hyphenated source requires `importlib.util.spec_from_file_location`, which is awkward in bash. |
+
+These are CI-runnable via `python3 linter-scripts/test/test-*.py` but
+not yet wired into `spec-health.yml` (that's Phase F2, blocked on Phase
+F1 user verdicts).
 
 ---
 
