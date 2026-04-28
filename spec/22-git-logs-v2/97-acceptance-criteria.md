@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.9.1  
-**Updated:** 2026-04-28 (Phase 147 — `B1: keep forbidden` finalized: AC-17 prose tightened to drop the "until the §07 App identity decision is unblocked" hedge; `Environment` / `Platform` / `OwnerEmail` are now PERMANENTLY forbidden per §07 locked decision 12 (also bumped to v2.2.0). No AC IDs added/removed; AC count unchanged at 75; no DDL change; no schema bump.)
+**Version:** 3.9.2  
+**Updated:** 2026-04-28 (Phase P6 — `GAP-V2-06: locked-vacant precedent retained` — added **AC-22-LV1** declaring §09–§13 must remain file-absent; rejects the original GAP-V2-06 stub-file recipe in favour of the Core memory immutability rule. AC count 75 → 76. No DDL change; no schema bump.)
 
 ---
 
