@@ -5,8 +5,9 @@ description: Placement-rule router for research specs under coding guidelines. I
 
 # Research
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-26
+**Version:** 3.3.1  
+<!-- h10-verified-phase: 30 -->
+**Updated:** 2026-04-28
 
 ---
 

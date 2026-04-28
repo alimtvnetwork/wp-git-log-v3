@@ -1,7 +1,9 @@
 # Consistency Report — 21-app
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Version:** 1.1.0  
+
+> **v1.1.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 1 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `2.1.0`→`3.3.1`; §00 banner `3.3.0`→`3.3.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
+**Updated:** 2026-04-28  
 **Scope:** `spec/02-coding-guidelines/21-app/`
 
 ---

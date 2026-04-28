@@ -1,7 +1,7 @@
 # Changelog — App
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-26  
+**Version:** 3.3.1  
+**Updated:** 2026-04-28  
 **Scope:** `spec/02-coding-guidelines/21-app/`
 
 ---
@@ -16,6 +16,15 @@
 ---
 
 ## Releases
+### 3.3.1 — 2026-04-28 — Phase P30 batch reconciliation
+- §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.
+
+### 3.3.0 — 2026-04-28 — Phase P30 (P30 batch — dual-stream alignment)
+- Reconciles §98 release stream with §00 banner stream (`3.3.0`). Prior §98 ladder ended at `3.0.0` (after promoting any post-footer prose) but §00 banner already tracked `3.3.0` from independent module-version stream (P25 subcase). Per P25 precedent, single alignment row added at §00 banner version; lockstep gate now satisfied.
+
+### 3.0.0 — 2026-04-28 — promoted by Phase P30 (P30 batch — P28-style hybrid)
+- Reconstructed from post-footer prose: `## 2026-04-27 — Phase 74 (evidenced index/tracker bonus)`. **Minor bump**: additive content (typed contracts, OpenAPI surface, Mermaid diagram, frontmatter, etc.) — no behavior change.
+
 ### 2.1.0 — 2026-04-26
 - **Phase 24 — `kind: index` exemption.** Added YAML front-matter `kind: index` to `00-overview.md` to mark this module as a placement-rule router (intentionally empty / index-only). Audit script v2.2 honours the exemption, removing `missing-contract` and `untestable` rubric findings. Result: module lifted from C-tier to B-tier in the v2-deterministic audit.
 
@@ -39,10 +48,3 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
-
-## 2026-04-27 — Phase 74 (evidenced index/tracker bonus)
-
-- Added Mermaid lifecycle diagram and 5-stage CI workflow contract.
-- Activates v2.9 evidenced-tracker / evidenced-index bonus (+5 each).
-- Documentation-only promotion.
-

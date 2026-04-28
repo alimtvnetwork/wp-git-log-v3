@@ -1,7 +1,9 @@
 # Consistency Report — Coding Guidelines
 
-**Version:** 4.3.0
-**Last Updated:** 2026-04-27
+**Version:** 4.4.0
+
+> **v4.4.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 0 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `2.3.0`→`3.3.1`; §00 banner `3.3.0`→`3.3.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
+**Last Updated:** 2026-04-28
 **Health Score:** 100/100 (A+)
 
 > **v4.3.0 update (Phase 47 — slot-06 co-location documentation fix):** Added `06-cicd-integration/` row to the subfolder inventory and `**Total:**` line. The folder physically exists with full §00/§97/§98/§99 (per `mem://specs/phased-roadmap.md` Phase 16r §28 closure) and shipped at slot 06 alongside `06-ai-optimization/` per the **§16→§37 immutability precedent** (once a slot has shipped a §97, the slot label is frozen even if a sibling later co-locates — rename would invalidate downstream cross-refs). This was a documentation-only omission in the §00 and §99 inventory tables; no folder rename, no AC churn, no §97 contract change. B2 backlog item closed without rename per "no destructive moves on shipped slots" rule.

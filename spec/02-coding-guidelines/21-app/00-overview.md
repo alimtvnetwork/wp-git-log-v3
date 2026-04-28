@@ -5,8 +5,9 @@ description: Placement-rule router for app-specific spec content under coding gu
 
 # App
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-26
+**Version:** 3.3.1  
+<!-- h10-verified-phase: 30 -->
+**Updated:** 2026-04-28
 
 ---
 

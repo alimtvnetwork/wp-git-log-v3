@@ -5,7 +5,8 @@ description: Top-level routing index for app issue analysis (parent of two child
 
 # App Issues
 
-**Version:** 3.4.0  
+**Version:** 3.4.1  
+<!-- h10-verified-phase: 30 -->
 **Updated:** 2026-04-28 (Phase P11 — nested-subdir audit; symmetric supersession routing surfaced)
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
