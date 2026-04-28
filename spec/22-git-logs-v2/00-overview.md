@@ -6,8 +6,8 @@ description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.8.7  
-**Updated:** 2026-04-26 (Phase 27 drift sweep: future-spec frontmatter added so drift gate stops flagging missing downstream PHP plugin code as a regression)  
+**Version:** 3.8.8  
+**Updated:** 2026-04-28 (Phase P5: §22 slot-16 collision resolved — superseded `16-test-plan.md` relocated to `38-test-plan-superseded.md`; live `16-seed-data.md` content unchanged. Inventory rows for §16 and §38 updated. Mirrors v2.8.6 precedent (§16 → §37 rename) per Core memory file-slot-immutability rule.)
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
