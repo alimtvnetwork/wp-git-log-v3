@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.28.0
+**Version:** 2.29.0
 **Updated:** 2026-04-28
+
+> **v2.29.0 update (Phase 143/144 — AC-62-04 enforced in code + locked by regression test):** Phase 143 hardened `linter-scripts/check-spec-folder-refs.py::load_allowlist()` to defensively strip inline trailing `# comment` from entry lines (tagged `AC-62-04 (Phase 143)` inline), so the parser-bug class can no longer corrupt buckets even if a contributor uses inline trailers. Phase 144 added `linter-scripts/test_check_spec_folder_refs.py` — 4 self-contained `tempfile`-based tests covering plain-entry routing, AC-62-04 inline-comment strip, whitespace-then-comment edge case, and `[doc-only]` routing under inline comments. Result: `PASS (4/4)`. The full-line-comment-only convention remains the documented preferred form; inline trailers are tolerated, not blessed. Memory alone is not enforcement — Phase 144 turns AC-62-04 into an executable contract. Neither the linter nor the new test is yet wired into `spec-health.yml`; that's Phase F2, blocked on Phase F1 user verdicts. No spec score change. Tree-health 168/168 strict ✓; lockstep 87/87 / 0 findings ✓. §98 v2.31.0 → **v2.32.0**.
 
 > **v2.28.0 update (Phase 143 — bulk-classify 13 stale folder refs + AC-62-04):** Reduced `check-spec-folder-refs.py` stale-refs count from **29 → 11** (-62%) by allowlisting 13 documentation-only folder names verified as deliberate references, not authoring drift: 4 narrative examples (`04-some-feature`, `30-cross-repo-foo`, `31-cross-repo-bar`, `99-nonexistent`), 4 archived/historical names (`21-git-logs`, `21-git-logs-v1`, `22-app-issues`, `29-app-issues-cli`), and 3 deprecated/typo examples used in §27 linter spec GWT bodies (`12-cicd-pipelines`, `14-generic-update`, `15-self-update-app-update`). Lockstep: §62 v1.0.0 → **v1.1.0** (changelog section added; AC-62-04 added). New **AC-62-04** codifies the inline-comment parser-bug discovered empirically during this phase: `check-spec-folder-refs.py:128` does `buckets[current].add(line.strip())` with no `#` stripping, so trailers corrupt the bucket — Phase 143's first write attempt used inline trailers and saw zero count drop until comments were moved to separate lines above the entries. AC-62-04 prevents future contributors from repeating the mistake. The remaining 11 stale refs (6 unique missing targets) are real authoring drift in `spec/01-spec-authoring-guide/04-ai-onboarding-prompt.md` + a few prose mentions in `07-design-system` / `17-consolidated-guidelines` — they require user-intent classification (typo / planned future module / sibling-repo) and are deferred under "Phase F". `check-spec-folder-refs.py` is NOT CI-gated (zero refs in `.github/workflows/`), so this phase is dormant-linter noise reduction, not a CI fix. Tree-health: **168/168 strict** ✓; lockstep: **0 findings** ✓; no spec score regression. §98 v2.30.0 → **v2.31.0**.
 
@@ -155,6 +157,7 @@ _None._
 
 | Date | Version | Action |
 |------|---------|--------|
+| 2026-04-28 | 2.29.0 | Phase 143/144: AC-62-04 enforced in `check-spec-folder-refs.py::load_allowlist()` (defensive inline-`#` strip); locked by `test_check_spec_folder_refs.py` (4/4 PASS). Banner 2.28.0→2.29.0; §98 v2.31.0→v2.32.0. No spec score change. |
 | 2026-04-27 | 2.5.0 | Phase 39b: Added §00 "Audit Marker Exemption" — `todo_count: 4` was substring false-positive (all hits inside script-spec content defining how the toolchain detects/processes TODOs). Banner v1.1.0→v1.2.0; §98 v2.7.0→v2.8.0. |
 | 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
 | 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |

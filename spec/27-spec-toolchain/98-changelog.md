@@ -1,12 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.31.0
+**Version:** 2.32.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
 
-### 2.31.0 — 2026-04-28 — Phase 143: bulk-classified 13 stale folder refs + new AC-62-04
+### 2.32.0 — 2026-04-28 — Phase 143/144: AC-62-04 enforced in code + locked by regression test
+- **Phase 143 (parser hardening):** `linter-scripts/check-spec-folder-refs.py::load_allowlist()` now strips inline trailing `# comment` from entry lines defensively, so the AC-62-04 bug class can no longer corrupt the bucket even if a contributor uses inline trailers. The full-line-comment-only convention remains the documented preferred form; inline trailers are tolerated, not blessed. Tagged `AC-62-04 (Phase 143)` inline at the strip site. Verified: linter still exits 0 with the same 11 dormant warnings as Phase 143's allowlist sweep — no behavior change for clean input.
+- **Phase 144 (regression test):** Added `linter-scripts/test_check_spec_folder_refs.py` — 4 self-contained tests (`tempfile`-based, no real allowlist read) covering: (1) plain entry routing to `[external]`, (2) **AC-62-04 inline-comment strip**, (3) whitespace-then-comment lines do not insert `""`, (4) `[doc-only]` routing survives inline comments. Loads the hyphenated linter via `importlib`. Result: `PASS (4/4)`.
+- **Why both in one bump:** Phase 143 codified the rule in code; Phase 144 turned the rule into an executable contract. Memory alone is not an enforcement mechanism — a regression test is.
+- **Not yet CI-gated:** `check-spec-folder-refs.py` and the new test will both be wired into `spec-health.yml` in Phase F2, which is blocked on Phase F1 user verdicts for the remaining 6 unclassified missing folders. No spec score change. Tree-health 168/168 strict ✓; lockstep 87/87 / 0 findings ✓.
+
+
 - §62 v1.0.0 → **v1.1.0**. Added 13 entries to `linter-scripts/spec-folder-refs.allowlist` under `[doc-only]`: 4 narrative examples (`04-some-feature`, `30-cross-repo-foo`, `31-cross-repo-bar`, `99-nonexistent`), 4 archived/historical names (`21-git-logs`, `21-git-logs-v1`, `22-app-issues`, `29-app-issues-cli`), 3 deprecated/typo examples (`12-cicd-pipelines`, `14-generic-update`, `15-self-update-app-update`). Each entry verified against its source markdown as a deliberate documentation reference, not authoring drift. Stale-refs count: **29 → 11** (-62%, -18 refs).
 - **AC-62-04 added** — codifies a parser bug discovered during the bulk-add: `check-spec-folder-refs.py:128` does not strip inline `# comment` suffixes from entry lines, so trailers like `04-some-feature  # narrative example` are stored verbatim and never match the bare folder name. Allowlist comments MUST be on separate full lines above the entry. Phase 143 hit this on the first write; AC-62-04 prevents future contributors from repeating the mistake.
 - Remaining 11 stale refs (across 6 unique missing targets: `08-docs-viewer-ui`, `09-code-block-system`, `21-app`, plus a few in `01-spec-authoring-guide`, `07-design-system`, `17-consolidated-guidelines`) are real authoring drift in `spec/01-spec-authoring-guide/04-ai-onboarding-prompt.md` + a few prose mentions elsewhere — they require user intent (typo? planned future module? sibling-repo?) and are deferred under "Phase F".
