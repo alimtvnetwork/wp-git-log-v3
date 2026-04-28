@@ -250,19 +250,22 @@ jobs:
         # with the snapshot-based H1 freshness gate (decay over time): edits
         # must bump (this gate, budget=0), unedited stamps decay (freshness,
         # budget=20). Files without a tracked stamp are SKIPPED — natural
-        # ratchet as authors opt-in. Skips on push to main (no diff base).
+        # ratchet as authors opt-in. On push to main (no PR base ref) the
+        # validator step is skipped; the self-test always runs to lock the
+        # AC-27-01..08 contract. Per the H1 workflow-step parity lesson the
+        # self-test is collapsed into this same step (single-gate test) to
+        # preserve AC-31-28 footer-row ↔ workflow-step ↔ declared-count
+        # parity at 16/16/16.
         # Spec: spec/27-spec-toolchain/27-check-99-stamp-bump.md (AC-27-01..08)
-        if: github.event_name == 'pull_request'
         env:
           STAMP_BUMP_BASE_REF: ${{ github.event.pull_request.base.sha }}
-        run: python3 linter-scripts/check-99-stamp-bump.py
-
-      - name: Self-test §99 stamp-bump gate (Phase H5)
-        # Phase H5: locks the AC-27-01..08 contract under CI (skip-rules,
-        # phase-detection, archive exclusion, structural error modes). Runs
-        # always — independent of pull_request context, since it injects its
-        # own diff via --changed-files / --treat-as-stamp-only flags.
-        run: bash linter-scripts/test/test-check-99-stamp-bump.sh
+        run: |
+          bash linter-scripts/test/test-check-99-stamp-bump.sh
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            python3 linter-scripts/check-99-stamp-bump.py
+          else
+            echo "ℹ️  Skipping diff-based stamp-bump check (not a pull_request event)."
+          fi
 
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
