@@ -981,7 +981,7 @@
 
 | File | Title | Version |
 |------|-------|---------|
-| `spec/27-spec-toolchain/00-overview.md` | Spec Toolchain | 2.46.3 |
+| `spec/27-spec-toolchain/00-overview.md` | Spec Toolchain | 2.47.0 |
 | `spec/27-spec-toolchain/01-check-spec-cross-links.md` | 01 — check-spec-cross-links.py | 1.0.0 |
 | `spec/27-spec-toolchain/02-check-spec-folder-refs.md` | 02 — check-spec-folder-refs.py | 1.0.0 |
 | `spec/27-spec-toolchain/03-check-forbidden-strings.md` | 03 — check-forbidden-strings.py | 1.0.0 |
@@ -1023,9 +1023,9 @@
 | `spec/27-spec-toolchain/63-readme-cross-links-md.md` | 63 — readme-cross-links.md | 1.0.0 |
 | `spec/27-spec-toolchain/70-spec-health-yml.md` | 70 — spec-health.yml | 1.1.0 |
 | `spec/27-spec-toolchain/71-spec-monthly-audit-yml.md` | 71 — spec-monthly-audit.yml | 1.0.0 |
-| `spec/27-spec-toolchain/97-acceptance-criteria.md` | Acceptance Criteria — Spec Toolchain | 2.2.0 |
-| `spec/27-spec-toolchain/98-changelog.md` | Changelog — Spec Toolchain | 2.46.3 |
-| `spec/27-spec-toolchain/99-consistency-report.md` | Consistency Report — Spec Toolchain | 2.43.3 |
+| `spec/27-spec-toolchain/97-acceptance-criteria.md` | Acceptance Criteria — Spec Toolchain | 2.3.0 |
+| `spec/27-spec-toolchain/98-changelog.md` | Changelog — Spec Toolchain | 2.47.0 |
+| `spec/27-spec-toolchain/99-consistency-report.md` | Consistency Report — Spec Toolchain | 2.44.0 |
 | `spec/27-spec-toolchain/trace-map.md` | Spec ↔ Code Trace Map |  |
 
 ## 📁 28-universal-ci-cli
