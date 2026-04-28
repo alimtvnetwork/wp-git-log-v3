@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.42.4
+**Version:** 2.42.5
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.42.5 — 2026-04-28 — Phase H1-S5: §99 Summary stamp adoption batch 5 — folder 03 cluster (19 modules; coverage 27/89 → 46/89; 1 stale freshen)
+- **Action**: Fifth opt-in adoption batch. Audited 19 unstamped §99 files under `spec/03-error-manage/`: `01-error-resolution/{root,03-retros,04-verification,05-debugging,app-issues}` (5), `02-error-architecture/{root,04-modal × 5,05-envelope,06-apperror × 2,07-logging}` (10), `03-error-code-registry/{root,07-schemas,08-linter-scripts,09-templates}` (4). 18 confirmed materially-fresh (Errors:0/Warnings:0/Health 100/100; 4 with non-empty Observations all factual — modal redirect-stub parents + deprecated-frozen `02-react-components.md`).
+- **Stale find — `spec/03/02-error-architecture/99`**: claimed `Health Score: 98/100 (A+)` + 1 warning ("3 error-modal subfolders still missing consistency reports") that no longer holds — all 4 modal subfolders (`01-copy-formats`, `02-react-components`, `03-error-modal-reference`, `04-color-themes`) ship `99-consistency-report.md` and are at full marks (this very batch stamped all 4). Freshened prose to `Errors:0 / Warnings:0 / Health 100/100` + stamped per H1-S1 rule.
+- **Stamp coverage**: 27/89 → **46/89** §99 files stamped (~52% all §99; ~94% of the 49 trackable Summary-bearing files). Gate remains advisory project-wide (43 unstamped → exit 0).
+- **Stale-discovery rate update**: H1-S1+S2+S3+S4+S5 cumulative = **3/46 ≈ 6.5%** (down from S4's 7.4%). Bimodal distribution holds: well-maintained clusters (folder 02 in S4: 0/15; folder 03 in S5: 1/19 = 5%) ≈ 0-5% stale; older one-off modules ≈ 50-100%. Steady-state confirmed at ~5-10%.
+- **Lockstep impact**: NONE on the 19 stamped target files (content-only edits). Verified: `node check-lockstep.cjs` 87/87 / 0 findings unchanged.
+- **Verified**: `python3 check-99-summary-freshness.py --report-only` → "stamped: 46; unstamped: 43 — within budget" ✅; `node check-lockstep.cjs` → 87/87 / 0 ✅; `node check-tree-health.cjs --strict` → 168/168 ✅. §27 §98 v2.42.4 → **v2.42.5** (patch — adoption-only). Memo: `.lovable/memory/audit/v2-deterministic/phase-h1-s5-summary-stamp-adoption-batch-5.md`.
 
 ### 2.42.4 — 2026-04-28 — Phase H1-S4: §99 Summary stamp adoption batch 4 — folder 02 cluster (15 modules; coverage 12/89 → 27/89)
 - **Action**: Fourth opt-in adoption batch. Audited all 15 §99 files under `spec/02-coding-guidelines/` with a `## Summary` heading: `01-cross-language/{root,02-boolean,04-code-style,15-master,16-static-analysis}` (5), `02-typescript`, `03-golang/{root,01-enum,04-standards-ref}` (3), `04-php/{root,07-standards-ref}` (2), `07-csharp`, `08-file-folder-naming`, `11-security/{root,01-axios}` (2). All 15 confirmed materially-fresh (Errors:0 / Warnings:0 / Health 100/100 A+ — aligns with current tree-health 168/168 strict + rubric v2.24); the 2 with non-empty Observations were factual (`04-code-style` split-from-1458-line history; `04-php` numbering-gap 04/06 intentionality). Stamp-only edits.

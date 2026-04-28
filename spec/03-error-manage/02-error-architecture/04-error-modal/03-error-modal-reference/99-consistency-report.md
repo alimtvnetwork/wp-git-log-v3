@@ -56,7 +56,7 @@
 ---
 
 ## Summary
-
+<!-- verified-phase: 147 -->
 - **Errors:** 0
 - **Warnings:** 0
 - **Observations:** 1 — Parent `03-error-modal-reference.md` is a redirect stub pointing to this subfolder

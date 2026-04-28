@@ -37,10 +37,11 @@
 ---
 
 ## Summary
+<!-- verified-phase: 147 -->
 
 - **Errors:** 0
-- **Warnings:** 1 — 3 error-modal subfolders still missing consistency reports
-- **Health Score:** 98/100 (A+)
+- **Warnings:** 0 (Phase H1-S5 reconciliation: prior "3 error-modal subfolders missing consistency reports" warning was stale — all 4 modal subfolders [`01-copy-formats`, `02-react-components`, `03-error-modal-reference`, `04-color-themes`] now ship `99-consistency-report.md`, each at full marks)
+- **Health Score:** 100/100 (A+) under rubric v2.24 strict (tree-health 168/168 confirms full marks)
 
 ---
 
