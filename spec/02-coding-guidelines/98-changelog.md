@@ -17,11 +17,11 @@
 
 ## Releases
 
-### 3.3.0 — 2026-04-28 — Phase P30 (P30 batch — dual-stream alignment)
-- Reconciles §98 release stream with §00 banner stream (`3.3.0`). Prior §98 ladder ended at `2.3.0` (after promoting any post-footer prose) but §00 banner already tracked `3.3.0` from independent module-version stream (P25 subcase). Per P25 precedent, single alignment row added at §00 banner version; lockstep gate now satisfied.
-
 ### 3.3.1 — 2026-04-28 — Phase P30 batch reconciliation
 - §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.
+
+### 3.3.0 — 2026-04-28 — Phase P30 (P30 batch — dual-stream alignment)
+- Reconciles §98 release stream with §00 banner stream (`3.3.0`). Prior §98 ladder ended at `2.3.0` (after promoting any post-footer prose) but §00 banner already tracked `3.3.0` from independent module-version stream (P25 subcase). Per P25 precedent, single alignment row added at §00 banner version; lockstep gate now satisfied.
 
 ### 2.3.0 — 2026-04-27 (Phase 47 — slot-06 co-location documentation fix)
 - **Fixed** §00 "Language & Cross-Language Standards" inventory table missing the `06-cicd-integration/` row (folder physically exists with full §00/§97/§98/§99 from Phase 16r §28 closure but was omitted from the documentation index). Added the row directly beneath `06-ai-optimization/` to make the slot-06 co-location explicit and discoverable. Also added the missing row to §99 subfolder inventory and corrected `**Total:**` from "14 subfolders (~121 files)" to "15 subfolders (~128 files)".
