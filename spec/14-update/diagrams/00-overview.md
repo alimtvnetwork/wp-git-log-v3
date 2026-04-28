@@ -6,6 +6,7 @@ description: Diagram index for self-update / app-update workflows. Indexes Merma
 
 **Version:** 3.4.0  
 **Updated:** 2026-04-27
+<!-- h10-verified-phase: 32 -->
 
 ---
 

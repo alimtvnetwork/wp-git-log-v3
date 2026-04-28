@@ -1,10 +1,20 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.61.0
+**Version:** 2.62.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.62.0 — 2026-04-28 — Phase P32: H10 stamp adoption complete — 74/74 modules stamped (100%)
+- **Action**: Batch-stamped the remaining 17 unstamped-but-matched §00 files with `<!-- h10-verified-phase: 32 -->` via `/tmp/p32-stamp.py`. Pure additive comment insertion after each `**Updated:**` line — no version bumps, no date changes, no §98 rows. Now that gate #19 is strict (Phase P31), stamping is purely promotional metadata: each stamped file opts into the per-file P20 strict-promotion contract on top of the workflow-level strict invocation, providing belt-and-braces protection. Each stamp explicitly certifies "an author verified this §00 ↔ §98 parity at Phase 32."
+- **Modules stamped (17)**: `07-design-system`, `15-distribution-and-runner`, `18-wp-plugin-how-to`, `22-git-logs-v2`, `26-gitlogs-diagrams`, `27-spec-toolchain`, `25-app-issues/{01-phase-2-git-logs-audit,02-consolidated-audit-findings}`, `18-wp-plugin-how-to/02-enums-and-coding-style`, `14-update/diagrams`, `12-cicd-pipeline-workflows/03-reusable-ci-guards`, `03-error-manage/02-error-architecture/{04-error-modal,05-response-envelope,07-logging-and-diagnostics,04-error-modal/03-error-modal-reference}`, `02-coding-guidelines/{08-file-folder-naming,09-powershell-integration}`.
+- **Gate impact**: matches=74/74 (unchanged — already at 100%), mismatches=0 (unchanged), **stamped=57→74 (+17, 100%)**, stamped_failed=0. **STAMP ADOPTION: 57/74 → 74/74 — TREE-WIDE COMPLETE.**
+- **What 100% stamping unlocks**: every eligible §00 now carries the `<!-- h10-verified-phase: NNN -->` certificate. Future P31-style strict-flips for other advisory gates can use the stamp count as a readiness signal that doesn't require running the gate (e.g. `grep -rc h10-verified-phase spec/ | sort | uniq -c` provides a cheap progress dashboard). Codifies the H1→H8 → P15→P20→P30→P31→P32 adoption arc as a complete, reproducible template.
+- **No CI workflow change, no script change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no spec slot version change** — pure consumer-side metadata adoption phase.
+- **P32 lessons codified (1 new)**:
+  - **(1) Post-strict-flip stamping is purely additive and risk-free**. Pre-strict-flip (P20→P30 era), stamping a drifting §00 would FAIL the gate per the P20 per-file strict-promotion contract — so the order had to be (a) reconcile drift, then (b) stamp. Post-strict-flip (P31+ era), the workflow already exits 1 on any drift; stamping a matched §00 just adds belt-and-braces certification with zero risk of new failure. **Future advisory→strict transitions SHOULD batch-stamp eligible+matched modules immediately after the strict-flip lands** — the work is mechanically uniform (~1 tool call) and the dashboard signal jumps to 100% in one phase.
+- **Verified**: parity 87/74/74/0/stamped=**74**/stamped_failed=0 / exit 0 with `--strict` ✅; lockstep 87/87/0 ✅ (stamps don't move dates, lockstep clean); tree-health 168/168 strict ✅; H10 self-test 13/13 ✅.
 
 ### 2.61.0 — 2026-04-28 — Phase P31: H10 strict-flip — gate #19 promoted to hard CI block
 - **Action**: With the reverse-drift backlog fully cleared at P30 (matches=74/74, mismatches=0, stamped=57/74, stamped_failed=0), the AC-T-25 dispensation that justified `check-version-parity.py` running advisory-by-default no longer applies. Flipped `.github/workflows/spec-health.yml` to invoke `python3 linter-scripts/check-version-parity.py --strict` for the §00 ↔ §98 Version-field parity step. Any §00 ↔ §98 drift now blocks the build.
