@@ -1,7 +1,7 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.4.0
-**Updated:** 2026-04-28
+**Version:** 3.4.1
+**Updated:** 2026-04-28 (Phase P19 — H10 §00↔§98 version-field parity catch-up)
 **Scope:** `spec/26-gitlogs-diagrams/`
 
 ---
