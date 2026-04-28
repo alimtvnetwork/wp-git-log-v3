@@ -6,7 +6,7 @@ This document explains the quality bar, the four CI gates, and how to keep them 
 
 ---
 
-## Quality bar (current as of Phase 86)
+## Quality bar (current as of Phase 147 / v2-deterministic Phase 23)
 
 | Metric | Threshold | Source |
 |---|---:|---|
@@ -49,7 +49,7 @@ AUDIT_DETERMINISTIC=1 python3 linter-scripts/audit-spec-vs-code-v2.py \
 
 Scores every module on 7 dimensions (implementability 35%, completeness 20%, alignment 15%, consistency 10%, clarity 10%, testability 7%, maintainability 3%) and applies hard scoring gates. `--min-weighted=N` and `--min-impl=N` (added in Phase 81) exit non-zero when the corpus mean drops below the floor. Floors set ~1 pt below current means to absorb noise while catching genuine regressions.
 
-Full rubric: `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` (currently at v1.8.0, covering script v2.15).
+Full rubric: `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` (currently at v1.23.0, covering script v2.17, `RUBRIC_VERSION = "v2.26"`).
 
 ### 4. Trace-map regression
 
@@ -114,7 +114,7 @@ Each completed work phase is captured in `.lovable/memory/audit/v2-deterministic
 - **Verification** — which gates were re-run and their results
 - **Effect** — measurable impact (score deltas, locked-in behaviour, etc.)
 
-Look at `phase-81` through `phase-86` for examples.
+Look at `phase-81` through `phase-86` for rubric-tuning examples; `phase-18` through `phase-23` for recent stale-prose / drift-sweep examples.
 
 ---
 
