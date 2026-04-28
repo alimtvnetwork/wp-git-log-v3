@@ -159,6 +159,14 @@ Whichever yields the highest integer wins.
 - **When** the gate runs,
 - **Then** the file MUST be counted under `exempt:` AND MUST NOT increment `unstamped:` AND MUST NOT cause exit 1, regardless of whether any tracked heading is present or any stamp exists.
 
+### AC-26-10 — Misplaced stamp detection (Phase H9)
+- **Given** a §99 file containing `<!-- verified-phase: NNN -->` OUTSIDE any tracked-heading body AND followed within ≤3 non-empty lines by a tracked heading,
+- **When** the gate runs in default mode,
+- **Then** an advisory warning MUST be emitted (`stamp(s) placed immediately BEFORE a tracked heading`) AND exit code MUST remain 0.
+- **When** the gate runs with `--strict-position`,
+- **Then** the same finding MUST cause exit 1 (unless `--report-only` is also set).
+- **Negative case**: a stamp inside a blockquote or other narrative far from any tracked heading (e.g. §27's Validation History referencing past phases) MUST NOT be flagged — only adjacency to a tracked heading constitutes misplacement.
+
 ## Cross-references
 
 - §99 [`99-consistency-report.md`](./99-consistency-report.md) — health/inventory; this gate is itself listed in §99's File Inventory.
@@ -174,8 +182,18 @@ unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 
 ## Changelog
 
+### 1.3.0 — 2026-04-28 — Phase H9 (stamp-position structural enforcement)
+- **Promoted H8 stamp-position precedent to lint check.** New `find_misplaced_stamps()` detects `<!-- verified-phase: NNN -->` placed OUTSIDE any tracked-heading body but immediately ABOVE a tracked heading (within ≤3 non-empty lines). Runs on every non-exempt §99 file each invocation.
+- **New `--strict-position` flag**: turns the misplaced-stamp finding into an exit-1 failure. Without the flag, advisory warning only.
+- **CI wired strict immediately**: `.github/workflows/spec-health.yml` step `§99 Summary freshness gate (Phase H1 / H8 / H9)` now passes `--strict-position` because the real tree has 0 misplaced findings post-H8 — flipping strict immediately locks the gain (no risk of false positives, no migration window needed).
+- **Adjacency-only rule** (vs whole-file outside-body): chosen because §27's own §99 legitimately documents past stamps inside Validation History blockquotes (lines 6, 24). Whole-file rule would emit false positives; adjacency rule (`stamp → ≤3 non-empty lines → tracked heading`) catches the real H8 failure mode (`stamp\n\n## Summary`) without flagging documentation references.
+- Self-test extended 20 → **27 assertions** (T12 misplaced advisory mode, T13 `--strict-position` exits 1, T14 blockquote-buried stamp not flagged).
+- Acceptance criteria addition: AC-26-10 (misplaced stamp detection — both modes + negative case).
+- **No AC-31-31 cascade, no rubric bump, no new gate**: same slot-26 gate, tighter contract within existing CI step.
+
 ### 1.2.0 — 2026-04-28 — Phase H8 (freshness coverage closure)
 - **New `<!-- freshness-exempt: <reason> -->` marker** recognized anywhere in file body (not heading-scoped). Files matching are counted under `exempt:` and skipped before the find-stamp pass.
+- **Output line shape changed**: `§99 files scanned: N; stamped: N; exempt: N; unstamped: N` (added `exempt:` field between stamped and unstamped).
 - **Output line shape changed**: `§99 files scanned: N; stamped: N; exempt: N; unstamped: N` (added `exempt:` field between stamped and unstamped).
 - **Coverage closure**: 75 stamped + 12 unstamped → **81 stamped + 6 exempt + 0 unstamped** (87/87 declare a posture). The 6 exempt files are audit-log-only — no `## Summary` and no inventory rubric, only date-anchored audit-log subsections.
 - **Stamp-position fix sweep** (one-time): 5 files carried the stamp BEFORE `## Summary` rather than under it; repositioned. Precedent codified — stamps MUST live inside a tracked-heading body, not adjacent.

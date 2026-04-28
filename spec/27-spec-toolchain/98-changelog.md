@@ -1,10 +1,20 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.46.1
+**Version:** 2.46.2
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.46.2 — 2026-04-28 — Phase H9: stamp-position structural enforcement (slot 26 v1.2.0 → v1.3.0; same gate, tighter contract)
+- **Action**: Promoted the Phase H8 stamp-position precedent ("stamps MUST live INSIDE a tracked-heading body, not adjacent") from a one-time sweep + memory rule to a structural lint inside the existing slot-26 gate. New `find_misplaced_stamps()` scans every non-exempt §99 for stamps placed OUTSIDE any tracked-heading body AND immediately ABOVE a tracked heading (within ≤3 non-empty lines).
+- **Two-mode contract**: default mode emits advisory warning (exit 0); new `--strict-position` flag turns the finding into exit 1. CI wired strict immediately because real-tree had 0 misplaced findings post-H8 — locks the H8 gain with no migration window.
+- **Adjacency-only rule** (deliberately narrower than "any stamp outside any tracked body"): chosen because §27's own §99 legitimately references past stamps inside Validation History blockquotes (lines 6, 24). A whole-file rule would emit false positives on documentation; adjacency rule catches the actual H8 failure mode (`stamp → blank → ## Summary`) without flagging narrative references. Codified in AC-26-10's negative case.
+- **Self-test**: extended 20 → **27 assertions** (T12 misplaced advisory mode, T13 `--strict-position` exits 1, T14 blockquote-buried stamp not flagged → no false-positive). All 27/27 ✅.
+- **Workflow comment update**: spec-health.yml step renamed to `§99 Summary freshness gate (Phase H1 / H8 / H9)` with explanatory comment block; passes `--strict-position`.
+- **No AC-31-31 cascade, no rubric bump, no new gate**: gate count remains **17/17/17**, RUBRIC_VERSION remains **v2.26**. Same slot-26 gate, tighter contract within the existing CI step. Footer/EXECUTIVE-SUMMARY/qa-baseline-footer awk all unchanged.
+- **Verified**: freshness gate `--strict-position` ✅ (87 scanned, 81 stamped, 6 exempt, 0 unstamped, 0 stale, 0 misplaced); self-test 27/27 ✅; lockstep 87/87 / 0 ✅; tree-health 168/168 strict ✅; §27-inventory 6/6 ✅.
+- §98 v2.46.1 → **v2.46.2** (patch — contract tightening, no surface change); §99 v2.43.1 → **v2.43.2**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h9-stamp-position-enforcement.md`.
 
 ### 2.46.1 — 2026-04-28 — Phase H8: §99 freshness coverage closure (12 unstamped → 0; exempt-marker convention)
 - **Action**: Drove §99 freshness-stamp coverage from 75/87 stamped + 12 unstamped → **81 stamped + 6 exempt + 0 unstamped** (full 87/87). Codifies the H1 stamp adoption rollout as feature-complete: every §99 file under `spec/` (excluding `_archive/`) now declares a freshness posture, either via `<!-- verified-phase: NNN -->` (stampable narrative/inventory) or `<!-- freshness-exempt: <reason> -->` (audit-log-only files with no claims to verify).
