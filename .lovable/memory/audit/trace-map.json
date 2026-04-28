@@ -222,6 +222,78 @@
         "symbol": null
       }
     ],
+    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01": [
+      {
+        "file": "linter-scripts/fill-missing-acceptance-criteria.cjs",
+        "kind": "function",
+        "note": "idempotent \u2014 second run is a no-op",
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02": [
+      {
+        "file": "linter-scripts/fill-missing-acceptance-criteria.cjs",
+        "kind": "config",
+        "note": null,
+        "symbol": "AC_TEMPLATE"
+      }
+    ],
+    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03": [
+      {
+        "file": "linter-scripts/fill-missing-acceptance-criteria.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "skip_existing"
+      }
+    ],
+    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01": [
+      {
+        "file": "linter-scripts/fill-missing-changelogs.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02": [
+      {
+        "file": "linter-scripts/fill-missing-changelogs.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "today_iso"
+      }
+    ],
+    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03": [
+      {
+        "file": "linter-scripts/fill-missing-changelogs.cjs",
+        "kind": "config",
+        "note": null,
+        "symbol": "CATEGORIES"
+      }
+    ],
+    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01": [
+      {
+        "file": "linter-scripts/fill-missing-consistency-reports.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02": [
+      {
+        "file": "linter-scripts/fill-missing-consistency-reports.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "scan_inventory"
+      }
+    ],
+    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03": [
+      {
+        "file": "linter-scripts/fill-missing-consistency-reports.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "skip_existing"
+      }
+    ],
     "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01": [
       {
         "file": "linter-scripts/audit-spec-vs-code-v2.py",
@@ -440,6 +512,21 @@
     ],
     "linter-scripts/deepen-consistency-reports.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24"
+    ],
+    "linter-scripts/fill-missing-acceptance-criteria.cjs": [
+      "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01",
+      "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02",
+      "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03"
+    ],
+    "linter-scripts/fill-missing-changelogs.cjs": [
+      "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01",
+      "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02",
+      "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03"
+    ],
+    "linter-scripts/fill-missing-consistency-reports.cjs": [
+      "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01",
+      "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02",
+      "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03"
     ],
     "linter-scripts/generate-fix-checklist.py": [
       "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-01",
@@ -1574,15 +1661,6 @@
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-04",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-05",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-06",
-    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01",
-    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02",
-    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03",
-    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01",
-    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02",
-    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03",
-    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01",
-    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02",
-    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03",
     "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-01",
     "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-02",
     "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-03",
@@ -1729,44 +1807,7 @@
   ],
   "errors": {
     "missing_ac": [],
-    "missing_file": [
-      {
-        "ac": "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01",
-        "file": "linter-scripts/fill-missing-acceptance-criteria.py"
-      },
-      {
-        "ac": "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02",
-        "file": "linter-scripts/fill-missing-acceptance-criteria.py"
-      },
-      {
-        "ac": "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03",
-        "file": "linter-scripts/fill-missing-acceptance-criteria.py"
-      },
-      {
-        "ac": "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01",
-        "file": "linter-scripts/fill-missing-changelogs.py"
-      },
-      {
-        "ac": "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02",
-        "file": "linter-scripts/fill-missing-changelogs.py"
-      },
-      {
-        "ac": "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03",
-        "file": "linter-scripts/fill-missing-changelogs.py"
-      },
-      {
-        "ac": "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01",
-        "file": "linter-scripts/fill-missing-consistency-reports.py"
-      },
-      {
-        "ac": "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02",
-        "file": "linter-scripts/fill-missing-consistency-reports.py"
-      },
-      {
-        "ac": "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03",
-        "file": "linter-scripts/fill-missing-consistency-reports.py"
-      }
-    ]
+    "missing_file": []
   },
   "orphan": [
     ".github/workflows/spec-monthly-audit.yml",
@@ -1779,9 +1820,6 @@
     "linter-scripts/check-readme-canonicals.py",
     "linter-scripts/check-readme-install-section.py",
     "linter-scripts/check-root-readme.py",
-    "linter-scripts/fill-missing-acceptance-criteria.cjs",
-    "linter-scripts/fill-missing-changelogs.cjs",
-    "linter-scripts/fill-missing-consistency-reports.cjs",
     "linter-scripts/forbidden-strings.toml",
     "linter-scripts/generate-dashboard-data.cjs",
     "linter-scripts/generate-spec-index.cjs",
@@ -1803,14 +1841,14 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1254,
+    "ac_drifted": 1245,
     "ac_total": 1299,
-    "ac_traced": 45,
-    "code_orphan": 32,
-    "code_referenced": 14,
+    "ac_traced": 54,
+    "code_orphan": 29,
+    "code_referenced": 17,
     "code_total": 46,
     "missing_ac": 0,
-    "missing_file": 9,
+    "missing_file": 0,
     "trace_entries": 54
   }
 }

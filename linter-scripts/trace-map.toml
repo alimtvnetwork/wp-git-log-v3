@@ -302,55 +302,55 @@ note   = "final ≤ raw overall (gates only subtract)"
 
 [[trace]]
 ac     = "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01"
-files  = ["linter-scripts/fill-missing-acceptance-criteria.py"]
+files  = ["linter-scripts/fill-missing-acceptance-criteria.cjs"]
 symbol = "main"
 kind   = "function"
 note   = "idempotent — second run is a no-op"
 
 [[trace]]
 ac     = "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02"
-files  = ["linter-scripts/fill-missing-acceptance-criteria.py"]
+files  = ["linter-scripts/fill-missing-acceptance-criteria.cjs"]
 symbol = "AC_TEMPLATE"
 kind   = "config"
 
 [[trace]]
 ac     = "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03"
-files  = ["linter-scripts/fill-missing-acceptance-criteria.py"]
+files  = ["linter-scripts/fill-missing-acceptance-criteria.cjs"]
 symbol = "skip_existing"
 kind   = "function"
 
 [[trace]]
 ac     = "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01"
-files  = ["linter-scripts/fill-missing-changelogs.py"]
+files  = ["linter-scripts/fill-missing-changelogs.cjs"]
 symbol = "main"
 kind   = "function"
 
 [[trace]]
 ac     = "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02"
-files  = ["linter-scripts/fill-missing-changelogs.py"]
+files  = ["linter-scripts/fill-missing-changelogs.cjs"]
 symbol = "today_iso"
 kind   = "function"
 
 [[trace]]
 ac     = "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03"
-files  = ["linter-scripts/fill-missing-changelogs.py"]
+files  = ["linter-scripts/fill-missing-changelogs.cjs"]
 symbol = "CATEGORIES"
 kind   = "config"
 
 [[trace]]
 ac     = "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01"
-files  = ["linter-scripts/fill-missing-consistency-reports.py"]
+files  = ["linter-scripts/fill-missing-consistency-reports.cjs"]
 symbol = "main"
 kind   = "function"
 
 [[trace]]
 ac     = "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02"
-files  = ["linter-scripts/fill-missing-consistency-reports.py"]
+files  = ["linter-scripts/fill-missing-consistency-reports.cjs"]
 symbol = "scan_inventory"
 kind   = "function"
 
 [[trace]]
 ac     = "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03"
-files  = ["linter-scripts/fill-missing-consistency-reports.py"]
+files  = ["linter-scripts/fill-missing-consistency-reports.cjs"]
 symbol = "skip_existing"
 kind   = "function"
