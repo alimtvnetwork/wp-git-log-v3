@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.16
-**Updated:** 2026-04-28 (Phase P16 — `GL-STREAM-*` lockstep closed: §15 v2.9.3 → v2.9.4 + §17 v2.9.5 → v2.9.6 + §97 v3.9.2 → v3.9.3 + AC-76; codes promoted from §04 §1.2 prose into §15 catalog and §17 `ErrorCode` enum with binding AC. AC count 76 → 77. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.17
+**Updated:** 2026-04-28 (Phase P17 — GAP-V2-09 closed: §00 v3.8.8 → v3.8.9 added Cross-References row pointing to `spec/28-universal-ci-cli/`; §37 v1.4.0 → v1.5.0 marked GAP-V2-09 RESOLVED. 9 of 10 historical gaps now closed; only GAP-V2-05 (user-blocked App identity) remains. Cosmetic discoverability fix; no AC/DDL/schema/enum/error-code change. AC count unchanged at 77. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
