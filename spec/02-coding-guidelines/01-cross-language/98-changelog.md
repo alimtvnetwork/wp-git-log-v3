@@ -9,6 +9,7 @@ All notable changes to the Cross-Language Coding Guidelines specification are do
 ---
 
 ## 4.1.0 — 2026-04-27
+- **P21 sync** (2026-04-28): §00 banner version field bumped 3.2.0 → 4.1.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 21 -->` stamp added under §00 banner; no spec content change).
 
 - Phase 53: appended typed-language / SQL DDL / JSON Schema contracts to overview to lift implementability score (no behavior change).
 
