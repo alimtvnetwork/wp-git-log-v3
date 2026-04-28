@@ -15,9 +15,25 @@ P15 baseline sweep found 59/74 modules drifting).
 
 Modes:
   default        : advisory; exit 0; emit one info line per mismatch.
-  --strict       : exit 1 on any mismatch (CI gate when adoption matures).
-  --report-only  : never fails (overrides --strict); useful for dashboards.
-  --json         : machine-readable output.
+                   Mismatches in STAMPED §00 files (see below) still fail
+                   in default mode — that is the per-file strict promotion
+                   path (Phase P20, mirrors H1 / check-99-summary-freshness).
+  --strict       : exit 1 on ANY mismatch (tree-wide CI gate when adoption
+                   matures; today 57/74 modules drift, so unused in CI).
+  --report-only  : never fails (overrides --strict AND per-file stamps);
+                   useful for dashboards.
+  --json         : machine-readable output (adds `stamped`, `stamped_failed`).
+
+Per-file opt-in stamp (Phase P20):
+  Authors who have caught a §00 banner up to its §98 latest release can
+  add a stamp INSIDE the first 40 lines of `00-overview.md`:
+
+      <!-- h10-verified-phase: 152 -->
+
+  Once stamped, ANY future §00 ↔ §98 mismatch on that file fails the
+  gate even in default (advisory-tree) mode. This lets modules opt into
+  strict enforcement one at a time without waiting for all 57 drifters
+  to catch up. Mirrors the H1 `<!-- verified-phase: NNN -->` pattern.
 
 Skip rules:
   - Files under `spec/_archive/**` (frozen by design — H2 lesson).
