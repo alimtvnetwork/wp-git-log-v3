@@ -244,6 +244,7 @@ Expanded §27 §97 from 10 ACs (AC-T-01..AC-T-10) to **20 module-specific GWT AC
 - **Phase B1** — §07 App identity fields: CLOSED Phase 147 (locked decision 12 PERMANENT — Env/Platform/OwnerEmail forbidden).
 - **Phase B2** — Slot-06 collision in `02-coding-guidelines/`: CLOSED Phase 47 via **co-location** (both `06-ai-optimization/` + `06-cicd-integration/` retain slot 06 per §16→§37 immutability precedent — once a slot ships a §97, the slot label is frozen). User confirmed 2026-04-28: honor Phase 47, no rename. Disambiguation by trailing slug. **Do NOT re-surface this in future `next` cycles.**
 - **Phase 17** — §99 consistency-report deepening sweep: CLOSED Phase H14 2026-04-28 via **H10 deferral** (1/3 criteria met — tree-health 168/168, 6 candidate scaffolds are `freshness-exempt: audit-log-only` by contract, deepening would duplicate parent inventory blocks violating Phase 135 single-source rule). User confirmed defer. Right intervention for richer per-leaf §99 content is Phase H1's opt-in `verified-phase` stamp on parent §99 `## Summary`, not bulk-deepening of audit-only stubs. **Do NOT re-surface in future `next` cycles.**
+- **Phase 18** — Tree-health drift sweep: CLOSED 2026-04-28. Tree-health gate held 168/168 strict, but expanded scope to all 5 sister gates caught **trace-map drift +2 ACs** (`ac_total:1320→1322`, `ac_drifted:1230→1232`, `ac_traced:90` flat, `code_orphan:26` flat). Rebaselined within 50-AC inspection budget. Memo: `phase-18-tree-health-drift-sweep.md`. Ambiguity logged: `01-trace-map-plus-2-untraced-acs.md`. **Lesson: drift sweeps MUST run all 5 sister gates, not just the named one** — sister-gate drift is independent of tree-health.
 
 ---
 
@@ -345,5 +346,5 @@ Remaining roadmap work:
 - ✅ **Phase B2** — CLOSED Phase 47 via co-location; user re-confirmed 2026-04-28. No further action.
 - ✅ **Phase 17** — CLOSED Phase H14 2026-04-28 (H10 deferral; freshness-exempt scaffolds are intentional).
 
-On next `next`: all backlog items resolved. Remaining open work lives in monitor-mode (R1 blocked on Lovable Cloud, R2 session-persistence watch, audit-v5 baseline-drift watch). Phase 18 (`check-tree-health.cjs --report` drift sweep) remains as a future low-priority verification — currently a no-op since strict tree-health is 168/168. Run only if `--strict` ever drops below 100.
+On next `next`: all numbered roadmap backlog resolved through Phase 18. Remaining open work lives in monitor-mode (R1 blocked on Lovable Cloud, R2 session-persistence watch, audit-v5 baseline-drift watch). Future `next` cycles should look for: (e) new spec content additions surfacing new ACs/scripts; (f) any sister-gate drift caught by periodic 5-gate sweep (use Phase 18 as template); (g) deferred items in `.lovable/question-and-ambiguity/` once user reviews them.
 
