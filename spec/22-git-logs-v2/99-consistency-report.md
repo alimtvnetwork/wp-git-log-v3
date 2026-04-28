@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.14
-**Updated:** 2026-04-28 (Phase P7b — cross-folder mirror of `## Legacy Index` GWT-completeness exemption codification at §01: **AC-SAG-28** added (`spec/01-spec-authoring-guide/97-acceptance-criteria.md` v4.7.0 → v4.8.0) carrying canonical regex `^AC-[A-Z]+-LEGACY(-\d+)?$` + four-module exemption snapshot. The 13 "non-GWT" findings from Phase P7's tree-wide sweep are reclassified as intentional traceability infrastructure (NOT authoring debt). §22 itself is unaffected (zero LEGACY rows; 76/76 GWT score holds). Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.15
+**Updated:** 2026-04-28 (Phase P8 — §37 effort-table & per-gap headers refreshed: V2-02/03/04/08/10 marked ✅ RESOLVED. §37 v1.3.0 → v1.4.0; pure bookkeeping, no AC/DDL/schema/enum/error-code change. AC count unchanged at 76. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
