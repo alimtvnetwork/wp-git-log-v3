@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.10
-**Updated:** 2026-04-28 (Phase P4 — §04 v2.9.5 → v2.9.6 gains §1.2 "Pre-parse caps & validation order" surfacing the four `ConfigKv` caps + 11-step strict gate order + `AppendLogMaxStreamSec` slow-loris cap; closes GAP-V2-10. Inventory row for §04 updated. No DDL/AC/error-code change. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.11
+**Updated:** 2026-04-28 (Phase P5 — slot-16 collision resolved: `16-test-plan.md` relocated to `38-test-plan-superseded.md` (banner v2.7.0 → v2.8.0). Inventory rows for §16 + §38 updated; 5 cross-folder referrers patched (§00 v3.8.7 → v3.8.8, `spec-index.md`, `dashboard-data.json`, `28/06`, this file). Mirrors v2.8.6 §16 → §37 precedent per Core memory file-slot-immutability rule. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
