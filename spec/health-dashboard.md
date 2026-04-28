@@ -63,3 +63,5 @@ See [`dashboard-data.json`](./dashboard-data.json) for the full machine-readable
 | 2026-04-27 | **100 (A+)** | Strict-pass baseline; 56 modules, 112/112 required+recommended, quality 167/168 (Phase H1 closeout) |
 | 2026-04-28 | **100 (A+)** | Phase 28 — refreshed dashboard prose vs `dashboard-data.json` (was 52→56 modules, 104→112 files, allowlist 12→9 corrected) |
 | 2026-04-28 | **100 (A+)** | Phase P34 — quality 167→168/168 (H8/H9 closure), CI gate count 17→19 (P30 spec-index strict + P31 H10 strict-flip), RUBRIC v2.29, H10 adoption 74/74 (100%); fixed 2 stale cross-link allowlist line numbers (P22/P32 stamp-insertion drift) |
+| 2026-04-28 | **100 (A+)** | Phase P38 — refreshed post P35–P37 batch; rebaselined trace-map (drift +25 ACs / +3 code files, all P31/P35-era test artifacts) |
+| 2026-04-28 | **100 (A+)** | Phase P43 — refreshed post P39–P42 batch via new P40 cluster-terminal-sweep runner (first SOLE-runner verification); no rebaseline needed (P39 inline, P40 self-validated, P41 docs-only, P42 NO-OP audit); counters unchanged |
