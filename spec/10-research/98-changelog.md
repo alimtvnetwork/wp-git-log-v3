@@ -1,6 +1,6 @@
 # Changelog — Research
 
-**Version:** 1.2.0  
+**Version:** 3.3.1  
 **Updated:** 2026-04-28  
 **Scope:** `spec/10-research/`
 
@@ -16,6 +16,15 @@
 ---
 
 ## Releases
+
+### 2.0.0 — 2026-04-28 — promoted by Phase P30 (P30 batch — P28-style hybrid)
+- Reconstructed from post-footer prose: `## 2026-04-27 — Phase 74 (evidenced index/tracker bonus)`. **Minor bump**: additive content (typed contracts, OpenAPI surface, Mermaid diagram, frontmatter, etc.) — no behavior change.
+
+### 3.3.0 — 2026-04-28 — Phase P30 (P30 batch — dual-stream alignment)
+- Reconciles §98 release stream with §00 banner stream (`3.3.0`). Prior §98 ladder ended at `2.0.0` (after promoting any post-footer prose) but §00 banner already tracked `3.3.0` from independent module-version stream (P25 subcase). Per P25 precedent, single alignment row added at §00 banner version; lockstep gate now satisfied.
+
+### 3.3.1 — 2026-04-28 — Phase P30 batch reconciliation
+- §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.
 
 ### 1.2.0 — 2026-04-28
 - **Phase 139 — Stale §99 prose refresh.** §99 Summary block carried `Health Score: 60/100 (D — placeholder)` and 2 stale warnings (`missing 97-acceptance-criteria.md`, `missing example/template`) that were already fixed on disk and superseded by the rubric-v2 strict 100/100 (Phase 137). Updated §99 to v1.1.0 with rubric-v2 score, cleared warnings, added Validation History row. No file content moved; pure documentation alignment.
@@ -35,10 +44,3 @@
 - [Module overview](./00-overview.md)
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
-
-## 2026-04-27 — Phase 74 (evidenced index/tracker bonus)
-
-- Added Mermaid lifecycle diagram and 5-stage CI workflow contract.
-- Activates v2.9 evidenced-tracker / evidenced-index bonus (+5 each).
-- Documentation-only promotion.
-

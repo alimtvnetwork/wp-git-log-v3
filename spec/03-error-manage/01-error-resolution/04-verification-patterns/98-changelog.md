@@ -1,7 +1,7 @@
 # Changelog — Verification Patterns
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Version:** 3.2.1  
+**Updated:** 2026-04-28  
 **Scope:** `spec/03-error-manage/01-error-resolution/04-verification-patterns/`
 
 ---
@@ -16,6 +16,18 @@
 ---
 
 ## Releases
+
+### 2.0.0 — 2026-04-28 — promoted by Phase P30 (P30 batch — P28-style hybrid)
+- Reconstructed from post-footer prose: `## 2026-04-27 — Phase 70 (impl 75 → 85)`. **Minor bump**: additive content (typed contracts, OpenAPI surface, Mermaid diagram, frontmatter, etc.) — no behavior change.
+
+### 2.1.0 — 2026-04-28 — promoted by Phase P30 (P30 batch — P28-style hybrid)
+- Reconstructed from post-footer prose: `## 2026-04-27 — Phase 75 (impl 85 → 95+)`. **Minor bump**: additive content (typed contracts, OpenAPI surface, Mermaid diagram, frontmatter, etc.) — no behavior change.
+
+### 3.2.0 — 2026-04-28 — Phase P30 (P30 batch — dual-stream alignment)
+- Reconciles §98 release stream with §00 banner stream (`3.2.0`). Prior §98 ladder ended at `2.1.0` (after promoting any post-footer prose) but §00 banner already tracked `3.2.0` from independent module-version stream (P25 subcase). Per P25 precedent, single alignment row added at §00 banner version; lockstep gate now satisfied.
+
+### 3.2.1 — 2026-04-28 — Phase P30 batch reconciliation
+- §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.
 
 ### 1.0.0 — 2026-04-26
 - **Added** baseline module structure (00-overview, 97-acceptance-criteria, 98-changelog, 99-consistency-report).
@@ -33,17 +45,3 @@
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
-
-## 2026-04-27 — Phase 70 (impl 75 → 85)
-
-- Added Mermaid lifecycle diagram `lifecycle-verification-pattern-pipeline.mmd`.
-- Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
-- No behavioural change to module rules; documentation-only promotion.
-
-## 2026-04-27 — Phase 75 (impl 85 → 95+)
-
-- Added typed-language reference contracts (Go, Rust, C# stubs) — satisfies
-  `has_typed_lang_contract` (+10 implementability).
-- Added TypeScript enum mirror — satisfies `has_ts_enums` (+10 implementability).
-- Documentation-only promotion; stubs are normative reference shapes only.
-

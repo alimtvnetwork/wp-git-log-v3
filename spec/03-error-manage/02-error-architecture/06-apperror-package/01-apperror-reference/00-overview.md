@@ -1,7 +1,8 @@
 # AppError Package Reference
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-27  
+**Version:** 3.2.1  
+<!-- h10-verified-phase: 30 -->
+**Updated:** 2026-04-28  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

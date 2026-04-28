@@ -1,7 +1,9 @@
 # Consistency Report — CI/CD Pipeline Workflows
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-27
+**Version:** 3.4.0  
+
+> **v3.4.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 1 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `1.1.0`→`3.3.1`; §00 banner `3.3.0`→`3.3.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
+**Updated:** 2026-04-28
 
 > **v3.3.0 (Phase 39c):** Added `11-technical-interface.md` (CI platform, runner OS matrix, required secrets, env vars, asset-matrix JSON Schema). Resolves audit finding *HIGH — Missing Pipeline Infrastructure Interfaces*. Inventory-numbering ambiguity (root-level vs subfolder prefix collision on `04`/`05`) is now documented as scoped, not duplicate, in §6 of the new file.
 
