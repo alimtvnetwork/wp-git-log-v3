@@ -85,7 +85,12 @@ EXIT3=$?
 assert "T3.1 exit code 0 after rewrite"          test "${EXIT3}" -eq 0
 assert "T3.2 rewritten count is 1"               grep -q '"rewritten": 1' <<< "${OUT3}"
 assert "T3.3 allowlist now contains line 7"      grep -q '^spec/sample/00-overview.md:7:./does-not-exist.md$' linter-scripts/spec-cross-links.allowlist
-assert "T3.4 stale line 4 entry removed"         ! grep -q '^spec/sample/00-overview.md:4:./does-not-exist.md$' linter-scripts/spec-cross-links.allowlist
+if grep -q '^spec/sample/00-overview.md:4:./does-not-exist.md$' linter-scripts/spec-cross-links.allowlist; then
+  STALE_GONE=1
+else
+  STALE_GONE=0
+fi
+assert "T3.4 stale line 4 entry removed"         test "${STALE_GONE}" -eq 0
 assert "T3.5 comment header preserved"           grep -q '^# Test allowlist$' linter-scripts/spec-cross-links.allowlist
 
 echo "==> T4: idempotence — second rewrite is no-op"
