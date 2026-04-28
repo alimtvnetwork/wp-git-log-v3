@@ -884,7 +884,7 @@
 | `spec/22-git-logs-v2/14-endpoint-examples.md` | Endpoint Examples (v2) | 2.2.0 |
 | `spec/22-git-logs-v2/15-error-codes.md` | Error Code Catalog (v2) | 2.9.3 |
 | `spec/22-git-logs-v2/16-seed-data.md` | Seed Data (v2) | 2.7.2 |
-| `spec/22-git-logs-v2/16-test-plan.md` | Test Plan (v2) — SUPERSEDED | 2.7.0 |
+
 | `spec/22-git-logs-v2/19-permission-matrix.md` | Permission Matrix (v2) | 2.3.0 |
 | `spec/22-git-logs-v2/20-observability.md` | Observability (v2) | 2.3.0 |
 | `spec/22-git-logs-v2/22-retention-and-pruning.md` | Retention & Pruning (v2) | 2.9.0 |
@@ -903,6 +903,7 @@
 | `spec/22-git-logs-v2/35-reference-ci-yml.md` | Reference CI Workflow (.github/workflows/ci.yml) | 2.7.0 |
 | `spec/22-git-logs-v2/36-why-v1-archived.md` | Why folder 21 is in `_archive/` | 1.0.0 |
 | `spec/22-git-logs-v2/37-blind-ai-gap-analysis.md` | Blind-AI Implementability Gap Analysis — v2 (folder 22) | 1.1.0 |
+| `spec/22-git-logs-v2/38-test-plan-superseded.md` | Test Plan (v2) — SUPERSEDED (relocated from slot 16 in Phase P5) | 2.8.0 |
 | `spec/22-git-logs-v2/39-split-db-log-storage.md` | Split-DB Log Storage (per-SHA SQLite files) | 1.0.0 |
 | `spec/22-git-logs-v2/97-acceptance-criteria.md` | Acceptance Criteria (v2) | 3.9.1 |
 | `spec/22-git-logs-v2/98-changelog.md` | Changelog (v2) |  |

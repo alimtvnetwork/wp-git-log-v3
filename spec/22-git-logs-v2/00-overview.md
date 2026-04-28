@@ -6,8 +6,8 @@ description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.8.7  
-**Updated:** 2026-04-26 (Phase 27 drift sweep: future-spec frontmatter added so drift gate stops flagging missing downstream PHP plugin code as a regression)  
+**Version:** 3.8.8  
+**Updated:** 2026-04-28 (Phase P5: §22 slot-16 collision resolved — superseded `16-test-plan.md` relocated to `38-test-plan-superseded.md`; live `16-seed-data.md` content unchanged. Inventory rows for §16 and §38 updated. Mirrors v2.8.6 precedent (§16 → §37 rename) per Core memory file-slot-immutability rule.)
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
@@ -81,7 +81,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 13 | _13-v1-vs-v2-mapping_ | **Locked vacant slot** — mapping distributed across §05/§18/§30/§31 |
 | 14 | [14-endpoint-examples.md](./14-endpoint-examples.md) | Curl + JSON samples for all 10 endpoints |
 | 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog |
-| 16 | [16-test-plan.md](./16-test-plan.md) | **Superseded** — redirects to §32–§35 |
+| 16 | [16-seed-data.md](./16-seed-data.md) | Authoritative initial-row content for every lookup table + `ConfigKv` defaults (Phase P5 — slot 16 collision with old `16-test-plan.md` resolved by relocating the superseded stub to §38) |
 | 17 | [17-openapi.yaml](./17-openapi.yaml) | OpenAPI 3.1 machine-readable spec for all 10 endpoints |
 | 18 | [18-schema.sql](./18-schema.sql) | Verbatim DDL for V2_0_0 migration |
 | 19 | [19-permission-matrix.md](./19-permission-matrix.md) | Role × Permission × Screen audit grid |
@@ -96,6 +96,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 28 | [28-example-github-actions.md](./28-example-github-actions.md) | Drop-in workflow YAML for Lane B push + fixed |
 | 29 | [29-uninstall-policy.md](./29-uninstall-policy.md) | DB retention modes on plugin removal |
 | 30 | [30-threat-model.md](./30-threat-model.md) | STRIDE pass over the v2 attack surface |
+| 38 | [38-test-plan-superseded.md](./38-test-plan-superseded.md) | **Superseded** — redirect stub for the old §16 test plan; authoritative content in §32–§35. Relocated from slot 16 in Phase P5 (2026-04-28) per Core memory file-slot-immutability rule. |
 | 39 | [39-split-db-log-storage.md](./39-split-db-log-storage.md) | **v3.8.0 introduced; v2.9.0 active.** Per-SHA SQLite log storage. Root DB keeps only `ShaRegistry` + 3 ConfigKv keys (`ShaLogsRoot`, `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`); logs live in `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`. See §15 `GL-SHA-DB-*` codes, §22 prune, §23 backup manifest, §29 wipe. |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
