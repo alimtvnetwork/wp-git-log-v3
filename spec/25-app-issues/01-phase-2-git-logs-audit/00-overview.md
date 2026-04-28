@@ -1,11 +1,13 @@
 # Phase-2 Spec Issues Report — `git-logs` App
 
-**Version:** 1.3.0  **Updated:** 2026-04-27  
-**Phase:** 2 (Spec-only audit, no code)  
-**Audit Target:** `spec/_archive/21-git-logs-v1/`  
-**Status:** Open  
-**AI Confidence:** Production-Ready  
+**Version:** 1.4.0  **Updated:** 2026-04-28 (Phase P11)
+**Phase:** 2 (Spec-only audit, no code)
+**Audit Target:** `spec/_archive/21-git-logs-v1/`
+**Status:** **SUPERSEDED** by [`../02-consolidated-audit-findings/00-overview.md`](../02-consolidated-audit-findings/00-overview.md) (preserved for traceability per AC-SAG-04 slot-immutability + the §22 GAP-V2-01 LEGACY-ledger precedent — Phase P7b)
+**AI Confidence:** Production-Ready
 **Ambiguity:** Low
+
+> **Phase P11 (2026-04-28) — Supersession notice.** This Phase-2 audit was the first pass and contained false-positive findings (it reported `02-database-schema-and-erd.md` and parts of `08-allowlist-and-wildcard-matching.md` as "missing" when they actually existed). [`../02-consolidated-audit-findings/00-overview.md`](../02-consolidated-audit-findings/00-overview.md) (`AUDIT-GL-2026-04-25` v1.1.0) re-scored every finding against verbatim line-anchored evidence and is now the **single source of truth**. New audit work MUST update the consolidated tracker, not this file. Reading order: start at the parent [`../00-overview.md`](../00-overview.md) → consolidated → this Phase-2 report (historical only). This supersession was already declared in the consolidated tracker's "Correction notice"; Phase P11 surfaces it on the §25 parent + this banner so the routing is symmetric.
 
 ---
 
