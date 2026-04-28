@@ -27,7 +27,7 @@
 | 14-endpoint-examples.md | ✅ |
 | 15-error-codes.md | ✅ (v2.9.4 — Phase P16 added `## Streaming ingest (Lane B — see §04 §1.2)` section with 4 `GL-STREAM-*` codes) |
 | 16-seed-data.md | ✅ (sole occupant of slot 16 since Phase P5 collision resolution) |
-| 17-openapi.yaml | ✅ (v2.9.5 — Phase P3 `AckResponse.PreviousHasError` REQUIRED) |
+| 17-openapi.yaml | ✅ (v2.9.6 — Phase P16 `ErrorCode` enum gained 4 `GL-STREAM-*` ingest-streaming entries) |
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |
 | 20-observability.md | ✅ |
