@@ -106,7 +106,7 @@
 > **v2.0.0 update:** Phase 16d-iv deepened §97 from 10 ACs to **20 module-specific GWT ACs** (AC-T-11..AC-T-20 added; AC-T-01..AC-T-10 preserved). New ACs cover stderr discipline, filler tight-loop idempotency, generator determinism, auditor JSON contract, config self-validation, runner cross-platform equivalence, trace-map round-trip, twin byte-equivalence, CI trigger-path completeness, and `trace-map.md` informational status. Banner v1.1.0 → v2.0.0.
 
 ## File Inventory
-<!-- verified-phase: 30 -->
+<!-- verified-phase: 147 -->
 
 | File | Present | Notes |
 |------|---------|-------|
