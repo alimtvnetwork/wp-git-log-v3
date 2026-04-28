@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.9.3  
-**Updated:** 2026-04-28 (Phase P16 — lockstep for the 4 `GL-STREAM-*` ingest-streaming codes deferred from Phase P2: added **AC-76** (Streaming-ingest error-code surface) binding §15 v2.9.4 catalog rows + §17 v2.9.6 `ErrorCode` enum entries to the §04 §1.2 wire-format pins. AC count 76 → 77. No DDL change; no schema bump.)
+**Version:** 3.9.4  
+**Updated:** 2026-04-28 (Phase P18 — added **AC-77** (History `HasError + StateLabel` column rendering contract) binding §03 v2.3.0's new `## State-Transition Label Rendering` section to AC-73's four-value label enum + AC-74's NDJSON consumer for cross-consumer parity. AC count 77 → 78. Closes the §99 v3.9.6+ open follow-up "(a)". No DDL change; no schema bump.)
 
 ---
 
