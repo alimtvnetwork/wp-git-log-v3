@@ -108,10 +108,11 @@ assert "QA tooling baseline section has $DECLARED_COUNT numbered gate rows (foun
 # ── Workflow lockstep: count quality-gate steps in spec-health.yml ──
 # Quality-gate steps are those matching the patterns the audit footer
 # advertises. We count by scanning step names and including only the
-# ones that correspond to the 13 footer gates (excluding Setup steps,
+# ones that correspond to the 14 footer gates (excluding Setup steps,
 # Self-heal, Regen, Trace-map, Summary).
 WORKFLOW_GATES=$(grep -E '^      - name: ' "$WORKFLOW" | awk -F': ' '
   /Spec cross-link gate/                      {n++}
+  /Spec folder-reference gate/                {n++}
   /Spec tree health gate/                     {n++}
   /Spec lockstep gate/                        {n++}
   /AI-implementability audit v2 gate/         {n++}

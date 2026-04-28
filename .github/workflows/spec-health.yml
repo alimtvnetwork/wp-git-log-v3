@@ -70,6 +70,19 @@ jobs:
       - name: Spec cross-link gate (zero broken links allowed)
         run: python3 linter-scripts/check-spec-cross-links.py --github
 
+      - name: Spec folder-reference gate (Phase F2)
+        # Phase F2: wires linter-scripts/check-spec-folder-refs.py into CI as
+        # a strict gate (was dormant since authoring — surfaced 11 stale refs
+        # at Phase F1 resolution time). Walks every spec/**/*.md file looking
+        # for `spec/NN-name/` references and asserts each target either
+        # exists on disk OR is allowlisted in linter-scripts/spec-folder-refs.allowlist
+        # under [external] (real sibling-repo path) or [doc-only] (illustrative/
+        # historical prose). Phase F1 (2026-04-28) brought the gate to 0 stale
+        # refs by classifying 3 missing-folder targets (08-docs-viewer-ui,
+        # 09-code-block-system, 21-app) as [doc-only]. Locks AC-62-01..04
+        # mechanically; protects against future drift.
+        run: python3 linter-scripts/check-spec-folder-refs.py
+
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
         # Phase 81: tightened from --min to --strict. Strict mode requires
         # every module to be at full marks (no partial credit). Locks in the

@@ -29,18 +29,18 @@
 ```json
 {
   "kind": "",
-  "md_files": 36,
+  "md_files": 37,
   "mmd_files": 0,
   "overview_chars": 9194,
   "ac_chars": 13158,
   "ac_count": 8,
   "gwt_block_count": 8,
   "consistency_report": true,
-  "code_blocks_total": 351,
+  "code_blocks_total": 352,
   "code_blocks_by_lang": {
     "bash": 6,
     "markdown": 7,
-    "plain": 188,
+    "plain": 189,
     "go": 42,
     "typescript": 18,
     "php": 13,
