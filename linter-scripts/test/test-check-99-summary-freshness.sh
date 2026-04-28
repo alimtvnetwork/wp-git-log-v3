@@ -185,6 +185,56 @@ grep -q "unstamped: 0" /tmp/h1-out \
   && { echo "  ✓ T11 exempt file does not increment unstamped"; PASS=$((PASS+1)); } \
   || { echo "  ✗ T11 exempt file leaked into unstamped tally"; FAIL=$((FAIL+1)); }
 
+# --- T12 (Phase H9): misplaced stamp (BEFORE tracked heading) is detected
+# in advisory mode — exits 0 but emits warning.
+cat > "$SANDBOX/spec/test-folder/99-consistency-report.md" <<'MD'
+# Test §99
+<!-- verified-phase: 195 -->
+
+## Summary
+Narrative claim — stamp is on wrong line (above heading, not under it).
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T12 (H9) misplaced stamp + default mode exits 0 (advisory)" "$RC" "0"
+grep -q "placed immediately BEFORE a tracked heading" /tmp/h1-out \
+  && { echo "  ✓ T12 misplaced-stamp warning emitted"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T12 misplaced-stamp warning missing"; FAIL=$((FAIL+1)); }
+grep -q "advisory" /tmp/h1-out \
+  && { echo "  ✓ T12 mode label says advisory"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T12 mode label missing"; FAIL=$((FAIL+1)); }
+
+# --- T13 (Phase H9): --strict-position turns the misplaced stamp into a failure.
+set +e
+python3 "$SANDBOX/check.py" --strict-position >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T13 (H9) misplaced stamp + --strict-position exits 1" "$RC" "1"
+grep -q "strict-position" /tmp/h1-out \
+  && { echo "  ✓ T13 mode label says strict-position"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T13 mode label missing"; FAIL=$((FAIL+1)); }
+
+# --- T14 (Phase H9): stamp inside blockquote (no nearby tracked heading) is
+# NOT flagged as misplaced — only adjacency to a tracked heading triggers.
+cat > "$SANDBOX/spec/test-folder/99-consistency-report.md" <<'MD'
+# Test §99
+
+> Past phase note: we stamped `<!-- verified-phase: 100 -->` here in Phase 100.
+> This is documentation, not a real stamp.
+
+Some prose unrelated to any tracked heading.
+MD
+set +e
+python3 "$SANDBOX/check.py" --strict-position >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T14 (H9) stamp in blockquote (no nearby heading) does not fail strict-position" "$RC" "0"
+! grep -q "placed immediately BEFORE" /tmp/h1-out \
+  && { echo "  ✓ T14 no false-positive misplaced warning"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T14 false-positive misplaced warning emitted"; FAIL=$((FAIL+1)); }
+
 echo
 echo "Results: $PASS passed, $FAIL failed"
 if [[ "$FAIL" -gt 0 ]]; then exit 1; fi
