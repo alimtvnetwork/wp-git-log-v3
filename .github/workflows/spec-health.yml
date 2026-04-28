@@ -83,6 +83,13 @@ jobs:
         # mechanically; protects against future drift.
         run: python3 linter-scripts/check-spec-folder-refs.py
 
+      - name: §99 Summary freshness gate (Phase H1)
+        # Phase H1: codifies Phase 136/139 stale-prose lesson. Advisory by default
+        # (89/89 §99 files unstamped at H1 close → exit 0). Becomes strict per-file
+        # as authors opt-in via `<!-- verified-phase: NNN -->` stamp under ## Summary.
+        run: python3 linter-scripts/check-99-summary-freshness.py
+
+
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
         # Phase 81: tightened from --min to --strict. Strict mode requires
         # every module to be at full marks (no partial credit). Locks in the

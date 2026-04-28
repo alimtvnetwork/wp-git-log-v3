@@ -450,3 +450,35 @@ files  = ["linter-scripts/scaffold-spec-module.cjs"]
 symbol = "TEMPLATE"
 kind   = "config"
 note   = "quality-credit anchors (## Acceptance criteria, ## Inventory, etc.) present in template"
+
+# ===== Phase H1 (2026-04-28): bind §99 freshness gate ACs =====
+
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-01"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "find_summary_stamp"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-02"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "main"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-03"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "main"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-04"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "--report-only"
+kind   = "cli-flag"
+
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-05"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "detect_current_phase"
+kind   = "function"

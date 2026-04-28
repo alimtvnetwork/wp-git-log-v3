@@ -414,6 +414,46 @@
         "symbol": "TEMPLATE"
       }
     ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-01": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "find_summary_stamp"
+      }
+    ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-02": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-03": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-04": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "cli-flag",
+        "note": null,
+        "symbol": "--report-only"
+      }
+    ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-05": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "detect_current_phase"
+      }
+    ],
     "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01": [
       {
         "file": "linter-scripts/audit-spec-vs-code-v2.py",
@@ -597,6 +637,13 @@
       "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-06",
       "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-07",
       "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-08"
+    ],
+    "linter-scripts/check-99-summary-freshness.py": [
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-01",
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-02",
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-03",
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-04",
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-05"
     ],
     "linter-scripts/check-memo-retrospective-headings.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-23"
@@ -1956,6 +2003,7 @@
     "linter-scripts/test/test-audit-cli-thresholds.sh",
     "linter-scripts/test/test-audit-deterministic-stability.sh",
     "linter-scripts/test/test-audit-explain-contract.sh",
+    "linter-scripts/test/test-check-99-summary-freshness.sh",
     "linter-scripts/test/test-check-spec-folder-refs.py",
     "linter-scripts/test/test-overview-inventory-parity.sh",
     "linter-scripts/test/test-qa-baseline-footer.sh",
@@ -1967,13 +2015,13 @@
   ],
   "summary": {
     "ac_drifted": 1230,
-    "ac_total": 1299,
-    "ac_traced": 69,
-    "code_orphan": 24,
-    "code_referenced": 22,
-    "code_total": 46,
+    "ac_total": 1304,
+    "ac_traced": 74,
+    "code_orphan": 25,
+    "code_referenced": 23,
+    "code_total": 48,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 69
+    "trace_entries": 74
   }
 }

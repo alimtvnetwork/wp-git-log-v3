@@ -5878,14 +5878,14 @@
         "bash": 32,
         "ini": 1,
         "json": 1,
-        "markdown": 1,
-        "plain": 4,
+        "markdown": 2,
+        "plain": 5,
         "powershell": 1,
         "text": 1,
         "toml": 2,
         "yaml": 6
       },
-      "code_blocks_total": 49,
+      "code_blocks_total": 51,
       "consistency_report": true,
       "gwt_block_count": 24,
       "has_ci_workflow": true,
@@ -5898,12 +5898,12 @@
       "has_yaml_openapi": true,
       "kind": "meta-toolchain",
       "links_broken": 0,
-      "links_total": 80,
-      "md_files": 43,
+      "links_total": 81,
+      "md_files": 44,
       "mmd_files": 1,
-      "overview_chars": 18065,
+      "overview_chars": 18320,
       "todo_density": 0,
-      "waffle_per_kchar": 0.14
+      "waffle_per_kchar": 0.13
     },
     "module": "27-spec-toolchain",
     "raw_scores": {
@@ -5915,7 +5915,7 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=24, gwt=24, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=24, gwt=24, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
