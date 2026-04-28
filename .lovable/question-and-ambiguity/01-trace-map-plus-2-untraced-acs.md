@@ -17,26 +17,41 @@ or is rebaseline correct?
 ## Inferred decision
 
 **Rebaseline +2** (`ac_total:1320→1322`, `ac_drifted:1230→1232`). All other
-fields flat: `ac_traced:90`, `code_orphan:26`, `missing_ac:0`, `missing_file:0`.
-Justified because:
+fields flat. Justified because `ac_traced` flat → no code-binding loss.
 
-1. `ac_traced` flat → no code-binding loss (true regression criterion is unmet)
-2. Delta +2 ≪ 50-AC inspection threshold (memory rule)
-3. Pure additive growth; gate flagged drift-arithmetic, not real risk
-4. Identifying the specific 2 ACs requires git archaeology against
-   generic "Changes" commit messages — exceeds Phase 18 scope
+## Resolution (task 2 — root-cause investigation)
+
+**Root cause: STALE BASELINE SNAPSHOT, not new ACs.**
+
+Reproducible with `git show <H7-commit>:.lovable/memory/audit/trace-map.json`:
+
+| Snapshot | `trace-map.json` (live) | `trace-map-baseline.json` (recorded) |
+|----------|-------------------------|--------------------------------------|
+| Pre-H7 commit (claimed 1315) | 1320 | 1315 |
+| H7 commit (claimed 1320) | 1322 | 1320 |
+| Phase 18 (today) | 1322 | 1232 → rebaselined to 1232 ✅ |
+
+Drift set diff between H7 commit and current HEAD: **0 added, 0 removed** — the
+1232 drift entries are identical. The "+2 untraced ACs" was an artifact of the
+H7 phase author writing `trace-map-baseline.json` against a stale
+`trace-map.json` (gap of 2 between snapshot regen and baseline write). H5 had
+the same problem with a gap of 5.
 
 ## Impact
 
-- `.lovable/memory/audit/trace-map-baseline.json` updated (single line each for
-  `ac_total` and `ac_drifted`).
-- Future drift sweeps will compare against the new baseline, so any *additional*
-  AC additions still get flagged.
-- If the 2 untraced ACs map to a script that does have an implementation, R1
-  (real-AI re-audit, blocked on Lovable Cloud) will surface the binding gap.
+- Rebaseline (+2 ac_total, +2 ac_drifted) was the correct fix.
+- No real AC additions occurred between H7 and Phase 18.
+- No `[[trace]]` bindings missing or required.
 
-## Suggested clarification
+## Lesson codified (added to memory Core)
 
-Confirm: was rebaseline the right call, or do you want me to find + bind the
-2 specific new ACs? If the latter, may need to spend ~10 min on `git log -p`
-across §97 files to identify them.
+**Phase 18-resolution lesson**: when shipping a rebaseline phase, ALWAYS run
+`generate-trace-map.py` immediately before writing
+`trace-map-baseline.json` (no intervening edits) — otherwise the baseline
+encodes stale numbers and the next sweep falsely reports growth. Better:
+`check-trace-map-regression.py --update-baseline` runs them atomically and
+should be preferred over manual JSON edits.
+
+## Status
+
+✅ **RESOLVED** — no user action required.
