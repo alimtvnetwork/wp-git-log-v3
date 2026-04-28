@@ -81,7 +81,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 13 | _13-v1-vs-v2-mapping_ | **Locked vacant slot** — mapping distributed across §05/§18/§30/§31 |
 | 14 | [14-endpoint-examples.md](./14-endpoint-examples.md) | Curl + JSON samples for all 10 endpoints |
 | 15 | [15-error-codes.md](./15-error-codes.md) | Unified `GL-*` error catalog |
-| 16 | [16-test-plan.md](./16-test-plan.md) | **Superseded** — redirects to §32–§35 |
+| 16 | [16-seed-data.md](./16-seed-data.md) | Authoritative initial-row content for every lookup table + `ConfigKv` defaults (Phase P5 — slot 16 collision with old `16-test-plan.md` resolved by relocating the superseded stub to §38) |
 | 17 | [17-openapi.yaml](./17-openapi.yaml) | OpenAPI 3.1 machine-readable spec for all 10 endpoints |
 | 18 | [18-schema.sql](./18-schema.sql) | Verbatim DDL for V2_0_0 migration |
 | 19 | [19-permission-matrix.md](./19-permission-matrix.md) | Role × Permission × Screen audit grid |
