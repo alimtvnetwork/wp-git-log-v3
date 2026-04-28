@@ -1,8 +1,23 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.2.0
-**Updated:** 2026-04-27
+**Version:** 3.3.0
+**Updated:** 2026-04-28
 **Scope:** `spec/26-gitlogs-diagrams/`
+
+---
+
+## [3.3.0] — 2026-04-28 (Phase P9: slot-gap audit — verified RESOLVED, no edits required)
+
+- **Verified** §26 slot gaps 02/03/04 are already fully resolved via the v2.0.0 retirement and the Phase 16g GWT rewrite. Audit checklist:
+  - **§00 inventory** lists all three slots as `~~retired v2.0.0~~` with explicit `_locked_` annotations and content-redirect pointers (lines 30–32).
+  - **§00 narrative** v2.0.0 banner explicitly declares "Slots **02**, **03**, **04** are now **intentional locked gaps** (never to be reused per project rule 'file slots are immutable once shipped')."
+  - **§97 inlined contract** `LOCKED_GAPS:` field machine-encodes the three slot numbers + their original names.
+  - **§97 AC-DG-10** ("Slots 02, 03, 04 remain intentional locked gaps") codifies the prohibition as a GWT acceptance criterion verified against AC-SAG-04 (slot immutability).
+  - **§97 AC-DG-LEGACY-11** preserves the v2.0.0 historical narrative for traceability.
+  - **§99 inventory** marks all three with 🗑️ + "Removed v2.0.0 — slot locked".
+- **Outcome:** No new file authoring, no AC additions, no DDL/schema/enum change. P9 closes by audit-confirmation, parallel to Phase P6's resolution of §22 GAP-V2-06 (locked-vacant precedent retained; stub-file recipe rejected by Core memory rule on slot immutability + tree-health regression risk).
+- **Scope discipline (Phase P9 ONLY):** Pure audit + this changelog row + §99 banner bump. No `.mmd` source change, no `.svg` re-render, no §00 / §97 edit. The five-source documentation cited above is already authoritative; this row simply records that the audit ran and confirmed coverage.
+- **Verified:** `node linter-scripts/check-lockstep.cjs` ✅ 87/87; `node linter-scripts/check-tree-health.cjs --strict` ✅ 168/168.
 
 ---
 
