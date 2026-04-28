@@ -220,6 +220,11 @@ P15 dispensation, and its P31 retirement:
 - **When** the gate runs WITH `--report-only`,
 - **Then** exit code MUST be 0 (`--report-only` is the strongest escape hatch — overrides both `--strict` and per-file stamps).
 
+### AC-29-14 — CI workflow invokes `--strict` (Phase P31)
+- **Given** the CI workflow `.github/workflows/spec-health.yml`,
+- **When** the §00 ↔ §98 Version-field parity step is inspected,
+- **Then** the invocation MUST be `python3 linter-scripts/check-version-parity.py --strict` (any mismatch fails the build). The script-level default remains advisory-by-default for local invocations and backward compatibility; the strict enforcement is encoded at the workflow layer per the P31 advisory→strict transition documented under "Why advisory-by-default at P15 — and strict-flip at P31".
+
 ## Self-test
 
 `linter-scripts/test/test-check-version-parity.sh` exercises 13 assertions
@@ -257,6 +262,14 @@ needed (unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 The next free slot in this band after H10 is 32 (slots 30/31 are auditors).
 
 ## Changelog
+
+### 1.2.0 — 2026-04-28 — Phase P31 (CI strict-flip)
+- **Workflow change**: `.github/workflows/spec-health.yml` step "§00 ↔ §98 Version-field parity gate" now invokes `python3 linter-scripts/check-version-parity.py --strict`. Any §00 ↔ §98 version drift now blocks the build (gate #19 is now a hard CI block; was advisory P15→P30).
+- **Script unchanged**: `check-version-parity.py` keeps its advisory-by-default semantics for local/backward-compat invocations. The strict enforcement is encoded at the workflow layer (Option A — minimal blast radius). Self-test 13/13 unchanged.
+- **Why now**: P30 cleared the reverse-drift backlog (74/74 matches, 0 mismatches, 57 stamped, 0 stamped_failed). The AC-T-25 dispensation that justified advisory-by-default no longer applies — the tree-wide invariant is locked.
+- **AC-31-31 cascade**: `RUBRIC_VERSION` v2.28 → **v2.29** (rubric semantics tightened — gate #19 is now strict, not advisory). `00-index.md` footer 19 production gates **unchanged** (no new gate added; gate #19 contract tightened in place). `EXECUTIVE-SUMMARY.md` does not reference per-gate semantics. Slot 70's `00-overview.md` description "19 production gates" unchanged.
+- **New AC**: AC-29-14 (CI workflow invocation contract).
+- **No spec slot bump beyond minor** (1.1.0 → 1.2.0 — workflow contract change, not a new gate).
 
 ### 1.1.0 — 2026-04-28 — Phase P20
 - Added per-file opt-in `<!-- h10-verified-phase: NNN -->` stamp pattern
