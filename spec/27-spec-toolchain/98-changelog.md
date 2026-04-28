@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.39.0
+**Version:** 2.40.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.40.0 — 2026-04-28 — Phase G2: AC-binding sweep batch 2 (24 trace entries; ac_traced 30→54, code_orphan 35→29)
+- **Action**: Bound 24 ACs into `linter-scripts/trace-map.toml` covering 6 generator scripts: AC-13-01..03 (`generate-gwt-acceptance.py`), AC-15-01..06 (`generate-fix-checklist.py`), AC-16-01..06 (`generate-gate-report.py`), AC-20-01..03 (`fill-missing-acceptance-criteria.cjs`), AC-21-01..03 (`fill-missing-changelogs.cjs`), AC-22-01..03 (`fill-missing-consistency-reports.cjs`).
+- **Trace-map delta**: `ac_traced` 30 → **54** (+24), `code_orphan` 35 → **29** (-6: all six newly-referenced scripts), `code_referenced` 11 → **17**, `ac_total` unchanged at 1299, no missing-ac / missing-file. Baseline updated.
+- **Implementation note (caught by trace-map regression)**: Initial G2 entries assumed `fill-missing-*` were `.py`; actual extensions are `.cjs`. Trace-map regression check fired with 9 missing-file errors, fixed via in-place sed before rebaseline. **New rule for G3**: always `ls linter-scripts/<name>.*` before authoring trace entries.
+- **What did NOT change**: No script source touched; no spec module content changed; no §97 ACs added or renumbered; §31 unchanged (no rubric / footer / AC-31-31 implications).
+- **Lockstep**: §98 v2.39.0 → **v2.40.0**; §99 v2.36.0 → **v2.37.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-g2-ac-binding-batch-2.md`.
+- **Verified**: `python3 linter-scripts/check-trace-map-regression.py` → ✅ no regression at new baseline; `node linter-scripts/check-lockstep.cjs` → 87/87 / 0 findings ✅; `node linter-scripts/check-tree-health.cjs --strict` → 168/168 ✅; `python3 linter-scripts/check-spec-folder-refs.py` → 0 stale ✅; `bash linter-scripts/test/test-overview-inventory-parity.sh` → 6/6 ✅.
 
 ### 2.39.0 — 2026-04-28 — Phase G1: AC-binding sweep batch 1 (6 trace entries; ac_traced 24→30, code_orphan 39→35)
 - **Action**: Bound 6 acceptance criteria into `linter-scripts/trace-map.toml` to start re-binding the 14 toolchain scripts that Phase 117 absorbed into the trace-map denominator: AC-62-02 (`check-spec-cross-links.py` + allowlist), AC-62-03 + AC-62-04 (`check-spec-folder-refs.py` + allowlist), AC-T-22 (`check-mermaid-syntax.mjs`), AC-T-23 (`check-memo-retrospective-headings.py`), AC-T-24 (`deepen-consistency-reports.py`).
