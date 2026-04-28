@@ -152,7 +152,7 @@ TODAY = "2026-04-25"
 # v2.17 (Phase 99): static rubric version surfaced in summary outputs so a
 # reader of 00-index.md / EXECUTIVE-SUMMARY.md knows which scoring rules
 # produced the verdict. Bump this on every rubric change (see docstring).
-RUBRIC_VERSION = "v2.23"
+RUBRIC_VERSION = "v2.24"
 
 WEIGHTS = {
     "implementability": 35,
@@ -1110,8 +1110,8 @@ def main():
     # self-test that mechanises AC-31-31 row #4 for the audit-script ↔
     # gate-report ↔ §31 ## Weights table triangle; closes the silent
     # scoring-divergence drift surface AC-31-02 only partially covered).
-    idx += ["", "## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2)",
-            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **14 strict CI gates** that surround it:",
+    idx += ["", "## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1)",
+            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **15 strict CI gates** that surround it:",
             "",
             "1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.",
             "2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).",
@@ -1127,8 +1127,9 @@ def main():
             "12. **§27 inventory parity triangle** (`test/test-overview-inventory-parity.sh`, Phase 112) — every executable artifact under `linter-scripts/` + `.github/workflows/` is tracked in either `spec/27-spec-toolchain/00-overview.md` (specced) OR the Phase 107 orphan ledger memo (acknowledged); every overview-listed code path exists on disk; mechanises AC-31-31 + INV-01/INV-02.",
             "13. **WEIGHTS dimension-table parity** (`test/test-weights-parity.sh`, Phase 113) — `audit-spec-vs-code-v2.py` `WEIGHTS` dict ↔ `generate-gate-report.py` `WEIGHTS` dict ↔ `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` `## Weights` table; mechanises AC-31-31 row #4 + AC-31-02 across-files extension.",
             "14. **Spec folder-reference gate** (`check-spec-folder-refs.py`, Phase F2) — every `spec/NN-name/` reference in `spec/**/*.md` either resolves on disk OR is allowlisted under `[external]` (real sibling-repo path) or `[doc-only]` (illustrative/historical prose) in `linter-scripts/spec-folder-refs.allowlist`; mechanises AC-62-01..04 and closes the dormant-gate gap Phase 141 surfaced.",
+            "15. **§99 Summary freshness gate** (`check-99-summary-freshness.py`, Phase H1) — flags §99 modules whose `## Summary` block carries a `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20); advisory-by-default for unstamped files (89 of 89 unstamped at H1 close); mechanises AC-26-01..05 and codifies the Phase 136/139 stale-prose-sweep lesson.",
             "",
-            "Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
+            "Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13, #15): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
             ""]
 
     (OUT / "00-index.md").write_text("\n".join(idx))
@@ -1154,7 +1155,7 @@ def main():
         "3. Resolve all broken cross-spec links (auto-detected per module).",
         "4. For every D/F module, run `linter-scripts/generate-gwt-acceptance.py` to regenerate ACs.",
         "5. Add `Status: Planned/In-Progress/Implemented` banners so alignment scores reflect intent.",
-        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2) listing the 14 strict CI gates that surround this score.",
+        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1) listing the 15 strict CI gates that surround this score.",
     ]
     (OUT / "EXECUTIVE-SUMMARY.md").write_text("\n".join(exec_md))
 
