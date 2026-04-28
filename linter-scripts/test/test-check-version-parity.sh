@@ -68,9 +68,10 @@ t2() {
 # in a sandbox to exercise this contract — was relying on real-tree
 # mismatches pre-P30 backlog clearance.)
 t3() {
-    local sb="$SANDBOX/t3"
-    mk_module "$sb/spec/drift" "1.0.0" "2.0.0" "heading"
-    ! python3 "$GATE" --strict --spec-root "$sb/spec" >/dev/null 2>&1
+    local sb="$SANDBOX/t3/spec"
+    rm -rf "$SANDBOX/t3"; mkdir -p "$sb"
+    mk_module "$sb/drift" "1.0.0" "2.0.0" "heading"
+    ! python3 "$GATE" --strict --spec-root "$sb" >/dev/null 2>&1
 }
 
 # T4 strict + report-only exits 0
