@@ -20,6 +20,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # Phase H5: stamp-bump gate needs git history to diff against base ref.
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
