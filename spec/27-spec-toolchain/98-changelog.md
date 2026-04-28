@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.42.3
+**Version:** 2.42.4
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.42.4 — 2026-04-28 — Phase H1-S4: §99 Summary stamp adoption batch 4 — folder 02 cluster (15 modules; coverage 12/89 → 27/89)
+- **Action**: Fourth opt-in adoption batch. Audited all 15 §99 files under `spec/02-coding-guidelines/` with a `## Summary` heading: `01-cross-language/{root,02-boolean,04-code-style,15-master,16-static-analysis}` (5), `02-typescript`, `03-golang/{root,01-enum,04-standards-ref}` (3), `04-php/{root,07-standards-ref}` (2), `07-csharp`, `08-file-folder-naming`, `11-security/{root,01-axios}` (2). All 15 confirmed materially-fresh (Errors:0 / Warnings:0 / Health 100/100 A+ — aligns with current tree-health 168/168 strict + rubric v2.24); the 2 with non-empty Observations were factual (`04-code-style` split-from-1458-line history; `04-php` numbering-gap 04/06 intentionality). Stamp-only edits.
+- **Stamp coverage**: 12/89 → **27/89** §99 files stamped (**~31% of all §99 files; ~55% of the 49 trackable Summary-bearing files**). Gate remains advisory project-wide (62 unstamped → exit 0).
+- **Stale-discovery rate update**: H1-S1+S2+S3+S4 cumulative = **2/27 ≈ 7.4%** (down from S3's 17%). Folder 02 was systematically deepened in Phases 27a-c (17 medium-drift specs cleared per memory) and remains well-maintained — zero stale finds. Updated projection: well-maintained clusters (folder 02) approach 0% stale; older one-off modules (root `spec/99`, `spec/15`) carry the 17% rate. Cumulative ~7-10% is the realistic steady-state expectation.
+- **Lockstep impact**: NONE on the 15 stamped target files (content-only edits). Verified: `node check-lockstep.cjs` 87/87 / 0 findings unchanged.
+- **Verified**: `python3 check-99-summary-freshness.py --report-only` → "stamped: 27; unstamped: 62 — within budget" ✅; `node check-lockstep.cjs` → 87/87 / 0 ✅; `node check-tree-health.cjs --strict` → 168/168 ✅. §27 §98 v2.42.3 → **v2.42.4** (patch — adoption-only). Memo: `.lovable/memory/audit/v2-deterministic/phase-h1-s4-summary-stamp-adoption-batch-4.md`.
 
 ### 2.42.3 — 2026-04-28 — Phase H1-S3: §99 Summary stamp adoption batch 3 (6 modules; coverage 6/89 → 12/89; 1 stale-prose freshen)
 - **Action**: Third opt-in adoption batch. Audited 6 candidates: `spec/06`, `spec/10`, `spec/11`, `spec/12`, `spec/16` confirmed materially-fresh on read (Errors:0 / Warnings:0 / Health 100/100 A+ — aligns with current tree-health 168/168 strict + rubric v2.24); stamp-only edits. **`spec/15-distribution-and-runner/99` was materially stale** — claimed `Health Score: 75/100 (C)` and 2 warnings ("missing `97-acceptance-test-plan.md`", "pipeline detail gaps") that no longer hold: `97-acceptance-criteria.md` is the current canonical name and is present, and module passes strict rubric (168/168 across all 56 modules means slot 15 is at full marks). Freshened prose + stamped in one edit per H1-S1 rule.
