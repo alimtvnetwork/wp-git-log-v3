@@ -6,7 +6,7 @@ description: Auditor-self-reference module — defines the toolchain that audits
 
 # Spec Toolchain
 
-**Version:** 2.57.0  
+**Version:** 2.58.0  
 **Updated:** 2026-04-28
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
 

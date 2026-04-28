@@ -1,10 +1,19 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.57.0
+**Version:** 2.58.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.58.0 — 2026-04-28 — Phase P28: H10 sixth reverse-drift reconstruction (`04-color-themes`) — second hybrid P26 subcase
+- **Action**: Sixth reverse-drift reconstruction; target `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes` (§00 `2.2.0` vs §98 latest `2.2.0` ladder + §98 header `1.0.0` + 3 post-footer orphan blocks). **Second hybrid subcase** (after P26): combined post-footer-prose-promote (P24) + dual-stream header-sync (P25) within a single phase.
+- **Reconstruction (hybrid P24+P25)**: Promoted Phase 61 (OpenAPI) → **2.3.0**, Phase 64 (Mermaid) → **2.4.0**, Phase 72 (inlined CI workflow) → **3.0.0** (major: new normative CI surface, per P23/P24/P26 precedent); deleted post-footer originals (P24 rule); bumped §98 header `1.0.0`→`3.0.1`; bumped §00 banner `2.2.0`→`3.0.1`; added `<!-- h10-verified-phase: 28 -->` stamp; §99 module 2.2.0→2.3.0.
+- **P28 lesson — hybrid taxonomy expanded to "P26-style hybrid" + "P28-style hybrid"**: P26 was (P23-renumber + P24-promote-and-delete); P28 is (P24-promote-and-delete + P25-header-sync). The four-entry subcase taxonomy from P26 was correct as a *single-axis* taxonomy, but real-world drifters mix subcases. Going forward: **always inspect ALL three §98 layers (header version, ladder rows, post-footer prose) before classifying** — single-subcase phases are the exception, not the rule.
+- **Gate impact**: `matches=42 → 43` (+1); `mismatches=32 → 31` (-1); `stamped=25 → 26`; `stamped_failed=0`. Reverse-drift backlog **31 → 30**.
+- **Adoption progress**: **26 / 74 modules opted into strict enforcement**.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption + per-module forensic reconstruction.
+- **Verified**: parity 87/74/43/31/stamped=26/stamped_failed=0 / exit 0 ✅; lockstep 87/87/0 ✅; tree-health 168/168 strict ✅.
 
 ### 2.57.0 — 2026-04-28 — Phase P27: H10 fifth reverse-drift reconstruction (`spec/24-app-design-system-and-ui`) — second P25 dual-stream subcase
 - **Action**: Fifth reverse-drift reconstruction; target `spec/24-app-design-system-and-ui` (§00 banner `4.1.0` vs §98 header `3.1.1`). Second occurrence of P25 subcase (clean ladder + decoupled header stream): §98 SemVer ladder already contained `4.1.0` (Phase 51/55) but §98 header version was tracking an independent audit-stream (last bumped 3.1.0→3.1.1 by Phase P14 STALE-disposition audit). No orphan prose to promote, no out-of-order rows, no missing ladder entries — purely a header-version sync.
