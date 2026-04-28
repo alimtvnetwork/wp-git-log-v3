@@ -38,7 +38,7 @@
       "mmd_files": 1,
       "overview_chars": 8272,
       "todo_density": 0,
-      "waffle_per_kchar": 0.03
+      "waffle_per_kchar": 0.06
     },
     "module": ".",
     "raw_scores": {
@@ -50,7 +50,7 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.03. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,

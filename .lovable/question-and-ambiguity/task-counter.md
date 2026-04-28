@@ -2,7 +2,7 @@
 
 **Budget:** 40 tasks
 **Activated:** 2026-04-28
-**Counter:** 12 / 40
+**Counter:** 13 / 40
 **Status:** 🟢 active
 
 ## Counting rule
@@ -31,6 +31,7 @@ This setup task (creating prompt-01 + index + folder scaffolding) is task
 | 10 | 2026-04-28 | Phase 26 — F3 "Adjacent .py tests" subsection verification (clean) | none |
 | 11 | 2026-04-28 | Phase 27 — Root §97 AC-ROOT-01..08 freshness verification (clean) | none |
 | 12 | 2026-04-28 | Phase 28 — health-dashboard.md freshness sweep (8 fields refreshed, v3.7.7→v3.7.8, §98 3.5.0→3.5.1) | none |
+| 13 | 2026-04-28 | Phase 29 — spec-index.md regen (877→883 files, 6 stale §27 slots flushed) — Phase 30 cascade queued | none |
 
 ## Deactivation trigger
 
