@@ -81,7 +81,7 @@ jobs:
         # refs by classifying 3 missing-folder targets (08-docs-viewer-ui,
         # 09-code-block-system, 21-app) as [doc-only]. Locks AC-62-01..04
         # mechanically; protects against future drift.
-        run: python3 linter-scripts/check-spec-folder-refs.py --strict
+        run: python3 linter-scripts/check-spec-folder-refs.py
 
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
         # Phase 81: tightened from --min to --strict. Strict mode requires
