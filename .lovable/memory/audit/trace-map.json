@@ -454,6 +454,30 @@
         "symbol": "detect_current_phase"
       }
     ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-06": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "regex",
+        "note": null,
+        "symbol": "TRACKED_HEADING_RE"
+      }
+    ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-07": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "find_99_files"
+      }
+    ],
+    "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-08": [
+      {
+        "file": "linter-scripts/check-99-summary-freshness.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "find_summary_stamp"
+      }
+    ],
     "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01": [
       {
         "file": "linter-scripts/audit-spec-vs-code-v2.py",
@@ -643,7 +667,10 @@
       "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-02",
       "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-03",
       "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-04",
-      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-05"
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-05",
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-06",
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-07",
+      "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-08"
     ],
     "linter-scripts/check-memo-retrospective-headings.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-23"
@@ -2015,13 +2042,13 @@
   ],
   "summary": {
     "ac_drifted": 1230,
-    "ac_total": 1304,
-    "ac_traced": 74,
+    "ac_total": 1307,
+    "ac_traced": 77,
     "code_orphan": 25,
     "code_referenced": 23,
     "code_total": 48,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 74
+    "trace_entries": 77
   }
 }

@@ -482,3 +482,22 @@ ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-05"
 files  = ["linter-scripts/check-99-summary-freshness.py"]
 symbol = "detect_current_phase"
 kind   = "function"
+
+# Phase H2 expansion — slot 26 v1.1.0 widened tracked-heading set.
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-06"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "TRACKED_HEADING_RE"
+kind   = "regex"
+
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-07"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "find_99_files"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-08"
+files  = ["linter-scripts/check-99-summary-freshness.py"]
+symbol = "find_summary_stamp"
+kind   = "function"

@@ -91,6 +91,10 @@ function readSafe(p) {
 }
 
 // ── Walk spec/ for module folders ─────────────────────────────────
+// Phase H3 (2026-04-28): exclude `spec/_archive/**` — archived modules are
+// frozen by design and lack §98/§99, which formerly produced 3 noisy
+// `skip: missing 00/98/99` rows on every run. Codifies the H2 lesson:
+// `_archive/` exclusion should be standard for any spec-traversing gate.
 function listModules(root) {
   const out = [];
   function walk(dir) {
@@ -98,7 +102,9 @@ function listModules(root) {
     const hasOverview = entries.some(e => e.isFile() && e.name === '00-overview.md');
     if (hasOverview) out.push(dir);
     for (const e of entries) {
-      if (e.isDirectory() && !e.name.startsWith('.')) walk(path.join(dir, e.name));
+      if (e.isDirectory() && !e.name.startsWith('.') && e.name !== '_archive') {
+        walk(path.join(dir, e.name));
+      }
     }
   }
   walk(root);
