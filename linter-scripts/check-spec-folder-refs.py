@@ -117,6 +117,14 @@ def load_allowlist() -> dict[str, set[str]]:
         line = raw.strip()
         if not line or line.startswith("#"):
             continue
+        # AC-62-04 (Phase 143): strip inline trailing `# comment` so entries
+        # like `22-git-logs   # legacy alias` don't poison the bucket with
+        # the literal "22-git-logs   # legacy alias" string. Comments on a
+        # full line (handled above) remain the preferred form.
+        if "#" in line:
+            line = line.split("#", 1)[0].rstrip()
+            if not line:
+                continue
         if is_section_header(line):
             section = parse_section_header(line)
             if section not in VALID_SECTIONS:
