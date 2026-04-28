@@ -1,7 +1,7 @@
 # 62 — spec-folder-refs.allowlist
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-28 (Phase F1: classified 3 stale missing-folder targets — `08-docs-viewer-ui`, `09-code-block-system`, `21-app` — all as `[doc-only]`. 11 broken references resolved across 6 files. `check-spec-folder-refs.py` now reports 0 stale refs. `[doc-only]` count 21 → 24.)  
+**Version:** 1.3.0  
+**Updated:** 2026-04-28 (Phase F4: bind Phase 144 sanctioned `.py` regression test `linter-scripts/test/test-check-spec-folder-refs.py` to AC-62-05 — closes spec-vs-code gap where the test existed on disk + in `linter-scripts/test/README.md` "Adjacent" subsection but was unreferenced from any §27 slot.)  
 **Source:** [`linter-scripts/spec-folder-refs.allowlist`](../../linter-scripts/spec-folder-refs.allowlist)  
 **Category:** Configuration (consumed by §02)
 
