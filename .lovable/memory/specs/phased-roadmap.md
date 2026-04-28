@@ -343,6 +343,7 @@ Phase 16r landed:
 Remaining roadmap work:
 - ✅ **Phase B1** — CLOSED Phase 147 (locked decision 12).
 - ✅ **Phase B2** — CLOSED Phase 47 via co-location; user re-confirmed 2026-04-28. No further action.
+- ✅ **Phase 17** — CLOSED Phase H14 2026-04-28 (H10 deferral; freshness-exempt scaffolds are intentional).
 
-On next `next`: §97 deepening fully done; both blocked items resolved. Suggested follow-on initiatives: (c) start **Phase 17** (§99 consistency-report deepening sweep — many `99-consistency-report.md` files are still scaffolds); (d) start **Phase 18** (run `node linter-scripts/check-tree-health.cjs --report` and fix any sub-100 modules — though current strict tree-health is 168/168, so this is likely a no-op until drift surfaces).
+On next `next`: all backlog items resolved. Remaining open work lives in monitor-mode (R1 blocked on Lovable Cloud, R2 session-persistence watch, audit-v5 baseline-drift watch). Phase 18 (`check-tree-health.cjs --report` drift sweep) remains as a future low-priority verification — currently a no-op since strict tree-health is 168/168. Run only if `--strict` ever drops below 100.
 
