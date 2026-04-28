@@ -1,7 +1,7 @@
 # 11 — generate-dashboard-data.cjs
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Version:** 1.2.0  
+**Updated:** 2026-04-28  
 **Source:** [`linter-scripts/generate-dashboard-data.cjs`](../../linter-scripts/generate-dashboard-data.cjs)  
 **Category:** Generator
 
@@ -80,6 +80,22 @@ node linter-scripts/generate-dashboard-data.cjs --quiet
 - **When** read,
 - **Then** the final byte MUST be `\n`.
 
+### AC-11-05 — Inline-code blanking parity with `check-spec-cross-links.py` (Phase P44)
+- **Given** a markdown narrative line containing an inline-code-wrapped link such as `` [`test-foo.sh`](./test-foo.sh) `` (where the link text is itself an inline-code span and the target is an example pattern, NOT a real file),
+- **When** the dashboard generator's `extractLinks()` parses the file,
+- **Then** the inline-code span MUST be blanked (same-length space run preserving char offsets) BEFORE `LINK_RE` matches, mirroring `check-spec-cross-links.py:strip_inline_code()` (P0 Python checker, ported from there in Phase P44).
+- **AND** the resulting `Links.Total.Broken` count MUST be 0 whenever `python3 linter-scripts/check-spec-cross-links.py` reports `OK All internal spec cross-references resolve.` — the two link counters MUST agree on the broken-set (parity contract; without this AC the JS counter over-reports false positives that the Python gate already correctly suppresses, producing baseline noise like the `./test-foo.sh` row that lingered in `Health.Deductions` from Phase 102 through P43).
+- **Verifies:** `linter-scripts/generate-dashboard-data.cjs:137-176` (`INLINE_CODE_RE` constant + `blankInlineCode()` helper + `extractLinks()` invocation); `linter-scripts/check-spec-cross-links.py:57-66` (`strip_inline_code()` reference implementation that this AC ports parity from).
+
 ## Cross-references
 
 - [`spec/health-dashboard.md`](../health-dashboard.md) — consumer.
+- [`spec/27-spec-toolchain/01-check-spec-cross-links.md`](./01-check-spec-cross-links.md) — Python sibling whose `strip_inline_code` semantics AC-11-05 ports parity from.
+
+## Changelog
+
+### 1.2.0 — 2026-04-28 — Phase P44: inline-code blanking parity with Python cross-link checker
+- **Action**: Added `INLINE_CODE_RE` constant + `blankInlineCode()` helper + `extractLinks()` integration in `linter-scripts/generate-dashboard-data.cjs` (lines 137-176). Mirrors `check-spec-cross-links.py:strip_inline_code()` semantics: inline-code spans are replaced with same-length space runs BEFORE `LINK_RE` matches, preserving char offsets so line numbers stay accurate. Closes a parity gap between the JS dashboard generator and the Python strict CI gate that had produced one persistent false-positive (`./test-foo.sh` example pattern in §27 §98 line 501 P102 narrative) lingering in `Health.Deductions` from Phase 102 through P43.
+- **Outcome**: `Links.Total.Broken` 1 → **0**; `Links.Total.Checked` 3079 → **3073** (6 inline-code-wrapped example patterns correctly skipped); `Health.LegacyScore` 98 → **100**; `Health.Deductions` `["1 broken links (-2)"]` → **`[]`**. Cross-link gate output unchanged (it was already correct via `strip_inline_code`); only the dashboard JSON aligns now.
+- **Spec**: This file v1.1.0 → **v1.2.0**: added AC-11-05 with full GWT body + parity contract + `Verifies:` block citing both the new JS code and the Python reference implementation; added `## Changelog` block; expanded `## Cross-references` with §01 Python-sibling pointer.
+- **No CI workflow change, no RUBRIC_VERSION bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline** — bug fix in a generator's link counter, contract-tightening only. The new AC documents the parity invariant so future divergences are caught at AC-review time.
