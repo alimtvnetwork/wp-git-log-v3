@@ -46,9 +46,17 @@ CODE_EXTS = {".py", ".cjs", ".js", ".sh", ".ps1", ".go", ".toml", ".mjs",
 
 
 def collect_ac_ids() -> dict[str, list[str]]:
-    """Return canonical_id -> [matching markdown headings]."""
+    """Return canonical_id -> [matching markdown headings].
+
+    Phase H3 (2026-04-28): defensively exclude `spec/_archive/**`. Currently
+    the `### `-only regex incidentally skips archive ACs (which are h4-level),
+    but this exclusion codifies the intent and protects against future archive
+    documents that promote ACs to h3.
+    """
     out: dict[str, list[str]] = defaultdict(list)
     for md in sorted(SPEC.rglob("*.md")):
+        if "_archive" in md.parts:
+            continue
         rel = str(md.relative_to(SPEC))
         text = md.read_text(encoding="utf-8", errors="replace")
         for m in AC_HEADING_RX.finditer(text):
