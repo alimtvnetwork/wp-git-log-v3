@@ -149,6 +149,18 @@ not yet wired as discrete steps in `spec-health.yml`. Acknowledgement
 flows through `test-overview-inventory-parity.sh` (Phase 112) instead of
 the README parity gate, which remains `.sh`-only by design.
 
+### Adjacent runners (acknowledged, exempt from both parity gates by design)
+
+| Runner | Phase | Composes | Why no `test-` prefix |
+|---|---|---|---|
+| [`cluster-terminal-sweep.sh`](./cluster-terminal-sweep.sh) | P40 | All 9 critical CI gates (tree-health `--strict`, lockstep, version-parity `--strict`, cross-links, folder-refs, freshness `--strict-position`, trace-map regression, §27 inventory parity, README inventory parity) — single-command runner with formatted PASS/FAIL counters and remediation hints citing Phase 18 rebaseline rule, P35 `--rewrite-allowlist`, and the P23/P24/P25/P26 reverse-drift subcase taxonomy | This file is a **runner**, not a self-test — it composes existing tests and gates rather than asserting new behaviour. Naming without the `test-` prefix is intentional: the [`test-readme-inventory.sh`](./test-readme-inventory.sh) parity gate scopes to `test-*.sh` glob, so runners are exempt from inventory-table membership. The [`test-overview-inventory-parity.sh`](./test-overview-inventory-parity.sh) gate scopes to `linter-scripts/` top-level only (via `find linter-scripts -maxdepth 1`), so files under `linter-scripts/test/` are also exempt from §27 §00 inventory enumeration. The runner sits in a deliberate dead-zone between both parity surfaces — visible to contributors via this subsection, exempt from both parity contracts by glob/scope.
+
+**Use case:** run `bash linter-scripts/test/cluster-terminal-sweep.sh` at the END of any cluster of phases (advisory→strict landings, batch sweeps, refactors, dashboard refreshes, etc.) BEFORE declaring the cluster closed. Mechanizes the P34/P38 cadence rule (codified in `mem://index.md` Core P34/P38/P40 entries): both P34 and P38 caught silent regressions (stale cross-link waivers; stale trace-map baseline) that strict CI would have flagged only at next PR — proving the cadence catches real failures the strict-mode CI does not pre-catch.
+
+**When to add another runner:** if you find yourself memorizing a multi-gate procedure that runs at a recurring lifecycle moment (cluster-end, pre-release, post-rebaseline, etc.), graduate it to a runner here. Use the same naming dead-zone (no `test-` prefix, under `linter-scripts/test/`). Document it in this subsection with the same "Composes" + "Why no `test-` prefix" + "Use case" + "When to add another" structure. The graduation cost is one-shot; the discipline cost recurs every cycle. Codified P40 lesson #2.
+
+
+
 ---
 
 ## Adjacent gates (not in this directory but logically siblings)
