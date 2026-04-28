@@ -27,13 +27,14 @@ assert() {
 
 echo "== test-check-99-summary-freshness.sh =="
 
-# --- T1: real-tree run (default mode) — should exit 0 since 0 stamped files at H1 close
-set +e
-python3 "$GATE" >/tmp/h1-out 2>&1
+# --- T1: real-tree run (default mode) — should exit 0 (Phase H2: gate now
+# scans all §99 files except _archive/ and accepts stamps under Summary OR
+# inventory-rubric headings; assert structural shape only, not exact counts
+# which churn as adoption progresses).
+PYTHONIOENCODING=utf-8 python3 "$REPO/linter-scripts/check-99-summary-freshness.py" >/tmp/h1-out 2>&1
 RC=$?
-set -e
-assert "T1 real-tree default mode exits 0 (89 unstamped, 0 stamped)" "$RC" "0"
-grep -q "unstamped: 89" /tmp/h1-out && echo "  ✓ T1 reports 89 unstamped" || { echo "  ✗ T1 unstamped count missing"; FAIL=$((FAIL+1)); }
+assert "T1 real-tree default mode exits 0" "$RC" "0"
+grep -qE "§99 files scanned: [0-9]+; stamped: [0-9]+; unstamped: [0-9]+" /tmp/h1-out && echo "  ✓ T1 reports scan/stamped/unstamped counts" || { echo "  ✗ T1 counts line missing"; FAIL=$((FAIL+1)); }
 
 # --- T2: real-tree --report-only also exits 0
 set +e
