@@ -1,8 +1,10 @@
 # Consistency Report — 23-app-database
 
-**Version:** 2.0.0
-**Updated:** 2026-04-27
+**Version:** 2.0.1
+**Updated:** 2026-04-28
 **Scope:** `spec/23-app-database/`
+
+> **v2.0.1 update (Phase P13 — "Split `00-overview.md` (554 lines)" closed as STALE):** Backlog item inherited from audit-v4 (45/100 baseline, superseded by audit-v5 per Phase 130). Re-audit on 2026-04-28 confirms zero split required: file is one cohesive SSOT contract for the App table family; "Open Items" below already lists splitting as optional with "No mandatory open items"; slot policy reserves `01..04` for if/when per-column commentary outgrows the inline DDL — condition not triggered. Splitting now would fragment the contract and burn 4 immutable slots prematurely. No content changed in `00-overview.md`. §98 / §99 patch-bumped to record the audit disposition. Future split proposals against §23 MUST cite a concrete trigger (per-column commentary >200 lines for a single table, OR a deep-dive workflow that doesn't belong in the router) — bare line-count arguments are not actionable per Phase P13 precedent (mirrors Phase P12 disposition for §28).
 
 ---
 
