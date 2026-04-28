@@ -1,10 +1,16 @@
 # Changelog — App Database
 
-**Version:** 3.0.0
-**Updated:** 2026-04-27
+**Version:** 3.0.1
+**Updated:** 2026-04-28
 **Scope:** `spec/23-app-database/`
 
 ---
+
+## 3.0.1 — 2026-04-28
+
+### Audit (no content change)
+
+- **Phase P13 — "Split `00-overview.md` (554 lines)" backlog item closed as STALE.** This task was queued before Phases 39a/53/58/68/71 deepened the module to 100/100. Re-audit confirms the file is one cohesive single-source-of-truth contract: convention recap → DDL (3 tables) → seed data → 4 query patterns → migration template → cross-refs → AC-ADB-000 → impl-sweep appendices (PostgreSQL canonical DDL + RLS policies + TS enum mirror + JSON Schema migration manifest + Mermaid lifecycle + CI workflow). §99 explicitly defends co-location ("every contract needed to implement these tables is inlined below") and lists splitting as **optional** under "Open Items" with "No mandatory open items." Slot policy already reserves `01-app-table.md` / `02-app-link-resolution.md` / `03-app-link-history.md` / `04-migration-recipes.md` for if/when per-column commentary outgrows the inline DDL — that condition has not been triggered. Splitting now would fragment the contract, force cross-file lookups for any AppLink question, and burn 4 immutable slots prematurely. No file edits required; no AC changes; no banner bump on `00-overview.md`. §98 / §99 receive a patch bump to record the disposition. Future split proposals against §23 MUST cite a concrete trigger (e.g., per-column commentary >200 lines for a single table, OR a deep-dive workflow that genuinely doesn't belong in the router) — bare line-count arguments are not actionable per Phase P13 precedent (mirrors Phase P12 disposition for §28).
 
 ## 4.1.0 — 2026-04-27
 
