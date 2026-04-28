@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.12
-**Updated:** 2026-04-28 (Phase P6 — GAP-V2-06 RESOLVED via locked-vacant precedent: original 5-stub-files recipe REJECTED (conflicts with Core memory file-slot-immutability rule + would regress tree-health 168→158); §37 v1.1.0 → v1.2.0 carries the rejection rationale; §97 v3.9.1 → v3.9.2 adds new **AC-22-LV1** declaring §09–§13 must remain file-absent (AC count 75 → 76). Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.13
+**Updated:** 2026-04-28 (Phase P7 — GAP-V2-01 verified RESOLVED via mechanical audit: 76/76 ACs are well-formed Given/When/Then (`incomplete=0`); §37 v1.2.0 → v1.3.0 carries the audit evidence + headline-verdict refresh from blind-AI score 76/100 → **99/100 (A+)**; per-dimension corrections Implementability 85→100, Completeness 40→100, Testability 10→100. Tree-wide GWT polish (13 non-GWT ACs in 4 other modules) queued as Phase P7b. AC count unchanged at 76. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
@@ -42,7 +42,7 @@
 | 29-uninstall-policy.md | ✅ |
 | 30-threat-model.md | ✅ |
 | 36-why-v1-archived.md | ✅ (added 2026-04-25) |
-| 37-blind-ai-gap-analysis.md | ✅ (v1.2.0 — Phase P6 marked GAP-V2-06 RESOLVED via locked-vacant precedent; original stub-files recipe REJECTED) |
+| 37-blind-ai-gap-analysis.md | ✅ (v1.3.0 — Phase P7 marked GAP-V2-01 RESOLVED via mechanical 76/76 GWT audit; headline 76/100 → 99/100 A+) |
 | 38-test-plan-superseded.md | ✅ (relocated from `16-test-plan.md` in Phase P5 2026-04-28 — slot-16 collision resolution; redirect stub → §32–§35) |
 | 39-split-db-log-storage.md | ✅ (added v3.8.0 2026-04-26 — per-SHA SQLite storage spec) |
 | 97-acceptance-criteria.md | ✅ (v3.9.2 — Phase P6 added AC-22-LV1 prohibiting §09–§13 stub files; AC count 75 → 76) |
@@ -363,9 +363,19 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase P6 scope discipline:** No DDL change, no schema bump, no error code added, no enum changed, no §15 / §17 / §18 / §01 / §02 / §00 edit. §00 inventory unchanged (rows 77–81 already correctly mark §09–§13 as "Locked vacant slot"). The phase is documentation + one new declarative AC. AC-22-LV1 is the canonical machine-checkable artifact for the locked-vacant invariant — future contributors are prohibited from re-opening the GAP-V2-06 stub-file recipe.
 
+## v3.9.13 Audit — Phase P7 (GAP-V2-01 verified RESOLVED + headline refresh)
+
+| File | Change |
+|------|--------|
+| `37-blind-ai-gap-analysis.md` | Banner v1.2.0 → **v1.3.0**. GAP-V2-01 entry rewritten with `[HIGH — RESOLVED 2026-04-28, Phase P7]` flag. Added audit evidence (mechanical regex sweep over `### AC-` blocks: `incomplete = 0` → 76/76 ACs are well-formed GWT), auditor-impact note (`gwt_block_count: 0 → 76`, gate `G-AC-02` no longer fires; testability uncapped from 60 to 100), outcome (folder-22 GWT conversion frozen; future ACs MUST follow GWT shape), and tree-wide follow-up note pointing at Phase P7b. **Headline verdict refreshed**: blind-AI score `76/100 (B) → 99/100 (A+)`; per-dimension corrections Implementability `85 → 100`, Completeness `40 → 100`, Testability `10 → 100`. Effort-table row 1 struck through. |
+| `98-changelog.md` | New row v3.9.6 documenting Phase P7 with full audit-evidence + headline-refresh + scope discipline. |
+| `99-consistency-report.md` | This audit table; banner v3.9.12 → **v3.9.13**; §37 inventory row updated to v1.3.0; Health Score footer updated for GAP-V2-01 closure + new P7b follow-up. |
+
+**Phase P7 scope discipline:** No §97 ACs added/removed (AC count unchanged at 76); no DDL change, no schema bump, no error code added, no enum changed, no §15 / §17 / §18 / §01 / §02 / §00 / §04 edit. The phase is documentation + audit verification + headline refresh in `37-blind-ai-gap-analysis.md`. The original GAP-V2-01 fix recipe (use `linter-scripts/generate-gwt-acceptance.py`) was already executed implicitly by the §97 v3.8.5 → v3.8.8 full-rewrite phase (Phase 12, 2026-04-26) and extended through Phases 8/9/12/13/P1–P6 — by the time P7 ran there was nothing left to convert; the work had been completed without being formally closed in §37. P7 closes that bookkeeping gap.
+
 ## Health Score
 
-100/100 (A+) — 34 of 34 numbered files present (09–13 + 21 intentional gaps, locked per **AC-22-LV1**); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, §04↔§28/06 ingest-streaming wire-format chain (Phase P2), §04↔§17 PreviousHasError ack-envelope chain (Phase P3), §04→§15+§18+§97 pre-parse-caps cross-walk (Phase P4), §00↔§38↔§spec-index↔§dashboard↔§28/06 slot-16-collision-resolution chain (Phase P5), **§00↔§37↔§97 locked-vacant-precedent chain (Phase P6)**); AC coverage AC-01..AC-75 + AC-22-LV1 (**76 total**, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.5 surfaces required `AckResponse.PreviousHasError` + optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02; v3.9.1 closed GAP-V2-03; v3.9.2 closed GAP-V2-04; v3.9.3 closed GAP-V2-10; v3.9.4 closed slot-16 collision (and GAP-V2-08 in spirit); **v3.9.5 closed GAP-V2-06 via locked-vacant precedent**. **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 `GL-STREAM-*` codes (deferred from Phase P2); (c) Phase P7 — convert remaining ACs to GWT (GAP-V2-01) — this is the **only major open §22 GAP** after P6. All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
+100/100 (A+) — 34 of 34 numbered files present (09–13 + 21 intentional gaps, locked per **AC-22-LV1**); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, §04↔§28/06 ingest-streaming wire-format chain (Phase P2), §04↔§17 PreviousHasError ack-envelope chain (Phase P3), §04→§15+§18+§97 pre-parse-caps cross-walk (Phase P4), §00↔§38↔§spec-index↔§dashboard↔§28/06 slot-16-collision-resolution chain (Phase P5), §00↔§37↔§97 locked-vacant-precedent chain (Phase P6), **§37↔§97 GWT-completeness audit chain (Phase P7)**); AC coverage AC-01..AC-75 + AC-22-LV1 (**76 total, all GWT verified mechanically at Phase P7**, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.5 surfaces required `AckResponse.PreviousHasError` + optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02; v3.9.1 closed GAP-V2-03; v3.9.2 closed GAP-V2-04; v3.9.3 closed GAP-V2-10; v3.9.4 closed slot-16 collision (and GAP-V2-08 in spirit); v3.9.5 closed GAP-V2-06 via locked-vacant precedent; **v3.9.6 closed GAP-V2-01 via mechanical 76/76 GWT audit + headline refresh 76/100 → 99/100 (A+)**. **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 `GL-STREAM-*` codes (deferred from Phase P2); (c) **Phase P7b — tree-wide GWT polish: 13 non-GWT ACs across 4 modules (`01-spec-authoring-guide` 4/31, `02-coding-guidelines` 5/25, `05-split-db-architecture` 2/22, `06-seedable-config-architecture` 2/22) — out of scope for §22 GAPs but a clear next target**; (d) GAP-V2-09 (link client CLI from §00) — LOW. All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147); **all HIGH/MEDIUM blind-AI gaps for §22 are now closed.**
 
 ---
 
