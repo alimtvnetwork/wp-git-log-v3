@@ -1,11 +1,13 @@
 {
-  "Generated": "2026-04-27",
+  "Generated": "2026-04-28",
   "Health": {
     "Score": 100,
     "Grade": "A+",
     "RubricVersion": "2.0.0",
-    "Deductions": [],
-    "LegacyScore": 100
+    "Deductions": [
+      "1 broken links (-2)"
+    ],
+    "LegacyScore": 98
   },
   "RubricV2": {
     "RubricVersion": "2.0.0",
@@ -26,9 +28,9 @@
       "PctOfTotal": 25
     },
     "Quality": {
-      "Earned": 167,
+      "Earned": 168,
       "Max": 168,
-      "PctOfTotal": 14.9
+      "PctOfTotal": 15
     },
     "ModuleCount": 56,
     "Modules": [
@@ -682,11 +684,12 @@
         "RequiredMax": 2,
         "Recommended": 2,
         "RecommendedMax": 2,
-        "QualityScore": 2,
+        "QualityScore": 3,
         "QualityMax": 3,
         "QualityHits": [
           "depth",
-          "history"
+          "history",
+          "inventory"
         ]
       },
       {
@@ -818,9 +821,9 @@
     ]
   },
   "Links": {
-    "TotalChecked": 2941,
-    "Ok": 2929,
-    "Broken": 0,
+    "TotalChecked": 3074,
+    "Ok": 3062,
+    "Broken": 1,
     "ExternalAllowed": 9,
     "ExternalAllowedDetails": [
       {
@@ -849,7 +852,7 @@
       },
       {
         "Source": "02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md",
-        "Line": 64,
+        "Line": 65,
         "Target": "../../../../linters-cicd/codegen/README.md",
         "Resolved": "../linters-cicd/codegen/README.md"
       },
@@ -867,7 +870,7 @@
       },
       {
         "Source": "15-distribution-and-runner/00-overview.md",
-        "Line": 96,
+        "Line": 97,
         "Target": "../../spec-slides/00-overview.md",
         "Resolved": "../spec-slides/00-overview.md"
       },
@@ -878,7 +881,15 @@
         "Resolved": "../spec-slides"
       }
     ],
-    "BrokenDetails": []
+    "BrokenDetails": [
+      {
+        "Source": "27-spec-toolchain/98-changelog.md",
+        "Line": 474,
+        "Text": "\\`test-foo.sh\\`",
+        "Target": "./test-foo.sh",
+        "Resolved": "27-spec-toolchain/test-foo.sh"
+      }
+    ]
   },
   "RequiredFiles": {
     "MissingOverview": [],
@@ -886,7 +897,7 @@
   },
   "Inventory": {
     "TotalFolders": 87,
-    "TotalMdFiles": 861,
+    "TotalMdFiles": 868,
     "Folders": [
       {
         "Folder": "",
@@ -2633,7 +2644,7 @@
       },
       {
         "Folder": "27-spec-toolchain",
-        "MdFiles": 40,
+        "MdFiles": 47,
         "Subfolders": 0,
         "HasOverview": true,
         "HasConsistency": true,
@@ -2658,11 +2669,18 @@
           "15-generate-fix-checklist.md",
           "16-generate-gate-report.md",
           "17-check-trace-map-regression.md",
+          "18-check-mermaid-syntax.md",
+          "19-check-memo-retrospective-headings.md",
           "20-fill-missing-acceptance-criteria.md",
           "21-fill-missing-changelogs.md",
           "22-fill-missing-consistency-reports.md",
           "23-scaffold-spec-module.md",
           "24-check-lockstep.md",
+          "25-deepen-consistency-reports.md",
+          "26-check-99-summary-freshness.md",
+          "27-check-99-stamp-bump.md",
+          "28-check-archive-exclusion-runtime.md",
+          "29-check-version-parity.md",
           "30-audit-spec-vs-code.md",
           "31-audit-spec-vs-code-v2.md",
           "40-run-sh.md",
