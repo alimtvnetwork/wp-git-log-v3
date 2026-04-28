@@ -1,6 +1,6 @@
 # 11 — generate-dashboard-data.cjs
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-28  
 **Source:** [`linter-scripts/generate-dashboard-data.cjs`](../../linter-scripts/generate-dashboard-data.cjs)  
 **Category:** Generator
