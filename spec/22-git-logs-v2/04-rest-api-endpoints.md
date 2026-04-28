@@ -1,7 +1,7 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.9.3  
-**Updated:** 2026-04-26 (Phase 12: §11.3.1 `Header` frame extended with optional `StateTransition` field exposing the four-value `Pipeline.PreviousHasError`-derived label per §97 AC-73/AC-74; emitted only on single-pipeline scopes #7–#10; previous Phase 8 v2.9.2 NDJSON streaming retrieval contract unchanged)
+**Version:** 2.9.4  
+**Updated:** 2026-04-28 (Phase P2: §1.1 NDJSON streaming wire format pinned for `/append-log` ingest — `X-GL-Stream:1` sentinel, `StreamHeader`/`Line`/`StreamFooter` frame contract, error codes `GL-STREAM-{NO-HEADER,NO-FOOTER,TOO-MANY-LINES,UNKNOWN-FRAME}` — resolves GAP-V2-03 and unblocks `28-universal-ci-cli/06` AC-28-06; §11 retrieval contract unchanged)
 **Namespace:** `/wp-json/git-logs/v2`
 
 ---
