@@ -200,9 +200,28 @@ def check_link(source: Path, target: str, repo_root: Path) -> tuple[str, str] | 
     return None
 
 
-def scan(root: Path, repo_root: Path) -> list[dict]:
+FUZZY_LINE_TOLERANCE = 5  # P35: drift budget for stamp-batch insertions etc.
+
+
+def scan(
+    root: Path,
+    repo_root: Path,
+    *,
+    strict_line_match: bool = False,
+) -> tuple[list[dict], list[dict]]:
+    """Scan ``root`` for broken markdown cross-links.
+
+    Returns a 2-tuple ``(failures, fuzzy_hits)``:
+      * ``failures`` — unresolved broken links (non-allowlisted).
+      * ``fuzzy_hits`` — allowlist waivers that matched fuzzily on
+        ``(file, target)`` despite a stale line number; surfaces as a
+        rewrite hint and (in ``--rewrite-allowlist`` mode) drives the
+        in-place line-number bump. Empty when ``strict_line_match=True``.
+    """
     failures: list[dict] = []
+    fuzzy_hits: list[dict] = []
     allowlist = load_allowlist(repo_root)
+    allowlist_index = load_allowlist_index(repo_root)
     for md in iter_markdown_files(root):
         try:
             text = md.read_text(encoding="utf-8", errors="ignore")
@@ -223,6 +242,23 @@ def scan(root: Path, repo_root: Path) -> list[dict]:
             waiver_key = f"{rel_file}:{line_num}:{target}"
             if waiver_key in allowlist:
                 continue
+            # P35 fuzzy-match: same (file, target) waived at a nearby line?
+            if not strict_line_match:
+                stale_lines = allowlist_index.get((rel_file, target), [])
+                nearby = [
+                    n for n in stale_lines
+                    if n != line_num and abs(n - line_num) <= FUZZY_LINE_TOLERANCE
+                ]
+                if nearby:
+                    fuzzy_hits.append({
+                        "file": rel_file,
+                        "target": target,
+                        "stale_line": nearby[0],
+                        "current_line": line_num,
+                        "stale_key": f"{rel_file}:{nearby[0]}:{target}",
+                        "current_key": waiver_key,
+                    })
+                    continue
             failures.append({
                 "file": rel_file,
                 "line": line_num,
@@ -232,7 +268,31 @@ def scan(root: Path, repo_root: Path) -> list[dict]:
                 "detail": detail,
                 "waiver_key": waiver_key,
             })
-    return failures
+    return failures, fuzzy_hits
+
+
+def rewrite_allowlist(repo_root: Path, fuzzy_hits: list[dict]) -> int:
+    """Rewrite the allowlist file in-place, replacing each ``stale_key``
+    with its corresponding ``current_key``. Returns the number of waivers
+    rewritten. Comments and blank lines are preserved verbatim.
+    """
+    if not fuzzy_hits:
+        return 0
+    path = allowlist_path(repo_root)
+    if not path.exists():
+        return 0
+    rewrites = {h["stale_key"]: h["current_key"] for h in fuzzy_hits}
+    new_lines: list[str] = []
+    bumped = 0
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        stripped = raw.strip()
+        if stripped and not stripped.startswith("#") and stripped in rewrites:
+            new_lines.append(rewrites[stripped])
+            bumped += 1
+        else:
+            new_lines.append(raw)
+    path.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
+    return bumped
 
 
 def emit_human(failures: list[dict]) -> None:
