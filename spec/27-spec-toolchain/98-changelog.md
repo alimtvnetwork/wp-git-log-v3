@@ -1,10 +1,13 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.29.0
-**Updated:** 2026-04-27
+**Version:** 2.30.0
+**Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.30.0 — 2026-04-28 — Phase 140: restored missing AC-T-10
+- §97 v2.0.0 → **v2.0.1**. Restored `AC-T-10 — Spec cross-link gate (zero broken links)`, which was silently dropped from §97 sometime before Phase 16d-iv but kept being referenced by `linter-scripts/trace-map.toml:116` and the live CI step *"Spec cross-link gate"* in `.github/workflows/spec-health.yml:71`. The §97 v2.0.0 header even claimed *"AC-T-01..AC-T-10 preserved verbatim"* — which was untrue and is now true again. Trace-map regression check's `missing_ac` error (`27-spec-toolchain/97-acceptance-criteria.md#AC-T-10`) is now resolved at the source. AC count: 19 → **20** (matches v2.0.0 header claim of 20). No code change; no other spec module touched.
 
 ## Format
 
