@@ -20,8 +20,21 @@ Codify the Phase 136/139 lesson into a CI gate: §99 `## Summary` narrative clai
 diverged from the source-of-truth (§97 ACs, §00 inventory) by 19 modules in
 Phase 136 before a manual sweep caught it.
 
-This validator detects §99 modules whose `## Summary` block carries a
+This validator detects §99 modules whose tracked block carries a
 `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20).
+
+**Phase H2 (2026-04-28)** widened the tracked-heading set from `## Summary`
+only to also accept inventory-rubric headings — the 35 §99 files that ship a
+`## File Inventory` / `## Module Health` table instead of a narrative Summary.
+The same stamp convention applies under any of these headings:
+
+- `## Summary` (narrative claims — the H1 original)
+- `## Module Health` (root `spec/02/99` style)
+- `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`,
+  `## Document Inventory`, `## Modules` (inventory-table styles)
+
+H2 also excludes `spec/_archive/**` from the scan — archived modules are
+intentionally frozen and stamping them would create false freshness signals.
 
 ## Stamp convention (opt-in, per file)
 
@@ -30,6 +43,17 @@ This validator detects §99 modules whose `## Summary` block carries a
 <!-- verified-phase: 147 -->
 
 …narrative claims about counts, versions, status flags…
+```
+
+or for inventory-rubric files:
+
+```markdown
+## File Inventory
+<!-- verified-phase: 147 -->
+
+| File | Present |
+|------|---------|
+| 00-overview.md | ✅ |
 ```
 
 Files **without** the stamp emit a per-file `info` line and do **not** fail —
