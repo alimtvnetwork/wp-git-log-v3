@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.47.0
+**Version:** 2.48.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.48.0 — 2026-04-28 — Phase F4: bind Phase 144 `.py` regression test to AC-62-05
+- **Action**: Closed the spec-vs-code gap discovered while auditing `linter-scripts/test/` coverage. The Phase 144 sanctioned `.py` regression test `linter-scripts/test/test-check-spec-folder-refs.py` existed on disk and was acknowledged in `linter-scripts/test/README.md` "Adjacent `.py` tests" subsection, but **was unreferenced from any §27 slot** — a contributor reading the §27 spec alone could not discover that AC-62-04 has a regression-test lock.
+- **Slot 62 (`62-spec-folder-refs-allowlist.md`) v1.2.0 → v1.3.0**: added **AC-62-05** codifying the test's four-case contract (plain-entry routing, AC-62-04 inline-comment strip, whitespace-then-comment edge case, `[doc-only]` bucket isolation); extended AC-62-04's `**Verifies:**` clause with a back-reference to the test + AC-62-05; added the test to the slot's `## Cross-references` block.
+- **Why no §27 slot for the test itself**: `linter-scripts/test/` is excluded by design from `test-overview-inventory-parity.sh`'s scope rule (production scripts only), and AC-62-05 explicitly documents this so future contributors don't try to "fix" it by carving a new slot. F3 sanctioned-exception policy (`mem://index.md` Core test-file rule) governs.
+- **No code changes** — pure spec lockstep. The test file itself is unchanged from Phase 144. No CI gate count change. No RUBRIC_VERSION change. No trace-map rebaseline (the test is in the existing AC-62-04→test linkage, not a new code orphan).
+- **Verified**: `bash linter-scripts/test/test-check-spec-folder-refs.py` (acts as `test-check-spec-folder-refs.py` runtime) ✓; `node linter-scripts/check-lockstep.cjs` ✓; `node linter-scripts/check-tree-health.cjs --strict` ✓.
 
 ### 2.47.0 — 2026-04-28 — Phase 30: Spec-index drift gate strict-promotion (gate #18; AC-31-31 cascade RUBRIC v2.26→v2.27)
 - **Action**: Promoted the existing `Regenerate spec-index.md (drift check)` workflow step in `.github/workflows/spec-health.yml` from advisory (`⚠️` warn + exit 0) to **strict** (`exit 1` on any `git status --porcelain spec/` delta after `node linter-scripts/generate-spec-index.cjs`). Step renamed `Regenerate spec-index.md (drift check)` → **`Spec-index drift gate`** (consistent with peer naming pattern: F2 `Spec folder-reference gate`, H7 `Runtime archive-exclusion gate`).
