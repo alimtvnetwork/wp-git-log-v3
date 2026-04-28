@@ -580,3 +580,18 @@ ac     = "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-05"
 files  = ["linter-scripts/test/test-archive-exclusion-runtime.sh"]
 symbol = "Results:"
 kind   = "literal"
+
+# ── Phase P44/P45 — Slot 11 generate-dashboard-data.cjs parity contract ────
+# AC-11-05 binds BOTH the JS implementation (P44) and the self-test (P45) so
+# trace-map regression catches future divergence: removing either file from
+# disk surfaces as missing-file; removing the AC surfaces as missing-ac.
+
+[[trace]]
+ac     = "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-05"
+files  = [
+  "linter-scripts/generate-dashboard-data.cjs",
+  "linter-scripts/test/test-inline-code-blanking-parity.sh",
+]
+symbol = "blankInlineCode"
+kind   = "function"
+note   = "P44 ported strip_inline_code semantics from check-spec-cross-links.py; P45 mechanically locks parity via 8-fixture self-test (17 assertions)."

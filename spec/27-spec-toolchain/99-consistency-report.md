@@ -1,6 +1,6 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.63.0
+**Version:** 2.64.0
 **Updated:** 2026-04-28
 
 > **v2.63.0 update (Phase P44 — inline-code blanking parity in `generate-dashboard-data.cjs` closes Phase-102-era dashboard false-positive):** User reply `next` (P43 Task #8). Ported `strip_inline_code` semantics from the Python strict cross-link gate to the JS dashboard generator: added `INLINE_CODE_RE` + `blankInlineCode()` + `extractLinks()` integration (`linter-scripts/generate-dashboard-data.cjs:137-176`). Inline-code spans are now blanked (same-length space runs preserving char offsets) BEFORE `LINK_RE` matches, mirroring `check-spec-cross-links.py:strip_inline_code()`. **Outcome**: `Links.Total.Broken` 1 → **0**; `Links.Total.Checked` 3079 → **3073** (6 inline-code-wrapped example patterns correctly skipped); `Health.LegacyScore` 98 → **100**; `Health.Deductions` `["1 broken links (-2)"]` → **`[]`**. The lingering `./test-foo.sh` false-positive (Phase 102 P102-narrative example pattern) is gone. Slot 11 v1.1.0→**v1.2.0** with new **AC-11-05** codifying the parity contract: the JS broken-set MUST agree with the Python broken-set. `Verifies:` clause names BOTH source files so future divergences surface at AC-review time. **Pure spec lockstep + small JS bug fix — no CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline.** §00 v2.65.0→**v2.66.0**; §98 v2.65.0→**v2.66.0**. **All 9 critical gates green** via `bash linter-scripts/test/cluster-terminal-sweep.sh` (P40 runner). **P44 lessons codified**: (1) dual-implementation parity (Python+JS validators of the same contract) is fragile — helper functions must port in lockstep, enforced by a parity AC naming BOTH source files; (2) dashboard noise has a half-life — "known-stale" classifications in banners/Validation-History rows SHOULD be paired with issue/task entries (the Phase 102→P43 22-phase lingering was a deferral that kept compounding until P43 surfaced it as Task #8).
@@ -242,7 +242,8 @@ _None._
 
 | Date | Version | Action |
 |------|---------|--------|
-| 2026-04-28 | 2.29.0 | Phase 143/144: AC-62-04 enforced in `check-spec-folder-refs.py::load_allowlist()` (defensive inline-`#` strip); locked by `test_check_spec_folder_refs.py` (4/4 PASS). Banner 2.28.0→2.29.0; §98 v2.31.0→v2.32.0. No spec score change. |
+| 2026-04-28 | 2.64.0 | Phase P45: AC-11-05 mechanically locked via `linter-scripts/test/test-inline-code-blanking-parity.sh` (8 fixtures, 17 assertions, ~1 s). Folded into existing `Spec cross-link gate` step per H1 workflow-step parity rule (no standalone step, no AC-31-31 cascade, gate count stays 19/19/19). Slot 11 v1.2.0→v1.3.0 (`Verifies:` extended); README inventory 12→13 scripts; trace-map rebaselined +1 code file. Banner 2.63.0→2.64.0; §98 v2.66.0→v2.67.0; §00 v2.66.0→v2.67.0. |
+| 2026-04-28 | 2.63.0 | Phase P44: AC-11-05 added to slot 11 (inline-code blanking parity with `check-spec-cross-links.py`); fixed JS dashboard generator's 22-phase `./test-foo.sh` false-positive. No spec score change. |
 | 2026-04-27 | 2.5.0 | Phase 39b: Added §00 "Audit Marker Exemption" — `todo_count: 4` was substring false-positive (all hits inside script-spec content defining how the toolchain detects/processes TODOs). Banner v1.1.0→v1.2.0; §98 v2.7.0→v2.8.0. |
 | 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
 | 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |

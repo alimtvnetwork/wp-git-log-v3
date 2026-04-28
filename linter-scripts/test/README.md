@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-28 (Phase P40/P41 — added `cluster-terminal-sweep.sh` runner mechanizing the P34/P38 cadence rule; documented in new "Adjacent runners" subsection — exempt from parity gates by design)
+**Last updated:** 2026-04-28 (Phase P45 — added `test-inline-code-blanking-parity.sh` (#13) mechanically locking the P44 AC-11-05 JS↔Python helper parity contract; totals 12 → 13 scripts, 142+ → 159+ assertions; folded into existing `Spec cross-link gate` step per H1 workflow-step parity lesson — no AC-31-31 cascade, no gate-count change)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -51,21 +51,24 @@ PR so any regression fails the build at the assertion level (with
 | 10 | [`test-archive-exclusion-runtime.sh`](./test-archive-exclusion-runtime.sh) | H7 | §28 runtime archive-exclusion gate: every spec-traversing linter MUST exclude `spec/_archive/` at RUNTIME (not just by source-reading). importlib-loads 3 critical linters (`check-99-summary-freshness.find_99_files()`, `audit-spec-vs-code-v2.ALL_MODULES`, `generate-trace-map.collect_ac_ids()`), calls each enumerator, asserts 0 archive-leaked results. Floor: probe count ≥ 3. Codifies the H6 lesson "runtime > source verification". | 10 | ~3 s | [AC-28-01..05](../../spec/27-spec-toolchain/28-check-archive-exclusion-runtime.md) |
 | 11 | [`test-check-version-parity.sh`](./test-check-version-parity.sh) | P15/P31 | §29 `check-version-parity.py` exit-code contract: §00 banner version vs §98 latest release row mismatches are reported; default mode is advisory (exit 0); `--strict` and `<!-- h10-verified-phase: NNN -->` per-file stamps promote to exit 1; `--report-only` overrides stamps; `--spec-root` outside repo no longer crashes. Sandbox-injected drift (real tree at 0 mismatches post-P30). | 13 | ~1 s | [AC-29-01..14](../../spec/27-spec-toolchain/29-check-version-parity.md) |
 | 12 | [`test-check-spec-cross-links.sh`](./test-check-spec-cross-links.sh) | P35 | §01 `check-spec-cross-links.py` fuzzy waiver matching: stale waiver line numbers (drifted by ≤ 5 lines from the actual link location, e.g. after a stamp-batch tool inserted a comment line above) are accepted with an `INFO` hint; `--rewrite-allowlist` auto-bumps stale lines in-place and is idempotent; `--strict-line-match` restores exact-line semantics; out-of-tolerance drift (> 5 lines) does NOT fuzzy-match. Codifies the P34 lesson #1: stamp-batch tools (P22/P32) silently broke CI for 12 phases by drifting waiver line numbers. Synthetic sandbox. | 19 | ~1 s | [AC-01-05..07](../../spec/27-spec-toolchain/01-check-spec-cross-links.md) |
+| 13 | [`test-inline-code-blanking-parity.sh`](./test-inline-code-blanking-parity.sh) | P45 | JS↔Python inline-code blanking parity: `linter-scripts/check-spec-cross-links.py::strip_inline_code()` and `linter-scripts/generate-dashboard-data.cjs::blankInlineCode()` MUST produce byte-identical output for any input line, with same-length space runs (char offsets preserved → line numbers stay accurate). 8-fixture corpus probes the P44 root-cause pattern (inline-code wrapping a markdown link target — `` `./test-foo.sh` `` inside `[…](…)`), bare/multi/triple-backtick spans, link-adjacent code, and empty input. Floor: fixture count ≥ 8. Mechanically locks the AC-11-05 dual-implementation parity contract (P44 closure). | 17 | ~1 s | [AC-11-05](../../spec/27-spec-toolchain/11-generate-dashboard-data.md) |
 
-**Totals:** 12 scripts · 142+ assertions · ~34 s of CI time.
+**Totals:** 13 scripts · 159+ assertions · ~35 s of CI time.
 
-All twelve scripts are reachable from [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml).
+All thirteen scripts are reachable from [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml).
 Seven run as discrete self-test steps (`Audit CLI threshold contract self-test (Phase 91)`,
 `Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`,
 `Self-test README inventory parity (Phase 102)`, `Self-test QA baseline footer (Phase 103)`,
 `Self-test §27 inventory parity triangle (Phase 112)`, `Self-test WEIGHTS dimension-table parity (Phase 113)`).
-The remaining five are folded into their broader-contract production gates per the H1
+The remaining six are folded into their broader-contract production gates per the H1
 workflow-step parity lesson (footer rows = workflow gates = declared count): `test-check-99-summary-freshness.sh`
 runs inside `§99 Summary freshness gate (Phase H1 / H8 / H9)`, `test-check-99-stamp-bump.sh` inside
 `§99 Stamp-bump gate (Phase H5)`, `test-archive-exclusion-runtime.sh` inside
 `Runtime archive-exclusion gate (Phase H7)`, `test-check-version-parity.sh` inside
-`Version-field parity gate (Phase P15 / H10)`, and `test-check-spec-cross-links.sh` inside
-`Spec cross-link gate (zero broken links allowed)` (Phase P35).
+`Version-field parity gate (Phase P15 / H10)`, `test-check-spec-cross-links.sh` inside
+`Spec cross-link gate (zero broken links allowed)` (Phase P35), and `test-inline-code-blanking-parity.sh`
+also inside `Spec cross-link gate (zero broken links allowed)` (Phase P45) — both lock the
+strict-cross-link contract from different angles (waiver fuzzy-match + JS↔Python helper parity).
 
 ---
 

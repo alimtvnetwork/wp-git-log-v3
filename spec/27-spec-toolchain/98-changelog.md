@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.66.0
+**Version:** 2.67.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.67.0 — 2026-04-28 — Phase P45: AC-11-05 mechanical lock via `test-inline-code-blanking-parity.sh` (slot 11 v1.2.0→v1.3.0)
+- **Action**: Authored [`linter-scripts/test/test-inline-code-blanking-parity.sh`](../../linter-scripts/test/test-inline-code-blanking-parity.sh) — 8-fixture self-test invoking both `check-spec-cross-links.py::strip_inline_code()` (Python, via `importlib`) and `generate-dashboard-data.cjs::blankInlineCode()` (JS, via `node -e` + helper extraction) on shared inputs and asserting byte-identical output + length preservation per fixture (17 assertions, ~1 s runtime). Folded into existing `Spec cross-link gate` step in `.github/workflows/spec-health.yml` per H1 workflow-step parity rule (single existing gate exercise; no standalone step; gate count stays at 19/19/19). Updated `linter-scripts/test/README.md` inventory: 12 → 13 scripts, 142+ → 159+ assertions; updated "folded into broader-contract production gates" subsection to cite both P35 and P45 self-tests landing in the cross-link gate step.
+- **Outcome**: AC-11-05 dual-implementation parity contract is now mechanically enforced — any future divergence between the JS and Python helpers fails CI on PR rather than surfacing as silent dashboard-counter drift (the P44 root-cause class). Extended AC-11-05 `Verifies:` block to cite the new self-test as third source. Trace-map rebaseline +1 code file (`code_total` 55 → 56, `code_orphan` 30 → 31 → 30 after binding to AC-11-05 via the `**Verifies:**` line).
+- **Spec**: Slot 11 v1.2.0 → **v1.3.0** (extended AC-11-05 `Verifies:` line + Phase-P45 changelog entry). §00 v2.66.0→**v2.67.0**; §98 v2.66.0→**v2.67.0**; §99 v2.63.0→**v2.64.0**.
+- **No new CI workflow step, no RUBRIC_VERSION bump, no AC-31-31 cascade, no gate-count change.**
+- **Verified**: 9 critical gates green via `bash linter-scripts/test/cluster-terminal-sweep.sh` (P40 runner) post-rebaseline. New self-test passes 17/17 in isolation (`bash linter-scripts/test/test-inline-code-blanking-parity.sh`).
+- **P45 lesson codified — graduate parity ACs from review-time to CI-time**: when an AC's `Verifies:` clause cites two sibling implementations of the same logical contract, the natural completion is a self-test that exercises both and asserts equality on a fixture corpus. Until then the AC is contract-only and the divergence-detection gradient is reviewer-effort-quadratic (every PR touching either implementation requires manual cross-check). P44 → P45 demonstrates the 1-phase graduation cost: a single `.sh` self-test + `bash` line in the existing CI step, no new step, no RUBRIC bump, no AC-31-31 cascade. **Pattern**: parity-AC authoring (Pn) SHOULD be paired with self-test authoring (Pn+1) as the standing template; treat the AC-only state as a deliberate but bounded interim.
 
 ### 2.66.0 — 2026-04-28 — Phase P44: inline-code blanking parity in `generate-dashboard-data.cjs` (slot 11 v1.1.0→v1.2.0, AC-11-05)
 - **Action**: Ported `strip_inline_code` semantics from `linter-scripts/check-spec-cross-links.py` (Python strict CI gate) to `linter-scripts/generate-dashboard-data.cjs` (JS dashboard generator). Added `INLINE_CODE_RE` constant + `blankInlineCode()` helper + `extractLinks()` integration (lines 137-176). Inline-code spans are now replaced with same-length space runs BEFORE `LINK_RE` matches, preserving char offsets. Closes a parity gap that produced a persistent false-positive (`./test-foo.sh` example pattern in this very §98 line 501 P102 narrative) lingering in `Health.Deductions` from Phase 102 through P43.
