@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.4.0
-**Updated:** 2026-04-28 (Phase P15 / H10: added AC-T-26 codifying the §00 ↔ §98 Version-field parity gate landing + advisory-by-default rationale per AC-T-25 dispensation. AC count 25 → 26.)
+**Version:** 2.5.0
+**Updated:** 2026-04-28 (Phase P20: extended AC-T-26 with the per-file `<!-- h10-verified-phase: NNN -->` opt-in stamp pattern; self-test row 10/10 → 13/13. AC count unchanged at 26 — the stamp is an extension of the existing H10 contract, not a new module-level rule. Per-file lifecycle ACs live in slot 29 as AC-29-11/12/13.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
