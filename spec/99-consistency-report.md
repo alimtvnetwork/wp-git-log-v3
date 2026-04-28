@@ -76,10 +76,14 @@
 ---
 
 ## Summary
+<!-- verified-phase: 146 -->
 
 - **Errors:** 0
-- **Warnings:** 3 (Phase 2 content gaps)
-- **Health Score:** 78/100 (B) — Phase 1 Triage complete; Phase 2 content-fill pending.
+- **Warnings:** 0
+- **Tree health:** 168/168 strict-pass (all 56 modules at full marks)
+- **Lockstep:** 87/87 pass · 0 findings
+- **Rubric:** v2.24 (15 strict CI gates, including §99 freshness gate H1)
+- **Trace-map:** ac_traced 74 / ac_total 1304; code_orphan 25 / code_total 48 (G-series closed Phase 145)
 
 ---
 
