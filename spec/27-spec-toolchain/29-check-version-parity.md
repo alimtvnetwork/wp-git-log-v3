@@ -128,23 +128,30 @@ all 57 drifters to be fixed before flipping `--strict` tree-wide.
 - **No slot-range exception needed** (mirrors slot 26's clean fit, unlike
   slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 
-## Why advisory-by-default (AC-T-25 dispensation)
+## Why advisory-by-default at P15 — and strict-flip at P31 (AC-T-25 dispensation)
 
 AC-T-25 (Phase 30) requires "advisory CI gates require explicit
 phased-rollout justification or they ship strict from day 1." The
-P15 dispensation:
+P15 dispensation, and its P31 retirement:
 
-- **Surface size**: 59/74 mismatches at gate landing. Flipping strict
-  immediately would block 59 unrelated PRs OR require a single sweep PR
-  that touches every module's §00 banner.
-- **Phased-rollout plan**: contributors fix `§00 Version` to match
-  `§98 latest release` opportunistically as they touch each module's §98
-  in normal phase work. When mismatch count reaches 0, a follow-up phase
-  flips `--strict` (mirrors H1→H8 stamp adoption: 0/89 → 87/87 over
-  ~1 day; H8 then locked the gain).
-- **Visibility**: every CI run prints the count and per-module mismatches
-  in the workflow log, so drift cannot grow silently (the AC-T-25 failure
-  mode is exactly an unprinted, unwatched advisory).
+- **Surface size at P15 landing**: 59/74 mismatches. Flipping strict
+  immediately would have blocked 59 unrelated PRs OR required a single
+  sweep PR touching every module's §00 banner.
+- **Phased-rollout execution**: contributors reconciled `§00 Version` ↔
+  `§98 latest release` PR-by-PR through Phases P22→P30 (per-module
+  forensic reconstructions + P29/P30 batched sweeps). At P30 close:
+  matches=74/74, mismatches=0, stamped=57/74, stamped_failed=0 — the
+  tree-wide invariant was achieved.
+- **P31 strict-flip**: with the backlog cleared, the AC-T-25 dispensation
+  no longer applies — `check-version-parity.py` runs in `--strict` mode
+  by default and the gate becomes a hard CI block (exit 1 on any drift).
+  Stamped count is no longer the gating factor; the remaining 17
+  unstamped modules are matches-by-default and the strict gate locks
+  them at parity going forward. Mirrors H1→H8 stamp adoption pattern
+  (0/89 → 87/87 → strict; H8 locked the gain).
+- **Visibility**: every CI run continues to print counts and per-module
+  details in the workflow log; failures now block the merge instead of
+  surfacing as advisory info lines.
 
 ## Acceptance criteria
 
