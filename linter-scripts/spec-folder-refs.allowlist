@@ -123,3 +123,20 @@
 12-cicd-pipelines
 14-generic-update
 15-self-update-app-update
+
+# --- Phase F1: aspirational / historical sibling-module names referenced
+# only in spec narrative (onboarding routing tables, design-system
+# cross-section "see also" pointers, consolidated-guidelines app-layer
+# narration). These three folders were planned during early scoping
+# (v2.x era) but never created; their content was either subsumed by
+# existing folders or remains aspirational. References live only as
+# prose in routing tables / "where to find this" hints — never as live
+# navigation. Keeping them here documents the intent without forcing
+# either (a) deleting the prose (loses contributor-routing value) or
+# (b) creating empty stub folders (creates real-but-empty modules). ---
+# 08-docs-viewer-ui    → spec/01-.../04-ai-onboarding-prompt.md routing table; spec/07-design-system/00-overview + 07-code-blocks + 99 cross-section pointers (planned docs-viewer module, never created)
+# 09-code-block-system → spec/01-.../04-ai-onboarding-prompt.md routing table (subsumed by spec/07-design-system/07-code-blocks.md)
+# 21-app               → spec/01-.../04-ai-onboarding-prompt.md routing table; spec/17-consolidated-guidelines/02-coding-guidelines.md + 13-app.md narrative (the "umbrella" concept that drives 23-app-database / 24-app-design-system-and-ui / 25-app-issues — described but no physical folder)
+08-docs-viewer-ui
+09-code-block-system
+21-app
