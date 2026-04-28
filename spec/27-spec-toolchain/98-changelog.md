@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.42.2
+**Version:** 2.42.3
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.42.3 — 2026-04-28 — Phase H1-S3: §99 Summary stamp adoption batch 3 (6 modules; coverage 6/89 → 12/89; 1 stale-prose freshen)
+- **Action**: Third opt-in adoption batch. Audited 6 candidates: `spec/06`, `spec/10`, `spec/11`, `spec/12`, `spec/16` confirmed materially-fresh on read (Errors:0 / Warnings:0 / Health 100/100 A+ — aligns with current tree-health 168/168 strict + rubric v2.24); stamp-only edits. **`spec/15-distribution-and-runner/99` was materially stale** — claimed `Health Score: 75/100 (C)` and 2 warnings ("missing `97-acceptance-test-plan.md`", "pipeline detail gaps") that no longer hold: `97-acceptance-criteria.md` is the current canonical name and is present, and module passes strict rubric (168/168 across all 56 modules means slot 15 is at full marks). Freshened prose + stamped in one edit per H1-S1 rule.
+- **Stamp coverage**: 6/89 → **12/89** §99 files stamped. Gate remains advisory project-wide (77 unstamped → exit 0).
+- **Stale-discovery rate**: 2/12 stamped files needed prose freshening (root `spec/99` in H1-S1, `spec/15/99` here in H1-S3) — i.e., ~17% stale rate over the first 3 adoption batches. Validates H1's hypothesis: opportunistic stamping with mandatory pre-stamp audit catches real drift that would otherwise persist invisibly. (Phase 136/139 caught similar drift via manual sweeps; H1 mechanises the catch.)
+- **Lockstep impact**: NONE on the 6 stamped target files (content-only edits). Verified: `node check-lockstep.cjs` 87/87 / 0 findings unchanged.
+- **Verified**: `python3 check-99-summary-freshness.py --report-only` → "stamped: 12; unstamped: 77 — within budget" ✅; `node check-lockstep.cjs` → 87/87 / 0 ✅; `node check-tree-health.cjs --strict` → 168/168 ✅. §27 §98 v2.42.2 → **v2.42.3** (patch — adoption-only). Memo: `.lovable/memory/audit/v2-deterministic/phase-h1-s3-summary-stamp-adoption-batch-3.md`.
 
 ### 2.42.2 — 2026-04-28 — Phase H1-S2: §99 Summary stamp adoption batch 2 (5 modules; coverage 1/89 → 6/89)
 - **Action**: Second opt-in adoption batch. Pre-stamp audit of 6 candidates from H1-S1 backlog: `spec/02/99` skipped (no `## Summary` heading — gate doesn't track it), `spec/03/99` + `spec/05/99` + `spec/13/99` + `spec/14/99` + `spec/17/99` all confirmed materially-fresh (Errors:0 / Warnings:0 / Health 100/100 A+ — aligns with current tree-health 168/168 strict + rubric v2.24). No prose freshening required for any of the 5 — Summaries are minimal, accurate, and version-anchor-free (forward-resilient). Stamp `<!-- verified-phase: 146 -->` inserted directly under `## Summary` heading per H1 contract.
