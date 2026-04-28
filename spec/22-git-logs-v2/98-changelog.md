@@ -1,6 +1,6 @@
 # Changelog (v2)
 
-**Updated:** 2026-04-28
+**Updated:** 2026-04-28 (Phase P2)
 
 
 | Version | Date | Notes |
