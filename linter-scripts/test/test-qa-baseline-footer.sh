@@ -108,11 +108,12 @@ assert "QA tooling baseline section has $DECLARED_COUNT numbered gate rows (foun
 # ── Workflow lockstep: count quality-gate steps in spec-health.yml ──
 # Quality-gate steps are those matching the patterns the audit footer
 # advertises. We count by scanning step names and including only the
-# ones that correspond to the 17 footer gates (excluding Setup steps,
-# Self-heal, Regen, Trace-map, Summary). Phase H7 added entry #17
-# (Runtime archive-exclusion gate) — single workflow step (the self-test
-# IS the gate, no separate validator), per the H1 workflow-step parity
-# lesson.
+# ones that correspond to the 18 footer gates (excluding Setup steps,
+# Self-heal, Trace-map, Summary). Phase 30 added entry #18 (Spec-index
+# drift gate) — promoted from the previously-advisory "Regenerate
+# spec-index.md (drift check)" step to strict; single workflow step
+# (the regen IS the gate, no separate validator), per the H1
+# workflow-step parity lesson.
 WORKFLOW_GATES=$(grep -E '^      - name: ' "$WORKFLOW" | awk -F': ' '
   /Spec cross-link gate/                      {n++}
   /Spec folder-reference gate/                {n++}
@@ -131,6 +132,7 @@ WORKFLOW_GATES=$(grep -E '^      - name: ' "$WORKFLOW" | awk -F': ' '
   /§99 Summary freshness gate/                {n++}
   /§99 Stamp-bump gate/                       {n++}
   /Runtime archive-exclusion gate/            {n++}
+  /Spec-index drift gate/                     {n++}
   END {print n+0}
 ' )
 
