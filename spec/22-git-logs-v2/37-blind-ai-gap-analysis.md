@@ -1,7 +1,7 @@
 # Blind-AI Implementability Gap Analysis — v2 (folder 22)
 
-**Version:** 1.3.0
-**Updated:** 2026-04-28
+**Version:** 1.4.0
+**Updated:** 2026-04-28 (Phase P8 — bookkeeping refresh: V2-02/03/04/08/10 marked ✅)
 **Question asked:** *"If I hand folder 22 to an AI blindly, how much can it build, and where will it stall?"*
 
 ---
@@ -58,34 +58,24 @@ Each gap below is paired with the **exact file + section to patch** so a human c
 - **Tree-wide follow-up (out of scope for §22):** A Phase P7 sweep of all `spec/*/97-acceptance-criteria.md` found that **19 of 23** modules are 100% GWT, with a residual long tail of **13 non-GWT ACs across 4 modules**: `01-spec-authoring-guide` (4/31), `02-coding-guidelines` (5/25), `05-split-db-architecture` (2/22), `06-seedable-config-architecture` (2/22). These belong to Phase P7b (`tree-wide GWT polish`) and are tracked in §99 v3.9.13 Open follow-ups, not in any §22 GAP-V2-* row.
 - **Score impact:** lifts testability 10 → ~85, raises overall to ~81.
 
-### GAP-V2-02 — TypeScript enums never inlined [MEDIUM]
+### GAP-V2-02 — TypeScript enums never inlined [MEDIUM — RESOLVED 2026-04-28, Phase P1]
 
-- **Symptom:** v2 ships PHP, SQL, YAML, JSON, bash code blocks — but `has_ts_enums = false`. Anyone implementing a JS/TS admin SPA against v2 (e.g. block editor, headless dashboard) has to retype every enum from prose.
-- **Fix target:** `spec/22-git-logs-v2/01-glossary-and-enums.md` — append a `## TypeScript Mirror` section with a single fenced `ts` block containing every enum (`UserStatus`, `AppStatus`, `Acceptance`, `LogSeverity`, `Provider`, `OwnerType`, `ActionType`, `AuditOutcome`).
-- **Effort:** ~15 min.
-- **Score impact:** removes one finding from §99; nudges implementability +2.
+- **Original symptom:** v2 shipped PHP, SQL, YAML, JSON, bash code blocks — but `has_ts_enums = false`. Anyone implementing a JS/TS admin SPA against v2 (e.g. block editor, headless dashboard) had to retype every enum from prose.
+- **Resolution:** §01 v3.8.10 → **v3.9.0** (Phase P1, see §98 row 3.9.0). Appended `## TypeScript Mirror` section with a drop-in `ts` fenced block (~135 lines) covering every enum from the §Enum Catalog (`UserStatus`, `Role`, `Permission`, `Provider`, `Acceptance`, `AppStatus`, `AppLinkType`, `LogSeverity` + `LogSeverityNumeric` map, `PipelineActionType`, `SystemEventType`, `AuditActionType` incl. `ConfigChange` seed id 25, `AuditOutcome`, `OwnerType_DEPRECATED_v380`). 4-row "Drift-detection contract" table makes `18-schema.sql` lookup-table seeds the canonical authority and demotes the TS block to a hand-maintained mirror; out-of-band drift becomes a §99 audit signal and any value present in SQL but missing in TS MUST raise `GL-SCHEMA-DRIFT` at boot.
+- **Outcome:** `has_ts_enums = true`; implementability +2.
 
-### GAP-V2-03 — Streaming wire format is behavioral, not byte-level [MEDIUM]
+### GAP-V2-03 — Streaming wire format is behavioral, not byte-level [MEDIUM — RESOLVED 2026-04-28, Phase P2]
 
-- **Symptom:** AC-12 says "`/append-log` supports streaming ingestion (`Transfer-Encoding: chunked`)". A blind AI will pick a framing format (NDJSON? raw bytes? CRLF-delimited?) and the client (`spec/28-universal-ci-cli/06-log-shipping-contract.md`) will pick a different one.
-- **Fix target:** `spec/22-git-logs-v2/04-rest-api-endpoints.md` §1 (`POST /append-log`) — add subsection "Streaming wire format" pinning:
-  - `Content-Type: application/x-ndjson`
-  - First chunk = identity + `"StreamHeader":true`
-  - Final chunk = `"StreamFooter":true,"HasError":<bool>`
-  - `X-GL-Stream: 1` request header
-- **Cross-impact:** unblocks `28-universal-ci-cli/06` AC-28-06 from being a *proposal*.
-- **Effort:** ~15 min.
+- **Original symptom:** AC-12 said "`/append-log` supports streaming ingestion (`Transfer-Encoding: chunked`)". A blind AI would pick a framing format (NDJSON? raw bytes? CRLF-delimited?) and the client (`spec/28-universal-ci-cli/06-log-shipping-contract.md`) would pick a different one.
+- **Resolution:** `04-rest-api-endpoints.md` v2.9.3 → **v2.9.4** (Phase P2, §98 row 3.9.1). New `### 1.1 Streaming wire format` subsection pins: opt-in sentinel `X-GL-Stream: 1`; `Content-Type: application/x-ndjson; charset=utf-8` + `Transfer-Encoding: chunked` (Content-Length absent); LF-only frame separator; three-frame contract (`StreamHeader` exactly-one with identity, `Line` zero-or-more `{Line, Severity}` mirroring §01 `LogSeverity`, `StreamFooter` exactly-one with authoritative `HasError` boolean); strict server validation (header-before-line ordering, EOF-without-footer rollback, unknown-discriminator rejection, forward-compatible unknown-key tolerance); reuses §11.4 `NdjsonMaxRowsPerStream` cap; buffered standard ack response. Introduced 4 ingest-streaming error codes: `GL-STREAM-NO-HEADER` (400), `GL-STREAM-NO-FOOTER` (400), `GL-STREAM-TOO-MANY-LINES` (413), `GL-STREAM-UNKNOWN-FRAME` (400).
+- **Cross-impact:** unblocked `28-universal-ci-cli/06` AC-28-06 (now cites pinned byte-level contract).
+- **Deferred follow-up:** §15/§17/§97 lockstep for the 4 new `GL-STREAM-*` error codes — tracked in §99 Open follow-ups.
 
-### GAP-V2-04 — Ack envelope lacks `PreviousHasError` [MEDIUM]
+### GAP-V2-04 — Ack envelope lacks `PreviousHasError` [MEDIUM — RESOLVED 2026-04-28, Phase P3]
 
-- **Symptom:** `04-rest-api-endpoints.md` shows the standard ack envelope as `{Status, Message, TraceId, Retrieval}`. There is no field telling the client whether the previous run for this `(Repo, Branch, Pipeline)` had `HasError=1`. Without it, no client can know whether to send `PUT /fixed-log` automatically (per AC-13).
-- **Fix target:** `spec/22-git-logs-v2/04-rest-api-endpoints.md` §Common ack + `17-openapi.yaml` `Ack` schema — add:
-  ```yaml
-  PreviousHasError:
-    type: boolean
-    description: True iff prior /append-log on this (Repo,Branch,Pipeline) had HasError=1
-  ```
-- **Effort:** ~10 min (schema only; server-side: 1 SQL lookup).
+- **Original symptom:** `04-rest-api-endpoints.md` showed the standard ack envelope as `{Status, Message, TraceId, Retrieval}`. There was no field telling the client whether the previous run for `(Repo, Branch, Pipeline)` had `HasError=1`. Without it, no client could know whether to send `PUT /fixed-log` automatically (per AC-13).
+- **Resolution:** `04-rest-api-endpoints.md` v2.9.4 → **v2.9.5** + `17-openapi.yaml` v2.9.4 → **v2.9.5** (Phase P3, §98 row 3.9.2). `PreviousHasError: boolean` added to Standard Ack Envelope JSON example AND a full field-contract subsection: type/required (write endpoints #1–#4 only; ABSENT on read endpoints #5–#10); semantics (true iff prior `Pipeline.PreviousHasError` for `(RepoVersionId, BranchName, PipelineName)` was 1 immediately before the current request; fresh triple → false, mirrors AC-73 first-failure boundary); per-endpoint usage; atomicity (MUST be read in same `BEGIN IMMEDIATE` SQL transaction as the write per AC-75 ORM-split fallback rules). OpenAPI: `AckResponse.PreviousHasError` added as REQUIRED boolean property.
+- **Outcome:** any client implementing AC-13 auto-fix can now read the field directly from the ack instead of doing a follow-up `GET /get-pipeline-logs`.
 
 ### GAP-V2-05 — App identity fields unfinished [HIGH — user-blocked]
 
@@ -113,11 +103,11 @@ Each gap below is paired with the **exact file + section to patch** so a human c
   - `32-cli-test-plan.md:202` — replaced "TODO comment linking the GitHub issue" with the explicit `# QUARANTINE(<issue-ref>): <reason>` comment-format contract, enforceable by `linter-scripts/check-quarantine-tracking.py`.
 - **Outcome:** `todo_density = 0`. Maintainability dimension lifted from 90 → 100.
 
-### GAP-V2-08 — `16` slot collision [COSMETIC]
+### GAP-V2-08 — `16` slot collision [COSMETIC — RESOLVED 2026-04-28, Phase P5]
 
-- **Symptom:** Two files use the prefix `16-`: `16-seed-data.md` AND `16-test-plan.md`. The user-preferences file (`.lovable/user-preferences`) explicitly says file slots are immutable; this duplication slipped through.
-- **Fix target:** Rename `16-seed-data.md` → `37-seed-data.md` (already implied by `99-consistency-report.md` §95 "slot moved in v2.8.6"). Verify no other file links to the old path: `rg -n "16-seed-data" spec/22-git-logs-v2/`.
-- **Effort:** ~5 min.
+- **Original symptom:** Two files used the prefix `16-`: `16-seed-data.md` AND `16-test-plan.md`. The Core memory rule "File slots are immutable once shipped — never reuse a number" was violated.
+- **Resolution:** Phase P5 (§98 row 3.9.4) chose the inverse of the original recipe — rather than renaming the live `16-seed-data.md`, the smaller superseded `16-test-plan.md` stub was relocated to `38-test-plan-superseded.md` (banner v2.7.0 → v2.8.0, gained "History of slot moves" subsection). Live §16 content unchanged. 5 cross-folder referrers updated lockstep (§00 inventory, §99, `spec/spec-index.md`, `spec/dashboard-data.json`, `spec/28-universal-ci-cli/06`). `grep -rn "16-test-plan"` returns 7 hits, all intentional historical narrative; zero active links.
+- **Outcome:** slot-16 collision eliminated; immutability invariant restored.
 
 ### GAP-V2-09 — No outbound CI client contract [MEDIUM — now closed]
 
@@ -125,11 +115,11 @@ Each gap below is paired with the **exact file + section to patch** so a human c
 - **Fix target:** **Already addressed** — `spec/28-universal-ci-cli/` now provides the canonical client contract (28 ACs, OpenAPI 3.1, JSON Schema). Cross-link from `spec/22-git-logs-v2/00-overview.md` Document Inventory.
 - **Effort:** ~2 min (one new row).
 
-### GAP-V2-10 — Rate limit + payload caps are not in §04 [LOW]
+### GAP-V2-10 — Rate limit + payload caps are not in §04 [LOW — RESOLVED 2026-04-28, Phase P4]
 
-- **Symptom:** `10-rate-limit-and-payload` is a vacant slot; values live as `ConfigKv` defaults inside `18-schema.sql`. AI implementing endpoint validation order won't know to enforce `MaxPushPayloadBytes` *before* parse (per AC-27).
-- **Fix target:** `spec/22-git-logs-v2/04-rest-api-endpoints.md` §1 — add a "Pre-parse caps" subsection naming the four `ConfigKv` keys and the order they are checked.
-- **Effort:** ~10 min.
+- **Original symptom:** `10-rate-limit-and-payload` was a vacant slot; values lived as `ConfigKv` defaults inside `18-schema.sql`. AI implementing endpoint validation order wouldn't know to enforce `MaxPushPayloadBytes` *before* parse (per AC-27).
+- **Resolution:** `04-rest-api-endpoints.md` v2.9.5 → **v2.9.6** (Phase P4, §98 row 3.9.3). New `### 1.2 Pre-parse caps & validation order` subsection surfaces all four `ConfigKv` enforcement caps in a single table (`RatePerMinPerProfile=60` / `GL-RATE-LIMIT-EXCEEDED` 429 with `Retry-After`; `MaxPushPayloadBytes=1048576` / `GL-PAYLOAD-TOO-LARGE` 413; `MaxLinesPerPush=10000` / `GL-LINES-TOO-MANY` 413; `MaxLineBytes=65536` / soft-truncate per AC-27) and pins the 11-step strict validation order from TLS/SSH-sig through atomic INSERT (per AC-75 `BEGIN IMMEDIATE`). Documents orthogonal `AppendLogMaxStreamSec` (recommended 30s) wall-clock cap with `GL-INGEST-TIMEOUT` for slow-loris defense.
+- **Outcome:** blind implementers reading §04 top-to-bottom now learn gate ordering without cross-walking §15/§18/§97.
 
 ---
 
@@ -179,17 +169,17 @@ Legend: ✅ kept, ✏ changed shape, ❌ removed, ➕ new in v2.
 | Order | Gap | File | Effort | Score gain |
 |------:|-----|------|-------:|-----------:|
 | 1 | ~~GAP-V2-01 (ACs → GWT)~~ ✅ Phase P7 2026-04-28 — verified 76/76 ACs are well-formed GWT (folder-22 sweep `incomplete=0`) | `97-acceptance-criteria.md` | n/a (already done in Phase 12 v3.8.8 full rewrite) | n/a |
-| 2 | GAP-V2-05 (App identity decision) | `07-app-entity.md` + `18-schema.sql` | 5m | +4 |
-| 3 | GAP-V2-04 (`PreviousHasError` in ack) | `04-rest-api-endpoints.md` + `17-openapi.yaml` | 10m | +3 |
-| 4 | GAP-V2-03 (streaming wire format) | `04-rest-api-endpoints.md` §1 | 15m | +3 |
-| 5 | GAP-V2-02 (TS enum mirror) | `01-glossary-and-enums.md` | 15m | +2 |
+| 2 | GAP-V2-05 (App identity decision) — **user-blocked, LOW priority** | `07-app-entity.md` + `18-schema.sql` | 5m | +4 |
+| 3 | ~~GAP-V2-04 (`PreviousHasError` in ack)~~ ✅ Phase P3 2026-04-28 | `04-rest-api-endpoints.md` v2.9.5 + `17-openapi.yaml` v2.9.5 | n/a | n/a |
+| 4 | ~~GAP-V2-03 (streaming wire format)~~ ✅ Phase P2 2026-04-28 | `04-rest-api-endpoints.md` v2.9.4 §1.1 | n/a | n/a |
+| 5 | ~~GAP-V2-02 (TS enum mirror)~~ ✅ Phase P1 2026-04-28 | `01-glossary-and-enums.md` v3.9.0 | n/a | n/a |
 | 6 | ~~GAP-V2-06 (5 stub files for §09–§13)~~ ✅ Phase P6 2026-04-28 — REJECTED, locked-vacant precedent retained; AC-22-LV1 prohibition added | `spec/22-git-logs-v2/97-acceptance-criteria.md` | n/a | n/a |
-| 7 | GAP-V2-10 (rate-limit caps in §04) | `04-rest-api-endpoints.md` | 10m | +2 |
-| 8 | GAP-V2-08 (rename `16-seed-data` → `37`) | filesystem + grep cross-refs | 5m | +1 |
-| 9 | ~~GAP-V2-07 (resolve 2 TODO markers)~~ ✅ Phase 39b 2026-04-27 | `30-threat-model.md`, `32-cli-test-plan.md`, `16-seed-data.md` | 10m | +1 |
-| 10 | GAP-V2-09 (link client CLI from §00) | `00-overview.md` | 2m | +1 |
+| 7 | ~~GAP-V2-10 (rate-limit caps in §04)~~ ✅ Phase P4 2026-04-28 | `04-rest-api-endpoints.md` v2.9.6 §1.2 | n/a | n/a |
+| 8 | ~~GAP-V2-08 (slot-16 collision)~~ ✅ Phase P5 2026-04-28 — resolved by inverse: `16-test-plan.md` → `38-test-plan-superseded.md` | filesystem + 5 lockstep referrers | n/a | n/a |
+| 9 | ~~GAP-V2-07 (resolve 2 TODO markers)~~ ✅ Phase 39b 2026-04-27 | `30-threat-model.md`, `32-cli-test-plan.md`, `16-seed-data.md` | n/a | n/a |
+| 10 | GAP-V2-09 (link client CLI from §00) — **LOW priority, queued** | `00-overview.md` | 2m | +1 |
 
-**Total effort:** ~2h 22m. **Projected score:** 100/100 (A+).
+**Effort remaining:** 7m (GAP-V2-05 user decision + GAP-V2-09 cosmetic link). **Current score:** 99/100 (A+); ceiling 100/100 awaits user decision on §07 App identity. 8 of 10 historical gaps resolved across Phases 39b + P1–P7 (2026-04-27 → 2026-04-28).
 
 ---
 
