@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-28 (Phase P40/P41 — added `cluster-terminal-sweep.sh` runner mechanizing the P34/P38 cadence rule; documented in new "Adjacent runners" subsection — exempt from parity gates by design)
+**Last updated:** 2026-04-28 (Phase P45 — added `test-inline-code-blanking-parity.sh` (#13) mechanically locking the P44 AC-11-05 JS↔Python helper parity contract; totals 12 → 13 scripts, 142+ → 159+ assertions; folded into existing `Spec cross-link gate` step per H1 workflow-step parity lesson — no AC-31-31 cascade, no gate-count change)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
