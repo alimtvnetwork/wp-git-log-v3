@@ -1,7 +1,7 @@
 # App Entity (v2)
 
-**Version:** 2.1.0
-**Updated:** 2026-04-27
+**Version:** 2.2.0
+**Updated:** 2026-04-28
 
 ---
 
@@ -21,7 +21,7 @@ Credentials: **App has no own GeneratedKeyApi/Token/TempToken**. CI/CD calls aut
 
 - **Locked decision 10 — Polymorphic linkage.** `AppLink` carries either `TargetRepoId` OR `TargetGitProfileId` (XOR), discriminator implicit, no `LinkType` column. See "Linkage" below + §02 (AppLink table) + §18 v2.9.3 (DDL CHECK + UNIQUE + FK CASCADE).
 - **Locked decision 11 — `AppSlug` regex.** `[a-z0-9][a-z0-9-]*` — kebab-case identifier used in `/append-log` payloads. SQLite-level UNIQUE constraint mandatory. See §05 (REST contract) + §97 AC-17.
-- **Locked decision 12 — Identity is exactly the 5 columns above; speculative additions are FORBIDDEN.** The `App` table MUST NOT carry the Phase B1-blocked fields `Environment`, `Platform`, `OwnerEmail` (or any other speculative identity column) until the Phase B1 user decision unblocks them. Adding them speculatively is a schema violation per §97 AC-17 and §15 `GL-SCHEMA-DRIFT`. Rationale: undecided columns mean undecided semantics — adding now would lock the project to whatever default behaviour the column happens to acquire in early code, foreclosing the actual decision. Status: **forbidden-by-default**, awaiting user reply `B1: add Environment only` / `B1: add all three` / `B1: keep forbidden` (the last makes the current state permanent).
+- **Locked decision 12 — Identity is exactly the 5 columns above; speculative additions are PERMANENTLY FORBIDDEN.** The `App` table MUST NOT carry `Environment`, `Platform`, `OwnerEmail`, or any other identity-shaped column. Adding any such column is a schema violation per §97 AC-17 and `GL-SCHEMA-DRIFT` (§15). Rationale: the v2 App entity is a deployment-target identifier, not a metadata bag — environment/platform belong on the inbound `Pipeline` row (already carried by §08), and owner contact info belongs on the parent `Profile` (§02). Status: **permanent** as of 2026-04-28 (Phase 147 — user reply `B1: keep forbidden` makes locked-decision-12 final; the prior "awaiting Phase B1 unblock" hedge is retired). Future identity expansion REQUIRES a new locked decision (14+) with a fresh changelog row, not an edit to this one.
 - **Locked decision 13 — Lifecycle column is `AppStatusId` lookup, not free-text.** See "Lifecycle" below + §08 (Audit) + §18 v3.8.0 DDL.
 
 
