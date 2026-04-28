@@ -210,6 +210,11 @@ components:
         # NDJSON streaming retrieval (see §04 §11, added v2.9.3 Phase 11)
         - GL-NDJSON-CLIENT-DISCONNECT
         - GL-NDJSON-CURSOR-LOST
+        # NDJSON streaming ingest (see §04 §1.2, added v2.9.6 Phase P16 lockstep)
+        - GL-STREAM-NO-HEADER
+        - GL-STREAM-NO-FOOTER
+        - GL-STREAM-TOO-MANY-LINES
+        - GL-STREAM-UNKNOWN-FRAME
 
     ErrorEnvelope:
       type: object
