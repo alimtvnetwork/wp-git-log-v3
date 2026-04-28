@@ -57,6 +57,10 @@ SPEC = ROOT / "spec"
 # §00 banner version: `**Version:** v1.2.3` or `**Version:** 1.2.3` near top.
 BANNER_VER_RE = re.compile(r"\*\*Version:\*\*\s*v?(\d+\.\d+\.\d+)")
 
+# Phase P20: per-file opt-in strict-promotion stamp under §00.
+# Mirrors `check-99-summary-freshness.py`'s `<!-- verified-phase: NNN -->`.
+H10_STAMP_RE = re.compile(r"<!--\s*h10-verified-phase:\s*(\d{1,4})\s*-->")
+
 # §98 release line — accept four shapes used across the tree:
 #   ## 1.2.0 — 2026-04-27
 #   ### v4.0.0 — 2026-04-26
@@ -88,6 +92,15 @@ def banner_version(text: str) -> str | None:
     head = "\n".join(text.split("\n")[:40])
     m = BANNER_VER_RE.search(head)
     return m.group(1) if m else None
+
+
+def h10_stamp(text: str) -> int | None:
+    """Return the highest h10-verified-phase stamp value found in the §00 head,
+    or None if unstamped. Searches the first 40 lines (same window as the
+    banner) so the stamp lives near the version it certifies."""
+    head = "\n".join(text.split("\n")[:40])
+    stamps = [int(m.group(1)) for m in H10_STAMP_RE.finditer(head)]
+    return max(stamps) if stamps else None
 
 
 def find_pairs(spec_root: Path):
