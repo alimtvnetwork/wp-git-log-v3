@@ -1,11 +1,23 @@
 # Changelog
 
-**Version:** 3.5.0
-**Updated:** 2026-04-27
+**Version:** 3.5.1
+**Updated:** 2026-04-28
 
 ---
 
 ## Releases
+
+### 3.5.1 — 2026-04-28 (Phase 28 — health-dashboard.md freshness sweep)
+
+- **Refreshed** `spec/health-dashboard.md` against `spec/dashboard-data.json` (source of truth):
+  - `Generated`: 2026-04-25 → **2026-04-27**.
+  - `Modules Audited`: 52 → **56**.
+  - Required + Recommended files: 104/104 → **112/112**.
+  - Added Quality row (167/168) and Rubric Version (2.0.0).
+  - Allowlist count: **12 → 9** (the previous "12" double-counted three narrative-only entries — `mem://`, `dashboard-data.json`, and a duplicate — that are not in `EXTERNAL_REPO_PREFIXES`).
+  - Appended two Validation History rows (2026-04-27 strict-pass baseline + 2026-04-28 Phase 28).
+- **Bumped** `spec/health-dashboard.md` v3.7.7 → **v3.7.8**.
+- No filesystem, schema, or CI changes; pure prose-vs-data reconciliation.
 
 ### 3.5.0 — 2026-04-27 (Phase 46 — root D-tier cleanup)
 
