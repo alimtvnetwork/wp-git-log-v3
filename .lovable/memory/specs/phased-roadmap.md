@@ -339,9 +339,9 @@ Phase 16r landed:
 
 **0 remaining §97 files with 0 GWT ACs** (excluding `_archive/21-git-logs-v1/` which is archived and never edited).
 
-Remaining roadmap work (BLOCKED only):
-- 🚧 **Phase B1** — §07 App identity fields (BLOCKED on user: `Environment`, `Platform`, `OwnerEmail` shape).
-- 🚧 **Phase B2** — Slot collision §06 in `02-coding-guidelines/` (BLOCKED on user: pick rename target for one of `06-ai-optimization`/`06-cicd-integration` — both now carry full §97s, so renaming is a §99-audit-row-only operation per the immutability precedent §16→§37).
+Remaining roadmap work:
+- ✅ **Phase B1** — CLOSED Phase 147 (locked decision 12).
+- ✅ **Phase B2** — CLOSED Phase 47 via co-location; user re-confirmed 2026-04-28. No further action.
 
-On next `next`: with §97 deepening fully done, the only pending technical work requires user input. Suggested follow-on initiatives: (a) **unblock B2** by choosing which §06 folder retains the slot; (b) **unblock B1** by providing §07 App identity field shape; (c) start **Phase 17** (§99 consistency-report deepening sweep — many `99-consistency-report.md` files are still scaffolds); (d) start **Phase 18** (run `node linter-scripts/check-tree-health.cjs --report` and fix any sub-100 modules).
+On next `next`: §97 deepening fully done; both blocked items resolved. Suggested follow-on initiatives: (c) start **Phase 17** (§99 consistency-report deepening sweep — many `99-consistency-report.md` files are still scaffolds); (d) start **Phase 18** (run `node linter-scripts/check-tree-health.cjs --report` and fix any sub-100 modules — though current strict tree-health is 168/168, so this is likely a no-op until drift surfaces).
 
