@@ -47,6 +47,12 @@ CHANGELOG_27 = SPEC / "27-spec-toolchain" / "98-changelog.md"
 
 PHASE_RE = re.compile(r"\bPhase\s+(\d{1,4})\b")
 STAMP_RE = re.compile(r"<!--\s*verified-phase:\s*(\d{1,4})\s*-->")
+# Phase H7 (2026-04-28): codifies the "audit-log-only §99" exemption.
+# Some §99 files carry only date-stamped audit-log headings (no narrative
+# Summary, no inventory rubric) and have no claims to verify. Files marking
+# `<!-- freshness-exempt: <reason> -->` anywhere in the file are counted
+# separately and excluded from the unstamped advisory tally.
+EXEMPT_RE = re.compile(r"<!--\s*freshness-exempt:\s*([a-z0-9_\-]+)\s*-->")
 # Phase H2 (2026-04-28): widened from `## Summary` only to also cover
 # inventory-rubric blocks (the 43 §99 files that ship inventory tables instead
 # of a narrative Summary). The stamp may live under any of these headings.
