@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.18
-**Updated:** 2026-04-28 (Phase P18 — §03 admin UI rendering of state labels closed: §03 v2.2.0 → v2.3.0 added `## State-Transition Label Rendering` section + History column revision; §97 v3.9.3 → v3.9.4 added AC-77 binding the rendering contract to AC-73's enum + AC-74's NDJSON consumer for cross-consumer parity. AC count 77 → 78. Closes the last §99 v3.9.6+ open follow-up "(a)" — together with P16+P17 all consumer-side and lockstep follow-ups for the v2.9.x release line are now resolved. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.19
+**Updated:** 2026-04-28 (Phase P19 — H10 §00↔§98 version-field parity catch-up: §00 v3.8.9 → v3.9.11 (catches up 8 minor releases of drift since Phase P5; pure banner bookkeeping, no inventory or content change). Sibling §26-gitlogs-diagrams got parallel parity catch-up (v2.4.0 → v3.4.0). H10 advisory delta tree-wide: 59 → 57 mismatches. AC count unchanged at 78. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
@@ -10,7 +10,7 @@
 
 | File | Present |
 |------|---------|
-| 00-overview.md | ✅ (v3.8.9 — Phase P17 added Cross-References row to `spec/28-universal-ci-cli/`, closing GAP-V2-09) |
+| 00-overview.md | ✅ (v3.9.12 — Phase P19 H10 parity catch-up; content current as of Phase P17 §28-universal-ci-cli Cross-References row) |
 | 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (v2.3.0 — Phase P18 added `## State-Transition Label Rendering` section + History `HasError + StateLabel` column revision binding the consumer-side AC-73 label enum) |

@@ -1,10 +1,14 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.4.0
-**Updated:** 2026-04-28
+**Version:** 3.4.1
+**Updated:** 2026-04-28 (Phase P19 — H10 §00↔§98 version-field parity catch-up)
 **Scope:** `spec/26-gitlogs-diagrams/`
 
 ---
+
+## [3.4.1] — 2026-04-28 (Phase P19: H10 §00↔§98 version-field parity catch-up)
+
+- **Bumped** `00-overview.md` banner from v2.4.0 → v3.4.0 to match this changelog's latest release line. The §00 banner had been left on the v2.x line since the Phase 55 `DiagramMetadata` JSON Schema rewrite shipped on §98's v3.x line — `check-version-parity.py` (the H10 advisory gate landed in Phase P15) flagged this as one of 59 tree-wide §00↔§98 mismatches at session open. Pure parity bookkeeping; no diagram added/removed/edited, no §97 AC change. Sibling Git-Logs domain folder `spec/22-git-logs-v2/00-overview.md` got the same parity catch-up in the same Phase P19 (v3.8.9 → v3.9.11; see that module's §98 row 3.9.12). H10 advisory delta: 59 → 57 mismatches (-2). **Verified**: `node linter-scripts/check-lockstep.cjs` ✅ 87/87; `node linter-scripts/check-tree-health.cjs --strict` ✅ 168/168; `python3 linter-scripts/check-version-parity.py` ✅ 57 advisory (was 59).
 
 ## [3.4.0] — 2026-04-28 (Phase P10: SSH auth-lane diagram)
 

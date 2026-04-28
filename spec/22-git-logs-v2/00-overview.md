@@ -6,8 +6,8 @@ description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.8.9  
-**Updated:** 2026-04-28 (Phase P17: GAP-V2-09 closed — added Document Inventory row + Cross-References row pointing to `spec/28-universal-ci-cli/` as the canonical outbound CI client contract for Lane B / SSH ingest. Cosmetic discoverability fix; no AC, no DDL, no schema bump.)
+**Version:** 3.9.12  
+**Updated:** 2026-04-28 (Phase P19: H10 §00↔§98 version-field parity catch-up — banner bumped from v3.8.9 to v3.9.11 to match the latest §98 release row (Phase P18). Phases P5/P6/P7/P7b/P8/P16/P17/P18 had each bumped §98 without re-stamping the §00 banner; this is pure parity bookkeeping (no content change). Eats our own dog food before any tree-wide H10-strict promotion.)
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
