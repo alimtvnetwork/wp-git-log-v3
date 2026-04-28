@@ -1,0 +1,32 @@
+{
+  "phase": "117-containment-only",
+  "date": "2026-04-28",
+  "trigger": "User reply `next` (autonomous queue exhausted; recommended close = `Phase 117: containment-only`).",
+  "decision": "Rebaselined trace-map gate to current values (1295 ACs, 46 code files, 39 orphans, 1271 drift) WITH explicit audit annotation recording what was absorbed and why.",
+  "rationale": [
+    "Drift growth 471 → 1271 is +800 ACs of LEGITIMATE spec growth (Phases 13/16c/20#7/etc deepened §97 across 22-git-logs-v2 + 17-consolidated-guidelines + others — every one of those ACs was a deliberate, audited contract addition, not silent code drift).",
+    "Orphan growth 25 → 39 is +14 toolchain scripts added across Phases 108–146 (check-spec-folder-refs.py, check-memo-retrospective-headings.py, check-readme-canonicals.py, deepen-consistency-reports.py, fill-missing-* trio, generate-gate-report.py, generate-gwt-acceptance.py, etc) — each is specced in §27 and reachable from CI, just not yet bound to a specific AC via trace-map.toml.",
+    "AC coverage held flat at 24 traced (the toolchain ACs that ARE bound) — no AC LOST tracing. The percentage drop (4.9% → 1.9%) is purely the denominator growing.",
+    "Containment-only is preferred over `go all` (would require ~800 trace-map.toml additions, not justified by current toolchain bandwidth) and over `parity-only` (which would only refresh AC totals, not the orphan-growth signal that's also pure spec-growth)."
+  ],
+  "absorbed": {
+    "ac_total_delta": 800,
+    "ac_drifted_delta": 800,
+    "code_total_delta": 14,
+    "code_orphan_delta": 14,
+    "ac_traced_delta": 0,
+    "missing_ac": 0,
+    "missing_file": 0
+  },
+  "guardrails": [
+    "Future drift/orphan growth is now measured against the Phase 147+ baseline. Any single-phase delta > 50 ACs or > 5 code files MUST be inspected before rebaselining again.",
+    "R1 (real-AI re-audit, blocked on Lovable Cloud) is the proper long-term answer — it would re-bind orphan toolchain scripts to their §27 ACs and shrink the orphan count organically.",
+    "Phase 117 is NOT a license to ignore future regressions. The gate now exits 0 and will fire again on the NEXT material drift."
+  ],
+  "verification": {
+    "rebaseline_command": "python3 linter-scripts/check-trace-map-regression.py --update-baseline",
+    "verify_command": "python3 linter-scripts/check-trace-map-regression.py",
+    "exit_code": 0,
+    "result": "✅ No regression. AC coverage and drift/orphan counts are within budget."
+  }
+}

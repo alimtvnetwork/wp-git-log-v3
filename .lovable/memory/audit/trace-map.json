@@ -1439,6 +1439,7 @@
     "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-01",
     "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02",
     "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-03",
+    "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-04",
     "27-spec-toolchain/63-readme-cross-links-md.md#AC-63-01",
     "27-spec-toolchain/63-readme-cross-links-md.md#AC-63-02",
     "27-spec-toolchain/63-readme-cross-links-md.md#AC-63-03",
@@ -1555,6 +1556,7 @@
     "linter-scripts/test/test-audit-cli-thresholds.sh",
     "linter-scripts/test/test-audit-deterministic-stability.sh",
     "linter-scripts/test/test-audit-explain-contract.sh",
+    "linter-scripts/test/test-check-spec-folder-refs.py",
     "linter-scripts/test/test-overview-inventory-parity.sh",
     "linter-scripts/test/test-qa-baseline-footer.sh",
     "linter-scripts/test/test-readme-inventory.sh",
@@ -1564,12 +1566,12 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1270,
-    "ac_total": 1294,
+    "ac_drifted": 1271,
+    "ac_total": 1295,
     "ac_traced": 24,
-    "code_orphan": 38,
+    "code_orphan": 39,
     "code_referenced": 7,
-    "code_total": 45,
+    "code_total": 46,
     "missing_ac": 0,
     "missing_file": 0,
     "trace_entries": 24
