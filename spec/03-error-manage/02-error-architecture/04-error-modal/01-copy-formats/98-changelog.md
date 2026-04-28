@@ -1,10 +1,14 @@
 # Changelog — Error Modal — Copy & Export Formats (Index)
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-27  
+**Version:** 3.3.1  
+**Updated:** 2026-04-28  
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats/`
 
 ---
+
+## 3.3.1 — 2026-04-28 — Phase P29: P25-pure dual-stream reconciliation (batch)
+
+- **Reconciled** §98 header version stream `1.0.0` → `3.3.1` to align with §00 banner stream (`3.3.0`). Prior §98 header tracked an independent audit-stream version decoupled from the SemVer ladder, which already contained `3.3.0` (matching §00 banner). Per Phase P25 precedent (subcase: clean ladder + decoupled header stream), §98 header is patch-bumped to `3.3.1` to align with banner; §00 banner also bumped to `3.3.1` per P27 sub-lesson (parity gate enforces exact match for stamped files). Ladder body unchanged. H10 stamp added to §00. **Phase P29 batch reconciliation** (8 P25-pure drifters processed in one phase per P27 batching lesson).
 
 ## 1.1.0 — 2026-04-27
 
