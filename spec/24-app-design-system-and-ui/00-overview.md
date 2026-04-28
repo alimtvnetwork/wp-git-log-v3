@@ -5,7 +5,7 @@ description: App-specific UI overlay on top of the core design system (§07). De
 
 # App Design System & UI
 
-**Version:** 4.1.0
+**Version:** 4.1.1
 **Updated:** 2026-04-28
 **AI Confidence:** High
 <!-- h10-verified-phase: 27 -->
