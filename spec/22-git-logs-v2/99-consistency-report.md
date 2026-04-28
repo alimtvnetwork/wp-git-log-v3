@@ -1,11 +1,11 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.4
-**Updated:** 2026-04-27
+**Version:** 3.9.5
+**Updated:** 2026-04-28
 
 ---
 
-## Inventory
+## File Inventory
 
 | File | Present |
 |------|---------|
