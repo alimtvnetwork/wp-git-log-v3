@@ -39,9 +39,8 @@ The link checker now suppresses the following resolved-path prefixes (these reso
 | `../eslint-plugins/` | monorepo sibling — ESLint coding-guidelines plugin |
 | `../spec-slides/` | monorepo sibling — slide deck |
 | `../mem:/` | virtual `mem://` filesystem (memory references) |
-| `dashboard-data.json` | legitimate JSON output reference |
 
-**Total currently allowlisted:** 12 references. To add new prefixes, edit `EXTERNAL_REPO_PREFIXES` in `linter-scripts/generate-dashboard-data.cjs`.
+**Total currently allowlisted:** 9 prefixes (matches `EXTERNAL_REPO_PREFIXES` in `linter-scripts/generate-dashboard-data.cjs`). To add new prefixes, edit that array.
 
 ---
 
@@ -58,3 +57,5 @@ See [`dashboard-data.json`](./dashboard-data.json) for the full machine-readable
 | 2026-04-16 | — | Baseline (initial dashboard) |
 | 2026-04-25 (early) | 74 (C) | Inventory grew to 80 folders, 636 md files (added v2.8.7, gitlogs-diagrams, consolidated-audit-findings) |
 | 2026-04-25 (late) | **97 (A+)** | Major audit pass: 0 broken, 0 missing consistency, allowlist mechanism added |
+| 2026-04-27 | **100 (A+)** | Strict-pass baseline; 56 modules, 112/112 required+recommended, quality 167/168 (Phase H1 closeout) |
+| 2026-04-28 | **100 (A+)** | Phase 28 — refreshed dashboard prose vs `dashboard-data.json` (was 52→56 modules, 104→112 files, allowlist 12→9 corrected) |
