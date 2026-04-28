@@ -178,7 +178,7 @@ Legend: ✅ kept, ✏ changed shape, ❌ removed, ➕ new in v2.
 
 | Order | Gap | File | Effort | Score gain |
 |------:|-----|------|-------:|-----------:|
-| 1 | GAP-V2-01 (ACs → GWT) | `97-acceptance-criteria.md` | 60m | +5 |
+| 1 | ~~GAP-V2-01 (ACs → GWT)~~ ✅ Phase P7 2026-04-28 — verified 76/76 ACs are well-formed GWT (folder-22 sweep `incomplete=0`) | `97-acceptance-criteria.md` | n/a (already done in Phase 12 v3.8.8 full rewrite) | n/a |
 | 2 | GAP-V2-05 (App identity decision) | `07-app-entity.md` + `18-schema.sql` | 5m | +4 |
 | 3 | GAP-V2-04 (`PreviousHasError` in ack) | `04-rest-api-endpoints.md` + `17-openapi.yaml` | 10m | +3 |
 | 4 | GAP-V2-03 (streaming wire format) | `04-rest-api-endpoints.md` §1 | 15m | +3 |
