@@ -49,20 +49,22 @@ PR so any regression fails the build at the assertion level (with
 | 8 | [`test-check-99-summary-freshness.sh`](./test-check-99-summary-freshness.sh) | H1 | §26 `check-99-summary-freshness.py` exit-code contract: unstamped files don't fail (advisory), stamped+stale files exit 1 in strict mode and 0 with `--report-only`, stamped+fresh files exit 0, missing-phase-token exits 2. Phase H2 widened to inventory rubrics + `_archive/` exclusion (T8/T9/T10). Synthetic sandbox. | 17 | ~1 s | [AC-26-01..08](../../spec/27-spec-toolchain/26-check-99-summary-freshness.md) |
 | 9 | [`test-check-99-stamp-bump.sh`](./test-check-99-stamp-bump.sh) | H4 | §27 `check-99-stamp-bump.py` exit-code contract: empty/unstamped/stamp-only diffs skip (exit 0); materially-edited stamped files without bump exit 1; `--report-only` never fails; `_archive/` excluded; bad base-ref/missing phase token exit 2. Uses `--changed-files` test injection to bypass git (sandbox forbids `git add`). | 23 | ~1 s | [AC-27-01..08](../../spec/27-spec-toolchain/27-check-99-stamp-bump.md) |
 | 10 | [`test-archive-exclusion-runtime.sh`](./test-archive-exclusion-runtime.sh) | H7 | §28 runtime archive-exclusion gate: every spec-traversing linter MUST exclude `spec/_archive/` at RUNTIME (not just by source-reading). importlib-loads 3 critical linters (`check-99-summary-freshness.find_99_files()`, `audit-spec-vs-code-v2.ALL_MODULES`, `generate-trace-map.collect_ac_ids()`), calls each enumerator, asserts 0 archive-leaked results. Floor: probe count ≥ 3. Codifies the H6 lesson "runtime > source verification". | 10 | ~3 s | [AC-28-01..05](../../spec/27-spec-toolchain/28-check-archive-exclusion-runtime.md) |
-| 11 | [`test-check-spec-cross-links.sh`](./test-check-spec-cross-links.sh) | P35 | §01 `check-spec-cross-links.py` fuzzy waiver matching: stale waiver line numbers (drifted by ≤ 5 lines from the actual link location, e.g. after a stamp-batch tool inserted a comment line above) are accepted with an `INFO` hint; `--rewrite-allowlist` auto-bumps stale lines in-place and is idempotent; `--strict-line-match` restores exact-line semantics; out-of-tolerance drift (> 5 lines) does NOT fuzzy-match. Codifies the P34 lesson #1: stamp-batch tools (P22/P32) silently broke CI for 12 phases by drifting waiver line numbers. Synthetic sandbox. | 19 | ~1 s | [AC-01-05..07](../../spec/27-spec-toolchain/01-check-spec-cross-links.md) |
+| 11 | [`test-check-version-parity.sh`](./test-check-version-parity.sh) | P15/P31 | §29 `check-version-parity.py` exit-code contract: §00 banner version vs §98 latest release row mismatches are reported; default mode is advisory (exit 0); `--strict` and `<!-- h10-verified-phase: NNN -->` per-file stamps promote to exit 1; `--report-only` overrides stamps; `--spec-root` outside repo no longer crashes. Sandbox-injected drift (real tree at 0 mismatches post-P30). | 13 | ~1 s | [AC-29-01..14](../../spec/27-spec-toolchain/29-check-version-parity.md) |
+| 12 | [`test-check-spec-cross-links.sh`](./test-check-spec-cross-links.sh) | P35 | §01 `check-spec-cross-links.py` fuzzy waiver matching: stale waiver line numbers (drifted by ≤ 5 lines from the actual link location, e.g. after a stamp-batch tool inserted a comment line above) are accepted with an `INFO` hint; `--rewrite-allowlist` auto-bumps stale lines in-place and is idempotent; `--strict-line-match` restores exact-line semantics; out-of-tolerance drift (> 5 lines) does NOT fuzzy-match. Codifies the P34 lesson #1: stamp-batch tools (P22/P32) silently broke CI for 12 phases by drifting waiver line numbers. Synthetic sandbox. | 19 | ~1 s | [AC-01-05..07](../../spec/27-spec-toolchain/01-check-spec-cross-links.md) |
 
-**Totals:** 11 scripts · 129+ assertions · ~33 s of CI time.
+**Totals:** 12 scripts · 142+ assertions · ~34 s of CI time.
 
-All eleven scripts are reachable from [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml).
+All twelve scripts are reachable from [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml).
 Seven run as discrete self-test steps (`Audit CLI threshold contract self-test (Phase 91)`,
 `Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`,
 `Self-test README inventory parity (Phase 102)`, `Self-test QA baseline footer (Phase 103)`,
 `Self-test §27 inventory parity triangle (Phase 112)`, `Self-test WEIGHTS dimension-table parity (Phase 113)`).
-The remaining four are folded into their broader-contract production gates per the H1
+The remaining five are folded into their broader-contract production gates per the H1
 workflow-step parity lesson (footer rows = workflow gates = declared count): `test-check-99-summary-freshness.sh`
 runs inside `§99 Summary freshness gate (Phase H1 / H8 / H9)`, `test-check-99-stamp-bump.sh` inside
 `§99 Stamp-bump gate (Phase H5)`, `test-archive-exclusion-runtime.sh` inside
-`Runtime archive-exclusion gate (Phase H7)`, and `test-check-spec-cross-links.sh` inside
+`Runtime archive-exclusion gate (Phase H7)`, `test-check-version-parity.sh` inside
+`Version-field parity gate (Phase P15 / H10)`, and `test-check-spec-cross-links.sh` inside
 `Spec cross-link gate (zero broken links allowed)` (Phase P35).
 
 ---
