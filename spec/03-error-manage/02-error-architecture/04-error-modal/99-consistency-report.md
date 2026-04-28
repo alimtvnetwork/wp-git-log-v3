@@ -59,7 +59,7 @@
 ---
 
 ## Summary
-
+<!-- verified-phase: 147 -->
 - **Errors:** 0
 - **Warnings:** 0
 - **Observations:** 1 — `02-react-components.md` deprecated (v3.0.0 frozen), superseded by `02-react-components/` subfolder (v4.0.0)

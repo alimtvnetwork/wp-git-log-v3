@@ -48,7 +48,7 @@
 ---
 
 ## Summary
-
+<!-- verified-phase: 147 -->
 - **Errors:** 0
 - **Warnings:** 0
 - **Observations:** 1 — Parent `01-copy-formats.md` is a redirect stub pointing to this subfolder
