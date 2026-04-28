@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-28 (Phase H7 — added `test-archive-exclusion-runtime.sh` codifying the H6 runtime-probe lesson as a standing CI gate; total 10 self-tests)
+**Last updated:** 2026-04-28 (Phase P35 — added `test-check-spec-cross-links.sh` codifying the P34 lesson #1 fuzzy waiver matching as a standing CI gate; total 11 self-tests)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
