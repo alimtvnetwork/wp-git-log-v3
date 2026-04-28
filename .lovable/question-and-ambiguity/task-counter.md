@@ -2,7 +2,7 @@
 
 **Budget:** 40 tasks
 **Activated:** 2026-04-28
-**Counter:** 8 / 40
+**Counter:** 9 / 40
 **Status:** 🟢 active
 
 ## Counting rule
@@ -27,6 +27,7 @@ This setup task (creating prompt-01 + index + folder scaffolding) is task
 | 6 | 2026-04-28 | Phase 22 — fleet-wide banner-drift sweep (0 drift, H10 rejected) | none |
 | 7 | 2026-04-28 | Phase 23 — root spec/00-overview.md audit (no-op, clean) | none |
 | 8 | 2026-04-28 | Phase 24 — CONTRIBUTING.md drift sweep (3 fixes, H10 rejected) | none |
+| 9 | 2026-04-28 | Phase 25 — PR-template + monthly-audit + folder-structure (clean, no-op) | 03-core-memory-gate-count-stale (self-resolved) |
 
 ## Deactivation trigger
 
