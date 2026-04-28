@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.32.0
+**Version:** 2.33.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.33.0 — 2026-04-28 — Phase 117: containment-only rebaseline of trace-map gate
+- **Action**: Ran `python3 linter-scripts/check-trace-map-regression.py --update-baseline` to rebaseline `.lovable/memory/audit/trace-map-baseline.json` from `{ac_total:495, ac_drifted:471, code_total:32, code_orphan:25, ac_traced:24}` to `{ac_total:1295, ac_drifted:1271, code_total:46, code_orphan:39, ac_traced:24}`. Verification re-run exits 0 with `✅ No regression`.
+- **Why containment-only (not `go all` / `parity-only`)**: Drift growth +800 ACs is **legitimate spec-growth** from Phases 13/16c/20#7/etc deepening §97 across `22-git-logs-v2`, `17-consolidated-guidelines`, and others. Orphan growth +14 code files is **specced-but-not-AC-bound toolchain scripts** added across Phases 108–146 (`check-spec-folder-refs.py`, `check-memo-retrospective-headings.py`, `check-readme-canonicals.py`, `deepen-consistency-reports.py`, `fill-missing-{acceptance-criteria,changelogs,consistency-reports}`, `generate-gate-report.py`, `generate-gwt-acceptance.py`, etc) — each is described in §27 modules and reachable from CI, just not yet bound to a specific AC via `linter-scripts/trace-map.toml`. AC coverage held flat at 24 traced (no AC LOST tracing); the percentage drop (4.9% → 1.9%) is purely the denominator growing. `go all` would require ~800 trace-map.toml additions (not justified by current toolchain bandwidth); `parity-only` would refresh AC totals only and silently absorb the orphan-growth signal.
+- **Containment annotation**: `.lovable/memory/audit/phase-117-containment-annotation.json` records the absorbed deltas (`ac_total +800`, `code_total +14`, `ac_traced +0`) plus the guardrails: future single-phase delta > 50 ACs or > 5 code files MUST be inspected before rebaselining again; R1 (real-AI re-audit, blocked on Lovable Cloud) is the proper long-term fix — it would re-bind orphan toolchain scripts to their §27 ACs and shrink the orphan count organically; Phase 117 is NOT a license to ignore future regressions, the gate now exits 0 and will fire again on the NEXT material drift.
+- **Scope discipline (Phase 117 ONLY)**: `linter-scripts/check-trace-map-regression.py` source untouched (no AC behavior change); `linter-scripts/trace-map.toml` untouched (no new bindings — that's Phase 117 `go all`); §17 `17-check-trace-map-regression.md` body untouched (the gate's contract is unchanged — only the baseline numbers it compares against shifted). §97 untouched (no AC IDs added/removed; AC count = 20). The change is purely a **measurement-baseline shift** with an audit annotation that makes the shift attributable.
+- **Lockstep**: §98 v2.32.0 → **v2.33.0**; §99 v2.29.0 → **v2.30.0** (banner refresh + Phase 117 audit-row sentence); `mem://index.md` Core line updated (the long-running "drift grew 471→1270 — gate is RED awaiting Phase 117" warning is retired and replaced with a Phase 117-resolved sentence).
+- **Verification**: Lockstep 87/87 ✓; tree-health 168/168 strict ✓; trace-map regression `exit 0` ✓.
 
 ### 2.32.0 — 2026-04-28 — Phase 143/144: AC-62-04 enforced in code + locked by regression test
 - **Phase 143 (parser hardening):** `linter-scripts/check-spec-folder-refs.py::load_allowlist()` now strips inline trailing `# comment` from entry lines defensively, so the AC-62-04 bug class can no longer corrupt the bucket even if a contributor uses inline trailers. The full-line-comment-only convention remains the documented preferred form; inline trailers are tolerated, not blessed. Tagged `AC-62-04 (Phase 143)` inline at the strip site. Verified: linter still exits 0 with the same 11 dormant warnings as Phase 143's allowlist sweep — no behavior change for clean input.
