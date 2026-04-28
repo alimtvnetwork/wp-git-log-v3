@@ -136,6 +136,14 @@ INV-04: validator_kind -> spec MUST document exit_codes table {0,1,2}
 INV-05: filler_kind   -> spec MUST contain literal phrase "idempotent" + "no-op on satisfied tree"
 INV-06: auditor_kind  -> spec MUST list 7 dimensions + their weights + active gates
 INV-07: ci-workflow_kind -> spec MUST reference workflow file path + trigger events list
+INV-08: code in {linter-scripts/, .github/workflows/} WITHOUT a spec/27-spec-toolchain/NN-*.md MAY be tracked
+        in the Phase 107 orphan ledger at .lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md
+        (the "Code → Spec orphans" table). Such ledger-tracked orphans satisfy INV-01 transitionally — the
+        spec/27-spec-toolchain/00-overview.md inventory remains authoritative; the ledger is a deliberate,
+        time-bounded acknowledgement contract enforced by linter-scripts/test/test-overview-inventory-parity.sh
+        (Phase 112 — locks AC-31-31). NEW orphans MUST be added to the ledger in the SAME PR that adds the code.
+        The ledger is NOT a permanent home — every ledger entry SHOULD migrate to a real §27 NN-*.md spec
+        within two release cycles; ledger growth without migration MUST trigger a Phase-108-style cleanup.
 
 # DELETION PROTOCOL
 DEL-01: rm linter-scripts/<script> -> rm spec/27-spec-toolchain/NN-*.md (same PR)
