@@ -140,8 +140,9 @@ tax intentionally.
 | [`test-check-spec-folder-refs.py`](./test-check-spec-folder-refs.py) | 144 | `check-spec-folder-refs.py::load_allowlist()` strips inline `# comment` trailers (AC-62-04) — 4 `tempfile`-based unit tests | Exercises an internal function, not the CLI; loading the hyphenated source requires `importlib.util.spec_from_file_location`, which is awkward in bash. |
 
 These are CI-runnable via `python3 linter-scripts/test/test-*.py` but
-not yet wired into `spec-health.yml` (that's Phase F2, blocked on Phase
-F1 user verdicts).
+not yet wired as discrete steps in `spec-health.yml`. Acknowledgement
+flows through `test-overview-inventory-parity.sh` (Phase 112) instead of
+the README parity gate, which remains `.sh`-only by design.
 
 ---
 
@@ -173,9 +174,12 @@ bash linter-scripts/test/test-readme-inventory.sh
 bash linter-scripts/test/test-qa-baseline-footer.sh
 bash linter-scripts/test/test-overview-inventory-parity.sh
 bash linter-scripts/test/test-weights-parity.sh
+bash linter-scripts/test/test-check-99-summary-freshness.sh
+bash linter-scripts/test/test-check-99-stamp-bump.sh
+bash linter-scripts/test/test-archive-exclusion-runtime.sh
 ```
 
-Run all seven sequentially:
+Run all ten sequentially:
 
 ```bash
 for t in linter-scripts/test/test-*.sh; do
