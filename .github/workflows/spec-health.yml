@@ -60,12 +60,21 @@ jobs:
           [ -f linter-scripts/fill-missing-acceptance-criteria.cjs ] && node linter-scripts/fill-missing-acceptance-criteria.cjs
           [ -f linter-scripts/fill-missing-changelogs.cjs ] && node linter-scripts/fill-missing-changelogs.cjs
 
-      - name: Regenerate spec-index.md (drift check)
+      - name: Regenerate spec-index.md (drift check — strict, Phase 29)
+        # Phase 29 (2026-04-28): hardened from advisory to strict. Previously
+        # this step printed a warning on drift but exited 0, which let the
+        # committed `spec/spec-index.md` go stale by 6 files / 18 lines
+        # (caught at Phase 29 audit: B1 §07 v2.1→2.2, Phase 147 §97 v3.9.0→
+        # 3.9.1, §27 toolchain v1.7→2.46.3 + 6 new slots, §98 v3.5.0→3.5.1
+        # all unreflected). Strict mode: regen, then fail if `git status`
+        # shows any spec/ delta. Same pattern as F2 folder-refs gate.
         run: |
           node linter-scripts/generate-spec-index.cjs
           if [ -n "$(git status --porcelain spec/)" ]; then
-            echo "⚠️  Spec artifacts out of date. Run 'bash linter-scripts/run.sh' locally and commit results."
+            echo "❌ Spec artifacts out of date. Run 'bash linter-scripts/run.sh' locally and commit results."
             git --no-pager diff --stat spec/ | head -20
+            git --no-pager diff spec/ | head -100
+            exit 1
           else
             echo "✅ Spec artifacts up to date."
           fi
