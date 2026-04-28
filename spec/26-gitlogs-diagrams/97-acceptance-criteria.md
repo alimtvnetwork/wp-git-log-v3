@@ -1,7 +1,7 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 3.0.0
-**Updated:** 2026-04-26 (Phase 16g: full GWT rewrite — converted 9 table-row criteria into 20 module-specific Given/When/Then ACs covering ER schema parity, header-comment contract, slot immutability, render-pipeline integrity, and §22 governance link. Old AC-D-01..AC-D-11 preserved as AC-DG-LEGACY-* at end.)
+**Version:** 3.1.0
+**Updated:** 2026-04-28 (Phase P10: added AC-DG-21 covering the new `10-ssh-auth-validation.mmd` SSH-lane diagram + bumped AC-DG-20 active-diagram count 6 → 7)
 **Scope:** `spec/26-gitlogs-diagrams/` — Mermaid diagram artifacts that visualize the §22 Git Logs WP plugin contracts.
 
 ---
@@ -180,8 +180,15 @@ GL_REJECT_CODE_FORMAT:     GL-{CATEGORY}-{NAME} (e.g. GL-AUTH-INVALID-TOKEN)
 
 - **Given** the current state of `spec/26-gitlogs-diagrams/`,
 - **When** AC-DG-01 through AC-DG-19 are mechanically evaluated,
-- **Then** every check MUST pass: 6 active diagrams ✅, 3 locked gap slots ✅, ER parity with §22 v3.8.0+ ✅, all forbidden tokens absent ✅, all 6 sources have sibling SVGs ✅, header-comment contract met for non-ER diagrams ✅, mindmap covers 8 endpoints ✅, encryption v3 covers 7 nodes ✅, governance link present ✅. Failure of any single AC against this module MUST drop the §26 health-score below 100 in `99-consistency-report.md`.
+- **Then** every check MUST pass: 7 active diagrams ✅ (6 original + Phase P10 SSH-lane), 3 locked gap slots ✅, ER parity with §22 v3.8.0+ ✅, all forbidden tokens absent ✅, all 7 sources have sibling SVGs ✅, header-comment contract met for non-ER diagrams ✅, mindmap covers 8 endpoints ✅, encryption v3 covers 7 nodes ✅, governance link present ✅. Failure of any single AC against this module MUST drop the §26 health-score below 100 in `99-consistency-report.md`.
 - **Verifies:** Recursive self-check + AC-SAG-18 dogfooding analogue.
+
+### AC-DG-21 — SSH auth-lane diagram covers all 10 §31 validation steps + 11 reject codes
+
+- **Given** `10-ssh-auth-validation.mmd` (added Phase P10),
+- **When** parsed by Mermaid CLI,
+- **Then** it MUST declare `flowchart TD` AND traverse the full 10-step server validation order from `../22-git-logs-v2/31-ssh-key-auth.md` §"Server Validation Order": (1) mode header parse, (2) header completeness, (3) timestamp skew vs `ReplayWindowSeconds`, (4) `SshKey` lookup by `Fingerprint` (UNKNOWN vs INACTIVE branch), (5) repo binding `RepoUrl → RepoId == SshKey.RepoId`, (6) acceptance + branch (delegated to `05-auth-validation.mmd` rules 3–4), (7) `SshNonce` uniqueness via `INSERT OR IGNORE`, (8) `ssh-keygen -Y verify` over the canonical signing string with namespace `git-logs@v2`, (9) `OwnedByProfileId.UserStatus = Active`, (10) `App.Status = Active` if linked. The diagram MUST surface all 11 distinct reject codes inline (`GL-SSH-LANE-CONFLICT`, `GL-SSH-HEADER-MISSING`, `GL-SSH-TIMESTAMP-SKEW`, `GL-SSH-KEY-UNKNOWN`, `GL-SSH-KEY-INACTIVE`, `GL-SSH-REPO-MISMATCH`, `GL-VALIDATION-REPO-NOT-ALLOWED`, `GL-VALIDATION-BRANCH-RESTRICTED`, `GL-SSH-NONCE-REUSED`, `GL-SSH-SIGNATURE-INVALID`, `GL-AUTH-PROFILE-INACTIVE`, `GL-APP-NOT-ACTIVE`) and MUST emit a fall-through arrow to `05-auth-validation.mmd` when `X-GL-Auth-Mode` is absent or `temptoken`. Acceptance terminal node MUST update `SshKey.LastUsedAt` and write `AuditTrail.SshAuthSuccess`; reject terminal MUST write `AuditTrail.AuthFail`.
+- **Verifies:** §22 §31 Server Validation Order + §22 §15 SSH error-code registry + AC-DG-05 (header contract) + AC-DG-11 (sibling SVG) + AC-DG-17 (`GL-*` registry parity).
 
 ---
 
