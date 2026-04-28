@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.15
-**Updated:** 2026-04-28 (Phase P8 — §37 effort-table & per-gap headers refreshed: V2-02/03/04/08/10 marked ✅ RESOLVED. §37 v1.3.0 → v1.4.0; pure bookkeeping, no AC/DDL/schema/enum/error-code change. AC count unchanged at 76. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.16
+**Updated:** 2026-04-28 (Phase P16 — `GL-STREAM-*` lockstep closed: §15 v2.9.3 → v2.9.4 + §17 v2.9.5 → v2.9.6 + §97 v3.9.2 → v3.9.3 + AC-76; codes promoted from §04 §1.2 prose into §15 catalog and §17 `ErrorCode` enum with binding AC. AC count 76 → 77. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
