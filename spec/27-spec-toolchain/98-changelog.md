@@ -1,10 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.52.0
+**Version:** 2.53.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.53.0 — 2026-04-28 — Phase P23: H10 first reverse-drift reconstruction (`02-coding-guidelines/11-security/01-axios-version-control`)
+- **Action**: First field application of the **reverse-drift forensic reconstruction** workflow announced as P21/P22 lesson (forward-drift sweeps stop at the boundary; reverse-drift requires per-module §98 reconstruction). Targeted the smallest-gap reverse drifter: `spec/02-coding-guidelines/11-security/01-axios-version-control` (§00 banner `3.2.0` vs §98 latest release `1.1.0` — gap of 1 major + 1 minor).
+- **Reconstruction**: Rebuilt §98 release ladder from the existing dated prose blocks already present in the file (Phase 27c frontmatter, Phase 53 typed contracts, Phase 70 Mermaid+CI, Phase 75 typed-language stubs+TS enums) — promoted them into proper SemVer rows: **1.0.0** (baseline) → **1.2.0** (frontmatter, Phase 27c) → **1.3.0** (typed/SQL/JSON Schema contracts, Phase 53) → **2.0.0** (Mermaid lifecycle + inlined CI workflow, Phase 70 — major because new normative CI surface) → **3.0.0** (Go/Rust/C# typed-language reference contracts, Phase 75 — major because new cross-language normative shape) → **3.1.0** (TypeScript enum mirror, Phase 75 part 2) → **3.2.0** (this Phase P23 reconciliation release). Audit trail preserved by citing prior prose block under each reconstructed row.
+- **Banner sync**: §00 `Updated:` bumped 2026-04-27 → 2026-04-28; `<!-- h10-verified-phase: 23 -->` stamp dropped under banner — module now opted into strict H10 enforcement.
+- **§99 module report**: bumped 3.3.0 → 3.4.0 with Validation History row documenting the reconstruction.
+- **Workflow codified for future reverse-drift phases**: (1) `ls` module to find dated prose blocks already present in §98 / §99; (2) map prose phases to plausible SemVer bumps (major = new public/normative surface; minor = additive content); (3) write reconstructed §98 with `### X.Y.Z — DATE` rows that **cite the source prose block** so audit trail survives; (4) drop H10 stamp; (5) bump §99 with reconstruction note. Mechanical bumps without §98 reconstruction are forbidden because they erase audit trail.
+- **Gate impact**: `matches=37 → 38` (+1); `mismatches=37 → 36` (-1); `stamped=20 → 21`; `stamped_failed=0`. Reverse-drift backlog **36 → 35**.
+- **Adoption progress**: **21 / 74 modules opted into strict enforcement**.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption + per-module forensic reconstruction.
+- **Verified**: parity gate 87/74/38/36/stamped=21/stamped_failed=0 / exit 0 ✅; lockstep 87/87 / 0 findings ✅ (after §99 sync); tree-health 168/168 strict ✅; §27-inventory 6/6 ✅; H10 self-test 13/13 ✅.
 
 ### 2.52.0 — 2026-04-28 — Phase P22: H10 forward-drift backlog cleared (tree-wide)
 - **Action**: Continuing P21's stamp-adoption sweep, applied the same idempotent mechanism (`/tmp/p22-sweep.py`) to the **remaining 10 forward-drift modules tree-wide**, closing the entire forward-drift backlog. Each: §00 banner version bumped to §98 latest release; `<!-- h10-verified-phase: 22 -->` stamp dropped under banner; `**P22 sync** ...` audit-trail bullet prepended under existing §98 latest release row (no new §98 release — pure banner catch-up, content unchanged).
