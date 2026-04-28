@@ -128,3 +128,4 @@ The remaining grep hits in `37-blind-ai-gap-analysis.md` are **historical narrat
 | Legacy v1 spec | [../_archive/21-git-logs-v1/00-overview.md](../_archive/21-git-logs-v1/00-overview.md) |
 | DB conventions | [../04-database-conventions/00-overview.md](../04-database-conventions/00-overview.md) |
 | Master coding guidelines | [../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md](../02-coding-guidelines/01-cross-language/15-master-coding-guidelines/00-overview.md) |
+| Outbound CI client (Lane B / SSH) | [../28-universal-ci-cli/00-overview.md](../28-universal-ci-cli/00-overview.md) — canonical client contract: posters CI runs invoke to push logs into this server (closes GAP-V2-09 per §37 Phase P17). |
