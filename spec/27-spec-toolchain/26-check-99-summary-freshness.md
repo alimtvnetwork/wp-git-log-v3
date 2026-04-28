@@ -60,6 +60,29 @@ Files **without** the stamp emit a per-file `info` line and do **not** fail —
 the gate is advisory until project-wide stamp adoption is decided in a future
 phase or via R1 (real-AI re-audit).
 
+## Exempt-marker convention (Phase H8)
+
+Some §99 files have no narrative claims and no inventory rubric — only
+date-anchored audit-log subsections (e.g. `## 2026-04-27 — Phase 69 audit`).
+Stamping such files makes no sense (there's nothing to verify). They declare
+their freshness posture via a whole-file marker:
+
+```markdown
+# Consistency Report — …
+<!-- freshness-exempt: audit-log-only -->
+
+## 2026-04-27 — Phase 69 audit
+…
+```
+
+Recognized format: `<!--\s*freshness-exempt:\s*([a-z0-9_\-]+)\s*-->` — anywhere
+in the file (NOT heading-scoped, unlike `verified-phase`). The reason token is
+informational; canonical first reason is `audit-log-only`. Exempt files are
+counted under `exempt:` and skipped before the find-stamp pass — they never
+increment the unstamped advisory count.
+
+After Phase H8: **87/87 §99 files declare a posture** (81 stamped + 6 exempt).
+
 ## CLI
 
 ```
