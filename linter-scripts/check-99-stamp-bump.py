@@ -177,6 +177,13 @@ def main() -> int:
                         help="Git ref to diff against (default: $STAMP_BUMP_BASE_REF or origin/main).")
     parser.add_argument("--report-only", action="store_true",
                         help="Never exit 1; print findings and exit 0.")
+    parser.add_argument("--changed-files", default=None,
+                        help="Test injection: path to a newline-separated list of §99 files to "
+                             "treat as 'changed'. Each file is checked against its committed "
+                             "version via git show; if --diff-stamp-only is also passed, the "
+                             "file is treated as a stamp-only diff. Bypasses git entirely.")
+    parser.add_argument("--treat-as-stamp-only", action="store_true",
+                        help="Test injection: treat all --changed-files as stamp-only diffs.")
     args = parser.parse_args()
 
     base_ref = args.base_ref or os.environ.get("STAMP_BUMP_BASE_REF") or "origin/main"
@@ -186,11 +193,32 @@ def main() -> int:
         print("ERROR: cannot determine current phase from mem://index.md or §27 changelog.",
               file=sys.stderr)
         return 2
-    print(f"Current phase: {current}; base ref: {base_ref}")
 
-    changed = git_diff_names(base_ref)
-    if changed is None:
-        return 2
+    if args.changed_files:
+        # Test-injection path: skip git entirely.
+        print(f"Current phase: {current}; mode: --changed-files={args.changed_files}")
+        try:
+            lines = Path(args.changed_files).read_text().splitlines()
+        except OSError as e:
+            print(f"ERROR: cannot read --changed-files: {e}", file=sys.stderr)
+            return 2
+        changed = []
+        for line in lines:
+            line = line.strip()
+            if not line or not line.endswith("99-consistency-report.md"):
+                continue
+            p = Path(line)
+            if not p.is_absolute():
+                p = REPO / p
+            if "_archive" in p.parts:
+                continue
+            if p.exists():
+                changed.append(p)
+    else:
+        print(f"Current phase: {current}; base ref: {base_ref}")
+        changed = git_diff_names(base_ref)
+        if changed is None:
+            return 2
     if not changed:
         print("No §99 files changed in diff. ✅")
         return 0
