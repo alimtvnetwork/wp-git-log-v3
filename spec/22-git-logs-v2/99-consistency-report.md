@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.7
-**Updated:** 2026-04-28 (Phase P1 — TypeScript enum mirror appended to §01 v3.8.10 → v3.9.0; closes GAP-V2-02. Inventory row for §01 updated to reflect v3.9.0 + new `## TypeScript Mirror` section. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.8
+**Updated:** 2026-04-28 (Phase P2 — `/append-log` ingest streaming wire format pinned in §04 v2.9.3 → v2.9.4 (new §1.1: `X-GL-Stream:1` sentinel, NDJSON `StreamHeader`/`Line`/`StreamFooter` framing, 4 new `GL-STREAM-*` codes); closes GAP-V2-03. Inventory row for §04 updated. §15/§17/§97 lockstep deferred per Phase P2 scope discipline. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
