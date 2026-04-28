@@ -1,10 +1,22 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.43.1
+**Version:** 2.44.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.44.0 — 2026-04-28 — Phase H4: stamp-bump enforcement gate (slot 27 v1.0.0; sister event-based gate to slot 26)
+- **Action**: New validator `linter-scripts/check-99-stamp-bump.py` — turns the H1/H2 honor-system into a CI check. When a §99 file is materially edited (any non-stamp line changed in `git diff $BASE_REF...HEAD`), the `<!-- verified-phase: NNN -->` stamp MUST be bumped to current phase in the same diff. Two-layer defense with slot-26: snapshot freshness (`--max-age 20`) + event-based bump-on-edit (budget 0).
+- **Skip-rules**: unstamped files (opt-in ratchet); stamp-only diffs (that IS the bump); `spec/_archive/**` (Phase H3 convention).
+- **Test injection**: `--changed-files FILE` + `--treat-as-stamp-only` flags bypass git for sandboxed self-tests (sandbox forbids `git add`).
+- **Self-test**: `linter-scripts/test/test-check-99-stamp-bump.sh` — 23 assertions across 10 test cases (T1 empty, T2 unstamped skip, T3 stamp-only skip, T4 unbumped fail, T5 --report-only, T6 edit+bump pass, T7 _archive exclusion, T8 bad base-ref exit 2, T9 missing phase token exit 2, T10 mixed batch). All 23 ✅.
+- **Spec doc**: §27 slot 27 v1.0.0 (band 20-29 validator, clean adjacent fit to slot 26 — no slot-range exception).
+- **Trace-map**: bound AC-27-01..08 to slot-27 gate symbols; rebaselined within thresholds (+8 ACs ≪ 50; +2 code files ≪ 5). New baseline: `{ac_total:1315, ac_traced:85 (+8), code_total:50 (+2), code_orphan:26 (+1)}`. ac_drifted unchanged at 1230.
+- **NOT YET CI-WIRED**: H4 ships the gate + self-test + spec doc only. CI wiring deferred to follow-up phase (H5) to coordinate the AC-31-31 cascade properly: gate count 15→16, RUBRIC_VERSION v2.24→v2.25, footer #16 row, EXECUTIVE-SUMMARY 15→16, qa-baseline-footer awk pattern. Codifies the "don't rush AC-31-31" lesson.
+- **AC-31-31 invariants (H4 close)**: gate count unchanged at **15** (gate not yet CI-wired); RUBRIC_VERSION unchanged at **v2.24**; footer/EXECUTIVE-SUMMARY/qa-baseline-footer untouched.
+- **Verified**: H4 self-test 23/23 ✅; H1 self-test 17/17 ✅; lockstep 87/87 / 0 ✅; tree-health 168/168 strict ✅; freshness 75 stamped / 0 stale ✅; trace-map regression ✅ at new baseline; README inventory 8→9 entries (24/24 ✅); §27-inventory 6/6 ✅.
+- §98 v2.43.1 → **v2.44.0** (minor — new gate); §99 v2.40.1 → **v2.41.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h4-stamp-bump-enforcement-gate.md` (deferred — see §99 entry).
 
 ### 2.43.1 — 2026-04-28 — Phase H3: `_archive/` exclusion sweep — codify H2 lesson across spec-traversing linters
 - **Action**: Audited all 12 spec-traversing linters for `_archive/` leakage. Found 8 already exclude (good), 2 need fixes:

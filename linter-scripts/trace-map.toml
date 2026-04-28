@@ -501,3 +501,52 @@ ac     = "27-spec-toolchain/26-check-99-summary-freshness.md#AC-26-08"
 files  = ["linter-scripts/check-99-summary-freshness.py"]
 symbol = "find_summary_stamp"
 kind   = "function"
+
+# Phase H4 — slot 27 stamp-bump enforcement gate.
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-01"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "git_diff_names"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-02"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "find_summary_stamp"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-03"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "diff_is_stamp_only"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-04"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "main"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-05"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "--report-only"
+kind   = "cli-flag"
+
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-06"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "_archive"
+kind   = "literal"
+
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-07"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "git diff failed"
+kind   = "literal"
+
+[[trace]]
+ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-08"
+files  = ["linter-scripts/check-99-stamp-bump.py"]
+symbol = "detect_current_phase"
+kind   = "function"
