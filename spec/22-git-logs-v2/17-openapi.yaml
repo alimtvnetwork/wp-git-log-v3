@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Git Logs Plugin API
-  version: 2.9.4
+  version: 2.9.5
   description: |
     REST API for the Git Logs WordPress plugin.
     Source spec: spec/22-git-logs-v2/04-rest-api-endpoints.md
@@ -92,13 +92,23 @@ components:
 
     AckResponse:
       type: object
-      required: [Status, PipelineId, Retrieval]
+      required: [Status, PipelineId, Retrieval, PreviousHasError]
       properties:
         Status: { type: string, enum: [Ack] }
         PipelineId: { type: integer }
         AcceptedLogCount: { type: integer }
         AcceptedErrorCount: { type: integer }
         HasError: { type: boolean }
+        PreviousHasError:
+          type: boolean
+          description: |
+            True iff the prior Pipeline row for this (RepoVersionId, BranchName, PipelineName)
+            had HasError=1 immediately BEFORE this request was applied. On a fresh triple
+            with no prior row, MUST be false. Read in the same SQL transaction as the write
+            (BEGIN IMMEDIATE) per §97 AC-75 to avoid the read-modify-write race. Returned on
+            write endpoints #1–#4 only; absent on read endpoints #5–#10. Closes GAP-V2-04
+            (Phase P3) — clients use this to chain PUT /fixed-log per AC-13. See §04
+            "PreviousHasError field contract" subsection for full per-endpoint semantics.
         Retrieval:
           type: object
           properties:

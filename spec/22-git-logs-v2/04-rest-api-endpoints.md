@@ -1,7 +1,7 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.9.4  
-**Updated:** 2026-04-28 (Phase P2: §1.1 NDJSON streaming wire format pinned for `/append-log` ingest — `X-GL-Stream:1` sentinel, `StreamHeader`/`Line`/`StreamFooter` frame contract, error codes `GL-STREAM-{NO-HEADER,NO-FOOTER,TOO-MANY-LINES,UNKNOWN-FRAME}` — resolves GAP-V2-03 and unblocks `28-universal-ci-cli/06` AC-28-06; §11 retrieval contract unchanged)
+**Version:** 2.9.5  
+**Updated:** 2026-04-28 (Phase P3: Standard Ack Envelope gains required `PreviousHasError: boolean` on write endpoints #1–#4; full field contract added — semantics, per-endpoint usage, atomicity (same-tx as write), cross-refs to §01/§97 AC-13/73/74/75/§17. Closes GAP-V2-04. §17 OpenAPI `Ack` schema lockstep-bumped in same phase. Phase P2 §1.1 NDJSON ingest contract unchanged.)
 **Namespace:** `/wp-json/git-logs/v2`
 
 ---
@@ -19,6 +19,7 @@
   "Status": "Success",
   "Message": "Logs appended.",
   "TraceId": "uuid-v4",
+  "PreviousHasError": false,
   "Retrieval": {
     "Logs": "/wp-json/git-logs/v2/get-logs",
     "ErrorLogs": "/wp-json/git-logs/v2/get-error-logs",
@@ -26,6 +27,17 @@
   }
 }
 ```
+
+**Field contract — `PreviousHasError`** (v2.9.5 — Phase P3, closes GAP-V2-04):
+
+- **Type:** `boolean`
+- **Required:** Yes on write endpoints #1–#4 (`/append-log`, `/fixed-log`, `/clear-log`, `/clear-log-all`); ABSENT on read endpoints #5–#10.
+- **Semantics:** `true` iff the **prior** `Pipeline` row for this `(RepoVersionId, BranchName, PipelineName)` had `HasError=1` **immediately before** the current request was applied. Computed by reading `Pipeline.PreviousHasError` (set atomically per AC-75 single-statement write contract) BEFORE the current request mutates it. On a fresh `(Repo, Branch, Pipeline)` triple with no prior row, `PreviousHasError` MUST be `false` (mirrors AC-73 `first-failure` vs `still-failing` boundary).
+- **On `/append-log` (#1):** lets the client decide whether to follow up with `PUT /fixed-log` automatically — if the new request resolves to `HasError=false` AND `PreviousHasError=true`, the client SHOULD chain a `/fixed-log` call (per AC-13).
+- **On `/fixed-log` (#2):** echoes the state BEFORE clearing — clients use this to detect no-op fixed calls (`PreviousHasError=false` ⇒ the pipeline was already green; the call was redundant but not erroneous).
+- **On `/clear-log` (#3) and `/clear-log-all` (#4):** echoes pre-clear state for audit trail correlation; the cleared row's prior state is otherwise unrecoverable.
+- **Atomicity:** MUST be read in the same SQL transaction as the write (`BEGIN IMMEDIATE` … `SELECT Pipeline.PreviousHasError WHERE …` … `UPDATE Pipeline SET …`) to avoid a read-modify-write race with a concurrent `/append-log` on the same triple. Mirrors AC-75 ORM-split fallback rules.
+- **Cross-refs:** §01 `Pipeline.PreviousHasError` glossary entry; §97 AC-13 (auto-fix), AC-73 (state-transition matrix), AC-74 (`Header.StateTransition` NDJSON exposure), AC-75 (atomicity); §17 `Ack` schema (lockstep — added in this phase).
 
 ### Standard Error Envelope
 

@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.8
-**Updated:** 2026-04-28 (Phase P2 — `/append-log` ingest streaming wire format pinned in §04 v2.9.3 → v2.9.4 (new §1.1: `X-GL-Stream:1` sentinel, NDJSON `StreamHeader`/`Line`/`StreamFooter` framing, 4 new `GL-STREAM-*` codes); closes GAP-V2-03. Inventory row for §04 updated. §15/§17/§97 lockstep deferred per Phase P2 scope discipline. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.9
+**Updated:** 2026-04-28 (Phase P3 — `PreviousHasError` boolean added to Standard Ack Envelope on §04 v2.9.4 → v2.9.5 with full field contract; §17 OpenAPI `AckResponse` v2.9.4 → v2.9.5 lockstep-bumped (REQUIRED property, deep-link description); closes GAP-V2-04. Inventory rows for §04 and §17 updated. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
@@ -14,7 +14,7 @@
 | 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
-| 04-rest-api-endpoints.md | ✅ (v2.9.4 — Phase P2 §1.1 NDJSON ingest streaming wire format) |
+| 04-rest-api-endpoints.md | ✅ (v2.9.5 — Phase P3 Standard Ack Envelope `PreviousHasError` + field contract; Phase P2 §1.1 NDJSON ingest streaming wire format) |
 | 05-auth-and-validation.md | ✅ (CI/CD cross-ref) |
 | 06-migrations-and-logger.md | ✅ |
 | 07-app-entity.md | ✅ |
@@ -27,7 +27,7 @@
 | 14-endpoint-examples.md | ✅ |
 | 15-error-codes.md | ✅ (4 new auth codes added in v2.6) |
 | 16-test-plan.md | ✅ (redirect stub → §32–§35) |
-| 17-openapi.yaml | ✅ |
+| 17-openapi.yaml | ✅ (v2.9.5 — Phase P3 `AckResponse.PreviousHasError` REQUIRED) |
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |
 | 20-observability.md | ✅ |
@@ -317,9 +317,20 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase P2 scope discipline:** §15 error-codes file, §17 OpenAPI, §97 ACs intentionally untouched — the §1.1 doc-side contract is the source of truth for the next downstream consumer (`28-universal-ci-cli/06-log-shipping-contract.md` AC-28-06, which becomes implementable). §15/§17/§97 lockstep is a follow-on micro-phase; deferring it preserves single-concern phase discipline. §11 retrieval contract (Phase 8/12) untouched. §02 / §18 / §01 untouched (no DDL change, no enum change — `Severity` field reuses existing `LogSeverity` enum verbatim).
 
+## v3.9.9 Audit — Phase P3 (GAP-V2-04 closed: `PreviousHasError` in Ack envelope + OpenAPI)
+
+| File | Change |
+|------|--------|
+| `04-rest-api-endpoints.md` | Banner v2.9.4 → v2.9.5. Standard Ack Envelope JSON example gains `"PreviousHasError": false`. New ~25-line "Field contract — `PreviousHasError`" subsection covers: type/required (write endpoints #1–#4 only); semantics (true iff prior `Pipeline.PreviousHasError` for `(RepoVersionId, BranchName, PipelineName)` was 1 immediately before request; fresh triple → false, mirrors AC-73 `first-failure` boundary); per-endpoint usage (#1 enables AC-13 auto-`/fixed-log` chaining; #2 detects no-op fixed calls; #3/#4 echo pre-clear state for audit correlation); atomicity (MUST be read in same `BEGIN IMMEDIATE` SQL transaction as the write per AC-75); cross-refs to §01 / §97 AC-13/73/74/75 / §17. |
+| `17-openapi.yaml` | `info.version` 2.9.4 → 2.9.5. `AckResponse.PreviousHasError` added as REQUIRED boolean property (added to `required: [Status, PipelineId, Retrieval, PreviousHasError]`); description block reuses §04 contract verbatim with deep-link to "PreviousHasError field contract" subsection. |
+| `98-changelog.md` | v3.9.2 row added (Phase P3). |
+| `99-consistency-report.md` | This audit table; banner v3.9.8 → v3.9.9; inventory rows for §04 + §17 updated. |
+
+**Phase P3 scope discipline:** §97 ACs untouched — AC-13 already references the auto-fix behavior (the field exposes existing semantics, no new contract). §15 untouched (no new error codes — missing `PreviousHasError` is a server-side schema bug, not a client-visible error mode). §01 glossary `Pipeline.PreviousHasError` entry already authoritative from Phase 9 (v2.9.2). §02 / §18 untouched (no DDL change — the field is computed from existing `Pipeline.PreviousHasError` column already shipped in §18 v2.9.2). The pending `GL-STREAM-*` lockstep micro-phase (deferred from Phase P2) is still open and unrelated to P3.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, **§04↔§28/06 ingest-streaming wire-format chain (Phase P2)**); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.4 surfaces optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02 (TS enum mirror); v3.9.1 closed GAP-V2-03 (NDJSON ingest wire format). **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 new `GL-STREAM-*` codes (deferred per Phase P2 scope). All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, §04↔§28/06 ingest-streaming wire-format chain (Phase P2), **§04↔§17 PreviousHasError ack-envelope chain (Phase P3)**); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.5 surfaces required `AckResponse.PreviousHasError` + optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02; v3.9.1 closed GAP-V2-03; v3.9.2 closed GAP-V2-04. **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 `GL-STREAM-*` codes (deferred from Phase P2). All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
 
 ---
 
