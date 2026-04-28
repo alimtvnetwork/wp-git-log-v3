@@ -159,6 +159,14 @@ Whichever yields the highest integer wins.
 - **When** the gate runs,
 - **Then** the file MUST be counted under `exempt:` AND MUST NOT increment `unstamped:` AND MUST NOT cause exit 1, regardless of whether any tracked heading is present or any stamp exists.
 
+### AC-26-10 — Misplaced stamp detection (Phase H9)
+- **Given** a §99 file containing `<!-- verified-phase: NNN -->` OUTSIDE any tracked-heading body AND followed within ≤3 non-empty lines by a tracked heading,
+- **When** the gate runs in default mode,
+- **Then** an advisory warning MUST be emitted (`stamp(s) placed immediately BEFORE a tracked heading`) AND exit code MUST remain 0.
+- **When** the gate runs with `--strict-position`,
+- **Then** the same finding MUST cause exit 1 (unless `--report-only` is also set).
+- **Negative case**: a stamp inside a blockquote or other narrative far from any tracked heading (e.g. §27's Validation History referencing past phases) MUST NOT be flagged — only adjacency to a tracked heading constitutes misplacement.
+
 ## Cross-references
 
 - §99 [`99-consistency-report.md`](./99-consistency-report.md) — health/inventory; this gate is itself listed in §99's File Inventory.
