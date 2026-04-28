@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.6
-**Updated:** 2026-04-28 (Phase 147 — banner refresh after `B1: keep forbidden` finalization in §07 v2.2.0 + §97 v3.9.1; no inventory change — §07 row already ✅. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.7
+**Updated:** 2026-04-28 (Phase P1 — TypeScript enum mirror appended to §01 v3.8.10 → v3.9.0; closes GAP-V2-02. Inventory row for §01 updated to reflect v3.9.0 + new `## TypeScript Mirror` section. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
