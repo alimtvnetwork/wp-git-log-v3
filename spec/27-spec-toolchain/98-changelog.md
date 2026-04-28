@@ -1,10 +1,22 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.49.0
+**Version:** 2.50.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.50.0 — 2026-04-28 — Phase P20: H10 per-file `<!-- h10-verified-phase: NNN -->` opt-in stamp pattern
+- **Action**: Extended `linter-scripts/check-version-parity.py` (Phase P15 / H10 advisory gate) with a per-file opt-in stamp under `00-overview.md` mirroring H1 / `check-99-summary-freshness.py`'s `<!-- verified-phase: NNN -->` pattern. Once a module catches its §00 banner up to its §98 latest release, an author adds `<!-- h10-verified-phase: 200 -->` inside the first 40 lines of `00-overview.md`. Any future drift on that file then fails the gate **even in default tree-wide-advisory mode** (per-file strict promotion).
+- **Why**: P19 closed with 57/74 modules still drifting and a queued task to enable incremental strict adoption. Mirroring the H1 stamp lets each module opt into strict enforcement individually instead of waiting for a single sweep PR or for all 57 to catch up before flipping `--strict` tree-wide.
+- **Output shape extended**: summary line gains trailing `stamped=N; stamped_failed=N` tokens; per-file lines tagged `(FAIL)` with optional `[stamped phase NNN]` suffix when stamp present (was uniformly `(info)`). `--json` schema gains top-level `stamped` + `stamped_failed` counts and per-entry `stamped: <int|null>` field. `--report-only` remains the strongest escape hatch (overrides both `--strict` and per-file stamps).
+- **Bug fix landed alongside**: `--spec-root` pointing outside the repo (used by self-test sandboxes in `/tmp`) was crashing on `relative_to(ROOT)`; module path now falls back to absolute when sandboxed.
+- **Spec slot 29 v1.0.0 → v1.1.0**: added `## Per-file opt-in stamp (Phase P20)` section; updated CLI table, exit-codes table, output-line-shape sample; updated AC-29-09 (`--json` schema +stamped/+stamped_failed/+details.stamped) and AC-29-10 (line shape token count 6 → 8); 3 new ACs **AC-29-11** (stamped+drift FAILs default), **AC-29-12** (stamped+match passes & counts both), **AC-29-13** (`--report-only` overrides per-file stamp).
+- **Self-test 10 → 13 assertions**: T11 stamped+drift fails default mode; T12 stamped+match passes; T13 `--report-only` overrides stamp failure. T9 updated to assert new JSON keys. `mk_module()` helper grew an optional 5th `stamp` param.
+- **No CI workflow change**: gate stays advisory tree-wide. The new strict promotion is per-file and triggers only on stamps, so no `.github/workflows/spec-health.yml` edit, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change. Adoption proceeds PR-by-PR.
+- **Adoption plan**: when a module is touched in normal phase work and its §98 latest is bumped, the author should also bump §00's `**Version:**` AND drop a `<!-- h10-verified-phase: NNN -->` stamp underneath. The gate's `stamped=N` counter visible in every CI run signals progress (today 0/74; goal: 74/74; at that point flip `--strict` tree-wide and the gate becomes a hard CI block).
+- **Verified**: `bash linter-scripts/test/test-check-version-parity.sh` 13/13 ✅; default mode against real tree 87 scanned / 74 eligible / 17 matches / 57 mismatches / `stamped=0` / `stamped_failed=0` / exit 0 ✅; `node linter-scripts/check-lockstep.cjs` 87/87 / 0 ✅; `node linter-scripts/check-tree-health.cjs --strict` 168/168 ✅.
+- **Closes P19 task #1**. Tasks #2 (tree-wide §00 catch-up sweep) and #3 (`--strict` tree-wide promotion when count = 0) remain queued and now have a concrete migration path via the stamp.
 
 ### 2.49.0 — 2026-04-28 — Phase P15 / H10: §00 ↔ §98 Version-field parity gate (gate #19; AC-31-31 cascade RUBRIC v2.27 → v2.28)
 - **Action**: Landed H10 — the §00 banner Version ↔ §98 latest release Version parity advisory codified in the Phase 21 disposition note. New validator `linter-scripts/check-version-parity.py` (advisory-by-default), spec slot `spec/27-spec-toolchain/29-check-version-parity.md` v1.0.0 (10 ACs AC-29-01..10), self-test `linter-scripts/test/test-check-version-parity.sh` (10 assertions T1–T10), CI step `Version-field parity gate (Phase P15 / H10)` wired in `.github/workflows/spec-health.yml` after the §99 freshness gate.
