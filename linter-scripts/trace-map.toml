@@ -165,3 +165,42 @@ kind   = "function"
 ac     = "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-08"
 files  = [".github/workflows/spec-health.yml"]
 kind   = "workflow"
+
+# ===== Phase G1 (2026-04-28): bind folder-refs allowlist + Phase 108-full migrated orphans =====
+
+[[trace]]
+ac     = "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02"
+files  = ["linter-scripts/check-spec-cross-links.py", "linter-scripts/spec-folder-refs.allowlist"]
+kind   = "function"
+note   = "doc-only entries are NOT covered by §01 link validator; cross-link gate must still flag them"
+
+[[trace]]
+ac     = "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-03"
+files  = ["linter-scripts/check-spec-folder-refs.py", "linter-scripts/spec-folder-refs.allowlist"]
+kind   = "function"
+note   = "external-bucket entries are recognised by §02 and not reported stale"
+
+[[trace]]
+ac     = "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-04"
+files  = ["linter-scripts/check-spec-folder-refs.py", "linter-scripts/spec-folder-refs.allowlist"]
+symbol = "buckets"
+kind   = "function"
+note   = "parser at line ~128 stores stripped line incl. inline `#` trailers; comments MUST be on separate lines above entries (Phase 143)"
+
+[[trace]]
+ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-22"
+files  = ["linter-scripts/check-mermaid-syntax.mjs"]
+kind   = "function"
+note   = "Slot 18 — validator in 10-19 generator band (slot-range exception, Phase 108-full)"
+
+[[trace]]
+ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-23"
+files  = ["linter-scripts/check-memo-retrospective-headings.py"]
+kind   = "function"
+note   = "Slot 19 — validator in 10-19 generator band (slot-range exception, Phase 108-full); enforces Phase 100 cadence retirement"
+
+[[trace]]
+ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24"
+files  = ["linter-scripts/deepen-consistency-reports.py"]
+kind   = "function"
+note   = "Slot 25 — filler in 20-29 band, no slot-range exception"
