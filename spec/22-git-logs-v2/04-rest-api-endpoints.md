@@ -1,7 +1,7 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.9.4  
-**Updated:** 2026-04-28 (Phase P2: §1.1 NDJSON streaming wire format pinned for `/append-log` ingest — `X-GL-Stream:1` sentinel, `StreamHeader`/`Line`/`StreamFooter` frame contract, error codes `GL-STREAM-{NO-HEADER,NO-FOOTER,TOO-MANY-LINES,UNKNOWN-FRAME}` — resolves GAP-V2-03 and unblocks `28-universal-ci-cli/06` AC-28-06; §11 retrieval contract unchanged)
+**Version:** 2.9.5  
+**Updated:** 2026-04-28 (Phase P3: Standard Ack Envelope gains required `PreviousHasError: boolean` on write endpoints #1–#4; full field contract added — semantics, per-endpoint usage, atomicity (same-tx as write), cross-refs to §01/§97 AC-13/73/74/75/§17. Closes GAP-V2-04. §17 OpenAPI `Ack` schema lockstep-bumped in same phase. Phase P2 §1.1 NDJSON ingest contract unchanged.)
 **Namespace:** `/wp-json/git-logs/v2`
 
 ---
