@@ -821,8 +821,8 @@
     ]
   },
   "Links": {
-    "TotalChecked": 3074,
-    "Ok": 3062,
+    "TotalChecked": 3077,
+    "Ok": 3065,
     "Broken": 1,
     "ExternalAllowed": 9,
     "ExternalAllowedDetails": [
@@ -884,7 +884,7 @@
     "BrokenDetails": [
       {
         "Source": "27-spec-toolchain/98-changelog.md",
-        "Line": 474,
+        "Line": 483,
         "Text": "\\`test-foo.sh\\`",
         "Target": "./test-foo.sh",
         "Resolved": "27-spec-toolchain/test-foo.sh"
