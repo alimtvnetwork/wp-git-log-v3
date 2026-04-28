@@ -38,6 +38,126 @@
         "symbol": "--json"
       }
     ],
+    "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-01": [
+      {
+        "file": "linter-scripts/generate-gwt-acceptance.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "select_modules_by_grade"
+      }
+    ],
+    "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-02": [
+      {
+        "file": "linter-scripts/generate-gwt-acceptance.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "inline_contracts"
+      }
+    ],
+    "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-03": [
+      {
+        "file": "linter-scripts/generate-gwt-acceptance.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "bump_changelog"
+      }
+    ],
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-01": [
+      {
+        "file": "linter-scripts/generate-fix-checklist.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "sort_by_implementability"
+      }
+    ],
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-02": [
+      {
+        "file": "linter-scripts/generate-fix-checklist.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "emit_action"
+      }
+    ],
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-03": [
+      {
+        "file": "linter-scripts/generate-fix-checklist.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "missing_contract_trigger"
+      }
+    ],
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-04": [
+      {
+        "file": "linter-scripts/generate-fix-checklist.py",
+        "kind": "cli-flag",
+        "note": "byte-stable JSON output (sorted keys, fixed precision)",
+        "symbol": "--json"
+      }
+    ],
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-05": [
+      {
+        "file": "linter-scripts/generate-fix-checklist.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "compute_effort_total"
+      }
+    ],
+    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-06": [
+      {
+        "file": "linter-scripts/generate-fix-checklist.py",
+        "kind": "function",
+        "note": "missing audit JSON \u2192 exit 1",
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-01": [
+      {
+        "file": "linter-scripts/generate-gate-report.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "explain_gate_firing"
+      }
+    ],
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-02": [
+      {
+        "file": "linter-scripts/generate-gate-report.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "build_leaderboard"
+      }
+    ],
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-03": [
+      {
+        "file": "linter-scripts/generate-gate-report.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "compute_dimension_loss"
+      }
+    ],
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-04": [
+      {
+        "file": "linter-scripts/generate-gate-report.py",
+        "kind": "cli-flag",
+        "note": null,
+        "symbol": "--json"
+      }
+    ],
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-05": [
+      {
+        "file": "linter-scripts/generate-gate-report.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/16-generate-gate-report.md#AC-16-06": [
+      {
+        "file": "linter-scripts/generate-gate-report.py",
+        "kind": "function",
+        "note": "final \u2264 raw overall (gates only subtract)",
+        "symbol": "apply_gates"
+      }
+    ],
     "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-01": [
       {
         "file": "linter-scripts/check-trace-map-regression.py",
@@ -100,6 +220,78 @@
         "kind": "workflow",
         "note": null,
         "symbol": null
+      }
+    ],
+    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01": [
+      {
+        "file": "linter-scripts/fill-missing-acceptance-criteria.cjs",
+        "kind": "function",
+        "note": "idempotent \u2014 second run is a no-op",
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02": [
+      {
+        "file": "linter-scripts/fill-missing-acceptance-criteria.cjs",
+        "kind": "config",
+        "note": null,
+        "symbol": "AC_TEMPLATE"
+      }
+    ],
+    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03": [
+      {
+        "file": "linter-scripts/fill-missing-acceptance-criteria.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "skip_existing"
+      }
+    ],
+    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01": [
+      {
+        "file": "linter-scripts/fill-missing-changelogs.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02": [
+      {
+        "file": "linter-scripts/fill-missing-changelogs.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "today_iso"
+      }
+    ],
+    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03": [
+      {
+        "file": "linter-scripts/fill-missing-changelogs.cjs",
+        "kind": "config",
+        "note": null,
+        "symbol": "CATEGORIES"
+      }
+    ],
+    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01": [
+      {
+        "file": "linter-scripts/fill-missing-consistency-reports.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02": [
+      {
+        "file": "linter-scripts/fill-missing-consistency-reports.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "scan_inventory"
+      }
+    ],
+    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03": [
+      {
+        "file": "linter-scripts/fill-missing-consistency-reports.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "skip_existing"
       }
     ],
     "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01": [
@@ -320,6 +512,42 @@
     ],
     "linter-scripts/deepen-consistency-reports.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24"
+    ],
+    "linter-scripts/fill-missing-acceptance-criteria.cjs": [
+      "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01",
+      "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02",
+      "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03"
+    ],
+    "linter-scripts/fill-missing-changelogs.cjs": [
+      "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01",
+      "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02",
+      "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03"
+    ],
+    "linter-scripts/fill-missing-consistency-reports.cjs": [
+      "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01",
+      "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02",
+      "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03"
+    ],
+    "linter-scripts/generate-fix-checklist.py": [
+      "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-01",
+      "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-02",
+      "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-03",
+      "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-04",
+      "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-05",
+      "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-06"
+    ],
+    "linter-scripts/generate-gate-report.py": [
+      "27-spec-toolchain/16-generate-gate-report.md#AC-16-01",
+      "27-spec-toolchain/16-generate-gate-report.md#AC-16-02",
+      "27-spec-toolchain/16-generate-gate-report.md#AC-16-03",
+      "27-spec-toolchain/16-generate-gate-report.md#AC-16-04",
+      "27-spec-toolchain/16-generate-gate-report.md#AC-16-05",
+      "27-spec-toolchain/16-generate-gate-report.md#AC-16-06"
+    ],
+    "linter-scripts/generate-gwt-acceptance.py": [
+      "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-01",
+      "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-02",
+      "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-03"
     ],
     "linter-scripts/spec-cross-links.allowlist": [
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-03"
@@ -1427,36 +1655,12 @@
     "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-01",
     "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-02",
     "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-03",
-    "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-01",
-    "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-02",
-    "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-03",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-01",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-02",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-03",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-04",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-05",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-06",
-    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-01",
-    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-02",
-    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-03",
-    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-04",
-    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-05",
-    "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-06",
-    "27-spec-toolchain/16-generate-gate-report.md#AC-16-01",
-    "27-spec-toolchain/16-generate-gate-report.md#AC-16-02",
-    "27-spec-toolchain/16-generate-gate-report.md#AC-16-03",
-    "27-spec-toolchain/16-generate-gate-report.md#AC-16-04",
-    "27-spec-toolchain/16-generate-gate-report.md#AC-16-05",
-    "27-spec-toolchain/16-generate-gate-report.md#AC-16-06",
-    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01",
-    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02",
-    "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03",
-    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01",
-    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02",
-    "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03",
-    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01",
-    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02",
-    "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03",
     "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-01",
     "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-02",
     "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-03",
@@ -1616,14 +1820,8 @@
     "linter-scripts/check-readme-canonicals.py",
     "linter-scripts/check-readme-install-section.py",
     "linter-scripts/check-root-readme.py",
-    "linter-scripts/fill-missing-acceptance-criteria.cjs",
-    "linter-scripts/fill-missing-changelogs.cjs",
-    "linter-scripts/fill-missing-consistency-reports.cjs",
     "linter-scripts/forbidden-strings.toml",
     "linter-scripts/generate-dashboard-data.cjs",
-    "linter-scripts/generate-fix-checklist.py",
-    "linter-scripts/generate-gate-report.py",
-    "linter-scripts/generate-gwt-acceptance.py",
     "linter-scripts/generate-spec-index.cjs",
     "linter-scripts/generate-trace-map.py",
     "linter-scripts/run.ps1",
@@ -1643,14 +1841,14 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1269,
+    "ac_drifted": 1245,
     "ac_total": 1299,
-    "ac_traced": 30,
-    "code_orphan": 35,
-    "code_referenced": 11,
+    "ac_traced": 54,
+    "code_orphan": 29,
+    "code_referenced": 17,
     "code_total": 46,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 30
+    "trace_entries": 54
   }
 }
