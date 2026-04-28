@@ -141,6 +141,26 @@ def diff_against_baseline(
             f"{base_orphan} (+{cur_orphan - base_orphan} files unspec'd)"
         )
 
+    # Advisory (non-fatal): stale-baseline detector. Phase 18r lesson.
+    # If ac_total or code_total differs between current and baseline, the
+    # baseline was likely written against a different tree state (manual
+    # edit, or generator not re-run before --update-baseline).
+    cur_ac_total = current.get("ac_total", 0)
+    base_ac_total = baseline.get("ac_total", 0)
+    cur_code_total = current.get("code_total", 0)
+    base_code_total = baseline.get("code_total", 0)
+    if cur_ac_total != base_ac_total or cur_code_total != base_code_total:
+        delta_ac = cur_ac_total - base_ac_total
+        delta_code = cur_code_total - base_code_total
+        sign = lambda d: f"+{d}" if d >= 0 else str(d)
+        print(
+            f"::warning::stale-baseline drift: ac_total {sign(delta_ac)}, "
+            f"code_total {sign(delta_code)} since baseline was written. "
+            f"Re-run `check-trace-map-regression.py --update-baseline` "
+            f"after a clean `generate-trace-map.py` to re-anchor.",
+            file=sys.stderr,
+        )
+
     if current.get("missing_ac", 0) > 0:
         fails.append(
             f"trace-map.toml references {current['missing_ac']} unknown AC id(s)"
