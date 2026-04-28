@@ -6,7 +6,7 @@ description: Auditor-self-reference module — defines the toolchain that audits
 
 # Spec Toolchain
 
-**Version:** 2.48.0  
+**Version:** 2.49.0  
 **Updated:** 2026-04-28  
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
 
@@ -77,6 +77,7 @@ Numbering convention inside this module:
 | 26 | [26-check-99-summary-freshness.md](./26-check-99-summary-freshness.md) | `linter-scripts/check-99-summary-freshness.py` | Validator: flag stale `## Summary` / `## File Inventory` / `## Module Health` claims via opt-in `<!-- verified-phase: NNN -->` stamps (Phase H1; H2 widened scope to inventory rubrics + excluded `_archive/`; advisory-then-strict) |
 | 27 | [27-check-99-stamp-bump.md](./27-check-99-stamp-bump.md) | `linter-scripts/check-99-stamp-bump.py` | Validator: enforce stamp bump on §99 edits via git diff (Phase H4 shipped tool; Phase H5 wired CI as gate #16; sister event-based gate to slot 26 snapshot gate) |
 | 28 | [28-check-archive-exclusion-runtime.md](./28-check-archive-exclusion-runtime.md) | `linter-scripts/test/test-archive-exclusion-runtime.sh` | Validator: runtime probe asserting every spec-traversing linter excludes `spec/_archive/` at RUNTIME (Phase H7; codifies H6 lesson "runtime > source verification"; gate #17; the self-test IS the gate — no separate `.py` validator) |
+| 29 | [29-check-version-parity.md](./29-check-version-parity.md) | `linter-scripts/check-version-parity.py` | Validator: §00 banner Version ↔ §98 latest release Version parity (Phase P15 / H10; advisory-by-default per AC-T-25 dispensation — 59/74 baseline mismatch surface; gate #19; collapsed self-test per H1 lesson) |
 
 ### Auditors (AI-driven)
 
@@ -113,7 +114,7 @@ Numbering convention inside this module:
 
 | # | Spec file | Code artifact | Purpose |
 |---|-----------|---------------|---------|
-| 70 | [70-spec-health-yml.md](./70-spec-health-yml.md) | `.github/workflows/spec-health.yml` | Per-PR/push spec-health pipeline: 18 production gates + 7 discrete self-test steps (cross-link, folder-refs, §99 freshness/stamp-bump, tree-health strict, lockstep, audit-v2 deterministic, mermaid syntax, archive-exclusion runtime, memo retro headings, spec-index drift, etc.) |
+| 70 | [70-spec-health-yml.md](./70-spec-health-yml.md) | `.github/workflows/spec-health.yml` | Per-PR/push spec-health pipeline: 19 production gates + 7 discrete self-test steps (cross-link, folder-refs, §99 freshness/stamp-bump, tree-health strict, lockstep, audit-v2 deterministic, mermaid syntax, archive-exclusion runtime, memo retro headings, spec-index drift, version-field parity, etc.) |
 | 71 | [71-spec-monthly-audit-yml.md](./71-spec-monthly-audit-yml.md) | `.github/workflows/spec-monthly-audit.yml` | Monthly cadence audit; dashboard parity check; auto-opens issue on regression (Phase 35) |
 
 ---
