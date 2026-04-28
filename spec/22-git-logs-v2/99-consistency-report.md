@@ -10,7 +10,7 @@
 
 | File | Present |
 |------|---------|
-| 00-overview.md | ✅ (v3.9.11 — Phase P19 H10 parity catch-up; content current as of Phase P17 §28-universal-ci-cli Cross-References row) |
+| 00-overview.md | ✅ (v3.9.12 — Phase P19 H10 parity catch-up; content current as of Phase P17 §28-universal-ci-cli Cross-References row) |
 | 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (v2.3.0 — Phase P18 added `## State-Transition Label Rendering` section + History `HasError + StateLabel` column revision binding the consumer-side AC-73 label enum) |
