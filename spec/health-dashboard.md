@@ -1,11 +1,11 @@
 # Project-Wide Spec Health Dashboard
 
-**Generated:** 2026-04-27  
+**Generated:** 2026-04-28  
 **Total Folders Inventoried:** 87 (in `dashboard-data.json`)  
 **Modules Audited:** 56  
 **Overall Health:** 100/100 (A+) 🎯 — measured by `linter-scripts/check-tree-health.cjs`
 
-> **v3.7.8 (2026-04-28, Phase 28):** Refreshed dashboard prose against `dashboard-data.json` (Generated 2026-04-27, RubricVersion 2.0.0, ModuleCount 56). Required + Recommended now **112/112** each (was stale 104/104 from the 52-module v3.7.7 snapshot). Allowlist count corrected to **9 prefixes** (matches `EXTERNAL_REPO_PREFIXES` in `linter-scripts/generate-dashboard-data.cjs`); the previous "12" included three narrative-only entries that are not in the source array. Score remains 100/100 strict.
+> **v3.7.9 (2026-04-28, Phase P34):** Refreshed dashboard prose against regenerated `dashboard-data.json` (Generated 2026-04-28, RubricVersion 2.0.0, ModuleCount 56). **Quality 167/168 → 168/168** — the H8/H9 strict-position landing closed the last quality deduction; tree-health now at full 168/168 strict-pass. CI gate count **17 → 19** (P30 strict spec-index drift gate + P31 H10 strict-flip parity gate). Required + Recommended remain **112/112** each. Allowlist remains **9 prefixes**. **Sub-fix**: refreshed two stale `linter-scripts/spec-cross-links.allowlist` line numbers (off by +1 after the P22/P32 `<!-- h10-verified-phase -->` stamp insertions in `02-boolean-principles/00-overview.md` and `15-distribution-and-runner/00-overview.md`) — cross-link gate was silently failing in CI; now green again. **Adjacent metric: H10 version-parity adoption 100% (74/74 stamped, 0 mismatches, 0 stamped_failed) — strict-flip locked under CI per P31.**
 
 ---
 
@@ -17,10 +17,13 @@
 | Rubric Version | **2.0.0** (tree-health) |
 | Required files (00-overview + 99-consistency) | **112/112 (100%)** ✅ |
 | Recommended files (97-AC + 98-changelog) | **112/112 (100%)** ✅ |
-| Quality (depth + history + inventory) | **167/168 (99.4%)** ✅ |
+| Quality (depth + history + inventory) | **168/168 (100%)** ✅ |
 | Modules tracked | **56** |
-| Stale `spec-index.md` | 0 (auto-regen) |
+| Stale `spec-index.md` | 0 (auto-regen + Phase 30 strict gate) |
 | CI gate threshold | **100** (locked v3.7.7, strict-pass since Phase H1) |
+| **CI strict gate count** | **19** (last bumps: Phase 30 spec-index drift; Phase P31 H10 strict-flip) |
+| **Audit RUBRIC_VERSION** | **v2.29** (last bump: Phase P31) |
+| **H10 version-parity adoption** | **74/74 stamped (100%)**, 0 mismatches, 0 stamped_failed — strict under CI |
 
 ---
 
@@ -40,7 +43,7 @@ The link checker now suppresses the following resolved-path prefixes (these reso
 | `../spec-slides/` | monorepo sibling — slide deck |
 | `../mem:/` | virtual `mem://` filesystem (memory references) |
 
-**Total currently allowlisted:** 9 prefixes (matches `EXTERNAL_REPO_PREFIXES` in `linter-scripts/generate-dashboard-data.cjs`). To add new prefixes, edit that array.
+**Total currently allowlisted:** 9 prefixes (matches `EXTERNAL_REPO_PREFIXES` in `linter-scripts/generate-dashboard-data.cjs`). To add new prefixes, edit that array. Per-link waivers (with `<relpath>:<line>:<target>` keys) live in `linter-scripts/spec-cross-links.allowlist`; **line numbers MUST be refreshed whenever surrounding lines are inserted/removed** (precedent: P34 fixed two off-by-+1 stale waivers introduced by the P22/P32 H10-stamp comment insertions).
 
 ---
 
@@ -59,3 +62,4 @@ See [`dashboard-data.json`](./dashboard-data.json) for the full machine-readable
 | 2026-04-25 (late) | **97 (A+)** | Major audit pass: 0 broken, 0 missing consistency, allowlist mechanism added |
 | 2026-04-27 | **100 (A+)** | Strict-pass baseline; 56 modules, 112/112 required+recommended, quality 167/168 (Phase H1 closeout) |
 | 2026-04-28 | **100 (A+)** | Phase 28 — refreshed dashboard prose vs `dashboard-data.json` (was 52→56 modules, 104→112 files, allowlist 12→9 corrected) |
+| 2026-04-28 | **100 (A+)** | Phase P34 — quality 167→168/168 (H8/H9 closure), CI gate count 17→19 (P30 spec-index strict + P31 H10 strict-flip), RUBRIC v2.29, H10 adoption 74/74 (100%); fixed 2 stale cross-link allowlist line numbers (P22/P32 stamp-insertion drift) |
