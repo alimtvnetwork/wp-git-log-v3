@@ -163,6 +163,7 @@ grep -q "files scanned: 1" /tmp/h1-out \
   && { echo "  ✓ T10 _archive/ excluded from scan count"; PASS=$((PASS+1)); } \
   || { echo "  ✗ T10 _archive/ leaked into scan"; FAIL=$((FAIL+1)); }
 
-
+echo
+echo "Results: $PASS passed, $FAIL failed"
 if [[ "$FAIL" -gt 0 ]]; then exit 1; fi
 echo "✅ §26 freshness gate self-test green."
