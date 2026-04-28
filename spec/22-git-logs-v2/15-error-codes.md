@@ -1,7 +1,7 @@
 # Error Code Catalog (v2)
 
-**Version:** 2.9.3  
-**Updated:** 2026-04-26 (Phase 5: schema-side `SshKey`/`SshNonce` shipped in §18 v2.9.1; existing 9 SSH codes now backed by canonical DDL)
+**Version:** 2.9.4  
+**Updated:** 2026-04-28 (Phase P16: §15/§17/§97 lockstep for the 4 `GL-STREAM-*` ingest-streaming codes deferred from Phase P2 — codes promoted from §04 §1.2 prose into this catalog so `ErrorResponder.php` and the `ErrorCode` enum have a single canonical source.)
 
 All `GL-*` codes returned by the plugin. Codes are stable strings (constants in `inc/Support/ErrorCodes.php`). Adding a new code requires a row here.
 
