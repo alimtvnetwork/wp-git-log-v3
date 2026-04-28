@@ -67,3 +67,4 @@ See [`dashboard-data.json`](./dashboard-data.json) for the full machine-readable
 | 2026-04-28 | **100 (A+)** | Phase P34 — quality 167→168/168 (H8/H9 closure), CI gate count 17→19 (P30 spec-index strict + P31 H10 strict-flip), RUBRIC v2.29, H10 adoption 74/74 (100%); fixed 2 stale cross-link allowlist line numbers (P22/P32 stamp-insertion drift) |
 | 2026-04-28 | **100 (A+)** | Phase P38 — refreshed post P35–P37 batch; rebaselined trace-map (drift +25 ACs / +3 code files, all P31/P35-era test artifacts) |
 | 2026-04-28 | **100 (A+)** | Phase P43 — refreshed post P39–P42 batch via new P40 cluster-terminal-sweep runner (first SOLE-runner verification); no rebaseline needed (P39 inline, P40 self-validated, P41 docs-only, P42 NO-OP audit); counters unchanged |
+| 2026-04-28 | **100 (A+)** | Phase P44 — JS/Python parity fix in `generate-dashboard-data.cjs` (slot 11 v1.2.0, AC-11-05); broken=1→0, checked=3079→3073, LegacyScore=98→100, Deductions=`[]` |

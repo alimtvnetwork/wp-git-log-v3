@@ -1993,6 +1993,7 @@
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-02",
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-03",
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-04",
+    "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-05",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-01",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-02",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-03",
@@ -2195,8 +2196,8 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1258,
-    "ac_total": 1348,
+    "ac_drifted": 1259,
+    "ac_total": 1349,
     "ac_traced": 90,
     "code_orphan": 30,
     "code_referenced": 25,
