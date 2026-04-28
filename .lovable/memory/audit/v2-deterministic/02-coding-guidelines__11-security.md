@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/02-coding-guidelines/11-security.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.08. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 17625,
+  "overview_chars": 17657,
   "ac_chars": 3192,
   "ac_count": 6,
   "gwt_block_count": 5,
@@ -60,7 +60,7 @@
   "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.09,
+  "waffle_per_kchar": 0.08,
   "child_modules": 1
 }
 ```

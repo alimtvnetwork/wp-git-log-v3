@@ -8,7 +8,7 @@
 > Deterministic score 97/100 (A+) for spec/03-error-manage/01-error-resolution/app-issues.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.07. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.06. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 6,
   "mmd_files": 1,
-  "overview_chars": 9308,
+  "overview_chars": 9340,
   "ac_chars": 4185,
   "ac_count": 7,
   "gwt_block_count": 6,
@@ -60,7 +60,7 @@
   "links_total": 17,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.07,
+  "waffle_per_kchar": 0.06,
   "child_modules": 0
 }
 ```

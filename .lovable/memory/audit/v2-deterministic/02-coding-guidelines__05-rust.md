@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 10,
   "mmd_files": 1,
-  "overview_chars": 7060,
+  "overview_chars": 7092,
   "ac_chars": 20751,
   "ac_count": 27,
   "gwt_block_count": 20,

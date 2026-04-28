@@ -8,7 +8,7 @@
 > Deterministic score 100/100 (A+) for spec/03-error-manage/02-error-architecture.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.11. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 7,
   "mmd_files": 1,
-  "overview_chars": 7090,
+  "overview_chars": 7122,
   "ac_chars": 4035,
   "ac_count": 8,
   "gwt_block_count": 8,
@@ -61,7 +61,7 @@
   "links_total": 24,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.12,
+  "waffle_per_kchar": 0.11,
   "child_modules": 4
 }
 ```

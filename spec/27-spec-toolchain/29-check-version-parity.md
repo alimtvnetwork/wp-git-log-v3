@@ -9,8 +9,8 @@ status: active
 
 # 29 — `check-version-parity.py`
 
-**Phase:** P15 / H10 (2026-04-28)
-**Type:** validator (advisory-by-default)
+**Phase:** P15 / H10 landed advisory; **Phase P31** flipped to strict tree-wide (2026-04-28).
+**Type:** validator (**strict tree-wide** as of P31; was advisory-by-default P15→P30)
 **Band:** 20-29 (validators on §99/§97/§98 lifecycle)
 
 ## Purpose
@@ -61,8 +61,8 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 
 | Flag | Behavior |
 |---|---|
-| _(default)_ | Advisory tree-wide; exit 0 even on mismatch — UNLESS the mismatched §00 carries a Phase P20 `<!-- h10-verified-phase: NNN -->` stamp, in which case that file fails per-file strict and the gate exits 1. |
-| `--strict` | Exit 1 on any mismatch (tree-wide CI gate when adoption matures). |
+| _(default)_ | Advisory tree-wide; exit 0 even on mismatch — UNLESS the mismatched §00 carries a Phase P20 `<!-- h10-verified-phase: NNN -->` stamp, in which case that file fails per-file strict and the gate exits 1. (Script-level default unchanged at P31; CI now invokes `--strict` — see Phase P31 row in Changelog.) |
+| `--strict` | Exit 1 on any mismatch. **As of Phase P31, the CI workflow invokes the gate with `--strict` since the reverse-drift backlog cleared at P30 (matches=74/74).** |
 | `--report-only` | Never fails (overrides `--strict` AND per-file stamps). Useful for dashboards. |
 | `--json` | Machine-readable output with `details[]` array (each entry includes `stamped: <int|null>`); top-level `stamped` and `stamped_failed` counts. |
 | `--spec-root PATH` | Override scan root (used by self-test sandboxes). |
@@ -71,8 +71,8 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 
 | Code | Meaning |
 |---|---|
-| 0 | Default mode with zero stamped failures, OR strict with zero mismatches, OR `--report-only` |
-| 1 | `--strict` mode AND any mismatch present, OR default mode AND any STAMPED §00 has a mismatch (per-file strict promotion) |
+| 0 | Default mode with zero stamped failures, OR `--strict` with zero mismatches, OR `--report-only` |
+| 1 | `--strict` mode AND any mismatch present (CI default as of Phase P31), OR default mode AND any STAMPED §00 has a mismatch (per-file strict promotion) |
 | 2 | Structural error (spec root not found) |
 
 ## Output line shape
@@ -128,23 +128,30 @@ all 57 drifters to be fixed before flipping `--strict` tree-wide.
 - **No slot-range exception needed** (mirrors slot 26's clean fit, unlike
   slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 
-## Why advisory-by-default (AC-T-25 dispensation)
+## Why advisory-by-default at P15 — and strict-flip at P31 (AC-T-25 dispensation)
 
 AC-T-25 (Phase 30) requires "advisory CI gates require explicit
 phased-rollout justification or they ship strict from day 1." The
-P15 dispensation:
+P15 dispensation, and its P31 retirement:
 
-- **Surface size**: 59/74 mismatches at gate landing. Flipping strict
-  immediately would block 59 unrelated PRs OR require a single sweep PR
-  that touches every module's §00 banner.
-- **Phased-rollout plan**: contributors fix `§00 Version` to match
-  `§98 latest release` opportunistically as they touch each module's §98
-  in normal phase work. When mismatch count reaches 0, a follow-up phase
-  flips `--strict` (mirrors H1→H8 stamp adoption: 0/89 → 87/87 over
-  ~1 day; H8 then locked the gain).
-- **Visibility**: every CI run prints the count and per-module mismatches
-  in the workflow log, so drift cannot grow silently (the AC-T-25 failure
-  mode is exactly an unprinted, unwatched advisory).
+- **Surface size at P15 landing**: 59/74 mismatches. Flipping strict
+  immediately would have blocked 59 unrelated PRs OR required a single
+  sweep PR touching every module's §00 banner.
+- **Phased-rollout execution**: contributors reconciled `§00 Version` ↔
+  `§98 latest release` PR-by-PR through Phases P22→P30 (per-module
+  forensic reconstructions + P29/P30 batched sweeps). At P30 close:
+  matches=74/74, mismatches=0, stamped=57/74, stamped_failed=0 — the
+  tree-wide invariant was achieved.
+- **P31 strict-flip**: with the backlog cleared, the AC-T-25 dispensation
+  no longer applies — `check-version-parity.py` runs in `--strict` mode
+  by default and the gate becomes a hard CI block (exit 1 on any drift).
+  Stamped count is no longer the gating factor; the remaining 17
+  unstamped modules are matches-by-default and the strict gate locks
+  them at parity going forward. Mirrors H1→H8 stamp adoption pattern
+  (0/89 → 87/87 → strict; H8 locked the gain).
+- **Visibility**: every CI run continues to print counts and per-module
+  details in the workflow log; failures now block the merge instead of
+  surfacing as advisory info lines.
 
 ## Acceptance criteria
 
@@ -213,6 +220,11 @@ P15 dispensation:
 - **When** the gate runs WITH `--report-only`,
 - **Then** exit code MUST be 0 (`--report-only` is the strongest escape hatch — overrides both `--strict` and per-file stamps).
 
+### AC-29-14 — CI workflow invokes `--strict` (Phase P31)
+- **Given** the CI workflow `.github/workflows/spec-health.yml`,
+- **When** the §00 ↔ §98 Version-field parity step is inspected,
+- **Then** the invocation MUST be `python3 linter-scripts/check-version-parity.py --strict` (any mismatch fails the build). The script-level default remains advisory-by-default for local invocations and backward compatibility; the strict enforcement is encoded at the workflow layer per the P31 advisory→strict transition documented under "Why advisory-by-default at P15 — and strict-flip at P31".
+
 ## Self-test
 
 `linter-scripts/test/test-check-version-parity.sh` exercises 13 assertions
@@ -224,7 +236,11 @@ stamped+match passes; T13 `--report-only` overrides stamp failure). Per
 the H1 lesson on workflow-step parity, the self-test is **collapsed into
 the gate's own workflow step** (no standalone self-test step) — the gate
 runs the self-test first, then runs against the real tree. This
-preserves AC-31-28 gate-count parity at 19/19/19.
+preserves AC-31-28 gate-count parity at 19/19/19. **Phase P31 update**:
+T3 was rewritten to inject drift in a sandbox instead of relying on
+real-tree mismatches (which dropped to 0 at P30 backlog clearance) —
+codifies the lesson "self-tests asserting strict-mode failure paths
+must own their own drift, not borrow from the real tree."
 
 ## Cross-references
 
@@ -250,6 +266,14 @@ needed (unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 The next free slot in this band after H10 is 32 (slots 30/31 are auditors).
 
 ## Changelog
+
+### 1.2.0 — 2026-04-28 — Phase P31 (CI strict-flip)
+- **Workflow change**: `.github/workflows/spec-health.yml` step "§00 ↔ §98 Version-field parity gate" now invokes `python3 linter-scripts/check-version-parity.py --strict`. Any §00 ↔ §98 version drift now blocks the build (gate #19 is now a hard CI block; was advisory P15→P30).
+- **Script unchanged**: `check-version-parity.py` keeps its advisory-by-default semantics for local/backward-compat invocations. The strict enforcement is encoded at the workflow layer (Option A — minimal blast radius). Self-test 13/13 unchanged.
+- **Why now**: P30 cleared the reverse-drift backlog (74/74 matches, 0 mismatches, 57 stamped, 0 stamped_failed). The AC-T-25 dispensation that justified advisory-by-default no longer applies — the tree-wide invariant is locked.
+- **AC-31-31 cascade**: `RUBRIC_VERSION` v2.28 → **v2.29** (rubric semantics tightened — gate #19 is now strict, not advisory). `00-index.md` footer 19 production gates **unchanged** (no new gate added; gate #19 contract tightened in place). `EXECUTIVE-SUMMARY.md` does not reference per-gate semantics. Slot 70's `00-overview.md` description "19 production gates" unchanged.
+- **New AC**: AC-29-14 (CI workflow invocation contract).
+- **No spec slot bump beyond minor** (1.1.0 → 1.2.0 — workflow contract change, not a new gate).
 
 ### 1.1.0 — 2026-04-28 — Phase P20
 - Added per-file opt-in `<!-- h10-verified-phase: NNN -->` stamp pattern

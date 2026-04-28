@@ -63,9 +63,15 @@ t2() {
     python3 "$GATE" >/dev/null 2>&1
 }
 
-# T3 strict exits 1 with real-tree mismatches
+# T3 strict exits 1 when sandbox contains a mismatch
+# (Phase P31: real tree is now 74/74 matches, so we must inject drift
+# in a sandbox to exercise this contract — was relying on real-tree
+# mismatches pre-P30 backlog clearance.)
 t3() {
-    ! python3 "$GATE" --strict >/dev/null 2>&1
+    local sb="$SANDBOX/t3/spec"
+    rm -rf "$SANDBOX/t3"; mkdir -p "$sb"
+    mk_module "$sb/drift" "1.0.0" "2.0.0" "heading"
+    ! python3 "$GATE" --strict --spec-root "$sb" >/dev/null 2>&1
 }
 
 # T4 strict + report-only exits 0

@@ -1,10 +1,23 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.60.0
+**Version:** 2.61.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.61.0 — 2026-04-28 — Phase P31: H10 strict-flip — gate #19 promoted to hard CI block
+- **Action**: With the reverse-drift backlog fully cleared at P30 (matches=74/74, mismatches=0, stamped=57/74, stamped_failed=0), the AC-T-25 dispensation that justified `check-version-parity.py` running advisory-by-default no longer applies. Flipped `.github/workflows/spec-health.yml` to invoke `python3 linter-scripts/check-version-parity.py --strict` for the §00 ↔ §98 Version-field parity step. Any §00 ↔ §98 drift now blocks the build.
+- **Approach: workflow-only flip (Option A)**. Script-level default remains advisory-by-default for local invocations and backward compatibility — the strict enforcement is encoded at the workflow layer. Minimal blast radius: no script change, no self-test change (13/13 still passes against the script's unchanged default contract), no migration risk for downstream local users. The `--strict` flag has existed since P15 landing; P31 simply turns it on in CI.
+- **AC-31-31 cascade (partial)**:
+  - `linter-scripts/audit-spec-vs-code-v2.py`: `RUBRIC_VERSION` v2.28 → **v2.29** (rubric semantics tightened — gate #19 is now strict, not advisory). Gate #19 enumeration entry rewritten to reflect strict status + P30→P31 transition arc.
+  - **No gate-count change**: gate count stays at 19 (gate #19 contract tightened in place; no new gate added). `00-index.md` footer "19 production gates" unchanged. `EXECUTIVE-SUMMARY.md` does not reference per-gate semantics. Slot 70's `00-overview.md` description "19 production gates" unchanged. **AC-31-31's 4-file site reduces to a 2-file site for this phase**: `RUBRIC_VERSION` constant + `spec-health.yml` step. The other two enumeration sites only count gates, not their per-gate contracts.
+- **Slot-29 spec**: `29-check-version-parity.md` v1.1.0 → **v1.2.0** (minor — workflow-contract change). New §"Why advisory-by-default at P15 — and strict-flip at P31" subsection (rewrite of P15 dispensation prose to add the P31 retirement clause). New AC **AC-29-14** (CI workflow invocation contract). CLI table + Exit codes table updated to flag the P31 transition while preserving the script's default-mode rows. New ### 1.2.0 release row at top (semver-desc — first-match-wins linter rule).
+- **§97**: AC-T-26 extended with the P31 strict-flip clause + new "P31 lesson" verification clause. AC count unchanged at 26 — the strict-flip is an extension of the existing H10 contract, not a new module-level rule. Per-workflow ACs live in slot 29 (AC-29-14).
+- **P31 lessons codified**:
+  - **(1) Workflow-only flip is the canonical advisory→strict migration tool** when (a) the backlog is fully cleared and (b) backward compatibility for local users matters. Don't invert the script's default — invert the CI invocation. Mirrors the H1→H8 stamp adoption pattern (the stamps moved files into per-file strict; H8 didn't change the H1 script default either).
+  - **(2) AC-31-31's 4-file site is contract-dependent**. New gates require all four (RUBRIC + 00-index + EXECUTIVE-SUMMARY + spec-health.yml). Contract-tightening of an existing gate may only require two (RUBRIC + spec-health.yml) if the count stays the same. Codified for future strict-flips.
+- **Verified**: parity 87/74/74/0/stamped=57/stamped_failed=0 / exit 0 with `--strict` ✅; lockstep 87/87/0 ✅; tree-health 168/168 strict ✅; H10 self-test 13/13 ✅.
 
 ### 2.60.0 — 2026-04-28 — Phase P30: H10 reverse-drift backlog CLEARED tree-wide via P28-style hybrid batch (23 modules)
 - **Action**: Terminal reverse-drift batch sweep. Pre-classified all 23 remaining `+post-footer|needs-promote` drifters via `/tmp/p30-batch.py` extending the P29 batch template. For each: detected post-footer prose blocks (Phase NN sections after §98 Cross-References footer); promoted each to a SemVer ladder row (minor for additive, major for new normative CI surface per P23/P24/P26 precedent); added a dual-stream alignment row at §00 banner version (P25 rationale); appended a final patch reconciliation row; bumped §98 header + §00 banner + §99 + dates; added H10 stamp.

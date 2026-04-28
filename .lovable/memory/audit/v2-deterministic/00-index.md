@@ -1,7 +1,7 @@
 # Spec-vs-Code Audit **v2** — Summary
 
 **Date:** 2026-04-25  
-**Rubric:** v2.28  
+**Rubric:** v2.29  
 **Modules audited:** 87  
 **Code files indexed:** 40  
 **Mean weighted score:** **98.0/100**  
@@ -170,7 +170,7 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 9 |
 
 ## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7)
-This audit runs rubric **v2.28**. The score above is one of **19 strict CI gates** that surround it:
+This audit runs rubric **v2.29**. The score above is one of **19 strict CI gates** that surround it:
 
 1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.
 2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).
@@ -190,6 +190,6 @@ This audit runs rubric **v2.28**. The score above is one of **19 strict CI gates
 16. **§99 Stamp-bump gate** (`check-99-stamp-bump.py`, Phase H5) — when a §99 file is materially edited (any non-stamp line changed) the `<!-- verified-phase: NNN -->` stamp MUST be bumped to the current phase in the same diff; PR-event only (skips on push-to-main with no diff base); pairs with #15 as a two-layer defense (edits must bump at budget=0, unedited stamps decay at budget=20); mechanises AC-27-01..08 and turns the H1/H2 honor-system into a CI check.
 17. **Runtime archive-exclusion gate** (`test/test-archive-exclusion-runtime.sh`, Phase H7) — every spec-traversing linter MUST exclude `spec/_archive/` at RUNTIME (not just by source-reading); importlib-loads `check-99-summary-freshness.find_99_files()` + `audit-spec-vs-code-v2.ALL_MODULES` + `generate-trace-map.collect_ac_ids()`, asserts each enumerator returns 0 archive-leaked results; probe count floor ≥ 3; codifies the H6 lesson (runtime > source verification) so a future contributor cannot silently drop the H3 `_archive` exclusion guard during a refactor; mechanises AC-28-01..05.
 18. **Spec-index drift gate** (`generate-spec-index.cjs` + `git status --porcelain spec/`, Phase 30) — `.github/workflows/spec-health.yml` regenerates `spec/spec-index.md` then fails if any `spec/` delta remains; promoted from advisory to strict in Phase 30 after Phase 29 found 6 files / 18 lines / 12 stale version entries had accumulated silently across phases 145–28 (the gate was previously a `⚠️` warning that exited 0); same exit-1-on-drift pattern as the F2 folder-refs gate; treats committed `spec-index.md` as a build artifact whose canonical source is the regenerator; mechanises AC-T-25 and codifies the Phase 29 lesson 'advisory CI gates silently rot'.
-19. **§00 ↔ §98 Version-field parity gate** (`check-version-parity.py`, Phase P15 / H10) — when a module's `00-overview.md` carries a `**Version:**` banner AND a sibling `98-changelog.md` ships a parseable release line, the §00 banner version SHOULD equal the latest §98 release version; **advisory-by-default** at landing per AC-T-25 dispensation (P15 baseline sweep found 59 / 74 eligible modules drifting — flipping strict immediately would block 59 unrelated PRs); per the H1 lesson on workflow-step parity the self-test (`test/test-check-version-parity.sh`, 10 assertions) is collapsed into the gate's own workflow step; codifies the Phase 21 lesson 'lockstep gate L1 only checks date relations, not version strings, so §00 banner can drift many releases behind §98 while lockstep stays green'; mechanises AC-T-26.
+19. **§00 ↔ §98 Version-field parity gate** (`check-version-parity.py --strict`, Phase P15 / H10 landed advisory; Phase P31 flipped to strict tree-wide) — when a module's `00-overview.md` carries a `**Version:**` banner AND a sibling `98-changelog.md` ships a parseable release line, the §00 banner version MUST equal the latest §98 release version (any drift fails CI). Phased rollout per the AC-T-25 dispensation: P15 baseline 15/74 matches (59 drifters) → P30 reverse-drift backlog cleared (74/74 matches, 0 mismatches, 57 stamped) → P31 strict-flip locks the gain. Per the H1 lesson on workflow-step parity the self-test (`test/test-check-version-parity.sh`, 13 assertions) is collapsed into the gate's own workflow step; codifies the Phase 21 lesson 'lockstep gate L1 only checks date relations, not version strings, so §00 banner can drift many releases behind §98 while lockstep stays green'; mechanises AC-T-26.
 
 Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).

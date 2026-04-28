@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/22-git-logs-v2.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=69, gwt=69, broken_links=0, waffle/kchar=0.15. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=71, gwt=71, broken_links=0, waffle/kchar=0.15. Gates active: 0.
 
 ---
 
@@ -31,10 +31,10 @@
   "kind": "future-spec",
   "md_files": 35,
   "mmd_files": 0,
-  "overview_chars": 9991,
-  "ac_chars": 62186,
-  "ac_count": 69,
-  "gwt_block_count": 69,
+  "overview_chars": 10295,
+  "ac_chars": 67230,
+  "ac_count": 71,
+  "gwt_block_count": 71,
   "consistency_report": true,
   "code_blocks_total": 101,
   "code_blocks_by_lang": {
@@ -56,7 +56,7 @@
   "has_ci_workflow": false,
   "has_normative_contract": false,
   "has_mermaid": false,
-  "links_total": 45,
+  "links_total": 46,
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.15,

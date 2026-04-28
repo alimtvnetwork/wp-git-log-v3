@@ -8,7 +8,7 @@
 > Deterministic score 100/100 (A+) for spec/14-update.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.33. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.32. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 32,
   "mmd_files": 1,
-  "overview_chars": 9555,
+  "overview_chars": 9587,
   "ac_chars": 28031,
   "ac_count": 20,
   "gwt_block_count": 20,
@@ -59,7 +59,7 @@
   "links_total": 142,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.33,
+  "waffle_per_kchar": 0.32,
   "child_modules": 2
 }
 ```

@@ -107,16 +107,18 @@ jobs:
         run: python3 linter-scripts/check-99-summary-freshness.py --strict-position
 
       - name: Version-field parity gate (Phase P15 / H10)
-        # Phase P15 (H10): codifies Phase 21 lesson — lockstep (§24) only checks
-        # DATE relations, not version strings, so §00 banner can drift many
-        # releases behind §98 while lockstep stays green. Advisory-by-default
-        # per AC-T-25 dispensation (P15 baseline: 59/74 modules drifting).
-        # H1 workflow-step-parity lesson: self-test collapsed into this step
+        # Phase P15 (H10) landed advisory-by-default; Phase P31 flipped
+        # to --strict tree-wide once the reverse-drift backlog cleared
+        # (P30: matches=74/74, mismatches=0, stamped=57/74, stamped_failed=0).
+        # Codifies Phase 21 lesson — lockstep (§24) only checks DATE
+        # relations, not version strings, so §00 banner can drift many
+        # releases behind §98 while lockstep stays green. H1
+        # workflow-step-parity lesson: self-test collapsed into this step
         # (no standalone step) to preserve AC-31-28 parity at 19/19/19.
         run: |
           set -e
           bash linter-scripts/test/test-check-version-parity.sh
-          python3 linter-scripts/check-version-parity.py
+          python3 linter-scripts/check-version-parity.py --strict
 
 
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
