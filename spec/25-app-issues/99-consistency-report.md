@@ -1,8 +1,7 @@
 # Consistency Report — 25-app-issues
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
-**Scope:** `spec/25-app-issues/`
+**Version:** 1.1.0  
+**Updated:** 2026-04-28 (Phase P11 — nested-subdir audit complete; symmetric supersession routing surfaced on all three entry points: parent Contents table, child-01 banner, and the pre-existing 02 Correction notice. No roll-up required — both children carry full governance and `kind: tracker` exemption. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 

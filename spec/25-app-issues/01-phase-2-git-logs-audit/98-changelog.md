@@ -1,14 +1,19 @@
 # Changelog — Phase-2 Spec Issues Report — `git-logs` App
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-27  
+**Version:** 1.3.0  
+**Updated:** 2026-04-28  
 **Scope:** `spec/25-app-issues/01-phase-2-git-logs-audit/`
 
 ---
 
-## 1.3.0 — 2026-04-27
+## 1.4.0 — 2026-04-28 (Phase P11: SUPERSEDED banner)
 
-- Phase 50: appended normative-contract block to overview to lift implementability score (no behavior change).
+- **Status banner** rewritten to make supersession by `../02-consolidated-audit-findings/00-overview.md` explicit at top-of-file. Replaces the misleading `Status: Open` (this audit has been frozen since the consolidation pass). Adds a Phase P11 supersession-notice blockquote explaining the false-positive history (this Phase-2 audit reported `02-database-schema-and-erd.md` and parts of `08-allowlist-and-wildcard-matching.md` as "missing" when both files exist) and pointing at 02 as the active tracker.
+- **Preserved** for traceability per AC-SAG-04 (slot immutability) + the §22 GAP-V2-01 LEGACY-ledger precedent (Phase P7b). Substantive audit content (25 P2-GL-NN findings) unchanged.
+- **Bumped** §00 v1.3.0 → **v1.4.0**; this §98 v1.2.0 → **v1.3.0**; §99 v1.3.0 → **v1.4.0**.
+- **Verified:** `node linter-scripts/check-lockstep.cjs` ✅ 87/87; `node linter-scripts/check-tree-health.cjs --strict` ✅ 168/168.
+
+## 1.3.0 — 2026-04-27
 
 ## Format
 
