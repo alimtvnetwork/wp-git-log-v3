@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Git Logs Plugin API
-  version: 2.9.4
+  version: 2.9.5
   description: |
     REST API for the Git Logs WordPress plugin.
     Source spec: spec/22-git-logs-v2/04-rest-api-endpoints.md
