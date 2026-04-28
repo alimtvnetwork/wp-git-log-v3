@@ -1,6 +1,8 @@
 # Consistency Report: React Components
 
-**Version:** 4.1.0  
+**Version:** 4.2.0  
+
+> **v4.2.0 update (Phase P29 — P25-pure dual-stream batch reconciliation):** §98 header `1.0.0`→`4.1.1` to align with §00 banner; §00 banner `4.1.0`→`4.1.1`; H10 stamp added; ladder body untouched. Part of Phase P29 batch (8 modules).
 **Generated:** 2026-04-27  
 **Health Score:** 100/100 (A+)
 

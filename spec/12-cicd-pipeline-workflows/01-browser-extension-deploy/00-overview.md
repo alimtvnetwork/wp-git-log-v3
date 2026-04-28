@@ -5,7 +5,8 @@ description: Forward-looking CI/CD pipeline architecture for browser extensions.
 
 # Browser Extension Deploy — Overview
 
-**Version:** 3.4.0  
+**Version:** 3.4.1  
+<!-- h10-verified-phase: 29 -->
 **Status:** Active (future-spec — workflows live in downstream extension repos)  
 **Updated:** 2026-04-27
 
