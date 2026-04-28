@@ -1,7 +1,7 @@
 # Changelog — Research
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Version:** 1.2.0  
+**Updated:** 2026-04-28  
 **Scope:** `spec/10-research/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 1.2.0 — 2026-04-28
+- **Phase 139 — Stale §99 prose refresh.** §99 Summary block carried `Health Score: 60/100 (D — placeholder)` and 2 stale warnings (`missing 97-acceptance-criteria.md`, `missing example/template`) that were already fixed on disk and superseded by the rubric-v2 strict 100/100 (Phase 137). Updated §99 to v1.1.0 with rubric-v2 score, cleared warnings, added Validation History row. No file content moved; pure documentation alignment.
 
 ### 1.1.0 — 2026-04-26
 - **Phase 24 — `kind: index` exemption.** Added YAML front-matter `kind: index` to `00-overview.md` to mark this module as a placement-rule router (intentionally empty / index-only). Audit script v2.2 honours the exemption, removing `missing-contract` and `untestable` rubric findings. Result: module lifted from C-tier to B-tier in the v2-deterministic audit.
