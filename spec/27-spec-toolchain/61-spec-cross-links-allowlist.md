@@ -1,7 +1,7 @@
 # 61 — spec-cross-links.allowlist
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-28 (Phase P39: bind P37 surface-survey lesson — AC-61-04 codifies that this file's `<relpath>:<line>:<target>` format is the SOLE line-keyed allowlist tree-wide and any future line-keyed waiver MUST inherit the P35 fuzzy-match contract.)  
 **Source:** [`linter-scripts/spec-cross-links.allowlist`](../../linter-scripts/spec-cross-links.allowlist)  
 **Category:** Configuration (consumed by §01)
 
