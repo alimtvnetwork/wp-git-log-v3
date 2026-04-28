@@ -61,6 +61,8 @@ Numbering convention inside this module:
 | 15 | [15-generate-fix-checklist.md](./15-generate-fix-checklist.md) | `linter-scripts/generate-fix-checklist.py` | Per-module fix checklist with file targets + AC tests |
 | 16 | [16-generate-gate-report.md](./16-generate-gate-report.md) | `linter-scripts/generate-gate-report.py` | Hard-gate cause report (which rule caps each module) |
 | 17 | [17-check-trace-map-regression.md](./17-check-trace-map-regression.md) | `linter-scripts/check-trace-map-regression.py` | CI gate: fail build when AC coverage drops or drift/orphan grows |
+| 18 | [18-check-mermaid-syntax.md](./18-check-mermaid-syntax.md) | `linter-scripts/check-mermaid-syntax.mjs` | Validator: pure-parse every `spec/**/*.mmd` (locks AC-SAG-24) — Phase 97; range-exception (validator in 10-19 band) |
+| 19 | [19-check-memo-retrospective-headings.md](./19-check-memo-retrospective-headings.md) | `linter-scripts/check-memo-retrospective-headings.py` | Validator: forbid forward-looking headings in phase memos ≥ Phase 100 — Phase 104; range-exception |
 
 ### Fillers (idempotent scaffolders)
 
