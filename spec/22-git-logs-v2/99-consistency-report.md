@@ -42,7 +42,7 @@
 | 29-uninstall-policy.md | ✅ |
 | 30-threat-model.md | ✅ |
 | 36-why-v1-archived.md | ✅ (added 2026-04-25) |
-| 37-blind-ai-gap-analysis.md | ✅ (v1.2.0 — Phase P6 marked GAP-V2-06 RESOLVED via locked-vacant precedent; original stub-files recipe REJECTED) |
+| 37-blind-ai-gap-analysis.md | ✅ (v1.3.0 — Phase P7 marked GAP-V2-01 RESOLVED via mechanical 76/76 GWT audit; headline 76/100 → 99/100 A+) |
 | 38-test-plan-superseded.md | ✅ (relocated from `16-test-plan.md` in Phase P5 2026-04-28 — slot-16 collision resolution; redirect stub → §32–§35) |
 | 39-split-db-log-storage.md | ✅ (added v3.8.0 2026-04-26 — per-SHA SQLite storage spec) |
 | 97-acceptance-criteria.md | ✅ (v3.9.2 — Phase P6 added AC-22-LV1 prohibiting §09–§13 stub files; AC count 75 → 76) |
