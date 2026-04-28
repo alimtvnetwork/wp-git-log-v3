@@ -93,13 +93,17 @@ def strip_code_fences(text: str) -> str:
     return "\n".join(out_lines)
 
 
+def allowlist_path(repo_root: Path) -> Path:
+    return repo_root / "linter-scripts" / "spec-cross-links.allowlist"
+
+
 def load_allowlist(repo_root: Path) -> set[str]:
     """Load waived broken links from linter-scripts/spec-cross-links.allowlist.
     Format: one `relpath:line:target` entry per line. Lines starting with `#`
     (after optional whitespace) are comments. Anchor fragments inside entries
     are preserved.
     """
-    path = repo_root / "linter-scripts" / "spec-cross-links.allowlist"
+    path = allowlist_path(repo_root)
     if not path.exists():
         return set()
     out: set[str] = set()
@@ -108,6 +112,39 @@ def load_allowlist(repo_root: Path) -> set[str]:
         if line and not line.startswith("#"):
             out.add(line)
     return out
+
+
+def parse_waiver(entry: str) -> tuple[str, int, str] | None:
+    """Split a `relpath:line:target` entry. Targets may contain ``:`` (e.g.
+    inside URLs or anchor fragments), so we only split on the first two
+    colons. Returns ``None`` if the entry is malformed or the line number
+    is not an integer.
+    """
+    parts = entry.split(":", 2)
+    if len(parts) != 3:
+        return None
+    rel, line_str, target = parts
+    try:
+        line_num = int(line_str)
+    except ValueError:
+        return None
+    return rel, line_num, target
+
+
+def load_allowlist_index(repo_root: Path) -> dict[tuple[str, str], list[int]]:
+    """Build an index of `(file, target) -> [line_numbers]` from the allowlist
+    so the scanner can fuzzy-match waivers whose source line drifted by ±N
+    after unrelated edits (e.g. a stamp-batch tool inserting a comment line
+    into the §00 banner above the link). Phase P35 — codifies P34 lesson #1.
+    """
+    index: dict[tuple[str, str], list[int]] = {}
+    for entry in load_allowlist(repo_root):
+        parsed = parse_waiver(entry)
+        if parsed is None:
+            continue
+        rel, line_num, target = parsed
+        index.setdefault((rel, target), []).append(line_num)
+    return index
 
 
 def collect_headings(path: Path) -> set[str]:
@@ -163,9 +200,28 @@ def check_link(source: Path, target: str, repo_root: Path) -> tuple[str, str] | 
     return None
 
 
-def scan(root: Path, repo_root: Path) -> list[dict]:
+FUZZY_LINE_TOLERANCE = 5  # P35: drift budget for stamp-batch insertions etc.
+
+
+def scan(
+    root: Path,
+    repo_root: Path,
+    *,
+    strict_line_match: bool = False,
+) -> tuple[list[dict], list[dict]]:
+    """Scan ``root`` for broken markdown cross-links.
+
+    Returns a 2-tuple ``(failures, fuzzy_hits)``:
+      * ``failures`` — unresolved broken links (non-allowlisted).
+      * ``fuzzy_hits`` — allowlist waivers that matched fuzzily on
+        ``(file, target)`` despite a stale line number; surfaces as a
+        rewrite hint and (in ``--rewrite-allowlist`` mode) drives the
+        in-place line-number bump. Empty when ``strict_line_match=True``.
+    """
     failures: list[dict] = []
+    fuzzy_hits: list[dict] = []
     allowlist = load_allowlist(repo_root)
+    allowlist_index = load_allowlist_index(repo_root)
     for md in iter_markdown_files(root):
         try:
             text = md.read_text(encoding="utf-8", errors="ignore")
@@ -186,6 +242,23 @@ def scan(root: Path, repo_root: Path) -> list[dict]:
             waiver_key = f"{rel_file}:{line_num}:{target}"
             if waiver_key in allowlist:
                 continue
+            # P35 fuzzy-match: same (file, target) waived at a nearby line?
+            if not strict_line_match:
+                stale_lines = allowlist_index.get((rel_file, target), [])
+                nearby = [
+                    n for n in stale_lines
+                    if n != line_num and abs(n - line_num) <= FUZZY_LINE_TOLERANCE
+                ]
+                if nearby:
+                    fuzzy_hits.append({
+                        "file": rel_file,
+                        "target": target,
+                        "stale_line": nearby[0],
+                        "current_line": line_num,
+                        "stale_key": f"{rel_file}:{nearby[0]}:{target}",
+                        "current_key": waiver_key,
+                    })
+                    continue
             failures.append({
                 "file": rel_file,
                 "line": line_num,
@@ -195,7 +268,31 @@ def scan(root: Path, repo_root: Path) -> list[dict]:
                 "detail": detail,
                 "waiver_key": waiver_key,
             })
-    return failures
+    return failures, fuzzy_hits
+
+
+def rewrite_allowlist(repo_root: Path, fuzzy_hits: list[dict]) -> int:
+    """Rewrite the allowlist file in-place, replacing each ``stale_key``
+    with its corresponding ``current_key``. Returns the number of waivers
+    rewritten. Comments and blank lines are preserved verbatim.
+    """
+    if not fuzzy_hits:
+        return 0
+    path = allowlist_path(repo_root)
+    if not path.exists():
+        return 0
+    rewrites = {h["stale_key"]: h["current_key"] for h in fuzzy_hits}
+    new_lines: list[str] = []
+    bumped = 0
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        stripped = raw.strip()
+        if stripped and not stripped.startswith("#") and stripped in rewrites:
+            new_lines.append(rewrites[stripped])
+            bumped += 1
+        else:
+            new_lines.append(raw)
+    path.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
+    return bumped
 
 
 def emit_human(failures: list[dict]) -> None:
@@ -224,6 +321,16 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--repo-root", default=".", help="Repo root used to resolve absolute links")
     p.add_argument("--json", action="store_true", help="Emit JSON report to stdout")
     p.add_argument("--github", action="store_true", help="Emit GitHub Actions annotations")
+    p.add_argument(
+        "--strict-line-match",
+        action="store_true",
+        help="Require waiver line numbers to match exactly (disables P35 fuzzy match)",
+    )
+    p.add_argument(
+        "--rewrite-allowlist",
+        action="store_true",
+        help="Rewrite stale waiver line numbers in-place when fuzzy match resolves them (P35)",
+    )
     return p.parse_args()
 
 
@@ -234,11 +341,28 @@ def main() -> int:
     if not root.exists():
         print(f"::error::spec root not found: {root}", file=sys.stderr)
         return 2
-    failures = scan(root, repo_root)
+    failures, fuzzy_hits = scan(root, repo_root, strict_line_match=args.strict_line_match)
+    bumped = 0
+    if args.rewrite_allowlist and fuzzy_hits:
+        bumped = rewrite_allowlist(repo_root, fuzzy_hits)
     if args.json:
-        print(json.dumps({"failures": failures, "count": len(failures)}, indent=2))
+        print(json.dumps({
+            "failures": failures,
+            "count": len(failures),
+            "fuzzy_hits": fuzzy_hits,
+            "fuzzy_count": len(fuzzy_hits),
+            "rewritten": bumped,
+        }, indent=2))
     else:
         emit_human(failures)
+        if fuzzy_hits:
+            print(f"\nINFO {len(fuzzy_hits)} waiver(s) matched fuzzily on (file, target) — line numbers drifted:")
+            for h in fuzzy_hits:
+                print(f"  {h['file']}: line {h['stale_line']} → {h['current_line']}  ({h['target']})")
+            if bumped:
+                print(f"\nREWROTE {bumped} stale waiver line number(s) in spec-cross-links.allowlist")
+            else:
+                print("\nHINT: re-run with --rewrite-allowlist to auto-bump stale line numbers.")
     if args.github:
         emit_github_annotations(failures)
     return 1 if failures else 0
