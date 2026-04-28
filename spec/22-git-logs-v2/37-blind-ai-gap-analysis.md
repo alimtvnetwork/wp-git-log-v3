@@ -1,7 +1,7 @@
 # Blind-AI Implementability Gap Analysis — v2 (folder 22)
 
-**Version:** 1.4.0
-**Updated:** 2026-04-28 (Phase P8 — bookkeeping refresh: V2-02/03/04/08/10 marked ✅)
+**Version:** 1.5.0
+**Updated:** 2026-04-28 (Phase P17 — GAP-V2-09 RESOLVED: §00 v3.8.8 → v3.8.9 added Cross-References row to `spec/28-universal-ci-cli/`. Effort table row 10 struck through; 9 of 10 historical gaps now closed.)
 **Question asked:** *"If I hand folder 22 to an AI blindly, how much can it build, and where will it stall?"*
 
 ---
@@ -20,7 +20,7 @@
 | Testability     | 100 | **76/76 GWT blocks** — gate `G-AC-02` no longer fires; downstream test-stub generators can emit one case per AC mechanically |
 | Maintainability | 100 | 0 unresolved markers (Phase 39b closed GAP-V2-07 2026-04-27); GAP-V2-01/02/03/04/06/07/08/10 all resolved |
 
-**An AI given v2 today can build ~99% of the plugin without asking a human.** The remaining 1% is the deferred v3 feature set (encryption, signed tokens, audit chain, multi-engine) explicitly out of scope for v2. Every HIGH/MEDIUM blind-AI gap from the 2026-04-25 baseline has been closed; only `GAP-V2-05` (App identity) and `GAP-V2-09` (link client CLI) remain — both LOW, both queued.
+**An AI given v2 today can build ~99% of the plugin without asking a human.** The remaining 1% is the deferred v3 feature set (encryption, signed tokens, audit chain, multi-engine) explicitly out of scope for v2. Every HIGH/MEDIUM blind-AI gap from the 2026-04-25 baseline has been closed; only `GAP-V2-05` (App identity — user decision, closed-in-spirit by Phase 147 §07 locked decision 12) remains. GAP-V2-09 closed Phase P17 (2026-04-28).
 
 ---
 
@@ -109,11 +109,11 @@ Each gap below is paired with the **exact file + section to patch** so a human c
 - **Resolution:** Phase P5 (§98 row 3.9.4) chose the inverse of the original recipe — rather than renaming the live `16-seed-data.md`, the smaller superseded `16-test-plan.md` stub was relocated to `38-test-plan-superseded.md` (banner v2.7.0 → v2.8.0, gained "History of slot moves" subsection). Live §16 content unchanged. 5 cross-folder referrers updated lockstep (§00 inventory, §99, `spec/spec-index.md`, `spec/dashboard-data.json`, `spec/28-universal-ci-cli/06`). `grep -rn "16-test-plan"` returns 7 hits, all intentional historical narrative; zero active links.
 - **Outcome:** slot-16 collision eliminated; immutability invariant restored.
 
-### GAP-V2-09 — No outbound CI client contract [MEDIUM — now closed]
+### GAP-V2-09 — No outbound CI client contract [MEDIUM — RESOLVED 2026-04-28, Phase P17]
 
-- **Symptom:** v2 specifies the *server* but not the matching *client*. Every team integrating CI/CD has to invent its own poster.
-- **Fix target:** **Already addressed** — `spec/28-universal-ci-cli/` now provides the canonical client contract (28 ACs, OpenAPI 3.1, JSON Schema). Cross-link from `spec/22-git-logs-v2/00-overview.md` Document Inventory.
-- **Effort:** ~2 min (one new row).
+- **Original symptom:** v2 specifies the *server* but not the matching *client*. Every team integrating CI/CD has to invent its own poster.
+- **Resolution:** `spec/28-universal-ci-cli/` already provides the canonical client contract (28 ACs, OpenAPI 3.1, JSON Schema). Phase P17 (§98 row 3.9.10) added the cross-link from §00 v3.8.8 → v3.8.9 `## Cross-References` table ("Outbound CI client (Lane B / SSH) → `../28-universal-ci-cli/00-overview.md`") so a blind-AI reading §00 top-to-bottom now discovers the client poster without leaving folder 22's overview. §00 Document Inventory rows untouched (§28-universal-ci-cli is a sibling folder, not a §22 slot — local slot numbering remains immutable per Core memory rule).
+- **Outcome:** discoverability gap closed; ceiling now bounded only by GAP-V2-05 (user-decision on §07 App identity, closed-in-spirit by Phase 147 §07 locked decision 12).
 
 ### GAP-V2-10 — Rate limit + payload caps are not in §04 [LOW — RESOLVED 2026-04-28, Phase P4]
 
@@ -177,9 +177,9 @@ Legend: ✅ kept, ✏ changed shape, ❌ removed, ➕ new in v2.
 | 7 | ~~GAP-V2-10 (rate-limit caps in §04)~~ ✅ Phase P4 2026-04-28 | `04-rest-api-endpoints.md` v2.9.6 §1.2 | n/a | n/a |
 | 8 | ~~GAP-V2-08 (slot-16 collision)~~ ✅ Phase P5 2026-04-28 — resolved by inverse: `16-test-plan.md` → `38-test-plan-superseded.md` | filesystem + 5 lockstep referrers | n/a | n/a |
 | 9 | ~~GAP-V2-07 (resolve 2 TODO markers)~~ ✅ Phase 39b 2026-04-27 | `30-threat-model.md`, `32-cli-test-plan.md`, `16-seed-data.md` | n/a | n/a |
-| 10 | GAP-V2-09 (link client CLI from §00) — **LOW priority, queued** | `00-overview.md` | 2m | +1 |
+| 10 | ~~GAP-V2-09 (link client CLI from §00)~~ ✅ Phase P17 2026-04-28 — §00 v3.8.9 Cross-References row added | `00-overview.md` v3.8.9 | n/a | n/a |
 
-**Effort remaining:** 7m (GAP-V2-05 user decision + GAP-V2-09 cosmetic link). **Current score:** 99/100 (A+); ceiling 100/100 awaits user decision on §07 App identity. 8 of 10 historical gaps resolved across Phases 39b + P1–P7 (2026-04-27 → 2026-04-28).
+**Effort remaining:** 5m (GAP-V2-05 user decision only). **Current score:** 99/100 (A+); ceiling 100/100 awaits user decision on §07 App identity. **9 of 10 historical gaps resolved** across Phases 39b + P1–P8 + P17 (2026-04-27 → 2026-04-28).
 
 ---
 
