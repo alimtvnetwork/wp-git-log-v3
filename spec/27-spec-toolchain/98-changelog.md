@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.42.0
+**Version:** 2.42.1
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.42.1 — 2026-04-28 — Phase H1-S1: §99 Summary stamp adoption batch 1 (root spec/99 stamped + freshened)
+- **Action**: First opt-in adoption of the `<!-- verified-phase: NNN -->` stamp introduced by H1's freshness gate. Target: `spec/99-consistency-report.md` (root tree-wide rollup). Pre-stamp audit found the existing Summary block was materially stale — claimed `Health Score: 78/100 (B)` and `Warnings: 3` from the Phase 1 Triage era, while current truth is tree-health 168/168 strict, lockstep 87/87 / 0 findings, rubric v2.24, 15 strict CI gates. **Rule applied**: stamp asserts "narrative verified at phase NNN" — never stamp a stale block to silence the gate; freshen the prose first, then stamp. Both done in one edit.
+- **Stamp coverage**: 0/89 → **1/89** §99 files stamped. Gate remains advisory (88 unstamped → exit 0); the 1 stamped file (`spec/99`) is now strict-tracked at phase 146 (budget delta 20 → expires near phase 166).
+- **Content delta in `spec/99` Summary**: replaced 3 stale lines (Errors:0 / Warnings:3 / Health 78/100 B + "Phase 2 content-fill pending") with 6 current lines (Errors:0 / Warnings:0 / Tree-health 168/168 strict / Lockstep 87/87 / Rubric v2.24 / Trace-map ac_traced 74 of 1304 + code_orphan 25 of 48). No §97 / §00 / §31 changes.
+- **New rule for future stamp adoption**: never stamp a §99 Summary you have not just read end-to-end and reconciled against §97 / §00 / source-of-truth. Stamping stale prose to clear a CI signal is precisely the failure mode H1 was designed to prevent — codified here for batch 2+.
+- **Verified**: `python3 check-99-summary-freshness.py --report-only` → "stamped: 1; unstamped: 88 — within budget" ✅; `node check-lockstep.cjs` → 87/87 / 0 ✅; `node check-tree-health.cjs --strict` → 168/168 ✅; `bash test-overview-inventory-parity.sh` → 6/6 ✅. NO script source touched, NO new specs/tests/orphans, NO trace-map / baseline / rubric implications. §98 v2.42.0 → **v2.42.1** (patch — adoption-only, no new artefacts/contract changes).
 
 ### 2.42.0 — 2026-04-28 — Phase H1: §99 Summary freshness gate (15th strict CI gate)
 - **Action**: New validator `linter-scripts/check-99-summary-freshness.py` codifies the Phase 136/139 stale-prose lesson. Detects §99 modules whose `## Summary` block carries a `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20). Advisory-by-default for unstamped files (89/89 unstamped at H1 close → exit 0); becomes strict per-file as authors opt-in to the stamp.
