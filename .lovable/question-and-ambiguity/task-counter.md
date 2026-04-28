@@ -2,7 +2,7 @@
 
 **Budget:** 40 tasks
 **Activated:** 2026-04-28
-**Counter:** 3 / 40
+**Counter:** 4 / 40
 **Status:** 🟢 active
 
 ## Counting rule
@@ -22,6 +22,7 @@ This setup task (creating prompt-01 + index + folder scaffolding) is task
 | 1 | 2026-04-28 | Phase 18 — tree-health drift sweep + trace-map rebaseline | 01-trace-map-plus-2-untraced-acs |
 | 2 | 2026-04-28 | Phase 18-resolution — root-cause: stale baseline (not new ACs) | 02-stale-baseline-ci-guard |
 | 3 | 2026-04-28 | Phase 19 — stale-baseline advisory (Ambiguity-02 option 3) | none (resolves 02) |
+| 4 | 2026-04-28 | Phase 20 — README stale-prose sweep (linter-scripts/test/) | none |
 
 ## Deactivation trigger
 

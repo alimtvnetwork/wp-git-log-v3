@@ -52,19 +52,24 @@ PR so any regression fails the build at the assertion level (with
 
 **Totals:** 10 scripts · 110+ assertions · ~32 s of CI time.
 
-All eight scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
-as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
+All ten scripts are reachable from [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml).
+Seven run as discrete self-test steps (`Audit CLI threshold contract self-test (Phase 91)`,
 `Audit --explain contract self-test (Phase 94)`, `Audit determinism / JSON-stability self-test (Phase 95)`,
 `Self-test README inventory parity (Phase 102)`, `Self-test QA baseline footer (Phase 103)`,
-`Self-test §27 inventory parity triangle (Phase 112)`, `Self-test WEIGHTS dimension-table parity (Phase 113)`,
-`Self-test §99 Summary freshness gate (Phase H1)`).
+`Self-test §27 inventory parity triangle (Phase 112)`, `Self-test WEIGHTS dimension-table parity (Phase 113)`).
+The remaining three are folded into their broader-contract production gates per the H1
+workflow-step parity lesson (footer rows = workflow gates = declared count): `test-check-99-summary-freshness.sh`
+runs inside `§99 Summary freshness gate (Phase H1 / H8 / H9)`, `test-check-99-stamp-bump.sh` inside
+`§99 Stamp-bump gate (Phase H5)`, and `test-archive-exclusion-runtime.sh` inside
+`Runtime archive-exclusion gate (Phase H7)`.
 
 ---
 
 ## Coverage triad: what each test catches
 
-The seven tests together form a **complete blind-spot coverage matrix** for
-the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–7):
+The ten tests together form a **complete blind-spot coverage matrix** for
+the audit subsystem (gates 1–3), the meta-suite itself (gates 4–7), and the
+§99 lifecycle / archive-exclusion contracts (gates 8–10):
 
 | Blind spot | Why production gate misses it | Self-test catching it |
 |---|---|---|
@@ -75,9 +80,12 @@ the audit subsystem (gates 1–3) plus the meta-suite itself (gates 4–7):
 | QA-baseline footer drifting from `RUBRIC_VERSION` / workflow / declared count | Production audit gate still passes while docs lie; AC-31-28 was unenforced | **Phase 103** (4-way enumeration consistency: script constant ↔ 00-index ↔ EXECUTIVE-SUMMARY ↔ workflow steps) |
 | New script silently added to `linter-scripts/` or `.github/workflows/` without a §27 spec row OR an entry in the Phase 107 orphan ledger | `check-tree-health.cjs` allow-list inference is permissive (Phase 107 found 8 silent orphans); AC-31-31 / INV-01 / INV-02 were unenforced | **Phase 112** (3-way triangle: §27 overview ↔ filesystem ↔ Phase 107 orphan memo) |
 | Dimension `WEIGHTS` drifting between `audit-spec-vs-code-v2.py`, `generate-gate-report.py`, and §31's `## Weights` table | AC-31-02's runtime assertion only catches in-script drift in the audit script alone; gate-report and §31 docs were unenforced and could silently produce divergent scoring | **Phase 113** (3-way dict-equality + AC-31-02 invariants + dimension count == 7) |
+| §99 `## Summary` prose stamped `<!-- verified-phase: NNN -->` going stale (claimed phase older than newest §98 row) | Production audit gate scores §99 structurally; stale narrative claims are invisible to it (Phase 136 over-counted, Phase 139 found real count was 1) | **Phase H1** (advisory→strict per opt-in stamp; sandbox-tested 17 assertions covering unstamped/stamped-stale/stamped-fresh/missing-token paths) |
+| §99 stamped+materially-edited without a phase-token bump | No production gate enforces "edited-then-stamp-must-bump"; reviewer-attention only | **Phase H4** (`--changed-files` injection bypasses git sandbox; 23 assertions across empty/unstamped/stamp-only/material-edit/`_archive/` exclusion/bad-base-ref paths) |
+| Spec-traversing linters reading `_archive/` paths at RUNTIME despite source-level allow-list (the H6 lesson) | Source-reading proves intent, not behavior; only runtime enumeration proves a linter actually skips the directory | **Phase H7** (importlib-loads 3 critical enumerators, asserts 0 archive-leaked results; floor: probe count ≥ 3) |
 
-If you add an eighth contract guarantee to the audit script (or any other
-linter), add an eighth self-test here following the same template — see
+If you add an eleventh contract guarantee to the audit script (or any other
+linter), add an eleventh self-test here following the same template — see
 **"Adding a new self-test"** below. The Phase 102 gate will fail on your
 PR if you forget to add the row; the Phase 103 gate will fail if you wire
 the new step into the workflow without bumping the audit footer's
@@ -90,7 +98,7 @@ of the three sites that restate them.
 
 ## Test-discovery policy (Phase F3 — keep `.sh`-only)
 
-The seven scripts above are **shell tests**, and the parity gate
+The ten scripts above are **shell tests**, and the parity gate
 ([`test-readme-inventory.sh`](./test-readme-inventory.sh)) discovers them
 via `ls test-*.sh`. This is **deliberate**, not an oversight:
 
@@ -132,8 +140,9 @@ tax intentionally.
 | [`test-check-spec-folder-refs.py`](./test-check-spec-folder-refs.py) | 144 | `check-spec-folder-refs.py::load_allowlist()` strips inline `# comment` trailers (AC-62-04) — 4 `tempfile`-based unit tests | Exercises an internal function, not the CLI; loading the hyphenated source requires `importlib.util.spec_from_file_location`, which is awkward in bash. |
 
 These are CI-runnable via `python3 linter-scripts/test/test-*.py` but
-not yet wired into `spec-health.yml` (that's Phase F2, blocked on Phase
-F1 user verdicts).
+not yet wired as discrete steps in `spec-health.yml`. Acknowledgement
+flows through `test-overview-inventory-parity.sh` (Phase 112) instead of
+the README parity gate, which remains `.sh`-only by design.
 
 ---
 
@@ -165,9 +174,12 @@ bash linter-scripts/test/test-readme-inventory.sh
 bash linter-scripts/test/test-qa-baseline-footer.sh
 bash linter-scripts/test/test-overview-inventory-parity.sh
 bash linter-scripts/test/test-weights-parity.sh
+bash linter-scripts/test/test-check-99-summary-freshness.sh
+bash linter-scripts/test/test-check-99-stamp-bump.sh
+bash linter-scripts/test/test-archive-exclusion-runtime.sh
 ```
 
-Run all seven sequentially:
+Run all ten sequentially:
 
 ```bash
 for t in linter-scripts/test/test-*.sh; do
