@@ -4,10 +4,12 @@ description: Diagram index for git-logs WP plugin (Mermaid sources + rendered SV
 ---
 # Gitlogs Diagrams
 
-**Version:** 2.3.0  
-**Updated:** 2026-04-27
+**Version:** 2.4.0
+**Updated:** 2026-04-28
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).
+
+> **v2.4.0 (2026-04-28 — Phase P10):** Added [`10-ssh-auth-validation.mmd`](./10-ssh-auth-validation.mmd) + companion `.svg` covering the §22/§31 Lane B SSH-key auth 10-step server validation order (mode parse → headers → timestamp skew → SshKey lookup → repo binding → acceptance + branch → nonce uniqueness → signature verify → profile status → app lifecycle). Mirrors §05's TempToken-lane diagram for the SSH branch and surfaces all 11 `GL-SSH-*` / `GL-AUTH-*` / `GL-APP-*` reject codes inline. Slot 10 chosen — first available numeric per AC-DG-10 ("next available slot for new diagrams is `10-*` onward"). Companion `puppeteer.json` checked in beside `.mmd` files (resolves the long-standing AC-DG-18 reproducibility-config gap).
 
 > **v2.0.0 (2026-04-26):** Consolidation per user feedback. Three changes: **(1)** retired duplicate `02-domain-design.mmd` — its hierarchy info already lives in the ER's relationship arrows + `../22-git-logs-v2/02-database-schema.md` prose. **(2)** retired separate `03-endpoints-write.mmd` + `04-endpoints-read.mmd` sequence diagrams; replaced with a single mindmap [`09-endpoints-mindmap.mmd`](./09-endpoints-mindmap.mmd) covering all 8 endpoints with verb, path, body, response, permissions, audit category, error codes — one branch per endpoint. **(3)** added explicit `%% Diagram type: …` + `%% What this answers: …` header comments to every flowchart/sequence so they can no longer be confused with the ER diagram. Permission flow [`06-permission-flow.mmd`](./06-permission-flow.mmd) redrawn with classDef colors + per-rejection error codes for visual distinction.
 >
