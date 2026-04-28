@@ -1161,7 +1161,7 @@ def main():
         "3. Resolve all broken cross-spec links (auto-detected per module).",
         "4. For every D/F module, run `linter-scripts/generate-gwt-acceptance.py` to regenerate ACs.",
         "5. Add `Status: Planned/In-Progress/Implemented` banners so alignment scores reflect intent.",
-        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5) listing the 16 strict CI gates that surround this score.",
+        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7) listing the 17 strict CI gates that surround this score.",
     ]
     (OUT / "EXECUTIVE-SUMMARY.md").write_text("\n".join(exec_md))
 
