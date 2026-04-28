@@ -136,6 +136,8 @@ def main(argv: list[str] | None = None) -> int:
     mismatches: list[dict] = []
     skipped_no_banner = 0
     skipped_no_release = 0
+    stamped = 0           # §00 files carrying h10-verified-phase stamp
+    stamped_failed = 0    # stamped files whose §00 ↔ §98 versions diverge
 
     for overview, changelog in find_pairs(root):
         scanned += 1
@@ -150,14 +152,21 @@ def main(argv: list[str] | None = None) -> int:
             skipped_no_release += 1
             continue
         eligible += 1
+        stamp = h10_stamp(ov_text)
+        if stamp is not None:
+            stamped += 1
         if bv == lr:
             matches += 1
         else:
-            mismatches.append({
+            entry = {
                 "module": str(overview.parent.relative_to(ROOT)),
                 "banner": bv,
                 "latest_release": lr,
-            })
+                "stamped": stamp,
+            }
+            mismatches.append(entry)
+            if stamp is not None:
+                stamped_failed += 1
 
     if args.json:
         out = {
@@ -167,6 +176,8 @@ def main(argv: list[str] | None = None) -> int:
             "mismatches": len(mismatches),
             "skipped_no_banner": skipped_no_banner,
             "skipped_no_release": skipped_no_release,
+            "stamped": stamped,
+            "stamped_failed": stamped_failed,
             "details": mismatches,
         }
         print(json.dumps(out, indent=2))
@@ -176,15 +187,24 @@ def main(argv: list[str] | None = None) -> int:
             f"scanned={scanned}; eligible={eligible}; "
             f"matches={matches}; mismatches={len(mismatches)}; "
             f"skipped(no-banner)={skipped_no_banner}; "
-            f"skipped(no-release)={skipped_no_release}"
+            f"skipped(no-release)={skipped_no_release}; "
+            f"stamped={stamped}; stamped_failed={stamped_failed}"
         )
         for m in mismatches:
-            print(f"  (info) {m['module']}: §00={m['banner']} vs §98 latest={m['latest_release']}")
+            tag = "FAIL" if m["stamped"] is not None else "info"
+            stamp_note = f" [stamped phase {m['stamped']}]" if m["stamped"] is not None else ""
+            print(f"  ({tag}) {m['module']}: §00={m['banner']} vs §98 latest={m['latest_release']}{stamp_note}")
 
     if args.report_only:
         if mismatches and not args.json:
             print("--report-only: not failing.")
         return 0
+    # Per-file strict promotion (Phase P20): a stamped §00 with a mismatch
+    # always fails, even in default (advisory-tree) mode.
+    if stamped_failed > 0:
+        if not args.json:
+            print(f"FAIL: {stamped_failed} stamped §00 file(s) drift from §98 latest release.")
+        return 1
     if args.strict and mismatches:
         return 1
     return 0
