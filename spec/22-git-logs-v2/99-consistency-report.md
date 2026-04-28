@@ -11,7 +11,7 @@
 | File | Present |
 |------|---------|
 | 00-overview.md | ✅ |
-| 01-glossary-and-enums.md | ✅ |
+| 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
 | 04-rest-api-endpoints.md | ✅ |
