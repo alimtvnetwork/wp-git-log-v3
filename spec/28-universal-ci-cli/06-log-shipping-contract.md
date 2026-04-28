@@ -116,4 +116,4 @@ Two consecutive `glci run` invocations on the same commit, same env, same source
 - `FilePaths[]` is sorted lexicographically.
 - JSON key order is insertion order from the typed struct (Go default with `encoding/json`).
 
-Tests in `16-test-plan.md` (TODO — added in v1.1) MUST assert this property.
+Tests for this contract live in `spec/22-git-logs-v2/32-cli-test-plan.md` and the BATS skeleton at `spec/22-git-logs-v2/33-bats-test-skeleton.md` (the old §22 `16-test-plan.md` was relocated to `38-test-plan-superseded.md` in Phase P5; do not link to the legacy slot).
