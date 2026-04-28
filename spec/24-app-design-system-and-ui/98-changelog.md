@@ -1,10 +1,16 @@
 # Changelog — App Design System & UI
 
-**Version:** 3.1.0
-**Updated:** 2026-04-27
+**Version:** 3.1.1
+**Updated:** 2026-04-28
 **Scope:** `spec/24-app-design-system-and-ui/`
 
 ---
+
+## 3.1.1 — 2026-04-28
+
+### Audit (no content change)
+
+- **Phase P14 — "Split `00-overview.md` (656 lines)" backlog item closed as STALE.** This task was queued before Phases 39a/51/55/61/68/72/78 deepened the module to 100/100. Re-audit confirms the file is one cohesive SSOT contract for the App design-system overlay: app-only semantic tokens → Tailwind extension → AppShell layout container → responsive breakpoints → theme parity rule → cross-refs (with §07 ↔ §24 ownership matrix that resolved circular finding 24-A) → AC-ADS-000 → impl-sweep appendices (JSON Schema design-token registry + TS variant/breakpoint enums + Go/Python/PHP token loaders + OpenAPI Component Registry + Mermaid lifecycle + CI workflow + normative Module Run Audit Schema). §99 lists splitting as **optional** under "Open Items" with "No mandatory open items." Slot policy reserves `01-app-shell.md` / `02-app-toolbar.md` / `03-app-sidebar.md` / `04-app-status-system.md` for if/when AppShell variants multiply or per-component commentary outgrows the inline tables — that condition has not been triggered (single AppShell variant; toolbar/sidebar/status not yet implemented anywhere). Splitting now would fragment the design-token contract, force cross-file lookups for any token-vs-Tailwind question, and burn 4 immutable slots prematurely. No file edits required; no AC changes; no banner bump on `00-overview.md`. §98 / §99 receive a patch bump to record the disposition. Future split proposals against §24 MUST cite a concrete trigger (e.g., 2+ shipped AppShell variants, OR a shipped per-component deep-dive >150 lines that genuinely doesn't belong in the router) — bare line-count arguments are not actionable per Phase P14 precedent (mirrors Phase P12 disposition for §28 and Phase P13 disposition for §23).
 
 ## 4.1.0 — 2026-04-27
 
