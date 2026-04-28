@@ -45,3 +45,6 @@ This work remains on the backlog as **Phase 108-full**. AC-T-21's "two release c
 
 ## Outcome
 Phase 108-min closed. Phase 108-full (3 new specs + `check-tree-health.cjs` patch) remains on the backlog awaiting explicit user ratification per Phase 133's caution. F1 / R1 still open.
+
+## Trace-map rebaseline (within Phase 117 guardrails)
+After AC-T-21 was added, `check-trace-map-regression.py` flagged +1 drift (1271 → 1272, ac_total 1295 → 1296). This is exactly the Phase 117 "absorbed legitimate spec-growth" pattern — a single deliberate AC addition. Per the Phase 117 guardrail ("future single-phase delta > 50 ACs or > 5 code files MUST be inspected"), +1 AC is well within budget. Ran `python3 linter-scripts/check-trace-map-regression.py --update-baseline` → exit 0 → re-run exit 0 ✅. Baseline now `{ac_total: 1296, ac_drifted: 1272}`.
