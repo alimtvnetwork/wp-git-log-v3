@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.7
-**Updated:** 2026-04-28 (Phase P1 — TypeScript enum mirror appended to §01 v3.8.10 → v3.9.0; closes GAP-V2-02. Inventory row for §01 updated to reflect v3.9.0 + new `## TypeScript Mirror` section. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.8
+**Updated:** 2026-04-28 (Phase P2 — `/append-log` ingest streaming wire format pinned in §04 v2.9.3 → v2.9.4 (new §1.1: `X-GL-Stream:1` sentinel, NDJSON `StreamHeader`/`Line`/`StreamFooter` framing, 4 new `GL-STREAM-*` codes); closes GAP-V2-03. Inventory row for §04 updated. §15/§17/§97 lockstep deferred per Phase P2 scope discipline. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
@@ -14,7 +14,7 @@
 | 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
-| 04-rest-api-endpoints.md | ✅ |
+| 04-rest-api-endpoints.md | ✅ (v2.9.4 — Phase P2 §1.1 NDJSON ingest streaming wire format) |
 | 05-auth-and-validation.md | ✅ (CI/CD cross-ref) |
 | 06-migrations-and-logger.md | ✅ |
 | 07-app-entity.md | ✅ |
@@ -306,11 +306,20 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Validation evidence:** Python regex parse confirms 75 distinct AC IDs sequential AC-01..AC-75; the 8 deepened ACs all measure 1400-2200 chars (vs prior 200-260). No new IDs, no removed IDs, no schema/DDL/OpenAPI changes.
 
-**Phase 13 scope discipline:** §02 / §18 / §04 / §17 / §15 untouched (deepened ACs cite existing normative content, not new contracts). The other 4 short ACs from the depth survey (AC-04/AC-05/AC-25/AC-34) intentionally left lean — they are simpler single-fact ACs. Phase B1 (§07 App identity) remains blocked on user; AC-17 explicitly documents `Environment`/`Platform`/`OwnerEmail` as forbidden until unblocked.
+
+## v3.9.8 Audit — Phase P2 (GAP-V2-03 closed: NDJSON ingest streaming wire format)
+
+| File | Change |
+|------|--------|
+| `04-rest-api-endpoints.md` | Banner v2.9.3 → v2.9.4. New `### 1.1 Streaming wire format (v2.9.4 — Phase P2)` subsection under §1 `POST /append-log`. Pins: opt-in sentinel `X-GL-Stream: 1` request header; required `Content-Type: application/x-ndjson; charset=utf-8` + `Transfer-Encoding: chunked`; LF-only frame separator; three-frame contract (`StreamHeader` exactly-one with identity ex `Logs`/`ErrorLogs`/`HasError`; `Line` zero-or-more with `{Line, Severity}` mirroring §01 `LogSeverity`; `StreamFooter` exactly-one with authoritative `HasError` boolean); strict server validation (header-before-line, EOF-without-footer rollback, unknown-discriminator rejection, forward-compat unknown-key tolerance); reuses §11.4 `NdjsonMaxRowsPerStream` cap. Documents 4 new `GL-STREAM-*` error codes (NO-HEADER 400, NO-FOOTER 400, TOO-MANY-LINES 413, UNKNOWN-FRAME 400). |
+| `98-changelog.md` | v3.9.1 row added (Phase P2). |
+| `99-consistency-report.md` | This audit table; banner v3.9.7 → v3.9.8; inventory row for §04 updated to call out Phase P2. |
+
+**Phase P2 scope discipline:** §15 error-codes file, §17 OpenAPI, §97 ACs intentionally untouched — the §1.1 doc-side contract is the source of truth for the next downstream consumer (`28-universal-ci-cli/06-log-shipping-contract.md` AC-28-06, which becomes implementable). §15/§17/§97 lockstep is a follow-on micro-phase; deferring it preserves single-concern phase discipline. §11 retrieval contract (Phase 8/12) untouched. §02 / §18 / §01 untouched (no DDL change, no enum change — `Severity` field reuses existing `LogSeverity` enum verbatim).
 
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.4 surfaces optional `Header.StateTransition`; v3.8.13 Phase 13 deepened 8 high-traffic ACs with no IDs/schema/OpenAPI churn. **Open follow-ups:** (a) §07 user decision (App identity, Phase B1 blocked); (b) §03 admin UI rendering of state labels — consumer-side, out-of-scope. All Phase 8/9 follow-ups closed; Phase 13 closes the §22-scope subset of the full-tree-audit-v4 deepening backlog.
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, **§04↔§28/06 ingest-streaming wire-format chain (Phase P2)**); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.4 surfaces optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02 (TS enum mirror); v3.9.1 closed GAP-V2-03 (NDJSON ingest wire format). **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 new `GL-STREAM-*` codes (deferred per Phase P2 scope). All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
 
 ---
 
