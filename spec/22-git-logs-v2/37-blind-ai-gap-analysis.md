@@ -1,7 +1,7 @@
 # Blind-AI Implementability Gap Analysis — v2 (folder 22)
 
-**Version:** 1.4.0
-**Updated:** 2026-04-28 (Phase P8 — bookkeeping refresh: V2-02/03/04/08/10 marked ✅)
+**Version:** 1.5.0
+**Updated:** 2026-04-28 (Phase P17 — GAP-V2-09 RESOLVED: §00 v3.8.8 → v3.8.9 added Cross-References row to `spec/28-universal-ci-cli/`. Effort table row 10 struck through; 9 of 10 historical gaps now closed.)
 **Question asked:** *"If I hand folder 22 to an AI blindly, how much can it build, and where will it stall?"*
 
 ---
