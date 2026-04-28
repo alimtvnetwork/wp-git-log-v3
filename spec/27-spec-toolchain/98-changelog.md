@@ -1,10 +1,19 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.41.0
+**Version:** 2.42.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.42.0 — 2026-04-28 — Phase H1: §99 Summary freshness gate (15th strict CI gate)
+- **Action**: New validator `linter-scripts/check-99-summary-freshness.py` codifies the Phase 136/139 stale-prose lesson. Detects §99 modules whose `## Summary` block carries a `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20). Advisory-by-default for unstamped files (89/89 unstamped at H1 close → exit 0); becomes strict per-file as authors opt-in to the stamp.
+- **New artifacts**: `spec/27-spec-toolchain/26-check-99-summary-freshness.md` (slot 26, validator in 20-29 band — clean kind/range match, no slot-range exception); `linter-scripts/check-99-summary-freshness.py`; `linter-scripts/test/test-check-99-summary-freshness.sh` (11 assertions across 7 sandbox scenarios — synthetic isolation per Phase F3 `.sh`-only addendum).
+- **Lockstep (AC-31-31 4-way enumeration)**: `RUBRIC_VERSION` v2.23 → **v2.24**; QA tooling baseline footer extended row #15 + section title +H1; EXECUTIVE-SUMMARY.md "14 strict CI gates" → "15 strict CI gates"; `test-qa-baseline-footer.sh` awk pattern adds `/§99 Summary freshness gate/`. CI gate count **14 → 15**.
+- **Trace-map**: bound AC-26-01..05 → `check-99-summary-freshness.py`; ac_traced 69 → **74**, code_orphan 24 → **25** (new test sandbox script counted as orphan — acceptable, will be acknowledged in Phase 107 ledger if persistent). Baseline updated.
+- **Workflow design note**: only the gate itself is wired as a step (the `.sh` self-test is run via the existing self-test umbrella, not a separate workflow step — keeps gate count = footer rows = workflow steps at 15/15/15 per AC-31-28).
+- **Lockstep docs**: §00 v? → +1 row in Validators band; §98 v2.41.0 → **v2.42.0**; §99 v2.38.0 → **v2.39.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h1-99-summary-freshness-gate.md`.
+- **Verified**: `bash test-check-99-summary-freshness.sh` → 11/11 ✅; `bash test-qa-baseline-footer.sh` → 11/11 at 15-gate ✅; `bash test-overview-inventory-parity.sh` → 6/6 ✅; `bash test-readme-inventory.sh` → 22/22 at 8 self-tests ✅; `node check-tree-health.cjs --strict` → 168/168 ✅; `node check-lockstep.cjs` → 87/87 / 0 ✅; `python3 check-trace-map-regression.py` → ✅ at new baseline; `AUDIT_DETERMINISTIC=1 audit-spec-vs-code-v2.py` → mean 98.0/99.8 unchanged ✅.
 
 ### 2.41.0 — 2026-04-28 — Phase G3: AC-binding sweep batch 3 — final (15 trace entries; ac_traced 54→69, code_orphan 29→24)
 - **Action**: Bound 15 ACs into `linter-scripts/trace-map.toml` covering the final 5 toolchain scripts: AC-07-01..02 (`check-readme-canonicals.py`), AC-08-01..03 (`check-readme-install-section.py`), AC-09-01..02 (`check-memory-mirror-drift.py`), AC-12-01..03 (`suggest-spec-cross-link-fixes.py`), AC-23-01..05 (`scaffold-spec-module.cjs`). Pre-flight `ls linter-scripts/<name>.*` per the G2 lesson — caught `scaffold-spec-module.cjs` (not `.py`) before authoring.
