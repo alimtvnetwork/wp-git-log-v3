@@ -141,12 +141,12 @@ t8() {
     [[ "$out" == *"matches=1"* ]] && [[ "$out" == *"mismatches=0"* ]]
 }
 
-# T9 --json valid
+# T9 --json valid (Phase P20: also asserts stamped/stamped_failed keys)
 t9() {
     python3 "$GATE" --json 2>/dev/null | python3 -c "
 import json, sys
 d = json.load(sys.stdin)
-required = {'scanned','eligible','matches','mismatches','skipped_no_banner','skipped_no_release','details'}
+required = {'scanned','eligible','matches','mismatches','skipped_no_banner','skipped_no_release','stamped','stamped_failed','details'}
 sys.exit(0 if required.issubset(d.keys()) else 1)
 "
 }
@@ -161,6 +161,34 @@ t10() {
     [[ "$out" == *"scanned=0"* ]]
 }
 
+# T11 Phase P20: stamped §00 with mismatch FAILS even in default mode
+t11() {
+    local sb="$SANDBOX/t11/spec"
+    rm -rf "$SANDBOX/t11"; mkdir -p "$sb"
+    mk_module "$sb/mod" "1.2.3" "1.2.4" "heading" "200"
+    local out rc
+    out="$(python3 "$GATE" --spec-root "$sb" 2>&1)" && rc=0 || rc=$?
+    [[ $rc -eq 1 ]] && [[ "$out" == *"stamped=1"* ]] && [[ "$out" == *"stamped_failed=1"* ]] && [[ "$out" == *"(FAIL)"* ]]
+}
+
+# T12 Phase P20: stamped §00 with match passes (counts as stamped + match)
+t12() {
+    local sb="$SANDBOX/t12/spec"
+    rm -rf "$SANDBOX/t12"; mkdir -p "$sb"
+    mk_module "$sb/mod" "2.0.0" "2.0.0" "heading" "201"
+    local out rc
+    out="$(python3 "$GATE" --spec-root "$sb" 2>&1)" && rc=0 || rc=$?
+    [[ $rc -eq 0 ]] && [[ "$out" == *"matches=1"* ]] && [[ "$out" == *"stamped=1"* ]] && [[ "$out" == *"stamped_failed=0"* ]]
+}
+
+# T13 Phase P20: --report-only overrides per-file stamp failure
+t13() {
+    local sb="$SANDBOX/t13/spec"
+    rm -rf "$SANDBOX/t13"; mkdir -p "$sb"
+    mk_module "$sb/mod" "1.0.0" "1.0.1" "heading" "202"
+    python3 "$GATE" --spec-root "$sb" --report-only >/dev/null 2>&1
+}
+
 echo "test-check-version-parity.sh"
 run 1 t1
 run 2 t2
@@ -172,6 +200,9 @@ run 7 t7
 run 8 t8
 run 9 t9
 run 10 t10
+run 11 t11
+run 12 t12
+run 13 t13
 
 echo "──────────────────────────────"
 echo "PASS: $PASS    FAIL: $FAIL"
