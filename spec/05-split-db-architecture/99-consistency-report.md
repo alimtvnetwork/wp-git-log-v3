@@ -45,7 +45,7 @@ All internal cross-references resolve. ✅
 ---
 
 ## Summary
-
+<!-- verified-phase: 146 -->
 - **Errors:** 0
 - **Warnings:** 0 (legacy `98-acceptance-criteria.md` retained for traceability; superseded by §97 v4.0.0)
 - **Observations:** 1 — folder uses dual changelog files (`97-changelog.md` legacy + `98-changelog.md` Phase 16r); both retained.

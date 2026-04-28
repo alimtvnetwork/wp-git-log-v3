@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.42.1
+**Version:** 2.42.2
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.42.2 — 2026-04-28 — Phase H1-S2: §99 Summary stamp adoption batch 2 (5 modules; coverage 1/89 → 6/89)
+- **Action**: Second opt-in adoption batch. Pre-stamp audit of 6 candidates from H1-S1 backlog: `spec/02/99` skipped (no `## Summary` heading — gate doesn't track it), `spec/03/99` + `spec/05/99` + `spec/13/99` + `spec/14/99` + `spec/17/99` all confirmed materially-fresh (Errors:0 / Warnings:0 / Health 100/100 A+ — aligns with current tree-health 168/168 strict + rubric v2.24). No prose freshening required for any of the 5 — Summaries are minimal, accurate, and version-anchor-free (forward-resilient). Stamp `<!-- verified-phase: 146 -->` inserted directly under `## Summary` heading per H1 contract.
+- **Stamp coverage**: 1/89 → **6/89** §99 files stamped. Gate remains advisory project-wide (83 unstamped → exit 0); 6 stamped files now strict-tracked, budget delta 20 → expires near phase 166.
+- **Audit method validated**: H1-S1 rule held — read each Summary end-to-end, reconciled vs §97 / §00 / source-of-truth (current health metrics). All 5 found accurate, so no freshening edits needed; only stamp inserts. Distinguishes "stale-and-needs-rewrite" (H1-S1: root `spec/99`) from "fresh-and-ready-to-stamp" (H1-S2: 5 already-clean modules) — the audit step is the same; the resulting edit differs.
+- **Lockstep impact**: NONE. Stamp insertion is content-only addition under existing heading; does NOT change §99.Updated dates or trip L0/L1/L2 invariants. Verified: `node check-lockstep.cjs` 87/87 / 0 findings unchanged. NO §00 / §97 / §31 / AC-31-31 / rubric / trace-map / baseline implications. NO §98 / §99 banner bumps on stamped files (content-only, lockstep dates unaffected).
+- **Verified**: `python3 check-99-summary-freshness.py --report-only` → "stamped: 6; unstamped: 83 — within budget" ✅; `node check-lockstep.cjs` → 87/87 / 0 ✅; `node check-tree-health.cjs --strict` → 168/168 ✅. §27 §98 v2.42.1 → **v2.42.2** (patch — adoption-only). Memo: `.lovable/memory/audit/v2-deterministic/phase-h1-s2-summary-stamp-adoption-batch-2.md`.
 
 ### 2.42.1 — 2026-04-28 — Phase H1-S1: §99 Summary stamp adoption batch 1 (root spec/99 stamped + freshened)
 - **Action**: First opt-in adoption of the `<!-- verified-phase: NNN -->` stamp introduced by H1's freshness gate. Target: `spec/99-consistency-report.md` (root tree-wide rollup). Pre-stamp audit found the existing Summary block was materially stale — claimed `Health Score: 78/100 (B)` and `Warnings: 3` from the Phase 1 Triage era, while current truth is tree-health 168/168 strict, lockstep 87/87 / 0 findings, rubric v2.24, 15 strict CI gates. **Rule applied**: stamp asserts "narrative verified at phase NNN" — never stamp a stale block to silence the gate; freshen the prose first, then stamp. Both done in one edit.
