@@ -5,7 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Security Guidelines
 
-**Version:** 2.2.0  
+**Version:** 2.3.0  
+<!-- h10-verified-phase: 21 -->
 **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** High  

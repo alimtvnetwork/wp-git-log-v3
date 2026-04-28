@@ -9,6 +9,7 @@ All notable changes to the PHP Standards specification are documented here.
 ---
 
 ## 4.2.0 — 2026-04-27
+- **P21 sync** (2026-04-28): §00 banner version field bumped 3.3.0 → 4.2.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 21 -->` stamp added under §00 banner; no spec content change).
 
 - Phase 51: appended JSON Schema + typed enum contracts to overview to lift implementability score (no behavior change).
 

@@ -5,7 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Rust Coding Standards
 
-**Version:** 3.2.0  
+**Version:** 4.0.0  
+<!-- h10-verified-phase: 21 -->
 **Status:** Active  
 **Updated:** 2026-04-16  
 **AI Confidence:** Production-Ready  

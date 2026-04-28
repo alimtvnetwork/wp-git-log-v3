@@ -1,6 +1,7 @@
 # C# Coding Standards
 
-**Version:** 3.2.0  
+**Version:** 4.1.0  
+<!-- h10-verified-phase: 21 -->
 **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** High  
