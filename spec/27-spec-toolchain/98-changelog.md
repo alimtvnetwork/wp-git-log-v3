@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.42.5
+**Version:** 2.42.6
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.42.6 — 2026-04-28 — Phase H1-S6 (FINAL): §99 Summary stamp adoption batch 6 — residual sweep (5 modules stamped; H1 series CLOSED)
+- **Action**: Sixth and final opt-in adoption batch. Swept all 40 remaining unstamped §99 files project-wide. Found that **35 of 40 lack a `## Summary` heading entirely** — they follow an inventory-only rubric (`## File Inventory` / `## Module Inventory`) with no narrative summary block. The freshness gate intentionally scans only `## Summary` sections (per Phase H1 design), so these are **structurally exempt**, not eligible for stamping. Stamped the remaining 5 Summary-bearing files: `spec/05/02-features/99`, `spec/06/02-features/99`, `spec/12/01-browser-extension-deploy/99`, `spec/12/02-go-binary-deploy/99`, `spec/18/02-enums-and-coding-style/99`. All 5 confirmed materially-fresh.
+- **Stamp coverage**: 41/89 → **46/89** §99 files stamped (~52% all §99; **100% of the 46 trackable Summary-bearing files** — H1 adoption COMPLETE for in-scope corpus). 43 unstamped files structurally exempt; 0 eligible-but-unstamped remaining.
+- **Stale-discovery rate (final)**: H1-S1+S2+S3+S4+S5+S6 cumulative = **3/46 ≈ 6.5%** stale found across the entire opt-in adoption series. Bimodal distribution confirmed: well-maintained nested clusters (folders 02, 03) ≈ 0-5% stale; older one-off top-level modules ≈ 50-100% stale. Steady-state ~5-10%.
+- **Phase H1 series CLOSED**: 15th strict CI gate `check-99-summary-freshness.py` shipped (Phase H1 main); 46/46 trackable §99 Summary blocks now stamped + within budget. Gate continues advisory project-wide (43 exempt → exit 0). Future phases that materially change §99 prose MUST bump the stamp.
+- **Lockstep impact**: NONE on the 5 stamped target files. Verified.
+- **Verified**: `python3 check-99-summary-freshness.py` → "stamped: 46; unstamped: 43 — within budget" ✅; `node check-lockstep.cjs` → 87/87 / 0 findings ✅; `node check-tree-health.cjs --strict` → 168/168 strict-pass ✅. §27 §98 v2.42.5 → **v2.42.6** (patch — adoption-only). Memo: `.lovable/memory/audit/v2-deterministic/phase-h1-s6-summary-stamp-adoption-batch-6-CLOSED.md`.
 
 ### 2.42.5 — 2026-04-28 — Phase H1-S5: §99 Summary stamp adoption batch 5 — folder 03 cluster (19 modules; coverage 27/89 → 46/89; 1 stale freshen)
 - **Action**: Fifth opt-in adoption batch. Audited 19 unstamped §99 files under `spec/03-error-manage/`: `01-error-resolution/{root,03-retros,04-verification,05-debugging,app-issues}` (5), `02-error-architecture/{root,04-modal × 5,05-envelope,06-apperror × 2,07-logging}` (10), `03-error-code-registry/{root,07-schemas,08-linter-scripts,09-templates}` (4). 18 confirmed materially-fresh (Errors:0/Warnings:0/Health 100/100; 4 with non-empty Observations all factual — modal redirect-stub parents + deprecated-frozen `02-react-components.md`).
