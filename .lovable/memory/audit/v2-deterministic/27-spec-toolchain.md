@@ -31,7 +31,7 @@
   "kind": "meta-toolchain",
   "md_files": 46,
   "mmd_files": 1,
-  "overview_chars": 19077,
+  "overview_chars": 19286,
   "ac_chars": 18519,
   "ac_count": 24,
   "gwt_block_count": 24,
@@ -44,10 +44,10 @@
     "toml": 2,
     "json": 1,
     "plain": 7,
-    "powershell": 1,
-    "ini": 1,
     "markdown": 4,
-    "python": 1
+    "python": 1,
+    "powershell": 1,
+    "ini": 1
   },
   "has_sql_ddl": false,
   "has_json_schema": true,
