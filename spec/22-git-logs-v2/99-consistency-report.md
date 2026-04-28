@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.17
-**Updated:** 2026-04-28 (Phase P17 — GAP-V2-09 closed: §00 v3.8.8 → v3.8.9 added Cross-References row pointing to `spec/28-universal-ci-cli/`; §37 v1.4.0 → v1.5.0 marked GAP-V2-09 RESOLVED. 9 of 10 historical gaps now closed; only GAP-V2-05 (user-blocked App identity) remains. Cosmetic discoverability fix; no AC/DDL/schema/enum/error-code change. AC count unchanged at 77. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.18
+**Updated:** 2026-04-28 (Phase P18 — §03 admin UI rendering of state labels closed: §03 v2.2.0 → v2.3.0 added `## State-Transition Label Rendering` section + History column revision; §97 v3.9.3 → v3.9.4 added AC-77 binding the rendering contract to AC-73's enum + AC-74's NDJSON consumer for cross-consumer parity. AC count 77 → 78. Closes the last §99 v3.9.6+ open follow-up "(a)" — together with P16+P17 all consumer-side and lockstep follow-ups for the v2.9.x release line are now resolved. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
