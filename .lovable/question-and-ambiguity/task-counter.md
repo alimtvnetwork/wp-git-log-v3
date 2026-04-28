@@ -2,7 +2,7 @@
 
 **Budget:** 40 tasks
 **Activated:** 2026-04-28
-**Counter:** 0 / 40
+**Counter:** 1 / 40
 **Status:** 🟢 active
 
 ## Counting rule
@@ -19,6 +19,7 @@ This setup task (creating prompt-01 + index + folder scaffolding) is task
 | # | Date | Brief | Ambiguity notes filed |
 |---|------|-------|----------------------|
 | 0 | 2026-04-28 | Setup: prompt-01 + index + folder scaffolding | none |
+| 1 | 2026-04-28 | Phase 18 — tree-health drift sweep + trace-map rebaseline | 01-trace-map-plus-2-untraced-acs |
 
 ## Deactivation trigger
 
