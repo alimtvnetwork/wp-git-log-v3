@@ -61,18 +61,18 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 
 | Flag | Behavior |
 |---|---|
-| _(default)_ | Advisory; exit 0 even on mismatch. Emits one `(info)` line per mismatch. |
-| `--strict` | Exit 1 on any mismatch (CI gate when adoption matures). |
-| `--report-only` | Never fails (overrides `--strict`). Useful for dashboards. |
-| `--json` | Machine-readable output with `details[]` array. |
+| _(default)_ | Advisory tree-wide; exit 0 even on mismatch — UNLESS the mismatched §00 carries a Phase P20 `<!-- h10-verified-phase: NNN -->` stamp, in which case that file fails per-file strict and the gate exits 1. |
+| `--strict` | Exit 1 on any mismatch (tree-wide CI gate when adoption matures). |
+| `--report-only` | Never fails (overrides `--strict` AND per-file stamps). Useful for dashboards. |
+| `--json` | Machine-readable output with `details[]` array (each entry includes `stamped: <int|null>`); top-level `stamped` and `stamped_failed` counts. |
 | `--spec-root PATH` | Override scan root (used by self-test sandboxes). |
 
 ## Exit codes
 
 | Code | Meaning |
 |---|---|
-| 0 | Default mode, OR strict with zero mismatches, OR `--report-only` |
-| 1 | `--strict` mode AND at least one mismatch present |
+| 0 | Default mode with zero stamped failures, OR strict with zero mismatches, OR `--report-only` |
+| 1 | `--strict` mode AND any mismatch present, OR default mode AND any STAMPED §00 has a mismatch (per-file strict promotion) |
 | 2 | Structural error (spec root not found) |
 
 ## Output line shape
