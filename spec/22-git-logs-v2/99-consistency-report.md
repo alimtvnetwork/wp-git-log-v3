@@ -14,7 +14,7 @@
 | 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
-| 04-rest-api-endpoints.md | ✅ (v2.9.4 — Phase P2 §1.1 NDJSON ingest streaming wire format) |
+| 04-rest-api-endpoints.md | ✅ (v2.9.5 — Phase P3 Standard Ack Envelope `PreviousHasError` + field contract; Phase P2 §1.1 NDJSON ingest streaming wire format) |
 | 05-auth-and-validation.md | ✅ (CI/CD cross-ref) |
 | 06-migrations-and-logger.md | ✅ |
 | 07-app-entity.md | ✅ |
