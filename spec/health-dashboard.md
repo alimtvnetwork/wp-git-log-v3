@@ -1,12 +1,11 @@
 # Project-Wide Spec Health Dashboard
 
-**Generated:** 2026-04-25  
-**Total Files Scanned:** 734  
-**Total Folders:** 80  
-**Modules Audited:** 52  
+**Generated:** 2026-04-27  
+**Total Folders Inventoried:** 87 (in `dashboard-data.json`)  
+**Modules Audited:** 56  
 **Overall Health:** 100/100 (A+) 🎯 — measured by `linter-scripts/check-tree-health.cjs`
 
-> **v3.7.7 (2026-04-25):** 🎯 **PERFECT MEASURED SCORE.** Phase 2c complete — authored 43 missing `98-changelog.md` files via new `linter-scripts/fill-missing-changelogs.cjs`. Recommended files: 61/104 → **104/104 (100%)**. CI threshold raised to **100** (zero-tolerance). Three idempotent fillers + index regen + gate now run on every `bash linter-scripts/run.sh` and every PR via `.github/workflows/spec-health.yml`. **Score trajectory: 45 → 71 → 81 → 90 → 100 (+55 from F baseline)**. Persistence regressions are now self-healed automatically.
+> **v3.7.8 (2026-04-28, Phase 28):** Refreshed dashboard prose against `dashboard-data.json` (Generated 2026-04-27, RubricVersion 2.0.0, ModuleCount 56). Required + Recommended now **112/112** each (was stale 104/104 from the 52-module v3.7.7 snapshot). Allowlist count corrected to **9 prefixes** (matches `EXTERNAL_REPO_PREFIXES` in `linter-scripts/generate-dashboard-data.cjs`); the previous "12" included three narrative-only entries that are not in the source array. Score remains 100/100 strict.
 
 ---
 
@@ -15,10 +14,13 @@
 | Metric | Value |
 |--------|-------|
 | Score | **100/100 (A+)** 🎯 — measured |
-| Required files (00-overview + 99-consistency) | **104/104 (100%)** ✅ |
-| Recommended files (97-AC + 98-changelog) | **104/104 (100%)** ✅ |
+| Rubric Version | **2.0.0** (tree-health) |
+| Required files (00-overview + 99-consistency) | **112/112 (100%)** ✅ |
+| Recommended files (97-AC + 98-changelog) | **112/112 (100%)** ✅ |
+| Quality (depth + history + inventory) | **167/168 (99.4%)** ✅ |
+| Modules tracked | **56** |
 | Stale `spec-index.md` | 0 (auto-regen) |
-| CI gate threshold | **100** (locked v3.7.7) |
+| CI gate threshold | **100** (locked v3.7.7, strict-pass since Phase H1) |
 
 ---
 
