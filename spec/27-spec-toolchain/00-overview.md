@@ -74,7 +74,7 @@ Numbering convention inside this module:
 | 23 | [23-scaffold-spec-module.md](./23-scaffold-spec-module.md) | `linter-scripts/scaffold-spec-module.cjs` | Scaffold a NEW module skeleton (§00/§97/§98/§99) — passes `--strict` on first run (Phase 37) |
 | 24 | [24-check-lockstep.md](./24-check-lockstep.md) | `linter-scripts/check-lockstep.cjs` | Validator — enforces §00↔§98↔§99 sync (Phase 40 lockstep gate) |
 | 25 | [25-deepen-consistency-reports.md](./25-deepen-consistency-reports.md) | `linter-scripts/deepen-consistency-reports.py` | Filler: rewrite thin `99-consistency-report.md` files into the canonical 5-section shape — Phase 21 |
-| 26 | [26-check-99-summary-freshness.md](./26-check-99-summary-freshness.md) | `linter-scripts/check-99-summary-freshness.py` | Validator: flag stale `## Summary` claims via opt-in `<!-- verified-phase: NNN -->` stamps (Phase H1; advisory-then-strict) |
+| 26 | [26-check-99-summary-freshness.md](./26-check-99-summary-freshness.md) | `linter-scripts/check-99-summary-freshness.py` | Validator: flag stale `## Summary` / `## File Inventory` / `## Module Health` claims via opt-in `<!-- verified-phase: NNN -->` stamps (Phase H1; H2 widened scope to inventory rubrics + excluded `_archive/`; advisory-then-strict) |
 
 ### Auditors (AI-driven)
 

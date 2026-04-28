@@ -20,8 +20,21 @@ Codify the Phase 136/139 lesson into a CI gate: §99 `## Summary` narrative clai
 diverged from the source-of-truth (§97 ACs, §00 inventory) by 19 modules in
 Phase 136 before a manual sweep caught it.
 
-This validator detects §99 modules whose `## Summary` block carries a
+This validator detects §99 modules whose tracked block carries a
 `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20).
+
+**Phase H2 (2026-04-28)** widened the tracked-heading set from `## Summary`
+only to also accept inventory-rubric headings — the 35 §99 files that ship a
+`## File Inventory` / `## Module Health` table instead of a narrative Summary.
+The same stamp convention applies under any of these headings:
+
+- `## Summary` (narrative claims — the H1 original)
+- `## Module Health` (root `spec/02/99` style)
+- `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`,
+  `## Document Inventory`, `## Modules` (inventory-table styles)
+
+H2 also excludes `spec/_archive/**` from the scan — archived modules are
+intentionally frozen and stamping them would create false freshness signals.
 
 ## Stamp convention (opt-in, per file)
 
@@ -30,6 +43,17 @@ This validator detects §99 modules whose `## Summary` block carries a
 <!-- verified-phase: 147 -->
 
 …narrative claims about counts, versions, status flags…
+```
+
+or for inventory-rubric files:
+
+```markdown
+## File Inventory
+<!-- verified-phase: 147 -->
+
+| File | Present |
+|------|---------|
+| 00-overview.md | ✅ |
 ```
 
 Files **without** the stamp emit a per-file `info` line and do **not** fail —
@@ -92,6 +116,21 @@ Whichever yields the highest integer wins.
 - **When** the gate runs,
 - **Then** exit 2 with `ERROR: cannot determine current phase` on stderr.
 
+### AC-26-06 — Inventory-rubric headings accepted (Phase H2)
+- **Given** a §99 file whose `## File Inventory` (or `## Module Health` / `## Module Inventory` / `## Top-Level Modules` / `## Document Inventory` / `## Modules`) carries a fresh `<!-- verified-phase: NNN -->` stamp,
+- **When** the gate runs,
+- **Then** exit 0 with the file counted under `stamped:` — same as if the stamp lived under `## Summary`.
+
+### AC-26-07 — `spec/_archive/**` excluded from scan (Phase H2)
+- **Given** any `99-consistency-report.md` under `spec/_archive/`,
+- **When** the gate runs,
+- **Then** the file MUST NOT appear in scan/stamped/unstamped counts — archived modules are frozen and excluded by design.
+
+### AC-26-08 — Multi-block stamp scan (Phase H2)
+- **Given** a §99 file with multiple tracked headings (e.g. `## File Inventory` followed by `## Summary`) where the stamp lives under the second heading,
+- **When** the gate runs,
+- **Then** the stamp MUST be found and the file counted as `stamped:` (highest phase number wins if multiple stamps exist).
+
 ## Cross-references
 
 - §99 [`99-consistency-report.md`](./99-consistency-report.md) — health/inventory; this gate is itself listed in §99's File Inventory.
@@ -106,6 +145,14 @@ Slot 26 is a clean fit in the 20-29 validator/filler band (no exception needed,
 unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 
 ## Changelog
+
+### 1.1.0 — 2026-04-28 — Phase H2
+- **Widened tracked-heading set** from `## Summary` only to also accept inventory-rubric headings (`## Module Health`, `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`, `## Document Inventory`, `## Modules`). Previously-exempt 35 inventory-rubric §99 files are now stampable.
+- **Excluded `spec/_archive/**`** from scan — archived modules are frozen.
+- **Multi-block scan**: stamp under ANY tracked heading is accepted (highest stamp wins). Previously only the FIRST tracked heading was checked, which broke files where File Inventory appeared before Summary.
+- Added 3 new self-test cases (T8 stamp under Module Health, T9 stamp under File Inventory, T10 _archive/ exclusion).
+- Adoption sweep: 46/89 → **75/87** stamped (~86%); remaining 12 are audit-log-style §99 files with no inventory or summary heading (structurally exempt — no claims to drift).
+- Acceptance criteria additions: AC-26-06 (inventory-rubric headings accepted), AC-26-07 (`_archive/` excluded), AC-26-08 (multi-block scan).
 
 ### 1.0.0 — 2026-04-28 — Phase H1
 - Initial version. Advisory-mode gate with opt-in `<!-- verified-phase: NNN -->` stamps.

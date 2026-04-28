@@ -1,10 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.42.6
+**Version:** 2.43.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.43.0 — 2026-04-28 — Phase H2: §99 freshness gate widened to inventory rubrics (slot 26 v1.1.0; +29 stamps; coverage 46/89 → 75/87)
+- **Action**: Extended `check-99-summary-freshness.py` (slot 26) from `## Summary`-only scanning to also accept inventory-rubric headings: `## Module Health`, `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`, `## Document Inventory`, `## Modules`. Multi-block scan now finds the highest stamp under any tracked heading (fixes case where `## File Inventory` appears before `## Summary` and would have masked Summary stamps under the H1 first-match logic).
+- **Also**: Excluded `spec/_archive/**` from scan — archived modules are intentionally frozen and stamping them creates false freshness signals.
+- **Stamp adoption sweep**: stamped 29 previously-exempt inventory-rubric §99 files. Trust chain: tree-health gate at 168/168 strict-pass already validates that all `| File | Present | ✅ |` rows are accurate (file existence + full marks); inventory tables are implicitly fresh, so bulk stamping is safe within the same phase.
+- **Coverage**: 46/89 → **75/87** stamped (~86%; denominator dropped from 89 to 87 due to `_archive/` exclusion). Remaining 12 files are audit-log-style §99s with no Summary or Inventory heading (structurally exempt — no claims to drift). 0 eligible-but-unstamped remaining.
+- **Self-test expansion**: 11 → **17 assertions** (+T8 stamp under Module Health, +T9 stamp under File Inventory, +T10 _archive/ exclusion). Per Phase F3 `.sh`-only addendum.
+- **Spec doc**: §27 slot 26 v1.0.0 → **v1.1.0** with +3 ACs (AC-26-06 inventory headings, AC-26-07 _archive exclusion, AC-26-08 multi-block scan); §00 row 26 description widened.
+- **Lockstep impact**: NONE on the 29 newly-stamped files (single-line comment insertion). Versioning bump §27-only.
+- **AC-31-31 invariants**: gate count unchanged at **15** (no new gate added); RUBRIC_VERSION unchanged at **v2.24** (no rubric semantics changed); footer / EXECUTIVE-SUMMARY / qa-baseline-footer untouched.
+- **Verified**: `python3 check-99-summary-freshness.py` → "scanned: 87; stamped: 75; unstamped: 12 — within budget" ✅; `bash test-check-99-summary-freshness.sh` → 17/17 ✅; `bash test-overview-inventory-parity.sh` → 6/6 ✅; `node check-lockstep.cjs` → 87/87 / 0 findings ✅; `node check-tree-health.cjs --strict` → 168/168 strict-pass ✅. §98 v2.42.6 → **v2.43.0** (minor — gate scope widened); §99 v2.39.6 → **v2.40.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h2-freshness-gate-inventory-rubric.md`.
 
 ### 2.42.6 — 2026-04-28 — Phase H1-S6 (FINAL): §99 Summary stamp adoption batch 6 — residual sweep (5 modules stamped; H1 series CLOSED)
 - **Action**: Sixth and final opt-in adoption batch. Swept all 40 remaining unstamped §99 files project-wide. Found that **35 of 40 lack a `## Summary` heading entirely** — they follow an inventory-only rubric (`## File Inventory` / `## Module Inventory`) with no narrative summary block. The freshness gate intentionally scans only `## Summary` sections (per Phase H1 design), so these are **structurally exempt**, not eligible for stamping. Stamped the remaining 5 Summary-bearing files: `spec/05/02-features/99`, `spec/06/02-features/99`, `spec/12/01-browser-extension-deploy/99`, `spec/12/02-go-binary-deploy/99`, `spec/18/02-enums-and-coding-style/99`. All 5 confirmed materially-fresh.

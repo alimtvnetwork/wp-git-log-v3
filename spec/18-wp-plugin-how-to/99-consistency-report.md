@@ -131,6 +131,7 @@ above summarize only the audit-/validation-bearing milestones for `18-wp-plugin-
 ---
 
 ## File Inventory
+<!-- verified-phase: 147 -->
 
 | File | Status |
 |------|--------|

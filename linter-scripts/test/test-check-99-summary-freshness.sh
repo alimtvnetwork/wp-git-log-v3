@@ -27,13 +27,16 @@ assert() {
 
 echo "== test-check-99-summary-freshness.sh =="
 
-# --- T1: real-tree run (default mode) — should exit 0 since 0 stamped files at H1 close
+# --- T1: real-tree run (default mode) — should exit 0 (Phase H2: gate now
+# scans all §99 files except _archive/ and accepts stamps under Summary OR
+# inventory-rubric headings; assert structural shape only, not exact counts
+# which churn as adoption progresses).
 set +e
-python3 "$GATE" >/tmp/h1-out 2>&1
+PYTHONIOENCODING=utf-8 python3 "$GATE" >/tmp/h1-out 2>&1
 RC=$?
 set -e
-assert "T1 real-tree default mode exits 0 (89 unstamped, 0 stamped)" "$RC" "0"
-grep -q "unstamped: 89" /tmp/h1-out && echo "  ✓ T1 reports 89 unstamped" || { echo "  ✗ T1 unstamped count missing"; FAIL=$((FAIL+1)); }
+assert "T1 real-tree default mode exits 0" "$RC" "0"
+grep -qE "§99 files scanned: [0-9]+; stamped: [0-9]+; unstamped: [0-9]+" /tmp/h1-out && echo "  ✓ T1 reports scan/stamped/unstamped counts" || { echo "  ✗ T1 counts line missing"; FAIL=$((FAIL+1)); }
 
 # --- T2: real-tree --report-only also exits 0
 set +e
@@ -107,6 +110,58 @@ assert "T7 stamped+fresh (delta 5, max 20) exits 0" "$RC" "0"
 grep -q "stamped: 1" /tmp/h1-out \
   && { echo "  ✓ T7 counts 1 stamped"; PASS=$((PASS+1)); } \
   || { echo "  ✗ T7 stamped count missing"; FAIL=$((FAIL+1)); }
+
+# --- T8 (Phase H2): stamp under ## Module Health is accepted (inventory rubric)
+cat > "$SANDBOX/spec/test-folder/99-consistency-report.md" <<'MD'
+# Test §99
+## Module Health
+<!-- verified-phase: 195 -->
+Inventory rubric, no narrative summary.
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T8 (H2) stamp under ## Module Health accepted (exits 0)" "$RC" "0"
+grep -q "stamped: 1" /tmp/h1-out \
+  && { echo "  ✓ T8 counts 1 stamped under inventory rubric"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T8 inventory-rubric stamp not counted"; FAIL=$((FAIL+1)); }
+
+# --- T9 (Phase H2): stamp under ## File Inventory also accepted
+cat > "$SANDBOX/spec/test-folder/99-consistency-report.md" <<'MD'
+# Test §99
+## File Inventory
+<!-- verified-phase: 195 -->
+
+| File | Present |
+|------|---------|
+| 00-overview.md | ✅ |
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T9 (H2) stamp under ## File Inventory accepted (exits 0)" "$RC" "0"
+grep -q "stamped: 1" /tmp/h1-out \
+  && { echo "  ✓ T9 counts 1 stamped under File Inventory"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T9 File-Inventory stamp not counted"; FAIL=$((FAIL+1)); }
+
+# --- T10 (Phase H2): _archive/ files are excluded from scan
+mkdir -p "$SANDBOX/spec/_archive/old-folder"
+cat > "$SANDBOX/spec/_archive/old-folder/99-consistency-report.md" <<'MD'
+# Archived §99
+## Summary
+Stale archived content with no stamp — must be excluded.
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T10 (H2) _archive/ excluded (still exits 0)" "$RC" "0"
+# Should still report exactly 1 file scanned (the test-folder one), not 2.
+grep -q "files scanned: 1" /tmp/h1-out \
+  && { echo "  ✓ T10 _archive/ excluded from scan count"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T10 _archive/ leaked into scan"; FAIL=$((FAIL+1)); }
 
 echo
 echo "Results: $PASS passed, $FAIL failed"

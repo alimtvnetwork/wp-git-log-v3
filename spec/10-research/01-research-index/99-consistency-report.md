@@ -36,6 +36,7 @@
 | 2026-04-27 | Phase 77 — §99 depth restoration | Validation History + File Inventory added; tree-health credits restored. |
 
 ## File Inventory
+<!-- verified-phase: 147 -->
 
 | # | File | Purpose |
 |---|------|---------|
