@@ -6,7 +6,7 @@ Never touch `.release/`. Bump at least minor version on code changes.
 Do NOT append boilerplate "If you have any question..." or "Do you understand?..." blocks.
 Always list remaining tasks at end of session; on `next`, find pending work from memory if task list is empty.
 Spec edits keep these in lockstep: target file banner + §98 changelog row + §99 health/inventory + `mem://specs/git-logs.md` queued-decisions trail.
-File slots are immutable once shipped — never reuse a number; if content moves, rename the slot and add a §99 audit row (precedent: §16 → §37 in v2.8.6; Phase 130 caught a slot-32 collision pre-commit).
+File slots are immutable once shipped — never reuse a number; if content moves, rename the slot and add a §99 audit row (precedent: §16 → §37 in v2.8.6; Phase 130 caught a slot-32 collision pre-commit). **Co-location precedent (Phase 47, re-confirmed 2026-04-28)**: when TWO folders ship at the same slot before the collision is noticed (e.g. `02-coding-guidelines/06-ai-optimization/` + `06-cicd-integration/`), the immutability rule **forbids rename** — both retain the slot, disambiguate by trailing slug, document in §00/§99 inventory. **B2 PERMANENTLY CLOSED — do NOT re-surface as actionable in `next` cycles.**
 When §99 has duplicate inventory blocks, prefer removing the stale one over patching it (precedent: Phase 135 removed bottom block missing 12 rows).
 §99 inventory heading must match `(File Inventory|Module Inventory|Top-Level Modules|Document Inventory|Modules)` — bare `## Inventory` silently loses the rubric-v2 inventory credit (precedent: Phase 137 recovered 168/168).
 Run `check-tree-health.cjs --strict` periodically — default mode rounds to 100 even when one module slips.
