@@ -111,3 +111,15 @@
 21-git-logs-v1
 22-app-issues
 29-app-issues-cli
+
+# --- Phase 143: deprecated/typo-example folder names used as DELIBERATE
+# negative examples in §27 linter specs (the linter spec uses these exact
+# strings to demonstrate what the checker should catch). They are
+# documentation-only by design — the spec USES the missing-folder name
+# inside its own GWT body. ---
+# 12-cicd-pipelines  → spec/27-spec-toolchain/02-check-spec-folder-refs.md AC GWT (typo example for 12-cicd-pipeline-workflows)
+# 14-generic-update  → spec/27-spec-toolchain/04-check-forbidden-spec-paths.md (deprecated pre-consolidation, merged into 14-update on 2026-04-17)
+# 15-self-update-app-update → spec/27-spec-toolchain/04-check-forbidden-spec-paths.md (same deprecation)
+12-cicd-pipelines
+14-generic-update
+15-self-update-app-update
