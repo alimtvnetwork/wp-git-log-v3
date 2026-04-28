@@ -189,7 +189,7 @@ Legend: ✅ kept, ✏ changed shape, ❌ removed, ➕ new in v2.
 | 3 | GAP-V2-04 (`PreviousHasError` in ack) | `04-rest-api-endpoints.md` + `17-openapi.yaml` | 10m | +3 |
 | 4 | GAP-V2-03 (streaming wire format) | `04-rest-api-endpoints.md` §1 | 15m | +3 |
 | 5 | GAP-V2-02 (TS enum mirror) | `01-glossary-and-enums.md` | 15m | +2 |
-| 6 | GAP-V2-06 (5 stub files for §09–§13) | `spec/22-git-logs-v2/0{9..13}-*.md` | 10m | +2 |
+| 6 | ~~GAP-V2-06 (5 stub files for §09–§13)~~ ✅ Phase P6 2026-04-28 — REJECTED, locked-vacant precedent retained; AC-22-LV1 prohibition added | `spec/22-git-logs-v2/97-acceptance-criteria.md` | n/a | n/a |
 | 7 | GAP-V2-10 (rate-limit caps in §04) | `04-rest-api-endpoints.md` | 10m | +2 |
 | 8 | GAP-V2-08 (rename `16-seed-data` → `37`) | filesystem + grep cross-refs | 5m | +1 |
 | 9 | ~~GAP-V2-07 (resolve 2 TODO markers)~~ ✅ Phase 39b 2026-04-27 | `30-threat-model.md`, `32-cli-test-plan.md`, `16-seed-data.md` | 10m | +1 |
