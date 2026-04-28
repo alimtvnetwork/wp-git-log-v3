@@ -1,10 +1,20 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.44.0
+**Version:** 2.45.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.45.0 — 2026-04-28 — Phase H5: §99 stamp-bump gate CI wiring (AC-31-31 cascade; gate 15→16; RUBRIC v2.24→v2.25)
+- **Action**: Wired Phase H4's `check-99-stamp-bump.py` validator + `test-check-99-stamp-bump.sh` self-test into `.github/workflows/spec-health.yml` as the **16th strict CI gate**, completing the H4 → H5 split (H4 shipped the tool; H5 ships the enforcement).
+- **Workflow step**: single collapsed step `§99 Stamp-bump gate (Phase H5)` running self-test always + validator only on `pull_request` events (push-to-main has no diff base). Per the H1 workflow-step parity lesson — single-gate self-tests collapse into the parent gate step (only broader-contract tests #5–#7, #9, #10, #12, #13 get standalone steps).
+- **Checkout fetch-depth**: bumped from default (1) to `0` so `git diff $BASE_REF...HEAD` resolves the PR base SHA.
+- **AC-31-31 cascade**: `RUBRIC_VERSION` v2.24 → **v2.25**; QA-tooling-baseline footer 15 → **16 strict CI gates** (entry #16 added); EXECUTIVE-SUMMARY back-reference updated; `test/test-qa-baseline-footer.sh` awk pattern gains `/§99 Stamp-bump gate/`. Footer rows = workflow steps = declared count = **16 / 16 / 16** (parity preserved).
+- **Self-test (footer parity)**: 11/11 ✅ — `Workflow gates: 16, Footer rows: 16, Declared: 16`.
+- **Verified (full gate suite)**: H5 self-test 23/23 ✅; H1 freshness 75 stamped / 0 stale ✅; QA-baseline-footer 11/11 ✅; lockstep 87/87 / 0 findings ✅; tree-health 168/168 strict ✅; audit mean 98.0/99.8 ✅; trace-map regression ✅ at unchanged baseline `{ac_total:1315, ac_traced:85, code_total:50, code_orphan:26}`.
+- **No spec-content drift**: gate count is the only artifact requiring manual updates across the cascade; everything else flows from `RUBRIC_VERSION` constant + footer enumeration. No §99 stamp re-bumps required (this phase doesn't materially edit any §99 narrative claim — only §27's freshly-stamped slot-27 doc is affected, already at H4 phase).
+- §98 v2.44.0 → **v2.45.0** (minor — CI gate count delta); §99 v2.41.0 → **v2.42.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h5-stamp-bump-ci-wiring.md`.
 
 ### 2.44.0 — 2026-04-28 — Phase H4: stamp-bump enforcement gate (slot 27 v1.0.0; sister event-based gate to slot 26)
 - **Action**: New validator `linter-scripts/check-99-stamp-bump.py` — turns the H1/H2 honor-system into a CI check. When a §99 file is materially edited (any non-stamp line changed in `git diff $BASE_REF...HEAD`), the `<!-- verified-phase: NNN -->` stamp MUST be bumped to current phase in the same diff. Two-layer defense with slot-26: snapshot freshness (`--max-age 20`) + event-based bump-on-edit (budget 0).
