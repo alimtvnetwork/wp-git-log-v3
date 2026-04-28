@@ -94,6 +94,20 @@
         "symbol": "main"
       }
     ],
+    "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-05": [
+      {
+        "file": "linter-scripts/generate-dashboard-data.cjs",
+        "kind": "function",
+        "note": "P44 ported strip_inline_code semantics from check-spec-cross-links.py; P45 mechanically locks parity via 8-fixture self-test (17 assertions).",
+        "symbol": "blankInlineCode"
+      },
+      {
+        "file": "linter-scripts/test/test-inline-code-blanking-parity.sh",
+        "kind": "function",
+        "note": "P44 ported strip_inline_code semantics from check-spec-cross-links.py; P45 mechanically locks parity via 8-fixture self-test (17 assertions).",
+        "symbol": "blankInlineCode"
+      }
+    ],
     "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-01": [
       {
         "file": "linter-scripts/suggest-spec-cross-link-fixes.py",
@@ -849,6 +863,9 @@
       "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02",
       "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03"
     ],
+    "linter-scripts/generate-dashboard-data.cjs": [
+      "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-05"
+    ],
     "linter-scripts/generate-fix-checklist.py": [
       "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-01",
       "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-02",
@@ -896,6 +913,9 @@
       "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-03",
       "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-04",
       "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-05"
+    ],
+    "linter-scripts/test/test-inline-code-blanking-parity.sh": [
+      "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-05"
     ]
   },
   "drift": [
@@ -1993,7 +2013,6 @@
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-02",
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-03",
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-04",
-    "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-05",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-01",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-02",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-03",
@@ -2173,7 +2192,6 @@
     "linter-scripts/check-root-readme.py",
     "linter-scripts/check-version-parity.py",
     "linter-scripts/forbidden-strings.toml",
-    "linter-scripts/generate-dashboard-data.cjs",
     "linter-scripts/generate-spec-index.cjs",
     "linter-scripts/generate-trace-map.py",
     "linter-scripts/run.ps1",
@@ -2187,7 +2205,6 @@
     "linter-scripts/test/test-check-spec-cross-links.sh",
     "linter-scripts/test/test-check-spec-folder-refs.py",
     "linter-scripts/test/test-check-version-parity.sh",
-    "linter-scripts/test/test-inline-code-blanking-parity.sh",
     "linter-scripts/test/test-overview-inventory-parity.sh",
     "linter-scripts/test/test-qa-baseline-footer.sh",
     "linter-scripts/test/test-readme-inventory.sh",
@@ -2197,14 +2214,14 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1259,
+    "ac_drifted": 1258,
     "ac_total": 1349,
-    "ac_traced": 90,
-    "code_orphan": 31,
-    "code_referenced": 25,
+    "ac_traced": 91,
+    "code_orphan": 29,
+    "code_referenced": 27,
     "code_total": 56,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 90
+    "trace_entries": 91
   }
 }

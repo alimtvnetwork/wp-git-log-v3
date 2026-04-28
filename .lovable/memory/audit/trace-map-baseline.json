@@ -1,13 +1,13 @@
 {
   "summary": {
-    "ac_drifted": 1259,
+    "ac_drifted": 1258,
     "ac_total": 1349,
-    "ac_traced": 90,
-    "code_orphan": 31,
-    "code_referenced": 25,
+    "ac_traced": 91,
+    "code_orphan": 29,
+    "code_referenced": 27,
     "code_total": 56,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 90
+    "trace_entries": 91
   }
 }
