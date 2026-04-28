@@ -91,15 +91,23 @@
 # spec's own demonstration table. Verified each as "deliberate fake path
 # used to demonstrate the checker / audit narrative", not a typo or
 # planned future module. ---
-04-some-feature        # spec/17-consolidated-guidelines/31-full-tree-ai-audit-v4.md §3 narrative example
-30-cross-repo-foo      # spec/27-spec-toolchain/62-spec-folder-refs-allowlist.md §[external] example row
-31-cross-repo-bar      # spec/27-spec-toolchain/62-spec-folder-refs-allowlist.md §[external] example row
-99-nonexistent         # spec/27-spec-toolchain/02-check-spec-folder-refs.md AC GWT body
+# 04-some-feature  → spec/17-consolidated-guidelines/31-full-tree-ai-audit-v4.md §3 narrative example
+# 30-cross-repo-foo  → spec/27-spec-toolchain/62-spec-folder-refs-allowlist.md §[external] example row
+# 31-cross-repo-bar  → spec/27-spec-toolchain/62-spec-folder-refs-allowlist.md §[external] example row
+# 99-nonexistent  → spec/27-spec-toolchain/02-check-spec-folder-refs.md AC GWT body
+04-some-feature
+30-cross-repo-foo
+31-cross-repo-bar
+99-nonexistent
 
 # --- Phase 143: archived/historical folder names that survive only in
 # audit memos and the v1-archive readme. These are intentional pointers
 # to the project's pre-renumbering past and the archived v1 spec. ---
-21-git-logs            # spec/17-consolidated-guidelines/33-full-tree-ai-audit-v5.md historical reference
-21-git-logs-v1         # spec/22-git-logs-v2/36-why-v1-archived.md → archived under spec/_archive/21-git-logs-v1/
-22-app-issues          # .lovable/memory/specs/full-tree-audit-v4.md historical reference (current name: 25-app-issues)
-29-app-issues-cli      # .lovable/memory/audit/v2-deterministic/phase-126-folder-17-enumeration-sweep.md historical reference
+# 21-git-logs     → spec/17-consolidated-guidelines/33-full-tree-ai-audit-v5.md historical reference
+# 21-git-logs-v1  → spec/22-git-logs-v2/36-why-v1-archived.md → archived under spec/_archive/21-git-logs-v1/
+# 22-app-issues   → .lovable/memory/specs/full-tree-audit-v4.md historical reference (current name: 25-app-issues)
+# 29-app-issues-cli → .lovable/memory/audit/v2-deterministic/phase-126-folder-17-enumeration-sweep.md historical reference
+21-git-logs
+21-git-logs-v1
+22-app-issues
+29-app-issues-cli
