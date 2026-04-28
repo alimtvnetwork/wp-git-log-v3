@@ -38,7 +38,8 @@ We previously had 8 `.mmd` files but several overlapped:
 | 07 | [07-rate-limit-flow.mmd](./07-rate-limit-flow.mmd) | sequenceDiagram | Per-Profile token-bucket: refill, allow/deny, 429 + Retry-After |
 | 08 | [08-encryption-v3-flow.mmd](./08-encryption-v3-flow.mmd) | flowchart | v3 deferred: MasterKey → DataKey → LookupKey + MigrationState |
 | 09 | [09-endpoints-mindmap.mmd](./09-endpoints-mindmap.mmd) | **mindmap** | **NEW v2.0.0** — all 8 REST endpoints in one page: verb, path, body fields, response, auth, permission, audit, error codes |
-| 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | — | AC-D-01..AC-D-09 |
+| 10 | [10-ssh-auth-validation.mmd](./10-ssh-auth-validation.mmd) | flowchart TD | **NEW v2.4.0 (Phase P10)** — Lane B SSH-key auth 10-step server validation order with all GL-SSH-* / GL-AUTH-* / GL-APP-* reject codes (mirrors §05 for the SSH branch; authoritative source §31) |
+| 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | — | AC-DG-01..AC-DG-21 |
 | 98 | [98-changelog.md](./98-changelog.md) | — | Version history |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | — | Health/structure |
 
