@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-28 (Phase H1 — added `test-check-99-summary-freshness.sh` for §26 freshness gate; total 8 self-tests)
+**Last updated:** 2026-04-28 (Phase H7 — added `test-archive-exclusion-runtime.sh` codifying the H6 runtime-probe lesson as a standing CI gate; total 10 self-tests)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -48,8 +48,9 @@ PR so any regression fails the build at the assertion level (with
 | 7 | [`test-weights-parity.sh`](./test-weights-parity.sh) | 113 | The 7-dimension `WEIGHTS` triangle: `audit-spec-vs-code-v2.py` `WEIGHTS` dict ↔ `generate-gate-report.py` `WEIGHTS` dict ↔ `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` `## Weights` table — pairwise dict-equality + AC-31-02 invariants (impl == 35, total == 100) + dimension count == 7 | 8 | ~1 s | [AC-31-31 row #4](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md) (extends [AC-31-02](../../spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md)) |
 | 8 | [`test-check-99-summary-freshness.sh`](./test-check-99-summary-freshness.sh) | H1 | §26 `check-99-summary-freshness.py` exit-code contract: unstamped files don't fail (advisory), stamped+stale files exit 1 in strict mode and 0 with `--report-only`, stamped+fresh files exit 0, missing-phase-token exits 2. Phase H2 widened to inventory rubrics + `_archive/` exclusion (T8/T9/T10). Synthetic sandbox. | 17 | ~1 s | [AC-26-01..08](../../spec/27-spec-toolchain/26-check-99-summary-freshness.md) |
 | 9 | [`test-check-99-stamp-bump.sh`](./test-check-99-stamp-bump.sh) | H4 | §27 `check-99-stamp-bump.py` exit-code contract: empty/unstamped/stamp-only diffs skip (exit 0); materially-edited stamped files without bump exit 1; `--report-only` never fails; `_archive/` excluded; bad base-ref/missing phase token exit 2. Uses `--changed-files` test injection to bypass git (sandbox forbids `git add`). | 23 | ~1 s | [AC-27-01..08](../../spec/27-spec-toolchain/27-check-99-stamp-bump.md) |
+| 10 | [`test-archive-exclusion-runtime.sh`](./test-archive-exclusion-runtime.sh) | H7 | §28 runtime archive-exclusion gate: every spec-traversing linter MUST exclude `spec/_archive/` at RUNTIME (not just by source-reading). importlib-loads 3 critical linters (`check-99-summary-freshness.find_99_files()`, `audit-spec-vs-code-v2.ALL_MODULES`, `generate-trace-map.collect_ac_ids()`), calls each enumerator, asserts 0 archive-leaked results. Floor: probe count ≥ 3. Codifies the H6 lesson "runtime > source verification". | 10 | ~3 s | [AC-28-01..05](../../spec/27-spec-toolchain/28-check-archive-exclusion-runtime.md) |
 
-**Totals:** 9 scripts · 100+ assertions · ~29 s of CI time.
+**Totals:** 10 scripts · 110+ assertions · ~32 s of CI time.
 
 All eight scripts are wired into [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml)
 as discrete steps (named `Audit CLI threshold contract self-test (Phase 91)`,
