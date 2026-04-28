@@ -81,6 +81,45 @@
 - **Effect**: insert `LogEntry` + `ErrorLogEntry` rows; if `HasError=true`, set `Pipeline.HasError=1`. Append `History` (ActionType=`Append`) and `Action` row.
 - **Response**: standard ack with `Retrieval`.
 
+### 1.1 Streaming wire format (v2.9.4 — Phase P2)
+
+When the client wants to stream `Logs`/`ErrorLogs` incrementally instead of buffering the full request body, it MUST opt in via a sentinel header and use NDJSON framing. This pins the byte-level contract referenced by `28-universal-ci-cli/06-log-shipping-contract.md` (AC-28-06).
+
+| Field | Value | Notes |
+|-------|-------|-------|
+| Request header | `X-GL-Stream: 1` | Sentinel — without it the body MUST be a single JSON object as in §1 above |
+| `Content-Type` | `application/x-ndjson; charset=utf-8` | Required iff `X-GL-Stream: 1` is present |
+| `Transfer-Encoding` | `chunked` | Required iff `X-GL-Stream: 1` is present; `Content-Length` MUST be absent |
+| Frame separator | exactly one `\n` (LF, U+000A) | Never CRLF; trailing LF on last frame allowed but not required |
+
+**Frame sequence (in order):**
+
+1. **`StreamHeader`** frame (exactly one, first):
+   ```json
+   {"StreamHeader":true,"RepoUrl":"…","RootRepo":"…","Branch":"main","TempToken":"…","Token":"…","PipelineName":"build","GitSha256":"abc123…","FilePaths":["src/foo.ts"]}
+   ```
+   Carries the same identity fields as the buffered §1 body MINUS `Logs`, `ErrorLogs`, `HasError`.
+2. **`Line`** frames (zero or more):
+   ```json
+   {"Line":"build started","Severity":"Info"}
+   {"Line":"missing dep","Severity":"Error"}
+   ```
+   `Severity` MUST be `"Info"` or `"Error"` (mirrors §01 `LogSeverity` enum). Server routes to `LogEntry` vs `ErrorLogEntry` accordingly.
+3. **`StreamFooter`** frame (exactly one, last):
+   ```json
+   {"StreamFooter":true,"HasError":true}
+   ```
+   `HasError` is authoritative — server sets `Pipeline.HasError` from this field, NOT from any per-`Line` severity tally. This makes "stream of all-Info lines but final HasError=true" a valid, lossless representation.
+
+**Server behavior:**
+
+- Server MUST validate `StreamHeader` BEFORE processing any `Line` frames; if `StreamHeader` is missing, malformed, or appears after a `Line` frame, respond `400` with `GL-STREAM-NO-HEADER`.
+- Server MUST close the request and respond `400` with `GL-STREAM-NO-FOOTER` if EOF arrives before a `StreamFooter` frame; partial inserts MUST be rolled back.
+- Server MUST reject (`413` `GL-STREAM-TOO-MANY-LINES`) once line count exceeds `NdjsonMaxRowsPerStream` (§11.4); cap reuse is intentional — same backpressure ceiling for ingest and retrieval.
+- Server MUST ignore unknown frame keys (forward-compatible) but MUST reject unknown frame discriminators (`{"Foo":true,…}` with no recognized leading key) with `GL-STREAM-UNKNOWN-FRAME`.
+
+**Response:** standard ack envelope per §Common — buffered, NOT streamed. The `Retrieval` hint is computed after the `StreamFooter` is consumed.
+
 ## 2. PUT /fixed-log
 
 **Body**
