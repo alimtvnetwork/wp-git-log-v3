@@ -111,7 +111,58 @@ grep -q "stamped: 1" /tmp/h1-out \
   && { echo "  ✓ T7 counts 1 stamped"; PASS=$((PASS+1)); } \
   || { echo "  ✗ T7 stamped count missing"; FAIL=$((FAIL+1)); }
 
-echo
-echo "Results: $PASS passed, $FAIL failed"
+# --- T8 (Phase H2): stamp under ## Module Health is accepted (inventory rubric)
+cat > "$SANDBOX/spec/test-folder/99-consistency-report.md" <<'MD'
+# Test §99
+## Module Health
+<!-- verified-phase: 195 -->
+Inventory rubric, no narrative summary.
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T8 (H2) stamp under ## Module Health accepted (exits 0)" "$RC" "0"
+grep -q "stamped: 1" /tmp/h1-out \
+  && { echo "  ✓ T8 counts 1 stamped under inventory rubric"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T8 inventory-rubric stamp not counted"; FAIL=$((FAIL+1)); }
+
+# --- T9 (Phase H2): stamp under ## File Inventory also accepted
+cat > "$SANDBOX/spec/test-folder/99-consistency-report.md" <<'MD'
+# Test §99
+## File Inventory
+<!-- verified-phase: 195 -->
+
+| File | Present |
+|------|---------|
+| 00-overview.md | ✅ |
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T9 (H2) stamp under ## File Inventory accepted (exits 0)" "$RC" "0"
+grep -q "stamped: 1" /tmp/h1-out \
+  && { echo "  ✓ T9 counts 1 stamped under File Inventory"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T9 File-Inventory stamp not counted"; FAIL=$((FAIL+1)); }
+
+# --- T10 (Phase H2): _archive/ files are excluded from scan
+mkdir -p "$SANDBOX/spec/_archive/old-folder"
+cat > "$SANDBOX/spec/_archive/old-folder/99-consistency-report.md" <<'MD'
+# Archived §99
+## Summary
+Stale archived content with no stamp — must be excluded.
+MD
+set +e
+python3 "$SANDBOX/check.py" >/tmp/h1-out 2>&1
+RC=$?
+set -e
+assert "T10 (H2) _archive/ excluded (still exits 0)" "$RC" "0"
+# Should still report exactly 1 file scanned (the test-folder one), not 2.
+grep -q "files scanned: 1" /tmp/h1-out \
+  && { echo "  ✓ T10 _archive/ excluded from scan count"; PASS=$((PASS+1)); } \
+  || { echo "  ✗ T10 _archive/ leaked into scan"; FAIL=$((FAIL+1)); }
+
+
 if [[ "$FAIL" -gt 0 ]]; then exit 1; fi
 echo "✅ §26 freshness gate self-test green."
