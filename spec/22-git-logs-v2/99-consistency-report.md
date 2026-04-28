@@ -25,7 +25,7 @@
 | 12-wp-plugin-scaffold.md | ⚠️ Referenced; PSR-4 layout described in `mem://specs/git-logs.md` |
 | 13-v1-vs-v2-mapping.md | ⚠️ Referenced; v1 deltas captured in changelog + `21-git-logs/` legacy banner |
 | 14-endpoint-examples.md | ✅ |
-| 15-error-codes.md | ✅ (4 new auth codes added in v2.6) |
+| 15-error-codes.md | ✅ (v2.9.4 — Phase P16 added `## Streaming ingest (Lane B — see §04 §1.2)` section with 4 `GL-STREAM-*` codes) |
 | 16-seed-data.md | ✅ (sole occupant of slot 16 since Phase P5 collision resolution) |
 | 17-openapi.yaml | ✅ (v2.9.5 — Phase P3 `AckResponse.PreviousHasError` REQUIRED) |
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
