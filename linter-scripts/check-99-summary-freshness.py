@@ -47,7 +47,14 @@ CHANGELOG_27 = SPEC / "27-spec-toolchain" / "98-changelog.md"
 
 PHASE_RE = re.compile(r"\bPhase\s+(\d{1,4})\b")
 STAMP_RE = re.compile(r"<!--\s*verified-phase:\s*(\d{1,4})\s*-->")
-SUMMARY_HEADING_RE = re.compile(r"^##+\s+Summary\b", re.MULTILINE)
+# Phase H2 (2026-04-28): widened from `## Summary` only to also cover
+# inventory-rubric blocks (the 43 §99 files that ship inventory tables instead
+# of a narrative Summary). The stamp may live under any of these headings.
+TRACKED_HEADING_RE = re.compile(
+    r"^##+\s+(Summary|Module Health|File Inventory|Module Inventory|"
+    r"Top-Level Modules|Document Inventory|Modules)\b",
+    re.MULTILINE,
+)
 
 
 def detect_current_phase() -> int | None:
@@ -65,14 +72,16 @@ def detect_current_phase() -> int | None:
 
 
 def find_99_files() -> list[Path]:
-    """All §99 files anywhere under spec/."""
-    return sorted(SPEC.rglob("99-consistency-report.md"))
+    """All §99 files anywhere under spec/, excluding _archive/."""
+    return sorted(p for p in SPEC.rglob("99-consistency-report.md")
+                  if "_archive" not in p.parts)
 
 
 def find_summary_stamp(text: str) -> int | None:
-    """Return the phase number stamped immediately under the first ## Summary,
-    or None if no Summary heading exists or no stamp is present in its body."""
-    m = SUMMARY_HEADING_RE.search(text)
+    """Return the phase number stamped under the FIRST tracked heading
+    (## Summary OR an inventory-rubric heading), or None if no tracked heading
+    exists or no stamp is present in its body. Phase H2 widened the scope."""
+    m = TRACKED_HEADING_RE.search(text)
     if not m:
         return None
     body = text[m.end():]
