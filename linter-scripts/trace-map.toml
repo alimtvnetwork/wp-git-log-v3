@@ -354,3 +354,99 @@ ac     = "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03"
 files  = ["linter-scripts/fill-missing-consistency-reports.cjs"]
 symbol = "skip_existing"
 kind   = "function"
+
+# ===== Phase G3 (2026-04-28): bind remaining 5 scripts (canonicals/install/memory-mirror/suggest/scaffold) =====
+
+[[trace]]
+ac     = "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-01"
+files  = ["linter-scripts/check-readme-canonicals.py"]
+symbol = "detect_stale_slug"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-02"
+files  = ["linter-scripts/check-readme-canonicals.py"]
+symbol = "CANONICAL_OVERRIDE"
+kind   = "env-var"
+
+[[trace]]
+ac     = "27-spec-toolchain/08-check-readme-install-section.md#AC-08-01"
+files  = ["linter-scripts/check-readme-install-section.py"]
+symbol = "verify_position"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/08-check-readme-install-section.md#AC-08-02"
+files  = ["linter-scripts/check-readme-install-section.py"]
+symbol = "verify_single_fence"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/08-check-readme-install-section.md#AC-08-03"
+files  = ["linter-scripts/check-readme-install-section.py"]
+symbol = "verify_no_inline_comment"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-01"
+files  = ["linter-scripts/check-memory-mirror-drift.py"]
+symbol = "detect_new_keyword"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-02"
+files  = ["linter-scripts/check-memory-mirror-drift.py"]
+symbol = "main"
+kind   = "function"
+note   = "missing section marker → exit 2"
+
+[[trace]]
+ac     = "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-01"
+files  = ["linter-scripts/suggest-spec-cross-link-fixes.py"]
+symbol = "report_mode"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-02"
+files  = ["linter-scripts/suggest-spec-cross-link-fixes.py"]
+symbol = "--apply"
+kind   = "cli-flag"
+
+[[trace]]
+ac     = "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-03"
+files  = ["linter-scripts/suggest-spec-cross-link-fixes.py"]
+symbol = "emit_output"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-01"
+files  = ["linter-scripts/scaffold-spec-module.cjs"]
+symbol = "scaffold"
+kind   = "function"
+note   = "fresh scaffold passes check-tree-health.cjs --strict"
+
+[[trace]]
+ac     = "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-02"
+files  = ["linter-scripts/scaffold-spec-module.cjs"]
+symbol = "detect_slot_collision"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-03"
+files  = ["linter-scripts/scaffold-spec-module.cjs"]
+symbol = "main"
+kind   = "function"
+note   = "no --force → idempotent (refuses to overwrite)"
+
+[[trace]]
+ac     = "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-04"
+files  = ["linter-scripts/scaffold-spec-module.cjs"]
+symbol = "validate_slug_slot"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-05"
+files  = ["linter-scripts/scaffold-spec-module.cjs"]
+symbol = "TEMPLATE"
+kind   = "config"
+note   = "quality-credit anchors (## Acceptance criteria, ## Inventory, etc.) present in template"

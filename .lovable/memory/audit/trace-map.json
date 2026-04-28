@@ -38,6 +38,86 @@
         "symbol": "--json"
       }
     ],
+    "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-01": [
+      {
+        "file": "linter-scripts/check-readme-canonicals.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "detect_stale_slug"
+      }
+    ],
+    "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-02": [
+      {
+        "file": "linter-scripts/check-readme-canonicals.py",
+        "kind": "env-var",
+        "note": null,
+        "symbol": "CANONICAL_OVERRIDE"
+      }
+    ],
+    "27-spec-toolchain/08-check-readme-install-section.md#AC-08-01": [
+      {
+        "file": "linter-scripts/check-readme-install-section.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "verify_position"
+      }
+    ],
+    "27-spec-toolchain/08-check-readme-install-section.md#AC-08-02": [
+      {
+        "file": "linter-scripts/check-readme-install-section.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "verify_single_fence"
+      }
+    ],
+    "27-spec-toolchain/08-check-readme-install-section.md#AC-08-03": [
+      {
+        "file": "linter-scripts/check-readme-install-section.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "verify_no_inline_comment"
+      }
+    ],
+    "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-01": [
+      {
+        "file": "linter-scripts/check-memory-mirror-drift.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "detect_new_keyword"
+      }
+    ],
+    "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-02": [
+      {
+        "file": "linter-scripts/check-memory-mirror-drift.py",
+        "kind": "function",
+        "note": "missing section marker \u2192 exit 2",
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-01": [
+      {
+        "file": "linter-scripts/suggest-spec-cross-link-fixes.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "report_mode"
+      }
+    ],
+    "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-02": [
+      {
+        "file": "linter-scripts/suggest-spec-cross-link-fixes.py",
+        "kind": "cli-flag",
+        "note": null,
+        "symbol": "--apply"
+      }
+    ],
+    "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-03": [
+      {
+        "file": "linter-scripts/suggest-spec-cross-link-fixes.py",
+        "kind": "function",
+        "note": null,
+        "symbol": "emit_output"
+      }
+    ],
     "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-01": [
       {
         "file": "linter-scripts/generate-gwt-acceptance.py",
@@ -294,6 +374,46 @@
         "symbol": "skip_existing"
       }
     ],
+    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-01": [
+      {
+        "file": "linter-scripts/scaffold-spec-module.cjs",
+        "kind": "function",
+        "note": "fresh scaffold passes check-tree-health.cjs --strict",
+        "symbol": "scaffold"
+      }
+    ],
+    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-02": [
+      {
+        "file": "linter-scripts/scaffold-spec-module.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "detect_slot_collision"
+      }
+    ],
+    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-03": [
+      {
+        "file": "linter-scripts/scaffold-spec-module.cjs",
+        "kind": "function",
+        "note": "no --force \u2192 idempotent (refuses to overwrite)",
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-04": [
+      {
+        "file": "linter-scripts/scaffold-spec-module.cjs",
+        "kind": "function",
+        "note": null,
+        "symbol": "validate_slug_slot"
+      }
+    ],
+    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-05": [
+      {
+        "file": "linter-scripts/scaffold-spec-module.cjs",
+        "kind": "config",
+        "note": "quality-credit anchors (## Acceptance criteria, ## Inventory, etc.) present in template",
+        "symbol": "TEMPLATE"
+      }
+    ],
     "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-01": [
       {
         "file": "linter-scripts/audit-spec-vs-code-v2.py",
@@ -481,8 +601,21 @@
     "linter-scripts/check-memo-retrospective-headings.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-23"
     ],
+    "linter-scripts/check-memory-mirror-drift.py": [
+      "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-01",
+      "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-02"
+    ],
     "linter-scripts/check-mermaid-syntax.mjs": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-22"
+    ],
+    "linter-scripts/check-readme-canonicals.py": [
+      "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-01",
+      "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-02"
+    ],
+    "linter-scripts/check-readme-install-section.py": [
+      "27-spec-toolchain/08-check-readme-install-section.md#AC-08-01",
+      "27-spec-toolchain/08-check-readme-install-section.md#AC-08-02",
+      "27-spec-toolchain/08-check-readme-install-section.md#AC-08-03"
     ],
     "linter-scripts/check-spec-cross-links.py": [
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-01",
@@ -549,6 +682,13 @@
       "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-02",
       "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-03"
     ],
+    "linter-scripts/scaffold-spec-module.cjs": [
+      "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-01",
+      "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-02",
+      "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-03",
+      "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-04",
+      "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-05"
+    ],
     "linter-scripts/spec-cross-links.allowlist": [
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-03"
     ],
@@ -556,6 +696,11 @@
       "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02",
       "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-03",
       "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-04"
+    ],
+    "linter-scripts/suggest-spec-cross-link-fixes.py": [
+      "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-01",
+      "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-02",
+      "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-03"
     ]
   },
   "drift": [
@@ -1638,13 +1783,6 @@
     "27-spec-toolchain/06-check-root-readme.md#AC-06-01",
     "27-spec-toolchain/06-check-root-readme.md#AC-06-02",
     "27-spec-toolchain/06-check-root-readme.md#AC-06-03",
-    "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-01",
-    "27-spec-toolchain/07-check-readme-canonicals.md#AC-07-02",
-    "27-spec-toolchain/08-check-readme-install-section.md#AC-08-01",
-    "27-spec-toolchain/08-check-readme-install-section.md#AC-08-02",
-    "27-spec-toolchain/08-check-readme-install-section.md#AC-08-03",
-    "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-01",
-    "27-spec-toolchain/09-check-memory-mirror-drift.md#AC-09-02",
     "27-spec-toolchain/10-generate-spec-index.md#AC-10-01",
     "27-spec-toolchain/10-generate-spec-index.md#AC-10-02",
     "27-spec-toolchain/10-generate-spec-index.md#AC-10-03",
@@ -1652,20 +1790,12 @@
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-02",
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-03",
     "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-04",
-    "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-01",
-    "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-02",
-    "27-spec-toolchain/12-suggest-spec-cross-link-fixes.md#AC-12-03",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-01",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-02",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-03",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-04",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-05",
     "27-spec-toolchain/14-generate-trace-map.md#AC-14-06",
-    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-01",
-    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-02",
-    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-03",
-    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-04",
-    "27-spec-toolchain/23-scaffold-spec-module.md#AC-23-05",
     "27-spec-toolchain/24-check-lockstep.md#AC-24-01",
     "27-spec-toolchain/24-check-lockstep.md#AC-24-02",
     "27-spec-toolchain/24-check-lockstep.md#AC-24-03",
@@ -1816,9 +1946,6 @@
     "linter-scripts/check-forbidden-spec-paths.sh",
     "linter-scripts/check-forbidden-strings.py",
     "linter-scripts/check-lockstep.cjs",
-    "linter-scripts/check-memory-mirror-drift.py",
-    "linter-scripts/check-readme-canonicals.py",
-    "linter-scripts/check-readme-install-section.py",
     "linter-scripts/check-root-readme.py",
     "linter-scripts/forbidden-strings.toml",
     "linter-scripts/generate-dashboard-data.cjs",
@@ -1826,8 +1953,6 @@
     "linter-scripts/generate-trace-map.py",
     "linter-scripts/run.ps1",
     "linter-scripts/run.sh",
-    "linter-scripts/scaffold-spec-module.cjs",
-    "linter-scripts/suggest-spec-cross-link-fixes.py",
     "linter-scripts/test/test-audit-cli-thresholds.sh",
     "linter-scripts/test/test-audit-deterministic-stability.sh",
     "linter-scripts/test/test-audit-explain-contract.sh",
@@ -1841,14 +1966,14 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1245,
+    "ac_drifted": 1230,
     "ac_total": 1299,
-    "ac_traced": 54,
-    "code_orphan": 29,
-    "code_referenced": 17,
+    "ac_traced": 69,
+    "code_orphan": 24,
+    "code_referenced": 22,
     "code_total": 46,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 54
+    "trace_entries": 69
   }
 }

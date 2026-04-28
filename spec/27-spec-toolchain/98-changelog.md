@@ -1,10 +1,19 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.40.0
+**Version:** 2.41.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.41.0 — 2026-04-28 — Phase G3: AC-binding sweep batch 3 — final (15 trace entries; ac_traced 54→69, code_orphan 29→24)
+- **Action**: Bound 15 ACs into `linter-scripts/trace-map.toml` covering the final 5 toolchain scripts: AC-07-01..02 (`check-readme-canonicals.py`), AC-08-01..03 (`check-readme-install-section.py`), AC-09-01..02 (`check-memory-mirror-drift.py`), AC-12-01..03 (`suggest-spec-cross-link-fixes.py`), AC-23-01..05 (`scaffold-spec-module.cjs`). Pre-flight `ls linter-scripts/<name>.*` per the G2 lesson — caught `scaffold-spec-module.cjs` (not `.py`) before authoring.
+- **Trace-map delta**: `ac_traced` 54 → **69** (+15), `code_orphan` 29 → **24** (-5: all five newly-referenced scripts), `code_referenced` 17 → **22**, `ac_total` unchanged at 1299, no missing-ac / missing-file. Baseline updated.
+- **Cumulative G1+G2+G3**: ac_traced 24 → **69** (+45 ACs, +188% coverage), code_orphan 39 → **24** (-15 orphans, -38%), code_referenced 7 → **22** (+15, +214%). All 14 Phase 117–absorbed scripts now bound (G1: 3 + 1 partial; G2: 6; G3: 5 = 15 scripts touched, including check-spec-cross-links.py).
+- **What did NOT change**: No script source touched; no spec module content changed; no §97 ACs added or renumbered; §31 unchanged.
+- **Lockstep**: §98 v2.40.0 → **v2.41.0**; §99 v2.37.0 → **v2.38.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-g3-ac-binding-batch-3.md`.
+- **Verified**: `python3 linter-scripts/check-trace-map-regression.py` → ✅ no regression at new baseline; `node linter-scripts/check-lockstep.cjs` → 87/87 / 0 findings ✅; `node linter-scripts/check-tree-health.cjs --strict` → 168/168 ✅; `python3 linter-scripts/check-spec-folder-refs.py` → 0 stale ✅; `bash linter-scripts/test/test-overview-inventory-parity.sh` → 6/6 ✅.
+- **Remaining 24 orphan code files** are now genuinely AC-unbound (helpers, run.sh dispatchers, audit-tooling internals, validators called only via run.sh, etc.) — not Phase 117–absorbed scripts. R1 (real-AI re-audit, blocked on Lovable Cloud) is the proper tool for these (deeper semantic binding, not just 1:1 script↔AC matching).
 
 ### 2.40.0 — 2026-04-28 — Phase G2: AC-binding sweep batch 2 (24 trace entries; ac_traced 30→54, code_orphan 35→29)
 - **Action**: Bound 24 ACs into `linter-scripts/trace-map.toml` covering 6 generator scripts: AC-13-01..03 (`generate-gwt-acceptance.py`), AC-15-01..06 (`generate-fix-checklist.py`), AC-16-01..06 (`generate-gate-report.py`), AC-20-01..03 (`fill-missing-acceptance-criteria.cjs`), AC-21-01..03 (`fill-missing-changelogs.cjs`), AC-22-01..03 (`fill-missing-consistency-reports.cjs`).
