@@ -1,7 +1,7 @@
 # Consistency Report — Gitlogs Diagrams
 
-**Version:** 3.2.0
-**Updated:** 2026-04-28 (Phase P9 — slot-gap 02/03/04 audit verified RESOLVED, no edits required. Five-source coverage confirmed: §00 inventory rows + §00 v2.0.0 banner + §97 `LOCKED_GAPS:` inlined contract + AC-DG-10 GWT prohibition + AC-DG-LEGACY-11 historical narrative + §99 inventory 🗑️ markers. Parallel to §22 Phase P6 GAP-V2-06 disposition. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.3.0
+**Updated:** 2026-04-28 (Phase P10 — added `10-ssh-auth-validation.mmd` + companion `.svg` covering §22/§31 Lane B SSH-key auth 10-step server validation order with all 11 reject codes; added AC-DG-21 codifying the 10-step + 11-code coverage contract; bumped AC-DG-20 active-diagram count 6 → 7; checked in `puppeteer.json` beside `.mmd` files (resolves AC-DG-18 reproducibility-config gap). Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 > **v3.0.0 update (Phase 16g):** §97 fully rewritten from 9 table-row criteria (with 02/03/04 already retired as locked gaps) to **20 module-specific Given/When/Then ACs** (AC-DG-01..AC-DG-20). New ACs codify ER parity with §22 (entities + FK cardinalities), auth validation order with `GL-*` reject codes, RBAC RolePermission-union resolution (never role name), header-comment contract for non-ER diagrams (`%% Diagram type:` + `%% What this answers:`), emoji-free + Mermaid-CLI rendering, JWT/RS256/JWKS forbidden tokens, 8-endpoint mindmap completeness, encryption v3 7-node derivation chain, slot 02/03/04 locked-gap immutability (per AC-SAG-04), `.mmd` ↔ `.svg` build-artifact lockstep, kebab-case ASCII node IDs, `GL-*` codes cross-validated against §22 §14 registry, `puppeteer.json` reproducibility, governance rule "§26 trails §22 — never leads", and self-application audit (AC-DG-20). Legacy AC-D-01..AC-D-11 preserved as AC-DG-LEGACY-01..11 at end of §97. Module-level tree-health: 100/100 (A+).
 
@@ -20,8 +20,10 @@
 | 07-rate-limit-flow.mmd / .svg | ✅ | sequenceDiagram + diagram-type header. SVG re-rendered Phase 10 v2.1.0 (35 KB). |
 | 08-encryption-v3-flow.mmd / .svg | ✅ | v3 deferred + diagram-type header. SVG re-rendered Phase 10 v2.1.0 (34 KB). |
 | 09-endpoints-mindmap.mmd / .svg | ✅ | mindmap, all 8 endpoints with verb/path/body/response/permission/audit/errors. SVG re-rendered Phase 10 v2.1.0 (182 KB). |
-| 97-acceptance-criteria.md | ✅ | AC-D-01, AC-D-05..AC-D-11 (AC-D-02/03/04 retired) |
-| 98-changelog.md | ✅ | v2.0.0 |
+| 10-ssh-auth-validation.mmd / .svg | ✅ | **NEW Phase P10** — flowchart TD covering §22/§31 SSH Lane B 10-step validation order + 11 reject codes. SVG rendered Phase P10 (~244 KB). Sibling `puppeteer.json` checked in. |
+| puppeteer.json | ✅ | **NEW Phase P10** — Mermaid render config (`--no-sandbox`, viewport 2400×2400). Resolves AC-DG-18 reproducibility-config gap that pre-dated this folder's GWT rewrite. |
+| 97-acceptance-criteria.md | ✅ | AC-DG-01..AC-DG-21 (Phase P10 added AC-DG-21; AC-DG-LEGACY-01..11 preserved) |
+| 98-changelog.md | ✅ | v3.4.0 |
 | 99-consistency-report.md | ✅ | This file |
 
 All diagrams reflect `spec/22-git-logs-v2/`. Where v1 (folder 21, archived) conflicts, v2 + diagrams win.
