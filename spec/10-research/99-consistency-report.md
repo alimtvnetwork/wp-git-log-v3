@@ -1,7 +1,7 @@
 # Consistency Report — Research
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26
+**Version:** 1.1.0  
+**Updated:** 2026-04-28
 
 ---
 
@@ -36,8 +36,8 @@
 ## Summary
 
 - **Errors:** 0
-- **Warnings:** 2 (missing `97-acceptance-criteria.md`, missing example/template file)
-- **Health Score:** 60/100 (D — placeholder folder, content pending)
+- **Warnings:** 0
+- **Health Score:** 100/100 (rubric-v2 strict, Phase 137) — required + recommended + §99 quality all at full marks. Prior `60/100 (rubric-v1)` baseline superseded; see Validation History.
 
 ---
 
@@ -46,6 +46,7 @@
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-04-21 | 1.0.0 | Initial consistency report — inventory baseline |
+| 2026-04-28 | 1.1.0 | Phase 139 — refreshed stale rubric-v1 60/100 prose to rubric-v2 100/100 strict; cleared 2 stale warnings (97-AC and template now present on disk) |
 
 ---
 
