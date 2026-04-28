@@ -3,12 +3,12 @@
 **Date:** 2026-04-25  
 **Auditor:** Deterministic rubric (no AI)  
 **Implementability Score:** **98/100 (A+)**  
-**Blast radius:** 5/10
+**Blast radius:** 7/10
 
 > Deterministic score 98/100 (A+) for spec/22-git-logs-v2.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=68, gwt=68, broken_links=0, waffle/kchar=0.12. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=69, gwt=69, broken_links=0, waffle/kchar=0.15. Gates active: 0.
 
 ---
 
@@ -31,35 +31,35 @@
   "kind": "future-spec",
   "md_files": 35,
   "mmd_files": 0,
-  "overview_chars": 9435,
-  "ac_chars": 60443,
-  "ac_count": 68,
-  "gwt_block_count": 68,
+  "overview_chars": 9991,
+  "ac_chars": 62186,
+  "ac_count": 69,
+  "gwt_block_count": 69,
   "consistency_report": true,
-  "code_blocks_total": 100,
+  "code_blocks_total": 101,
   "code_blocks_by_lang": {
+    "ts": 1,
     "sql": 3,
-    "json": 22,
+    "json": 25,
     "plain": 38,
     "text": 2,
     "bash": 11,
-    "yaml": 5,
+    "yaml": 4,
     "php": 9,
-    "bats": 8,
-    "md": 2
+    "bats": 8
   },
   "has_sql_ddl": true,
   "has_json_schema": true,
-  "has_ts_enums": false,
+  "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
-  "has_ci_workflow": true,
+  "has_ci_workflow": false,
   "has_normative_contract": false,
   "has_mermaid": false,
-  "links_total": 44,
+  "links_total": 45,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.12,
+  "waffle_per_kchar": 0.15,
   "child_modules": 0
 }
 ```

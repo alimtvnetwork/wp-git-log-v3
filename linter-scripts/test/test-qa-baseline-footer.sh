@@ -133,6 +133,7 @@ WORKFLOW_GATES=$(grep -E '^      - name: ' "$WORKFLOW" | awk -F': ' '
   /§99 Stamp-bump gate/                       {n++}
   /Runtime archive-exclusion gate/            {n++}
   /Spec-index drift gate/                     {n++}
+  /Version-field parity gate/                 {n++}
   END {print n+0}
 ' )
 
