@@ -1,10 +1,14 @@
 # Changelog — App Design System & UI
 
-**Version:** 3.1.1
+**Version:** 4.1.1
 **Updated:** 2026-04-28
 **Scope:** `spec/24-app-design-system-and-ui/`
 
 ---
+
+## 4.1.1 — 2026-04-28 (Phase P27 — dual-stream reconciliation)
+
+- **Reconciled** §98 changelog header version stream with §00 banner stream (4.1.0). Prior §98 header tracked an independent audit-stream version (3.1.1) decoupled from the SemVer ladder, which already contained 4.1.0 (Phase 51/55). Per Phase P25 precedent (subcase: clean ladder + decoupled header stream), §98 header is patch-bumped to 4.1.1 to align with banner. No content change to ladder entries; H10 stamp added to §00.
 
 ## 3.1.1 — 2026-04-28
 
