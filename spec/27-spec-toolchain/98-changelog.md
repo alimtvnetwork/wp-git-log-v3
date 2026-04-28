@@ -1,10 +1,22 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.55.0
+**Version:** 2.56.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.56.0 — 2026-04-28 — Phase P26: H10 fourth reverse-drift reconstruction (`spec/23-app-database`) — hybrid P23+P24 subcase
+- **Action**: Fourth application of P23 reverse-drift workflow on `spec/23-app-database` (§00 banner `4.0.0` vs §98 latest `3.0.1`). **First hybrid subcase**: §98 had THREE structural problems simultaneously — (1) a stray out-of-order release `4.1.0` row listed AFTER `3.0.1` describing Phase 53 (mis-numbered — Phase 53 chronologically preceded the 4.x trunk); (2) orphan dated prose blocks (Phase 58, 68, 71) appended *after* the §98 Cross-References footer never promoted into SemVer rows; (3) §00 banner sat at `4.0.0` with no §98 release row to back it.
+- **Reconstruction (hybrid P23 renumber + P24 promote-and-delete)**: Renumbered the stray Phase 53 row → **3.1.0** (correct chronological slot, with explicit explanation in row body of WHY the original `4.1.0` label was wrong); promoted post-footer orphans into **3.2.0** (Phase 58 JSON Schema), **3.3.0** (Phase 68 Mermaid), **4.0.0** (Phase 71 inlined CI workflow — major: new normative CI surface, matching pre-existing §00 banner); added **4.0.1** as the P26 reorganization release (patch — pure §98 reorganization, no module-rule change). Each reconstructed row cites its source prose; orphan blocks REMOVED to single-source the audit trail.
+- **Banner sync**: §00 banner `4.0.0` → `4.0.1` (patch reflecting the §98 reorganization itself); §00 `Updated:` 2026-04-27 → 2026-04-28; `<!-- h10-verified-phase: 26 -->` stamp dropped — opted into strict H10.
+- **§99 module report**: already at 2026-04-28 from prior P13 audit — no banner sync needed (lockstep gate clean on first verify).
+- **P26 lesson — hybrid subcase codified as taxonomy entry (d)**: when §98 has out-of-order rows mixed with post-footer orphans, apply P23 + P24 workflows in sequence within a single phase. **Stray-numbered rows are NEVER renamed in-place silently** — the reconstruction MUST explain in the renumbered row body why the original number was wrong (chronological mis-placement, version-stream confusion, etc.). This protects future readers from thinking the renumbered row was always at the new slot. Updated reverse-drift subcase taxonomy now: (a) P23 — orphan prose in §98/§99 → promote; (b) P24 — orphan prose after Cross-References footer → promote AND delete; (c) P25 — clean §98 ladder but decoupled streams → add ONE alignment release row, preserve history, lock streams; (d) **P26 — hybrid (out-of-order rows + post-footer orphans) → apply P23-renumber + P24-promote-and-delete in sequence with explicit explanation per renumbered row**.
+- **Renumber-with-explanation rule (codified)**: when a §98 row has an obviously-wrong version number (e.g. higher than its chronological position warrants, or lower than a preceding row), the fix is renumber-with-explanation, NOT delete-and-rewrite. Deletion would lose the original-author intent; explanation lets future readers audit the renumber decision.
+- **Gate impact**: `matches=40 → 41` (+1); `mismatches=34 → 33` (-1); `stamped=23 → 24`; `stamped_failed=0`. Reverse-drift backlog **33 → 32**.
+- **Adoption progress**: **24 / 74 modules opted into strict enforcement**.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption + per-module forensic reconstruction.
+- **Verified**: parity gate 87/74/41/33/stamped=24/stamped_failed=0 / exit 0 ✅; lockstep 87/87 / 0 findings ✅ (clean on first verify — §99 already 2026-04-28); tree-health 168/168 strict ✅; §27-inventory 6/6 ✅; H10 self-test 13/13 ✅.
 
 ### 2.55.0 — 2026-04-28 — Phase P25: H10 third reverse-drift reconstruction (`spec/17-consolidated-guidelines`) — dual-stream alignment subcase
 - **Action**: Third application of the P23 reverse-drift workflow. Targeted `spec/17-consolidated-guidelines` (§00 banner `3.3.0` vs §98 latest `2.5.0` — gap of 1 major + (-2) minor + 0 patch). **Different shape from P23 + P24**: §98 had NO orphan post-Cross-References prose to promote — it was already a clean 7-row release ladder (1.0.0 → 2.5.0). The reverse drift came from a **decoupled-version-stream pattern**: §98 v2.4.0 explicitly recorded "Bumped overview banner v3.2.0 → v3.3.0" while §98 itself stayed at 2.4.0 and continued numbering 2.5.0. §00 banner was treated as a separate "module-version stream" while §98 was treated as a "changelog-file-version stream"; the two streams ran in parallel and the H10 gate (which compares them) flagged the divergence.
