@@ -1,9 +1,9 @@
 # Spec-vs-Code Audit **v2** — Summary
 
 **Date:** 2026-04-25  
-**Rubric:** v2.24  
+**Rubric:** v2.25  
 **Modules audited:** 87  
-**Code files indexed:** 38  
+**Code files indexed:** 39  
 **Mean weighted score:** **98.0/100**  
 **Mean implementability:** **99.8/100**
 
@@ -169,8 +169,8 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`14-update`](./14-update.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 10 |
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 9 |
 
-## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1)
-This audit runs rubric **v2.24**. The score above is one of **15 strict CI gates** that surround it:
+## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5)
+This audit runs rubric **v2.25**. The score above is one of **16 strict CI gates** that surround it:
 
 1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.
 2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).
@@ -187,5 +187,6 @@ This audit runs rubric **v2.24**. The score above is one of **15 strict CI gates
 13. **WEIGHTS dimension-table parity** (`test/test-weights-parity.sh`, Phase 113) — `audit-spec-vs-code-v2.py` `WEIGHTS` dict ↔ `generate-gate-report.py` `WEIGHTS` dict ↔ `spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md` `## Weights` table; mechanises AC-31-31 row #4 + AC-31-02 across-files extension.
 14. **Spec folder-reference gate** (`check-spec-folder-refs.py`, Phase F2) — every `spec/NN-name/` reference in `spec/**/*.md` either resolves on disk OR is allowlisted under `[external]` (real sibling-repo path) or `[doc-only]` (illustrative/historical prose) in `linter-scripts/spec-folder-refs.allowlist`; mechanises AC-62-01..04 and closes the dormant-gate gap Phase 141 surfaced.
 15. **§99 Summary freshness gate** (`check-99-summary-freshness.py`, Phase H1) — flags §99 modules whose `## Summary` block carries a `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20); advisory-by-default for unstamped files (89 of 89 unstamped at H1 close); mechanises AC-26-01..05 and codifies the Phase 136/139 stale-prose-sweep lesson.
+16. **§99 Stamp-bump gate** (`check-99-stamp-bump.py`, Phase H5) — when a §99 file is materially edited (any non-stamp line changed) the `<!-- verified-phase: NNN -->` stamp MUST be bumped to the current phase in the same diff; PR-event only (skips on push-to-main with no diff base); pairs with #15 as a two-layer defense (edits must bump at budget=0, unedited stamps decay at budget=20); mechanises AC-27-01..08 and turns the H1/H2 honor-system into a CI check.
 
-Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13, #15): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).
+Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).
