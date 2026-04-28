@@ -8,7 +8,7 @@
 > Deterministic score 99/100 (A+) for spec/26-gitlogs-diagrams.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=21, gwt=20, broken_links=0, waffle/kchar=0.07. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=22, gwt=21, broken_links=0, waffle/kchar=0.06. Gates active: 0.
 
 ---
 
@@ -30,11 +30,11 @@
 {
   "kind": "index",
   "md_files": 4,
-  "mmd_files": 7,
-  "overview_chars": 8211,
-  "ac_chars": 17103,
-  "ac_count": 21,
-  "gwt_block_count": 20,
+  "mmd_files": 8,
+  "overview_chars": 9226,
+  "ac_chars": 18656,
+  "ac_count": 22,
+  "gwt_block_count": 21,
   "consistency_report": true,
   "code_blocks_total": 9,
   "code_blocks_by_lang": {
@@ -54,7 +54,7 @@
   "links_total": 14,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.07,
+  "waffle_per_kchar": 0.06,
   "child_modules": 1
 }
 ```
