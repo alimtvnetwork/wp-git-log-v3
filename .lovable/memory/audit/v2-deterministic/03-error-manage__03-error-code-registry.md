@@ -8,7 +8,7 @@
 > Deterministic score 100/100 (A+) for spec/03-error-manage/03-error-code-registry.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.06. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.1. Gates active: 0.
 
 ---
 
@@ -29,19 +29,19 @@
 ```json
 {
   "kind": "future-spec",
-  "md_files": 9,
+  "md_files": 10,
   "mmd_files": 1,
   "overview_chars": 9218,
-  "ac_chars": 4101,
+  "ac_chars": 4129,
   "ac_count": 8,
   "gwt_block_count": 8,
   "consistency_report": true,
-  "code_blocks_total": 27,
+  "code_blocks_total": 29,
   "code_blocks_by_lang": {
     "yaml": 6,
     "mermaid": 1,
-    "sql": 1,
-    "plain": 6,
+    "sql": 2,
+    "plain": 7,
     "markdown": 1,
     "go": 3,
     "typescript": 5,
@@ -57,10 +57,10 @@
   "has_ci_workflow": true,
   "has_normative_contract": false,
   "has_mermaid": true,
-  "links_total": 22,
+  "links_total": 23,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.06,
+  "waffle_per_kchar": 0.1,
   "child_modules": 3
 }
 ```

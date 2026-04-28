@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/16-generic-release.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.26. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.25. Gates active: 0.
 
 ---
 
@@ -29,21 +29,21 @@
 ```json
 {
   "kind": "future-spec",
-  "md_files": 12,
+  "md_files": 13,
   "mmd_files": 1,
   "overview_chars": 9903,
-  "ac_chars": 27050,
+  "ac_chars": 27079,
   "ac_count": 20,
   "gwt_block_count": 20,
   "consistency_report": true,
-  "code_blocks_total": 93,
+  "code_blocks_total": 97,
   "code_blocks_by_lang": {
-    "bash": 35,
+    "bash": 37,
     "go": 3,
     "typescript": 1,
     "sql": 1,
     "yaml": 11,
-    "plain": 27,
+    "plain": 29,
     "markdown": 4,
     "powershell": 9,
     "json": 1,
@@ -60,7 +60,7 @@
   "links_total": 36,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.26,
+  "waffle_per_kchar": 0.25,
   "child_modules": 0
 }
 ```
