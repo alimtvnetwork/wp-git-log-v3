@@ -81,7 +81,17 @@ jobs:
           fi
 
       - name: Spec cross-link gate (zero broken links allowed)
-        run: python3 linter-scripts/check-spec-cross-links.py --github
+        # Phase P35: self-test collapsed into this step per H1 workflow-step
+        # parity lesson — exercises a single existing gate (#2 cross-links),
+        # so adding a standalone workflow step would break AC-31-28 footer
+        # row ↔ workflow gate ↔ declared count parity at 19/19/19. Self-test
+        # locks AC-01-05/06/07 (fuzzy waiver matching, --rewrite-allowlist
+        # idempotence, --strict-line-match opt-in) — codifies the P34
+        # lesson #1 silent-CI-failure-after-stamp-batch-drift class.
+        run: |
+          set -e
+          bash linter-scripts/test/test-check-spec-cross-links.sh
+          python3 linter-scripts/check-spec-cross-links.py --github
 
       - name: Spec folder-reference gate (Phase F2)
         # Phase F2: wires linter-scripts/check-spec-folder-refs.py into CI as
