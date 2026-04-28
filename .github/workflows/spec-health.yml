@@ -88,9 +88,14 @@ jobs:
         # locks AC-01-05/06/07 (fuzzy waiver matching, --rewrite-allowlist
         # idempotence, --strict-line-match opt-in) — codifies the P34
         # lesson #1 silent-CI-failure-after-stamp-batch-drift class.
+        # Phase P45: ALSO runs test-inline-code-blanking-parity.sh — same H1
+        # rationale (single existing gate, no parity bump). Locks AC-11-05
+        # (JS↔Python helper byte-equality for inline-code blanking) — codifies
+        # the P44 dual-implementation-divergence class (22-phase noise drift).
         run: |
           set -e
           bash linter-scripts/test/test-check-spec-cross-links.sh
+          bash linter-scripts/test/test-inline-code-blanking-parity.sh
           python3 linter-scripts/check-spec-cross-links.py --github
 
       - name: Spec folder-reference gate (Phase F2)
