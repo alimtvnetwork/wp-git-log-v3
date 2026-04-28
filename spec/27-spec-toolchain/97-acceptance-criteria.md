@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.0.0
-**Updated:** 2026-04-26 (Phase 16d-iv: Deepen §27 §97 — 10 new module-specific GWT ACs added (AC-T-11..AC-T-20). AC count 10 → 20. AC-T-01..AC-T-10 preserved verbatim.)
+**Version:** 2.0.1
+**Updated:** 2026-04-28 (Phase 140: restored missing AC-T-10 — was referenced by `linter-scripts/trace-map.toml:116` and the live CI cross-link gate but had been silently dropped from §97; v2.0.0 header's "AC-T-01..AC-T-10 preserved verbatim" claim is now true again.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -52,6 +52,12 @@
 - **Given** the entire `spec/` tree,
 - **When** `node linter-scripts/check-tree-health.cjs --min=80` is run,
 - **Then** this module MUST contribute `required=2/2` (overview + consistency report present) and the overall score MUST be ≥ 80.
+
+### AC-T-10 — Spec cross-link gate (zero broken links)
+- **Given** every relative link inside `spec/**/*.md`,
+- **When** `python3 linter-scripts/check-spec-cross-links.py --github` is run as a CI gate (see `.github/workflows/spec-health.yml` step "Spec cross-link gate"),
+- **Then** the script MUST exit 0 with `OK All internal spec cross-references resolve` and ANY broken target MUST fail the build (zero-broken-link contract). Allowlist exceptions live in `linter-scripts/spec-cross-links.allowlist`; entries there bypass the gate intentionally and MUST carry an inline comment justifying the exemption.
+- **Verifies:** `linter-scripts/check-spec-cross-links.py` (binds the AC to its implementation per `linter-scripts/trace-map.toml:115-118`).
 
 ### AC-T-11 — Validator output goes to the correct stream
 - **Given** any validator script in slots 01–09 or 50–59 (extensions `.py`, `.cjs`, `.sh`, `.ps1`, `.go`),
