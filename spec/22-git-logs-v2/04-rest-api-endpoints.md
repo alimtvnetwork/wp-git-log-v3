@@ -1,7 +1,7 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.9.5  
-**Updated:** 2026-04-28 (Phase P3: Standard Ack Envelope gains required `PreviousHasError: boolean` on write endpoints #1–#4; full field contract added — semantics, per-endpoint usage, atomicity (same-tx as write), cross-refs to §01/§97 AC-13/73/74/75/§17. Closes GAP-V2-04. §17 OpenAPI `Ack` schema lockstep-bumped in same phase. Phase P2 §1.1 NDJSON ingest contract unchanged.)
+**Version:** 2.9.6  
+**Updated:** 2026-04-28 (Phase P4: §1.2 "Pre-parse caps & validation order" subsection added — surfaces the four `ConfigKv` enforcement caps (`RatePerMinPerProfile`, `MaxPushPayloadBytes`, `MaxLinesPerPush`, `MaxLineBytes`) + 11-step strict validation order so a blind implementer learns gate ordering without cross-walking §15/§18/§97. Closes GAP-V2-10. No DDL/AC/error-code change — purely a cross-walk-elimination doc surface. Phase P3 PreviousHasError ack contract unchanged.)
 **Namespace:** `/wp-json/git-logs/v2`
 
 ---
