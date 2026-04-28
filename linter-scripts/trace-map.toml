@@ -204,3 +204,153 @@ ac     = "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24"
 files  = ["linter-scripts/deepen-consistency-reports.py"]
 kind   = "function"
 note   = "Slot 25 — filler in 20-29 band, no slot-range exception"
+
+# ===== Phase G2 (2026-04-28): bind generators (gwt + fix-checklist + gate-report + fill-missing trio) =====
+
+[[trace]]
+ac     = "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-01"
+files  = ["linter-scripts/generate-gwt-acceptance.py"]
+symbol = "select_modules_by_grade"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-02"
+files  = ["linter-scripts/generate-gwt-acceptance.py"]
+symbol = "inline_contracts"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/13-generate-gwt-acceptance.md#AC-13-03"
+files  = ["linter-scripts/generate-gwt-acceptance.py"]
+symbol = "bump_changelog"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-01"
+files  = ["linter-scripts/generate-fix-checklist.py"]
+symbol = "sort_by_implementability"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-02"
+files  = ["linter-scripts/generate-fix-checklist.py"]
+symbol = "emit_action"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-03"
+files  = ["linter-scripts/generate-fix-checklist.py"]
+symbol = "missing_contract_trigger"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-04"
+files  = ["linter-scripts/generate-fix-checklist.py"]
+symbol = "--json"
+kind   = "cli-flag"
+note   = "byte-stable JSON output (sorted keys, fixed precision)"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-05"
+files  = ["linter-scripts/generate-fix-checklist.py"]
+symbol = "compute_effort_total"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/15-generate-fix-checklist.md#AC-15-06"
+files  = ["linter-scripts/generate-fix-checklist.py"]
+symbol = "main"
+kind   = "function"
+note   = "missing audit JSON → exit 1"
+
+[[trace]]
+ac     = "27-spec-toolchain/16-generate-gate-report.md#AC-16-01"
+files  = ["linter-scripts/generate-gate-report.py"]
+symbol = "explain_gate_firing"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/16-generate-gate-report.md#AC-16-02"
+files  = ["linter-scripts/generate-gate-report.py"]
+symbol = "build_leaderboard"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/16-generate-gate-report.md#AC-16-03"
+files  = ["linter-scripts/generate-gate-report.py"]
+symbol = "compute_dimension_loss"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/16-generate-gate-report.md#AC-16-04"
+files  = ["linter-scripts/generate-gate-report.py"]
+symbol = "--json"
+kind   = "cli-flag"
+
+[[trace]]
+ac     = "27-spec-toolchain/16-generate-gate-report.md#AC-16-05"
+files  = ["linter-scripts/generate-gate-report.py"]
+symbol = "main"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/16-generate-gate-report.md#AC-16-06"
+files  = ["linter-scripts/generate-gate-report.py"]
+symbol = "apply_gates"
+kind   = "function"
+note   = "final ≤ raw overall (gates only subtract)"
+
+[[trace]]
+ac     = "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-01"
+files  = ["linter-scripts/fill-missing-acceptance-criteria.py"]
+symbol = "main"
+kind   = "function"
+note   = "idempotent — second run is a no-op"
+
+[[trace]]
+ac     = "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-02"
+files  = ["linter-scripts/fill-missing-acceptance-criteria.py"]
+symbol = "AC_TEMPLATE"
+kind   = "config"
+
+[[trace]]
+ac     = "27-spec-toolchain/20-fill-missing-acceptance-criteria.md#AC-20-03"
+files  = ["linter-scripts/fill-missing-acceptance-criteria.py"]
+symbol = "skip_existing"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-01"
+files  = ["linter-scripts/fill-missing-changelogs.py"]
+symbol = "main"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-02"
+files  = ["linter-scripts/fill-missing-changelogs.py"]
+symbol = "today_iso"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/21-fill-missing-changelogs.md#AC-21-03"
+files  = ["linter-scripts/fill-missing-changelogs.py"]
+symbol = "CATEGORIES"
+kind   = "config"
+
+[[trace]]
+ac     = "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-01"
+files  = ["linter-scripts/fill-missing-consistency-reports.py"]
+symbol = "main"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-02"
+files  = ["linter-scripts/fill-missing-consistency-reports.py"]
+symbol = "scan_inventory"
+kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/22-fill-missing-consistency-reports.md#AC-22-03"
+files  = ["linter-scripts/fill-missing-consistency-reports.py"]
+symbol = "skip_existing"
+kind   = "function"
