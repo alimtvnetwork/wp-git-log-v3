@@ -177,9 +177,9 @@ Legend: ✅ kept, ✏ changed shape, ❌ removed, ➕ new in v2.
 | 7 | ~~GAP-V2-10 (rate-limit caps in §04)~~ ✅ Phase P4 2026-04-28 | `04-rest-api-endpoints.md` v2.9.6 §1.2 | n/a | n/a |
 | 8 | ~~GAP-V2-08 (slot-16 collision)~~ ✅ Phase P5 2026-04-28 — resolved by inverse: `16-test-plan.md` → `38-test-plan-superseded.md` | filesystem + 5 lockstep referrers | n/a | n/a |
 | 9 | ~~GAP-V2-07 (resolve 2 TODO markers)~~ ✅ Phase 39b 2026-04-27 | `30-threat-model.md`, `32-cli-test-plan.md`, `16-seed-data.md` | n/a | n/a |
-| 10 | GAP-V2-09 (link client CLI from §00) — **LOW priority, queued** | `00-overview.md` | 2m | +1 |
+| 10 | ~~GAP-V2-09 (link client CLI from §00)~~ ✅ Phase P17 2026-04-28 — §00 v3.8.9 Cross-References row added | `00-overview.md` v3.8.9 | n/a | n/a |
 
-**Effort remaining:** 7m (GAP-V2-05 user decision + GAP-V2-09 cosmetic link). **Current score:** 99/100 (A+); ceiling 100/100 awaits user decision on §07 App identity. 8 of 10 historical gaps resolved across Phases 39b + P1–P7 (2026-04-27 → 2026-04-28).
+**Effort remaining:** 5m (GAP-V2-05 user decision only). **Current score:** 99/100 (A+); ceiling 100/100 awaits user decision on §07 App identity. **9 of 10 historical gaps resolved** across Phases 39b + P1–P8 + P17 (2026-04-27 → 2026-04-28).
 
 ---
 
