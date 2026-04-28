@@ -1,8 +1,10 @@
 # Consistency Report — 24-app-design-system-and-ui
 
-**Version:** 2.1.0
-**Updated:** 2026-04-27
+**Version:** 2.1.1
+**Updated:** 2026-04-28
 **Scope:** `spec/24-app-design-system-and-ui/`
+
+> **v2.1.1 update (Phase P14 — "Split `00-overview.md` (656 lines)" closed as STALE):** Backlog item inherited from audit-v4 (45/100 baseline, superseded by audit-v5 per Phase 130). Re-audit on 2026-04-28 confirms zero split required: file is one cohesive SSOT contract for the App design-system overlay (tokens + Tailwind extension + AppShell + breakpoints + theme parity + impl-sweep appendices); "Open Items" already lists splitting as optional with "No mandatory open items"; slot policy reserves `01..04` for if/when AppShell variants multiply — condition not triggered. Splitting now would fragment the token contract and burn 4 immutable slots prematurely. No content changed in `00-overview.md`. §98 / §99 patch-bumped to record the audit disposition. Future split proposals against §24 MUST cite a concrete trigger (2+ shipped AppShell variants, OR a per-component deep-dive >150 lines that doesn't belong in the router) — bare line-count arguments are not actionable per Phase P14 precedent (mirrors Phase P12 for §28 and Phase P13 for §23).
 
 ---
 
