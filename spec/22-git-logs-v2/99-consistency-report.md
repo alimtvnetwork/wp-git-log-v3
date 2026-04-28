@@ -26,7 +26,7 @@
 | 13-v1-vs-v2-mapping.md | ⚠️ Referenced; v1 deltas captured in changelog + `21-git-logs/` legacy banner |
 | 14-endpoint-examples.md | ✅ |
 | 15-error-codes.md | ✅ (4 new auth codes added in v2.6) |
-| 16-test-plan.md | ✅ (redirect stub → §32–§35) |
+| 16-seed-data.md | ✅ (sole occupant of slot 16 since Phase P5 collision resolution) |
 | 17-openapi.yaml | ✅ (v2.9.5 — Phase P3 `AckResponse.PreviousHasError` REQUIRED) |
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |
