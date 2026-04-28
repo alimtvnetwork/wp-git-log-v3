@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.9.0  
-**Updated:** 2026-04-26 (Phase 16c: Depth pass on the four lean ACs left from Phase 13 — AC-04 Logger level gating (constant-time integer compare at call boundary, sink-side filtering forbidden, request-scoped cache, fixed 6-level mapping `Trace=0..Fatal=5`, near-silence emergency mode at `Fatal`), AC-05 Diagnostic dedup window (rolling 60s, fingerprint = `(source, level, template, ctx_hash)`, error/fatal carve-out, process-local LRU bounded at 1024, `[deduped: N within 60s]` suffix on window expiry, per-worker not cross-worker), AC-25 `format:hide` not rendered (omitted from DOM entirely — not CSS-hidden, not opacity-zeroed, not off-screen positioned; defense-in-depth against view-source/DevTools/screen-reader leakage; subtractive-not-additive; empty container shells must collapse; distinct from RBAC AC-06/AC-39 hiding), AC-34 Multisite per-site DB (per-`blog_id` SQLite file at `wp_upload_dir()`-derived path, shared file forbidden even when network-activated, no cross-site fan-out, `switch_to_blog`/`restore_current_blog` connection invalidation, lazy per-site migration on first access, `wp_delete_site` cleanup of orphan DBs). AC count unchanged at 75.)
+**Version:** 3.9.1  
+**Updated:** 2026-04-28 (Phase 147 — `B1: keep forbidden` finalized: AC-17 prose tightened to drop the "until the §07 App identity decision is unblocked" hedge; `Environment` / `Platform` / `OwnerEmail` are now PERMANENTLY forbidden per §07 locked decision 12 (also bumped to v2.2.0). No AC IDs added/removed; AC count unchanged at 75; no DDL change; no schema bump.)
 
 ---
 

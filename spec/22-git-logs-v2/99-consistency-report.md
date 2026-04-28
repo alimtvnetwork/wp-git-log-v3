@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.5
-**Updated:** 2026-04-28
+**Version:** 3.9.6
+**Updated:** 2026-04-28 (Phase 147 — banner refresh after `B1: keep forbidden` finalization in §07 v2.2.0 + §97 v3.9.1; no inventory change — §07 row already ✅. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
