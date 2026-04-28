@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.65.0
+**Version:** 2.66.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.66.0 — 2026-04-28 — Phase P44: inline-code blanking parity in `generate-dashboard-data.cjs` (slot 11 v1.1.0→v1.2.0, AC-11-05)
+- **Action**: Ported `strip_inline_code` semantics from `linter-scripts/check-spec-cross-links.py` (Python strict CI gate) to `linter-scripts/generate-dashboard-data.cjs` (JS dashboard generator). Added `INLINE_CODE_RE` constant + `blankInlineCode()` helper + `extractLinks()` integration (lines 137-176). Inline-code spans are now replaced with same-length space runs BEFORE `LINK_RE` matches, preserving char offsets. Closes a parity gap that produced a persistent false-positive (`./test-foo.sh` example pattern in this very §98 line 501 P102 narrative) lingering in `Health.Deductions` from Phase 102 through P43.
+- **Outcome**: `Links.Total.Broken` 1 → **0**; `Links.Total.Checked` 3079 → **3073** (6 inline-code-wrapped example patterns correctly skipped); `Health.LegacyScore` 98 → **100**; `Health.Deductions` `["1 broken links (-2)"]` → **`[]`**.
+- **Spec**: Slot 11 v1.1.0 → **v1.2.0** (added AC-11-05 with full GWT body + parity contract + `Verifies:` block + `## Changelog` block + `## Cross-references` expansion to §01 Python-sibling).
+- **No CI workflow change, no RUBRIC_VERSION bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline** — bug fix in a generator's link counter; contract-tightening only via the new AC. Cross-link gate output unchanged (it was already correct via `strip_inline_code`); only the dashboard JSON aligns now.
+- **Verified**: 9 critical gates green via `bash linter-scripts/test/cluster-terminal-sweep.sh` (P40 runner). §00 v2.65.0→**v2.66.0**; §98 v2.65.0→**v2.66.0**; §99 v2.62.0→**v2.63.0**.
+- **P44 lessons codified (2 new)**: (1) **dual-implementation parity is fragile** — when the same logical contract (cross-link validation) is implemented in two languages (Python strict CI + JS dashboard generator), helper functions (`strip_inline_code` / `blankInlineCode`) must be ported in lockstep. The right enforcement is a parity AC (AC-11-05) that names BOTH source files in `Verifies:` so future divergences are caught at AC-review time. (2) **dashboard noise has a half-life** — the `./test-foo.sh` false positive lingered for ~22 phases (102 → P43) because it was correctly classified as "baseline noise, dashboard generator's standalone counter, separate from strict CI" in the v3.7.10 banner — the classification was right but the deferral kept compounding. P43 surfaced the noise as a Task #8; P44 fixed it. **Rule codified**: any "known-stale" or "baseline-noise" classification in a `## Validation History` row or banner SHOULD be paired with an issue/task entry to drive eventual fix; otherwise the noise becomes architectural.
 
 ### 2.65.0 — 2026-04-28 — Phase P42: slot-level format-contract AC survey for slots 60/62/63 — NO-OP confirmed
 - **Action**: Audited §27 slots **60** (`forbidden-strings.toml`), **62** (`spec-folder-refs.allowlist`), **63** (`readme-cross-links.md`) for the same survey-binding gap that P39 closed in slot 61 (line-keyed allowlist contract). Verified via fresh `grep -E ':[0-9]+:' linter-scripts/*.allowlist linter-scripts/*.toml` at 2026-04-28: only `spec-cross-links.allowlist` uses the `<relpath>:<line>:<target>` line-keyed shape. Slot 60 is regex-keyed, slot 62 is folder-name-keyed, slot 63 is URL-keyed in a two-column markdown table. The P35 fuzzy-match contract (±5 line tolerance + `--rewrite-allowlist` + `--strict-line-match` + matching `.sh` self-test) is **structurally inapplicable** to slots 60/62/63 — no line-number discriminator to drift.
