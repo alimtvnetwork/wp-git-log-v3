@@ -13,7 +13,7 @@
 | 00-overview.md | ✅ (v3.8.9 — Phase P17 added Cross-References row to `spec/28-universal-ci-cli/`, closing GAP-V2-09) |
 | 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
-| 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
+| 03-admin-ui.md | ✅ (v2.3.0 — Phase P18 added `## State-Transition Label Rendering` section + History `HasError + StateLabel` column revision binding the consumer-side AC-73 label enum) |
 | 04-rest-api-endpoints.md | ✅ (v2.9.6 — Phase P4 §1.2 pre-parse caps & 11-step validation order; Phase P3 Ack `PreviousHasError`; Phase P2 §1.1 NDJSON ingest streaming wire format) |
 | 05-auth-and-validation.md | ✅ (CI/CD cross-ref) |
 | 06-migrations-and-logger.md | ✅ |
