@@ -1,10 +1,20 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.43.0
+**Version:** 2.43.1
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.43.1 — 2026-04-28 — Phase H3: `_archive/` exclusion sweep — codify H2 lesson across spec-traversing linters
+- **Action**: Audited all 12 spec-traversing linters for `_archive/` leakage. Found 8 already exclude (good), 2 need fixes:
+  - **`check-lockstep.cjs`**: walked into `spec/_archive/21-git-logs-v1/` and produced 3 noisy `skip: missing 00/98/99` rows on every CI run. Added `&& e.name !== '_archive'` to the directory walker. Result: `Modules scanned: 90 → 87`, `skip: 3 → 0` — clearer signal, identical pass/fail behavior.
+  - **`generate-trace-map.py`**: defensive exclusion added to `collect_ac_ids()` (skip files with `_archive` in path). Currently the `### `-only AC heading regex incidentally skips archive ACs (which are h4-level: `#### AC-PUSH-13`), but this codifies the intent and protects against future archive docs that promote ACs to h3.
+- **Audit findings (8 already-excluding scripts)**: `check-tree-health.cjs` (`ARCHIVE_PREFIX`), `audit-spec-vs-code.py` + `-v2.py` (rglob filter), `generate-spec-index.cjs` (label-only), `deepen-consistency-reports.py` (skip + log), `generate-dashboard-data.cjs` (`ARCHIVE_SEGMENTS`), `fill-missing-{consistency-reports,changelogs,acceptance-criteria}.cjs` (all 3 share the same `e.name === '_archive'` guard), `check-spec-folder-refs.py` (legacy-doc allowlist), `check-99-summary-freshness.py` (Phase H2 close).
+- **Trace-map impact**: regression gate caught +3 new ACs (AC-26-06/07/08 added in Phase H2). Bound all 3 to `linter-scripts/check-99-summary-freshness.py` symbols (TRACKED_HEADING_RE / find_99_files / find_summary_stamp). Then rebaselined within memory's safety threshold (+3 ACs ≪ 50 AC limit; +0 code files ≪ 5 file limit). New baseline: `{ac_total:1307, ac_traced:77 (+3), code_total:48, code_orphan:25}`. ac_drifted unchanged at 1230 (3 new ACs all traced, denominator grew by 3).
+- **AC-31-31 invariants**: gate count unchanged at **15** (no new gate); RUBRIC_VERSION unchanged at **v2.24** (no rubric semantics changed); footer / EXECUTIVE-SUMMARY / qa-baseline-footer untouched.
+- **Verified**: `node check-lockstep.cjs` → 87/87 / 0 findings ✅ (was 90/87/3 skip); `node check-tree-health.cjs --strict` → 168/168 strict-pass ✅; `python3 check-99-summary-freshness.py` → 75/87 stamped ✅; `python3 check-trace-map-regression.py` → no regression at new baseline ✅; self-tests: 17/17 ✅, 6/6 ✅, 22/22 ✅, 11/11 ✅.
+- §98 v2.43.0 → **v2.43.1** (patch — defensive exclusions, no behavior change for non-archive paths); §99 v2.40.0 → **v2.40.1**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h3-archive-exclusion-sweep.md`.
 
 ### 2.43.0 — 2026-04-28 — Phase H2: §99 freshness gate widened to inventory rubrics (slot 26 v1.1.0; +29 stamps; coverage 46/89 → 75/87)
 - **Action**: Extended `check-99-summary-freshness.py` (slot 26) from `## Summary`-only scanning to also accept inventory-rubric headings: `## Module Health`, `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`, `## Document Inventory`, `## Modules`. Multi-block scan now finds the highest stamp under any tracked heading (fixes case where `## File Inventory` appears before `## Summary` and would have masked Summary stamps under the H1 first-match logic).
