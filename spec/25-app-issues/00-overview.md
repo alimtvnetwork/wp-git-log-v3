@@ -5,8 +5,8 @@ description: Top-level routing index for app issue analysis (parent of two child
 
 # App Issues
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-26
+**Version:** 3.4.0  
+**Updated:** 2026-04-28 (Phase P11 — nested-subdir audit; symmetric supersession routing surfaced)
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
@@ -26,10 +26,12 @@ Any content that analyzes bugs, failures, root causes, or fixes for application-
 
 ## Contents
 
-| # | Folder | Description |
-|---|--------|-------------|
-| 01 | [01-phase-2-git-logs-audit/](./01-phase-2-git-logs-audit/00-overview.md) | Phase-2 spec-only audit of `spec/_archive/21-git-logs-v1/` (25 findings) |
-| 02 | [02-consolidated-audit-findings/](./02-consolidated-audit-findings/00-overview.md) | Single auditable findings document — 24 numbered items with file paths and evidence snippets |
+| # | Folder | Status | Description |
+|---|--------|--------|-------------|
+| 01 | [01-phase-2-git-logs-audit/](./01-phase-2-git-logs-audit/00-overview.md) | **superseded** by 02 (preserved for traceability) | Phase-2 spec-only audit of `spec/_archive/21-git-logs-v1/` — first pass; contained false-positives later corrected by the consolidated tracker. |
+| 02 | [02-consolidated-audit-findings/](./02-consolidated-audit-findings/00-overview.md) | **active** (start here) | Single source of truth — 24 numbered findings with file paths + verbatim evidence snippets. Re-scored every Phase-2 item against line-anchored evidence. |
+
+> **Reading order (Phase P11):** Start at `02-consolidated-audit-findings/` for the current state. `01-phase-2-git-logs-audit/` is preserved for traceability only — it predates the line-anchored evidence pass and reports two files as "missing" that actually exist. The supersession is symmetric: declared in 02's "Correction notice", in 01's banner, and in this routing table.
 
 ---
 
