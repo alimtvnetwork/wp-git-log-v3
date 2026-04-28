@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.9
-**Updated:** 2026-04-28 (Phase P3 — `PreviousHasError` boolean added to Standard Ack Envelope on §04 v2.9.4 → v2.9.5 with full field contract; §17 OpenAPI `AckResponse` v2.9.4 → v2.9.5 lockstep-bumped (REQUIRED property, deep-link description); closes GAP-V2-04. Inventory rows for §04 and §17 updated. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.10
+**Updated:** 2026-04-28 (Phase P4 — §04 v2.9.5 → v2.9.6 gains §1.2 "Pre-parse caps & validation order" surfacing the four `ConfigKv` caps + 11-step strict gate order + `AppendLogMaxStreamSec` slow-loris cap; closes GAP-V2-10. Inventory row for §04 updated. No DDL/AC/error-code change. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
