@@ -108,8 +108,12 @@ assert "QA tooling baseline section has $DECLARED_COUNT numbered gate rows (foun
 # ── Workflow lockstep: count quality-gate steps in spec-health.yml ──
 # Quality-gate steps are those matching the patterns the audit footer
 # advertises. We count by scanning step names and including only the
-# ones that correspond to the 15 footer gates (excluding Setup steps,
-# Self-heal, Regen, Trace-map, Summary).
+# ones that correspond to the 16 footer gates (excluding Setup steps,
+# Self-heal, Regen, Trace-map, Summary). Phase H5 added entry #16
+# (§99 Stamp-bump gate) — collapsed into a single workflow step per
+# the H1 workflow-step parity lesson (single-gate self-tests do not
+# get standalone steps; only broader-contract tests #5–#7, #9, #10,
+# #12, #13 do).
 WORKFLOW_GATES=$(grep -E '^      - name: ' "$WORKFLOW" | awk -F': ' '
   /Spec cross-link gate/                      {n++}
   /Spec folder-reference gate/                {n++}
@@ -126,6 +130,7 @@ WORKFLOW_GATES=$(grep -E '^      - name: ' "$WORKFLOW" | awk -F': ' '
   /Self-test §27 inventory parity triangle/   {n++}
   /Self-test WEIGHTS dimension-table parity/  {n++}
   /§99 Summary freshness gate/                {n++}
+  /§99 Stamp-bump gate/                       {n++}
   END {print n+0}
 ' )
 

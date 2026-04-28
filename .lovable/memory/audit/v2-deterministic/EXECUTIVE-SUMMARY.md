@@ -1,7 +1,7 @@
 # AI-Implementability Audit v2 — Executive Summary
 
 **Date:** 2026-04-25  
-**Rubric:** v2.24  
+**Rubric:** v2.25  
 **Verdict:** Mean **98.0/100** weighted, **99.8/100** implementability across 87 modules.
 
 ## TL;DR
@@ -17,4 +17,4 @@
 4. For every D/F module, run `linter-scripts/generate-gwt-acceptance.py` to regenerate ACs.
 5. Add `Status: Planned/In-Progress/Implemented` banners so alignment scores reflect intent.
 
-See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1) listing the 15 strict CI gates that surround this score.
+See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5) listing the 16 strict CI gates that surround this score.
