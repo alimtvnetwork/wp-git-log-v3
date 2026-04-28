@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.9.2  
-**Updated:** 2026-04-28 (Phase P6 — `GAP-V2-06: locked-vacant precedent retained` — added **AC-22-LV1** declaring §09–§13 must remain file-absent; rejects the original GAP-V2-06 stub-file recipe in favour of the Core memory immutability rule. AC count 75 → 76. No DDL change; no schema bump.)
+**Version:** 3.9.3  
+**Updated:** 2026-04-28 (Phase P16 — lockstep for the 4 `GL-STREAM-*` ingest-streaming codes deferred from Phase P2: added **AC-76** (Streaming-ingest error-code surface) binding §15 v2.9.4 catalog rows + §17 v2.9.6 `ErrorCode` enum entries to the §04 §1.2 wire-format pins. AC count 76 → 77. No DDL change; no schema bump.)
 
 ---
 
@@ -470,6 +470,12 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - **When** any contributor (human or AI) is authoring new content in folder 22 OR a CI lint runs over `spec/22-git-logs-v2/`
 - **Then** NO file matching the glob `spec/22-git-logs-v2/{09,10,11,12,13}-*.md` may exist on disk — these slot numbers are **retired**, not "available stubs"; AND a contributor MUST NOT create a "Slot intentionally vacant" stub file at any of these slot numbers (the original GAP-V2-06 fix recipe is **rejected** — see §37 Phase P6 entry — because (a) it conflicts with the Core memory rule "File slots are immutable once shipped — never reuse a number" and (b) a one-line stub file would score 0 on `check-tree-health.cjs --strict` and regress the module from 168/168 → 158/168); AND the next free slot for new §22 content is **§40+** (§38 + §39 are now occupied per Phases P5 and 105); AND the §00 italic inventory rows are the **single source of truth** for the locked-vacant disambiguation — they are advisory anchors, not navigation targets, and a blind-AI link-follow against them is the accepted residual cost of the immutability invariant; AND `linter-scripts/check-spec-folder-refs.py` (or its successor) MAY add a per-folder allowlist entry recording these five slot numbers as `[locked-vacant]` so any future authoring attempt is caught at PR time.
 - **Verifies:** §00 v3.8.8 (inventory rows §09–§13 marked "Locked vacant slot"), §37 v1.2.0 (GAP-V2-06 RESOLVED entry — Phase P6 rejection rationale), `mem://index.md` Core rule "File slots are immutable once shipped — never reuse a number".
+
+### AC-76 — Streaming-ingest error-code surface (`GL-STREAM-*`)  `[active]`
+- **Given** the opt-in NDJSON ingest mode for `POST /append-log` defined in §04 §1.2 (sentinel `X-GL-Stream: 1` + `Content-Type: application/x-ndjson; charset=utf-8` + `Transfer-Encoding: chunked`, three-frame `StreamHeader` / `Line` / `StreamFooter` contract, cap reuse of `NdjsonMaxRowsPerStream` per §11.4)
+- **When** the server validates an inbound ingest stream and detects (a) a missing/malformed/late `StreamHeader`, (b) EOF before `StreamFooter`, (c) line count exceeding `NdjsonMaxRowsPerStream`, or (d) an NDJSON frame whose discriminator key is none of the three recognized values
+- **Then** the server MUST respond with the exact code/HTTP-status pairs `GL-STREAM-NO-HEADER` / 400, `GL-STREAM-NO-FOOTER` / 400, `GL-STREAM-TOO-MANY-LINES` / 413, `GL-STREAM-UNKNOWN-FRAME` / 400 respectively; AND each code MUST be present as a row in §15 v2.9.4 `## Streaming ingest (Lane B — see §04 §1.2)` table with matching HTTP status, cause, and caller-action columns; AND each code MUST be present in §17 v2.9.6 `components.schemas.ErrorCode.enum` so generated OpenAPI clients reject unknown values at typecheck time; AND because ingest streaming responds with a buffered standard `AckResponse` (per §04 §1.2) all four codes MUST surface as the conventional `ErrorEnvelope` JSON shape — NEVER as a mid-stream `Error` frame (the response body is buffered, not streamed); AND any partial inserts already buffered when the violation is detected MUST be rolled back atomically (no half-written `LogEntry` rows visible to subsequent reads); AND adding any future `GL-STREAM-*` code MUST follow the same three-file lockstep (§15 row + §17 enum entry + this AC's `Verifies:` extended).
+- **Verifies:** §04 v2.9.4 §1.2 lines 102–131 (wire-format pins + four MUST-respond rules), §15 v2.9.4 `## Streaming ingest (Lane B — see §04 §1.2)` (catalog rows for all 4 codes), §17 v2.9.6 `components.schemas.ErrorCode` enum (NDJSON streaming ingest block), §11.4 (`NdjsonMaxRowsPerStream` shared cap with retrieval streaming).
 
 ---
 

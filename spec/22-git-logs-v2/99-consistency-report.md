@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.15
-**Updated:** 2026-04-28 (Phase P8 — §37 effort-table & per-gap headers refreshed: V2-02/03/04/08/10 marked ✅ RESOLVED. §37 v1.3.0 → v1.4.0; pure bookkeeping, no AC/DDL/schema/enum/error-code change. AC count unchanged at 76. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.16
+**Updated:** 2026-04-28 (Phase P16 — `GL-STREAM-*` lockstep closed: §15 v2.9.3 → v2.9.4 + §17 v2.9.5 → v2.9.6 + §97 v3.9.2 → v3.9.3 + AC-76; codes promoted from §04 §1.2 prose into §15 catalog and §17 `ErrorCode` enum with binding AC. AC count 76 → 77. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
@@ -25,9 +25,9 @@
 | 12-wp-plugin-scaffold.md | ⚠️ Referenced; PSR-4 layout described in `mem://specs/git-logs.md` |
 | 13-v1-vs-v2-mapping.md | ⚠️ Referenced; v1 deltas captured in changelog + `21-git-logs/` legacy banner |
 | 14-endpoint-examples.md | ✅ |
-| 15-error-codes.md | ✅ (4 new auth codes added in v2.6) |
+| 15-error-codes.md | ✅ (v2.9.4 — Phase P16 added `## Streaming ingest (Lane B — see §04 §1.2)` section with 4 `GL-STREAM-*` codes) |
 | 16-seed-data.md | ✅ (sole occupant of slot 16 since Phase P5 collision resolution) |
-| 17-openapi.yaml | ✅ (v2.9.5 — Phase P3 `AckResponse.PreviousHasError` REQUIRED) |
+| 17-openapi.yaml | ✅ (v2.9.6 — Phase P16 `ErrorCode` enum gained 4 `GL-STREAM-*` ingest-streaming entries) |
 | 18-schema.sql | ✅ (Prune + Restore seeds added in v2.6) |
 | 19-permission-matrix.md | ✅ |
 | 20-observability.md | ✅ |
@@ -45,7 +45,7 @@
 | 37-blind-ai-gap-analysis.md | ✅ (v1.3.0 — Phase P7 marked GAP-V2-01 RESOLVED via mechanical 76/76 GWT audit; headline 76/100 → 99/100 A+) |
 | 38-test-plan-superseded.md | ✅ (relocated from `16-test-plan.md` in Phase P5 2026-04-28 — slot-16 collision resolution; redirect stub → §32–§35) |
 | 39-split-db-log-storage.md | ✅ (added v3.8.0 2026-04-26 — per-SHA SQLite storage spec) |
-| 97-acceptance-criteria.md | ✅ (v3.9.2 — Phase P6 added AC-22-LV1 prohibiting §09–§13 stub files; AC count 75 → 76) |
+| 97-acceptance-criteria.md | ✅ (v3.9.3 — Phase P16 added AC-76 binding the 4 `GL-STREAM-*` codes across §04 §1.2 + §15 v2.9.4 + §17 v2.9.6; AC count 76 → 77) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
 
@@ -56,7 +56,7 @@
 - `97-acceptance-criteria.md` AC-26..AC-41 reference §10, §17–§26 sources: OK
 - `18-schema.sql` `AuditActionType` seed includes Prune (19), Restore (20): OK
 - `30-threat-model.md` deferral list cross-links to `11-encryption-deferred-plan.md` (queued file)
-- `17-openapi.yaml` `ErrorCode` enum mirrors all 37 runtime `GL-*` codes from `15-error-codes.md` (release-time `GL-RELEASE-*` excluded by design): OK
+- `17-openapi.yaml` `ErrorCode` enum mirrors all 41 runtime `GL-*` codes from `15-error-codes.md` (37 pre-P16 + 4 `GL-STREAM-*` ingest codes added Phase P16; release-time `GL-RELEASE-*` excluded by design): OK
 - `04-rest-api-endpoints.md` documents the 10-logical→8-path `?q=` collapse rule; AC-11 cross-links it: OK
 
 ## Naming compliance
