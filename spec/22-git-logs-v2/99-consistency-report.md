@@ -45,7 +45,7 @@
 | 37-blind-ai-gap-analysis.md | ✅ (v1.5.0 — Phase P17 marked GAP-V2-09 RESOLVED; 9 of 10 historical gaps closed; effort remaining 7m → 5m) |
 | 38-test-plan-superseded.md | ✅ (relocated from `16-test-plan.md` in Phase P5 2026-04-28 — slot-16 collision resolution; redirect stub → §32–§35) |
 | 39-split-db-log-storage.md | ✅ (added v3.8.0 2026-04-26 — per-SHA SQLite storage spec) |
-| 97-acceptance-criteria.md | ✅ (v3.9.3 — Phase P16 added AC-76 binding the 4 `GL-STREAM-*` codes across §04 §1.2 + §15 v2.9.4 + §17 v2.9.6; AC count 76 → 77) |
+| 97-acceptance-criteria.md | ✅ (v3.9.4 — Phase P18 added AC-77 binding the §03 v2.3.0 History `HasError + StateLabel` rendering contract to AC-73's label enum + AC-74's NDJSON consumer; AC count 77 → 78) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
 
