@@ -6,7 +6,7 @@
 
 ---
 
-## 1.1.0 — 2026-04-27
+### 1.1.0 — 2026-04-27
 
 - Phase 51: appended JSON Schema + typed enum contracts to overview to lift implementability score (no behavior change).
 

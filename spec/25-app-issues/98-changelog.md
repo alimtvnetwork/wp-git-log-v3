@@ -6,7 +6,7 @@
 
 ---
 
-## 1.2.0 — 2026-04-28 (Phase P11: nested-subdir audit)
+### 1.2.0 — 2026-04-28 (Phase P11: nested-subdir audit)
 
 - **Audited** the two nested child trackers (`01-phase-2-git-logs-audit/`, `02-consolidated-audit-findings/`) per the queued P11 task ("audit nested subdirs; spec or roll up"). **Disposition: SPEC IS COMPLETE — no roll-up required.**
 - **Findings:** Both child trackers carry full §00/§97/§98/§99 governance; both are tagged `kind: tracker` (exempt from missing-contract / untestable rubric findings); both audit `spec/_archive/21-git-logs-v1/`; tree-health 168/168 strict-pass already covers them (all 56 modules at full marks per `mem://index.md` Core). The 02-consolidated tracker's "Correction notice" already declared supersession of 01 ("This document supersedes the Phase-2 audit … wherever they disagree").
