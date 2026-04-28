@@ -152,3 +152,162 @@
 | Success | Completed |
 | Rejected | Validation/policy denied |
 | Error | Runtime failure |
+
+---
+
+## TypeScript Mirror
+
+> **Phase P1 (2026-04-28) — closes GAP-V2-02.** Drop-in TypeScript enum module for any client (headless admin SPA, Gutenberg block editor, TS dashboard, future React Native). The codes below MUST be byte-identical to the SQLite `{EnumName}.Name` columns and to the PHP `{EnumName}Type` constants — drift between any of the three is a `GL-SCHEMA-DRIFT` error (§15). New enum values MUST be added here in the same PR that adds them to the lookup-table seed (`18-schema.sql`) and to the §99 inventory.
+
+**Generation contract**: this block is hand-maintained for now. A future Phase MAY auto-generate it from `18-schema.sql` lookup-table seeds; until then, the §99 audit row for this section is the single source of "last verified in sync".
+
+```ts
+// spec-22-git-logs-v2-enums.ts
+// Mirror of spec/22-git-logs-v2/01-glossary-and-enums.md §Enum Catalog.
+// Codes are PascalCase string literals matching SQLite {EnumName}.Name.
+// DO NOT compare against raw strings in client code — import these enums.
+
+export enum UserStatus {
+  Active = "Active",
+  Suspended = "Suspended",
+  Revoked = "Revoked",
+}
+
+export enum Role {
+  Admin = "Admin",
+  Editor = "Editor",
+}
+
+export enum Permission {
+  AppCreate = "AppCreate",
+  AppView = "AppView",
+  AppModify = "AppModify",
+  AppDelete = "AppDelete",
+  ProfileCreate = "ProfileCreate",
+  ProfileView = "ProfileView",
+  ProfileModify = "ProfileModify",
+  ProfileDelete = "ProfileDelete",
+  GitProfileCreate = "GitProfileCreate",
+  GitProfileView = "GitProfileView",
+  GitProfileModify = "GitProfileModify",
+  GitProfileDelete = "GitProfileDelete",
+  RepoView = "RepoView",
+  RepoModify = "RepoModify",
+  RepoDelete = "RepoDelete",
+  HistoryView = "HistoryView",
+  LogPush = "LogPush",
+}
+
+export enum Provider {
+  GitHub = "GitHub",
+  GitLab = "GitLab", // reserved — not active in v2
+}
+
+export enum Acceptance {
+  AcceptAllRepos = "AcceptAllRepos",
+  AcceptSelectedRepoOnly = "AcceptSelectedRepoOnly",
+  AcceptSelectedRepoInAllVersions = "AcceptSelectedRepoInAllVersions",
+}
+
+export enum AppStatus {
+  Active = "Active",
+  Disabled = "Disabled",
+  Archived = "Archived",
+}
+
+export enum AppLinkType {
+  GitProfile = "GitProfile",
+  Repo = "Repo",
+}
+
+export enum LogSeverity {
+  Trace = "Trace",
+  Debug = "Debug",
+  Info = "Info",
+  Warn = "Warn",
+  Error = "Error",
+  Fatal = "Fatal",
+}
+
+/** Numeric severity mirrors the table in §LogSeverity for ordering / threshold checks. */
+export const LogSeverityNumeric: Readonly<Record<LogSeverity, number>> = {
+  [LogSeverity.Trace]: 10,
+  [LogSeverity.Debug]: 20,
+  [LogSeverity.Info]: 30,
+  [LogSeverity.Warn]: 40,
+  [LogSeverity.Error]: 50,
+  [LogSeverity.Fatal]: 60,
+};
+
+/** Renamed from `ActionType` in v3.8.0. */
+export enum PipelineActionType {
+  Append = "Append",
+  Fixed = "Fixed",
+  Clear = "Clear",
+  ClearAll = "ClearAll",
+}
+
+/** NEW in v3.8.0 — business state changes that aren't Git pushes. */
+export enum SystemEventType {
+  ProfileCreated = "ProfileCreated",
+  ProfileDeleted = "ProfileDeleted",
+  ProfileStatusChanged = "ProfileStatusChanged",
+  RoleAssigned = "RoleAssigned",
+  RoleRevoked = "RoleRevoked",
+  GitProfileCreated = "GitProfileCreated",
+  GitProfileAcceptanceChanged = "GitProfileAcceptanceChanged",
+  GitProfileBranchRestrictionChanged = "GitProfileBranchRestrictionChanged",
+  AppCreated = "AppCreated",
+  AppStatusChanged = "AppStatusChanged",
+  AppLinkAdded = "AppLinkAdded",
+  AppLinkRemoved = "AppLinkRemoved",
+  SshKeyRegistered = "SshKeyRegistered",
+  SshKeyRevoked = "SshKeyRevoked",
+  SshKeyRotated = "SshKeyRotated",
+  TempTokenRotated = "TempTokenRotated",
+}
+
+export enum AuditActionType {
+  ProfileCreate = "ProfileCreate",
+  ProfileUpdate = "ProfileUpdate",
+  ProfileDelete = "ProfileDelete",
+  GitProfileCreate = "GitProfileCreate",
+  GitProfileUpdate = "GitProfileUpdate",
+  GitProfileDelete = "GitProfileDelete",
+  RepoCreate = "RepoCreate",
+  RepoUpdate = "RepoUpdate",
+  RepoDelete = "RepoDelete",
+  AppCreate = "AppCreate",
+  AppUpdate = "AppUpdate",
+  AppDelete = "AppDelete",
+  AppLinkChange = "AppLinkChange",
+  LogPush = "LogPush",
+  LogQuery = "LogQuery",
+  AuthSuccess = "AuthSuccess",
+  AuthFail = "AuthFail",
+  MigrationRun = "MigrationRun",
+  ConfigChange = "ConfigChange", // seed id 25, added v2.8.0 (Phase 39b backfill)
+}
+
+export enum AuditOutcome {
+  Success = "Success",
+  Rejected = "Rejected",
+  Error = "Error",
+}
+
+/** Retired in v3.8.0 — replaced by `GitProfile.IsOrganization: boolean`. Kept here as a deprecated stub for any v1 client still on the wire. */
+/** @deprecated removed in v3.8.0; use `GitProfile.IsOrganization` instead. */
+export enum OwnerType_DEPRECATED_v380 {
+  User = "User",
+  Organization = "Organization",
+}
+```
+
+### Drift-detection contract
+
+| Source | Authority | Drift signal |
+|--------|-----------|--------------|
+| `18-schema.sql` `{EnumName}` lookup-table seeds | **Canonical** | Any value present in SQL but missing here MUST raise a `GL-SCHEMA-DRIFT` (§15) at boot. |
+| `01-glossary-and-enums.md` §Enum Catalog tables | **Canonical** (human-readable) | Tables and `ts` block above MUST list the same codes in the same order. |
+| `## TypeScript Mirror` block above | Generated-by-hand mirror | Out-of-band drift is a §99 finding (audit row demoted from ✅ to ⚠️). |
+| Future PHP `{EnumName}Type::cases()` constants | Generated from SQL at boot | Drift escalates to `GL-SCHEMA-DRIFT` at admin-page load. |
