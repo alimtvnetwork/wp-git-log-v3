@@ -242,6 +242,28 @@ jobs:
         # Spec: spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md (AC-31-02, AC-31-31 row #4)
         run: bash linter-scripts/test/test-weights-parity.sh
 
+      - name: §99 Stamp-bump gate (Phase H5)
+        # Phase H5: turns the H1/H2 honor-system into a CI check. When a
+        # §99 file is materially edited (any non-stamp line changed), this
+        # gate verifies its `<!-- verified-phase: NNN -->` stamp was bumped
+        # to the current phase in the same diff. Two-layer defense pairing
+        # with the snapshot-based H1 freshness gate (decay over time): edits
+        # must bump (this gate, budget=0), unedited stamps decay (freshness,
+        # budget=20). Files without a tracked stamp are SKIPPED — natural
+        # ratchet as authors opt-in. Skips on push to main (no diff base).
+        # Spec: spec/27-spec-toolchain/27-check-99-stamp-bump.md (AC-27-01..08)
+        if: github.event_name == 'pull_request'
+        env:
+          STAMP_BUMP_BASE_REF: ${{ github.event.pull_request.base.sha }}
+        run: python3 linter-scripts/check-99-stamp-bump.py
+
+      - name: Self-test §99 stamp-bump gate (Phase H5)
+        # Phase H5: locks the AC-27-01..08 contract under CI (skip-rules,
+        # phase-detection, archive exclusion, structural error modes). Runs
+        # always — independent of pull_request context, since it injects its
+        # own diff via --changed-files / --treat-as-stamp-only flags.
+        run: bash linter-scripts/test/test-check-99-stamp-bump.sh
+
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
         # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC
