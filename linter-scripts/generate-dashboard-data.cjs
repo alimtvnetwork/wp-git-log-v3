@@ -135,6 +135,15 @@ function walkDirs(dir) {
 // ── 1. Broken link detection ────────────────────────────────
 
 const LINK_RE = /\[([^\]]*)\]\((\.[^)]+)\)/g;
+// P44: blank inline-code spans before link extraction (parity with
+// check-spec-cross-links.py:strip_inline_code). Without this, `[`foo`](./foo)`
+// inside narrative text is mis-parsed as a real link, producing
+// false-positive broken-link counts (precedent: `./test-foo.sh` example
+// pattern in §27 §98 line 501 P102 narrative). Preserves char offsets.
+const INLINE_CODE_RE = /(`+)(?:(?!\1).)+?\1/g;
+function blankInlineCode(line) {
+  return line.replace(INLINE_CODE_RE, (m) => " ".repeat(m.length));
+}
 
 function extractLinks(filePath, content) {
   const links = [];
@@ -142,13 +151,14 @@ function extractLinks(filePath, content) {
   let inCodeBlock = false;
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    if (line.trimStart().startsWith("```")) {
+    const rawLine = lines[i];
+    if (rawLine.trimStart().startsWith("```")) {
       inCodeBlock = !inCodeBlock;
       continue;
     }
     if (inCodeBlock) continue;
 
+    const line = blankInlineCode(rawLine);
     let match;
     LINK_RE.lastIndex = 0;
     while ((match = LINK_RE.exec(line)) !== null) {
