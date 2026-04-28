@@ -31,7 +31,7 @@
   "kind": "tracker",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 32421,
+  "overview_chars": 32453,
   "ac_chars": 4043,
   "ac_count": 8,
   "gwt_block_count": 8,
