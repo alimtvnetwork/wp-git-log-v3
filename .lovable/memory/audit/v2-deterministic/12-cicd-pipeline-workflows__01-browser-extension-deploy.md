@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/12-cicd-pipeline-workflows/01-browser-extension-deploy.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.21. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.19. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 6,
   "mmd_files": 1,
-  "overview_chars": 14188,
+  "overview_chars": 14220,
   "ac_chars": 4076,
   "ac_count": 8,
   "gwt_block_count": 8,
@@ -59,7 +59,7 @@
   "links_total": 10,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.21,
+  "waffle_per_kchar": 0.19,
   "child_modules": 0
 }
 ```

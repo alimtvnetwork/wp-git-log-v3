@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/24-app-design-system-and-ui.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.15. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.14. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "module",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 20221,
+  "overview_chars": 20253,
   "ac_chars": 6598,
   "ac_count": 11,
   "gwt_block_count": 10,
@@ -62,7 +62,7 @@
   "links_total": 13,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.15,
+  "waffle_per_kchar": 0.14,
   "child_modules": 0
 }
 ```

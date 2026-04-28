@@ -8,7 +8,7 @@
 > Deterministic score 100/100 (A+) for spec/03-error-manage/03-error-code-registry.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.1. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 10,
   "mmd_files": 1,
-  "overview_chars": 9218,
+  "overview_chars": 9250,
   "ac_chars": 4129,
   "ac_count": 8,
   "gwt_block_count": 8,
@@ -60,7 +60,7 @@
   "links_total": 23,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.1,
+  "waffle_per_kchar": 0.09,
   "child_modules": 3
 }
 ```

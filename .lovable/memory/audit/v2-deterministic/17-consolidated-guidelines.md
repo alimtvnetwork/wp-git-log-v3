@@ -31,7 +31,7 @@
   "kind": "",
   "md_files": 37,
   "mmd_files": 0,
-  "overview_chars": 9194,
+  "overview_chars": 9226,
   "ac_chars": 13158,
   "ac_count": 8,
   "gwt_block_count": 8,

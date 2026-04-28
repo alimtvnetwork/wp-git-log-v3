@@ -8,7 +8,7 @@
 > Deterministic score 97/100 (A+) for spec/03-error-manage/01-error-resolution/04-verification-patterns.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.1. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=7, gwt=6, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 5,
   "mmd_files": 1,
-  "overview_chars": 4717,
+  "overview_chars": 4749,
   "ac_chars": 3686,
   "ac_count": 7,
   "gwt_block_count": 6,
@@ -59,7 +59,7 @@
   "links_total": 8,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.1,
+  "waffle_per_kchar": 0.09,
   "child_modules": 0
 }
 ```
