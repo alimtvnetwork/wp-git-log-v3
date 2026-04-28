@@ -235,8 +235,12 @@ def main() -> int:
         if stamp is None:
             skipped_unstamped += 1
             continue
-        diff = git_diff_lines(base_ref, f) or ""
-        if diff_is_stamp_only(diff):
+        if args.changed_files and args.treat_as_stamp_only:
+            stamp_only = True
+        else:
+            diff = git_diff_lines(base_ref, f) or ""
+            stamp_only = diff_is_stamp_only(diff)
+        if stamp_only:
             skipped_stamp_only += 1
             continue
         # Material edit. Stamp must equal current phase.
