@@ -10,7 +10,7 @@
 
 | File | Present | Notes |
 |------|---------|-------|
-| 00-overview.md | ✅ | Index + inventory (v3.4.0 — Phase P19 H10 parity catch-up; content current as of Phase P10) |
+| 00-overview.md | ✅ | Index + inventory (v3.4.1 — Phase P19 H10 parity catch-up; content current as of Phase P10) |
 | 01-er-diagram.mmd / .svg | ✅ | erDiagram — only place data shape lives. SVG re-rendered Phase 10 v2.1.0 (313 KB, reflects v2.9.0 split-DB shape). |
 | ~~02-domain-design.mmd~~ | 🗑️ | Removed v2.0.0 — duplicated 01; slot locked |
 | ~~03-endpoints-write.mmd~~ | 🗑️ | Removed v2.0.0 — folded into 09; slot locked |
