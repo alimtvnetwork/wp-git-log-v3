@@ -49,19 +49,13 @@ A reasonable AI starting from §00 can produce: complete SQLite schema, all 10 P
 
 Each gap below is paired with the **exact file + section to patch** so a human can close it in one PR.
 
-### GAP-V2-01 — ACs are Markdown rows, not Given/When/Then [HIGH]
+### GAP-V2-01 — ACs are Markdown rows, not Given/When/Then [HIGH — RESOLVED 2026-04-28, Phase P7]
 
-- **Symptom:** `97-acceptance-criteria.md` has 41 testable items written as table rows (`| AC-01 | … |`). The auditor's `gwt_block_count = 0` triggers gate `G-AC-02` capping testability at 60. An AI builder can read each row but cannot generate a test stub mechanically.
-- **Impact on blind build:** The AI will write tests that *paraphrase* each AC, so the test names will drift from the spec wording across runs.
-- **Fix target:** `spec/22-git-logs-v2/97-acceptance-criteria.md` — convert each row to:
-
-  ```md
-  ### AC-01 — Top-level menu
-  - **Given** a fresh activation,
-  - **When** an admin loads the plugin admin page,
-  - **Then** the top menu MUST render exactly: Profile, Roles, AccessToRoles, GitProfile, Repo, RepoVersion, History, Action.
-  ```
-- **Effort:** ~60 min (helper exists: `python3 linter-scripts/generate-gwt-acceptance.py`).
+- **Original symptom:** `97-acceptance-criteria.md` had 41 testable items written as one-line table rows (`| AC-01 | … |`). The auditor's `gwt_block_count = 0` triggered gate `G-AC-02` capping testability at 60. An AI builder could read each row but could not generate a test stub mechanically.
+- **Resolution:** Closed by §97 v3.8.5 → v3.8.8 **full-rewrite phase** (Phase 12, 2026-04-26) and extended through Phases 8/9/12/13/P1–P6. As of §97 v3.9.2 (Phase P6 close), folder 22 carries **76 ACs** (AC-01..AC-75 + AC-22-LV1) and **all 76 are well-formed Given/When/Then stanzas** with explicit `Verifies:` cross-refs. Mechanical audit (`python3 -c "..."` regex sweep over `### AC-` blocks at Phase P7) confirms `incomplete_count = 0` — every AC contains all four required markers (`- **Given**`, `- **When**`, `- **Then**`, `**Verifies:**`). Status badges `[active]` / `[draft]` / `[deprecated]` are uniformly applied; the file is reorganised into 11 thematic sections (A UI · B Domain · C Auth/Lane · D Endpoints · E Logging/Migrations · F Audit · G Schema/Diagrams · H Per-SHA Split-DB · I SSH-Key Lane B · J NDJSON Streaming · K PreviousHasError State Transitions) plus the standalone AC-22-LV1 locked-vacant invariant.
+- **Auditor impact:** `gwt_block_count` for folder 22 is now **76 / 76 (100%)**; gate `G-AC-02` no longer fires. Testability dimension uncapped at 100 (was 10 in the v1.0 baseline). Tools downstream (`generate-gwt-acceptance.py`, hypothetical `generate-test-stubs-from-gwt.py`) can mechanically emit one PHPUnit / bats / vitest case per AC without paraphrasing — eliminating the test-name-drift class of regressions described in the original "Impact on blind build" symptom.
+- **Outcome:** Folder-22 GWT conversion is complete and frozen — no further authoring is required. Future ACs added to §97 MUST follow the same GWT shape (informally enforced by the §97 banner reorganisation; could be hardened by a future per-AC linter — see Phase P7b in §99).
+- **Tree-wide follow-up (out of scope for §22):** A Phase P7 sweep of all `spec/*/97-acceptance-criteria.md` found that **19 of 23** modules are 100% GWT, with a residual long tail of **13 non-GWT ACs across 4 modules**: `01-spec-authoring-guide` (4/31), `02-coding-guidelines` (5/25), `05-split-db-architecture` (2/22), `06-seedable-config-architecture` (2/22). These belong to Phase P7b (`tree-wide GWT polish`) and are tracked in §99 v3.9.13 Open follow-ups, not in any §22 GAP-V2-* row.
 - **Score impact:** lifts testability 10 → ~85, raises overall to ~81.
 
 ### GAP-V2-02 — TypeScript enums never inlined [MEDIUM]
