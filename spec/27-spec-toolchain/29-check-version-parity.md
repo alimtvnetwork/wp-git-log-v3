@@ -61,8 +61,8 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 
 | Flag | Behavior |
 |---|---|
-| _(default)_ | **Strict** as of Phase P31: exit 1 on any mismatch. (Pre-P31: advisory tree-wide; promoted per-file only on `<!-- h10-verified-phase: NNN -->` stamp.) |
-| `--strict` | Explicit strict mode (now equivalent to default). Retained for backward compatibility and explicit-intent CI invocations. |
+| _(default)_ | Advisory tree-wide; exit 0 even on mismatch — UNLESS the mismatched §00 carries a Phase P20 `<!-- h10-verified-phase: NNN -->` stamp, in which case that file fails per-file strict and the gate exits 1. (Script-level default unchanged at P31; CI now invokes `--strict` — see Phase P31 row in Changelog.) |
+| `--strict` | Exit 1 on any mismatch. **As of Phase P31, the CI workflow invokes the gate with `--strict` since the reverse-drift backlog cleared at P30 (matches=74/74).** |
 | `--report-only` | Never fails (overrides `--strict` AND per-file stamps). Useful for dashboards. |
 | `--json` | Machine-readable output with `details[]` array (each entry includes `stamped: <int|null>`); top-level `stamped` and `stamped_failed` counts. |
 | `--spec-root PATH` | Override scan root (used by self-test sandboxes). |
@@ -71,8 +71,8 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 
 | Code | Meaning |
 |---|---|
-| 0 | Zero mismatches, OR `--report-only` |
-| 1 | Any mismatch present (default mode is strict as of P31), OR pre-P31 default mode AND any STAMPED §00 has a mismatch (per-file strict promotion — historically retained) |
+| 0 | Default mode with zero stamped failures, OR `--strict` with zero mismatches, OR `--report-only` |
+| 1 | `--strict` mode AND any mismatch present (CI default as of Phase P31), OR default mode AND any STAMPED §00 has a mismatch (per-file strict promotion) |
 | 2 | Structural error (spec root not found) |
 
 ## Output line shape
