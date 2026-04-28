@@ -1,7 +1,7 @@
 # Blind-AI Implementability Gap Analysis — v2 (folder 22)
 
-**Version:** 1.1.0
-**Updated:** 2026-04-27
+**Version:** 1.2.0
+**Updated:** 2026-04-28
 **Question asked:** *"If I hand folder 22 to an AI blindly, how much can it build, and where will it stall?"*
 
 ---
