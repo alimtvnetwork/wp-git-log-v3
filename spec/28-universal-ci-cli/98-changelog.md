@@ -1,9 +1,15 @@
 # Changelog
 
-**Updated:** 2026-04-27
+**Updated:** 2026-04-28
 
 
 All notable changes to `spec/28-universal-ci-cli/`.
+
+## [2.1.1] — 2026-04-28
+
+### Audit (no content change)
+
+- **Phase P12 — "Deepen 9 thin section files" backlog item closed as STALE.** This task was queued before Phases 31/55/63/76 deepened the module to a perfect 100/100 strict tree-health score. Re-audit confirms: all 9 section files (`01`..`09`) are 83–132 lines of dense tabular contract (enums, harvest maps, layered-design rules, error catalogs, provider bindings) — comparable to or denser than peer modules. §99 reports `Files present 15/15`, `0 TODO/TBD/FIXME markers`, implementability `100`, all internal consistency checks ✅, and `check-tree-health.cjs --strict` returns `168/168 (all 56 modules at full marks)` with §28 contributing 3/3 quality credits. The "thin files" framing was inherited from the audit-v4 baseline (45/100) which has been superseded by audit-v5 (Phase 130). No file edits required; no AC changes; no version bump for any section file. §98 / §99 receive a patch bump to record the disposition.
 
 ## [2.1.0] — 2026-04-27
 
