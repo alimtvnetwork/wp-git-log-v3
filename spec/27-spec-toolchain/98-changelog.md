@@ -1,10 +1,24 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.59.0
+**Version:** 2.60.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.60.0 — 2026-04-28 — Phase P30: H10 reverse-drift backlog CLEARED tree-wide via P28-style hybrid batch (23 modules)
+- **Action**: Terminal reverse-drift batch sweep. Pre-classified all 23 remaining `+post-footer|needs-promote` drifters via `/tmp/p30-batch.py` extending the P29 batch template. For each: detected post-footer prose blocks (Phase NN sections after §98 Cross-References footer); promoted each to a SemVer ladder row (minor for additive, major for new normative CI surface per P23/P24/P26 precedent); added a dual-stream alignment row at §00 banner version (P25 rationale); appended a final patch reconciliation row; bumped §98 header + §00 banner + §99 + dates; added H10 stamp.
+- **Reconstruction (P28-style hybrid batch)**: 23 modules processed in one phase. Final reconciliation patch versions: `3.2.1`, `3.3.1`, `3.4.1` depending on each module's banner. Total prose blocks promoted: ~50 across all modules. Mix of `needs-promote-only` (no post-footer prose, just header/banner sync) and `+post-footer` (full hybrid).
+- **P30 lessons codified (3 new + 1 confirmed)**:
+  - **(1) Linter "first-match-wins" requires semver-desc row ordering.** `latest_release()` in `check-version-parity.py` returns the FIRST `## ` or `### ` heading matching `vX.Y.Z` in document order — NOT the highest semver. Batch insertions of new rows MUST be placed FIRST in the Releases section AND any pre-Releases orphan version headings MUST be removed (or the linter picks them up as latest). Codified as required step #2 in batch template.
+  - **(2) Pre-Releases orphan version headings are a hidden trap.** Several drifters had `### 1.2.0 — Phase NN` style headings ABOVE `## Releases` (legacy ad-hoc audit notes from earlier sweeps). Even with the proper Releases ladder built, the linter scans line-by-line and picks these up first. Resolution: remove or demote — the new P30 reconciliation row supersedes them. Codified as required step #3.
+  - **(3) `**Last Updated:**` ≠ `**Updated:**`.** Two §99 files (`02-coding-guidelines`, `04-database-conventions`) used `**Last Updated:**` instead of `**Updated:**`. The lockstep gate reads either, but our batch date-sync regex only matched `**Updated:**`. Codified as required regex pair in batch template.
+  - **(4) Confirmed P29 lesson — date-sync is required.** Re-verified across 23 more modules.
+- **Gate impact**: `matches=51 → 74` (+23 — **100% parity matches**); `mismatches=23 → 0` (**ZERO reverse drift**); `stamped=34 → 57` (+23); `stamped_failed=0`. **Reverse-drift backlog: 22 → 0 — ENTIRE BACKLOG CLEARED TREE-WIDE.**
+- **Adoption progress**: **57 / 74 modules opted into strict enforcement (77.0%).** Remaining 17 unstamped are matches-by-default (no drift) — opt-in stamping a per-author choice, no tree health implication.
+- **Strict-flip readiness**: With `mismatches=0` and `stamped_failed=0`, `check-version-parity.py --strict` would now pass tree-wide. Task #2 from prior backlog (auto-trigger flip at `74/74` stamped) is **eligible to ship as next phase** — needs the remaining 17 stamps OR a one-time unconditional flip (since drift is already zero). Recommendation: **next phase = ship the strict-flip** (single-PR change to default `--strict`), since stamped count is no longer the gating factor — the tree-wide invariant is already achieved.
+- **No CI workflow change yet, no `RUBRIC_VERSION` bump yet, no AC-31-31 cascade yet, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption. **Strict-flip phase will trigger AC-31-31 cascade.**
+- **Verified**: parity 87/74/74/0/stamped=57/stamped_failed=0 / exit 0 ✅; lockstep 87/87/0 ✅; tree-health 168/168 strict ✅.
 
 ### 2.59.0 — 2026-04-28 — Phase P29: H10 batch reconciliation of 8 P25-pure dual-stream drifters
 - **Action**: First batch application of P27's batching lesson. Pre-classified all 31 reverse drifters via `/tmp/p29-batch.py`; identified **8 P25-pure** candidates (clean ladder + decoupled header, no orphan promotion needed): `12-cicd-pipeline-workflows/01-browser-extension-deploy`, `02-go-binary-deploy`, `03-error-manage/03-error-code-registry/07-schemas`, `09-templates`, `02-error-architecture/06-apperror-package`, `04-error-modal/01-copy-formats`, `02-react-components`, `01-error-resolution/app-issues`.
