@@ -36,7 +36,7 @@ PYTHONIOENCODING=utf-8 python3 "$GATE" >/tmp/h1-out 2>&1
 RC=$?
 set -e
 assert "T1 real-tree default mode exits 0" "$RC" "0"
-grep -qE "§99 files scanned: [0-9]+; stamped: [0-9]+; unstamped: [0-9]+" /tmp/h1-out && echo "  ✓ T1 reports scan/stamped/unstamped counts" || { echo "  ✗ T1 counts line missing"; FAIL=$((FAIL+1)); }
+grep -qE "§99 files scanned: [0-9]+; stamped: [0-9]+; exempt: [0-9]+; unstamped: [0-9]+" /tmp/h1-out && echo "  ✓ T1 reports scan/stamped/exempt/unstamped counts" || { echo "  ✗ T1 counts line missing"; FAIL=$((FAIL+1)); }
 
 # --- T2: real-tree --report-only also exits 0
 set +e
