@@ -1,10 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.46.0
+**Version:** 2.46.1
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.46.1 — 2026-04-28 — Phase H8: §99 freshness coverage closure (12 unstamped → 0; exempt-marker convention)
+- **Action**: Drove §99 freshness-stamp coverage from 75/87 stamped + 12 unstamped → **81 stamped + 6 exempt + 0 unstamped** (full 87/87). Codifies the H1 stamp adoption rollout as feature-complete: every §99 file under `spec/` (excluding `_archive/`) now declares a freshness posture, either via `<!-- verified-phase: NNN -->` (stampable narrative/inventory) or `<!-- freshness-exempt: <reason> -->` (audit-log-only files with no claims to verify).
+- **Validator extension** (`check-99-summary-freshness.py`): added `EXEMPT_RE = <!--\s*freshness-exempt:\s*([a-z0-9_\-]+)\s*-->` recognized anywhere in the file (not heading-scoped — exemption is a whole-file property). New "exempt" tally printed alongside stamped/unstamped; exempt files are skipped before the find-stamp pass and never increment the unstamped advisory count. Output line shape changed: `§99 files scanned: N; stamped: N; exempt: N; unstamped: N`.
+- **Convention codified**: `audit-log-only` is the canonical first reason. A §99 qualifies when it has neither a `## Summary` block nor any tracked inventory-rubric heading (`## File Inventory`, `## Module Inventory`, `## Module Health`, `## Top-Level Modules`, `## Document Inventory`, `## Modules`) — only date-anchored audit-log subsections. Six files matched: research-index, app-coding-rules, app-issue-templates, app-database-conventions, app-ui-conventions, update/diagram-conventions.
+- **Stamp-position fix**: discovered 5 files (`05/02-features/99`, `06/02-features/99`, `12/01-browser-extension-deploy/99`, `12/02-go-binary-deploy/99`, `18/02-enums-and-coding-style/99`) carried the stamp on the blank line BEFORE `## Summary` rather than directly under it — the heading-body scanner correctly rejected them. Repositioned all 5 to the line immediately after the heading. **Precedent**: stamps MUST be inside a tracked-heading body, not adjacent to it; the H1 contract was tightened wording but never enforced position.
+- **§27's own §99**: was unstamped because its only stamp tokens lived inside blockquoted Validation History narrative (lines 22-26), not under any tracked heading. Added a fresh `<!-- verified-phase: 147 -->` directly under `## File Inventory`.
+- **Self-test**: extended `test-check-99-summary-freshness.sh` 12 → **20 assertions** (T1 counts-line shape now requires the `exempt:` field; new T11 verifies exempt-marker honored — sandbox file with no tracked heading + exempt marker counted as exempt, not unstamped, exits 0).
+- **No AC-31-31 cascade, no rubric bump, no new gate**: this is a coverage-closure + convention extension within the existing slot-26 gate's contract. Gate count remains **17/17/17**. RUBRIC_VERSION remains v2.26. No §00 inventory delta. No trace-map delta (the validator still occupies AC-26-01..05; new exempt-marker behavior is internal to AC-26-02 "tally").
+- **Verified**: freshness gate ✅ (87 scanned, 81 stamped, 6 exempt, 0 unstamped, 0 stale); self-test 20/20 ✅; lockstep 87/87 / 0 findings ✅; tree-health 168/168 strict ✅; §27-inventory 6/6 ✅.
+- §98 v2.46.0 → **v2.46.1** (patch — convention extension + coverage closure, no contract change); §99 v2.43.0 → **v2.43.1**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h8-freshness-coverage-closure.md`.
 
 ### 2.46.0 — 2026-04-28 — Phase H7: runtime archive-exclusion gate (slot 28 v1.0.0; gate #17; AC-31-31 cascade RUBRIC v2.25→v2.26)
 - **Action**: New self-test `linter-scripts/test/test-archive-exclusion-runtime.sh` codifies the H6 lesson "runtime > source verification" as a standing CI gate. importlib-loads 3 critical spec-traversing linters and asserts each enumerator returns 0 archive-leaked results: `check-99-summary-freshness.find_99_files()` (87 scanned), `audit-spec-vs-code-v2.ALL_MODULES` (87), `generate-trace-map.collect_ac_ids()` (1315). Probe count floor ≥ 3.
