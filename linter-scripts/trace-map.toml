@@ -550,3 +550,33 @@ ac     = "27-spec-toolchain/27-check-99-stamp-bump.md#AC-27-08"
 files  = ["linter-scripts/check-99-stamp-bump.py"]
 symbol = "detect_current_phase"
 kind   = "function"
+
+[[trace]]
+ac     = "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-01"
+files  = ["linter-scripts/test/test-archive-exclusion-runtime.sh"]
+symbol = "probe loaded successfully"
+kind   = "literal"
+
+[[trace]]
+ac     = "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-02"
+files  = ["linter-scripts/test/test-archive-exclusion-runtime.sh"]
+symbol = "0 archive-leaked"
+kind   = "literal"
+
+[[trace]]
+ac     = "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-03"
+files  = ["linter-scripts/test/test-archive-exclusion-runtime.sh"]
+symbol = "sanity"
+kind   = "literal"
+
+[[trace]]
+ac     = "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-04"
+files  = ["linter-scripts/test/test-archive-exclusion-runtime.sh"]
+symbol = "PROBE_COUNT"
+kind   = "literal"
+
+[[trace]]
+ac     = "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-05"
+files  = ["linter-scripts/test/test-archive-exclusion-runtime.sh"]
+symbol = "Results:"
+kind   = "literal"
