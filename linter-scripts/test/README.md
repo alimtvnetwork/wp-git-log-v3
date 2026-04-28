@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-28 (Phase F3 — `.sh`-only test-discovery policy codified; adjacent `.py` test acknowledged below)
+**Last updated:** 2026-04-28 (Phase H1 — added `test-check-99-summary-freshness.sh` for §26 freshness gate; total 8 self-tests)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
