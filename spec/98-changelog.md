@@ -8,6 +8,7 @@
 ## Releases
 
 ### 3.5.1 — 2026-04-28 (Phase 28 — health-dashboard.md freshness sweep)
+- **P22 sync** (2026-04-28): §00 banner version field bumped 3.5.0 → 3.5.1 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
 
 - **Refreshed** `spec/health-dashboard.md` against `spec/dashboard-data.json` (source of truth):
   - `Generated`: 2026-04-25 → **2026-04-27**.

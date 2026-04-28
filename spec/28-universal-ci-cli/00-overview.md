@@ -1,6 +1,7 @@
 # Universal CI CLI — Spec Overview
 
-**Version:** 1.1.0  
+**Version:** 2.1.1  
+<!-- h10-verified-phase: 22 -->
 **Updated:** 2026-04-27  
 **Status:** Draft  
 **AI Confidence:** Production-Ready  

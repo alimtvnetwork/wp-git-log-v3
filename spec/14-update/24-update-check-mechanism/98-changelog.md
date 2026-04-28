@@ -18,6 +18,7 @@
 ## Releases
 
 ### 2.1.0 — 2026-04-26
+- **P22 sync** (2026-04-28): §00 banner version field bumped 1.0.0 → 2.1.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
 
 **Added (Phase 20 Module #9 — code-mirror + wire-format contracts in §04):**
 - New §6 in `04-database-schema.md` inlining the `UpdateStatusEnum` mirror promised by §2 — TypeScript numeric enum (1-based, matches `UpdateStatusId`) plus `UpdateStatusName` / `UpdateStatusLabel` const records and a strict `parseUpdateStatus()` (throws on unknown).

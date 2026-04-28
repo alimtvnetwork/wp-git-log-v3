@@ -5,7 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Spec Authoring Guide
 
-**Version:** 3.7.0  
+**Version:** 4.13.0  
+<!-- h10-verified-phase: 22 -->
 **Updated:** 2026-04-27  
 **Status:** Active  
 **AI Confidence:** Production-Ready  

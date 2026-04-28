@@ -7,6 +7,7 @@
 ---
 
 ## 1.3.0 — 2026-04-27
+- **P22 sync** (2026-04-28): §00 banner version field bumped 1.2.0 → 1.3.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
 
 - Phase 50: appended normative-contract block to overview to lift implementability score (no behavior change).
 
