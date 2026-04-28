@@ -1,10 +1,20 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.45.0
+**Version:** 2.46.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.46.0 — 2026-04-28 — Phase H7: runtime archive-exclusion gate (slot 28 v1.0.0; gate #17; AC-31-31 cascade RUBRIC v2.25→v2.26)
+- **Action**: New self-test `linter-scripts/test/test-archive-exclusion-runtime.sh` codifies the H6 lesson "runtime > source verification" as a standing CI gate. importlib-loads 3 critical spec-traversing linters and asserts each enumerator returns 0 archive-leaked results: `check-99-summary-freshness.find_99_files()` (87 scanned), `audit-spec-vs-code-v2.ALL_MODULES` (87), `generate-trace-map.collect_ac_ids()` (1315). Probe count floor ≥ 3.
+- **Spec doc**: §27 slot 28 v1.0.0 (band 20-29 validator, clean adjacent fit to slot 27). Sanctioned exception to F3 ".sh self-tests": the file IS a `.sh` self-test but occupies a §27 slot because that is its functional role in CI; future contributors MUST NOT invent a thin `.py` wrapper just to fit "validator = `.py`" pattern.
+- **CI wiring**: single workflow step `Runtime archive-exclusion gate (Phase H7)` between H5 stamp-bump and Trace-map regression. Per H1 workflow-step parity lesson, no separate validator step (the self-test IS the gate).
+- **AC-31-31 cascade**: `RUBRIC_VERSION` v2.25 → **v2.26**; QA-baseline footer 16 → **17 strict CI gates** (added entry #17); EXECUTIVE-SUMMARY back-ref 16→17; `test-qa-baseline-footer.sh` awk +1 (`/Runtime archive-exclusion gate/`). Parity 17/17/17.
+- **Trace-map**: bound AC-28-01..05 to slot-28 self-test. Rebaselined: `{ac_total:1320 (+5), ac_traced:90 (+5), code_total:51 (+1), code_orphan:26}` (within thresholds: +5 ACs ≪ 50, +1 code ≪ 5).
+- **README inventory**: 9 → 10 entries (added test-archive-exclusion-runtime.sh row; totals 100+→110+ assertions).
+- **Verified**: H7 self-test 10/10 ✅; QA-baseline-footer 11/11 ✅ (Workflow gates: 17, Footer rows: 17, Declared: 17); README inventory 26/26 ✅; §27 inventory parity 6/6 ✅; lockstep 87/87 / 0 ✅; tree-health 168/168 strict ✅; audit mean 98.0/99.8 ✅; trace-map regression ✅ at new baseline; freshness 75 stamped / 0 stale ✅.
+- §98 v2.45.0 → **v2.46.0** (minor — new gate); §99 v2.42.0 → **v2.43.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-h7-runtime-probe-gate.md`.
 
 ### 2.45.0 — 2026-04-28 — Phase H5: §99 stamp-bump gate CI wiring (AC-31-31 cascade; gate 15→16; RUBRIC v2.24→v2.25)
 - **Action**: Wired Phase H4's `check-99-stamp-bump.py` validator + `test-check-99-stamp-bump.sh` self-test into `.github/workflows/spec-health.yml` as the **16th strict CI gate**, completing the H4 → H5 split (H4 shipped the tool; H5 ships the enforcement).

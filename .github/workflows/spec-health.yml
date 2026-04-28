@@ -267,6 +267,20 @@ jobs:
             echo "ℹ️  Skipping diff-based stamp-bump check (not a pull_request event)."
           fi
 
+      - name: Runtime archive-exclusion gate (Phase H7)
+        # Phase H7: codifies the H6 lesson "runtime > source verification" as
+        # a standing CI gate. importlib-loads 3 critical spec-traversing
+        # linters (check-99-summary-freshness, audit-spec-vs-code-v2,
+        # generate-trace-map) and asserts each enumerator returns 0 results
+        # under spec/_archive/. Without this gate, a future contributor
+        # could silently regress the H3 _archive exclusion convention by
+        # dropping the `if "_archive" not in p.parts` guard during a refactor
+        # — H3's source-only audit + H6's runtime audit would catch it only
+        # at next manual review. Probe-count floor: ≥ 3 (codified in the
+        # self-test itself; new spec-traversing linters MUST add a probe).
+        # Spec: spec/27-spec-toolchain/28-check-archive-exclusion-runtime.md (AC-28-01..05)
+        run: bash linter-scripts/test/test-archive-exclusion-runtime.sh
+
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
         # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC

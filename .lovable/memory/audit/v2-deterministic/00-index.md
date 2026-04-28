@@ -1,7 +1,7 @@
 # Spec-vs-Code Audit **v2** — Summary
 
 **Date:** 2026-04-25  
-**Rubric:** v2.25  
+**Rubric:** v2.26  
 **Modules audited:** 87  
 **Code files indexed:** 39  
 **Mean weighted score:** **98.0/100**  
@@ -169,8 +169,8 @@ Deterministic metrics (waffle ratio, contract presence, broken links, GWT count)
 | [`14-update`](./14-update.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 10 |
 | [`18-wp-plugin-how-to`](./18-wp-plugin-how-to.md) | 100 | 100 | 100 | 100 | 100 | 100 | 100 | **100** | A+ | 9 |
 
-## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5)
-This audit runs rubric **v2.25**. The score above is one of **16 strict CI gates** that surround it:
+## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7)
+This audit runs rubric **v2.26**. The score above is one of **17 strict CI gates** that surround it:
 
 1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.
 2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).
@@ -188,5 +188,6 @@ This audit runs rubric **v2.25**. The score above is one of **16 strict CI gates
 14. **Spec folder-reference gate** (`check-spec-folder-refs.py`, Phase F2) — every `spec/NN-name/` reference in `spec/**/*.md` either resolves on disk OR is allowlisted under `[external]` (real sibling-repo path) or `[doc-only]` (illustrative/historical prose) in `linter-scripts/spec-folder-refs.allowlist`; mechanises AC-62-01..04 and closes the dormant-gate gap Phase 141 surfaced.
 15. **§99 Summary freshness gate** (`check-99-summary-freshness.py`, Phase H1) — flags §99 modules whose `## Summary` block carries a `<!-- verified-phase: NNN -->` stamp older than `--max-age` phases (default 20); advisory-by-default for unstamped files (89 of 89 unstamped at H1 close); mechanises AC-26-01..05 and codifies the Phase 136/139 stale-prose-sweep lesson.
 16. **§99 Stamp-bump gate** (`check-99-stamp-bump.py`, Phase H5) — when a §99 file is materially edited (any non-stamp line changed) the `<!-- verified-phase: NNN -->` stamp MUST be bumped to the current phase in the same diff; PR-event only (skips on push-to-main with no diff base); pairs with #15 as a two-layer defense (edits must bump at budget=0, unedited stamps decay at budget=20); mechanises AC-27-01..08 and turns the H1/H2 honor-system into a CI check.
+17. **Runtime archive-exclusion gate** (`test/test-archive-exclusion-runtime.sh`, Phase H7) — every spec-traversing linter MUST exclude `spec/_archive/` at RUNTIME (not just by source-reading); importlib-loads `check-99-summary-freshness.find_99_files()` + `audit-spec-vs-code-v2.ALL_MODULES` + `generate-trace-map.collect_ac_ids()`, asserts each enumerator returns 0 archive-leaked results; probe count floor ≥ 3; codifies the H6 lesson (runtime > source verification) so a future contributor cannot silently drop the H3 `_archive` exclusion guard during a refactor; mechanises AC-28-01..05.
 
 Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).

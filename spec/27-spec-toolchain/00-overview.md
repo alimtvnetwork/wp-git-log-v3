@@ -75,7 +75,8 @@ Numbering convention inside this module:
 | 24 | [24-check-lockstep.md](./24-check-lockstep.md) | `linter-scripts/check-lockstep.cjs` | Validator — enforces §00↔§98↔§99 sync (Phase 40 lockstep gate) |
 | 25 | [25-deepen-consistency-reports.md](./25-deepen-consistency-reports.md) | `linter-scripts/deepen-consistency-reports.py` | Filler: rewrite thin `99-consistency-report.md` files into the canonical 5-section shape — Phase 21 |
 | 26 | [26-check-99-summary-freshness.md](./26-check-99-summary-freshness.md) | `linter-scripts/check-99-summary-freshness.py` | Validator: flag stale `## Summary` / `## File Inventory` / `## Module Health` claims via opt-in `<!-- verified-phase: NNN -->` stamps (Phase H1; H2 widened scope to inventory rubrics + excluded `_archive/`; advisory-then-strict) |
-| 27 | [27-check-99-stamp-bump.md](./27-check-99-stamp-bump.md) | `linter-scripts/check-99-stamp-bump.py` | Validator: enforce stamp bump on §99 edits via git diff (Phase H4; sister event-based gate to slot 26 snapshot gate; not yet CI-wired — manual + pre-commit only at H4 close) |
+| 27 | [27-check-99-stamp-bump.md](./27-check-99-stamp-bump.md) | `linter-scripts/check-99-stamp-bump.py` | Validator: enforce stamp bump on §99 edits via git diff (Phase H4 shipped tool; Phase H5 wired CI as gate #16; sister event-based gate to slot 26 snapshot gate) |
+| 28 | [28-check-archive-exclusion-runtime.md](./28-check-archive-exclusion-runtime.md) | `linter-scripts/test/test-archive-exclusion-runtime.sh` | Validator: runtime probe asserting every spec-traversing linter excludes `spec/_archive/` at RUNTIME (Phase H7; codifies H6 lesson "runtime > source verification"; gate #17; the self-test IS the gate — no separate `.py` validator) |
 
 ### Auditors (AI-driven)
 
