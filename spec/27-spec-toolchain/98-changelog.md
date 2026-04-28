@@ -1,10 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.53.0
+**Version:** 2.54.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.54.0 — 2026-04-28 — Phase P24: H10 second reverse-drift reconstruction (`spec/14-update`)
+- **Action**: Second application of the P23 reverse-drift workflow. Targeted next-smallest-gap drifter: `spec/14-update` (§00 banner `2.1.0` vs §98 latest `1.3.0` — gap of 1 major + (-2) minor). Same shape as P23: dated prose blocks (Phase 63 + Phase 76) appended *after* the §98 Cross-References footer rather than promoted into SemVer rows.
+- **Reconstruction**: Promoted Phase 63 (TS enum mirror, impl 80→90) → **1.4.0**; Phase 76 (Mermaid lifecycle + SQL DDL audit-log schema, impl 90→100) → **2.0.0** (major: introduces two new normative artifact surfaces — binding lifecycle diagram + auditable SQL DDL schema that downstream tooling can validate against). P24 reconciliation row → **2.1.0**. Each cites its source prose block; original prose blocks removed from the post-Cross-References footer area to single-source the audit trail.
+- **Banner sync**: §00 `Updated:` 2026-04-27 → 2026-04-28; `<!-- h10-verified-phase: 24 -->` stamp dropped — opted into strict H10.
+- **§99 module report**: bumped 1.2.0 → 1.3.0 with reconstruction-note blockquote.
+- **Workflow consistency check vs P23**: identical 5-step workflow applied (ls module → map prose to SemVer → write rows citing source prose → drop H10 stamp → bump §99). Confirms P23-codified workflow scales as a deterministic template — second application took less time than first because the pattern was pre-known.
+- **Gate impact**: `matches=38 → 39` (+1); `mismatches=36 → 35` (-1); `stamped=21 → 22`; `stamped_failed=0`. Reverse-drift backlog **35 → 34**.
+- **Adoption progress**: **22 / 74 modules opted into strict enforcement**.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption + per-module forensic reconstruction.
+- **Verified**: parity gate 87/74/39/35/stamped=22/stamped_failed=0 / exit 0 ✅; lockstep 87/87 / 0 findings ✅ (after §99 sync); tree-health 168/168 strict ✅; §27-inventory 6/6 ✅; H10 self-test 13/13 ✅.
 
 ### 2.53.0 — 2026-04-28 — Phase P23: H10 first reverse-drift reconstruction (`02-coding-guidelines/11-security/01-axios-version-control`)
 - **Action**: First field application of the **reverse-drift forensic reconstruction** workflow announced as P21/P22 lesson (forward-drift sweeps stop at the boundary; reverse-drift requires per-module §98 reconstruction). Targeted the smallest-gap reverse drifter: `spec/02-coding-guidelines/11-security/01-axios-version-control` (§00 banner `3.2.0` vs §98 latest release `1.1.0` — gap of 1 major + 1 minor).
