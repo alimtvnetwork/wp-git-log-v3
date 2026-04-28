@@ -1,10 +1,16 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.30.0
+**Version:** 2.31.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.31.0 — 2026-04-28 — Phase 143: bulk-classified 13 stale folder refs + new AC-62-04
+- §62 v1.0.0 → **v1.1.0**. Added 13 entries to `linter-scripts/spec-folder-refs.allowlist` under `[doc-only]`: 4 narrative examples (`04-some-feature`, `30-cross-repo-foo`, `31-cross-repo-bar`, `99-nonexistent`), 4 archived/historical names (`21-git-logs`, `21-git-logs-v1`, `22-app-issues`, `29-app-issues-cli`), 3 deprecated/typo examples (`12-cicd-pipelines`, `14-generic-update`, `15-self-update-app-update`). Each entry verified against its source markdown as a deliberate documentation reference, not authoring drift. Stale-refs count: **29 → 11** (-62%, -18 refs).
+- **AC-62-04 added** — codifies a parser bug discovered during the bulk-add: `check-spec-folder-refs.py:128` does not strip inline `# comment` suffixes from entry lines, so trailers like `04-some-feature  # narrative example` are stored verbatim and never match the bare folder name. Allowlist comments MUST be on separate full lines above the entry. Phase 143 hit this on the first write; AC-62-04 prevents future contributors from repeating the mistake.
+- Remaining 11 stale refs (across 6 unique missing targets: `08-docs-viewer-ui`, `09-code-block-system`, `21-app`, plus a few in `01-spec-authoring-guide`, `07-design-system`, `17-consolidated-guidelines`) are real authoring drift in `spec/01-spec-authoring-guide/04-ai-onboarding-prompt.md` + a few prose mentions elsewhere — they require user intent (typo? planned future module? sibling-repo?) and are deferred under "Phase F".
+- `check-spec-folder-refs.py` itself is **NOT CI-gated** (verified: zero refs in `.github/workflows/`); this phase reduces a dormant linter's noise floor so the next time the script is invoked manually (or a contributor wires it in), the signal is genuinely actionable. No spec score change. No tree-health/lockstep regression — both still 100/100 strict / 0 findings.
 
 ### 2.30.0 — 2026-04-28 — Phase 140: restored missing AC-T-10
 - §97 v2.0.0 → **v2.0.1**. Restored `AC-T-10 — Spec cross-link gate (zero broken links)`, which was silently dropped from §97 sometime before Phase 16d-iv but kept being referenced by `linter-scripts/trace-map.toml:116` and the live CI step *"Spec cross-link gate"* in `.github/workflows/spec-health.yml:71`. The §97 v2.0.0 header even claimed *"AC-T-01..AC-T-10 preserved verbatim"* — which was untrue and is now true again. Trace-map regression check's `missing_ac` error (`27-spec-toolchain/97-acceptance-criteria.md#AC-T-10`) is now resolved at the source. AC count: 19 → **20** (matches v2.0.0 header claim of 20). No code change; no other spec module touched.
