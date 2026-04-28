@@ -20,6 +20,7 @@
 ### 2.2.0 — 2026-04-27 (Phase 123 — placeholder catalog)
 - **Added** `09-placeholder-tokens.md` v1.0.0 — canonical SoT for 6 install-script placeholder tokens across 2 families (legacy `<NAME>_PLACEHOLDER` + modern `__<NAME>__`). Closes Phase 121 Candidate N — placeholders previously restated across §03/§08/§12/§14/§17 with no canonical catalog. Pre-req for Phase 117 containment harness. Inventory 11 → 12 files.
 - **Doc-only — no behavior change.** All 6 tokens already in active use; this catalogues them.
+- **P22 sync** (2026-04-28): §00 banner version field bumped 1.1.0 → 2.2.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
 
 ### 1.1.0 — 2026-04-27 (Phase 55 — implementability lever)
 - **Added** Added 2 Go consumer references (Manifest reader + checksums.txt parser) so total Go block count ≥3 → `has_typed_lang_contract` flips true (+10 impl).

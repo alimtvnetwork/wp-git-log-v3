@@ -5,7 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Linter Scripts
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
+<!-- h10-verified-phase: 22 -->
 **Status:** Active  
 **Updated:** 2026-04-27  
 **AI Confidence:** High  

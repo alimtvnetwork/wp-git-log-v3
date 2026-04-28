@@ -5,7 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Generic Release Pipeline Specification
 
-> **Version:** 1.1.0  
+> **Version:** 2.2.0  
+<!-- h10-verified-phase: 22 -->
 > **Updated:** 2026-04-27  
 > **Status:** Active  
 > **Imported from:** sibling reference implementation `spec/16-generic-release`

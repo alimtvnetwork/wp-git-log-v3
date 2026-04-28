@@ -6,6 +6,7 @@
 ---
 
 ## 3.4.0 — 2026-04-27
+- **P22 sync** (2026-04-28): §00 banner version field bumped 3.2.0 → 3.4.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
 
 - Phase 128: added `03-error-code-registry/06-lint-rule-catalog.md` (v1.0.0) — canonical SoT for 7 cross-folder lint rule IDs. Pre-req for Phase 117 containment harness (Candidate O).
 

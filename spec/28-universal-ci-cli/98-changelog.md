@@ -6,6 +6,7 @@
 All notable changes to `spec/28-universal-ci-cli/`.
 
 ## [2.1.1] — 2026-04-28
+- **P22 sync** (2026-04-28): §00 banner version field bumped 1.1.0 → 2.1.1 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
 
 ### Audit (no content change)
 

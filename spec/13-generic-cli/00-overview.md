@@ -1,6 +1,7 @@
 # Generic CLI Creation Guidelines — Overview
 
-> **Version:** 1.0.0  
+> **Version:** 1.1.0  
+<!-- h10-verified-phase: 22 -->
 > **Updated:** 2026-04-20  
 > **Status:** Active  
 > **Related specs:**

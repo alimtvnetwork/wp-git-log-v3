@@ -1,6 +1,7 @@
 # Update Check Mechanism — Overview
 
-> **Version:** 1.0.0
+> **Version:** 2.1.0
+<!-- h10-verified-phase: 22 -->
 > **Created:** 2026-04-20
 > **Updated:** 2026-04-26
 > **Status:** Active

@@ -5,7 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Specification Root
 
-**Version:** 3.5.0  
+**Version:** 3.5.1  
+<!-- h10-verified-phase: 22 -->
 **Updated:** 2026-04-27  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
