@@ -1,7 +1,7 @@
 # Error Modal — Reusable React Components (Index)
 
 > **Parent:** [Error Modal Spec](../00-overview.md)  
-> **Version:** 4.1.1  > **Updated:** 2026-04-27
+> **Version:** 4.1.1  > **Updated:** 2026-04-28
 <!-- h10-verified-phase: 29 -->
 > **AI Confidence:** 95%  
 > **Ambiguity Score:** 5%  

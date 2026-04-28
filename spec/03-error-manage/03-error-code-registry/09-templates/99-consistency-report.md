@@ -3,7 +3,7 @@
 **Version:** 3.6.0  
 
 > **v3.6.0 update (Phase P29 — P25-pure dual-stream batch reconciliation):** §98 header `1.2.0`→`3.4.1` to align with §00 banner; §00 banner `3.4.0`→`3.4.1`; H10 stamp added; ladder body untouched. Part of Phase P29 batch (8 modules).
-**Generated:** 2026-04-27  
+**Generated:** 2026-04-28  
 **Health Score:** 100/100 (A+) — Phase 42 inlined-contract sweep  
 
 ---

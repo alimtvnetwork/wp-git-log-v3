@@ -8,7 +8,7 @@ description: Forward-looking CI/CD pipeline architecture for cross-compiled Go b
 **Version:** 3.4.1  
 <!-- h10-verified-phase: 29 -->
 **Status:** Active (future-spec — workflows + Go source live in downstream binary repos)  
-**Updated:** 2026-04-27
+**Updated:** 2026-04-28
 
 ---
 

@@ -1,7 +1,7 @@
 # Changelog — Error Modal — Copy & Export Formats (Index)
 
 **Version:** 3.3.1  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-28  
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/01-copy-formats/`
 
 ---

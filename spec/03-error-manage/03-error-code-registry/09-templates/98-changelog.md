@@ -1,7 +1,7 @@
 # Changelog — Templates
 
 **Version:** 3.4.1  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-28  
 **Scope:** `spec/03-error-manage/03-error-code-registry/09-templates/`
 
 ---

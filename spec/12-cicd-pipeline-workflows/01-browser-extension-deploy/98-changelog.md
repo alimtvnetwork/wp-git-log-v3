@@ -1,7 +1,7 @@
 # Changelog — Browser Extension Deploy — Overview
 
 **Version:** 3.4.1  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-28  
 **Scope:** `spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/`
 
 ---

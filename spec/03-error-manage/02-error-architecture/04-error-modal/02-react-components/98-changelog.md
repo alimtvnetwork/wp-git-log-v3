@@ -1,7 +1,7 @@
 # Changelog — Error Modal — Reusable React Components (Index)
 
 **Version:** 4.1.1  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-28  
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/02-react-components/`
 
 ---
