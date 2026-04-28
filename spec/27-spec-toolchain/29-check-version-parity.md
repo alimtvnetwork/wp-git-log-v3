@@ -78,15 +78,46 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 ## Output line shape
 
 ```
-§00 ↔ §98 Version-field parity: scanned=87; eligible=74; matches=15; mismatches=59; skipped(no-banner)=5; skipped(no-release)=8
+§00 ↔ §98 Version-field parity: scanned=87; eligible=74; matches=17; mismatches=57; skipped(no-banner)=5; skipped(no-release)=8; stamped=0; stamped_failed=0
   (info) spec/01-spec-authoring-guide: §00=3.7.0 vs §98 latest=4.13.0
-  (info) spec/22-git-logs-v2: §00=3.8.8 vs §98 latest=3.9.8
+  (FAIL) spec/22-git-logs-v2: §00=3.9.11 vs §98 latest=3.9.12 [stamped phase 200]
   …
 ```
 
 The shape is asserted by self-test T1 (`scanned=` / `eligible=` /
 `matches=` / `mismatches=` / `skipped(no-banner)=` / `skipped(no-release)=`
-all present). Future field additions MUST extend T1.
+all present). Phase P20 added trailing `stamped=` / `stamped_failed=`
+tokens AND the `(FAIL)` tag with optional `[stamped phase NNN]` suffix
+for stamped-and-drifting modules. Future field additions MUST extend T1.
+
+## Per-file opt-in stamp (Phase P20)
+
+Once a module's `00-overview.md` banner has been brought back in lockstep
+with its `98-changelog.md` latest release, authors MAY add a stamp inside
+the first 40 lines of `00-overview.md`:
+
+```markdown
+<!-- h10-verified-phase: 200 -->
+```
+
+Effects (mirrors H1 / `check-99-summary-freshness.py`):
+
+- The stamp itself does NOT prove the parity — the gate re-checks `bv == lr`
+  every run. The stamp **promotes that file to per-file strict**: any future
+  drift (e.g. someone bumps §98 without bumping §00) fails the gate even in
+  default tree-wide-advisory mode.
+- Multiple `<!-- h10-verified-phase: NNN -->` comments in one file → the
+  highest phase number wins (defensive parsing for incremental bumps).
+- Stamps under removable scopes (fenced code blocks, blockquotes) are
+  **NOT** filtered today — keep stamps as plain top-of-file comments.
+  If false positives appear, this gate will adopt the §99-freshness gate's
+  block-stripping rules in a follow-up.
+- `--report-only` overrides per-file stamp failures (escape hatch for
+  dashboards / CI bisect).
+
+This pattern lets adoption proceed PR-by-PR: each module that catches up
+opts itself into strict enforcement individually, instead of waiting for
+all 57 drifters to be fixed before flipping `--strict` tree-wide.
 
 ## Why the slot is 29
 
