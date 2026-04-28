@@ -78,23 +78,33 @@ def find_99_files() -> list[Path]:
 
 
 def find_summary_stamp(text: str) -> int | None:
-    """Return the phase number stamped under the FIRST tracked heading
+    """Return the highest phase number stamped under ANY tracked heading
     (## Summary OR an inventory-rubric heading), or None if no tracked heading
-    exists or no stamp is present in its body. Phase H2 widened the scope."""
-    m = TRACKED_HEADING_RE.search(text)
-    if not m:
+    has a stamp. Phase H2 widened the scope from Summary-only to also accept
+    inventory-rubric blocks; multi-block scan ensures a stamp under Summary
+    is still found even if an inventory heading appears first."""
+    matches = list(TRACKED_HEADING_RE.finditer(text))
+    if not matches:
         return None
-    body = text[m.end():]
-    next_h = re.search(r"^##+\s+\S", body, re.MULTILINE)
-    if next_h:
-        body = body[:next_h.start()]
-    stamp = STAMP_RE.search(body)
-    if not stamp:
-        return None
-    try:
-        return int(stamp.group(1))
-    except ValueError:
-        return None
+    best: int | None = None
+    for i, m in enumerate(matches):
+        body_start = m.end()
+        body_end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        # Also stop at any other ## heading inside the slice (defensive).
+        body = text[body_start:body_end]
+        next_h = re.search(r"^##+\s+\S", body, re.MULTILINE)
+        if next_h:
+            body = body[:next_h.start()]
+        stamp = STAMP_RE.search(body)
+        if not stamp:
+            continue
+        try:
+            n = int(stamp.group(1))
+        except ValueError:
+            continue
+        if best is None or n > best:
+            best = n
+    return best
 
 
 def main() -> int:
