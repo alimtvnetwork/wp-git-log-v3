@@ -191,23 +191,40 @@ P15 dispensation:
 ### AC-29-09 — `--json` output schema
 - **Given** the gate runs with `--json`,
 - **When** the output is parsed,
-- **Then** the JSON object MUST contain top-level keys `scanned`, `eligible`, `matches`, `mismatches`, `skipped_no_banner`, `skipped_no_release`, `details` (array of `{module, banner, latest_release}` objects).
+- **Then** the JSON object MUST contain top-level keys `scanned`, `eligible`, `matches`, `mismatches`, `skipped_no_banner`, `skipped_no_release`, `stamped`, `stamped_failed`, `details` (array of `{module, banner, latest_release, stamped}` objects, where `stamped` is the integer phase number or `null`).
 
 ### AC-29-10 — Output line shape contract
 - **Given** the gate runs in default text mode,
 - **When** the first non-empty stdout line is inspected,
-- **Then** it MUST contain all six tokens: `scanned=`, `eligible=`, `matches=`, `mismatches=`, `skipped(no-banner)=`, `skipped(no-release)=`. Self-test T1 enforces this; future field additions MUST extend T1 and bump this AC.
+- **Then** it MUST contain all eight tokens: `scanned=`, `eligible=`, `matches=`, `mismatches=`, `skipped(no-banner)=`, `skipped(no-release)=`, `stamped=`, `stamped_failed=`. Self-test T1 enforces the original six; future field additions MUST extend T1 and bump this AC.
+
+### AC-29-11 — Per-file stamp promotes mismatch to FAIL in default mode
+- **Given** a module whose `00-overview.md` carries `**Version:** 1.0.0` AND a `<!-- h10-verified-phase: 200 -->` stamp inside the first 40 lines, AND whose `98-changelog.md` latest release is `1.0.1`,
+- **When** the gate runs in default mode (no flags),
+- **Then** exit code MUST be 1, the per-file line MUST be tagged `(FAIL)` with `[stamped phase 200]` suffix, and `stamped_failed=1` MUST appear in the summary line.
+
+### AC-29-12 — Stamped + matched module counts as both stamped and match
+- **Given** a stamped `00-overview.md` whose banner version equals the §98 latest release,
+- **When** the gate runs,
+- **Then** the file MUST contribute `+1` to `matches=` AND `+1` to `stamped=`, MUST contribute `0` to `stamped_failed=`, and the gate MUST exit 0.
+
+### AC-29-13 — `--report-only` overrides per-file stamp failure
+- **Given** a stamped §00 with a §00 ↔ §98 mismatch (would FAIL in default mode per AC-29-11),
+- **When** the gate runs WITH `--report-only`,
+- **Then** exit code MUST be 0 (`--report-only` is the strongest escape hatch — overrides both `--strict` and per-file stamps).
 
 ## Self-test
 
-`linter-scripts/test/test-check-version-parity.sh` exercises 10 assertions
-(T1–T10) covering: banner shape, default vs strict exit codes,
+`linter-scripts/test/test-check-version-parity.sh` exercises 13 assertions
+(T1–T13) covering: banner shape, default vs strict exit codes,
 `--report-only` override, sandboxed match/no-banner/no-release/table-row
-modules, `--json` schema, and `_archive/` exclusion. Per the H1 lesson on
-workflow-step parity, the self-test is **collapsed into the gate's own
-workflow step** (no standalone self-test step) — the gate runs the
-self-test first, then runs against the real tree. This preserves
-AC-31-28 gate-count parity at 19/19/19.
+modules, `--json` schema, `_archive/` exclusion, and the Phase P20
+per-file stamp lifecycle (T11 stamped+drift fails default; T12
+stamped+match passes; T13 `--report-only` overrides stamp failure). Per
+the H1 lesson on workflow-step parity, the self-test is **collapsed into
+the gate's own workflow step** (no standalone self-test step) — the gate
+runs the self-test first, then runs against the real tree. This
+preserves AC-31-28 gate-count parity at 19/19/19.
 
 ## Cross-references
 
@@ -217,7 +234,8 @@ AC-31-28 gate-count parity at 19/19/19.
   date arithmetic is a different invariant from version-string equality.
 - §26 [`26-check-99-summary-freshness.md`](./26-check-99-summary-freshness.md)
   — H1 lesson source: advisory-then-strict pattern + workflow-step
-  collapse for self-tests.
+  collapse for self-tests + per-file `<!-- verified-phase: NNN -->` stamp
+  precedent that Phase P20's `<!-- h10-verified-phase: NNN -->` mirrors.
 - §27 [`27-check-99-stamp-bump.md`](./27-check-99-stamp-bump.md) — H4/H5
   sibling pattern (event-based stamp gate vs snapshot freshness gate).
 - §97 `97-acceptance-criteria.md` — AC-T-26 codifies H10's CI integration
@@ -232,6 +250,28 @@ needed (unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 The next free slot in this band after H10 is 32 (slots 30/31 are auditors).
 
 ## Changelog
+
+### 1.1.0 — 2026-04-28 — Phase P20
+- Added per-file opt-in `<!-- h10-verified-phase: NNN -->` stamp pattern
+  (mirrors H1 / `check-99-summary-freshness.py`).
+- A stamped §00 with a §00 ↔ §98 mismatch now fails the gate even in
+  default tree-wide-advisory mode (per-file strict promotion). Lets
+  modules opt into strict enforcement one at a time without waiting for
+  all 57 drifters to catch up.
+- Output shape extended: trailing `stamped=` / `stamped_failed=` tokens
+  on the summary line; per-file lines tagged `(FAIL)` with optional
+  `[stamped phase NNN]` suffix when stamp present.
+- `--json` schema extended: top-level `stamped` + `stamped_failed`
+  counts; each `details[]` entry now carries a `stamped: <int|null>` field.
+- `--report-only` remains the strongest escape hatch (overrides both
+  `--strict` and per-file stamp failures).
+- Self-test grew T11/T12/T13 (stamp lifecycle): 10/10 → **13/13** ✅.
+- 3 new ACs: AC-29-11, AC-29-12, AC-29-13.
+- Bug fix: `--spec-root` pointing outside the repo now degrades
+  gracefully (was raising `ValueError` in `relative_to`); module path
+  falls back to absolute when sandboxed.
+- No CI workflow change: the gate stays advisory tree-wide; the new
+  strict promotion is per-file and triggers only on stamps.
 
 ### 1.0.0 — 2026-04-28 — Phase P15 / H10
 - Initial version. Advisory-by-default §00 ↔ §98 Version-field parity gate.
