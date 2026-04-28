@@ -321,6 +321,16 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--repo-root", default=".", help="Repo root used to resolve absolute links")
     p.add_argument("--json", action="store_true", help="Emit JSON report to stdout")
     p.add_argument("--github", action="store_true", help="Emit GitHub Actions annotations")
+    p.add_argument(
+        "--strict-line-match",
+        action="store_true",
+        help="Require waiver line numbers to match exactly (disables P35 fuzzy match)",
+    )
+    p.add_argument(
+        "--rewrite-allowlist",
+        action="store_true",
+        help="Rewrite stale waiver line numbers in-place when fuzzy match resolves them (P35)",
+    )
     return p.parse_args()
 
 
@@ -331,11 +341,28 @@ def main() -> int:
     if not root.exists():
         print(f"::error::spec root not found: {root}", file=sys.stderr)
         return 2
-    failures = scan(root, repo_root)
+    failures, fuzzy_hits = scan(root, repo_root, strict_line_match=args.strict_line_match)
+    bumped = 0
+    if args.rewrite_allowlist and fuzzy_hits:
+        bumped = rewrite_allowlist(repo_root, fuzzy_hits)
     if args.json:
-        print(json.dumps({"failures": failures, "count": len(failures)}, indent=2))
+        print(json.dumps({
+            "failures": failures,
+            "count": len(failures),
+            "fuzzy_hits": fuzzy_hits,
+            "fuzzy_count": len(fuzzy_hits),
+            "rewritten": bumped,
+        }, indent=2))
     else:
         emit_human(failures)
+        if fuzzy_hits:
+            print(f"\nINFO {len(fuzzy_hits)} waiver(s) matched fuzzily on (file, target) — line numbers drifted:")
+            for h in fuzzy_hits:
+                print(f"  {h['file']}: line {h['stale_line']} → {h['current_line']}  ({h['target']})")
+            if bumped:
+                print(f"\nREWROTE {bumped} stale waiver line number(s) in spec-cross-links.allowlist")
+            else:
+                print("\nHINT: re-run with --rewrite-allowlist to auto-bump stale line numbers.")
     if args.github:
         emit_github_annotations(failures)
     return 1 if failures else 0
