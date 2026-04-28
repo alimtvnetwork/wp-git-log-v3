@@ -1,10 +1,19 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.38.0
+**Version:** 2.39.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.39.0 — 2026-04-28 — Phase G1: AC-binding sweep batch 1 (6 trace entries; ac_traced 24→30, code_orphan 39→35)
+- **Action**: Bound 6 acceptance criteria into `linter-scripts/trace-map.toml` to start re-binding the 14 toolchain scripts that Phase 117 absorbed into the trace-map denominator: AC-62-02 (`check-spec-cross-links.py` + allowlist), AC-62-03 + AC-62-04 (`check-spec-folder-refs.py` + allowlist), AC-T-22 (`check-mermaid-syntax.mjs`), AC-T-23 (`check-memo-retrospective-headings.py`), AC-T-24 (`deepen-consistency-reports.py`).
+- **Why G1 first**: Smallest meaningful slice — closes the Phase 108-full migration loop end-to-end (AC-T-22/23/24 were authored Phase 108-full but lived only in §97 prose; G1 makes them mechanically discoverable from `trace-map.toml`) and validates the rebaseline ritual before the larger G2/G3 batches (~37 more entries across 11 scripts).
+- **Trace-map delta**: `ac_traced` 24 → **30** (+6), `code_orphan` 39 → **35** (-4: the 3 G1-targeted scripts plus `check-spec-cross-links.py` newly referenced via AC-62-02), `code_referenced` 7 → **11**, `ac_total` unchanged at 1299, no missing-ac / missing-file. Baseline updated.
+- **Why this is NOT a regression**: All 4 newly-referenced scripts were already specced in §27 (slots 01, 02, 18, 19, 25) and CI-active; G1 only adds the *spec ↔ code* edge in `trace-map.toml`. Phase 117's containment annotation explicitly anticipated this kind of incremental re-binding.
+- **What did NOT change**: No script source touched; no spec module content changed; no §97 ACs added or renumbered (G1 binds existing ACs only); §31 unchanged (no rubric, footer, or AC-31-31 implications — pure trace-map data update).
+- **Lockstep**: §98 v2.38.0 → **v2.39.0**; §99 v2.35.0 → **v2.36.0**. Memo: `.lovable/memory/audit/v2-deterministic/phase-g1-ac-binding-batch-1.md`.
+- **Verified**: `python3 linter-scripts/check-trace-map-regression.py` → ✅ no regression at new baseline; `node linter-scripts/check-lockstep.cjs` → 87/87 / 0 findings ✅; `node linter-scripts/check-tree-health.cjs --strict` → 168/168 ✅; `python3 linter-scripts/check-spec-folder-refs.py` → 0 stale ✅; `bash linter-scripts/test/test-overview-inventory-parity.sh` → 6/6 ✅.
 
 ### 2.38.0 — 2026-04-28 — Phase F2: folder-reference gate wired into CI (14th strict gate)
 - **Action**: Wired `linter-scripts/check-spec-folder-refs.py` into `.github/workflows/spec-health.yml` as a strict gate, inserted between the cross-link gate (#1) and the tree-health gate (#2). The script existed since authoring but was dormant (zero CI references) — Phase 141 surfaced it; Phase F1 brought it to 0 stale refs; Phase F2 wires it so future drift triggers a CI fail at PR time. Per AC-31-31's 4-way enumeration discipline, the change touched **all four** restatement sites in lockstep:
