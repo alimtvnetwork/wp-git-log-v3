@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.11
-**Updated:** 2026-04-28 (Phase P5 — slot-16 collision resolved: `16-test-plan.md` relocated to `38-test-plan-superseded.md` (banner v2.7.0 → v2.8.0). Inventory rows for §16 + §38 updated; 5 cross-folder referrers patched (§00 v3.8.7 → v3.8.8, `spec-index.md`, `dashboard-data.json`, `28/06`, this file). Mirrors v2.8.6 §16 → §37 precedent per Core memory file-slot-immutability rule. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.12
+**Updated:** 2026-04-28 (Phase P6 — GAP-V2-06 RESOLVED via locked-vacant precedent: original 5-stub-files recipe REJECTED (conflicts with Core memory file-slot-immutability rule + would regress tree-health 168→158); §37 v1.1.0 → v1.2.0 carries the rejection rationale; §97 v3.9.1 → v3.9.2 adds new **AC-22-LV1** declaring §09–§13 must remain file-absent (AC count 75 → 76). Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
@@ -42,10 +42,10 @@
 | 29-uninstall-policy.md | ✅ |
 | 30-threat-model.md | ✅ |
 | 36-why-v1-archived.md | ✅ (added 2026-04-25) |
-| 37-blind-ai-gap-analysis.md | ✅ (added 2026-04-25) |
+| 37-blind-ai-gap-analysis.md | ✅ (v1.2.0 — Phase P6 marked GAP-V2-06 RESOLVED via locked-vacant precedent; original stub-files recipe REJECTED) |
 | 38-test-plan-superseded.md | ✅ (relocated from `16-test-plan.md` in Phase P5 2026-04-28 — slot-16 collision resolution; redirect stub → §32–§35) |
 | 39-split-db-log-storage.md | ✅ (added v3.8.0 2026-04-26 — per-SHA SQLite storage spec) |
-| 97-acceptance-criteria.md | ✅ (AC-01..AC-53; +AC-49..AC-53 in v3.8.0 for split-DB) |
+| 97-acceptance-criteria.md | ✅ (v3.9.2 — Phase P6 added AC-22-LV1 prohibiting §09–§13 stub files; AC count 75 → 76) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
 
@@ -352,9 +352,20 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase P5 scope discipline:** §97 ACs untouched (no AC ID added/removed; the rename is filesystem hygiene, not a contract change). §15 / §17 / §18 / §01 / §02 untouched (no DDL, no error code, no enum, no schema change). §37 GAP-V2-08 retrospective row left intact — it documents how the collision was resolved and removing it would erase the audit trail (Phase 39b lesson: historical narrative inside `*-blind-ai-gap-analysis.md` is the audit trail, not actionable). The 7 remaining `grep -rn "16-test-plan"` hits are ALL intentional historical narrative (banners, audit rows, history-of-moves table, retrospective) — zero active links. Slot 16 is now sole-occupied by `16-seed-data.md`; old `16-test-plan.md` slot is PERMANENTLY RETIRED for any new file in §22 (file-slot-immutability rule).
 
+## v3.9.12 Audit — Phase P6 (GAP-V2-06 resolved via locked-vacant precedent)
+
+| File | Change |
+|------|--------|
+| `37-blind-ai-gap-analysis.md` | Banner v1.1.0 → **v1.2.0**. GAP-V2-06 entry rewritten with `[LOW — RESOLVED 2026-04-28, Phase P6]` flag. Original "5 stub files" recipe REJECTED — added "Original fix recipe (REJECTED)" subsection with two conflict reasons: (1) violates Core memory rule "File slots are immutable once shipped — never reuse a number"; (2) one-line stubs would score 0 on `check-tree-health.cjs --strict` and regress folder 22 from 168/168 → 158/168. Effort-table row 6 struck through. |
+| `97-acceptance-criteria.md` | Banner v3.9.1 → **v3.9.2**. New **AC-22-LV1** added ("Locked vacant slots §09–§13 must remain file-absent") declaring: no file may match `spec/22-git-logs-v2/{09,10,11,12,13}-*.md`; next free slot for new §22 content is §40+; §00 italic inventory rows are single source of truth; `check-spec-folder-refs.py` MAY add a per-folder `[locked-vacant]` allowlist entry. AC count 75 → **76**. Verifies §00 v3.8.8 inventory + §37 v1.2.0 + Core memory immutability rule. |
+| `98-changelog.md` | New row v3.9.5 documenting Phase P6 with full rejection rationale + chosen resolution + scope discipline. |
+| `99-consistency-report.md` | This audit table; banner v3.9.11 → **v3.9.12**; §37 + §97 inventory rows updated; Health Score footer updated for AC count 75 → 76 + GAP-V2-06 closure. |
+
+**Phase P6 scope discipline:** No DDL change, no schema bump, no error code added, no enum changed, no §15 / §17 / §18 / §01 / §02 / §00 edit. §00 inventory unchanged (rows 77–81 already correctly mark §09–§13 as "Locked vacant slot"). The phase is documentation + one new declarative AC. AC-22-LV1 is the canonical machine-checkable artifact for the locked-vacant invariant — future contributors are prohibited from re-opening the GAP-V2-06 stub-file recipe.
+
 ## Health Score
 
-100/100 (A+) — 34 of 34 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, §04↔§28/06 ingest-streaming wire-format chain (Phase P2), §04↔§17 PreviousHasError ack-envelope chain (Phase P3), §04→§15+§18+§97 pre-parse-caps cross-walk (Phase P4), **§00↔§38↔§spec-index↔§dashboard↔§28/06 slot-16-collision-resolution chain (Phase P5)**); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.5 surfaces required `AckResponse.PreviousHasError` + optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02; v3.9.1 closed GAP-V2-03; v3.9.2 closed GAP-V2-04; v3.9.3 closed GAP-V2-10; v3.9.4 closed slot-16 collision (and GAP-V2-08 in spirit). **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 `GL-STREAM-*` codes (deferred from Phase P2). All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
+100/100 (A+) — 34 of 34 numbered files present (09–13 + 21 intentional gaps, locked per **AC-22-LV1**); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, §04↔§28/06 ingest-streaming wire-format chain (Phase P2), §04↔§17 PreviousHasError ack-envelope chain (Phase P3), §04→§15+§18+§97 pre-parse-caps cross-walk (Phase P4), §00↔§38↔§spec-index↔§dashboard↔§28/06 slot-16-collision-resolution chain (Phase P5), **§00↔§37↔§97 locked-vacant-precedent chain (Phase P6)**); AC coverage AC-01..AC-75 + AC-22-LV1 (**76 total**, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.5 surfaces required `AckResponse.PreviousHasError` + optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02; v3.9.1 closed GAP-V2-03; v3.9.2 closed GAP-V2-04; v3.9.3 closed GAP-V2-10; v3.9.4 closed slot-16 collision (and GAP-V2-08 in spirit); **v3.9.5 closed GAP-V2-06 via locked-vacant precedent**. **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 `GL-STREAM-*` codes (deferred from Phase P2); (c) Phase P7 — convert remaining ACs to GWT (GAP-V2-01) — this is the **only major open §22 GAP** after P6. All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
 
 ---
 
