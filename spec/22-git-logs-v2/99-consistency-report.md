@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.11
-**Updated:** 2026-04-28 (Phase P5 — slot-16 collision resolved: `16-test-plan.md` relocated to `38-test-plan-superseded.md` (banner v2.7.0 → v2.8.0). Inventory rows for §16 + §38 updated; 5 cross-folder referrers patched (§00 v3.8.7 → v3.8.8, `spec-index.md`, `dashboard-data.json`, `28/06`, this file). Mirrors v2.8.6 §16 → §37 precedent per Core memory file-slot-immutability rule. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.12
+**Updated:** 2026-04-28 (Phase P6 — GAP-V2-06 RESOLVED via locked-vacant precedent: original 5-stub-files recipe REJECTED (conflicts with Core memory file-slot-immutability rule + would regress tree-health 168→158); §37 v1.1.0 → v1.2.0 carries the rejection rationale; §97 v3.9.1 → v3.9.2 adds new **AC-22-LV1** declaring §09–§13 must remain file-absent (AC count 75 → 76). Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
