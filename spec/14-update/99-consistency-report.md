@@ -1,7 +1,9 @@
 # Consistency Report — Generic Update
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-27
+**Version:** 1.3.0  
+**Updated:** 2026-04-28
+
+> **v1.3.0 (Phase P24 — H10 reverse-drift reconstruction):** Reconstructed §98 SemVer ladder so §00 banner v2.1.0 is now backed by an explicit release row. Promoted prior dated prose blocks (Phase 63 TS enum mirror, Phase 76 Mermaid + SQL DDL) — previously appended after the Cross-References footer — into proper releases **1.4.0** (Phase 63) and **2.0.0** (Phase 76 — major: new normative artifact surfaces). Each reconstructed row cites its source prose block. §00 Updated 2026-04-27→2026-04-28; <!-- h10-verified-phase: 24 --> stamp dropped under banner — opted into strict H10 enforcement.
 
 > **v1.2.0 (Phase 39c):** Added `28-update-interface-contract.md` — authoritative `latest.json` JSON Schema (Draft-07), `RISEUP_UPDATE_*` env-var table, canonical deploy paths, and self-update exit codes. Resolves audit finding *HIGH — Self-Update relies on undefined `latest.json` shape*. §00 banner v2.0.0 → v2.1.0.
 
