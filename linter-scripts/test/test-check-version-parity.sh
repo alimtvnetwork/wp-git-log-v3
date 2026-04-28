@@ -78,10 +78,13 @@ SANDBOX="$(mktemp -d)"
 trap 'rm -rf "$SANDBOX"' EXIT
 
 mk_module() {
-    local dir="$1" banner_v="$2" release_v="$3" release_format="$4"
+    local dir="$1" banner_v="$2" release_v="$3" release_format="$4" stamp="${5:-}"
     mkdir -p "$dir"
     if [[ -n "$banner_v" ]]; then
         printf '# Test\n\n**Version:** %s\n**Updated:** 2026-04-28\n' "$banner_v" > "$dir/00-overview.md"
+        if [[ -n "$stamp" ]]; then
+            printf '<!-- h10-verified-phase: %s -->\n' "$stamp" >> "$dir/00-overview.md"
+        fi
     else
         printf '# Test\n\n**Updated:** 2026-04-28\n' > "$dir/00-overview.md"
     fi
