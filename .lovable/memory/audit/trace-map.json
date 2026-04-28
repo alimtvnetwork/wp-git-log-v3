@@ -166,6 +166,48 @@
         "symbol": "DETERMINISTIC"
       }
     ],
+    "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02": [
+      {
+        "file": "linter-scripts/check-spec-cross-links.py",
+        "kind": "function",
+        "note": "doc-only entries are NOT covered by \u00a701 link validator; cross-link gate must still flag them",
+        "symbol": null
+      },
+      {
+        "file": "linter-scripts/spec-folder-refs.allowlist",
+        "kind": "function",
+        "note": "doc-only entries are NOT covered by \u00a701 link validator; cross-link gate must still flag them",
+        "symbol": null
+      }
+    ],
+    "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-03": [
+      {
+        "file": "linter-scripts/check-spec-folder-refs.py",
+        "kind": "function",
+        "note": "external-bucket entries are recognised by \u00a702 and not reported stale",
+        "symbol": null
+      },
+      {
+        "file": "linter-scripts/spec-folder-refs.allowlist",
+        "kind": "function",
+        "note": "external-bucket entries are recognised by \u00a702 and not reported stale",
+        "symbol": null
+      }
+    ],
+    "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-04": [
+      {
+        "file": "linter-scripts/check-spec-folder-refs.py",
+        "kind": "function",
+        "note": "parser at line ~128 stores stripped line incl. inline `#` trailers; comments MUST be on separate lines above entries (Phase 143)",
+        "symbol": "buckets"
+      },
+      {
+        "file": "linter-scripts/spec-folder-refs.allowlist",
+        "kind": "function",
+        "note": "parser at line ~128 stores stripped line incl. inline `#` trailers; comments MUST be on separate lines above entries (Phase 143)",
+        "symbol": "buckets"
+      }
+    ],
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01": [
       {
         "file": "linter-scripts/check-spec-folder-refs.py",
@@ -203,6 +245,30 @@
         "note": null,
         "symbol": null
       }
+    ],
+    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-22": [
+      {
+        "file": "linter-scripts/check-mermaid-syntax.mjs",
+        "kind": "function",
+        "note": "Slot 18 \u2014 validator in 10-19 generator band (slot-range exception, Phase 108-full)",
+        "symbol": null
+      }
+    ],
+    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-23": [
+      {
+        "file": "linter-scripts/check-memo-retrospective-headings.py",
+        "kind": "function",
+        "note": "Slot 19 \u2014 validator in 10-19 generator band (slot-range exception, Phase 108-full); enforces Phase 100 cadence retirement",
+        "symbol": null
+      }
+    ],
+    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24": [
+      {
+        "file": "linter-scripts/deepen-consistency-reports.py",
+        "kind": "function",
+        "note": "Slot 25 \u2014 filler in 20-29 band, no slot-range exception",
+        "symbol": null
+      }
     ]
   },
   "code_to_ac": {
@@ -220,14 +286,23 @@
       "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-07",
       "27-spec-toolchain/31-audit-spec-vs-code-v2.md#AC-31-08"
     ],
+    "linter-scripts/check-memo-retrospective-headings.py": [
+      "27-spec-toolchain/97-acceptance-criteria.md#AC-T-23"
+    ],
+    "linter-scripts/check-mermaid-syntax.mjs": [
+      "27-spec-toolchain/97-acceptance-criteria.md#AC-T-22"
+    ],
     "linter-scripts/check-spec-cross-links.py": [
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-01",
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-02",
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-03",
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-04",
+      "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-10"
     ],
     "linter-scripts/check-spec-folder-refs.py": [
+      "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-03",
+      "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-04",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01"
     ],
     "linter-scripts/check-trace-map-regression.py": [
@@ -243,8 +318,16 @@
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-09"
     ],
+    "linter-scripts/deepen-consistency-reports.py": [
+      "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24"
+    ],
     "linter-scripts/spec-cross-links.allowlist": [
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-03"
+    ],
+    "linter-scripts/spec-folder-refs.allowlist": [
+      "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02",
+      "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-03",
+      "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-04"
     ]
   },
   "drift": [
@@ -1437,9 +1520,6 @@
     "27-spec-toolchain/61-spec-cross-links-allowlist.md#AC-61-02",
     "27-spec-toolchain/61-spec-cross-links-allowlist.md#AC-61-03",
     "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-01",
-    "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02",
-    "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-03",
-    "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-04",
     "27-spec-toolchain/63-readme-cross-links-md.md#AC-63-01",
     "27-spec-toolchain/63-readme-cross-links-md.md#AC-63-02",
     "27-spec-toolchain/63-readme-cross-links-md.md#AC-63-03",
@@ -1472,9 +1552,6 @@
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-19",
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-20",
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-21",
-    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-22",
-    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-23",
-    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24",
     "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-01",
     "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-02",
     "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-03",
@@ -1535,13 +1612,10 @@
     "linter-scripts/check-forbidden-spec-paths.sh",
     "linter-scripts/check-forbidden-strings.py",
     "linter-scripts/check-lockstep.cjs",
-    "linter-scripts/check-memo-retrospective-headings.py",
     "linter-scripts/check-memory-mirror-drift.py",
-    "linter-scripts/check-mermaid-syntax.mjs",
     "linter-scripts/check-readme-canonicals.py",
     "linter-scripts/check-readme-install-section.py",
     "linter-scripts/check-root-readme.py",
-    "linter-scripts/deepen-consistency-reports.py",
     "linter-scripts/fill-missing-acceptance-criteria.cjs",
     "linter-scripts/fill-missing-changelogs.cjs",
     "linter-scripts/fill-missing-consistency-reports.cjs",
@@ -1555,7 +1629,6 @@
     "linter-scripts/run.ps1",
     "linter-scripts/run.sh",
     "linter-scripts/scaffold-spec-module.cjs",
-    "linter-scripts/spec-folder-refs.allowlist",
     "linter-scripts/suggest-spec-cross-link-fixes.py",
     "linter-scripts/test/test-audit-cli-thresholds.sh",
     "linter-scripts/test/test-audit-deterministic-stability.sh",
@@ -1570,14 +1643,14 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1275,
+    "ac_drifted": 1269,
     "ac_total": 1299,
-    "ac_traced": 24,
-    "code_orphan": 39,
-    "code_referenced": 7,
+    "ac_traced": 30,
+    "code_orphan": 35,
+    "code_referenced": 11,
     "code_total": 46,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 24
+    "trace_entries": 30
   }
 }
