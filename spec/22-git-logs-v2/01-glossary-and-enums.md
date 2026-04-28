@@ -1,7 +1,7 @@
 # Glossary and Enum Catalog (v2)
 
-**Version:** 3.8.10  
-**Updated:** 2026-04-26 (Q3 Split-DB: glossary entries for `PerShaDb`, `ShaLogsRoot`)
+**Version:** 3.9.0  
+**Updated:** 2026-04-28 (Phase P1 — GAP-V2-02 closed: TypeScript enum mirror appended for headless-SPA / block-editor / TS dashboard consumers)  
 
 ---
 
