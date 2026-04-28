@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.9.2  
-**Updated:** 2026-04-28 (Phase P6 — `GAP-V2-06: locked-vacant precedent retained` — added **AC-22-LV1** declaring §09–§13 must remain file-absent; rejects the original GAP-V2-06 stub-file recipe in favour of the Core memory immutability rule. AC count 75 → 76. No DDL change; no schema bump.)
+**Version:** 3.9.3  
+**Updated:** 2026-04-28 (Phase P16 — lockstep for the 4 `GL-STREAM-*` ingest-streaming codes deferred from Phase P2: added **AC-76** (Streaming-ingest error-code surface) binding §15 v2.9.4 catalog rows + §17 v2.9.6 `ErrorCode` enum entries to the §04 §1.2 wire-format pins. AC count 76 → 77. No DDL change; no schema bump.)
 
 ---
 
