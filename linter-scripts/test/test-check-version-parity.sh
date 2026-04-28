@@ -11,8 +11,11 @@
 #   T6  module with no §00 banner Version is skipped (skipped_no_banner++)
 #   T7  module with no §98 release is skipped (skipped_no_release++)
 #   T8  table-row §98 format (folder 22 style) parsed correctly
-#   T9  --json output is valid JSON with required keys
+#   T9  --json output is valid JSON with required keys (incl. stamped/stamped_failed)
 #   T10 _archive/ excluded from scan
+#   T11 Phase P20: stamped §00 with mismatch fails default mode (per-file strict)
+#   T12 Phase P20: stamped §00 with match passes (counts as stamped + match)
+#   T13 Phase P20: --report-only overrides per-file stamp failure
 
 set -euo pipefail
 
