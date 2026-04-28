@@ -1,12 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.62.0
+**Version:** 2.63.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
 
-### 2.62.0 — 2026-04-28 — Phase P32: H10 stamp adoption complete — 74/74 modules stamped (100%)
+### 2.63.0 — 2026-04-28 — Phase P35: fuzzy waiver matching for `check-spec-cross-links.py` (codifies P34 lesson #1)
+- **Action**: Added fuzzy `(file, target)` waiver matching to `linter-scripts/check-spec-cross-links.py` with default tolerance ±5 lines, plus `--rewrite-allowlist` (idempotent in-place line-number bump) and `--strict-line-match` (opt-in exact-line semantics). Codifies the P34 lesson #1: stamp-batch tools that insert comment lines into §00 banners (P22, P32) silently broke CI for 12 phases by drifting waiver line numbers in `linter-scripts/spec-cross-links.allowlist`. The fuzzy match accepts drift ≤ 5 lines; `--rewrite-allowlist` auto-heals; `--strict-line-match` preserves the previous behaviour for contributors who want exact enforcement.
+- **Spec**: `spec/27-spec-toolchain/01-check-spec-cross-links.md` v1.0.0 → **v1.1.0** (4 new flags documented; new "Why fuzzy waiver matching (P35)" subsection citing the P34 root-cause; AC-01-05/06/07 added with `Verifies` clauses).
+- **Self-test**: New `linter-scripts/test/test-check-spec-cross-links.sh` (19 assertions across T1 fuzzy-match accept, T2 strict-mode reject, T3 rewrite + comment preservation, T4 idempotence, T5 out-of-tolerance non-match). Synthetic sandbox; runs in ~1s.
+- **Workflow**: Self-test collapsed into existing `Spec cross-link gate (zero broken links allowed)` step per H1 workflow-step parity rule (single-gate test → fold into parent step). **CI gate count UNCHANGED at 19** (contract extension, not new gate); **RUBRIC_VERSION UNCHANGED at v2.29** (no AC-31-31 cascade).
+- **README**: Added rows #11 (`test-check-version-parity.sh`, P15/P31 — pre-existing P31 oversight caught by P35 README inventory parity gate) and #12 (`test-check-spec-cross-links.sh`, P35) to `linter-scripts/test/README.md` inventory; coverage triad row added; "Last updated" + totals refreshed (12 scripts · 142+ assertions · ~34s).
+- **P35 lessons codified (3 new)**: (1) **fuzzy waiver matching is the canonical resolution for line-number-keyed allowlists drifting under unrelated edits** — extends the P34 lesson #1 from "audit post-sweep" prevention to "tolerate drift natively" with opt-in strict-mode escape hatch; (2) **README inventory parity gate caught a P31-era oversight** (`test-check-version-parity.sh` was never added to README) — the gate's value compounds with each new self-test added; future authors should expect existing-test-row gaps to surface when adding new tests; (3) **the H1 workflow-step parity rule extends to "extending an existing gate's contract"** — adding fuzzy-match assertions to the cross-link gate is contract-tightening, not a new gate, so the self-test folds into the parent step (preserves 19/19/19 footer↔workflow↔declared parity without an AC-31-31 cascade).
+- **Verified**: 9 critical gates green: self-test 19/19 ✅; cross-links 0 broken ✅; folder-refs ✅; tree-health 168/168 strict ✅; lockstep 87/87/0 ✅; version-parity 74/74/0/stamped=74 ✅; freshness `--strict-position` ✅; overview-parity ✅; qa-baseline-footer ✅. Adoption: H10 stamp 74/74 + new §27 §00 stamp at phase 35.
+
+
 - **Action**: Batch-stamped the remaining 17 unstamped-but-matched §00 files with `<!-- h10-verified-phase: 32 -->` via `/tmp/p32-stamp.py`. Pure additive comment insertion after each `**Updated:**` line — no version bumps, no date changes, no §98 rows. Now that gate #19 is strict (Phase P31), stamping is purely promotional metadata: each stamped file opts into the per-file P20 strict-promotion contract on top of the workflow-level strict invocation, providing belt-and-braces protection. Each stamp explicitly certifies "an author verified this §00 ↔ §98 parity at Phase 32."
 - **Modules stamped (17)**: `07-design-system`, `15-distribution-and-runner`, `18-wp-plugin-how-to`, `22-git-logs-v2`, `26-gitlogs-diagrams`, `27-spec-toolchain`, `25-app-issues/{01-phase-2-git-logs-audit,02-consolidated-audit-findings}`, `18-wp-plugin-how-to/02-enums-and-coding-style`, `14-update/diagrams`, `12-cicd-pipeline-workflows/03-reusable-ci-guards`, `03-error-manage/02-error-architecture/{04-error-modal,05-response-envelope,07-logging-and-diagnostics,04-error-modal/03-error-modal-reference}`, `02-coding-guidelines/{08-file-folder-naming,09-powershell-integration}`.
 - **Gate impact**: matches=74/74 (unchanged — already at 100%), mismatches=0 (unchanged), **stamped=57→74 (+17, 100%)**, stamped_failed=0. **STAMP ADOPTION: 57/74 → 74/74 — TREE-WIDE COMPLETE.**
