@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.1.0
-**Updated:** 2026-04-28 (Phase 108-min: added AC-T-21 codifying INV-08 — the Phase 107 orphan ledger as a transitional acknowledgement contract for INV-01. AC count 20 → 21.)
+**Version:** 2.2.0
+**Updated:** 2026-04-28 (Phase 108-full: added AC-T-22/23/24 verifying the three migrated orphans now occupy real §27 slots 18/19/25. AC count 21 → 24.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -124,6 +124,24 @@
 - **When** `linter-scripts/test/test-overview-inventory-parity.sh` (Phase 112) enumerates the §27 inventory triangle (filesystem ↔ §00 overview ↔ Phase 107 orphan ledger),
 - **Then** the script MUST exit 0 if AND ONLY IF the orphan code file is listed in the "Code → Spec orphans" table of `.lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md`. A code file that is neither specced in §27 NOR ledgered in Phase 107 MUST cause exit 1; AND every ledger entry MUST migrate to a real `NN-*.md` spec within two release cycles (sustained ledger-only tracking is technical debt, not a permanent home — see Phase 108 Strategy B for the migration cleanup); AND adding a new orphan to the ledger MUST happen in the SAME PR that adds the code (no after-the-fact ledger backfills); AND the ledger is **acknowledgement, not absolution**: it satisfies the INV-01 gate transitionally but does NOT exempt the code from the eventual `NN-*.md` spec requirement.
 - **Verifies:** INV-08 (Normative Contract block in §00 overview), Phase 112 self-test (`linter-scripts/test/test-overview-inventory-parity.sh`), AC-31-31 (the upstream invariant Phase 112 enforces), Phase 107 orphan ledger (`.lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md`), Phase 108 backlog (Strategy B migration plan).
+
+### AC-T-22 — Slot 18 (`check-mermaid-syntax.mjs`) is bijection-satisfying (Phase 108-full)
+- **Given** [`spec/27-spec-toolchain/18-check-mermaid-syntax.md`](./18-check-mermaid-syntax.md) exists and references `linter-scripts/check-mermaid-syntax.mjs`,
+- **When** `linter-scripts/test/test-overview-inventory-parity.sh` and `node linter-scripts/check-tree-health.cjs --strict` run,
+- **Then** both MUST exit 0 with the script counted as specced (NOT ledger-tracked); AND the §00 inventory row in the Generators table MUST point at the slot-18 spec; AND the script's slot-range exception (validator inside the 10-19 generator band) MUST be documented in §18 and acknowledged in this AC as a Phase 108-full deliberate choice (not a violation of INV-03 — the slot is new, not relabelled).
+- **Verifies:** INV-01, INV-02, INV-08 (this AC moves O1 OUT of the ledger), Phase 107 ledger row O1 (now marked migrated), Phase 108-full retrospective.
+
+### AC-T-23 — Slot 19 (`check-memo-retrospective-headings.py`) is bijection-satisfying (Phase 108-full)
+- **Given** [`spec/27-spec-toolchain/19-check-memo-retrospective-headings.md`](./19-check-memo-retrospective-headings.md) exists and references `linter-scripts/check-memo-retrospective-headings.py`,
+- **When** `linter-scripts/test/test-overview-inventory-parity.sh` and `node linter-scripts/check-tree-health.cjs --strict` run,
+- **Then** both MUST exit 0 with the script counted as specced (NOT ledger-tracked); AND the §00 inventory row in the Generators table MUST point at the slot-19 spec; AND the slot-range exception (validator inside the 10-19 band) MUST be documented in §19 alongside the Phase 100 cadence-retirement rationale this script enforces.
+- **Verifies:** INV-01, INV-02, INV-08, Phase 100 cadence retirement, Phase 107 ledger row O2 (now marked migrated), Phase 108-full retrospective.
+
+### AC-T-24 — Slot 25 (`deepen-consistency-reports.py`) is bijection-satisfying (Phase 108-full)
+- **Given** [`spec/27-spec-toolchain/25-deepen-consistency-reports.md`](./25-deepen-consistency-reports.md) exists and references `linter-scripts/deepen-consistency-reports.py`,
+- **When** `linter-scripts/test/test-overview-inventory-parity.sh` and `node linter-scripts/check-tree-health.cjs --strict` run,
+- **Then** both MUST exit 0 with the script counted as specced; AND the §00 inventory row in the Fillers table MUST point at the slot-25 spec; AND slot 25 satisfies the kind-range bijection (filler in 20-29 band) — no exception note required.
+- **Verifies:** INV-01, INV-02, INV-08, Phase 21 deepen-sweep origin, Phase 107 ledger row O3 (now marked migrated), Phase 108-full retrospective.
 
 ---
 
