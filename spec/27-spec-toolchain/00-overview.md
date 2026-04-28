@@ -136,6 +136,14 @@ INV-04: validator_kind -> spec MUST document exit_codes table {0,1,2}
 INV-05: filler_kind   -> spec MUST contain literal phrase "idempotent" + "no-op on satisfied tree"
 INV-06: auditor_kind  -> spec MUST list 7 dimensions + their weights + active gates
 INV-07: ci-workflow_kind -> spec MUST reference workflow file path + trigger events list
+INV-08: code in {linter-scripts/, .github/workflows/} WITHOUT a spec/27-spec-toolchain/NN-*.md MAY be tracked
+        in the Phase 107 orphan ledger at .lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md
+        (the "Code → Spec orphans" table). Such ledger-tracked orphans satisfy INV-01 transitionally — the
+        spec/27-spec-toolchain/00-overview.md inventory remains authoritative; the ledger is a deliberate,
+        time-bounded acknowledgement contract enforced by linter-scripts/test/test-overview-inventory-parity.sh
+        (Phase 112 — locks AC-31-31). NEW orphans MUST be added to the ledger in the SAME PR that adds the code.
+        The ledger is NOT a permanent home — every ledger entry SHOULD migrate to a real §27 NN-*.md spec
+        within two release cycles; ledger growth without migration MUST trigger a Phase-108-style cleanup.
 
 # DELETION PROTOCOL
 DEL-01: rm linter-scripts/<script> -> rm spec/27-spec-toolchain/NN-*.md (same PR)
@@ -158,7 +166,7 @@ FAIL-05: lockstep break (§00 vs §98 vs §99 mismatch)  -> exit 1 (via §24 che
 2. **Slot immutability**: once a number is assigned, it MUST NOT be reused. If a script is deleted, the slot is retired (note in §99) and the next new artifact takes the next free number.
 3. **Exit-code contract**: every validator section MUST document its exit codes (`0=pass`, `1=fail`, `2=error` is the canonical contract).
 4. **Idempotency**: every filler section MUST state explicitly that re-runs on a satisfied tree are no-ops.
-5. **No orphan code**: a script without a spec is a CI failure (see [`05-check-tree-health.md`](./05-check-tree-health.md) future extension).
+5. **No silent orphan code**: a script without a spec is a CI failure (see [`05-check-tree-health.md`](./05-check-tree-health.md) future extension). **Exception (Phase 108 / INV-08):** code MAY be tracked transitionally in the Phase 107 orphan ledger at `.lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md` — `linter-scripts/test/test-overview-inventory-parity.sh` (Phase 112) accepts ledger acknowledgement as valid INV-01 satisfaction. Ledger entries SHOULD migrate to a real `NN-*.md` spec within two release cycles; sustained ledger growth without migration MUST trigger a Phase-108-style cleanup. The ledger is **acknowledgement, not absolution**.
 
 ---
 

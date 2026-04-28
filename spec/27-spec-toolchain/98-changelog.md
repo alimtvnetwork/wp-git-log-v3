@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.34.0
+**Version:** 2.35.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.35.0 — 2026-04-28 — Phase 108-min: INV-08 + AC-T-21 (orphan-ledger codification)
+- **Action**: Added **INV-08** to the Normative Contract block in `00-overview.md` formalizing the Phase 107 orphan ledger (`.lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md`) as a transitional acknowledgement contract that satisfies INV-01 — exactly the de-facto behavior `linter-scripts/test/test-overview-inventory-parity.sh` (Phase 112) has been enforcing since 2026-04-27. Added **AC-T-21** to §97 verifying the rule (AC count 20 → 21). Updated the human-readable "Invariants" bullet 5 in §00 to cross-reference INV-08 with the explicit "acknowledgement, not absolution" framing.
+- **Why "Phase 108-min" not full Strategy B**: Phase 133 (2026-04-27) explicitly deferred full Strategy B (3 new spec files for O1/O2/O3 + `check-tree-health.cjs` patch) to user ratification — "Strategy B touches 6+ files including a CI-gate script — non-trivial blast radius; user should ratify". User has not ratified; instead replied `next` repeatedly. Phase 108-min is the smallest meaningful slice: it converts the implicit Phase 112 gate behavior into an explicit normative rule WITHOUT touching `check-tree-health.cjs` or scaffolding 3 new spec files. The 3 production orphans (O1 `check-mermaid-syntax.mjs` Phase 97, O2 `check-memo-retrospective-headings.py` Phase 104, O3 `deepen-consistency-reports.py`) remain ledger-tracked under INV-08 — their migration to slots 18/19/25 awaits explicit user ratification of full Strategy B.
+- **The "two release cycles" guardrail**: AC-T-21 codifies "every ledger entry SHOULD migrate to a real `NN-*.md` spec within two release cycles" — this prevents INV-08 from becoming a permanent escape hatch. O1/O2/O3 have been ledger-tracked since Phase 107 (2026-04-27); they are within the budget but at the upper bound, which is the architectural reason Phase 108 is on the backlog at all.
+- **Scope discipline (Phase 108-min ONLY)**: `linter-scripts/check-tree-health.cjs` source untouched; no new `NN-*.md` spec files created (slots 18/19/25 remain available for full Strategy B); §00 inventory tables unchanged (no new code to enumerate); existing 7 `.sh` self-tests + new `.py` test continue to pass without modification. The change is **rule-promotion-only**: implicit gate behavior → explicit normative contract + verifiable AC. Tree-health 168/168 strict ✓; lockstep 87/87 / 0 findings ✓; Phase 112 parity self-test 6/6 ✓ (unchanged — it was already enforcing INV-08, just unspecced).
+- **Lockstep**: §97 v2.0.1 → **v2.1.0** (AC count 20 → 21, AC-T-21 added); §98 v2.34.0 → **v2.35.0**; §99 v2.31.0 → **v2.32.0** (Phase 108-min audit row + INV-08 acknowledgement); §00 normative contract block + invariants bullet 5 updated. `mem://index.md` Memories entry for `full-tree-audit-v4` to be touched on next index refresh; no Core-rule change (INV-08 lives in the spec, not the AI rules).
 
 ### 2.34.0 — 2026-04-28 — Phase F3: `.sh`-only test-discovery policy codified
 - **Action**: User reply `Phase F3: keep sh-only`. `linter-scripts/test/README.md` updated with a new "Test-discovery policy (Phase F3 — keep `.sh`-only)" section + an "Adjacent `.py` tests (acknowledged, not parity-gated)" subsection that lists `test-check-spec-folder-refs.py` (Phase 144, locks AC-62-04). `Last updated:` banner refreshed `2026-04-27 (Phase 113)` → `2026-04-28 (Phase F3 — `.sh`-only test-discovery policy codified; adjacent `.py` test acknowledged below)`.

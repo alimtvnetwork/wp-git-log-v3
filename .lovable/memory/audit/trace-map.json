@@ -1471,6 +1471,7 @@
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-18",
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-19",
     "27-spec-toolchain/97-acceptance-criteria.md#AC-T-20",
+    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-21",
     "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-01",
     "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-02",
     "28-universal-ci-cli/97-acceptance-criteria.md#AC-28-03",
@@ -1566,8 +1567,8 @@
     "linter-scripts/validate-guidelines.py"
   ],
   "summary": {
-    "ac_drifted": 1271,
-    "ac_total": 1295,
+    "ac_drifted": 1272,
+    "ac_total": 1296,
     "ac_traced": 24,
     "code_orphan": 39,
     "code_referenced": 7,
