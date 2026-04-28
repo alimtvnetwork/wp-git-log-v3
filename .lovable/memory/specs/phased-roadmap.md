@@ -240,8 +240,9 @@ Expanded §27 §97 from 10 ACs (AC-T-01..AC-T-10) to **20 module-specific GWT AC
 ---
 
 
-## 🚧 Blocked (awaiting user decision)
-- **Phase B1 — §07 App identity fields**: confirm `Environment`, `Platform`, `OwnerEmail` shape
+## ✅ Closed backlog (resolved)
+- **Phase B1** — §07 App identity fields: CLOSED Phase 147 (locked decision 12 PERMANENT — Env/Platform/OwnerEmail forbidden).
+- **Phase B2** — Slot-06 collision in `02-coding-guidelines/`: CLOSED Phase 47 via **co-location** (both `06-ai-optimization/` + `06-cicd-integration/` retain slot 06 per §16→§37 immutability precedent — once a slot ships a §97, the slot label is frozen). User confirmed 2026-04-28: honor Phase 47, no rename. Disambiguation by trailing slug. **Do NOT re-surface this in future `next` cycles.**
 
 ---
 
