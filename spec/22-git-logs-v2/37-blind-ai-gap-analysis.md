@@ -20,7 +20,7 @@
 | Testability     | 100 | **76/76 GWT blocks** — gate `G-AC-02` no longer fires; downstream test-stub generators can emit one case per AC mechanically |
 | Maintainability | 100 | 0 unresolved markers (Phase 39b closed GAP-V2-07 2026-04-27); GAP-V2-01/02/03/04/06/07/08/10 all resolved |
 
-**An AI given v2 today can build ~99% of the plugin without asking a human.** The remaining 1% is the deferred v3 feature set (encryption, signed tokens, audit chain, multi-engine) explicitly out of scope for v2. Every HIGH/MEDIUM blind-AI gap from the 2026-04-25 baseline has been closed; only `GAP-V2-05` (App identity) and `GAP-V2-09` (link client CLI) remain — both LOW, both queued.
+**An AI given v2 today can build ~99% of the plugin without asking a human.** The remaining 1% is the deferred v3 feature set (encryption, signed tokens, audit chain, multi-engine) explicitly out of scope for v2. Every HIGH/MEDIUM blind-AI gap from the 2026-04-25 baseline has been closed; only `GAP-V2-05` (App identity — user decision, closed-in-spirit by Phase 147 §07 locked decision 12) remains. GAP-V2-09 closed Phase P17 (2026-04-28).
 
 ---
 
