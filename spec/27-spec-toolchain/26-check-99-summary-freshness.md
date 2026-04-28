@@ -174,6 +174,15 @@ unlike slots 18/19 in the 10-19 generator band per AC-T-22/AC-T-23).
 
 ## Changelog
 
+### 1.2.0 — 2026-04-28 — Phase H8 (freshness coverage closure)
+- **New `<!-- freshness-exempt: <reason> -->` marker** recognized anywhere in file body (not heading-scoped). Files matching are counted under `exempt:` and skipped before the find-stamp pass.
+- **Output line shape changed**: `§99 files scanned: N; stamped: N; exempt: N; unstamped: N` (added `exempt:` field between stamped and unstamped).
+- **Coverage closure**: 75 stamped + 12 unstamped → **81 stamped + 6 exempt + 0 unstamped** (87/87 declare a posture). The 6 exempt files are audit-log-only — no `## Summary` and no inventory rubric, only date-anchored audit-log subsections.
+- **Stamp-position fix sweep** (one-time): 5 files carried the stamp BEFORE `## Summary` rather than under it; repositioned. Precedent codified — stamps MUST live inside a tracked-heading body, not adjacent.
+- **§27's own §99**: stamp tokens were only inside Validation History blockquotes (not under any tracked heading); added `<!-- verified-phase: 147 -->` under `## File Inventory`.
+- Self-test extended 12 → **20 assertions** (T1 counts-line shape requires `exempt:` field; new T11 verifies exempt-marker behavior in 3 sub-asserts).
+- Acceptance criteria addition: AC-26-09 (freshness-exempt marker honored).
+
 ### 1.1.0 — 2026-04-28 — Phase H2
 - **Widened tracked-heading set** from `## Summary` only to also accept inventory-rubric headings (`## Module Health`, `## File Inventory`, `## Module Inventory`, `## Top-Level Modules`, `## Document Inventory`, `## Modules`). Previously-exempt 35 inventory-rubric §99 files are now stampable.
 - **Excluded `spec/_archive/**`** from scan — archived modules are frozen.
