@@ -1,7 +1,7 @@
 # Admin UI (v2)
 
-**Version:** 2.2.0  
-**Updated:** 2026-04-26
+**Version:** 2.3.0  
+**Updated:** 2026-04-28 (Phase P18 — added `## State-Transition Label Rendering` section binding the History `HasError` column rendering to AC-73's four-value label enum (`still-green` / `first-failure` / `still-failing` / `just-recovered`); History columns table revised to call out the derived state label adjacent to the raw `HasError` boolean. Closes the §99 v3.9.6+ open follow-up "(a) §03 admin UI rendering of state labels — consumer-side". Pure consumer-side contract; no DDL, no schema bump, no enum change.)
 
 ---
 
