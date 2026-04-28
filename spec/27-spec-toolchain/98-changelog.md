@@ -1,10 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.54.0
+**Version:** 2.55.0
 **Updated:** 2026-04-28
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.55.0 — 2026-04-28 — Phase P25: H10 third reverse-drift reconstruction (`spec/17-consolidated-guidelines`) — dual-stream alignment subcase
+- **Action**: Third application of the P23 reverse-drift workflow. Targeted `spec/17-consolidated-guidelines` (§00 banner `3.3.0` vs §98 latest `2.5.0` — gap of 1 major + (-2) minor + 0 patch). **Different shape from P23 + P24**: §98 had NO orphan post-Cross-References prose to promote — it was already a clean 7-row release ladder (1.0.0 → 2.5.0). The reverse drift came from a **decoupled-version-stream pattern**: §98 v2.4.0 explicitly recorded "Bumped overview banner v3.2.0 → v3.3.0" while §98 itself stayed at 2.4.0 and continued numbering 2.5.0. §00 banner was treated as a separate "module-version stream" while §98 was treated as a "changelog-file-version stream"; the two streams ran in parallel and the H10 gate (which compares them) flagged the divergence.
+- **Reconciliation strategy**: Added a single new §98 release row at version **3.3.0** (matching §00 banner) explaining the alignment; preserved historical 1.0.0 → 2.5.0 rows verbatim for audit-trail continuity. Codified versioning rule: §98 latest release version = §00 banner version. The two streams are now locked together (matches every other reconciled module's convention).
+- **Banner sync**: §00 `Updated:` 2026-04-27 → 2026-04-28; `<!-- h10-verified-phase: 25 -->` stamp dropped — opted into strict H10.
+- **§99 module report**: bumped 4.4.0 → 4.5.0 with reconstruction-note blockquote.
+- **P25 lesson — third reverse-drift subcase codified (dual-stream alignment)**: when §98 has a clean release ladder but is numerically behind §00 because §98 was treated as a "changelog-file-version stream" separate from the "module-version stream", the reconciliation is NOT prose promotion (P23) and NOT post-footer cleanup (P24). Instead, add ONE new §98 release row at the §00 banner version explaining the alignment, preserve all historical rows verbatim, codify the locked-stream rule going forward. This is the third reverse-drift subcase identified; future contributors MUST classify drifters into one of: (a) **P23 subcase** — orphan dated prose blocks present in §98/§99 → promote to SemVer rows; (b) **P24 subcase** — orphan prose appended *after* §98 Cross-References footer → promote AND delete the orphans; (c) **P25 subcase** — clean §98 ladder but decoupled streams → add ONE alignment release row, preserve history, lock streams. Subcase identification should be the first step of any reverse-drift phase.
+- **Gate impact**: `matches=39 → 40` (+1); `mismatches=35 → 34` (-1); `stamped=22 → 23`; `stamped_failed=0`. Reverse-drift backlog **34 → 33**.
+- **Adoption progress**: **23 / 74 modules opted into strict enforcement**.
+- **No CI workflow change, no `RUBRIC_VERSION` bump, no AC-31-31 cascade, no gate-count change, no trace-map rebaseline, no §27 slot version change** — pure consumer-side adoption + per-module forensic reconstruction.
+- **Verified**: parity gate 87/74/40/34/stamped=23/stamped_failed=0 / exit 0 ✅; lockstep 87/87 / 0 findings ✅; tree-health 168/168 strict ✅; §27-inventory 6/6 ✅; H10 self-test 13/13 ✅.
 
 ### 2.54.0 — 2026-04-28 — Phase P24: H10 second reverse-drift reconstruction (`spec/14-update`)
 - **Action**: Second application of the P23 reverse-drift workflow. Targeted next-smallest-gap drifter: `spec/14-update` (§00 banner `2.1.0` vs §98 latest `1.3.0` — gap of 1 major + (-2) minor). Same shape as P23: dated prose blocks (Phase 63 + Phase 76) appended *after* the §98 Cross-References footer rather than promoted into SemVer rows.

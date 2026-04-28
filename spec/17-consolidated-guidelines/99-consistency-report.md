@@ -1,7 +1,9 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.4.0
-**Updated:** 2026-04-27
+**Version:** 4.5.0
+**Updated:** 2026-04-28
+
+> **v4.5.0 update (Phase P25 — H10 reverse-drift dual-stream alignment):** Aligned §98 changelog version stream with §00 banner version stream. Pre-P25, §98 tracked its own minor releases (1.0.0 → 2.5.0) while §00 banner was bumped independently per §98 internal notes (§98 v2.4.0 explicitly recorded "Bumped overview banner v3.2.0 → v3.3.0" while §98 itself stayed at 2.4.0) — a decoupled-stream pattern that made `check-version-parity.py` (P15/H10) flag this module as reverse-drift even though every §00 bump was internally documented inside §98 release rows. P25 adds a single new §98 release row at version **3.3.0** (matching §00 banner) explaining the alignment; the historical 1.0.0 → 2.5.0 rows are preserved verbatim for audit-trail continuity. Versioning rule going forward: §98 latest release version = §00 banner version (the convention every other reconciled module uses). §00 `Updated:` 2026-04-27 → 2026-04-28; `<!-- h10-verified-phase: 25 -->` stamp dropped under banner — opted into strict H10 enforcement.
 
 > **v4.4.0 update (Phase 130):** Added [`33-full-tree-ai-audit-v5.md`](./33-full-tree-ai-audit-v5.md) — supersedes audit-v4 by mechanically re-validating all 4 critical findings; 3 of 4 resolved between v4 publication (2026-04-25) and v5 (2026-04-27). audit-v4 banner-superseded. File count 33 → 34. No score change pending R1 (real-AI re-audit).
 
