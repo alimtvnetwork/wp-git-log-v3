@@ -1,7 +1,7 @@
 # REST API Endpoints (v2)
 
-**Version:** 2.9.5  
-**Updated:** 2026-04-28 (Phase P3: Standard Ack Envelope gains required `PreviousHasError: boolean` on write endpoints #1–#4; full field contract added — semantics, per-endpoint usage, atomicity (same-tx as write), cross-refs to §01/§97 AC-13/73/74/75/§17. Closes GAP-V2-04. §17 OpenAPI `Ack` schema lockstep-bumped in same phase. Phase P2 §1.1 NDJSON ingest contract unchanged.)
+**Version:** 2.9.6  
+**Updated:** 2026-04-28 (Phase P4: §1.2 "Pre-parse caps & validation order" subsection added — surfaces the four `ConfigKv` enforcement caps (`RatePerMinPerProfile`, `MaxPushPayloadBytes`, `MaxLinesPerPush`, `MaxLineBytes`) + 11-step strict validation order so a blind implementer learns gate ordering without cross-walking §15/§18/§97. Closes GAP-V2-10. No DDL/AC/error-code change — purely a cross-walk-elimination doc surface. Phase P3 PreviousHasError ack contract unchanged.)
 **Namespace:** `/wp-json/git-logs/v2`
 
 ---
@@ -131,6 +131,35 @@ When the client wants to stream `Logs`/`ErrorLogs` incrementally instead of buff
 - Server MUST ignore unknown frame keys (forward-compatible) but MUST reject unknown frame discriminators (`{"Foo":true,…}` with no recognized leading key) with `GL-STREAM-UNKNOWN-FRAME`.
 
 **Response:** standard ack envelope per §Common — buffered, NOT streamed. The `Retrieval` hint is computed after the `StreamFooter` is consumed.
+
+### 1.2 Pre-parse caps & validation order (v2.9.6 — Phase P4)
+
+Closes GAP-V2-10. The four enforcement caps below are seeded in `18-schema.sql` `ConfigKv` and apply to **both** the buffered §1 body and the §1.1 NDJSON streaming variant. They are listed here (rather than only in §15/§18/§97 AC-12/AC-27) so a blind implementer reading §04 top-to-bottom learns the validation gate order WITHOUT cross-walking three files.
+
+| # | ConfigKv key | Default | Scope | When checked | Error code (§15) | HTTP |
+|---|---|---|---|---|---|---|
+| 1 | `RatePerMinPerProfile` | `60` | Per-Profile (token bucket; refills at 1/sec) | **BEFORE** body parse, immediately after Profile resolution from `TempToken` | `GL-RATE-LIMIT-EXCEEDED` | `429` (with `Retry-After`) |
+| 2 | `MaxPushPayloadBytes` | `1048576` (1 MiB) | Per-request | Buffered: from `Content-Length` header BEFORE reading body. Streaming: incremental running counter — abort mid-stream as soon as crossed. | `GL-PAYLOAD-TOO-LARGE` | `413` |
+| 3 | `MaxLinesPerPush` | `10000` | `len(Logs) + len(ErrorLogs)` (buffered) OR cumulative `Line` frame count (streaming) | Buffered: after JSON parse, BEFORE INSERT. Streaming: incremental — abort on the (10001)th `Line` frame. | `GL-LINES-TOO-MANY` | `413` |
+| 4 | `MaxLineBytes` | `65536` (64 KiB) | Per-line UTF-8 byte length | Per-line, BEFORE INSERT. Oversize lines are TRUNCATED and tagged `Warn` per AC-27 — no `GL-*` error raised, the push continues. | (none — soft-truncation) | n/a |
+
+**Strict validation order (gates fail fast, top to bottom):**
+
+1. **TLS / transport** (Lane B SSH key signature verification per §05/§31, if `SshAuthMode != off`).
+2. **Auth** — resolve `TempToken` → `Profile`; respond `401` `GL-AUTH-INVALID` if unknown/expired.
+3. **Cap #1** — token bucket charge for resolved `ProfileId`; respond `429` `GL-RATE-LIMIT-EXCEEDED` if empty.
+4. **Cap #2 (Content-Length pre-check)** — for buffered requests, reject `413` `GL-PAYLOAD-TOO-LARGE` BEFORE allocating any read buffer. For streaming requests (`Transfer-Encoding: chunked` + `X-GL-Stream:1`), this gate becomes the running-total cap in step 6.
+5. **Body parse** — `JSON.parse()` (buffered) OR NDJSON frame loop (streaming).
+6. **Cap #2 (streaming running-total)** — abort mid-stream with `413` `GL-PAYLOAD-TOO-LARGE` per AC-12 incremental contract; rollback partial inserts (the §97 AC-13 sticky-`HasError` atomicity contract makes partial-commit unsafe).
+7. **Cap #3** — `len(Logs)+len(ErrorLogs)` (buffered) OR `Line` frame count (streaming) — `413` `GL-LINES-TOO-MANY`.
+8. **Cap #4** — per-line — TRUNCATE + `Warn` tag (no error code per AC-27).
+9. **Field validation** — `RepoUrl`/`Branch`/`PipelineName` shape per §05; reject `400` `GL-VALIDATION-*` on type/format errors.
+10. **GitProfile acceptance match** — reject `400` `GL-VALIDATION-001` if `RepoUrl` does not match the resolved `Profile`'s GitProfile acceptance regex.
+11. **INSERT** — atomic per AC-75 (`BEGIN IMMEDIATE` + `Pipeline.PreviousHasError` read + `UPDATE` + `INSERT LogEntry/ErrorLogEntry` + `INSERT History/Action` + `COMMIT`).
+
+**Wall-clock cap (orthogonal):** `ConfigKv.AppendLogMaxStreamSec` (recommended default `30` s, mentioned in §97 AC-12) MUST cap total request time for streaming requests to prevent slow-loris worker exhaustion. Exceeding the cap returns `GL-INGEST-TIMEOUT` (§15). This cap does NOT apply to buffered requests under `MaxPushPayloadBytes` — `Content-Length` already bounds them.
+
+**Cross-refs:** §18 ConfigKv seed rows (lines 426–429); §15 `Rate limiting + payload (Lane B)` table; §97 AC-12 (incremental enforcement contract), AC-27 (soft-truncation), AC-13 (atomicity), AC-75 (single-statement write); §31 (SSH lane validation order, step 0 above).
 
 ## 2. PUT /fixed-log
 

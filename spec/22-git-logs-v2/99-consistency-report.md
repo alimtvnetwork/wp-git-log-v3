@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.9
-**Updated:** 2026-04-28 (Phase P3 — `PreviousHasError` boolean added to Standard Ack Envelope on §04 v2.9.4 → v2.9.5 with full field contract; §17 OpenAPI `AckResponse` v2.9.4 → v2.9.5 lockstep-bumped (REQUIRED property, deep-link description); closes GAP-V2-04. Inventory rows for §04 and §17 updated. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.9.10
+**Updated:** 2026-04-28 (Phase P4 — §04 v2.9.5 → v2.9.6 gains §1.2 "Pre-parse caps & validation order" surfacing the four `ConfigKv` caps + 11-step strict gate order + `AppendLogMaxStreamSec` slow-loris cap; closes GAP-V2-10. Inventory row for §04 updated. No DDL/AC/error-code change. Tree health unchanged at 168/168 strict-pass. Lockstep 87/87 ✅.)
 
 ---
 
@@ -14,7 +14,7 @@
 | 01-glossary-and-enums.md | ✅ (v3.9.0 — Phase P1 added `## TypeScript Mirror` section + drift-detection contract; closes GAP-V2-02) |
 | 02-database-schema.md | ✅ (v3.8.11 — Canonical DDL excerpt inlined per Phase 20 G-CON-01) |
 | 03-admin-ui.md | ✅ (incl. First-run Bootstrap) |
-| 04-rest-api-endpoints.md | ✅ (v2.9.5 — Phase P3 Standard Ack Envelope `PreviousHasError` + field contract; Phase P2 §1.1 NDJSON ingest streaming wire format) |
+| 04-rest-api-endpoints.md | ✅ (v2.9.6 — Phase P4 §1.2 pre-parse caps & 11-step validation order; Phase P3 Ack `PreviousHasError`; Phase P2 §1.1 NDJSON ingest streaming wire format) |
 | 05-auth-and-validation.md | ✅ (CI/CD cross-ref) |
 | 06-migrations-and-logger.md | ✅ |
 | 07-app-entity.md | ✅ |
@@ -328,9 +328,19 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 
 **Phase P3 scope discipline:** §97 ACs untouched — AC-13 already references the auto-fix behavior (the field exposes existing semantics, no new contract). §15 untouched (no new error codes — missing `PreviousHasError` is a server-side schema bug, not a client-visible error mode). §01 glossary `Pipeline.PreviousHasError` entry already authoritative from Phase 9 (v2.9.2). §02 / §18 untouched (no DDL change — the field is computed from existing `Pipeline.PreviousHasError` column already shipped in §18 v2.9.2). The pending `GL-STREAM-*` lockstep micro-phase (deferred from Phase P2) is still open and unrelated to P3.
 
+## v3.9.10 Audit — Phase P4 (GAP-V2-10 closed: pre-parse caps & validation order surfaced in §04)
+
+| File | Change |
+|------|--------|
+| `04-rest-api-endpoints.md` | Banner v2.9.5 → v2.9.6. New `### 1.2 Pre-parse caps & validation order (v2.9.6 — Phase P4)` subsection added between §1.1 and §2. Single table surfaces the four `ConfigKv` enforcement caps (`RatePerMinPerProfile=60`, `MaxPushPayloadBytes=1048576`, `MaxLinesPerPush=10000`, `MaxLineBytes=65536`) with their error codes (`GL-RATE-LIMIT-EXCEEDED` 429, `GL-PAYLOAD-TOO-LARGE` 413, `GL-LINES-TOO-MANY` 413, soft-truncate per AC-27) and check-time semantics (Content-Length pre-check vs streaming running-total). Pins 11-step strict validation order from TLS/SSH-sig through atomic `BEGIN IMMEDIATE` INSERT. Documents orthogonal `AppendLogMaxStreamSec` (default 30s) wall-clock cap with `GL-INGEST-TIMEOUT` for slow-loris defense, scoped to streaming requests only. |
+| `98-changelog.md` | v3.9.3 row added (Phase P4). |
+| `99-consistency-report.md` | This audit table; banner v3.9.9 → v3.9.10; inventory row for §04 updated. |
+
+**Phase P4 scope discipline:** §15 / §18 / §97 untouched — no new error codes, no new ConfigKv keys, no new ACs. The four caps and their `GL-*` codes were already authoritative in those files (§18 lines 426–429 for defaults, §15 "Rate limiting + payload (Lane B)" table for codes, §97 AC-12/AC-27/AC-13/AC-75 for behavior). §1.2 is a pure cross-walk-elimination doc surface — a blind implementer reading §04 top-to-bottom no longer needs to flip between three files to learn gate ordering. §17 OpenAPI untouched (validation order is server-side behavior, not wire-format — it does not belong in the API contract that clients consume). §01 / §02 / §18 / §97 untouched. The pending `GL-STREAM-*` lockstep micro-phase (deferred from Phase P2) and §03 admin UI rendering follow-up remain open.
+
 ## Health Score
 
-100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, §04↔§28/06 ingest-streaming wire-format chain (Phase P2), **§04↔§17 PreviousHasError ack-envelope chain (Phase P3)**); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.5 surfaces required `AckResponse.PreviousHasError` + optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02; v3.9.1 closed GAP-V2-03; v3.9.2 closed GAP-V2-04. **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 `GL-STREAM-*` codes (deferred from Phase P2). All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
+100/100 (A+) — 33 of 33 numbered files present (09–13 + 21 intentional gaps, locked); cross-links valid (incl. §00↔§39, §01↔§02↔§15↔§18↔§31, §05↔§28↔§30↔§31 SSH lane chain, §02↔§15↔§22↔§23↔§29↔§39 split-DB chain, §97↔§05/§15/§18/§28/§30/§31 SSH AC chain, §04↔§10/§15/§17/§18/§39 NDJSON streaming chain, §01↔§02↔§18↔§04↔§17↔§97 PreviousHasError end-to-end chain, §15↔§17↔§18↔§97 NDJSON Phase 11 chain, §97↔§02/§04/§05/§10/§15/§17/§18/§26/§31/§39 Phase 13 deepened-AC cross-refs, §04↔§28/06 ingest-streaming wire-format chain (Phase P2), §04↔§17 PreviousHasError ack-envelope chain (Phase P3), **§04→§15+§18+§97 pre-parse-caps cross-walk (Phase P4)**); AC coverage AC-01..AC-75 (75 total, all GWT, all `[active]`); ER diagram reflects v2.9.0 split-DB shape; OpenAPI v2.9.5 surfaces required `AckResponse.PreviousHasError` + optional `Header.StateTransition`; v3.9.0 closed GAP-V2-02; v3.9.1 closed GAP-V2-03; v3.9.2 closed GAP-V2-04; v3.9.3 closed GAP-V2-10. **Open follow-ups:** (a) §03 admin UI rendering of state labels — consumer-side, out-of-scope; (b) §15/§17/§97 lockstep for the 4 `GL-STREAM-*` codes (deferred from Phase P2). All Phase 8/9/12/13 follow-ups closed; B1 closed (Phase 147).
 
 ---
 
