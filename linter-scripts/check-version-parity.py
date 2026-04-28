@@ -15,9 +15,25 @@ P15 baseline sweep found 59/74 modules drifting).
 
 Modes:
   default        : advisory; exit 0; emit one info line per mismatch.
-  --strict       : exit 1 on any mismatch (CI gate when adoption matures).
-  --report-only  : never fails (overrides --strict); useful for dashboards.
-  --json         : machine-readable output.
+                   Mismatches in STAMPED §00 files (see below) still fail
+                   in default mode — that is the per-file strict promotion
+                   path (Phase P20, mirrors H1 / check-99-summary-freshness).
+  --strict       : exit 1 on ANY mismatch (tree-wide CI gate when adoption
+                   matures; today 57/74 modules drift, so unused in CI).
+  --report-only  : never fails (overrides --strict AND per-file stamps);
+                   useful for dashboards.
+  --json         : machine-readable output (adds `stamped`, `stamped_failed`).
+
+Per-file opt-in stamp (Phase P20):
+  Authors who have caught a §00 banner up to its §98 latest release can
+  add a stamp INSIDE the first 40 lines of `00-overview.md`:
+
+      <!-- h10-verified-phase: 152 -->
+
+  Once stamped, ANY future §00 ↔ §98 mismatch on that file fails the
+  gate even in default (advisory-tree) mode. This lets modules opt into
+  strict enforcement one at a time without waiting for all 57 drifters
+  to catch up. Mirrors the H1 `<!-- verified-phase: NNN -->` pattern.
 
 Skip rules:
   - Files under `spec/_archive/**` (frozen by design — H2 lesson).
@@ -40,6 +56,10 @@ SPEC = ROOT / "spec"
 
 # §00 banner version: `**Version:** v1.2.3` or `**Version:** 1.2.3` near top.
 BANNER_VER_RE = re.compile(r"\*\*Version:\*\*\s*v?(\d+\.\d+\.\d+)")
+
+# Phase P20: per-file opt-in strict-promotion stamp under §00.
+# Mirrors `check-99-summary-freshness.py`'s `<!-- verified-phase: NNN -->`.
+H10_STAMP_RE = re.compile(r"<!--\s*h10-verified-phase:\s*(\d{1,4})\s*-->")
 
 # §98 release line — accept four shapes used across the tree:
 #   ## 1.2.0 — 2026-04-27
@@ -72,6 +92,15 @@ def banner_version(text: str) -> str | None:
     head = "\n".join(text.split("\n")[:40])
     m = BANNER_VER_RE.search(head)
     return m.group(1) if m else None
+
+
+def h10_stamp(text: str) -> int | None:
+    """Return the highest h10-verified-phase stamp value found in the §00 head,
+    or None if unstamped. Searches the first 40 lines (same window as the
+    banner) so the stamp lives near the version it certifies."""
+    head = "\n".join(text.split("\n")[:40])
+    stamps = [int(m.group(1)) for m in H10_STAMP_RE.finditer(head)]
+    return max(stamps) if stamps else None
 
 
 def find_pairs(spec_root: Path):
@@ -107,6 +136,8 @@ def main(argv: list[str] | None = None) -> int:
     mismatches: list[dict] = []
     skipped_no_banner = 0
     skipped_no_release = 0
+    stamped = 0           # §00 files carrying h10-verified-phase stamp
+    stamped_failed = 0    # stamped files whose §00 ↔ §98 versions diverge
 
     for overview, changelog in find_pairs(root):
         scanned += 1
@@ -121,14 +152,26 @@ def main(argv: list[str] | None = None) -> int:
             skipped_no_release += 1
             continue
         eligible += 1
+        stamp = h10_stamp(ov_text)
+        if stamp is not None:
+            stamped += 1
         if bv == lr:
             matches += 1
         else:
-            mismatches.append({
-                "module": str(overview.parent.relative_to(ROOT)),
+            try:
+                mod_path = str(overview.parent.relative_to(ROOT))
+            except ValueError:
+                # --spec-root may point outside the repo (self-tests use a tmpdir).
+                mod_path = str(overview.parent)
+            entry = {
+                "module": mod_path,
                 "banner": bv,
                 "latest_release": lr,
-            })
+                "stamped": stamp,
+            }
+            mismatches.append(entry)
+            if stamp is not None:
+                stamped_failed += 1
 
     if args.json:
         out = {
@@ -138,6 +181,8 @@ def main(argv: list[str] | None = None) -> int:
             "mismatches": len(mismatches),
             "skipped_no_banner": skipped_no_banner,
             "skipped_no_release": skipped_no_release,
+            "stamped": stamped,
+            "stamped_failed": stamped_failed,
             "details": mismatches,
         }
         print(json.dumps(out, indent=2))
@@ -147,15 +192,24 @@ def main(argv: list[str] | None = None) -> int:
             f"scanned={scanned}; eligible={eligible}; "
             f"matches={matches}; mismatches={len(mismatches)}; "
             f"skipped(no-banner)={skipped_no_banner}; "
-            f"skipped(no-release)={skipped_no_release}"
+            f"skipped(no-release)={skipped_no_release}; "
+            f"stamped={stamped}; stamped_failed={stamped_failed}"
         )
         for m in mismatches:
-            print(f"  (info) {m['module']}: §00={m['banner']} vs §98 latest={m['latest_release']}")
+            tag = "FAIL" if m["stamped"] is not None else "info"
+            stamp_note = f" [stamped phase {m['stamped']}]" if m["stamped"] is not None else ""
+            print(f"  ({tag}) {m['module']}: §00={m['banner']} vs §98 latest={m['latest_release']}{stamp_note}")
 
     if args.report_only:
         if mismatches and not args.json:
             print("--report-only: not failing.")
         return 0
+    # Per-file strict promotion (Phase P20): a stamped §00 with a mismatch
+    # always fails, even in default (advisory-tree) mode.
+    if stamped_failed > 0:
+        if not args.json:
+            print(f"FAIL: {stamped_failed} stamped §00 file(s) drift from §98 latest release.")
+        return 1
     if args.strict and mismatches:
         return 1
     return 0
