@@ -195,6 +195,14 @@
         "note": null,
         "symbol": null
       }
+    ],
+    "27-spec-toolchain/97-acceptance-criteria.md#AC-T-10": [
+      {
+        "file": "linter-scripts/check-spec-cross-links.py",
+        "kind": "function",
+        "note": null,
+        "symbol": null
+      }
     ]
   },
   "code_to_ac": {
@@ -216,7 +224,8 @@
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-01",
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-02",
       "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-03",
-      "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-04"
+      "27-spec-toolchain/01-check-spec-cross-links.md#AC-01-04",
+      "27-spec-toolchain/97-acceptance-criteria.md#AC-T-10"
     ],
     "linter-scripts/check-spec-folder-refs.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01"
@@ -1511,9 +1520,7 @@
     "97-acceptance-criteria.md#AC-ROOT-08"
   ],
   "errors": {
-    "missing_ac": [
-      "27-spec-toolchain/97-acceptance-criteria.md#AC-T-10"
-    ],
+    "missing_ac": [],
     "missing_file": []
   },
   "orphan": [
@@ -1558,12 +1565,12 @@
   ],
   "summary": {
     "ac_drifted": 1270,
-    "ac_total": 1293,
-    "ac_traced": 23,
+    "ac_total": 1294,
+    "ac_traced": 24,
     "code_orphan": 38,
     "code_referenced": 7,
     "code_total": 45,
-    "missing_ac": 1,
+    "missing_ac": 0,
     "missing_file": 0,
     "trace_entries": 24
   }
