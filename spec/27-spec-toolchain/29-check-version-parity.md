@@ -9,8 +9,8 @@ status: active
 
 # 29 — `check-version-parity.py`
 
-**Phase:** P15 / H10 (2026-04-28)
-**Type:** validator (advisory-by-default)
+**Phase:** P15 / H10 landed advisory; **Phase P31** flipped to strict tree-wide (2026-04-28).
+**Type:** validator (**strict tree-wide** as of P31; was advisory-by-default P15→P30)
 **Band:** 20-29 (validators on §99/§97/§98 lifecycle)
 
 ## Purpose
@@ -61,8 +61,8 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 
 | Flag | Behavior |
 |---|---|
-| _(default)_ | Advisory tree-wide; exit 0 even on mismatch — UNLESS the mismatched §00 carries a Phase P20 `<!-- h10-verified-phase: NNN -->` stamp, in which case that file fails per-file strict and the gate exits 1. |
-| `--strict` | Exit 1 on any mismatch (tree-wide CI gate when adoption matures). |
+| _(default)_ | **Strict** as of Phase P31: exit 1 on any mismatch. (Pre-P31: advisory tree-wide; promoted per-file only on `<!-- h10-verified-phase: NNN -->` stamp.) |
+| `--strict` | Explicit strict mode (now equivalent to default). Retained for backward compatibility and explicit-intent CI invocations. |
 | `--report-only` | Never fails (overrides `--strict` AND per-file stamps). Useful for dashboards. |
 | `--json` | Machine-readable output with `details[]` array (each entry includes `stamped: <int|null>`); top-level `stamped` and `stamped_failed` counts. |
 | `--spec-root PATH` | Override scan root (used by self-test sandboxes). |
@@ -71,8 +71,8 @@ python3 linter-scripts/check-version-parity.py [--strict] [--report-only] [--jso
 
 | Code | Meaning |
 |---|---|
-| 0 | Default mode with zero stamped failures, OR strict with zero mismatches, OR `--report-only` |
-| 1 | `--strict` mode AND any mismatch present, OR default mode AND any STAMPED §00 has a mismatch (per-file strict promotion) |
+| 0 | Zero mismatches, OR `--report-only` |
+| 1 | Any mismatch present (default mode is strict as of P31), OR pre-P31 default mode AND any STAMPED §00 has a mismatch (per-file strict promotion — historically retained) |
 | 2 | Structural error (spec root not found) |
 
 ## Output line shape
