@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.3.0
-**Updated:** 2026-04-28 (Phase 30: added AC-T-25 codifying the Phase 29-discovered "advisory CI gates silently rot" lesson via the Spec-index drift gate strict-promotion. AC count 24 → 25.)
+**Version:** 2.4.0
+**Updated:** 2026-04-28 (Phase P15 / H10: added AC-T-26 codifying the §00 ↔ §98 Version-field parity gate landing + advisory-by-default rationale per AC-T-25 dispensation. AC count 25 → 26.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -148,6 +148,12 @@
 - **When** any future commit causes `node linter-scripts/generate-spec-index.cjs` to produce a `spec/` filesystem delta (e.g. a file/version bump landed without re-running `bash linter-scripts/run.sh` locally),
 - **Then** the workflow step MUST `exit 1` (strict mode), printing the `git diff --stat` and a `head -100` of `git diff` so the contributor can locate the stale entries; AND the script enumeration footer in `audit-spec-vs-code-v2.py` MUST list this gate as entry #18 of the QA tooling baseline; AND `linter-scripts/test/test-qa-baseline-footer.sh`'s workflow-gates awk MUST include `/Spec-index drift gate/` so footer-rows = workflow-gates = declared-count parity holds at 18/18/18.
 - **Verifies:** AC-31-31 (multi-file enumeration parity at the 4-file site: script `RUBRIC_VERSION` + `00-index.md` footer + `EXECUTIVE-SUMMARY.md` cross-ref + `spec-health.yml` step list — gate count 17 → 18, RUBRIC v2.26 → v2.27); codifies the **Phase 29 root-cause lesson** "advisory CI gates silently rot" (second instance after the Phase H1 session-persistence-regression class — first instance never cleanly auto-detected); also codifies the **second-order lesson** "generator artifacts in `run.sh` need CI parity" (treat `spec-index.md` as a build artifact whose canonical source is the regenerator, not a hand-edited document).
+
+### AC-T-26 — §00 ↔ §98 Version-field parity gate (Phase P15 / H10)
+- **Given** [`spec/27-spec-toolchain/29-check-version-parity.md`](./29-check-version-parity.md) and `linter-scripts/check-version-parity.py` exist as gate #19 of the QA tooling baseline (advisory-by-default per AC-T-25 dispensation; P15 baseline sweep found 59 / 74 eligible modules drifting, making strict-from-day-1 prohibitive),
+- **When** the `Version-field parity gate (Phase P15 / H10)` step runs in `.github/workflows/spec-health.yml`,
+- **Then** the step MUST first execute `bash linter-scripts/test/test-check-version-parity.sh` (10/10 assertions T1–T10) and then `python3 linter-scripts/check-version-parity.py` (default mode, exit 0 even on mismatch — the contract is that drift is reported but advisory); AND the script enumeration footer in `audit-spec-vs-code-v2.py` MUST list this gate as entry #19; AND `test-qa-baseline-footer.sh`'s workflow-gates awk MUST include `/Version-field parity gate/` so footer-rows = workflow-gates = declared-count parity holds at 19/19/19; AND per the H1 workflow-step-parity lesson the self-test MUST be collapsed into this gate's step (no standalone self-test step) since it exclusively exercises one numbered footer gate.
+- **Verifies:** AC-31-31 (multi-file enumeration parity at the 4-file site: `RUBRIC_VERSION` v2.27 → v2.28 + `00-index.md` footer 18 → 19 gates + `EXECUTIVE-SUMMARY.md` `+ P15` appended + `spec-health.yml` step list); AC-T-25 (advisory dispensation rationale: 59/74 surface = phased-rollout justification documented in slot-29 spec's "Why advisory-by-default" subsection); codifies the **Phase 21 lesson** "lockstep gate L1 only checks date relations, not version strings — §00 banner can drift many releases behind §98 while lockstep stays green"; also codifies the **Phase P15 secondary lesson** "audit retrospective surface estimates are unreliable until validated by a mechanical sweep" (the Phase 21 disposition note "1/3 historical incident, low surface" understated the real surface by ~60×).
 
 ---
 
