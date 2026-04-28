@@ -116,6 +116,21 @@ Whichever yields the highest integer wins.
 - **When** the gate runs,
 - **Then** exit 2 with `ERROR: cannot determine current phase` on stderr.
 
+### AC-26-06 — Inventory-rubric headings accepted (Phase H2)
+- **Given** a §99 file whose `## File Inventory` (or `## Module Health` / `## Module Inventory` / `## Top-Level Modules` / `## Document Inventory` / `## Modules`) carries a fresh `<!-- verified-phase: NNN -->` stamp,
+- **When** the gate runs,
+- **Then** exit 0 with the file counted under `stamped:` — same as if the stamp lived under `## Summary`.
+
+### AC-26-07 — `spec/_archive/**` excluded from scan (Phase H2)
+- **Given** any `99-consistency-report.md` under `spec/_archive/`,
+- **When** the gate runs,
+- **Then** the file MUST NOT appear in scan/stamped/unstamped counts — archived modules are frozen and excluded by design.
+
+### AC-26-08 — Multi-block stamp scan (Phase H2)
+- **Given** a §99 file with multiple tracked headings (e.g. `## File Inventory` followed by `## Summary`) where the stamp lives under the second heading,
+- **When** the gate runs,
+- **Then** the stamp MUST be found and the file counted as `stamped:` (highest phase number wins if multiple stamps exist).
+
 ## Cross-references
 
 - §99 [`99-consistency-report.md`](./99-consistency-report.md) — health/inventory; this gate is itself listed in §99's File Inventory.
