@@ -93,13 +93,17 @@ def strip_code_fences(text: str) -> str:
     return "\n".join(out_lines)
 
 
+def allowlist_path(repo_root: Path) -> Path:
+    return repo_root / "linter-scripts" / "spec-cross-links.allowlist"
+
+
 def load_allowlist(repo_root: Path) -> set[str]:
     """Load waived broken links from linter-scripts/spec-cross-links.allowlist.
     Format: one `relpath:line:target` entry per line. Lines starting with `#`
     (after optional whitespace) are comments. Anchor fragments inside entries
     are preserved.
     """
-    path = repo_root / "linter-scripts" / "spec-cross-links.allowlist"
+    path = allowlist_path(repo_root)
     if not path.exists():
         return set()
     out: set[str] = set()
@@ -108,6 +112,39 @@ def load_allowlist(repo_root: Path) -> set[str]:
         if line and not line.startswith("#"):
             out.add(line)
     return out
+
+
+def parse_waiver(entry: str) -> tuple[str, int, str] | None:
+    """Split a `relpath:line:target` entry. Targets may contain ``:`` (e.g.
+    inside URLs or anchor fragments), so we only split on the first two
+    colons. Returns ``None`` if the entry is malformed or the line number
+    is not an integer.
+    """
+    parts = entry.split(":", 2)
+    if len(parts) != 3:
+        return None
+    rel, line_str, target = parts
+    try:
+        line_num = int(line_str)
+    except ValueError:
+        return None
+    return rel, line_num, target
+
+
+def load_allowlist_index(repo_root: Path) -> dict[tuple[str, str], list[int]]:
+    """Build an index of `(file, target) -> [line_numbers]` from the allowlist
+    so the scanner can fuzzy-match waivers whose source line drifted by ±N
+    after unrelated edits (e.g. a stamp-batch tool inserting a comment line
+    into the §00 banner above the link). Phase P35 — codifies P34 lesson #1.
+    """
+    index: dict[tuple[str, str], list[int]] = {}
+    for entry in load_allowlist(repo_root):
+        parsed = parse_waiver(entry)
+        if parsed is None:
+            continue
+        rel, line_num, target = parsed
+        index.setdefault((rel, target), []).append(line_num)
+    return index
 
 
 def collect_headings(path: Path) -> set[str]:
