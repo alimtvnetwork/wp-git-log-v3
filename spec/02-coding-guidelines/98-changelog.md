@@ -1,7 +1,7 @@
 # Changelog — Coding Guidelines
 
-**Version:** 3.3.1
-**Updated:** 2026-04-28
+**Version:** 3.4.0
+**Updated:** 2026-04-29
 **Scope:** `spec/02-coding-guidelines/`
 
 ---
