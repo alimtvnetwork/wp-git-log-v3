@@ -1,6 +1,6 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.72.0
+**Version:** 2.72.1
 **Updated:** 2026-04-29
 
 > **v2.72.0 update (Phase 153 Task A4 — slot 34 `audit-ai-implementability.py` v1.0.0 productionised):** Shipped LLM-driven deep-walk auditor as a first-class linter (was prototype-only in Tasks A1/A2). 5-dim rubric × 0-20, walks `*.md|*.json|*.yaml|*.yml|*.tmpl|*.toml` to close the A2 spec/11 blind spot. SHA-keyed cache, Cloudflare 1010 immunity (explicit `User-Agent`), six CLI flags (`--module`, `--no-network`, `--force`, `--json`, `--report-only`, `--strict`), 8 ACs (AC-34-01..08 all GWT + Verifies), self-test 6/6. Inventory grew slot 34; §00 v2.74.0→**2.75.0**, §98 v2.74.0→**2.75.0**, §99 v2.71.0→**2.72.0**. Distinct from slot 33 (deterministic): slot 34 is LLM-driven semantic scoring, advisory-by-default. **No CI workflow change** (graduation deferred). Confirmed walker sees 19 files for spec/11 (was 16 in `*.md`-only mode; +3 from `schemas/` + `templates/`).
