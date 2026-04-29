@@ -17,7 +17,9 @@
 
 ## Releases
 
-### 2.2.0 — 2026-04-29 — Phase P48-1-fu1-batch slot 6 (P1 inventory sync)
+### 2.3.0 — 2026-04-29 — Phase 149 (P3 sweep slot 9 — Verifies clauses on §97)
+- **Added** `**Verifies:**` clauses to all 20 ACs in `97-acceptance-criteria.md` (gap=20 → 0). Each AC now explicitly maps to the underlying invariant it protects: structural floor (AC-01), zero broken links (AC-02), slot-immutability (AC-03), §99 inventory rubric (AC-04), strict-pass tree-health (AC-05), cross-platform deploy uniformity (AC-06), parent-survival (AC-07), build-time version-injection (AC-08), supply-chain trust (AC-09), integrity / no-MD5-SHA1 (AC-10), idempotent install + no-silent-sudo (AC-11), latest-probe-or-fail (AC-12), XDG + atomic-write 0600 (AC-13), ordered-pipeline-with-fail-fast (AC-14), no-daemon / no-stdout-pollution (AC-15), idempotent silent-cleanup-budget (AC-16), single-step atomic rollback + RECOVERY.md (AC-17), three-layer precedence + system-dir blacklist (AC-18), tag-first monotonicity (AC-19), six-target-floor + CGO_ENABLED=0 + reproducible-toolchain (AC-20). §97 v2.1.0 → v2.2.0. AI-confidence: P3 driver eliminated for `spec/14`; derived tier Medium → High.
+
 - **Added** §00 Feature Inventory rows for slots 24/25/26/27/28: `24-update-check-mechanism/`, `25-release-pinned-installer.md`, `26-repo-major-version-migrator.md`, `27-generic-installer-behavior.md`, `28-update-interface-contract.md`. Files already existed and were §97/§99-tracked; only §00 lagged. Pure inventory reconciliation — no spec rule changes. Linter: P1 driver eliminated for `spec/14`.
 
 ### 2.1.0 — 2026-04-28 (Phase P24 — H10 reverse-drift reconciliation)
