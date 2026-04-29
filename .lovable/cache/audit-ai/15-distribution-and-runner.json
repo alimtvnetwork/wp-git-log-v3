@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 20,
   "d3": 17,
-  "d4": 16,
-  "d5": 19,
+  "d4": 19,
+  "d5": 18,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Conflicting Default Overwrite Semantics",
-      "why": "01-install-contract.md states 'Overwrite existing files silently (legacy behavior)' as default, but AC-07 in 97-acceptance-criteria.md states 'refuse to proceed (exit 2) UNLESS --force is passed'.",
-      "fix": "Update 01-install-contract.md to match AC-07's safety-first requirement: default to exit 2 on conflict."
+      "dim": "D1",
+      "title": "Conflicting Versioning Logic",
+      "why": "01-install-contract.md defines --version and --branch flags, but AC-18 (the deeper contract) explicitly forbids branch names in --ref to ensure reproducibility. A mediocre coder will be confused whether to implement branch support or block it.",
+      "fix": "Remove --branch from 01-install-contract and unify all reference flags into a single --ref flag that validates against the 'no-branch' rule in AC-18."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Missing Runner Help Output Example",
-      "why": "The spec mandates a specific table format for the 'help' sub-command but does not provide the actual text/markdown block for the AI to copy-paste into the code.",
-      "fix": "Add a 'Sample Help Output' block to 02-runner-contract.md showing the exact text to be printed."
+      "dim": "D3",
+      "title": "Undefined 'Middle-out' Probe Logic",
+      "why": "01-install-contract mentions a 'middle-out, parallel, 2s timeout' probe for newer repos (vN) but provides no algorithm, endpoint list, or naming convention for these repos.",
+      "fix": "Define the specific GitHub API search query or naming pattern (e.g., 'coding-guidelines-v*') used to discover newer versions."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'git pull' behavior in Runner",
-      "why": "02-runner-contract.md mandates 'git pull' for slides/lint but doesn't specify behavior if the directory is not a git repo or if there are local conflicts.",
-      "fix": "Specify that 'git pull' should be attempted only if .git exists, and failures should be non-fatal warnings."
+      "dim": "D5",
+      "title": "Unresolved External Script Reference",
+      "why": "03-release-pipeline.md references a 'release.sh' script as a source for artifacts, but the content/contract of this script is not provided in the module.",
+      "fix": "Add a brief contract or file-path reference for release.sh explaining its expected outputs."
     }
   ],
   "module": "15-distribution-and-runner",
   "files_used": 8,
   "files_total": 8,
-  "bytes_used": 60345,
-  "bundle_sha": "08a2bed2d10980a5",
-  "total": 90,
+  "bytes_used": 61779,
+  "bundle_sha": "29b4107c121a6613",
+  "total": 92,
   "band": "EXCELLENT"
 }

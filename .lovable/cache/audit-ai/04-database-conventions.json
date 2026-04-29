@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 14,
-  "d3": 16,
-  "d4": 18,
+  "d3": 15,
+  "d4": 19,
   "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Incomplete Acceptance Criteria for Business Logic",
-      "why": "The ACs in 97-acceptance-criteria.md focus almost exclusively on meta-health (file existence, naming, changelogs) and DDL linting, but lack GWT criteria for the core functional requirements like ORM-only usage, View-first joins, and Split-DB implementation.",
-      "fix": "Add GWT criteria for ORM usage (AC-DB-009) and View-first joins (AC-DB-010) in 97-acceptance-criteria.md."
+      "title": "Missing Verifies clauses for AC-09",
+      "why": "AC-09 (Boolean Storage) is marked as a critical normative contract but lacks the 'Verifies' clause required by the module's own changelog standards (v3.3.2) and rubric.",
+      "fix": "Add 'Verifies: the cross-language storage contract preventing data corruption' to AC-09 in 97-acceptance-criteria.md."
     },
     {
       "severity": "MEDIUM",
       "dim": "D5",
-      "title": "Broken Cross-References to External Guidelines",
-      "why": "Multiple files reference '../02-coding-guidelines/01-cross-language/07-database-naming.md' and similar paths which are not provided in this context, making it impossible for an AI to verify the 'full specification' it is supposed to follow.",
-      "fix": "Inline the critical naming rules from the external cross-language spec into 01-naming-conventions.md."
+      "title": "Broken link to 07-split-db-pattern.md",
+      "why": "The overview index and quick reference link to 07-split-db-pattern.md, but the changelog (v3.4.2) and drift acknowledgment note a naming conflict with 07-split-db-architecture.md.",
+      "fix": "Rename 07-split-db-pattern.md to 07-split-db-architecture.md and update all internal references to match."
     },
     {
-      "severity": "LOW",
+      "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency and Locking in Split-DB Pattern",
-      "why": "The spec mentions SQLite WAL mode and 'no lock contention across domains' but provides no guidance on handling concurrent writes within a single domain's SQLite file for a 'mediocre' coder.",
-      "fix": "Add a section to 07-split-db-pattern.md specifying mandatory PRAGMA settings for SQLite concurrency (e.g., busy_timeout, journal_mode=WAL)."
+      "title": "Incomplete Concurrency Specification",
+      "why": "The spec explicitly offloads concurrency (WAL mode, retries, locking) to spec/13, but spec/13 is not provided in this context, leaving the AI to guess SQLite's multi-writer behavior.",
+      "fix": "Inline the mandatory SQLite PRAGMAs (WAL, busy_timeout) and 'BEGIN IMMEDIATE' requirement into 02-schema-design.md \u00a74.3."
     }
   ],
   "module": "04-database-conventions",
-  "files_used": 9,
+  "files_used": 7,
   "files_total": 11,
   "bytes_used": 90000,
-  "bundle_sha": "05776ab8107b379e",
+  "bundle_sha": "66c4e456e44f14ca",
   "total": 82,
   "band": "GOOD"
 }

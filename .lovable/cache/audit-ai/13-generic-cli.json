@@ -1,37 +1,37 @@
 {
-  "d1": 16,
-  "d2": 14,
-  "d3": 12,
-  "d4": 15,
-  "d5": 18,
+  "d1": 18,
+  "d2": 19,
+  "d3": 17,
+  "d4": 16,
+  "d5": 14,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D1",
-      "title": "Conflicting Exit Code Contracts",
-      "why": "AC-10 defines a strict 5-value exit code contract (0-4), but 03-subcommand-architecture and 07-error-handling explicitly use 'exit 1' for unknown commands and 'exit 1' for batch failures.",
-      "fix": "Update 03-subcommand-architecture and 07-error-handling to use ExitMisuse (2) for unknown commands and ExitBatchPartial (4) for batch failures."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Missing Concurrency/Locking Specs for DB and Files",
-      "why": "The spec mandates a local SQLite DB and batch execution but lacks instructions on handling concurrent access or file locks during multi-threaded 'exec' or 'update' operations.",
-      "fix": "Add a 'Concurrency & Locking' section to 10-database.md and 18-batch-execution.md specifying mutex usage or WAL mode for SQLite."
+      "dim": "D5",
+      "title": "Broken External Spec References",
+      "why": "AC-22 and AC-23 reference external specs (spec/05, spec/27) and specific ACs (AC-SD-22, AC-T-28) that are not provided in the context, making concurrency and atomic-write rules unresolvable.",
+      "fix": "Incorporate the specific requirements of AC-SD-22 and AC-T-28 directly into the text of AC-22/23 or provide the referenced files."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Incomplete Acceptance Criteria for Database and Build",
-      "why": "AC-01 through AC-20 cover most modules, but Phase 5 (Database) and Phase 8 (Build) in the checklist lack corresponding GWT criteria in the 97-acceptance-criteria.md file.",
-      "fix": "Add AC-21 (Database Persistence) and AC-22 (Build Artifact Integrity) to 97-acceptance-criteria.md."
+      "dim": "D4",
+      "title": "Missing Reference Images",
+      "why": "Multiple files (06, 20) reference a rendering pipeline diagram 'images/terminal-output-pipeline.mmd' which is not included in the module.",
+      "fix": "Include the Mermaid source for the terminal-output-pipeline diagram within the overview or a dedicated file."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Stale Prose Contradictions",
+      "why": "Despite AC-21's '97-WINS' rule, files like 03 and 04 still contain 'os.Exit(1)' examples for misuse cases that the contract now mandates as Exit 2.",
+      "fix": "Perform a final regex sweep to replace 'os.Exit(1)' with 'os.Exit(int(exit.ExitMisuse))' in all code examples."
     }
   ],
   "module": "13-generic-cli",
-  "files_used": 18,
+  "files_used": 13,
   "files_total": 24,
   "bytes_used": 90000,
-  "bundle_sha": "53fa49739e53cf43",
-  "total": 75,
+  "bundle_sha": "d482e2b39d2d7128",
+  "total": 84,
   "band": "GOOD"
 }

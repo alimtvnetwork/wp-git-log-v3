@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 14,
-  "d3": 16,
-  "d4": 18,
-  "d5": 15,
+  "d3": 15,
+  "d4": 16,
+  "d5": 12,
   "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D5",
+      "title": "Broken Internal Cross-References",
+      "why": "The Feature Inventory in 00-overview.md references files like 01-ci-pipeline.md and 02-release-pipeline.md in the root, but the Consistency Report (99-consistency-report.md) and actual file list show these are often duplicated or shadowed by subfolder versions, leading to path resolution ambiguity for an AI.",
+      "fix": "Consolidate root-level generic specs into a single 'templates' folder and use absolute-style paths from the spec root in all inventories."
+    },
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing Logic-Specific Acceptance Criteria",
-      "why": "The provided AC files (97-acceptance-criteria.md) only cover 'meta' tree-health (file existence, naming, banners) but lack GWT criteria for the actual pipeline logic (SHA-dedup, version resolution, checksumming).",
-      "fix": "Add GWT scenarios to 97-acceptance-criteria.md for SHA-cache hits, version parsing from tags vs branches, and artifact retention enforcement."
+      "title": "Boilerplate-Only Acceptance Criteria",
+      "why": "The 97-acceptance-criteria.md files for both the root and subfolders contain only 'tree-health' and 'naming convention' checks. They lack GWT criteria for the actual logic (e.g., SHA-deduplication logic, source-map removal, or checksum generation).",
+      "fix": "Add GWT cases for SHA-cache hit/miss behavior and artifact packaging constraints (e.g., 'Given a build with .map files, When packaged, Then .zip contains 0 .map files')."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Dangling References to Missing Files",
-      "why": "The Feature Inventory and Cross-Refs cite files like '03-vulnerability-scanning.md' and '04-install-script-generation.md' which are listed as 'Active' but their content is not provided in the context.",
-      "fix": "Provide the content for all files listed in the Feature Inventory or mark them as 'External/Future'."
-    },
-    {
-      "severity": "LOW",
       "dim": "D3",
-      "title": "Race Condition in SHA Cache Write",
-      "why": "While the spec notes the risk of separate jobs, it doesn't explicitly define behavior if the 'Save SHA' step fails due to network issues while the build itself succeeded.",
-      "fix": "Add a requirement that cache-save failures should emit a warning but not fail the build, ensuring the current run still completes."
+      "title": "Concurrency Race Condition in SHA-Deduplication",
+      "why": "The SHA-deduplication pattern in 01-ci-pipeline.md describes inlining cache writes to prevent races, but doesn't specify how to handle multiple parallel workflows (e.g., push + PR) hitting the cache-save step simultaneously.",
+      "fix": "Add a requirement to use unique cache keys per workflow type or implement a 'check-then-set' lock using a secondary cache key."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
   "files_used": 14,
   "files_total": 49,
   "bytes_used": 90000,
-  "bundle_sha": "975cef736d066e92",
-  "total": 81,
+  "bundle_sha": "e7941a1ad05d7d82",
+  "total": 75,
   "band": "GOOD"
 }

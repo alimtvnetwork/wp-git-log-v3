@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 15,
-  "d4": 18,
+  "d2": 15,
+  "d3": 16,
+  "d4": 14,
   "d5": 12,
   "issues": [
     {
       "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Missing Core Schema and Template Files",
-      "why": "The spec references 'schemas/powershell.schema.json' and 'templates/run.ps1' as the primary implementation sources, but these files are not provided in the context.",
-      "fix": "Include the full text of schemas/powershell.schema.json and templates/run.ps1 in the spec module."
+      "title": "Missing Core Template and Schema Files",
+      "why": "The spec references 'templates/run.ps1' and 'schemas/powershell.schema.json' as the primary implementation targets, but these files are not provided in the context.",
+      "fix": "Include the full content of templates/run.ps1 and schemas/powershell.schema.json in the module context."
     },
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Functional ACs lack 'Verifies' clauses",
-      "why": "While boilerplate ACs (AC-01..08) have Verifies clauses, the functional requirements (AC-RUN-01..10) mentioned in the changelog are missing from the actual AC file.",
-      "fix": "Add GWT-style functional acceptance criteria for CLI flags and PnP logic to 97-acceptance-criteria.md with explicit Verifies clauses."
+      "title": "Acceptance Criteria are Meta-focused",
+      "why": "AC-01 through AC-08 verify file existence and naming conventions rather than functional logic (e.g., verifying that -Force actually deletes the specific paths listed in JSON).",
+      "fix": "Add functional GWT criteria for each pipeline step, specifically verifying the 'Forbidden runtime patterns' defined in the overview."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Incomplete Concurrency/Locking Specs",
-      "why": "The spec mentions multi-project shared pnpm stores but does not define behavior if two instances of run.ps1 attempt to prune or install to the shared store simultaneously.",
-      "fix": "Add a section to 02-script-reference.md defining a file-lock mechanism or 'check-then-skip' logic for shared store operations."
+      "dim": "D4",
+      "title": "Truncated Interface Contract",
+      "why": "File 07-runner-interface.md is truncated at the end of the context, losing the final exit code definitions and dependency toolchain details.",
+      "fix": "Provide the complete, non-truncated version of 07-runner-interface.md."
     }
   ],
   "module": "11-powershell-integration",
-  "files_used": 15,
+  "files_used": 12,
   "files_total": 19,
   "bytes_used": 90000,
-  "bundle_sha": "60fd837a37da7362",
-  "total": 77,
+  "bundle_sha": "582e4a9adff7ac2b",
+  "total": 75,
   "band": "GOOD"
 }

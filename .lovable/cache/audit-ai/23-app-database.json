@@ -1,37 +1,37 @@
 {
-  "d1": 16,
-  "d2": 18,
-  "d3": 15,
-  "d4": 14,
-  "d5": 12,
+  "d1": 18,
+  "d2": 20,
+  "d3": 19,
+  "d4": 17,
+  "d5": 20,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken External References",
-      "why": "The DDL for App and AppLink relies on Profile, GitProfile, and Repo tables, but their schemas are not provided in this context, only referenced via external paths.",
-      "fix": "Inline the minimal DDL for Profile, GitProfile, and Repo tables in the 'Convention recap' or a 'Prerequisites' section."
-    },
-    {
-      "severity": "HIGH",
+      "severity": "MEDIUM",
       "dim": "D1",
       "title": "Conflicting DDL Dialects",
-      "why": "The spec provides SQLite DDL (PascalCase, INTEGER types) in the main section but then provides PostgreSQL DDL (snake_case, UUIDs) in the Phase 53 section without stating which is the primary target.",
-      "fix": "Explicitly designate one DDL block as the 'Primary Implementation Target' and the other as 'Reference/Secondary'."
+      "why": "The module provides both SQLite (PascalCase) and PostgreSQL (snake_case/UUID) schemas. While AC-ADB-11 designates SQLite as primary, having two full schemas in one file increases the risk of a mediocre AI picking the wrong dialect or mixing naming conventions.",
+      "fix": "Move the PostgreSQL 'Reference' DDL to a separate file (e.g., 96-postgres-reference.md) to prevent context-window confusion."
     },
     {
-      "severity": "MEDIUM",
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Missing Canonicalization Examples",
+      "why": "The resolution algorithm (Step 1) requires a specific canonicalization pipeline (lowercase, strip .git, etc.), but no worked examples of input vs. output URLs are provided.",
+      "fix": "Add a table of 5-6 example URL transformations (SSH, HTTPS, trailing slashes) to the Normative Resolution section."
+    },
+    {
+      "severity": "LOW",
       "dim": "D3",
-      "title": "Unresolved CHECK Constraint Logic",
-      "why": "The AppLink CHECK constraint uses subqueries (SELECT AppLinkTypeId FROM AppLinkType...). SQLite does not allow subqueries inside CHECK constraints.",
-      "fix": "Replace subqueries in CHECK constraints with hardcoded ID constants or use a Trigger/Application logic to enforce the XOR invariant."
+      "title": "Missing Concurrency Guidance",
+      "why": "SQLite 'busy_timeout' is mentioned via cross-reference to spec/05, but not explicitly defined for the App resolution queries which are high-frequency.",
+      "fix": "Add a 'Concurrency' note to the Query Patterns section specifying a 5000ms busy_timeout for the App resolver."
     }
   ],
   "module": "23-app-database",
   "files_used": 4,
   "files_total": 4,
-  "bytes_used": 38989,
-  "bundle_sha": "42894d34ea05687f",
-  "total": 75,
-  "band": "GOOD"
+  "bytes_used": 58383,
+  "bundle_sha": "747e5dc126318858",
+  "total": 94,
+  "band": "EXCELLENT"
 }

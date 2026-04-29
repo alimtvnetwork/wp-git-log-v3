@@ -1,37 +1,37 @@
 {
-  "d1": 16,
-  "d2": 14,
-  "d3": 12,
-  "d4": 15,
-  "d5": 18,
+  "d1": 18,
+  "d2": 16,
+  "d3": 19,
+  "d4": 12,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
       "title": "Missing GWT/Verifies for individual artifacts",
-      "why": "The module aggregates module-level ACs in 97-acceptance-criteria.md but delegates per-artifact ACs to 79 separate files (01-79-*.md) which are not provided in this context, leaving the actual tool logic unverified.",
-      "fix": "Include GWT criteria for at least the core validators (01, 05, 24) within the provided module context."
+      "why": "The module delegates all per-script logic to 79 separate files (01-*.md to 79-*.md) which are not provided in this context, leaving the actual tool logic unverified.",
+      "fix": "Explicitly list the delegation contract in \u00a797 and provide at least one sample per-artifact spec file in the bundle."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Incomplete Error/Concurrency Handling",
-      "why": "While exit codes (0,1,2) are defined, the spec lacks detail on how tools handle common CI edge cases like locked files, network timeouts for AI auditors, or partial disk writes during 'filler' operations.",
-      "fix": "Add a 'Resilience' section to the Normative Contract specifying timeout behavior and atomic write requirements for fillers."
+      "dim": "D4",
+      "title": "Incomplete Examples for Resilience Rules",
+      "why": "The 'Resilience \u2014 CI Edge Cases' section (R1-R5) defines complex behaviors (atomic writes, signal forwarding) but lacks code snippets or worked cases showing the implementation.",
+      "fix": "Add a 'Reference Implementations' section to \u00a700 with a Python/Node snippet for the R1 atomic-write pattern."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous 'Code_Glob' in Contract",
-      "why": "The Normative Contract uses globs like 'linter-scripts/check-*.{py,sh,cjs}' which may overlap or miss specific files (e.g., .mjs or .go files mentioned elsewhere), creating ambiguity for a coder implementing the health-check logic.",
-      "fix": "Explicitly list all supported extensions (.py, .sh, .cjs, .mjs, .go, .ps1) in the CODE_GLOB column of the contract."
+      "title": "Ambiguous CODE_GLOB in Normative Contract",
+      "why": "The Normative Contract uses brace-expansion globs (e.g., {py,sh,cjs}) but doesn't explicitly state if these are exhaustive or if new extensions require a contract bump.",
+      "fix": "Add a note to the Contract block stating the extension list is exhaustive and requires a \u00a798 entry to extend."
     }
   ],
   "module": "27-spec-toolchain",
   "files_used": 3,
   "files_total": 50,
   "bytes_used": 90000,
-  "bundle_sha": "8b25a45ef1db9efb",
-  "total": 75,
+  "bundle_sha": "031743eae625e0e6",
+  "total": 80,
   "band": "GOOD"
 }
