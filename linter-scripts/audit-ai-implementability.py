@@ -1,0 +1,311 @@
+#!/usr/bin/env python3
+"""
+audit-ai-implementability.py — Phase 153 Task A4 deep-walk LLM audit.
+
+Productionises the prototype harness used in Phase 153 Tasks A1/A2.
+Scores every top-level `spec/<NN>-*` module on a 5-dimension rubric
+(D1 Contract Clarity, D2 Acceptance-Test Coverage, D3 Edge/Error Handling,
+D4 Examples & Worked Cases, D5 Cross-Ref / Dependency Closure) — each 0-20,
+total 0-100 — using `google/gemini-3-flash-preview` via the Lovable AI Gateway.
+
+Improvements over `/tmp/run_ai_audit_v2.py` (Phase 153 Task A1):
+  - Walks `*.md` PLUS `*.json|*.yaml|*.yml|*.tmpl|*.toml|*.schema.json`
+    (closes the spec/11 schemas/templates blind spot from Task A2).
+  - Per-module on-disk cache (`.lovable/cache/audit-ai/<module>.json`).
+  - `--module=<slug>` filter for targeted re-runs.
+  - `--no-network` mode prints per-module file-bundle stats only.
+  - `--json` machine-readable output mirroring `check-ai-confidence.py` shape.
+  - `--report-only` never fails (advisory-by-default per H1/P20/P48-1-fu1).
+  - Cloudflare 1010 fix baked in (explicit `User-Agent`).
+  - Tolerant JSON response parser (strips fences + stray backslashes).
+
+Slot 34 in spec/27-spec-toolchain (auditor band 30-39).
+"""
+from __future__ import annotations
+import argparse
+import hashlib
+import json
+import os
+import re
+import sys
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parent.parent
+SPEC = ROOT / "spec"
+CACHE_DIR = ROOT / ".lovable" / "cache" / "audit-ai"
+DEFAULT_REPORT = ROOT / ".lovable" / "memory" / "audit" / "v2-deterministic" / "audit-ai-implementability-latest.md"
+
+ENDPOINT = "https://ai.gateway.lovable.dev/v1/chat/completions"
+MODEL = "google/gemini-3-flash-preview"
+USER_AGENT = "lovable-spec-audit/1.0 (audit-ai-implementability.py)"
+MAX_BYTES = 90_000  # Cloudflare-safe ceiling (~22k tokens).
+
+WALK_GLOBS = ("*.md", "*.json", "*.yaml", "*.yml", "*.tmpl", "*.toml")
+
+RUBRIC = """You are an exacting spec auditor. Score this spec module for whether a MEDIOCRE AI coder
+(no clarifying questions, no web access) can implement it with 100% confidence on first try.
+
+Score 5 dimensions, each 0-20 (integers only):
+- D1 Contract Clarity: types pinned, units explicit, error codes enumerated
+- D2 Acceptance-Test Coverage: every behaviour has a GWT acceptance criterion + Verifies clause
+- D3 Edge / Error Handling: nulls, concurrency, large inputs, timeouts, partial failures addressed
+- D4 Examples & Worked Cases: sample I/O, code snippets, file paths, fixtures
+- D5 Cross-Ref / Dependency Closure: every external symbol/file referenced is resolved IN THE PROVIDED CONTEXT
+
+Then list the TOP 3 failing issues with severity (CRITICAL/HIGH/MEDIUM/LOW), why-it-fails,
+and a one-line fix.
+
+Reply ONLY with strict JSON of shape:
+{"d1":N,"d2":N,"d3":N,"d4":N,"d5":N,"issues":[{"severity":"CRITICAL|HIGH|MEDIUM|LOW","dim":"D1..D5","title":"...","why":"...","fix":"..."}, ...]}
+"""
+
+
+def discover_modules() -> list[Path]:
+    return sorted(
+        p for p in SPEC.iterdir()
+        if p.is_dir()
+        and not p.name.startswith("_")
+        and len(p.name) > 2
+        and p.name[:2].isdigit()
+        and (p / "00-overview.md").exists()
+    )
+
+
+def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
+    """Concatenate all walk-globbed files up to MAX_BYTES.
+
+    Returns (bundle_text, bytes_used, files_used, files_total).
+    """
+    files: list[Path] = []
+    for pattern in WALK_GLOBS:
+        files.extend(mod_dir.rglob(pattern))
+    files = sorted(set(files))
+    parts: list[str] = []
+    total = 0
+    used = 0
+    for f in files:
+        try:
+            txt = f.read_text(encoding="utf-8", errors="replace")
+        except Exception:
+            continue
+        header = f"\n\n===== FILE: {f.relative_to(ROOT)} =====\n\n"
+        chunk = header + txt
+        if total + len(chunk) > MAX_BYTES:
+            remaining = MAX_BYTES - total
+            if remaining > 500:
+                parts.append(chunk[:remaining] + "\n\n[...TRUNCATED at 90KB context cap...]")
+                total += remaining
+                used += 1
+            break
+        parts.append(chunk)
+        total += len(chunk)
+        used += 1
+    return "".join(parts), total, used, len(files)
+
+
+def call_gateway(content: str, api_key: str) -> dict[str, Any]:
+    body = json.dumps({
+        "model": MODEL,
+        "messages": [
+            {"role": "system", "content": RUBRIC},
+            {"role": "user", "content": content},
+        ],
+        "temperature": 0,
+    }).encode()
+    req = urllib.request.Request(
+        ENDPOINT,
+        data=body,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "User-Agent": USER_AGENT,
+        },
+    )
+    last: Exception | None = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            last = e
+            if e.code in (429, 502, 503, 504) and attempt < 2:
+                time.sleep(5 * (attempt + 1))
+                continue
+            raise
+        except Exception as e:  # noqa: BLE001
+            last = e
+            if attempt < 2:
+                time.sleep(3 * (attempt + 1))
+                continue
+            raise
+    raise RuntimeError(f"retries exhausted: {last}")
+
+
+def parse_score(raw: str) -> dict[str, Any]:
+    s = raw.strip()
+    if s.startswith("```"):
+        s = s.split("```", 2)[1]
+        if s.startswith("json"):
+            s = s[4:]
+        s = s.rsplit("```", 1)[0]
+    s = s.strip()
+    # Tolerate stray backslashes the model occasionally emits inside JSON strings.
+    try:
+        return json.loads(s)
+    except json.JSONDecodeError:
+        s2 = re.sub(r'\\(?!["\\/bfnrtu])', "", s)
+        return json.loads(s2)
+
+
+def band(total: int) -> str:
+    if total >= 90:
+        return "EXCELLENT"
+    if total >= 75:
+        return "GOOD"
+    if total >= 60:
+        return "NEEDS_WORK"
+    return "BLOCKING"
+
+
+def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool) -> dict[str, Any]:
+    cache_file = CACHE_DIR / f"{mod.name}.json"
+    bundle, used_bytes, used_files, total_files = load_module_bundle(mod)
+    bundle_sha = hashlib.sha256(bundle.encode()).hexdigest()[:16]
+
+    if cache_file.exists() and not force:
+        cached = json.loads(cache_file.read_text())
+        if cached.get("bundle_sha") == bundle_sha:
+            cached["from_cache"] = True
+            return cached
+
+    if no_network:
+        return {
+            "module": mod.name,
+            "no_network": True,
+            "files_used": used_files,
+            "files_total": total_files,
+            "bytes_used": used_bytes,
+            "bundle_sha": bundle_sha,
+        }
+
+    if api_key is None:
+        raise RuntimeError("LOVABLE_API_KEY not set; pass --no-network for stats-only mode")
+
+    prompt = f"# Module: spec/{mod.name}\n\nFiles: {used_files}/{total_files}, ~{used_bytes//1024} KB\n\n{bundle}"
+    resp = call_gateway(prompt, api_key)
+    raw = resp["choices"][0]["message"]["content"]
+    parsed = parse_score(raw)
+    parsed["module"] = mod.name
+    parsed["files_used"] = used_files
+    parsed["files_total"] = total_files
+    parsed["bytes_used"] = used_bytes
+    parsed["bundle_sha"] = bundle_sha
+    parsed["total"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
+    parsed["band"] = band(parsed["total"])
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    cache_file.write_text(json.dumps(parsed, indent=2))
+    return parsed
+
+
+def write_report(results: list[dict[str, Any]], out: Path) -> None:
+    scored = [r for r in results if "total" in r]
+    if not scored:
+        out.write_text("# Audit AI Implementability — no scored results\n")
+        return
+    avg = lambda k: round(sum(r[k] for r in scored) / len(scored), 1)
+    overall = round(sum(r["total"] for r in scored) / len(scored), 1)
+    sev = {"CRITICAL": 0, "HIGH": 0, "MEDIUM": 0, "LOW": 0}
+    for r in scored:
+        for i in r.get("issues", []):
+            s = str(i.get("severity", "")).upper()
+            if s in sev:
+                sev[s] += 1
+    lines = [
+        "# Spec AI-Implementability Audit (production)",
+        "",
+        f"**Generator:** `linter-scripts/audit-ai-implementability.py`  ",
+        f"**Modules scored:** {len(scored)}  ",
+        f"**Overall:** **{overall} / 100** ({band(int(overall))})  ",
+        f"**Severity tally:** CRITICAL {sev['CRITICAL']} · HIGH {sev['HIGH']} · MEDIUM {sev['MEDIUM']} · LOW {sev['LOW']}",
+        "",
+        "| Dimension | Avg |",
+        "|---|---:|",
+        f"| D1 Contract Clarity | {avg('d1')}/20 |",
+        f"| D2 AC Coverage | {avg('d2')}/20 |",
+        f"| D3 Edge/Error | {avg('d3')}/20 |",
+        f"| D4 Examples | {avg('d4')}/20 |",
+        f"| D5 Cross-Ref Closure | {avg('d5')}/20 |",
+        "",
+        "## Per-module ranking (low → high)",
+        "",
+        "| Rank | Module | Total | D1 | D2 | D3 | D4 | D5 | Files | KB | Band |",
+        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+    ]
+    for i, r in enumerate(sorted(scored, key=lambda x: x["total"]), 1):
+        lines.append(
+            f"| {i} | `spec/{r['module']}` | **{r['total']}** | "
+            f"{r['d1']} | {r['d2']} | {r['d3']} | {r['d4']} | {r['d5']} | "
+            f"{r['files_used']}/{r['files_total']} | {r['bytes_used']//1024} | {r.get('band','')} |"
+        )
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text("\n".join(lines) + "\n")
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description="Deep-walk AI implementability audit (Phase 153 Task A4)")
+    ap.add_argument("--module", help="Only audit this module slug (e.g. 04-database-conventions)")
+    ap.add_argument("--no-network", action="store_true", help="Print bundle stats only; never call gateway")
+    ap.add_argument("--force", action="store_true", help="Ignore cache and re-score")
+    ap.add_argument("--json", action="store_true", help="Emit machine-readable JSON to stdout")
+    ap.add_argument("--report-only", action="store_true", help="Always exit 0 (advisory mode)")
+    ap.add_argument("--strict", action="store_true", help="Exit 1 if any module scores BLOCKING (<60)")
+    ap.add_argument("--report", type=Path, default=DEFAULT_REPORT, help="Markdown report output path")
+    args = ap.parse_args(argv)
+
+    api_key = os.environ.get("LOVABLE_API_KEY")
+    modules = discover_modules()
+    if args.module:
+        modules = [m for m in modules if m.name == args.module]
+        if not modules:
+            print(f"audit-ai-implementability: no module matches --module={args.module}", file=sys.stderr)
+            return 2
+
+    results: list[dict[str, Any]] = []
+    for mod in modules:
+        try:
+            r = audit_module(mod, api_key, args.no_network, args.force)
+            results.append(r)
+            if not args.json:
+                if "total" in r:
+                    print(f"  {mod.name:40s} {r['total']:3d}/100  {r.get('band','')}  "
+                          f"({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB)"
+                          f"{'  [cache]' if r.get('from_cache') else ''}")
+                elif r.get("no_network"):
+                    print(f"  {mod.name:40s} stats-only ({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB, sha={r['bundle_sha']})")
+        except Exception as e:  # noqa: BLE001
+            print(f"  {mod.name:40s} ERROR: {e}", file=sys.stderr)
+            results.append({"module": mod.name, "error": str(e)})
+        time.sleep(0.5)
+
+    if args.json:
+        print(json.dumps(results, indent=2))
+    else:
+        write_report([r for r in results if "total" in r], args.report)
+        print(f"\nReport: {args.report}")
+
+    if args.report_only:
+        return 0
+    if args.strict:
+        blocking = [r for r in results if r.get("band") == "BLOCKING"]
+        if blocking:
+            print(f"\nFAIL: {len(blocking)} module(s) in BLOCKING band (<60).", file=sys.stderr)
+            return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
