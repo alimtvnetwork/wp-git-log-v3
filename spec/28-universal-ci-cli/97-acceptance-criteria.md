@@ -159,6 +159,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** a repo with both `package.json` AND `composer.json`,
 - **When** `glci run` runs,
 - **Then** at least 6 distinct `PipelineName` values MUST appear in posted payloads: `ts-lint`, `ts-build`, `ts-test`, `php-lint`, `php-build`, `php-test`.
+- **Verifies:** §03 polyglot-detection invariant; §04 `<runtime>-<phase>` PipelineName naming convention; AC-28-37/38/39 per-runtime tool-selection complements.
 
 ### AC-28-23 — Determinism: identical input → identical body
 
