@@ -1,7 +1,7 @@
 # Acceptance Criteria — Consolidated Guidelines
 
-**Version:** 2.2.0
-**Updated:** 2026-04-29 (Phase P48-1: AC-09 added — `AI Confidence` four-gate rubric (P1–P4) is now a normative contract; closes the P47-fu1 finding that cost this module 33 implementability points by leaving the four tier values undefined.)
+**Version:** 2.3.0
+**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 2: added `**Verifies:**` clauses to AC-01..AC-08 to graduate this module from Medium → High AI-confidence per the four-gate rubric (gap closes from 8 → 0).)
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
