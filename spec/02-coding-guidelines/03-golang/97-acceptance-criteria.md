@@ -201,6 +201,8 @@ The following stub criteria from v3.2.0 are preserved verbatim. They are NO LONG
 - [ ] AC-GO-LEGACY-01-B — Error handling uses `apperror.Result[T]` pattern consistently
 - [ ] AC-GO-LEGACY-01-C — Naming conventions follow Go idioms (exported/unexported, acronym casing)
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-GO-LEGACY: Architecture
 
 - [ ] AC-GO-LEGACY-02-A — Service layer follows interface-based dependency injection
@@ -222,3 +224,5 @@ The following stub criteria from v3.2.0 are preserved verbatim. They are NO LONG
 - [Boolean standards](./02-boolean-standards.md)
 - [§02 parent governance](../97-acceptance-criteria.md)
 - [TypeScript sibling](../02-typescript/97-acceptance-criteria.md)
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).

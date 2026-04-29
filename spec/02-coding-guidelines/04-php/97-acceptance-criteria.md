@@ -220,21 +220,33 @@ The following 7 criteria from v2.0.0 are preserved verbatim. They are NO LONGER 
 ### AC-PHP-LEGACY-01: Enum Naming and Required Structure  `[critical]`
 - Given a new PHP enum being created for 'Upload Status' in `includes/Enums/`, when defining the enum name and class body, then the enum MUST be named `UploadStatusType`, use the `RiseupAsia\Enums` namespace, be string-backed, and implement the `isEqual(self $other): bool` method. → superseded by AC-PHP-03 + AC-PHP-04.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-PHP-LEGACY-02: Enum Case Casing Convention  `[high]`
 - Given any PHP backed enum in the `RiseupAsia` namespace, when declaring enum cases, then individual cases MUST use PascalCase (e.g., `case RestApi`), NOT SCREAMING_SNAKE_CASE. → superseded by AC-PHP-03.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-PHP-LEGACY-03: Internal Service Result Standardization  `[critical]`
 - Given an internal service method returning a result in the `RiseupAsia` namespace, when returning data or status, then it MUST return a structured array via `ResultHelper::ok()`, `error()`, or `failed()`, with keys using `ResponseKeyType` cases. → superseded by AC-PHP-05 + AC-PHP-06.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-PHP-LEGACY-04: Spacing for Control Flow and Exceptions  `[medium]`
 - Given a line of code inside a class method using `if` or `throw`, when writing control flow logic, then there MUST be a blank line before the keyword if preceded by other statements. → superseded by AC-PHP-11.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-PHP-LEGACY-05: No Leading Backslash for Global Types  `[high]`
 - Given a PHP file within the `RiseupAsia` namespace using global PHP types, when referencing them, then code MUST use `use` imports without leading backslash. → superseded by AC-PHP-09.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-PHP-LEGACY-06: REST Error Handling Guardrails  `[critical]`
 - Given a REST API handler in WordPress companion plugin, when implementing endpoint logic, then handler MUST NOT use `wp_die()` and MUST wrap execution in `$this->safeExecute(fn() => ...)`. → superseded by AC-PHP-10.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-PHP-LEGACY-07: Boolean Variable Naming Convention  `[medium]`
 - Given a boolean variable being declared in PHP, when declaring, then it MUST use camelCase with `is`/`has` prefix, forbidding snake_case. → superseded by AC-PHP-08.
 
@@ -257,3 +269,5 @@ The following 7 criteria from v2.0.0 are preserved verbatim. They are NO LONGER 
 - [§02 parent governance](../97-acceptance-criteria.md)
 - [TypeScript sibling](../02-typescript/97-acceptance-criteria.md)
 - [Golang sibling](../03-golang/97-acceptance-criteria.md)
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
