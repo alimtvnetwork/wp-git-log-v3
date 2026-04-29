@@ -145,6 +145,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `git config remote.origin.url` returns `git@github.com:org/repo.git` AND no CI env present,
 - **When** payload is built,
 - **Then** `RepoUrl` MUST equal `https://github.com/org/repo`.
+- **Verifies:** §08 SSH-to-HTTPS canonicalization invariant — server records always store HTTPS form so `(RepoUrl,Branch,PipelineName)` keys collide correctly across SSH-clone vs HTTPS-clone hosts.
 
 ### AC-28-21 — `--no-push` skips all network IO
 
