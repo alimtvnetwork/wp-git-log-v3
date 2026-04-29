@@ -134,3 +134,9 @@ python3 linter-scripts/audit-ai-implementability.py --strict              # CI g
 - **When** the script runs with `--report-only --strict`.
 - **Then** exit code MUST be 0 (`--report-only` overrides `--strict`).
 - **Verifies:** §34 advisory-by-default contract — mirrors slot 33 `check-ai-confidence.py` and the H1/P20 pattern.
+
+### AC-34-09 — Tier-1 contract files (`{00,97,98,99}-*.md`) prioritized in 90 KB bundle `[critical]`
+- **Given** a module whose chunky `02-*` / `03-*` siblings would exhaust the `MAX_BYTES = 90000` cap before alphabetical iteration reaches `97-acceptance-criteria.md`,
+- **When** `load_module_bundle()` orders files for inclusion,
+- **Then** the four module-root contract files (`00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`) MUST be placed FIRST in canonical order, followed by everything else under `WALK_GLOBS` alphabetically. Without this priority, the §97 binding contract is silently dropped from the prompt for any module > ~70 KB of feature/issue prose, and the auditor scores examples without seeing the contract — yielding a false-low D2 (AC coverage) and stable scores under contract edits (Phase 153 Task A6 first re-score loop produced ZERO movement on spec/05 for exactly this reason; bundle_sha changed, score didn't, because `97-acceptance-criteria.md` was alphabetically last and never made the cut). After the fix, spec/05 lifted 69 → 89 (+20) on the same content edits.
+- **Verifies:** §34 contract-surface bundling guarantee — the auditor's prompt MUST contain the contract before the examples.
