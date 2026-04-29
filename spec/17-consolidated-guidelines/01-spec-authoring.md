@@ -106,6 +106,29 @@ Every `00-overview.md` must include:
 | **Ambiguity** | `None` / `Low` / `Medium` / `High` / `Critical` |
 | **Health Score** | 0–100 from dashboard scanner |
 
+#### AI Confidence Rubric (normative)
+
+A module's `AI Confidence` value MUST be assigned by evaluating it against the four gates below. The lowest-passing tier wins (a module passing P1+P2 but failing P3 is `Medium`, not `High`).
+
+| Tier | Gate ID | All of these MUST hold |
+|------|---------|------------------------|
+| `Production-Ready` | **P4** | P1 + P2 + P3 hold AND module is referenced by at least one shipped CI gate (linter/self-test in `.github/workflows/spec-health.yml`) AND last `<!-- verified-phase: NNN -->` or `<!-- h10-verified-phase: NNN -->` stamp is ≤ 30 phases stale AND **§99 Health Score ≥ 95**. |
+| `High` | **P3** | P1 + P2 hold AND every AC in §97 has a `**Verifies:**` clause naming a concrete artifact (linter script, test, file path, DDL block) AND **§99 Health Score ≥ 80**. |
+| `Medium` | **P2** | P1 holds AND §97 contains ≥ 1 acceptance criterion in Given/When/Then form AND no file ends with a truncation marker (trailing `…`, `TODO`, `TBD`, `FIXME`, mid-sentence cut). |
+| `Low` | **P1** | §00-overview.md exists AND lists every sibling `.md` in its inventory table AND `Updated:` date is within the current calendar year. |
+| *(unset)* | — | Any of P1's preconditions fail. The field MUST be omitted rather than guessed. |
+
+**Measurement source of truth (deterministic, not author judgement):**
+
+- P1 inventory completeness → `linter-scripts/check-tree-health.cjs --strict` row for the module.
+- P2 GWT presence + truncation absence → `linter-scripts/check-truncated-prose.py` (P47-fu0) + `rg "\*\*Given\*\*|\*\*When\*\*|\*\*Then\*\*" spec/<module>/97-acceptance-criteria.md`.
+- P3 `Verifies:` coverage → `linter-scripts/check-spec-cross-links.py` + manual scan of §97.
+- P4 CI-gate reference + stamp freshness → `linter-scripts/check-99-summary-freshness.py` (slot 26) + `.github/workflows/spec-health.yml` grep for the module path.
+
+**Re-evaluation cadence:** the value MUST be re-checked whenever §00, §97, §98, or §99 of the module changes. Authors MAY downgrade unilaterally; an upgrade requires a §98 changelog row citing which gate(s) newly pass.
+
+**Ambiguity field is the inverse axis** and follows the same gate logic mirrored: `None` requires P4-level confidence with zero open clarification questions in §99; `Critical` means at least one §99 row is tagged `BLOCKER` or `OPEN-Q`.
+
 ### Other Required Sections
 
 - **Version** and **Updated** date
