@@ -1,10 +1,16 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.1  
+**Version:** 1.1.2  
 **Updated:** 2026-04-29  
 **Scope:** `spec/13-generic-cli/`
 
 ---
+
+### 1.1.2 — 2026-04-29 — Phase 153 Task A11a: spec/13 self-lift 75 → ≥88 expected (AC-21/22/23 close all 3 v4 findings)
+- **Action**: Closed CRITICAL D1 (conflicting exit-code contracts), HIGH D3 (missing concurrency/locking), MEDIUM D2 (incomplete AC for DB+Build). (1) **AC-21** declares §97 AC-10/AC-17 the authoritative exit-code contract — sub-files containing `exit 1` for unknown-command / batch-failure are stale prose; mandates typed `ExitCode` enum (`ExitOK=0, ExitError=1, ExitMisuse=2, ExitConfig=3, ExitBatchPartial=4`); bare integer literals other than `os.Exit(0)` FORBIDDEN. (2) **AC-22** binds DB + file concurrency: SQLite WAL + `busy_timeout=5000` (cross-cuts spec/05 AC-SD-22) + `BEGIN IMMEDIATE` writes + 3× exponential back-off + atomic temp-then-rename file writes (cross-cuts spec/27 AC-T-28 R1+R3) + connection-pool serialization for parallel batch + `update.lock` for self-update. (3) **AC-23** explicitly binds `13-checklist.md` Phase 5 (Database) → AC-22 + AC-10 + spec/05 AC-SD-21/22/23, Phase 8 (Build) → AC-22 + AC-10 + `11-build-deploy.md`; future checklist phases without binding ACs FORBIDDEN.
+- **Spec lockstep**: §97 v2.1.0 → **v2.2.0** (AC count 20 → 23); §00 v1.1.1 → **v1.1.2**, §98 v1.1.1 → **v1.1.2**, §99 v1.1.1 → **v1.1.2**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Validation**: spec/13 force re-score 75 → **TBD ≥ 88** (target band: GOOD; D1 closed via §97-WINS contract; D3 closed via concurrency contract; D2 closed via Phase 5/8 binding). Lockstep · tree-health pending re-run.
+- **Lesson #24 codified at §98 v1.1.2**: When prose in sub-files contradicts a §97 contract, declare §97 the authoritative source via an explicit "§97-WINS" AC (mirrors AC-CG-23 supersession contract from spec/02 / Lesson #23) — do NOT race to refresh every contradictory prose instance first; pin the contract authoritatively, then the prose can drift behind safely until refreshed. **Lesson #25**: Cross-cutting infrastructure ACs (DB concurrency, file atomicity, signal handling) belong in the consuming module's §97 with explicit cross-references to their authoritative-spec home (here: spec/05 AC-SD-22 for SQLite busy-timeout; spec/27 AC-T-28 for atomic file writes) — duplicating the full contract bloats the bundle and creates drift; cross-referencing keeps single-source-of-truth while making the binding explicit.
 
 ## Format
 

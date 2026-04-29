@@ -1,8 +1,10 @@
 # Consistency Report — Generic CLI
 
-**Version:** 1.1.1  
+**Version:** 1.1.2  
 **Updated:** 2026-04-29
 
+
+> **v1.1.2 update (Phase 153 Task A11a — spec/13 self-lift 75 → ≥88; AC-21/22/23 close all 3 v4 findings):** User reply `next`. Targeted lift on the lone CRITICAL-D1 75-scorer in the v4 baseline. Three new module-level ACs close all findings in one phase: **AC-21** declares §97 AC-10/AC-17 authoritative over sub-file `exit 1` prose (mandates typed `ExitCode` enum at every call site; bare integer literals other than `os.Exit(0)` FORBIDDEN) — closes CRITICAL D1. **AC-22** binds DB + file concurrency (SQLite WAL + `busy_timeout=5000` + `BEGIN IMMEDIATE` + 3× back-off; cross-cuts spec/05 AC-SD-22; atomic temp-then-rename for files cross-cuts spec/27 AC-T-28 R1+R3; connection-pool for `--parallel=N`; `update.lock` for self-update) — closes HIGH D3. **AC-23** binds checklist Phase 5 (Database) → AC-22 + AC-10 + spec/05 AC-SD-21/22/23, Phase 8 (Build) → AC-22 + AC-10 + `11-build-deploy.md`; future phases without binding ACs FORBIDDEN — closes MEDIUM D2. Banners: §97 v2.1.0 → **v2.2.0** (AC count 20 → 23); §00 v1.1.1 → **v1.1.2**, §98 v1.1.1 → **v1.1.2**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.** **Lesson #24**: §97-WINS supersession ACs are the canonical fix for contract-vs-prose drift (mirrors AC-CG-23 / Lesson #23); pin the contract first, refresh prose later. **Lesson #25**: Cross-cutting infrastructure ACs belong in the consuming §97 with explicit cross-references to their authoritative home — duplication bloats bundle + creates drift; cross-references keep SSoT.
 
 > **v1.1.1 update (Phase 153 Task #31):** §97 boilerplate ACs (AC-01..AC-08) gained `**Verifies:**` clauses (8 added). Bulk sweep closes the audit-v6 boilerplate blind spot tree-wide. §97 v2.0.0→**v2.1.0**; §98 v1.1.0→**v1.1.1**.
 
