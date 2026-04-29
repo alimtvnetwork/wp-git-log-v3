@@ -1,6 +1,6 @@
 # WordPress Plugin How-To — Overview
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-29  
 <!-- h10-verified-phase: 32 -->
 **Status:** Active  

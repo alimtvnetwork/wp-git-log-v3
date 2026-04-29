@@ -1,7 +1,7 @@
 # Changelog — App Issues
 
-**Version:** 3.4.1  
-**Updated:** 2026-04-28  
+**Version:** 3.4.2  
+**Updated:** 2026-04-29  
 **Scope:** `spec/25-app-issues/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 3.4.2 — 2026-04-29 — Phase P48-1-fu1-batch P3 sweep slot 7 (AC-01..AC-08 Verifies clauses)
+- **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v1.0.0 → v1.1.0). Each clause cites the precise invariant defended; AC-01/AC-06 document this module's `kind: index` YAML exemption (parent of two `kind: tracker` children). Closes the P3-tier gap (0/8 → 8/8 Verifies) and graduates the AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)*. §00 banner 3.4.1 → 3.4.2; §97 1.0.0 → 1.1.0; §99 row added.
 
 ### 3.4.1 — 2026-04-28 — Phase P30 batch reconciliation
 - §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.

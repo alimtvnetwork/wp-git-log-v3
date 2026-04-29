@@ -1,8 +1,8 @@
 # Consistency Report — spec/18-wp-plugin-how-to/
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Generated:** 2026-04-29  
-**Status:** ✅ All issues resolved (v1.2.0) — Phase P48-1-fu1-batch slot 5 added `readme.md` + `changelog.md` rows to §00 inventory (P1 driver eliminated)
+**Status:** ✅ All issues resolved (v1.3.0) — Phase P48-1-fu1-batch P3 sweep slot 6 added Verifies clauses to AC-01..AC-08 (P3 derived tier Medium → High). Slot 5's P1 inventory fix preserved.
 
 ---
 

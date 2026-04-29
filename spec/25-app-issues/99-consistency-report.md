@@ -1,9 +1,11 @@
 # Consistency Report — 25-app-issues
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
+
+> **v1.3.0 update (Phase P48-1-fu1-batch P3 sweep slot 7 — AC-01..AC-08 Verifies clauses):** Closes the P3-tier `**Verifies:**` gap (0 → 8 clauses). AC-01 and AC-06 explicitly call out the `kind: index` YAML exemption (parent of two `kind: tracker` children). Lockstep: §00 3.4.1 → 3.4.2 (date 2026-04-28 → 2026-04-29), §97 1.0.0 → 1.1.0, §98 row 3.4.2 added, §99 1.2.0 → 1.3.0. P3 derived tier: Medium → High. Tree-health 168/168 strict-pass holds.
 
 > **v1.2.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 1 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `1.1.0`→`3.4.1`; §00 banner `3.4.0`→`3.4.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
-**Updated:** 2026-04-28 (Phase P11 — nested-subdir audit complete; symmetric supersession routing surfaced on all three entry points: parent Contents table, child-01 banner, and the pre-existing 02 Correction notice. No roll-up required — both children carry full governance and `kind: tracker` exemption. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 7 — Verifies clauses landed; prior P11 nested-subdir audit context preserved in v1.2.0 block.)
 
 ---
 
