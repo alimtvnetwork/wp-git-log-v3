@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 14,
   "d3": 15,
-  "d4": 17,
-  "d5": 19,
+  "d4": 18,
+  "d5": 12,
   "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D5",
+      "title": "Missing Core Schema and Template Files",
+      "why": "The spec references 'schemas/powershell.schema.json' and 'templates/run.ps1' as the primary implementation sources, but these files are not provided in the context.",
+      "fix": "Include the full text of schemas/powershell.schema.json and templates/run.ps1 in the spec module."
+    },
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Acceptance Criteria are meta-tests, not functional tests",
-      "why": "AC-01 through AC-08 verify the existence and naming of markdown files (spec hygiene) rather than the behavior of the PowerShell script (e.g., 'Given a missing Go installation, When run, Then winget installs Go').",
-      "fix": "Add GWT scenarios for core logic: dependency bootstrapping, PnP fallback logic, and firewall rule injection."
+      "title": "Functional ACs lack 'Verifies' clauses",
+      "why": "While boilerplate ACs (AC-01..08) have Verifies clauses, the functional requirements (AC-RUN-01..10) mentioned in the changelog are missing from the actual AC file.",
+      "fix": "Add GWT-style functional acceptance criteria for CLI flags and PnP logic to 97-acceptance-criteria.md with explicit Verifies clauses."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency and Process Locking unaddressed",
-      "why": "The script performs recursive deletions and file moves (Step 5) but does not address cases where files are locked by a running backend or an IDE, which is a common failure point in PowerShell dev-loops.",
-      "fix": "Add a 'Stop-ExistingProcess' function that kills processes bound to the configured ports before cleaning/copying."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'rootDir' resolution",
-      "why": "The spec states paths are relative to the script location, but 'rootDir' in the JSON can also be relative. If rootDir is '../', the interaction with backendDir/frontendDir resolution is not explicitly typed.",
-      "fix": "Explicitly state that all other paths are joined to the resolved absolute path of rootDir."
+      "title": "Incomplete Concurrency/Locking Specs",
+      "why": "The spec mentions multi-project shared pnpm stores but does not define behavior if two instances of run.ps1 attempt to prune or install to the shared store simultaneously.",
+      "fix": "Add a section to 02-script-reference.md defining a file-lock mechanism or 'check-then-skip' logic for shared store operations."
     }
   ],
   "module": "11-powershell-integration",
   "files_used": 15,
   "files_total": 19,
   "bytes_used": 90000,
-  "bundle_sha": "930caa522017a4c2",
-  "total": 83,
+  "bundle_sha": "60fd837a37da7362",
+  "total": 77,
   "band": "GOOD"
 }

@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 15,
-  "d4": 16,
-  "d5": 12,
+  "d2": 20,
+  "d3": 17,
+  "d4": 15,
+  "d5": 14,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Missing Core Token Definitions",
-      "why": "The spec references 'src/index.css' and 'tailwind.config.ts' as the single source of truth for tokens, but the actual HSL values for the 40+ tokens are only partially listed in tables, not provided as a complete file or block.",
-      "fix": "Include the full content of the normative 'src/index.css' file containing all :root and .dark HSL triplets."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Truncated Acceptance Criteria",
-      "why": "The AC file (97-acceptance-criteria.md) is truncated at AC-003 due to context limits, leaving 31 of 34 criteria (AC-004 to AC-034) undefined for the coder.",
-      "fix": "Provide the remaining 31 GWT acceptance criteria in a follow-up or condensed block."
+      "dim": "D5",
+      "title": "Missing Dependency Context",
+      "why": "The spec references 13 sub-files (01-13) and external files like 'src/index.css' and 'tailwind.config.ts' which are not provided in the context.",
+      "fix": "Provide the content of 01-design-principles.md and 02-theme-variable-architecture.md to resolve token and principle definitions."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Missing Concurrency/Flash Handling",
-      "why": "The 'Theme Transition' section mentions a 0.3s transition but doesn't specify how to prevent 'Flash of Unstyled Content' (FOUC) or 'Flash of Incorrect Theme' during SSR/Hydration.",
-      "fix": "Add a requirement for an inline blocking script in the HTML head to apply the '.dark' class before the first paint."
+      "title": "Concurrency/Race Condition in Font Loading",
+      "why": "AC-007/008/009 mandate 'display=swap' but don't specify behavior for slow networks where system fonts might cause Layout Shift (CLS) before the 300ms motion budget.",
+      "fix": "Add a requirement for a CSS 'font-display: swap' with specific size-adjust overrides to minimize CLS during font swap."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Incomplete Code Block Examples",
+      "why": "While logic for loaders is provided in Go/PHP/Python, the actual CSS implementation for the 'gradient underline sweep' (AC-027) is described but not shown as a code snippet.",
+      "fix": "Include a CSS snippet for the .nav-item::after origin-flip logic to ensure 100% CSS accuracy."
     }
   ],
   "module": "07-design-system",
-  "files_used": 15,
+  "files_used": 3,
   "files_total": 17,
   "bytes_used": 90000,
-  "bundle_sha": "fce6a81e16dbedd3",
-  "total": 75,
+  "bundle_sha": "3e7fb892b74b6fe8",
+  "total": 84,
   "band": "GOOD"
 }

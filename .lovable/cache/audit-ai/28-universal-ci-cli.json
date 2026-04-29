@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 20,
   "d3": 17,
-  "d4": 16,
-  "d5": 19,
+  "d4": 15,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Ambiguous SSH Signing Implementation",
-      "why": "The spec says it 'shells out to ssh-keygen' but doesn't provide the exact command string or how to handle the resulting signature file/stdout for the X-GL-Signature header.",
-      "fix": "Define the exact shell command and how to extract the base64 signature from the .sig file or stdout."
+      "dim": "D5",
+      "title": "Broken Server-Side Dependencies (GAPs)",
+      "why": "The spec identifies GAP-22-03 (Streaming format) and GAP-22-04 (PreviousHasError field) as missing in the server spec (folder 22), which are critical for the CLI's core logic.",
+      "fix": "Update spec/22-git-logs-v2 to include NDJSON streaming and the PreviousHasError boolean in the ack envelope."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Missing Streaming Chunk Examples",
-      "why": "While NDJSON is mentioned, there is no worked example of a 'StreamHeader' or 'StreamFooter' JSON object in the examples section, only in the contract prose.",
-      "fix": "Add a 'Worked Example: Streaming' section showing the sequence of 3-4 JSON chunks."
+      "dim": "D3",
+      "title": "Inter-process Concurrency Race",
+      "why": "The spec allows --parallel for runtimes but does not specify how interleaved stdout/stderr from different runtimes is handled before shipping to prevent log corruption.",
+      "fix": "Explicitly state that each runtime in parallel mode must use a thread-safe buffer or separate ship queue to prevent line interleaving."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Vague 'interleaved' capture requirement",
-      "why": "Section 04 says 'capture stdout + stderr interleaved with timestamps', but doesn't specify if timestamps are internal metadata or prepended to the Log strings.",
-      "fix": "Clarify that timestamps are used for internal sorting and MUST NOT be prepended to the raw log lines unless [push].preserve_timestamps is true."
+      "dim": "D4",
+      "title": "Truncated Context",
+      "why": "The provided file content for 08-ci-provider-bindings.md is truncated, leaving the harvest map for Azure and Bitbucket incomplete for the coder.",
+      "fix": "Provide the full harvest map table for all CI providers in section 08."
     }
   ],
   "module": "28-universal-ci-cli",
-  "files_used": 14,
+  "files_used": 12,
   "files_total": 15,
   "bytes_used": 90000,
-  "bundle_sha": "3fcd35f1665fc00d",
-  "total": 90,
-  "band": "EXCELLENT"
+  "bundle_sha": "fdb4c09d4e66512e",
+  "total": 86,
+  "band": "GOOD"
 }

@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 14,
-  "d3": 16,
+  "d3": 15,
   "d4": 19,
-  "d5": 15,
+  "d5": 12,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT Acceptance Criteria for Core Logic",
-      "why": "While the spec has boilerplate ACs for file existence and naming (AC-01 to AC-08), it lacks GWT (Given-When-Then) criteria for the actual plugin logic like safeExecute, PSR-4 resolution, or Enum metadata behavior.",
-      "fix": "Add a 97-acceptance-criteria.md file to Phase 1 and 3 with GWT scenarios for error boundaries and trait composition."
-    },
-    {
-      "severity": "MEDIUM",
       "dim": "D5",
-      "title": "Unresolved External References",
-      "why": "The spec frequently references files like 'linter-scripts/check-spec-cross-links.py' and '99-consistency-report.md' which are mentioned in the inventory but their content/logic is not provided in the context.",
-      "fix": "Include the content of the linter scripts or provide a detailed interface specification for them within the module."
+      "title": "Broken External Cross-References",
+      "why": "The consistency report (99-consistency-report.md) explicitly identifies 5 broken external links to non-existent folders like '06-golang-standards' and '01-app'.",
+      "fix": "Update paths to point to 'spec/02-coding-guidelines/03-golang/' and 'spec/02-coding-guidelines/01-cross-language/' respectively."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Concurrency and Race Conditions Unaddressed",
-      "why": "The spec defines a Singleton Plugin class and file-based logging but does not address file locking or race conditions during concurrent REST API requests writing to the same log.",
-      "fix": "Add a section in Phase 4 (Logging) specifying flock() usage or a dedicated concurrency handling strategy for the FileLogger."
+      "dim": "D2",
+      "title": "Incomplete Acceptance Criteria",
+      "why": "File 97-acceptance-criteria.md is truncated mid-sentence at AC-08, leaving the module without a complete verification suite for the AI to follow.",
+      "fix": "Complete the AC-08 'Source' field and add specific ACs for the Enum Metadata Pattern and coding style rules."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Casing Mismatch in File References",
+      "why": "Multiple files reference 'CHANGELOG.md' while the actual file on disk is 'changelog.md', causing potential failures on case-sensitive CI environments.",
+      "fix": "Perform a global search and replace of 'CHANGELOG.md' with 'changelog.md'."
     }
   ],
   "module": "18-wp-plugin-how-to",
   "files_used": 12,
   "files_total": 35,
   "bytes_used": 90000,
-  "bundle_sha": "f9cda0eb4777269b",
-  "total": 82,
+  "bundle_sha": "affbb5cd28da4924",
+  "total": 78,
   "band": "GOOD"
 }

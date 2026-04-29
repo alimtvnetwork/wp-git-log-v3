@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 12,
-  "d3": 15,
-  "d4": 17,
-  "d5": 14,
+  "d2": 14,
+  "d3": 12,
+  "d4": 15,
+  "d5": 19,
   "issues": [
     {
-      "severity": "HIGH",
+      "severity": "CRITICAL",
       "dim": "D2",
-      "title": "Missing Acceptance Criteria for Core Logic",
-      "why": "While the Overview (00) has one AC for cross-links, the actual logic modules (01, 02, 03) lack GWT criteria for their specific behaviors (e.g., version bumping rules, error wrapping logic).",
-      "fix": "Add a 97-acceptance-criteria.md file to each sub-module with GWT scenarios for its specific logic."
+      "title": "Acceptance Criteria lack 'Verifies' clauses in 00-overview",
+      "why": "The overview file (00-overview.md) contains AC-CON-000 but lacks the mandatory '**Verifies:**' clause required by the P3 AI Confidence rubric defined in 01-spec-authoring.md.",
+      "fix": "Add '**Verifies:** linter-scripts/check-spec-cross-links.py' to AC-CON-000 in 00-overview.md."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D3",
+      "title": "Truncated content in 02-coding-guidelines",
+      "why": "The provided context for 02-coding-guidelines.md ends abruptly with '[...TRUNCATED at 90KB context cap...]', leaving the TypeScript example and subsequent sections (7-33) missing.",
+      "fix": "Ensure the full content of 02-coding-guidelines.md is included or split into smaller, non-truncated files."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved External Script References",
-      "why": "The spec references numerous scripts (e.g., check-spec-cross-links.py, sync-version.mjs) and files (package.json) that are not provided in the context, making it impossible to verify their interface.",
-      "fix": "Include the CLI help output or interface definitions for all referenced linter and sync scripts in a 'Tooling' section."
-    },
-    {
-      "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency and Large Input Omissions",
-      "why": "The coding guidelines (02) and error management (03) do not explicitly address concurrency safety (e.g., Go routine leaks) or handling of extremely large JSON payloads in the envelope.",
-      "fix": "Add a 'Resource Constraints' section to 02-coding-guidelines.md addressing concurrency and payload limits."
+      "title": "Inconsistent TODO/TBD handling in AC-01",
+      "why": "AC-01 forbids TODO/TBD markers but the module overview (00-overview.md) contains a 'Drift Acknowledgment' section that references 'Phase 27d' which is effectively a placeholder for future work.",
+      "fix": "Explicitly define the 'Drift Acknowledgment' as a valid exception to the forbidden-string rule in AC-01."
     }
   ],
   "module": "17-consolidated-guidelines",
-  "files_used": 4,
+  "files_used": 6,
   "files_total": 38,
   "bytes_used": 90000,
-  "bundle_sha": "3ffc47a6cbfb505d",
-  "total": 76,
+  "bundle_sha": "c1da9f0a6aa1aea9",
+  "total": 78,
   "band": "GOOD"
 }

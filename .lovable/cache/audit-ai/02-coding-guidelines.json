@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 20,
-  "d3": 15,
-  "d4": 20,
-  "d5": 17,
+  "d2": 16,
+  "d3": 14,
+  "d4": 17,
+  "d5": 15,
   "issues": [
     {
-      "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous Concurrency Policy for Boolean Flags",
-      "why": "The spec mandates 'is/has' prefixes but doesn't specify thread-safety requirements (e.g., atomic vs volatile) for these flags in Go/C#.",
-      "fix": "Add a rule to P1 stating that cross-goroutine/thread boolean flags must use atomic types or mutex protection."
-    },
-    {
-      "severity": "LOW",
+      "severity": "HIGH",
       "dim": "D5",
-      "title": "Unresolved External Linter References",
-      "why": "References to 'linter-scripts/validate-guidelines.py' and 'codegen' tools are mentioned as authoritative but the scripts themselves are not provided in the context.",
-      "fix": "Inline the core logic of the 'validate-guidelines' regex or provide the script content."
+      "title": "Dangling Subfolder References",
+      "why": "The overview lists 15 subfolders (01-24), but the provided context only includes files for 00-overview and 01-cross-language. A mediocre AI cannot verify the 'CODE-RED' rules against the actual language specs (e.g., 05-rust/01-naming-conventions.md).",
+      "fix": "Provide the full content of all referenced subfolder overview and naming convention files."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D2",
+      "title": "Legacy AC Scaffolds Lack Specificity",
+      "why": "The 'Legacy Index' in 97-acceptance-criteria.md explicitly states that table-row criteria are 'NO LONGER authoritative', yet many subfolders (TS, PHP, C#) currently have 0 GWT ACs, leaving the AI with no testable contract for those languages.",
+      "fix": "Backfill at least 5 GWT ACs for every language subfolder listed in the inventory."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Missing Units for Function Metrics",
-      "why": "Rule 6 mentions 'Functions: 8\u201315 lines' but doesn't specify if this is Logical Lines of Code (LLOC) or Physical Lines (including comments/whitespace).",
-      "fix": "Define 'lines' as 'non-comment, non-blank physical lines'."
+      "dim": "D3",
+      "title": "Incomplete Size Limit Enforcement Logic",
+      "why": "AC-CG-08 mandates 8-15 lines per function but does not define how to handle 'language-specific exceptions' mentioned in the text, leading to potential implementation inconsistency in Rust or Go.",
+      "fix": "Explicitly list the allowed exceptions for size limits within the normative YAML or TS contract blocks."
     }
   ],
   "module": "02-coding-guidelines",
-  "files_used": 13,
+  "files_used": 7,
   "files_total": 251,
-  "bytes_used": 89531,
-  "bundle_sha": "03166615ecd6d09b",
-  "total": 90,
-  "band": "EXCELLENT"
+  "bytes_used": 90000,
+  "bundle_sha": "479dee0cb3fdf99c",
+  "total": 80,
+  "band": "GOOD"
 }

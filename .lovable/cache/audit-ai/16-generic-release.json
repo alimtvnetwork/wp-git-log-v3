@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 15,
-  "d4": 17,
-  "d5": 14,
+  "d2": 20,
+  "d3": 17,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken Cross-References to External Workflows",
-      "why": "The spec references files like '../12-cicd-pipeline-workflows/02-release-pipeline.md' and 'linter-scripts/check-spec-cross-links.py' which are not provided in the context, making it impossible for an AI to verify the full pipeline logic.",
-      "fix": "Provide the content of the referenced workflow and script files or inline the critical logic into the generic-release module."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Truncated Acceptance Criteria",
-      "why": "The AC-11 and subsequent criteria in 97-acceptance-criteria.md are cut off mid-sentence due to the context cap, leaving the 'Verifies' clauses for the installer contract incomplete.",
-      "fix": "Ensure the full text of the acceptance criteria document is included within the context limits."
+      "title": "Dangling Cross-References to External Modules",
+      "why": "The spec heavily relies on external files (e.g., 13-generic-cli/20-terminal-output-design.md) which are not provided in this context, making it impossible for an AI to verify the 'Terminal Output' or 'Shell Activation' contracts.",
+      "fix": "Incorporate the normative content of the terminal-output and shell-activation contracts directly into the 16-generic-release module or provide them in the context."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous Error Handling for Checksum Mismatch",
-      "why": "While scripts show 'exit 1', the spec doesn't define specific error codes for different failure modes (e.g., network vs checksum vs arch mismatch) as required by D1/D3.",
-      "fix": "Enumerate specific exit codes (e.g., 10=Network, 11=Checksum, 12=Arch) in the installer contract."
+      "title": "Incomplete Concurrency/Race Condition Handling",
+      "why": "While AC-07 and AC-08 mention immutability and draft-promotion, the provided shell snippets for 'Compress' and 'Checksum' stages lack atomic file operations or cleanup for partial failures in a local environment.",
+      "fix": "Add 'set -o pipefail' and trap-based cleanup to all shell examples, and explicitly define behavior for 'tag already exists' during the Resolve Version stage."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Ambiguous Placeholder Syntax Families",
+      "why": "The changelog mentions a Phase 123 update for '09-placeholder-tokens.md' with two syntactic families, but the actual file 09 is missing from the provided text, leaving the AI to guess between <NAME> and __NAME__.",
+      "fix": "Include the content of 09-placeholder-tokens.md to pin the exact regex/string patterns for substitution."
     }
   ],
   "module": "16-generic-release",
   "files_used": 11,
   "files_total": 13,
   "bytes_used": 90000,
-  "bundle_sha": "ad636d5162767ab4",
-  "total": 80,
+  "bundle_sha": "1371b26d5dee9622",
+  "total": 89,
   "band": "GOOD"
 }

@@ -1,37 +1,37 @@
 {
-  "d1": 18,
-  "d2": 19,
-  "d3": 15,
-  "d4": 16,
-  "d5": 17,
+  "d1": 16,
+  "d2": 14,
+  "d3": 12,
+  "d4": 15,
+  "d5": 18,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Implicit dependency on Gemini/Lovable API in Generator 13",
-      "why": "Module 13 (generate-gwt-acceptance.py) requires an external AI call but lacks a fallback, timeout spec, or mock-mode for local development/CI.",
-      "fix": "Add a 'Dry Run' mode and explicit timeout/retry contract to the CLI flags and error handling section."
+      "dim": "D2",
+      "title": "Missing GWT/Verifies for individual artifacts",
+      "why": "The module aggregates module-level ACs in 97-acceptance-criteria.md but delegates per-artifact ACs to 79 separate files (01-79-*.md) which are not provided in this context, leaving the actual tool logic unverified.",
+      "fix": "Include GWT criteria for at least the core validators (01, 05, 24) within the provided module context."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved reference to 'Phase 107 orphan ledger'",
-      "why": "Multiple modules (18, 19) reference a ledger at '.lovable/memory/audit/v2-deterministic/...' which is not provided in the context, making it impossible to verify the migration logic.",
-      "fix": "Include the orphan ledger schema or a sample file path in the Cross-Ref section."
+      "dim": "D3",
+      "title": "Incomplete Error/Concurrency Handling",
+      "why": "While exit codes (0,1,2) are defined, the spec lacks detail on how tools handle common CI edge cases like locked files, network timeouts for AI auditors, or partial disk writes during 'filler' operations.",
+      "fix": "Add a 'Resilience' section to the Normative Contract specifying timeout behavior and atomic write requirements for fillers."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous 'depth' calculation in Filler 20",
-      "why": "AC-20-05 mentions a depth-aware relative path computation but doesn't define if 'spec/' is depth 0 or 1, leading to potential off-by-one link errors.",
-      "fix": "Explicitly define depth: 'spec/module/file.md' is depth 1; 'spec/category/module/file.md' is depth 2."
+      "title": "Ambiguous 'Code_Glob' in Contract",
+      "why": "The Normative Contract uses globs like 'linter-scripts/check-*.{py,sh,cjs}' which may overlap or miss specific files (e.g., .mjs or .go files mentioned elsewhere), creating ambiguity for a coder implementing the health-check logic.",
+      "fix": "Explicitly list all supported extensions (.py, .sh, .cjs, .mjs, .go, .ps1) in the CODE_GLOB column of the contract."
     }
   ],
   "module": "27-spec-toolchain",
-  "files_used": 23,
+  "files_used": 3,
   "files_total": 50,
   "bytes_used": 90000,
-  "bundle_sha": "4a4f27bf25638581",
-  "total": 85,
+  "bundle_sha": "8b25a45ef1db9efb",
+  "total": 75,
   "band": "GOOD"
 }

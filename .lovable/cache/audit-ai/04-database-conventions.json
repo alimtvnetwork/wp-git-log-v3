@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 15,
-  "d4": 19,
-  "d5": 14,
+  "d2": 14,
+  "d3": 16,
+  "d4": 18,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken External References",
-      "why": "The spec heavily references external files like '../02-coding-guidelines/01-cross-language/07-database-naming.md' and '../03-error-manage/...' which are not provided in the context.",
-      "fix": "Inline the critical naming and envelope rules or provide the referenced files in the audit context."
-    },
-    {
-      "severity": "MEDIUM",
       "dim": "D2",
-      "title": "Incomplete Acceptance Criteria",
-      "why": "The 'Acceptance - DDL Conformance' section refers to a linter script (check-forbidden-strings.py) that is not defined, making the test non-executable for the AI.",
-      "fix": "Provide the logic or a pseudocode implementation of the linter script within the testing strategy."
+      "title": "Incomplete Acceptance Criteria for Business Logic",
+      "why": "The ACs in 97-acceptance-criteria.md focus almost exclusively on meta-health (file existence, naming, changelogs) and DDL linting, but lack GWT criteria for the core functional requirements like ORM-only usage, View-first joins, and Split-DB implementation.",
+      "fix": "Add GWT criteria for ORM usage (AC-DB-009) and View-first joins (AC-DB-010) in 97-acceptance-criteria.md."
     },
     {
       "severity": "MEDIUM",
+      "dim": "D5",
+      "title": "Broken Cross-References to External Guidelines",
+      "why": "Multiple files reference '../02-coding-guidelines/01-cross-language/07-database-naming.md' and similar paths which are not provided in this context, making it impossible for an AI to verify the 'full specification' it is supposed to follow.",
+      "fix": "Inline the critical naming rules from the external cross-language spec into 01-naming-conventions.md."
+    },
+    {
+      "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency and Locking in Split-DB",
-      "why": "The spec mentions SQLite 'Split DB' pattern but lacks specific guidance on handling cross-database transactions or WAL mode configuration for concurrency.",
-      "fix": "Add a section to 07-split-db-pattern.md (or 02-schema-design) explicitly defining the WAL mode requirement and transaction boundaries."
+      "title": "Concurrency and Locking in Split-DB Pattern",
+      "why": "The spec mentions SQLite WAL mode and 'no lock contention across domains' but provides no guidance on handling concurrent writes within a single domain's SQLite file for a 'mediocre' coder.",
+      "fix": "Add a section to 07-split-db-pattern.md specifying mandatory PRAGMA settings for SQLite concurrency (e.g., busy_timeout, journal_mode=WAL)."
     }
   ],
   "module": "04-database-conventions",
-  "files_used": 7,
+  "files_used": 9,
   "files_total": 11,
   "bytes_used": 90000,
-  "bundle_sha": "136f0695064bc42f",
+  "bundle_sha": "05776ab8107b379e",
   "total": 82,
   "band": "GOOD"
 }
