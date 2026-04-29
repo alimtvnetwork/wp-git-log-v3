@@ -1,7 +1,9 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.10.0
-**Last Updated:** 2026-04-28
+**Version:** 4.10.1
+**Last Updated:** 2026-04-29
+
+> **v4.10.1 update (Phase P48-1-fu1-batch slot 2 — §00 inventory drift fix, slot 04 co-location):** Reconciles a §00↔disk drift surfaced by `check-ai-confidence.py` (Phase P48-1-fu1) — this folder was 1 of 5 P1 inventory-gap drifters. File `04-ai-onboarding-prompt.md` was on disk and tracked by §99 inventory but never added to the §00 inventory table; per the **co-location precedent** (Core memory — when two folders ship at the same slot before the collision is noticed, both retain the slot, disambiguate by trailing slug), the resolution is to add a second slot-04 row, NOT to renumber. Patch adds the missing §00 row and updates §99 inventory (line 47) to enumerate both slot-04 occupants. §00 banner 4.13.0→**4.13.1**, §98 release row 4.13.1 added. No score change (single-row sync); restores P1 → pass and unblocks tier re-derivation under the P48-1 rubric. Follows precedent established by §17 v3.4.1 (P48-1-fu1-batch slot 1, 2026-04-29).
 
 > **v4.10.0 update (Phase P7b — `## Legacy Index` GWT-completeness exemption codified):** Added **AC-SAG-28** at §97 codifying that AC headings matching `^AC-[A-Z]+-LEGACY(-\d+)?$` MUST be excluded from any GWT-completeness audit denominator. Surfaced when the Phase P7 mechanical sweep over `spec/*/97-acceptance-criteria.md` flagged 13 "non-GWT" ACs across §01/§02/§05/§06 — investigation revealed all 13 are intentional `## Legacy Index (preserved for traceability)` rows kept after a GWT-rewrite phase and referenced from new GWT ACs' `Verifies:` chains (e.g. §05 AC-SD-02 cites `+ AC-SD-LEGACY-001-a`). Removing them would silently break those cross-refs; re-authoring as GWT would balloon §97 length without new contract surface. AC-SAG-28 codifies the canonical exemption regex + four-module exemption snapshot (§01 4 / §02 5 / §05 2 / §06 2) + pre-conditions for new modules introducing a Legacy Index + downstream-tools contract (any future `check-ac-gwt-completeness.py` MUST hardcode the regex AND emit a banner line `excluding N LEGACY ACs across M modules per AC-SAG-28` for visibility). No code change, no new gate, no `RUBRIC_VERSION` bump — pure declarative meta-spec contract. Lockstep: §97 v4.7.0 → **v4.8.0**; §98 v4.12.0 → **v4.13.0**. CI gate count unchanged at **15**; `RUBRIC_VERSION` unchanged at **v2.24**. Verification: `node linter-scripts/check-lockstep.cjs` ✅ 87/87; `node linter-scripts/check-tree-health.cjs --strict` ✅ 168/168. Cross-folder lockstep snapshot to be mirrored at `spec/22-git-logs-v2/98-changelog.md` v3.9.7 + §99 v3.9.14 (Phase P7b row) so the §22 GAP-V2-01 closure narrative carries the full disposition of the 13-row tree-wide follow-up. **Closes Phase P7b** — the 13 "non-GWT" findings are reclassified as intentional traceability infrastructure, not authoring debt. No score regression — §01 holds at 97/100 A+ with impl=100.
 
@@ -45,6 +47,7 @@
 | 02 | `02-naming-conventions.md` | ✅ Present |
 | 03 | `03-required-files.md` | ✅ Present |
 | 04 | `04-cli-module-template.md` | ✅ Present |
+| 04 | `04-ai-onboarding-prompt.md` | ✅ Present (co-located at slot 04 per immutable-slot rule; disambiguated by trailing slug — Phase P48-1-fu1-batch slot 2) |
 | 05 | `05-app-project-template.md` | ✅ Present |
 | 06 | `06-non-cli-module-template.md` | ✅ Present |
 | 07 | `07-memory-folder-guide.md` | ✅ Present |
