@@ -357,6 +357,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 
 ### AC-SAG-LEGACY: Cross-References & Validation
 
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these rows are referenced by `Verifies:` chains of AC-SAG-09, AC-SAG-10, AC-SAG-19 above and by AC-SAG-28's exemption registry. Same exemption-regex contract as the prior LEGACY blocks.
+
 | ID | Criterion | Source |
 |---|---|---|
 | AC-SAG-LEGACY-016 | All cross-references use relative paths (never root-relative or absolute) | `08-cross-references.md` |
