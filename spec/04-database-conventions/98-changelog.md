@@ -25,7 +25,7 @@
 
 ### 3.3.3 — 2026-04-29 — Phase 153 Task A2 (envelope inlining for context-bounded AI)
 
-- **Added** "Universal Response Envelope — Inlined Summary" section at the end of `00-overview.md` so a context-bounded AI implementing REST endpoints from `spec/04` alone has the full envelope shape (PascalCase JSON keys, top-level field table, conditional-field semantics, Go `omitempty` note) without needing to fetch `spec/03-error-manage/.../05-response-envelope/`.
+- **Added** "Universal Response Envelope — Inlined Summary" section at the end of `00-overview.md` so a context-bounded AI implementing REST endpoints from `spec/04` alone has the full envelope shape (PascalCase JSON keys, top-level field table, conditional-field semantics, Go `omitempty` note) without needing to fetch `spec/03-error-manage/02-error-architecture/05-response-envelope/`.
 - **Lockstep:** §00 banner v3.3.2 → v3.3.3 (h10 stamp 30 → 153). §99 v3.5.0 → v3.5.1.
 - **No AC change.** Spec content is a pure inlining of the existing source-of-truth reference; if upstream and the inlined summary diverge, upstream wins (declared in the new section's preamble).
 - Closes Phase 153 Task A2 finding "spec/04 D5 cross-module dep" from audit-v2.
