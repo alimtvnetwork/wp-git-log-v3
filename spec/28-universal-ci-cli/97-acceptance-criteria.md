@@ -61,6 +61,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** classifier output that extracts `src/b.ts` then `src/a.ts` then `src/a.ts`,
 - **When** the payload is serialized,
 - **Then** `FilePaths[]` MUST equal `["src/a.ts","src/b.ts"]`.
+- **Verifies:** §06 `FilePaths[]` lex-sort + dedup invariant; §09 classifier output normalization; supports AC-28-23 byte-identical determinism.
 
 ### AC-28-09 — Auth lane: SSH headers exclude TempToken in body
 
