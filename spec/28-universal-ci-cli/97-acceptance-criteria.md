@@ -47,6 +47,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `--stream` is passed AND the server reachable,
 - **When** the test phase runs,
 - **Then** the HTTP request MUST set `Transfer-Encoding: chunked` AND `Content-Type: application/x-ndjson` AND `X-GL-Stream: 1` AND the first body chunk MUST contain `"StreamHeader":true`.
+- **Verifies:** §06 streaming-mode header contract; §17 OpenAPI streaming variant; AC-28-31 stream-broken recovery precedent.
 
 ### AC-28-07 — `HasError` reflects ErrorLogs OR exit code
 
