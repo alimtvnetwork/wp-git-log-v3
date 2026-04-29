@@ -122,10 +122,13 @@ def parse_banner(text: str) -> Optional[str]:
 
 
 def gate_p1(mod: Path, ov_text: str) -> tuple[bool, str]:
-    # Inventory completeness: every sibling .md (excluding 00 itself, 97/98/99 always allowed)
-    siblings = {p.name for p in mod.iterdir() if p.is_file() and p.name.endswith(".md") and p.name != "00-overview.md"}
+    # Inventory completeness: every sibling .md (excluding 00 itself, and the
+    # standard meta-slots 97/98/99 which are conventionally omitted from
+    # inventory tables — they are guaranteed to exist by tree-health and have
+    # their own dedicated linters).
+    META = {"00-overview.md", "97-acceptance-criteria.md", "98-changelog.md", "99-consistency-report.md"}
+    siblings = {p.name for p in mod.iterdir() if p.is_file() and p.name.endswith(".md") and p.name not in META}
     if not siblings:
-        # Leaf modules with only 00 — trivially pass P1 if dated this year.
         listed = set()
     else:
         listed = set(INVENTORY_LINK_RE.findall(ov_text))
