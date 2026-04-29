@@ -332,6 +332,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 
 ### AC-SAG-LEGACY: Naming Conventions
 
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these rows are referenced by `Verifies:` chains of AC-SAG-02, AC-SAG-03, AC-SAG-04 above and by AC-SAG-28's exemption registry. Same exemption-regex contract as the prior LEGACY block.
+
 | ID | Criterion | Source |
 |---|---|---|
 | AC-SAG-LEGACY-005 | All files use lowercase kebab-case naming | `02-naming-conventions.md` |
