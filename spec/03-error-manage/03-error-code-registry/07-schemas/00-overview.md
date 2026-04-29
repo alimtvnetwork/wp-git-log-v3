@@ -1,6 +1,6 @@
 # Schemas
 
-**Version:** 3.4.1  **Status:** Active  
+**Version:** 3.4.2  **Status:** Active  
 <!-- h10-verified-phase: 29 -->
 **Updated:** 2026-04-28  
 **AI Confidence:** Production-Ready  
