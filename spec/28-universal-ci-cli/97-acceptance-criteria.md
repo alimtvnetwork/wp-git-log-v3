@@ -75,6 +75,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `--auth-mode=temptoken` and `GLCI_TEMP_TOKEN=tt`, `GLCI_TOKEN=t`,
 - **When** the CLI POSTs `/append-log`,
 - **Then** the body MUST contain `"TempToken":"tt"` AND `"Token":"t"` AND no `X-GL-Auth-Mode` header.
+- **Verifies:** §10 TempToken-lane separation (auth-in-body, never-as-X-GL-Auth-Mode-header) — guarantees the two auth modes never co-mingle credentials; AC-28-09 SSH-mode complement.
 
 ### AC-28-11 — 4xx is fatal; no retry
 
