@@ -7,31 +7,31 @@
   "issues": [
     {
       "severity": "CRITICAL",
-      "dim": "D1",
-      "title": "PascalCase Enforcement vs SQL standard",
-      "why": "The spec mandates PascalCase for all field names (e.g., SessionId), but SQLite is case-insensitive by default and many Go drivers/mappers default to snake_case. A mediocre coder might produce inconsistent mapping or fail to use backticks/quotes in queries, leading to runtime errors in strict environments.",
-      "fix": "Explicitly mandate double-quoting all identifiers in SQL snippets and provide a Go struct-to-DB mapping example using tags (e.g., `db:\"SessionId\"`)."
+      "dim": "D3",
+      "title": "Missing Concurrency Control for Dynamic DB Provisioning",
+      "why": "The Go implementation uses a global mutex for GetOrCreateDb, but does not address file-level race conditions or WAL-mode initialization safety when multiple processes/threads attempt to create the same physical SQLite file simultaneously.",
+      "fix": "Implement a file-based flock or a named-mutex pattern during the physical file creation and PRAGMA initialization phase."
     },
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Concurrency/Locking implementation gaps",
-      "why": "While WAL mode is mentioned, the provided Go code uses a simple `sync.RWMutex` for the map of connections but does not address cross-process locking or how to handle 'database is locked' errors during high-concurrency writes to the same Session DB.",
-      "fix": "Add a requirement for a retry-loop decorator for write operations and specify the use of 'PRAGMA busy_timeout'."
+      "dim": "D1",
+      "title": "Ambiguous 'EntityId' and 'Slug' Mapping",
+      "why": "The spec uses 'EntityId', 'Slug', and 'Entity-Slug' interchangeably across tables and file paths without defining if they are identical or how to handle collisions (e.g., 'readme.md' vs 'readme-md').",
+      "fix": "Explicitly define that EntityId MUST be the sanitized output of the GenerateSlug() function and enforce this in the schema constraints."
     },
     {
       "severity": "MEDIUM",
       "dim": "D2",
-      "title": "Missing Acceptance Criteria for Reset TTL",
-      "why": "The 5-minute TTL for the Reset API is a core safety feature, but the provided AC-SDB-000 only checks for 'lifecycle wiring' and 'Casbin points', not the actual expiration logic or cleanup of expired tokens.",
-      "fix": "Add a specific GWT criterion: 'Given a reset request older than 5 minutes, When confirm is called, Then return 401/410 Expired and do not delete data.'"
+      "title": "Incomplete Acceptance Criteria for Reset TTL",
+      "why": "While the 5-minute TTL is mentioned, there is no GWT (Given-When-Then) test case verifying the 'expired' state transition or the cleanup of the physical files upon confirmation.",
+      "fix": "Add an AC in 97-acceptance-criteria.md: 'Given a reset request older than 5 mins, When confirm is called, Then return 410 Gone and do not delete files'."
     }
   ],
   "module": "05-split-db-architecture",
   "files_used": 6,
   "files_total": 20,
   "bytes_used": 90000,
-  "bundle_sha": "cbe6018a6a582234",
+  "bundle_sha": "dbb3399c281f5ff8",
   "total": 69,
   "band": "NEEDS_WORK"
 }
