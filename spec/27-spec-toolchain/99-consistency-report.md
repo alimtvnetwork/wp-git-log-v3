@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.71.0
+**Version:** 2.72.0
 **Updated:** 2026-04-29
+
+> **v2.72.0 update (Phase 153 Task A4 — slot 34 `audit-ai-implementability.py` v1.0.0 productionised):** Shipped LLM-driven deep-walk auditor as a first-class linter (was prototype-only in Tasks A1/A2). 5-dim rubric × 0-20, walks `*.md|*.json|*.yaml|*.yml|*.tmpl|*.toml` to close the A2 spec/11 blind spot. SHA-keyed cache, Cloudflare 1010 immunity (explicit `User-Agent`), six CLI flags (`--module`, `--no-network`, `--force`, `--json`, `--report-only`, `--strict`), 8 ACs (AC-34-01..08 all GWT + Verifies), self-test 6/6. Inventory grew slot 34; §00 v2.74.0→**2.75.0**, §98 v2.74.0→**2.75.0**, §99 v2.71.0→**2.72.0**. Distinct from slot 33 (deterministic): slot 34 is LLM-driven semantic scoring, advisory-by-default. **No CI workflow change** (graduation deferred). Confirmed walker sees 19 files for spec/11 (was 16 in `*.md`-only mode; +3 from `schemas/` + `templates/`).
 
 > **v2.71.0 update (Phase 153 Task #34 — slot 33 v1.2.0→v1.3.0; AC-33-10/11/12 codify Task #29d's regex widening):** User reply `next`. Codifies the three regex changes that shipped during Task #29d (multi-section inventory scan via `finditer`, heading-name tolerance for `Inventory|Index|Modules|Files|Contents`, bare-filename matching in table cells + list items). These widenings cascade-closed the final 13 P3/P4 drifts and lifted AI-confidence parity to 51/51 (100%). Slot-33 §97 added AC-33-10/11/12 (slot-internal AC count 9→12); §27 §00 v2.73.0→**v2.74.0**, §97 v2.6.0→**v2.7.0**, §98 v2.73.0→**v2.74.0**. Linter binary unchanged (already at v1.3.0 behaviour); this is a documentation-lockstep phase. Lockstep 87/87 · tree-health 168/168 strict · AI-confidence 51/51 — all GREEN. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.** **Lesson codified**: When a sweep deploys multiple regex widenings to close one drift class, codify as a grouped AC release on the linter's spec slot — three separate phases would fragment the Why prose chain without changing lockstep cost.
 
