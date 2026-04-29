@@ -19,6 +19,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** a directory with no recognized markers,
 - **When** `glci detect` runs,
 - **Then** it MUST exit `2` and stderr MUST contain code `GLCI-DETECT-NONE`.
+- **Verifies:** §07 `GLCI-DETECT-NONE`; §03 detection contract (no-marker rejection invariant).
 
 ### AC-28-03 — Detection: ambiguous TS lockfiles
 
