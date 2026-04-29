@@ -37,7 +37,7 @@ Lesson #34 holds: when `next` surfaces a backlog item rooted in cache counts, th
 | **P2** | 🟡 ready | Stub-AC backfill for 0-AC subfolders (Lesson #23) — independent of cache |
 | **P3** | 🟡 ready | Concurrency & Locking prose mirror to AC-22 (spec/04, spec/13/10, spec/13/18) |
 | **#17** | 🟡 ready | spec/23 polymorphic AppLink resolution tracker (P47-fu1 critical) |
-| **#18** | 🟡 ready | spec/11-ps Pipeline Steps per-step exit codes tracker (P47-fu1 critical) |
+| **#18** | 🟡 ready | spec-11-ps Pipeline Steps per-step exit codes tracker (P47-fu1 critical) |
 | **P4 / A12** | 🔒 blocked | Full LLM audit-v7 rebaseline (gateway budget) — would refresh cache |
 | 1–8, R1, R2 | 🔒 blocked | Lovable Cloud / R1 / monitor items |
 
