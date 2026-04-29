@@ -87,6 +87,7 @@ Numbering convention inside this module:
 | 30 | [30-audit-spec-vs-code.md](./30-audit-spec-vs-code.md) | `linter-scripts/audit-spec-vs-code.py` | v1: 6-dimension spec-vs-code audit (deprecated; kept for diffing) |
 | 31 | [31-audit-spec-vs-code-v2.md](./31-audit-spec-vs-code-v2.md) | `linter-scripts/audit-spec-vs-code-v2.py` | v2: AI-implementability audit, 7 dimensions, blast-radius |
 | 32 | [32-check-truncated-prose.md](./32-check-truncated-prose.md) | `linter-scripts/check-truncated-prose.py` | Detect mid-sentence endings + unclosed code fences across `spec/**/*.md` |
+| 33 | [33-check-ai-confidence.md](./33-check-ai-confidence.md) | `linter-scripts/check-ai-confidence.py` | Mechanize AC-09 four-gate `AI Confidence` rubric (P1→P4) — derive tier from on-disk signals; per-file opt-in stamp |
 
 ### Runners
 
