@@ -51,6 +51,7 @@ This document defines testable acceptance criteria for the **Update — Overview
 - **When** `node linter-scripts/check-tree-health.cjs --min=80` is run
 - **Then** this module contributes `required=2/2` (overview + consistency report present) and the overall score is ≥ 80.
 - **Source:** `linter-scripts/check-tree-health.cjs`.
+- **Verifies:** Strict-pass tree-health rubric — module contributes its full 3/3 (required+changelog+inventory) toward the 168/168 strict-mode target; default-mode rounding to 100 is insufficient (Phase 137 precedent).
 
 ---
 
