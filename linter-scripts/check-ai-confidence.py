@@ -277,8 +277,12 @@ def main() -> int:
         stamped = stamp_m is not None
         stamped_phase = int(stamp_m.group(1)) if stamp_m else None
         match = (declared == derived)
+        try:
+            mod_label = mod.relative_to(SPEC_ROOT).as_posix()
+        except ValueError:
+            mod_label = mod.name
         rows.append({
-            "module": mod.relative_to(SPEC_ROOT).as_posix(),
+            "module": mod_label,
             "declared": declared,
             "derived": derived,
             "match": match,
