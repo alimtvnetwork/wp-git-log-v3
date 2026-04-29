@@ -26,6 +26,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** a directory with both `package-lock.json` and `pnpm-lock.yaml`,
 - **When** `glci detect` runs,
 - **Then** it MUST exit `2` with `GLCI-DETECT-AMBIGUOUS-LOCK`.
+- **Verifies:** §07 `GLCI-DETECT-AMBIGUOUS-LOCK`; §03 single-lockfile invariant (eliminates non-deterministic install).
 
 ### AC-28-04 — Override order: flag beats env beats file
 
