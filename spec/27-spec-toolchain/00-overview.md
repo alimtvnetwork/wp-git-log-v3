@@ -184,6 +184,52 @@ FAIL-05: lockstep break (§00 vs §98 vs §99 mismatch)  -> exit 1 (via §24 che
 
 ---
 
+## Resilience — CI Edge Cases (Phase 153 Task A9, AC-T-28)
+
+The Normative Contract above defines exit codes and bijection invariants. This subsection codifies how every script in the toolchain MUST behave under hostile CI conditions. These rules apply to ALL slots (validators, generators, fillers, auditors, runners) unless explicitly overridden in the per-artifact spec.
+
+### R1 — Atomic writes (fillers + generators)
+
+Slots 10–29 mutate disk. Every write MUST be atomic against concurrent readers and against partial-disk-failure mid-write:
+
+- Write to a sibling temp file (`<target>.tmp.<pid>`) in the SAME directory (so `os.replace` / `fs.renameSync` is a same-volume rename — atomic on POSIX + NTFS).
+- `fsync` the temp file before rename (where the runtime exposes it: Python `os.fsync(fd)` after `f.flush()`; Node `fs.fsyncSync(fd)`).
+- Rename over the destination (`os.replace` / `fs.renameSync`) — never `unlink` + `write`.
+- On any exception between temp-write and rename, delete the temp file in a `finally` block.
+- FORBIDDEN: `open(target, 'w')` followed by streaming writes — a Ctrl-C or OOM-kill mid-stream leaves a truncated artifact that fails subsequent linter runs and corrupts trace-map regression baselines.
+
+### R2 — File locking (validators reading shared artifacts)
+
+Validators that read generated artifacts (`spec/spec-index.md`, `spec/dashboard-data.json`, `linter-scripts/trace-map.toml`) MUST tolerate the artifact being mid-rewrite by a concurrent generator:
+
+- Read the file in a single `read()` call (not chunked) so the kernel's atomic-rename semantics give the reader either the OLD or NEW content, never a torn read.
+- On `JSONDecodeError` / parse failure, retry up to 3 times with 100ms back-off before exiting non-zero — covers the narrow window between `unlink` and `rename` on filesystems that don't honour POSIX rename atomicity.
+- Locked-file errors (Windows `PermissionError`, POSIX `EAGAIN`) MUST exit with code `2` (error / invocation problem), NOT code `1` (genuine fail) — CI orchestrators distinguish "rerun-and-it-passes" from "real violation".
+
+### R3 — Network timeouts (AI auditors)
+
+Slots 30–39 that call external LLM gateways MUST:
+
+- Set an explicit per-request timeout ≤ 60 seconds (default `requests.post(..., timeout=60)`).
+- On timeout / 5xx / Cloudflare 1010, retry up to 3 times with exponential back-off (`2**attempt` seconds, jittered ±25%).
+- After exhausted retries, the auditor MUST exit `2` (error) NOT `1` (fail) — a network outage is not a spec violation. The CI workflow MAY treat exit `2` as a soft-fail when the step is marked advisory (`continue-on-error: true`).
+- Cache invalidation MUST be content-keyed (SHA of the input bundle), so an interrupted audit run does not poison the cache with partial results.
+
+### R4 — Signal handling (runners)
+
+`run.sh` and `run.ps1` MUST install SIGTERM/SIGINT handlers that:
+
+- Forward the signal to the currently-running child script.
+- Wait up to 5 seconds for the child to exit cleanly (giving R1 atomic-write `finally` blocks a chance to fire).
+- Then SIGKILL the child and exit `130` (POSIX convention for SIGINT).
+- The handler MUST NOT leave temp files (`.tmp.<pid>`) behind — the same `finally`-block sweep that R1 mandates inside scripts also runs in the runner's exit trap.
+
+### R5 — Disk-full / read-only filesystem
+
+Any script that writes (slots 10–29) MUST detect `ENOSPC` / `EROFS` from the temp-file write and exit `2` with a stderr message `<script>: cannot write to <dir>: <errno>` — exit `1` is reserved for genuine spec-violation findings, NOT environmental failures.
+
+---
+
 ## Related Modules
 
 - [`spec/01-spec-authoring-guide/`](../01-spec-authoring-guide/) — naming + required-files conventions enforced by §05/§20–§22.
