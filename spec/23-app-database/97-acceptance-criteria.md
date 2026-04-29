@@ -1,6 +1,6 @@
 # Acceptance Criteria — 23 App Database
 
-**Version:** 3.1.0
+**Version:** 3.0.0
 **Updated:** 2026-04-27
 **Scope:** `spec/23-app-database/`
 **Generated:** Hand-authored alongside the v4.0.0 overview (Phase 39a). Supersedes the auto-extracted v2.0.0 set.
