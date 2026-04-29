@@ -1,7 +1,7 @@
 # Consistency Report: TypeScript Standards
 
 **Version:** 4.1.1
-**Generated:** 2026-04-27
+**Generated:** 2026-04-29
 **Health Score:** 100/100 (A+)
 
 > **v4.0.0 update (Phase 16i):** §97 fully rewritten from 6 stub checkbox criteria to **20 module-specific Given/When/Then ACs** (AC-TS-01..AC-TS-20). New ACs codify TS-specific rules layered on top of cross-language parent: explicit AC-CL-* inheritance, 6-flag strict tsconfig, `any` forbidden, `as const` enums (NEVER `enum` keyword), `Promise.all` CODE-RED rule, discriminated unions with `never` exhaustive checks, `AppError` over throw, functional components, Zustand/RQ split, Zod at boundaries, `noUncheckedIndexedAccess`, kebab-case files + PascalCase exports, ESLint type-checked + `--max-warnings 0`, `interface`/`type` discipline, generic constraints, import grouping, `exhaustive-deps` error, Vitest + RTL, self-application doctest. Legacy AC-01/AC-02 preserved as AC-TS-LEGACY-01-A..02-C at end of §97. Module-level tree-health: 100/100 (A+).
