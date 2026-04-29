@@ -3,7 +3,7 @@
 **Version:** 3.4.1  
 
 > **v3.4.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 4 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `1.0.0`→`3.2.1`; §00 banner `3.2.0`→`3.2.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
-**Generated:** 2026-04-28  
+**Generated:** 2026-04-29  
 **Health Score:** 100/100 (A+) — Phase 21 deepening sweep
 
 ---
