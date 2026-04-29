@@ -6,7 +6,7 @@ description: Auditor-self-reference module — defines the toolchain that audits
 
 # Spec Toolchain
 
-**Version:** 2.76.0  
+**Version:** 2.77.0  
 **Updated:** 2026-04-29
 <!-- h10-verified-phase: 48 -->
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
@@ -128,16 +128,19 @@ Numbering convention inside this module:
 The following block is the **machine-readable contract** for the spec/code bijection enforced by this module. It is the source of truth for `linter-scripts/check-tree-health.cjs` and the §05 health gate. Any deviation MUST be reconciled in the same PR.
 
 ```text
-# CONTRACT: spec-toolchain-bijection v1.0
-# Format: NUMBER_RANGE | KIND | SPEC_GLOB                        | CODE_GLOB                                       | EXIT_CONTRACT
-01-09  | validator    | spec/27-spec-toolchain/0[1-9]-*.md    | linter-scripts/check-*.{py,sh,cjs}             | 0=pass,1=fail,2=error
-10-19  | generator    | spec/27-spec-toolchain/1[0-9]-*.md    | linter-scripts/{generate,suggest}-*.{py,cjs}   | 0=pass,1=fail,2=error
-20-29  | filler       | spec/27-spec-toolchain/2[0-9]-*.md    | linter-scripts/{fill,scaffold,check}-*.cjs     | 0=pass,1=fail,2=error
-30-39  | auditor      | spec/27-spec-toolchain/3[0-9]-*.md    | linter-scripts/audit-*.py                      | 0=pass,1=fail,2=error
-40-49  | runner       | spec/27-spec-toolchain/4[0-9]-*.md    | linter-scripts/run.{sh,ps1}                    | 0=pass,1=fail,2=error
-50-59  | src-validator| spec/27-spec-toolchain/5[0-9]-*.md    | linter-scripts/validate-*.{py,go} + check-*.sh | 0=pass,1=fail,2=error
-60-69  | config       | spec/27-spec-toolchain/6[0-9]-*.md    | linter-scripts/{*.toml,*.allowlist,*.md}       | n/a (data file)
-70-79  | ci-workflow  | spec/27-spec-toolchain/7[0-9]-*.md    | .github/workflows/*.yml                        | GitHub Actions
+# CONTRACT: spec-toolchain-bijection v1.1 (Phase 153 Task A9: explicit ext lists per AC-T-27)
+# Format: NUMBER_RANGE | KIND | SPEC_GLOB                        | CODE_GLOB                                                                  | EXIT_CONTRACT
+# CODE_GLOB extension authority: the brace-listed extensions below are EXHAUSTIVE per kind; adding a new
+# extension to any range requires a §98 changelog row + AC-T-27 update in the SAME PR. The full canonical
+# extension set across the toolchain is {.py, .cjs, .mjs, .sh, .ps1, .go, .toml, .allowlist, .md, .yml}.
+01-09  | validator    | spec/27-spec-toolchain/0[1-9]-*.md    | linter-scripts/check-*.{py,sh,cjs,mjs,go,ps1}                              | 0=pass,1=fail,2=error
+10-19  | generator    | spec/27-spec-toolchain/1[0-9]-*.md    | linter-scripts/{generate,suggest,check}-*.{py,cjs,mjs}                     | 0=pass,1=fail,2=error
+20-29  | filler       | spec/27-spec-toolchain/2[0-9]-*.md    | linter-scripts/{fill,scaffold,deepen,check}-*.{cjs,py,sh}                  | 0=pass,1=fail,2=error
+30-39  | auditor      | spec/27-spec-toolchain/3[0-9]-*.md    | linter-scripts/{audit,check}-*.py                                          | 0=pass,1=fail,2=error
+40-49  | runner       | spec/27-spec-toolchain/4[0-9]-*.md    | linter-scripts/run.{sh,ps1}                                                | 0=pass,1=fail,2=error
+50-59  | src-validator| spec/27-spec-toolchain/5[0-9]-*.md    | linter-scripts/{validate,check}-*.{py,go,sh}                               | 0=pass,1=fail,2=error
+60-69  | config       | spec/27-spec-toolchain/6[0-9]-*.md    | linter-scripts/{*.toml,*.allowlist,*.md}                                   | n/a (data file)
+70-79  | ci-workflow  | spec/27-spec-toolchain/7[0-9]-*.md    | .github/workflows/*.yml                                                    | GitHub Actions
 
 # INVARIANTS (enforced by linter-scripts/check-tree-health.cjs)
 INV-01: forall code in {linter-scripts/, .github/workflows/} :: exists exactly one spec/27-spec-toolchain/NN-*.md
@@ -178,6 +181,52 @@ FAIL-05: lockstep break (§00 vs §98 vs §99 mismatch)  -> exit 1 (via §24 che
 3. **Exit-code contract**: every validator section MUST document its exit codes (`0=pass`, `1=fail`, `2=error` is the canonical contract).
 4. **Idempotency**: every filler section MUST state explicitly that re-runs on a satisfied tree are no-ops.
 5. **No silent orphan code**: a script without a spec is a CI failure (see [`05-check-tree-health.md`](./05-check-tree-health.md) future extension). **Exception (Phase 108 / INV-08):** code MAY be tracked transitionally in the Phase 107 orphan ledger at `.lovable/memory/audit/v2-deterministic/phase-107-overview-inventory-drift-audit.md` — `linter-scripts/test/test-overview-inventory-parity.sh` (Phase 112) accepts ledger acknowledgement as valid INV-01 satisfaction. Ledger entries SHOULD migrate to a real `NN-*.md` spec within two release cycles; sustained ledger growth without migration MUST trigger a Phase-108-style cleanup. The ledger is **acknowledgement, not absolution**.
+
+---
+
+## Resilience — CI Edge Cases (Phase 153 Task A9, AC-T-28)
+
+The Normative Contract above defines exit codes and bijection invariants. This subsection codifies how every script in the toolchain MUST behave under hostile CI conditions. These rules apply to ALL slots (validators, generators, fillers, auditors, runners) unless explicitly overridden in the per-artifact spec.
+
+### R1 — Atomic writes (fillers + generators)
+
+Slots 10–29 mutate disk. Every write MUST be atomic against concurrent readers and against partial-disk-failure mid-write:
+
+- Write to a sibling temp file (`<target>.tmp.<pid>`) in the SAME directory (so `os.replace` / `fs.renameSync` is a same-volume rename — atomic on POSIX + NTFS).
+- `fsync` the temp file before rename (where the runtime exposes it: Python `os.fsync(fd)` after `f.flush()`; Node `fs.fsyncSync(fd)`).
+- Rename over the destination (`os.replace` / `fs.renameSync`) — never `unlink` + `write`.
+- On any exception between temp-write and rename, delete the temp file in a `finally` block.
+- FORBIDDEN: `open(target, 'w')` followed by streaming writes — a Ctrl-C or OOM-kill mid-stream leaves a truncated artifact that fails subsequent linter runs and corrupts trace-map regression baselines.
+
+### R2 — File locking (validators reading shared artifacts)
+
+Validators that read generated artifacts (`spec/spec-index.md`, `spec/dashboard-data.json`, `linter-scripts/trace-map.toml`) MUST tolerate the artifact being mid-rewrite by a concurrent generator:
+
+- Read the file in a single `read()` call (not chunked) so the kernel's atomic-rename semantics give the reader either the OLD or NEW content, never a torn read.
+- On `JSONDecodeError` / parse failure, retry up to 3 times with 100ms back-off before exiting non-zero — covers the narrow window between `unlink` and `rename` on filesystems that don't honour POSIX rename atomicity.
+- Locked-file errors (Windows `PermissionError`, POSIX `EAGAIN`) MUST exit with code `2` (error / invocation problem), NOT code `1` (genuine fail) — CI orchestrators distinguish "rerun-and-it-passes" from "real violation".
+
+### R3 — Network timeouts (AI auditors)
+
+Slots 30–39 that call external LLM gateways MUST:
+
+- Set an explicit per-request timeout ≤ 60 seconds (default `requests.post(..., timeout=60)`).
+- On timeout / 5xx / Cloudflare 1010, retry up to 3 times with exponential back-off (`2**attempt` seconds, jittered ±25%).
+- After exhausted retries, the auditor MUST exit `2` (error) NOT `1` (fail) — a network outage is not a spec violation. The CI workflow MAY treat exit `2` as a soft-fail when the step is marked advisory (`continue-on-error: true`).
+- Cache invalidation MUST be content-keyed (SHA of the input bundle), so an interrupted audit run does not poison the cache with partial results.
+
+### R4 — Signal handling (runners)
+
+`run.sh` and `run.ps1` MUST install SIGTERM/SIGINT handlers that:
+
+- Forward the signal to the currently-running child script.
+- Wait up to 5 seconds for the child to exit cleanly (giving R1 atomic-write `finally` blocks a chance to fire).
+- Then SIGKILL the child and exit `130` (POSIX convention for SIGINT).
+- The handler MUST NOT leave temp files (`.tmp.<pid>`) behind — the same `finally`-block sweep that R1 mandates inside scripts also runs in the runner's exit trap.
+
+### R5 — Disk-full / read-only filesystem
+
+Any script that writes (slots 10–29) MUST detect `ENOSPC` / `EROFS` from the temp-file write and exit `2` with a stderr message `<script>: cannot write to <dir>: <errno>` — exit `1` is reserved for genuine spec-violation findings, NOT environmental failures.
 
 ---
 
