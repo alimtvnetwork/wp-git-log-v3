@@ -16,6 +16,7 @@
 #   T11 Phase P20: stamped §00 with mismatch fails default mode (per-file strict)
 #   T12 Phase P20: stamped §00 with match passes (counts as stamped + match)
 #   T13 Phase P20: --report-only overrides per-file stamp failure
+#   T14 Phase 153 Task #35-fu: latest_release() returns SemVer-MAX, not positional-first
 
 set -euo pipefail
 
@@ -195,6 +196,22 @@ t13() {
     python3 "$GATE" --spec-root "$sb" --report-only >/dev/null 2>&1
 }
 
+# T14 Phase 153 Task #35-fu: latest_release() returns SemVer-MAX, not positional-first.
+# Builds a §98 where row order does NOT equal SemVer order:
+#   ## 4.0.1 — 2026-04-29 (Phase 153 reconciliation patch, prepended top)
+#   ## 4.1.0 — 2026-04-27 (older but SemVer-higher minor release)
+# §00 banner = 4.1.0 (SemVer-max). Pre-fix gate compared 4.1.0 ↔ 4.0.1 → MISMATCH.
+# Post-fix gate compares 4.1.0 ↔ 4.1.0 (max(4.0.1, 4.1.0)) → MATCH.
+t14() {
+    local sb="$SANDBOX/t14/spec"
+    rm -rf "$SANDBOX/t14"; mkdir -p "$sb/mod"
+    printf '# Test\n\n**Version:** 4.1.0\n**Updated:** 2026-04-29\n' > "$sb/mod/00-overview.md"
+    printf '# Changelog\n\n## 4.0.1 — 2026-04-29 (reconciliation patch)\n- entry\n\n## 4.1.0 — 2026-04-27 (older minor)\n- entry\n' > "$sb/mod/98-changelog.md"
+    local out
+    out="$(python3 "$GATE" --spec-root "$sb" 2>&1)"
+    [[ "$out" == *"matches=1"* ]] && [[ "$out" == *"mismatches=0"* ]]
+}
+
 echo "test-check-version-parity.sh"
 run 1 t1
 run 2 t2
@@ -209,6 +226,7 @@ run 10 t10
 run 11 t11
 run 12 t12
 run 13 t13
+run 14 t14
 
 echo "──────────────────────────────"
 echo "PASS: $PASS    FAIL: $FAIL"
