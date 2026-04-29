@@ -46,6 +46,7 @@ This document defines testable acceptance criteria for the **Consolidated Guidel
 - **Given** the entire `spec/` tree
 - **When** `node linter-scripts/check-tree-health.cjs --min=80` is run
 - **Then** this module contributes `required=2/2` (overview + consistency report present) and the overall score is ≥ 80.
+- **Verifies:** the project-wide ≥80 tree-health floor enforced by `.github/workflows/spec-health.yml`; this module's 2/2 required-artifact contribution is part of the 168/168 strict-pass baseline (Phase 137).
 - **Source:** `linter-scripts/check-tree-health.cjs`.
 
 ---
