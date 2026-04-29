@@ -1,7 +1,9 @@
 # Consistency Report
 
-**Generated:** 2026-04-28
-**Module version:** 2.1.1
+**Generated:** 2026-04-29
+**Module version:** 2.1.2
+
+> **v2.1.2 update (Phase 150 — P3 sweep slot 10 — Verifies clauses on §97 AC-28-01..AC-28-28):** §97 deepened — Verifies-coverage 12/40 → 40/40. The pre-existing 12 Verifies on AC-28-29..AC-28-40 (Phase 16d-v) are now joined by 28 new Verifies on AC-28-01..AC-28-28. Each AC explicitly cites the §03/§04/§05/§06/§07/§08/§09/§10/§11/§17/§18 invariant it protects (detection contracts, config precedence, schema/streaming/`/fixed-log`/deterministic-serialization, exit-code class assignments, provider-binding + SSH-to-HTTPS canonicalization, `HasError` disjunction + sort/dedup, SSH-vs-TempToken lane separation, doctor contracts, OpenAPI client/server parity, JSON-Schema-as-source-of-truth). AC-28-01..AC-28-28 GWT bodies preserved verbatim. §97 v2.0.0 → v2.1.0; §00 v2.1.1 → v2.1.2; §98 [2.1.1] → [2.1.2]. AI-confidence P3 driver eliminated for `spec/28`; derived tier remains Production-Ready (already at top tier; this closes the residual Verifies-coverage gap toward the upcoming P4 stamp).
 
 > **v2.1.1 update (Phase P12 — "Deepen 9 thin section files" closed as STALE):** Backlog item inherited from audit-v4 (45/100 baseline, now superseded by audit-v5 per Phase 130). Re-audit on 2026-04-28 confirms zero deepening required: all 9 section files (`01`..`09`) carry dense tabular contract (83–132 lines each); `check-tree-health.cjs --strict` returns `168/168` with §28 at full 3/3 quality credits; internal consistency table below remains all-✅; §97 holds 28+12=40 module-specific GWT ACs; implementability score 100 (capped, deterministic). No content changed in any section file. §98 / §99 patch-bumped to v2.1.1 to record the audit disposition. Future "thin files" claims against §28 MUST cite a specific gap (missing AC coverage, broken cross-link, undefined enum value, etc.) — bare line-count arguments are not actionable per Phase P12 precedent.
 
