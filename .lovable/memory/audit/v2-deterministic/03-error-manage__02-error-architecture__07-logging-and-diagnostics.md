@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.19. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.18. Gates active: 0.
 
 ---
 
@@ -31,7 +31,7 @@
   "kind": "future-spec",
   "md_files": 6,
   "mmd_files": 1,
-  "overview_chars": 7867,
+  "overview_chars": 7876,
   "ac_chars": 5648,
   "ac_count": 11,
   "gwt_block_count": 10,
@@ -59,7 +59,7 @@
   "links_total": 6,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.19,
+  "waffle_per_kchar": 0.18,
   "child_modules": 0
 }
 ```

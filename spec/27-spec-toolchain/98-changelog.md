@@ -1,10 +1,14 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.77.1
+**Version:** 2.77.2
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.77.2 — 2026-04-29 — Phase 153 P49: AC-T-13 mechanical-lock graduation (P46-followup-3)
+- **Action**: Extended `linter-scripts/test/test-audit-deterministic-stability.sh` to cover all three generators cited in AC-T-13 `**Verifies:**`. Pre-P49 the self-test asserted byte-identity for the auditor only; AC-T-13 cites three generators (auditor + `generate-spec-index.cjs` + `generate-dashboard-data.cjs`) as a parity contract. Per P46 graduation rule (Lesson L21): a parity-AC citing N source files MUST be mechanically locked across ALL N. Added `run_twice_byte_identical()` helper that snapshots the live artifact, runs the generator twice, asserts sha256 + byte-count parity, and restores the original (working tree byte-identical pre/post). Self-test 7/7 → **13/13 assertions GREEN** (auditor 7 + spec-index 3 + dashboard-data 3). AC-T-13 `**Verifies:**` extended with `**Mechanical lock (P49):**` line citing the self-test. **No new AC, no AC-31-31 cascade, no RUBRIC bump, no gate-count change** — the existing CI step that runs the self-test now exercises 6 additional assertions automatically. Closes the third and final P46-followup; all three retroactive-graduation candidates now mechanically locked (P47=AC-31-29; P48=AC-T-11; P49=AC-T-13). §97 v2.8.0 → **v2.8.1** (verifies-clause extension; no new AC). §00 v2.77.1 → **v2.77.2**, §98 v2.77.1 → **v2.77.2**, §99 v2.74.1 → **v2.74.2**.
+- **Lesson #31** (codify): When extending a self-test that mutates working-tree artifacts, ALWAYS snapshot pre-existing output and restore it after the test. Without the restore, the self-test itself would corrupt git working state every time it runs (e.g. inserting today's date into `Generated:` lines on a tree where the prior generation was on a different date). The `run_twice_byte_identical()` helper formalizes the snapshot-restore contract for any future generator added to AC-T-13's parity set.
 
 ### 2.77.1 — 2026-04-29 — Phase 153 Task #35-fu: slot 29 `latest_release()` SemVer-max comparator (AC-29-15, slot 29 v1.2.0 → v1.3.0)
 - **Action**: Patched `linter-scripts/check-version-parity.py:latest_release()` to return the SemVer-MAXIMUM release version found in §98 instead of the positional-first one. Added `_semver_key(v)` helper that parses `X.Y.Z` into a comparable `(int, int, int)` tuple. Closes 15 false-positive parity FAILs accumulated during Phase 153 Tasks #29c/d/e/#31 — those sub-tasks prepended SemVer-LOWER patch reconciliation rows above older SemVer-HIGHER minor releases (e.g. `### 4.0.1` above `## 4.1.0`); the prior comparator returned `4.0.1` while §00 banners correctly tracked the SemVer max.

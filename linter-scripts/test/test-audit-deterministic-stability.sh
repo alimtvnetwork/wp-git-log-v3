@@ -131,6 +131,93 @@ else
   note_fail "Modules NOT sorted by name (DETERMINISTIC mode broken: $SORTED1)"
 fi
 
+# ─── P49 / AC-T-13 extension: spec-index + dashboard-data generators ─
+# Per Lesson #21 (parity-AC graduation): a determinism contract that cites
+# multiple generators MUST be mechanically locked across ALL of them, not
+# just the first. AC-T-13 cites three generators; this self-test originally
+# covered only the auditor. P49 (P46-followup-3) adds coverage for:
+#   - linter-scripts/generate-spec-index.cjs   → spec/spec-index.md
+#   - linter-scripts/generate-dashboard-data.cjs → spec/dashboard-data.json
+# Both generators are pure single-day deterministic (the only wall-clock
+# value is `new Date().toISOString().slice(0,10)` which is stable across
+# back-to-back runs), so two-run byte-identity is the right contract.
+
+run_twice_byte_identical() {
+  # $1 = label, $2 = node script path, $3 = output file (relative to repo root)
+  local label="$1" script="$2" out_rel="$3"
+  local out_abs="$REPO_ROOT/$out_rel"
+  local backup="$TMP_DIR/${label}.backup"
+  local r1="$TMP_DIR/${label}.run1"
+  local r2="$TMP_DIR/${label}.run2"
+
+  if [ ! -f "$script" ]; then
+    note_fail "$label: generator not found at $script"
+    return
+  fi
+
+  # Snapshot pre-existing artifact so we can restore it (the working tree
+  # MUST be byte-identical before and after this self-test).
+  if [ -f "$out_abs" ]; then
+    cp "$out_abs" "$backup"
+  fi
+
+  echo "Run 1: node $(basename "$script")"
+  if ! node "$script" >"$TMP_DIR/${label}.log1" 2>&1; then
+    note_fail "$label: Run 1 exited non-zero"
+    tail -10 "$TMP_DIR/${label}.log1"
+    [ -f "$backup" ] && cp "$backup" "$out_abs"
+    return
+  fi
+  if [ ! -f "$out_abs" ]; then
+    note_fail "$label: Run 1 did not write $out_rel"
+    return
+  fi
+  cp "$out_abs" "$r1"
+  note_pass "$label: Run 1 wrote $out_rel"
+
+  echo "Run 2: same invocation"
+  if ! node "$script" >"$TMP_DIR/${label}.log2" 2>&1; then
+    note_fail "$label: Run 2 exited non-zero"
+    tail -10 "$TMP_DIR/${label}.log2"
+    [ -f "$backup" ] && cp "$backup" "$out_abs"
+    return
+  fi
+  cp "$out_abs" "$r2"
+
+  local h1 h2
+  h1="$(sha256sum < "$r1" | awk '{print $1}')"
+  h2="$(sha256sum < "$r2" | awk '{print $1}')"
+  if [ "$h1" = "$h2" ]; then
+    note_pass "$label: $out_rel sha256 identical across both runs ($h1)"
+  else
+    note_fail "$label: $out_rel DIFFERS between runs (run1=$h1 run2=$h2)"
+  fi
+
+  local s1 s2
+  s1="$(wc -c < "$r1")"
+  s2="$(wc -c < "$r2")"
+  if [ "$s1" = "$s2" ]; then
+    note_pass "$label: byte size identical ($s1 bytes)"
+  else
+    note_fail "$label: byte size differs (run1=$s1 run2=$s2)"
+  fi
+
+  # Restore pre-existing artifact (working tree contract).
+  if [ -f "$backup" ]; then
+    cp "$backup" "$out_abs"
+  fi
+}
+
+echo ""
+echo "P49 / AC-T-13 — generate-spec-index.cjs determinism"
+echo "----------------------------------------------------"
+run_twice_byte_identical "spec-index" "$SCRIPT_DIR/generate-spec-index.cjs" "spec/spec-index.md"
+
+echo ""
+echo "P49 / AC-T-13 — generate-dashboard-data.cjs determinism"
+echo "--------------------------------------------------------"
+run_twice_byte_identical "dashboard-data" "$SCRIPT_DIR/generate-dashboard-data.cjs" "spec/dashboard-data.json"
+
 # ─── Cleanup ───────────────────────────────────────────────────────
 rm -rf "$TMP_DIR"
 
@@ -141,4 +228,4 @@ if [ "$FAIL" -gt 0 ]; then
   echo "❌ Determinism contract violated."
   exit 1
 fi
-echo "✅ Determinism contract intact (raw-results.json is byte-identical)."
+echo "✅ Determinism contract intact (auditor + spec-index + dashboard-data byte-identical)."

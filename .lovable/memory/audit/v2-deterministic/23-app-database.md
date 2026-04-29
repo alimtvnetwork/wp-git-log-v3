@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/23-app-database.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.0. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=14, gwt=13, broken_links=0, waffle/kchar=0.04. Gates active: 0.
 
 ---
 
@@ -31,14 +31,14 @@
   "kind": "module",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 19793,
-  "ac_chars": 5833,
-  "ac_count": 11,
-  "gwt_block_count": 10,
+  "overview_chars": 19806,
+  "ac_chars": 12989,
+  "ac_count": 14,
+  "gwt_block_count": 13,
   "consistency_report": true,
-  "code_blocks_total": 20,
+  "code_blocks_total": 21,
   "code_blocks_by_lang": {
-    "sql": 11,
+    "sql": 12,
     "bash": 1,
     "ts": 1,
     "json": 1,
@@ -56,7 +56,7 @@
   "links_total": 11,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.0,
+  "waffle_per_kchar": 0.04,
   "child_modules": 0
 }
 ```

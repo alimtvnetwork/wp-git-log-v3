@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.8.0
-**Updated:** 2026-04-29 (Phase 153 Task A9: AC-T-27/28/29 codify CODE_GLOB exhaustiveness, R1–R5 resilience contract, per-artifact AC delegation. Module AC count 26 → 29 — closes spec/27 audit findings D1/D2/D3. Lift expected 75 → 88+.)
+**Version:** 2.8.1
+**Updated:** 2026-04-29 (Phase 153 P49: AC-T-13 mechanical-lock graduation — `test-audit-deterministic-stability.sh` extended to cover all three generators cited in `**Verifies:**` (auditor + spec-index + dashboard-data). 7 → 13 assertions; closes P46-followup-3.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -75,7 +75,7 @@
 - **Given** any generator in slots 10–19 (e.g. `generate-spec-index.cjs`, `generate-dashboard-data.cjs`, `generate-trace-map.py`),
 - **When** the generator is run twice on the same `spec/` snapshot (no edits between runs),
 - **Then** the produced artifact MUST be **byte-identical** between runs — no embedded `Date.now()`, no `Math.random()`, no environment-leaked values (`$USER`, `$HOSTNAME`, `process.env.CI`), no map-iteration order non-determinism (use `Array.from(map).sort()` or equivalent). Embedded `Generated: <date>` lines MUST use a **content-derived** timestamp (`git log -1 --format=%cI` of the latest spec-tree change) rather than `new Date()` — non-deterministic generators trigger phantom diffs that drown real changes in PRs.
-- **Verifies:** AC-T-01 bijection (regenerated artifacts must round-trip); `linter-scripts/generate-spec-index.cjs`; `linter-scripts/generate-dashboard-data.cjs`.
+- **Verifies:** AC-T-01 bijection (regenerated artifacts must round-trip); `linter-scripts/generate-spec-index.cjs`; `linter-scripts/generate-dashboard-data.cjs`; `linter-scripts/audit-spec-vs-code-v2.py` (extended coverage). **Mechanical lock (P49):** `linter-scripts/test/test-audit-deterministic-stability.sh` runs each generator twice on the live `spec/` tree and asserts byte-identical output (sha256 + byte-count) across runs — auditor + spec-index + dashboard-data, snapshot-restore-safe (working tree byte-identical pre/post). 13/13 assertions GREEN.
 
 ### AC-T-14 — Auditor scripts MUST emit machine-readable JSON alongside human-readable Markdown
 - **Given** any auditor script in slots 30–39 (`audit-spec-vs-code.py`, `audit-spec-vs-code-v2.py`),

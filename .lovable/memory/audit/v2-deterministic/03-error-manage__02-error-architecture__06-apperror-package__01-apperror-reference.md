@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.19. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.18. Gates active: 0.
 
 ---
 
@@ -32,7 +32,7 @@
   "md_files": 11,
   "mmd_files": 1,
   "overview_chars": 8590,
-  "ac_chars": 4312,
+  "ac_chars": 4948,
   "ac_count": 8,
   "gwt_block_count": 8,
   "consistency_report": true,
@@ -59,7 +59,7 @@
   "links_total": 29,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.19,
+  "waffle_per_kchar": 0.18,
   "child_modules": 0
 }
 ```

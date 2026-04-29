@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/07-design-system.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.2. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.19. Gates active: 0.
 
 ---
 
@@ -31,8 +31,8 @@
   "kind": "",
   "md_files": 17,
   "mmd_files": 1,
-  "overview_chars": 16846,
-  "ac_chars": 57625,
+  "overview_chars": 16847,
+  "ac_chars": 65519,
   "ac_count": 34,
   "gwt_block_count": 34,
   "consistency_report": true,
@@ -62,7 +62,7 @@
   "links_total": 58,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.2,
+  "waffle_per_kchar": 0.19,
   "child_modules": 0
 }
 ```
