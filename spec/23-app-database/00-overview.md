@@ -6,7 +6,7 @@ description: App-specific database tables (App, AppLink, AppStatus, AppLinkType)
 # App Database
 
 <!-- h10-verified-phase: 153 -->
-**Version:** 4.0.3
+**Version:** 4.1.0
 **Updated:** 2026-04-29
 **AI Confidence:** Production-Ready
 **Ambiguity:** None
@@ -152,6 +152,53 @@ CREATE INDEX IF NOT EXISTS IX_AppLink_Active             ON AppLink(AppId, IsAct
 INSERT OR IGNORE INTO AppStatus  (Name) VALUES ('Active'), ('Disabled'), ('Archived');
 INSERT OR IGNORE INTO AppLinkType(Name) VALUES ('GitProfile'), ('Repo');
 ```
+
+---
+
+## Polymorphic AppLink Resolution (Normative)
+
+> Closes Phase 153 P48-3 / P47-fu1 finding "23-adb polymorphic AppLink resolution". This section is the **single source of truth** for how the `AppLinkTypeId` discriminator binds an AppLink row to its concrete target table — auditors and implementers MUST NOT infer the algorithm from the DDL or the Q1 SQL alone.
+
+### Discriminator → Target binding table
+
+| `AppLinkType.Name` | Locked `AppLinkTypeId` (per AC-ADB-13) | Required non-NULL column | Required NULL column | Target table | Target PK column | Resolution surface |
+|---|---|---|---|---|---|---|
+| `GitProfile` | `1` | `TargetGitProfileId` | `TargetRepoId` | `GitProfile` | `GitProfileId` | All `Repo` rows whose `GitProfileId = AppLink.TargetGitProfileId` resolve to this App (transitive — any push to any repo under that GitProfile attributes to this App) |
+| `Repo` | `2` | `TargetRepoId` | `TargetGitProfileId` | `Repo` | `RepoId` | Only the single `Repo` row whose `RepoId = AppLink.TargetRepoId` resolves to this App (direct — most specific) |
+
+The XOR target invariant (AC-ADB-05) and the locked-ID seed (AC-ADB-13) together guarantee every active `AppLink` row matches exactly one row of this table.
+
+### Resolution algorithm — inbound RepoUrl → App (normative)
+
+Given an inbound canonicalised `:repoUrl`, the resolver MUST execute the following deterministic 4-step procedure (Q1 in the Query Patterns section is the SQL realisation of this algorithm — the prose is authoritative):
+
+1. **Canonicalise** `:repoUrl` (lowercase host, strip trailing `.git`, strip trailing `/`, normalise SSH `git@host:owner/repo` → `https://host/owner/repo`). Implementations MUST apply the same canonicalisation pipeline used when `Repo.RepoUrl` was inserted.
+2. **Direct (Repo) candidates** — find every `AppLink` row where `IsActive = 1 AND AppLinkTypeId = 2 AND TargetRepoId = (SELECT RepoId FROM Repo WHERE RepoUrl = :repoUrl)`.
+3. **Transitive (GitProfile) candidates** — find every `AppLink` row where `IsActive = 1 AND AppLinkTypeId = 1 AND TargetGitProfileId = (SELECT GitProfileId FROM Repo WHERE RepoUrl = :repoUrl)`.
+4. **Tie-break (precedence)** — combine the two candidate sets and apply this ordering, returning the FIRST row:
+   1. **Direct (Repo) wins over Transitive (GitProfile).** Specificity wins. If step 2 returns ≥1 row, step 3's results MUST be discarded.
+   2. **Within the same specificity class, newer `CreatedAt` wins.** Most-recently-connected link wins on ties (covers the legitimate case where an admin re-connected a target after a misconfiguration).
+   3. **App must be Active.** The resolved App's `AppStatusId` MUST point to `AppStatus.Name = 'Active'`. Apps with status `Disabled` or `Archived` MUST NOT receive attribution; the inbound push MUST be rejected with a "no active App for this target" error (NOT silently fall through to the next candidate).
+
+### Resolution states (closed enumeration)
+
+Every inbound `:repoUrl` resolution call MUST terminate in exactly one of these four states — implementations MUST NOT invent additional outcomes:
+
+| State | Trigger | Required handler behaviour |
+|---|---|---|
+| `RESOLVED_DIRECT` | Step 2 returned ≥1 row, top candidate's App is Active | Attribute push to the App; record the winning `AppLinkId` in the push audit log. |
+| `RESOLVED_TRANSITIVE` | Step 2 returned 0 rows, step 3 returned ≥1 row, top candidate's App is Active | Attribute push to the App; record the winning `AppLinkId` AND the matched `RepoId` (so the audit log shows WHICH repo under the GitProfile triggered the match). |
+| `REJECTED_INACTIVE_APP` | A candidate row exists but its App's `AppStatusId` is `Disabled` or `Archived` | Reject with HTTP 410 Gone (or equivalent transport-level signal); do NOT silently fall through to the next candidate. |
+| `REJECTED_NO_MATCH` | No active `AppLink` row matches `:repoUrl` after step 4 | Reject with HTTP 404 Not Found; the push is unattributed. |
+
+### Forbidden resolution patterns
+
+Implementers MUST NOT:
+
+- Attribute a push to an `App` whose `AppStatusId` is not `Active` (state `REJECTED_INACTIVE_APP` is non-skippable).
+- Attribute a push to an `AppLink` row where `IsActive = 0` (the soft-disconnect invariant from AC-ADB-06 is load-bearing for resolution correctness).
+- Treat steps 2 and 3 as union-with-no-precedence — Direct MUST win over Transitive deterministically; tied-precedence resolution is forbidden because it would make push attribution non-deterministic across replicas.
+- Bypass the `Repo` table lookup in step 3 by joining `AppLink` directly to `GitProfile` (the inbound `:repoUrl` carries no GitProfile hint — the only path is `RepoUrl → Repo.GitProfileId → AppLink.TargetGitProfileId`).
 
 ---
 

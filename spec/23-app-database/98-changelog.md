@@ -1,10 +1,16 @@
 # Changelog — App Database
 
-**Version:** 4.0.2
+**Version:** 4.1.0
 **Updated:** 2026-04-29
 **Scope:** `spec/23-app-database/`
 
 ---
+
+### 4.1.0 — 2026-04-29 — Phase 153 P48-3: Polymorphic AppLink resolution algorithm lifted to normative prose
+- **Added** §00 "Polymorphic AppLink Resolution (Normative)" section: discriminator → target binding table (locked IDs 1/2 per AC-ADB-13), 4-step resolution algorithm (canonicalise → Direct candidates → Transitive candidates → tie-break Direct>Transitive>newer-CreatedAt), 4-state closed-enumeration outcome table (`RESOLVED_DIRECT`, `RESOLVED_TRANSITIVE`, `REJECTED_INACTIVE_APP`, `REJECTED_NO_MATCH`), and forbidden-patterns subsection (no inactive-App attribution, no `IsActive = 0` row use, no non-deterministic tie-break, no `AppLink → GitProfile` short-circuit bypassing the `Repo` table).
+- **Added** AC-ADB-14 (`[critical]`) binding the resolution algorithm; cross-references AC-ADB-05/06/10/13 as load-bearing prerequisites; codifies **Lesson #33** — polymorphic-FK resolution algorithms MUST be lifted to normative prose with closed-enumeration outcomes (example SQL is illustrative, not authoritative; `ORDER BY`-encoded precedence is invisible to auditors and fresh implementers).
+- **Closes** Phase 153 P47-fu1 critical finding "23-adb polymorphic AppLink resolution" (the 2nd of 3 P47-fu1 critical findings; #16 P48-2 closed earlier today, #18 P48-4 still open).
+- **Banners**: §00 v4.0.3 → **v4.1.0** (minor — new normative subsection adds a public contract surface); §97 v3.1.0 → **v3.2.0** (minor — AC count 13 → 14); §98 v4.0.2 → **v4.1.0**; §99 v2.0.3 → **v2.1.0**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade** (no new linter slot — algorithm is enforced by the `app-database` binary at runtime, not by a static checker; future static-checker contributions can land as a §97 extension AC).
 
 ### 4.0.2 — 2026-04-29 — Phase 153 Task #29e: AI Confidence promoted High → Production-Ready
 - Phase 153 Task #29e — promoted `**AI Confidence:**` from `High` to `Production-Ready`. Pure banner edit: this module already passes P1+P2+P3+P4 per `check-ai-confidence.py`; the prior `High` value was a stale underclaim. **No AC change, no CI workflow change, no RUBRIC bump.**
