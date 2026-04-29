@@ -1,7 +1,7 @@
 # Acceptance Criteria — Error Resolution
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/03-error-manage/01-error-resolution/`
 
 ---

@@ -1,7 +1,7 @@
 # Acceptance Criteria — Go Binary Deploy — Overview
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/02-go-binary-deploy/`
 
 ---

@@ -1,7 +1,7 @@
 # Acceptance Criteria — Split DB Architecture — Features Index
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/05-split-db-architecture/02-features/`
 
 ---

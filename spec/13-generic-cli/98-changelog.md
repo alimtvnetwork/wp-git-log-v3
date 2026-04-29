@@ -1,7 +1,7 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-26  
+**Version:** 1.1.1  
+**Updated:** 2026-04-29  
 **Scope:** `spec/13-generic-cli/`
 
 ---
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+
+### 1.1.1 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
+- **Action**: Phase 153 Task #31 bulk sweep — added `**Verifies:**` lines to all 8 boilerplate ACs (AC-01..AC-08) anchored to §00 baseline / sibling spec / linter scripts. Closes the audit-v6 boilerplate blind spot for this module.
+- **Lockstep**: §97 v2.0.0 → **v2.1.0**; §99 lockstep update.
 
 ### 1.1.0 — 2026-04-26
 - **Phase 16a — Deepen §97 with module-specific GWT ACs.** §97 banner v1.0.0 → v2.0.0 (major bump because the AC count more than tripled — 5 → 20 — and the new ACs validate a different surface (the CLI implementation) than the original 5 (the spec module structure)).

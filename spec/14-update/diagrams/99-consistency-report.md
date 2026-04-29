@@ -1,7 +1,10 @@
 # Consistency Report — diagrams
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-27  
+**Version:** 1.1.1  
+**Updated:** 2026-04-29  
+
+> **v1.1.1 update (Phase 153 Task #31):** §97 boilerplate ACs (AC-01..AC-08) gained `**Verifies:**` clauses (8 added). Bulk sweep closes the audit-v6 boilerplate blind spot tree-wide. §97 v1.0.0→**v1.1.0**; §98 v1.2.0→**v1.2.1**.
+
 **Scope:** `spec/14-update/diagrams/`
 
 ---

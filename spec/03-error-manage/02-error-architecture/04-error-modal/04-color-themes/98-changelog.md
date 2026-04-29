@@ -1,7 +1,7 @@
 # Changelog — Color Theme & Design Token Reference (Index)
 
-**Version:** 3.0.1
-**Updated:** 2026-04-28
+**Version:** 3.0.2
+**Updated:** 2026-04-29
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/`
 
 ---
@@ -24,6 +24,11 @@
 ---
 
 ## Releases
+
+
+### 3.0.2 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
+- **Action**: Phase 153 Task #31 bulk sweep — added `**Verifies:**` lines to all 8 boilerplate ACs (AC-01..AC-08) anchored to §00 baseline / sibling spec / linter scripts. Closes the audit-v6 boilerplate blind spot for this module.
+- **Lockstep**: §97 v1.0.0 → **v1.1.0**; §99 lockstep update.
 
 ### 3.0.0 — 2026-04-27 (Phase 72 — CI workflow contract — promoted by Phase P28)
 - **Added** Inlined 5-stage CI workflow contract (yaml) in `00-overview.md` — satisfies `has_ci_workflow` rubric gate (+5 impl, 90 → 95). Documentation-only promotion of CI surface; no behavioural rules changed. **Major bump** rationale: new normative CI workflow surface (per P23/P24/P26 precedent — any new normative public/CI surface = major). Reconstructed by Phase P28 from post-footer prose `## 2026-04-27 — Phase 72 (impl 90 → 95)`.

@@ -1,7 +1,7 @@
 # Acceptance Criteria — AppError Package Reference
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference/`
 
 ---

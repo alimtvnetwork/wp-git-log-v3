@@ -1,7 +1,7 @@
 # Acceptance Criteria — Enum Specification
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/02-coding-guidelines/03-golang/01-enum-specification/`
 
 ---

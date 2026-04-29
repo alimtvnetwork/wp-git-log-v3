@@ -1,7 +1,7 @@
 # Acceptance Criteria — Generic CLI Creation Guidelines — Overview
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26  
+**Version:** 2.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/13-generic-cli/`
 
 > **v2.0.0 (Phase 16a):** Added 15 module-specific Given/When/Then ACs (AC-06..AC-20) covering subcommand dispatch, flag parsing, three-layer config, multi-format output, exit-code contract, code-style limits, embedded help, date formatting, constants discipline, verbose logging, progress tracking, batch execution, shell completion, terminal output design, and post-install shell activation. The 5 generic structural ACs (AC-01..AC-05) are preserved verbatim — they validate the spec module itself; AC-06+ validate the **CLI implementation** that consumes the spec.

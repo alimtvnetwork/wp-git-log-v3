@@ -1,6 +1,6 @@
 # Consistency Report — Browser Extension Deploy
 
-**Version:** 3.5.0  
+**Version:** 3.5.1  
 
 > **v3.5.0 update (Phase P29 — P25-pure dual-stream batch reconciliation):** §98 header `1.2.0`→`3.4.1` to align with §00 banner; §00 banner `3.4.0`→`3.4.1`; H10 stamp added; ladder body untouched. Part of Phase P29 batch (8 modules).
 **Generated:** 2026-04-28  

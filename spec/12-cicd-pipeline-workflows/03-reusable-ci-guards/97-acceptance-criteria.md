@@ -1,7 +1,7 @@
 # Acceptance Criteria — Reusable CI Guards — AI-Implementation Guide
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/03-reusable-ci-guards/`
 
 ---

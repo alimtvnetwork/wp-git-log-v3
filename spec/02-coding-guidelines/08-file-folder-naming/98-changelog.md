@@ -1,7 +1,7 @@
 # Changelog — File & Folder Naming Conventions
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-27  
+**Version:** 1.2.1  
+**Updated:** 2026-04-29  
 **Scope:** `spec/02-coding-guidelines/08-file-folder-naming/`
 
 ---
@@ -20,6 +20,11 @@
 ---
 
 ## Releases
+
+
+### 1.2.1 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
+- **Action**: Phase 153 Task #31 bulk sweep — added `**Verifies:**` lines to all 8 boilerplate ACs (AC-01..AC-08) anchored to §00 baseline / sibling spec / linter scripts. Closes the audit-v6 boilerplate blind spot for this module.
+- **Lockstep**: §97 v1.0.0 → **v1.1.0**; §99 lockstep update.
 
 ### 1.3.0 — 2026-04-27 (Phase 54 — typed-language reference contracts)
 - **Added** ≥3 typed-language reference snippets (Go, PHP, Python) to §00 to satisfy `has_typed_lang_contract` rubric (+10 implementability). Implements `FileAndFolderNamingRule` mirror across 3 typed languages.

@@ -1,7 +1,7 @@
 # Changelog — App Issues
 
-**Version:** 3.3.1  
-**Updated:** 2026-04-28  
+**Version:** 3.3.2  
+**Updated:** 2026-04-29  
 **Scope:** `spec/02-coding-guidelines/22-app-issues/`
 
 ---
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+
+### 3.3.2 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
+- **Action**: Phase 153 Task #31 bulk sweep — added `**Verifies:**` lines to all 8 boilerplate ACs (AC-01..AC-08) anchored to §00 baseline / sibling spec / linter scripts. Closes the audit-v6 boilerplate blind spot for this module.
+- **Lockstep**: §97 v1.0.0 → **v1.1.0**; §99 lockstep update.
 
 ### 3.3.1 — 2026-04-28 — Phase P30 batch reconciliation
 - §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.

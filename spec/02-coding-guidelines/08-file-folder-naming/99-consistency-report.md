@@ -1,6 +1,6 @@
 # Consistency Report — File & Folder Naming
 
-**Version:** 1.3.0  
+**Version:** 1.3.1  
 **Generated:** 2026-04-27  
 **Health Score:** 100/100 (A+) — Phase 42 inlined-contract sweep  
 

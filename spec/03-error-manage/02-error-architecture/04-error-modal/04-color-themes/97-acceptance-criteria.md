@@ -1,7 +1,7 @@
 # Acceptance Criteria — Color Theme & Design Token Reference (Index)
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-26  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/03-error-manage/02-error-architecture/04-error-modal/04-color-themes/`
 
 ---

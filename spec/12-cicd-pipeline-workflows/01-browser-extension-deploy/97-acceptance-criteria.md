@@ -1,7 +1,7 @@
 # Acceptance Criteria — Browser Extension Deploy — Overview
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/`
 
 ---

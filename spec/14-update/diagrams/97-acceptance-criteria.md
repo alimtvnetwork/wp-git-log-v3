@@ -1,7 +1,7 @@
 # Acceptance Criteria — Diagrams — Self-Update & App Update
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/14-update/diagrams/`
 
 ---

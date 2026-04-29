@@ -1,6 +1,6 @@
 # Consistency Report — Axios Version Control
 
-**Version:** 3.4.0  
+**Version:** 3.4.1  
 **Generated:** 2026-04-28  
 **Health Score:** 100/100 (A+) — Phase P23 H10 reverse-drift reconstruction
 
