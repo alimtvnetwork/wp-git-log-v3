@@ -53,7 +53,7 @@ The script computes a **derived** tier by walking gates P1 → P4 in order; the 
 
 | Gate | Passes when |
 |------|-------------|
-| **P1** | §00 lists every sibling `.md` (excluding meta-slots `97`/`98`/`99`) AND `**Updated:**` year matches current calendar year. |
+| **P1** | §00 lists every sibling `.md` (excluding meta-slots `97`/`98`/`99`) AND `**Updated:**` year matches current calendar year. **Inventory regex** matches any `](./<basename>.md)` reference where the basename starts with an alphanumeric character (e.g. `01-foo.md`, `consolidated-review-guide.md`, `readme.md`, `changelog.md`, `structure.md`) — non-numeric-prefix siblings ARE legitimate inventory entries (precedent: §02 review-guide files, §03 `structure.md`, §12/§14 `readme.md`, §18 `readme.md`/`changelog.md`). |
 | **P2** | P1 holds AND §97 contains ≥1 `**Given**`/`**When**`/`**Then**` marker AND no `*.md` in the module ends with a truncation marker (`...`, `…`, bare `TODO`/`TBD`/`FIXME`). |
 | **P3** | P2 holds AND every `### AC-…` heading in §97 has a `**Verifies:**` clause. |
 | **P4** | P3 holds AND module dir name appears in `.github/workflows/spec-health.yml` AND §99 carries a `<!-- verified-phase: NNN -->` stamp ≤ 30 phases stale relative to the highest stamp anywhere in the tree. |
