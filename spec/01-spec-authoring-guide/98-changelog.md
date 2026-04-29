@@ -5,6 +5,10 @@
 
 ---
 
+## 4.13.2 — 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 8 — `### AC-SAG-LEGACY` Verifies clauses)
+
+- **Added** group-level `**Verifies:**` clauses to all four `### AC-SAG-LEGACY` block headings in `97-acceptance-criteria.md` (v4.8.0 → v4.9.0): "Folder Structure & Required Files", "Naming Conventions", "Overview Content Standards", "Cross-References & Validation". Each clause names (a) the GWT-rewrite supersession chain (`Verifies:` chain references in the new GWT ACs above), (b) the AC-SAG-28 exemption-regex contract (`^AC-[A-Z]+-LEGACY(-\d+)?$`) that any future `check-ac-gwt-completeness.py` MUST honor. Closes the P3-tier `**Verifies:**` gap for this module (28/32 → 32/32 — the smallest remaining gap among P3 drifters). Graduates this module's AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)* gate P3. No semantic change to acceptance surface — purely a verifiability uplift on the LEGACY scaffolds (which remain exempt from GWT-completeness denominators per AC-SAG-28). §00 banner 4.13.1 → 4.13.2; §97 4.8.0 → 4.9.0; §99 row added below.
+
 ## 4.13.1 — 2026-04-29 (Phase P48-1-fu1-batch slot 2 — §00 inventory drift fix, slot 04 co-location)
 
 - **Fixed** `00-overview.md` inventory table — added missing row for the second slot-04 occupant `04-ai-onboarding-prompt.md` (co-located with `04-cli-module-template.md` per the immutable-slot rule, disambiguated by trailing slug). The file was on disk but absent from the §00 inventory, leaving `check-ai-confidence.py` to flag this folder as a P1 drifter (`declared='Production-Ready'`, `derived=None`, reason `1 sibling not in inventory`). Single-row patch; restores P1 → pass and unblocks tier re-derivation. Bumps to **4.13.1** (patch — pure inventory sync, no normative surface change). Follows the precedent established by Phase P48-1-fu1-batch slot 1 (§17 v3.4.1).
