@@ -23,6 +23,7 @@ This document defines testable acceptance criteria for the **Update — Overview
 - **When** `00-overview.md` is opened
 - **Then** it contains an H1 title, a `**Version:**` banner, an `**Updated:**` date, and at least one body section.
 - **Source:** `00-overview.md`
+- **Verifies:** Required-files structural floor (overview presence + version/date banner) — the universal `kind: spec` invariant from `spec/01-spec-authoring-guide/03-required-files.md` enforced by `linter-scripts/check-tree-health.cjs`.
 
 ### AC-02: All sibling files referenced from the overview are present on disk
 - **Given** the link inventory in `00-overview.md`
