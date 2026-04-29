@@ -82,6 +82,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the server returns `401 GL-AUTH-TEMPTOKEN-INVALID` on first POST,
 - **When** the CLI processes the response,
 - **Then** the CLI MUST NOT retry AND MUST exit `3` AND stderr MUST surface the verbatim server `ErrorCode`.
+- **Verifies:** §06 4xx-is-deterministic invariant (no retry on client error); §07 exit-code-3 for server-rejected; verbatim-ErrorCode passthrough for diagnosability (mirrors `mem://specs/git-logs` Q3 server-error-code contract).
 
 ### AC-28-12 — 5xx triggers exponential backoff
 
