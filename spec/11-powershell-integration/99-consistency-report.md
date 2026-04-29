@@ -1,8 +1,10 @@
 # Consistency Report — PowerShell Integration
 
-**Version:** 3.4.1  
+**Version:** 3.5.0  
 **Generated:** 2026-04-29  
-**Health Score:** 100/100 (A+) — Phase 153 Verifies-coverage closure
+**Health Score:** 100/100 (A+) — Phase 153 P48-4 per-step pipeline contract closure
+
+> **v3.5.0 (Phase 153 P48-4 — final P47-fu1 critical finding):** Lifted §00 "Pipeline Steps" to a normative per-step contract — 5-row table with inputs / outputs / success criteria / disjoint top exit code (`{1..10}`) / cross-walk to detailed `9500..9599` codes; 3-row pre-flight config-codes table; 5-rule forbidden-patterns list. Bound as **AC-09** (`[critical]`). Banners: §00 spec-version 2.26.1 → **2.27.0**, §97 v1.1.0 → **v1.2.0** (count 8→9), §98 v1.2.0 → **v1.3.0**, §99 v3.4.1 → **v3.5.0**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade.** **All 3 P47-fu1 critical findings now CLOSED** (P48-2 boolean storage, P48-3 AppLink resolution, P48-4 pipeline contract). **Lesson #34**: Multi-step pipeline contracts MUST lift the per-step inputs/outputs/success/exit-code contract to a single normative table on the entry-point document — fragmenting across sibling files (steps in §00, exit codes in §04, deps in §07) is invisible to LLM auditors and fresh implementers; closed-enumeration top exit codes with disjoint per-step ownership is the canonical fix (mirror of Lessons #19/#21/#26/#33 — audit-boundary < verification-boundary requires inlined contract surface).
 
 > **v3.4.1 (Phase 153):** §97 v1.0.0 → v1.1.0 — added `**Verifies:**` clauses to all 8 boilerplate ACs (AC-01..AC-08), closing the real P3 Verifies-coverage gap that audit-v6 (Phase 152) baseline missed. Module now satisfies the tree-wide P3-CLOSED claim recorded in `mem://index.md` Core.
 >

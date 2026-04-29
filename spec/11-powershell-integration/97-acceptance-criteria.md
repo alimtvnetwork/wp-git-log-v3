@@ -1,6 +1,6 @@
 # Acceptance Criteria — PowerShell Integration for Project Runner
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-29  
 **Scope:** `spec/11-powershell-integration/`
 
@@ -71,6 +71,13 @@ This document defines testable acceptance criteria for the **PowerShell Integrat
 - **Then** that date MUST also appear as a section header in `99-consistency-report.md`; the strict gate (Phase 81) blocks merge on any mismatch.
 - **Source:** `linter-scripts/check-lockstep.cjs`.
 - **Verifies:** `linter-scripts/check-lockstep.cjs` §strict date+phase parity
+
+### AC-09: Per-step pipeline contract with closed exit-code enumeration (Phase 153 P48-4)  `[critical]`
+- **Given** the 5-stage pipeline declared in `00-overview.md` § "Pipeline Steps" (1 Git Pull → 2 Prerequisites → 3 pnpm Install → 4 Frontend Build → 5 Copy & Run) AND the existing `04-error-codes.md` top-level exit codes (`0..10`) and detailed `9500..9599` codes AND the pinned dependency toolchain in `07-runner-interface.md`,
+- **When** any implementer authors or audits the PowerShell runner (`run.ps1`),
+- **Then** the implementer MUST follow the **Per-Step Contract (Normative)** subsection in `00-overview.md` § "Pipeline Steps" — every step has an explicit (a) inputs row drawn from `powershell.json` + `Param()` flags, (b) outputs / side effects row, (c) success criteria row, (d) **disjoint** top exit-code subset from `{1..10}`, (e) cross-walk to the detailed `9500..9599` codes that map under that top code. Pre-flight (configuration) exit codes `{5, 6, 7}` apply BEFORE Step 1 and are NOT step-attributed. The runner MUST exit on the FIRST failing step (fail-fast — later steps MUST NOT execute). The runner MUST NOT (1) continue to step `N+1` after step `N` returned non-zero, (2) emit a top exit code outside `{0, 1..10}` without first extending the per-step contract table + shipping a §98 release row, (3) emit a detailed `9500..9599` code without ALSO setting the paired top exit code, (4) map a single top exit code to multiple steps (disjointness is load-bearing for unambiguous attribution from exit code alone), (5) treat `-SkipPull` / `-SkipBuild` / `-BuildOnly` as success without satisfying the additional success criteria for that step (e.g. `-BuildOnly` still requires copy success). This codifies the **Phase 153 P47-fu1 critical finding** "Pipeline Steps (1. Git Pull → 2. Prerequisites → 3. pnpm Install → 4. Build → 5. Run) — overview lists pipeline steps but provides no detailed contract for each step's expected behavior, inputs, outputs, or error handling". Mirrors `spec/02 AC-CG-21` Subfolder Delegation Map / `spec/23 AC-ADB-14` Polymorphic AppLink Resolution / `spec/27 AC-T-29` per-artifact AC delegation (Lessons #19/#21/#26/#33): when a contract surface lives implicitly across multiple sibling files, it is invisible to context-window-bounded auditors and to fresh implementers — the contract MUST be lifted into a single normative table on the entry-point document with closed-enumeration codes and forbidden patterns.
+- **Source:** `00-overview.md` § "Pipeline Steps" → "Per-Step Contract (Normative)" (table + pre-flight codes + forbidden runtime patterns subsections).
+- **Verifies:** `00-overview.md` § "Pipeline Steps" → "Per-Step Contract (Normative)" (5 step rows × 5 columns + 3 pre-flight rows + 5 forbidden patterns); `04-error-codes.md` § "Exit Codes" (top `0..10` band — paired with per-step rows); `04-error-codes.md` § "Detailed Error Codes" (`9500..9599` bands — paired with per-step rows); `07-runner-interface.md` (CLI `Param()` block + minimum dependency versions Go 1.22 / Node 20.11 / pnpm 9 referenced from Step 2 success criteria). Codifies **Lesson #34** "Multi-step pipeline contracts MUST lift the per-step inputs/outputs/success/exit-code contract to a single normative table on the entry-point document — fragmenting the contract across sibling files (steps in §00, exit codes in §04, deps in §07) is invisible to LLM auditors and fresh implementers; closed-enumeration top exit codes with disjoint per-step ownership is the canonical fix".
 
 
 ---

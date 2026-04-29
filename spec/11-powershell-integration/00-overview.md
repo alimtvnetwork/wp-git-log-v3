@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # PowerShell Integration for Project Runner
 
-> **Spec Version:** 2.26.1  
+> **Spec Version:** 2.27.0  
 > **Script Version:** 2.25.0  
 > **Updated:** 2026-04-29  
 > **Status:** Active  
@@ -80,7 +80,39 @@ This specification defines a **cross-project reusable** PowerShell integration p
 | 4 | Frontend Build | Build React with pnpm | `-SkipBuild` to skip |
 | 5 | Copy & Run | Copy dist, start Go server | `-BuildOnly` to skip run |
 
----
+### Per-Step Contract (Normative)
+
+> Closes Phase 153 P48-4 / P47-fu1 finding "11-ps Pipeline Steps lack per-step exit codes". This subsection is the **single source of truth** for each step's inputs, outputs, success criteria, failure modes, and exit codes. Per-step exit codes (top-level `0..10` band) and the detailed `9500..9599` band in `04-error-codes.md` are bound here so implementers do not have to cross-walk three files. The runner MUST exit on the FIRST failing step (fail-fast — no later step runs).
+
+| Step | Inputs (from `powershell.json` + flags) | Outputs / Side effects | Success criteria | Failure exit code (top) | Detailed code (`04-error-codes.md`) |
+|------|-----------------------------------------|------------------------|------------------|-------------------------|-------------------------------------|
+| 1 — Git Pull | Repo working dir; `-SkipPull` flag | `git pull --ff-only` against current branch; stdout/stderr captured to log | `git pull` exits `0` OR step is skipped (`-SkipPull` set OR `9550 ERR_NOT_GIT_REPO` downgraded to warn) | **9** `ERR_GIT_FAILED` | `9550` `ERR_NOT_GIT_REPO` (warn-skip), `9551` `ERR_GIT_PULL_FAILED`, `9552` `ERR_GIT_CONFLICT` |
+| 2 — Prerequisites | System `PATH`; winget availability | Installs missing Go / Node.js / pnpm via `winget install --silent --accept-source-agreements --accept-package-agreements`; verifies binaries resolve via `Get-Command` | All three binaries (`go`, `node`/`npm`, `pnpm`) resolve on `PATH` AND minimum versions met (Go ≥1.22, Node ≥20.11, pnpm ≥9 per `07-runner-interface.md`) | **1** `ERR_PREREQUISITES` | `9510` `ERR_WINGET_NOT_FOUND`, `9511` `ERR_GO_INSTALL_FAILED`, `9512` `ERR_NODE_INSTALL_FAILED`, `9513` `ERR_GO_NOT_IN_PATH`, `9514` `ERR_NPM_NOT_IN_PATH` |
+| 3 — pnpm Install | `usePnp`, `pnpmStorePath` from config; `-Force` flag | `pnpm install` (or `pnpm install --force` when `-Force`); `-Force` ALSO removes `node_modules/`, `dist/`, and the configured `pnpmStorePath` directory before re-running install | `pnpm install` exits `0` AND lockfile (`pnpm-lock.yaml`) is unchanged OR newly generated; `-Force` mode additionally requires the three deletion targets to be absent at start of install | **2** `ERR_NPM_INSTALL` | `9520` `ERR_NPM_INSTALL_FAILED`, `9524` `ERR_CLEAN_FAILED` (only emitted under `-Force`) |
+| 4 — Frontend Build | Frontend dir from config; `-SkipBuild` flag | `pnpm build` in frontend dir; produces `dist/` artifact | Step is skipped (`-SkipBuild`) OR `pnpm build` exits `0` AND `dist/` directory exists and is non-empty | **3** `ERR_NPM_BUILD` | `9521` `ERR_NPM_BUILD_FAILED`, `9522` `ERR_DIST_NOT_CREATED` |
+| 5 — Copy & Run | Backend dir; copy target dir; `-BuildOnly` flag; `-OpenFirewall` flag | Copies `dist/` → backend's served-asset directory; copies `config.example.json` → `config.json` if absent; (optional) opens firewall ports for backend; `go run` (or `go build && run`) the backend `main.go` | `-BuildOnly` short-circuits with exit `0` after copy AND `config.json` is present; otherwise backend process starts AND binds to its configured port within 30s | **4** `ERR_GO_RUN` (run failure); **8** `ERR_COPY_FAILED` (copy failure); **10** `ERR_FIREWALL` (`-OpenFirewall` failure) | `9523` `ERR_COPY_DIST_FAILED`, `9530` `ERR_BACKEND_DIR_NOT_FOUND`, `9531` `ERR_MAIN_GO_NOT_FOUND`, `9532` `ERR_GO_BUILD_FAILED`, `9533` `ERR_GO_RUN_FAILED`, `9534` `ERR_CONFIG_COPY_FAILED`, `9540` `ERR_NOT_ADMIN`, `9541` `ERR_FIREWALL_CMDLET`, `9542` `ERR_FIREWALL_RULE_FAILED` |
+
+#### Configuration / pre-flight exit codes (apply BEFORE Step 1)
+
+These codes terminate the runner before any pipeline step begins; they are NOT step-attributed:
+
+| Top exit | Name | Detailed code | When |
+|----------|------|---------------|------|
+| **5** | `ERR_CONFIG_MISSING` | `9500` `ERR_CONFIG_NOT_FOUND` | `powershell.json` not found in project root |
+| **6** | `ERR_CONFIG_INVALID` | `9501` `ERR_CONFIG_PARSE`, `9502` `ERR_CONFIG_MISSING_FIELD`, `9504` `ERR_CONFIG_INVALID_PORT` | `powershell.json` parse error or schema-required field absent |
+| **7** | `ERR_PATH_NOT_FOUND` | `9503` `ERR_CONFIG_INVALID_PATH` | A configured path (frontend dir, backend dir, store path) does not exist |
+
+#### Forbidden runtime patterns
+
+The runner implementation MUST NOT:
+
+- Continue to step `N+1` after step `N` returned a non-zero exit (fail-fast — codified above).
+- Emit a top exit code outside the closed set `{0, 1..10}` — any new failure class requires extending the per-step contract table above (and a new §98 release row).
+- Emit a detailed `9500..9599` code without ALSO setting the corresponding top exit code from the table above (the two layers are paired, not alternative).
+- Map a single top exit code to multiple steps (each step owns a disjoint top-code subset; this disjointness is what makes attribution unambiguous from the exit code alone).
+- Treat `-SkipPull` / `-SkipBuild` / `-BuildOnly` as success absent the additional success criteria listed above (e.g. `-BuildOnly` still requires copy success).
+
+
 
 ## Package Management: pnpm with Plug'n'Play
 
