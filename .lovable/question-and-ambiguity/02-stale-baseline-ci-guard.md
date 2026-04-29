@@ -63,3 +63,34 @@ Choose one:
 3. **Linter warning** (middle ground) — extend `check-trace-map-regression.py`
    to detect baseline staleness during normal runs and emit advisory
    warning (no exit code change).
+
+## Resolution (2026-04-29)
+
+✅ **CLOSED — option already shipped.** User selected "Linter advisory
+warning (middle ground)" on review. Investigation shows the warning was
+already implemented in `check-trace-map-regression.py` lines 144-162
+(unattributed phase, predates Phase 153). Behaviour verified live today:
+
+```
+::warning::stale-baseline drift: ac_total +46, code_total +4 since baseline
+was written. Re-run `check-trace-map-regression.py --update-baseline`
+after a clean `generate-trace-map.py` to re-anchor.
+```
+
+No code changes required. **Side effect of verification**: discovered the
+real H1 baseline was stale (last rebaseline = `ac_total:1304`, current =
+`1400` after Phase 153's +96 ACs from Verifies sweep, AppLink/Pipeline/
+Boolean ACs, A6 spec/05 lift, etc.). Rebaselined atomically:
+
+```
+{ac_total:1400, ac_traced:96, ac_drifted:1304, code_total:62, code_orphan:33}
+```
+
+Gate now GREEN. **Lesson #35 (operational)**: when verifying that an
+advisory warning is wired, run the linter live — if the warning fires on a
+real regression, that's a signal to inspect the baseline, not just confirm
+the warning string.
+
+## Status
+
+✅ **RESOLVED** — no further user action required.
