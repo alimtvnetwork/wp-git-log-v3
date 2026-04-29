@@ -74,3 +74,10 @@
 - SQL DDL audit-log schema inlined.
 - Implementability raised 90 → 100.
 
+
+## 2026-04-29 — Phase 153 Task #35-fu2 — SemVer-track unification audit
+
+- §00 banner unified from 1.1.0 → 2.1.0 to align with §98 SemVer-max (Phase 16d-i v2.0.0 depth pass + Phase 55 v1.1.0 lever consolidated as v2.1.0).
+- Closes the version-parity drift class (Task #35-fu surfaced 15 §00↔§98 mismatches; this is the inverse case where §00 was BEHIND §98).
+- Lesson #25 codified — dual-track SemVer (file-scaffold lever vs depth-pass major) is forbidden going forward.
+- §99 banner v2.1.0 → v2.1.1; §98 banner v2.1.0 → v2.1.1; §00 banner v1.1.0 → v2.1.0; h10 stamp already at phase 153.
