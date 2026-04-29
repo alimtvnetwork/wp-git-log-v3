@@ -1,5 +1,6 @@
 # Consolidated: Docs Viewer UI — Complete Reference
 
+**Source:** [`../08-docs-viewer-ui/`](../08-docs-viewer-ui/)  
 **Version:** 3.2.0  
 **Updated:** 2026-04-16
 

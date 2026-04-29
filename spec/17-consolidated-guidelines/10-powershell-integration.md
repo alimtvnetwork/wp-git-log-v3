@@ -1,5 +1,6 @@
 # Consolidated: PowerShell Integration — Complete Reference
 
+**Source:** [`../11-powershell-integration/`](../11-powershell-integration/)  
 **Version:** 3.2.0  
 **Updated:** 2026-04-16
 

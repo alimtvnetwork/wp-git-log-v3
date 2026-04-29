@@ -1,5 +1,6 @@
 # Consolidated: Coding Guidelines Research
 
+**Source:** [`../02-coding-guidelines/research/`](../02-coding-guidelines/research/)  
 **Version:** 3.3.0  
 **Updated:** 2026-04-16
 

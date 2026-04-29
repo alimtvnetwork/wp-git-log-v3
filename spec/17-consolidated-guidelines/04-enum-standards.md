@@ -1,5 +1,6 @@
 # Consolidated Enum Standards — All Languages
 
+**Source:** [`../04-database-conventions/`](../04-database-conventions/)  
 **Version:** 3.2.0  
 **Updated:** 2026-04-16  
 **Source Specs:**  

@@ -1,5 +1,6 @@
 # Consolidated: App Issues — Complete Reference
 
+**Source:** [`../21-app/issues/`](../21-app/issues/)  
 **Version:** 3.3.1  
 **Updated:** 2026-04-29
 

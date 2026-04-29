@@ -1,5 +1,6 @@
 # Consolidated: Design System — Complete Reference
 
+**Source:** [`../07-design-system/`](../07-design-system/)  
 **Version:** 3.2.0  
 **Updated:** 2026-04-16
 

@@ -1,5 +1,6 @@
 # Consolidated Guidelines — Gap Analysis Report
 
+**Source:** (self — periodic gap analysis report; no single source module)  
 **Version:** 13.0.0  
 **Updated:** 2026-04-22  
 **Scope:** All 23 consolidated guideline files vs source spec folders  
