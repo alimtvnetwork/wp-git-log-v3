@@ -1,7 +1,7 @@
 # Changelog — PowerShell Integration for Project Runner
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-27  
+**Version:** 1.2.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/11-powershell-integration/`
 
 ---
@@ -16,6 +16,10 @@
 ---
 
 ## Releases
+
+### 1.2.0 — 2026-04-29
+- **Phase 153 — Changed** §97 v1.0.0 → v1.1.0: added `**Verifies:**` clauses to all 8 boilerplate ACs (AC-01..AC-08), each anchored to either §00 baseline, a sibling spec section, or the relevant linter script. Closes the real P3 Verifies-coverage gap that audit-v6 baseline (Phase 152) missed because `check-ai-confidence.py` did not flag boilerplate-template modules.
+- §00 spec-version 2.26.0 → 2.26.1; §99 lockstep update v3.4.0 → v3.4.1.
 
 ### 1.1.0 — 2026-04-27
 - **Phase 39c — Added** `07-runner-interface.md` defining the authoritative PowerShell `Param()` block, exit-code table (0/2/3/4/5/10/11/12/20/30/40/99), pinned dependency toolchain (Go 1.22, Node 20.11, pnpm 9, Git 2.40) with provider priority, and JSON-Schema reference. Closes audit findings *CRITICAL — Missing Interface Definition (JSON & CLI)* and *HIGH — Underspecified Dependency Management*.
