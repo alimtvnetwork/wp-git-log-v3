@@ -17,6 +17,9 @@
 
 ## Releases
 
+### 3.3.2 — 2026-04-29 — Phase P48-1-fu1-batch P3 sweep slot 3 (AC-01..AC-08 Verifies clauses)
+- **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v1.0.0 → v1.1.0). Each clause cites the precise invariant defended (structural floor, no-broken-links, slot-immutability, §99 inventory-heading rubric, ≥80 floor, missing-contract rule, cross-folder links, four-file lockstep). Closes the P3-tier gap (0/8 → 8/8 Verifies) and graduates this module's AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)*. No semantic change to acceptance surface — purely a verifiability uplift. §00 banner 3.3.1 → 3.3.2; §97 1.0.0 → 1.1.0; §99 row added.
+
 ### 3.3.1 — 2026-04-28 — Phase P30 batch reconciliation
 - §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.
 
