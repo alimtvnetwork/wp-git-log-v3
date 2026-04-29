@@ -154,7 +154,7 @@ def gate_p1(mod: Path, ov_text: str) -> tuple[bool, str]:
         # to the section under a `## ... Inventory` heading to avoid matching
         # `.md` words in arbitrary prose. Falls back to no bare-scan if no
         # such heading exists (the link-form scan above still applies).
-        m_inv = re.search(r"^##[^\n]*Inventory[^\n]*\n", ov_text, re.M)
+        m_inv = re.search(r"^##[^\n]*(Inventory|Index|Modules|Files|Contents)[^\n]*\n", ov_text, re.M | re.I)
         if m_inv:
             after = ov_text[m_inv.end():]
             m_next = re.search(r"^## ", after, re.M)
