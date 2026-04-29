@@ -1,6 +1,6 @@
 # C# Coding Standards — Acceptance Criteria
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26 (Phase 16m: full GWT rewrite — replaced 38 stub checkboxes (AC-01..AC-07) with 20 module-specific Given/When/Then ACs covering C#-specific rules + explicit inheritance from `../01-cross-language/97` (AC-CL-*). Old AC-01..AC-07 preserved as AC-CS-LEGACY-* at end.)
 **Scope:** `spec/02-coding-guidelines/07-csharp/` — C# 12 / .NET 8+ coding standards layered on the cross-language parent.
 

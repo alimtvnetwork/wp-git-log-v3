@@ -1,6 +1,6 @@
 # Consistency Report: Static Analysis
 
-**Version:** 4.0.0
+**Version:** 4.0.1
 **Generated:** 2026-04-27
 **Health Score:** 100/100 (A+)
 

@@ -1,6 +1,6 @@
 # TypeScript Standards — Acceptance Criteria
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26 (Phase 16i: full GWT rewrite — replaced 6 stub checkboxes with 20 module-specific Given/When/Then ACs covering TS-specific rules + explicit inheritance from `../01-cross-language/97` (AC-CL-*). Old AC-01..AC-02 preserved as AC-TS-LEGACY-* at end.)
 **Scope:** `spec/02-coding-guidelines/02-typescript/` — TypeScript-specific coding standards layered on top of the cross-language parent.
 

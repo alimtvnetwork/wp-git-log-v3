@@ -1,6 +1,6 @@
 # Acceptance Criteria: Static Analysis & Linter Enforcement
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26 (Phase 16p: full GWT rewrite — replaced 7 stub checkboxes with 20 module-specific Given/When/Then ACs covering SonarQube→linter mapping, threshold enforcement, and CI quality gate. Old stubs preserved as AC-SA-LEGACY-* at end.)
 **Scope:** `spec/02-coding-guidelines/01-cross-language/16-static-analysis/` — Cross-language static analysis rule mapping, SonarQube coverage, linter configuration, and unified CI quality gate.
 

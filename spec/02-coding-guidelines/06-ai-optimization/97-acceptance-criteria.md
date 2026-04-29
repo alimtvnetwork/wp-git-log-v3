@@ -1,6 +1,6 @@
 # Acceptance Criteria — AI Optimization
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26 (Phase 16n: full GWT rewrite — replaced 7 stub checkboxes with 20 module-specific Given/When/Then ACs covering AI-optimization-specific rules + explicit inheritance from `../01-cross-language/97` (AC-CL-*). Old "Required" + "Validation" stubs preserved as AC-AI-LEGACY-* at end.)
 **Scope:** `spec/02-coding-guidelines/06-ai-optimization/` — AI-targeted rules to prevent hallucination, enforce style, and supply machine-parsable guardrails.
 

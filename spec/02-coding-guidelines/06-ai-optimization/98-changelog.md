@@ -1,10 +1,13 @@
 # Changelog — AI Optimization
 
-**Version:** 4.0.0
-**Updated:** 2026-04-26
+**Version:** 4.0.1
+**Updated:** 2026-04-29
 **Scope:** `spec/02-coding-guidelines/06-ai-optimization/`
 
 ---
+
+### 4.0.1 — 2026-04-29 — Phase 153 Task #29c: legacy AC stubs gain `**Verifies:**` clauses
+- Phase 153 Task #29c — backfilled `**Verifies:**` clauses on legacy AC stubs (`AC-*-LEGACY*`) so `check-ai-confidence.py` P3 passes tree-wide post-Task-#29b walker widening. Stubs are deprecation markers; their Verifies clause back-points to the modern numeric replacement AC (or section). 18 clauses inserted across 4 nested modules. **No CI workflow change, no AC count change** — content is metadata-only on legacy stubs.
 
 ## v4.0.0 — 2026-04-26 (Phase 16n: §97 full GWT rewrite)
 - **P21 sync** (2026-04-28): §00 banner version field bumped 3.2.0 → 4.0.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 21 -->` stamp added under §00 banner; no spec content change).
