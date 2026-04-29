@@ -1,10 +1,16 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.75.0
+**Version:** 2.75.1
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.75.1 — 2026-04-29 — Phase 153 Task A5: slot 34 wired into `spec-health.yml` as advisory step
+- **Action**: Added the "AI-implementability deep-walk audit" step to `.github/workflows/spec-health.yml` between the Trace-map regression gate and the Summary block. Runs `python3 linter-scripts/audit-ai-implementability.py --report-only` so the gate is observability-only (always exits 0). Step is conditionally skipped when `LOVABLE_API_KEY` is unset (community PRs from forks) to avoid noisy 401 failures. Cache lives at `.lovable/cache/audit-ai/` and is repo-local — re-runs are cheap.
+- **Spec lockstep**: Slot 34 `34-audit-ai-implementability.md` v1.0.0 → **v1.0.1** (banner-only — added "CI wiring (Phase 153 Task A5)" subsection under `## Status`). §27 §00 v2.75.0 → **v2.75.1**, §98 v2.75.0 → **v2.75.1**, §99 v2.72.0 → **v2.72.1**. **No new ACs**, no AC-31-31 cascade, no RUBRIC bump, no gate-count change (advisory step is broader-contract per H1 lesson and rightly gets its own workflow step rather than collapsing into a numbered footer gate).
+- **Validation**: Tree-wide v3 baseline 81.6/100 (GOOD) captured at A3 closure; Lockstep · tree-health pending re-run.
+- **Lesson codified**: Advisory CI steps for LLM-driven gates MUST guard on the secret being available (`if: env.LOVABLE_API_KEY != ''`). Without the guard, every fork PR would 401-fail, training contributors to ignore the step's signal.
 
 ### 2.75.0 — 2026-04-29 — Phase 153 Task A4: slot 34 `audit-ai-implementability.py` v1.0.0 — productionised deep-walk LLM auditor
 - **Action**: Shipped `linter-scripts/audit-ai-implementability.py` (slot 34, auditor band 30-39) productionising the prototype harness from Phase 153 Tasks A1+A2. LLM-driven 5-dim rubric (D1 Clarity / D2 ACs / D3 Edge / D4 Examples / D5 Cross-Ref Closure), each 0-20. Walks `*.md|*.json|*.yaml|*.yml|*.tmpl|*.toml` (closes spec/11 schemas/templates blind spot from A2). On-disk SHA-keyed cache at `.lovable/cache/audit-ai/<module>.json`. Cloudflare 1010 immunity (explicit `User-Agent`). Tolerant JSON parser. Six CLI flags: `--module`, `--no-network`, `--force`, `--json`, `--report-only`, `--strict`. Self-test 6/6 (`test-audit-ai-implementability.sh`).
