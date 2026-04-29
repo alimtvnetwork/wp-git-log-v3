@@ -166,6 +166,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the same repo, env, and a recorded runner transcript,
 - **When** `glci run --no-push --dump-payload` is invoked twice,
 - **Then** the two dumped JSON bodies MUST be byte-identical (modulo wall-clock fields not present in this contract).
+- **Verifies:** §06 deterministic-serialization invariant — supports payload-replay testing AND signature-stability for SSH-mode (signed-body cannot be a moving target); AC-28-08 sort/dedup is a precondition.
 
 ### AC-28-24 — Config validation: HTTPS required by default
 
