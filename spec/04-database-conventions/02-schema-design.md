@@ -1,7 +1,7 @@
 # Database Schema Design
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-19
+**Version:** 3.4.0  
+**Updated:** 2026-04-29 (Phase 153 P48-2: §2.1 Cross-Language Boolean Storage Convention added — closes P47-fu1 critical finding)
 
 ---
 
