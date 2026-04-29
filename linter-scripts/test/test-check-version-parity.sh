@@ -59,9 +59,16 @@ t1() {
     [[ "$out" == *"skipped(no-release)="* ]]
 }
 
-# T2 default exit 0 with real-tree mismatches
+# T2 default exit 0 with mismatches present (advisory mode, no stamps).
+# Phase 153 Task #35-fu: switched from real-tree to sandbox — real tree now
+# has 74/74 stamped modules, so per-file strict promotion fires whenever any
+# mismatch exists, breaking the "default exits 0" assertion. Sandbox isolates
+# the contract under test (advisory-by-default for unstamped drift).
 t2() {
-    python3 "$GATE" >/dev/null 2>&1
+    local sb="$SANDBOX/t2/spec"
+    rm -rf "$SANDBOX/t2"; mkdir -p "$sb"
+    mk_module "$sb/drift" "1.0.0" "2.0.0" "heading"   # unstamped → advisory
+    python3 "$GATE" --spec-root "$sb" >/dev/null 2>&1
 }
 
 # T3 strict exits 1 when sandbox contains a mismatch
@@ -148,9 +155,14 @@ t8() {
     [[ "$out" == *"matches=1"* ]] && [[ "$out" == *"mismatches=0"* ]]
 }
 
-# T9 --json valid (Phase P20: also asserts stamped/stamped_failed keys)
+# T9 --json valid (Phase P20: also asserts stamped/stamped_failed keys).
+# Phase 153 Task #35-fu: switched to sandbox — same reason as T2 (real-tree
+# stamped+drift now exits 1, killing stdin to the JSON parser).
 t9() {
-    python3 "$GATE" --json 2>/dev/null | python3 -c "
+    local sb="$SANDBOX/t9/spec"
+    rm -rf "$SANDBOX/t9"; mkdir -p "$sb"
+    mk_module "$sb/mod" "1.2.3" "1.2.3" "heading"
+    python3 "$GATE" --spec-root "$sb" --json 2>/dev/null | python3 -c "
 import json, sys
 d = json.load(sys.stdin)
 required = {'scanned','eligible','matches','mismatches','skipped_no_banner','skipped_no_release','stamped','stamped_failed','details'}
