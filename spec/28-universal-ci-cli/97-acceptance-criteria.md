@@ -124,6 +124,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the previous run posted `HasError=true` AND the server's ack envelope on the current passing run includes `PreviousHasError=true`,
 - **When** the current phase passes,
 - **Then** the CLI MUST send `PUT /fixed-log` for the same `(RepoUrl, Branch, PipelineName)` exactly once.
+- **Verifies:** §06 `/fixed-log` server-driven invariant — recovery state lives on the server (no local cache); AC-28-18 negative complement.
 
 ### AC-28-18 — `/fixed-log` not sent when server omits `PreviousHasError`
 
