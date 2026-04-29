@@ -100,6 +100,16 @@ GWT_RE = re.compile(r"\*\*(Given|When|Then)\*\*", re.M)
 VERIFIES_RE = re.compile(r"\*\*Verifies:\*\*", re.M)
 AC_RE = re.compile(r"^### AC[-_][A-Za-z0-9\-]+", re.M)
 INVENTORY_LINK_RE = re.compile(r"\]\(\.\/([A-Za-z0-9_][A-Za-z0-9_\-\.]*\.md)\)")
+# Phase 153 Task #29d (2026-04-29): bare-filename inventory matches inside table
+# rows or list items. Restricts to inventory-shaped lines (starting with `|`,
+# `-`, or `*`, optionally with leading whitespace) to avoid matching arbitrary
+# `.md` words in prose. Backtick-wrapped filenames are also accepted. Mirrors
+# the AC-33-07 broadening precedent (numeric-prefix → any-prefix) — same shape,
+# different surface form (markdown link vs. table cell).
+INVENTORY_BARE_RE = re.compile(
+    r"^[ \t]*[|\-*][^\n]*?`?([A-Za-z0-9_][A-Za-z0-9_\-/\.]*\.md)`?",
+    re.M,
+)
 
 
 def list_modules() -> list[Path]:
