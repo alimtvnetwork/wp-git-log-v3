@@ -6,8 +6,8 @@ description: Auditor-self-reference module — defines the toolchain that audits
 
 # Spec Toolchain
 
-**Version:** 2.68.0  
-**Updated:** 2026-04-28
+**Version:** 2.69.0  
+**Updated:** 2026-04-29
 <!-- h10-verified-phase: 35 -->
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
 
@@ -86,6 +86,7 @@ Numbering convention inside this module:
 |---|-----------|---------------|---------|
 | 30 | [30-audit-spec-vs-code.md](./30-audit-spec-vs-code.md) | `linter-scripts/audit-spec-vs-code.py` | v1: 6-dimension spec-vs-code audit (deprecated; kept for diffing) |
 | 31 | [31-audit-spec-vs-code-v2.md](./31-audit-spec-vs-code-v2.md) | `linter-scripts/audit-spec-vs-code-v2.py` | v2: AI-implementability audit, 7 dimensions, blast-radius |
+| 32 | [32-check-truncated-prose.md](./32-check-truncated-prose.md) | `linter-scripts/check-truncated-prose.py` | Detect mid-sentence endings + unclosed code fences across `spec/**/*.md` |
 
 ### Runners
 
