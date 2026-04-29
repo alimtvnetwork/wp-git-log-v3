@@ -1,7 +1,9 @@
 # Consistency Report — 23-app-database
 
-**Version:** 2.0.2
+**Version:** 2.0.3
 **Updated:** 2026-04-29
+
+> **v2.0.3 update (Phase 153 Task A11b — spec/23 self-lift 75 → ≥88; AC-ADB-11/12/13 close all 3 v4 findings):** **AC-ADB-11** designates SQLite (PascalCase, INTEGER PKs) as Primary Implementation Target and PostgreSQL block as Reference (closes HIGH D1 conflicting DDL dialects). **AC-ADB-12** mandates inline minimal-DDL summary for prerequisite Profile/GitProfile/Repo tables (authoritative DDL stays in spec/22; mirrors spec/02 AC-CG-21 / spec/27 AC-T-29 delegation pattern — closes HIGH D5). **AC-ADB-13** replaces subquery-based AppLink CHECK constraint with hardcoded ID constants (1=GitProfile, 2=Repo) — SQLite forbids subqueries in CHECK (closes MEDIUM D3). Banners: §97 v3.0.0 → **v3.1.0** (AC count 10 → 13); §00 v4.0.2 → **v4.0.3**, §98 v2.0.2 → **v2.0.3**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade.** **Lesson #26**: External-FK contract surfaces MUST inline a minimal DDL summary so consuming-module audits don't fail on unresolved references. **Lesson #27**: SQLite CHECK constraints CANNOT contain subqueries — closed-enumeration FKs MUST hardcode IDs in seed + CHECK pair.
 
 > **v2.0.2 update (Phase 153 Task #29e):** Phase 153 Task #29e — promoted `**AI Confidence:**` from `High` to `Production-Ready`. Pure banner edit: this module already passes P1+P2+P3+P4 per `check-ai-confidence.py`; the prior `High` value was a stale underclaim. **No AC change, no CI workflow change, no RUBRIC bump.**
 **Scope:** `spec/23-app-database/`
