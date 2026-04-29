@@ -1,8 +1,8 @@
 # Consolidated Enum Standards — All Languages
 
 **Source:** [`../04-database-conventions/`](../04-database-conventions/)  
-**Version:** 3.2.0  
-**Updated:** 2026-04-16  
+**Version:** 3.2.1  
+**Updated:** 2026-04-29  
 **Source Specs:**  
 - [Go Enum Specification](../02-coding-guidelines/03-golang/01-enum-specification/00-overview.md)  
 - [TypeScript Enums](../02-coding-guidelines/02-typescript/00-overview.md)  

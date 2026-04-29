@@ -1,7 +1,7 @@
 # Consolidated: Spec Authoring Guide — Complete Reference
 
 **Source:** [`../01-spec-authoring/`](../01-spec-authoring/)  
-**Version:** 3.3.0  
+**Version:** 3.3.1  
 **Updated:** 2026-04-29
 
 ---
