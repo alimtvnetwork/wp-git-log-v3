@@ -1,7 +1,7 @@
 # Changelog — CI/CD Pipeline Workflows
 
-**Version:** 3.3.1  
-**Updated:** 2026-04-28  
+**Version:** 3.4.1  
+**Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 3.4.1 — 2026-04-29 — Phase P48-1-fu1-batch slot 4 (P1 inventory sync)
+- §00 Feature Inventory now lists all 4 previously-missing root files: `readme.md`, `01-ci-pipeline.md`, `02-release-pipeline.md`, `11-technical-interface.md`. Slots 01/02 receive co-located rows (precedent: spec/01 slot 04, spec/17 slot 33). No spec rule changes — pure inventory reconciliation. Linter: P1 driver eliminated for `spec/12`.
 
 ### 3.3.1 — 2026-04-28 — Phase P30 batch reconciliation
 - §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.
