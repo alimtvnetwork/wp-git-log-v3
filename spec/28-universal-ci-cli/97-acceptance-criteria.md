@@ -12,6 +12,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** a directory containing `package.json` and `tsconfig.json` and no `go.mod` or `composer.json`,
 - **When** `glci detect --json` runs,
 - **Then** it MUST exit `0` and the JSON `Runtimes[]` MUST contain exactly one entry with `Id="ts"`.
+- **Verifies:** §03 TS detection table; §04 phase-runtime binding; AC-28-22 multi-runtime precedent.
 
 ### AC-28-02 — Detection: empty repo rejected
 
