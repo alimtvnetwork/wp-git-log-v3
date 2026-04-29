@@ -1,6 +1,6 @@
 # Database Conventions
 
-**Version:** 3.4.1  
+**Version:** 3.4.2  
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
 **Updated:** 2026-04-29  
