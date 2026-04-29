@@ -1,6 +1,6 @@
 # Coding Guidelines — Acceptance Criteria
 
-**Version:** 4.2.0
+**Version:** 4.3.0
 **Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 layer — added 5 group-level `**Verifies:**` clauses to the LEGACY scaffolds (Cross-Language, TypeScript, Golang, PHP, Rust). Each clause cites the source subfolder + the GWT AC that supersedes the legacy table-row group. `check-ai-confidence.py` P3 driver eliminated for `spec/02` — derived tier promoted from Medium → High. AC count unchanged at 25.)
 **Scope:** `spec/02-coding-guidelines/` (the parent module — language-specific ACs live in subfolder §97 files).
 
