@@ -172,6 +172,7 @@
 | 24-check-lockstep.md | ✅ | Validator (Phase 40 lockstep gate) |
 | 30-audit-spec-vs-code.md | ✅ | Auditor v1 |
 | 31-audit-spec-vs-code-v2.md | ✅ | Auditor v2 |
+| 32-check-truncated-prose.md | ✅ | Validator (slot-range note: in 30-39 band; see slot doc) |
 | 40-run-sh.md | ✅ | Runner (bash) |
 | 41-run-ps1.md | ✅ | Runner (powershell) |
 | 50-validate-guidelines-py.md | ✅ | Source validator (Python) |
@@ -214,6 +215,7 @@
 | `linter-scripts/scaffold-spec-module.cjs` | [23](./23-scaffold-spec-module.md) | ✅ (Phase 37) |
 | `linter-scripts/audit-spec-vs-code.py` | [30](./30-audit-spec-vs-code.md) | ✅ |
 | `linter-scripts/audit-spec-vs-code-v2.py` | [31](./31-audit-spec-vs-code-v2.md) | ✅ |
+| `linter-scripts/check-truncated-prose.py` | [32](./32-check-truncated-prose.md) | ✅ (Phase P47-followup-1) |
 | `linter-scripts/run.sh` | [40](./40-run-sh.md) | ✅ |
 | `linter-scripts/run.ps1` | [41](./41-run-ps1.md) | ✅ |
 | `linter-scripts/validate-guidelines.py` | [50](./50-validate-guidelines-py.md) | ✅ |
