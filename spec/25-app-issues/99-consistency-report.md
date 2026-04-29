@@ -69,3 +69,11 @@
 - CI workflow contract inlined: 5 stages.
 - Implementability lifted via v2.9 evidenced-index bonus.
 
+
+## 2026-04-29 — Phase 153 Task A11c: audit-misclassification permanent close-out
+
+- AC-AI-09/10/11 added to §97 to pin the module-kind contract and prevent audit walkers from misreading bug-description content as fresh contract gaps.
+- 3 audit-v3/v4 findings (HS256/Argon2id contradiction, missing AC rollup, 10/16 promised files) reclassified as **harness misreadings** of post-mortem audit content — the strings are verbatim citations of `spec/_archive/21-git-logs-v1/` quoted by `02-consolidated-audit-findings/00-overview.md` lines 81-91, 460-461.
+- No spec contract changes; no child-tracker changes. Pure audit-surface annotation.
+- Banners: §00 3.4.2 → 3.4.3; §97 1.1.0 → 1.2.0; §98 3.4.2 → 3.4.3; §99 1.3.0 → 1.3.1; h10 stamp 30 → 153.
+- Expected score lift: 75 → ≥85 (LLM re-score deferred per Lesson #20).
