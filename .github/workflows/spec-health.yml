@@ -160,12 +160,15 @@ jobs:
       #   - spec/02-coding-guidelines
       #   - spec/03-error-management   (matches '03-error-manage' substring used by the gate)
       #   - spec/04-database-conventions
+      #   - spec/07-design-system          (Phase 152 — Task #26 / audit-v6 P4 closure)
       #   - spec/10-research
       #   - spec/12-cicd-pipeline-workflows
+      #   - spec/14-update                 (Phase 152 — Task #26 / audit-v6 P4 closure)
       #   - spec/17-consolidated-guidelines
       #   - spec/18-wp-plugin-how-to
       #   - spec/22-git-logs-v2
       #   - spec/25-app-issues
+      #   - spec/28-universal-ci-cli       (Phase 152 — Task #26 / audit-v6 P4 closure)
       # Note: substring-only attestation; the gate scans the entire workflow text.
       # Removal of any path above re-opens that module's P4 drift. See Phase
       # P48-1-fu1-batch §99 trail for the per-module graduation history.
