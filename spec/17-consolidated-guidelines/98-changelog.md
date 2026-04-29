@@ -17,6 +17,15 @@
 
 ## Releases
 
+### 3.4.0 — 2026-04-29 (Phase P48-1 — `AI Confidence` rubric becomes a normative contract)
+
+- **Added** `01-spec-authoring.md` § *AI Confidence Rubric (normative)* — defines four gates **P1 → P4** that a module must pass to claim each tier (`Low` / `Medium` / `High` / `Production-Ready`). Lowest-passing gate wins. Each gate cites a deterministic measurement source (`check-tree-health.cjs --strict`, `check-truncated-prose.py`, `check-spec-cross-links.py`, `check-99-summary-freshness.py`), so the value is no longer author judgement. The rubric also defines the unset case ("omit the field rather than guess") and the inverse mirror for the `Ambiguity` field.
+- **Added** `97-acceptance-criteria.md` AC-09 — binds the rubric as an acceptance criterion: a declared `AI Confidence` value must equal the lowest-passing tier, upgrades require a §98 row citing the newly-passing gate(s), and `Ambiguity` mirrors on the inverse axis.
+- **Closes** the largest single finding from Phase P47-fu1 (large-digest AI re-audit): prior to this release, the four tier values (`Production-Ready` / `High` / `Medium` / `Low`) were listed in `01-spec-authoring.md` without measurement criteria, costing this module **33 implementability points** (88 → 55) when the AI auditor was given enough context to notice. The rubric is the contract the auditor was looking for.
+- **Why this is a minor (3.3.0 → 3.4.0) not a patch:** new normative surface (a rubric + a binding AC) that downstream modules must conform to going forward; existing modules' declared values are grandfathered until their next §00/§97/§98/§99 edit (the rubric specifies re-evaluation cadence at that boundary).
+- **Banner sync:** §00 banner update deferred to a follow-up phase (P48-1 ships the rubric + AC + changelog only; the banner re-evaluation against the new rubric is itself a content task and will land with whichever module first triggers re-evaluation under the cadence rule).
+- **Lockstep:** §97 v2.1.0 → v2.2.0 (AC-09 added); §99 v4.5.0 → v4.6.0 (Validation History row + open follow-up: future linter to mechanize AC-09).
+
 ### 3.3.0 — 2026-04-28 (Phase P25 — H10 reverse-drift dual-stream alignment)
 
 - **Changed** Aligned §98 changelog version stream with §00 banner version stream. Prior to this release, §98 tracked its own minor releases (1.0.0 → 2.5.0) while §00 banner was bumped independently per §98 internal notes (§98 v2.4.0 explicitly recorded "Bumped overview banner v3.2.0 → v3.3.0" while §98 itself stayed at 2.4.0). This decoupled-stream pattern made `check-version-parity.py` (P15/H10) flag the module as reverse-drift even though every §00 bump was internally documented inside §98 release rows.
