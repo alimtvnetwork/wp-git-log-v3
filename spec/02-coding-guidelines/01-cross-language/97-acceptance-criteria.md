@@ -201,6 +201,8 @@ The following stub criteria from v3.2.0 are preserved verbatim. They are NO LONG
 - [ ] AC-CL-LEGACY-01-B — Casting elimination patterns cover type-safe alternatives to type assertions
 - [ ] AC-CL-LEGACY-01-C — Code style defines formatting, naming, and structural conventions
 
+
+> **Verifies:** Legacy stub preserved for traceability; live contract is asserted by **the modern numeric-ID ACs in this same §97**. Phase 153 Task #29d.
 ### AC-CL-LEGACY: Enforcement
 
 - [ ] AC-CL-LEGACY-02-A — All guidelines include ❌ (forbidden) and ✅ (compliant) code examples
@@ -225,3 +227,5 @@ The following stub criteria from v3.2.0 are preserved verbatim. They are NO LONG
 - [PHP subfolder](../04-php/)
 - [Rust subfolder](../05-rust/)
 - [C# subfolder](../07-csharp/)
+
+> **Verifies:** Legacy stub preserved for traceability; live contract is asserted by **the modern numeric-ID ACs in this same §97**. Phase 153 Task #29d.

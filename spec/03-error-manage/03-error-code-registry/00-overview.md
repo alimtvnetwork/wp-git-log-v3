@@ -96,6 +96,7 @@ Centralized error code registry ensuring no collisions between projects, consist
 | 09 | [09-templates/](./09-templates/00-overview.md) | Templates for project error docs | 1 |
 
 | — | 99-consistency-report.md | — |
+| 06-lint-rule-catalog.md | Lint rule catalog (Phase 153 Task #29d backfill) |
 ---
 
 ## Quick Reference
