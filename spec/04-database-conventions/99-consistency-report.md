@@ -1,6 +1,8 @@
 # Consistency Report — Database Conventions
 
-**Version:** 3.6.1  
+**Version:** 3.6.2  
+
+> **v3.6.2 update (Phase 153 P3 — §4.3 Concurrency Posture cross-reference):** Added `### 4.3 Concurrency Posture (Normative cross-reference)` to `02-schema-design.md`, cross-linking to spec/13 § AC-22 (canonical) + spec/13/10 § "Concurrency & Locking" + spec/13/18 § "Concurrency Discipline" — explicitly NOT re-stating the concurrency rules (schema ⊥ runtime concurrency; dual-source would drift). Companion to spec/13 §00/§98/§99 v1.1.4 which carries the implementer prose. §02-schema-design v3.4.0 → v3.4.1; §00 v3.4.0 → v3.4.1; §98 v3.4.1 → v3.4.2; §99 v3.6.1 → v3.6.2. **No §97 / AC / CI / RUBRIC / gate-count change.** Codifies Lesson #36 (cross-module cross-references MUST link, never restate — restatement is a dual-source drift class).
 
 > **v3.6.1 update (Phase 153 Task A11a-fu3 — P1-verify HIGH sweep + spec/04 §98 path disambiguation):** Applied Lesson #34 to all 26 cache HIGHs: 10 already contract-closed; 16 remain (12 D5). Deterministic gate `check-spec-folder-refs.py` ground-truthed D5 cluster to **only 2 stale refs tree-wide** (cache overcount ≥6×). Both fixed: spec/04 §98 line 28 path widened to `02-error-architecture/05-response-envelope/`; memo `phase-153-task-A4-...md` rewrote `spec/11-style` → `spec-11-style`. §98 v3.4.0 → **v3.4.1**; §99 v3.6.0 → **v3.6.1**. No §97/AC/CI/RUBRIC change. All 4 strict gates GREEN. **Lesson #35**: never use `.../<leaf>/` shorthand when `<leaf>` matches `\d{2}-[a-z0-9-]+` — spell out the deep path so the gate's display can't mislead.
 
