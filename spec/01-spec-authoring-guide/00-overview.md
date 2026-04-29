@@ -184,6 +184,7 @@ spec/13-wp-plugin/03-exam-manager/
 | 02 | [02-naming-conventions.md](./02-naming-conventions.md) | Rules | File and folder naming rules (kebab-case, numeric prefixes, reserved ranges) |
 | 03 | [03-required-files.md](./03-required-files.md) | Rules | Mandatory files every module must contain (overview, consistency report, etc.) |
 | 04 | [04-cli-module-template.md](./04-cli-module-template.md) | Template | Step-by-step template for CLI tool spec modules (3-folder pattern) |
+| 04 | [04-ai-onboarding-prompt.md](./04-ai-onboarding-prompt.md) | Protocol | Mandatory AI-assistant onboarding sequence — phased internalization of specs/rules/conventions before any code edit (co-located at slot 04 per immutable-slot rule; disambiguated by trailing slug) |
 | 05 | [05-app-project-template.md](./05-app-project-template.md) | Template | Template for app/WordPress projects (fundamentals + features + issues) |
 | 06 | [06-non-cli-module-template.md](./06-non-cli-module-template.md) | Template | Template for flat/non-CLI modules (research, utilities, standards) |
 | 07 | [07-memory-folder-guide.md](./07-memory-folder-guide.md) | Guide | Structure and conventions for the `.lovable/memories/` tree |
