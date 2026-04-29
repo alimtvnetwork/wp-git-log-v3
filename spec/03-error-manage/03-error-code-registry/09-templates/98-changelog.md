@@ -6,6 +6,9 @@
 
 ---
 
+### 3.4.2 — 2026-04-29 — Phase 153 Task #29d closure: AI Confidence parity reached 51/51 (100%)
+- Lockstep companion bump for §00/§99 banner edits made under Phase 153 Task #29d (P1 inventory regex widened in `check-ai-confidence.py`, underclaim banners promoted, legacy stub Verifies clauses backfilled). **No AC change beyond Task #29c-pattern legacy stubs; no CI workflow change.** See `.lovable/memory/audit/v2-deterministic/phase-153-task-29d-p1-regex-widening-and-final-parity.md`.
+
 ## 3.4.1 — 2026-04-28 — Phase P29: P25-pure dual-stream reconciliation (batch)
 
 - **Reconciled** §98 header version stream `1.2.0` → `3.4.1` to align with §00 banner stream (`3.4.0`). Prior §98 header tracked an independent audit-stream version decoupled from the SemVer ladder, which already contained `3.4.0` (matching §00 banner). Per Phase P25 precedent (subcase: clean ladder + decoupled header stream), §98 header is patch-bumped to `3.4.1` to align with banner; §00 banner also bumped to `3.4.1` per P27 sub-lesson (parity gate enforces exact match for stamped files). Ladder body unchanged. H10 stamp added to §00. **Phase P29 batch reconciliation** (8 P25-pure drifters processed in one phase per P27 batching lesson).
