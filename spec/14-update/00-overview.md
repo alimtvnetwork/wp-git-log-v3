@@ -1,8 +1,8 @@
 # Update — Overview
 
 <!-- h10-verified-phase: 24 -->
-**Version:** 2.2.0  
-**Updated:** 2026-04-28  
+**Version:** 2.3.0  
+**Updated:** 2026-04-29  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
