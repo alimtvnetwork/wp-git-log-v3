@@ -1,7 +1,7 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 1.6.0  
-**Updated:** 2026-04-27  
+**Version:** 1.7.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/07-design-system/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 1.7.0 — 2026-04-29 — Phase 151 (P3 sweep slot 11 — FINAL P3 SLOT — Verifies clauses on §97)
+- **Added** `**Verifies:**` clauses to all 34 ACs in `97-acceptance-criteria.md` (AC-001..AC-034). Verifies-coverage gap: **0/34 → 34/34**. Each AC now explicitly maps to its underlying invariant. Selected mappings: AC-001 (token-layer purity), AC-002 (composition contract), AC-003/004 (brand-recolor + `:root`↔`.dark` parity), AC-005 (single-frame atomic theme switch + no-FOUC), AC-006 (WCAG 2.1 AA — 4.5:1 normal / 3:1 large / 3:1 non-text §1.4.11), AC-007/008/009 (font family-resolution invariants — Ubuntu / Poppins / Ubuntu Mono+JetBrains Mono with `display=swap`), AC-010 (gradient-text cross-browser composition + WCAG §1.3.1 semantic-vs-decoration), AC-011 (WCAG §2.4.6 heading hierarchy), AC-012/013/014 (motion-budget + no-JS-animation + WCAG §2.3.3 reduced-motion), AC-015/016/027 (brand-motion signatures — link sweep, CTA slide-text, menu underline origin-flip), AC-017..025 (code-block surface, language-color binding, reader-control range, pin/range/fullscreen/copy/tree contracts; AC-023 WCAG §2.1.2 no-keyboard-trap), AC-026 (header-icon tactile-feedback with reduced-motion collapse), AC-028 (dropdown brand-anchoring), AC-029 (mobile Sheet + WCAG §2.5.5 touch targets), AC-030 (Ctrl+B global shortcut + input-guard), AC-031 (section-pattern composition), AC-032 (font-registry single-source-of-truth), AC-033 (state-language quartet + WCAG §2.4.7), AC-034 (responsive-tier invariant). GWT bodies preserved verbatim. §97 v3.7.0 → v3.8.0; §00 v3.3.0 → v3.4.0; §99 v3.8.0 → v3.9.0. AI-confidence P3 driver eliminated for `spec/07`. **Closes the P3 sweep across all 11 slots.**
 
 ### 3.3.0 — 2026-04-27 (Phase 56 — typed-language reference)
 - **Added** Added Go/PHP/Python design-token loader references with HSL-triplet validation → flips `has_typed_lang_contract` true (+10 impl).

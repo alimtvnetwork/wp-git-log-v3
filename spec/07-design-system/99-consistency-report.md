@@ -1,7 +1,9 @@
 # Consistency Report
 
-**Version:** 3.8.0  
-**Updated:** 2026-04-27
+**Version:** 3.9.0  
+**Updated:** 2026-04-29
+
+> **v3.9.0 update (Phase 151 — P3 sweep slot 11 — FINAL P3 SLOT — Verifies clauses on §97):** §97 deepened — Verifies-coverage 0/34 → 34/34. All 34 ACs (AC-001..AC-034) now carry `**Verifies:**` clauses mapping each criterion to its underlying invariant: token-layer purity, `:root`↔`.dark` parity, single-frame atomic theme switch, WCAG 2.1 AA conformance (§1.3.1 / §1.4.11 / §2.1.2 / §2.3.3 / §2.4.6 / §2.4.7 / §2.5.5), font family-resolution + gradient-text composition, motion-budget + reduced-motion + brand-motion signatures, code-block surface + reader-control + pin/range/fullscreen/copy contracts, header-icon tactile-feedback, dropdown brand-anchoring, mobile-nav structural-shift, Ctrl+B global shortcut, section-pattern composition, font-registry single-source-of-truth, state-language quartet, responsive-tier. GWT bodies preserved verbatim. §97 v3.7.0 → v3.8.0; §00 v3.3.0 → v3.4.0; §98 v1.6.0 → v1.7.0. AI-confidence P3 driver eliminated for `spec/07`; derived tier remains Production-Ready (already at top tier; this closes the residual Verifies-coverage gap toward the upcoming P4 stamp). **Closes the P3 sweep across all 11 slots — every Verifies-gap module in the spec tree is now at full coverage.**
 
 > **v3.7.0 update (Phase 15e — §07 §97 conversion COMPLETE):** §97 Navigation + Page Consistency sections converted from table-row to GWT — 9 ACs (AC-026..AC-034) deepened from ~70 chars/row to 1900-3500 chars/AC (27-50× depth) with full G/W/T bodies + cross-refs to `08-header-navigation.md`, `10-sidebar-system.md`, `11-section-patterns.md`, `12-page-creation-rules.md`, `tailwind.config.ts`, AC-001/AC-007/AC-008/AC-009/AC-010/AC-012/AC-014/AC-026/AC-029, WCAG 2.1 §1.3.1/§2.4.7/§2.5.5. **34 of 34 ACs now GWT — conversion COMPLETE.** Zero table rows remain in §97. AC IDs unchanged (still AC-001..AC-034 sequential). Banner v3.6.0 → v3.7.0.
 
