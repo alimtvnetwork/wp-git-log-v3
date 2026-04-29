@@ -74,14 +74,24 @@ def main() -> int:
             continue
         checked += 1
         ok, why = classify(p)
+        try:
+            display = p.relative_to(ROOT)
+        except ValueError:
+            display = p
         if not ok:
             failures.append((p, why))
+            if args.verbose:
+                print(f"FAIL {display}  -- {why}", file=sys.stderr)
         elif args.verbose:
-            print(f"OK   {p.relative_to(ROOT)}  [{why}]")
+            print(f"OK   {display}  [{why}]")
     if failures:
         print(f"check-truncated-prose: {len(failures)} truncated file(s) of {checked} checked", file=sys.stderr)
         for p, why in failures:
-            print(f"  FAIL  {p.relative_to(ROOT)}  -- {why}", file=sys.stderr)
+            try:
+                display = p.relative_to(ROOT)
+            except ValueError:
+                display = p
+            print(f"  FAIL  {display}  -- {why}", file=sys.stderr)
         return 1
     print(f"check-truncated-prose: OK ({checked} files clean)")
     return 0
