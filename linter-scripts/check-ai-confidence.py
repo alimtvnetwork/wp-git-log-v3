@@ -103,13 +103,19 @@ INVENTORY_LINK_RE = re.compile(r"\]\(\.\/([A-Za-z0-9_][A-Za-z0-9_\-\.]*\.md)\)")
 
 
 def list_modules() -> list[Path]:
+    """Every directory under spec/ (recursively) that contains a 00-overview.md.
+
+    Phase 153 Task #29b (2026-04-29) widened from top-level-only to recursive:
+    nested sub-modules (e.g. spec/03-error-manage/02-error-architecture/.../01-copy-formats/)
+    routinely carry their own `**AI Confidence:**` banners and were silently
+    skipped by the v1 walker, masking ~40 modules' worth of drift signal.
+    """
     out = []
-    for p in sorted(SPEC_ROOT.iterdir()):
-        if not p.is_dir() or p.name.startswith("_"):
+    for ov in sorted(SPEC_ROOT.rglob("00-overview.md")):
+        # Skip _archive/** (frozen by design) and any hidden-prefixed parent.
+        if any(part.startswith("_") for part in ov.relative_to(SPEC_ROOT).parts):
             continue
-        ov = p / "00-overview.md"
-        if ov.is_file():
-            out.append(p)
+        out.append(ov.parent)
     return out
 
 
