@@ -37,6 +37,7 @@ This document defines testable acceptance criteria for the **Update — Overview
 - **When** filenames are inspected
 - **Then** all match `^[0-9]{2}-[a-z0-9-]+\.md$` (or are recognized special files like `README.md`).
 - **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md`.
+- **Verifies:** Slot-immutability + `NN-kebab-case.md` filename invariant — protects file-slot lockstep (precedent: §16 → §37 in v2.8.6) and prevents collisions caught by `check-tree-health.cjs --strict`.
 
 ### AC-04: Consistency report present and current
 - **Given** the module folder
