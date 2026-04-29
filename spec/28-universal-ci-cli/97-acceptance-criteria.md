@@ -194,6 +194,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the output of `glci config print --defaults-only`,
 - **When** the JSON is validated against `18-config-schema.json`,
 - **Then** validation MUST pass with zero errors.
+- **Verifies:** §18 JSON-Schema-as-source-of-truth invariant — defaults are machine-checkable, not human-curated prose; eliminates drift between docs and runtime parser.
 
 ### AC-28-28 — OpenAPI client mirrors server endpoint paths
 
