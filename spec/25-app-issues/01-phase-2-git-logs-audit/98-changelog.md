@@ -1,7 +1,7 @@
 # Changelog — Phase-2 Spec Issues Report — `git-logs` App
 
-**Version:** 1.3.1  
-**Updated:** 2026-04-29  
+**Version:** 1.3.2
+**Updated:** 2026-04-29
 **Scope:** `spec/25-app-issues/01-phase-2-git-logs-audit/`
 
 ---

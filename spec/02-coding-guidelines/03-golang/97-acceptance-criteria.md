@@ -1,7 +1,7 @@
 # Golang Standards — Acceptance Criteria
 
-**Version:** 4.0.0
-**Last Updated:** 2026-04-26 (Phase 16j: full GWT rewrite — replaced 6 stub checkboxes with 20 module-specific Given/When/Then ACs covering Go-specific rules + explicit inheritance from `../01-cross-language/97` (AC-CL-*). Old AC-01..AC-02 preserved as AC-GO-LEGACY-* at end.)
+**Version:** 4.1.0
+**Last Updated:** 2026-04-29
 **Scope:** `spec/02-coding-guidelines/03-golang/` — Go-specific coding standards layered on the cross-language parent.
 
 ---

@@ -1,7 +1,7 @@
 # Changelog — Phase 2 — Enums and Coding Style
 
-**Version:** 1.1.1  
-**Updated:** 2026-04-29  
+**Version:** 1.1.2
+**Updated:** 2026-04-29
 **Scope:** `spec/18-wp-plugin-how-to/02-enums-and-coding-style/`
 
 ---

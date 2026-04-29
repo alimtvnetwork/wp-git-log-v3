@@ -1,7 +1,7 @@
 # Changelog — Error Code Registry
 
-**Version:** 3.2.2  
-**Updated:** 2026-04-29  
+**Version:** 3.2.3
+**Updated:** 2026-04-29
 **Scope:** `spec/03-error-manage/03-error-code-registry/`
 
 ---

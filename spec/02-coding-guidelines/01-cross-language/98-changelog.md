@@ -1,8 +1,8 @@
 # Coding Guidelines — Changelog
 
 
-**Version:** 4.0.0
-**Last Updated:** 2026-04-27
+**Version:** 4.0.1
+**Last Updated:** 2026-04-29
 
 All notable changes to the Cross-Language Coding Guidelines specification are documented here.
 

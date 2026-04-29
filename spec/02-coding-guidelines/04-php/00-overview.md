@@ -5,10 +5,10 @@ description: Forward-looking PHP coding standards for the RiseupAsia namespace. 
 
 # PHP Standards
 
-**Version:** 4.2.0  
+**Version:** 4.2.1
 <!-- h10-verified-phase: 21 -->
 **Status:** Active (future-spec — implementation lives downstream)  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-29
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

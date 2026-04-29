@@ -1,7 +1,7 @@
 # Changelog — Enum Specification
 
-**Version:** 3.3.2  
-**Updated:** 2026-04-29  
+**Version:** 3.3.3
+**Updated:** 2026-04-29
 **Scope:** `spec/02-coding-guidelines/03-golang/01-enum-specification/`
 
 ---

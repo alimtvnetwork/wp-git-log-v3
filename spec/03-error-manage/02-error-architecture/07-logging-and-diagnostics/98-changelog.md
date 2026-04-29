@@ -1,7 +1,7 @@
 # Changelog — Logging and Diagnostics
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-27  
+**Version:** 1.1.1
+**Updated:** 2026-04-29
 **Scope:** `spec/03-error-manage/02-error-architecture/07-logging-and-diagnostics/`
 
 ---

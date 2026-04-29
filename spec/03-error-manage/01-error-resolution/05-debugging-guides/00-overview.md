@@ -5,10 +5,10 @@ description: Forward-looking debugging guide format for downstream PHP/Go/TypeSc
 
 # Debugging Guides
 
-**Version:** 3.3.1  
+**Version:** 3.3.2
 <!-- h10-verified-phase: 30 -->
 **Status:** Active (future-spec — referenced application code lives downstream)  
-**Updated:** 2026-04-28  
+**Updated:** 2026-04-29
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

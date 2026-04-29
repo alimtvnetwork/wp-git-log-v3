@@ -1,7 +1,7 @@
 # Changelog — Debugging Guides
 
-**Version:** 3.3.1  
-**Updated:** 2026-04-28  
+**Version:** 3.3.2
+**Updated:** 2026-04-29
 **Scope:** `spec/03-error-manage/01-error-resolution/05-debugging-guides/`
 
 ---

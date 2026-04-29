@@ -1,10 +1,9 @@
 # Changelog: Rust Standards
 
-**Updated:** 2026-04-26
+**Updated:** 2026-04-29
 
 
-**Version:** 4.0.0
-
+**Version:** 4.0.1
 ---
 
 ## v4.0.0 — 2026-04-26 (Phase 16l: §97 full GWT rewrite)

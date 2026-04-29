@@ -5,9 +5,9 @@ drift_acknowledged: 2026-04-26
 
 # Logging and Diagnostics
 
-**Version:** 3.3.0  
+**Version:** 3.3.1
 **Status:** Active  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-29
 <!-- h10-verified-phase: 32 -->
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
