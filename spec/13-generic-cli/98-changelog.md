@@ -1,6 +1,6 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.1  
+**Version:** 1.1.2  
 **Updated:** 2026-04-29  
 **Scope:** `spec/13-generic-cli/`
 
