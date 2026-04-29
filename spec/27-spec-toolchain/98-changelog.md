@@ -1,10 +1,16 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.75.1
+**Version:** 2.76.0
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.76.0 — 2026-04-29 — Phase 153 Task A6: slot 34 v1.0.1 → v1.1.0 — tier-1 contract-file prioritization (AC-34-09)
+- **Action**: Patched `linter-scripts/audit-ai-implementability.py` `load_module_bundle()` to place the four module-root contract files (`00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`) FIRST in the 90 KB bundle, then everything else alphabetically. **Surfacing context**: Task A6's first re-score loop on `spec/05-split-db-architecture` (the lone NEEDS_WORK module from the v3 baseline at 69/100) produced ZERO score movement despite three new GWT ACs (AC-SD-21/22/23). Diagnosis via file-size enumeration revealed the pre-A6 alphabetical sort exhausted the 90 KB cap on chunky `02-features/0[1-3]-*.md` siblings BEFORE reaching `97-acceptance-criteria.md` — the auditor scored examples without ever seeing the binding contract. **After the walker fix**: spec/05 lifted **69 → 89 (+20)** on the same `97` content; D1 14→18, D2 12→19, D3 10→17, D4 18→20 (only D5 unchanged — cross-module AC-CL-* reference, known walker boundary). Codified as **AC-34-09** with full Why prose tying the bug class (silent contract dropout) to its symptom (stable score under contract edits).
+- **Spec lockstep**: Slot 34 §00 v1.0.1 → **v1.1.0** (one new AC); §27 §00 v2.75.1 → **v2.76.0**, §98 v2.75.1 → **v2.76.0**, §99 v2.72.1 → **v2.73.0**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.**
+- **Validation**: spec/05 force re-score 69 → 89 ✅; lockstep · tree-health pending re-run.
+- **Lesson #16 codified at slot-34 §98 v2.76.0**: When an LLM auditor uses a bounded context window (here 90 KB), file ordering inside the bundle is load-bearing — alphabetical-only ordering silently drops contract files when example-bearing siblings are chunky. The fix MUST tier contract surfaces (§00/§97/§98/§99) before example/feature surfaces; otherwise contract edits become invisible to the auditor and contributors waste cycles wondering why scores don't move. **Diagnostic heuristic**: if `bundle_sha` changes but `total` doesn't move under a §97 edit, the §97 was almost certainly truncated — enumerate file sizes BEFORE the next edit attempt.
 
 ### 2.75.1 — 2026-04-29 — Phase 153 Task A5: slot 34 wired into `spec-health.yml` as advisory step
 - **Action**: Added the "AI-implementability deep-walk audit" step to `.github/workflows/spec-health.yml` between the Trace-map regression gate and the Summary block. Runs `python3 linter-scripts/audit-ai-implementability.py --report-only` so the gate is observability-only (always exits 0). Step is conditionally skipped when `LOVABLE_API_KEY` is unset (community PRs from forks) to avoid noisy 401 failures. Cache lives at `.lovable/cache/audit-ai/` and is repo-local — re-runs are cheap.

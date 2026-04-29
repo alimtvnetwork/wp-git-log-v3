@@ -78,12 +78,35 @@ def discover_modules() -> list[Path]:
 def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
     """Concatenate all walk-globbed files up to MAX_BYTES.
 
+    File ordering (Phase 153 Task A6 fix — codified as AC-34-09):
+      Tier 1 (always-first, contract-bearing):  00-overview.md, 97-acceptance-criteria.md, 98-changelog.md, 99-consistency-report.md
+      Tier 2 (alphabetical):                    everything else under WALK_GLOBS
+
+    Pre-A6 the walker sorted purely alphabetically, which silently dropped
+    every module's `97-acceptance-criteria.md` (alphabetically last) out
+    of the 90 KB context window for any module whose `02-*`/`03-*` siblings
+    were chunky. The auditor then scored on examples without seeing the
+    binding contract — Task A6's first re-score loop produced no movement
+    because the §97 additions were never bundled. Tier-1 priority guarantees
+    the contract surface is always sampled.
+
     Returns (bundle_text, bytes_used, files_used, files_total).
     """
     files: list[Path] = []
     for pattern in WALK_GLOBS:
         files.extend(mod_dir.rglob(pattern))
     files = sorted(set(files))
+
+    # Tier 1: contract-bearing files at the module root, in canonical order.
+    tier1_names = ["00-overview.md", "97-acceptance-criteria.md", "98-changelog.md", "99-consistency-report.md"]
+    tier1: list[Path] = []
+    for name in tier1_names:
+        candidate = mod_dir / name
+        if candidate in files:
+            tier1.append(candidate)
+            files.remove(candidate)
+    files = tier1 + files
+
     parts: list[str] = []
     total = 0
     used = 0

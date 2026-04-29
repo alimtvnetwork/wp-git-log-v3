@@ -1,8 +1,10 @@
 # Consistency Report: Split DB Architecture
 
-**Version:** 4.0.0  
-**Generated:** 2026-04-26  
+**Version:** 4.0.1  
+**Generated:** 2026-04-29  
 **Health Score:** 100/100 (A+)
+
+> **v4.0.1 update (Phase 153 Task A6 — close v3 audit findings on the only NEEDS_WORK module):** User reply `next`. Targeted lift on `spec/05-split-db-architecture` (was 69/100 — lone NEEDS_WORK in the v3 baseline). Added three GWT ACs in §97 directly mapping to the cached audit findings: **AC-SD-21** (CRITICAL D1, PascalCase SQL identifier quoting + Go struct mapping with `db:` / `gorm:column:` tags), **AC-SD-22** (HIGH D3, cross-process concurrency — `PRAGMA busy_timeout=5000` mandatory + retry-loop on `SQLITE_BUSY`/`SQLITE_LOCKED` with exponential backoff + jitter), **AC-SD-23** (MEDIUM D2, TTL/expiry contract — explicit `ExpiresAt INTEGER NOT NULL`, filter-on-read with 401/410/409 status, background sweeper, forbidden patterns enumerated). Each AC carries a complete worked example (Go for AC-SD-22; SQL for AC-SD-23) so a mediocre coder can implement directly. §97 v4.0.0 → **v4.1.0**; §00 banner v4.0.0 → **v4.0.1** (Updated 2026-04-03 → 2026-04-29; h10 stamp 22 → 153); §98 v4.0.0 → **v4.1.0**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.** Expected v4 audit lift: D1 14→17 (+3, quoting contract), D2 12→16 (+4, AC count 22→25), D3 10→15 (+5, busy_timeout + retry + sweeper + forbidden patterns). Projected total: 69 → ~81-83 (GOOD band crossover). **Lesson #16**: Targeted single-module audit lift via cached-finding-driven AC additions is the highest-leverage spec improvement workflow — the auditor already wrote the AC titles; the contributor's job is to expand each into a full GWT with worked example. Cache hit means re-running the audit to validate is a single API call.
 
 ---
 
@@ -45,7 +47,7 @@ All internal cross-references resolve. ✅
 ---
 
 ## Summary
-<!-- verified-phase: 146 -->
+<!-- verified-phase: 153 -->
 - **Errors:** 0
 - **Warnings:** 0 (legacy `98-acceptance-criteria.md` retained for traceability; superseded by §97 v4.0.0)
 - **Observations:** 1 — folder uses dual changelog files (`97-changelog.md` legacy + `98-changelog.md` Phase 16r); both retained.

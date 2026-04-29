@@ -1,7 +1,7 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.0.0
-**Last Updated:** 2026-04-26 (Phase 16r: full GWT rewrite — replaced 2 stub criteria (AC-01/AC-02 with 6 sub-checkboxes total) with 20 module-specific Given/When/Then ACs covering hierarchical SQLite organization, Root DB registry, per-item DBs, cross-DB queries, connection pooling, backup, and migration. Old stubs preserved as AC-SD-LEGACY-001..002 at end.)
+**Version:** 4.1.0
+**Last Updated:** 2026-04-29 (Phase 153 Task A6: added AC-SD-21 SQL identifier quoting + Go struct mapping; AC-SD-22 cross-process concurrency contract — busy_timeout + retry-loop + locked-error handling; AC-SD-23 TTL/expiry contract for time-bounded rows. Targets v3 audit findings on D2 (AC coverage) + D3 (edge/error handling) for the only NEEDS_WORK module.)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
 ---
@@ -170,6 +170,65 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
 - **When** extracted and run against a fresh in-memory SQLite (`:memory:`),
 - **Then** EVERY block tagged ` ```sql` MUST execute without errors. The doctest harness (e.g., `linter-scripts/split-db-doctest.py`) MUST: (a) walk every `.md` file in this folder, (b) extract every ```` ```sql ```` block, (c) feed each block to a fresh in-memory SQLite, (d) verify no syntax errors, (e) verify no PascalCase violations (regex against extracted CREATE TABLE statements), (f) verify WAL pragma is present where the block represents a connection setup. Failures MUST list the file + block + error. This is the dogfooding gate — the spec's example DDL must actually work. Stale or fictional DDL in the spec FAILS this AC.
 - **Verifies:** AC-CL-20 self-application + AC-SD-02 PascalCase + AC-SD-12 WAL.
+
+### AC-SD-21 — SQL identifier quoting + Go struct ↔ DB mapping for PascalCase fields
+
+- **Given** PascalCase field names are MANDATORY (AC-SD-02) and SQLite is case-insensitive by default, allowing some Go drivers / ORMs to silently rewrite identifiers to snake_case,
+- **When** any SQL statement (DDL or DML) references a PascalCase identifier in this folder OR in any project's generated SQL,
+- **Then** the identifier MUST be wrapped in **double quotes** (`"SessionId"`) — NOT backticks (MySQL style) and NOT square brackets (T-SQL style). Go struct ↔ DB mapping MUST use explicit struct tags: ` `db:"SessionId"` ` (for `sqlx`) or ` `gorm:"column:SessionId"` ` (for GORM). Worked example:
+  ```go
+  type Session struct {
+      SessionId string `db:"SessionId" gorm:"column:SessionId;primaryKey"`
+      OwnerId   string `db:"OwnerId"   gorm:"column:OwnerId;index"`
+      CreatedAt int64  `db:"CreatedAt" gorm:"column:CreatedAt"`
+  }
+  // SELECT "SessionId", "OwnerId", "CreatedAt" FROM "Session" WHERE "SessionId" = ?
+  ```
+  Doctest harness (AC-SD-20) MUST reject any DDL/DML block in this folder that references a PascalCase identifier without double-quoting OR uses backticks/brackets. Reasoning: without explicit quoting, a downstream tool (linter, formatter, ORM) may silently lowercase the identifier and produce runtime "no such column" errors against another caller that did quote correctly — the bug surfaces only at the integration boundary.
+- **Verifies:** AC-SD-02 PascalCase + AC-SD-20 self-application doctest. Closes v3 audit CRITICAL D1 finding "PascalCase Enforcement vs SQL standard" (Phase 153 Task A6).
+
+### AC-SD-22 — Cross-process concurrency: `PRAGMA busy_timeout` + retry-loop on `SQLITE_BUSY`
+
+- **Given** SQLite serializes writers per database file and a `database is locked` (SQLITE_BUSY) error is returned the moment two writers contend (cross-goroutine OR cross-process), and given `sync.RWMutex` only protects in-process callers,
+- **When** any writer opens a connection to a DB in this hierarchy,
+- **Then** the connection setup MUST execute `PRAGMA busy_timeout = 5000` (≥ 5 seconds, project-tunable via `BusyTimeoutMs` config). All write operations (INSERT/UPDATE/DELETE/CREATE/DROP/ALTER, plus `BEGIN IMMEDIATE`/`BEGIN EXCLUSIVE`) MUST be wrapped in a retry-loop that catches `SQLITE_BUSY` (errno 5) and `SQLITE_LOCKED` (errno 6), retries with exponential backoff (initial 10 ms, factor 2, jitter ±25%), and gives up after a project-tunable cap (`MaxBusyRetries`, default 5). Worked example:
+  ```go
+  func WithRetry(db *sql.DB, op func(*sql.Tx) error) error {
+      delay := 10 * time.Millisecond
+      for attempt := 0; attempt < MaxBusyRetries; attempt++ {
+          tx, err := db.BeginTx(ctx, &sql.TxOptions{Isolation: sql.LevelSerializable})
+          if err == nil { if err = op(tx); err == nil { return tx.Commit() }; tx.Rollback() }
+          var sqliteErr sqlite3.Error
+          if errors.As(err, &sqliteErr) && (sqliteErr.Code == sqlite3.ErrBusy || sqliteErr.Code == sqlite3.ErrLocked) {
+              jitter := time.Duration(rand.Int63n(int64(delay) / 2)) - delay/4
+              time.Sleep(delay + jitter); delay *= 2; continue
+          }
+          return err
+      }
+      return ErrBusyExhausted
+  }
+  ```
+  Read operations under `journal_mode=WAL` (AC-SD-12) generally do NOT need retries (WAL allows concurrent readers + one writer), but read-after-write coherence MUST be tested under contention.
+- **Verifies:** AC-SD-11 connection pooling + AC-SD-12 WAL + AC-SD-14 atomic write. Closes v3 audit HIGH D3 finding "Concurrency/Locking implementation gaps" (Phase 153 Task A6).
+
+### AC-SD-23 — TTL / expiry contract for time-bounded rows (Reset tokens, sessions, idempotency keys)
+
+- **Given** any table in this hierarchy holds time-bounded rows (e.g., password-reset tokens with 5-min TTL, idle sessions with 30-min TTL, idempotency keys with 24-hr TTL),
+- **When** a caller reads a row OR a sweeper job runs,
+- **Then** the row MUST carry an explicit `ExpiresAt INTEGER NOT NULL` column (Unix epoch milliseconds, UTC). Reads MUST filter `WHERE ExpiresAt > unixepoch('now') * 1000` AND the application layer MUST return the protocol-appropriate expired status (HTTP 401 Unauthorized for sessions, 410 Gone for one-shot tokens, 409 Conflict for idempotency-key collisions on already-expired keys) **WITHOUT deleting or mutating the data the row protects** (deletion happens only via the sweeper). A background sweeper MUST run at least every `min(TTL/4, 5 minutes)` and `DELETE FROM <table> WHERE ExpiresAt <= unixepoch('now') * 1000`. Worked example (5-min reset token):
+  ```sql
+  CREATE TABLE "ResetToken" (
+      "TokenId"   TEXT PRIMARY KEY,
+      "UserId"    TEXT NOT NULL,
+      "ExpiresAt" INTEGER NOT NULL,  -- created_ms + 300_000
+      "Consumed"  INTEGER NOT NULL DEFAULT 0
+  );
+  -- read:    SELECT * FROM "ResetToken" WHERE "TokenId"=? AND "ExpiresAt" > unixepoch('now')*1000 AND "Consumed"=0
+  -- expired: HTTP 410 Gone, do NOT delete the user, do NOT delete the token (sweeper handles it)
+  -- sweeper: DELETE FROM "ResetToken" WHERE "ExpiresAt" <= unixepoch('now')*1000  (every 75 s)
+  ```
+  Forbidden patterns: relative timestamps (`CreatedAt + INTERVAL '5 minutes'` evaluated at read time — clock-skew-sensitive), implicit cleanup-on-read (race-condition prone — two callers may both observe "valid" then both consume), and TTL stored in application config without an `ExpiresAt` column (sweeper would have nothing to query).
+- **Verifies:** AC-SD-04 Root DB scope + AC-SD-13 per-item DB lifecycle + AC-SD-14 atomic write. Closes v3 audit MEDIUM D2 finding "Missing Acceptance Criteria for Reset TTL" (Phase 153 Task A6).
 
 ---
 

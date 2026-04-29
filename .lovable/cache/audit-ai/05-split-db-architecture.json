@@ -1,37 +1,37 @@
 {
-  "d1": 14,
-  "d2": 12,
-  "d3": 10,
-  "d4": 18,
+  "d1": 18,
+  "d2": 19,
+  "d3": 17,
+  "d4": 20,
   "d5": 15,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D1",
-      "title": "PascalCase Enforcement vs SQL standard",
-      "why": "The spec mandates PascalCase for all field names (e.g., SessionId), but SQLite is case-insensitive by default and many Go drivers/mappers default to snake_case. A mediocre coder might produce inconsistent mapping or fail to use backticks/quotes in queries, leading to runtime errors in strict environments.",
-      "fix": "Explicitly mandate double-quoting all identifiers in SQL snippets and provide a Go struct-to-DB mapping example using tags (e.g., `db:\"SessionId\"`)."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Concurrency/Locking implementation gaps",
-      "why": "While WAL mode is mentioned, the provided Go code uses a simple `sync.RWMutex` for the map of connections but does not address cross-process locking or how to handle 'database is locked' errors during high-concurrency writes to the same Session DB.",
-      "fix": "Add a requirement for a retry-loop decorator for write operations and specify the use of 'PRAGMA busy_timeout'."
+      "dim": "D5",
+      "title": "Missing Cross-Language Parent Reference",
+      "why": "AC-SD-01 and AC-SD-02 explicitly inherit from a 'cross-language parent' (AC-CL-*) located at `../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md`, but this file is not provided in the context.",
+      "fix": "Include the 02-coding-guidelines module in the context or inline the specific AC-CL rules referenced."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Missing Acceptance Criteria for Reset TTL",
-      "why": "The 5-minute TTL for the Reset API is a core safety feature, but the provided AC-SDB-000 only checks for 'lifecycle wiring' and 'Casbin points', not the actual expiration logic or cleanup of expired tokens.",
-      "fix": "Add a specific GWT criterion: 'Given a reset request older than 5 minutes, When confirm is called, Then return 401/410 Expired and do not delete data.'"
+      "dim": "D3",
+      "title": "Incomplete Concurrency Implementation in Examples",
+      "why": "While AC-SD-22 mandates a retry-loop for SQLITE_BUSY, the provided Go implementation of DbManager (01-fundamentals.md) lacks this logic, potentially misleading a mediocre coder.",
+      "fix": "Update the DbManager.GetOrCreateDb code snippet in 01-fundamentals.md to include the WithRetry wrapper defined in AC-SD-22."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Ambiguous Sequence Number Assignment",
+      "why": "AC-SD-05 requires sequence numbers to be assigned by the Root DB registry but doesn't specify if this is a global counter or per-category/project counter.",
+      "fix": "Explicitly state in AC-SD-05 that sequence numbers are derived from the 'Counter' table defined in the Root DB schema."
     }
   ],
   "module": "05-split-db-architecture",
-  "files_used": 6,
+  "files_used": 7,
   "files_total": 20,
   "bytes_used": 90000,
-  "bundle_sha": "cbe6018a6a582234",
-  "total": 69,
-  "band": "NEEDS_WORK"
+  "bundle_sha": "49edfe6cb27311b0",
+  "total": 89,
+  "band": "GOOD"
 }
