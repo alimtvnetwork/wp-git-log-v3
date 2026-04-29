@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 20,
+  "d3": 15,
+  "d4": 16,
+  "d5": 14,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "Missing Authoritative Source Context",
+      "why": "The spec is a derivative of 'spec/22-git-logs-v2', but the content of that module (schema, error codes, endpoints) is not provided in this context.",
+      "fix": "Provide the content of spec/22-git-logs-v2/02-database-schema.md and 14-error-codes.md."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Non-deterministic SVG Validation",
+      "why": "AC-DG-12 admits Mermaid renders are non-byte-identical due to dynamic IDs, but the provided CI script uses a strict sha256sum check which will fail.",
+      "fix": "Update the CI script to use a structural diff tool or allow for non-identical hashes if the source .mmd is unchanged."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Missing Mermaid Source Examples",
+      "why": "While metadata and CI scripts are provided, no actual .mmd source content (e.g., 01-er-diagram.mmd) is included to verify the '%% Diagram type' contract.",
+      "fix": "Include at least one full .mmd file content as a reference implementation."
+    }
+  ],
+  "module": "26-gitlogs-diagrams",
+  "files_used": 9,
+  "files_total": 9,
+  "bytes_used": 60649,
+  "bundle_sha": "cd84b821ad63d5ef",
+  "total": 83,
+  "band": "GOOD"
+}

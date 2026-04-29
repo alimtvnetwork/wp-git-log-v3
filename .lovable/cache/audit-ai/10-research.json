@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 16,
+  "d3": 14,
+  "d4": 15,
+  "d5": 17,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Acceptance Criteria Mismatch",
+      "why": "The child module (01-research-index) claims to have 6 GWT criteria in its checklist, but the actual 97-acceptance-criteria.md file for that sub-module is missing from the provided context.",
+      "fix": "Provide the file spec/10-research/01-research-index/97-acceptance-criteria.md containing the 6 GWT cases."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Domain Path Validation Ambiguity",
+      "why": "The JSON schema requires 'domains' to be relpaths to spec modules but does not define if these must be validated against the filesystem or a known list during runtime.",
+      "fix": "Add a 'Verifies' clause to AC-RESEARCH-03 stating that domain strings must resolve to existing directories in the spec/ tree."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Missing Mermaid Source Files",
+      "why": "The overview references standalone .mmd files (e.g., lifecycle-top-research.mmd) which are not provided in the file list, though the code is inlined.",
+      "fix": "Include the raw .mmd files in the module file inventory to match the 'File Inventory' table."
+    }
+  ],
+  "module": "10-research",
+  "files_used": 8,
+  "files_total": 8,
+  "bytes_used": 29048,
+  "bundle_sha": "f087d5e6a6bce737",
+  "total": 80,
+  "band": "GOOD"
+}

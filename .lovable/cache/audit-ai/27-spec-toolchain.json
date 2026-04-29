@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 19,
+  "d3": 15,
+  "d4": 16,
+  "d5": 17,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D3",
+      "title": "Implicit dependency on Gemini/Lovable API in Generator 13",
+      "why": "Module 13 (generate-gwt-acceptance.py) requires an external AI call but lacks a fallback, timeout spec, or mock-mode for local development/CI.",
+      "fix": "Add a 'Dry Run' mode and explicit timeout/retry contract to the CLI flags and error handling section."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D5",
+      "title": "Unresolved reference to 'Phase 107 orphan ledger'",
+      "why": "Multiple modules (18, 19) reference a ledger at '.lovable/memory/audit/v2-deterministic/...' which is not provided in the context, making it impossible to verify the migration logic.",
+      "fix": "Include the orphan ledger schema or a sample file path in the Cross-Ref section."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Ambiguous 'depth' calculation in Filler 20",
+      "why": "AC-20-05 mentions a depth-aware relative path computation but doesn't define if 'spec/' is depth 0 or 1, leading to potential off-by-one link errors.",
+      "fix": "Explicitly define depth: 'spec/module/file.md' is depth 1; 'spec/category/module/file.md' is depth 2."
+    }
+  ],
+  "module": "27-spec-toolchain",
+  "files_used": 23,
+  "files_total": 50,
+  "bytes_used": 90000,
+  "bundle_sha": "4a4f27bf25638581",
+  "total": 85,
+  "band": "GOOD"
+}

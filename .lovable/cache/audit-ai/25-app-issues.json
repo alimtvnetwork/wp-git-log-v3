@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 14,
+  "d3": 15,
+  "d4": 12,
+  "d5": 16,
+  "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D2",
+      "title": "Truncated Acceptance Criteria",
+      "why": "File `spec/25-app-issues/02-consolidated-audit-findings/97-acceptance-criteria.md` is cut off mid-sentence at AC-05, leaving the module untestable.",
+      "fix": "Complete the AC-05 text and add the remaining boilerplate ACs (AC-06 to AC-08) as seen in sibling modules."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D4",
+      "title": "Missing machine-readable issue fixtures",
+      "why": "While schemas are provided (JSON/SQL), there are no sample JSON files or SQL insert statements representing a 'worked case' of a finding.",
+      "fix": "Add a fenced JSON block in 00-overview.md containing a valid example of a P2-GL-NN record."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D5",
+      "title": "Dangling Linter Script References",
+      "why": "Multiple ACs and verification sections reference `linter-scripts/` (e.g., `check-issue-records.py`) which are not provided in the context.",
+      "fix": "Add a 'Dependencies' section to 00-overview.md explicitly listing required external scripts and their expected exit codes."
+    }
+  ],
+  "module": "25-app-issues",
+  "files_used": 7,
+  "files_total": 12,
+  "bytes_used": 90000,
+  "bundle_sha": "262eef9baea8551a",
+  "total": 75,
+  "band": "GOOD"
+}

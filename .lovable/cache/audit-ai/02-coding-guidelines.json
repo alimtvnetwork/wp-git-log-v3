@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 20,
+  "d3": 15,
+  "d4": 20,
+  "d5": 17,
+  "issues": [
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Ambiguous Concurrency Policy for Boolean Flags",
+      "why": "The spec mandates 'is/has' prefixes but doesn't specify thread-safety requirements (e.g., atomic vs volatile) for these flags in Go/C#.",
+      "fix": "Add a rule to P1 stating that cross-goroutine/thread boolean flags must use atomic types or mutex protection."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "Unresolved External Linter References",
+      "why": "References to 'linter-scripts/validate-guidelines.py' and 'codegen' tools are mentioned as authoritative but the scripts themselves are not provided in the context.",
+      "fix": "Inline the core logic of the 'validate-guidelines' regex or provide the script content."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Missing Units for Function Metrics",
+      "why": "Rule 6 mentions 'Functions: 8\u201315 lines' but doesn't specify if this is Logical Lines of Code (LLOC) or Physical Lines (including comments/whitespace).",
+      "fix": "Define 'lines' as 'non-comment, non-blank physical lines'."
+    }
+  ],
+  "module": "02-coding-guidelines",
+  "files_used": 13,
+  "files_total": 251,
+  "bytes_used": 89531,
+  "bundle_sha": "03166615ecd6d09b",
+  "total": 90,
+  "band": "EXCELLENT"
+}

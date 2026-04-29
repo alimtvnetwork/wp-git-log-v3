@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 14,
+  "d3": 17,
+  "d4": 15,
+  "d5": 19,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Missing GWT Acceptance Criteria for Core Logic",
+      "why": "While the spec references AC-13, AC-73, etc., the actual '97-acceptance-criteria.md' file is not provided in the context, and the provided files lack explicit GWT (Given-When-Then) clauses for the complex state transitions (PreviousHasError logic).",
+      "fix": "Append a 'Verifies' section to each endpoint in \u00a704 with explicit GWT scenarios for state transitions."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D4",
+      "title": "Truncated Examples and Seed Data",
+      "why": "The context cuts off at 90KB, losing the '14-endpoint-examples.md', '16-seed-data.md', and '18-schema.sql' files which are critical for a 'no-questions' implementation of the DB and API.",
+      "fix": "Ensure the DDL in \u00a702 is exhaustive or provide the full 18-schema.sql content within the module context."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Ambiguous 'Retrieval' URL Construction",
+      "why": "The Standard Ack Envelope shows relative paths like '/wp-json/git-logs/v2/get-logs' but doesn't specify if these should include the query parameters (RepoUrl, Branch) required to actually use those links.",
+      "fix": "Explicitly state that Retrieval URLs must be fully qualified and pre-populated with the request's context parameters."
+    }
+  ],
+  "module": "22-git-logs-v2",
+  "files_used": 7,
+  "files_total": 36,
+  "bytes_used": 90000,
+  "bundle_sha": "4648b5722738ef13",
+  "total": 83,
+  "band": "GOOD"
+}

@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 14,
+  "d3": 15,
+  "d4": 17,
+  "d5": 19,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Acceptance Criteria are meta-tests, not functional tests",
+      "why": "AC-01 through AC-08 verify the existence and naming of markdown files (spec hygiene) rather than the behavior of the PowerShell script (e.g., 'Given a missing Go installation, When run, Then winget installs Go').",
+      "fix": "Add GWT scenarios for core logic: dependency bootstrapping, PnP fallback logic, and firewall rule injection."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Concurrency and Process Locking unaddressed",
+      "why": "The script performs recursive deletions and file moves (Step 5) but does not address cases where files are locked by a running backend or an IDE, which is a common failure point in PowerShell dev-loops.",
+      "fix": "Add a 'Stop-ExistingProcess' function that kills processes bound to the configured ports before cleaning/copying."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Ambiguous 'rootDir' resolution",
+      "why": "The spec states paths are relative to the script location, but 'rootDir' in the JSON can also be relative. If rootDir is '../', the interaction with backendDir/frontendDir resolution is not explicitly typed.",
+      "fix": "Explicitly state that all other paths are joined to the resolved absolute path of rootDir."
+    }
+  ],
+  "module": "11-powershell-integration",
+  "files_used": 15,
+  "files_total": 19,
+  "bytes_used": 90000,
+  "bundle_sha": "930caa522017a4c2",
+  "total": 83,
+  "band": "GOOD"
+}

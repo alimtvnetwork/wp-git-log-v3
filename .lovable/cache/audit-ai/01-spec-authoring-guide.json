@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 14,
+  "d3": 12,
+  "d4": 19,
+  "d5": 17,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Missing GWT blocks for core authoring rules",
+      "why": "While the spec mandates GWT (Given/When/Then) blocks for all modules, the guide itself only provides one example (AC-SAG-000) and lacks coverage for naming, numbering, and folder placement rules.",
+      "fix": "Add a comprehensive 97-acceptance-criteria.md with GWT blocks for every invariant listed in the Phase 48/52 contracts."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Undefined conflict resolution for numbering gaps",
+      "why": "The spec acknowledges historical gaps in numbering but does not define how an AI should handle a collision if two agents attempt to use the 'next available number' simultaneously.",
+      "fix": "Add a concurrency section requiring a 'lock' file or a specific git-rebase strategy for numeric prefix allocation."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "Unresolved external script references",
+      "why": "The spec references several scripts (e.g., audit-spec-v2.py, generate-gwt-acceptance.py) as mandatory infrastructure but does not provide their interface or location within the provided context.",
+      "fix": "Include a 'Linter Interface' section defining the CLI arguments and expected JSON output for referenced scripts."
+    }
+  ],
+  "module": "01-spec-authoring-guide",
+  "files_used": 7,
+  "files_total": 17,
+  "bytes_used": 90000,
+  "bundle_sha": "81c1a152b806749d",
+  "total": 80,
+  "band": "GOOD"
+}

@@ -1,0 +1,37 @@
+{
+  "d1": 16,
+  "d2": 18,
+  "d3": 15,
+  "d4": 14,
+  "d5": 12,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "Broken External References",
+      "why": "The DDL for App and AppLink relies on Profile, GitProfile, and Repo tables, but their schemas are not provided in this context, only referenced via external paths.",
+      "fix": "Inline the minimal DDL for Profile, GitProfile, and Repo tables in the 'Convention recap' or a 'Prerequisites' section."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D1",
+      "title": "Conflicting DDL Dialects",
+      "why": "The spec provides SQLite DDL (PascalCase, INTEGER types) in the main section but then provides PostgreSQL DDL (snake_case, UUIDs) in the Phase 53 section without stating which is the primary target.",
+      "fix": "Explicitly designate one DDL block as the 'Primary Implementation Target' and the other as 'Reference/Secondary'."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Unresolved CHECK Constraint Logic",
+      "why": "The AppLink CHECK constraint uses subqueries (SELECT AppLinkTypeId FROM AppLinkType...). SQLite does not allow subqueries inside CHECK constraints.",
+      "fix": "Replace subqueries in CHECK constraints with hardcoded ID constants or use a Trigger/Application logic to enforce the XOR invariant."
+    }
+  ],
+  "module": "23-app-database",
+  "files_used": 4,
+  "files_total": 4,
+  "bytes_used": 38989,
+  "bundle_sha": "42894d34ea05687f",
+  "total": 75,
+  "band": "GOOD"
+}
