@@ -1,6 +1,6 @@
 # Changelog — Database Conventions
 
-**Version:** 3.3.3  
+**Version:** 3.4.0  
 **Updated:** 2026-04-29  
 **Scope:** `spec/04-database-conventions/`
 
