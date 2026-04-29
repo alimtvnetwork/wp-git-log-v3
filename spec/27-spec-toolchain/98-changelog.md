@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.70.0
+**Version:** 2.71.0
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.71.0 — 2026-04-29 — Phase P48-1-fu1-batch slot 3: P1 inventory regex broadened — non-numeric-prefix siblings now matched
+- **Action**: Fixed `INVENTORY_LINK_RE` in `linter-scripts/check-ai-confidence.py` from `\d{2}[-A-Za-z0-9_\-]*\.md` → `[A-Za-z0-9_][A-Za-z0-9_\-\.]*\.md`. The pre-fix regex required a `\d{2}-` prefix, producing false-positive P1 drift findings for legitimately-listed non-numeric siblings (`consolidated-review-guide.md`, `structure.md`, `readme.md`, `changelog.md`).
+- **Surfacing context**: While running P48-1-fu1-batch slot 3 (sweep `spec/02-coding-guidelines`), inspection confirmed both `consolidated-review-guide.md` and `consolidated-review-guide-condensed.md` ARE listed in §00 inventory at lines 191-192 yet flagged as "not in inventory" by P1. Cross-checked across all 6 P1 drifters: 5 of 13 first-run findings were this regex bug, not real spec drift (§02 review-guides, §03 `structure.md`, §12 `readme.md`, §14 `readme.md`, §18 `readme.md`+`changelog.md`).
+- **Result after fix**: P1 drifters reduced 5 → 3 (real ones remain: §12 missing 4 numeric slots, §14 missing 5, §22 missing 7). §02/§03/§17 now resolve cleanly to honest deeper-layer findings (P3 `**Verifies:**` gaps). §18 still drifts (real `readme.md` + `changelog.md` not in inventory — confirmed by `rg`).
+- **Spec lockstep**: §27 slot 33 v1.0.0 → **v1.1.0** (broadened P1 description in detection-rules table; added **AC-33-07** codifying the regex-shape contract with rationale + worked example). §27 §00 v2.70.0 → **2.71.0**, §98 v2.70.0 → **2.71.0**, §99 v2.67.0 → **2.68.0**.
+- **Self-test**: 5/5 still pass (regex change does not affect `derive_tier()` contract). Lockstep 87/87 · version-parity 74/74/0 · tree-health 168/168 strict — all GREEN. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.**
+- **Lesson**: "First-run findings ≠ bugs in the linter" (P48-1-fu1 lesson 2) is the **default**, not absolute — when ≥30% of findings cluster on a single mechanical pattern (here: non-numeric prefix), inspect the linter regex BEFORE mass-patching the tree. Codifies a counter-balance: assume tree-wrong by default, but test the assumption when the finding distribution is suspiciously uniform.
 
 ### 2.70.0 — 2026-04-29 — Phase P48-1-fu1: §27 slot 33 `check-ai-confidence.py` ships — mechanizes AC-09 four-gate rubric, surfaces 13/15 module drifts on first run
 - **Action**: Authored `linter-scripts/check-ai-confidence.py` (slot 33) — deterministic validator that mechanizes the **AI Confidence four-gate rubric (P1 → P4)** introduced in P48-1 (`spec/17-consolidated-guidelines/01-spec-authoring.md` § *AI Confidence Rubric (normative)*) and bound by AC-09. Walks gates in order, returns the highest-passing tier; advisory-by-default with per-file `<!-- ai-confidence-verified-phase: NNN -->` strict-promotion stamp (mirrors P20 H10 + H1 §99 freshness exactly).
