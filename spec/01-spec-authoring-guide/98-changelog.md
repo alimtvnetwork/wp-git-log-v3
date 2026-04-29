@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.13.1
+**Version:** 4.13.2
 **Last Updated:** 2026-04-29
 
 ---
+
+## 4.13.2 — 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 8 — `### AC-SAG-LEGACY` Verifies clauses)
+
+- **Added** group-level `**Verifies:**` clauses to all four `### AC-SAG-LEGACY` block headings in `97-acceptance-criteria.md` (v4.8.0 → v4.9.0): "Folder Structure & Required Files", "Naming Conventions", "Overview Content Standards", "Cross-References & Validation". Each clause names (a) the GWT-rewrite supersession chain (`Verifies:` chain references in the new GWT ACs above), (b) the AC-SAG-28 exemption-regex contract (`^AC-[A-Z]+-LEGACY(-\d+)?$`) that any future `check-ac-gwt-completeness.py` MUST honor. Closes the P3-tier `**Verifies:**` gap for this module (28/32 → 32/32 — the smallest remaining gap among P3 drifters). Graduates this module's AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)* gate P3. No semantic change to acceptance surface — purely a verifiability uplift on the LEGACY scaffolds (which remain exempt from GWT-completeness denominators per AC-SAG-28). §00 banner 4.13.1 → 4.13.2; §97 4.8.0 → 4.9.0; §99 row added below.
 
 ## 4.13.1 — 2026-04-29 (Phase P48-1-fu1-batch slot 2 — §00 inventory drift fix, slot 04 co-location)
 

@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.8.0
-**Updated:** 2026-04-28 (Phase P7b: added **AC-SAG-28** — the **`## Legacy Index` GWT-completeness exemption** codifying that AC headings matching `^AC-[A-Z]+-LEGACY(-\d+)?$` MUST be excluded from GWT-completeness audit denominators. Surfaced when the Phase P7 mechanical sweep over `spec/*/97-acceptance-criteria.md` flagged 13 "non-GWT" ACs across §01/§02/§05/§06 — investigation revealed all 13 are intentional `## Legacy Index (preserved for traceability)` rows kept after a GWT-rewrite phase (§01 v3.2.0→current via Phases 16d/e/f, §02 Phase 16e, §05 v4.0.0 Phase 16r, §06 v4.0.0 Phase 16r) and referenced from new GWT ACs' `Verifies:` chains (e.g. `Verifies: ... + AC-SD-LEGACY-001-a` in §05 AC-SD-02). Removing them would silently break those cross-refs; re-authoring as GWT would balloon §97 length without adding new contract surface. Spec carries the exemption regex + four-module exemption table for downstream tools (any future `check-ac-gwt-completeness.py` MUST hardcode the regex AND emit a banner line `excluding N LEGACY ACs across M modules per AC-SAG-28`). Phase 115: added AC-SAG-27 — enumeration-restatement vs API-surface-use distinction. Phase 111: added AC-SAG-26 — documentation-cadence retirement pattern. Phase 105: cross-referenced AC-SAG-25 to AC-31-30. Phase 101: added AC-SAG-25 pinning `mermaid` and `jsdom`. Phase 97: added AC-SAG-24. Phase 93: added AC-SAG-23. Phase 89: added AC-SAG-21 + AC-SAG-22.)
+**Version:** 4.9.0
+**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 8 — added group-level `**Verifies:**` clauses to all four `### AC-SAG-LEGACY` block headings; closes 4/4 P3 gap (28/32 → 32/32 Verifies coverage), graduates AC-block from Medium → High AI-confidence per the four-gate rubric. Each clause names the exemption-regex contract per AC-SAG-28 and the supersession chain to the GWT ACs above. Phase P7b context preserved in v4.8.0 trail below.)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
@@ -321,6 +321,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 
 ### AC-SAG-LEGACY: Folder Structure & Required Files
 
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these table-row criteria are referenced by `Verifies:` chains of the new GWT ACs above (notably AC-SAG-01, AC-SAG-11, AC-SAG-12) and by AC-SAG-28's exemption registry. Removing them silently breaks those cross-refs (Phase P7b precedent). The mechanical exemption regex `^AC-[A-Z]+-LEGACY(-\d+)?$` in any future `check-ac-gwt-completeness.py` MUST exclude this row from the GWT-completeness denominator.
+
 | ID | Criterion | Source |
 |---|---|---|
 | AC-SAG-LEGACY-001 | Every spec module has `00-overview.md` at root | `03-required-files.md` |
@@ -330,6 +332,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 
 ### AC-SAG-LEGACY: Naming Conventions
 
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these rows are referenced by `Verifies:` chains of AC-SAG-02, AC-SAG-03, AC-SAG-04 above and by AC-SAG-28's exemption registry. Same exemption-regex contract as the prior LEGACY block.
+
 | ID | Criterion | Source |
 |---|---|---|
 | AC-SAG-LEGACY-005 | All files use lowercase kebab-case naming | `02-naming-conventions.md` |
@@ -338,6 +342,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 | AC-SAG-LEGACY-008 | Reserved prefixes (00, 97, 98, 99) used only for their designated purposes | `02-naming-conventions.md` |
 
 ### AC-SAG-LEGACY: Overview Content Standards
+
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these rows are referenced by `Verifies:` chains of AC-SAG-05, AC-SAG-16, AC-SAG-17 above and by AC-SAG-28's exemption registry. Same exemption-regex contract as the prior LEGACY blocks.
 
 | ID | Criterion | Source |
 |---|---|---|
@@ -350,6 +356,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 | AC-SAG-LEGACY-015 | Every `00-overview.md` includes Cross-References table | `00-overview.md` |
 
 ### AC-SAG-LEGACY: Cross-References & Validation
+
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these rows are referenced by `Verifies:` chains of AC-SAG-09, AC-SAG-10, AC-SAG-19 above and by AC-SAG-28's exemption registry. Same exemption-regex contract as the prior LEGACY blocks.
 
 | ID | Criterion | Source |
 |---|---|---|

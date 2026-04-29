@@ -1,7 +1,9 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.10.1
+**Version:** 4.10.2
 **Last Updated:** 2026-04-29
+
+> **v4.10.2 update (Phase P48-1-fu1-batch P3 sweep slot 8 — `### AC-SAG-LEGACY` Verifies clauses):** Closes the P3-tier `**Verifies:**` gap for this module (28/32 → 32/32 — smallest remaining gap among P3 drifters). Added group-level `**Verifies:**` clauses to all four `### AC-SAG-LEGACY` block headings; each clause names the GWT-rewrite supersession chain and the AC-SAG-28 exemption-regex contract. Graduates this module's AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)* gate P3. Lockstep: §00 banner 4.13.1 → 4.13.2, §97 4.8.0 → 4.9.0, §98 release row 4.13.2 added, §99 4.10.1 → 4.10.2. P3 derived tier: Medium → High. Tree-health 168/168 strict-pass holds; lockstep 87/87. **Lesson reinforced** (already in Core from slots 2–4): `**Verifies:**` is the single highest-leverage AC field for AI implementability; group-level clauses on LEGACY scaffolds are the canonical pattern (precedent: spec/02 slot 1).
 
 > **v4.10.1 update (Phase P48-1-fu1-batch slot 2 — §00 inventory drift fix, slot 04 co-location):** Reconciles a §00↔disk drift surfaced by `check-ai-confidence.py` (Phase P48-1-fu1) — this folder was 1 of 5 P1 inventory-gap drifters. File `04-ai-onboarding-prompt.md` was on disk and tracked by §99 inventory but never added to the §00 inventory table; per the **co-location precedent** (Core memory — when two folders ship at the same slot before the collision is noticed, both retain the slot, disambiguate by trailing slug), the resolution is to add a second slot-04 row, NOT to renumber. Patch adds the missing §00 row and updates §99 inventory (line 47) to enumerate both slot-04 occupants. §00 banner 4.13.0→**4.13.1**, §98 release row 4.13.1 added. No score change (single-row sync); restores P1 → pass and unblocks tier re-derivation under the P48-1 rubric. Follows precedent established by §17 v3.4.1 (P48-1-fu1-batch slot 1, 2026-04-29).
 
