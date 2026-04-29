@@ -1,37 +1,37 @@
 {
-  "d1": 18,
-  "d2": 14,
+  "d1": 19,
+  "d2": 18,
   "d3": 17,
   "d4": 15,
-  "d5": 19,
+  "d5": 20,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT Acceptance Criteria for Core Logic",
-      "why": "While the spec references AC-13, AC-73, etc., the actual '97-acceptance-criteria.md' file is not provided in the context, and the provided files lack explicit GWT (Given-When-Then) clauses for the complex state transitions (PreviousHasError logic).",
-      "fix": "Append a 'Verifies' section to each endpoint in \u00a704 with explicit GWT scenarios for state transitions."
+      "dim": "D3",
+      "title": "Ambiguous rollback mechanism for streaming ingest",
+      "why": "AC-12 and AC-76 mandate 'atomic rollback' of partial inserts during a chunked/streaming ingest failure, but the spec uses SQLite which does not support nested transactions or long-lived transactions across multiple HTTP chunks easily without locking the DB for other users.",
+      "fix": "Specify use of a temporary 'IngestBuffer' table or a specific transaction-per-request lifecycle with 'BEGIN IMMEDIATE' at the start of the first chunk."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Truncated Examples and Seed Data",
-      "why": "The context cuts off at 90KB, losing the '14-endpoint-examples.md', '16-seed-data.md', and '18-schema.sql' files which are critical for a 'no-questions' implementation of the DB and API.",
-      "fix": "Ensure the DDL in \u00a702 is exhaustive or provide the full 18-schema.sql content within the module context."
+      "title": "Missing NDJSON Frame Examples",
+      "why": "While AC-68 defines frame ordering and AC-76 defines error codes, there are no verbatim examples of the 'StreamHeader' or 'StreamFooter' JSON objects in the provided context, forcing the coder to guess the exact key casing and structure.",
+      "fix": "Add a fenced code block in \u00a797 or \u00a704 showing a sample 3-frame NDJSON ingest sequence."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'Retrieval' URL Construction",
-      "why": "The Standard Ack Envelope shows relative paths like '/wp-json/git-logs/v2/get-logs' but doesn't specify if these should include the query parameters (RepoUrl, Branch) required to actually use those links.",
-      "fix": "Explicitly state that Retrieval URLs must be fully qualified and pre-populated with the request's context parameters."
+      "dim": "D2",
+      "title": "AC-70 Verification Gap",
+      "why": "AC-70 requires detecting client disconnect within 2000ms, but does not specify the PHP mechanism (e.g., connection_aborted() check) to achieve this in a standard WordPress environment.",
+      "fix": "Add a 'Verifies' clause or implementation note to AC-70 mentioning the use of 'connection_aborted()' during the flush loop."
     }
   ],
   "module": "22-git-logs-v2",
-  "files_used": 7,
+  "files_used": 3,
   "files_total": 36,
   "bytes_used": 90000,
-  "bundle_sha": "4648b5722738ef13",
-  "total": 83,
+  "bundle_sha": "aa85e31f78532acb",
+  "total": 89,
   "band": "GOOD"
 }

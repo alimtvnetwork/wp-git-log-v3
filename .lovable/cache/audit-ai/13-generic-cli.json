@@ -1,37 +1,37 @@
 {
-  "d1": 18,
+  "d1": 16,
   "d2": 14,
-  "d3": 15,
-  "d4": 19,
-  "d5": 16,
+  "d3": 12,
+  "d4": 15,
+  "d5": 18,
   "issues": [
     {
+      "severity": "CRITICAL",
+      "dim": "D1",
+      "title": "Conflicting Exit Code Contracts",
+      "why": "AC-10 defines a strict 5-value exit code contract (0-4), but 03-subcommand-architecture and 07-error-handling explicitly use 'exit 1' for unknown commands and 'exit 1' for batch failures.",
+      "fix": "Update 03-subcommand-architecture and 07-error-handling to use ExitMisuse (2) for unknown commands and ExitBatchPartial (4) for batch failures."
+    },
+    {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT Acceptance Criteria for Sub-modules",
-      "why": "While the overview has a smoke harness AC, individual modules (Database, Config, Progress) lack specific Given/When/Then criteria and Verifies clauses.",
-      "fix": "Add a 'Verification' section to each markdown file with at least one GWT scenario and a specific test command."
+      "dim": "D3",
+      "title": "Missing Concurrency/Locking Specs for DB and Files",
+      "why": "The spec mandates a local SQLite DB and batch execution but lacks instructions on handling concurrent access or file locks during multi-threaded 'exec' or 'update' operations.",
+      "fix": "Add a 'Concurrency & Locking' section to 10-database.md and 18-batch-execution.md specifying mutex usage or WAL mode for SQLite."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Dangling References to External Specs",
-      "why": "The overview references '20-terminal-output-design.md' and '14-date-formatting.md' which are mentioned but their full content is not provided in the context.",
-      "fix": "Ensure all referenced spec files are either included in the bundle or their core requirements are summarized in the overview."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D3",
-      "title": "Concurrency and Race Conditions Unaddressed",
-      "why": "The 'Local Database' and 'Progress Tracking' modules do not specify thread-safety requirements for the global logger or DB handle.",
-      "fix": "Add a constraint in 10-database.md and 16-verbose-logging.md requiring a sync.Once or Mutex for global instance access."
+      "dim": "D2",
+      "title": "Incomplete Acceptance Criteria for Database and Build",
+      "why": "AC-01 through AC-20 cover most modules, but Phase 5 (Database) and Phase 8 (Build) in the checklist lack corresponding GWT criteria in the 97-acceptance-criteria.md file.",
+      "fix": "Add AC-21 (Database Persistence) and AC-22 (Build Artifact Integrity) to 97-acceptance-criteria.md."
     }
   ],
   "module": "13-generic-cli",
-  "files_used": 17,
+  "files_used": 18,
   "files_total": 24,
   "bytes_used": 90000,
-  "bundle_sha": "7c0ecf165444438d",
-  "total": 82,
+  "bundle_sha": "53fa49739e53cf43",
+  "total": 75,
   "band": "GOOD"
 }

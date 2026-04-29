@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 14,
-  "d3": 15,
-  "d4": 17,
-  "d5": 19,
+  "d3": 16,
+  "d4": 18,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing GWT for Go Binary Archetype",
-      "why": "While the Browser Extension sub-module has a dedicated AC file (97-acceptance-criteria.md), the Go Binary sub-module (02-go-binary-deploy) lacks any testable acceptance criteria despite being a primary archetype.",
-      "fix": "Create spec/12-cicd-pipeline-workflows/02-go-binary-deploy/97-acceptance-criteria.md with GWT cases for cross-compilation targets and checksum verification."
+      "title": "Missing Logic-Specific Acceptance Criteria",
+      "why": "The provided AC files (97-acceptance-criteria.md) only cover 'meta' tree-health (file existence, naming, banners) but lack GWT criteria for the actual pipeline logic (SHA-dedup, version resolution, checksumming).",
+      "fix": "Add GWT scenarios to 97-acceptance-criteria.md for SHA-cache hits, version parsing from tags vs branches, and artifact retention enforcement."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Undefined 'sdk-name' and 'module-name' placeholders",
-      "why": "The Browser Extension CI pipeline (01-ci-pipeline.md) uses placeholders like <sdk-name> and <module-name> in artifact paths without defining where these values are sourced from (e.g., package.json name field or a specific config file).",
-      "fix": "Explicitly state that <sdk-name> and <module-name> must match the 'name' field in the respective component's package.json."
+      "dim": "D5",
+      "title": "Dangling References to Missing Files",
+      "why": "The Feature Inventory and Cross-Refs cite files like '03-vulnerability-scanning.md' and '04-install-script-generation.md' which are listed as 'Active' but their content is not provided in the context.",
+      "fix": "Provide the content for all files listed in the Feature Inventory or mark them as 'External/Future'."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'version' resolution in CI vs Release",
-      "why": "CI pipelines use 'dev-<sha>' while Release pipelines use semantic versions, but the shared version resolution logic in 01-shared-conventions.md doesn't explicitly show the 'dev-' string concatenation logic for the CI branch case.",
-      "fix": "Update the version resolution bash snippet to include the 'dev-${GITHUB_SHA::10}' assignment for non-tag/non-release branches."
+      "dim": "D3",
+      "title": "Race Condition in SHA Cache Write",
+      "why": "While the spec notes the risk of separate jobs, it doesn't explicitly define behavior if the 'Save SHA' step fails due to network issues while the build itself succeeded.",
+      "fix": "Add a requirement that cache-save failures should emit a warning but not fail the build, ensuring the current run still completes."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
-  "files_used": 13,
+  "files_used": 14,
   "files_total": 49,
   "bytes_used": 90000,
-  "bundle_sha": "0e07dff132a8447b",
-  "total": 83,
+  "bundle_sha": "975cef736d066e92",
+  "total": 81,
   "band": "GOOD"
 }

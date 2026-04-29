@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 15,
+  "d2": 20,
   "d3": 17,
-  "d4": 16,
-  "d5": 14,
+  "d4": 15,
+  "d5": 16,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Missing Critical Sub-Modules",
-      "why": "The File Inventory lists files 13 through 28 (Release Assets, Checksums, Network, etc.) as 'Active', but their content is not provided in the context. A coder cannot implement the 'Binary-Based Update' strategy without the download/checksum/manifest specs.",
-      "fix": "Provide the content for files 13-28 or remove references to binary-based updates from the scope."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Incomplete Acceptance Criteria",
-      "why": "The 'Verification' section in 00-overview.md points to a missing file (97-acceptance-criteria.md) and only provides a linter command for cross-links, which does not verify the actual logic (rename-first, handoff, etc.).",
-      "fix": "Inline the GWT (Given-When-Then) criteria for the rename-first and handoff mechanisms directly into files 03 and 05."
+      "dim": "D5",
+      "title": "Missing Sub-Module Context",
+      "why": "The overview references files 09 through 27 and subfolder 24, but these files are not provided in the context, leaving the AI to guess the implementation of 'latest.json' schema and 'json-fallback-store'.",
+      "fix": "Provide the content for files 09-28 and the subfolder 24-update-check-mechanism."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Ambiguous 'Hidden' Command Registration",
-      "why": "Module 08 references a hidden command 'set-source-repo' and 06 references 'update-cleanup', but it doesn't specify the CLI framework (Cobra, etc.) or how to 'hide' them from help output consistently.",
-      "fix": "Explicitly state that commands must be hidden using the 'Hidden: true' property (Cobra) or equivalent in the technical interface contract."
+      "dim": "D3",
+      "title": "Race Condition in Skip-if-Current",
+      "why": "The 'Skip-if-Current' fast-path (01-self-update-overview.md) relies on 'git pull' output strings which are locale-dependent and prone to race conditions if another process modifies the repo.",
+      "fix": "Compare local HEAD SHA against remote tracking branch SHA instead of parsing stdout strings."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Incomplete Code Snippets",
+      "why": "Several critical functions (e.g., Resolve-DeployTarget in 02-deploy-path-resolution.md) are shown as partial logic or high-level pseudocode without full error handling.",
+      "fix": "Provide the complete, copy-pasteable implementation for the Resolve-DeployTarget function in both PS1 and Bash."
     }
   ],
   "module": "14-update",
-  "files_used": 12,
+  "files_used": 8,
   "files_total": 54,
   "bytes_used": 90000,
-  "bundle_sha": "4c4d4f4b4ccc31e5",
-  "total": 80,
+  "bundle_sha": "50f223b126534a48",
+  "total": 86,
   "band": "GOOD"
 }

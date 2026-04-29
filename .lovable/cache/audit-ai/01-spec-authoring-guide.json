@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 12,
-  "d4": 19,
-  "d5": 17,
+  "d2": 19,
+  "d3": 15,
+  "d4": 17,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT blocks for core authoring rules",
-      "why": "While the spec mandates GWT (Given/When/Then) blocks for all modules, the guide itself only provides one example (AC-SAG-000) and lacks coverage for naming, numbering, and folder placement rules.",
-      "fix": "Add a comprehensive 97-acceptance-criteria.md with GWT blocks for every invariant listed in the Phase 48/52 contracts."
+      "dim": "D5",
+      "title": "Dangling External Module References",
+      "why": "The spec references modules like '../03-error-manage/', '../02-coding-guidelines/', and '../04-database-conventions/' which are not provided in the context.",
+      "fix": "Provide the content for modules 02, 03, and 04 or stub their interfaces in the inlined contracts section."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Undefined conflict resolution for numbering gaps",
-      "why": "The spec acknowledges historical gaps in numbering but does not define how an AI should handle a collision if two agents attempt to use the 'next available number' simultaneously.",
-      "fix": "Add a concurrency section requiring a 'lock' file or a specific git-rebase strategy for numeric prefix allocation."
+      "title": "Linter Concurrency/Race Conditions Unaddressed",
+      "why": "The spec mandates multiple linter scripts and a 'self-heal' pipeline but does not specify behavior for concurrent execution or file locking.",
+      "fix": "Add a section to 10-mandatory-linter-infrastructure.md specifying that linters must be idempotent and use atomic writes for self-healing."
     },
     {
       "severity": "LOW",
-      "dim": "D5",
-      "title": "Unresolved external script references",
-      "why": "The spec references several scripts (e.g., audit-spec-v2.py, generate-gwt-acceptance.py) as mandatory infrastructure but does not provide their interface or location within the provided context.",
-      "fix": "Include a 'Linter Interface' section defining the CLI arguments and expected JSON output for referenced scripts."
+      "dim": "D4",
+      "title": "Truncated Content in AC-SAG-27",
+      "why": "The provided text cuts off mid-sentence at the end of the file, losing the final rationale and potentially the end of the criteria.",
+      "fix": "Complete the sentence in AC-SAG-27 regarding SQL DDL enumeration."
     }
   ],
   "module": "01-spec-authoring-guide",
-  "files_used": 7,
+  "files_used": 2,
   "files_total": 17,
   "bytes_used": 90000,
-  "bundle_sha": "81c1a152b806749d",
-  "total": 80,
+  "bundle_sha": "03a62b4a52d13089",
+  "total": 83,
   "band": "GOOD"
 }
