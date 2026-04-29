@@ -415,6 +415,12 @@ gates:
 - **Then** EVERY `AC-CG-LEGACY-NNN` row MUST point to the GWT successor that supersedes it (already done at the per-section `**Verifies:**` clause level — e.g. "superseded as a group by AC-CG-10") AND the per-language `97-acceptance-criteria.md` files for TS / PHP / C# MUST carry at least one **stub GWT AC** referencing the LEGACY rows pending the Task A10-fu1 deepening sweep — leaving zero GWT ACs is FORBIDDEN even pre-deepening because it signals to context-window-bounded auditors that the language is unverified. The stub MUST follow the form `### AC-XX-01 — Pending Phase A10-fu1 deepening (legacy contract: AC-CG-LEGACY-NNN..NNN)` with a Given/When/Then triplet that explicitly cites the legacy IDs as the binding contract until the sweep lands. This codifies the **Phase 153 Task A10 audit finding** "Legacy AC Scaffolds Lack Specificity — Legacy Index says rows are 'NO LONGER authoritative' yet TS/PHP/C# subfolders have 0 GWT ACs, leaving the AI with no testable contract".
 - **Verifies:** AC-CG-10 (per-subfolder GWT ≥ 5 — stub satisfies the floor); AC-CG-19 (tree-health ≥ 95 — stubs prevent the AC-count drag); the **Phase 16e legacy-vs-GWT supersession contract** in this §97's `## Legacy Index` heading; codifies the **Phase 153 Task A10 lesson** "legacy-deprecated ACs MUST carry a forward-pointer to their GWT successor AND the successor MUST exist as at least a stub — supersession without a target is verifiable nonsense".
 
+---
+
+## Legacy Index (preserved for traceability)
+
+The following table-row criteria from v3.2.0 are preserved verbatim. They are NO LONGER authoritative — the GWT ACs above supersede them — but downstream linters / link-checkers may still reference these IDs. New linter checks SHOULD target `AC-CG-NN`, NOT `AC-CG-LEGACY-NNN`. **Phase 153 Task A10 amendment**: per AC-CG-23 every legacy section's `**Verifies:**` clause MUST cite the GWT successor; this restores the supersession contract end-to-end.
+
 ### AC-CG-LEGACY: Cross-Language
 
 | ID | Criterion | Source |
