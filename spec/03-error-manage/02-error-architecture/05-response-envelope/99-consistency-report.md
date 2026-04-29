@@ -1,7 +1,7 @@
 # Consistency Report: Response Envelope
 
-**Version:** 3.3.0  
-**Generated:** 2026-04-27  
+**Version:** 3.3.1
+**Generated:** 2026-04-29
 **Health Score:** 100/100 (A+)
 
 > **v3.3.0 update (Phase 20 contract-inlining sweep):** §97 "Inlined Contracts" section now ships THREE machine-parseable normative blocks alongside the human-readable text summary — (1) `ts` block (`ResponseEnvelope<T>` generic + nested interfaces + `RESPONSE_DEBUG_CONFIG_KEYS`); (2) `go` block (`Envelope` + nested structs with explicit `json:"PascalCase"` + `,omitempty` tags); (3) `json` JSON-Schema 2020-12 wire-format validator. Phase 19 audit scored this module 51/100 (F) — the spec was flagged as a "high-quality orphan" because it described systems (Go envelope, PHP envelope, React types) that had no inlined source-of-truth contract. This patch directly addresses orphan-spec finding #1 from `.lovable/memory/audit/03-error-manage__02-error-architecture__05-response-envelope.md`. Auditor contract count: 1/3 (json from on-disk examples) → 2/3 (ts + json normative blocks; sql N/A for an envelope spec). Projected impact: module weighted overall 51 (F) → 70+ (C/B); module implementability 35 → 75+; gate `G-CON-01` (cap ≤ 50) bypassed. Lockstep: §97 v2.0.0 → v2.1.0; §98 v1.0.0 → v1.1.0; spec-index 3 cells refreshed.

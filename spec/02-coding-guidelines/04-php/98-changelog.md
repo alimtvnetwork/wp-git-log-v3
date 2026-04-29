@@ -1,12 +1,15 @@
 # PHP Standards — Changelog
 
 
-**Version:** 4.1.0
-**Last Updated:** 2026-04-27
+**Version:** 4.1.1
+**Last Updated:** 2026-04-29
 
 All notable changes to the PHP Standards specification are documented here.
 
 ---
+
+### 4.1.1 — 2026-04-29 — Phase 153 Task #29d closure: AI Confidence parity reached 51/51 (100%)
+- Lockstep companion bump for §00/§99 banner edits made under Phase 153 Task #29d (P1 inventory regex widened in `check-ai-confidence.py`, underclaim banners promoted, legacy stub Verifies clauses backfilled). **No AC change beyond Task #29c-pattern legacy stubs; no CI workflow change.** See `.lovable/memory/audit/v2-deterministic/phase-153-task-29d-p1-regex-widening-and-final-parity.md`.
 
 ## 4.2.0 — 2026-04-27
 - **P21 sync** (2026-04-28): §00 banner version field bumped 3.3.0 → 4.2.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 21 -->` stamp added under §00 banner; no spec content change).

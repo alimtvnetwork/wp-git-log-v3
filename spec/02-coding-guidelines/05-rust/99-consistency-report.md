@@ -1,7 +1,7 @@
 # Consistency Report — Rust Coding Standards
 
-**Version:** 4.0.0
-**Last Updated:** 2026-04-26
+**Version:** 4.0.1
+**Last Updated:** 2026-04-29
 **Health Score:** 100/100 (A+)
 
 > **v4.0.0 update (Phase 16l):** §97 fully rewritten from 18 stub checkbox criteria (AC-01..AC-06) to **20 module-specific Given/When/Then ACs** (AC-RS-01..AC-RS-20). New ACs codify Rust-specific rules layered on cross-language parent: explicit AC-CL-* inheritance with documented AC-CL-12 waiver for snake_case `.rs` files, Rust 1.75+ + edition pinned, `thiserror`+`anyhow` exhaustive error contract, `panic!`/`unwrap`/`expect` FORBIDDEN outside main/tests, `// SAFETY:` discipline on every `unsafe`, Tokio sole runtime, Rust API guidelines casing, serde PascalCase wire format, bounded MPSC channels only, cancellation-safe selects, borrow > Arc > clone, AAA tests + trait-mocked OS deps, `PlatformApi` per-OS modules, FFI safety docs + `#[repr(C)]` + null checks, clippy pedantic + cargo deny + cargo audit zero-warning gate, `Cargo.lock` checked in, `tracing` structured logging, `#![deny(missing_docs)]`, lifetime elision idiom, self-application doctest. Legacy 18 stubs preserved as AC-RS-LEGACY-01..06 at end of §97. Module-level tree-health: 100/100 (A+).

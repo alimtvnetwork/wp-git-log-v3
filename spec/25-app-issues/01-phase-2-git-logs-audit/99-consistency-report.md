@@ -1,7 +1,7 @@
 # Consistency Report — 01-phase-2-git-logs-audit
 
-**Version:** 1.4.1  
-**Updated:** 2026-04-28 (Phase P11 — SUPERSEDED banner added at top of §00; status routing now symmetric across parent §25 Contents + this child banner + 02's pre-existing Correction notice. Substantive findings unchanged. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 1.4.2
+**Updated:** 2026-04-29
 **Scope:** `spec/25-app-issues/01-phase-2-git-logs-audit/`
 
 ---

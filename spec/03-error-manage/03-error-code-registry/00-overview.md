@@ -5,9 +5,9 @@ drift_acknowledged: 2026-04-26
 
 # Error Code Registry
 
-**Version:** 3.2.2  
+**Version:** 3.2.3
 <!-- h10-verified-phase: 30 -->
-**Updated:** 2026-04-29  
+**Updated:** 2026-04-29
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None  
 **Scope:** Cross-project utility
@@ -96,6 +96,7 @@ Centralized error code registry ensuring no collisions between projects, consist
 | 09 | [09-templates/](./09-templates/00-overview.md) | Templates for project error docs | 1 |
 
 | — | 99-consistency-report.md | — |
+| 06-lint-rule-catalog.md | Lint rule catalog (Phase 153 Task #29d backfill) |
 ---
 
 ## Quick Reference

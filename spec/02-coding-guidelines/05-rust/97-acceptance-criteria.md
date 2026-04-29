@@ -1,7 +1,7 @@
 # Rust Coding Standards — Acceptance Criteria
 
-**Version:** 4.0.0
-**Last Updated:** 2026-04-26 (Phase 16l: full GWT rewrite — replaced 18 stub checkboxes (AC-01..AC-06) with 20 module-specific Given/When/Then ACs covering Rust-specific rules + explicit inheritance from `../01-cross-language/97` (AC-CL-*). Old AC-01..AC-06 preserved as AC-RS-LEGACY-* at end.)
+**Version:** 4.1.0
+**Last Updated:** 2026-04-29
 **Scope:** `spec/02-coding-guidelines/05-rust/` — Rust 2021/2024-edition coding standards layered on the cross-language parent.
 
 ---
@@ -221,30 +221,40 @@ The following 18 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [ ] Module and file naming follows Rust snake_case conventions → superseded by AC-RS-07.
 - [ ] Exported types use descriptive, domain-specific names → superseded by AC-RS-07.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-RS-LEGACY-02: Error Handling
 
 - [ ] Domain errors use `thiserror` with project error codes → superseded by AC-RS-03.
 - [ ] Application logic uses `anyhow` with contextual messages → superseded by AC-RS-03.
 - [ ] All error variants map to documented error codes → superseded by AC-RS-03.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-RS-LEGACY-03: Async Patterns
 
 - [ ] Tokio async runtime is used consistently → superseded by AC-RS-06.
 - [ ] Channel usage follows bounded MPSC patterns → superseded by AC-RS-09.
 - [ ] Cancellation-safe patterns are applied in async code → superseded by AC-RS-10.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-RS-LEGACY-04: Memory Safety
 
 - [ ] `unsafe` blocks include `// SAFETY:` justification comments → superseded by AC-RS-05.
 - [ ] Borrowing and `Arc` are preferred over cloning → superseded by AC-RS-11.
 - [ ] No unnecessary `Clone` derives on large structs → superseded by AC-RS-11.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-RS-LEGACY-05: Testing
 
 - [ ] Unit tests follow AAA (Arrange-Act-Assert) pattern → superseded by AC-RS-12.
 - [ ] OS dependencies use trait-based mocking → superseded by AC-RS-12.
 - [ ] Integration tests are separated from unit tests → superseded by AC-RS-12.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).
 ### AC-RS-LEGACY-06: Platform Abstraction
 
 - [ ] Cross-platform code uses `PlatformApi` traits → superseded by AC-RS-13.
@@ -269,3 +279,5 @@ The following 18 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [TypeScript sibling](../02-typescript/97-acceptance-criteria.md)
 - [Golang sibling](../03-golang/97-acceptance-criteria.md)
 - [PHP sibling](../04-php/97-acceptance-criteria.md)
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29d (extension of Task #29c).

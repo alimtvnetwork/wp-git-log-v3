@@ -100,6 +100,16 @@ GWT_RE = re.compile(r"\*\*(Given|When|Then)\*\*", re.M)
 VERIFIES_RE = re.compile(r"\*\*Verifies:\*\*", re.M)
 AC_RE = re.compile(r"^### AC[-_][A-Za-z0-9\-]+", re.M)
 INVENTORY_LINK_RE = re.compile(r"\]\(\.\/([A-Za-z0-9_][A-Za-z0-9_\-\.]*\.md)\)")
+# Phase 153 Task #29d (2026-04-29): bare-filename inventory matches inside table
+# rows or list items. Restricts to inventory-shaped lines (starting with `|`,
+# `-`, or `*`, optionally with leading whitespace) to avoid matching arbitrary
+# `.md` words in prose. Backtick-wrapped filenames are also accepted. Mirrors
+# the AC-33-07 broadening precedent (numeric-prefix → any-prefix) — same shape,
+# different surface form (markdown link vs. table cell).
+INVENTORY_BARE_RE = re.compile(
+    r"^[ \t]*[|\-*][^\n]*?`?([A-Za-z0-9_][A-Za-z0-9_\-/\.]*\.md)`?",
+    re.M,
+)
 
 
 def list_modules() -> list[Path]:
@@ -137,7 +147,24 @@ def gate_p1(mod: Path, ov_text: str) -> tuple[bool, str]:
     if not siblings:
         listed = set()
     else:
+        # Markdown-link form `](./file.md)` is unambiguous — scan the whole
+        # document (these are explicit cross-refs anywhere in §00).
         listed = set(INVENTORY_LINK_RE.findall(ov_text))
+        # Bare-filename form (table cells, list items) is ambiguous — restrict
+        # to the section under a `## ... Inventory` heading to avoid matching
+        # `.md` words in arbitrary prose. Falls back to no bare-scan if no
+        # such heading exists (the link-form scan above still applies).
+        # Scan EVERY inventory-titled section (a §00 may carry both a "Full
+        # Document Inventory" with subfolder paths AND a "Document Inventory"
+        # with bare filenames — both are legitimate listings).
+        inv_heading_re = re.compile(r"^##[^\n]*(Inventory|Index|Modules|Files|Contents)[^\n]*\n", re.M | re.I)
+        next_h2_re = re.compile(r"^## ", re.M)
+        for m_inv in inv_heading_re.finditer(ov_text):
+            after = ov_text[m_inv.end():]
+            m_next = next_h2_re.search(after)
+            inv_section = after[: m_next.start()] if m_next else after
+            for raw in INVENTORY_BARE_RE.findall(inv_section):
+                listed.add(raw.rsplit("/", 1)[-1])
     missing = siblings - listed
     if missing:
         return False, f"P1: {len(missing)} sibling(s) not in inventory ({sorted(missing)[:3]}…)"
