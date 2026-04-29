@@ -1,6 +1,6 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 3.4.0  
+**Version:** 3.4.1  
 **Updated:** 2026-04-29  
 **Scope:** `spec/07-design-system/`
 
