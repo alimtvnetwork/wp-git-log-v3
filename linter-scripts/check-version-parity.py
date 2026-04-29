@@ -76,16 +76,35 @@ RELEASE_ROW_RE = re.compile(
 )
 
 
+def _semver_key(v: str) -> tuple[int, int, int]:
+    """Parse 'X.Y.Z' into a comparable tuple. Used to find SemVer-max release."""
+    parts = v.split(".")
+    return (int(parts[0]), int(parts[1]), int(parts[2]))
+
+
 def latest_release(text: str) -> str | None:
-    """Return the FIRST release version found (newest-first changelog convention)."""
+    """Return the SemVer-MAXIMUM release version found in §98.
+
+    Phase 153 Task #35-fu: switched from positional-first to SemVer-max.
+    Patch reconciliation rows (Tasks #29c/d/e/#31) sometimes prepend
+    SemVer-LOWER patches (e.g. 4.0.1) above older SemVer-HIGHER minor
+    releases (e.g. 4.1.0); §00 banner correctly tracks the SemVer max
+    (e.g. 4.1.1 = 4.1.0 + reconciliation patch). Comparing against the
+    positional-first row produced 15 false-positive mismatches at
+    Phase 153 close. SemVer is source of truth, not row position.
+    """
+    versions: list[str] = []
     for line in text.split("\n"):
         m = RELEASE_HEADING_RE.match(line)
         if m:
-            return m.group(1)
+            versions.append(m.group(1))
+            continue
         m = RELEASE_ROW_RE.match(line)
         if m:
-            return m.group(1)
-    return None
+            versions.append(m.group(1))
+    if not versions:
+        return None
+    return max(versions, key=_semver_key)
 
 
 def banner_version(text: str) -> str | None:
