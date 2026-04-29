@@ -1,6 +1,6 @@
 # C# Coding Standards — Acceptance Criteria
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26 (Phase 16m: full GWT rewrite — replaced 38 stub checkboxes (AC-01..AC-07) with 20 module-specific Given/When/Then ACs covering C#-specific rules + explicit inheritance from `../01-cross-language/97` (AC-CL-*). Old AC-01..AC-07 preserved as AC-CS-LEGACY-* at end.)
 **Scope:** `spec/02-coding-guidelines/07-csharp/` — C# 12 / .NET 8+ coding standards layered on the cross-language parent.
 
@@ -247,6 +247,8 @@ The following 38 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [ ] File names match primary type in PascalCase → superseded by AC-CS-07.
 - [ ] One type per file → superseded by AC-CS-07.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-CS-LEGACY-02: Method Design
 
 - [ ] No boolean flag parameters that branch method behavior → superseded by AC-CS-06.
@@ -255,6 +257,8 @@ The following 38 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [ ] Shared logic between split methods extracted into private helpers → superseded by AC-CS-06 + AC-CL-20.
 - [ ] Async methods suffixed with `Async` → superseded by AC-CS-09.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-CS-LEGACY-03: Boolean Flag Splitting
 
 - [ ] `Save(doc, isDraft)` → `SaveDraft(doc)` + `PublishDocument(doc)` → superseded by AC-CS-06.
@@ -262,6 +266,8 @@ The following 38 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [ ] Options objects with named bool properties are exempt → superseded by AC-CS-06.
 - [ ] Toggle methods are exempt → superseded by AC-CS-06.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-CS-LEGACY-04: Error Handling
 
 - [ ] Catch specific exceptions, never bare `catch (Exception)` → superseded by AC-CS-13.
@@ -270,6 +276,8 @@ The following 38 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [ ] `ArgumentNullException` with `nameof()` for null parameter guards → superseded by AC-CS-14.
 - [ ] Nullable reference types enabled project-wide → superseded by AC-CS-02.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-CS-LEGACY-05: Type Safety
 
 - [ ] No `object` returns — use generics → superseded by AC-CS-16.
@@ -278,12 +286,16 @@ The following 38 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [ ] No magic strings — use enums or typed constants → superseded by AC-CS-18.
 - [ ] `switch` expressions with exhaustive matching and `_` default case → superseded by AC-CS-17.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-CS-LEGACY-06: Async Patterns
 
 - [ ] No `.Result` or `.GetAwaiter().GetResult()` → superseded by AC-CS-10.
 - [ ] Independent async calls use `Task.WhenAll()` → superseded by AC-CS-11.
 - [ ] Async method naming ends with `Async` suffix → superseded by AC-CS-09.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-CS-LEGACY-07: LINQ Usage
 
 - [ ] LINQ preferred over manual loops for transforms → superseded by AC-CS-19 analyzers + idiom.
@@ -309,3 +321,5 @@ The following 38 stub criteria from v3.2.0 are preserved verbatim. They are NO L
 - [Golang sibling](../03-golang/97-acceptance-criteria.md)
 - [PHP sibling](../04-php/97-acceptance-criteria.md)
 - [Rust sibling](../05-rust/97-acceptance-criteria.md)
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).

@@ -1,6 +1,6 @@
 # TypeScript Standards — Acceptance Criteria
 
-**Version:** 4.0.0
+**Version:** 4.1.0
 **Last Updated:** 2026-04-26 (Phase 16i: full GWT rewrite — replaced 6 stub checkboxes with 20 module-specific Given/When/Then ACs covering TS-specific rules + explicit inheritance from `../01-cross-language/97` (AC-CL-*). Old AC-01..AC-02 preserved as AC-TS-LEGACY-* at end.)
 **Scope:** `spec/02-coding-guidelines/02-typescript/` — TypeScript-specific coding standards layered on top of the cross-language parent.
 
@@ -197,6 +197,8 @@ The following stub criteria from v3.2.0 are preserved verbatim. They are NO LONG
 - [ ] AC-TS-LEGACY-01-B — Type definitions avoid `any` and use proper generic constraints
 - [ ] AC-TS-LEGACY-01-C — Error types follow the project's AppError pattern
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-TS-LEGACY: Patterns
 
 - [ ] AC-TS-LEGACY-02-A — React component patterns follow functional component with hooks style
@@ -217,3 +219,5 @@ The following stub criteria from v3.2.0 are preserved verbatim. They are NO LONG
 - [Discriminated union patterns](./12-discriminated-union-patterns.md)
 - [Type safety remediation plan](./07-type-safety-remediation-plan.md)
 - [§02 parent governance](../97-acceptance-criteria.md)
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).

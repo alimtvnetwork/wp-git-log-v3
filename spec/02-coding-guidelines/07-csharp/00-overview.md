@@ -1,9 +1,9 @@
 # C# Coding Standards
 
-**Version:** 4.1.0  
+**Version:** 4.1.1
 <!-- h10-verified-phase: 21 -->
 **Status:** Active  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-29
 **AI Confidence:** High  
 **Ambiguity:** None
 
