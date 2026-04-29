@@ -32,7 +32,65 @@ On first data-producing command:
 2. If missing, create it and initialize all tables.
 3. Upsert data into tables.
 
+## Concurrency & Locking (Normative)
+
+> **AC anchor:** [`97-acceptance-criteria.md` § AC-22](97-acceptance-criteria.md) is the normative source. This section is the implementer-facing prose surface — if the two diverge, AC-22 wins and this prose MUST be patched (Lesson #33).
+
+Every CLI built per this spec runs in a multi-process / multi-thread environment (concurrent invocations from shells, IDE plugins, watchers, and `--parallel=N` batch execution per `18-batch-execution.md`). The SQLite store and any sibling files under the config/data directory MUST therefore obey a closed concurrency contract.
+
+### Required PRAGMAs (apply at every connection open)
+
+| PRAGMA | Value | Why |
+|--------|-------|-----|
+| `journal_mode` | `WAL` | Concurrent readers + single writer; required for `--parallel=N` batches and IDE-plugin watchers |
+| `busy_timeout` | `5000` (ms) | Cross-cuts spec/05 AC-SD-22 — kernel-level wait before `SQLITE_BUSY` is returned |
+| `foreign_keys` | `ON` | SQLite default is OFF; FK enforcement is load-bearing for AC-23 cascade contracts |
+| `synchronous` | `NORMAL` | Safe under WAL; `FULL` is wasteful, `OFF` risks corruption |
+
+### Transaction discipline
+
+- **Every WRITE transaction MUST use `BEGIN IMMEDIATE`** (NOT default `DEFERRED`). Reason: `DEFERRED` acquires the write lock at first write statement, mid-transaction — by then the application has done useful work and the rollback cost is high. `IMMEDIATE` fails fast at `BEGIN` with `SQLITE_BUSY`, letting the retry loop kick in cheaply.
+- **`SQLITE_BUSY` / `SQLITE_LOCKED` MUST be retried** with exponential back-off: **3 attempts, base 100 ms, ±25 % jitter** (mirrors spec/27 AC-T-28 R3). After 3 failures, surface the original error to the caller.
+- **Read-only queries** MAY use `BEGIN DEFERRED` or no explicit transaction — WAL allows them to proceed against any snapshot regardless of writer state.
+
+### File writes outside SQLite (config files, lock files, cache entries)
+
+Use the **atomic temp-then-rename** pattern (spec/27 AC-T-28 R1):
+
+1. Write payload to `<target>.tmp.<pid>` (same directory as `<target>` — must be on the same filesystem so `rename(2)` is atomic).
+2. `fsync` the temp file's file descriptor.
+3. `os.Rename(<target>.tmp.<pid>, <target>)` — POSIX guarantees atomic replace.
+4. `fsync` the parent directory (Linux requirement for rename durability).
+5. Cleanup the temp file in a `finally` / `defer` block on any error path.
+
+Direct in-place writes (`os.WriteFile(<target>, ...)`) are **FORBIDDEN** for any file another process may read concurrently — a partial write is observable as truncated content.
+
+### Process-level update lock
+
+`update` and `self-update` subcommands MUST acquire a process-level lock file at:
+
+```
+~/.local/state/<binary-name>/update.lock
+```
+
+before mutating the binary on disk. The lock file MUST contain the holding process's PID. If the lock is already held:
+
+```
+$ <binary-name> update
+error: another update is in progress (lock held by PID 12345)
+```
+
+Exit code MUST be `1` (`ExitError` per spec/13 AC-21 typed enum). The lock MUST be released in a `finally` / `defer` block — never rely on process exit alone, because a SIGKILL'd updater leaves a stale lock that blocks future invocations until the user clears it manually.
+
+### Forbidden patterns
+
+- Opening **N independent SQLite connections** for a `--parallel=N` batch — amplifies WAL checkpoint contention and starves readers. Use a single connection pool sized N instead (see `18-batch-execution.md` § "Concurrency Discipline").
+- Skipping `busy_timeout` and "rolling your own" timeout in application code — the kernel-level PRAGMA is correct and battle-tested; application-level timeouts race against the SQLite mutex internals.
+- Using `BEGIN DEFERRED` for any transaction that contains an `INSERT` / `UPDATE` / `DELETE` (lock acquisition is then mid-transaction — see "Transaction discipline" above).
+- Writing config/cache files in-place without temp-then-rename — partial writes corrupt the file from a concurrent reader's perspective.
+
 ## Schema Conventions
+
 
 | Convention | Detail |
 |------------|--------|

@@ -173,9 +173,21 @@ func execOneRepo(rec model.ScanRecord, gitArgs []string) (int, int, int) {
 
 Three outcomes per repo: **succeeded**, **failed**, or **missing**.
 
+### Concurrency Discipline (Normative)
+
+> **AC anchor:** [`97-acceptance-criteria.md` § AC-22](97-acceptance-criteria.md). Implementer prose; AC-22 wins on conflict (Lesson #33).
+
+When the `exec` subcommand exposes `--parallel=N` (parallel batch execution across N worker goroutines/threads/tasks):
+
+- **SQLite writes MUST flow through a single connection pool** (size = N), NOT N independent `sql.Open` calls. Independent connections amplify WAL checkpoint contention; the pool serializes writes through one connection while letting reads proceed in parallel from the others. See `10-database.md` § "Concurrency & Locking" for the underlying PRAGMA contract.
+- **Each worker MUST treat its per-repo `git` invocation as the only side effect**. Writing to a shared file (log, cache, summary) from multiple workers MUST go through the atomic temp-then-rename pattern (`10-database.md` § "File writes outside SQLite") OR a dedicated single-writer goroutine that owns the file.
+- **`SQLITE_BUSY` retry inside a worker MUST NOT block the pool** — the retry loop (3 attempts, base 100 ms, ±25 % jitter per AC-22) runs on the worker's own goroutine; the pool connection is released to other workers between attempts.
+- **Forbidden:** sharing a single `*sql.DB` handle in N goroutines without a connection pool (Go's `database/sql` already pools internally — pass `db.SetMaxOpenConns(N)`); opening per-worker SQLite files; per-worker `flock` on the SQLite file (WAL handles this — adding `flock` deadlocks against SQLite's own locking).
+
 ---
 
 ## Output Format
+
 
 ### Banner
 

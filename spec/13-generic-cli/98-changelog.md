@@ -1,10 +1,18 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.3  
+**Version:** 1.1.4  
 **Updated:** 2026-04-29  
 **Scope:** `spec/13-generic-cli/`
 
 ---
+
+### 1.1.4 — 2026-04-29 — Phase 153 P3: AC-22 concurrency prose mirrored into implementer surfaces
+- **Action**: Lifted AC-22's normative concurrency contract from §97 prose-only into the two files where implementers actually look: (1) added `## Concurrency & Locking (Normative)` section to `10-database.md` (PRAGMA table, transaction discipline, atomic temp-then-rename, `update.lock` discipline, forbidden patterns) and (2) added `### Concurrency Discipline (Normative)` subsection to `18-batch-execution.md` Execution Flow (single connection pool sized N for `--parallel=N`, no per-worker `flock`, retry on worker goroutine).
+- **Why**: Per Lesson #33 (§97-WINS contract-pin is correct, but file-grep auditors keep flagging absent prose) and Lessons #19/#21/#26 (lift contract surface to entry-point document with closed-enumeration tables). AC-22 itself is unchanged — these are implementer-facing prose mirrors. Cross-link added in `spec/04-database-conventions/02-schema-design.md` §4.3 (concurrency posture cross-reference, no re-statement).
+- **Files**: `10-database.md` (+~50 lines), `18-batch-execution.md` (+~13 lines), `00-overview.md` v1.1.3 → v1.1.4 banner-only, this file v1.1.3 → v1.1.4, `99-consistency-report.md` v1.1.3 → v1.1.4.
+- **No §97 change · no AC change · no CI change · no RUBRIC change · no gate-count change** — pure prose-mirror under existing AC-22.
+- **Cross-module**: `spec/04-database-conventions/02-schema-design.md` §4.3 added (cross-link only — schema and concurrency are orthogonal axes per the new section's rationale).
+- **Lockstep**: 87/87 GREEN (verify after run).
 
 ### 1.1.3 — 2026-04-29 — Phase 153 Task A11a-fu1: stale-prose refresh in `03-subcommand-architecture.md` + `07-error-handling.md` (P0 audit-v6 follow-through)
 - **Action**: Refreshed the four stale-prose hotspots flagged in the deterministic audit at `/mnt/documents/spec-deterministic-audit.md` (CRITICAL D1, spec/13). (1) `03-subcommand-architecture.md` line 84 (handler-pattern step 5) and line 102 (rules table) now reference `ExitCode` enum values + cite §97 AC-10/AC-21 instead of bare `exit 1`. (2) `07-error-handling.md` § Exit Codes table widened from 3 rows to the full 5-value enum (`ExitOK/ExitError/ExitMisuse/ExitConfig/ExitBatchPartial`) with constant names + a normative pointer to §97 AC-10/AC-17/AC-21; clamp + child-process re-mapping rule added. (3) Inline Go example for missing-required-arg now exits `ExitMisuse` (2), not `1`. (4) Batch-operations section + example now follow the AC-17 three-way conditional (`ExitOK` / `ExitError` / `ExitBatchPartial`) instead of the bare "exit 1 if any failures" rule. (5) Closing rule "In `cmd` package handlers, print the error and `os.Exit(1)`" generalised to "exit with the appropriate `ExitCode` enum value".
