@@ -1,7 +1,7 @@
 # Acceptance Criteria — Database Conventions
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 3: added `**Verifies:**` clauses to AC-01..AC-08 — closes 8/8 P3 gap, graduates AC-block from Medium → High AI-confidence.)
+**Version:** 1.2.0  
+**Updated:** 2026-04-29 (Phase 153 P48-2: AC-09 binds the Cross-Language Boolean Storage Convention §2.1 of `02-schema-design.md` — closes P47-fu1 critical finding "04-db cross-lang boolean conventions")
 **Scope:** `spec/04-database-conventions/`
 
 ---
@@ -71,6 +71,13 @@ This document defines testable acceptance criteria for the **Database Convention
 - **Then** that date MUST also appear as a section header in `99-consistency-report.md`; the strict gate (Phase 81) blocks merge on any mismatch.
 - **Verifies:** the four-file lockstep invariant from `mem://index.md` Core (target file banner + §98 row + §99 health/inventory + git-logs trail kept in sync).
 - **Source:** `linter-scripts/check-lockstep.cjs`.
+
+### AC-09: Cross-language boolean storage convention is normative and complete
+- **Given** the module's §02-schema-design file `02-schema-design.md`
+- **When** §2.1 "Cross-Language Boolean Storage Convention (Normative)" is read
+- **Then** it MUST contain (a) a per-engine storage table covering at minimum SQLite, MySQL/MariaDB, and PostgreSQL with allowed values + forbidden alternatives; (b) a per-language scan/insert pattern table covering at minimum Go, PHP, Rust, C#, and TypeScript; (c) the tri-state `NULL` exception clause; (d) the migration discipline subsection (NOT NULL default, positive-only rename rule, type-swap precondition). Adding a NEW supported language (per §02 Coding Guidelines) requires extending the §2.1.2 table in the same PR.
+- **Verifies:** the cross-language storage contract that prevents silent boolean data corruption when one consumer reads `0` as false and another reads `'0'` (string) as truthy; closes the **P47-fu1 critical finding** "04-db cross-lang boolean conventions" surfaced in `mem://index.md` line 55. Cross-references the cross-language naming rule in `spec/02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md` (storage-vs-naming axis split — naming lives in §02 Coding Guidelines, storage lives in §04 DB Conventions).
+- **Source:** `02-schema-design.md` §2.1; cross-language naming rule in `spec/02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md`.
 
 
 ---

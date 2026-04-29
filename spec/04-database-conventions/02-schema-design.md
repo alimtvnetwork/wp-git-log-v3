@@ -1,7 +1,7 @@
 # Database Schema Design
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-19
+**Version:** 3.4.0  
+**Updated:** 2026-04-29 (Phase 153 P48-2: §2.1 Cross-Language Boolean Storage Convention added — closes P47-fu1 critical finding)
 
 ---
 
@@ -78,11 +78,42 @@ Apply the smallest-type principle to ALL columns, not just primary keys:
 | Status (5 values) | `TEXT` | `TINYINT` + lookup table |
 | Age | `INTEGER` | `TINYINT` (0-255) |
 | Year | `INTEGER` | `SMALLINT` (0-65535) |
-| Boolean | `INTEGER` | `TINYINT(1)` or `BOOLEAN` |
+| Boolean | `INTEGER` | `TINYINT(1)` or `BOOLEAN` (see §2.1 for cross-language storage table) |
 | Country code | `TEXT` | `CHAR(2)` |
 | Currency amount | `REAL` | `DECIMAL(10,2)` |
 
 ---
+
+## 2.1 Cross-Language Boolean Storage Convention (Normative)
+
+**Why this is normative:** Boolean columns cross language boundaries on every read/write. Without a single source of truth for storage type + scan pattern, each ORM, raw-SQL query, and migration script picks a different representation (`0/1` vs `TRUE/FALSE` vs `'Y'/'N'` vs `NULL` for false), producing silent data corruption when one consumer interprets `0` as false but another interprets `'0'` (string) as truthy. This table is the **single normative cross-language mapping** — every consumer (Go `database/sql`, PHP PDO, Rust `sqlx`, C# ADO.NET, raw SQL, any new language added to §02 Coding Guidelines) MUST use the row for its target engine. This closes the **P47-fu1 critical finding** "Cross-language boolean conventions lack normative table" surfaced in `mem://index.md` line 55.
+
+### 2.1.1 Storage type per engine
+
+| Engine | Storage column type | Allowed values on disk | Forbidden alternatives |
+|---|---|---|---|
+| **SQLite** | `INTEGER` (preferred) or `BOOLEAN` (alias of `INTEGER` since SQLite 3.23) | `0` (false), `1` (true), `NULL` only when the column is genuinely tri-state | `'Y'/'N'`, `'T'/'F'`, `'true'/'false'` strings, any non-{0,1,NULL} integer |
+| **MySQL / MariaDB** | `TINYINT(1) NOT NULL` (default `0` or `1` per business rule) | `0`, `1` | `BIT(1)` (legacy, scan-type drift across drivers); `ENUM('Y','N')`; `CHAR(1)` |
+| **PostgreSQL** | `BOOLEAN NOT NULL` | `TRUE`, `FALSE` | `INTEGER 0/1` (loses type-safety; pgsql distinguishes them) |
+
+**Tri-state exception:** Only when the column models a genuine three-valued logic (e.g. `IsApprovedByReviewer` where `NULL = "not yet reviewed"`) MAY the column be `NULL`-able. The §97 review must call out the third state explicitly; default-`NULL` for "unknown false" is FORBIDDEN — use `0`/`FALSE` with a separate `ReviewedAt TIMESTAMP NULL` column instead.
+
+### 2.1.2 Scan / insert pattern per language
+
+| Language | Scan target type | Insert literal | Notes |
+|---|---|---|---|
+| **Go** (`database/sql`) | `bool` (or `sql.NullBool` for tri-state) | `true` / `false` (driver translates) | Avoid `int`/`int8` scan — driver-specific coercion drift between mysql/sqlite drivers. |
+| **PHP** (PDO) | bind with `PDO::PARAM_BOOL`; fetch as `(bool)$row['Col']` | `true` / `false` (PDO translates) | NEVER fetch as string and rely on `'0' == false` quirks — PHP loose-equality returns `true` for `'0' == 0` but `'0' == false` is also `true` while `'00' == false` is `false`. Cast explicitly. |
+| **Rust** (`sqlx`) | `bool` (or `Option<bool>` for tri-state) | `true` / `false` | `sqlx` macros enforce compile-time type match — no manual coercion. |
+| **C#** (ADO.NET / Dapper) | `bool` (or `bool?` for tri-state) | `true` / `false` | Avoid `byte` scan target on TINYINT(1) — Dapper auto-converts but EF Core may not. |
+| **TypeScript / Node** (`better-sqlite3`, `pg`, `mysql2`) | `boolean` (with engine-specific cast where needed) | `true` / `false` (`mysql2` requires `typeCast` config to coerce TINYINT(1) → boolean) | Default `mysql2` returns TINYINT(1) as `number`; configure `typeCast` or use `?: 1 : 0` shim. |
+
+### 2.1.3 Migration discipline
+
+- Adding a new boolean column MUST default to `NOT NULL DEFAULT 0` (or `FALSE` on PostgreSQL) unless the tri-state exception applies and is documented in the migration's `-- linter-waive:` comment.
+- Renaming a boolean column MUST follow the `Is`/`Has` positive-only rule from §1 — `IsActive` (allowed), `IsDisabled` (FORBIDDEN, use `IsActive` and invert in queries).
+- Changing storage type from `INTEGER`/`TINYINT(1)` → `BOOLEAN` (PostgreSQL only) requires a forward migration that asserts every existing value ∈ `{0,1}` BEFORE the type swap; orphaned `2`/`-1` values fail the migration and surface in the §99 audit row.
+
 
 ## 3. Normalization — Repeated Values Become Tables
 
