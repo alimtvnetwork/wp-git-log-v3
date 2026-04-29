@@ -274,6 +274,13 @@ The next free slot in this band after H10 is 32 (slots 30/31 are auditors).
 
 ## Changelog
 
+### 1.3.0 — 2026-04-29 — Phase 153 Task #35-fu (SemVer-max comparator)
+- **Bug fix in `latest_release()`**: switched return semantics from positional-first to **SemVer-MAXIMUM**. Added `_semver_key(v)` helper that parses `X.Y.Z` into a comparable `(int, int, int)` tuple; `latest_release()` now collects ALL release rows and returns `max(versions, key=_semver_key)` instead of the first one matched. Closes 15 false-positive parity FAILs accumulated during Phase 153 Tasks #29c/d/e/#31 — those sub-tasks prepended SemVer-LOWER patch reconciliation rows above older SemVer-HIGHER minor releases (e.g. `### 4.0.1` above `## 4.1.0`), and the prior positional-first comparator returned `4.0.1` while §00 banners correctly tracked the SemVer max (`4.1.0` or `4.1.1`). SemVer is the source of truth, not row position.
+- **New AC**: AC-29-15 codifies the SemVer-max contract with a worked example.
+- **Self-test grew T14**: builds a §98 with a SemVer-LOWER row prepended above a SemVer-HIGHER row and asserts `matches=1, mismatches=0`. T2 + T9 also moved from real-tree to sandbox (real tree is now 74/74 stamped, so per-file strict promotion fires whenever any drift exists, breaking the "advisory exits 0" + "JSON parses cleanly" assertions). Self-test: **13/13 → 14/14** ✅.
+- **Lesson #28** (codified inside AC-29-15): when a versioning gate flags wide drift, inspect the gate's COMPARATOR before mass-patching the tree.
+- **No CI workflow change, no AC-31-31 cascade, no RUBRIC bump, no gate-count change** (gate #19 contract preserved; only the comparator was sharpened).
+
 ### 1.2.0 — 2026-04-28 — Phase P31 (CI strict-flip)
 - **Workflow change**: `.github/workflows/spec-health.yml` step "§00 ↔ §98 Version-field parity gate" now invokes `python3 linter-scripts/check-version-parity.py --strict`. Any §00 ↔ §98 version drift now blocks the build (gate #19 is now a hard CI block; was advisory P15→P30).
 - **Script unchanged**: `check-version-parity.py` keeps its advisory-by-default semantics for local/backward-compat invocations. The strict enforcement is encoded at the workflow layer (Option A — minimal blast radius). Self-test 13/13 unchanged.
