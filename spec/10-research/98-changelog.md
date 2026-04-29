@@ -1,7 +1,7 @@
 # Changelog — Research
 
-**Version:** 3.3.1  
-**Updated:** 2026-04-28  
+**Version:** 3.3.2  
+**Updated:** 2026-04-29  
 **Scope:** `spec/10-research/`
 
 ---
