@@ -224,6 +224,13 @@ P15 dispensation, and its P31 retirement:
 - **Given** the CI workflow `.github/workflows/spec-health.yml`,
 - **When** the §00 ↔ §98 Version-field parity step is inspected,
 - **Then** the invocation MUST be `python3 linter-scripts/check-version-parity.py --strict` (any mismatch fails the build). The script-level default remains advisory-by-default for local invocations and backward compatibility; the strict enforcement is encoded at the workflow layer per the P31 advisory→strict transition documented under "Why advisory-by-default at P15 — and strict-flip at P31".
+- **Verifies:** §29 CI strict-flip contract.
+
+### AC-29-15 — `latest_release()` returns SemVer-MAX, not positional-first (Phase 153 Task #35-fu)
+- **Given** a `98-changelog.md` containing TWO release rows where row order does NOT equal SemVer order — e.g. `### 4.0.1 — 2026-04-29 — Phase 153 Task #29d` appears ABOVE `## 4.1.0 — 2026-04-27` (a patch reconciliation prepended above an older minor release),
+- **When** `latest_release(text)` is called,
+- **Then** the returned version MUST be `4.1.0` (the SemVer-maximum), NOT `4.0.1` (the positional-first). The comparator MUST parse each candidate as `(major, minor, patch)` integers and return the lexicographic max. Rationale: §00 banners track the SemVer maximum (which equals "highest semantic release shipped"), so the gate's comparator must match the same semantic — positional-first reads the wrong row whenever Phase 153–style patch reconciliation rows are prepended above older higher-minor releases. **Lesson #28 (Phase 153 Task #35)**: when a versioning gate flags wide drift (≥10 modules in a single class), inspect the gate's comparator BEFORE mass-patching the tree — the bug may be in the comparator, not the data.
+- **Verifies:** §29 `latest_release()` SemVer-max comparator (`linter-scripts/check-version-parity.py:_semver_key` + `latest_release`).
 
 ## Self-test
 
