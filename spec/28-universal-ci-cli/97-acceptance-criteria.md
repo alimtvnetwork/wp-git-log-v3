@@ -40,6 +40,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** a passing `ts-test` phase with 3 log lines,
 - **When** the CLI ships in batched mode,
 - **Then** the request body MUST validate against `17-openapi-client.yaml#components.schemas.AppendLogBatched` AND `PipelineName` MUST equal `ts-test` AND `HasError` MUST equal `false`.
+- **Verifies:** §06 `/append-log` schema contract; §17 OpenAPI client conformance; AC-28-28 client/server-mirror invariant.
 
 ### AC-28-06 — Streaming mode uses chunked NDJSON
 
