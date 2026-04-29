@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.71.0
+**Version:** 2.72.0
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.72.0 — 2026-04-29 — Phase 153 Task #29a: slot 20 scaffolder patched — boilerplate ACs now emit `**Verifies:**` clauses + latent `upToSpec` ReferenceError fixed
+- **Action**: Patched `linter-scripts/fill-missing-acceptance-criteria.cjs` `buildAC()` template — every boilerplate AC (AC-01..AC-05) now emits BOTH a `**Source:**` line AND a `**Verifies:**` line. Closes the audit-v6 boilerplate blind spot discovered in Phase 153 (`mem://specs/full-tree-audit-v4` Core memory): 35 §97 files used the boilerplate scaffold; 24 had ZERO `**Verifies:**` clauses because the scaffolder never emitted them.
+- **Latent bug also fixed**: the previous template referenced an undefined `upToSpec` identifier (would throw `ReferenceError` on first new module). Replaced with depth-aware `'../'.repeat(rel.split('/').length)`.
+- **Spec lockstep**: §27 slot 20 v1.0.0 → **v1.1.0** — added **AC-20-04** (boilerplate Verifies emission contract) and **AC-20-05** (`upToSpec` depth-awareness contract); also added `**Verifies:**` to AC-20-01..03. §27 §00 v2.71.0 → **v2.72.0**, §99 v2.68.0 → **v2.69.0**.
+- **Validation**: Idempotent re-run on satisfied tree → 0 files written, exit 0 (AC-20-01 still holds). Lockstep 87/87 · tree-health 168/168 strict — both GREEN.
+- **Lesson codified**: Root-cause fixes to scaffolders are higher-leverage than per-instance sweeps. The 23 remaining boilerplate-template §97 files with missing `**Verifies:**` clauses (Task #31) are now strictly bounded — no NEW modules can recreate the gap. Future audit-v6 blind spots discovered via mass-coverage gaps SHOULD always check whether a scaffolder upstream is the originator before embarking on a per-instance sweep.
 
 ### 2.71.0 — 2026-04-29 — Phase P48-1-fu1-batch slot 3: P1 inventory regex broadened — non-numeric-prefix siblings now matched
 - **Action**: Fixed `INVENTORY_LINK_RE` in `linter-scripts/check-ai-confidence.py` from `\d{2}[-A-Za-z0-9_\-]*\.md` → `[A-Za-z0-9_][A-Za-z0-9_\-\.]*\.md`. The pre-fix regex required a `\d{2}-` prefix, producing false-positive P1 drift findings for legitimately-listed non-numeric siblings (`consolidated-review-guide.md`, `structure.md`, `readme.md`, `changelog.md`).
