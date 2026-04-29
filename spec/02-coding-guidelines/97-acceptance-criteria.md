@@ -1,6 +1,6 @@
 # Coding Guidelines — Acceptance Criteria
 
-**Version:** 4.2.0
+**Version:** 4.3.0
 **Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 layer — added 5 group-level `**Verifies:**` clauses to the LEGACY scaffolds (Cross-Language, TypeScript, Golang, PHP, Rust). Each clause cites the source subfolder + the GWT AC that supersedes the legacy table-row group. `check-ai-confidence.py` P3 driver eliminated for `spec/02` — derived tier promoted from Medium → High. AC count unchanged at 25.)
 **Scope:** `spec/02-coding-guidelines/` (the parent module — language-specific ACs live in subfolder §97 files).
 
@@ -358,11 +358,68 @@ gates:
 - **Then** it MUST contain ≥ 5 `### AC-` headings each with GWT triplets (this file has 20), MUST use only relative links, MUST have a SemVer-bumped banner on every edit (`v4.0.0` for Phase 16e), MUST have a matching row in `98-changelog.md`, AND MUST have an `inlined contracts` block so each AC is self-contained. Self-application is the "dogfooding" rule — the parent §97 cannot demand of subfolders what it does not satisfy itself.
 - **Verifies:** AC-CG-02 + AC-CG-10 + AC-CG-12 + AC-CG-18 (recursive self-check).
 
+### AC-CG-21 — Subfolder delegation map (Phase 153 Task A10)
+
+- **Given** §02's overview lists 16 subfolders (`01-cross-language`, `02-typescript`, `03-golang`, `04-php`, `05-rust`, `06-ai-optimization`, `06-cicd-integration`, `07-csharp`, `08-file-folder-naming`, `09-powershell-integration`, `10-research`, `11-security`, `21-app`, `22-app-issues`, `23-app-database`, `24-app-design-system-and-ui`) with per-subfolder §00/§97/§98/§99 acceptance criteria living **outside** the parent §97 file,
+- **When** any context-window-bounded auditor or reviewer reads this §97 alone,
+- **Then** the delegation MUST be inspectable from inside §97 itself via the **Subfolder Delegation Map** below — every subfolder MUST be listed by slot + path + AC-family-prefix + governing CODE-RED rules + ownership status. The map is the canonical source of truth for "which language owns which AC namespace"; per-subfolder §97 files MUST use AC-id prefixes that match this map (`AC-TS-NN` for `02-typescript`, `AC-GO-NN` for `03-golang`, `AC-PHP-NN` for `04-php`, `AC-RS-NN` for `05-rust`, `AC-CS-NN` for `07-csharp`, etc.). Adding a new subfolder MUST include a new map row in the SAME PR. This codifies the **Phase 153 Task A10 audit finding** "Dangling Subfolder References — overview lists 15 subfolders but provided context only includes 2 files" by making the delegation auditable from inside §97 (mirrors AC-T-29 in spec/27).
+
+**Subfolder Delegation Map:**
+
+| Slot | Path | AC family prefix | Governing CODE-RED | Status | AC count target |
+|------|------|------------------|--------------------|--------|-----------------|
+| 01 | `01-cross-language/` | `AC-XL-NN` | R1, R2, R3, R4, R5, R6 | populated | ≥ 5 GWT |
+| 02 | `02-typescript/` | `AC-TS-NN` | R2, R3, R6 | needs deepening (Task A10-fu1) | ≥ 5 GWT |
+| 03 | `03-golang/` | `AC-GO-NN` | R1, R2, R6 | needs deepening (Task A10-fu1) | ≥ 5 GWT |
+| 04 | `04-php/` | `AC-PHP-NN` | R4, R5 | needs deepening (Task A10-fu1) | ≥ 5 GWT |
+| 05 | `05-rust/` | `AC-RS-NN` | R1, R2 + Rust naming exception (AC-CG-09) | needs deepening (Task A10-fu1) | ≥ 5 GWT |
+| 06 | `06-ai-optimization/` | `AC-AI-NN` | R5 (canonical home) | populated | ≥ 5 GWT |
+| 06 | `06-cicd-integration/` | `AC-CI-NN` | n/a (CI patterns) | populated (Phase 47 §28) | ≥ 5 GWT |
+| 07 | `07-csharp/` | `AC-CS-NN` | R1, R2, R6 | needs deepening (Task A10-fu1) | ≥ 5 GWT |
+| 08 | `08-file-folder-naming/` | `AC-FFN-NN` | n/a (orthogonal naming) | populated | ≥ 5 GWT |
+| 09 | `09-powershell-integration/` | `AC-PS-NN` | R1, R2 | placeholder per AC-CG-17 | populate-or-archive |
+| 10 | `10-research/` | `AC-RES-NN` | n/a (research notes) | placeholder per AC-CG-17 | populate-or-archive |
+| 11 | `11-security/` | `AC-SEC-NN` | R5 (security adjacency) | populated | ≥ 5 GWT |
+| 21 | `21-app/` | `AC-APP-NN` | n/a (app-specific) | populated | ≥ 5 GWT |
+| 22 | `22-app-issues/` | `AC-APPI-NN` | n/a (app-specific) | populated | ≥ 5 GWT |
+| 23 | `23-app-database/` | `AC-APPDB-NN` | R4 | populated | ≥ 5 GWT |
+| 24 | `24-app-design-system-and-ui/` | `AC-APPDS-NN` | n/a (app-specific) | populated | ≥ 5 GWT |
+
+- **Verifies:** AC-CG-01 (numbering ranges); AC-CG-02 (four required files); AC-CG-10 (per-subfolder GWT ≥ 5); AC-CG-12 (cross-references resolve); AC-CG-13 (no language vs cross-language contradictions); AC-CG-17 (PowerShell + Research populate-or-archive); codifies the **Phase 153 Task A10 lesson** (mirror of A9 Lesson #19) "when audit-boundary < verification-boundary, the parent §97 MUST make the delegation auditable from inside itself — listing 16 subfolders in §00 prose is invisible to context-window-bounded auditors; an in-§97 delegation map with AC-prefix namespacing is the canonical fix".
+
+### AC-CG-22 — Size-limit exception ledger (Phase 153 Task A10)
+
+- **Given** AC-CG-08 mandates 8–15 lines per function, < 300 lines per file, < 100 lines per React component, with three exempt categories ((a) `// AUTO-GENERATED` headered code, (b) test fixtures, (c) language-specific exceptions),
+- **When** a size-limit linter (`linter-scripts/validate-guidelines.go` or its successor) encounters a violation,
+- **Then** the linter MUST consult the **Size-Limit Exception Ledger** below as the closed enumeration of allowed exception classes; ANY violation NOT matching one of these classes is a hard fail — the open phrase "language-specific exceptions" in AC-CG-08 is replaced by this ledger as the normative surface. New exceptions MUST be added to the ledger in the SAME PR that needs them, with a `Why:` row, a `Detection:` rule, AND a sunset date (default 2 release cycles); ledger growth without sunset triggers a Phase-108-style cleanup. This codifies the **Phase 153 Task A10 audit finding** "Incomplete Size Limit Enforcement Logic — AC-CG-08 does not define how to handle 'language-specific exceptions', leading to potential implementation inconsistency in Rust or Go".
+
+**Size-Limit Exception Ledger:**
+
+| # | Language | Construct | Limit override | Detection rule | Why | Sunset |
+|---|----------|-----------|----------------|----------------|-----|--------|
+| EX-01 | All | `// AUTO-GENERATED` headered file | bypass all limits | First 5 lines of file contain `AUTO-GENERATED` (case-insensitive) | Generators emit deterministic blocks; reformatting breaks round-trip | permanent |
+| EX-02 | All | Test fixtures | < 1000 lines per file | Path contains `/test/`, `/tests/`, `/__tests__/`, `_test.go`, `.test.ts`, `.spec.ts` | Fixtures are data, not logic | permanent |
+| EX-03 | Go | Table-driven test cases | bypass function-line limit when body is a single `[]struct{...}` literal | Function body matches `^\s*tests := \[\]struct\b` | Idiomatic Go tests; splitting harms readability | permanent |
+| EX-04 | Rust | `match` arms | function may reach 25 lines if ≥ 60% of lines are `match` arms | AST count: `match`-expression-line / total-line ≥ 0.6 | Exhaustive `match` is Rust idiom; splitting fragments the contract | permanent |
+| EX-05 | Rust | `#[derive(...)]` blocks | not counted toward function/file line totals | Lines starting with `#[derive(` or `#[cfg(` | Attribute macros are declarative metadata, not code | permanent |
+| EX-06 | TypeScript | React component with co-located styles | < 150 lines (vs 100 default) WHEN file contains both `export default function` AND `const styles =` / `styled.` | Single-file component with inline styles | Splitting style file forces premature abstraction | sunset 2026-Q4 (move to CSS-in-JS pattern by then) |
+| EX-07 | Go | `init()` registration blocks | bypass function-line limit when body is exclusively `register*(...)` calls | Every non-blank line in body matches `^\s*[A-Za-z]+\.?[Rr]egister[A-Z]\w*\(` | Plugin registration is mechanical; splitting harms grep-ability | permanent |
+| EX-08 | All | Switch / select dispatch on enum | function may reach 30 lines if body is exclusively `switch x { case ... }` covering enum variants | AST count: case-line / total-line ≥ 0.7 AND switch subject is enum-typed | Exhaustiveness over decomposition for type-safe dispatch | permanent |
+
+- **Verifies:** AC-CG-08 (R6 size limits become statically + deterministically enforceable via the closed ledger); CODE-RED rule R6 in `00-overview.md`; `linter-scripts/validate-guidelines.go` size-check implementation contract; codifies the **Phase 153 Task A10 lesson** "open-ended exception phrases in normative ACs invite implementation drift; replace 'language-specific exceptions' with a closed enumerated ledger that has Why + Detection + Sunset per row — exception ledgers ARE the normative surface, not appendices to it".
+
+### AC-CG-23 — Legacy-AC scaffolds carry an upgrade pointer (Phase 153 Task A10)
+
+- **Given** the `## Legacy Index (preserved for traceability)` block at the bottom of this §97 enumerates `AC-CG-LEGACY-001..022` table-row criteria for Cross-Language, TypeScript, Golang, PHP, Rust,
+- **When** a per-language subfolder §97 currently has 0 GWT ACs (TS, PHP, C# at v4.2.0 baseline) AND a downstream auditor cannot find a testable contract for that language,
+- **Then** EVERY `AC-CG-LEGACY-NNN` row MUST point to the GWT successor that supersedes it (already done at the per-section `**Verifies:**` clause level — e.g. "superseded as a group by AC-CG-10") AND the per-language `97-acceptance-criteria.md` files for TS / PHP / C# MUST carry at least one **stub GWT AC** referencing the LEGACY rows pending the Task A10-fu1 deepening sweep — leaving zero GWT ACs is FORBIDDEN even pre-deepening because it signals to context-window-bounded auditors that the language is unverified. The stub MUST follow the form `### AC-XX-01 — Pending Phase A10-fu1 deepening (legacy contract: AC-CG-LEGACY-NNN..NNN)` with a Given/When/Then triplet that explicitly cites the legacy IDs as the binding contract until the sweep lands. This codifies the **Phase 153 Task A10 audit finding** "Legacy AC Scaffolds Lack Specificity — Legacy Index says rows are 'NO LONGER authoritative' yet TS/PHP/C# subfolders have 0 GWT ACs, leaving the AI with no testable contract".
+- **Verifies:** AC-CG-10 (per-subfolder GWT ≥ 5 — stub satisfies the floor); AC-CG-19 (tree-health ≥ 95 — stubs prevent the AC-count drag); the **Phase 16e legacy-vs-GWT supersession contract** in this §97's `## Legacy Index` heading; codifies the **Phase 153 Task A10 lesson** "legacy-deprecated ACs MUST carry a forward-pointer to their GWT successor AND the successor MUST exist as at least a stub — supersession without a target is verifiable nonsense".
+
 ---
 
 ## Legacy Index (preserved for traceability)
 
-The following table-row criteria from v3.2.0 are preserved verbatim. They are NO LONGER authoritative — the GWT ACs above supersede them — but downstream linters / link-checkers may still reference these IDs. New linter checks SHOULD target `AC-CG-NN`, NOT `AC-CG-LEGACY-NNN`.
+The following table-row criteria from v3.2.0 are preserved verbatim. They are NO LONGER authoritative — the GWT ACs above supersede them — but downstream linters / link-checkers may still reference these IDs. New linter checks SHOULD target `AC-CG-NN`, NOT `AC-CG-LEGACY-NNN`. **Phase 153 Task A10 amendment**: per AC-CG-23 every legacy section's `**Verifies:**` clause MUST cite the GWT successor; this restores the supersession contract end-to-end.
 
 ### AC-CG-LEGACY: Cross-Language
 
