@@ -1,10 +1,16 @@
 # Changelog — Database Conventions
 
-**Version:** 3.4.0  
+**Version:** 3.4.1  
 **Updated:** 2026-04-29  
 **Scope:** `spec/04-database-conventions/`
 
 ---
+
+### 3.4.1 — 2026-04-29 — Phase 153 Task A11a-fu3: P1-verify HIGH sweep (Lesson #34) + spec/04 §98 prose path disambiguation
+- **Action**: Per Lesson #34 (cache-vs-contract drift), enumerated all 26 HIGH findings from `.lovable/cache/audit-ai/*.json` and cross-referenced against closing memos / §97 ACs / §98 changelogs. **10 of 26 HIGHs are already contract-closed** (spec/02 D5 = AC-CG-21 + Subfolder Delegation Map; spec/05 D5 = AC-SD-21/22/23; spec/06 D3 = Task A2 canonical naming pin; spec/11 + spec/12 D2 = P3 Verifies sweep #29a-e + #31; spec/13 D3 = AC-22; spec/17 D3 = Task A1/A2 walker fix; spec/25 D2+D5 = AC-AI-09/10/11; spec/27 D2 = AC-T-29). **The remaining 16 HIGHs cluster heavily into D5 (12 of 16 = "broken/dangling external/cross/sub-module refs / missing context").** Ran the deterministic gate `check-spec-folder-refs.py` to ground-truth the D5 cluster: **only 2 stale folder refs tree-wide** (vs cache claiming 12 modules — Lesson #34 confirmed: cache massively overcounts D5 by ≥6×). Both real findings closed in this phase: (1) `spec/04-database-conventions/98-changelog.md` line 28 contained `spec/03-error-manage/.../05-response-envelope/` — the `.../` wildcard caused the gate's substring scanner to flag the leaf `05-response-envelope` as a missing top-level folder; refreshed prose to spell out the full deep path `spec/03-error-manage/02-error-architecture/05-response-envelope/`. (2) Memo file `.lovable/memory/audit/v2-deterministic/phase-153-task-A4-audit-ai-implementability-productionised.md` line 3 used the hyphenated phrase `spec/11-style` (not a folder ref); rewrote as `spec-11-style` to satisfy the gate's word-boundary regex.
+- **Spec lockstep**: §00 v3.4.0 (no change — banner already current); §98 v3.4.0 → **v3.4.1** (this row); §99 v3.6.0 → **v3.6.1**. **No §97 contract change**, **no AC count change**, **no CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**. Patch-level lockstep only (banner + row + audit row).
+- **Validation**: `check-spec-folder-refs.py` 0 stale refs (was 2) → exit 0; lockstep 87/87 · tree-health 168/168 strict · version-parity 74/74 · freshness 81/81 — all GREEN. The audit-cache `.lovable/cache/audit-ai/04-database-conventions.json` and 11 sibling cache rows remain stale until A8/A12 (LLM gateway) unblocks; per Lesson #34 they are NOT authoritative — closure references above are.
+- **Lesson #35 codified at §98 v3.4.1**: When a deterministic gate's regex/scanner matches partial paths (e.g. `spec-folder-refs.allowlist`'s `(?<![\w\-])spec/(\d{2}-[a-z0-9-]+)` correctly rejects nested paths but the gate's *display* of `→ spec/<leaf>/` can mislead a reader into thinking the leaf is a top-level claim), the fix is **prose disambiguation** (spell out the deep path) rather than a parser change — the parser is correct, the prose is just terse. This is a sub-case of Lesson #34 (cache-vs-contract drift): even a CORRECT deterministic gate's *output rendering* can be misread as a real finding when the input prose uses `.../` wildcards or hyphenated phrases that look like folder refs. Authoring rule: never use `.../<leaf>/` shorthand in §98 changelogs or memos when `<leaf>` matches `\d{2}-[a-z0-9-]+` — always spell out the full path. Cross-references Lesson #34 (cache staleness), Lesson #29 (audit-corpus quoted-evidence rule), Lesson #30 (verify-before-open).
 
 ## Format
 
@@ -25,7 +31,7 @@
 
 ### 3.3.3 — 2026-04-29 — Phase 153 Task A2 (envelope inlining for context-bounded AI)
 
-- **Added** "Universal Response Envelope — Inlined Summary" section at the end of `00-overview.md` so a context-bounded AI implementing REST endpoints from `spec/04` alone has the full envelope shape (PascalCase JSON keys, top-level field table, conditional-field semantics, Go `omitempty` note) without needing to fetch `spec/03-error-manage/.../05-response-envelope/`.
+- **Added** "Universal Response Envelope — Inlined Summary" section at the end of `00-overview.md` so a context-bounded AI implementing REST endpoints from `spec/04` alone has the full envelope shape (PascalCase JSON keys, top-level field table, conditional-field semantics, Go `omitempty` note) without needing to fetch `spec/03-error-manage/02-error-architecture/05-response-envelope/`.
 - **Lockstep:** §00 banner v3.3.2 → v3.3.3 (h10 stamp 30 → 153). §99 v3.5.0 → v3.5.1.
 - **No AC change.** Spec content is a pure inlining of the existing source-of-truth reference; if upstream and the inlined summary diverge, upstream wins (declared in the new section's preamble).
 - Closes Phase 153 Task A2 finding "spec/04 D5 cross-module dep" from audit-v2.

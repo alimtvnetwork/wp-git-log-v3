@@ -1,6 +1,6 @@
 ---
 name: phase-153-task-A4-audit-ai-implementability-productionised
-description: Productionised the prototype LLM audit harness as slot-34 first-class linter; closes the spec/11-style non-md walker blind spot
+description: Productionised the prototype LLM audit harness as slot-34 first-class linter; closes the spec-11-style non-md walker blind spot
 type: feature
 ---
 
