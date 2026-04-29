@@ -56,7 +56,7 @@ The script computes a **derived** tier by walking gates P1 → P4 in order; the 
 | **P1** | §00 lists every sibling `.md` (excluding meta-slots `97`/`98`/`99`) AND `**Updated:**` year matches current calendar year. **Inventory regex** matches any `](./<basename>.md)` reference where the basename starts with an alphanumeric character (e.g. `01-foo.md`, `consolidated-review-guide.md`, `readme.md`, `changelog.md`, `structure.md`) — non-numeric-prefix siblings ARE legitimate inventory entries (precedent: §02 review-guide files, §03 `structure.md`, §12/§14 `readme.md`, §18 `readme.md`/`changelog.md`). |
 | **P2** | P1 holds AND §97 contains ≥1 `**Given**`/`**When**`/`**Then**` marker AND no `*.md` in the module ends with a truncation marker (`...`, `…`, bare `TODO`/`TBD`/`FIXME`). |
 | **P3** | P2 holds AND every `### AC-…` heading in §97 has a `**Verifies:**` clause. |
-| **P4** | P3 holds AND module dir name appears in `.github/workflows/spec-health.yml` AND §99 carries a `<!-- verified-phase: NNN -->` stamp ≤ 30 phases stale relative to the highest stamp anywhere in the tree. |
+| **P4** | P3 holds AND the module is referenced by `.github/workflows/spec-health.yml` (either the leaf dir name appears verbatim, the module's `spec/<rel-path>` is mentioned, OR the workflow uses a `spec/**` glob that transitively covers the module) AND §99 carries a `<!-- verified-phase: NNN -->` stamp ≤ 30 phases stale relative to the highest stamp anywhere in the tree. |
 
 A module with `unset`/blank `AI Confidence` is **skipped** (matches the rubric's "omit rather than guess" rule — no drift can be computed).
 
