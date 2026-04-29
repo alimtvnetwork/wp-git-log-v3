@@ -1,7 +1,7 @@
 # Changelog — Update — Overview
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-28  
+**Version:** 2.2.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/14-update/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 2.2.0 — 2026-04-29 — Phase P48-1-fu1-batch slot 6 (P1 inventory sync)
+- **Added** §00 Feature Inventory rows for slots 24/25/26/27/28: `24-update-check-mechanism/`, `25-release-pinned-installer.md`, `26-repo-major-version-migrator.md`, `27-generic-installer-behavior.md`, `28-update-interface-contract.md`. Files already existed and were §97/§99-tracked; only §00 lagged. Pure inventory reconciliation — no spec rule changes. Linter: P1 driver eliminated for `spec/14`.
 
 ### 2.1.0 — 2026-04-28 (Phase P24 — H10 reverse-drift reconciliation)
 

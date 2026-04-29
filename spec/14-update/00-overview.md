@@ -1,7 +1,7 @@
 # Update — Overview
 
 <!-- h10-verified-phase: 24 -->
-**Version:** 2.1.0  
+**Version:** 2.2.0  
 **Updated:** 2026-04-28  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
@@ -100,6 +100,11 @@ file-lock errors and guarantees rollback is always one rename away.
 | 21 | [21-config-file.md](./21-config-file.md) | `powershell.json` config schema, defaults, override rules | ✅ Active |
 | 22 | [22-update-command-workflow.md](./22-update-command-workflow.md) | End-to-end `<binary> update` workflow (source-based + binary-based) | ✅ Active |
 | 23 | [23-install-script-version-probe.md](./23-install-script-version-probe.md) | Latest-version probe in `install.{ps1,sh}` (current+1 .. +20, parallel) | ✅ Active |
+| 24 | [24-update-check-mechanism/](./24-update-check-mechanism/) | Update-check mechanism (subfolder): polling cadence, channel resolution, prompt UX | ✅ Active |
+| 25 | [25-release-pinned-installer.md](./25-release-pinned-installer.md) | Release-pinned installer: lock install to a specific tagged release | ✅ Active |
+| 26 | [26-repo-major-version-migrator.md](./26-repo-major-version-migrator.md) | Repo major-version migrator: cross-major upgrade orchestration | ✅ Active |
+| 27 | [27-generic-installer-behavior.md](./27-generic-installer-behavior.md) | Generic installer behavior contract: shared rules across PS1/Bash installers | ✅ Active |
+| 28 | [28-update-interface-contract.md](./28-update-interface-contract.md) | Technical interface contract: declared inputs/outputs/env/exit codes for the update subsystem | ✅ Active |
 
 ### Auxiliary
 
@@ -107,6 +112,7 @@ file-lock errors and guarantees rollback is always one rename away.
 |------|-------------|
 | [99-consistency-report.md](./99-consistency-report.md) | Per-folder consistency audit |
 | [diagrams/](./diagrams/) | Mermaid flow diagrams (handoff, cleanup, deploy) |
+| [readme.md](./readme.md) | Folder readme — high-level update-subsystem entry-point (legacy) |
 
 ---
 
