@@ -117,6 +117,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `--auth-mode=ssh` AND local clock is 120 s ahead of server (as detected via `Date:` response header from probe),
 - **When** `glci doctor` runs,
 - **Then** it MUST exit `5` with `GLCI-DOCTOR-CLOCK-SKEW`.
+- **Verifies:** §07 `GLCI-DOCTOR-CLOCK-SKEW`; §11 SSH-mode signature-window invariant (clock skew breaks `X-GL-Timestamp` validation); exit-code-5 for doctor-failure class.
 
 ### AC-28-17 — `/fixed-log` auto-fires only when server reports prior failure
 
