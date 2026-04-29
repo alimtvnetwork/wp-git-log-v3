@@ -321,6 +321,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 
 ### AC-SAG-LEGACY: Folder Structure & Required Files
 
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these table-row criteria are referenced by `Verifies:` chains of the new GWT ACs above (notably AC-SAG-01, AC-SAG-11, AC-SAG-12) and by AC-SAG-28's exemption registry. Removing them silently breaks those cross-refs (Phase P7b precedent). The mechanical exemption regex `^AC-[A-Z]+-LEGACY(-\d+)?$` in any future `check-ac-gwt-completeness.py` MUST exclude this row from the GWT-completeness denominator.
+
 | ID | Criterion | Source |
 |---|---|---|
 | AC-SAG-LEGACY-001 | Every spec module has `00-overview.md` at root | `03-required-files.md` |
