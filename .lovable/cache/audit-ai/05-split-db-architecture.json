@@ -1,0 +1,37 @@
+{
+  "d1": 14,
+  "d2": 12,
+  "d3": 10,
+  "d4": 18,
+  "d5": 15,
+  "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D1",
+      "title": "PascalCase Enforcement vs SQL standard",
+      "why": "The spec mandates PascalCase for all field names (e.g., SessionId), but SQLite is case-insensitive by default and many Go drivers/mappers default to snake_case. A mediocre coder might produce inconsistent mapping or fail to use backticks/quotes in queries, leading to runtime errors in strict environments.",
+      "fix": "Explicitly mandate double-quoting all identifiers in SQL snippets and provide a Go struct-to-DB mapping example using tags (e.g., `db:\"SessionId\"`)."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D3",
+      "title": "Concurrency/Locking implementation gaps",
+      "why": "While WAL mode is mentioned, the provided Go code uses a simple `sync.RWMutex` for the map of connections but does not address cross-process locking or how to handle 'database is locked' errors during high-concurrency writes to the same Session DB.",
+      "fix": "Add a requirement for a retry-loop decorator for write operations and specify the use of 'PRAGMA busy_timeout'."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D2",
+      "title": "Missing Acceptance Criteria for Reset TTL",
+      "why": "The 5-minute TTL for the Reset API is a core safety feature, but the provided AC-SDB-000 only checks for 'lifecycle wiring' and 'Casbin points', not the actual expiration logic or cleanup of expired tokens.",
+      "fix": "Add a specific GWT criterion: 'Given a reset request older than 5 minutes, When confirm is called, Then return 401/410 Expired and do not delete data.'"
+    }
+  ],
+  "module": "05-split-db-architecture",
+  "files_used": 6,
+  "files_total": 20,
+  "bytes_used": 90000,
+  "bundle_sha": "cbe6018a6a582234",
+  "total": 69,
+  "band": "NEEDS_WORK"
+}

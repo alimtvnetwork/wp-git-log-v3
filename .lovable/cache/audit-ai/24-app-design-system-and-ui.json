@@ -1,0 +1,37 @@
+{
+  "d1": 20,
+  "d2": 20,
+  "d3": 18,
+  "d4": 20,
+  "d5": 15,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "External Dependency Missing",
+      "why": "The module relies heavily on \u00a707 (Core Design System) for primitives, but the content of \u00a707 is not provided in the context, making it impossible to verify if --background or --card actually exist.",
+      "fix": "Provide the core design system tokens from spec/07-design-system/ in the context."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Z-Index Collision Risk",
+      "why": "The AppShell uses hardcoded z-40 and z-30. If \u00a707 defines a global z-index scale (e.g., for modals or tooltips), these hardcoded values may cause layering bugs.",
+      "fix": "Map z-index values to \u00a707 tokens (e.g., z-[var(--z-sticky)]) instead of raw Tailwind classes."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Sidebar Transition State",
+      "why": "The spec defines a collapsed state for < md breakpoints but does not specify if the transition should be animated or how 'icons only' mode handles labels for a11y.",
+      "fix": "Add a 'Transitions' section to the AppShell contract specifying duration and easing."
+    }
+  ],
+  "module": "24-app-design-system-and-ui",
+  "files_used": 4,
+  "files_total": 4,
+  "bytes_used": 38997,
+  "bundle_sha": "122c00473ecda2cc",
+  "total": 93,
+  "band": "EXCELLENT"
+}

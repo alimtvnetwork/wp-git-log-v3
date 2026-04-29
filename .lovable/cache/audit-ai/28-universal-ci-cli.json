@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 20,
+  "d3": 17,
+  "d4": 16,
+  "d5": 19,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D3",
+      "title": "Ambiguous SSH Signing Implementation",
+      "why": "The spec says it 'shells out to ssh-keygen' but doesn't provide the exact command string or how to handle the resulting signature file/stdout for the X-GL-Signature header.",
+      "fix": "Define the exact shell command and how to extract the base64 signature from the .sig file or stdout."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D4",
+      "title": "Missing Streaming Chunk Examples",
+      "why": "While NDJSON is mentioned, there is no worked example of a 'StreamHeader' or 'StreamFooter' JSON object in the examples section, only in the contract prose.",
+      "fix": "Add a 'Worked Example: Streaming' section showing the sequence of 3-4 JSON chunks."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Vague 'interleaved' capture requirement",
+      "why": "Section 04 says 'capture stdout + stderr interleaved with timestamps', but doesn't specify if timestamps are internal metadata or prepended to the Log strings.",
+      "fix": "Clarify that timestamps are used for internal sorting and MUST NOT be prepended to the raw log lines unless [push].preserve_timestamps is true."
+    }
+  ],
+  "module": "28-universal-ci-cli",
+  "files_used": 14,
+  "files_total": 15,
+  "bytes_used": 90000,
+  "bundle_sha": "3fcd35f1665fc00d",
+  "total": 90,
+  "band": "EXCELLENT"
+}

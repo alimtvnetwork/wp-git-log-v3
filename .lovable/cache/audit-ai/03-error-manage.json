@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 16,
+  "d3": 15,
+  "d4": 19,
+  "d5": 14,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "Broken Internal Links & Missing Files",
+      "why": "The overview references 12+ files (e.g., 02-error-architecture, 03-error-code-registry) that are not present in the provided context, leaving the 'canonical location' incomplete.",
+      "fix": "Provide the missing sub-modules or inline the core Error Code Registry and Architecture schemas into the root overview."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D2",
+      "title": "Acceptance Criteria Gap for Resolution Process",
+      "why": "While retrospectives have ACs (97-acceptance-criteria.md), the mandatory 'Error Documentation Guideline' process lacks GWT/Verifies clauses to ensure AI compliance.",
+      "fix": "Add AC-ERR-001 to 97-acceptance-criteria.md verifying that every fix includes a YYYY-MM-DD-*.md file in app-issues/."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Concurrency/Race Condition in Registry",
+      "why": "INV-02 and FAIL-02 mention collision resolution but don't specify the locking mechanism or CI check logic for concurrent PRs modifying the registry.",
+      "fix": "Add a requirement to INV-02 specifying that the registry linter must run in a serialized CI stage or use a central lock file."
+    }
+  ],
+  "module": "03-error-manage",
+  "files_used": 12,
+  "files_total": 166,
+  "bytes_used": 90000,
+  "bundle_sha": "fcda050b39286078",
+  "total": 82,
+  "band": "GOOD"
+}

@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 20,
+  "d3": 17,
+  "d4": 16,
+  "d5": 19,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D3",
+      "title": "Missing Mermaid Lifecycle Diagram",
+      "why": "The text in 00-overview.md and 99-consistency-report.md explicitly references a Mermaid lifecycle diagram ('lifecycle-15-distribution-and-runner.mmd'), but the diagram code is missing from the provided context.",
+      "fix": "Insert a Mermaid block in 00-overview.md illustrating the install/run/release state transitions."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D4",
+      "title": "Incomplete release.sh Example",
+      "why": "The release pipeline (03-release-pipeline.md) relies heavily on a 'release.sh' script to build artifacts, but the content/logic of this script is not provided, leaving the AI to guess the build commands.",
+      "fix": "Add a code block to 03-release-pipeline.md showing a sample release.sh that zips the required folders."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Ambiguous 'Middle-out' Version Probing",
+      "why": "01-install-contract.md mentions 'middle-out, parallel, 2s timeout' probing for newer repos but doesn't define the algorithm or the list of URLs to probe.",
+      "fix": "Define the specific GitHub API endpoints or naming patterns (e.g., coding-guidelines-v18) to be probed."
+    }
+  ],
+  "module": "15-distribution-and-runner",
+  "files_used": 8,
+  "files_total": 8,
+  "bytes_used": 60345,
+  "bundle_sha": "12a8a88549c81de6",
+  "total": 90,
+  "band": "EXCELLENT"
+}

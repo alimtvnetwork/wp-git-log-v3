@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 16,
+  "d3": 15,
+  "d4": 17,
+  "d5": 14,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "Broken Cross-References to External Workflows",
+      "why": "The spec references files like '../12-cicd-pipeline-workflows/02-release-pipeline.md' and 'linter-scripts/check-spec-cross-links.py' which are not provided in the context, making it impossible for an AI to verify the full pipeline logic.",
+      "fix": "Provide the content of the referenced workflow and script files or inline the critical logic into the generic-release module."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D2",
+      "title": "Truncated Acceptance Criteria",
+      "why": "The AC-11 and subsequent criteria in 97-acceptance-criteria.md are cut off mid-sentence due to the context cap, leaving the 'Verifies' clauses for the installer contract incomplete.",
+      "fix": "Ensure the full text of the acceptance criteria document is included within the context limits."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Ambiguous Error Handling for Checksum Mismatch",
+      "why": "While scripts show 'exit 1', the spec doesn't define specific error codes for different failure modes (e.g., network vs checksum vs arch mismatch) as required by D1/D3.",
+      "fix": "Enumerate specific exit codes (e.g., 10=Network, 11=Checksum, 12=Arch) in the installer contract."
+    }
+  ],
+  "module": "16-generic-release",
+  "files_used": 11,
+  "files_total": 13,
+  "bytes_used": 90000,
+  "bundle_sha": "ad636d5162767ab4",
+  "total": 80,
+  "band": "GOOD"
+}

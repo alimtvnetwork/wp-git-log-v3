@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 16,
+  "d3": 15,
+  "d4": 19,
+  "d5": 14,
+  "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "Broken External References",
+      "why": "The spec heavily references external files like '../02-coding-guidelines/01-cross-language/07-database-naming.md' and '../03-error-manage/...' which are not provided in the context.",
+      "fix": "Inline the critical naming and envelope rules or provide the referenced files in the audit context."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D2",
+      "title": "Incomplete Acceptance Criteria",
+      "why": "The 'Acceptance - DDL Conformance' section refers to a linter script (check-forbidden-strings.py) that is not defined, making the test non-executable for the AI.",
+      "fix": "Provide the logic or a pseudocode implementation of the linter script within the testing strategy."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Concurrency and Locking in Split-DB",
+      "why": "The spec mentions SQLite 'Split DB' pattern but lacks specific guidance on handling cross-database transactions or WAL mode configuration for concurrency.",
+      "fix": "Add a section to 07-split-db-pattern.md (or 02-schema-design) explicitly defining the WAL mode requirement and transaction boundaries."
+    }
+  ],
+  "module": "04-database-conventions",
+  "files_used": 7,
+  "files_total": 11,
+  "bytes_used": 90000,
+  "bundle_sha": "136f0695064bc42f",
+  "total": 82,
+  "band": "GOOD"
+}

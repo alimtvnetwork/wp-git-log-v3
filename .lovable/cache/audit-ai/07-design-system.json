@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 14,
+  "d3": 15,
+  "d4": 16,
+  "d5": 12,
+  "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D5",
+      "title": "Missing Core Token Definitions",
+      "why": "The spec references 'src/index.css' and 'tailwind.config.ts' as the single source of truth for tokens, but the actual HSL values for the 40+ tokens are only partially listed in tables, not provided as a complete file or block.",
+      "fix": "Include the full content of the normative 'src/index.css' file containing all :root and .dark HSL triplets."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Truncated Acceptance Criteria",
+      "why": "The AC file (97-acceptance-criteria.md) is truncated at AC-003 due to context limits, leaving 31 of 34 criteria (AC-004 to AC-034) undefined for the coder.",
+      "fix": "Provide the remaining 31 GWT acceptance criteria in a follow-up or condensed block."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Missing Concurrency/Flash Handling",
+      "why": "The 'Theme Transition' section mentions a 0.3s transition but doesn't specify how to prevent 'Flash of Unstyled Content' (FOUC) or 'Flash of Incorrect Theme' during SSR/Hydration.",
+      "fix": "Add a requirement for an inline blocking script in the HTML head to apply the '.dark' class before the first paint."
+    }
+  ],
+  "module": "07-design-system",
+  "files_used": 15,
+  "files_total": 17,
+  "bytes_used": 90000,
+  "bundle_sha": "fce6a81e16dbedd3",
+  "total": 75,
+  "band": "GOOD"
+}

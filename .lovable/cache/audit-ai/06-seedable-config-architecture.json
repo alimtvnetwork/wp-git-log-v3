@@ -1,0 +1,37 @@
+{
+  "d1": 18,
+  "d2": 14,
+  "d3": 15,
+  "d4": 19,
+  "d5": 12,
+  "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D5",
+      "title": "Missing Core Logic Files",
+      "why": "The module references '02-features/05-validation-data-seeding.md' and '02-features/06-update-check-keys.md' as active/normative, but they are missing from the provided context.",
+      "fix": "Provide the missing feature specification files for data seeding and update-check keys."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Incomplete Acceptance Criteria",
+      "why": "The '97-acceptance-criteria.md' and '98-acceptance-criteria.md' files are referenced in the inventory but not provided, leaving the AI coder without specific GWT verification steps for the Go implementation.",
+      "fix": "Include the 97/98 acceptance criteria files with explicit GWT scenarios for the ConfigService."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D1",
+      "title": "Schema vs Example Case Mismatch",
+      "why": "The canonical naming convention mandates PascalCase (Version, Categories), but the test data example in 02-features/03-rag-validation-tests.md uses lowercase 'version' and 'categories'.",
+      "fix": "Update the testdata/config.seed.json example in file 03 to use strict PascalCase for all keys."
+    }
+  ],
+  "module": "06-seedable-config-architecture",
+  "files_used": 7,
+  "files_total": 21,
+  "bytes_used": 90000,
+  "bundle_sha": "3205e7dd2d6927db",
+  "total": 78,
+  "band": "GOOD"
+}
