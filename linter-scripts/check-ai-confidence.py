@@ -154,10 +154,14 @@ def gate_p1(mod: Path, ov_text: str) -> tuple[bool, str]:
         # to the section under a `## ... Inventory` heading to avoid matching
         # `.md` words in arbitrary prose. Falls back to no bare-scan if no
         # such heading exists (the link-form scan above still applies).
-        m_inv = re.search(r"^##[^\n]*(Inventory|Index|Modules|Files|Contents)[^\n]*\n", ov_text, re.M | re.I)
-        if m_inv:
+        # Scan EVERY inventory-titled section (a §00 may carry both a "Full
+        # Document Inventory" with subfolder paths AND a "Document Inventory"
+        # with bare filenames — both are legitimate listings).
+        inv_heading_re = re.compile(r"^##[^\n]*(Inventory|Index|Modules|Files|Contents)[^\n]*\n", re.M | re.I)
+        next_h2_re = re.compile(r"^## ", re.M)
+        for m_inv in inv_heading_re.finditer(ov_text):
             after = ov_text[m_inv.end():]
-            m_next = re.search(r"^## ", after, re.M)
+            m_next = next_h2_re.search(after)
             inv_section = after[: m_next.start()] if m_next else after
             for raw in INVENTORY_BARE_RE.findall(inv_section):
                 listed.add(raw.rsplit("/", 1)[-1])
