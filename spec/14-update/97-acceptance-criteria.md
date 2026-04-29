@@ -44,6 +44,7 @@ This document defines testable acceptance criteria for the **Update — Overview
 - **When** `99-consistency-report.md` is opened
 - **Then** it lists every `.md` file in this folder under "File Inventory" with status ✅.
 - **Source:** `99-consistency-report.md`.
+- **Verifies:** §99 inventory single-source-of-truth invariant — every `.md` accounted for under a heading matching the `(File Inventory|Module Inventory|Top-Level Modules|Document Inventory|Modules)` rubric (Phase 137 lesson; bare `## Inventory` silently loses credit).
 
 ### AC-05: Module passes the tree-health gate
 - **Given** the entire `spec/` tree
