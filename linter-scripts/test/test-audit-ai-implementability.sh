@@ -21,7 +21,7 @@ assert() {
 
 assert_contains() {
   local desc="$1" needle="$2"; shift 2
-  if "$@" 2>&1 | grep -qF "$needle"; then
+  if "$@" 2>&1 | grep -qF -- "$needle"; then
     echo "  PASS — $desc"
     PASS=$((PASS+1))
   else
@@ -72,19 +72,14 @@ else
   FAIL=$((FAIL+1))
 fi
 
-# 6. Walk includes non-md artefacts (spec/11 has schemas/templates).
+# 6. Walk includes non-md artefacts (spec/11 has schemas/templates → ≥18 files).
 out=$(python3 "$SCRIPT" --no-network --module=11-powershell-integration 2>&1)
-if echo "$out" | grep -qE "11-powershell-integration .* / [0-9]+ files"; then
-  total=$(echo "$out" | grep -oE "/ [0-9]+ files" | head -1 | grep -oE "[0-9]+")
-  if [ "$total" -ge "18" ]; then
-    echo "  PASS — AC-34-06: non-md walker includes schemas/templates (got $total files)"
-    PASS=$((PASS+1))
-  else
-    echo "  FAIL — AC-34-06: walker only saw $total files (expected ≥18 incl. schemas/templates)"
-    FAIL=$((FAIL+1))
-  fi
+total=$(echo "$out" | grep -oE "\([0-9]+/[0-9]+ files" | head -1 | grep -oE "/[0-9]+" | tr -d '/')
+if [ -n "$total" ] && [ "$total" -ge "18" ]; then
+  echo "  PASS — AC-34-06: non-md walker includes schemas/templates (got $total files)"
+  PASS=$((PASS+1))
 else
-  echo "  FAIL — AC-34-06: spec/11 stats line not found"
+  echo "  FAIL — AC-34-06: walker only saw '${total:-none}' files (expected ≥18 incl. schemas/templates)"
   FAIL=$((FAIL+1))
 fi
 
