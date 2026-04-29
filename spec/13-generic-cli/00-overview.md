@@ -1,8 +1,8 @@
 # Generic CLI Creation Guidelines — Overview
 
-> **Version:** 1.1.2  
-<!-- h10-verified-phase: 22 -->
-> **Updated:** 2026-04-20  
+> **Version:** 1.1.3  
+<!-- h10-verified-phase: 153 -->
+> **Updated:** 2026-04-29  
 > **Status:** Active  
 > **Related specs:**
 > - [02-project-structure.md](02-project-structure.md) — package layout and file organization
