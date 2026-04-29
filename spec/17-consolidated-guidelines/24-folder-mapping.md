@@ -1,7 +1,8 @@
 # Folder-by-Folder Mapping — Source Specs ↔ Consolidated Guidelines
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-22  
+**Source:** (self — mapping document; sources are all spec/* folders)  
+**Version:** 1.0.1  
+**Updated:** 2026-04-29  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None

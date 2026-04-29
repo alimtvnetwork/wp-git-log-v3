@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.4.4
+**Version:** 3.4.5
 **Updated:** 2026-04-29
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 3.4.5 — 2026-04-29 (Phase 153 P-L36-fu — Source-header sweep across roll-up)
+
+- **Added** `**Source:**` headers to 15 files in this folder that were missing the canonical-source anchor required by Lesson #36 (roll-up nuance): `01-spec-authoring`, `04-enum-standards`, `07-design-system`, `08-docs-viewer-ui`, `09-code-block-system`, `10-powershell-integration`, `11-research`, `12-root-research`, `13-app`, `14-app-issues`, `16-app-design-system-and-ui`, `19-gap-analysis`, `24-folder-mapping`, `27-linter-authoring-guide`, `28-distribution-and-runner`. Each got a 1-line `**Source:** [`../<source-folder>/`](../<source-folder>/)` insertion immediately under the title (or `**Source:** (self — ...)` for the 2 files that don't mirror a source module: `19-gap-analysis` and `24-folder-mapping`). Per-file patch bumps applied: 13 files +0.0.1 on `**Version:**` line; 2 files (27, 28) +0.0.1 on blockquote `> **Version:**` line. Pre-existing `Source:`/`Source Module:`-bearing files (02, 03, 05, 06, 15, 17, 18, 20, 21, 22, 23, 26, 29, 30, 31, 32, 33, 34) were untouched. Six audit/rollup files (25, 26, 29, 31, 32, 30) classified as **standalone** — they ARE the source, so no Source header is needed; documented in this row for future contributors.
+- **Lesson #36 nuance** (codified Phase 153 P-L36 last cycle, applied tree-wide here): roll-up surfaces (spec/17) MUST carry a `**Source:**` link to their source folder. The link IS the drift-detection mechanism — without it, future contributors editing the source can't grep-find the mirror. The existing convention (used by 18/35 files pre-sweep) was already correct; this sweep just brings the remaining 15 into line. Standalone audits/rollups are exempt because they have no upstream source.
+- **Why a patch (3.4.5):** pure documentation hardening — no normative surface change to spec/17, no §97 edit, no AC surface change, no rubric/CI-gate change. Lockstep ripple: 15 file banner patch-bumps + 2 blockquote-version patch-bumps + spec/17 §00/§98/§99 patch-bump.
 
 ### 3.4.4 — 2026-04-29 (Phase 153 P-L36 — Lesson #36 cross-reference anchors in roll-up)
 

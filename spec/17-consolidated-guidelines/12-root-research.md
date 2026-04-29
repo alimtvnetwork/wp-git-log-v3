@@ -1,7 +1,8 @@
 # Consolidated: Root-Level Research
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-16
+**Source:** [`../research/`](../research/)  
+**Version:** 3.3.1  
+**Updated:** 2026-04-29
 
 ---
 

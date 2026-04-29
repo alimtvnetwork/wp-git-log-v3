@@ -1,7 +1,8 @@
 # Consolidated: App Design System & UI
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-16
+**Source:** [`../21-app/design-system/`](../21-app/design-system/)  
+**Version:** 3.3.1  
+**Updated:** 2026-04-29
 
 ---
 

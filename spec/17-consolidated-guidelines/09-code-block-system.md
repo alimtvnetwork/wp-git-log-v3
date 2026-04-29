@@ -1,7 +1,8 @@
 # Consolidated: Code Block System — Complete Reference
 
-**Version:** 3.2.0  
-**Updated:** 2026-04-16
+**Source:** [`../09-code-block-system/`](../09-code-block-system/)  
+**Version:** 3.2.1  
+**Updated:** 2026-04-29
 
 ---
 

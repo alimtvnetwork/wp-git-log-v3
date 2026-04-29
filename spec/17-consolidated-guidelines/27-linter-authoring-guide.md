@@ -1,6 +1,8 @@
 # 27 — Linter Authoring Guide
 
-> **Version:** 1.0.0
+**Source:** [`../27-linter-authoring-guide/`](../27-linter-authoring-guide/)  
+
+> **Version:** 1.0.1
 > **Updated:** 2026-04-22
 > **Type:** Consolidated Guideline — Phase 6A
 > **Status:** Closes the final 🟡 from `26-blind-ai-audit-v2.md` (validator authoring opacity)
