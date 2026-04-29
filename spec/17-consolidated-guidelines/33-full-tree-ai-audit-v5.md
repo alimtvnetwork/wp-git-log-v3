@@ -1,5 +1,7 @@
-# 32 — Full Spec-Tree AI-Implementability Audit (v5.0)
+# 33 — Full Spec-Tree AI-Implementability Audit (v5.0) — SUPERSEDED
 
+> **⚠️ SUPERSEDED by [`34-full-tree-ai-audit-v6.md`](./34-full-tree-ai-audit-v6.md) (Phase 152, 2026-04-29).** v6 publishes a deterministic numeric headline (tree-health 168/168, AI-confidence 12/15 match, P3 driver CLOSED tree-wide) that v5 deliberately deferred to R1.
+>
 > **Version:** 5.0.0
 > **Updated:** 2026-04-27 (Phase 130)
 > **Scope:** **Entire `spec/` tree**

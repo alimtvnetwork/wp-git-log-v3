@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.4.2
+**Version:** 3.4.3
 **Updated:** 2026-04-29
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 3.4.3 — 2026-04-29 (Phase 152 — audit-v6 baseline published, supersedes v5)
+
+- **Added** `34-full-tree-ai-audit-v6.md` (slot 35 in inventory) — first audit baseline with a numeric headline since v4 (Phase 1, 45/100). Method: deterministic gate replay only (`check-tree-health --strict` 168/168, `check-lockstep` 87/87, `check-99-summary-freshness` 81 stamped + 6 exempt + 0 unstamped, `check-ai-confidence` 12/15 match). Headline: **P3 (Verifies-coverage) driver CLOSED tree-wide** across 11 modules over Phases 148–151 (Tasks #21a–#21d). Residual drift is 3 modules on P4 (workflow-ref) — cosmetic, not contract. Banner-supersedes `33-full-tree-ai-audit-v5.md` (Phase 130 reconciliation, no headline). Inventory: 34 → 35. §00 banner bumped 3.4.2 → 3.4.3 (patch — single-file additive, mirrors v4.4.0 Phase-130 precedent). No score change to tree-health (168/168 strict-pass holds); no AC surface change; no rubric/CI-gate change.
+- **Why a patch and not a minor:** identical pattern to v4.4.0 / Phase-130 publication of v5 — pure additive inventory sync of one new audit document. The audit itself reports state, doesn't change contract.
 
 ### 3.4.2 — 2026-04-29 (Phase P48-1-fu1-batch — P3 sweep slot 2: AC-01..AC-08 Verifies clauses)
 - **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v2.2.0 → v2.3.0). Each clause cites the precise invariant or precedent the AC defends (structural floor, no-broken-links, slot-immutability, lockstep, ≥80 floor, missing-contract rule, cross-folder links, four-file lockstep). Closes the P3-tier gap (1 → 9 Verifies clauses) and graduates this module's AC-block from Medium → High AI-confidence per the four-gate rubric (`01-spec-authoring.md` § *AI Confidence Rubric*). No semantic change to acceptance surface — purely a verifiability uplift. §00 banner bumped 3.4.1 → 3.4.2; §97 bumped 2.2.0 → 2.3.0; §99 row added below.
