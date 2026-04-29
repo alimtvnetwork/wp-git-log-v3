@@ -128,16 +128,19 @@ Numbering convention inside this module:
 The following block is the **machine-readable contract** for the spec/code bijection enforced by this module. It is the source of truth for `linter-scripts/check-tree-health.cjs` and the §05 health gate. Any deviation MUST be reconciled in the same PR.
 
 ```text
-# CONTRACT: spec-toolchain-bijection v1.0
-# Format: NUMBER_RANGE | KIND | SPEC_GLOB                        | CODE_GLOB                                       | EXIT_CONTRACT
-01-09  | validator    | spec/27-spec-toolchain/0[1-9]-*.md    | linter-scripts/check-*.{py,sh,cjs}             | 0=pass,1=fail,2=error
-10-19  | generator    | spec/27-spec-toolchain/1[0-9]-*.md    | linter-scripts/{generate,suggest}-*.{py,cjs}   | 0=pass,1=fail,2=error
-20-29  | filler       | spec/27-spec-toolchain/2[0-9]-*.md    | linter-scripts/{fill,scaffold,check}-*.cjs     | 0=pass,1=fail,2=error
-30-39  | auditor      | spec/27-spec-toolchain/3[0-9]-*.md    | linter-scripts/audit-*.py                      | 0=pass,1=fail,2=error
-40-49  | runner       | spec/27-spec-toolchain/4[0-9]-*.md    | linter-scripts/run.{sh,ps1}                    | 0=pass,1=fail,2=error
-50-59  | src-validator| spec/27-spec-toolchain/5[0-9]-*.md    | linter-scripts/validate-*.{py,go} + check-*.sh | 0=pass,1=fail,2=error
-60-69  | config       | spec/27-spec-toolchain/6[0-9]-*.md    | linter-scripts/{*.toml,*.allowlist,*.md}       | n/a (data file)
-70-79  | ci-workflow  | spec/27-spec-toolchain/7[0-9]-*.md    | .github/workflows/*.yml                        | GitHub Actions
+# CONTRACT: spec-toolchain-bijection v1.1 (Phase 153 Task A9: explicit ext lists per AC-T-27)
+# Format: NUMBER_RANGE | KIND | SPEC_GLOB                        | CODE_GLOB                                                                  | EXIT_CONTRACT
+# CODE_GLOB extension authority: the brace-listed extensions below are EXHAUSTIVE per kind; adding a new
+# extension to any range requires a §98 changelog row + AC-T-27 update in the SAME PR. The full canonical
+# extension set across the toolchain is {.py, .cjs, .mjs, .sh, .ps1, .go, .toml, .allowlist, .md, .yml}.
+01-09  | validator    | spec/27-spec-toolchain/0[1-9]-*.md    | linter-scripts/check-*.{py,sh,cjs,mjs,go,ps1}                              | 0=pass,1=fail,2=error
+10-19  | generator    | spec/27-spec-toolchain/1[0-9]-*.md    | linter-scripts/{generate,suggest,check}-*.{py,cjs,mjs}                     | 0=pass,1=fail,2=error
+20-29  | filler       | spec/27-spec-toolchain/2[0-9]-*.md    | linter-scripts/{fill,scaffold,deepen,check}-*.{cjs,py,sh}                  | 0=pass,1=fail,2=error
+30-39  | auditor      | spec/27-spec-toolchain/3[0-9]-*.md    | linter-scripts/{audit,check}-*.py                                          | 0=pass,1=fail,2=error
+40-49  | runner       | spec/27-spec-toolchain/4[0-9]-*.md    | linter-scripts/run.{sh,ps1}                                                | 0=pass,1=fail,2=error
+50-59  | src-validator| spec/27-spec-toolchain/5[0-9]-*.md    | linter-scripts/{validate,check}-*.{py,go,sh}                               | 0=pass,1=fail,2=error
+60-69  | config       | spec/27-spec-toolchain/6[0-9]-*.md    | linter-scripts/{*.toml,*.allowlist,*.md}                                   | n/a (data file)
+70-79  | ci-workflow  | spec/27-spec-toolchain/7[0-9]-*.md    | .github/workflows/*.yml                                                    | GitHub Actions
 
 # INVARIANTS (enforced by linter-scripts/check-tree-health.cjs)
 INV-01: forall code in {linter-scripts/, .github/workflows/} :: exists exactly one spec/27-spec-toolchain/NN-*.md
