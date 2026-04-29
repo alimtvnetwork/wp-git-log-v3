@@ -64,6 +64,15 @@ This document defines testable acceptance criteria for the **Consolidated Guidel
 - **Then** that date MUST also appear as a section header in `99-consistency-report.md`; the strict gate (Phase 81) blocks merge on any mismatch.
 - **Source:** `linter-scripts/check-lockstep.cjs`.
 
+### AC-09: `AI Confidence` field follows the four-gate rubric (P1–P4)
+- **Given** any module whose `00-overview.md` declares an `**AI Confidence:**` value
+- **When** an author or auditor evaluates the value against the rubric defined in `01-spec-authoring.md` § *AI Confidence Rubric (normative)*
+- **Then** the declared value MUST equal the **lowest-passing tier** among gates P1, P2, P3, P4 (a module passing P1+P2 but failing P3 is `Medium`, not `High`); the value MUST be omitted entirely if even P1 fails (rather than guessing `Low`).
+- **And** an upgrade across tiers MUST be accompanied by a `98-changelog.md` row citing the gate(s) newly passing, with measurement evidence drawn from the deterministic sources listed in the rubric (`check-tree-health.cjs --strict`, `check-truncated-prose.py`, `check-spec-cross-links.py`, `check-99-summary-freshness.py`).
+- **And** the `Ambiguity` field MUST mirror the same gate logic on the inverse axis: `None` requires P4-level confidence with zero open clarification questions in §99; `Critical` requires at least one `BLOCKER` or `OPEN-Q` row in §99.
+- **Verifies:** the contract introduced in Phase P48-1 (P47-fu1 finding: prior to v3.3.0 of `01-spec-authoring.md`, the four tier values were listed without measurement criteria, costing this module 33 points in the AI-implementability re-audit). Until a dedicated linter ships, conformance is checked by review against the rubric table.
+- **Source:** `01-spec-authoring.md` § *AI Confidence Rubric (normative)* lines following the Scoring Metrics table.
+
 
 ---
 
