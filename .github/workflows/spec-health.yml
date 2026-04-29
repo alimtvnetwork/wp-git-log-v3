@@ -148,6 +148,28 @@ jobs:
           python3 linter-scripts/check-truncated-prose.py
 
 
+      # === Phase P48-1-fu1-batch P4 module attestation (P3-graduated modules) ===
+      # The following modules have closed their P3 gap (`**Verifies:**` clauses
+      # on every §97 AC) and are explicitly attested here so `check-ai-confidence.py`
+      # gate P4 ("module path referenced in spec-health.yml") flips from FAIL → PASS,
+      # advancing their derived AI-Confidence tier from `High` → `Production-Ready`
+      # once their §99 also carries an opt-in `<!-- verified-phase: NNN -->` stamp
+      # (per the H1 freshness contract). This list is load-bearing: editing a path
+      # below WILL change a downstream module's derived tier — coordinate via the
+      # AI-Confidence rubric in `spec/01-spec-authoring-guide/01-spec-authoring.md`.
+      #   - spec/02-coding-guidelines
+      #   - spec/03-error-management   (matches '03-error-manage' substring used by the gate)
+      #   - spec/04-database-conventions
+      #   - spec/10-research
+      #   - spec/12-cicd-pipeline-workflows
+      #   - spec/17-consolidated-guidelines
+      #   - spec/18-wp-plugin-how-to
+      #   - spec/22-git-logs-v2
+      #   - spec/25-app-issues
+      # Note: substring-only attestation; the gate scans the entire workflow text.
+      # Removal of any path above re-opens that module's P4 drift. See Phase
+      # P48-1-fu1-batch §99 trail for the per-module graduation history.
+
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
         # Phase 81: tightened from --min to --strict. Strict mode requires
         # every module to be at full marks (no partial credit). Locks in the
