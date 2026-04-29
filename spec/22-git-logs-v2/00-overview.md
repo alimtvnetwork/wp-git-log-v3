@@ -6,7 +6,7 @@ description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.9.12  
+**Version:** 3.9.13  
 **Updated:** 2026-04-28 (Phase P19: H10 §00↔§98 version-field parity catch-up — banner bumped from v3.8.9 to v3.9.11 to match the latest §98 release row (Phase P18). Phases P5/P6/P7/P7b/P8/P16/P17/P18 had each bumped §98 without re-stamping the §00 banner; this is pure parity bookkeeping (no content change). Eats our own dog food before any tree-wide H10-strict promotion.)
 <!-- h10-verified-phase: 32 -->
 **Status:** Draft (future-spec — plugin code lives downstream)  
@@ -97,6 +97,13 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 28 | [28-example-github-actions.md](./28-example-github-actions.md) | Drop-in workflow YAML for Lane B push + fixed |
 | 29 | [29-uninstall-policy.md](./29-uninstall-policy.md) | DB retention modes on plugin removal |
 | 30 | [30-threat-model.md](./30-threat-model.md) | STRIDE pass over the v2 attack surface |
+| 31 | [31-ssh-key-auth.md](./31-ssh-key-auth.md) | SSH-key Lane B authentication: keypair lifecycle, signing, verification on ingest |
+| 32 | [32-cli-test-plan.md](./32-cli-test-plan.md) | Authoritative CLI test plan (supersedes the old §16 plan; pairs with §33/§34 skeletons) |
+| 33 | [33-bats-test-skeleton.md](./33-bats-test-skeleton.md) | Bats test skeleton — bash CLI integration coverage |
+| 34 | [34-phpunit-test-skeleton.md](./34-phpunit-test-skeleton.md) | PHPUnit test skeleton — PHP plugin & REST coverage |
+| 35 | [35-reference-ci-yml.md](./35-reference-ci-yml.md) | Reference GitHub Actions CI workflow wiring §33+§34 + lint gates |
+| 36 | [36-why-v1-archived.md](./36-why-v1-archived.md) | Why v1 was archived — design rationale + migration trail (links to `_archive/21-git-logs-v1/`) |
+| 37 | [37-blind-ai-gap-analysis.md](./37-blind-ai-gap-analysis.md) | Blind-AI gap analysis — implementability audit findings (relocated from §16 per Phase P5 immutability) |
 | 38 | [38-test-plan-superseded.md](./38-test-plan-superseded.md) | **Superseded** — redirect stub for the old §16 test plan; authoritative content in §32–§35. Relocated from slot 16 in Phase P5 (2026-04-28) per Core memory file-slot-immutability rule. |
 | 39 | [39-split-db-log-storage.md](./39-split-db-log-storage.md) | **v3.8.0 introduced; v2.9.0 active.** Per-SHA SQLite log storage. Root DB keeps only `ShaRegistry` + 3 ConfigKv keys (`ShaLogsRoot`, `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`); logs live in `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`. See §15 `GL-SHA-DB-*` codes, §22 prune, §23 backup manifest, §29 wipe. |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
