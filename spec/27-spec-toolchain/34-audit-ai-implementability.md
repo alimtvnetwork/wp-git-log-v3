@@ -81,6 +81,8 @@ python3 linter-scripts/audit-ai-implementability.py --strict              # CI g
 
 **Advisory-by-default** per the H1 / P20 / P48-1-fu1 stamp pattern. Will graduate to a strict CI gate after adoption shows the rubric is stable AND the tree-wide score holds at GOOD or above.
 
+**CI wiring (Phase 153 Task A5):** wired into `.github/workflows/spec-health.yml` between the Trace-map regression gate and the Summary step as `--report-only`. Step is skipped when `LOVABLE_API_KEY` is unset (community PRs from forks). Cache lives at `.lovable/cache/audit-ai/` and is repo-local.
+
 ---
 
 ## Acceptance Criteria
