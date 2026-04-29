@@ -173,6 +173,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `glci.toml` sets `server.url="http://example.com/…"` AND `--insecure-http` is NOT passed,
 - **When** `glci doctor` runs,
 - **Then** it MUST exit `2` with `GLCI-CONFIG-INSECURE-URL`.
+- **Verifies:** §05 HTTPS-by-default invariant; §07 `GLCI-CONFIG-INSECURE-URL`; `--insecure-http` is the single explicit opt-out (never silent fallback).
 
 ### AC-28-25 — Config validation: backoff length matches max_retries
 
