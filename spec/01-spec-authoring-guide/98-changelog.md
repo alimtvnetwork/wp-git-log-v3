@@ -1,9 +1,13 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.13.0
-**Last Updated:** 2026-04-28
+**Version:** 4.13.1
+**Last Updated:** 2026-04-29
 
 ---
+
+## 4.13.1 — 2026-04-29 (Phase P48-1-fu1-batch slot 2 — §00 inventory drift fix, slot 04 co-location)
+
+- **Fixed** `00-overview.md` inventory table — added missing row for the second slot-04 occupant `04-ai-onboarding-prompt.md` (co-located with `04-cli-module-template.md` per the immutable-slot rule, disambiguated by trailing slug). The file was on disk but absent from the §00 inventory, leaving `check-ai-confidence.py` to flag this folder as a P1 drifter (`declared='Production-Ready'`, `derived=None`, reason `1 sibling not in inventory`). Single-row patch; restores P1 → pass and unblocks tier re-derivation. Bumps to **4.13.1** (patch — pure inventory sync, no normative surface change). Follows the precedent established by Phase P48-1-fu1-batch slot 1 (§17 v3.4.1).
 
 ## 4.13.0 — 2026-04-28
 - **P22 sync** (2026-04-28): §00 banner version field bumped 3.7.0 → 4.13.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
