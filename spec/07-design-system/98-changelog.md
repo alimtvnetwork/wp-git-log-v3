@@ -1,6 +1,6 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 3.4.0  
+**Version:** 3.4.1  
 **Updated:** 2026-04-29  
 **Scope:** `spec/07-design-system/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 3.4.1 — 2026-04-29 — Phase 153 Task #32 — §99 narrative refresh; h10 stamp refresh
+- **Action**: Patch-level lockstep capturing Task #32 closure on §99. §99 banner v3.9.0 → v3.10.0 with new top blockquote documenting the §98 SemVer-track unification (1.x → 3.x) and codifying the going-forward "one SemVer track per file" rule. §00 `<!-- h10-verified-phase: 32 -->` stamp refreshed to `153` so subsequent `check-version-parity --strict` runs treat §07 as freshly verified at the post-correction phase. The v3.4.0 release row below already carries the Task #32 lockstep-correction note (added when §98's heading was renumbered from `1.7.0`); no further §98-row edits required.
+- **Spec lockstep**: §00 v3.4.0 → **v3.4.1** (h10 stamp refresh + banner patch); §98 banner v3.4.0 → **v3.4.1**; §99 v3.9.0 → **v3.10.0**. §97 untouched (no AC content change). `check-version-parity.py` confirms `spec/07` not in FAIL list pre- and post-edit (parity gate was already satisfied by the §98 row renumbering; this row formalises the §99 narrative + bumps the stamp).
+- **Validation**: lockstep 87/87 strict · tree-health 168/168 strict · check-ai-confidence 51/51 matches · check-version-parity stamped-FAIL list excludes spec/07. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.**
+- **Lesson codified**: When §98 has been tracking two SemVer namespaces (file-scaffold + module-version), renumbering the topmost row is sufficient to clear `check-version-parity.py` (it inspects only the top row); no need to retroactively renumber the historical 1.x rows. But the §99 narrative claim about the renumbering MUST be added so future readers don't see the topmost row v3.4.0 against historical v1.5.0..v1.0.0 below and assume corruption.
 
 ### 3.4.0 — 2026-04-29 — Phase 151 (P3 sweep slot 11 — FINAL P3 SLOT — Verifies clauses on §97)
 - **Phase 153 Task #32 lockstep correction (2026-04-29)**: This row was previously labelled `1.7.0` because §98 had been tracking its own SemVer track separate from §00 (file-scaffold versioning rather than module versioning). The check-version-parity gate (§27 slot 29) treats §00 banner = §98 latest release as the lockstep contract. Phase 56 (the `3.3.0` row below) had already started realigning §98 to §00's track but the Phase 151 entry regressed back to the 1.x track, leaving `§00=3.4.0 vs §98=1.7.0` parity drift. Corrected by renumbering this row's heading **and** the §98 file banner to **3.4.0**, matching §00. Older 1.x rows below are left as historical record (the gate only inspects the topmost row). **Lesson**: when §98 tracks two SemVer namespaces (file-scaffold vs module-version), the check-version-parity gate will fail every time §00 bumps; pick one track per file and stick with it. Going forward, §07 §98 release rows MUST track §00's module SemVer.
