@@ -219,9 +219,20 @@ Use MySQL only when:
 
 All naming conventions (PascalCase) apply equally to MySQL.
 
+### 4.3 Concurrency Posture (Normative cross-reference)
+
+The Split DB pattern (§4.1) gives each domain its own WAL and eliminates cross-domain lock contention, but every individual SQLite database is still single-writer. The full concurrency contract — required PRAGMAs (`journal_mode=WAL`, `busy_timeout=5000`, `foreign_keys=ON`), `BEGIN IMMEDIATE` for write transactions, `SQLITE_BUSY` retry policy (3 attempts × 100 ms × ±25 % jitter), atomic temp-then-rename for sibling files, and the `update.lock` discipline — is normatively specified in:
+
+- **`spec/13-generic-cli/97-acceptance-criteria.md` § AC-22** (the canonical AC; cross-cuts spec/05 AC-SD-22 + spec/27 AC-T-28 R1/R3)
+- **`spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)"** (the implementer-facing prose)
+- **`spec/13-generic-cli/18-batch-execution.md` § "Concurrency Discipline (Normative)"** (the `--parallel=N` clause)
+
+This module (`spec/04-database-conventions/`) does NOT re-state those rules — schema design and concurrency are orthogonal axes. When a schema decision (e.g. denormalising a hot column to avoid a join under contention) is driven by concurrency posture, link to AC-22 from the schema's own §97 row rather than restating the contract here.
+
 ---
 
 ## 5. Schema Documentation
+
 
 Every database schema MUST be documented with:
 
