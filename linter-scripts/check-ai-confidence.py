@@ -205,9 +205,16 @@ def _max_h1_stamp_in_tree() -> int:
 
 
 def gate_p4(mod: Path, workflow_text: str, h1_horizon: int) -> tuple[bool, str]:
-    # CI-gate referenced: module dir name appears in spec-health.yml triggers/paths
-    if mod.name not in workflow_text:
-        return False, f"P4: '{mod.name}' not referenced in spec-health.yml"
+    # CI-gate referenced: either the leaf dir name is mentioned, OR the
+    # workflow uses a `spec/**` glob that transitively covers the module.
+    rel = mod.relative_to(ROOT).as_posix()
+    covered = (
+        mod.name in workflow_text
+        or "spec/**" in workflow_text
+        or rel in workflow_text
+    )
+    if not covered:
+        return False, f"P4: '{mod.name}' not referenced in spec-health.yml (and no spec/** glob)"
     # §99 H1 stamp ≤ 30 phases stale.
     cr = mod / "99-consistency-report.md"
     if not cr.is_file():
