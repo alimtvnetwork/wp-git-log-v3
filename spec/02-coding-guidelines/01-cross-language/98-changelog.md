@@ -75,3 +75,9 @@ Project-wide major version increment (+1.0.0) applied to all specification files
 | Date | Bump | Notes |
 |------|------|-------|
 | 2026-04-26 | patch | Phase 27d: Added Drift Acknowledgment for low-severity doc-hygiene findings. |
+
+### 4.1.1 — 2026-04-29 — Phase 153 Task #35-fu2: §98 backfill (parity gate close-out)
+
+- **Action**: Backfilled missing §98 row to match §00 banner v4.1.1. Phase 153 Task #35-fu surfaced this as part of the §00-ahead-of-§98 drift class after `latest_release()` was patched to SemVer-max comparator. The §00 banner had been bumped in a prior phase but the corresponding §98 row was never authored — this entry closes the parity gate.
+- **Lockstep**: §98 latest release now equals §00 banner; no §00/§99 changes (banner already at v4.1.1).
+- **Why**: Codifies Lesson #28 — version-parity drift is mechanical close-out work, not a comparator bug.

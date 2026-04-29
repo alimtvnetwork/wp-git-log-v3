@@ -2,7 +2,7 @@
 
 **Version:** 1.4.1
 **Updated:** 2026-04-29
-<!-- h10-verified-phase: 32 -->
+<!-- h10-verified-phase: 153 -->
 **Phase:** 2 (Spec-only audit, no code)
 **Audit Target:** `spec/_archive/21-git-logs-v1/`
 **Status:** **SUPERSEDED** by [`../02-consolidated-audit-findings/00-overview.md`](../02-consolidated-audit-findings/00-overview.md) (preserved for traceability per AC-SAG-04 slot-immutability + the §22 GAP-V2-01 LEGACY-ledger precedent — Phase P7b)

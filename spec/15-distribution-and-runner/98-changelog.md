@@ -1,7 +1,7 @@
 # Changelog — Distribution and Runner
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-27  
+**Version:** 2.1.1  
+**Updated:** 2026-04-29  
 **Scope:** `spec/15-distribution-and-runner/`
 
 ---
@@ -55,3 +55,9 @@
 - Added SQL DDL audit-log schema — satisfies `has_sql_ddl` (+20).
 - Implementability raised 90 → 100 (deterministic audit, capped).
 
+
+### 2.1.0 — 2026-04-29 — Phase 153 Task #35-fu2: SemVer-track unification (§00 lift to align with §98 SemVer-max)
+
+- **Action**: §00 banner bumped 1.1.0 → 2.1.0 to align with §98 SemVer-max (2.0.0 Phase 16d-i depth pass + 1.1.0 Phase 55 lever consolidated as 2.1.0). The §00 banner had been tracking the Phase 55 lever stream independent of the §98 Phase 16d-i depth-pass major bump — Task #32 precedent (spec/07 dual-track unification).
+- **Lockstep**: §00 1.1.0 → 2.1.0; §98 banner 2.1.0 → 2.1.1; §99 banner 2.1.0 → 2.1.1; §99 narrative updated.
+- **Why**: Codifies Lesson #25 — never let §98 track a SemVer namespace independent of §00. The Phase 16d-i depth pass (§97 5→20 ACs) was a real major bump that §00 never absorbed. Phase 55's `has_ci_workflow + has_typed_lang_contract` lever is preserved as the minor-bump rationale for 2.1.0.
