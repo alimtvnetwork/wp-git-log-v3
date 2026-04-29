@@ -1,7 +1,7 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 1.6.0  
-**Updated:** 2026-04-27  
+**Version:** 1.7.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/07-design-system/`
 
 ---
