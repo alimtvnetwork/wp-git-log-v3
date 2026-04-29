@@ -35,7 +35,7 @@ This is exactly the H12/H13/H14 pattern: surface-elimination dominates standing 
 
 > **R2 (session-persistence regression monitor) is PERMANENTLY CLOSED. Do NOT re-surface in `next` cycles.** Future single re-occurrences (if any) MUST be opened as a fresh phase with a new identifier, not "R2 reopened" — the new instance would need its own forensic sweep and may have a different root cause class.
 
-## Lesson #38 (cadence-vs-class graduation)
+## Lesson #39 (cadence-vs-class graduation)
 
 **Passive monitor items graduate to permanent close when the clean-phase count crosses ~5× the cited graduation gradient AND no mechanical CI hook is feasible AND a standing session-hygiene reflex already covers re-detection.** This is the H10 filter inverted: instead of "promote a one-off lesson into a standing gate", "demote a standing monitor into a session-reflex when its monitoring surface is empty".
 
