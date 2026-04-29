@@ -274,7 +274,7 @@ def main() -> int:
         stamped_phase = int(stamp_m.group(1)) if stamp_m else None
         match = (declared == derived)
         rows.append({
-            "module": mod.name,
+            "module": mod.relative_to(SPEC_ROOT).as_posix(),
             "declared": declared,
             "derived": derived,
             "match": match,
