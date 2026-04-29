@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-29 (Phase P47-followup-1 — added `test-check-truncated-prose.sh` (#14) mechanically locking the P47-surfaced truncation-class blocker via §27 slot 32 `check-truncated-prose.py`; first production run caught one real defect in `spec/17-consolidated-guidelines/14-app-issues.md`. Totals 13 → 14 scripts, 159+ → 164+ assertions; CI gate count 19 → 20; RUBRIC v2.29 → v2.30; AC-31-31 cascade across audit script + this README + slot-32 spec.)
+**Last updated:** 2026-04-29 (Phase P48-1-fu1 — added `test-check-ai-confidence.sh` (#15) mechanically locking the AC-09 `AI Confidence` four-gate rubric via §27 slot 33 `check-ai-confidence.py`; first production run found 13/15 modules drifting (5 P1 inventory gaps, 5 P3 `**Verifies:**` coverage gaps, 3 deeper P3/P4 issues) — actionable backlog for follow-up phases. Totals 14 → 15 scripts; mirrors P20/P31 advisory-by-default + per-file `<!-- ai-confidence-verified-phase: NNN -->` stamp pattern. No CI gate count change in this phase — workflow wiring deferred to a follow-up alongside adoption.)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
