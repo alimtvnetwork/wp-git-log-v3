@@ -1,7 +1,7 @@
 # WordPress Plugin How-To — Overview
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-16  
+**Version:** 1.1.0  
+**Updated:** 2026-04-29  
 <!-- h10-verified-phase: 32 -->
 **Status:** Active  
 **AI Confidence:** Production-Ready  
@@ -68,6 +68,8 @@ The defining property: **enums are the source of truth.** Every state, action ty
 | 19 | [19-micro-orm-and-root-db.md](./19-micro-orm-and-root-db.md) | Micro-ORM layer, root DB integration, query patterns | ✅ Active |
 | 20 | [20-end-to-end-walkthrough.md](./20-end-to-end-walkthrough.md) | Full plugin build walkthrough from scratch | ✅ Active |
 | 21 | [21-ping-endpoint.md](./21-ping-endpoint.md) | Health-check REST endpoint pattern | ✅ Active |
+| — | [readme.md](./readme.md) | Folder readme — table-of-contents index for all 22 phases + meta files | ✅ Active |
+| — | [changelog.md](./changelog.md) | Folder-level changelog (legacy entry-point complementing §98) | ✅ Active |
 
 ---
 
