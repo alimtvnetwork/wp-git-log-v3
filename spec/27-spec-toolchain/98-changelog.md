@@ -1,10 +1,16 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.74.0
+**Version:** 2.75.0
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.75.0 — 2026-04-29 — Phase 153 Task A4: slot 34 `audit-ai-implementability.py` v1.0.0 — productionised deep-walk LLM auditor
+- **Action**: Shipped `linter-scripts/audit-ai-implementability.py` (slot 34, auditor band 30-39) productionising the prototype harness from Phase 153 Tasks A1+A2. LLM-driven 5-dim rubric (D1 Clarity / D2 ACs / D3 Edge / D4 Examples / D5 Cross-Ref Closure), each 0-20. Walks `*.md|*.json|*.yaml|*.yml|*.tmpl|*.toml` (closes spec/11 schemas/templates blind spot from A2). On-disk SHA-keyed cache at `.lovable/cache/audit-ai/<module>.json`. Cloudflare 1010 immunity (explicit `User-Agent`). Tolerant JSON parser. Six CLI flags: `--module`, `--no-network`, `--force`, `--json`, `--report-only`, `--strict`. Self-test 6/6 (`test-audit-ai-implementability.sh`).
+- **Spec lockstep**: New §00 inventory row at slot 34; §00 v2.74.0 → **2.75.0**, §98 v2.74.0 → **2.75.0**, §99 v2.71.0 → **2.72.0**. New spec doc `34-audit-ai-implementability.md` v1.0.0 (8 ACs: AC-34-01..08, all GWT + Verifies clauses).
+- **Validation**: Self-test 6/6 pass · `--no-network --module=11-powershell-integration` confirms walker sees 19 files (was 16 in `*.md`-only mode; +3 from schemas/templates). Lockstep · tree-health pending re-run.
+- **Status**: Advisory-by-default per H1/P20/P48-1-fu1 stamp pattern. CI graduation deferred until adoption converges.
 
 ### 2.74.0 — 2026-04-29 — Phase 153 Task #34: slot 33 `check-ai-confidence.py` v1.2.0→v1.3.0 — codified Task #29d's regex widening (multi-section + heading-name + bare-filename)
 - **Action**: Added three slot-33 ACs documenting the regex changes shipped in Task #29d that closed the AI-confidence drift class tree-wide (15/15→51/51 matches). **AC-33-10** (multi-section inventory scan): `gate_p1()` MUST iterate ALL inventory headings via `inv_heading_re.finditer()` and union entries — `re.search()` would stop at the first match, missing siblings listed exclusively in a second section (precedent: `spec/00` carries both `## Full Document Inventory` and `## Document Inventory`). **AC-33-11** (heading-name tolerance): `inv_heading_re` MUST match `Inventory|Index|Modules|Files|Contents` case-insensitively — heterogeneity is the rule, not exception (5+ canonical forms across the tree). **AC-33-12** (bare-filename entries): `INVENTORY_BARE_RE` MUST count bare filenames in table cells `| 01-foo.md |` and list items `- 01-foo.md` alongside markdown links — three legitimate authoring forms coexist. Slot 33 §00 banner v1.2.0 → **v1.3.0**; slot-33 AC count 9 → 12.

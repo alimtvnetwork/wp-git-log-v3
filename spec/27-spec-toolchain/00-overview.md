@@ -6,7 +6,7 @@ description: Auditor-self-reference module — defines the toolchain that audits
 
 # Spec Toolchain
 
-**Version:** 2.74.0  
+**Version:** 2.75.0  
 **Updated:** 2026-04-29
 <!-- h10-verified-phase: 48 -->
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
@@ -88,6 +88,7 @@ Numbering convention inside this module:
 | 31 | [31-audit-spec-vs-code-v2.md](./31-audit-spec-vs-code-v2.md) | `linter-scripts/audit-spec-vs-code-v2.py` | v2: AI-implementability audit, 7 dimensions, blast-radius |
 | 32 | [32-check-truncated-prose.md](./32-check-truncated-prose.md) | `linter-scripts/check-truncated-prose.py` | Detect mid-sentence endings + unclosed code fences across `spec/**/*.md` |
 | 33 | [33-check-ai-confidence.md](./33-check-ai-confidence.md) | `linter-scripts/check-ai-confidence.py` | Mechanize AC-09 four-gate `AI Confidence` rubric (P1→P4) — derive tier from on-disk signals; per-file opt-in stamp |
+| 34 | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | `linter-scripts/audit-ai-implementability.py` | LLM-driven deep-walk audit (5 dims × 0-20); walks `*.md\|*.json\|*.yaml\|*.tmpl\|*.toml`; cached, advisory-by-default |
 
 ### Runners
 
