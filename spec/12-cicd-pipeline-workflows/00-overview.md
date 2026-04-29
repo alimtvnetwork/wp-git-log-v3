@@ -5,9 +5,9 @@ drift_acknowledged: 2026-04-26
 
 # CI/CD Pipeline Workflows
 
-**Version:** 3.3.1  
+**Version:** 3.4.1  
 <!-- h10-verified-phase: 30 -->
-**Updated:** 2026-04-28  
+**Updated:** 2026-04-29  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
@@ -53,8 +53,11 @@ AI INSTRUCTION:
 
 | # | File | Description | Status |
 |---|------|-------------|--------|
+| — | [readme.md](./readme.md) | Folder readme — high-level pipeline-spec table of contents (legacy entry-point) | ✅ Active |
 | 01 | [01-shared-conventions.md](./01-shared-conventions.md) | Platform, triggers, concurrency, version resolution, checksums | ✅ Active |
+| 01 | [01-ci-pipeline.md](./01-ci-pipeline.md) | Generic CI pipeline: lint, vulncheck, test, cross-compile, SHA-dedup cache (co-located w/ slot 01) | ✅ Active |
 | 02 | [02-github-release-standard.md](./02-github-release-standard.md) | Release body assembly, pre-release detection, asset matrix | ✅ Active |
+| 02 | [02-release-pipeline.md](./02-release-pipeline.md) | Generic release pipeline: build, sign, install scripts, GitHub Release (co-located w/ slot 02) | ✅ Active |
 | 03 | [03-vulnerability-scanning.md](./03-vulnerability-scanning.md) | Standalone and in-CI vulnerability scanning patterns | ✅ Active |
 | 04 | [04-install-script-generation.md](./04-install-script-generation.md) | Reusable PS1+Bash installer pattern, placeholder strategy, checksum verification | ✅ Active |
 | 05 | [05-code-signing.md](./05-code-signing.md) | SignPath integration, feature-flag gating, signature verification | ✅ Active |
@@ -67,6 +70,7 @@ AI INSTRUCTION:
 | 08 | [08-terminal-output-standards.md](./08-terminal-output-standards.md) | Output formatting: icons, tables, progress, errors, CI summaries | ✅ Active |
 | 09 | [09-binary-icon-branding.md](./09-binary-icon-branding.md) | Windows binary icon embedding via `go-winres`: icon, manifest, version info | ✅ Active |
 | 10 | [10-release-pipeline-issues-rca.md](./10-release-pipeline-issues-rca.md) | 🔴 Root-cause analysis ledger of 12 CI/CD failures (3 from this repo + 9 imported from gitmap-v3: npm ci, pip cache, winres icon, working-dir drift, status-check gating, cancel-in-progress, `@latest` pinning, release-branch cancellation, install-script placeholders, silent token skip, asset-name mismatch). Includes 19 standing rules + pre-flight checklist — read before editing any workflow. | ✅ Active |
+| 11 | [11-technical-interface.md](./11-technical-interface.md) | Technical interface contract: declared inputs/outputs/env/exit codes for the pipeline as a callable unit | ✅ Active |
 
 ### Subfolder: Browser Extension Deploy
 
