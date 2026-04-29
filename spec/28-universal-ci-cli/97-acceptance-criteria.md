@@ -96,6 +96,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the server returns 502 four times in a row with `max_retries=3`,
 - **When** the CLI processes the responses,
 - **Then** the CLI MUST exit `4` with `GLCI-PUSH-RETRIES-EXHAUSTED`.
+- **Verifies:** §07 exit-code-4 for retries-exhausted; §06 retry-budget invariant (max_retries is a hard cap, never silently extended); AC-28-31 stream-broken fallback uses same exit code.
 
 ### AC-28-14 — Payload cap enforced before send
 
