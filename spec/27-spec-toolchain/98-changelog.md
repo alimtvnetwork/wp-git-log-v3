@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.73.0
+**Version:** 2.74.0
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.74.0 — 2026-04-29 — Phase 153 Task #34: slot 33 `check-ai-confidence.py` v1.2.0→v1.3.0 — codified Task #29d's regex widening (multi-section + heading-name + bare-filename)
+- **Action**: Added three slot-33 ACs documenting the regex changes shipped in Task #29d that closed the AI-confidence drift class tree-wide (15/15→51/51 matches). **AC-33-10** (multi-section inventory scan): `gate_p1()` MUST iterate ALL inventory headings via `inv_heading_re.finditer()` and union entries — `re.search()` would stop at the first match, missing siblings listed exclusively in a second section (precedent: `spec/00` carries both `## Full Document Inventory` and `## Document Inventory`). **AC-33-11** (heading-name tolerance): `inv_heading_re` MUST match `Inventory|Index|Modules|Files|Contents` case-insensitively — heterogeneity is the rule, not exception (5+ canonical forms across the tree). **AC-33-12** (bare-filename entries): `INVENTORY_BARE_RE` MUST count bare filenames in table cells `| 01-foo.md |` and list items `- 01-foo.md` alongside markdown links — three legitimate authoring forms coexist. Slot 33 §00 banner v1.2.0 → **v1.3.0**; slot-33 AC count 9 → 12.
+- **Surfacing context**: Phase 153 Task #34 — codification follow-up to Task #29d's cascade-fix that closed the final 13 P3/P4 drifts. The linter changes already shipped in v1.3.0 (deployed during Task #29d); this changelog row makes the contracts inspectable so future contributors don't accidentally narrow the regexes back. **Why these three together**: all three were single-root-cause regex bugs surfaced by the same cascade sweep; codifying as a single v1.3.0 release matches the deploy event and keeps the Why prose coherent.
+- **Spec lockstep**: §27 §97 v2.6.0 → **v2.7.0** (3 new ACs, slot-internal); §27 §00 v2.73.0 → **v2.74.0**, §98 v2.73.0 → **v2.74.0**, §99 v2.70.0 → **v2.71.0**. Slot-33 `33-check-ai-confidence.md` banner v1.2.0 → v1.3.0. Module-level AC count unchanged at 26.
+- **Validation**: `check-ai-confidence.py` itself unchanged (already at v1.3.0 behaviour). Lockstep 87/87 · tree-health 168/168 strict — both still GREEN. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.**
+- **Lesson codified**: When a single sweep deploys multiple regex/walker widenings to close one drift class, codify them as a *grouped* AC release on the linter's spec slot — not three separate phases. The reader benefit (one Why prose chain) outweighs the smaller version-bump granularity, and the lockstep cost is identical (one §97 minor + one §00/§98/§99 patch). Precedent: Task #29d shipped three regex changes to v1.3.0; Task #34 codifies them as AC-33-10/11/12 in a single §97 minor.
 
 ### 2.73.0 — 2026-04-29 — Phase 153 Task #29b: slot 33 `check-ai-confidence.py` widened to recursive — 27 latent drifts surfaced under nested sub-modules
 - **Action**: Patched `linter-scripts/check-ai-confidence.py` `list_modules()` from a top-level-only walker (`SPEC_ROOT.iterdir()`) to a recursive one (`SPEC_ROOT.rglob("00-overview.md")`). Coupled fix to `gate_p4()` workflow-coverage check: the leaf-name substring test was widened to also accept the module's `spec/<rel-path>` OR a `spec/**` glob in `spec-health.yml` (without this, every nested module would have flipped from `derived=Production-Ready` to `derived=High` purely as a workflow-detection artifact). Output `module` field now slash-joined relative to `spec/` (e.g. `02-coding-guidelines/01-cross-language/16-static-analysis`) so nested modules are uniquely addressable.

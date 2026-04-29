@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.6.0
-**Updated:** 2026-04-28 (Phase P31: extended AC-T-26 with the P31 strict-flip clause + P31 verification lesson. AC count unchanged at 26 — the strict-flip is an extension of the existing H10 contract, not a new module-level rule. Per-workflow lifecycle ACs live in slot 29 as AC-29-14.)
+**Version:** 2.7.0
+**Updated:** 2026-04-29 (Phase 153 Task #34: slot 33 v1.2.0→v1.3.0; AC-33-10/11/12 codify Task #29d's regex widening — multi-section inventory scan, heading-name tolerance, bare-filename entries. Slot-33 AC count 9→12. Module AC count unchanged at 26 — slot-internal additions.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---

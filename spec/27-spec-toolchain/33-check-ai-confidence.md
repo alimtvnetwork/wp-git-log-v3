@@ -1,6 +1,6 @@
 # 33 — check-ai-confidence.py
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-29  
 **Source:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py)  
 **Self-test:** [`linter-scripts/test/test-check-ai-confidence.sh`](../../linter-scripts/test/test-check-ai-confidence.sh)  
@@ -143,6 +143,27 @@ AI-Confidence rubric parity: scanned=N; eligible=N; matches=N; mismatches=N; sta
 - **Then** the workflow-reference signal MUST be considered satisfied (P4 evaluates the §99 stamp freshness check next).
 - **Why:** `spec-health.yml` triggers on `spec/**` rather than enumerating every nested module; the v1.0.0 substring check produced false-negative P4 fails on every nested module. Codified at v1.2.0 alongside AC-33-08; the two changes are coupled — widening `list_modules()` without widening P4 would have flipped most nested modules from `derived=Production-Ready` to `derived=High` purely as a workflow-coverage-detection artifact.
 - **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `gate_p4()` (covered = leaf-name OR rel-path OR `spec/**` glob).
+
+### AC-33-10 — Multi-section inventory scan
+- **Given** a §00 overview that carries MORE THAN ONE inventory-style section (e.g. both `## Full Document Inventory` near the top AND `## Document Inventory` near the bottom — observed in `spec/00` at Phase 153 Task #29d),
+- **When** `gate_p1()` enumerates listed siblings,
+- **Then** the validator MUST iterate ALL matching headings via `inv_heading_re.finditer()` and union every section's entries into the `listed` set (NOT stop at the first match).
+- **Why:** Pre-v1.3.0 used `re.search()` which returned only the first heading; siblings listed exclusively in a second/third inventory section appeared "missing" even though they were present on disk and in §00. Codified at v1.3.0 (Phase 153 Task #29d) after `spec/00` cascade-fix surfaced the multi-section pattern as legitimate spec authoring (one section may enumerate top-level docs, another may enumerate sub-folders).
+- **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `gate_p1()` `inv_heading_re.finditer(ov_text)` loop (line ~162).
+
+### AC-33-11 — Heading-name tolerance for inventory sections
+- **Given** a §00 overview whose inventory section is titled `## Inventory`, `## Index`, `## Modules`, `## Files`, or `## Contents` (case-insensitive, optionally with leading/trailing words such as `## Full Document Inventory` or `## Module Inventory`),
+- **When** `gate_p1()` searches for the inventory heading,
+- **Then** `inv_heading_re` MUST match all five canonical heading names (the `(Inventory|Index|Modules|Files|Contents)` alternation, `re.M | re.I` flags).
+- **Why:** Inventory-section heading names are heterogeneous across the tree by design — historic precedent supports at least five forms. Pre-v1.3.0 only matched `Inventory`, producing false-positive P1 drift on modules using `Index`/`Modules`/`Files`/`Contents`. Codified at v1.3.0 (Phase 153 Task #29d) after the cascade sweep surfaced the heterogeneity as an authoring rule, not an inconsistency.
+- **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `inv_heading_re` pattern (line 160).
+
+### AC-33-12 — Bare-filename inventory entries (table cells & list items)
+- **Given** a sibling `.md` referenced inside an inventory section as a bare filename (e.g. `| 01-foo.md | …description… |` table cell, `- 01-foo.md — description` list item, or any non-link mention surrounded by row/list whitespace),
+- **When** `gate_p1()` parses the inventory section after locating the heading,
+- **Then** `INVENTORY_BARE_RE` MUST match the bare filename and union it into `listed` alongside `INVENTORY_LINK_RE` markdown-link matches.
+- **Why:** Three legitimate authoring forms coexist in the tree: (1) markdown link `[01-foo.md](./01-foo.md)`, (2) bare table cell `| 01-foo.md |`, (3) bare list item `- 01-foo.md`. Pre-v1.3.0 only counted form (1), producing false-positive P1 drift on every module using forms (2)/(3). Codified at v1.3.0 (Phase 153 Task #29d) — final regex widening that closed the AI-confidence drift class tree-wide (51/51 matches).
+- **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `INVENTORY_BARE_RE` (line 109) + `gate_p1()` bare-filename union (line ~166).
 
 ## Cross-references
 
