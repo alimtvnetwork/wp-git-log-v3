@@ -1,7 +1,7 @@
 # Changelog — Distribution and Runner
 
 **Version:** 2.1.1  
-**Updated:** 2026-04-27  
+**Updated:** 2026-04-29  
 **Scope:** `spec/15-distribution-and-runner/`
 
 ---
