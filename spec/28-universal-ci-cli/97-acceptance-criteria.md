@@ -131,6 +131,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the server ack envelope does NOT contain `PreviousHasError`,
 - **When** the current phase passes,
 - **Then** the CLI MUST NOT call `/fixed-log` (no local cache).
+- **Verifies:** §06 stateless-CLI invariant — when the server omits `PreviousHasError`, the CLI MUST NOT guess from local history; AC-28-17 positive complement; eliminates a class of duplicate `/fixed-log` posts.
 
 ### AC-28-19 — CI provider auto-fill: GitHub
 
