@@ -180,6 +180,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `push.max_retries=3` AND `push.backoff_ms=[500,2000]`,
 - **When** config is loaded,
 - **Then** the CLI MUST exit `2` with `GLCI-CONFIG-BACKOFF-LENGTH`.
+- **Verifies:** §05 backoff-array length-must-equal-max_retries invariant — eliminates a class of off-by-one retry bugs (last attempt with no backoff value); §07 `GLCI-CONFIG-BACKOFF-LENGTH`.
 
 ### AC-28-26 — Doctor surfaces server ErrorCode verbatim
 
