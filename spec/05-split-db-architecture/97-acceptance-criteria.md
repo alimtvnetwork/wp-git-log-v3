@@ -1,7 +1,7 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.0.0
-**Last Updated:** 2026-04-26 (Phase 16r: full GWT rewrite — replaced 2 stub criteria (AC-01/AC-02 with 6 sub-checkboxes total) with 20 module-specific Given/When/Then ACs covering hierarchical SQLite organization, Root DB registry, per-item DBs, cross-DB queries, connection pooling, backup, and migration. Old stubs preserved as AC-SD-LEGACY-001..002 at end.)
+**Version:** 4.1.0
+**Last Updated:** 2026-04-29 (Phase 153 Task A6: added AC-SD-21 SQL identifier quoting + Go struct mapping; AC-SD-22 cross-process concurrency contract — busy_timeout + retry-loop + locked-error handling; AC-SD-23 TTL/expiry contract for time-bounded rows. Targets v3 audit findings on D2 (AC coverage) + D3 (edge/error handling) for the only NEEDS_WORK module.)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
 ---
