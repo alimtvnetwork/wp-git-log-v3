@@ -1,11 +1,11 @@
 {
   "summary": {
-    "ac_drifted": 1258,
-    "ac_total": 1354,
+    "ac_drifted": 1304,
+    "ac_total": 1400,
     "ac_traced": 96,
-    "code_orphan": 29,
+    "code_orphan": 33,
     "code_referenced": 29,
-    "code_total": 58,
+    "code_total": 62,
     "missing_ac": 0,
     "missing_file": 0,
     "trace_entries": 96
