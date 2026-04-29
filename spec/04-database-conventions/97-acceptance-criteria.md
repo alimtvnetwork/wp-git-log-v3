@@ -1,7 +1,7 @@
 # Acceptance Criteria — Database Conventions
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 3: added `**Verifies:**` clauses to AC-01..AC-08 — closes 8/8 P3 gap, graduates AC-block from Medium → High AI-confidence.)
+**Version:** 1.2.0  
+**Updated:** 2026-04-29 (Phase 153 P48-2: AC-09 binds the Cross-Language Boolean Storage Convention §2.1 of `02-schema-design.md` — closes P47-fu1 critical finding "04-db cross-lang boolean conventions")
 **Scope:** `spec/04-database-conventions/`
 
 ---
