@@ -1,6 +1,6 @@
 # 33 — check-ai-confidence.py
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-29  
 **Source:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py)  
 **Self-test:** [`linter-scripts/test/test-check-ai-confidence.sh`](../../linter-scripts/test/test-check-ai-confidence.sh)  
