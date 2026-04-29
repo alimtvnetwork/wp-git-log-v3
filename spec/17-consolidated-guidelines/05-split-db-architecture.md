@@ -1,6 +1,6 @@
 # Consolidated: Split Database Architecture — Complete Reference
 
-**Version:** 3.2.0  
+**Version:** 3.2.1  
 **Updated:** 2026-04-16
 
 ---
@@ -727,4 +727,4 @@ _, err = cacheDb.Exec(`
 
 ---
 
-*Consolidated split-db architecture — v3.2.0 — 2026-04-16*
+*Consolidated split-db architecture — v3.2.1 — 2026-04-29*

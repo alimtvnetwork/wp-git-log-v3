@@ -1,6 +1,6 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.6.3
+**Version:** 4.6.4
 **Updated:** 2026-04-29
 
 > **v4.6.3 update (Phase 152 — audit-v6 baseline published, supersedes v5):** Added `34-full-tree-ai-audit-v6.md` (inventory slot 35) — first audit baseline with a numeric headline since audit-v4 (Phase 1). Method is deterministic-gate-replay-only (no AI scorer): `check-tree-health --strict` 168/168, `check-lockstep` 87/87, `check-99-summary-freshness` 81 stamped + 6 exempt + 0 unstamped, `check-ai-confidence` 12/15 match. Headline: **P3 (Verifies-coverage) driver CLOSED tree-wide** across 11 modules (Phases 148–151, Tasks #21a–#21d, codified at `mem://process/verifies-clause-authoring.md`). Residual drift: 3 modules on P4 workflow-ref (`spec/07`, `spec/14`, `spec/28`) — cosmetic, not contract; closes when those slots are name-referenced in `.github/workflows/spec-health.yml`. Banner-supersedes audit-v5 (Phase 130 reconciliation, no headline). Lockstep: §00 3.4.2 → 3.4.3, §98 release row 3.4.3 added, §99 4.6.2 → 4.6.3, file count 34 → 35. No score change (168/168 strict-pass holds); no AC surface change; no rubric/CI-gate change. Forward-looking: v7 baseline warranted when R1 unblocks (~25 trace-map orphans), P4 closes (12/15 → 15/15), or 7 cosmetic stamp refreshes land.
