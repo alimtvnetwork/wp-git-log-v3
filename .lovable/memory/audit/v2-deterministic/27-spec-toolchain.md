@@ -32,7 +32,7 @@
   "md_files": 50,
   "mmd_files": 1,
   "overview_chars": 24668,
-  "ac_chars": 27753,
+  "ac_chars": 28177,
   "ac_count": 29,
   "gwt_block_count": 29,
   "consistency_report": true,
