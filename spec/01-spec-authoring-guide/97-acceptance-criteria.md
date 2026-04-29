@@ -343,6 +343,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 
 ### AC-SAG-LEGACY: Overview Content Standards
 
+- **Verifies:** the v3.2.0 → current GWT-rewrite traceability chain — these rows are referenced by `Verifies:` chains of AC-SAG-05, AC-SAG-16, AC-SAG-17 above and by AC-SAG-28's exemption registry. Same exemption-regex contract as the prior LEGACY blocks.
+
 | ID | Criterion | Source |
 |---|---|---|
 | AC-SAG-LEGACY-009 | Every `00-overview.md` includes Version and Updated metadata | `00-overview.md` |
