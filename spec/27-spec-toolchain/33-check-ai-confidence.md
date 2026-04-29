@@ -1,6 +1,6 @@
 # 33 — check-ai-confidence.py
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-29  
 **Source:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py)  
 **Self-test:** [`linter-scripts/test/test-check-ai-confidence.sh`](../../linter-scripts/test/test-check-ai-confidence.sh)  
@@ -56,7 +56,7 @@ The script computes a **derived** tier by walking gates P1 → P4 in order; the 
 | **P1** | §00 lists every sibling `.md` (excluding meta-slots `97`/`98`/`99`) AND `**Updated:**` year matches current calendar year. **Inventory regex** matches any `](./<basename>.md)` reference where the basename starts with an alphanumeric character (e.g. `01-foo.md`, `consolidated-review-guide.md`, `readme.md`, `changelog.md`, `structure.md`) — non-numeric-prefix siblings ARE legitimate inventory entries (precedent: §02 review-guide files, §03 `structure.md`, §12/§14 `readme.md`, §18 `readme.md`/`changelog.md`). |
 | **P2** | P1 holds AND §97 contains ≥1 `**Given**`/`**When**`/`**Then**` marker AND no `*.md` in the module ends with a truncation marker (`...`, `…`, bare `TODO`/`TBD`/`FIXME`). |
 | **P3** | P2 holds AND every `### AC-…` heading in §97 has a `**Verifies:**` clause. |
-| **P4** | P3 holds AND module dir name appears in `.github/workflows/spec-health.yml` AND §99 carries a `<!-- verified-phase: NNN -->` stamp ≤ 30 phases stale relative to the highest stamp anywhere in the tree. |
+| **P4** | P3 holds AND the module is referenced by `.github/workflows/spec-health.yml` (either the leaf dir name appears verbatim, the module's `spec/<rel-path>` is mentioned, OR the workflow uses a `spec/**` glob that transitively covers the module) AND §99 carries a `<!-- verified-phase: NNN -->` stamp ≤ 30 phases stale relative to the highest stamp anywhere in the tree. |
 
 A module with `unset`/blank `AI Confidence` is **skipped** (matches the rubric's "omit rather than guess" rule — no drift can be computed).
 
@@ -129,6 +129,20 @@ AI-Confidence rubric parity: scanned=N; eligible=N; matches=N; mismatches=N; sta
 - **Then** `INVENTORY_LINK_RE` MUST match the reference and `gate_p1()` MUST count the file as listed.
 - **Why:** P1's intent is "every sibling `.md` is in §00 inventory" — independent of filename shape. The pre-v1.1.0 regex `\d{2}[-…].md` produced false-positive drift findings on §02/§03/§12/§14/§18 (5 of the 13 first-run drifters were this regex bug, not real spec drift). Codified at v1.1.0 (Phase P48-1-fu1-batch slot 3) after the §02 sweep surfaced both review-guide files as legitimately listed in §00 inventory at lines 191-192 yet flagged as "not in inventory".
 - **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `INVENTORY_LINK_RE` (line 102).
+
+### AC-33-08 — Recursive module discovery (no nested-overview blind spot)
+- **Given** a nested sub-module under `spec/<top>/<sub>/.../00-overview.md` (depth ≥ 3) carrying its own `**AI Confidence:**` banner,
+- **When** the validator runs,
+- **Then** the module MUST appear in `rows[]` with `module` set to the slash-joined path relative to `spec/` (e.g. `02-coding-guidelines/01-cross-language/16-static-analysis`).
+- **Why:** Pre-v1.2.0 `list_modules()` only walked top-level `spec/<dir>/00-overview.md`, silently skipping ~40 of 55 banner-carrying overviews (15 visible / 56 total). Phase 153 Task #29b widened the walker via `SPEC_ROOT.rglob("00-overview.md")` and surfaced 27 latent drifts on first re-run — including 15 P3 `**Verifies:**` coverage gaps under nested sub-modules that the boilerplate-bulk Task #31 sweep could not see. Codified at v1.2.0 (Phase 153 slot, post-Task #31).
+- **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `list_modules()` (recursive `rglob` walk, line ~105).
+
+### AC-33-09 — Workflow glob coverage satisfies P4
+- **Given** a module whose leaf directory name does NOT appear verbatim in `.github/workflows/spec-health.yml` but the workflow declares a `spec/**` path glob,
+- **When** P4 evaluates,
+- **Then** the workflow-reference signal MUST be considered satisfied (P4 evaluates the §99 stamp freshness check next).
+- **Why:** `spec-health.yml` triggers on `spec/**` rather than enumerating every nested module; the v1.0.0 substring check produced false-negative P4 fails on every nested module. Codified at v1.2.0 alongside AC-33-08; the two changes are coupled — widening `list_modules()` without widening P4 would have flipped most nested modules from `derived=Production-Ready` to `derived=High` purely as a workflow-coverage-detection artifact.
+- **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `gate_p4()` (covered = leaf-name OR rel-path OR `spec/**` glob).
 
 ## Cross-references
 

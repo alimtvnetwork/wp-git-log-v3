@@ -103,13 +103,19 @@ INVENTORY_LINK_RE = re.compile(r"\]\(\.\/([A-Za-z0-9_][A-Za-z0-9_\-\.]*\.md)\)")
 
 
 def list_modules() -> list[Path]:
+    """Every directory under spec/ (recursively) that contains a 00-overview.md.
+
+    Phase 153 Task #29b (2026-04-29) widened from top-level-only to recursive:
+    nested sub-modules (e.g. spec/03-error-manage/02-error-architecture/.../01-copy-formats/)
+    routinely carry their own `**AI Confidence:**` banners and were silently
+    skipped by the v1 walker, masking ~40 modules' worth of drift signal.
+    """
     out = []
-    for p in sorted(SPEC_ROOT.iterdir()):
-        if not p.is_dir() or p.name.startswith("_"):
+    for ov in sorted(SPEC_ROOT.rglob("00-overview.md")):
+        # Skip _archive/** (frozen by design) and any hidden-prefixed parent.
+        if any(part.startswith("_") for part in ov.relative_to(SPEC_ROOT).parts):
             continue
-        ov = p / "00-overview.md"
-        if ov.is_file():
-            out.append(p)
+        out.append(ov.parent)
     return out
 
 
@@ -199,9 +205,20 @@ def _max_h1_stamp_in_tree() -> int:
 
 
 def gate_p4(mod: Path, workflow_text: str, h1_horizon: int) -> tuple[bool, str]:
-    # CI-gate referenced: module dir name appears in spec-health.yml triggers/paths
-    if mod.name not in workflow_text:
-        return False, f"P4: '{mod.name}' not referenced in spec-health.yml"
+    # CI-gate referenced: either the leaf dir name is mentioned, OR the
+    # workflow uses a `spec/**` glob that transitively covers the module,
+    # OR the module's spec-relative path is mentioned verbatim.
+    try:
+        rel = mod.relative_to(ROOT).as_posix()
+    except ValueError:
+        rel = mod.as_posix()
+    covered = (
+        mod.name in workflow_text
+        or "spec/**" in workflow_text
+        or rel in workflow_text
+    )
+    if not covered:
+        return False, f"P4: '{mod.name}' not referenced in spec-health.yml (and no spec/** glob)"
     # §99 H1 stamp ≤ 30 phases stale.
     cr = mod / "99-consistency-report.md"
     if not cr.is_file():
@@ -260,8 +277,12 @@ def main() -> int:
         stamped = stamp_m is not None
         stamped_phase = int(stamp_m.group(1)) if stamp_m else None
         match = (declared == derived)
+        try:
+            mod_label = mod.relative_to(SPEC_ROOT).as_posix()
+        except ValueError:
+            mod_label = mod.name
         rows.append({
-            "module": mod.name,
+            "module": mod_label,
             "declared": declared,
             "derived": derived,
             "match": match,
