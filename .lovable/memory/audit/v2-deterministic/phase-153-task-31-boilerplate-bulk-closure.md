@@ -93,3 +93,8 @@ spec/25-app-issues/02-consolidated-audit-findings
   is caught automatically.
 - **Task #32** still open: `spec/07-design-system` §00 v3.4.0 vs §98 v1.7.0
   pre-existing version-parity drift.
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

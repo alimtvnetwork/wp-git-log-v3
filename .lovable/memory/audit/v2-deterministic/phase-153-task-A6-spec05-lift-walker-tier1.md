@@ -49,3 +49,8 @@ Re-running an audit after a content-only edit MUST be the first verification ste
 
 - A7 (or A3-followup): tree-wide rebaseline run with the new walker — likely lifts overall 81.6 by several points on every chunky module.
 - A6-followup: address the only remaining HIGH on spec/05 (cross-module AC-CL-* reference) by either inlining a 1-paragraph AC-CL summary in §05 §97 (mirrors the spec/04 A2 fix pattern) or extending the walker to slurp parent-module §97s when explicitly inherited.
+
+
+---
+
+**Lessons codified:** #16, #17 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

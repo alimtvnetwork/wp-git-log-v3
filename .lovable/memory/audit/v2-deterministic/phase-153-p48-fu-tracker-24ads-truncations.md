@@ -44,3 +44,8 @@ None. No spec edit, no lockstep ripple. The AI auditor's truncation
 category is **structurally unreliable for files >4 KB** under the current
 P47-fu1 cap config. If audit-v7+ re-uses this category, it MUST be cross-
 checked against `check-truncated-prose.py` before being raised as a finding.
+
+
+---
+
+**Lessons codified:** #37 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

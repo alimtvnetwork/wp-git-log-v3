@@ -68,3 +68,8 @@ to the AI Confidence value; §98/§99 captured the lockstep bump.
    only (no AC change), patch-bumps on §00/§98/§99 are correct (§97 stays
    unchanged). Distinguishes from Task #29c's pattern where §97 minor was
    appropriate (new content, even on legacy stubs).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

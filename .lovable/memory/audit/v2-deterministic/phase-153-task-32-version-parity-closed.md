@@ -52,3 +52,8 @@ Bumping §00 `Updated:` triggered lockstep failures (L1: §99 stale). Bulk-bumpe
 2. **Bulk-lockstep scripts MUST bump §00 in lockstep with §98 patch bumps for stamped modules.** Phase 153 Task #31's `bulk_lockstep.py` only touched §97/§98/§99 — for stamped modules (where check-version-parity is strict-promoted), this is a regression. Future bulk scripts SHOULD: (a) detect `<!-- h10-verified-phase: -->` stamps; (b) when present, also bump §00 `**Version:**` and `**Updated:**`; (c) THEN bump §99 `Updated:` to match. Codify in `mem://process/verifies-clause-authoring` if reused.
 3. **Run `check-version-parity.py` AFTER any bulk-lockstep sweep.** Lockstep gate ONLY checks DATE relations (L1: §98 latest date ≥ §00 Updated date), not version strings. Version-parity is a separate gate. Phase 153 Task #31 skipped this verification step — caught here.
 4. **`spec/13-generic-cli` uses blockquote-prefixed banner** (`> **Version:**`) — most other modules use bare. Regex fixers MUST handle both shapes.
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

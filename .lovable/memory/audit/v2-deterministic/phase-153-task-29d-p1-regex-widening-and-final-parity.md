@@ -44,3 +44,8 @@
 2. **Multi-section §00 is a real pattern.** spec/02/01-cross-language has TWO inventories (legacy "Full Document Inventory" with subfolder paths + canonical "Document Inventory" with bare files). Single-section regex scans miss the canonical one. Use `finditer`, not `search`.
 3. **Cascading P1 fixes unlock downstream P3/P4 visibility.** Each P1 widening surfaced 2-7 new actionable findings (mostly underclaims, some real Verifies gaps). Sequence: P1 regex → underclaim sweep → P3 backfill → final P1 sweep. Iterate until matches plateaus.
 4. **AC-33-07 precedent reapplied successfully.** Both P48-1-fu1-batch-3 (numeric-prefix → any-prefix) and Phase 153 Task #29d (link-form → link-OR-bare) followed the same pattern: ≥30% findings cluster on a mechanical pattern → inspect the regex BEFORE mass-patching the tree.
+
+
+---
+
+**Lessons codified:** #14, #27 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

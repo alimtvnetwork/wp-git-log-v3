@@ -80,3 +80,8 @@ declared tier now matches derived. `16-static-analysis` still drifts at P1
 3. **Legacy-stub Verifies pattern** is reusable: cite the replacement AC
    from the `> Replaced by:` blockquote, or fall back to a section-level
    pointer. Both satisfy P3 mechanically without inventing new contracts.
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

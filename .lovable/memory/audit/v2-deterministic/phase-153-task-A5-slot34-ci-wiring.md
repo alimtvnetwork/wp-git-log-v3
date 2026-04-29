@@ -32,3 +32,8 @@ Advisory CI steps for LLM-driven gates MUST guard on the secret being available 
 
 - Future graduation phase: flip `--report-only` → `--strict` once tree-wide score holds GOOD or above for ≥3 consecutive baselines.
 - A6: lift spec/05-split-db-architecture 69 → 80+ (lone NEEDS_WORK module).
+
+
+---
+
+**Lessons codified:** #15 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

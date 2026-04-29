@@ -31,3 +31,8 @@ trackers.
 
 None. No spec edit, no lockstep ripple. Tracker exists per Lesson #32 so
 future audits can find the closure without re-deriving from P47-fu1 JSON.
+
+
+---
+
+**Lessons codified:** #37 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

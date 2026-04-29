@@ -40,3 +40,8 @@ gate is not already strict before opening a graduation phase.
 - `.github/workflows/spec-health.yml` lines 122, 136, 387
 - Phase 153 Task #35-fu2 memo (version-parity 74/74 zero-mismatch baseline)
 - Phase H1 / P20 (per-file stamp pattern enabling the strict promotions)
+
+
+---
+
+**Lessons codified:** #30 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

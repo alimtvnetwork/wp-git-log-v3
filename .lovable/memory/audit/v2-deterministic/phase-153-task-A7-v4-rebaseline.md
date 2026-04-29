@@ -50,3 +50,8 @@ When fixing a measurement bias in an LLM-driven audit, expect **band-level corre
 
 - A8 (deferred): graduation. Wait for 3 consecutive baselines to hold ≥ GOOD before flipping `--report-only` → `--strict`.
 - A6-followup-2: now that spec/02, spec/13, spec/27 surface honest gaps (each was a hidden EXCELLENT or near-EXCELLENT pre-A6), they're the next-highest-leverage targets for content-driven lifts (mirror the spec/05 A6 playbook).
+
+
+---
+
+**Lessons codified:** #18 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

@@ -55,3 +55,8 @@ All four files now stamped `2026-04-29`.
 
 - Task #29 still relevant: fix `check-ai-confidence.py` to also scan top-level `spec/NN-overview.md` AND boilerplate-template §97 files so future drift is caught automatically.
 - Audit other boilerplate-template §97 files tree-wide for the same `**Source:**`-only pattern (precedent: `spec/03-error-manage/03-error-code-registry/97-acceptance-criteria.md` shown in context still uses `**Source:**`).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

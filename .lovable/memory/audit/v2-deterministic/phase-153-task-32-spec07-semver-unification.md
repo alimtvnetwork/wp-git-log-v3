@@ -37,3 +37,8 @@ Operational sub-lesson: renumbering ONLY the topmost §98 row is sufficient to c
 ## State
 
 Task #32 CLOSED. AI-confidence parity 51/51 (100%) and parity-gate exclusion for spec/07 both confirmed.
+
+
+---
+
+**Lessons codified:** #25 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

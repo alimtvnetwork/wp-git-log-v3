@@ -58,3 +58,8 @@ No CI workflow change. No RUBRIC bump. No AC-31-31 cascade. No gate-count change
 ## Follow-ups created
 
 - **A10-fu1**: Per-language deepening sweep — add ≥5 GWT ACs each to `02-typescript`, `03-golang`, `04-php`, `05-rust`, `07-csharp`. Stub form mandated by AC-CG-23.
+
+
+---
+
+**Lessons codified:** #21, #22, #23 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.
