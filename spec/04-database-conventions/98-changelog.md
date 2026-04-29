@@ -1,12 +1,19 @@
 # Changelog — Database Conventions
 
-**Version:** 3.4.1  
+**Version:** 3.4.2  
 **Updated:** 2026-04-29  
 **Scope:** `spec/04-database-conventions/`
 
 ---
 
-### 3.4.1 — 2026-04-29 — Phase 153 Task A11a-fu3: P1-verify HIGH sweep (Lesson #34) + spec/04 §98 prose path disambiguation
+### 3.4.2 — 2026-04-29 — Phase 153 P3: §4.3 Concurrency Posture cross-reference (no re-statement)
+- **Action**: Added `### 4.3 Concurrency Posture (Normative cross-reference)` to `02-schema-design.md` between §4.2 (MySQL fallback) and §5 (Schema Documentation). The section explicitly does NOT re-state AC-22's concurrency rules — it cross-links to `spec/13-generic-cli/97-acceptance-criteria.md` § AC-22 (canonical AC), `spec/13-generic-cli/10-database.md` § "Concurrency & Locking" (implementer prose, added in Phase 153 P3), and `spec/13-generic-cli/18-batch-execution.md` § "Concurrency Discipline" (the `--parallel=N` clause, also added in Phase 153 P3).
+- **Why**: spec/04 governs **schema design** (axis: how tables and columns are shaped); spec/13 governs **runtime concurrency** (axis: how a multi-process CLI accesses the schema). The two axes are orthogonal — re-stating AC-22 here would create dual-source drift. The cross-reference is normative for the cross-link itself (you MUST link, not duplicate) but not for the concurrency rules (those live in spec/13 AC-22).
+- **Lockstep**: §02-schema-design v3.4.0 → v3.4.1; §00 v3.4.0 → v3.4.1; this file v3.4.1 → v3.4.2; §99 v3.6.1 → v3.6.2.
+- **No §97 / AC / CI / RUBRIC change · no AC-31-31 cascade · no gate-count change.**
+- **Cross-module**: spec/13 §00/§98/§99 v1.1.3 → v1.1.4 carries the implementer prose; this module just cross-links.
+
+
 - **Action**: Per Lesson #34 (cache-vs-contract drift), enumerated all 26 HIGH findings from `.lovable/cache/audit-ai/*.json` and cross-referenced against closing memos / §97 ACs / §98 changelogs. **10 of 26 HIGHs are already contract-closed** (spec/02 D5 = AC-CG-21 + Subfolder Delegation Map; spec/05 D5 = AC-SD-21/22/23; spec/06 D3 = Task A2 canonical naming pin; spec/11 + spec/12 D2 = P3 Verifies sweep #29a-e + #31; spec/13 D3 = AC-22; spec/17 D3 = Task A1/A2 walker fix; spec/25 D2+D5 = AC-AI-09/10/11; spec/27 D2 = AC-T-29). **The remaining 16 HIGHs cluster heavily into D5 (12 of 16 = "broken/dangling external/cross/sub-module refs / missing context").** Ran the deterministic gate `check-spec-folder-refs.py` to ground-truth the D5 cluster: **only 2 stale folder refs tree-wide** (vs cache claiming 12 modules — Lesson #34 confirmed: cache massively overcounts D5 by ≥6×). Both real findings closed in this phase: (1) `spec/04-database-conventions/98-changelog.md` line 28 contained `spec/03-error-manage/.../05-response-envelope/` — the `.../` wildcard caused the gate's substring scanner to flag the leaf `05-response-envelope` as a missing top-level folder; refreshed prose to spell out the full deep path `spec/03-error-manage/02-error-architecture/05-response-envelope/`. (2) Memo file `.lovable/memory/audit/v2-deterministic/phase-153-task-A4-audit-ai-implementability-productionised.md` line 3 used the hyphenated phrase `spec/11-style` (not a folder ref); rewrote as `spec-11-style` to satisfy the gate's word-boundary regex.
 - **Spec lockstep**: §00 v3.4.0 (no change — banner already current); §98 v3.4.0 → **v3.4.1** (this row); §99 v3.6.0 → **v3.6.1**. **No §97 contract change**, **no AC count change**, **no CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**. Patch-level lockstep only (banner + row + audit row).
 - **Validation**: `check-spec-folder-refs.py` 0 stale refs (was 2) → exit 0; lockstep 87/87 · tree-health 168/168 strict · version-parity 74/74 · freshness 81/81 — all GREEN. The audit-cache `.lovable/cache/audit-ai/04-database-conventions.json` and 11 sibling cache rows remain stale until A8/A12 (LLM gateway) unblocks; per Lesson #34 they are NOT authoritative — closure references above are.

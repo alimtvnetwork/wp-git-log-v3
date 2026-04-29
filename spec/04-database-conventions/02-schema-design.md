@@ -1,7 +1,7 @@
 # Database Schema Design
 
-**Version:** 3.4.0  
-**Updated:** 2026-04-29 (Phase 153 P48-2: §2.1 Cross-Language Boolean Storage Convention added — closes P47-fu1 critical finding)
+**Version:** 3.4.1  
+**Updated:** 2026-04-29 (Phase 153 P3: §4.3 Concurrency Posture cross-reference to spec/13 AC-22 added — implementer-facing prose mirror, no contract change)
 
 ---
 

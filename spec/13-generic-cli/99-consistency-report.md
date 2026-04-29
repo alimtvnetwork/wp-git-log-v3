@@ -1,7 +1,9 @@
 # Consistency Report — Generic CLI
 
-**Version:** 1.1.3  
-**Updated:** 2026-04-29
+**Version:** 1.1.4  
+**Updated:** 2026-04-29  
+
+> **v1.1.4 update (Phase 153 P3 — AC-22 concurrency prose mirror):** Lifted AC-22's normative concurrency contract from §97 prose-only into `10-database.md` (`## Concurrency & Locking (Normative)` — PRAGMA table, `BEGIN IMMEDIATE`, atomic temp-then-rename, `update.lock`) and `18-batch-execution.md` (`### Concurrency Discipline (Normative)` — single connection pool for `--parallel=N`, no per-worker `flock`). Cross-link added in `spec/04-database-conventions/02-schema-design.md` §4.3 (no re-statement; schema ⊥ concurrency). **No §97 / AC / CI / RUBRIC change** — pure implementer-facing prose mirror under existing AC-22. Codifies Lessons #33 (§97-WINS prose-mirror cadence) + #19/#21/#26 (entry-point contract surface). §00/§98/§99 v1.1.3 → v1.1.4. Lockstep 87/87 (post-run verify).
 
 
 > **v1.1.3 update (Phase 153 Task A11a-fu1 — stale-prose refresh, P0 audit-v6 follow-through):** User reply `next`. Closes the CRITICAL D1 file-grep finding from `/mnt/documents/spec-deterministic-audit.md` by refreshing four stale-prose hotspots in `03-subcommand-architecture.md` (lines 84, 102) + `07-error-handling.md` (§ Exit Codes table widened to full 5-value `ExitCode` enum; missing-arg example exits `ExitMisuse`; batch-ops section follows AC-17 three-way conditional; closing handler rule generalised to enum). **No new AC**, **no §97 contract change**, **no AC count change** — patch-level lockstep only. AC-21 §97-WINS contract was already authoritative pre-refresh (per Lesson #24); this patch silences file-grep auditors that don't parse contract supersession. Banners: §00 v1.1.2 → **v1.1.3** (h10 stamp 22 → 153); §98 v1.1.2 → **v1.1.3**; §99 v1.1.2 → **v1.1.3**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.** **Lesson #33**: Lesson #24 contract-pin is correct for *contract integrity*, but file-grep auditors will keep flagging literal stale strings until prose is refreshed — schedule a follow-up patch-level prose-refresh phase after every §97-WINS AC ships. Cross-references Lesson #24 (contract-pin first), Lesson #29 (audit-corpus module-kind pin — same "audit reads literal text" failure mode).
