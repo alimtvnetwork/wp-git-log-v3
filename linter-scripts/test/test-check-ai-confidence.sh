@@ -91,11 +91,9 @@ assert_eq "report-only exit" "0" "$ro_ec"
 # ---- Internal-function unit test (P3 lowest-passing-gate logic) ------------
 echo "Test 5: derive_tier() returns Medium when P3 fails (AC-33-04)"
 # Use python3 importlib to call derive_tier() against a synthetic module dir.
-python3 - <<'PY'
+python3 - <<PY
 import importlib.util, pathlib, tempfile, sys, os
-repo = pathlib.Path(__file__).resolve().parents[2] if "__file__" in dir() else pathlib.Path.cwd()
-# Locate linter via env-fallback since stdin script has no __file__.
-linter_path = pathlib.Path(os.environ.get("LINTER_PATH", "linter-scripts/check-ai-confidence.py")).resolve()
+linter_path = pathlib.Path("${LINTER}").resolve()
 spec = importlib.util.spec_from_file_location("ck", linter_path)
 mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
 
