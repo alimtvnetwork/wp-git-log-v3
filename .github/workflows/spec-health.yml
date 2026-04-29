@@ -136,6 +136,18 @@ jobs:
           python3 linter-scripts/check-version-parity.py --strict
 
 
+      - name: Spec truncation gate (Phase P47-followup-1, AC-32-01..05)
+        # Phase P47-followup-1: §27 slot 32 — mechanically catches mid-sentence
+        # endings + unclosed code fences, the truncation class of
+        # AI-implementability blockers surfaced by the Phase P47 audit.
+        # H1 workflow-step-parity lesson: self-test collapsed into this step
+        # (no standalone step) to preserve AC-31-28 parity.
+        run: |
+          set -e
+          bash linter-scripts/test/test-check-truncated-prose.sh
+          python3 linter-scripts/check-truncated-prose.py
+
+
       - name: Spec tree health gate — STRICT (Phase 81, threshold 100)
         # Phase 81: tightened from --min to --strict. Strict mode requires
         # every module to be at full marks (no partial credit). Locks in the

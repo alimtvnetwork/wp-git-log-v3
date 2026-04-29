@@ -1,7 +1,7 @@
 # Consolidated: App Issues — Complete Reference
 
-**Version:** 3.3.0  
-**Updated:** 2026-04-16
+**Version:** 3.3.1  
+**Updated:** 2026-04-29
 
 ---
 
@@ -53,3 +53,8 @@ What was changed and why:
 - Files modified (with line-level detail)
 - Why this approach was chosen over alternatives
 - Any trade-offs accepted
+```
+
+---
+
+*Version 3.3.1 — 2026-04-29 — Phase P47-followup-1: closed unbalanced fence at template end (caught by `check-truncated-prose.py`).*

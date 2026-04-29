@@ -595,3 +595,58 @@ files  = [
 symbol = "blankInlineCode"
 kind   = "function"
 note   = "P44 ported strip_inline_code semantics from check-spec-cross-links.py; P45 mechanically locks parity via 8-fixture self-test (17 assertions)."
+
+# ─────────────────────────────────────────────────────────────────────────
+# Phase P47-followup-1 — slot 32 truncation gate
+# AC-32-01..05 bind the validator + self-test; trace-map regression catches
+# future removal of either file or the AC.
+
+[[trace]]
+ac     = "27-spec-toolchain/32-check-truncated-prose.md#AC-32-01"
+files  = [
+  "linter-scripts/check-truncated-prose.py",
+  "linter-scripts/test/test-check-truncated-prose.sh",
+]
+symbol = "classify"
+kind   = "function"
+note   = "Unclosed-fence detection (odd fence count → exit 1)."
+
+[[trace]]
+ac     = "27-spec-toolchain/32-check-truncated-prose.md#AC-32-02"
+files  = [
+  "linter-scripts/check-truncated-prose.py",
+  "linter-scripts/test/test-check-truncated-prose.sh",
+]
+symbol = "TERMINATOR_RE"
+kind   = "regex"
+note   = "Mid-sentence detection (last meaningful line lacks terminator)."
+
+[[trace]]
+ac     = "27-spec-toolchain/32-check-truncated-prose.md#AC-32-03"
+files  = [
+  "linter-scripts/check-truncated-prose.py",
+  "linter-scripts/test/test-check-truncated-prose.sh",
+]
+symbol = "STRUCTURAL_RE"
+kind   = "regex"
+note   = "Structural-ending allowance (heading/table/list/HR/blockquote/closing-fence/link-only)."
+
+[[trace]]
+ac     = "27-spec-toolchain/32-check-truncated-prose.md#AC-32-04"
+files  = [
+  "linter-scripts/check-truncated-prose.py",
+  ".github/workflows/spec-health.yml",
+]
+symbol = "main"
+kind   = "function"
+note   = "Live-tree gate wired into spec-health.yml between version-parity and tree-health steps."
+
+[[trace]]
+ac     = "27-spec-toolchain/32-check-truncated-prose.md#AC-32-05"
+files  = [
+  "linter-scripts/test/test-check-truncated-prose.sh",
+]
+symbol = "assert"
+kind   = "function"
+note   = "5 assertions including the live-tree gate (proves Phase P47-followup-1 fix landed)."
+

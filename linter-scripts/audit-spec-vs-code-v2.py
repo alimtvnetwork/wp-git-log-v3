@@ -152,7 +152,7 @@ TODAY = "2026-04-25"
 # v2.17 (Phase 99): static rubric version surfaced in summary outputs so a
 # reader of 00-index.md / EXECUTIVE-SUMMARY.md knows which scoring rules
 # produced the verdict. Bump this on every rubric change (see docstring).
-RUBRIC_VERSION = "v2.29"
+RUBRIC_VERSION = "v2.30"
 
 WEIGHTS = {
     "implementability": 35,
@@ -1114,8 +1114,8 @@ def main():
     # H1/H2 honor-system into a CI check; pairs with the H1 freshness gate
     # to form a two-layer defense — edits must bump (budget=0), unedited
     # stamps decay over time (budget=20)).
-    idx += ["", "## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7)",
-            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **19 strict CI gates** that surround it:",
+    idx += ["", "## QA tooling baseline (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7 + 30 + P15 + P47-followup-1)",
+            f"This audit runs rubric **{RUBRIC_VERSION}**. The score above is one of **20 strict CI gates** that surround it:",
             "",
             "1. **Cross-links** (`check-spec-cross-links.py`) — every internal `[link](./path)` resolves.",
             "2. **Tree-health** (`check-tree-health.cjs --strict`) — four-required-files rule + naming + structure (100/100 strict bar).",
@@ -1136,8 +1136,9 @@ def main():
             "17. **Runtime archive-exclusion gate** (`test/test-archive-exclusion-runtime.sh`, Phase H7) — every spec-traversing linter MUST exclude `spec/_archive/` at RUNTIME (not just by source-reading); importlib-loads `check-99-summary-freshness.find_99_files()` + `audit-spec-vs-code-v2.ALL_MODULES` + `generate-trace-map.collect_ac_ids()`, asserts each enumerator returns 0 archive-leaked results; probe count floor ≥ 3; codifies the H6 lesson (runtime > source verification) so a future contributor cannot silently drop the H3 `_archive` exclusion guard during a refactor; mechanises AC-28-01..05.",
             "18. **Spec-index drift gate** (`generate-spec-index.cjs` + `git status --porcelain spec/`, Phase 30) — `.github/workflows/spec-health.yml` regenerates `spec/spec-index.md` then fails if any `spec/` delta remains; promoted from advisory to strict in Phase 30 after Phase 29 found 6 files / 18 lines / 12 stale version entries had accumulated silently across phases 145–28 (the gate was previously a `⚠️` warning that exited 0); same exit-1-on-drift pattern as the F2 folder-refs gate; treats committed `spec-index.md` as a build artifact whose canonical source is the regenerator; mechanises AC-T-25 and codifies the Phase 29 lesson 'advisory CI gates silently rot'.",
             "19. **§00 ↔ §98 Version-field parity gate** (`check-version-parity.py --strict`, Phase P15 / H10 landed advisory; Phase P31 flipped to strict tree-wide) — when a module's `00-overview.md` carries a `**Version:**` banner AND a sibling `98-changelog.md` ships a parseable release line, the §00 banner version MUST equal the latest §98 release version (any drift fails CI). Phased rollout per the AC-T-25 dispensation: P15 baseline 15/74 matches (59 drifters) → P30 reverse-drift backlog cleared (74/74 matches, 0 mismatches, 57 stamped) → P31 strict-flip locks the gain. Per the H1 lesson on workflow-step parity the self-test (`test/test-check-version-parity.sh`, 13 assertions) is collapsed into the gate's own workflow step; codifies the Phase 21 lesson 'lockstep gate L1 only checks date relations, not version strings, so §00 banner can drift many releases behind §98 while lockstep stays green'; mechanises AC-T-26.",
+            "20. **Spec truncation gate** (`check-truncated-prose.py`, Phase P47-followup-1) — every `spec/**/*.md` file MUST end with a sentence terminator OR a structural element (heading/table/list/HR), AND every code-fence block MUST be balanced (even fence count). Mechanically catches the **truncation class** of AI-implementability blockers surfaced by the Phase P47 audit. Self-test (`test/test-check-truncated-prose.sh`, 5 assertions including a live-tree gate) is collapsed into the gate's own workflow step per H1 workflow-step parity. First production run caught one real defect: `spec/17-consolidated-guidelines/14-app-issues.md` had an unbalanced fence at template end (fixed in same phase). Mechanises AC-32-01..05.",
             "",
-            "Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
+            "Inventory + onboarding for the self-test suite (#5–#7, #9, #10, #12, #13, #20): [`linter-scripts/test/README.md`](../../../linter-scripts/test/README.md) (Phase 98).",
             ""]
 
     (OUT / "00-index.md").write_text("\n".join(idx))
@@ -1163,7 +1164,7 @@ def main():
         "3. Resolve all broken cross-spec links (auto-detected per module).",
         "4. For every D/F module, run `linter-scripts/generate-gwt-acceptance.py` to regenerate ACs.",
         "5. Add `Status: Planned/In-Progress/Implemented` banners so alignment scores reflect intent.",
-        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7 + 30 + P15) listing the 19 strict CI gates that surround this score.",
+        "", f"See [00-index.md](./00-index.md) for the full per-module ranking + the **QA tooling baseline** footer (Phase 99, expanded Phases 102 + 103 + 104 + 112 + 113 + F2 + H1 + H5 + H7 + 30 + P15 + P47-followup-1) listing the 20 strict CI gates that surround this score.",
     ]
     (OUT / "EXECUTIVE-SUMMARY.md").write_text("\n".join(exec_md))
 
