@@ -110,6 +110,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** valid config, reachable server, valid TempToken, all runners on PATH,
 - **When** `glci doctor` runs,
 - **Then** it MUST exit `0` AND stdout MUST list each check with `OK`.
+- **Verifies:** §11 `glci doctor` happy-path contract — config-valid, server-reachable, auth-valid, runners-on-PATH; AC-28-16 / AC-28-26 failure-mode complements.
 
 ### AC-28-16 — `glci doctor` flags clock skew for SSH mode
 
