@@ -38,7 +38,7 @@
       "mmd_files": 1,
       "overview_chars": 8304,
       "todo_density": 0,
-      "waffle_per_kchar": 0.06
+      "waffle_per_kchar": 0.09
     },
     "module": ".",
     "raw_scores": {
@@ -50,7 +50,7 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.06. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=9, gwt=8, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -84,7 +84,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 53412,
+      "ac_chars": 53669,
       "ac_count": 33,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -115,12 +115,12 @@
       "has_yaml_openapi": true,
       "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 47,
+      "links_total": 48,
       "md_files": 17,
       "mmd_files": 1,
-      "overview_chars": 47135,
+      "overview_chars": 47412,
       "todo_density": 1,
-      "waffle_per_kchar": 0.42
+      "waffle_per_kchar": 0.41
     },
     "module": "01-spec-authoring-guide",
     "raw_scores": {
@@ -132,7 +132,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=33, gwt=29, broken_links=0, waffle/kchar=0.42. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=33, gwt=29, broken_links=0, waffle/kchar=0.41. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -166,8 +166,8 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 31913,
-      "ac_count": 26,
+      "ac_chars": 42021,
+      "ac_count": 29,
       "child_modules": 16,
       "code_blocks_by_lang": {
         "bash": 1,
@@ -182,7 +182,7 @@
       },
       "code_blocks_total": 36,
       "consistency_report": true,
-      "gwt_block_count": 21,
+      "gwt_block_count": 24,
       "has_ci_workflow": false,
       "has_json_schema": true,
       "has_mermaid": false,
@@ -198,7 +198,7 @@
       "mmd_files": 0,
       "overview_chars": 13063,
       "todo_density": 1,
-      "waffle_per_kchar": 0.11
+      "waffle_per_kchar": 0.12
     },
     "module": "02-coding-guidelines",
     "raw_scores": {
@@ -210,7 +210,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=26, gwt=21, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=29, gwt=24, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -235,7 +235,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 16790,
+      "ac_chars": 16842,
       "ac_count": 23,
       "child_modules": 4,
       "code_blocks_by_lang": {
@@ -268,7 +268,7 @@
       "links_total": 124,
       "md_files": 31,
       "mmd_files": 0,
-      "overview_chars": 9254,
+      "overview_chars": 9263,
       "todo_density": 0,
       "waffle_per_kchar": 0.22
     },
@@ -515,7 +515,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 21603,
+      "ac_chars": 23248,
       "ac_count": 28,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -553,7 +553,7 @@
       "links_total": 155,
       "md_files": 13,
       "mmd_files": 1,
-      "overview_chars": 11559,
+      "overview_chars": 11558,
       "todo_density": 0,
       "waffle_per_kchar": 0.06
     },
@@ -592,7 +592,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 16692,
+      "ac_chars": 17246,
       "ac_count": 23,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -625,7 +625,7 @@
       "links_total": 79,
       "md_files": 16,
       "mmd_files": 1,
-      "overview_chars": 13789,
+      "overview_chars": 13785,
       "todo_density": 0,
       "waffle_per_kchar": 0.2
     },
@@ -664,7 +664,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 16626,
+      "ac_chars": 16846,
       "ac_count": 23,
       "child_modules": 2,
       "code_blocks_by_lang": {
@@ -693,9 +693,9 @@
       "links_total": 28,
       "md_files": 11,
       "mmd_files": 1,
-      "overview_chars": 9126,
+      "overview_chars": 9135,
       "todo_density": 0,
-      "waffle_per_kchar": 0.31
+      "waffle_per_kchar": 0.3
     },
     "module": "02-coding-guidelines/03-golang",
     "raw_scores": {
@@ -707,7 +707,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.31. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.3. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -732,7 +732,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4151,
+      "ac_chars": 4787,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -762,9 +762,9 @@
       "links_total": 16,
       "md_files": 9,
       "mmd_files": 1,
-      "overview_chars": 16024,
+      "overview_chars": 16031,
       "todo_density": 0,
-      "waffle_per_kchar": 0.12
+      "waffle_per_kchar": 0.11
     },
     "module": "02-coding-guidelines/03-golang/01-enum-specification",
     "raw_scores": {
@@ -776,7 +776,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.12. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -868,7 +868,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 20674,
+      "ac_chars": 22067,
       "ac_count": 28,
       "child_modules": 1,
       "code_blocks_by_lang": {
@@ -897,9 +897,9 @@
       "links_total": 42,
       "md_files": 12,
       "mmd_files": 1,
-      "overview_chars": 11376,
+      "overview_chars": 11373,
       "todo_density": 0,
-      "waffle_per_kchar": 0.15
+      "waffle_per_kchar": 0.14
     },
     "module": "02-coding-guidelines/04-php",
     "raw_scores": {
@@ -911,7 +911,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1004,7 +1004,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 20751,
+      "ac_chars": 21889,
       "ac_count": 27,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -1033,9 +1033,9 @@
       "links_total": 16,
       "md_files": 10,
       "mmd_files": 1,
-      "overview_chars": 7092,
+      "overview_chars": 7088,
       "todo_density": 0,
-      "waffle_per_kchar": 0.21
+      "waffle_per_kchar": 0.2
     },
     "module": "02-coding-guidelines/05-rust",
     "raw_scores": {
@@ -1047,7 +1047,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.21. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1072,7 +1072,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 19240,
+      "ac_chars": 19794,
       "ac_count": 23,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -1103,7 +1103,7 @@
       "links_total": 46,
       "md_files": 9,
       "mmd_files": 1,
-      "overview_chars": 7225,
+      "overview_chars": 7221,
       "todo_density": 0,
       "waffle_per_kchar": 0.09
     },
@@ -1213,7 +1213,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 24619,
+      "ac_chars": 26558,
       "ac_count": 28,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -1241,9 +1241,9 @@
       "links_total": 41,
       "md_files": 8,
       "mmd_files": 1,
-      "overview_chars": 10342,
+      "overview_chars": 10351,
       "todo_density": 0,
-      "waffle_per_kchar": 0.1
+      "waffle_per_kchar": 0.09
     },
     "module": "02-coding-guidelines/07-csharp",
     "raw_scores": {
@@ -1255,7 +1255,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=28, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1280,7 +1280,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4105,
+      "ac_chars": 4741,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -1312,7 +1312,7 @@
       "links_total": 26,
       "md_files": 9,
       "mmd_files": 1,
-      "overview_chars": 15795,
+      "overview_chars": 15807,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -1418,7 +1418,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3907,
+      "ac_chars": 4543,
       "ac_count": 8,
       "child_modules": 1,
       "code_blocks_by_lang": {
@@ -1579,7 +1579,7 @@
       "links_total": 10,
       "md_files": 4,
       "mmd_files": 1,
-      "overview_chars": 17657,
+      "overview_chars": 17666,
       "todo_density": 0,
       "waffle_per_kchar": 0.08
     },
@@ -1618,7 +1618,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4104,
+      "ac_chars": 4740,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -1650,7 +1650,7 @@
       "mmd_files": 1,
       "overview_chars": 9212,
       "todo_density": 0,
-      "waffle_per_kchar": 0.29
+      "waffle_per_kchar": 0.28
     },
     "module": "02-coding-guidelines/11-security/01-axios-version-control",
     "raw_scores": {
@@ -1662,7 +1662,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.29. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.28. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -1816,7 +1816,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3917,
+      "ac_chars": 4553,
       "ac_count": 8,
       "child_modules": 1,
       "code_blocks_by_lang": {
@@ -2276,7 +2276,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4038,
+      "ac_chars": 4674,
       "ac_count": 8,
       "child_modules": 4,
       "code_blocks_by_lang": {
@@ -2376,7 +2376,7 @@
       "links_total": 6,
       "md_files": 8,
       "mmd_files": 1,
-      "overview_chars": 6686,
+      "overview_chars": 6694,
       "todo_density": 0,
       "waffle_per_kchar": 0.4
     },
@@ -2445,7 +2445,7 @@
       "links_total": 8,
       "md_files": 5,
       "mmd_files": 1,
-      "overview_chars": 4749,
+      "overview_chars": 4757,
       "todo_density": 0,
       "waffle_per_kchar": 0.09
     },
@@ -2517,7 +2517,7 @@
       "links_total": 13,
       "md_files": 7,
       "mmd_files": 1,
-      "overview_chars": 8198,
+      "overview_chars": 8206,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2587,7 +2587,7 @@
       "links_total": 17,
       "md_files": 6,
       "mmd_files": 1,
-      "overview_chars": 9340,
+      "overview_chars": 9348,
       "todo_density": 0,
       "waffle_per_kchar": 0.06
     },
@@ -2626,7 +2626,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4035,
+      "ac_chars": 4671,
       "ac_count": 8,
       "child_modules": 4,
       "code_blocks_by_lang": {
@@ -2729,7 +2729,7 @@
       "links_total": 54,
       "md_files": 10,
       "mmd_files": 1,
-      "overview_chars": 10212,
+      "overview_chars": 10221,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2768,7 +2768,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4390,
+      "ac_chars": 5026,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -2801,7 +2801,7 @@
       "links_total": 37,
       "md_files": 13,
       "mmd_files": 1,
-      "overview_chars": 14417,
+      "overview_chars": 14418,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2840,7 +2840,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4339,
+      "ac_chars": 4975,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -2875,7 +2875,7 @@
       "links_total": 30,
       "md_files": 12,
       "mmd_files": 1,
-      "overview_chars": 12343,
+      "overview_chars": 12344,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -2984,7 +2984,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4205,
+      "ac_chars": 4841,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -3019,7 +3019,7 @@
       "links_total": 15,
       "md_files": 7,
       "mmd_files": 1,
-      "overview_chars": 11787,
+      "overview_chars": 11788,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -3088,7 +3088,7 @@
       "links_total": 9,
       "md_files": 8,
       "mmd_files": 1,
-      "overview_chars": 8578,
+      "overview_chars": 8590,
       "todo_density": 0,
       "waffle_per_kchar": 0.06
     },
@@ -3157,7 +3157,7 @@
       "links_total": 7,
       "md_files": 5,
       "mmd_files": 1,
-      "overview_chars": 10365,
+      "overview_chars": 10373,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -3196,7 +3196,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4312,
+      "ac_chars": 4948,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -3228,7 +3228,7 @@
       "mmd_files": 1,
       "overview_chars": 8590,
       "todo_density": 0,
-      "waffle_per_kchar": 0.19
+      "waffle_per_kchar": 0.18
     },
     "module": "03-error-manage/02-error-architecture/06-apperror-package/01-apperror-reference",
     "raw_scores": {
@@ -3240,7 +3240,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3295,9 +3295,9 @@
       "links_total": 6,
       "md_files": 6,
       "mmd_files": 1,
-      "overview_chars": 7867,
+      "overview_chars": 7876,
       "todo_density": 0,
-      "waffle_per_kchar": 0.19
+      "waffle_per_kchar": 0.18
     },
     "module": "03-error-manage/02-error-architecture/07-logging-and-diagnostics",
     "raw_scores": {
@@ -3309,7 +3309,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3334,7 +3334,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4129,
+      "ac_chars": 4765,
       "ac_count": 8,
       "child_modules": 3,
       "code_blocks_by_lang": {
@@ -3365,7 +3365,7 @@
       "links_total": 23,
       "md_files": 10,
       "mmd_files": 1,
-      "overview_chars": 9250,
+      "overview_chars": 9326,
       "todo_density": 0,
       "waffle_per_kchar": 0.09
     },
@@ -3434,9 +3434,9 @@
       "links_total": 9,
       "md_files": 4,
       "mmd_files": 1,
-      "overview_chars": 19895,
+      "overview_chars": 19908,
       "todo_density": 0,
-      "waffle_per_kchar": 0.1
+      "waffle_per_kchar": 0.09
     },
     "module": "03-error-manage/03-error-code-registry/07-schemas",
     "raw_scores": {
@@ -3448,7 +3448,7 @@
       "maintainability": 100,
       "testability": 96
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=6, gwt=5, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3503,7 +3503,7 @@
       "links_total": 6,
       "md_files": 4,
       "mmd_files": 1,
-      "overview_chars": 15983,
+      "overview_chars": 15992,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -3572,7 +3572,7 @@
       "links_total": 6,
       "md_files": 5,
       "mmd_files": 1,
-      "overview_chars": 10526,
+      "overview_chars": 10534,
       "todo_density": 0,
       "waffle_per_kchar": 0.0
     },
@@ -3611,20 +3611,20 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4089,
+      "ac_chars": 5810,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 2,
         "go": 16,
-        "json": 9,
+        "json": 10,
         "markdown": 1,
         "php": 7,
         "plain": 21,
         "sql": 26,
         "typescript": 4
       },
-      "code_blocks_total": 86,
+      "code_blocks_total": 87,
       "consistency_report": true,
       "gwt_block_count": 8,
       "has_ci_workflow": false,
@@ -3640,9 +3640,9 @@
       "links_total": 69,
       "md_files": 11,
       "mmd_files": 1,
-      "overview_chars": 11747,
+      "overview_chars": 13831,
       "todo_density": 0,
-      "waffle_per_kchar": 0.15
+      "waffle_per_kchar": 0.14
     },
     "module": "04-database-conventions",
     "raw_scores": {
@@ -3654,7 +3654,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.15. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3679,22 +3679,22 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 22965,
-      "ac_count": 23,
+      "ac_chars": 28662,
+      "ac_count": 26,
       "child_modules": 2,
       "code_blocks_by_lang": {
         "bash": 1,
-        "go": 14,
+        "go": 16,
         "json": 1,
         "mermaid": 1,
         "plain": 7,
-        "sql": 3,
+        "sql": 4,
         "text": 1,
         "yaml": 5
       },
-      "code_blocks_total": 33,
+      "code_blocks_total": 36,
       "consistency_report": true,
-      "gwt_block_count": 20,
+      "gwt_block_count": 23,
       "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": true,
@@ -3708,9 +3708,9 @@
       "links_total": 7,
       "md_files": 7,
       "mmd_files": 1,
-      "overview_chars": 6370,
+      "overview_chars": 6371,
       "todo_density": 0,
-      "waffle_per_kchar": 0.11
+      "waffle_per_kchar": 0.14
     },
     "module": "05-split-db-architecture",
     "raw_scores": {
@@ -3722,7 +3722,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=26, gwt=23, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3747,7 +3747,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4118,
+      "ac_chars": 4754,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -3815,7 +3815,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3969,
+      "ac_chars": 4605,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -3910,9 +3910,9 @@
       "links_total": 7,
       "md_files": 7,
       "mmd_files": 1,
-      "overview_chars": 11036,
+      "overview_chars": 11524,
       "todo_density": 0,
-      "waffle_per_kchar": 0.09
+      "waffle_per_kchar": 0.08
     },
     "module": "06-seedable-config-architecture",
     "raw_scores": {
@@ -3924,7 +3924,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -3949,7 +3949,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4204,
+      "ac_chars": 4840,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4016,7 +4016,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4004,
+      "ac_chars": 4640,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4079,7 +4079,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 57625,
+      "ac_chars": 65519,
       "ac_count": 34,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4112,9 +4112,9 @@
       "links_total": 58,
       "md_files": 17,
       "mmd_files": 1,
-      "overview_chars": 16846,
+      "overview_chars": 16847,
       "todo_density": 0,
-      "waffle_per_kchar": 0.2
+      "waffle_per_kchar": 0.19
     },
     "module": "07-design-system",
     "raw_scores": {
@@ -4126,7 +4126,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=34, gwt=34, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4151,7 +4151,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3840,
+      "ac_chars": 6005,
       "ac_count": 8,
       "child_modules": 1,
       "code_blocks_by_lang": {
@@ -4177,7 +4177,7 @@
       "mmd_files": 1,
       "overview_chars": 4248,
       "todo_density": 0,
-      "waffle_per_kchar": 0.11
+      "waffle_per_kchar": 0.08
     },
     "module": "10-research",
     "raw_scores": {
@@ -4189,7 +4189,7 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.11. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4281,7 +4281,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4246,
+      "ac_chars": 4882,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4353,7 +4353,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4433,
+      "ac_chars": 6585,
       "ac_count": 8,
       "child_modules": 3,
       "code_blocks_by_lang": {
@@ -4380,12 +4380,12 @@
       "has_yaml_openapi": true,
       "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 96,
+      "links_total": 100,
       "md_files": 22,
       "mmd_files": 1,
-      "overview_chars": 10578,
+      "overview_chars": 11218,
       "todo_density": 0,
-      "waffle_per_kchar": 0.2
+      "waffle_per_kchar": 0.19
     },
     "module": "12-cicd-pipeline-workflows",
     "raw_scores": {
@@ -4397,7 +4397,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.2. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4422,7 +4422,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4076,
+      "ac_chars": 4712,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4452,9 +4452,9 @@
       "links_total": 10,
       "md_files": 6,
       "mmd_files": 1,
-      "overview_chars": 14220,
+      "overview_chars": 14221,
       "todo_density": 0,
-      "waffle_per_kchar": 0.19
+      "waffle_per_kchar": 0.18
     },
     "module": "12-cicd-pipeline-workflows/01-browser-extension-deploy",
     "raw_scores": {
@@ -4466,7 +4466,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.19. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.18. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4491,7 +4491,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4074,
+      "ac_chars": 4710,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4521,7 +4521,7 @@
       "links_total": 43,
       "md_files": 7,
       "mmd_files": 1,
-      "overview_chars": 14032,
+      "overview_chars": 14033,
       "todo_density": 0,
       "waffle_per_kchar": 0.04
     },
@@ -4560,7 +4560,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4354,
+      "ac_chars": 4990,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -4629,8 +4629,8 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 23395,
-      "ac_count": 20,
+      "ac_chars": 29155,
+      "ac_count": 23,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 3,
@@ -4646,7 +4646,7 @@
       },
       "code_blocks_total": 161,
       "consistency_report": true,
-      "gwt_block_count": 20,
+      "gwt_block_count": 23,
       "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": true,
@@ -4662,7 +4662,7 @@
       "mmd_files": 1,
       "overview_chars": 7351,
       "todo_density": 0,
-      "waffle_per_kchar": 0.09
+      "waffle_per_kchar": 0.08
     },
     "module": "13-generic-cli",
     "raw_scores": {
@@ -4674,7 +4674,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=2/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=2/3, ac=23, gwt=23, broken_links=0, waffle/kchar=0.08. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4699,7 +4699,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 28031,
+      "ac_chars": 33336,
       "ac_count": 20,
       "child_modules": 2,
       "code_blocks_by_lang": {
@@ -4726,12 +4726,12 @@
       "has_yaml_openapi": true,
       "kind": "",
       "links_broken": 0,
-      "links_total": 142,
+      "links_total": 147,
       "md_files": 32,
       "mmd_files": 1,
-      "overview_chars": 9587,
+      "overview_chars": 10517,
       "todo_density": 0,
-      "waffle_per_kchar": 0.32
+      "waffle_per_kchar": 0.31
     },
     "module": "14-update",
     "raw_scores": {
@@ -4743,7 +4743,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.32. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.31. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -4839,7 +4839,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3919,
+      "ac_chars": 4555,
       "ac_count": 8,
       "child_modules": 1,
       "code_blocks_by_lang": {
@@ -5000,9 +5000,9 @@
       "links_total": 11,
       "md_files": 8,
       "mmd_files": 1,
-      "overview_chars": 13520,
+      "overview_chars": 13521,
       "todo_density": 0,
-      "waffle_per_kchar": 0.1
+      "waffle_per_kchar": 0.09
     },
     "module": "15-distribution-and-runner",
     "raw_scores": {
@@ -5014,7 +5014,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -5118,34 +5118,36 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 13158,
-      "ac_count": 8,
+      "ac_chars": 16173,
+      "ac_count": 9,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 6,
+        "bash": 20,
         "csharp": 1,
-        "css": 24,
+        "css": 27,
         "gitignore": 1,
-        "go": 42,
+        "go": 55,
         "html": 4,
         "ini": 1,
-        "json": 13,
-        "markdown": 7,
-        "php": 13,
-        "plain": 189,
-        "powershell": 12,
+        "json": 21,
+        "markdown": 15,
+        "php": 23,
+        "plain": 91,
+        "powershell": 13,
+        "python": 3,
         "regex": 1,
         "rust": 4,
-        "sql": 10,
+        "sql": 41,
         "toml": 1,
         "ts": 2,
-        "typescript": 18,
-        "yaml": 3
+        "tsx": 2,
+        "typescript": 22,
+        "yaml": 6
       },
-      "code_blocks_total": 352,
+      "code_blocks_total": 354,
       "consistency_report": true,
-      "gwt_block_count": 8,
-      "has_ci_workflow": false,
+      "gwt_block_count": 9,
+      "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": false,
       "has_normative_contract": false,
@@ -5155,10 +5157,10 @@
       "has_yaml_openapi": true,
       "kind": "",
       "links_broken": 0,
-      "links_total": 44,
-      "md_files": 37,
+      "links_total": 55,
+      "md_files": 38,
       "mmd_files": 0,
-      "overview_chars": 9226,
+      "overview_chars": 10150,
       "todo_density": 1,
       "waffle_per_kchar": 0.09
     },
@@ -5172,7 +5174,7 @@
       "maintainability": 90,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=9, gwt=9, broken_links=0, waffle/kchar=0.09. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -5197,7 +5199,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4640,
+      "ac_chars": 6356,
       "ac_count": 8,
       "child_modules": 1,
       "code_blocks_by_lang": {
@@ -5227,10 +5229,10 @@
       "has_yaml_openapi": true,
       "kind": "",
       "links_broken": 0,
-      "links_total": 111,
+      "links_total": 113,
       "md_files": 27,
       "mmd_files": 0,
-      "overview_chars": 6362,
+      "overview_chars": 6593,
       "todo_density": 0,
       "waffle_per_kchar": 0.19
     },
@@ -5269,7 +5271,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4115,
+      "ac_chars": 4751,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5298,9 +5300,9 @@
       "links_total": 25,
       "md_files": 8,
       "mmd_files": 1,
-      "overview_chars": 11998,
+      "overview_chars": 12007,
       "todo_density": 0,
-      "waffle_per_kchar": 0.29
+      "waffle_per_kchar": 0.27
     },
     "module": "18-wp-plugin-how-to/02-enums-and-coding-style",
     "raw_scores": {
@@ -5312,7 +5314,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.29. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.27. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -5364,10 +5366,10 @@
       "has_yaml_openapi": true,
       "kind": "future-spec",
       "links_broken": 0,
-      "links_total": 46,
+      "links_total": 53,
       "md_files": 35,
       "mmd_files": 0,
-      "overview_chars": 10327,
+      "overview_chars": 11304,
       "todo_density": 0,
       "waffle_per_kchar": 0.15
     },
@@ -5406,20 +5408,20 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 5833,
-      "ac_count": 11,
+      "ac_chars": 12989,
+      "ac_count": 14,
       "child_modules": 0,
       "code_blocks_by_lang": {
         "bash": 1,
         "json": 1,
         "mermaid": 1,
-        "sql": 11,
+        "sql": 12,
         "ts": 1,
         "yaml": 5
       },
-      "code_blocks_total": 20,
+      "code_blocks_total": 21,
       "consistency_report": true,
-      "gwt_block_count": 10,
+      "gwt_block_count": 13,
       "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": true,
@@ -5433,9 +5435,9 @@
       "links_total": 11,
       "md_files": 4,
       "mmd_files": 1,
-      "overview_chars": 19793,
+      "overview_chars": 19806,
       "todo_density": 0,
-      "waffle_per_kchar": 0.0
+      "waffle_per_kchar": 0.04
     },
     "module": "23-app-database",
     "raw_scores": {
@@ -5447,7 +5449,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=11, gwt=10, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=14, gwt=13, broken_links=0, waffle/kchar=0.04. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -5505,7 +5507,7 @@
       "links_total": 13,
       "md_files": 4,
       "mmd_files": 1,
-      "overview_chars": 20253,
+      "overview_chars": 20265,
       "todo_density": 0,
       "waffle_per_kchar": 0.14
     },
@@ -5544,8 +5546,8 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3850,
-      "ac_count": 8,
+      "ac_chars": 11178,
+      "ac_count": 11,
       "child_modules": 2,
       "code_blocks_by_lang": {
         "bash": 2,
@@ -5554,7 +5556,7 @@
       },
       "code_blocks_total": 8,
       "consistency_report": true,
-      "gwt_block_count": 8,
+      "gwt_block_count": 11,
       "has_ci_workflow": true,
       "has_json_schema": false,
       "has_mermaid": true,
@@ -5568,9 +5570,9 @@
       "links_total": 10,
       "md_files": 4,
       "mmd_files": 1,
-      "overview_chars": 5105,
+      "overview_chars": 5090,
       "todo_density": 0,
-      "waffle_per_kchar": 0.0
+      "waffle_per_kchar": 0.1
     },
     "module": "25-app-issues",
     "raw_scores": {
@@ -5582,7 +5584,7 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.0. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=11, gwt=11, broken_links=0, waffle/kchar=0.1. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -5607,7 +5609,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 3998,
+      "ac_chars": 4634,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5637,7 +5639,7 @@
       "links_total": 13,
       "md_files": 4,
       "mmd_files": 1,
-      "overview_chars": 39798,
+      "overview_chars": 39786,
       "todo_density": 0,
       "waffle_per_kchar": 0.09
     },
@@ -5676,7 +5678,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 4043,
+      "ac_chars": 4679,
       "ac_count": 8,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5871,24 +5873,24 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 23432,
-      "ac_count": 26,
+      "ac_chars": 27753,
+      "ac_count": 29,
       "child_modules": 0,
       "code_blocks_by_lang": {
-        "bash": 32,
+        "bash": 35,
         "ini": 1,
         "json": 1,
-        "markdown": 5,
-        "plain": 9,
+        "markdown": 6,
+        "plain": 10,
         "powershell": 1,
         "python": 1,
         "text": 1,
         "toml": 2,
         "yaml": 6
       },
-      "code_blocks_total": 59,
+      "code_blocks_total": 64,
       "consistency_report": true,
-      "gwt_block_count": 26,
+      "gwt_block_count": 29,
       "has_ci_workflow": true,
       "has_json_schema": true,
       "has_mermaid": true,
@@ -5899,10 +5901,10 @@
       "has_yaml_openapi": true,
       "kind": "meta-toolchain",
       "links_broken": 0,
-      "links_total": 84,
-      "md_files": 47,
+      "links_total": 89,
+      "md_files": 50,
       "mmd_files": 1,
-      "overview_chars": 19786,
+      "overview_chars": 24668,
       "todo_density": 0,
       "waffle_per_kchar": 0.13
     },
@@ -5916,7 +5918,7 @@
       "maintainability": 100,
       "testability": 80
     },
-    "score_justification": "Deterministic rubric: contracts=1/3, ac=26, gwt=26, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=1/3, ac=29, gwt=29, broken_links=0, waffle/kchar=0.13. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,
@@ -5941,7 +5943,7 @@
     "grade": "A+",
     "implementability_blockers": [],
     "metrics": {
-      "ac_chars": 20531,
+      "ac_chars": 25934,
       "ac_count": 40,
       "child_modules": 0,
       "code_blocks_by_lang": {
@@ -5973,7 +5975,7 @@
       "mmd_files": 1,
       "overview_chars": 11347,
       "todo_density": 0,
-      "waffle_per_kchar": 0.16
+      "waffle_per_kchar": 0.14
     },
     "module": "28-universal-ci-cli",
     "raw_scores": {
@@ -5985,7 +5987,7 @@
       "maintainability": 100,
       "testability": 100
     },
-    "score_justification": "Deterministic rubric: contracts=3/3, ac=40, gwt=40, broken_links=0, waffle/kchar=0.16. Gates active: 0.",
+    "score_justification": "Deterministic rubric: contracts=3/3, ac=40, gwt=40, broken_links=0, waffle/kchar=0.14. Gates active: 0.",
     "scores": {
       "alignment": 100,
       "clarity": 100,

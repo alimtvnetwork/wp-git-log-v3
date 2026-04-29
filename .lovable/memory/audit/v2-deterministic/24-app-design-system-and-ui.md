@@ -31,7 +31,7 @@
   "kind": "module",
   "md_files": 4,
   "mmd_files": 1,
-  "overview_chars": 20253,
+  "overview_chars": 20265,
   "ac_chars": 6598,
   "ac_count": 11,
   "gwt_block_count": 10,

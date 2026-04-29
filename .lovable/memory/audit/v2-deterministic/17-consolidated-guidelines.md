@@ -8,7 +8,7 @@
 > Deterministic score 97/100 (A+) for spec/17-consolidated-guidelines.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.09. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=9, gwt=9, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -29,44 +29,46 @@
 ```json
 {
   "kind": "",
-  "md_files": 37,
+  "md_files": 38,
   "mmd_files": 0,
-  "overview_chars": 9226,
-  "ac_chars": 13158,
-  "ac_count": 8,
-  "gwt_block_count": 8,
+  "overview_chars": 10150,
+  "ac_chars": 16173,
+  "ac_count": 9,
+  "gwt_block_count": 9,
   "consistency_report": true,
-  "code_blocks_total": 352,
+  "code_blocks_total": 354,
   "code_blocks_by_lang": {
-    "bash": 6,
-    "markdown": 7,
-    "plain": 189,
-    "go": 42,
-    "typescript": 18,
-    "php": 13,
+    "bash": 20,
+    "markdown": 15,
+    "plain": 91,
+    "go": 55,
+    "typescript": 22,
+    "php": 23,
     "csharp": 1,
-    "json": 13,
+    "json": 21,
     "ts": 2,
     "toml": 1,
     "rust": 4,
-    "yaml": 3,
-    "sql": 10,
+    "yaml": 6,
+    "sql": 41,
     "ini": 1,
-    "css": 24,
+    "css": 27,
     "html": 4,
     "regex": 1,
-    "powershell": 12,
-    "gitignore": 1
+    "powershell": 13,
+    "gitignore": 1,
+    "tsx": 2,
+    "python": 3
   },
   "has_sql_ddl": true,
   "has_json_schema": true,
   "has_ts_enums": true,
   "has_yaml_openapi": true,
   "has_typed_lang_contract": true,
-  "has_ci_workflow": false,
+  "has_ci_workflow": true,
   "has_normative_contract": false,
   "has_mermaid": false,
-  "links_total": 44,
+  "links_total": 55,
   "links_broken": 0,
   "todo_density": 1,
   "waffle_per_kchar": 0.09,

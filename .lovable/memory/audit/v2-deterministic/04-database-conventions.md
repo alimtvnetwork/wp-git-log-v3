@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/04-database-conventions.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.15. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.14. Gates active: 0.
 
 ---
 
@@ -31,21 +31,21 @@
   "kind": "",
   "md_files": 11,
   "mmd_files": 1,
-  "overview_chars": 11747,
-  "ac_chars": 4089,
+  "overview_chars": 13831,
+  "ac_chars": 5810,
   "ac_count": 8,
   "gwt_block_count": 8,
   "consistency_report": true,
-  "code_blocks_total": 86,
+  "code_blocks_total": 87,
   "code_blocks_by_lang": {
     "sql": 26,
     "bash": 2,
+    "json": 10,
     "go": 16,
     "php": 7,
     "typescript": 4,
     "plain": 21,
-    "markdown": 1,
-    "json": 9
+    "markdown": 1
   },
   "has_sql_ddl": true,
   "has_json_schema": true,
@@ -58,7 +58,7 @@
   "links_total": 69,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.15,
+  "waffle_per_kchar": 0.14,
   "child_modules": 0
 }
 ```

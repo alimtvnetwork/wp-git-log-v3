@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/15-distribution-and-runner.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.1. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.
 
 ---
 
@@ -31,21 +31,21 @@
   "kind": "future-spec",
   "md_files": 8,
   "mmd_files": 1,
-  "overview_chars": 13520,
+  "overview_chars": 13521,
   "ac_chars": 22436,
   "ac_count": 20,
   "gwt_block_count": 20,
   "consistency_report": true,
   "code_blocks_total": 24,
   "code_blocks_by_lang": {
-    "plain": 3,
-    "json": 4,
     "bash": 4,
+    "powershell": 1,
+    "plain": 3,
     "yaml": 7,
+    "json": 4,
     "go": 3,
     "typescript": 1,
-    "sql": 1,
-    "powershell": 1
+    "sql": 1
   },
   "has_sql_ddl": true,
   "has_json_schema": true,
@@ -58,7 +58,7 @@
   "links_total": 11,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.1,
+  "waffle_per_kchar": 0.09,
   "child_modules": 0
 }
 ```

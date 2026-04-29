@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/02-coding-guidelines/05-rust.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.21. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=27, gwt=20, broken_links=0, waffle/kchar=0.2. Gates active: 0.
 
 ---
 
@@ -31,8 +31,8 @@
   "kind": "future-spec",
   "md_files": 10,
   "mmd_files": 1,
-  "overview_chars": 7092,
-  "ac_chars": 20751,
+  "overview_chars": 7088,
+  "ac_chars": 21889,
   "ac_count": 27,
   "gwt_block_count": 20,
   "consistency_report": true,
@@ -58,7 +58,7 @@
   "links_total": 16,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.21,
+  "waffle_per_kchar": 0.2,
   "child_modules": 0
 }
 ```

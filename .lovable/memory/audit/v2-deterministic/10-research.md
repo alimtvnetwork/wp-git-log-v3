@@ -8,7 +8,7 @@
 > Deterministic score 99/100 (A+) for spec/10-research.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.11. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=8, gwt=8, broken_links=0, waffle/kchar=0.08. Gates active: 0.
 
 ---
 
@@ -32,7 +32,7 @@
   "md_files": 4,
   "mmd_files": 1,
   "overview_chars": 4248,
-  "ac_chars": 3840,
+  "ac_chars": 6005,
   "ac_count": 8,
   "gwt_block_count": 8,
   "consistency_report": true,
@@ -53,7 +53,7 @@
   "links_total": 9,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.11,
+  "waffle_per_kchar": 0.08,
   "child_modules": 1
 }
 ```

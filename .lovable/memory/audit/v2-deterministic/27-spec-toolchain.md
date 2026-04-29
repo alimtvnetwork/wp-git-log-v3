@@ -8,7 +8,7 @@
 > Deterministic score 97/100 (A+) for spec/27-spec-toolchain.
 
 
-**Score justification:** Deterministic rubric: contracts=1/3, ac=26, gwt=26, broken_links=0, waffle/kchar=0.13. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=1/3, ac=29, gwt=29, broken_links=0, waffle/kchar=0.13. Gates active: 0.
 
 ---
 
@@ -29,22 +29,22 @@
 ```json
 {
   "kind": "meta-toolchain",
-  "md_files": 47,
+  "md_files": 50,
   "mmd_files": 1,
-  "overview_chars": 19786,
-  "ac_chars": 23432,
-  "ac_count": 26,
-  "gwt_block_count": 26,
+  "overview_chars": 24668,
+  "ac_chars": 27753,
+  "ac_count": 29,
+  "gwt_block_count": 29,
   "consistency_report": true,
-  "code_blocks_total": 59,
+  "code_blocks_total": 64,
   "code_blocks_by_lang": {
     "text": 1,
     "yaml": 6,
-    "bash": 32,
+    "bash": 35,
     "toml": 2,
     "json": 1,
-    "plain": 9,
-    "markdown": 5,
+    "plain": 10,
+    "markdown": 6,
     "python": 1,
     "powershell": 1,
     "ini": 1
@@ -57,7 +57,7 @@
   "has_ci_workflow": true,
   "has_normative_contract": true,
   "has_mermaid": true,
-  "links_total": 84,
+  "links_total": 89,
   "links_broken": 0,
   "todo_density": 0,
   "waffle_per_kchar": 0.13,

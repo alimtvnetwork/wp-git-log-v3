@@ -8,7 +8,7 @@
 > Deterministic score 98/100 (A+) for spec/13-generic-cli.
 
 
-**Score justification:** Deterministic rubric: contracts=2/3, ac=20, gwt=20, broken_links=0, waffle/kchar=0.09. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=2/3, ac=23, gwt=23, broken_links=0, waffle/kchar=0.08. Gates active: 0.
 
 ---
 
@@ -32,9 +32,9 @@
   "md_files": 24,
   "mmd_files": 1,
   "overview_chars": 7351,
-  "ac_chars": 23395,
-  "ac_count": 20,
-  "gwt_block_count": 20,
+  "ac_chars": 29155,
+  "ac_count": 23,
+  "gwt_block_count": 23,
   "consistency_report": true,
   "code_blocks_total": 161,
   "code_blocks_by_lang": {
@@ -60,7 +60,7 @@
   "links_total": 93,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.09,
+  "waffle_per_kchar": 0.08,
   "child_modules": 0
 }
 ```

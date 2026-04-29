@@ -8,7 +8,7 @@
 > Deterministic score 100/100 (A+) for spec/02-coding-guidelines/03-golang.
 
 
-**Score justification:** Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.31. Gates active: 0.
+**Score justification:** Deterministic rubric: contracts=3/3, ac=23, gwt=20, broken_links=0, waffle/kchar=0.3. Gates active: 0.
 
 ---
 
@@ -31,8 +31,8 @@
   "kind": "future-spec",
   "md_files": 11,
   "mmd_files": 1,
-  "overview_chars": 9126,
-  "ac_chars": 16626,
+  "overview_chars": 9135,
+  "ac_chars": 16846,
   "ac_count": 23,
   "gwt_block_count": 20,
   "consistency_report": true,
@@ -58,7 +58,7 @@
   "links_total": 28,
   "links_broken": 0,
   "todo_density": 0,
-  "waffle_per_kchar": 0.31,
+  "waffle_per_kchar": 0.3,
   "child_modules": 2
 }
 ```
