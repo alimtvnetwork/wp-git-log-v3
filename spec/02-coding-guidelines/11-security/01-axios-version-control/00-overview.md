@@ -6,9 +6,9 @@ drift_acknowledged: 2026-04-26
 # Axios Version Control Policy
 
 <!-- h10-verified-phase: 23 -->
-**Version:** 3.2.0  
+**Version:** 3.2.1  
 **Status:** Active  
-**Updated:** 2026-04-28  
+**Updated:** 2026-04-29  
 **AI Confidence:** 100%  
 **Ambiguity:** None  
 **Author:** Harshil Agrawal

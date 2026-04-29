@@ -5,10 +5,10 @@ drift_acknowledged: 2026-04-26
 
 # Enum Specification
 
-**Version:** 3.3.1  
+**Version:** 3.3.2  
 <!-- h10-verified-phase: 30 -->
 **Status:** Complete  
-**Updated:** 2026-04-28    
+**Updated:** 2026-04-29    
 **AI Confidence:** High  
 **Ambiguity:** None
 **Error Range:** N/A (Cross-cutting standard)

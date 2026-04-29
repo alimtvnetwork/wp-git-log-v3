@@ -1,6 +1,6 @@
 # Changelog — Diagrams — Self-Update & App Update
 
-**Version:** 1.2.1  
+**Version:** 3.4.0  
 **Updated:** 2026-04-29  
 **Scope:** `spec/14-update/diagrams/`
 
@@ -18,7 +18,7 @@
 ## Releases
 
 
-### 1.2.1 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
+### 3.4.0 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
 - **Action**: Phase 153 Task #31 bulk sweep — added `**Verifies:**` lines to all 8 boilerplate ACs (AC-01..AC-08) anchored to §00 baseline / sibling spec / linter scripts. Closes the audit-v6 boilerplate blind spot for this module.
 - **Lockstep**: §97 v1.0.0 → **v1.1.0**; §99 lockstep update.
 
