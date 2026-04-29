@@ -103,6 +103,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** a phase produces 2 MiB of `Logs[]` and `batch_max_bytes=1048576`,
 - **When** the payload is built,
 - **Then** the serialized JSON body MUST be ≤ 1 MiB AND `ErrorLogs[]` MUST contain a `"GLCI: log truncated, N lines dropped"` synthetic entry where `N≥1`.
+- **Verifies:** §05 `push.batch_max_bytes` cap-before-send invariant; §06 truncation-must-be-loud rule (synthetic ErrorLogs entry, not silent drop); pairs with AC-28-36 streaming buffer cap.
 
 ### AC-28-15 — `glci doctor` happy path
 
