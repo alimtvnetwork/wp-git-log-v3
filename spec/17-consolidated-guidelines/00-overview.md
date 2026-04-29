@@ -1,7 +1,7 @@
 # Consolidated Guidelines
 
 <!-- h10-verified-phase: 48 -->
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 **Updated:** 2026-04-29  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
@@ -67,7 +67,8 @@ This folder provides **standalone, self-contained AI-readable references** for e
 | 30 | [30-readme-improvement-suggestions.md](./30-readme-improvement-suggestions.md) | **Meta** — Prioritised README rewrite plan (22 suggestions in 5 phases). Awaiting approval. Created alongside the v3.55.0 GIFs + Bundle Installers section |
 | 31 | [31-full-tree-ai-audit-v4.md](./31-full-tree-ai-audit-v4.md) | **Meta** — First full-tree (not folder-17 only) AI-implementability audit. Verdict 45/100 (F). Roadmap to 100 in 3 phases; supersedes folder-17-only verdicts of 25/26/29 for whole-tree readiness |
 | 32 | [32-phase-26-31-rollup.md](./32-phase-26-31-rollup.md) | **Retrospective** — Single-session rollup of Phases 26–31: 67 spec remediations + rubric upgrade v1.x→v2.0.0; tree health 45/100 → 100/100 (162/162 quality credits). Closes Phase 1 + 2 of v4 roadmap; documents pattern catalogue + handoff notes for future AI |
-| 33 | [33-full-tree-ai-audit-v5.md](./33-full-tree-ai-audit-v5.md) | **Meta** — audit-v5 reconciliation (Phase 130). Mechanically re-validates v4's 4 critical findings against current tree state: 3 of 4 resolved (root slot collision, broken-link count 32→0, legacy `21-git-logs/` deletion). Only #1 (session-persistence regression) remains open. Numeric re-score deferred to R1 (real-AI re-audit, blocked on Lovable Cloud) |
+| 33 | [33-full-tree-ai-audit-v5.md](./33-full-tree-ai-audit-v5.md) | **Meta** — audit-v5 reconciliation (Phase 130). Mechanically re-validates v4's 4 critical findings against current tree state: 3 of 4 resolved (root slot collision, broken-link count 32→0, legacy `21-git-logs/` deletion). Only #1 (session-persistence regression) remains open. Numeric re-score deferred to R1 (real-AI re-audit, blocked on Lovable Cloud). **Superseded by v6 (Phase 152).** |
+| 34 | [34-full-tree-ai-audit-v6.md](./34-full-tree-ai-audit-v6.md) | **Meta** — audit-v6 baseline (Phase 152). First post-v5 baseline with deterministic numeric headline: tree-health 168/168 strict, lockstep 87/87, freshness 81 stamped + 6 exempt + 0 unstamped, AI-confidence 12/15 match (80%). **P3 Verifies-coverage CLOSED tree-wide** (11 modules, Tasks #21a–#21d). Supersedes v5; method is gate-replay-only (no AI scorer); semantic claims still defer to R1 |
 
 ---
 

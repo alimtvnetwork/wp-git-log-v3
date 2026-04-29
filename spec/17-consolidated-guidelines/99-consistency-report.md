@@ -1,7 +1,10 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.6.2
+**Version:** 4.6.3
 **Updated:** 2026-04-29
+
+> **v4.6.3 update (Phase 152 — audit-v6 baseline published, supersedes v5):** Added `34-full-tree-ai-audit-v6.md` (inventory slot 35) — first audit baseline with a numeric headline since audit-v4 (Phase 1). Method is deterministic-gate-replay-only (no AI scorer): `check-tree-health --strict` 168/168, `check-lockstep` 87/87, `check-99-summary-freshness` 81 stamped + 6 exempt + 0 unstamped, `check-ai-confidence` 12/15 match. Headline: **P3 (Verifies-coverage) driver CLOSED tree-wide** across 11 modules (Phases 148–151, Tasks #21a–#21d, codified at `mem://process/verifies-clause-authoring.md`). Residual drift: 3 modules on P4 workflow-ref (`spec/07`, `spec/14`, `spec/28`) — cosmetic, not contract; closes when those slots are name-referenced in `.github/workflows/spec-health.yml`. Banner-supersedes audit-v5 (Phase 130 reconciliation, no headline). Lockstep: §00 3.4.2 → 3.4.3, §98 release row 3.4.3 added, §99 4.6.2 → 4.6.3, file count 34 → 35. No score change (168/168 strict-pass holds); no AC surface change; no rubric/CI-gate change. Forward-looking: v7 baseline warranted when R1 unblocks (~25 trace-map orphans), P4 closes (12/15 → 15/15), or 7 cosmetic stamp refreshes land.
+
 
 > **v4.6.2 update (Phase P48-1-fu1-batch P3 sweep slot 2 — AC-01..AC-08 Verifies clauses):** Closes the P3-tier `**Verifies:**` gap for this module (1 → 9 clauses). Each AC now declares the invariant or precedent it defends, completing the contract graduation from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)* gate P3. Lockstep: §00 banner 3.4.1 → 3.4.2, §97 banner 2.2.0 → 2.3.0, §98 release row 3.4.2 added, §99 banner 4.6.1 → 4.6.2. No score change to tree-health (168/168 strict-pass holds); P3 contribution to AC-09's four-gate derivation now passes for this module's AC-block. **Lesson reinforced:** `**Verifies:**` is the single highest-leverage AC field for AI implementability — it converts a test description into a contract by naming the invariant under defense. Future P3 sweeps continue with the next-smallest gap module from `check-ai-confidence.py --report`.
 
@@ -62,7 +65,8 @@
 | 31 | `30-readme-improvement-suggestions.md` | ✅ Present | — | (meta) |
 | 32 | `31-full-tree-ai-audit-v4.md` | ✅ Present | — | (meta-audit, full tree) |
 | 33 | `32-phase-26-31-rollup.md` | ✅ Present | 130+ | (retrospective, Phase 32) |
-| 34 | `33-full-tree-ai-audit-v5.md` | ✅ Present | 110+ | (meta-audit, supersedes v4) |
+| 34 | `33-full-tree-ai-audit-v5.md` | ✅ Present | 110+ | (meta-audit, supersedes v4; superseded by v6) |
+| 35 | `34-full-tree-ai-audit-v6.md` | ✅ Present | 130+ | (meta-audit, supersedes v5; Phase 152 baseline) |
 
 **Total:** 34 files (including this report, gap analysis, folder mapping, audits, and the Phase 32 rollup)
 
