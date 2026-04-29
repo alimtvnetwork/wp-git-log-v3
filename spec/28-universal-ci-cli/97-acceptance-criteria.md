@@ -152,6 +152,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `--no-push` is passed,
 - **When** any phase runs,
 - **Then** the CLI MUST NOT open any HTTPS connection AND exit code MUST reflect only phase outcome (`0` or `1`).
+- **Verifies:** §04 `--no-push` air-gapped invariant — local CI rehearsal MUST be totally network-free; pairs with AC-28-35 telemetry-prohibition (network calls are ALWAYS opt-in).
 
 ### AC-28-22 — Multiple runtimes: separate PipelineName per (runtime, phase)
 
