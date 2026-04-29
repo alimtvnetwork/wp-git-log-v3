@@ -201,6 +201,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `17-openapi-client.yaml` AND `spec/22-git-logs-v2/17-openapi.yaml`,
 - **When** the path sets are intersected,
 - **Then** every path in the client file MUST exist in the server file.
+- **Verifies:** §17 client-server endpoint-parity invariant — `spec/28` client cannot drift ahead of `spec/22-git-logs-v2` server; protects the §06↔§22 cross-spec contract.
 
 ---
 
