@@ -33,6 +33,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `glci.toml` sets `server.url=A`, env `GLCI_SERVER_URL=B`, and CLI flag `--server=C`,
 - **When** `glci config print --json` runs,
 - **Then** the resolved `server.url` MUST equal `C` and its `provenance` MUST equal `flag`.
+- **Verifies:** §05 three-layer config precedence (file < env < flag); provenance-tracking invariant for diagnosability.
 
 ### AC-28-05 — Batched POST to /append-log carries all required fields
 
