@@ -1,6 +1,6 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.13.1
+**Version:** 4.13.2
 **Last Updated:** 2026-04-29
 
 ---
