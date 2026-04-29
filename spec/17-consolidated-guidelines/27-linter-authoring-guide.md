@@ -1,6 +1,6 @@
 # 27 — Linter Authoring Guide
 
-**Source:** [`../27-linter-authoring-guide/`](../27-linter-authoring-guide/)  
+**Source:** [`../27-spec-toolchain/`](../27-spec-toolchain/)  
 
 > **Version:** 1.0.1
 > **Updated:** 2026-04-22
