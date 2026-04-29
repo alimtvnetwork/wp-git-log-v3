@@ -1,6 +1,6 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.0.1  
+**Version:** 1.1.0  
 **Updated:** 2026-04-29  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
