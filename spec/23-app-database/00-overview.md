@@ -6,7 +6,7 @@ description: App-specific database tables (App, AppLink, AppStatus, AppLinkType)
 # App Database
 
 <!-- h10-verified-phase: 153 -->
-**Version:** 4.0.3
+**Version:** 4.1.0
 **Updated:** 2026-04-29
 **AI Confidence:** Production-Ready
 **Ambiguity:** None
