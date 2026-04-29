@@ -1,6 +1,6 @@
 # 33 — check-ai-confidence.py
 
-**Version:** 1.0.0  
+**Version:** 1.1.0  
 **Updated:** 2026-04-29  
 **Source:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py)  
 **Self-test:** [`linter-scripts/test/test-check-ai-confidence.sh`](../../linter-scripts/test/test-check-ai-confidence.sh)  
@@ -53,7 +53,7 @@ The script computes a **derived** tier by walking gates P1 → P4 in order; the 
 
 | Gate | Passes when |
 |------|-------------|
-| **P1** | §00 lists every sibling `.md` (excluding meta-slots `97`/`98`/`99`) AND `**Updated:**` year matches current calendar year. |
+| **P1** | §00 lists every sibling `.md` (excluding meta-slots `97`/`98`/`99`) AND `**Updated:**` year matches current calendar year. **Inventory regex** matches any `](./<basename>.md)` reference where the basename starts with an alphanumeric character (e.g. `01-foo.md`, `consolidated-review-guide.md`, `readme.md`, `changelog.md`, `structure.md`) — non-numeric-prefix siblings ARE legitimate inventory entries (precedent: §02 review-guide files, §03 `structure.md`, §12/§14 `readme.md`, §18 `readme.md`/`changelog.md`). |
 | **P2** | P1 holds AND §97 contains ≥1 `**Given**`/`**When**`/`**Then**` marker AND no `*.md` in the module ends with a truncation marker (`...`, `…`, bare `TODO`/`TBD`/`FIXME`). |
 | **P3** | P2 holds AND every `### AC-…` heading in §97 has a `**Verifies:**` clause. |
 | **P4** | P3 holds AND module dir name appears in `.github/workflows/spec-health.yml` AND §99 carries a `<!-- verified-phase: NNN -->` stamp ≤ 30 phases stale relative to the highest stamp anywhere in the tree. |
@@ -122,6 +122,13 @@ AI-Confidence rubric parity: scanned=N; eligible=N; matches=N; mismatches=N; sta
 - **When** it runs,
 - **Then** all assertions MUST pass.
 - **Verifies:** [`linter-scripts/test/test-check-ai-confidence.sh`](../../linter-scripts/test/test-check-ai-confidence.sh).
+
+### AC-33-07 — P1 inventory regex matches non-numeric-prefix siblings
+- **Given** a sibling `.md` file in a module directory whose basename does NOT start with a `\d{2}-` prefix (e.g. `consolidated-review-guide.md`, `structure.md`, `readme.md`, `changelog.md`),
+- **When** that file is referenced from §00 inventory as `](./basename.md)`,
+- **Then** `INVENTORY_LINK_RE` MUST match the reference and `gate_p1()` MUST count the file as listed.
+- **Why:** P1's intent is "every sibling `.md` is in §00 inventory" — independent of filename shape. The pre-v1.1.0 regex `\d{2}[-…].md` produced false-positive drift findings on §02/§03/§12/§14/§18 (5 of the 13 first-run drifters were this regex bug, not real spec drift). Codified at v1.1.0 (Phase P48-1-fu1-batch slot 3) after the §02 sweep surfaced both review-guide files as legitimately listed in §00 inventory at lines 191-192 yet flagged as "not in inventory".
+- **Verifies:** [`linter-scripts/check-ai-confidence.py`](../../linter-scripts/check-ai-confidence.py) `INVENTORY_LINK_RE` (line 102).
 
 ## Cross-references
 

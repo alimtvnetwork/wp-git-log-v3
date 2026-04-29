@@ -99,7 +99,7 @@ TRUNC_TAIL = re.compile(r"(\.{3,}|…|TODO|TBD|FIXME)\s*$", re.I)
 GWT_RE = re.compile(r"\*\*(Given|When|Then)\*\*", re.M)
 VERIFIES_RE = re.compile(r"\*\*Verifies:\*\*", re.M)
 AC_RE = re.compile(r"^### AC[-_][A-Za-z0-9\-]+", re.M)
-INVENTORY_LINK_RE = re.compile(r"\]\(\.\/(\d{2}[-A-Za-z0-9_\-]*\.md)\)")
+INVENTORY_LINK_RE = re.compile(r"\]\(\.\/([A-Za-z0-9_][A-Za-z0-9_\-\.]*\.md)\)")
 
 
 def list_modules() -> list[Path]:
