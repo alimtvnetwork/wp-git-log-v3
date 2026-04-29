@@ -1,6 +1,6 @@
 # Consistency Report — Distribution and Runner
 
-**Version:** 2.1.0  
+**Version:** 2.1.1  
 **Updated:** 2026-04-27
 
 ---
