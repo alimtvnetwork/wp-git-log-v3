@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.4.0
+**Version:** 3.4.1
 **Updated:** 2026-04-29
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 3.4.1 — 2026-04-29 (Phase P48-1-fu1-batch — §00 inventory drift fix, slot 33)
+
+- **Fixed** `00-overview.md` inventory table — added missing row for slot 33 (`33-full-tree-ai-audit-v5.md`). The file was added to §98 changelog and §99 inventory in v3.3.x (Phase 130) but the §00 table was never updated, leaving `check-ai-confidence.py` to flag this folder as a P1 drifter (declared `Production-Ready`, derived `unset`). Single-row patch; restores P1 pass and unblocks tier re-derivation. Bumps to **3.4.1** (patch — pure inventory sync, no normative surface change).
+- **Why a patch and not a minor:** no rubric/AC/contract changes; one missing inventory row reconciled to match disk reality. Codifies the precedent for the remaining 7 P1-drifter folders surfaced by `check-ai-confidence.py` (queued as P48-1-fu1-batch follow-ups, one folder per PR).
 
 ### 3.4.0 — 2026-04-29 (Phase P48-1 — `AI Confidence` rubric becomes a normative contract)
 
