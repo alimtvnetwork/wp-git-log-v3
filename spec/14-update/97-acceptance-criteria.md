@@ -30,6 +30,7 @@ This document defines testable acceptance criteria for the **Update — Overview
 - **When** each relative `.md` link is resolved
 - **Then** the target file exists in this module folder.
 - **Source:** `00-overview.md` cross-references; verified by `linter-scripts/check-spec-cross-links.py`.
+- **Verifies:** Zero broken intra-module links — the cross-link integrity invariant gating `spec-health.yml` (no dangling sibling refs).
 
 ### AC-03: Naming convention compliance
 - **Given** every file in this module
