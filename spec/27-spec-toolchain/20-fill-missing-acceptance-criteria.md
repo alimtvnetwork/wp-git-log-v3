@@ -44,11 +44,13 @@ New `spec/<module>/97-acceptance-criteria.md` per missing module.
 - **Given** every module already has `97-acceptance-criteria.md`,
 - **When** the script runs,
 - **Then** zero files MUST be written and exit code MUST be `0`.
+- **Verifies:** `linter-scripts/fill-missing-acceptance-criteria.cjs` §`main()` `fs.existsSync(target)` short-circuit
 
 ### AC-20-02 — Generated AC contains AC-NN-01 placeholder
 - **Given** a freshly scaffolded file,
 - **When** it is read,
 - **Then** it MUST contain at least one `### AC-` heading.
+- **Verifies:** `linter-scripts/fill-missing-acceptance-criteria.cjs` §`buildAC()` template (5 boilerplate ACs always emitted)
 
 ### AC-20-03 — Existing AC files are not overwritten
 - **Given** an existing AC file with custom content,
