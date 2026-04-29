@@ -1,6 +1,6 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-29  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 1.2.0 — 2026-04-29 — Phase P48-1-fu1-batch P3 sweep slot 6 (AC-01..AC-08 Verifies clauses)
+- **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v1.0.0 → v1.1.0). Each clause cites the precise invariant defended. Closes the P3-tier gap (0/8 → 8/8 Verifies) and graduates the AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)*. §00 banner 1.1.0 → 1.2.0; §97 1.0.0 → 1.1.0; §99 row added.
 
 ### 1.1.0 — 2026-04-29 — Phase P48-1-fu1-batch slot 5 (P1 inventory sync)
 - §00 Feature Inventory now lists `readme.md` and `changelog.md` (legacy root entry-points). Aligns §00 with §99 file-index (which already enumerated both). Pure inventory reconciliation — no spec rule changes. Linter: P1 driver eliminated for `spec/18`.

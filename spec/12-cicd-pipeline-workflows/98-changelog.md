@@ -1,6 +1,6 @@
 # Changelog — CI/CD Pipeline Workflows
 
-**Version:** 3.4.1  
+**Version:** 3.4.2  
 **Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 3.4.2 — 2026-04-29 — Phase P48-1-fu1-batch P3 sweep slot 5 (AC-01..AC-08 Verifies clauses)
+- **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v1.0.0 → v1.1.0). Each clause cites the precise invariant defended; AC-01/AC-06 also document this module's `kind: future-spec` YAML exemption. Closes the P3-tier gap (0/8 → 8/8 Verifies) and graduates the AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)*. §00 banner 3.4.1 → 3.4.2; §97 1.0.0 → 1.1.0; §99 row added.
 
 ### 3.4.1 — 2026-04-29 — Phase P48-1-fu1-batch slot 4 (P1 inventory sync)
 - §00 Feature Inventory now lists all 4 previously-missing root files: `readme.md`, `01-ci-pipeline.md`, `02-release-pipeline.md`, `11-technical-interface.md`. Slots 01/02 receive co-located rows (precedent: spec/01 slot 04, spec/17 slot 33). No spec rule changes — pure inventory reconciliation. Linter: P1 driver eliminated for `spec/12`.
