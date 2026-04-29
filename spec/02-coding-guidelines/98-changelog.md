@@ -17,6 +17,9 @@
 
 ## Releases
 
+### 3.4.0 — 2026-04-29 — Phase P48-1-fu1-batch P3 layer (first P3 closure)
+- §97 v4.1.0 → v4.2.0: added 5 group-level `**Verifies:**` clauses to the AC-CG-LEGACY scaffolds (Cross-Language, TypeScript, Golang, PHP, Rust). Each clause cites its source subfolder + the GWT AC that supersedes the legacy table-row group. Pure documentation patch — no AC added/removed (count unchanged at 25), no rule change. **Verified**: `check-ai-confidence.py` P3 driver eliminated for `spec/02`; derived tier promoted Medium → High (only P4 cosmetic `spec-health.yml`-reference advisory remains, same posture as `spec/22`). Lockstep ✅; tree-health 168/168 strict ✅. **Significance**: first concrete P3 closure of the post-P48-1-fu1-batch P3 sweep — proves the "group-level Verifies clause for LEGACY scaffolds" pattern as a low-cost, honest fix that doesn't require backfilling 1:1 per-row evidence.
+
 ### 3.3.1 — 2026-04-28 — Phase P30 batch reconciliation
 - §98 header bumped to align with §00 banner; H10 stamp dropped on §00; date sweep `2026-04-27`→`2026-04-28`. Pure metadata patch — no module-rule change.
 
