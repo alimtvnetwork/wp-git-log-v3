@@ -1,12 +1,21 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.68.0
-**Updated:** 2026-04-28
+**Version:** 2.69.0
+**Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
 
-### 2.68.0 — 2026-04-28 — Phase P46: retroactive parity-AC graduation survey (3 candidates surfaced; 0 fixes this phase)
+### 2.69.0 — 2026-04-29 — Phase P47-followup-1: §27 slot 32 `check-truncated-prose.py` ships + caught real defect in `17-consolidated-guidelines/14-app-issues.md`
+- **Action**: Authored `linter-scripts/check-truncated-prose.py` (slot 32) — deterministic validator that flags spec markdown files ending mid-sentence or with an unclosed code fence (the **truncation class** of AI-implementability blockers surfaced by the Phase P47 audit, `/mnt/documents/audit-phase-p47.md`). Authored matching self-test `linter-scripts/test/test-check-truncated-prose.sh` (5 assertions: clean fixtures, dirty fixtures with both unclosed-fence + mid-sentence detection, live-tree gate). Wired to `.github/workflows/spec-health.yml` as new step "Spec truncation gate" between version-parity gate and tree-health gate. **Self-test collapsed into the same step** per H1 workflow-step parity rule (no standalone step) — preserves AC-31-28 footer-rows = workflow-gates parity.
+- **Real defect caught on first run**: `spec/17-consolidated-guidelines/14-app-issues.md` had an unbalanced ` ``` ` fence at template end (issue-file template open-fence at line 20, no matching close). Closed the fence; bumped slot to v3.3.1 with explanatory changelog line citing this phase. Validates that the AI's P47 audit correctly identified the **class** even though its 4 cited file-level findings were digest-cap artifacts (each AI prompt was capped at 3500 chars) — the linter triages real-vs-artifact mechanically.
+- **CI gate count**: 15 → **16**; RUBRIC_VERSION v2.24 → **v2.25** (AC-31-31 cascade — `audit-spec-vs-code-v2.py` gate enumeration list extended).
+- **Spec lockstep**: §27 §00 v2.68.0→**v2.69.0**; §98 v2.68.0→**v2.69.0**; §99 v2.65.0→**v2.66.0**; new slot 32 v1.0.0; slot 17/14 v3.3.0→**v3.3.1**.
+- **Trace-map**: +1 source file (`check-truncated-prose.py`) + 1 self-test, both bound to AC-32-01..05.
+- **P47-followup-1 lesson codified — AI audit triage rule**: AI deep-dive findings cited at file-granularity SHOULD be re-validated by a deterministic linter before being adopted as concrete remediation tasks. The Phase P47 audit's 4 truncation-class findings (`23-app-database/00-overview.md`, `04-database-conventions/01-naming-conventions.md`, `11-powershell-integration/00-overview.md`, `17-consolidated-guidelines/03-error-management.md`) were ALL false positives caused by the audit pipeline's 3500-char digest cap — each file actually ends cleanly. The AI correctly identified the **class** ("truncation is a recurring blocker") but mis-cited the **instances**. The linter found ONE genuine instance (`14-app-issues.md`) the AI never inspected. **Rule**: an AI audit is best treated as a class-discovery surface; instance-level claims need mechanical confirmation before phase planning.
+- **Verified**: linter clean on 868 spec files; self-test 5/5 assertions pass; inventory parity gate clean (38 artifacts / 38 tracked).
+
+
 - **Action**: Applied the P45 graduation rule retroactively. Authored a one-shot Python scanner over `spec/27-spec-toolchain/*.md` extracting every AC whose `**Verifies:**` clause cites ≥2 source files (the heuristic for "parity contract — multiple implementations of the same logical invariant"). Found **14** such ACs total: **9 already mechanically locked** (cite a `test-*.sh` or `test_*.py` self-test) and **5 candidates** lacking a self-test. Manually triaged each candidate.
 - **Triage result**:
   - **AC-31-29** (`check-memo-retrospective-headings.py` ↔ Phase 100 memo verdict ↔ `.github/workflows/spec-health.yml` step "Memo retrospective headings gate") — **graduation candidate**: tri-source contract (linter + verdict-doc + workflow) with no self-test asserting the linter's `CUTOFF_PHASE=100` constant or `FORBIDDEN_PATTERNS` table is in lockstep with the verdict doc. Surfaced as P46-followup-1.
