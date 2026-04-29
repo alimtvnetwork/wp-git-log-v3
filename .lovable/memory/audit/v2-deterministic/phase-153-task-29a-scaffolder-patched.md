@@ -36,3 +36,8 @@ Patched `linter-scripts/fill-missing-acceptance-criteria.cjs` `buildAC()` templa
 - **Task #31** still required: backfill `**Verifies:**` clauses in the 23 remaining boilerplate-template §97 files. Mechanical — same Python pattern as Phase 153 spec/11 fix, batch-applicable.
 - **Task #29b** still relevant: fix `check-ai-confidence.py` to (a) include top-level `spec/NN-overview.md` files; (b) flag boilerplate-template §97 files missing `**Verifies:**` so this class of drift is caught automatically going forward.
 - **Task #32 (NEW)**: investigate `spec/07-design-system` §00 v3.4.0 / §98 v1.7.0 version drift — pre-existing, surfaced today by `check-version-parity.py`. Phase-32 stamp suggests this has been failing for a long time; needs root-cause investigation (likely §00 was bumped without corresponding §98 entry).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

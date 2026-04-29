@@ -25,3 +25,8 @@ All 3 P47-fu1 critical findings closed within Phase 153. Lessons #32 (per-findin
 
 ## Gates
 Lockstep · tree-health 168/168 strict · version-parity 74/74 — all GREEN (verify in next exec call).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

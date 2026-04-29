@@ -22,3 +22,8 @@ P47-fu1 backlog items survived 7+ phases without resolution because findings wer
 ## Remaining P47-fu1 critical findings
 - **#17** — 23-adb polymorphic AppLink resolution (open)
 - **#18** — 11-ps Pipeline Steps lack per-step exit codes (open)
+
+
+---
+
+**Lessons codified:** #32 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

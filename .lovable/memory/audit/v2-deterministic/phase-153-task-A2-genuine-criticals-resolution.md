@@ -42,3 +42,8 @@ Both modules patch-bumped (banner-only edits + new banner-adjacent prose; no AC 
 ## Status
 
 **A2 CLOSED.** Genuine D5 inlining for spec/04 + immunisation pins for spec/06 + spec/11 explanation. Tree-score lift on next audit-v2 run expected ~+1-3 pts (already at 81.4; ceiling for v2 harness is ~85 due to cap).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

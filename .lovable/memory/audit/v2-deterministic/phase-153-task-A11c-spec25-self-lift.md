@@ -62,3 +62,8 @@ Banners: §00 3.4.2 → 3.4.3 · §97 1.1.0 → 1.2.0 · §98 3.4.2 → 3.4.3 ·
 - spec/25-app-issues/00-overview.md (banner bump, h10 stamp refresh)
 - spec/25-app-issues/98-changelog.md (banner bump + 3.4.3 row)
 - spec/25-app-issues/99-consistency-report.md (banner bump + audit row)
+
+
+---
+
+**Lessons codified:** #29 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

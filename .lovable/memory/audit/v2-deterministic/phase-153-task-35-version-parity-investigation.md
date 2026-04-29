@@ -72,3 +72,8 @@ comparator (positional-first vs SemVer-max), not the data.
 No §98/§99 bumps — both edits were corrections of stale banners catching up
 to already-shipped §98 rows (no new content). Lockstep 87/87 PASS, tree-health
 168/168 strict PASS, parity 17 → 15 FAIL (15 require comparator fix above).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

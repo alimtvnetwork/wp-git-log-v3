@@ -77,3 +77,8 @@ targeting linters MUST default to `rglob` with explicit opt-out filters
 (`_archive`, `_`-prefix). Pair every walker-widening change with a
 coupled-rule audit (here: P4's leaf-name substring test) to avoid converting
 one blind spot into a different false-positive class.
+
+
+---
+
+**Lessons codified:** #12, #13 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

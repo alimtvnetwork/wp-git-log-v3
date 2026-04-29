@@ -30,3 +30,8 @@
 
 - A5: wire `audit-ai-implementability.py --report-only` into `spec-health.yml` (advisory).
 - Optional: target `spec/05-split-db-architecture` (69 → 80+) by widening D2/D3 (AC coverage + edge/error worked cases).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

@@ -60,3 +60,8 @@ LLM-gateway re-scores during a self-lift phase MAY fail with HTTP 402 (credit ex
 ## Status
 
 **CLOSED** (lockstep + tree-health green; LLM re-score deferred — Lesson #20).
+
+
+---
+
+**Lessons codified:** #19, #20 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

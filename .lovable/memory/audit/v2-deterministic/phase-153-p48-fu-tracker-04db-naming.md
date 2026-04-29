@@ -34,3 +34,8 @@ known harness limitation — not a spec gap.
 None. No spec edit, no lockstep ripple. If this class of false-positive
 recurs in audit-v7+, consider extending the AI auditor to follow `**Source:**`
 links one hop (analog to walker's tier-1 fix from Lesson #16).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

@@ -40,3 +40,8 @@ on the first inspection pass without per-finding tracker work.
 None. No spec edit, no script edit, no lockstep ripple. Tracker exists per
 Lesson #32 so future audits can find this NO-OP closure without re-running
 the enumeration.
+
+
+---
+
+**Lessons codified:** #36 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

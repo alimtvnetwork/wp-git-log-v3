@@ -55,3 +55,8 @@ Spec content untouched in this phase — pure analysis pass. Lockstep / tree-hea
 ## Status
 
 **A1 CLOSED.** Score lift achieved by **harness correctness**, not content change. Genuine remaining gaps are now narrow and individually addressable (3 real CRITICALs; 22 HIGH).
+
+
+---
+
+**Lessons codified:** #11 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

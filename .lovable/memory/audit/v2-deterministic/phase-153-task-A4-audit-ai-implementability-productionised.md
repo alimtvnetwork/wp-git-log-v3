@@ -33,3 +33,8 @@ type: feature
 ## Status
 
 **A4 CLOSED.** Slot 34 advisory-by-default; CI graduation to `spec-health.yml` deferred until adoption converges (mirrors slot 33 P48-1-fu1 cadence).
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

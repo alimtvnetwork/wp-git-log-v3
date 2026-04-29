@@ -21,3 +21,8 @@ Polymorphic-FK resolution algorithms MUST be lifted to normative prose with clos
 
 ## Index update
 Append-only narrative row in `mem://index.md` (Phase 153 section); Lesson #33 codified.
+
+
+---
+
+**Related lessons:** see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the consolidated Phase 153 contributor rules (#11–#37).

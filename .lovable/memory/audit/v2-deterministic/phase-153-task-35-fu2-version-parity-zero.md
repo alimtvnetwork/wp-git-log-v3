@@ -58,3 +58,8 @@ Drove `/tmp/backfill_98_rows.py` — for each (§00 path, §00 version) pair, ap
 ## Next-up after this
 
 Version-parity gate is now at steady-state. Future drifts will be single-case mechanical close-outs (no class-wide sweep needed). The remaining backlog reverts to A11c (spec/25 crypto fix), spec/13 lift verification, and the deferred LLM re-scores.
+
+
+---
+
+**Lessons codified:** #25 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

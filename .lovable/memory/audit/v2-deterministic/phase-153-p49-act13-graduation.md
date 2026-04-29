@@ -74,3 +74,8 @@ or (b) mechanically locked by a self-test cited in `**Verifies:**`.
 - P47/P48 precedents: prior `phase-153-task-*-graduation.md` memos
 - AC-T-13: `spec/27-spec-toolchain/97-acceptance-criteria.md` line 74
 - Self-test: `linter-scripts/test/test-audit-deterministic-stability.sh`
+
+
+---
+
+**Lessons codified:** #31 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

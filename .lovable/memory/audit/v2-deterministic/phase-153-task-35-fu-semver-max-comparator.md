@@ -95,3 +95,8 @@ the bump). Listed in `phase-153-task-35-version-parity-investigation.md`.
 - `spec/27-spec-toolchain/98-changelog.md` — banner + v2.77.1 release row
 - `spec/27-spec-toolchain/99-consistency-report.md` — banner v2.74.0 → v2.74.1
 - 5 × `00-overview.md` banner+stamp refreshes (spec/12/01, spec/12/02, three error-modal sub-modules)
+
+
+---
+
+**Lessons codified:** #28 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.

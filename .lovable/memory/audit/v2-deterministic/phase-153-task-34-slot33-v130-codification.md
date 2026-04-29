@@ -34,3 +34,8 @@ When a sweep deploys multiple regex/walker widenings to close ONE drift class, c
 - Linter binary unchanged (already shipping v1.3.0 behaviour since Task #29d).
 - This phase is documentation-only (spec catches up to deployed behaviour).
 - AI-confidence drift class: **CLOSED** tree-wide (51/51).
+
+
+---
+
+**Lessons codified:** #24 → see [`mem://process/phase-153-lessons`](../../../memory/process/phase-153-lessons.md) for the canonical contributor-rule statements.
