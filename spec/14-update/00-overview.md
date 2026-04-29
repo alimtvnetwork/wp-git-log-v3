@@ -112,6 +112,7 @@ file-lock errors and guarantees rollback is always one rename away.
 |------|-------------|
 | [99-consistency-report.md](./99-consistency-report.md) | Per-folder consistency audit |
 | [diagrams/](./diagrams/) | Mermaid flow diagrams (handoff, cleanup, deploy) |
+| [readme.md](./readme.md) | Folder readme — high-level update-subsystem entry-point (legacy) |
 
 ---
 
