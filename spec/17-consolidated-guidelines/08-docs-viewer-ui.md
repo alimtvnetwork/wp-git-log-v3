@@ -1,6 +1,6 @@
 # Consolidated: Docs Viewer UI — Complete Reference
 
-**Source:** [`../08-docs-viewer-ui/`](../08-docs-viewer-ui/)  
+**Source:** `../08-docs-viewer-ui/` *(documentation-only — folder not yet materialised; see Phase F1 classification)*  
 **Version:** 3.2.1  
 **Updated:** 2026-04-29
 

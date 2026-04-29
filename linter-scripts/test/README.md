@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-29 (Phase P48-1-fu1 — added `test-check-ai-confidence.sh` (#15) mechanically locking the AC-09 `AI Confidence` four-gate rubric via §27 slot 33 `check-ai-confidence.py`; first production run found 13/15 modules drifting (5 P1 inventory gaps, 5 P3 `**Verifies:**` coverage gaps, 3 deeper P3/P4 issues) — actionable backlog for follow-up phases. Totals 14 → 15 scripts; mirrors P20/P31 advisory-by-default + per-file `<!-- ai-confidence-verified-phase: NNN -->` stamp pattern. No CI gate count change in this phase — workflow wiring deferred to a follow-up alongside adoption.)
+**Last updated:** 2026-04-29 (Phase 153 pL36-cluster-fix — added `test-audit-ai-implementability.sh` (#16) to inventory closing the README parity gate that surfaced during cluster-terminal sweep; the test ships AC-34-01..06 CLI-surface coverage in no-network mode, mechanically locking the deep-walk + non-md tier-1 walker contract from Phase 153 Task A4 without LLM gateway dependency. Totals 15 → 16 scripts; ~36 → ~41 s CI time.)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -54,8 +54,9 @@ PR so any regression fails the build at the assertion level (with
 | 13 | [`test-inline-code-blanking-parity.sh`](./test-inline-code-blanking-parity.sh) | P45 | JS↔Python inline-code blanking parity: `linter-scripts/check-spec-cross-links.py::strip_inline_code()` and `linter-scripts/generate-dashboard-data.cjs::blankInlineCode()` MUST produce byte-identical output for any input line, with same-length space runs (char offsets preserved → line numbers stay accurate). 8-fixture corpus probes the P44 root-cause pattern (inline-code wrapping a markdown link target — `` `./test-foo.sh` `` inside `[…](…)`), bare/multi/triple-backtick spans, link-adjacent code, and empty input. Floor: fixture count ≥ 8. Mechanically locks the AC-11-05 dual-implementation parity contract (P44 closure). | 17 | ~1 s | [AC-11-05](../../spec/27-spec-toolchain/11-generate-dashboard-data.md) |
 | 14 | [`test-check-truncated-prose.sh`](./test-check-truncated-prose.sh) | P47-followup-1 | §27 slot 32 `check-truncated-prose.py` exit-code contract: clean fixtures (terminator + structural endings) exit 0; dirty fixtures (unclosed code fence + mid-sentence ending) exit 1 with both flagged in stderr; live `spec/` tree gate proves the linter passes on the real tree. Mechanically catches the **truncation class** of AI-implementability blockers surfaced by the Phase P47 audit. First production run found one real defect: `spec/17-consolidated-guidelines/14-app-issues.md` had an unbalanced fence at template end (fixed in same phase). | 5 | ~0.3 s | [AC-32-01..05](../../spec/27-spec-toolchain/32-check-truncated-prose.md) |
 | 15 | [`test-check-ai-confidence.sh`](./test-check-ai-confidence.sh) | P48-1-fu1 | §27 slot 33 `check-ai-confidence.py` exit-code contract: live-tree default mode exits 0; `--json` schema includes `scanned_modules`/`eligible`/`matches`/`mismatches`/`stamped`/`stamped_failed`/`rows`; `--strict` exits 1 when any drift exists (current 13 drifters), 0 once tree converges; `--report-only` always exits 0; importlib-loaded `derive_tier()` returns `Medium` when P3 fails (no `**Verifies:**`) and promotes to `High` when added — proves AC-33-04 lowest-passing-gate logic. Mechanizes the AC-09 `AI Confidence` four-gate rubric introduced in P48-1, eliminating the entire class of author-judgement drift. | 5 | ~1 s | [AC-33-01..06](../../spec/27-spec-toolchain/33-check-ai-confidence.md) |
+| 16 | [`test-audit-ai-implementability.sh`](./test-audit-ai-implementability.sh) | 153 Task A4 | §27 slot 34 `audit-ai-implementability.py` CLI surface contract (no-network mode only — never invokes the LLM gateway): `--help` advertises five mode flags incl. `--no-network`; `--no-network` exits 0 on full tree; `--module=<slot>` walks a single module bundle; `--json` produces parseable JSON; non-md walker (slot 11 `spec/11-powershell-integration` schemas/templates) returns ≥18 files per AC-34-06. Mechanically locks the deep-walk + non-md tier-1 walker contract (Lessons #11/#16) without LLM gateway dependency. | 6 | ~5 s | [AC-34-01..06](../../spec/27-spec-toolchain/34-audit-ai-implementability.md) |
 
-**Totals:** 14 scripts · 164+ assertions · ~36 s of CI time.
+**Totals:** 15 scripts · 170+ assertions · ~41 s of CI time.
 
 All thirteen scripts are reachable from [`.github/workflows/spec-health.yml`](../../.github/workflows/spec-health.yml).
 Seven run as discrete self-test steps (`Audit CLI threshold contract self-test (Phase 91)`,
@@ -199,6 +200,7 @@ bash linter-scripts/test/test-weights-parity.sh
 bash linter-scripts/test/test-check-99-summary-freshness.sh
 bash linter-scripts/test/test-check-99-stamp-bump.sh
 bash linter-scripts/test/test-archive-exclusion-runtime.sh
+bash linter-scripts/test/test-audit-ai-implementability.sh
 ```
 
 Run all ten sequentially:

@@ -1,6 +1,6 @@
 # Consolidated: Code Block System — Complete Reference
 
-**Source:** [`../09-code-block-system/`](../09-code-block-system/)  
+**Source:** `../09-code-block-system/` *(documentation-only — folder not yet materialised; see Phase F1 classification)*  
 **Version:** 3.2.1  
 **Updated:** 2026-04-29
 

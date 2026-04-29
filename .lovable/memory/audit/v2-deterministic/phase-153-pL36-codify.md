@@ -17,7 +17,7 @@ Appended **Section G — Cross-Module Roll-ups (Lesson #36)** to `mem://process/
 
 ## What this closes
 
-The pL36-spec17 sweep (last cycle) caught a real `synchronous=NORMAL` divergence in spec/17 mirrors of AC-22; without Section G in the lessons memo, the rule lived only in narrative across multiple per-task memos. Section G makes the rule discoverable as a first-class contributor process surface — future spec/24-design-system or README-style index authors will find it before they paste a contract into a roll-up.
+The pL36-spec17 sweep (last cycle) caught a real `synchronous=NORMAL` divergence in spec/17 mirrors of AC-22; without Section G in the lessons memo, the rule lived only in narrative across multiple per-task memos. Section G makes the rule discoverable as a first-class contributor process surface — future `spec/24-app-design-system-and-ui` or README-style index authors will find it before they paste a contract into a roll-up.
 
 ## Mirror chain
 

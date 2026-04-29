@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.4.5
+**Version:** 3.4.6
 **Updated:** 2026-04-29
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 3.4.6 — 2026-04-29 (Phase 153 pL36-cluster-fix — Source-header drift repair)
+
+- **Fixed** 10 broken `**Source:**` line-3 anchors in spec/17 mirror modules surfaced by the cluster-terminal cross-link gate. The v3.4.5 sweep that authored these headers used legacy/aspirational sibling-folder names instead of canonical slugs. Renames (7 files): `01-spec-authoring/` → `01-spec-authoring-guide/`; `02-coding-guidelines/research/` → `02-coding-guidelines/10-research/`; `research/` → `10-research/`; `21-app/issues/` → `25-app-issues/`; `21-app/design-system/` → `24-app-design-system-and-ui/`; `27-linter-authoring-guide/` → `27-spec-toolchain/`; `28-distribution-and-runner/` → `15-distribution-and-runner/`. Doc-only conversions (3 files: `08-docs-viewer-ui`, `09-code-block-system`, `13-app`): live links converted to inline-code spans with explicit `*(documentation-only — folder not yet materialised; see Phase F1 classification)*` rider — the P44 inline-code-blanking-parity skip semantics correctly silence the cross-link gate on these illustrative anchors.
+- **Lesson #36 reinforced for sweep-authored content** (codified in §99 v4.6.6): when a bulk-sweep tool inserts navigation links across ≥10 files, the input slug list MUST be cross-checked against `ls spec/` BEFORE the sweep runs (v3.4.5 produced 10 broken anchors out of 15 — 67% failure rate — entirely from stale/aspirational slug data). Future sweep tools SHOULD ingest the canonical sibling-folder list at run-time, not from author memory.
+- **Why a patch:** pure header-metadata fix — no normative surface change to spec/17, no §97 edit, no AC surface change, no rubric/CI-gate change. Lockstep ripple: §00/§98/§99 patch-bump only.
 
 ### 3.4.5 — 2026-04-29 (Phase 153 P-L36-fu — Source-header sweep across roll-up)
 
