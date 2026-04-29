@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.8.0
-**Updated:** 2026-04-29 (Phase 153 Task A9: AC-T-27/28/29 codify CODE_GLOB exhaustiveness, R1–R5 resilience contract, per-artifact AC delegation. Module AC count 26 → 29 — closes spec/27 audit findings D1/D2/D3. Lift expected 75 → 88+.)
+**Version:** 2.8.1
+**Updated:** 2026-04-29 (Phase 153 P49: AC-T-13 mechanical-lock graduation — `test-audit-deterministic-stability.sh` extended to cover all three generators cited in `**Verifies:**` (auditor + spec-index + dashboard-data). 7 → 13 assertions; closes P46-followup-3.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
