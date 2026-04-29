@@ -138,6 +138,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** env `GITHUB_ACTIONS=true`, `GITHUB_SERVER_URL=https://github.com`, `GITHUB_REPOSITORY=org/repo`, `GITHUB_HEAD_REF=feat/x`, `GITHUB_SHA=abc…`,
 - **When** any phase runs,
 - **Then** the payload `RepoUrl` MUST equal `https://github.com/org/repo` AND `Branch` MUST equal `feat/x` AND `GitSha256` MUST equal `abc…`.
+- **Verifies:** §08 GitHub provider-binding table; AC-28-33 GitLab / AC-28-34 Azure-Bitbucket-shell complements; AC-28-20 SSH-to-HTTPS normalization for the constructed `RepoUrl`.
 
 ### AC-28-20 — URL normalization: SSH → HTTPS
 
