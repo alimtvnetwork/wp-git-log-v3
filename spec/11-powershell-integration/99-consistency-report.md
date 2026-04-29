@@ -1,9 +1,11 @@
 # Consistency Report — PowerShell Integration
 
-**Version:** 3.4.0  
-**Generated:** 2026-04-27  
-**Health Score:** 100/100 (A+) — Phase 39c interface-contract sweep
+**Version:** 3.4.1  
+**Generated:** 2026-04-29  
+**Health Score:** 100/100 (A+) — Phase 153 Verifies-coverage closure
 
+> **v3.4.1 (Phase 153):** §97 v1.0.0 → v1.1.0 — added `**Verifies:**` clauses to all 8 boilerplate ACs (AC-01..AC-08), closing the real P3 Verifies-coverage gap that audit-v6 (Phase 152) baseline missed. Module now satisfies the tree-wide P3-CLOSED claim recorded in `mem://index.md` Core.
+>
 > **v3.4.0 (Phase 39c):** Added `07-runner-interface.md` (CLI Param block, exit codes, dep toolchain). §97 deepened from 5 meta-ACs to 13 ACs (10 functional GWT + 3 spec-hygiene). Closes audit findings *CRITICAL — Missing Interface Definition*, *HIGH — Underspecified Dependency Management*, *HIGH — Non-Functional Acceptance Criteria*.
 
 ---
