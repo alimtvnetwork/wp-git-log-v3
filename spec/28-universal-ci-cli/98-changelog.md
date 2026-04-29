@@ -1,9 +1,13 @@
 # Changelog
 
-**Updated:** 2026-04-28
+**Updated:** 2026-04-29
 
 
 All notable changes to `spec/28-universal-ci-cli/`.
+
+## [2.1.2] — 2026-04-29 — Phase 150 (P3 sweep slot 10 — Verifies clauses on §97 AC-28-01..AC-28-28)
+
+- **Added** `**Verifies:**` clauses to AC-28-01 through AC-28-28 in `97-acceptance-criteria.md` (28 ACs). Verifies-coverage gap: **12/40 → 40/40**. Each AC now explicitly maps to its underlying invariant. Selected mappings: AC-28-01 (§03 TS detection), AC-28-04 (§05 file<env<flag precedence + provenance), AC-28-05/06/28 (§06↔§17 OpenAPI/streaming contract), AC-28-07 (§09 `HasError` disjunction), AC-28-08 (§06 sort+dedup; supports AC-28-23 byte-identical determinism), AC-28-09/10 (§10 SSH-vs-TempToken lane separation; mirrors `mem://specs/git-logs` SSH-key Lane B), AC-28-11/13 (§07 exit-code-3 / exit-code-4 + 4xx-fatal / retry-budget), AC-28-12 (§05 backoff exact-honor + idempotency), AC-28-14 (§05 `batch_max_bytes` cap-before-send + truncation-must-be-loud), AC-28-15/16/26 (§11 doctor happy/skew/verbatim-passthrough), AC-28-17/18 (§06 `/fixed-log` server-driven, no-local-cache), AC-28-19/20 (§08 GitHub binding + SSH-to-HTTPS canonicalization), AC-28-21 (§04 `--no-push` air-gapped), AC-28-22 (§03 polyglot detection + `<runtime>-<phase>` PipelineName), AC-28-23 (§06 deterministic-serialization for SSH signature stability), AC-28-24/25 (§05 HTTPS-by-default + backoff-length-equals-max_retries), AC-28-27 (§18 JSON-Schema-as-source-of-truth). AC-28-01..AC-28-28 GWT bodies preserved verbatim. §97 v2.0.0 → v2.1.0; §00 v2.1.1 → v2.1.2; §99 v2.1.1 → v2.1.2. `check-ai-confidence.py` P3 driver eliminated for `spec/28`.
 
 ## [2.1.1] — 2026-04-28
 - **P22 sync** (2026-04-28): §00 banner version field bumped 1.1.0 → 2.1.1 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
