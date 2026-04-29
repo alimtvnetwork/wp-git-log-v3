@@ -1,10 +1,13 @@
 # Changelog — File & Folder Naming Conventions
 
-**Version:** 1.2.1  
-**Updated:** 2026-04-29  
+**Version:** 1.2.2
+**Updated:** 2026-04-29
 **Scope:** `spec/02-coding-guidelines/08-file-folder-naming/`
 
 ---
+
+### 1.2.2 — 2026-04-29 — Phase 153 Task #29e: AI Confidence promoted High → Production-Ready
+- Phase 153 Task #29e — promoted `**AI Confidence:**` from `High` to `Production-Ready`. Pure banner edit: this module already passes P1+P2+P3+P4 per `check-ai-confidence.py`; the prior `High` value was a stale underclaim. **No AC change, no CI workflow change, no RUBRIC bump.**
 
 ## 1.3.0 — 2026-04-27
 
