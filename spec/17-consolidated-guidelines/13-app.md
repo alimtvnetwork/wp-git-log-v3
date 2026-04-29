@@ -1,6 +1,6 @@
 # Consolidated: App Specifications
 
-**Source:** [`../21-app/`](../21-app/)  
+**Source:** `../21-app/` *(documentation-only — see spec/23-app-database, spec/24-app-design-system-and-ui, spec/25-app-issues for current materialised app surfaces; Phase F1 classification)*  
 **Version:** 3.3.1  
 **Updated:** 2026-04-29
 
