@@ -147,7 +147,19 @@ def gate_p1(mod: Path, ov_text: str) -> tuple[bool, str]:
     if not siblings:
         listed = set()
     else:
-        listed = set(INVENTORY_LINK_RE.findall(ov_text))
+        # Restrict scan to the section under a `## ... Inventory` heading
+        # (any heading whose line includes "Inventory"). Falls back to the
+        # whole document if no such heading exists.
+        m_inv = re.search(r"^##[^\n]*Inventory[^\n]*\n", ov_text, re.M)
+        scan_text = ov_text
+        if m_inv:
+            after = ov_text[m_inv.end():]
+            m_next = re.search(r"^## ", after, re.M)
+            scan_text = after[: m_next.start()] if m_next else after
+        listed = set(INVENTORY_LINK_RE.findall(scan_text))
+        # Bare-filename matches: take the basename so we compare to sibling names.
+        for raw in INVENTORY_BARE_RE.findall(scan_text):
+            listed.add(raw.rsplit("/", 1)[-1])
     missing = siblings - listed
     if missing:
         return False, f"P1: {len(missing)} sibling(s) not in inventory ({sorted(missing)[:3]}…)"
