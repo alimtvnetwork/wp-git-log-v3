@@ -68,6 +68,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** `--auth-mode=ssh`,
 - **When** the CLI POSTs `/append-log`,
 - **Then** the request MUST include all 5 headers (`X-GL-Auth-Mode`, `X-GL-Fingerprint`, `X-GL-Timestamp`, `X-GL-Nonce`, `X-GL-Signature`) AND the JSON body MUST NOT contain a `TempToken` field.
+- **Verifies:** §10 SSH-lane separation (auth-in-headers, never-in-body) — mirrors `mem://specs/git-logs` SSH-key Lane B contract; AC-28-10 TempToken-mode complement.
 
 ### AC-28-10 — Auth lane: TempToken mode populates body fields
 
