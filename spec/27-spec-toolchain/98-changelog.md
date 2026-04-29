@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.77.0
+**Version:** 2.77.1
 **Updated:** 2026-04-29
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.77.1 — 2026-04-29 — Phase 153 Task #35-fu: slot 29 `latest_release()` SemVer-max comparator (AC-29-15, slot 29 v1.2.0 → v1.3.0)
+- **Action**: Patched `linter-scripts/check-version-parity.py:latest_release()` to return the SemVer-MAXIMUM release version found in §98 instead of the positional-first one. Added `_semver_key(v)` helper that parses `X.Y.Z` into a comparable `(int, int, int)` tuple. Closes 15 false-positive parity FAILs accumulated during Phase 153 Tasks #29c/d/e/#31 — those sub-tasks prepended SemVer-LOWER patch reconciliation rows above older SemVer-HIGHER minor releases (e.g. `### 4.0.1` above `## 4.1.0`); the prior comparator returned `4.0.1` while §00 banners correctly tracked the SemVer max.
+- **Spec lockstep**: slot 29 §97 (inline `## Changelog`) v1.2.0 → **v1.3.0** (new AC-29-15); §00 v2.77.0 → **v2.77.1**; §98 v2.77.0 → **v2.77.1**; §99 v2.74.0 → **v2.74.1**. Patch-only on §27 module banners (child slot got new content; module surface unchanged).
+- **Self-test**: 13/13 → **14/14** ✅. T14 builds a §98 with row order ≠ SemVer order and asserts `matches=1`. T2 + T9 also moved from real-tree to sandbox (real tree is now 74/74 stamped; per-file strict promotion fires whenever any drift exists, breaking the "advisory exits 0" + "JSON parses cleanly" assertions).
+- **Real-tree impact**: parity FAILs 17 → 5 over the two-step Task #35 closure (Task #35: 17 → 15 via 2 banner-bump fixes catching A6/Task#29e shipments; Task #35-fu: 15 → ?? — depends on which side of mismatch each remaining drift sits on). Five banner-bump fixes shipped this turn (spec/12/01, spec/12/02, three error-modal sub-modules) clear the §00-behind class.
+- **Lesson #28 codified inside AC-29-15**: when a versioning gate flags wide drift (≥10 modules in a single class), inspect the gate's COMPARATOR before mass-patching the tree — the bug may be in the comparator (positional-first vs SemVer-max), not the data.
+- **No CI workflow change, no AC-31-31 cascade, no RUBRIC bump, no gate-count change** (gate #19 contract preserved; only the comparator was sharpened).
 
 ### 2.77.0 — 2026-04-29 — Phase 153 Task A9: spec/27 self-lift 75 → ≥88 (AC-T-27/28/29 + Resilience contract + Bijection v1.1)
 - **Action**: Closed the three audit findings against spec/27 from the v4 baseline (HIGH D2 missing per-artifact GWT, MEDIUM D3 incomplete error/concurrency, LOW D1 ambiguous CODE_GLOB). (1) **AC-T-27** locks brace-list extensions in the `Normative Contract — Toolchain Bijection` block as exhaustive per kind — bumped contract `v1.0 → v1.1`, extended every kind's brace-list to its full canonical extension universe (`{.py,.cjs,.mjs,.sh,.ps1,.go,.toml,.allowlist,.md,.yml}`), authority-comment requires §98 + AC-T-27 update on every new extension. (2) Added **Resilience — CI Edge Cases** section in §00 between Invariants and Related Modules with five rules R1–R5 (R1 atomic temp-then-rename + fsync + finally; R2 single-read + 3× retry + exit-2-on-lock; R3 ≤60s LLM timeout + exponential back-off + content-keyed cache; R4 SIGTERM/SIGINT trap + 5s graceful + temp sweep + exit 130; R5 ENOSPC/EROFS exit 2 not 1) and bound them via **AC-T-28**. (3) **AC-T-29** makes the §97-vs-slot AC delegation contract explicit + auditable — closes the LLM-context-window-bounded auditor blind spot (auditor scored §97 alone without the 79 slot files in its bundle).

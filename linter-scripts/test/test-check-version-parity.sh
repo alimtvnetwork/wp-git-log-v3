@@ -16,6 +16,7 @@
 #   T11 Phase P20: stamped §00 with mismatch fails default mode (per-file strict)
 #   T12 Phase P20: stamped §00 with match passes (counts as stamped + match)
 #   T13 Phase P20: --report-only overrides per-file stamp failure
+#   T14 Phase 153 Task #35-fu: latest_release() returns SemVer-MAX, not positional-first
 
 set -euo pipefail
 
@@ -58,9 +59,16 @@ t1() {
     [[ "$out" == *"skipped(no-release)="* ]]
 }
 
-# T2 default exit 0 with real-tree mismatches
+# T2 default exit 0 with mismatches present (advisory mode, no stamps).
+# Phase 153 Task #35-fu: switched from real-tree to sandbox — real tree now
+# has 74/74 stamped modules, so per-file strict promotion fires whenever any
+# mismatch exists, breaking the "default exits 0" assertion. Sandbox isolates
+# the contract under test (advisory-by-default for unstamped drift).
 t2() {
-    python3 "$GATE" >/dev/null 2>&1
+    local sb="$SANDBOX/t2/spec"
+    rm -rf "$SANDBOX/t2"; mkdir -p "$sb"
+    mk_module "$sb/drift" "1.0.0" "2.0.0" "heading"   # unstamped → advisory
+    python3 "$GATE" --spec-root "$sb" >/dev/null 2>&1
 }
 
 # T3 strict exits 1 when sandbox contains a mismatch
@@ -147,9 +155,14 @@ t8() {
     [[ "$out" == *"matches=1"* ]] && [[ "$out" == *"mismatches=0"* ]]
 }
 
-# T9 --json valid (Phase P20: also asserts stamped/stamped_failed keys)
+# T9 --json valid (Phase P20: also asserts stamped/stamped_failed keys).
+# Phase 153 Task #35-fu: switched to sandbox — same reason as T2 (real-tree
+# stamped+drift now exits 1, killing stdin to the JSON parser).
 t9() {
-    python3 "$GATE" --json 2>/dev/null | python3 -c "
+    local sb="$SANDBOX/t9/spec"
+    rm -rf "$SANDBOX/t9"; mkdir -p "$sb"
+    mk_module "$sb/mod" "1.2.3" "1.2.3" "heading"
+    python3 "$GATE" --spec-root "$sb" --json 2>/dev/null | python3 -c "
 import json, sys
 d = json.load(sys.stdin)
 required = {'scanned','eligible','matches','mismatches','skipped_no_banner','skipped_no_release','stamped','stamped_failed','details'}
@@ -195,6 +208,22 @@ t13() {
     python3 "$GATE" --spec-root "$sb" --report-only >/dev/null 2>&1
 }
 
+# T14 Phase 153 Task #35-fu: latest_release() returns SemVer-MAX, not positional-first.
+# Builds a §98 where row order does NOT equal SemVer order:
+#   ## 4.0.1 — 2026-04-29 (Phase 153 reconciliation patch, prepended top)
+#   ## 4.1.0 — 2026-04-27 (older but SemVer-higher minor release)
+# §00 banner = 4.1.0 (SemVer-max). Pre-fix gate compared 4.1.0 ↔ 4.0.1 → MISMATCH.
+# Post-fix gate compares 4.1.0 ↔ 4.1.0 (max(4.0.1, 4.1.0)) → MATCH.
+t14() {
+    local sb="$SANDBOX/t14/spec"
+    rm -rf "$SANDBOX/t14"; mkdir -p "$sb/mod"
+    printf '# Test\n\n**Version:** 4.1.0\n**Updated:** 2026-04-29\n' > "$sb/mod/00-overview.md"
+    printf '# Changelog\n\n## 4.0.1 — 2026-04-29 (reconciliation patch)\n- entry\n\n## 4.1.0 — 2026-04-27 (older minor)\n- entry\n' > "$sb/mod/98-changelog.md"
+    local out
+    out="$(python3 "$GATE" --spec-root "$sb" 2>&1)"
+    [[ "$out" == *"matches=1"* ]] && [[ "$out" == *"mismatches=0"* ]]
+}
+
 echo "test-check-version-parity.sh"
 run 1 t1
 run 2 t2
@@ -209,6 +238,7 @@ run 10 t10
 run 11 t11
 run 12 t12
 run 13 t13
+run 14 t14
 
 echo "──────────────────────────────"
 echo "PASS: $PASS    FAIL: $FAIL"
