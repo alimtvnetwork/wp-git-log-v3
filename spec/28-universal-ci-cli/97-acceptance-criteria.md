@@ -187,6 +187,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the server returns `403 GL-AUTH-PROFILE-INACTIVE` on the doctor probe,
 - **When** `glci doctor` runs,
 - **Then** stderr MUST contain literal `GL-AUTH-PROFILE-INACTIVE` AND exit code MUST equal `5`.
+- **Verifies:** §11 doctor-passes-server-codes-verbatim invariant; pairs with AC-28-11 (verbatim ErrorCode passthrough at runtime); exit-code-5 doctor-failure class.
 
 ### AC-28-27 — JSON Schema validates default config
 
