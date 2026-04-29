@@ -47,6 +47,7 @@
 | 02 | `02-naming-conventions.md` | ✅ Present |
 | 03 | `03-required-files.md` | ✅ Present |
 | 04 | `04-cli-module-template.md` | ✅ Present |
+| 04 | `04-ai-onboarding-prompt.md` | ✅ Present (co-located at slot 04 per immutable-slot rule; disambiguated by trailing slug — Phase P48-1-fu1-batch slot 2) |
 | 05 | `05-app-project-template.md` | ✅ Present |
 | 06 | `06-non-cli-module-template.md` | ✅ Present |
 | 07 | `07-memory-folder-guide.md` | ✅ Present |
