@@ -375,6 +375,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 | AC-CG-LEGACY-005 | DRY principles documented with refactoring patterns | `01-cross-language/08-dry-principles.md` |
 | AC-CG-LEGACY-006 | Cyclomatic complexity limits defined with enforcement rules | `01-cross-language/06-cyclomatic-complexity.md` |
 
+- **Verifies:** `01-cross-language/` subfolder contents (booleans, casting, code-style, master-guidelines, DRY, complexity); superseded as a group by AC-CG-04, AC-CG-05, AC-CG-09, AC-CG-13.
+
 ### AC-CG-LEGACY: TypeScript
 
 | ID | Criterion | Source |
@@ -383,6 +385,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 | AC-CG-LEGACY-008 | Type definitions avoid `any` and use proper generic constraints | `02-typescript/` |
 | AC-CG-LEGACY-009 | React component patterns follow functional component with hooks style | `02-typescript/` |
 | AC-CG-LEGACY-010 | State management patterns use Zustand stores with typed selectors | `02-typescript/` |
+
+- **Verifies:** `02-typescript/` subfolder contents (enums, generics, React patterns, Zustand stores); superseded as a group by AC-CG-10 (per-language module-specific GWT ACs).
 
 ### AC-CG-LEGACY: Golang
 
@@ -393,6 +397,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 | AC-CG-LEGACY-013 | HTTP method enum defines typed constants | `03-golang/03-httpmethod-enum.md` |
 | AC-CG-LEGACY-014 | Service layer follows interface-based dependency injection | `03-golang/` |
 
+- **Verifies:** `03-golang/` subfolder contents (booleans, `apperror.Result[T]`, HTTP method enum, service interfaces); superseded as a group by AC-CG-03 (CODE-RED R1) + AC-CG-10.
+
 ### AC-CG-LEGACY: PHP
 
 | ID | Criterion | Source |
@@ -402,6 +408,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 | AC-CG-LEGACY-017 | Type declarations (parameter + return types) required on all functions | `04-php/` |
 | AC-CG-LEGACY-018 | Input sanitization and output escaping follow WordPress security standards | `04-php/` |
 
+- **Verifies:** `04-php/` subfolder contents (PSR-4, `$wpdb` prepared statements, type declarations, WP sanitization/escaping); superseded as a group by AC-CG-06 (CODE-RED R4 — DB conventions) + AC-CG-10.
+
 ### AC-CG-LEGACY: Rust
 
 | ID | Criterion | Source |
@@ -410,6 +418,8 @@ The following table-row criteria from v3.2.0 are preserved verbatim. They are NO
 | AC-CG-LEGACY-020 | Error handling uses `Result<T, E>` pattern with custom error types | `05-rust/` |
 | AC-CG-LEGACY-021 | Async patterns use tokio runtime with proper cancellation handling | `05-rust/` |
 | AC-CG-LEGACY-022 | Memory safety patterns documented for FFI boundaries | `05-rust/` |
+
+- **Verifies:** `05-rust/` subfolder contents (snake_case/PascalCase Rust idioms, `Result<T, E>`, tokio cancellation, FFI memory safety); superseded as a group by AC-CG-09 (Rust naming exception) + AC-CG-10.
 
 ---
 
