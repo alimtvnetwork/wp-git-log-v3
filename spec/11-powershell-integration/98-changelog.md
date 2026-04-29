@@ -1,6 +1,6 @@
 # Changelog — PowerShell Integration for Project Runner
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-29  
 **Scope:** `spec/11-powershell-integration/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 1.3.0 — 2026-04-29 — Phase 153 P48-4: Per-step pipeline contract with closed exit-code enumeration
+- **Added** §00 "Pipeline Steps" → "Per-Step Contract (Normative)" subsection: 5-row × 5-column per-step table (inputs / outputs / success criteria / disjoint top exit code from `{1..10}` / cross-walk to detailed `9500..9599` codes), 3-row pre-flight configuration codes table (`{5, 6, 7}` apply BEFORE Step 1), and 5-rule forbidden-runtime-patterns subsection (fail-fast, no out-of-band exit codes, paired top+detailed codes, disjoint per-step ownership, no false-success on skip flags).
+- **Added** AC-09 (`[critical]`) binding the per-step contract; cross-references `04-error-codes.md` (top + detailed bands) and `07-runner-interface.md` (CLI `Param()` block + pinned dependency versions Go 1.22 / Node 20.11 / pnpm 9). Codifies **Lesson #34** — multi-step pipeline contracts MUST lift the per-step inputs/outputs/success/exit-code contract to a single normative table on the entry-point document; fragmenting across sibling files is invisible to LLM auditors and fresh implementers.
+- **Closes** Phase 153 P47-fu1 critical finding "11-ps Pipeline Steps lack per-step exit codes" — the **3rd of 3 P47-fu1 critical findings** (P48-2 closed boolean conventions; P48-3 closed AppLink resolution; P48-4 closes pipeline contract). All P47-fu1 critical findings now CLOSED.
+- **Banners**: §00 spec-version 2.26.1 → **2.27.0** (minor — new normative subsection adds a public contract surface); §97 v1.1.0 → **v1.2.0** (minor — AC count 8 → 9); §98 v1.2.0 → **v1.3.0**; §99 v3.4.1 → **v3.5.0**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade** (no new linter slot — the contract is enforced at runtime by `run.ps1` and verified by exit-code observation; future static-checker contributions can land as a §97 extension AC).
 
 ### 1.2.0 — 2026-04-29
 - **Phase 153 — Changed** §97 v1.0.0 → v1.1.0: added `**Verifies:**` clauses to all 8 boilerplate ACs (AC-01..AC-08), each anchored to either §00 baseline, a sibling spec section, or the relevant linter script. Closes the real P3 Verifies-coverage gap that audit-v6 baseline (Phase 152) missed because `check-ai-confidence.py` did not flag boilerplate-template modules.
