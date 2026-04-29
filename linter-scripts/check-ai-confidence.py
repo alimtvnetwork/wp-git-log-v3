@@ -147,19 +147,20 @@ def gate_p1(mod: Path, ov_text: str) -> tuple[bool, str]:
     if not siblings:
         listed = set()
     else:
-        # Restrict scan to the section under a `## ... Inventory` heading
-        # (any heading whose line includes "Inventory"). Falls back to the
-        # whole document if no such heading exists.
+        # Markdown-link form `](./file.md)` is unambiguous — scan the whole
+        # document (these are explicit cross-refs anywhere in §00).
+        listed = set(INVENTORY_LINK_RE.findall(ov_text))
+        # Bare-filename form (table cells, list items) is ambiguous — restrict
+        # to the section under a `## ... Inventory` heading to avoid matching
+        # `.md` words in arbitrary prose. Falls back to no bare-scan if no
+        # such heading exists (the link-form scan above still applies).
         m_inv = re.search(r"^##[^\n]*Inventory[^\n]*\n", ov_text, re.M)
-        scan_text = ov_text
         if m_inv:
             after = ov_text[m_inv.end():]
             m_next = re.search(r"^## ", after, re.M)
-            scan_text = after[: m_next.start()] if m_next else after
-        listed = set(INVENTORY_LINK_RE.findall(scan_text))
-        # Bare-filename matches: take the basename so we compare to sibling names.
-        for raw in INVENTORY_BARE_RE.findall(scan_text):
-            listed.add(raw.rsplit("/", 1)[-1])
+            inv_section = after[: m_next.start()] if m_next else after
+            for raw in INVENTORY_BARE_RE.findall(inv_section):
+                listed.add(raw.rsplit("/", 1)[-1])
     missing = siblings - listed
     if missing:
         return False, f"P1: {len(missing)} sibling(s) not in inventory ({sorted(missing)[:3]}…)"
