@@ -5,10 +5,10 @@ drift_acknowledged: 2026-04-26
 
 # Coding Guidelines
 
-**Version:** 3.3.1  
+**Version:** 3.4.0  
 <!-- h10-verified-phase: 30 -->
 **Status:** Active  
-**Updated:** 2026-04-28  
+**Updated:** 2026-04-29  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
