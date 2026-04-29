@@ -5,8 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Reusable CI Guards — AI-Implementation Guide
 
-**Version:** 1.0.0
-**Updated:** 2026-04-21
+**Version:** 1.0.1
+**Updated:** 2026-04-29
 <!-- h10-verified-phase: 32 -->
 **AI Confidence:** Production-Ready
 **Ambiguity:** None

@@ -5,9 +5,9 @@ description: Placement-rule router for app issue analysis under coding guideline
 
 # App Issues
 
-**Version:** 3.3.1  
+**Version:** 3.3.2  
 <!-- h10-verified-phase: 30 -->
-**Updated:** 2026-04-28
+**Updated:** 2026-04-29
 
 ---
 

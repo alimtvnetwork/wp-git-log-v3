@@ -1,8 +1,8 @@
 # Phase 2 — Enums and Coding Style
 
-**Version:** 1.1.0  
+**Version:** 1.1.1  
 **Status:** Complete  
-**Updated:** 2026-04-26  
+**Updated:** 2026-04-29  
 <!-- h10-verified-phase: 32 -->
 **AI Confidence:** High  
 **Ambiguity:** None
