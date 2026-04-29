@@ -660,6 +660,70 @@
         "symbol": "DETERMINISTIC"
       }
     ],
+    "27-spec-toolchain/32-check-truncated-prose.md#AC-32-01": [
+      {
+        "file": "linter-scripts/check-truncated-prose.py",
+        "kind": "function",
+        "note": "Unclosed-fence detection (odd fence count \u2192 exit 1).",
+        "symbol": "classify"
+      },
+      {
+        "file": "linter-scripts/test/test-check-truncated-prose.sh",
+        "kind": "function",
+        "note": "Unclosed-fence detection (odd fence count \u2192 exit 1).",
+        "symbol": "classify"
+      }
+    ],
+    "27-spec-toolchain/32-check-truncated-prose.md#AC-32-02": [
+      {
+        "file": "linter-scripts/check-truncated-prose.py",
+        "kind": "regex",
+        "note": "Mid-sentence detection (last meaningful line lacks terminator).",
+        "symbol": "TERMINATOR_RE"
+      },
+      {
+        "file": "linter-scripts/test/test-check-truncated-prose.sh",
+        "kind": "regex",
+        "note": "Mid-sentence detection (last meaningful line lacks terminator).",
+        "symbol": "TERMINATOR_RE"
+      }
+    ],
+    "27-spec-toolchain/32-check-truncated-prose.md#AC-32-03": [
+      {
+        "file": "linter-scripts/check-truncated-prose.py",
+        "kind": "regex",
+        "note": "Structural-ending allowance (heading/table/list/HR/blockquote/closing-fence/link-only).",
+        "symbol": "STRUCTURAL_RE"
+      },
+      {
+        "file": "linter-scripts/test/test-check-truncated-prose.sh",
+        "kind": "regex",
+        "note": "Structural-ending allowance (heading/table/list/HR/blockquote/closing-fence/link-only).",
+        "symbol": "STRUCTURAL_RE"
+      }
+    ],
+    "27-spec-toolchain/32-check-truncated-prose.md#AC-32-04": [
+      {
+        "file": ".github/workflows/spec-health.yml",
+        "kind": "function",
+        "note": "Live-tree gate wired into spec-health.yml between version-parity and tree-health steps.",
+        "symbol": "main"
+      },
+      {
+        "file": "linter-scripts/check-truncated-prose.py",
+        "kind": "function",
+        "note": "Live-tree gate wired into spec-health.yml between version-parity and tree-health steps.",
+        "symbol": "main"
+      }
+    ],
+    "27-spec-toolchain/32-check-truncated-prose.md#AC-32-05": [
+      {
+        "file": "linter-scripts/test/test-check-truncated-prose.sh",
+        "kind": "function",
+        "note": "5 assertions including the live-tree gate (proves Phase P47-followup-1 fix landed).",
+        "symbol": "assert"
+      }
+    ],
     "27-spec-toolchain/62-spec-folder-refs-allowlist.md#AC-62-02": [
       {
         "file": "linter-scripts/check-spec-cross-links.py",
@@ -768,6 +832,7 @@
   "code_to_ac": {
     ".github/workflows/spec-health.yml": [
       "27-spec-toolchain/17-check-trace-map-regression.md#AC-17-08",
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-04",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-08"
     ],
     "linter-scripts/audit-spec-vs-code-v2.py": [
@@ -845,6 +910,12 @@
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-01",
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-09"
     ],
+    "linter-scripts/check-truncated-prose.py": [
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-01",
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-02",
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-03",
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-04"
+    ],
     "linter-scripts/deepen-consistency-reports.py": [
       "27-spec-toolchain/97-acceptance-criteria.md#AC-T-24"
     ],
@@ -913,6 +984,12 @@
       "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-03",
       "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-04",
       "27-spec-toolchain/28-check-archive-exclusion-runtime.md#AC-28-05"
+    ],
+    "linter-scripts/test/test-check-truncated-prose.sh": [
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-01",
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-02",
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-03",
+      "27-spec-toolchain/32-check-truncated-prose.md#AC-32-05"
     ],
     "linter-scripts/test/test-inline-code-blanking-parity.sh": [
       "27-spec-toolchain/11-generate-dashboard-data.md#AC-11-05"
@@ -2215,13 +2292,13 @@
   ],
   "summary": {
     "ac_drifted": 1258,
-    "ac_total": 1349,
-    "ac_traced": 91,
+    "ac_total": 1354,
+    "ac_traced": 96,
     "code_orphan": 29,
-    "code_referenced": 27,
-    "code_total": 56,
+    "code_referenced": 29,
+    "code_total": 58,
     "missing_ac": 0,
     "missing_file": 0,
-    "trace_entries": 91
+    "trace_entries": 96
   }
 }
