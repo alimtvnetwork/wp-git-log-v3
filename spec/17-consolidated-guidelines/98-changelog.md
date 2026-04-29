@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.4.1
+**Version:** 3.4.2
 **Updated:** 2026-04-29
 **Scope:** `spec/17-consolidated-guidelines/`
 
