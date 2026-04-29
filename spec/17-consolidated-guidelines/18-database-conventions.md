@@ -447,13 +447,16 @@ CREATE INDEX IdxUserRole_UserId          ON UserRole(UserId);
 
 ## 9. SQLite-Specific Rules
 
+**Canonical source:** [`spec/13-generic-cli/97-acceptance-criteria.md` AC-22](../13-generic-cli/97-acceptance-criteria.md) + [`spec/13-generic-cli/10-database.md` "Concurrency & Locking (Normative)"](../13-generic-cli/10-database.md). Restated here as a roll-up reference; if these PRAGMAs diverge from AC-22, **AC-22 wins** and this table MUST be updated.
+
 | Setting | PRAGMA | Purpose |
 |---------|--------|---------|
 | WAL mode | `PRAGMA journal_mode=WAL` | Concurrent reads during writes |
 | Foreign keys | `PRAGMA foreign_keys=ON` | Enforce FK constraints (OFF by default) |
 | Busy timeout | `PRAGMA busy_timeout=5000` | Prevent SQLITE_BUSY errors |
+| Synchronous | `PRAGMA synchronous=NORMAL` | Durability vs. throughput balance (per AC-22) |
 
-Every database connection MUST set all three PRAGMAs.
+Every database connection MUST set all four PRAGMAs. See AC-22 for `BEGIN IMMEDIATE` write discipline + `SQLITE_BUSY` retry contract (3×100ms ±25% jitter).
 
 ---
 

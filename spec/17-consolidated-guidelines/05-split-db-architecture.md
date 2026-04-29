@@ -198,7 +198,9 @@ CREATE TABLE DatabaseStat (
 
 ## 5. Concurrency & Locking — WAL Mode
 
-All databases use Write-Ahead Logging for concurrent access. **Every connection MUST set all three PRAGMAs:**
+**Canonical source:** [`spec/13-generic-cli/97-acceptance-criteria.md` AC-22](../13-generic-cli/97-acceptance-criteria.md) + [`spec/13-generic-cli/10-database.md` "Concurrency & Locking (Normative)"](../13-generic-cli/10-database.md). Per AC-22 the full PRAGMA set is `journal_mode=WAL`, `busy_timeout=5000`, `foreign_keys=ON`, `synchronous=NORMAL`; the example below shows three for brevity but production code MUST set all four. If this section diverges from AC-22, **AC-22 wins**.
+
+All databases use Write-Ahead Logging for concurrent access. **Every connection MUST set all four PRAGMAs (AC-22):**
 
 ```go
 func (m *DbManager) configureDb(db *sql.DB) error {
