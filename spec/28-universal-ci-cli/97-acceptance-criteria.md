@@ -54,6 +54,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** a runner that exits 0 but emits a line matching `^FAIL\b`,
 - **When** classification runs,
 - **Then** `HasError` MUST equal `true` AND `ErrorLogs[]` MUST contain that line.
+- **Verifies:** §09 classifier `HasError` invariant — disjunction of (exit≠0) OR (matched failure pattern); guards against false-green from runners that exit 0 on test failure.
 
 ### AC-28-08 — FilePaths sorted and deduplicated
 
