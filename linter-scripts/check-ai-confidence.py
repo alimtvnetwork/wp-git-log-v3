@@ -206,8 +206,12 @@ def _max_h1_stamp_in_tree() -> int:
 
 def gate_p4(mod: Path, workflow_text: str, h1_horizon: int) -> tuple[bool, str]:
     # CI-gate referenced: either the leaf dir name is mentioned, OR the
-    # workflow uses a `spec/**` glob that transitively covers the module.
-    rel = mod.relative_to(ROOT).as_posix()
+    # workflow uses a `spec/**` glob that transitively covers the module,
+    # OR the module's spec-relative path is mentioned verbatim.
+    try:
+        rel = mod.relative_to(ROOT).as_posix()
+    except ValueError:
+        rel = mod.as_posix()
     covered = (
         mod.name in workflow_text
         or "spec/**" in workflow_text
