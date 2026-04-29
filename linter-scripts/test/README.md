@@ -1,6 +1,6 @@
 # `linter-scripts/test/` — Self-Tests for the Spec-Toolchain CLI
 
-**Last updated:** 2026-04-29 (Phase P48-1-fu1 — added `test-check-ai-confidence.sh` (#15) mechanically locking the AC-09 `AI Confidence` four-gate rubric via §27 slot 33 `check-ai-confidence.py`; first production run found 13/15 modules drifting (5 P1 inventory gaps, 5 P3 `**Verifies:**` coverage gaps, 3 deeper P3/P4 issues) — actionable backlog for follow-up phases. Totals 14 → 15 scripts; mirrors P20/P31 advisory-by-default + per-file `<!-- ai-confidence-verified-phase: NNN -->` stamp pattern. No CI gate count change in this phase — workflow wiring deferred to a follow-up alongside adoption.)
+**Last updated:** 2026-04-29 (Phase 153 pL36-cluster-fix — added `test-audit-ai-implementability.sh` (#16) to inventory closing the README parity gate that surfaced during cluster-terminal sweep; the test ships AC-34-01..06 CLI-surface coverage in no-network mode, mechanically locking the deep-walk + non-md tier-1 walker contract from Phase 153 Task A4 without LLM gateway dependency. Totals 15 → 16 scripts; ~36 → ~41 s CI time.)
 **Source of truth for:** the contract guarantees of every script under
 `linter-scripts/` that has user-visible CLI semantics (exit codes,
 stdout/stderr structure, idempotency, determinism).
@@ -200,6 +200,7 @@ bash linter-scripts/test/test-weights-parity.sh
 bash linter-scripts/test/test-check-99-summary-freshness.sh
 bash linter-scripts/test/test-check-99-stamp-bump.sh
 bash linter-scripts/test/test-archive-exclusion-runtime.sh
+bash linter-scripts/test/test-audit-ai-implementability.sh
 ```
 
 Run all ten sequentially:
