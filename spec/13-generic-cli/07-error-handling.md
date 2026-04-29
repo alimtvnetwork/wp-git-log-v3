@@ -7,11 +7,17 @@
 
 ## Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | Success |
-| 1 | User error (bad args, missing file, invalid input) |
-| Non-zero | Propagated from child processes |
+> **Authoritative contract:** §97 **AC-10** (five-value enum) + **AC-17** (batch partial) + **AC-21** (§97-WINS supersession rule). Implementations MUST define a typed `ExitCode` enum and use it at every call site — bare integer literals other than `os.Exit(0)` are FORBIDDEN. The table below is a quick reference; the §97 ACs are normative.
+
+| Code | Constant         | Meaning                                                                              |
+|-----:|------------------|--------------------------------------------------------------------------------------|
+| `0`  | `ExitOK`         | Success                                                                              |
+| `1`  | `ExitError`      | Generic runtime error (operation failed but invocation was valid)                    |
+| `2`  | `ExitMisuse`     | Misuse: unknown command, invalid flags, missing required args                        |
+| `3`  | `ExitConfig`     | Configuration error (config file malformed or unreadable)                            |
+| `4`  | `ExitBatchPartial` | Batch partial failure (some items succeeded, some failed — `exec` only, AC-17)     |
+
+Codes 5–127 / 128+ / negative are SPEC VIOLATIONS — a top-level normaliser MUST clamp to `ExitError` and log the violation. Exit codes propagated from spawned child processes MUST be re-mapped onto this five-value contract before the parent process exits (e.g. a child's `127` becomes `ExitError` with an actionable stderr message, not a bare `127` leak).
 
 ## Error Message Rules
 
@@ -37,7 +43,7 @@ const (
 // cmd/clone.go
 if source == "" {
     fmt.Fprintln(os.Stderr, constants.ErrSourceRequired)
-    os.Exit(1)
+    os.Exit(int(exit.ExitMisuse)) // AC-10 / AC-21: missing required arg → ExitMisuse (2), NOT 1
 }
 ```
 
@@ -48,7 +54,7 @@ For commands that process N items (e.g., pull all repos):
 1. **Log per-item failures** but continue processing.
 2. **Track success/failure counts**.
 3. **Print summary at the end**.
-4. **Exit with code 1 if any failures**.
+4. **Exit per §97 AC-17:** `ExitOK` (0) if all succeeded, `ExitBatchPartial` (4) if some succeeded and some failed, `ExitError` (1) if **all** items failed. The bare `os.Exit(1)` in the example below is stale prose — refresh implementations to the three-way conditional.
 
 ```go
 var failed int
@@ -63,8 +69,14 @@ for _, repo := range repos {
 }
 
 fmt.Printf("\n%d succeeded, %d failed\n", len(repos)-failed, failed)
-if failed > 0 {
-    os.Exit(1)
+// AC-17 three-way contract:
+switch {
+case failed == 0:
+    os.Exit(int(exit.ExitOK))
+case failed == len(repos):
+    os.Exit(int(exit.ExitError)) // all failed
+default:
+    os.Exit(int(exit.ExitBatchPartial)) // partial — exit 4, NOT 1
 }
 ```
 
@@ -72,7 +84,7 @@ if failed > 0 {
 
 - Always check errors immediately after the call.
 - Return errors up the stack; let the caller decide.
-- In `cmd` package handlers, print the error and `os.Exit(1)`.
+- In `cmd` package handlers, print the error and exit with the appropriate `ExitCode` enum value (per §97 AC-10 + AC-21) — never a bare integer literal.
 - Never use `panic` for expected error conditions.
 
 ```go

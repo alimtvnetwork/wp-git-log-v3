@@ -81,7 +81,7 @@ Every subcommand handler:
 2. **Parses flags** using a dedicated parse function
 3. **Validates inputs** (required args, file existence)
 4. **Executes logic** by calling into domain packages
-5. **Handles errors** — print to stderr, exit 1
+5. **Handles errors** — print to stderr, return the appropriate `ExitCode` enum value (`ExitError=1` for generic runtime failure, `ExitMisuse=2` for invalid invocation, `ExitConfig=3` for malformed config, `ExitBatchPartial=4` for batch). See §97 AC-10 + AC-21 for the authoritative five-value contract; bare `os.Exit(1)` literals at handler call sites are FORBIDDEN.
 
 ```go
 // cmd/scan.go
@@ -99,7 +99,7 @@ func runScan(args []string) {
 |------|-----------|
 | One file per subcommand | Single responsibility |
 | Handlers are unexported (`runScan`, not `RunScan`) | Only `Run()` is the public API |
-| Unknown commands → stderr + exit 1 | Fail fast, fail clearly |
+| Unknown commands → stderr + `ExitMisuse` (2) per §97 AC-10 + AC-21 | Fail fast, fail clearly with the typed contract |
 | Aliases live in `constants` | No inline strings |
 | Each handler ≤ 15 lines | Extract helpers for complex flows |
 
