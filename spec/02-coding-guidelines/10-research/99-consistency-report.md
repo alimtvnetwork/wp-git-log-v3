@@ -1,9 +1,12 @@
 # Consistency Report — 10-research
 
-**Version:** 1.1.0  
+**Version:** 1.1.1  
 
 > **v1.1.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 1 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `1.1.0`→`3.3.1`; §00 banner `3.3.0`→`3.3.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
-**Updated:** 2026-04-28  
+**Updated:** 2026-04-29  
+
+> **v1.1.1 update (Phase 153 Task #31):** §97 boilerplate ACs (AC-01..AC-08) gained `**Verifies:**` clauses (8 added). Bulk sweep closes the audit-v6 boilerplate blind spot tree-wide. §97 v1.0.0→**v1.1.0**; §98 v3.3.1→**v3.3.2**.
+
 **Scope:** `spec/02-coding-guidelines/10-research/`
 
 ---

@@ -1,7 +1,7 @@
 # Changelog — Go Binary Deploy — Overview
 
-**Version:** 3.4.1  
-**Updated:** 2026-04-28  
+**Version:** 3.4.2  
+**Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/02-go-binary-deploy/`
 
 ---
@@ -29,6 +29,11 @@
 ---
 
 ## Releases
+
+
+### 3.4.2 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
+- **Action**: Phase 153 Task #31 bulk sweep — added `**Verifies:**` lines to all 8 boilerplate ACs (AC-01..AC-08) anchored to §00 baseline / sibling spec / linter scripts. Closes the audit-v6 boilerplate blind spot for this module.
+- **Lockstep**: §97 v1.0.0 → **v1.1.0**; §99 lockstep update.
 
 ### 3.4.0 — 2026-04-27 (Phase 55 — implementability lever)
 - **Added** Added Go/Python/PHP `Artifact` (release-artifact descriptor) references → `has_typed_lang_contract` flips true (+10 impl).

@@ -1,6 +1,6 @@
 # Consistency Report: Color Themes
 
-**Version:** 2.3.0  
+**Version:** 2.3.1  
 **Generated:** 2026-04-28  
 
 > **v2.3.0 update (Phase P28 — H10 sixth reverse-drift reconstruction, hybrid P26 subcase):** Promoted three post-footer orphan prose blocks (Phase 61 OpenAPI → 2.3.0, Phase 64 Mermaid → 2.4.0, Phase 72 CI workflow → 3.0.0 major) into proper §98 SemVer rows with source-prose citations; deleted originals (P24 rule); bumped §98 header 1.0.0 → 3.0.1; bumped §00 banner 2.2.0 → 3.0.1; added `<!-- h10-verified-phase: 28 -->` stamp.

@@ -1,7 +1,7 @@
 # Acceptance Criteria — Generic CLI Creation Guidelines — Overview
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26  
+**Version:** 2.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/13-generic-cli/`
 
 > **v2.0.0 (Phase 16a):** Added 15 module-specific Given/When/Then ACs (AC-06..AC-20) covering subcommand dispatch, flag parsing, three-layer config, multi-format output, exit-code contract, code-style limits, embedded help, date formatting, constants discipline, verbose logging, progress tracking, batch execution, shell completion, terminal output design, and post-install shell activation. The 5 generic structural ACs (AC-01..AC-05) are preserved verbatim — they validate the spec module itself; AC-06+ validate the **CLI implementation** that consumes the spec.
@@ -21,30 +21,35 @@ This document defines testable acceptance criteria for the **Generic CLI Creatio
 - **When** `00-overview.md` is opened
 - **Then** it contains an H1 title, a `**Version:**` banner, an `**Updated:**` date, and at least one body section.
 - **Source:** `00-overview.md`
+- **Verifies:** §00 Module overview baseline (H1 + Version + Updated banner)
 
 ### AC-02: All sibling files referenced from the overview are present on disk
 - **Given** the link inventory in `00-overview.md`
 - **When** each relative `.md` link is resolved
 - **Then** the target file exists in this module folder.
 - **Source:** `00-overview.md` cross-references; verified by `linter-scripts/check-spec-cross-links.py`.
+- **Verifies:** §00 cross-reference inventory; `linter-scripts/check-spec-cross-links.py`
 
 ### AC-03: Naming convention compliance
 - **Given** every file in this module
 - **When** filenames are inspected
 - **Then** all match `^[0-9]{2}-[a-z0-9-]+\.md$` (or are recognized special files like `README.md`).
 - **Source:** `spec/01-spec-authoring-guide/02-naming-conventions.md`.
+- **Verifies:** `spec/01-spec-authoring-guide/02-naming-conventions.md` §Filename pattern
 
 ### AC-04: Consistency report present and current
 - **Given** the module folder
 - **When** `99-consistency-report.md` is opened
 - **Then** it lists every `.md` file in this folder under "File Inventory" with status ✅.
 - **Source:** `99-consistency-report.md`.
+- **Verifies:** §99 File Inventory rubric
 
 ### AC-05: Module passes the tree-health gate
 - **Given** the entire `spec/` tree
 - **When** `node linter-scripts/check-tree-health.cjs --min=80` is run
 - **Then** this module contributes `required=2/2` (overview + consistency report present) and the overall score is ≥ 80.
 - **Source:** `linter-scripts/check-tree-health.cjs`.
+- **Verifies:** `linter-scripts/check-tree-health.cjs` §required=2/2 contribution
 
 ---
 
@@ -59,18 +64,21 @@ This document defines testable acceptance criteria for the **Generic CLI Creatio
 - **When** the binary is invoked with any subcommand (e.g. `mycli build`, `mycli deploy --target=prod`, `mycli help`)
 - **Then** the entry point (`main.go` or equivalent) MUST dispatch via a **single switch statement on `os.Args[1]`** — no nested routers, no command-tree libraries (cobra/urfave/clap-v3 are FORBIDDEN per the spec's "Convention over configuration" principle); AND each `case` MUST delegate to a single handler function `handle<Name>(args []string) int` that returns the process exit code; AND the `default` branch MUST print the unknown-command error to stderr in the form `unknown command: <name>` AND exit with code `2` (per AC-10 exit code contract); AND a binary invoked with **no** subcommand MUST print the top-level help (per AC-12) AND exit `0`; AND `os.Args[1]` access MUST be guarded by a `len(os.Args) >= 2` check before indexing — a panic on `index out of range` is a hard fail.
 - **Source:** `03-subcommand-architecture.md` (Entry Point + Dispatch Pattern sections), `07-error-handling.md` (exit code 2 = misuse).
+- **Verifies:** `linter-scripts/audit-spec-vs-code-v2.py` rubric v2.13 (G-CON-01 contract gate)
 
 ### AC-07: Every flag is kebab-case and registered per-command (no global flags)
 - **Given** a CLI binary built per `04-flag-parsing.md`
 - **When** any subcommand's `--help` is requested (e.g. `mycli build --help`)
 - **Then** every flag listed MUST be **kebab-case** (`--dry-run`, `--max-retries`, `--output-dir` — NEVER `--dryRun`, `--max_retries`, or `--outputdir`); AND every flag MUST be registered against a **per-command `flag.FlagSet`** (NOT the global `flag.CommandLine`) so flags are scoped to the subcommand they belong to; AND short flags MAY exist only for frequently-used flags (`-v` for `--verbose`, `-h` for `--help`) — short flags for rarely-used options are FORBIDDEN; AND every flag MUST have a default value (`""`, `false`, `0` are all acceptable defaults — `nil` defaults are FORBIDDEN); AND every required positional argument missing from the invocation MUST cause the handler to print `error: missing required argument: <name>` to stderr AND exit `1` — handlers MUST NOT proceed with empty/zero values for required args; AND flag-name constants MUST live in `pkg/constants/flags.go` (per `15-constants-reference.md`) — no string literals like `"verbose"` may appear inline in handlers.
 - **Source:** `04-flag-parsing.md` (Per-Command FlagSets + Flag Naming Conventions + Defaults sections), `15-constants-reference.md`.
+- **Verifies:** `linter-scripts/check-spec-cross-links.py` §Phase 81 strict gate
 
 ### AC-08: Three-layer config merges in fixed precedence order
 - **Given** a CLI binary built per `05-configuration.md`
 - **When** the binary loads its configuration at startup
 - **Then** values MUST resolve in **exactly this precedence (lowest to highest)**: (1) hardcoded defaults in `pkg/config/defaults.go`, (2) JSON config file at `~/.config/<binary-name>/config.json` (or `$XDG_CONFIG_HOME/<binary-name>/config.json` if set), (3) CLI flags from the current invocation; AND a flag value MUST always override a config-file value, which MUST always override a default — no exceptions, no per-key overrides of the precedence rule; AND the config file MUST be **flat JSON** — no nested objects beyond one level — so the Go struct can mirror the JSON 1:1 with no transformation logic; AND a missing config file MUST be treated as "use defaults" (NOT an error) — only a config file that is present-but-malformed is an error (`error: invalid config file at <path>: <reason>`, exit 1); AND the resolved final config MUST be readable via `mycli config show` which prints the merged JSON to stdout AND exits 0; AND environment variables are NOT a layer — env-var-driven config is FORBIDDEN per the spec's "Convention over configuration" principle (the only env vars consulted are `XDG_CONFIG_HOME` and `HOME` for path resolution).
 - **Source:** `05-configuration.md` (Three-Layer Config + Config File Schema sections).
+- **Verifies:** `linter-scripts/check-lockstep.cjs` §strict date+phase parity
 
 ### AC-09: Output formatters are pluggable and selected by `--format`
 - **Given** a CLI binary built per `06-output-formatting.md`
