@@ -89,6 +89,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 - **Given** the server returns 502 three times then 200,
 - **When** `max_retries=3` and `backoff_ms=[500,2000,8000]`,
 - **Then** the CLI MUST sleep for ≥500, ≥2000, ≥8000 ms between attempts AND exit `0` AND only one phase POST MUST be visible to the server (the final 200).
+- **Verifies:** §06 5xx-is-transient invariant; §05 `push.backoff_ms` exact-honor; idempotency at server (one logical phase = one record).
 
 ### AC-28-13 — Retries exhausted → exit 4
 
