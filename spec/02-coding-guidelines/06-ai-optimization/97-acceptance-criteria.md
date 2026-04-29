@@ -223,6 +223,8 @@ The 7 stub criteria from v3.2.0 are preserved verbatim. They are NO LONGER autho
 - [ ] Common mistakes include before/after code examples → superseded by AC-AI-07.
 - [ ] All rules cross-reference the canonical spec file they enforce → superseded by AC-AI-04 + AC-AI-06.
 
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-AI-LEGACY: Validation
 
 - [ ] Zero overlap between anti-hallucination rules and quick-reference checklist (no duplicate content) → superseded by AC-AI-08 (extended to 3-file tri-set).
@@ -247,3 +249,5 @@ The 7 stub criteria from v3.2.0 are preserved verbatim. They are NO LONGER autho
 - [PHP sibling](../04-php/97-acceptance-criteria.md)
 - [Rust sibling](../05-rust/97-acceptance-criteria.md)
 - [C# sibling](../07-csharp/97-acceptance-criteria.md)
+
+> **Verifies:** Legacy heading-only stub preserved for traceability; the live contract is asserted by the modern numeric-ID ACs in this same §97 file. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).

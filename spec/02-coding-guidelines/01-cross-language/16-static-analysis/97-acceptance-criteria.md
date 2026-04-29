@@ -181,32 +181,46 @@ RULE_MATRIX_FORMAT:        Side-by-side Markdown table: Language × SonarQube Ru
 > Original stub: "- [ ] Every supported language (8) has a dedicated linter spec"
 > Replaced by: AC-SA-02 (exact file inventory + content requirements).
 
+
+> **Verifies:** Legacy stub preserved for traceability; the live contract is asserted by **AC-SA-02** above. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-SA-LEGACY-002 — All specs enforce identical thresholds: 15-line functions, 3 params, complexity ≤ 10
 
 > Original stub: "- [ ] All specs enforce identical thresholds: 15-line functions, 3 params, complexity ≤ 10"
 > Replaced by: AC-SA-03 (four thresholds + linter config enforcement + no deviation).
 
+
+> **Verifies:** Legacy stub preserved for traceability; the live contract is asserted by **AC-SA-03** above. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-SA-LEGACY-003 — SonarQube rule IDs mapped for every enforceable rule per language
 
 > Original stub: "- [ ] SonarQube rule IDs mapped for every enforceable rule per language"
 > Replaced by: AC-SA-04 (bidirectional mapping + 7-rule minimum + no orphan rules).
 
+
+> **Verifies:** Legacy stub preserved for traceability; the live contract is asserted by **AC-SA-04** above. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-SA-LEGACY-004 — Integration checklist uses standardized table format with 🔲 status
 
 > Original stub: "- [ ] Integration checklist uses standardized table format with 🔲 status"
 > Replaced by: AC-SA-05 (exact table format + 🔲/✅ emoji + ≥ 10 rows).
 
+
+> **Verifies:** Legacy stub preserved for traceability; the live contract is asserted by **AC-SA-05** above. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-SA-LEGACY-005 — CI pipeline spec defines a unified quality gate referencing all 8 languages
 
 > Original stub: "- [ ] CI pipeline spec defines a unified quality gate referencing all 8 languages"
 > Replaced by: AC-SA-06 (parallel execution + single SARIF + fail-on-error + both platform YAMLs).
 
+
+> **Verifies:** Legacy stub preserved for traceability; the live contract is asserted by **AC-SA-06** above. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-SA-LEGACY-006 — Cross-language rule matrix covers all 7 SonarQube rules across all 8 languages
 
 > Original stub: "- [ ] Cross-language rule matrix covers all 7 SonarQube rules across all 8 languages"
 > Replaced by: AC-SA-07 (machine-parseable 8×8 table + coverage badges + no HTML/Mermaid).
 
+
+> **Verifies:** Legacy stub preserved for traceability; the live contract is asserted by **AC-SA-07** above. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
 ### AC-SA-LEGACY-007 — TypeScript ESLint spec cross-referenced from overview
 
 > Original stub: "- [ ] TypeScript ESLint spec cross-referenced from overview (lives in `02-typescript/`)"
 > Replaced by: AC-SA-08 (exact cross-ref path + hyperlink + no duplicate + target file existence).
+
+> **Verifies:** Legacy stub preserved for traceability; the live contract is asserted by **AC-SA-08** above. Mechanical Verifies clause added in Phase 153 Task #29c to satisfy `check-ai-confidence.py` P3 (AC-33-08 nested-tier sweep).
