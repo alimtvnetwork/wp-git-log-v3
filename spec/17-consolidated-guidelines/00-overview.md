@@ -1,7 +1,7 @@
 # Consolidated Guidelines
 
 <!-- h10-verified-phase: 48 -->
-**Version:** 3.4.3  
+**Version:** 3.4.4  
 **Updated:** 2026-04-29  
 **Status:** Active  
 **AI Confidence:** Production-Ready  

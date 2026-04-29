@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.4.3
+**Version:** 3.4.4
 **Updated:** 2026-04-29
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 3.4.4 — 2026-04-29 (Phase 153 P-L36 — Lesson #36 cross-reference anchors in roll-up)
+
+- **Changed** `18-database-conventions.md` (v3.3.0 → v3.3.1) and `05-split-db-architecture.md` (v3.2.0 → v3.2.1) — added `**Canonical source:**` anchors pinning the SQLite PRAGMA + concurrency content to its source-of-truth (`spec/13-generic-cli/97-acceptance-criteria.md` AC-22 + `10-database.md` "Concurrency & Locking (Normative)"). Per Lesson #36, even spec/17's roll-up surface MUST link to the canonical AC so divergence is detectable; the existing tables/code remain (roll-up *purpose*) but now carry an explicit "AC-22 wins" tiebreaker + an updated 4-PRAGMA list (added `synchronous=NORMAL` previously missing here vs. AC-22). Pure documentation hardening — no normative surface change to spec/17, no §97 edit, no AC surface change. Lockstep ripple: spec/17 §00/§98/§99 patch-bump only.
+- **Why a patch:** roll-up cross-reference anchors are documentation hardening, not contract. The tables already restated AC-22 verbatim; this just makes the source explicit. Per Lesson #36 spec/17 (consolidated-guidelines roll-up) is the *one* surface where restatement is by design — but link-pinning makes future drift mechanically detectable via AC-22-grep.
 
 ### 3.4.3 — 2026-04-29 (Phase 152 — audit-v6 baseline published, supersedes v5)
 
