@@ -1,6 +1,6 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.72.1
+**Version:** 2.73.0
 **Updated:** 2026-04-29
 
 > **v2.72.1 update (Phase 153 Task A5 — slot 34 wired into `spec-health.yml` as advisory CI step):** User reply `next`. Added the "AI-implementability deep-walk audit" step to `.github/workflows/spec-health.yml` between the Trace-map regression gate and the Summary block; runs `python3 linter-scripts/audit-ai-implementability.py --report-only` (always exits 0) and is conditionally skipped when `LOVABLE_API_KEY` is unset (community PRs from forks). Slot 34 §00 v1.0.0 → **v1.0.1** (banner-only; added `## Status` "CI wiring (Phase 153 Task A5)" subsection). §00 v2.75.0 → **v2.75.1**, §98 v2.75.0 → **v2.75.1**. **No new ACs, no AC-31-31 cascade, no RUBRIC bump, no gate-count change** (LLM advisory step is broader-contract per H1 lesson — rightly its own workflow step rather than collapsed into a numbered footer gate). Tree-wide v3 baseline 81.6/100 (GOOD) at A3 closure 2026-04-29. **Lesson codified**: Advisory CI steps for LLM-driven gates MUST guard on the secret being available (`if: env.LOVABLE_API_KEY != ''`); without the guard, every fork PR would 401-fail and contributors learn to ignore the signal.
