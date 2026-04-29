@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.7.0
-**Updated:** 2026-04-29 (Phase 153 Task #34: slot 33 v1.2.0→v1.3.0; AC-33-10/11/12 codify Task #29d's regex widening — multi-section inventory scan, heading-name tolerance, bare-filename entries. Slot-33 AC count 9→12. Module AC count unchanged at 26 — slot-internal additions.)
+**Version:** 2.8.0
+**Updated:** 2026-04-29 (Phase 153 Task A9: AC-T-27/28/29 codify CODE_GLOB exhaustiveness, R1–R5 resilience contract, per-artifact AC delegation. Module AC count 26 → 29 — closes spec/27 audit findings D1/D2/D3. Lift expected 75 → 88+.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
