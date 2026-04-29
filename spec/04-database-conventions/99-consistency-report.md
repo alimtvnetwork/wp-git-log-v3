@@ -1,6 +1,9 @@
 # Consistency Report — Database Conventions
 
-**Version:** 3.5.0  
+**Version:** 3.5.1  
+
+> **v3.5.1 update (Phase 153 Task A2 — envelope inlining):** Closes audit-v2 D5 finding "cross-module response-envelope dependency" by inlining a verbatim envelope summary at the end of §00 (top-level field table + reference JSON + Go `omitempty` note). Upstream `spec/03-error-manage/.../04-response-envelope-reference.md` remains the source of truth; the inlined block is a courtesy copy for context-bounded AIs. §00 banner v3.3.2 → v3.3.3 (h10 30 → 153); §98 release row 3.3.3 added. No AC change, no CI gate change.
+
 
 > **v3.5.0 update (Phase P48-1-fu1-batch P3 sweep slot 3 — AC-01..AC-08 Verifies clauses):** Closes the P3-tier `**Verifies:**` gap for this module (0 → 8 clauses). Each AC now declares the invariant or precedent it defends, completing the contract graduation from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)* gate P3. Lockstep: §00 banner 3.3.1 → 3.3.2 (date 2026-04-28 → 2026-04-29), §97 banner 1.0.0 → 1.1.0, §98 release row 3.3.2 added, §99 banner 3.4.0 → 3.5.0. No score change to tree-health (168/168 strict-pass holds); P3 contribution to AC-09's four-gate derivation now passes. Pattern reused verbatim from slot 2 (`spec/17-consolidated-guidelines`) — see Core memory entry on `**Verifies:**` as the highest-leverage AI-implementability uplift.
 
