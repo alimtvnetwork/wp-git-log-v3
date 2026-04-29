@@ -17,6 +17,11 @@
 
 ## Releases
 
+### 3.4.4 — 2026-04-29 (Phase 153 P-L36 — Lesson #36 cross-reference anchors in roll-up)
+
+- **Changed** `18-database-conventions.md` (v3.3.0 → v3.3.1) and `05-split-db-architecture.md` (v3.2.0 → v3.2.1) — added `**Canonical source:**` anchors pinning the SQLite PRAGMA + concurrency content to its source-of-truth (`spec/13-generic-cli/97-acceptance-criteria.md` AC-22 + `10-database.md` "Concurrency & Locking (Normative)"). Per Lesson #36, even spec/17's roll-up surface MUST link to the canonical AC so divergence is detectable; the existing tables/code remain (roll-up *purpose*) but now carry an explicit "AC-22 wins" tiebreaker + an updated 4-PRAGMA list (added `synchronous=NORMAL` previously missing here vs. AC-22). Pure documentation hardening — no normative surface change to spec/17, no §97 edit, no AC surface change. Lockstep ripple: spec/17 §00/§98/§99 patch-bump only.
+- **Why a patch:** roll-up cross-reference anchors are documentation hardening, not contract. The tables already restated AC-22 verbatim; this just makes the source explicit. Per Lesson #36 spec/17 (consolidated-guidelines roll-up) is the *one* surface where restatement is by design — but link-pinning makes future drift mechanically detectable via AC-22-grep.
+
 ### 3.4.3 — 2026-04-29 (Phase 152 — audit-v6 baseline published, supersedes v5)
 
 - **Added** `34-full-tree-ai-audit-v6.md` (slot 35 in inventory) — first audit baseline with a numeric headline since v4 (Phase 1, 45/100). Method: deterministic gate replay only (`check-tree-health --strict` 168/168, `check-lockstep` 87/87, `check-99-summary-freshness` 81 stamped + 6 exempt + 0 unstamped, `check-ai-confidence` 12/15 match). Headline: **P3 (Verifies-coverage) driver CLOSED tree-wide** across 11 modules over Phases 148–151 (Tasks #21a–#21d). Residual drift is 3 modules on P4 (workflow-ref) — cosmetic, not contract. Banner-supersedes `33-full-tree-ai-audit-v5.md` (Phase 130 reconciliation, no headline). Inventory: 34 → 35. §00 banner bumped 3.4.2 → 3.4.3 (patch — single-file additive, mirrors v4.4.0 Phase-130 precedent). No score change to tree-health (168/168 strict-pass holds); no AC surface change; no rubric/CI-gate change.
