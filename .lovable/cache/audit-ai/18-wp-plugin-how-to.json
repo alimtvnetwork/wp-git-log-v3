@@ -8,30 +8,30 @@
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken External Cross-References",
-      "why": "The consistency report (99-consistency-report.md) explicitly identifies 5 broken external links to non-existent folders like '06-golang-standards' and '01-app'.",
+      "title": "Broken External Dependencies",
+      "why": "The consistency report (99-consistency-report.md) explicitly identifies 5 broken external cross-references to nonexistent folders like '06-golang-standards' and '01-app'.",
       "fix": "Update paths to point to 'spec/02-coding-guidelines/03-golang/' and 'spec/02-coding-guidelines/01-cross-language/' respectively."
     },
     {
-      "severity": "MEDIUM",
+      "severity": "HIGH",
       "dim": "D2",
       "title": "Incomplete Acceptance Criteria",
-      "why": "File 97-acceptance-criteria.md is truncated mid-sentence at AC-08, leaving the module without a complete verification suite for the AI to follow.",
-      "fix": "Complete the AC-08 'Source' field and add specific ACs for the Enum Metadata Pattern and coding style rules."
+      "why": "The provided 97-acceptance-criteria.md file is truncated mid-sentence at AC-08, and the criteria listed are meta-checks (file existence) rather than functional logic checks for the WP plugin patterns.",
+      "fix": "Complete the AC file and add functional GWT cases for the 'safeExecute' pattern and Enum metadata resolution."
     },
     {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Casing Mismatch in File References",
-      "why": "Multiple files reference 'CHANGELOG.md' while the actual file on disk is 'changelog.md', causing potential failures on case-sensitive CI environments.",
-      "fix": "Perform a global search and replace of 'CHANGELOG.md' with 'changelog.md'."
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Concurrency and Race Conditions Unaddressed",
+      "why": "While the spec covers structure and enums well, it lacks guidance on WordPress-specific concurrency (e.g., race conditions during option updates or file-system locks for the FileLogger).",
+      "fix": "Add a section to Phase 4 or 15 regarding the use of flock() for logging and atomic option updates."
     }
   ],
   "module": "18-wp-plugin-how-to",
   "files_used": 12,
   "files_total": 35,
   "bytes_used": 90000,
-  "bundle_sha": "affbb5cd28da4924",
+  "bundle_sha": "42f53d4f77982d8a",
   "total": 78,
   "band": "GOOD"
 }

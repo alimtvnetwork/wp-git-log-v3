@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 15,
-  "d3": 12,
-  "d4": 14,
-  "d5": 16,
+  "d2": 14,
+  "d3": 16,
+  "d4": 12,
+  "d5": 15,
   "issues": [
     {
       "severity": "CRITICAL",
-      "dim": "D3",
-      "title": "Cryptographic Contradiction (HS256 vs Argon2id)",
-      "why": "The spec mandates HS256 verification for log envelopes but only stores Argon2id hashes of the secret, making verification mathematically impossible.",
-      "fix": "Amend the database schema to store an AEAD-wrapped verifier secret or switch to asymmetric Ed25519 signatures."
-    },
-    {
-      "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing Acceptance Criteria Roll-up",
-      "why": "Multiple files reference AC-ALW, AC-ERR, and AC-JWT IDs, but the central 97-acceptance-criteria.md and 14-acceptance-criteria.md files are missing or empty.",
-      "fix": "Consolidate all inline AC IDs into the 97-acceptance-criteria.md file with GWT descriptions."
+      "title": "Circular/Self-Referential Acceptance Criteria",
+      "why": "AC-01 through AC-08 in both 97-acceptance-criteria files verify structural metadata (banners, filenames) rather than the logic of the issue tracker or audit schema.",
+      "fix": "Add GWT cases for the Issue Record Contract validation logic and the supersession routing logic."
     },
     {
       "severity": "HIGH",
+      "dim": "D4",
+      "title": "Missing Concrete Issue Examples",
+      "why": "While the spec defines schemas and audit findings, it lacks a complete 'worked example' file showing a single issue from discovery to resolution in the required format.",
+      "fix": "Add a '03-sample-issue.md' file containing a fully populated issue following the Phase2GitLogsIssue schema."
+    },
+    {
+      "severity": "MEDIUM",
       "dim": "D5",
-      "title": "10/16 Promised Content Files Missing",
-      "why": "The overview inventory promises critical files (REST endpoints, Audit Trail, Admin UI) that do not exist on disk, leading to 'hallucinated' implementations.",
-      "fix": "Author the missing foundational files (04-rest-api-endpoints.md, 10-audit-trail.md) to close the dependency loop."
+      "title": "Unresolved Linter Script Dependencies",
+      "why": "The spec mandates specific python/node scripts (e.g., check-spec-cross-links.py) for verification, but their interface/contract is not defined in this context.",
+      "fix": "Add a '96-tooling-interface.md' defining the CLI arguments and exit codes for the required linter scripts."
     }
   ],
   "module": "25-app-issues",
   "files_used": 9,
   "files_total": 12,
   "bytes_used": 90000,
-  "bundle_sha": "905e0729bf716dff",
+  "bundle_sha": "69645d8f9285f644",
   "total": 75,
   "band": "GOOD"
 }

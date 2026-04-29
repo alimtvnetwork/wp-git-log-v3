@@ -1,37 +1,38 @@
 {
-  "d1": 18,
-  "d2": 16,
-  "d3": 14,
-  "d4": 17,
+  "d1": 19,
+  "d2": 18,
+  "d3": 17,
+  "d4": 18,
   "d5": 15,
+  "score": 87,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Dangling Subfolder References",
-      "why": "The overview lists 15 subfolders (01-24), but the provided context only includes files for 00-overview and 01-cross-language. A mediocre AI cannot verify the 'CODE-RED' rules against the actual language specs (e.g., 05-rust/01-naming-conventions.md).",
-      "fix": "Provide the full content of all referenced subfolder overview and naming convention files."
+      "why": "The overview lists 16 subfolders (e.g., 07-csharp, 09-powershell), but the provided context only includes the root and 01-cross-language. A mediocre AI cannot resolve the specific rules for C#, Go, or Rust without these files.",
+      "fix": "Provide the 00-overview.md and 97-acceptance-criteria.md for all language-specific subfolders listed in the categories table."
     },
     {
       "severity": "MEDIUM",
       "dim": "D2",
-      "title": "Legacy AC Scaffolds Lack Specificity",
-      "why": "The 'Legacy Index' in 97-acceptance-criteria.md explicitly states that table-row criteria are 'NO LONGER authoritative', yet many subfolders (TS, PHP, C#) currently have 0 GWT ACs, leaving the AI with no testable contract for those languages.",
-      "fix": "Backfill at least 5 GWT ACs for every language subfolder listed in the inventory."
+      "title": "Legacy AC Scaffold Ambiguity",
+      "why": "The Legacy Index in 97-acceptance-criteria.md states rows are 'NO LONGER authoritative', yet several subfolders (TS, PHP, C#) are noted as having 0 GWT ACs, leaving a vacuum of testable requirements for those languages.",
+      "fix": "Ensure every language subfolder has at least one stub GWT AC that explicitly points to the legacy criteria as the binding contract until deepened."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Incomplete Size Limit Enforcement Logic",
-      "why": "AC-CG-08 mandates 8-15 lines per function but does not define how to handle 'language-specific exceptions' mentioned in the text, leading to potential implementation inconsistency in Rust or Go.",
-      "fix": "Explicitly list the allowed exceptions for size limits within the normative YAML or TS contract blocks."
+      "title": "Size-Limit Exception Enforcement",
+      "why": "AC-CG-08 mentions 'language-specific exceptions' for size limits but doesn't define them, though AC-CG-22 (the ledger) attempts to close this. There is a slight risk of an AI hallucinating new exception types not in the ledger.",
+      "fix": "Change AC-CG-08 text to 'Three exempt categories defined strictly in the Size-Limit Exception Ledger (AC-CG-22)'."
     }
   ],
   "module": "02-coding-guidelines",
-  "files_used": 7,
+  "files_used": 6,
   "files_total": 251,
   "bytes_used": 90000,
-  "bundle_sha": "479dee0cb3fdf99c",
-  "total": 80,
+  "bundle_sha": "3aab943c11ae581a",
+  "total": 87,
   "band": "GOOD"
 }
