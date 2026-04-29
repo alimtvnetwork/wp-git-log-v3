@@ -1,13 +1,19 @@
 # Seedable Config Architecture + Changelog Versioning (also known as CW Config)
 
-> **Version:** 4.1.0  
-<!-- h10-verified-phase: 22 -->
+> **Version:** 4.1.1  
+<!-- h10-verified-phase: 153 -->
 > **Created:** 2026-02-01  
-> **Updated:** 2026-04-26  
+> **Updated:** 2026-04-29  
 > **Status:** Active  
 > **AI Confidence:** Production-Ready  
 > **Ambiguity:** Low  
 > **Purpose:** Reusable pattern for version-controlled configuration with automatic changelog updates and initial seeding
+
+---
+
+## 🔒 Canonical Naming Convention
+
+All JSON keys in seedable configs use **PascalCase** (`Version`, `Categories`, `Settings`). This applies uniformly to `00-overview.md`, `01-fundamentals.md`, every example payload, and every JSON Schema fragment in this module. **Do not introduce camelCase variants.** This pin exists because Phase 153 Task A1 audit-v2 misread an SVG-style ASCII diagram in `01-fundamentals.md` as a camelCase contract; both files are and must remain PascalCase.
 
 ---
 

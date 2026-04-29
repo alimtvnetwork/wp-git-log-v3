@@ -1,7 +1,7 @@
 # Database Conventions
 
-**Version:** 3.3.2  
-<!-- h10-verified-phase: 30 -->
+**Version:** 3.3.3  
+<!-- h10-verified-phase: 153 -->
 **Status:** Active  
 **Updated:** 2026-04-29  
 **AI Confidence:** Production-Ready  
@@ -272,3 +272,35 @@ CREATE INDEX IF NOT EXISTS idx_mra_p78_exit
 
 This contract enables AI agents to generate idempotent migrations and
 verification queries directly from the spec.
+
+---
+
+## Universal Response Envelope — Inlined Summary (Phase 153 Task A2)
+
+> **Source of truth:** [`../03-error-manage/02-error-architecture/05-response-envelope/04-response-envelope-reference.md`](../03-error-manage/02-error-architecture/05-response-envelope/04-response-envelope-reference.md). The summary below is **inlined verbatim** so a context-bounded AI implementing REST endpoints from `spec/04` alone has the envelope shape locally without an extra fetch. If the upstream reference and this summary disagree, the upstream reference wins.
+
+All HTTP responses MUST conform to this envelope. JSON keys use **PascalCase** (matches DB convention §38).
+
+```json
+{
+  "Status":      { "IsSuccess": true, "IsFailed": false, "Code": 200, "Message": "OK", "Timestamp": "2026-02-07T12:00:00Z" },
+  "Attributes":  { "RequestedAt": "...", "RequestDelegatedAt": "", "HasAnyErrors": false, "IsSingle": false, "IsMultiple": true, "IsEmpty": false, "TotalRecords": 47, "PerPage": 10, "TotalPages": 5, "CurrentPage": 2 },
+  "Results":     [ /* always an array, even for single items */ ],
+  "Navigation":  { "First": "...", "Prev": "...", "Next": "...", "Last": "..." },
+  "Errors":      null,
+  "MethodsStack": null
+}
+```
+
+| Top-level key | Type | Required | Notes |
+|---|---|---|---|
+| `Status` | object | ✅ Always | Outcome metadata (`IsSuccess`, `Code`, `Message`, `Timestamp`) |
+| `Attributes` | object | ✅ Always | Shape descriptors + pagination counters |
+| `Results` | array | ✅ Always | Payload — array even for single items |
+| `Navigation` | object \| null | ⚙️ Conditional | Only on paginated list responses |
+| `Errors` | object \| null | ⚙️ Conditional | Only when errors exist AND reporting enabled |
+| `MethodsStack` | object \| null | ⚙️ Conditional | Only when debug call-chain enabled in config |
+
+**Go implementation note:** use pointers (`*Navigation`, `*Errors`, `*MethodsStack`) with `omitempty` so absent sections are omitted from JSON.
+
+For full field-by-field semantics, error-shape conventions, and worked envelope examples, follow the source-of-truth link above.

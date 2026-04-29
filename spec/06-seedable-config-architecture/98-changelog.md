@@ -1,12 +1,19 @@
 # Changelog — Seedable Config Architecture (CW Config)
 
-**Version:** 4.1.0
-**Updated:** 2026-04-26
+**Version:** 4.1.1
+**Updated:** 2026-04-29
 **Scope:** `spec/06-seedable-config-architecture/`
 
 ---
 
 ## Releases
+
+### 4.1.1 — 2026-04-29 — Phase 153 Task A2 (canonical PascalCase pin)
+
+- **Added** "🔒 Canonical Naming Convention" callout in `00-overview.md` immediately under the banner. Pins the PascalCase contract for `Version`, `Categories`, `Settings` across `00-overview.md`, `01-fundamentals.md`, every example payload, and every JSON Schema fragment. Explicitly states: "Do not introduce camelCase variants."
+- **Why:** Phase 153 Task A1 audit-v2 misread an SVG-style ASCII diagram in `01-fundamentals.md` as a camelCase contract conflict. Direct file inspection confirmed both files are PascalCase. The pin is an immunisation against future auditor (human or AI) repeating that misread.
+- **Lockstep:** §00 banner v4.1.0 → v4.1.1 (h10 stamp 22 → 153). §99 v4.1.0 → v4.1.1.
+- **No content change** to schema, examples, or rules — pin describes existing reality.
 
 ### 4.1.0 — 2026-04-26
 - **Added** Phase 20 Module #8 — inlined two normative contracts in `00-overview.md`:
