@@ -1,8 +1,10 @@
 # Acceptance Criteria — Update — Overview
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-27  
+**Version:** 2.2.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/14-update/`
+
+> **v2.2.0 (Phase 149 — P3 sweep slot 9):** Added `**Verifies:**` clauses to all 20 ACs (AC-01..AC-20). Each criterion now explicitly maps to the underlying invariant it protects (structural floor, slot-immutability, cross-platform deploy uniformity, parent-survival, build-time version-injection, supply-chain trust, integrity, idempotent install, latest-probe-or-fail, XDG/atomic-write, ordered-pipeline-with-fail-fast, no-daemon, idempotent silent-cleanup-budget, single-step atomic rollback, three-layer precedence + system-dir blacklist, tag-first monotonicity, six-target-floor + CGO_ENABLED=0). Verifies-coverage gap: 0/20 → 20/20. Drives AI-confidence Medium → High.
 
 > **v2.1.0 (Phase 124):** AC-20 `Given` and `Source` lines now explicitly cite the upstream generic blueprint [`../16-generic-release/01-cross-compilation.md`](../16-generic-release/01-cross-compilation.md) in addition to the local `16-cross-compilation.md` / `17-release-pipeline.md`. The cross-compilation target list and CGO discipline originate in §16 (kind: future-spec generic blueprint); §14 is the concrete consumer. Closes the AC-SAG-25 cite-direction gap surfaced by Phase 121's reframe (§14 → §16, not the inverted §16 → §14 originally proposed).
 
