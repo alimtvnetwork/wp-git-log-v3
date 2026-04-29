@@ -1,11 +1,14 @@
 # Changelog: Static Analysis & Linter Enforcement
 
-**Updated:** 2026-04-27
+**Updated:** 2026-04-29
 
 
 All notable changes to the `16-static-analysis/` subfolder.
 
 ---
+
+## 4.1.0 — 2026-04-29 — Phase 153 Task #29c: legacy AC stubs gain `**Verifies:**` clauses
+- Backfilled `**Verifies:**` on 7 `AC-SA-LEGACY-001..007` deprecation-marker stubs (the modern replacement ACs are `AC-SA-02..08` above each stub). Closes the audit-v6 nested-tier P3 blind spot exposed by Phase 153 Task #29b walker widening. §97 v4.0.0 → v4.1.0; §00 v4.1.0 → v4.1.1; §99 v4.0.0 → v4.0.1. **No CI workflow change, no AC count change** — content is metadata-only on legacy stubs.
 
 ## 4.1.0 — 2026-04-27
 - **P21 sync** (2026-04-28): §00 banner version field bumped 3.2.0 → 4.1.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 21 -->` stamp added under §00 banner; no spec content change).

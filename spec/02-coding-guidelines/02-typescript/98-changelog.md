@@ -2,7 +2,7 @@
 
 
 **Version:** 4.1.1
-**Last Updated:** 2026-04-27
+**Last Updated:** 2026-04-29
 
 All notable changes to the TypeScript Standards specification are documented here.
 
