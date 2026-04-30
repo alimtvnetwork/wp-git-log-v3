@@ -1,6 +1,6 @@
 # Seedable Config Architecture + Changelog Versioning (also known as CW Config)
 
-> **Version:** 4.1.1  
+> **Version:** 4.2.0  
 <!-- h10-verified-phase: 153 -->
 > **Created:** 2026-02-01  
 > **Updated:** 2026-04-29  
@@ -148,7 +148,8 @@ This ensures configuration is always traceable, auditable, and version-aware.
       "properties": {
         "Type": {
           "type": "string",
-          "enum": ["string", "int", "float", "bool", "json"]
+          "enum": ["boolean", "number", "string", "select", "multiselect"],
+          "description": "Closed UI-aware enum per AC-SC-14. `boolean`/`number`/`string` are scalar Types; `select` requires `Validation.Enum` (single-value pick); `multiselect` requires `Validation.Enum` (multi-value pick). NOTE: legacy storage-type values {int, float, bool, json} are FORBIDDEN — use `number` (covers int+float), `boolean`, or `string` (with `Validation.Pattern` for JSON-shaped strings)."
         },
         "Default":        { "$ref": "#/$defs/Scalar" },
         "Description":    { "type": "string" },
@@ -191,22 +192,22 @@ This ensures configuration is always traceable, auditable, and version-aware.
       "Version": "1.1.0",
       "Description": "Retrieval-augmented generation chunk strategy.",
       "Settings": {
-        "ChunkSizeTokens":   { "Type": "int",  "Default": 512,  "AddedInVersion": "1.0.0", "Validation": { "Min": 64, "Max": 4096 } },
-        "ChunkOverlapTokens":{ "Type": "int",  "Default": 64,   "AddedInVersion": "1.0.0", "Validation": { "Min": 0,  "Max": 1024 } },
+        "ChunkSizeTokens":   { "Type": "number", "Default": 512,  "AddedInVersion": "1.0.0", "Validation": { "Min": 64, "Max": 4096 } },
+        "ChunkOverlapTokens":{ "Type": "number", "Default": 64,   "AddedInVersion": "1.0.0", "Validation": { "Min": 0,  "Max": 1024 } },
         "EmbeddingModel":    { "Type": "string", "Default": "text-embedding-3-small", "AddedInVersion": "1.1.0" }
       }
     },
     "Update": {
       "Version": "1.0.0",
       "Settings": {
-        "CheckIntervalHours":          { "Type": "int",  "Default": 12, "Validation": { "Min": 1, "Max": 168 } },
-        "BackgroundUpdateCheckEnabled":{ "Type": "bool", "Default": true }
+        "CheckIntervalHours":          { "Type": "number",  "Default": 12, "Validation": { "Min": 1, "Max": 168 } },
+        "BackgroundUpdateCheckEnabled":{ "Type": "boolean", "Default": true }
       }
     },
     "Storage": {
       "Version": "1.0.0",
       "Settings": {
-        "Backend": { "Type": "string", "Default": "sqlite", "Validation": { "Enum": ["sqlite", "json"] } }
+        "Backend": { "Type": "select", "Default": "sqlite", "Validation": { "Enum": ["sqlite", "json"] } }
       }
     }
   }
@@ -219,7 +220,7 @@ This ensures configuration is always traceable, auditable, and version-aware.
 |--------------|------------|
 | `version`, `categories` (camelCase / lowercase) | `Version`, `Categories` (PascalCase) |
 | `"Version": "1.2"`     | `"Version": "1.2.0"` (full SemVer) |
-| Untyped `Default` without `Type` | Always declare `Type` ∈ {string,int,float,bool,json} |
+| Untyped `Default` without `Type` | Always declare `Type` ∈ {boolean, number, string, select, multiselect} (per AC-SC-14; legacy {string,int,float,bool,json} FORBIDDEN) |
 | Top-level scalar setting (`"Foo": 1`) | Setting nested under a Category |
 | Unknown top-level key (e.g. `"Settings": {…}` at root) | Only `Version` / `Description` / `Categories` allowed |
 | Two seed files in same project | Single `config.seed.json` per bounded context |
