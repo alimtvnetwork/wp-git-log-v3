@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 15,
-  "d4": 19,
-  "d5": 14,
+  "d2": 15,
+  "d3": 14,
+  "d4": 12,
+  "d5": 16,
   "issues": [
     {
+      "severity": "CRITICAL",
+      "dim": "D2",
+      "title": "Circular/Self-Referential Acceptance Criteria",
+      "why": "AC-CG-24 and AC-CG-21 declare that subfolder ACs are 'not missing' but 'delegated', yet the mediocre AI cannot see those subfolders due to context limits. The parent spec lacks the actual GWT logic for the languages it claims to govern.",
+      "fix": "Inline at least 3-5 core GWT criteria for each major language (Go, TS, Rust) directly into the parent 97-acceptance-criteria.md."
+    },
+    {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Dangling Subfolder References",
-      "why": "The overview lists 16 subfolders (e.g., 02-typescript, 03-golang), but the provided context only includes the root files and the 01-cross-language subfolder. A mediocre AI cannot resolve the language-specific rules required by the 'CODE-RED' mandate.",
-      "fix": "Provide the full content of all referenced subfolders or remove the requirement to satisfy language-specific ACs in this audit."
+      "dim": "D4",
+      "title": "Missing Worked Examples for Size-Limit Exceptions",
+      "why": "AC-CG-22 (Size-Limit Exception Ledger) defines complex detection rules (e.g., 'AST count: match-expression-line / total-line \u2265 0.6') without providing a sample calculation or code snippet.",
+      "fix": "Add a 'Worked Examples' section to \u00a797 showing a Rust match block and the line-count math used to justify the exception."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Legacy AC Scaffolds Lack Specificity",
-      "why": "The Legacy Index (AC-CG-LEGACY-001..022) states these are 'NO LONGER authoritative', yet several subfolders (TS, PHP, C#) are noted as having 0 GWT ACs. This leaves the AI with no testable contract for those languages.",
-      "fix": "Author at least 5 GWT ACs for every language subfolder to replace the legacy table rows."
-    },
-    {
-      "severity": "LOW",
       "dim": "D3",
-      "title": "Incomplete Size Limit Enforcement Logic",
-      "why": "AC-CG-08 mandates function/file size limits but allows 'language-specific exceptions' without enumerating them in the provided context (except for the 'Size-Limit Exception Ledger' which is partially defined).",
-      "fix": "Ensure the Size-Limit Exception Ledger (AC-CG-22) is the exhaustive and only source for overrides."
+      "title": "Ambiguous Concurrency/Partial Failure in CI Gates",
+      "why": "AC-CG-19 mandates a tree-health gate \u2265 95/100 but does not define behavior when linter scripts (Go/Python mix) partially fail or timeout during large-scale (251 files) scans.",
+      "fix": "Define a 'Fail-Fast' policy in AC-CG-19: any script timeout or partial scan result defaults to a score of 0."
     }
   ],
   "module": "02-coding-guidelines",
-  "files_used": 10,
+  "files_used": 8,
   "files_total": 251,
   "bytes_used": 120000,
-  "bundle_sha": "0f9dbd5108d4c6d0",
-  "total_v6": 82,
+  "bundle_sha": "68f3755a4b89aa2e",
+  "total_v6": 75,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 82.2,
-  "total_v7": 82,
-  "total": 82,
+  "weighted_total": 74.9,
+  "total_v7": 75,
+  "total": 75,
   "band": "GOOD",
   "rubric": "v7"
 }

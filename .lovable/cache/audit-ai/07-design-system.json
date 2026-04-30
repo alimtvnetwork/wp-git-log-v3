@@ -1,38 +1,38 @@
 {
-  "d1": 20,
+  "d1": 18,
   "d2": 20,
-  "d3": 18,
-  "d4": 19,
-  "d5": 15,
+  "d3": 16,
+  "d4": 14,
+  "d5": 12,
   "issues": [
     {
-      "severity": "HIGH",
+      "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Missing Leaf Files in Context",
-      "why": "The overview references 13 leaf files (01-13) as 'authoritative', but only 00, 01, 97, 98, and 99 are provided. A mediocre coder cannot implement specific component logic (e.g., Sidebar, Buttons) without them.",
-      "fix": "Provide the content for files 02 through 13 or merge their normative constraints into the overview."
+      "title": "Missing Leaf Files (02-13) in Context",
+      "why": "The walker cap (120KB) has excluded the actual component specifications (Sidebar, Buttons, Typography details). An AI cannot implement the 'Sidebar' or 'Button' logic with 100% confidence because the normative files (02-13) are physically missing from the provided text.",
+      "fix": "Consolidate the core normative requirements for Sidebar, Buttons, and Typography into the 00-overview.md or provide them as separate modules."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D4",
+      "title": "Truncated Acceptance Criteria and Changelog",
+      "why": "The context ends abruptly in the middle of the Changelog and Acceptance Criteria (AC-39 is mentioned in the header but the file is truncated). The AI lacks the full set of constraints for the latest version.",
+      "fix": "Reduce the verbosity of historical changelog entries to ensure the latest normative ACs and release notes fit within the 120KB context window."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "LocalStorage Failure Mode",
-      "why": "The FOUC script catches errors for blocked localStorage but 'fails open to light'. In high-contrast or dark-preference environments, this is a flash/accessibility failure.",
-      "fix": "Update the catch block to check window.matchMedia('(prefers-color-scheme: dark)').matches even if localStorage fails."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D4",
-      "title": "Truncated Design Principles",
-      "why": "File 01-design-principles.md is truncated at the end of the provided context, losing potential implementation rules.",
-      "fix": "Ensure the full text of 01-design-principles.md is included within the context window."
+      "title": "Undefined 'linter-scripts' and 'linter-commands'",
+      "why": "AC-DS-000 and the CI Workflow stage references rely on external scripts (e.g., detect-changed-modules.sh, validate-contracts.py) that are not defined or provided in the context.",
+      "fix": "Include the source code or a detailed functional spec for the referenced linter-scripts in a 'Dependencies' section."
     }
   ],
   "module": "07-design-system",
-  "files_used": 5,
+  "files_used": 3,
   "files_total": 17,
   "bytes_used": 120000,
-  "bundle_sha": "5424f40aa906da13",
-  "total_v6": 92,
+  "bundle_sha": "e7e326b87600ff06",
+  "total_v6": 80,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 92.4,
-  "total_v7": 92,
-  "total": 92,
-  "band": "EXCELLENT",
+  "weighted_total": 79.8,
+  "total_v7": 80,
+  "total": 80,
+  "band": "GOOD",
   "rubric": "v7"
 }

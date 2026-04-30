@@ -2,37 +2,37 @@
   "d1": 18,
   "d2": 19,
   "d3": 17,
-  "d4": 18,
+  "d4": 20,
   "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "External Reference Path Drift",
-      "why": "The overview and consistency report mention resolving broken links to '../02-coding-guidelines/', but the provided context shows Phase 1 still uses the old path '../01-app/formatting-rules-reference.md'.",
-      "fix": "Update Phase 1 line 5 to point to '../../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md'."
+      "why": "The overview (00-overview.md) and foundation (01-foundation-and-architecture.md) reference '../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md', but the consistency report (\u00a72.2) admits historical drift and the provided context does not include the target file to verify resolution.",
+      "fix": "Ensure all external paths in 01-foundation-and-architecture.md match the current on-disk structure of spec/02."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency Contract Implementation Gap",
-      "why": "AC-11 mandates flock(LOCK_EX) for FileLogger, but the provided FileLogger description in Phase 0.4 and Phase 1.5 does not explicitly mention the locking requirement in its 'Required behaviours'.",
-      "fix": "Add 'MUST acquire LOCK_EX before write' to the FileLogger behavior table in Phase 1.5."
+      "title": "Concurrency Implementation Prose Gap",
+      "why": "AC-11 mandates specific flock() usage for FileLogger, but the actual FileLogger spec (04-logging-and-error-handling.md) is mentioned as having a 'prose-mirror gap' in the changelog, potentially leading to implementation without locks if the coder skips the AC file.",
+      "fix": "Explicitly inline the flock(LOCK_EX) requirement into the normative blockquote of 04-logging-and-error-handling.md \u00a74.3."
     },
     {
       "severity": "LOW",
       "dim": "D1",
       "title": "Filename Casing Inconsistency",
-      "why": "AC-14 forbids 'CHANGELOG.md', yet the consistency report (2.1) admits 4 open references remain in Phase 10.",
-      "fix": "Execute the suggested sed command: sed -i 's/CHANGELOG\\.md/changelog.md/g' on Phase 10."
+      "why": "The spec contains references to 'CHANGELOG.md' (uppercase) in 10-deployment-patterns.md while the project standard is lowercase 'changelog.md', creating ambiguity for case-sensitive filesystems.",
+      "fix": "Run sed -i 's/CHANGELOG\\.md/changelog.md/g' on all files in spec/18/."
     }
   ],
   "module": "18-wp-plugin-how-to",
-  "files_used": 15,
+  "files_used": 14,
   "files_total": 35,
   "bytes_used": 120000,
-  "bundle_sha": "6a6f8d4a28e4e3f3",
-  "total_v6": 88,
+  "bundle_sha": "c3adf80d9097bc14",
+  "total_v6": 90,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 87.9,
-  "total_v7": 88,
-  "total": 88,
-  "band": "GOOD",
+  "weighted_total": 89.9,
+  "total_v7": 90,
+  "total": 90,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

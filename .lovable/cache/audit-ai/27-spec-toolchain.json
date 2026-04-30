@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 19,
-  "d4": 17,
+  "d2": 16,
+  "d3": 17,
+  "d4": 19,
   "d5": 12,
   "issues": [
     {
       "severity": "CRITICAL",
       "dim": "D5",
       "title": "Missing Per-Artifact Spec Files",
-      "why": "The module references 79 external spec files (e.g., 01-check-spec-cross-links.md) which are not provided in the context. An AI coder cannot implement the toolchain logic (the actual script behaviors) without these individual specs.",
-      "fix": "Include the content of the referenced NN-*.md files in the provided context or merge them into a single implementation-ready document."
+      "why": "The module references 79 external spec files (e.g., 01-check-spec-cross-links.md) which are not provided in the context. A mediocre AI cannot implement the toolchain logic (the actual script behaviors) without these individual specs.",
+      "fix": "Provide the content of the referenced NN-*.md files or merge their core logic into the overview."
     },
     {
       "severity": "HIGH",
       "dim": "D2",
       "title": "Delegated Acceptance Criteria",
-      "why": "AC-T-29 explicitly delegates per-script logic to external files. Without these, the AI has no Given/When/Then criteria for the actual script behaviors (e.g., how fuzzy matching works in slot 12).",
-      "fix": "In-line the core GWT criteria for each slot into the Slot Delegation Map in \u00a797."
+      "why": "AC-T-29 explicitly delegates per-script logic to external files. Without these, the AI has no Given/When/Then criteria for the actual script behaviors, only module-level meta-rules.",
+      "fix": "Incorporate the GWT criteria for the most critical scripts (01, 05, 14, 34) directly into 97-acceptance-criteria.md."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
       "title": "Concurrency/Locking Implementation Ambiguity",
       "why": "R2 requires retries on JSONDecodeError to handle 'torn reads', but doesn't specify if this applies to all readers or just specific slots, and lacks a code example for the retry logic.",
-      "fix": "Add the normative code snippet for R2 (read_json_with_retry) to the \u00a700 Resilience section as mandated by AC-T-32."
+      "fix": "Add a normative code snippet for the R2 retry pattern in the overview, mirroring the R1 atomic-write example."
     }
   ],
   "module": "27-spec-toolchain",
   "files_used": 3,
   "files_total": 50,
   "bytes_used": 120000,
-  "bundle_sha": "3ccd85024870884d",
-  "total_v6": 80,
+  "bundle_sha": "169b0d8a6be66824",
+  "total_v6": 82,
   "axis": "tooling-spec",
   "axis_multipliers": {
     "d1": 0.9091,
@@ -42,9 +42,9 @@
     "d5": 0.8182
   },
   "axis_cap": 100,
-  "weighted_total": 80.1,
-  "total_v7": 80,
-  "total": 80,
+  "weighted_total": 83.0,
+  "total_v7": 83,
+  "total": 83,
   "band": "GOOD",
   "rubric": "v7"
 }
