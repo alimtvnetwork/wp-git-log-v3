@@ -54,7 +54,7 @@ Behavior:
 2. Detect runtimes (filter by `--runtime` if set).
 3. For each runtime:
    - Execute `(Phase, Runner, Args)` from §03.
-   - Capture stdout + stderr **interleaved** with timestamps to preserve ordering.
+   - Capture stdout + stderr **interleaved** with timestamps to preserve ordering. **Mechanism (normative):** the runner subprocess MUST be invoked with `stdout` and `stderr` merged at the OS pipe level (`exec.Cmd.Stderr = exec.Cmd.Stdout` in Go; equivalent in other runtimes), NOT via two independent pipes round-robined in user space (which loses sub-millisecond ordering). A pseudo-terminal (PTY) is **NOT required** and **SHOULD NOT** be used — runners detect TTY via `isatty(fd)` and emit ANSI escapes / progress bars / pager invocations that corrupt log parsing (`CI=true`, `FORCE_COLOR=0`, `npm_config_progress=false` per AC-28-37 already suppress most of this, but PTY allocation defeats those signals). Each captured byte is timestamped at read time with monotonic-clock millisecond resolution; ordering is preserved by the kernel pipe FIFO discipline. Forbidden: separate `Stdout` + `Stderr` pipes that the CLI multiplexes with `select` / goroutines (interleaving order is then user-space-scheduling-dependent and non-reproducible across runs).
    - Classify per §09 into `Logs[]` and `ErrorLogs[]`.
    - Ship per §06 (skip if `--no-push`).
 4. Compute exit code per §01.
