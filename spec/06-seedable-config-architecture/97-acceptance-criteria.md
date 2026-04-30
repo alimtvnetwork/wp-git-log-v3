@@ -1,7 +1,7 @@
 # Seedable Config Architecture — Acceptance Criteria
 
-**Version:** 4.1.0
-**Last Updated:** 2026-04-29 (Phase 153 Task A11f: added AC-SC-21 CHANGELOG concurrency lock-ordering + AC-SC-22 apperror cross-reference to spec/03; closes v5 D3 MEDIUM + D5 HIGH. AC count 20 → 22.)
+**Version:** 4.2.0
+**Last Updated:** 2026-04-30 (Phase 153 Task A24: extended AC-SC-14 with Go `SettingValue` struct mapping for `select`/`multiselect` (closes v7 D1 LOW); extended AC-SC-21 with reference Go implementation for lock-then-tx-then-changelog discipline (closes v7 D3 MEDIUM). No AC count change. Pre-flight `wc -c` per Lesson #45 graduated: §97+§00+§01 = 63.4 KB, well under 75 KB cap.)
 **Scope:** `spec/06-seedable-config-architecture/` — Reusable pattern for version-controlled configuration with automatic changelog updates and initial seeding (CW Config).
 
 ---
@@ -139,8 +139,8 @@ ATOMIC_WRITE:              tmp + rename (AC-UCM-08 pattern)
 
 - **Given** any setting in the seed file,
 - **When** its `Type` field is parsed,
-- **Then** it MUST be one of EXACTLY these 5 values: `boolean`, `number`, `string`, `select`, `multiselect` (lowercase, exact). Custom types (`enum`, `int`, `float`, `text`, `json`) are FORBIDDEN — the schema validator MUST reject them with exit 3. Each Type has required companion fields: (a) `boolean` requires `Default: true|false`, (b) `number` requires `Default: <number>`, optional `Min`/`Max`, (c) `string` requires `Default: "<string>"`, optional `MaxLength`, (d) `select` requires `Default: "<value>"` AND `Options: ["<v1>", "<v2>"]` where Default ∈ Options, (e) `multiselect` requires `Default: ["<value>"]` AND `Options: ["<v1>", "<v2>"]` where every element of Default ∈ Options. Missing required companion field OR invalid Type value FAILS this AC.
-- **Verifies:** `01-fundamentals.md` §Setting Schema + AC-CL-* closed-enum patterns.
+- **Then** it MUST be one of EXACTLY these 5 values: `boolean`, `number`, `string`, `select`, `multiselect` (lowercase, exact). Custom types (`enum`, `int`, `float`, `text`, `json`) are FORBIDDEN — the schema validator MUST reject them with exit 3. Each Type has required companion fields: (a) `boolean` requires `Default: true|false`, (b) `number` requires `Default: <number>`, optional `Min`/`Max`, (c) `string` requires `Default: "<string>"`, optional `MaxLength`, (d) `select` requires `Default: "<value>"` AND `Options: ["<v1>", "<v2>"]` where Default ∈ Options, (e) `multiselect` requires `Default: ["<value>"]` AND `Options: ["<v1>", "<v2>"]` where every element of Default ∈ Options. Missing required companion field OR invalid Type value FAILS this AC. **Go struct mapping (NORMATIVE — closes v7 D1 LOW "Ambiguous Type Mapping for 'select'"):** the `SettingValue` union in Go MUST map Type values to fields as follows — `boolean` → `BoolVal *bool`; `number` → `NumberVal *float64` (single numeric type covers both integer + float per AC-CL-09 cross-language scalar floor); `string` → `StringVal *string`; **`select` → `StringVal *string`** (single-choice from `Options`; the chosen value is stored verbatim, NOT an enum-index); **`multiselect` → `StringsVal *[]string`** (ordered list of chosen values from `Options`; preserves user-selection order). Forbidden: introducing a separate `EnumVal int` for `select` (loses round-trip fidelity with `Options`); flattening `multiselect` to a comma-separated `StringVal` (loses values containing commas). The `SettingValue` struct comment MUST cite this AC by ID.
+- **Verifies:** `01-fundamentals.md` §Setting Schema + `01-fundamentals.md` `SettingValue` struct + AC-CL-* closed-enum patterns.
 
 ### AC-SC-15 — User overrides stored separately in `UserConfiguration` table; never mutate `Configuration` defaults
 
@@ -188,9 +188,32 @@ ATOMIC_WRITE:              tmp + rename (AC-UCM-08 pattern)
 
 - **Given** the seeder writes BOTH a SQL transaction (per AC-SC-11) AND a `CHANGELOG.md` append (per AC-SC-16), and concurrent invocations are possible (per AC-SC-17),
 - **When** the seeder runs,
-- **Then** the locking discipline MUST be: (a) **acquire** the OS-level file lock on `<DBPath>.seeder.lock` (per AC-SC-17) **BEFORE** `BEGIN IMMEDIATE`, (b) **hold** the lock through the entire sequence `BEGIN IMMEDIATE → INSERT/UPDATE → COMMIT → CHANGELOG append → fsync(CHANGELOG.md)`, (c) **release** the lock ONLY after the CHANGELOG fsync returns (whether success or failure path). This closes the race where two concurrent seeders both COMMIT their DB transactions in serial, then race to append to the same CHANGELOG.md, producing interleaved or lost entries. The lock MUST be the SAME sentinel as AC-SC-17 — DO NOT introduce a separate `<CHANGELOG.md>.lock`; one lock owns the entire write transaction (DB + file). On crash between COMMIT and CHANGELOG fsync, AC-SC-11's "log CRITICAL + exit 1" path applies AND the lock MUST be released by the OS (`flock` auto-releases on process death; PID-staleness check per AC-SC-17 handles `LockFileEx` Windows path). Releasing the lock between COMMIT and CHANGELOG write OR taking a separate CHANGELOG lock OR holding the lock across the user-facing wait loop in AC-SC-17 (which would deadlock) FAILS this AC.
-- **Verifies:** AC-SC-11 (atomic txn) + AC-SC-16 (CHANGELOG append-only) + AC-SC-17 (concurrent invocations) — binds the three together via lock-ordering. Closes Phase 153 v5 audit `06-seedable-config-architecture.json` issue [MEDIUM/D3] "Ambiguous CHANGELOG.md Write Concurrency".
-- **Source:** AC-SC-11 §Atomicity + AC-SC-17 §Concurrency.
+- **Then** the locking discipline MUST be: (a) **acquire** the OS-level file lock on `<DBPath>.seeder.lock` (per AC-SC-17) **BEFORE** `BEGIN IMMEDIATE`, (b) **hold** the lock through the entire sequence `BEGIN IMMEDIATE → INSERT/UPDATE → COMMIT → CHANGELOG append → fsync(CHANGELOG.md)`, (c) **release** the lock ONLY after the CHANGELOG fsync returns (whether success or failure path). This closes the race where two concurrent seeders both COMMIT their DB transactions in serial, then race to append to the same CHANGELOG.md, producing interleaved or lost entries. The lock MUST be the SAME sentinel as AC-SC-17 — DO NOT introduce a separate `<CHANGELOG.md>.lock`; one lock owns the entire write transaction (DB + file). On crash between COMMIT and CHANGELOG fsync, AC-SC-11's "log CRITICAL + exit 1" path applies AND the lock MUST be released by the OS (`flock` auto-releases on process death; PID-staleness check per AC-SC-17 handles `LockFileEx` Windows path). Releasing the lock between COMMIT and CHANGELOG write OR taking a separate CHANGELOG lock OR holding the lock across the user-facing wait loop in AC-SC-17 (which would deadlock) FAILS this AC. **Reference Go implementation (NORMATIVE pseudo-code — closes v7 D3 MEDIUM "Incomplete Concurrency Implementation Detail"):**
+
+```go
+// SeedWithVersionCheck — full lock-then-tx-then-changelog discipline per AC-SC-21.
+// Order is FIXED: lock → tx → commit → changelog → fsync → unlock.
+func (s *ConfigService) SeedWithVersionCheck(ctx context.Context, seed *SeedFile) error {
+    lockPath := s.dbPath + ".seeder.lock"
+    lock, err := acquireFileLock(lockPath, 30*time.Second)  // per AC-SC-17 (flock/LockFileEx + PID-staleness)
+    if err != nil { return apperror.Wrap(err, "AB-9501", "seeder lock timeout") }  // exit 5 per AC-SC-17
+    defer lock.Release()  // OS auto-releases on crash; defer covers normal exit
+
+    return s.db.Transaction(func(tx *gorm.DB) error {  // GORM wraps BEGIN IMMEDIATE per AC-SC-11
+        if err := s.applySeedRows(tx, seed); err != nil { return err }   // INSERT/UPDATE
+        // tx COMMIT happens on return-nil from this closure
+        if err := s.appendChangelog(seed); err != nil {                  // CHANGELOG append per AC-SC-16
+            return apperror.Wrap(err, "AB-9502", "changelog append failed after DB commit")  // CRITICAL per AC-SC-11
+        }
+        return s.fsyncChangelog()                                         // fsync BEFORE lock release
+    })
+    // lock released here via defer
+}
+```
+
+Forbidden patterns (each FAILS this AC): (i) calling `s.db.Transaction(...)` BEFORE `acquireFileLock` (race window during lock wait); (ii) moving `appendChangelog` outside the transaction closure (lock would release on COMMIT, then changelog race); (iii) replacing `defer lock.Release()` with explicit `lock.Release()` mid-function (skipped on panic); (iv) using `sync.Mutex` instead of OS file lock (only blocks within-process — concurrent OS processes still race).
+- **Verifies:** AC-SC-11 (atomic txn) + AC-SC-16 (CHANGELOG append-only) + AC-SC-17 (concurrent invocations) — binds the three together via lock-ordering. Closes Phase 153 v5 audit `06-seedable-config-architecture.json` issue [MEDIUM/D3] "Ambiguous CHANGELOG.md Write Concurrency" + v7 audit MEDIUM D3 "Incomplete Concurrency Implementation Detail" (`bundle_sha c5b46d3cb2b36a7b`).
+- **Source:** AC-SC-11 §Atomicity + AC-SC-17 §Concurrency. Reference Go snippet authored Phase 153 Task A24.
 
 ### AC-SC-22 — `apperror` package, error-code prefixes, and `Err*` sentinels are sourced from `spec/03-error-manage/` (no local re-definition)
 

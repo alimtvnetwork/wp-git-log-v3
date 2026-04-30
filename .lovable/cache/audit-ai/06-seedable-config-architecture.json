@@ -8,30 +8,30 @@
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken External Symbol Resolution",
-      "why": "The spec references 'apperror.Wrap', 'ErrSeedLoadFailed', and 'pathutil' which are explicitly delegated to spec/03 and other modules, but those modules are not provided in the context.",
-      "fix": "Provide the 'apperror' package definition and 'pathutil' source or mock signatures in the fundamentals file."
+      "title": "Broken External Symbol Resolution (spec/03)",
+      "why": "The Go code samples and AC-SC-22 rely on the 'apperror' package and 'AB-NNNN' registry from spec/03, which is not provided in this context.",
+      "fix": "Provide the normative content of spec/03-error-manage or a mock definition of the apperror package and registry."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Incomplete Concurrency Implementation Detail",
-      "why": "AC-SC-21 mandates a file lock before SQL transaction, but the Go implementation in 01-fundamentals.md does not show the locking logic, only the GORM transaction.",
-      "fix": "Add a 'Lock()' and 'Unlock()' call using a sentinel file to the Go ConfigService.SeedWithVersionCheck snippet."
+      "title": "Inconsistent Database Schema Definitions",
+      "why": "01-fundamentals.md defines 'ConfigMeta' and 'Setting' tables, while AC-SC-02/10/15 require 'Configuration', 'Metadata', and 'UserConfiguration' tables.",
+      "fix": "Realign 01-fundamentals.md SQL blocks to use the table names mandated in the Acceptance Criteria (Metadata/Configuration/UserConfiguration)."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous Type Mapping for 'select'",
-      "why": "The schema uses 'Type: select' but the Go struct 'SettingValue' uses a union of scalars; it's unclear if 'select' should map to StringVal or a specific enum type in Go.",
-      "fix": "Explicitly state in the SettingValue struct comment that 'select' maps to StringVal and 'multiselect' maps to StringsVal."
+      "title": "Ambiguous 'select' Type Mapping in Go",
+      "why": "AC-SC-14 specifies 'select' maps to 'StringVal', but the Go struct in 01-fundamentals.md still includes legacy 'IntVal' and 'FloatVal' fields.",
+      "fix": "Update the SettingValue struct in 01-fundamentals.md to match the normative mapping in AC-SC-14 (number -> FloatVal, select -> StringVal)."
     }
   ],
   "module": "06-seedable-config-architecture",
-  "files_used": 8,
+  "files_used": 7,
   "files_total": 21,
   "bytes_used": 90000,
-  "bundle_sha": "c5b46d3cb2b36a7b",
+  "bundle_sha": "46259530c5aa13af",
   "total_v6": 87,
   "axis": "normative-contract",
   "axis_multipliers": {

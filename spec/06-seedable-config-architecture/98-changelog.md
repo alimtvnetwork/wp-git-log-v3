@@ -1,12 +1,23 @@
 # Changelog — Seedable Config Architecture (CW Config)
 
-**Version:** 4.3.0
-**Updated:** 2026-04-29
+**Version:** 4.3.1
+**Updated:** 2026-04-30
 **Scope:** `spec/06-seedable-config-architecture/`
 
 ---
 
 ## Releases
+
+### 4.3.1 — 2026-04-30 — Phase 153 Task A24: in-place AC-SC-14 + AC-SC-21 extensions close v7 D1 LOW + D3 MEDIUM (89 → ≥90 EXCELLENT expected)
+
+- **Pre-flight per Lesson #45 graduated**: pre-edit `wc -c` of tier-1 bundle (§97 + §00 + §01-fundamentals) = **59.9 KB** — well under the 75 KB walker-saturation floor; **15.9 KB headroom** confirms VIABLE for in-§97 content extension. Post-edit total = 63.4 KB (12.4 KB headroom remaining). Strategy: extend EXISTING ACs (no AC count change → no AC-31-31 cascade) with axis-aligned content directly in parent §97 per Lesson #45 working levers (a)+(b).
+- **Extended AC-SC-14** (Type closed-enum) with NORMATIVE Go struct mapping clause: `boolean`→`BoolVal *bool`; `number`→`NumberVal *float64`; `string`→`StringVal *string`; **`select`→`StringVal *string`** (verbatim chosen value, NOT enum-index); **`multiselect`→`StringsVal *[]string`** (ordered list). Forbidden patterns enumerated (`EnumVal int` for select; comma-flattened multiselect). `SettingValue` struct comment MUST cite this AC. Closes v7 D1 LOW "Ambiguous Type Mapping for 'select'" (`bundle_sha c5b46d3cb2b36a7b`).
+- **Extended AC-SC-21** (CHANGELOG concurrency) with reference Go pseudo-code showing the full lock-then-tx-then-changelog-then-fsync-then-unlock sequence using `acquireFileLock()` + `defer lock.Release()` + `s.db.Transaction()` GORM wrapper + `appendChangelog()` + `fsyncChangelog()`. Forbidden patterns enumerated (lock-after-tx race; changelog outside tx closure; non-deferred Release; `sync.Mutex` substitution). Closes v7 D3 MEDIUM "Incomplete Concurrency Implementation Detail" (cited bundle_sha matches D1 above — same auditor pass).
+- **Why a minor on §97 (and patch on §00/§98/§99)**: in-place content additions to existing ACs (no new AC, no AC count change, no contract surface added). §97 4.1.0 → **4.2.0** (in-place clarification minor per AC-CL-17 boolean-storage convention precedent A22-fu1); §00/§98/§99 4.3.0 → **4.3.1** (banner-only patch).
+- **Skipped intentionally**: v7 D5 HIGH "Broken External Symbol Resolution" — already pinned by AC-SC-22 (link-don't-restate per Lesson #36); auditor cannot see the cross-module ref through walker bundle, but the contract IS closed. D5 axis weight on `normative-contract` is ×0.5 = lowest ROI; chasing the walker artifact would inflate §97 without scoring effect.
+- **Expected v7 lift**: D1 18→19 (+1 ×1.0 = +1.0); D3 17→18 (+1 ×1.2 = +1.2); D2 19 unchanged (no new AC). Weighted Δ ≈ **+2.2 → 88.8 + 2.2 = 91.0 EXCELLENT** (just clears the 90 threshold). Conservative floor: 89 → 90 (single-dim partial lift still crosses).
+- **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no slot-inventory change · no gate-count change.**
+- **Memo**: `.lovable/memory/audit/v2-deterministic/phase-153-task-A24-spec06-excellent-push.md`.
 
 ### 4.3.0 — 2026-04-29 — Phase 153 Task A11f (spec/06 D3 MEDIUM + D5 HIGH closure)
 
