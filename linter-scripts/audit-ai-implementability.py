@@ -356,12 +356,13 @@ def write_report(results: list[dict[str, Any]], out: Path) -> None:
         "",
         "## Per-module ranking (low → high)",
         "",
-        "| Rank | Module | Total | D1 | D2 | D3 | D4 | D5 | Files | KB | Band |",
-        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+        "| Rank | Module | Axis | Total (v7) | Raw (v6) | D1 | D2 | D3 | D4 | D5 | Files | KB | Band |",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     for i, r in enumerate(sorted(scored, key=lambda x: x["total"]), 1):
+        cap_marker = " 🔒" if r.get("total_v7") == r.get("axis_cap") else ""
         lines.append(
-            f"| {i} | `spec/{r['module']}` | **{r['total']}** | "
+            f"| {i} | `spec/{r['module']}` | {r.get('axis','?')} | **{r['total']}**{cap_marker} | {r.get('total_v6','?')} | "
             f"{r['d1']} | {r['d2']} | {r['d3']} | {r['d4']} | {r['d5']} | "
             f"{r['files_used']}/{r['files_total']} | {r['bytes_used']//1024} | {r.get('band','')} |"
         )
