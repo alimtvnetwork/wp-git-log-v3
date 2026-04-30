@@ -1,38 +1,50 @@
 {
-  "d1": 19,
-  "d2": 18,
+  "d1": 18,
+  "d2": 19,
   "d3": 17,
-  "d4": 18,
-  "d5": 15,
-  "score": 87,
+  "d4": 15,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Dangling Subfolder References",
-      "why": "The overview lists 16 subfolders (e.g., 07-csharp, 09-powershell), but the provided context only includes the root and 01-cross-language. A mediocre AI cannot resolve the specific rules for C#, Go, or Rust without these files.",
-      "fix": "Provide the 00-overview.md and 97-acceptance-criteria.md for all language-specific subfolders listed in the categories table."
+      "why": "The overview lists 16 subfolders (e.g., 07-csharp, 09-powershell) that are not provided in the context, preventing the AI from knowing the specific rules for those languages.",
+      "fix": "Provide the 00-overview.md and 97-acceptance-criteria.md for all referenced language subfolders."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Legacy AC Scaffold Ambiguity",
-      "why": "The Legacy Index in 97-acceptance-criteria.md states rows are 'NO LONGER authoritative', yet several subfolders (TS, PHP, C#) are noted as having 0 GWT ACs, leaving a vacuum of testable requirements for those languages.",
-      "fix": "Ensure every language subfolder has at least one stub GWT AC that explicitly points to the legacy criteria as the binding contract until deepened."
+      "dim": "D4",
+      "title": "Missing Concrete Code Examples for Code-Red Rules",
+      "why": "While rules like 'Zero Nesting' (R3) are stated, the parent module lacks inline 'Before/After' code snippets for all 5 languages, forcing the AI to guess idiomatic guard clauses.",
+      "fix": "Add a 'Worked Examples' section to 00-overview.md showing R1-R6 implementations in Go, TS, and Rust."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Size-Limit Exception Enforcement",
-      "why": "AC-CG-08 mentions 'language-specific exceptions' for size limits but doesn't define them, though AC-CG-22 (the ledger) attempts to close this. There is a slight risk of an AI hallucinating new exception types not in the ledger.",
-      "fix": "Change AC-CG-08 text to 'Three exempt categories defined strictly in the Size-Limit Exception Ledger (AC-CG-22)'."
+      "title": "Vague 'Language-Specific Exceptions' for Size Limits",
+      "why": "AC-CG-08 allows exceptions for size limits but delegates the definition to subfolders which are missing from context.",
+      "fix": "Explicitly list the allowed exception patterns (like Go table-tests or Rust match arms) in the parent AC-CG-22 ledger."
     }
   ],
   "module": "02-coding-guidelines",
   "files_used": 6,
   "files_total": 251,
   "bytes_used": 90000,
-  "bundle_sha": "3aab943c11ae581a",
-  "total": 87,
-  "band": "GOOD"
+  "bundle_sha": "acfe337bd86effbe",
+  "total_v6": 83,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 85.9,
+  "total_v7": 86,
+  "total": 86,
+  "band": "GOOD",
+  "rubric": "v7"
 }

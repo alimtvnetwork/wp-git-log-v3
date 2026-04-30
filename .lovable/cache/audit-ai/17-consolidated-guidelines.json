@@ -1,37 +1,51 @@
 {
   "d1": 18,
-  "d2": 14,
+  "d2": 19,
   "d3": 15,
-  "d4": 16,
+  "d4": 14,
   "d5": 12,
+  "score_rationale": "The module is exceptionally well-structured for an AI, with high-quality acceptance criteria and a clear 'module-kind pin' that prevents common AI misinterpretations. However, it suffers from significant 'Dependency Closure' issues (D5) because it references many external scripts and folders that are not provided in the context, and the final file is truncated mid-sentence, losing critical workflow instructions.",
   "issues": [
     {
       "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Broken Dependency Closure (Aspirational Folders)",
-      "why": "The spec explicitly references folders like 08-docs-viewer-ui and 09-code-block-system which do not exist on disk. A mediocre AI will fail to find the 'source' it is supposed to consolidate.",
-      "fix": "Provide the content for the 3 aspirational modules or mark them as 'EXEMPT-MISSING' in the provided context."
+      "title": "Missing External Dependencies",
+      "why": "The spec relies heavily on external linter scripts (e.g., check-tree-health.cjs, validate-guidelines.py) and source folders (e.g., spec/01-spec-authoring-guide/) that are not included in the provided context.",
+      "fix": "Include the source code or interface definitions for all referenced linter scripts and the content of the 'Source' folders in the prompt context."
     },
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing Verifies Clauses for AC-09/AC-10",
-      "why": "AC-09 (AI Confidence) and AC-10 (Module-kind pin) lack the mandatory '**Verifies:**' clauses required by the module's own P3-tier confidence rubric.",
-      "fix": "Add '**Verifies:**' clauses to AC-09 and AC-10 citing the specific linter or memory-index rule they enforce."
+      "dim": "D3",
+      "title": "Content Truncation in Critical Workflow",
+      "why": "File 01-spec-authoring.md cuts off at the 'Mandatory Execution Order' section, leaving the AI without the final steps to maintain version parity and CI compliance.",
+      "fix": "Ensure the full content of 01-spec-authoring.md is provided, specifically the completion of the sync script execution sequence."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved External Script References",
-      "why": "Multiple ACs (AC-01, AC-02, AC-03) require running specific Python/Node scripts (e.g., check-spec-cross-links.py) that are not provided in the context.",
-      "fix": "Include the CLI interface/contract or source code for the referenced linter-scripts in the context."
+      "dim": "D4",
+      "title": "Incomplete Example for Sync Scripts",
+      "why": "The 'Mandatory Execution Order' section starts a bash/node command list but terminates at 'python3 linter-scripts/c', preventing the AI from knowing the full command.",
+      "fix": "Provide the complete command string and a sample output for the synchronization workflow."
     }
   ],
   "module": "17-consolidated-guidelines",
   "files_used": 5,
   "files_total": 38,
   "bytes_used": 90000,
-  "bundle_sha": "836787963bc1da70",
-  "total": 75,
-  "band": "GOOD"
+  "bundle_sha": "d648db887ebe5af6",
+  "total_v6": 78,
+  "axis": "process-guidance",
+  "axis_multipliers": {
+    "d1": 1.5,
+    "d2": 0.7,
+    "d3": 0.8,
+    "d4": 1.0,
+    "d5": 1.0
+  },
+  "axis_cap": 95,
+  "weighted_total": 78.3,
+  "total_v7": 78,
+  "total": 78,
+  "band": "GOOD",
+  "rubric": "v7"
 }

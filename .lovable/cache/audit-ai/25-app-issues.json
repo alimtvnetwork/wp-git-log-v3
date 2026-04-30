@@ -1,37 +1,50 @@
 {
   "d1": 18,
   "d2": 14,
-  "d3": 16,
+  "d3": 15,
   "d4": 12,
-  "d5": 15,
+  "d5": 19,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D2",
-      "title": "Circular/Self-Referential Acceptance Criteria",
-      "why": "AC-01 through AC-08 in both 97-acceptance-criteria files verify structural metadata (banners, filenames) rather than the logic of the issue tracker or audit schema.",
-      "fix": "Add GWT cases for the Issue Record Contract validation logic and the supersession routing logic."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Missing Concrete Issue Examples",
-      "why": "While the spec defines schemas and audit findings, it lacks a complete 'worked example' file showing a single issue from discovery to resolution in the required format.",
-      "fix": "Add a '03-sample-issue.md' file containing a fully populated issue following the Phase2GitLogsIssue schema."
+      "dim": "D2",
+      "title": "Circular Acceptance Criteria",
+      "why": "AC-01 through AC-08 in the sub-modules are generic boilerplate that verify the existence of the spec files themselves rather than the logic of the issue tracker or the validity of the audit findings.",
+      "fix": "Add logic-based ACs that verify the 'Reproduction/Cause/Fix/Prevention' structure and the JSON schema validation of issue records."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved Linter Script Dependencies",
-      "why": "The spec mandates specific python/node scripts (e.g., check-spec-cross-links.py) for verification, but their interface/contract is not defined in this context.",
-      "fix": "Add a '96-tooling-interface.md' defining the CLI arguments and exit codes for the required linter scripts."
+      "dim": "D4",
+      "title": "Truncated Content in Consolidated Findings",
+      "why": "File 02-consolidated-audit-findings/00-overview.md is truncated at the end of the provided context, leaving 'F-12' and subsequent findings incomplete.",
+      "fix": "Ensure the full text of the consolidated findings is present or split into smaller, complete files."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Concurrency and Race Conditions in Issue Status",
+      "why": "The spec defines issue statuses (Open, In Progress, Resolved) but does not address state-transition safety if multiple auditors/scripts update the tracker simultaneously.",
+      "fix": "Add a 'Concurrency' section to the Issue Record Contract specifying a 'last-writer-wins' or 'version-check' strategy."
     }
   ],
   "module": "25-app-issues",
   "files_used": 9,
   "files_total": 12,
   "bytes_used": 90000,
-  "bundle_sha": "69645d8f9285f644",
-  "total": 75,
-  "band": "GOOD"
+  "bundle_sha": "4a943b79755ac6d3",
+  "total_v6": 78,
+  "axis": "audit-corpus",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 0.5,
+    "d3": 0.5,
+    "d4": 1.5,
+    "d5": 1.5
+  },
+  "axis_cap": 95,
+  "weighted_total": 79.0,
+  "total_v7": 79,
+  "total": 79,
+  "band": "GOOD",
+  "rubric": "v7"
 }

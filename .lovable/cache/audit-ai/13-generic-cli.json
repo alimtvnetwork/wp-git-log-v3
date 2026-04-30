@@ -1,37 +1,50 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 19,
-  "d4": 18,
-  "d5": 16,
+  "d3": 18,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
-      "severity": "MEDIUM",
+      "severity": "HIGH",
       "dim": "D5",
       "title": "Broken External Spec References (AC-24)",
-      "why": "AC-24 explicitly references AC-SD-22 (spec/05) and AC-T-28 (spec/27) which are not provided in the current context, creating a dependency gap for a standalone coder.",
-      "fix": "Incorporate the specific requirements of AC-SD-22 and AC-T-28 directly into AC-22 or provide the text of those external ACs in a 'Dependencies' section."
+      "why": "AC-22 and AC-23 rely on external modules (spec/05, spec/27) for critical resilience and DB logic which are not provided in this context.",
+      "fix": "Incorporate the normative content of AC-SD-22 and AC-T-28 directly into a 'Shared Infrastructure' section within this module."
     },
     {
-      "severity": "LOW",
+      "severity": "MEDIUM",
       "dim": "D1",
-      "title": "Ambiguous 'Positive Condition' Rule",
-      "why": "The rule 'Always positive \u2014 no !, no !=' in 08-code-style.md is logically impossible for error checking (e.g., 'if err != nil') which is standard in Go.",
-      "fix": "Clarify that the 'positive condition' rule applies to domain logic and boolean flags, explicitly exempting standard error handling patterns."
+      "title": "Inconsistent Function Length Constraints",
+      "why": "AC-11 mandates functions \u2264 50 lines, but 08-code-style.md mandates a much stricter 8\u201315 lines.",
+      "fix": "Standardize on \u2264 50 lines in 08-code-style.md to match the AC-11 master contract."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Missing 'doctor' Command Example",
-      "why": "AC-20 defines complex behavior for a 'doctor' command (interactive prompts, shell injection), but no code snippet or sample output is provided in the prose files.",
-      "fix": "Add a '21-post-install-shell-activation.md' file (referenced but not provided) or include a sample 'runDoctor' handler snippet in 03-subcommand-architecture.md."
+      "dim": "D3",
+      "title": "Missing Timeout/Deadline Contract for Network Ops",
+      "why": "While DB concurrency is addressed in AC-22, network timeouts (HTTP/Clone) are mentioned in AC-15 but lack a specific duration or retry policy.",
+      "fix": "Add a 'Network Resilience' AC specifying a 30s default timeout and 3-attempt retry policy for all external calls."
     }
   ],
   "module": "13-generic-cli",
   "files_used": 11,
   "files_total": 24,
-  "bytes_used": 89662,
-  "bundle_sha": "214cbf552e8e75d7",
-  "total": 91,
-  "band": "EXCELLENT"
+  "bytes_used": 89783,
+  "bundle_sha": "8bdee2acdff4b9d5",
+  "total_v6": 90,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 92.3,
+  "total_v7": 92,
+  "total": 92,
+  "band": "EXCELLENT",
+  "rubric": "v7"
 }

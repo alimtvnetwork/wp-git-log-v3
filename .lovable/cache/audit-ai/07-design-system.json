@@ -1,37 +1,50 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 17,
-  "d4": 15,
+  "d3": 16,
+  "d4": 14,
   "d5": 12,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Missing 13 Core Leaf Files",
-      "why": "The spec references 13 critical files (01-13) for principles, variables, and component logic, but they are not provided in the context. A mediocre AI cannot implement the 'Variable-First' architecture without the variable registry (02) or component patterns (07-11).",
-      "fix": "Provide the content for files 01-13 in the prompt context."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Missing CSS/Tailwind Fixtures",
-      "why": "While the spec defines the architecture, it lacks the actual 'index.css' and 'tailwind.config.ts' content. An AI coder must guess the exact HSL values and Tailwind extension keys, leading to 0% confidence in visual parity.",
-      "fix": "Include the full source code for src/index.css and tailwind.config.ts as examples."
+      "dim": "D5",
+      "title": "Missing Leaf Files (01-13)",
+      "why": "The module references 13 critical leaf files (01-design-principles.md through 13-wordpress-migration.md) containing the actual token values and component logic, but they are not provided in the context.",
+      "fix": "Provide the content for files 01 through 13 to complete the dependency closure."
     },
     {
       "severity": "MEDIUM",
+      "dim": "D4",
+      "title": "Incomplete Token Registry Example",
+      "why": "While HSL logic is explained, the actual 'canonical' list of semantic tokens (e.g., --primary-glow, --card, --popover) mentioned in ACs is not fully listed in the overview.",
+      "fix": "Include a comprehensive table of all required semantic CSS variables and their default HSL values in the overview or file 02."
+    },
+    {
+      "severity": "LOW",
       "dim": "D3",
-      "title": "Vague Error Handling for Token API",
-      "why": "The OpenAPI spec (Phase 58) defines a 404 for /tokens/{name} but doesn't specify the error response schema or how to handle invalid 'category' queries in the list endpoint.",
-      "fix": "Add a standard Error schema to the OpenAPI components and reference it in 400/404 responses."
+      "title": "Concurrency/Race Condition in Theme Script",
+      "why": "AC-005 requires a synchronous script to prevent FOUC but doesn't provide the specific script snippet, leaving the 'no-flash' implementation to guesswork.",
+      "fix": "Add the specific 5-line blocking script for index.html to the Theme & Variables section."
     }
   ],
   "module": "07-design-system",
   "files_used": 3,
   "files_total": 17,
   "bytes_used": 90000,
-  "bundle_sha": "838994cf8a3d6c84",
-  "total": 82,
-  "band": "GOOD"
+  "bundle_sha": "0469003529972d02",
+  "total_v6": 80,
+  "axis": "process-guidance",
+  "axis_multipliers": {
+    "d1": 1.5,
+    "d2": 0.7,
+    "d3": 0.8,
+    "d4": 1.0,
+    "d5": 1.0
+  },
+  "axis_cap": 95,
+  "weighted_total": 79.8,
+  "total_v7": 80,
+  "total": 80,
+  "band": "GOOD",
+  "rubric": "v7"
 }

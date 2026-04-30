@@ -6,32 +6,45 @@
   "d5": 15,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "External Dependency Missing",
-      "why": "The module relies heavily on \u00a707 (Core Design System) for primitives, but the content of \u00a707 is not provided in the context, making it impossible to verify if --background or --card actually exist.",
-      "fix": "Provide the core design system tokens from spec/07-design-system/ in the context."
-    },
-    {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Z-Index Collision Risk",
-      "why": "The AppShell uses hardcoded z-40 and z-30. If \u00a707 defines a global z-index scale (e.g., for modals or tooltips), these hardcoded values may cause layering bugs.",
-      "fix": "Map z-index values to \u00a707 tokens (e.g., z-[var(--z-sticky)]) instead of raw Tailwind classes."
+      "dim": "D5",
+      "title": "External Dependency \u00a707 Missing",
+      "why": "The module is a 'strict additive overlay' on \u00a707, but the \u00a707 primitive tokens (e.g., --background, --card) are not provided in this context, preventing 100% confidence in variable resolution.",
+      "fix": "Provide a snippet of the core \u00a707 token registry in the Cross-References or as a mock fixture."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Sidebar Transition State",
-      "why": "The spec defines a collapsed state for < md breakpoints but does not specify if the transition should be animated or how 'icons only' mode handles labels for a11y.",
-      "fix": "Add a 'Transitions' section to the AppShell contract specifying duration and easing."
+      "title": "Sidebar State Concurrency",
+      "why": "The spec mentions a 'collapsed' state for the sidebar at < md breakpoints but does not define the transition logic or how to handle the state if toggled manually (concurrency of window resize vs user click).",
+      "fix": "Add a requirement that sidebar state must be derived from a unified 'isCollapsed' hook sensitive to both breakpoint and manual toggle."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "Missing linter-scripts",
+      "why": "The verification section and CI workflow rely on specific scripts (e.g., detect-changed-modules.sh) that are referenced but not defined.",
+      "fix": "Add a brief comment describing the expected behavior/exit codes of the referenced linter-scripts."
     }
   ],
   "module": "24-app-design-system-and-ui",
   "files_used": 4,
   "files_total": 4,
-  "bytes_used": 38997,
-  "bundle_sha": "122c00473ecda2cc",
-  "total": 93,
-  "band": "EXCELLENT"
+  "bytes_used": 39103,
+  "bundle_sha": "a192dbc85adf0bba",
+  "total_v6": 93,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 95.1,
+  "total_v7": 95,
+  "total": 95,
+  "band": "EXCELLENT",
+  "rubric": "v7"
 }

@@ -1,37 +1,50 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 19,
+  "d3": 17,
   "d4": 15,
-  "d5": 17,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Truncated Log Shipping Contract",
-      "why": "The file 06-log-shipping-contract.md is truncated mid-sentence due to the 90KB context cap, leaving the core payload schema and streaming wire-format details missing.",
-      "fix": "Move the normative JSON payload examples and NDJSON framing rules from the end of file 06 to a new file 10-payload-examples.md to stay under the per-file cap."
+      "dim": "D5",
+      "title": "Broken External References (spec/22)",
+      "why": "The spec relies heavily on the 'Git Logs v2' server (folder 22) for auth, endpoints, and error envelopes, but these files are not provided in the context.",
+      "fix": "Include the normative content of spec/22/04, 05, and 15 in the companion context or provide a mock server response schema."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved Server-Side Gaps",
-      "why": "The consistency report (\u00a799) explicitly lists GAP-22-03 and GAP-22-04, noting that the receiving server spec (folder 22) does not yet define the NDJSON format or the PreviousHasError field.",
-      "fix": "Update spec/22/04 to include the 'PreviousHasError' boolean in the Ack schema and define the NDJSON streaming framing."
+      "dim": "D4",
+      "title": "Truncated Log Shipping Contract",
+      "why": "File 06-log-shipping-contract.md is truncated at the 90KB cap, leaving the actual JSON payload shapes for /append-log and /fixed-log undefined.",
+      "fix": "Move the JSON payload examples and wire-format definitions to the top of file 06 or into 01-glossary-and-enums.md."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'RepoRoot' derivation",
-      "why": "Config \u00a705 mentions 'root_repo' is auto-derived by stripping -vN, but doesn't specify if this is regex-based or suffix-based, which could lead to inconsistent RepoUrl keys.",
-      "fix": "Define root_repo derivation as: strip suffix matching regex '-v[0-9]+$' from the repository name."
+      "dim": "D3",
+      "title": "Concurrency on Shared State",
+      "why": "While it references spec/13 for concurrency, it mentions local SQLite state (~/.local/state/glci/) which contradicts the 'stateless' claim in 02-architecture.md.",
+      "fix": "Clarify if the CLI is truly stateless or if it uses a local cache for specific features like 'glci config set'."
     }
   ],
   "module": "28-universal-ci-cli",
   "files_used": 10,
   "files_total": 15,
   "bytes_used": 90000,
-  "bundle_sha": "48b2bb91f1e75e79",
-  "total": 89,
-  "band": "GOOD"
+  "bundle_sha": "ddb93cc3663f8167",
+  "total_v6": 84,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 87.4,
+  "total_v7": 87,
+  "total": 87,
+  "band": "GOOD",
+  "rubric": "v7"
 }

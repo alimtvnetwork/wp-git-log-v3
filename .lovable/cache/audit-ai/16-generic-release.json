@@ -2,36 +2,49 @@
   "d1": 18,
   "d2": 20,
   "d3": 17,
-  "d4": 16,
+  "d4": 15,
   "d5": 19,
   "issues": [
     {
-      "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous Error Handling for Checksum Download Failure",
-      "why": "04-checksums-verification.md states the installer should 'warn but NOT skip verification' if checksums.txt fails to download, but then says it 'must exit with an error'.",
-      "fix": "Explicitly mandate a hard exit with code 1 if checksums.txt cannot be retrieved."
+      "severity": "HIGH",
+      "dim": "D4",
+      "title": "Incomplete Installer Templates",
+      "why": "The spec provides logic fragments for Bash/PowerShell but lacks a complete, copy-pasteable 'Golden Template' for the installers, forcing the AI to synthesize the glue code.",
+      "fix": "Add a '08-installer-templates.md' containing the full, un-truncated source for install.sh and install.ps1 with all placeholders."
     },
     {
-      "severity": "LOW",
-      "dim": "D4",
-      "title": "Inconsistent Placeholder Syntax",
-      "why": "03-install-scripts.md uses VERSION_PLACEHOLDER while 09-placeholder-tokens.md (referenced in changelog) mentions modern __VERSION__ syntax, creating potential confusion for template implementation.",
-      "fix": "Standardize on one placeholder format (e.g., __VERSION__) across all script templates and documentation."
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Missing Concurrency Implementation",
+      "why": "AC-21 and 02-release-pipeline defer concurrency logic to spec/13 via cross-reference, but a mediocre AI without web access cannot resolve that external link.",
+      "fix": "In-line the specific SQLite/locking shell commands required for the release pipeline's local state management."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Missing Binary Mode Bit Specification for Windows",
-      "why": "AC-09 specifies 0755 for POSIX but doesn't define expectations for Windows binary attributes within the .zip archive.",
-      "fix": "Add a clause stating Windows binaries should be packaged without specific read-only attributes to ensure overwrite capability."
+      "title": "Ambiguous 'dist' cleanup logic",
+      "why": "05-release-assets.md provides a shell loop for cleanup that might delete the newly created .tar.gz if the globbing or extension check is slightly off in different shells.",
+      "fix": "Provide a specific, tested 'find' command or explicit list of files to keep to avoid accidental deletion of assets."
     }
   ],
   "module": "16-generic-release",
   "files_used": 11,
   "files_total": 13,
   "bytes_used": 90000,
-  "bundle_sha": "ab3d75cfceeb013d",
+  "bundle_sha": "a1d1cd2971743df9",
+  "total_v6": 89,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 89.9,
+  "total_v7": 90,
   "total": 90,
-  "band": "EXCELLENT"
+  "band": "EXCELLENT",
+  "rubric": "v7"
 }

@@ -1,37 +1,50 @@
 {
   "d1": 18,
-  "d2": 20,
-  "d3": 17,
-  "d4": 15,
-  "d5": 19,
+  "d2": 16,
+  "d3": 14,
+  "d4": 12,
+  "d5": 15,
   "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D5",
+      "title": "Missing Sub-Module Context (Files 09-27)",
+      "why": "The provided context only includes files 00-08 and 28. Critical logic for versioning (09), checksums (14), and the updater binary (19) is referenced but not provided.",
+      "fix": "Provide the full 36-file inventory as defined in the AC-21 pin to ensure all referenced logic is available for implementation."
+    },
     {
       "severity": "HIGH",
       "dim": "D4",
       "title": "Truncated Build Script Logic",
-      "why": "The core build script (04-build-scripts.md) is truncated at the 90KB cap, leaving the Bash implementation and the final deploy logic undefined for the AI.",
-      "fix": "Move the Bash implementation of the build script to a separate file or ensure the overview provides a complete pseudo-code summary of the missing logic."
+      "why": "File 04-build-scripts.md is truncated mid-PowerShell function, leaving the deploy logic and the entire Bash implementation missing.",
+      "fix": "Provide the complete content of 04-build-scripts.md to ensure the cross-platform build/deploy contract is fully specified."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Race Condition in Update Check",
-      "why": "AC-15 specifies updating 'last_check_unix' BEFORE spawning the child to prevent thundering herds, but does not define behavior if the child process fails to start or crashes immediately.",
-      "fix": "Add a requirement to reset 'last_check_unix' to 0 or the previous value if the detached process spawn fails."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D1",
       "title": "Ambiguous <module> Placeholder",
-      "why": "The ldflags in 04-build-scripts.md use a '<module>' placeholder which is not explicitly defined as the Go module path from go.mod.",
-      "fix": "Explicitly state that '<module>' must be replaced with the 'module' declaration found in the project's go.mod file."
+      "why": "The build script uses '<module>/constants.RepoPath' as an ldflag. A mediocre coder won't know if this should be the Go module name from go.mod or a literal string.",
+      "fix": "Explicitly state that '<module>' must be replaced with the actual Go module path found in the project's go.mod file."
     }
   ],
   "module": "14-update",
   "files_used": 8,
   "files_total": 54,
   "bytes_used": 90000,
-  "bundle_sha": "c4dd825b441fa859",
-  "total": 89,
-  "band": "GOOD"
+  "bundle_sha": "a3b812e6615d0f56",
+  "total_v6": 75,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 75.9,
+  "total_v7": 76,
+  "total": 76,
+  "band": "GOOD",
+  "rubric": "v7"
 }

@@ -1,37 +1,50 @@
 {
   "d1": 18,
-  "d2": 14,
+  "d2": 12,
   "d3": 15,
   "d4": 19,
-  "d5": 16,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing Verifies clauses for Phase 1-21",
-      "why": "While the meta-files (00, 97, 98, 99) have detailed ACs with Verifies clauses, the actual technical phases (01-21) are listed as 'must remain valid' but lack specific GWT criteria for their technical requirements (e.g., PSR-4 logging, singleton constraints).",
-      "fix": "Add a 'Technical Requirements' section to 97-acceptance-criteria.md with GWT/Verifies for the core architectural patterns defined in Phases 01-06."
+      "title": "Missing Verifies clauses for Phase 01-06",
+      "why": "While 00-overview has ACs with Verifies clauses in 97-acceptance-criteria.md, the actual technical phases (01-06) lack granular GWT/Verifies pairs for their specific architectural requirements.",
+      "fix": "Add a 'Verification' section to each phase file (01-06) with explicit GWT criteria and a 'Verifies:' line referencing the specific architectural invariant."
     },
     {
       "severity": "MEDIUM",
       "dim": "D5",
-      "title": "Broken internal link to Phase 2 sub-files",
-      "why": "00-overview.md references '02-enums-and-coding-style/' as a subfolder, but the file inventory and links in 00-quick-start.md and 02-overview.md use inconsistent relative paths that may fail depending on the working directory of the AI.",
-      "fix": "Standardize all internal links to use the full relative path from the module root (e.g., ./02-enums-and-coding-style/01-enum-architecture.md)."
+      "title": "Unresolved External References in Consistency Report",
+      "why": "The 99-consistency-report.md identifies several broken external links (e.g., formatting-rules-reference.md) and marks them as 'RESOLVED' in prose, but the 'Recommended Fixes' section still lists them as P0/P1 actions, creating ambiguity for an AI.",
+      "fix": "Remove the 'Recommended Fixes' P0/P1 table entries for items already marked as RESOLVED in the status tables."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency and Race Conditions in FileLogger",
-      "why": "Phase 01 and 04 specify a FileLogger singleton but do not address file locking (flock) or concurrent write handling, which is critical in high-traffic WordPress environments.",
-      "fix": "Add a requirement in 04-logging-and-error-handling.md for exclusive file locking during write operations."
+      "title": "Concurrency and Race Conditions Unaddressed",
+      "why": "The spec covers file logging and database migrations but does not specify handling for concurrent requests (e.g., file locking for FileLogger or race conditions in the self-update/rollback logic).",
+      "fix": "Add a 'Concurrency' section to Phase 04 (Logging) and Phase 10 (Deployment) specifying flock() or atomic operation requirements."
     }
   ],
   "module": "18-wp-plugin-how-to",
   "files_used": 11,
   "files_total": 35,
-  "bytes_used": 89670,
-  "bundle_sha": "064127fafb0acfe8",
-  "total": 82,
-  "band": "GOOD"
+  "bytes_used": 89767,
+  "bundle_sha": "901f4120b9cb26e9",
+  "total_v6": 78,
+  "axis": "process-guidance",
+  "axis_multipliers": {
+    "d1": 1.5,
+    "d2": 0.7,
+    "d3": 0.8,
+    "d4": 1.0,
+    "d5": 1.0
+  },
+  "axis_cap": 95,
+  "weighted_total": 80.4,
+  "total_v7": 80,
+  "total": 80,
+  "band": "GOOD",
+  "rubric": "v7"
 }
