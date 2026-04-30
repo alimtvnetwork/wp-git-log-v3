@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 15,
+  "d2": 15,
+  "d3": 14,
   "d4": 12,
-  "d5": 16,
+  "d5": 17,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
       "title": "Circular/Self-Referential Acceptance Criteria",
-      "why": "AC-01 through AC-05 in 97-acceptance-criteria.md define 'structural rules' for the module itself but lack 'Verifies' clauses that point to external code/scripts for the specific module logic (e.g., the linter authoring guide in file 27).",
-      "fix": "Add 'Verifies' clauses to AC-01..05 citing specific linter-script paths and expected exit codes for this module's unique content."
+      "why": "AC-01 through AC-05 in \u00a797 define the 'structural floor' for the module itself, but the module's purpose is to consolidate 35 other files. There are no GWT criteria for the actual content/logic of the 35 guidelines.",
+      "fix": "Add a 'Content Integrity' AC requiring each rollup file to match its source module's normative tables/regex/schemas byte-for-byte."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
       "title": "Missing Worked Examples for Consolidated Format",
-      "why": "While the spec defines what a 'consolidated' file is, it lacks a concrete 'before/after' example showing how a 50-page source spec is condensed into a 5-page consolidated reference.",
-      "fix": "Add a 'Worked Example' section to 00-overview.md showing a source-to-consolidated mapping for a specific module like '03-error-manage'."
+      "why": "While the module contains many files, the provided context (Overview/AC/Changelog) lacks a sample of how a source spec is actually 'condensed' into a rollup file.",
+      "fix": "Add a 'Worked Example' section to \u00a797 showing a 3-paragraph source spec mapped to a 1-paragraph consolidated summary."
     },
     {
       "severity": "LOW",
       "dim": "D5",
       "title": "Aspirational Folder References",
-      "why": "The spec acknowledges references to folders that 'do not yet materialize' (e.g., 08-docs-viewer-ui), which creates a 100% confidence failure for an AI trying to validate the tree.",
-      "fix": "Mark aspirational references with a standardized [STUB] prefix in the inventory tables to signal they are not yet implementable."
+      "why": "The File Inventory (e.g., 08-docs-viewer-ui.md) references source modules like '08-docs-viewer-ui/' which are noted as aspirational/not yet existing, potentially confusing a blind AI.",
+      "fix": "Mark aspirational rows in the \u00a700 inventory table with a [STUB] prefix and a note that the source folder is not yet materialised."
     }
   ],
   "module": "17-consolidated-guidelines",
-  "files_used": 5,
+  "files_used": 4,
   "files_total": 39,
   "bytes_used": 90000,
-  "bundle_sha": "66d780b0f5f7ee66",
-  "total_v6": 75,
+  "bundle_sha": "ff4fab1c3572913b",
+  "total_v6": 76,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 76.8,
-  "total_v7": 77,
-  "total": 77,
+  "weighted_total": 77.7,
+  "total_v7": 78,
+  "total": 78,
   "band": "GOOD",
   "rubric": "v7"
 }
