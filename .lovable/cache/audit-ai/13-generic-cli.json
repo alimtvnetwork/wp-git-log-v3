@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 19,
+  "d2": 20,
   "d3": 17,
-  "d4": 18,
-  "d5": 15,
+  "d4": 15,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken External Spec References",
-      "why": "AC-22 and AC-23 reference external modules (spec/05, spec/27) for critical concurrency and atomic write logic which are not provided in this context.",
-      "fix": "Provide the referenced spec/05 and spec/27 modules or inline the specific AC-SD-22 and AC-T-28 requirements."
+      "title": "Truncated Context (Files 14-21 Missing)",
+      "why": "The module is truncated at 120KB. Critical normative files for Date Formatting (14), Constants (15), Verbose Logging (16), Progress (17), Batch Exec (18), Shell Completion (19), Terminal Design (20), and Post-Install (21) are missing from the provided context.",
+      "fix": "Provide the remaining files (14-21) or increase the context window to include the full 117 KB module."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Truncated Date Formatting Spec",
-      "why": "File 14-date-formatting.md is truncated mid-sentence, leaving the implementation and rules incomplete.",
-      "fix": "Restore the full content of 14-date-formatting.md including the complete Contributors footer."
+      "dim": "D4",
+      "title": "Missing Concrete Examples for Multi-Format Output",
+      "why": "While AC-09 and 06-output-formatting.md define the requirement for CSV/Markdown/JSON, they lack the specific sample I/O or 'Worked Cases' required for a mediocre coder to implement the exact layout (e.g., specific CSV headers or Markdown table styles) without guessing.",
+      "fix": "Add a 'Worked Examples' section to 06-output-formatting.md with sample input data and the resulting CSV/JSON/MD strings."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Inconsistent Exit Code Prose",
-      "why": "While AC-21 establishes a '97-WINS' rule, several files (07, 11, 18) still contain prose or code snippets suggesting 'exit 1' for misuse or partial failures.",
-      "fix": "Perform a final sweep of all code snippets to replace os.Exit(1) with os.Exit(int(exit.ExitMisuse)) or similar."
+      "title": "Undefined 'isBusyOrLocked' Implementation",
+      "why": "10-database.md references a predicate 'isBusyOrLocked(err)' in the Go snippet but does not provide the implementation, leaving the coder to guess how to extract SQLite error codes.",
+      "fix": "Add the implementation of isBusyOrLocked using errors.As or type assertion to the Go snippet in 10-database.md."
     }
   ],
   "module": "13-generic-cli",
-  "files_used": 17,
+  "files_used": 16,
   "files_total": 24,
   "bytes_used": 120000,
-  "bundle_sha": "f6e423e14f017555",
-  "total_v6": 87,
+  "bundle_sha": "3062f34a1da1b1c1",
+  "total_v6": 86,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 88.8,
-  "total_v7": 89,
-  "total": 89,
+  "weighted_total": 88.4,
+  "total_v7": 88,
+  "total": 88,
   "band": "GOOD",
   "rubric": "v7"
 }

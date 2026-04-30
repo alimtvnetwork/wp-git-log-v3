@@ -1,38 +1,38 @@
 {
-  "d1": 19,
-  "d2": 18,
+  "d1": 18,
+  "d2": 14,
   "d3": 15,
-  "d4": 20,
+  "d4": 19,
   "d5": 18,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "SQLite Single-Writer Bottleneck",
-      "why": "The spec mandates SQLite-first with a 'Split DB' pattern but lacks explicit guidance on handling 'database is locked' errors during concurrent writes in the business logic examples.",
-      "fix": "Add a normative requirement for a retry-with-jitter policy (e.g., 3 attempts, 100ms base) for all write operations in the ORM/Service layer."
+      "dim": "D2",
+      "title": "Missing GWT for Core Naming Rules",
+      "why": "While AC-10/11/12 cover ORM and Booleans, the fundamental 'Golden Rules' (Singular names, PascalCase, PK={Table}Id) lack explicit GWT criteria in the AC file.",
+      "fix": "Add AC-14 with GWT steps to verify Table/Column naming and PK/FK identity matching against the Canonical DDL."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Missing AC for Boolean Storage",
-      "why": "While \u00a72.1 of 02-schema-design.md provides a detailed normative table for cross-language boolean storage, the Acceptance Criteria (97-acceptance-criteria.md) lacks a specific GWT test for verifying this across different language implementations.",
-      "fix": "Add AC-12: 'Given a boolean field, When persisted in SQLite and read in Go/PHP, Then it must be stored as INTEGER 0/1 and cast to native bool without string-coercion side effects.'"
+      "dim": "D3",
+      "title": "Ambiguous 'Smallest Type' Enforcement",
+      "why": "Rule 1.1 and 2 suggest using SMALLINT/TINYINT, but the Canonical DDL uses INTEGER for everything, creating a conflict for a mediocre coder.",
+      "fix": "Update Canonical DDL in 00-overview.md to use SMALLINT for ProjectStatusId to demonstrate the sizing rule."
     },
     {
       "severity": "LOW",
-      "dim": "D5",
-      "title": "Dangling Reference in Relationship Diagrams",
-      "why": "The file 05-relationship-diagrams.md ends with a truncated cross-reference to '02-boolean-principles/00-overview.m' due to context limits or file end.",
-      "fix": "Complete the link to [../02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md]."
+      "dim": "D1",
+      "title": "Inconsistent View Naming Prefix",
+      "why": "01-naming-conventions.md specifies 'Vw' prefix for views, but the Canonical DDL in 00-overview.md uses 'View' suffix (ProjectWithOwnerView).",
+      "fix": "Standardize on 'Vw' prefix in the Canonical DDL (e.g., VwProjectWithOwner)."
     }
   ],
   "module": "04-database-conventions",
   "files_used": 9,
   "files_total": 11,
   "bytes_used": 120000,
-  "bundle_sha": "cd82fafabed61373",
-  "total_v6": 90,
+  "bundle_sha": "0ead3d11a9dd6392",
+  "total_v6": 84,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 89.0,
-  "total_v7": 89,
-  "total": 89,
+  "weighted_total": 81.2,
+  "total_v7": 81,
+  "total": 81,
   "band": "GOOD",
   "rubric": "v7"
 }

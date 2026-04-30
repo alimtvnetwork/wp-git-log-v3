@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 15,
-  "d4": 12,
-  "d5": 19,
+  "d2": 19,
+  "d3": 17,
+  "d4": 18,
+  "d5": 20,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D2",
-      "title": "Circular/Structural-only ACs for Tracker Content",
-      "why": "AC-01 through AC-08 in the child trackers verify the existence of the spec files themselves rather than the logic or schema of the issue records they contain.",
-      "fix": "Add logic-based ACs that verify the 'Reproduction/Cause/Fix/Prevention' structure and the JSON schema validation of issue records."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Truncated Evidence in Consolidated Findings",
-      "why": "The file 02-consolidated-audit-findings/00-overview.md is truncated at the end of the provided context, leaving F-24 incomplete and potentially missing subsequent findings.",
-      "fix": "Split the consolidated findings into smaller, logically grouped files (e.g., by severity or category) to stay under context limits."
+      "dim": "D3",
+      "title": "Truncated tracker content in 02-consolidated-audit-findings",
+      "why": "The file 02-consolidated-audit-findings/00-overview.md is truncated at 120KB, leaving findings F-15 through F-24 without their 'Required fix' or 'Prevention' sections.",
+      "fix": "Acknowledge truncation as a known harness limitation per AC-AI-16 and ensure human review of the full on-disk file."
     },
     {
       "severity": "MEDIUM",
+      "dim": "D1",
+      "title": "Inconsistent Issue ID Patterns",
+      "why": "AC-AI-14/15 and 02-overview use 'F-NN', but 01-overview and its contracts mandate 'P2-GL-NN' or 'P2-GLA-NNN'.",
+      "fix": "Standardize on a single regex pattern (e.g., ^[A-Z0-9-]+-[0-9]+$) across all tracker contracts."
+    },
+    {
+      "severity": "LOW",
       "dim": "D3",
-      "title": "Unaddressed Schema Validation for Issue Records",
-      "why": "While a JSON schema is provided in 01-phase-2-git-logs-audit/00-overview.md, there are no examples of malformed records or negative test cases to confirm validation behavior.",
-      "fix": "Add a 'Negative Case' example to 01-phase-2-git-logs-audit showing a schema validation failure for a missing required field."
+      "title": "Missing timeout/retry logic for linter scripts",
+      "why": "AC-AI-000 and others reference python/node scripts for verification but do not specify behavior for large-repo timeouts or partial file-system access failures.",
+      "fix": "Add a 'Verification Robustness' section to 00-overview.md specifying a 30s timeout and non-zero exit on partial failures."
     }
   ],
   "module": "25-app-issues",
   "files_used": 9,
   "files_total": 12,
   "bytes_used": 120000,
-  "bundle_sha": "86e15f6092f775ab",
-  "total_v6": 78,
+  "bundle_sha": "b124d6a215f05037",
+  "total_v6": 92,
   "axis": "audit-corpus",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 1.5
   },
   "axis_cap": 95,
-  "weighted_total": 79.0,
-  "total_v7": 79,
-  "total": 79,
-  "band": "GOOD",
+  "weighted_total": 93.0,
+  "total_v7": 93,
+  "total": 93,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }
