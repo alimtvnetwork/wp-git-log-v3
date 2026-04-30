@@ -124,3 +124,10 @@
 
 - Added **AC-35** (Module asset inventory pin) — Lesson #29 module asset inventory pin. Auditor-authoritative on-disk inventory declaration; closes audit-v6 HIGH [D5] missing-files class as bundling-cap artifact (cache-stale per Lesson #34 until A8 LLM re-score). Lockstep §00/§97/§98/§99 patch+minor coordinated.
 
+## 3.4.3 — 2026-04-30 — Phase 153 A24-fu9 (spec/07 self-lift)
+
+- Added **AC-036** (Canonical semantic token registry, `[critical]`) + canonical 23-row token table in §00 — closes audit-v7 [D4 MEDIUM] "Incomplete Token Registry Example" by lifting the full registry into tier-1 (Lesson #19 audit-boundary < verification-boundary). Registry is closed-set; HSL space-separated triplets only; `:root` + `.dark` MUST both declare every token.
+- Added **AC-037** (FOUC-prevention theme bootstrap, `[high]`) + canonical 9-line `<script>` snippet in §00 — closes audit-v7 [D3 LOW] "Concurrency/Race Condition in Theme Script" by inlining the synchronous bootstrap pattern with `try`/`catch`/`prefers-color-scheme` fallback. Tightens AC-005 with copy-pasteable implementation. Forbidden patterns enumerated (React `useEffect` init, `defer`, post-stylesheet placement, missing `try`/`catch`).
+- Lockstep: §97 v3.9.0 → **v3.10.0** (minor — 2 new ACs, AC count 36 → 38); §00 v3.4.2 → **v3.4.3** (patch — new normative subsections); §98 v3.4.2 → **v3.4.3** (patch); §99 v3.10.1 → **v3.10.2** (patch). h10 stamps refreshed to phase 153.
+- v7 cache score predicted lift 80 → ≥85 (D4 +2, D3 +2, plus D5 stability via existing AC-35 pin); fresh re-score performed per Lesson #38.
+
