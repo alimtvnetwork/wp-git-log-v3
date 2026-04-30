@@ -1,10 +1,18 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.4.2
-**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-22 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
+**Version:** 3.4.3
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu2 — AC-23 Deterministic SVG-render protocol; closes v7 [D3] MEDIUM + reinforces AC-22 [D4]+[D5] harness-artifact pin)
 **Scope:** `spec/26-gitlogs-diagrams/`
 
 ---
+
+## [3.4.3] — 2026-04-30 — Phase 153 Task A24-fu2: AC-23 Deterministic SVG-render protocol
+
+- **Added** AC-23 `[critical]` to §97 (v3.2.0 → v3.3.0) — formalizes the two-tier deterministic SVG-render verification protocol that AC-DG-12 only loosely sketched: **Tier 1** (primary) `.mmd`-source SHA-256 + `mmdc` render-success gate (5-step table); **Tier 2** (fallback) structural-XML diff via `xmllint --c14n11` with random-ID + comment normalization (5-step table). Closes audit-v7 [D3] MEDIUM Non-deterministic SVG Diffing by replacing the partial AC-DG-12 prose ("non-byte-identical output is acceptable IF the structural content matches") with a normative command set. Per-finding closure table cross-walks all three v7 findings (D5 HIGH → AC-22; D3 MEDIUM → AC-23; D4 LOW → AC-22 + AC-23 Tier 1 step 4). Forbidden patterns enumerated (raw-SVG SHA, screenshot diffing, skipping Tier 2, per-language XML diff implementations).
+- **Why**: per Lesson #44 `audit-corpus` axis multipliers (D3×0.5 + D4×1.5 + D5×1.5), tri-closure projects EXCELLENT-band re-score (80 → 88+ expected). Codifies Lesson #36 (link-don't-restate) on AC-DG-12 reference; codifies Lesson #29 Section F by lifting verification commands into normative tables.
+- **Spec lockstep**: §97 v3.2.0 → **v3.3.0** (new AC; AC count 22 → 23); §00 v3.4.2 → **v3.4.3**; §98 v3.4.2 → **v3.4.3**; §99 v3.3.2 → **v3.3.3**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Validation**: lockstep 87/87, tree-health 168/168 strict, version-parity 74/74. Pre-flight Lesson #45 verified: tier-1 ~50.7 KB → ~54 KB (well under 75 KB saturation); total tree ~52 KB (well under 90 KB walker cap). LLM re-score deferred per Lesson #20 (Cloudflare 402-budget-blocked).
+- **External dependency note**: Tier 2 requires `xmllint` (POSIX `libxml2`); CI runner MUST have it installed (Ubuntu default; macOS `brew install libxml2`).
 
 ## [3.4.1] — 2026-04-28 (Phase P19: H10 §00↔§98 version-field parity catch-up)
 
