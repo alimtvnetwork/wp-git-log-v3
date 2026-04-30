@@ -1,7 +1,7 @@
 # Install Contract
 
-**Version:** 1.0.0
-**Updated:** 2026-04-19
+**Version:** 1.1.0
+**Updated:** 2026-04-29 (Phase 153 A11d: removed `--branch` CLI flag per §97 AC-18 reproducibility — replaced with `--ref <tag-or-sha>`. v5 audit D1 finding closed.)
 
 ---
 
