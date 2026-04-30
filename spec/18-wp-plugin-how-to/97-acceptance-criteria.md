@@ -1,6 +1,6 @@
 # Acceptance Criteria — WordPress Plugin How-To — Overview
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-29 (Phase 153 audit-v6 HIGH self-lift: AC-09 asset-inventory pin added — Lesson #29 deep-tree variant + Lesson #34 cache-staleness; supersedes Phase P48-1-fu1-batch P3 v1.1.0.)  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
@@ -83,6 +83,41 @@ This document defines testable acceptance criteria for the **WordPress Plugin Ho
 - **Verifies:** on-disk module asset inventory (Lesson #29 module-kind pin extended to deep-tree modules with 22+ phase files; Lesson #34 cache-staleness — audit caches MUST NOT be authoritative source of broken-ref counts; cross-reference §99 v1.4.0 + §98 + this AC before allocating effort).
 - **Source:** `spec/18-wp-plugin-how-to/99-consistency-report.md` §1 File Index Coverage + §2.2/§2.3 RESOLVED tables.
 
+
+### AC-10: Phase-file architectural invariants binding (Phases 01–06)  `[high]`
+
+- **Given** the 6 architectural-foundation phase files (`01-foundation-and-architecture.md`, `02-enums-and-coding-style/00-overview.md`, `03-traits-and-composition.md`, `04-logging-and-error-handling.md`, `05-helpers-responses-and-integration.md`, `06-input-validation-patterns.md`)
+- **When** an LLM auditor or implementer audits the module's normative surface from §97
+- **Then** each phase MUST satisfy the invariants listed below; deviation MUST cause a hard fail in code review:
+
+| Phase | Architectural invariant (binding) |
+|-------|-----------------------------------|
+| 01-foundation-and-architecture | Plugin bootstrap MUST use a single registered `register_activation_hook` + idempotent installer; no `init`-hook side-effects on activation. |
+| 02-enums-and-coding-style | All Go-style enums MUST follow the `01-enum-architecture.md` info-object pattern (cross-ref `spec/02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md` per Lesson #36); enum values MUST be string constants, NOT numeric. |
+| 03-traits-and-composition | PHP traits MUST be composed via `use` in concrete classes only (NEVER in interfaces or abstract base traits); no diamond-inheritance fallbacks. |
+| 04-logging-and-error-handling | All log writes MUST go through the `FileLogger` facade — `error_log()` direct calls FORBIDDEN outside the facade itself; concurrency contract per AC-11. |
+| 05-helpers-responses-and-integration | All REST responses MUST flow through the `Response` envelope helper (cross-ref `spec/04-database-conventions` response-envelope summary); raw `wp_send_json_*` calls FORBIDDEN. |
+| 06-input-validation-patterns | All user input MUST be sanitized via the `Validator` chain BEFORE reaching DB/persistence; `$_POST`/`$_GET` direct reads FORBIDDEN outside the validator boundary. |
+
+- **Forbidden patterns:** authoring a phase file that introduces a new architectural concept without a row in this table; introducing per-phase ACs in the phase file itself (those would create dual-source drift per Lesson #36 — phase files are implementer-facing prose; §97 is the contract).
+- **Verifies:** the architectural-invariant contract for spec/18 phases 01–06 (Lesson #19 audit-boundary < verification-boundary lift; the 6 phase files exist on disk but the contract MUST live in §97 to be auditor-visible). Mirror of spec/02 AC-CG-21 Subfolder Delegation Map at the phase-file granularity.
+
+### AC-11: Concurrency contract for FileLogger + self-update  `[high]`
+
+- **Given** `04-logging-and-error-handling.md` (FileLogger) + `10-deployment-patterns.md` (self-update / rollback) handle concurrent requests under typical WordPress traffic
+- **When** ≥2 PHP-FPM workers write to the same log file OR the self-updater races against an in-flight admin request
+- **Then** the following concurrency guarantees MUST hold:
+
+| Surface | Contract |
+|---------|----------|
+| FileLogger writes | MUST acquire `flock($handle, LOCK_EX)` before write, release on `flock(…, LOCK_UN)` (or implicit fclose); `LOCK_NB` non-blocking acquire FORBIDDEN (silently drops log lines under load). |
+| FileLogger rotation | Atomic rename: write to `<log>.tmp.<pid>`, `flock(LOCK_EX)`, `rename()` to `<log>.<date>`; partial-write log fragments FORBIDDEN. |
+| Self-update download | Download to `<plugin-dir>/.update-staging/<version>.zip.partial`, `rename()` to `.zip` only after sha256 verification — concurrent updater invocations MUST detect existing `.partial` via `flock` on a `.lock` sentinel file and abort with exit code matching `spec/13-generic-cli` AC-21 typed `ExitCode` enum. |
+| Self-update activation | Use `register_shutdown_function` to defer plugin reload until after the current request completes; mid-request `wp_redirect` after activation FORBIDDEN. |
+| Rollback | MUST verify rollback-target sha256 against `changelog.md` recorded hash BEFORE swapping symlink; symlink swap MUST be atomic via `rename()` on a sibling symlink. |
+
+- **Forbidden patterns:** `fwrite` to log file without preceding `flock`; using `LOCK_NB` (silent drop class); writing self-update artifacts directly to live plugin directory (corrupts in-flight requests); rollback via `cp -r` (non-atomic).
+- **Verifies:** concurrency contract for FileLogger + self-update / rollback (closes audit-v7 [D3 LOW] "Concurrency and Race Conditions Unaddressed"). Cross-references `spec/13-generic-cli` AC-22 (DB+file concurrency) per Lesson #36 (link-don't-restate — spec/13 owns the canonical concurrency posture; this AC pins the WordPress-specific surfaces).
 
 ---
 
