@@ -98,12 +98,12 @@ func loadFile(path string) ([]byte, error) {
     return data, nil
 }
 
-// ✅ Correct — handler prints and exits
+// ✅ Correct — handler prints and exits with typed enum
 func runImport(args []string) {
     data, err := loadFile(args[0])
     if err != nil {
         fmt.Fprintln(os.Stderr, err)
-        os.Exit(1)
+        os.Exit(int(exit.ExitError)) // §97 AC-21: typed enum mandatory
     }
     // process data
 }

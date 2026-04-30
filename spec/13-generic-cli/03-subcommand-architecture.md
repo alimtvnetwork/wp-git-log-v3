@@ -13,7 +13,7 @@ A single exported `Run()` function validates arguments and dispatches:
 func Run() {
     if len(os.Args) < 2 {
         printUsage()
-        os.Exit(1)
+        os.Exit(int(exit.ExitMisuse)) // §97 AC-21: typed enum mandatory
     }
     dispatch(os.Args[1])
 }
@@ -37,7 +37,7 @@ func dispatch(command string) {
         printUsage()
     default:
         fmt.Fprintf(os.Stderr, "Unknown command: %s\n", command)
-        os.Exit(1)
+        os.Exit(int(exit.ExitMisuse)) // §97 AC-21: typed enum mandatory
     }
 }
 ```
@@ -53,7 +53,7 @@ func dispatch(command string) {
     if dispatchUtility(command) { return }
 
     fmt.Fprintf(os.Stderr, "Unknown command: %s\n", command)
-    os.Exit(1)
+    os.Exit(int(exit.ExitMisuse)) // §97 AC-21: typed enum mandatory
 }
 
 func dispatchCore(command string) bool {

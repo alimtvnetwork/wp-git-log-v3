@@ -117,7 +117,7 @@ func runExec(args []string) {
     groupName, all, gitArgs := parseExecFlags(args)
     if len(gitArgs) == 0 {
         fmt.Fprintln(os.Stderr, constants.ErrExecUsage)
-        os.Exit(1)
+        os.Exit(int(exit.ExitMisuse)) // §97 AC-21: typed enum mandatory
     }
 
     records := loadExecByScope(groupName, all)
