@@ -1,7 +1,7 @@
 # Acceptance Criteria — WordPress Plugin How-To — Overview
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep: added `**Verifies:**` clauses to AC-01..AC-08 — closes 8/8 P3 gap, graduates AC-block from Medium → High AI-confidence.)  
+**Version:** 1.2.0  
+**Updated:** 2026-04-29 (Phase 153 audit-v6 HIGH self-lift: AC-09 asset-inventory pin added — Lesson #29 deep-tree variant + Lesson #34 cache-staleness; supersedes Phase P48-1-fu1-batch P3 v1.1.0.)  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
@@ -71,6 +71,17 @@ This document defines testable acceptance criteria for the **WordPress Plugin Ho
 - **Then** that date MUST also appear as a section header in `99-consistency-report.md`; the strict gate (Phase 81) blocks merge on any mismatch.
 - **Verifies:** the four-file lockstep invariant from `mem://index.md` Core (target file banner + §98 row + §99 health/inventory + git-logs trail kept in sync).
 - **Source:** `linter-scripts/check-lockstep.cjs`.
+
+### AC-09: Module Asset Inventory Pin (Lesson #29 deep-tree variant)  `[critical]`
+- **Given** an LLM auditor or downstream AI implementer bundling this module's normative surface from disk
+- **When** auditing cross-references emitted by this module's 22 phase files (`00-quick-start.md`, `01-foundation-…`, …, `21-ping-endpoint.md`) + 4 sub-files (`02-enums-and-coding-style/{00-overview,01-enum-architecture,02-enum-metadata-pattern,03-self-update-status-enum,04-action-type-enum}.md`) plus the §97 file itself
+- **Then** ALL of the following on-disk targets MUST be treated as PRESENT and authoritative:
+  - All 22 phase files + 4 enum sub-files + `readme.md` + `changelog.md` + §00/§97/§98/§99 (27 files total per §99 §1)
+  - External cross-references: `spec/02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` (formatting rules) and `spec/02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md` (Go info-object pattern)
+- **And** Auditors that report any of these as "missing", "broken", or pointing to a `06-golang-standards/` or `01-app/` prefix MUST be diagnosed as operating on **stale `99-consistency-report.md` v1.3.0 prose** — the `99-consistency-report.md` v1.4.0 release (2026-04-29) verified all historical broken refs were redirected in prior phases. The canonical fix is to re-read §99 v1.4.0 §2.2/§2.3 RESOLVED tables, NOT to edit the spec to remove the references.
+- **And** §97 file is NOT truncated — auditor reports citing "truncated mid-sentence at AC-08" reference a deep-walker bundling cap (90 KB tier-1 limit in `linter-scripts/audit-ai-implementability.py`); §97 has clean closing at line 125 with full Cross-References section.
+- **Verifies:** on-disk module asset inventory (Lesson #29 module-kind pin extended to deep-tree modules with 22+ phase files; Lesson #34 cache-staleness — audit caches MUST NOT be authoritative source of broken-ref counts; cross-reference §99 v1.4.0 + §98 + this AC before allocating effort).
+- **Source:** `spec/18-wp-plugin-how-to/99-consistency-report.md` §1 File Index Coverage + §2.2/§2.3 RESOLVED tables.
 
 
 ---

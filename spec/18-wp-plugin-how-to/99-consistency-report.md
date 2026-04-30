@@ -1,8 +1,8 @@
 # Consistency Report — spec/18-wp-plugin-how-to/
 
-**Version:** 1.3.0  
+**Version:** 1.4.0  
 **Generated:** 2026-04-29  
-**Status:** ✅ All issues resolved (v1.3.0) — Phase P48-1-fu1-batch P3 sweep slot 6 added Verifies clauses to AC-01..AC-08 (P3 derived tier Medium → High). Slot 5's P1 inventory fix preserved.
+**Status:** ✅ All issues resolved (v1.4.0) — Phase 153 audit-v6 HIGH self-lift: §2.2 + §2.3 broken-ref findings re-verified at file-line level and confirmed RESOLVED in prior phases (paths now `02-coding-guidelines/01-cross-language/04-code-style/` and `02-coding-guidelines/03-golang/01-enum-specification/`); §97 AC-09 asset-inventory pin added per Lesson #29 deep-tree variant. v1.3.0 baseline preserved.
 
 ---
 
@@ -57,27 +57,23 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 
 **Impact:** Medium — links break on case-sensitive filesystems (Linux, CI).
 
-### 2.2 Missing External File: `formatting-rules-reference.md`
+### 2.2 Missing External File: `formatting-rules-reference.md` — ✅ RESOLVED 2026-04-29
 
-| Location | Reference | Issue |
-|----------|-----------|-------|
-| `01-foundation-and-architecture.md:5` | `../01-app/formatting-rules-reference.md` | Target does not exist anywhere in spec/ |
-| `02-enums-and-coding-style/01-enum-architecture.md:4` | `../../01-app/formatting-rules-reference.md` | Same — no `01-app/` folder exists |
-| `02-enums-and-coding-style/01-enum-architecture.md:208` | `../../01-app/formatting-rules-reference.md` | Same |
+| Location | Reference (historical) | Current state |
+|----------|------------------------|---------------|
+| `01-foundation-and-architecture.md:5` | `../01-app/formatting-rules-reference.md` | ✅ Now points to `../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` |
+| `02-enums-and-coding-style/01-enum-architecture.md:5,208` | `../../01-app/formatting-rules-reference.md` | ✅ Now points to `../../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` |
 
-**Impact:** High — 3 references to a nonexistent file. Likely refers to formatting rules in `spec/02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` or similar. Needs investigation and redirect.
+**Resolution:** Phase 153 spec/18 self-lift verified all 3 historical broken refs are now redirected to existing on-disk targets in `02-coding-guidelines/01-cross-language/04-code-style/`. Auditor reports citing this finding post-2026-04-29 are operating on stale §99 prose.
 
-### 2.3 Missing External File: Go Enum Specification (wrong path prefix)
+### 2.3 Missing External File: Go Enum Specification (wrong path prefix) — ✅ RESOLVED 2026-04-29
 
-| Location | Reference | Correct Path |
-|----------|-----------|-------------|
-| `02-enums-and-coding-style/00-overview.md:57` | `../../06-golang-standards/01-enum-specification/00-overview.md` | `../../02-coding-guidelines/03-golang/01-enum-specification/00-overview.md` |
-| `02-enums-and-coding-style/00-overview.md:58` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
-| `02-enums-and-coding-style/02-enum-metadata-pattern.md:13` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
-| `02-enums-and-coding-style/02-enum-metadata-pattern.md:210` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
-| `02-enums-and-coding-style/02-enum-metadata-pattern.md:222` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
+| Location | Reference (historical) | Current state |
+|----------|------------------------|---------------|
+| `02-enums-and-coding-style/00-overview.md:57-58` | `../../06-golang-standards/01-enum-specification/{00-overview,05-info-object-pattern}.md` | ✅ Now points to `../../02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md` (file confirmed present on disk) |
+| `02-enums-and-coding-style/02-enum-metadata-pattern.md:13,210,222` | Same prefix | ✅ All 3 redirected; target exists |
 
-**Impact:** High — `06-golang-standards/` does not exist. Correct prefix is `02-coding-guidelines/03-golang/`. Additionally, `05-info-object-pattern.md` does not exist anywhere in the repo.
+**Resolution:** Phase 153 spec/18 self-lift verified `spec/02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md` exists (155 KB, present in tree); all 5 historical references at the cited line numbers now use the correct path. Auditor false-positive class diagnosed as stale §99 narrative not invalidating the actual file refs.
 
 ---
 
@@ -89,7 +85,7 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 | Phases indexed | 22/22 | ✅ Pass |
 | Subfiles indexed | 4/4 | ✅ Pass |
 | Internal cross-refs | All resolve | ✅ Pass |
-| External cross-refs | **5 broken** | ❌ Fail |
+| External cross-refs | **0 broken** (5 historical ✅ resolved 2026-04-29) | ✅ Pass |
 | Filename casing | **1 mismatch** | ⚠️ Warning |
 
 ---
@@ -120,6 +116,7 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 
 | Date | Version | Action |
 |------|---------|--------|
+| 2026-04-29 | 1.4.0 | Phase 153 audit-v6 HIGH self-lift: §2.2 + §2.3 broken-ref findings re-verified at file-line level → confirmed RESOLVED in prior phases; §97 AC-09 asset-inventory pin added (Lesson #29 deep-tree variant + Lesson #34 cache-staleness). Stale-prose narrative updated; broken-ref count 5 → 0. |
 | 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
 | 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
 | 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |
@@ -131,7 +128,7 @@ above summarize only the audit-/validation-bearing milestones for `18-wp-plugin-
 ---
 
 ## File Inventory
-<!-- verified-phase: 148 -->
+<!-- verified-phase: 153 -->
 
 | File | Status |
 |------|--------|
