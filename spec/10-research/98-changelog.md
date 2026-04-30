@@ -17,6 +17,9 @@
 
 ## Releases
 
+### 3.3.4 — 2026-04-30 — Phase 153 Task A13 (child slot v2.1.0 close-out)
+- **Changed (banner-only)** Patch-bump of parent banners (3.3.3 → 3.3.4) catching child slot `01-research-index/` v2.0.0 → v2.1.0 (AC-RESEARCH-05 Verifies + AC-RESEARCH-07 domain-registry validator AC). Closes v6 audit D2 LOW + D3 MEDIUM findings on the child contract (the third v6 finding `lifecycle-*.mmd` D5 HIGH remains pinned upstream by §97 AC-9 — Lesson #29 harness-bundling-cap). Parent §97/§00 surface unchanged.
+
 ### 3.3.2 — 2026-04-29 — Phase P48-1-fu1-batch P3 sweep slot 4 (AC-01..AC-08 Verifies clauses)
 - **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v1.0.0 → v1.1.0). Each clause cites the precise invariant defended; AC-01 + AC-06 also note this module's `kind: index` YAML exemption (intentionally empty until child specs land — exempt from `missing-contract` but NOT from structural floor). Closes the P3-tier gap (0/8 → 8/8 Verifies) and graduates this module's AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)*. No semantic change to acceptance surface — purely a verifiability uplift. §00 banner 3.3.1 → 3.3.2; §97 1.0.0 → 1.1.0; §99 row added.
 
