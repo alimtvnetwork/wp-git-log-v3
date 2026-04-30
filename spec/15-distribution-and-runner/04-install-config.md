@@ -56,7 +56,7 @@ This list MUST stay in sync with the §"Default install layout" table in [`00-ov
 
 Both installers MUST resolve `repo`, `branch`, and `folders` in this order (highest wins):
 
-1. CLI flag (`--repo`, `--branch`, `--folders`, or `--version` for branch/tag)
+1. CLI flag (`--repo`, `--folders`, `--ref` for tag/SHA, or `--version` as the `--ref` alias for tags). **`--branch` as a CLI flag is FORBIDDEN** — see §97 AC-18 (reproducibility) and `01-install-contract.md` § "Versioning". The `branch` JSON field below is the **default-branch hint** used only when probing for the latest release tag; it MUST NOT be overridden from the CLI.
 2. Custom config file specified via `--config <path>`
 3. The repo-root `install-config.json`
 4. Hard-coded fallback in the installer source
