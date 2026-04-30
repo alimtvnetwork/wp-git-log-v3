@@ -17,6 +17,14 @@
 
 ## Releases
 
+### 2.2.0 — 2026-04-29 (Phase 153 A11d — `--branch` CLI flag removed; reproducibility hardened)
+- **Removed** `--branch <name>` / `-Branch <name>` CLI flag from `01-install-contract.md` § "Versioning" — branch heads move, defeating the **reproducible install** contract codified in §97 AC-18. Replaced with `--ref <tag-or-sha>` row that explicitly cites AC-18's no-branch rule and the exit-`2` enforcement.
+- **Changed** `04-install-config.md` § "Override precedence" — `--branch` removed from the CLI-flag bullet; clarified that the JSON `branch` field is the **default-branch hint** for tag probing only, never a CLI override.
+- **Why** v5 audit (D1 HIGH "Conflicting Versioning Logic"): two surfaces contradicted — `01-install-contract.md` line 51 advertised `--branch` while §97 AC-18 forbade branch refs. Per user direction (Phase 153 A11d): strict removal, single source of truth = AC-18.
+- **Lockstep:** `01-install-contract.md` v1.0.0 → **v1.1.0** (CLI surface contract change; module is `future-spec` — no shipped binary impacted); `04-install-config.md` v1.0.0 → **v1.1.0** (precedence clarification); §00 v2.1.0 → **v2.1.1** (banner ripple); §99 v2.1.1 → **v2.1.2** (audit row added).
+- **No §97 AC change** — AC-18 already declared the no-branch rule; this commit removes the contradicting prose surface, no new contract added.
+- **Lesson #29 codified inside §97 AC-18** (already present): contract files MUST NOT contradict §97 normative ACs; when found, prose is patched to AC, not the reverse.
+
 ### 1.1.0 — 2026-04-27 (Phase 55 — implementability lever)
 - **Added** Added 5 GitHub Actions YAML workflows (build/sign/smoke/contract/release) → `has_ci_workflow` (+5). Added 3 Go installer reference blocks → `has_typed_lang_contract` (+10).
 
