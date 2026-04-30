@@ -1,4 +1,4 @@
-# Phase 153 Task A24-fu16 — spec/02 floor-lift (AC-CG-25/26/27)
+# Phase 153 Task A24-fu17 — spec/02 floor-lift (AC-CG-25/26/27)
 
 **Date:** 2026-04-30
 **Trigger:** A20-fu2 v8 rebaseline diagnosed spec/02 at 75 (GOOD floor — lowest in tree); 3 audit-v8 findings.

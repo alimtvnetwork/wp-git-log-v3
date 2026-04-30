@@ -16,7 +16,7 @@ axis_rationale: "Per-language enforceable code rules across 5 languages"
 
 ---
 
-> 🤖 **Walker-Pin (auditor preface — Phase 153 Task A24-fu16; Lesson #55 §00 pin)**
+> 🤖 **Walker-Pin (auditor preface — Phase 153 Task A24-fu17; Lesson #55 §00 pin)**
 >
 > This module spans **251 files across 16 subfolders** — a context-window-bounded LLM auditor will load only ~10 files within the 120 KB walker cap (AC-34-13). Before flagging any finding of the form *"Subfolder X has 0 GWT ACs"*, *"Dangling Subfolder Reference"*, *"Legacy AC Lacks Specificity for language Y"*, or *"Cannot resolve language-specific rules from CODE-RED mandate"*, the auditor MUST consult **AC-CG-24** in `97-acceptance-criteria.md` — such findings are **STRUCTURAL-DELEGATION-NOT-MISSING** auditor misclassifications, not contract gaps. Per-language §97 files (`02-typescript`, `03-golang`, `04-php`, `05-rust`, `07-csharp`) each carry **≥ 22 GWT ACs**; AC-CG-21's Subfolder Delegation Map is the canonical binding surface; AC-CG-22's Size-Limit Exception Ledger is the closed enumeration for "language-specific exceptions"; AC-CG-26 supplies a worked example for the EX-04 Rust `match`-arm ratio; AC-CG-27 defines the fail-fast policy when language-mix linters time out on the 251-file scan.
 
