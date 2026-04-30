@@ -6,7 +6,7 @@ axis_rationale: "Diagrams describing the 22-git-logs-v2 architecture"
 ---
 # Gitlogs Diagrams
 
-**Version:** 3.4.2
+**Version:** 3.4.3
 **Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-22 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 <!-- h10-verified-phase: 32 -->
 
