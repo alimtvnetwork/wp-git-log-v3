@@ -1,7 +1,7 @@
 # Acceptance Criteria — App Issues
 
-**Version:** 1.4.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu8 — added **AC-AI-14** R/C/F/P + Severity finding-schema contract with positive verification (closes audit-v7 HIGH D2 `Circular/Structural-only ACs for Tracker Content` by giving the auditor the schema-validator AC it asks for, while preserving AC-AI-12's "structural floor is intentional" framing) + **AC-AI-15** Negative-case malformed-finding example (closes audit-v7 LOW D3 `Unaddressed Schema Validation for Issue Records`). v7 MEDIUM D4 truncation finding deferred per **Lesson #46** — `02-consolidated-audit-findings/00-overview.md` is 32 KB single-file by design (single audit corpus); splitting would break line-anchor citations. Walker-saturation flag set in closing memo per L#46.)  
+**Version:** 1.5.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — added **AC-AI-16** Walker-cap truncation of audit-corpus files is structural-design-not-defect (closes recurring v7 HIGH D4 `Truncated Evidence in Consolidated Findings` as STRUCTURAL-DESIGN-NOT-DEFECT walker-window artifact). The auditor's recommended fix ("split into smaller files") DIRECTLY VIOLATES AC-AI-10 verbatim-citation contract; AC-AI-16 codifies this as forbidden remediation. Lesson #50 mirror on the audit-corpus axis (vs spec/02 AC-CG-24 normative-contract axis). AC count 15 → 16. v7 cache-reported CRITICAL/D2 + MEDIUM/D3 findings are pre-closed by A24-fu3 (AC-AI-12) + A24-fu8 (AC-AI-14/15) — Lesson #47 auditor-cannot-self-respect-ACs in effect.)  
 **Scope:** `spec/25-app-issues/`
 
 ---
