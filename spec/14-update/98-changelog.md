@@ -1,7 +1,14 @@
 # Changelog — Update — Overview
 
-**Version:** 2.4.0  
-**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-21 module asset inventory pin (Lesson #29 + Lesson #36) closes audit-v5 D5/D4/D1 findings as harness bundling-cap artifacts; AC count 20 → 21)
+**Version:** 2.4.1  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu5 — AC-22 binds `<module>` ldflags placeholder to consuming repo's go.mod path; AC count 21 → 22)
+
+### 2.4.1 — 2026-04-30 — Phase 153 Task A24-fu5: AC-22 `<module>` placeholder pin
+- **Added** AC-22 `[high]` — binds the literal `<module>` in `04-build-scripts.md` ldflags (PowerShell line 102; Bash line 200) to the consuming repo's `go.mod` `module` line; build scripts MUST NOT hard-code the path.
+- **Added** explanatory blockquote in `04-build-scripts.md` immediately after the PowerShell code block (use-site prose; Lesson #36 link-don't-restate).
+- **Why**: closes audit-v7 D3 MEDIUM "Ambiguous <module> Placeholder" as a real-but-narrow gap. Per Lesson #36, the canonical explanation lives at the use-site; AC-22 binds it normatively.
+- **Spec lockstep**: §97 v2.3.0 → **v2.4.0** (AC count 21 → 22, minor — new content); §00 v2.4.0 → **v2.4.1** (patch); §98 v2.4.0 → **v2.4.1** (patch); §99 v1.6.0 → **v1.6.1** (patch). **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Validation**: lockstep 87/87, tree-health 168/168 strict, version-parity 74/74, freshness 81/81 (verify after run).
 
 ### 2.4.0 — 2026-04-30 — Phase 153 Task A11h: AC-21 module asset inventory pin
 - **Added** AC-21 `[critical]` — declares spec/14's full 36-entry on-disk inventory as auditor-authoritative; classifies audit-v5 D5 HIGH (missing files 09–27, subfolder 24), D4 MED (truncated `04-build-scripts.md`), D1 LOW (`<module>` placeholder ambiguity) as harness bundling-cap artifacts. Mirror of spec/13 AC-24 + spec/28 AC-28-41 + spec/16 AC-21 + spec/22 AC-78.
