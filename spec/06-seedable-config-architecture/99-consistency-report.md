@@ -1,9 +1,10 @@
 # Consistency Report: Seedable Config Architecture
 
-**Version:** 4.2.0  
+**Version:** 4.3.0  
 **Generated:** 2026-04-29  
 **Health Score:** 100/100 (A+)
 
+> **v4.3.0 update (Phase 153 Task A11f — spec/06 D3 MEDIUM + D5 HIGH closure):** Added AC-SC-21 (CHANGELOG concurrency lock-ordering — single shared file lock binds AC-SC-11 + AC-SC-16 + AC-SC-17) and AC-SC-22 (apperror/AB-NNNN/ErrSeedLoadFailed symbols cross-referenced to canonical spec/03 apperror package + error-code registry per Lesson #36). AC count 20 → 22. §97 4.0.0 → 4.1.0; §00/§98/§99 4.2.0 → 4.3.0. Closes v5 D3 MEDIUM + D5 HIGH.
 > **v4.2.0 update (Phase 153 Task A11e — spec/06 D3 Type-enum reconciliation):** Closes v5 audit D3 HIGH "Inconsistent Type Enums between Schema and AC". §00 JSON Schema `Type` enum realigned from legacy `{string, int, float, bool, json}` to AC-SC-14's canonical UI-aware `{boolean, number, string, select, multiselect}`. Reference instance + Forbidden-shapes table updated in lockstep. §00 v4.1.1 → v4.2.0; §98 v4.1.1 → v4.2.0; §99 v4.1.1 → v4.2.0. No new AC.
 > **v4.1.1 update (Phase 153 Task A2 — canonical PascalCase pin):** Closes audit-v2 D1 finding "conflicting schema definitions" (false positive — both files were already PascalCase). Pin added under §00 banner explicitly forbidding camelCase variants and citing the audit-v2 misread as the precedent. §00 v4.1.0 → v4.1.1 (h10 22 → 153); §98 release row 4.1.1 added. No schema or example content changed.
 
