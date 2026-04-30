@@ -1,6 +1,6 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.2.0  
+**Version:** 1.2.1  
 **Updated:** 2026-04-29  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
