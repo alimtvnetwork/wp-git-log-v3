@@ -1,6 +1,6 @@
 # Acceptance Criteria — Consolidated Guidelines
 
-**Version:** 2.3.0
+**Version:** 2.4.0
 **Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 2: added `**Verifies:**` clauses to AC-01..AC-08 to graduate this module from Medium → High AI-confidence per the four-gate rubric (gap closes from 8 → 0).)
 **Scope:** `spec/17-consolidated-guidelines/`
 
