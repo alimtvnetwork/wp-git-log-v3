@@ -1,9 +1,16 @@
 # Error Management — Changelog
 
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 **Last Updated:** 2026-04-30
 
 ---
+
+## 3.4.3 — 2026-04-30
+- **Phase 153 Task A24-fu23** (audit-corpus walker-saturation pure-promotion, Lesson #61/#63 third instance): added `> 🤖 Walker-Pin` teaser table to head of `00-overview.md` surfacing pre-existing AC-08 (asset inventory), AC-09 (citation density), AC-05/AC-07 (Tier 2/3 verification), and AC-01/AC-02 (envelope + HTTP-status) as canonical close-outs for cache findings (D5 broken-refs, D2 missing-AC-for-architecture, D3 concurrency/timeout). Diagnosis: walker `files_used 17/166 ≈ 10%` saturation — auditor cannot reach §97 where contracts already exist.
+- **Why**: spec/03 cache 2026-04-30 reports `total=84` GOOD with 3 findings (D2-HIGH/D3-MEDIUM/D5-LOW) all closed in §97. Pure visibility patch: §00 teaser surfaces structural pins in first ~2 KB of file so bundle-capped LLM auditors hit them before exhausting the 120 KB cap.
+- **Lockstep**: §00 v3.4.2 → **v3.4.3** (patch — teaser content); §98 v3.4.2 → **v3.4.3** (patch — this row); §99 v3.3.0 → **v3.3.1** (patch — Phase 153 audit row).
+- **§97 unchanged at v2.2.0** — no new normative requirement, no AC-31-31 cascade, no RUBRIC bump, no CI workflow change. **Pure-promotion variant** of Lesson #61 per spec/22 A24-fu20 + spec/27 A24-fu22 precedent.
+- **Lesson #63 reconfirmed** (third instance — spec/22 / spec/27 / spec/03): when an LLM auditor flags pre-existing contracts as "missing", the highest-leverage fix is a §00 walker-pin teaser, not new AC authoring.
 
 ## 3.4.2 — 2026-04-30
 - **Phase 153 Task A21** (audit-v7 NEEDS_WORK close-out): added **AC-09 Sub-Module Reference Resolution** `[high]` to §97. Elevates D5 contract from passive (asset-inventory-only via AC-08) to active (citation-density floor ≥3 cross-refs/file + dual-gate verification via `linter-scripts/check-spec-folder-refs.py` + `check-spec-cross-links.py`). Closes audit-v7 HIGH D5 finding "Broken Sub-module References" (spec/03 cache 2026-04-30, finding [0]) — the gates already verify the invariant; AC-09 makes the contract explicit so D5 scoring can credit it.

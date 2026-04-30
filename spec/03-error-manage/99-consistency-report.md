@@ -1,6 +1,6 @@
 # Consistency Report: Error Management
 
-**Version:** 3.3.0  
+**Version:** 3.3.1  
 **Generated:** 2026-04-30  
 **Health Score:** 100/100 (A+)
 
@@ -108,3 +108,11 @@ Inventory mirrors the on-disk layout of `03-error-manage/` as of 2026-04-26. See
 - CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
 - Implementability raised 90 → 95 (deterministic audit).
 
+
+## 2026-04-30 — Phase 153 Task A24-fu23 (walker-pin pure-promotion)
+
+- Added `> 🤖 Walker-Pin` teaser table to `00-overview.md` head surfacing AC-08/AC-09/AC-05/AC-07/AC-01/AC-02 as canonical close-outs for cache-flagged D2/D3/D5 findings.
+- Diagnosis: `files_used 17/166 ≈ 10%` walker-saturation (audit-corpus axis with d4×1.5/d5×1.5 multipliers); contracts already exist in §97 but bundle-capped LLM auditors cannot reach them.
+- §00 v3.4.2 → v3.4.3 (patch); §98 v3.4.2 → v3.4.3 (patch); §99 v3.3.0 → v3.3.1 (patch).
+- §97 unchanged at v2.2.0 — no new normative requirement; AC-31-31 cascade not triggered.
+- Lesson #63 third instance (after spec/22 A24-fu20 + spec/27 A24-fu22) — pure-promotion pattern stable across audit-corpus + integration-spec axes.
