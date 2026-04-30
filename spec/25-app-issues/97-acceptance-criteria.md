@@ -1,7 +1,7 @@
 # Acceptance Criteria — App Issues
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep: added `**Verifies:**` clauses to AC-01..AC-08 — closes 8/8 P3 gap, graduates AC-block from Medium → High AI-confidence.)  
+**Version:** 1.3.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu3 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH "Circular ACs" + [D3] LOW "Issue-status concurrency" as kind-mismatch / out-of-scope-axis artifacts; codifies Lesson #29 Section F for `kind: tracker` sub-class)  
 **Scope:** `spec/25-app-issues/`
 
 ---
