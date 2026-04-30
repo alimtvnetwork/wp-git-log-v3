@@ -1,6 +1,6 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-30  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
@@ -140,3 +140,62 @@ python3 linter-scripts/audit-ai-implementability.py --strict              # CI g
 - **When** `load_module_bundle()` orders files for inclusion,
 - **Then** the four module-root contract files (`00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`) MUST be placed FIRST in canonical order, followed by everything else under `WALK_GLOBS` alphabetically. Without this priority, the §97 binding contract is silently dropped from the prompt for any module > ~70 KB of feature/issue prose, and the auditor scores examples without seeing the contract — yielding a false-low D2 (AC coverage) and stable scores under contract edits (Phase 153 Task A6 first re-score loop produced ZERO movement on spec/05 for exactly this reason; bundle_sha changed, score didn't, because `97-acceptance-criteria.md` was alphabetically last and never made the cut). After the fix, spec/05 lifted 69 → 89 (+20) on the same content edits.
 - **Verifies:** §34 contract-surface bundling guarantee — the auditor's prompt MUST contain the contract before the examples.
+
+---
+
+## Rubric v7 — Axis-driven dimension weight cascades (Phase 153 Task A17)
+
+Rubric v6 (active in Tasks A1–A12) applied uniform 0–20 weights to D1–D5 across every module. The Phase 153 Task A8 v5 baseline exposed a **structural 75-point ceiling** on modules whose content axis is incompatible with uniform weighting:
+
+| Module | v6 score | Axis | Penalty source |
+|---|---|---|---|
+| 03-error-manage | 75 | `audit-corpus` | D2 penalised "missing AC coverage" — but module *describes* errors, doesn't contract them |
+| 12-cicd-pipeline-workflows | 75 | `integration-spec` | D5 penalised external GitHub Actions refs as "unresolved" |
+| 17-consolidated-guidelines | 75 | `process-guidance` | D2 penalised checklist prose for not being GWT |
+| 25-app-issues | 75 | `audit-corpus` | D3 penalised quoted bug descriptions as "unhandled edge cases" (per Lesson #29) |
+
+Rubric v7 reads `content_axis` from each module's `00-overview.md` front-matter (introduced in Phase 153 Task A16) and applies axis-appropriate weight multipliers BEFORE summing to the 0–100 total. Sum-of-multipliers is **always 5.0** (mean 1.0) so total range stays 0–100 — multipliers redistribute scoring weight, they do not inflate it.
+
+### Weight cascade (Normative)
+
+| `content_axis` | D1 (Clarity) | D2 (AC Coverage) | D3 (Edge/Error) | D4 (Examples) | D5 (Cross-Ref) | Sum |
+|---|---|---|---|---|---|---|
+| `normative-contract` | 1.0 | **1.5** | **1.2** | 0.8 | 0.5 | 5.0 |
+| `process-guidance` | **1.5** | **0.7** | 0.8 | 1.0 | 1.0 | 5.0 |
+| `integration-spec` | 1.0 | 0.9 | 0.9 | **1.4** | **1.2** (allowed external) | 5.4 → renormalised to 5.0 |
+| `audit-corpus` | 1.0 | **0.5** | **0.5** | 1.5 | **1.5** (citation density) | 5.0 |
+| `tooling-spec` | 1.0 | **1.3** | 1.0 | **1.3** | 0.9 | 5.5 → renormalised to 5.0 |
+
+Renormalisation rule: if raw sum ≠ 5.0, every multiplier is divided by `(raw_sum / 5.0)` so the module total stays bounded at 100.
+
+### Per-axis caps + floor preservation
+
+| `content_axis` | Soft cap | Floor | Rationale |
+|---|---|---|---|
+| `normative-contract` | 100 | 60 | Full range — these MUST be implementable |
+| `process-guidance` | 95 | 60 | Inherent ambiguity — reaching 100 would require GWT-encoding human conventions |
+| `integration-spec` | 95 | 60 | External-system uncertainty caps achievable D5 |
+| `audit-corpus` | 95 | 60 | Per Lesson #29 — describing other specs has inherent semantic distance |
+| `tooling-spec` | 100 | 60 | Full range — script ACs are GWT-checkable |
+
+**Strict CI threshold remains 60 (BLOCKING) for every axis** — caps are upper bounds for the GOOD/EXCELLENT band assignment, not the strict gate. The 15-point moat between the v6 75-floor and the 60 strict threshold (per Lesson #40) is preserved across all axes.
+
+### Acceptance Criteria
+
+### AC-34-10 — Axis-driven weight multipliers applied per module `[critical]`
+- **Given** a module's `00-overview.md` declares `content_axis: <one-of-5>`,
+- **When** the auditor computes the per-module score,
+- **Then** the five raw dimension scores (D1–D5, each 0–20) MUST be multiplied by the axis-appropriate multipliers from the Rubric v7 weight cascade table above BEFORE summing to the 0–100 total. The multiplier sum MUST be normalised to 5.0 (so the module total stays bounded at 100); for axes whose raw multiplier sum exceeds 5.0 (`integration-spec`=5.4, `tooling-spec`=5.5), every multiplier MUST be divided by `(raw_sum / 5.0)` before scoring.
+- **Verifies:** §34 Rubric v7 contract — uniform v6 weighting penalised non-contract axes (Phase 153 Task A8 v5 baseline showed 4 modules at structural 75-floor); axis-appropriate weights close the ceiling per Lesson #29 + Lesson #36.
+
+### AC-34-11 — Per-axis soft cap applied to band assignment, NOT to strict gate `[high]`
+- **Given** a module's score after Rubric v7 multiplication,
+- **When** the band (EXCELLENT/GOOD/NEEDS_WORK/BLOCKING) is computed,
+- **Then** the soft cap from the per-axis caps table MUST be applied (e.g. `process-guidance` cannot exceed 95 even if raw weighted sum is 97); BUT the strict CI gate threshold MUST remain 60 (BLOCKING) for every axis. The 15-point moat between the v6 75-floor and the 60 strict threshold (Lesson #40) is preserved tree-wide.
+- **Verifies:** §34 strict-gate stability under axis-aware scoring — caps adjust band labels without weakening the regression-detection contract Task A12 graduated.
+
+### AC-34-12 — Missing or invalid `content_axis` fails fast `[critical]`
+- **Given** a module's `00-overview.md` lacks `content_axis:` or declares a value outside `{normative-contract, process-guidance, integration-spec, audit-corpus, tooling-spec}`,
+- **When** the auditor processes that module,
+- **Then** the script MUST exit code 2 (CLI/data error) with a message naming the offending module + the missing/invalid value, and MUST NOT silently fall back to v6 uniform weighting. The Phase 153 Task A16 bulk injection guarantees all 23 top-level modules carry valid axis values; this AC enforces that any future module addition (or accidental front-matter deletion) breaks CI immediately.
+- **Verifies:** §34 fail-loud contract — silent v6 fallback would mask Rubric v7 regressions; mirrors AC-34-04 (unknown `--module=` slug exits 2).
