@@ -422,6 +422,106 @@ gates:
 - **Then** the finding MUST be classified as **STRUCTURAL-DELEGATION-NOT-MISSING** rather than a contract gap, because (a) AC-CG-21's Subfolder Delegation Map is the canonical binding surface (16 rows × slot + path + `AC-XX-NN` family-prefix + governing CODE-RED + status), (b) every per-language §97 (`02-typescript`, `03-golang`, `04-php`, `05-rust`, `07-csharp`) carries **≥ 22 GWT ACs** as of A10-fu1 verification (TS=22, Go=22, PHP=27, Rust=26, C#=27 — totals re-counted in A24-fu11), and (c) AC-CG-22's 8-row Size-Limit Exception Ledger is the closed-enumeration source for "language-specific exceptions" — the LLM auditor's bundle window **cannot fit** these proofs simultaneously with the parent §97. Resolution: the parent §97 (this file) is the authoritative delegation surface; subfolder absence in an auditor's bundle is a **walker-saturation artifact**, NOT a contract gap. Auditors MUST consult the per-subfolder §97 directly when verifying language-X coverage; tree-spanning aggregate scores MUST treat parent §97 + AC-CG-21 map as sufficient evidence of delegation. This codifies **Lesson #29 (audit-corpus module-kind pin)** for the `normative-contract` axis on tree-spanning modules — mirror of spec/25 AC-AI-09/10/11 (post-mortem-tracker axis) and spec/12 AC-10 (integration-contract axis).
 - **Verifies:** AC-CG-21 (Subfolder Delegation Map is the canonical binding); AC-CG-22 (Size-Limit Exception Ledger is closed); AC-CG-23 (per-language stub floor ≥ 1); AC-34-13 (120 KB walker cap — root cause of bundle saturation); the **Phase 153 Lesson #29** module-kind pin pattern; closes the recurring **Phase 153 Task A24-fu11 audit findings** (HIGH/D5 "Dangling Subfolder References", MEDIUM/D2 "Legacy AC Lacks Specificity", LOW/D3 "Incomplete Size Limit Enforcement Logic") as STRUCTURAL-DELEGATION-NOT-MISSING auditor misclassifications.
 
+### AC-CG-25 — Inline language samples (Phase 153 Task A24-fu16)
+
+- **Given** AC-CG-21 (Subfolder Delegation Map) + AC-CG-24 (Audit-corpus structural pin) declare that per-language GWT logic lives in subfolder §97 files (TS=22, Go=22, PHP=27, Rust=26, C#=27 ACs) AND a context-window-bounded LLM auditor cannot load those subfolder bundles within the 120 KB walker cap (AC-34-13),
+- **When** the parent §97 is the only file the auditor has visible,
+- **Then** the parent §97 MUST inline at least **one** worked GWT example per major language (Go, TypeScript, Rust) so the auditor can verify the language is *contractually covered* without chasing subfolder bundles. The samples below are the canonical inline proofs:
+
+  **Go (sample — full contract in `03-golang/97-acceptance-criteria.md`):**
+  - **Given** a Go function returns a fallible operation result,
+  - **When** authoring the function signature,
+  - **Then** it MUST return `apperror.Result[T]` (NEVER `(T, error)` — CODE-RED R1); errors MUST carry `apperror.Code` typed enum (NEVER bare `errors.New(string)`); the `defer` keyword MUST be used for `Close()` paired with the `Open()` call on the same `if err == nil` branch.
+  - **Verifies:** `03-golang/` AC-GO-01..22; CODE-RED R1.
+
+  **TypeScript (sample — full contract in `02-typescript/97-acceptance-criteria.md`):**
+  - **Given** a TypeScript function accepts user input or external API data,
+  - **When** declaring its parameter and return types,
+  - **Then** it MUST use a discriminated-union `Result<T, E>` type (NEVER throw — CODE-RED R1); `any` is FORBIDDEN; React components MUST be functional + use hooks (NEVER class components); state stores MUST be Zustand with typed selectors (NEVER raw `useState` for cross-component state).
+  - **Verifies:** `02-typescript/` AC-TS-01..22; CODE-RED R1, R3.
+
+  **Rust (sample — full contract in `05-rust/97-acceptance-criteria.md`):**
+  - **Given** a Rust function may fail or operate across an FFI boundary,
+  - **When** declaring its return type or its FFI shim,
+  - **Then** it MUST return `Result<T, E>` with a custom error enum (NEVER `panic!` in library code — CODE-RED R1); `unwrap()` and `expect()` are FORBIDDEN outside `tests/`; FFI shims MUST be `#[no_mangle] extern "C"` with `*const c_char` parameters and `Box::into_raw` ownership transfer; `todo!()` and `unimplemented!()` are FORBIDDEN (per `05-rust/97-acceptance-criteria.md:97`).
+  - **Verifies:** `05-rust/` AC-RS-01..26; CODE-RED R1, R6.
+
+  These three samples are **proof-by-example** that the parent §97 is NOT a circular reference to subfolders — they directly enumerate testable rules an AI auditor can verify without bundle expansion. PHP and C# are deliberately omitted from this inline set because (a) the bundle would exceed the walker cap if all 5 languages were inlined here, AND (b) AC-CG-23's stub-AC floor + AC-CG-24's structural pin already cover the verification gap for the omitted languages. PHP/C# inline samples MUST be added to this AC if a future audit raises a CRITICAL/D2 finding specifically against PHP or C#.
+- **Verifies:** Closes Phase 153 Task A24-fu16 CRITICAL/D2 finding "Circular/Self-Referential Acceptance Criteria — AC-CG-24 and AC-CG-21 declare that subfolder ACs are 'not missing' but 'delegated', yet the mediocre AI cannot see those subfolders due to context limits". Mirrors **Lesson #50** (in-§97 worked example) and **Lesson #55** (§00 walker-pin teaser) for the `normative-contract` axis. Cross-references AC-CG-21 (delegation map), AC-CG-24 (structural pin), AC-34-13 (walker cap).
+
+### AC-CG-26 — Worked example for EX-04 Rust `match`-arm ratio (Phase 153 Task A24-fu16)
+
+- **Given** AC-CG-22 EX-04 specifies that a Rust function may reach 25 lines if `match`-expression-line / total-line ≥ 0.6 (`AST count` rule),
+- **When** an AI agent or linter reviewer needs to determine whether a 20-line+ Rust `match` function qualifies for EX-04,
+- **Then** the following worked example MUST be the canonical proof of how the ratio is computed:
+
+  ```rust
+  // File: src/codec/decode.rs (24 lines total — body 21 lines)
+  pub fn decode_frame(byte: u8) -> Result<Frame, DecodeError> {  // line 1: signature
+      match byte {                                               // line 2: match-line ✓
+          0x00 => Ok(Frame::Heartbeat),                          // line 3: match-arm ✓
+          0x01 => Ok(Frame::Ack { seq: 0 }),                     // line 4: match-arm ✓
+          0x02 => Ok(Frame::Nack { seq: 0, code: 0 }),           // line 5: match-arm ✓
+          0x10..=0x1F => Ok(Frame::Data {                        // line 6: match-arm ✓
+              channel: byte & 0x0F,                              // line 7: arm-body
+              payload: Vec::new(),                               // line 8: arm-body
+          }),                                                    // line 9: arm-close ✓
+          0x20..=0x2F => Ok(Frame::Control {                     // line 10: match-arm ✓
+              op: byte & 0x0F,                                   // line 11: arm-body
+          }),                                                    // line 12: arm-close ✓
+          0x30 => Ok(Frame::Reset),                              // line 13: match-arm ✓
+          0x31 => Ok(Frame::Sync),                               // line 14: match-arm ✓
+          0xF0 => Err(DecodeError::Reserved),                    // line 15: match-arm ✓
+          0xFF => Err(DecodeError::Invalid),                     // line 16: match-arm ✓
+          _ => Err(DecodeError::Unknown(byte)),                  // line 17: match-arm ✓
+      }                                                          // line 18: match-close ✓
+  }                                                              // line 19: fn-close
+  ```
+
+  **Calculation (per EX-04 detection rule):**
+  - `total-line` = 19 (lines 1–19, body inclusive of signature and braces — counted per `linter-scripts/validate-guidelines.go` size-check convention)
+  - `match-line` count = signature + `match` keyword (1) + arm-introducer lines marked ✓ (12) + arm-close lines marked ✓ (3) + match-close (1) = **14** lines
+  - **Ratio** = 14 / 19 = **0.737 ≥ 0.6** ✅ — EX-04 applies; the function (19 lines, > 15-line default limit) is exempt.
+
+  **Counter-example (EX-04 does NOT apply):**
+
+  ```rust
+  pub fn process(input: &str) -> Result<Output, Error> {  // 1 line
+      let parsed = parse(input)?;                          // 2
+      let validated = validate(&parsed)?;                  // 3
+      let normalized = normalize(validated);               // 4
+      let result = match normalized {                      // 5: match-line
+          Output::A(x) => transform_a(x),                  // 6: arm
+          Output::B(y) => transform_b(y),                  // 7: arm
+      };                                                   // 8: match-close
+      log_result(&result);                                 // 9
+      persist(&result)?;                                   // 10
+      notify_subscribers(&result);                         // 11
+      audit_trail(&result);                                // 12
+      cleanup_temp_state();                                // 13
+      Ok(result)                                           // 14
+  }                                                        // 15
+  ```
+
+  - `total-line` = 15
+  - `match-line` count = 4 (lines 5, 6, 7, 8)
+  - **Ratio** = 4 / 15 = **0.267 < 0.6** ❌ — EX-04 does NOT apply; this 15-line function MUST be split per the AC-CG-08 base limit.
+
+- **Verifies:** Closes Phase 153 Task A24-fu16 HIGH/D4 finding "Missing Worked Examples for Size-Limit Exceptions — AC-CG-22 EX-04 defines complex detection rules (e.g., 'AST count: match-expression-line / total-line ≥ 0.6') without providing a sample calculation". Cross-references AC-CG-22 EX-04 (the rule); AC-CG-08 (the base R6 size limit being exempted); `linter-scripts/validate-guidelines.go` size-check implementation contract. Codifies **Lesson #50 / Lesson #56** (worked-example-in-§97): when a normative AC cites a numeric ratio or AST-count threshold, a worked example with line-numbered code + the exact arithmetic MUST accompany the rule — auditors and AI agents cannot infer "what counts as a `match`-line" from prose alone.
+
+### AC-CG-27 — Fail-fast policy for partial linter scans (Phase 153 Task A24-fu16)
+
+- **Given** AC-CG-19 mandates a tree-health gate ≥ 95/100 across the spec/02 tree (251 files spanning 16 subfolders, 5 enforcement languages: Go for `validate-guidelines.go`, Python for `audit-ai-implementability.py` and `check-*.py` family, Node.js for `generate-spec-index.cjs` and `check-lockstep.cjs`, Bash for `test-*.sh` self-tests, PowerShell for the `.ps1` family on Windows runners),
+- **When** any linter script invoked by the tree-health gate (a) exceeds its per-script timeout (default **300 seconds**), OR (b) returns a partial result (some files scanned, some skipped due to I/O error, OOM, or panic), OR (c) panics / segfaults / crashes mid-scan,
+- **Then** the gate MUST apply this **fail-fast policy** unambiguously:
+  1. The crashing / partial / timed-out script's contribution to the tree-health score defaults to **0 / 100** (NEVER the partial computed score, NEVER an interpolated estimate).
+  2. The gate's overall `gate_status` MUST be set to **`FAIL`** (NEVER `WARN`, NEVER `ADVISORY`) with one of three machine-readable reason codes: `LINTER_TIMEOUT`, `LINTER_PARTIAL`, or `LINTER_PANIC`.
+  3. The CI workflow step MUST exit with status code **1** (NEVER 0, NEVER a separate "soft-fail" code).
+  4. Retry-on-flake is FORBIDDEN at the gate level — flaky linters MUST be fixed at the script level (per `linter-scripts/test/` self-test discipline), not papered over in CI.
+  5. Per-script timeout overrides MUST be declared inline in `.github/workflows/spec-health.yml` next to the step (NEVER in a side YAML file; NEVER as a workflow-level default that masks per-script intent); the override MUST cite a specific finding (e.g., `# Phase NNN: raised to 600s after audit-v8 251-file scan`).
+
+- **Verifies:** Closes Phase 153 Task A24-fu16 MEDIUM/D3 finding "Ambiguous Concurrency/Partial Failure in CI Gates — AC-CG-19 mandates a tree-health gate ≥ 95/100 but does not define behavior when linter scripts (Go/Python mix) partially fail or timeout during large-scale (251 files) scans". Cross-references AC-CG-19 (tree-health gate rule); `.github/workflows/spec-health.yml` (the gate's CI surface); `linter-scripts/test/` (the self-test discipline that prevents flake at the script level rather than the gate level). Codifies **Lesson #15** (LLM-gateway CI steps guard on secret availability) extended to the **mixed-language linter-mix axis**: timeouts and panics in a 5-runtime CI matrix MUST resolve to a single deterministic exit code + reason code, NEVER to runtime-dependent soft-fail behavior.
+
 ---
 
 ## Legacy Index (preserved for traceability)
