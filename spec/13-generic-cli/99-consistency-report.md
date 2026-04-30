@@ -1,7 +1,7 @@
 # Consistency Report — Generic CLI
 
-**Version:** 1.1.4  
-**Updated:** 2026-04-29  
+**Version:** 1.1.5  
+**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-24 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 
 > **v1.1.4 update (Phase 153 P3 — AC-22 concurrency prose mirror):** Lifted AC-22's normative concurrency contract from §97 prose-only into `10-database.md` (`## Concurrency & Locking (Normative)` — PRAGMA table, `BEGIN IMMEDIATE`, atomic temp-then-rename, `update.lock`) and `18-batch-execution.md` (`### Concurrency Discipline (Normative)` — single connection pool for `--parallel=N`, no per-worker `flock`). Cross-link added in `spec/04-database-conventions/02-schema-design.md` §4.3 (no re-statement; schema ⊥ concurrency). **No §97 / AC / CI / RUBRIC change** — pure implementer-facing prose mirror under existing AC-22. Codifies Lessons #33 (§97-WINS prose-mirror cadence) + #19/#21/#26 (entry-point contract surface). §00/§98/§99 v1.1.3 → v1.1.4. Lockstep 87/87 (post-run verify).
 

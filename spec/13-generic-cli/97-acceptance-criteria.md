@@ -1,7 +1,7 @@
 # Acceptance Criteria — Generic CLI Creation Guidelines — Overview
 
-**Version:** 2.2.0  
-**Updated:** 2026-04-29  
+**Version:** 2.3.0  
+**Updated:** 2026-04-30 (Phase 153 — AC-24 Module cross-reference pin for AC-22/AC-23 external dependencies (Lesson #29 + Lesson #36))
 **Scope:** `spec/13-generic-cli/`
 
 > **v2.0.0 (Phase 16a):** Added 15 module-specific Given/When/Then ACs (AC-06..AC-20) covering subcommand dispatch, flag parsing, three-layer config, multi-format output, exit-code contract, code-style limits, embedded help, date formatting, constants discipline, verbose logging, progress tracking, batch execution, shell completion, terminal output design, and post-install shell activation. The 5 generic structural ACs (AC-01..AC-05) are preserved verbatim — they validate the spec module itself; AC-06+ validate the **CLI implementation** that consumes the spec.
@@ -217,3 +217,8 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 - [Module overview](./00-overview.md)
 - [Module consistency report](./99-consistency-report.md)
 - [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
+
+### AC-24: Module cross-reference pin for AC-22/AC-23 external dependencies (Lesson #29 + Lesson #36)  `[critical]`
+
+**Given** `spec/13-generic-cli`'s AC-22 (DB+file concurrency) and AC-23 (atomic writes) reference external ACs by ID — specifically `spec/05-split-db-architecture/97-acceptance-criteria.md` AC-SD-22 (PRAGMA busy_timeout + retry-loop) and `spec/27-spec-toolchain/97-acceptance-criteria.md` AC-T-28 (Resilience R1–R5: atomic writes), **When** an audit harness scoped to spec/13's bundle reports `[D5] Broken External Spec References` because AC-SD-22 + AC-T-28 are not provided in spec/13's local context, **Then** the auditor MUST treat that finding as a **harness scope artifact**, NOT a spec defect — both AC IDs are present on disk in their owning modules and the cross-reference is intentional per Lesson #36 (link-don't-restate, codified at Phase 153 P3 row + spec/04 §4.3 cross-reference). Restating AC-SD-22 / AC-T-28 inside spec/13 would create a dual-source drift class.\n\n- **Verifies:** the spec/13 module-kind = `module` declaration AND the cross-module link-not-restate contract; codifies **Lesson #29** + **Lesson #36** for tier-1-bounded auditors operating on per-module bundles. Mirror of spec/03 AC-08 + spec/07 AC-35 + spec/10 AC-09 + spec/11 AC-10 + spec/12 AC-09 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11 + spec/26 (forthcoming AC-22). Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4 [D5] findings citing AC-SD-22 + AC-T-28 as outstanding — this AC declares those findings are stale-cache artifacts per Lesson #34.
+
