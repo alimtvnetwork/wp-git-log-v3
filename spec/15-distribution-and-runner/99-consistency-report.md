@@ -1,7 +1,7 @@
 # Consistency Report — Distribution and Runner
 
-**Version:** 2.1.1  
-**Updated:** 2026-04-27
+**Version:** 2.1.2  
+**Updated:** 2026-04-29
 
 ---
 
@@ -81,3 +81,13 @@
 - Closes the version-parity drift class (Task #35-fu surfaced 15 §00↔§98 mismatches; this is the inverse case where §00 was BEHIND §98).
 - Lesson #25 codified — dual-track SemVer (file-scaffold lever vs depth-pass major) is forbidden going forward.
 - §99 banner v2.1.0 → v2.1.1; §98 banner v2.1.0 → v2.1.1; §00 banner v1.1.0 → v2.1.0; h10 stamp already at phase 153.
+
+## 2026-04-29 — Phase 153 Task A11d — `--branch` CLI flag removal (v5 D1 close)
+
+- v5 audit (`/mnt/documents/spec-ai-implementability-audit-v5.md`) flagged D1 HIGH "Conflicting Versioning Logic": `01-install-contract.md:51` advertised `--branch <name>` while §97 AC-18 forbade branch refs in `--ref` for reproducibility.
+- **User direction:** strict removal — single source of truth = AC-18.
+- `01-install-contract.md` § "Versioning" — `--branch` row deleted; `--ref <tag-or-sha>` row added with explicit AC-18 cross-reference and exit-`2` enforcement note; "Why no `--branch` flag?" callout block added.
+- `04-install-config.md` § "Override precedence" — `--branch` removed from CLI-flag bullet; clarified that JSON `branch` field is default-branch hint for tag probing (NOT a CLI override surface).
+- **Lockstep:** `01-install-contract.md` v1.0.0 → v1.1.0 · `04-install-config.md` v1.0.0 → v1.1.0 · §00 v2.1.0 → v2.1.1 · §98 v2.1.1 → v2.2.0 · §99 v2.1.1 → v2.1.2.
+- **No §97 AC change** — AC-18 already declared the no-branch rule; this is a contract-prose alignment, not a new contract.
+- **Expected v6 score lift:** spec/15 92 → ≥96 (D1 +4 — direct conflict close); pushes module into EXCELLENT band. LLM re-score deferred per Lesson #20 (gateway budget — covered by next A8 rebaseline).

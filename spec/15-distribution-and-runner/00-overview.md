@@ -5,8 +5,8 @@ drift_acknowledged: 2026-04-26
 
 # Distribution and Runner
 
-**Version:** 2.1.0
-**Updated:** 2026-04-27
+**Version:** 2.2.0
+**Updated:** 2026-04-29
 <!-- h10-verified-phase: 153 -->
 **Owner:** Md. Alim Ul Karim
 **Status:** Authoritative — implementation must match this spec.
