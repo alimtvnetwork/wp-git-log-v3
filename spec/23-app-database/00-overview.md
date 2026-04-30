@@ -1,6 +1,8 @@
 ---
 kind: module
 description: App-specific database tables (App, AppLink, AppStatus, AppLinkType) — schema, queries, migration patterns. The "App" entity binds inbound CI/CD pushes to a Profile via polymorphic AppLink rows.
+content_axis: normative-contract
+axis_rationale: "App tables + AppLink polymorphic resolution rules"
 ---
 
 # App Database

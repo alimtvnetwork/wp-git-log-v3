@@ -1,3 +1,8 @@
+---
+content_axis: normative-contract
+axis_rationale: "Universal CI binary behavioural ACs"
+---
+
 # Universal CI CLI — Spec Overview
 
 **Version:** 2.2.0  

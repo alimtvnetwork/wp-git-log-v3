@@ -1,3 +1,8 @@
+---
+content_axis: process-guidance
+axis_rationale: "Token/component conventions for designers and authors"
+---
+
 # AI-Adaptable Design System
 
 **Version:** 3.4.2  

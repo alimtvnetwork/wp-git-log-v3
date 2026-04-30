@@ -1,6 +1,8 @@
 ---
 kind: future-spec
 drift_acknowledged: 2026-04-26
+content_axis: integration-spec
+axis_rationale: "Bridges repos to GitHub Actions / external CI providers"
 ---
 
 # CI/CD Pipeline Workflows

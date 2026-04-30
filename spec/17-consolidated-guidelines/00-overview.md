@@ -1,3 +1,8 @@
+---
+content_axis: process-guidance
+axis_rationale: "Cross-module process consolidation for spec authors"
+---
+
 # Consolidated Guidelines
 
 <!-- h10-verified-phase: 153 -->

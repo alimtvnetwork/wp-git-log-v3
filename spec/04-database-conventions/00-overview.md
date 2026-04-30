@@ -1,3 +1,8 @@
+---
+content_axis: normative-contract
+axis_rationale: "Schema/concurrency/boolean rules MUST be satisfied by downstream code"
+---
+
 # Database Conventions
 
 **Version:** 3.4.2  

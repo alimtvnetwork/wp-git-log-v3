@@ -1,3 +1,8 @@
+---
+content_axis: normative-contract
+axis_rationale: "Config-loading contract (CW Config) enforceable across consumers"
+---
+
 # Seedable Config Architecture + Changelog Versioning (also known as CW Config)
 
 > **Version:** 4.3.0  

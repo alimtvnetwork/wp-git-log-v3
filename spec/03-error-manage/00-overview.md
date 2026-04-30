@@ -1,6 +1,8 @@
 ---
 kind: future-spec
 drift_acknowledged: 2026-04-26
+content_axis: audit-corpus
+axis_rationale: "Catalogues error patterns observed across modules"
 ---
 
 # Error Management Specification
