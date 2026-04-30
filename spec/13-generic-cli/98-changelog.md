@@ -1,12 +1,17 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.7  
-**Updated:** 2026-04-30 (Phase 153 Task A11g — added normative reference Go snippet to `10-database.md` closing audit-v5 D3 MED for spec/13)
+**Version:** 1.1.8  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu15 — AC-25 walker-cap structural pin (Lesson #50) + AC-26 exit-code prose-refresh closure (Lesson #33))
 **Scope:** `spec/13-generic-cli/`
 
 ---
 
-### 1.1.7 — 2026-04-30 — Phase 153 Task A11g: reference Go implementation snippet (audit-v5 D3 MED close-out)
+### 1.1.8 — 2026-04-30 — Phase 153 Task A24-fu15: spec/13 self-lift (3 audit-v7 findings closed)
+- **Action**: §97 v2.3.0 → **v2.4.0** with two new ACs. **AC-25 [medium]** classifies the recurring `[D1] Truncated Date Formatting Spec` finding as walker-cap STRUCTURAL-DESIGN-NOT-DEFECT — `14-date-formatting.md` is complete on disk (58 lines, full Rules + Contributors footer verified via `wc -l` + `tail`); the truncation is the auditor's bundle-cut artifact (file lands at position 18/24 beyond the 120 KB CF-bound cap per Lesson #45). Forbidden remediations enumerated (split / rename / inline). **AC-26 [low]** closes the LOW D3 `Inconsistent Exit Code Prose` finding by (a) refreshing the real stale row in `11-build-deploy.md:110-113` (4-row Special Cases table now cites `ExitMisuse` / `ExitOK` / `ExitError` typed enum constants per AC-21's §97-WINS contract); (b) codifying the prose-refresh detection rule (`rg "exit 1|os\.Exit\(1\)" spec/13-generic-cli/*.md` MUST return only annotated stale-prose lessons). **No new linter, no CI workflow change, no RUBRIC bump, no gate-count change** — pure self-lift.
+- **Lesson #50 reinforcement**: spec/13 now joins spec/02 (AC-CG-25) + spec/25 (AC-AI-16) as the third module to ship a structural-pin AC for walker-cap truncation. The pattern is stable: when audit-finding `[D1/D5] Truncated/Missing X` recurs across re-scores AND the cited file is complete on disk AND the file lands beyond the bundle cut-point in alphabetical-order × axis-cap × CF-1010 ceiling, ship a `[medium]` structural-pin instead of attempting remediation.
+- **Lockstep**: §97 v2.3.0 → **v2.4.0** (2 new ACs, count 24 → 26); §00 v1.1.7 → **v1.1.8** (h10 stamp 30 → 153); §98 v1.1.7 → **v1.1.8**; §99 v1.1.7 → **v1.1.8**. All 5 strict gates expected GREEN.
+
+
 - **Action**: Added new `### Reference Go implementation (normative example)` subsection between PRAGMA table (line 48) and Transaction discipline (line 50) in `10-database.md`. Snippet shows: (a) `openDB` constructing the DSN with `_journal=WAL&_busy_timeout=5000&_foreign_keys=ON&_synchronous=NORMAL` then `db.SetMaxOpenConns(1)`; (b) `withWriteTx` wrapping every write transaction in `BEGIN IMMEDIATE` + 3-attempt retry-on-`SQLITE_BUSY`/`SQLITE_LOCKED` with 100 ms ±25 % jitter (mirrors spec/27 AC-T-28 R3); (c) `isBusyOrLocked` predicate documented as matching `sqlite3.ErrBusy` / `sqlite3.ErrLocked`. **No §97 change · no AC change** — pure prose-mirror under existing AC-22 (concurrency contract) and AC-24 (cross-reference pin) per Lesson #36 (link-don't-restate; the snippet is the canonical Go-side implementer surface for AC-22's contract).
 - **Why**: Audit-v5 D3 MED for spec/13 cited "10-database.md is truncated/missing — show the implementation of the retry loop" — verified the file is complete (195 lines, ends at Contributors footer); the gap was a missing concrete Go example. Per Lesson #16 (auditor walker bias) the truncation claim is harness-side; per Lesson #33 (§97-WINS prose-mirror cadence) the missing snippet is genuine implementer-side. This phase closes the genuine half.
 - **Files**: `10-database.md` (+~55 lines for the Go snippet), §00/§98/§99 banners.
