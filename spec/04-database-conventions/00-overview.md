@@ -5,7 +5,7 @@ axis_rationale: "Schema/concurrency/boolean rules MUST be satisfied by downstrea
 
 # Database Conventions
 
-**Version:** 3.6.0  
+**Version:** 3.7.0  
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
 **Updated:** 2026-04-30  
@@ -13,6 +13,19 @@ axis_rationale: "Schema/concurrency/boolean rules MUST be satisfied by downstrea
 **Ambiguity:** None
 
 ---
+
+> 🤖 **Walker-Pin (Lesson #55) — read first if you are an AI implementer**
+>
+> Three of this module's normative contracts are bound deep in `97-acceptance-criteria.md` and may fall past a context-bounded walker's tier-2 byte cap. They are listed here at the §00 anchor so any walker reaching this overview sees them before consuming the long Canonical DDL block:
+>
+> | AC | Severity | Subject | Canonical surface |
+> |----|----------|---------|-------------------|
+> | **AC-13** | medium | SQLite single-writer concurrency is **NOT** restated here — see `spec/13-generic-cli/97-acceptance-criteria.md` § AC-22 (Lesson #36 link-don't-restate). Cross-link lives at §02-schema-design.md §4.3. | spec/13 §97 AC-22 |
+> | **AC-14** | high | Golden Rules 1–4 (Singular table names, PascalCase identifiers, PK = `{TableName}Id INTEGER PRIMARY KEY AUTOINCREMENT`, FK reuses parent PK name) — verifiable via `check-forbidden-strings.py` against the Canonical DDL. | This file §"Canonical Reference DDL" + §97 AC-14 |
+> | **AC-15** | medium | Golden Rule 7 "smallest possible key type" — lookup tables with bounded cardinality (≤ 32 767 rows) MUST use `SMALLINT` PK, not `INTEGER`. The Canonical DDL `ProjectStatus` table demonstrates the pattern. | This file §"Canonical Reference DDL" + §97 AC-15 |
+> | **AC-16** | low | View names use the `Vw` prefix (e.g. `VwProjectWithOwner`), NEVER the `View` suffix. The two surfaces — §01-naming-conventions §"View names" row + §00 Canonical DDL — must agree byte-for-byte. | §01 + this file Canonical DDL + §97 AC-16 |
+>
+> Forbidden remediation patterns for the recurring HIGH D3 finding "SQLite single-writer bottleneck" are enumerated in §97 AC-13 — do not "fix" by restating AC-22 here.
 
 ## Keywords
 
