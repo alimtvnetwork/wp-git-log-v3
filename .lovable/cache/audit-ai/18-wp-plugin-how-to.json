@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 15,
-  "d3": 17,
-  "d4": 19,
-  "d5": 16,
+  "d2": 16,
+  "d3": 14,
+  "d4": 18,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing Verifies clauses for Phase 07-21",
-      "why": "While AC-01 to AC-08 have Verifies clauses, the architectural invariants for Phases 07 through 21 (referenced in the overview) lack explicit GWT criteria and Verifies bindings in the \u00a797 file.",
-      "fix": "Extend the AC-10 table in 97-acceptance-criteria.md to include rows for Phases 07-21 with specific architectural bindings."
+      "title": "Missing Verifies clauses for Phases 07-21",
+      "why": "While AC-10 covers Phases 01-06 with explicit Verifies, AC-12 and AC-13 list invariants for the remaining phases but lack the 'Verifies:' line required by the authoring guide for automated trace-map binding.",
+      "fix": "Add 'Verifies: the architectural-invariant contract for spec/18 phases NN-NN' to AC-12 and AC-13."
     },
     {
       "severity": "MEDIUM",
       "dim": "D5",
-      "title": "Unresolved internal sub-file references",
-      "why": "The overview references 22 phases, but the provided context only includes files for Phases 00, 01, and 02. A mediocre coder cannot implement the 'Gold Standard' without the content of Phases 03-21.",
-      "fix": "Provide the remaining phase files (03-21) or consolidate their core contracts into the \u00a797 acceptance criteria."
+      "title": "Broken internal sub-file references in Overview",
+      "why": "The File Inventory in 00-overview.md links to 02-enums-and-coding-style/ as a subfolder, but the actual files (01-enum-architecture.md, etc.) are referenced in 02-enums-and-coding-style/00-overview.md without ensuring the parent overview can resolve them.",
+      "fix": "Ensure all relative links in 00-overview.md use the full path including subdirectories."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Filename casing mismatch in documentation",
-      "why": "Consistency report identifies a mismatch where 'CHANGELOG.md' is referenced but 'changelog.md' exists on disk, potentially breaking CI on Linux.",
-      "fix": "Run a global search-replace for 'CHANGELOG.md' to 'changelog.md' across all .md files."
+      "dim": "D3",
+      "title": "Partial Concurrency Coverage",
+      "why": "AC-11 addresses FileLogger and Self-update concurrency but misses Micro-ORM/Database race conditions (e.g., incrementing counters or status transitions) which are common in WP plugins.",
+      "fix": "Add a row to AC-11 table for 'Database Writes' requiring $wpdb->prepare and atomic SQL updates."
     }
   ],
   "module": "18-wp-plugin-how-to",
-  "files_used": 11,
+  "files_used": 10,
   "files_total": 35,
   "bytes_used": 90000,
-  "bundle_sha": "3c27b9b2ccf2a2ef",
-  "total_v6": 85,
+  "bundle_sha": "b75e9dfe75ce476d",
+  "total_v6": 81,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 86.1,
-  "total_v7": 86,
-  "total": 86,
+  "weighted_total": 82.4,
+  "total_v7": 82,
+  "total": 82,
   "band": "GOOD",
   "rubric": "v7"
 }
