@@ -46,6 +46,90 @@ MAX_BYTES = 90_000  # Cloudflare-safe ceiling (~22k tokens).
 
 WALK_GLOBS = ("*.md", "*.json", "*.yaml", "*.yml", "*.tmpl", "*.toml")
 
+# ─── Rubric v7 (Phase 153 Task A17 contract; A19 wiring) ─────────────────────
+# Per-axis dimension multipliers; raw rows that sum to >5.0 are renormalised
+# to 5.0 so the weighted total stays bounded at 100. See slot 34 §97 AC-34-10.
+AXIS_VALUES = {
+    "normative-contract",
+    "process-guidance",
+    "integration-spec",
+    "audit-corpus",
+    "tooling-spec",
+}
+AXIS_MULTIPLIERS_RAW: dict[str, dict[str, float]] = {
+    "normative-contract": {"d1": 1.0, "d2": 1.5, "d3": 1.2, "d4": 0.8, "d5": 0.5},
+    "process-guidance":   {"d1": 1.5, "d2": 0.7, "d3": 0.8, "d4": 1.0, "d5": 1.0},
+    "integration-spec":   {"d1": 1.0, "d2": 0.9, "d3": 0.9, "d4": 1.4, "d5": 1.2},  # raw sum 5.4
+    "audit-corpus":       {"d1": 1.0, "d2": 0.5, "d3": 0.5, "d4": 1.5, "d5": 1.5},
+    "tooling-spec":       {"d1": 1.0, "d2": 1.3, "d3": 1.0, "d4": 1.3, "d5": 0.9},  # raw sum 5.5
+}
+# Per-axis soft cap on band assignment (AC-34-11). Strict CI gate threshold
+# stays 60 (BLOCKING) tree-wide regardless of axis.
+AXIS_CAPS: dict[str, int] = {
+    "normative-contract": 100,
+    "process-guidance":   95,
+    "integration-spec":   95,
+    "audit-corpus":       95,
+    "tooling-spec":       100,
+}
+
+
+def axis_multipliers(axis: str) -> dict[str, float]:
+    """Return AC-34-10 normalised multipliers for an axis (sum exactly 5.0)."""
+    raw = AXIS_MULTIPLIERS_RAW[axis]
+    s = sum(raw.values())
+    if abs(s - 5.0) < 1e-9:
+        return dict(raw)
+    factor = s / 5.0
+    return {k: v / factor for k, v in raw.items()}
+
+
+FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+AXIS_LINE_RE = re.compile(r"^\s*content_axis:\s*([A-Za-z0-9_\-]+)\s*$", re.MULTILINE)
+
+
+def read_content_axis(mod_dir: Path) -> tuple[str | None, str | None]:
+    """Parse `content_axis:` from the module's `00-overview.md` front-matter.
+
+    Returns (axis, error). On success: (axis, None). On any error (no §00,
+    no front-matter, no axis key, invalid axis value): (None, error_msg).
+    Per AC-34-12, missing or invalid axis MUST cause the auditor to exit 2.
+    """
+    overview = mod_dir / "00-overview.md"
+    if not overview.exists():
+        return None, f"{mod_dir.name}: no 00-overview.md"
+    txt = overview.read_text(encoding="utf-8", errors="replace")
+    m = FRONT_MATTER_RE.match(txt)
+    if not m:
+        return None, f"{mod_dir.name}: 00-overview.md has no YAML front-matter block"
+    fm = m.group(1)
+    am = AXIS_LINE_RE.search(fm)
+    if not am:
+        return None, f"{mod_dir.name}: front-matter missing `content_axis:` key"
+    axis = am.group(1).strip()
+    if axis not in AXIS_VALUES:
+        return None, f"{mod_dir.name}: invalid content_axis '{axis}' (allowed: {sorted(AXIS_VALUES)})"
+    return axis, None
+
+
+def apply_rubric_v7(scores: dict[str, int], axis: str) -> dict[str, Any]:
+    """Apply AC-34-10 multipliers + AC-34-11 soft cap. Returns dict with
+    weighted_total (pre-cap) and total_v7 (post-cap, the score the band uses).
+    """
+    mults = axis_multipliers(axis)
+    weighted = sum(scores[k] * mults[k] for k in ("d1", "d2", "d3", "d4", "d5"))
+    weighted_total = round(weighted, 1)
+    cap = AXIS_CAPS[axis]
+    total_v7 = min(int(round(weighted)), cap)
+    return {
+        "axis": axis,
+        "axis_multipliers": {k: round(v, 4) for k, v in mults.items()},
+        "axis_cap": cap,
+        "weighted_total": weighted_total,
+        "total_v7": total_v7,
+    }
+
+
 RUBRIC = """You are an exacting spec auditor. Score this spec module for whether a MEDIOCRE AI coder
 (no clarifying questions, no web access) can implement it with 100% confidence on first try.
 
