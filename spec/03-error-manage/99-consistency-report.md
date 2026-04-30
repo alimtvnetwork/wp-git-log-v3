@@ -71,6 +71,7 @@ All internal cross-references verified. ✅
 |------|---------|--------|
 | 2026-03-31 | 1.0.0 | Initial consolidation from 3 archived sources |
 | 2026-04-29 | 3.2.1 | Phase 153 audit-v6 HIGH self-lift: AC-08 asset-inventory pin added (§97 v2.1.0); diagnoses prior D5 broken-refs as deep-walker tier-1 90 KB cap (Lesson #29 + #36) |
+| 2026-04-30 | 3.3.0 | Phase 153 Task A21: AC-09 Sub-Module Reference Resolution `[high]` added (§97 v2.2.0) — D5 elevated from passive to active citation-density floor + dual-gate verification; closes audit-v7 HIGH D5 finding; banners §00 3.4.2 / §98 3.4.2 / §99 3.3.0; Lesson #44 invoked. |
 
 ---
 
