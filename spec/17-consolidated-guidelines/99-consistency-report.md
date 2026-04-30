@@ -153,6 +153,7 @@
 | 2026-04-22 | 3.4.0 | Added `24-folder-mapping.md` — bidirectional source-folder ↔ consolidated-file index with coverage heatmap, reverse index, and blind-spot tracking. Registered `23-generic-cli.md` in inventory. Total: 25 files. |
 | 2026-04-27 | 4.3.0 | Phase 39b: Added §00 "Audit Marker Exemption" — `todo_count: 5` was substring false-positive (all hits inside Python example block in `27-linter-authoring-guide.md` lines 361–424 that *defines* `check-stale-todos.py`). Banner v3.2.0→v3.3.0; §98 v2.3.0→v2.4.0. |
 | 2026-04-30 | 4.7.0 | Phase 153 Task A20: Rubric v7 LLM rebaseline. Added slot 35 `35-full-tree-ai-audit-v7.md`. Tree mean 82.3 → 83.7 (+1.4); EXCELLENT 4 → 5; 2 NEEDS_WORK at 74; 0 BLOCKING. Banner-superseded slot 34 v6 baseline. Lockstep §00 3.5.0 / §98 3.5.0 / §99 4.7.0; file count 35 → 36. |
+| 2026-04-30 | 4.8.1 | Phase 153 Task A24-fu25: §00 compact AC-index teaser table (Lesson #63 sixth instance — process-guidance axis). Pure-promotion lockstep — zero §97 / AC / contract change. §00/§98 v3.7.0→v3.7.1 patch; §99 v4.8.0→v4.8.1 patch. Cap-bound auditor (6/39 files visible) can now classify findings without reaching §97. |
 
 ---
 
