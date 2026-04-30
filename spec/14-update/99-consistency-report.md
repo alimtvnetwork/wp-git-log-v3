@@ -1,7 +1,9 @@
 # Consistency Report — Generic Update
 
 **Version:** 1.5.1  
-**Updated:** 2026-04-29
+**Updated:** 2026-04-30
+
+> **v1.5.1 (Phase 153 — Lesson #36 cross-ref inoculation):** Added `## Concurrency Posture (Normative cross-reference)` to `22-update-command-workflow.md` linking self-update worker `update.lock` + atomic temp-then-rename + state-DB writes to canonical [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated. Codifies Lesson #36 on the cross-module axis. No §97 / AC / RUBRIC / gate-count change. §00 v2.3.0 → v2.3.1; §98 v2.3.0 → v2.3.1.
 
 > **v1.5.0 (Phase 149 — P3 sweep slot 9):** §97 deepened — all 20 ACs (AC-01..AC-20) now carry `**Verifies:**` clauses mapping each criterion to its underlying invariant (structural floor, slot-immutability, deploy uniformity, parent-survival, supply-chain trust, integrity, atomic rollback, six-target-floor, etc.). Verifies-coverage 0/20 → 20/20. §97 v2.1.0 → v2.2.0; §00 v2.2.0 → v2.3.0; §98 v2.2.0 → v2.3.0. AI-confidence P3 driver eliminated; derived tier Medium → High.
 

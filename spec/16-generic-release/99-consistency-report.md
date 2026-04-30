@@ -1,8 +1,10 @@
 # Consistency Report — Generic Release
 
 **Version:** 2.2.1  
-**Generated:** 2026-04-27  
+**Generated:** 2026-04-30  
 **Health Score:** 100/100 (A+) — Phase 21 deepening sweep
+
+> **v2.2.1 (Phase 153 — Lesson #36 cross-ref inoculation):** Added `### Local-tooling concurrency (cross-reference)` subsection under `## Concurrency` in `02-release-pipeline.md` linking local CLI shell-outs (state-DB writes + atomic asset staging) to canonical [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated; CI-job-level `concurrency: group: release-${{ github.ref }}` block untouched (orthogonal axis). Codifies Lesson #36 (link, never restate). No §97 / AC / RUBRIC / gate-count change. §00 v2.2.0 → v2.2.1; §98 v2.2.0 → v2.2.1.
 
 ---
 
