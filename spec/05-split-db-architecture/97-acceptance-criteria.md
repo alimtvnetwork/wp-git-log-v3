@@ -209,7 +209,30 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
   }
   ```
   Read operations under `journal_mode=WAL` (AC-SD-12) generally do NOT need retries (WAL allows concurrent readers + one writer), but read-after-write coherence MUST be tested under contention.
-- **Verifies:** AC-SD-11 connection pooling + AC-SD-12 WAL + AC-SD-14 atomic write. Closes v3 audit HIGH D3 finding "Concurrency/Locking implementation gaps" (Phase 153 Task A6).
+
+  **Language-agnostic retry algorithm (normative)** — implementations in PHP/Rust/C#/TS/Python MUST follow this pseudo-code; any deviation REQUIRES a §98 row + new AC:
+  ```
+  function with_retry(open_tx, op, max_retries=5, initial_delay_ms=10):
+      delay_ms = initial_delay_ms
+      for attempt in 0 .. max_retries-1:
+          tx = open_tx()                              # MUST use BEGIN IMMEDIATE / equivalent
+          try:
+              op(tx)
+              tx.commit()
+              return SUCCESS
+          catch BUSY_OR_LOCKED_ERROR (errno 5 or 6):
+              tx.rollback()
+              jitter_ms = random(-delay_ms/4, +delay_ms/4)   # ±25 % jitter
+              sleep(delay_ms + jitter_ms)
+              delay_ms = delay_ms * 2                       # exponential backoff
+              continue
+          catch OTHER_ERROR as e:
+              tx.rollback()
+              raise e                                       # do NOT retry non-busy errors
+      raise ErrBusyExhausted                                # surface to caller after max_retries
+  ```
+  Per-language driver mappings: **PHP** PDO `SQLSTATE[HY000]: General error: 5` (PDO::ATTR_TIMEOUT preferred over busy_timeout PRAGMA — DOUBLES the contract; pick one); **Rust** `rusqlite::Error::SqliteFailure(ffi::Error{code: ErrorCode::DatabaseBusy | ErrorCode::DatabaseLocked, ..}, _)`; **C#** `Microsoft.Data.Sqlite.SqliteException` with `SqliteErrorCode == 5 || == 6`; **TypeScript** `better-sqlite3` throws `SqliteError` with `code === 'SQLITE_BUSY' || === 'SQLITE_LOCKED'`; **Python** `sqlite3.OperationalError` matched by `str(e).startswith('database is locked')`. Implementations using `db.execute()` autocommit MUST wrap the autocommit call in the same retry loop — autocommit is a hidden BEGIN/COMMIT and contends identically.
+- **Verifies:** AC-SD-11 connection pooling + AC-SD-12 WAL + AC-SD-14 atomic write. Closes v3 audit HIGH D3 finding "Concurrency/Locking implementation gaps" (Phase 153 Task A6) AND v6 audit MEDIUM D3 finding "Incomplete Concurrency Implementation for Non-Go Languages" (Phase 153 Task A14 — added language-agnostic pseudo-code + per-language driver mappings).
 
 ### AC-SD-23 — TTL / expiry contract for time-bounded rows (Reset tokens, sessions, idempotency keys)
 
