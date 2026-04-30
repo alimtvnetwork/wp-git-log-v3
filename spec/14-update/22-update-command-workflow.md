@@ -356,6 +356,12 @@ The `--verbose` flag is forwarded from the parent to the worker so that detailed
 
 ---
 
+## Concurrency Posture (Normative cross-reference)
+
+The self-update worker's lock-file discipline (`update.lock` + PID file + defer-release), atomic temp-then-rename for the staged binary, and any DB writes performed during state migration are governed by the canonical concurrency contract at [spec/13-generic-cli §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). This module MUST NOT restate that contract — see Lesson #36 (link, never restate). Implementer prose lives in [spec/13/10-database.md `## Concurrency & Locking (Normative)`](../13-generic-cli/10-database.md) and [spec/13/18-batch-execution.md `### Concurrency Discipline`](../13-generic-cli/18-batch-execution.md).
+
+---
+
 ## Cross-References
 
 - [Self-Update Overview](./01-self-update-overview.md) — High-level architecture and strategy selection
