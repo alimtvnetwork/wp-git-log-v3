@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 3.9.0  
-**Updated:** 2026-04-30 (Phase 153 — AC-35 Module asset inventory pin (Lesson #29 — design-system tokens + 13 leaf files))
+**Version:** 3.10.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu9 — AC-036 canonical token registry + AC-037 FOUC-prevention bootstrap; closes audit-v7 [D4 MEDIUM] + [D3 LOW] per Lesson #19 audit-boundary lift to tier-1)
 **Prior banner — Version:** 3.7.0; **Updated:** 2026-04-26 (Phase 15e: Navigation + Page Consistency sections AC-026..AC-034 converted from table format to full GWT subsections — header icon scale + active down-press, gradient underline sweep with origin-flip mechanics, dropdown primary-tinted hover, mobile sidebar Sheet pattern + backdrop + auto-close, Ctrl+B global shortcut + input-guard + per-breakpoint behavior, section-pattern composition rule, font-registry enforcement, full :hover/:active/:focus-visible/:disabled state language, mobile/tablet/desktop breakpoint contracts. AC IDs unchanged at AC-001..AC-034. **34 of 34 ACs now GWT — §07 §97 conversion COMPLETE.** Zero table rows remain.)
 
 ---
