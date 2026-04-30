@@ -1,7 +1,12 @@
 # Changelog — Generic Release Pipeline Specification
 
-**Version:** 2.2.1  
-**Updated:** 2026-04-30  
+**Version:** 2.3.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-21 module asset inventory pin + cross-module link-don't-restate pin (Lesson #29 + Lesson #36); AC count 20 → 21)
+
+### 2.3.0 — 2026-04-30 — Phase 153 Task A11h: AC-21 inventory + cross-module pin
+- **Added** AC-21 `[critical]` — combined inventory pin (15-entry §99-authoritative on-disk asset list) + cross-module link-don't-restate pin (`../12/`, `../13/`, `../14/` cross-references are intentional per Lesson #36; restating would create dual-source drift). Classifies audit-v5 D5 HIGH (broken cross-refs), D3 MED (missing concurrency impl — already correctly bound to spec/13 AC-22), D4 MED (incomplete installer templates — deliberate spec-vs-implementation boundary; templates live in consuming repo per AC-15/AC-18) as harness scope / boundary artifacts. Mirror of spec/13 AC-24 + spec/28 AC-28-41 + spec/14 AC-21 + spec/22 AC-78.
+- **Why**: per Lesson #29 + #36 — the spec defines normative installer fragments + cross-references; the consuming repo materialises copy-pasteable templates from the fragments. Restating concurrency or templating would create exactly the dual-source drift Lesson #36 forbids.
+- **Spec lockstep**: §97 v2.0.0 → **v2.1.0** (AC count 20 → 21); §00 v2.2.1 → **v2.3.0** (h10 stamp 22 → 153); §98 v2.2.1 → **v2.3.0**; §99 v2.2.1 → **v2.3.0**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
 **Scope:** `spec/16-generic-release/`
 
 ---

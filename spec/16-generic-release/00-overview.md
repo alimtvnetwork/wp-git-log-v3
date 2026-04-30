@@ -5,9 +5,9 @@ drift_acknowledged: 2026-04-26
 
 # Generic Release Pipeline Specification
 
-> **Version:** 2.2.1  
-<!-- h10-verified-phase: 22 -->
-> **Updated:** 2026-04-27  
+> **Version:** 2.3.0  
+<!-- h10-verified-phase: 153 -->
+> **Updated:** 2026-04-30 (Phase 153 Task A11h — AC-21 module asset inventory pin + cross-module link-don't-restate pin closes audit-v5 D5/D3/D4 findings as harness scope / spec-vs-impl boundary artifacts)
 > **Status:** Active  
 > **Imported from:** sibling reference implementation `spec/16-generic-release`
 >

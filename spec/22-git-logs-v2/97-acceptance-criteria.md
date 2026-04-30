@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.9.5  
-**Updated:** 2026-04-28 (Phase P18 — added **AC-77** (History `HasError + StateLabel` column rendering contract) binding §03 v2.3.0's new `## State-Transition Label Rendering` section to AC-73's four-value label enum + AC-74's NDJSON consumer for cross-consumer parity. AC count 77 → 78. Closes the §99 v3.9.6+ open follow-up "(a)". No DDL change; no schema bump.)
+**Version:** 3.10.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11h — added **AC-78** module asset inventory pin (Lesson #29 + Lesson #36) closing audit-v5 D5 HIGH "Missing Core Schema and API Definitions" + D4 MED "Missing Concrete Code Fixtures" + D3 LOW "Concurrency/Race Condition on Rate Limits" as harness bundling-cap artifacts (every cited file present on disk per §99 inventory; AC-26 concurrency correctly bound to spec/13 AC-22 per Lesson #36). AC count 78 → 79.)
 
 ---
 

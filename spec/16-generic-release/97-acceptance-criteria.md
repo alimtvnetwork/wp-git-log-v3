@@ -1,8 +1,8 @@
 # Acceptance Criteria — Generic Release Pipeline Specification
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26 (Phase 16d-ii: Deepened from 5 generic scaffold ACs to **20 module-specific GWT ACs** covering cross-compilation matrix, tag-driven CI workflow, version-pinned installers, checksum protocol, asset naming, release metadata, known-issue ledger, and the spec-first install ordering. AC-01..AC-05 retained as universal scaffold floor; AC-06..AC-20 added. Harmonized with §15 AC-12/13/16 — `Verifies:` lines explicitly cite where overlap exists so the contracts stay in lockstep.)  
-**Scope:** `spec/16-generic-release/`
+**Version:** 2.1.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11h — added AC-21 module asset inventory pin + cross-module link-don't-restate pin (Lesson #29 + Lesson #36) closing audit-v5 D5 HIGH "Broken Cross-References" + D3 MED "Missing Concurrency Implementation" + D4 MED "Incomplete Installer Templates" as harness scope / spec-vs-impl boundary artifacts. AC count 20 → 21.)
+**Prior banner — Version:** 2.0.0; **Updated:** 2026-04-26 (Phase 16d-ii: Deepened from 5 generic scaffold ACs to **20 module-specific GWT ACs**.)
 
 ---
 

@@ -1,8 +1,8 @@
 # Update — Overview
 
 <!-- h10-verified-phase: 24 -->
-**Version:** 2.3.1  
-**Updated:** 2026-04-29  
+**Version:** 2.4.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-21 inventory pin closes audit-v5 D5/D4/D1 findings as harness artifacts)
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
