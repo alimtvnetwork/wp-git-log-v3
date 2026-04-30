@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # Distribution and Runner
 
-**Version:** 2.1.1
+**Version:** 2.2.0
 **Updated:** 2026-04-29
 <!-- h10-verified-phase: 153 -->
 **Owner:** Md. Alim Ul Karim
