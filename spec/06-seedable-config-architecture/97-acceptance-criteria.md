@@ -1,7 +1,7 @@
 # Seedable Config Architecture — Acceptance Criteria
 
-**Version:** 4.2.0
-**Last Updated:** 2026-04-30 (Phase 153 Task A22: added AC-SC-23 Subfolder Delegation Map for `02-features/` + `03-issues/` per Lesson #21; expected D5 lift cracks EXCELLENT band ≥90. AC count 22 → 23.)
+**Version:** 4.1.0
+**Last Updated:** 2026-04-29 (Phase 153 Task A11f: added AC-SC-21 CHANGELOG concurrency lock-ordering + AC-SC-22 apperror cross-reference to spec/03; closes v5 D3 MEDIUM + D5 HIGH. AC count 20 → 22.)
 **Scope:** `spec/06-seedable-config-architecture/` — Reusable pattern for version-controlled configuration with automatic changelog updates and initial seeding (CW Config).
 
 ---

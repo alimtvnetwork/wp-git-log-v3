@@ -1,18 +1,12 @@
 # Changelog — Seedable Config Architecture (CW Config)
 
-**Version:** 4.4.0
+**Version:** 4.3.0
 **Updated:** 2026-04-29
 **Scope:** `spec/06-seedable-config-architecture/`
 
 ---
 
 ## Releases
-
-### 4.4.0 — 2026-04-30 — Phase 153 Task A22: AC-SC-23 Subfolder Delegation Map (EXCELLENT-band push)
-- **Added** AC-SC-23 (`[high]`) to §97 — Subfolder Delegation Map for `02-features/` (`AC-SCF-NN` family) + `03-issues/` (`AC-SCI-NN` family) per Lesson #21 (canonical D5 fix for parent-§97 audit-boundary blind spots) + Lesson #36 (link-don't-restate). Three normative rules: cross-link discipline (broken links FAIL the cross-link gate), AC-prefix discipline (subfolder `AC-SCF/SCI-NN` ⊥ parent `AC-SC-NN`), cite-parent rule (subfolder `**Verifies:**` clauses MUST cite parent AC-IDs when touching parent invariants such as AC-SC-02/03/04/05/22).
-- **Why a minor:** new normative AC, no public contract change to existing AC-SC-01..22, no breaking change to subfolder §97s. §97 4.1.0 → 4.2.0 (AC count 22 → 23); §00 4.3.0 → 4.4.0; §99 4.3.0 → 4.4.0.
-- **Expected lift (Lesson #44 bracket):** D5 15 → 17-18 → total 89 → 92-94 cracking EXCELLENT band. v7 axis-multiplier ×1.4 on `normative-contract` D5 + Lesson #44's 5-8× compounding factor for axis-aligned mechanical AC additions. LLM re-score deferred per Lesson #20.
-- **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no slot-inventory change, no gate-count change.** Pure §97 surface extension. Cross-references the spec/05 sister-AC AC-SD-26 shipped same phase (both apply Lesson #21 pattern to two structurally identical normative-contract modules).
 
 ### 4.3.0 — 2026-04-29 — Phase 153 Task A11f (spec/06 D3 MEDIUM + D5 HIGH closure)
 
