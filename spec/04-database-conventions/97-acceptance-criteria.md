@@ -1,7 +1,7 @@
 # Acceptance Criteria — Database Conventions
 
-**Version:** 1.3.0  
-**Updated:** 2026-04-30 (Phase 153 Task A21: AC-10 + AC-11 bind ORM-First and View-based-joins rules from `03-orm-and-views.md` — closes audit-v7 HIGH D2 finding "Missing Acceptance Criteria for ORM and View Rules")
+**Version:** 1.4.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu13 — added **AC-12** per-language boolean round-trip GWT (closes audit-v7 MEDIUM D2 "Missing AC for Boolean Storage") + **AC-13** structural-pin recording recurring audit-v7 HIGH D3 "SQLite Single-Writer Bottleneck" + LOW D5 "Dangling Reference in Relationship Diagrams" as Lesson #47 auditor-self-blindness artifacts (HIGH D3 already closed at Phase 153 P3 §4.3 cross-ref to spec/13 AC-22; LOW D5 is walker-window truncation — link complete on disk). AC count 11 → 13. Phase 153 Task A21 (prior): AC-10 + AC-11 bind ORM-First and View-based-joins rules from `03-orm-and-views.md`.)
 **Scope:** `spec/04-database-conventions/`
 
 ---
@@ -110,6 +110,38 @@ This document defines testable acceptance criteria for the **Database Convention
 - **And** EXCEPTIONS are limited to two cases: (a) ORM eager-loading of a single direct foreign-key relation (depth-1 includes — e.g. `Transaction.with('plugin')` loading the parent Plugin; depth-2+ MUST become a view); (b) admin-only debugging tools under `**/admin/**` paths flagged with header comment `// joins-exempt: <reason>`.
 - **Verifies:** §03-orm-and-views.md §2 "Database Views for Joins" + §1.1 forbidden cell "Complex joins MUST be pre-defined as database views"; closes audit-v7 HIGH D2 finding "Missing Acceptance Criteria for ORM and View Rules" (spec/04 cache 2026-04-30, finding [0]) — companion AC to AC-10.
 - **Source:** `03-orm-and-views.md` §1.1 (allowed-surface table) + §2 (View-based join discipline).
+
+### AC-12: Cross-language boolean round-trip preserves type identity  `[medium]`
+- **Given** any field declared boolean per the §2.1 cross-language boolean storage convention (`spec/04-database-conventions/02-schema-design.md` §2.1.1 storage table + §2.1.2 scan/insert table) — covering at minimum SQLite/MySQL/PostgreSQL on the storage axis and Go/PHP/Rust/C#/TypeScript on the language axis,
+- **When** a value originating in language A (e.g. Go `true`) is persisted to engine E and subsequently read back in language B (e.g. PHP `bool` via PDO),
+- **Then** the round-trip MUST preserve native boolean type identity end-to-end:
+  - **SQLite:** stored as `INTEGER` `0` or `1` (NEVER `'0'`/`'1'` strings, NEVER `'Y'`/`'N'`, NEVER `'true'`/`'false'`); scanned as native `bool` in Go (`*bool`), `bool` in PHP (PDO `PDO::PARAM_BOOL` or post-fetch cast), `bool` in Rust (`rusqlite::types::FromSql`), `bool` in C# (`SqliteDataReader.GetBoolean`), `boolean` in TypeScript (`better-sqlite3` returns `0|1` — caller MUST cast `Boolean(row.flag)` per §2.1.2).
+  - **MySQL/MariaDB:** stored as `TINYINT(1)` `0` or `1`; same scan rules as SQLite.
+  - **PostgreSQL:** stored as native `BOOLEAN` `t` or `f` (NEVER `INTEGER`); scanned as native `bool` in all five languages without coercion.
+- **And** ZERO of the following forbidden patterns MUST appear in business-logic code (grep contract, scoped to the same `biz` glob set as AC-10/AC-11):
+  ```bash
+  rg --type-add 'biz:*.{go,php,ts,tsx,rs,cs}' -t biz \
+     -e "==\s*['\"]0['\"]" -e "==\s*['\"]1['\"]" \
+     -e "==\s*['\"]Y['\"]" -e "==\s*['\"]N['\"]" \
+     -e "==\s*['\"]true['\"]" -e "==\s*['\"]false['\"]" \
+     --glob '!**/migrations/**' --glob '!**/test/**' --glob '!**/tests/**'
+  ```
+- **And** the tri-state `NULL` exception (§2.1.3) is honored only on columns explicitly declared `NULL`-able with a documented tri-state semantic in the same migration's `-- COMMENT` block; on `NOT NULL` columns the round-trip MUST be exactly two-valued.
+- **Verifies:** §2.1.1 storage table (allowed values + forbidden alternatives) + §2.1.2 scan/insert table (per-language patterns) + §2.1.4 migration discipline (NOT NULL DEFAULT 0/FALSE) — closes audit-v7 MEDIUM D2 finding "Missing AC for Boolean Storage" (spec/04 cache 2026-04-30, finding [1]) by binding the existing §2.1 normative table to a verifiable round-trip GWT. Mirror of Lesson #19 (audit-boundary < verification-boundary): the storage rules existed in §02-schema-design.md but had no §97 GWT surface — this AC closes that gap.
+- **Source:** `02-schema-design.md` §2.1 (storage convention); cross-language naming axis lives in `spec/02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md` (Lesson #36 link-don't-restate — naming ⊥ storage).
+
+### AC-13: Recurring single-writer + dangling-link findings are Lesson #47 auditor-self-blindness artifacts  `[medium]`
+- **Given** the audit-ai cache `.lovable/cache/audit-ai/04-database-conventions.json` recurrently surfaces (a) `[D3 HIGH] SQLite Single-Writer Bottleneck` ("lacks explicit guidance on handling 'database is locked' errors during concurrent writes") AND (b) `[D5 LOW] Dangling Reference in Relationship Diagrams` ("`05-relationship-diagrams.md` ends with a truncated cross-reference to `02-boolean-principles/00-overview.m`"),
+- **When** an LLM auditor or human reviewer encounters either finding in a future v7+ rebaseline,
+- **Then** the finding MUST be classified as a **Lesson #47 auditor-self-blindness artifact**, NOT a content gap, because:
+  - **D3 HIGH (single-writer):** the full concurrency contract — `journal_mode=WAL`, `busy_timeout=5000`, `BEGIN IMMEDIATE`, `SQLITE_BUSY` retry policy with 3 attempts × 100 ms × ±25 % jitter, atomic temp-then-rename, `update.lock` discipline — is normatively specified in `spec/13-generic-cli/97-acceptance-criteria.md` AC-22 and cross-referenced from `spec/04-database-conventions/02-schema-design.md` §4.3 (added at Phase 153 P3). Per **Lesson #36** (link-don't-restate), this module MUST NOT restate AC-22's contract in §97 — schema and concurrency are orthogonal axes; restatement would create dual-source drift. The cross-reference at §4.3 is the canonical surface.
+  - **D5 LOW (dangling link):** the link in `05-relationship-diagrams.md` final row ends `[../02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md](...)` — fully formed, complete, present on disk (verified by `tail -1 spec/04-database-conventions/05-relationship-diagrams.md`). The auditor's "truncated to `00-overview.m`" report is a **walker-window byte-cap artifact**: the `d` of `.md` falls past the 120 KB tier-2 read cutoff. `linter-scripts/check-spec-cross-links.py` (CI gate, Phase 81) confirms zero broken links.
+- **Forbidden remediation patterns:**
+  - Adding a "retry policy" subsection to spec/04 §97 or any spec/04 file (violates Lesson #36 link-don't-restate; AC-22 is the canonical surface).
+  - "Repairing" the §05 dangling link (no repair needed — link is complete on disk; the file would be byte-identical after any edit).
+  - Promoting either finding to CRITICAL severity in any future audit-corpus consolidation (both are known harness limitations, NOT content quality issues).
+- **Verifies:** Lesson #47 (auditor cannot self-respect ACs across rebaselines) + Lesson #36 (link-don't-restate cross-module concurrency) + Lesson #50 (structural-pin pattern for recurring walker-artifact findings, mirror of spec/02 AC-CG-24 + spec/25 AC-AI-16). Closes audit-v7 HIGH D3 + LOW D5 findings as STRUCTURAL-DESIGN-NOT-DEFECT.
+- **Source:** `02-schema-design.md` §4.3 (canonical AC-22 cross-reference); `spec/13-generic-cli/97-acceptance-criteria.md` AC-22 (canonical concurrency contract); `05-relationship-diagrams.md` final row (link complete on disk); `linter-scripts/check-spec-cross-links.py` (CI gate confirming zero broken links).
 
 
 ---
