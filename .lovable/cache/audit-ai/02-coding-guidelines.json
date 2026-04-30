@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 15,
-  "d3": 14,
-  "d4": 12,
-  "d5": 16,
+  "d2": 19,
+  "d3": 17,
+  "d4": 20,
+  "d5": 19,
   "issues": [
-    {
-      "severity": "CRITICAL",
-      "dim": "D2",
-      "title": "Circular/Self-Referential Acceptance Criteria",
-      "why": "AC-CG-24 and AC-CG-21 declare that subfolder ACs are 'not missing' but 'delegated', yet the mediocre AI cannot see those subfolders due to context limits. The parent spec lacks the actual GWT logic for the languages it claims to govern.",
-      "fix": "Inline at least 3-5 core GWT criteria for each major language (Go, TS, Rust) directly into the parent 97-acceptance-criteria.md."
-    },
-    {
-      "severity": "HIGH",
-      "dim": "D4",
-      "title": "Missing Worked Examples for Size-Limit Exceptions",
-      "why": "AC-CG-22 (Size-Limit Exception Ledger) defines complex detection rules (e.g., 'AST count: match-expression-line / total-line \u2265 0.6') without providing a sample calculation or code snippet.",
-      "fix": "Add a 'Worked Examples' section to \u00a797 showing a Rust match block and the line-count math used to justify the exception."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D3",
       "title": "Ambiguous Concurrency/Partial Failure in CI Gates",
-      "why": "AC-CG-19 mandates a tree-health gate \u2265 95/100 but does not define behavior when linter scripts (Go/Python mix) partially fail or timeout during large-scale (251 files) scans.",
-      "fix": "Define a 'Fail-Fast' policy in AC-CG-19: any script timeout or partial scan result defaults to a score of 0."
+      "why": "While AC-CG-27 defines a fail-fast policy, it doesn't specify how the linter should handle race conditions or file-locking when scanning 251 files across 5 runtimes simultaneously.",
+      "fix": "Add a clause to AC-CG-27 requiring linter scripts to use deterministic sequential scanning or explicit file-locking for shared report artifacts."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Inconsistent Boolean Prefix Regex",
+      "why": "The TS contract defines BOOLEAN_NAME_REGEX as /^(is|has|should|can|will|did|was)[A-Z]/, but the human-readable summary in 00-overview only lists is/has/should.",
+      "fix": "Sync the overview text to include 'can/will/did/was' to match the normative TS contract."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "Dangling Reference to PowerShell/Research",
+      "why": "00-overview lists folders 09 and 10 as having 0 files, and AC-CG-17 marks them as placeholders, which might confuse an AI looking for automation standards.",
+      "fix": "Add a 'NOT_IMPLEMENTED' status to the Subfolder Delegation Map for slots 09 and 10."
     }
   ],
   "module": "02-coding-guidelines",
-  "files_used": 8,
+  "files_used": 6,
   "files_total": 251,
   "bytes_used": 120000,
-  "bundle_sha": "68f3755a4b89aa2e",
-  "total_v6": 75,
+  "bundle_sha": "6f6ff4c3a77417ce",
+  "total_v6": 93,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 74.9,
-  "total_v7": 75,
-  "total": 75,
-  "band": "GOOD",
+  "weighted_total": 92.4,
+  "total_v7": 92,
+  "total": 92,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }
