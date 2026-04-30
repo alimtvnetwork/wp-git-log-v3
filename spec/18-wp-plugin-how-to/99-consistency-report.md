@@ -116,6 +116,7 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 
 | Date | Version | Action |
 |------|---------|--------|
+| 2026-04-29 | 1.4.0 | Phase 153 audit-v6 HIGH self-lift: §2.2 + §2.3 broken-ref findings re-verified at file-line level → confirmed RESOLVED in prior phases; §97 AC-09 asset-inventory pin added (Lesson #29 deep-tree variant + Lesson #34 cache-staleness). Stale-prose narrative updated; broken-ref count 5 → 0. |
 | 2026-04-26 | current | Phase 31: Added Validation History + heading-rubric alignment for `check-tree-health.cjs` v2.0.0 quality dimension. No content removed. |
 | 2026-04-25 | prior | Tree-wide audit baseline established (45/100 → roadmap to 100). |
 | 2026-04-20 | prior | Module brought into alignment with parent §99 conventions. |
