@@ -2,36 +2,49 @@
   "d1": 18,
   "d2": 19,
   "d3": 17,
-  "d4": 16,
+  "d4": 18,
   "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Unresolved External Symbols in Go Samples",
-      "why": "Go code references 'apperror', 'pathutil', and 'semver' packages which are not defined in this context, nor are their specific method signatures (e.g., pathutil.ReadFileIfExists) provided.",
-      "fix": "Add a 'Dependencies' section to 01-fundamentals.md mapping these symbols to their respective spec modules or standard library equivalents."
+      "title": "Broken External Symbol Resolution",
+      "why": "The spec references 'apperror.Wrap', 'ErrSeedLoadFailed', and 'pathutil' which are explicitly delegated to spec/03 and other modules, but those modules are not provided in the context.",
+      "fix": "Provide the 'apperror' package definition and 'pathutil' source or mock signatures in the fundamentals file."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous Rollback Data Source",
-      "why": "AC-SC-07 requires rolling back to a 'cached value from CHANGELOG', but the CHANGELOG format in 01-fundamentals does not store the previous value for 'Removed' keys, making machine-led restoration impossible.",
-      "fix": "Update the CHANGELOG.md format to include 'Removed: Key (last value: X)' to enable the reverse-replay logic."
+      "title": "Incomplete Concurrency Implementation Detail",
+      "why": "AC-SC-21 mandates a file lock before SQL transaction, but the Go implementation in 01-fundamentals.md does not show the locking logic, only the GORM transaction.",
+      "fix": "Add a 'Lock()' and 'Unlock()' call using a sentinel file to the Go ConfigService.SeedWithVersionCheck snippet."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Truncated Feature Specifications",
-      "why": "The provided context cuts off mid-file for 02-rag-validation-helpers.md, leaving the implementation of TopK validation and other helpers incomplete for the coder.",
-      "fix": "Ensure the full content of 02-features/02-rag-validation-helpers.md is included in the module bundle."
+      "dim": "D1",
+      "title": "Ambiguous Type Mapping for 'select'",
+      "why": "The schema uses 'Type: select' but the Go struct 'SettingValue' uses a union of scalars; it's unclear if 'select' should map to StringVal or a specific enum type in Go.",
+      "fix": "Explicitly state in the SettingValue struct comment that 'select' maps to StringVal and 'multiselect' maps to StringsVal."
     }
   ],
   "module": "06-seedable-config-architecture",
   "files_used": 8,
   "files_total": 21,
   "bytes_used": 90000,
-  "bundle_sha": "5013e437b35f7baf",
-  "total": 85,
-  "band": "GOOD"
+  "bundle_sha": "c5b46d3cb2b36a7b",
+  "total_v6": 87,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 88.8,
+  "total_v7": 89,
+  "total": 89,
+  "band": "GOOD",
+  "rubric": "v7"
 }

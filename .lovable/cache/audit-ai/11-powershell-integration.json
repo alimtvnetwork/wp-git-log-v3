@@ -6,32 +6,45 @@
   "d5": 14,
   "issues": [
     {
-      "severity": "HIGH",
+      "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Broken Internal References",
-      "why": "The spec references 07-runner-interface.md and 06-php-known-issues.md in multiple places (AC-09, File Inventory), but these files are not provided in the context.",
-      "fix": "Provide 07-runner-interface.md and 06-php-known-issues.md or merge their content into 02-script-reference.md."
+      "title": "Missing Core Template and Schema Files",
+      "why": "The spec relies entirely on 'templates/run.ps1' and 'schemas/powershell.schema.json' as the normative implementation source, but these files are not provided in the context.",
+      "fix": "Include the content of templates/run.ps1 and schemas/powershell.schema.json in the provided context."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Acceptance Criteria lack Verifies clauses",
+      "why": "AC-01 through AC-05 in 97-acceptance-criteria.md describe behaviors but lack the mandatory 'Verifies:' clause linking them to specific spec sections or linter slots.",
+      "fix": "Add 'Verifies: \u00a700 baseline' or similar anchors to each AC in 97-acceptance-criteria.md."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Acceptance Criteria Mismatch",
-      "why": "AC-09 and AC-10 are highly detailed, but AC-01 through AC-08 are generic boilerplate that doesn't verify the specific logic of pnpm PnP or Go/React orchestration.",
-      "fix": "Add functional GWT criteria for pnpm PnP store resolution and cross-drive fallback logic."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D3",
-      "title": "Concurrency / Process Locking",
-      "why": "The script performs recursive deletions and port binding but does not address cases where files are locked by an IDE or a previous instance is still bound to the port.",
-      "fix": "Add a pre-flight check to kill processes bound to the configured ports before starting Step 3."
+      "dim": "D5",
+      "title": "Unresolved Sibling References",
+      "why": "00-overview.md and 02-script-reference.md reference '07-runner-interface.md' and 'upload-scripts' which are listed as 'pending creation' or missing from the file list.",
+      "fix": "Provide 07-runner-interface.md or remove normative dependencies on it from the pipeline contract."
     }
   ],
   "module": "11-powershell-integration",
   "files_used": 10,
   "files_total": 19,
-  "bytes_used": 89776,
-  "bundle_sha": "6baa08b34c47e66d",
+  "bytes_used": 89869,
+  "bundle_sha": "6e38b24f97d1430f",
+  "total_v6": 81,
+  "axis": "integration-spec",
+  "axis_multipliers": {
+    "d1": 0.9259,
+    "d2": 0.8333,
+    "d3": 0.8333,
+    "d4": 1.2963,
+    "d5": 1.1111
+  },
+  "axis_cap": 95,
+  "weighted_total": 81.4,
+  "total_v7": 81,
   "total": 81,
-  "band": "GOOD"
+  "band": "GOOD",
+  "rubric": "v7"
 }

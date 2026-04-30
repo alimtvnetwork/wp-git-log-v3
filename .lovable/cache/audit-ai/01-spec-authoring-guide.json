@@ -2,36 +2,49 @@
   "d1": 18,
   "d2": 19,
   "d3": 15,
-  "d4": 17,
+  "d4": 16,
   "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Dangling External Module References",
-      "why": "The spec references external modules (e.g., 02-coding-guidelines, 03-error-manage, 04-database-conventions, 27-spec-toolchain) that are not provided in the context, making it impossible for an AI to verify cross-link integrity or inherited rules.",
-      "fix": "Provide the 00-overview.md and 97-acceptance-criteria.md for all referenced modules in the context."
+      "why": "The spec references external modules like `../03-error-manage/`, `../02-coding-guidelines/`, and `../04-database-conventions/` which are not provided in the context.",
+      "fix": "Provide the referenced modules or include their normative contracts in the current context."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency and Race Conditions in Linter Scripts",
-      "why": "The spec mandates multiple linter scripts (Python, Node, Go) running in a pipeline but does not define behavior for concurrent execution or file-locking during the 'self-heal' (--fix) phase.",
-      "fix": "Add a section to 10-mandatory-linter-infrastructure.md specifying a lockfile mechanism or sequential execution requirement for --fix operations."
+      "title": "Missing Concurrency/Large Input Constraints",
+      "why": "While it defines structural rules, it lacks constraints on maximum file sizes or handling of concurrent linter runs in CI/local environments.",
+      "fix": "Add a section to \u00a710 or \u00a797 defining file size limits (e.g., 1MB) and lockfile requirements for linter scripts."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'Phase' Numbering",
-      "why": "The spec frequently references 'Phases' (e.g., Phase 48, Phase 153) as normative anchors, but the definition of a 'Phase' and its sequence is not pinned in the provided files.",
-      "fix": "Define the 'Phase' schema and its canonical source (e.g., a phase-registry.json) in 01-folder-structure.md."
+      "dim": "D4",
+      "title": "Truncated Content in AC-SAG-27",
+      "why": "The provided text cuts off mid-sentence at the end of the file, leaving the final Acceptance Criterion incomplete.",
+      "fix": "Complete the sentence and closing block for AC-SAG-27 in the source file."
     }
   ],
   "module": "01-spec-authoring-guide",
   "files_used": 2,
   "files_total": 17,
   "bytes_used": 90000,
-  "bundle_sha": "0a17c5b607f88779",
-  "total": 83,
-  "band": "GOOD"
+  "bundle_sha": "93d669f3b5fa7fb3",
+  "total_v6": 82,
+  "axis": "process-guidance",
+  "axis_multipliers": {
+    "d1": 1.5,
+    "d2": 0.7,
+    "d3": 0.8,
+    "d4": 1.0,
+    "d5": 1.0
+  },
+  "axis_cap": 95,
+  "weighted_total": 82.3,
+  "total_v7": 82,
+  "total": 82,
+  "band": "GOOD",
+  "rubric": "v7"
 }

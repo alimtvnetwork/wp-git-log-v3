@@ -8,30 +8,43 @@
     {
       "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Broken Dependency Closure (Truncated Context)",
-      "why": "The module references 24+ files in its inventory, but only 14 are provided. Critical logic for 'Go Binary Deploy' (02-go-binary-deploy/01-ci-pipeline.md) and 'Technical Interface' (11-technical-interface.md) is missing.",
-      "fix": "Provide the full content of all 24 files listed in the 99-consistency-report.md inventory."
+      "title": "Broken Internal Cross-References (Slot Collisions)",
+      "why": "The module uses identical numeric prefixes (01, 02, 04, 05, 06, 07) for both root files and subfolders. A mediocre AI will resolve '[01-ci-pipeline.md](./01-ci-pipeline.md)' to the root file but may fail to distinguish it from the subfolder '01-browser-extension-deploy/01-ci-pipeline.md' when referenced via shorthand or relative paths in complex logic.",
+      "fix": "Enforce explicit path resolution in all links and rename colliding root files to include a '-generic' suffix."
     },
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Acceptance Criteria Mismatch",
-      "why": "AC-01 through AC-08 are generic 'meta-specs' (checking if files exist/banners match) rather than verifying the actual CI/CD logic (e.g., 'Verify SHA-dedup skips steps').",
-      "fix": "Add functional ACs verifying specific pipeline behaviors like 'Job Graph execution order' and 'Checksum generation format'."
+      "title": "Missing GWT/Verifies for Technical Interface",
+      "why": "While the overview has ACs, the '11-technical-interface.md' (referenced in inventory but content truncated/missing in provided text) lacks specific GWT criteria for the secrets schema and environment variable contracts.",
+      "fix": "Add a dedicated 97-acceptance-criteria.md section for the Technical Interface with GWT blocks for secret validation."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous 'Working Directory' for Multi-Module",
-      "why": "The spec forbids 'cd' and mandates 'working-directory', but doesn't define how to resolve the path for the 'extension subdirectory' vs 'root' in a monorepo context.",
-      "fix": "Define a standard variable (e.g., PROJECT_ROOT) and provide a mapping table for component-to-path resolution."
+      "dim": "D5",
+      "title": "Unresolved External Linter Dependencies",
+      "why": "AC-05 and AC-07 reference 'check-tree-health.cjs' and 'check-spec-cross-links.py' which are not provided in the context, leaving the AI unable to verify the 'tree-health gate' logic.",
+      "fix": "Provide the interface/CLI contract for the referenced linter scripts in a shared-conventions file."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
   "files_used": 14,
   "files_total": 49,
   "bytes_used": 90000,
-  "bundle_sha": "ac0f1e101d602d01",
+  "bundle_sha": "f9ceb92bc1cd6839",
+  "total_v6": 75,
+  "axis": "integration-spec",
+  "axis_multipliers": {
+    "d1": 0.9259,
+    "d2": 0.8333,
+    "d3": 0.8333,
+    "d4": 1.2963,
+    "d5": 1.1111
+  },
+  "axis_cap": 95,
+  "weighted_total": 74.9,
+  "total_v7": 75,
   "total": 75,
-  "band": "GOOD"
+  "band": "GOOD",
+  "rubric": "v7"
 }

@@ -1,37 +1,50 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 15,
+  "d2": 15,
+  "d3": 14,
   "d4": 16,
   "d5": 12,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Broken Cross-References (Deep-Walker Cap)",
-      "why": "The spec explicitly references files like '02-error-architecture/01-error-handling-reference.md' and '03-error-code-registry/error-codes-master.json' which are not provided in the context due to the 90KB truncation.",
-      "fix": "Provide the full content of the '02-error-architecture' and '03-error-code-registry' subfolders in the prompt context."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT for Core Logic",
-      "why": "While \u00a797 lists ACs, many lack specific 'Verifies' clauses for the complex logic described in the retrospectives (e.g., the IIFE closure dedup lock in 01-error-resolution/03-retrospectives/02-retry-debounce-dedup-fixes.md).",
-      "fix": "Add explicit GWT criteria for the API-layer dedup lock and WebSocket completion lock patterns."
+      "dim": "D5",
+      "title": "Broken Sub-module References",
+      "why": "The spec frequently references files like '02-error-architecture/01-error-handling-reference.md' which are listed in the inventory but not provided in the context.",
+      "fix": "Provide the full content of the 02-error-architecture and 03-error-code-registry subfolders in the prompt context."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Inconsistent Error Code Regex",
-      "why": "AC-04 defines the pattern as '^[A-Z]{2,4}-[0-9]{3}-[0-9]{2}$', but the JSON Schema in \u00a700 uses '^[A-Z]{2,5}-[A-Z]+-\\d{3}$'.",
-      "fix": "Unify all error code regex patterns to the '^[A-Z]{2,5}-[A-Z]+-\\d{3}$' standard across all files."
+      "dim": "D2",
+      "title": "Incomplete GWT Coverage for Phase 50 Contracts",
+      "why": "The Normative Contract (Phase 50) defines invariants (INV-01 to INV-07) that lack corresponding GWT acceptance criteria in 97-acceptance-criteria.md.",
+      "fix": "Add AC-09 through AC-15 to 97-acceptance-criteria.md mapping each INV-N to a Given/When/Then clause."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Concurrency and Race Condition Ambiguity",
+      "why": "While retrospectives mention dedup locks, the normative Go/PHP/Python validator code snippets do not implement thread-safe registry lookups or collision checks.",
+      "fix": "Add a 'Concurrency' section to the Phase 50 contract specifying mutex requirements for registry access."
     }
   ],
   "module": "03-error-manage",
   "files_used": 11,
   "files_total": 166,
   "bytes_used": 90000,
-  "bundle_sha": "e43d2ed88d254f37",
-  "total": 75,
-  "band": "GOOD"
+  "bundle_sha": "0092873a3d9ddb5d",
+  "total_v6": 75,
+  "axis": "audit-corpus",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 0.5,
+    "d3": 0.5,
+    "d4": 1.5,
+    "d5": 1.5
+  },
+  "axis_cap": 95,
+  "weighted_total": 74.5,
+  "total_v7": 74,
+  "total": 74,
+  "band": "NEEDS_WORK",
+  "rubric": "v7"
 }

@@ -1,37 +1,50 @@
 {
   "d1": 18,
   "d2": 14,
-  "d3": 15,
-  "d4": 19,
-  "d5": 16,
+  "d3": 12,
+  "d4": 17,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing Verifies clauses for AC-09",
-      "why": "AC-09 (Boolean Storage) is marked as a critical normative contract but lacks the 'Verifies' clause required by the module's own changelog standards (v3.3.2) and rubric.",
-      "fix": "Add 'Verifies: the cross-language storage contract preventing data corruption' to AC-09 in 97-acceptance-criteria.md."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Broken link to 07-split-db-pattern.md",
-      "why": "The overview index and quick reference link to 07-split-db-pattern.md, but the changelog (v3.4.2) and drift acknowledgment note a naming conflict with 07-split-db-architecture.md.",
-      "fix": "Rename 07-split-db-pattern.md to 07-split-db-architecture.md and update all internal references to match."
+      "title": "Missing Acceptance Criteria for ORM and View Rules",
+      "why": "While naming and schema design have ACs (AC-03, AC-09), the mandatory 'ORM-First' and 'No On-the-fly Joins' rules in 03-orm-and-views.md lack GWT criteria and verification clauses.",
+      "fix": "Add AC-10 and AC-11 to 97-acceptance-criteria.md specifically covering ORM usage and View-based joins with grep-based verification commands."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Incomplete Concurrency Specification",
-      "why": "The spec explicitly offloads concurrency (WAL mode, retries, locking) to spec/13, but spec/13 is not provided in this context, leaving the AI to guess SQLite's multi-writer behavior.",
-      "fix": "Inline the mandatory SQLite PRAGMAs (WAL, busy_timeout) and 'BEGIN IMMEDIATE' requirement into 02-schema-design.md \u00a74.3."
+      "title": "Incomplete Concurrency Handling in SQLite",
+      "why": "The spec acknowledges SQLite is single-writer but offloads the actual locking/retry logic (WAL, BEGIN IMMEDIATE) to a cross-reference (spec/13) which is not provided in this context.",
+      "fix": "Inline the mandatory SQLite PRAGMAs and transaction retry policy into 02-schema-design.md \u00a74.3."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D5",
+      "title": "Dangling Reference to Split-DB Pattern",
+      "why": "02-schema-design.md \u00a74.1 and 00-overview.md point to 07-split-db-pattern.md for 'full specification', but that file's content is missing from the provided context.",
+      "fix": "Provide the content for 07-split-db-pattern.md or merge its core directory layout rules into the overview."
     }
   ],
   "module": "04-database-conventions",
   "files_used": 7,
   "files_total": 11,
   "bytes_used": 90000,
-  "bundle_sha": "66c4e456e44f14ca",
-  "total": 82,
-  "band": "GOOD"
+  "bundle_sha": "b18fd7f9b7fb2aa9",
+  "total_v6": 76,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 74.5,
+  "total_v7": 74,
+  "total": 74,
+  "band": "NEEDS_WORK",
+  "rubric": "v7"
 }

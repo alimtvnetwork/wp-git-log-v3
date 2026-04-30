@@ -9,29 +9,42 @@
       "severity": "HIGH",
       "dim": "D5",
       "title": "Missing Core Schema and API Definitions",
-      "why": "The module inventory references critical files (04-rest-api-endpoints.md, 18-schema.sql, 17-openapi.yaml) that are not provided in the context, making 100% confident implementation impossible.",
-      "fix": "Provide the content for files 04, 17, and 18 in the prompt context."
+      "why": "The module references 37 files (including 04-rest-api-endpoints.md and 18-schema.sql) but only 3 files are provided in the context. A mediocre AI cannot implement the DB or API without these.",
+      "fix": "Provide the full content of 04-rest-api-endpoints.md and 18-schema.sql in the prompt context."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
       "title": "Missing Concrete Code Fixtures",
-      "why": "While AC-78 claims 18-schema.sql is the canonical DDL, the actual SQL content is missing from the provided text, leaving the AI to guess table structures.",
-      "fix": "Include the verbatim content of 18-schema.sql."
+      "why": "While the spec mentions PHPUnit and Bats skeletons (33, 34), the actual code templates are missing from the provided text, leaving the AI to guess the boilerplate.",
+      "fix": "Include the content of 33-bats-test-skeleton.md and 34-phpunit-test-skeleton.md."
     },
     {
       "severity": "LOW",
       "dim": "D3",
       "title": "Concurrency/Race Condition on Rate Limits",
-      "why": "AC-26 mentions 'in-memory + persisted floor' but refers to an external spec (spec/13) for the actual locking strategy.",
-      "fix": "Briefly state the SQLite locking/transaction requirement for the rate-limit counter in AC-26."
+      "why": "AC-26 mentions an 'in-memory + persisted floor' for rate limiting but doesn't define the SQLite locking strategy to prevent race conditions during the increment.",
+      "fix": "Add a requirement to use 'BEGIN IMMEDIATE' or a single 'UPDATE ... SET count = count + 1' statement for rate-limit increments."
     }
   ],
   "module": "22-git-logs-v2",
   "files_used": 3,
   "files_total": 36,
   "bytes_used": 90000,
-  "bundle_sha": "355d092a8f022b76",
-  "total": 83,
-  "band": "GOOD"
+  "bundle_sha": "35441c6b42f67a34",
+  "total_v6": 83,
+  "axis": "normative-contract",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
+  },
+  "axis_cap": 100,
+  "weighted_total": 85.6,
+  "total_v7": 86,
+  "total": 86,
+  "band": "GOOD",
+  "rubric": "v7"
 }

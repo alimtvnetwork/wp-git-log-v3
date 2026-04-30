@@ -76,6 +76,15 @@
 # example. Documentation-only — must never appear as a live link. ---
 24-design-system
 
+# --- Phase 153 Task A19 self-test fixture: synthetic module name used by
+# `linter-scripts/audit-ai-implementability.py` self-tests to exercise the
+# AC-34-12 fail-fast (missing `content_axis` raises exit 2) and the
+# axis-multiplier renormalization assertions. The folder is constructed
+# in-memory inside the test harness and never lives on disk. Referenced
+# verbatim in spec/27 §98/§99 release rows, the A19 closure memo, and the
+# memory index. Documentation-only — must never appear as a live link. ---
+00-aai-axis-test-fixture
+
 # --- Historical folder numbers from spec/26-spec-outsides/ archive ---
 # These appear in archived spec-outsides documents that reference an
 # older numbering scheme (pre-renumbering). The current equivalents are:

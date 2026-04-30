@@ -5,6 +5,7 @@
 > **Scope:** **Entire `spec/` tree** — 23 numbered top-level modules, 56 leaf modules, 1373 ACs across §97 files, 87 §99 files
 > **Method:** Empirical filesystem scan + automated gate replay (`check-tree-health --strict`, `check-lockstep`, `check-99-summary-freshness`, `check-ai-confidence`)
 > **Supersedes:** [`33-full-tree-ai-audit-v5.md`](./33-full-tree-ai-audit-v5.md) (Phase 130 reconciliation, no numeric headline)
+> **Superseded by:** [`35-full-tree-ai-audit-v7.md`](./35-full-tree-ai-audit-v7.md) (Phase 153 Task A20, Rubric v7 axis-driven baseline 83.7/100)
 > **Headline:** **Tree-wide P3 (Verifies-coverage) driver CLOSED.** All 11 P3-drifter modules brought from partial/zero to full `**Verifies:**` coverage across Tasks #21a–#21d (Phases 148–151). 12 of 15 declared `Production-Ready` modules now match the deterministic AI-confidence derivation; the remaining 3 drift solely on P4 (workflow-ref), not on P3 (contract depth).
 
 ---

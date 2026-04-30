@@ -1,7 +1,9 @@
 # Consistency Report — Consolidated Guidelines
 
-**Version:** 4.6.7
-**Updated:** 2026-04-29
+**Version:** 4.7.0
+**Updated:** 2026-04-30
+
+> **v4.7.0 update (Phase 153 Task A20 — Rubric v7 LLM rebaseline + slot 35 snapshot):** Added `35-full-tree-ai-audit-v7.md` (inventory slot 35) — LLM rebaseline under Rubric v7 axis-driven dimension weight cascades (slot 34 v1.3.0 contract, AC-34-10..12). Tree mean **82.3 → 83.7 (+1.4)**; EXCELLENT band 4 → 5 (spec/23 lifted 93 → 97); 2 NEEDS_WORK at 74 (spec/03 audit-corpus, spec/04 normative-contract — both 1pt below threshold, mechanically closeable in optional A21). Top movers: spec/10 +12, spec/01 +7, spec/02 +6, spec/11 +6, spec/26 +5. Honest-baseline corrections: spec/14 -10, spec/07 -9 (v7 D2/D3 weighting caught over-credit on narrative/process content). Banner-superseded `34-…-v6.md` — v6's deterministic 168/168 result preserved as historical baseline; LLM companion baseline migrated to v7. Lockstep: §00 3.4.7 → **3.5.0**, §98 release row 3.5.0 added, §99 4.6.7 → **4.7.0**, file count 35 → 36. **Lesson #43 codified inline in §98 row + slot 35 prose**: when a new LLM baseline supersedes the prior baseline, the prior file MUST get a `**Superseded by:**` line in its banner block AND its data MUST be preserved (not deleted) — historical baselines remain comparable evidence for future rubric changes (mirror of Lesson #18 honest-baseline preservation). All 23 modules carry `content_axis` front-matter (Task A16) — auditor's AC-34-12 fail-fast on missing axis is now exercised at every CI run. **All 4 audit-v6 CRITICALs remain CLOSED** (carried forward from v4.6.7).
 
 > **v4.6.7 update (Phase 153 audit-v6 close-out):** Added **AC-10** (`[critical]`) to §97 — consolidated-guide module-kind pin declaring all 35 `NN-*.md` files as DESCRIPTIVE rollups (not first-party normative source-module entry points). Closes audit-v6 CRITICAL `[D5] Broken Cross-References to Source Folders` as a harness misreading — aspirational source mnemonics (`08-docs-viewer-ui`, `09-code-block-system`, `13-app`) are already `[doc-only]` per Phase F1 (2026-04-28). Banners: §97 v2.3.0 → **v2.4.0** (count 9 → 10); §00/§98/§99 v3.4.6/3.4.6/4.6.6 → **3.4.7/3.4.7/4.6.7**. Score 76 → ≥86 expected (deferred per Lesson #20). **Lesson #29 third extension** (codified inside AC-10 + §98 row): audit-corpus pattern extends from quoted-evidence (spec/25) → non-`.md` assets (spec/11) → structural ambiguities (spec/12) → **consolidated-guide rollups** under the same auditor-misreads-by-default class. **All 4 audit-v6 CRITICALs now CLOSED.**
 
@@ -122,7 +124,7 @@
 ---
 
 ## Summary
-<!-- verified-phase: 152 -->
+<!-- verified-phase: 153 -->
 - **Errors:** 0
 - **Health Score:** 100/100 (A+)
 
@@ -142,6 +144,7 @@
 | 2026-04-16 | 3.3.0 | Reflected recent expansions: `01-spec-authoring.md` 90%→95% (330+ lines), `16-app-design-system-and-ui.md` 88%→93% (530+ lines), `22-app-database.md` added (310+ lines, 90%), placeholders 11/12/13 expanded to 88%. Added implementability summary table. Total: 23 files, 17 at 90%+. |
 | 2026-04-22 | 3.4.0 | Added `24-folder-mapping.md` — bidirectional source-folder ↔ consolidated-file index with coverage heatmap, reverse index, and blind-spot tracking. Registered `23-generic-cli.md` in inventory. Total: 25 files. |
 | 2026-04-27 | 4.3.0 | Phase 39b: Added §00 "Audit Marker Exemption" — `todo_count: 5` was substring false-positive (all hits inside Python example block in `27-linter-authoring-guide.md` lines 361–424 that *defines* `check-stale-todos.py`). Banner v3.2.0→v3.3.0; §98 v2.3.0→v2.4.0. |
+| 2026-04-30 | 4.7.0 | Phase 153 Task A20: Rubric v7 LLM rebaseline. Added slot 35 `35-full-tree-ai-audit-v7.md`. Tree mean 82.3 → 83.7 (+1.4); EXCELLENT 4 → 5; 2 NEEDS_WORK at 74; 0 BLOCKING. Banner-superseded slot 34 v6 baseline. Lockstep §00 3.5.0 / §98 3.5.0 / §99 4.7.0; file count 35 → 36. |
 
 ---
 

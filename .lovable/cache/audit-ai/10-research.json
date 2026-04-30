@@ -3,35 +3,48 @@
   "d2": 19,
   "d3": 17,
   "d4": 18,
-  "d5": 15,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Missing Mermaid Source Files",
-      "why": "The spec references 'lifecycle-10-research-lifecycle.mmd' and '01-research-index/lifecycle-top-research.mmd' as normative sources, but these files are not provided in the context.",
-      "fix": "Include the raw .mmd files in the module file list or inline the Mermaid code directly into the overview files."
+      "title": "Unresolved External Script Dependencies",
+      "why": "The spec mandates execution of multiple scripts (e.g., linter-scripts/check-spec-folder-refs.py, check-tree-health.cjs) to verify the module, but these scripts are not provided in the context.",
+      "fix": "Include the source code or detailed logic/interfaces for all referenced linter-scripts in the spec tree."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Undefined Linter Script Logic",
-      "why": "Multiple ACs (AC-05, AC-07, AC-RESEARCH-07) rely on specific python/node scripts (check-tree-health.cjs, check-spec-cross-links.py) whose logic for 'strict gates' is not defined.",
-      "fix": "Provide the core logic or pseudo-code for the linter scripts in a 'Tooling' section."
+      "title": "Ambiguous 'On-Disk' Resolution Logic",
+      "why": "AC-RESEARCH-07 requires resolving domain strings against the 'repo's spec/ tree', but does not define the root path or how to handle symlinks/case-sensitivity in the resolution logic.",
+      "fix": "Define the base path for resolution (e.g., project root) and specify case-sensitive matching for the kebab-case regex."
     },
     {
       "severity": "LOW",
       "dim": "D1",
       "title": "Registry Table Type Mismatch",
-      "why": "The SQL DDL uses 'TEXT' for AuthoredAt, while the Validation Schema expects 'date-time' format; SQLite does not enforce ISO-8601 by default.",
-      "fix": "Add a CHECK constraint to the SQL DDL: CHECK(AuthoredAt IS datetime(AuthoredAt))."
+      "why": "The SQL DDL uses 'TEXT' for AuthoredAt, while the Validation Schema excerpt expects 'date-time' format; the SQL lacks a CHECK constraint to enforce this format.",
+      "fix": "Add a CHECK constraint to the RegistryEntry table: CHECK (AuthoredAt IS datetime(AuthoredAt))."
     }
   ],
   "module": "10-research",
   "files_used": 8,
   "files_total": 8,
-  "bytes_used": 36022,
-  "bundle_sha": "8ad61d82959ecb13",
+  "bytes_used": 36132,
+  "bundle_sha": "194d63e4f24afeb3",
+  "total_v6": 88,
+  "axis": "audit-corpus",
+  "axis_multipliers": {
+    "d1": 1.0,
+    "d2": 0.5,
+    "d3": 0.5,
+    "d4": 1.5,
+    "d5": 1.5
+  },
+  "axis_cap": 95,
+  "weighted_total": 87.0,
+  "total_v7": 87,
   "total": 87,
-  "band": "GOOD"
+  "band": "GOOD",
+  "rubric": "v7"
 }
