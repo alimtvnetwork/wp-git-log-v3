@@ -17,6 +17,9 @@
 
 ## Releases
 
+### 3.3.5 — 2026-04-30 — Phase 153 Task A24-fu (AC-10 v7-finding tri-closure — EXCELLENT-band push)
+- **Added** AC-10 `[critical]` to §97 (v1.2.0 → v1.3.0) closing all three v7 audit findings against this module: (a) D1 LOW Registry Table Type Mismatch — adds CHECK constraint enforcing ISO-8601 on `AuthoredAt` + GLOB pin on `Domain`; (b) D3 MEDIUM Ambiguous On-Disk Resolution — defines 5-row normative table covering base path / case sensitivity / symlinks / domain pattern / resolution order; (c) D5 HIGH Unresolved External Script Dependencies — adds 4-row script-binding table delegating each linter contract to its owning spec/27 §97 AC family per Lesson #36 (link-don't-restate). Per Lesson #44 `audit-corpus` axis multipliers (D4×1.5 + D5×1.5), tri-closure projects EXCELLENT-band re-score (87 → 92+ expected). Pre-flight verified per Lesson #45 graduated rule: tier-1 bundle ~12 KB + AC-10 ~3 KB = well under 75 KB saturation threshold; total tree bundle ~36 KB stays under 90 KB walker cap. §00 banner 3.3.4 → 3.3.5; §97 1.2.0 → 1.3.0; §98 release row 3.3.5 added; §99 banner 1.3.2 → 1.3.3 + row added. LLM re-score deferred per Lesson #20 (HTTP 402).
+
 ### 3.3.4 — 2026-04-30 — Phase 153 Task A13 (child slot v2.1.0 close-out)
 - **Changed (banner-only)** Patch-bump of parent banners (3.3.3 → 3.3.4) catching child slot `01-research-index/` v2.0.0 → v2.1.0 (AC-RESEARCH-05 Verifies + AC-RESEARCH-07 domain-registry validator AC). Closes v6 audit D2 LOW + D3 MEDIUM findings on the child contract (the third v6 finding `lifecycle-*.mmd` D5 HIGH remains pinned upstream by §97 AC-9 — Lesson #29 harness-bundling-cap). Parent §97/§00 surface unchanged.
 
