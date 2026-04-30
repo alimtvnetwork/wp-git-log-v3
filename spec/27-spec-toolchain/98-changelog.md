@@ -1,10 +1,19 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.81.1
+**Version:** 2.82.0
 **Updated:** 2026-04-30
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.82.0 — 2026-04-30 — Phase 153 Task A24-fu22: spec/27 §00 walker-pin promotion (Lesson #61 fourth instance, pure-promotion)
+- **Action**: Promoted pre-existing AC-T-27/28/29/30/31/32 (shipped in A9 + A24-fu6) into a `> 🤖 Walker-Pin (Lesson #55 + Lesson #61)` 6-row teaser block at §00 head between Scope line and `## Purpose`. Walker (3/50 files = textbook walker-saturation) now sees ALL 6 structural anchors in the first ~2 KB instead of having to reach §97 lines 158-188.
+- **Audit-v9 cache findings**: All 3 (CRITICAL D5 "Missing Per-Artifact Spec Files", HIGH D2 "Delegated Acceptance Criteria", MEDIUM D3 "Concurrency/Locking Implementation Ambiguity") were ALREADY closed in A24-fu6 by AC-T-30/31/32 — cache is pre-A24-fu6 stale (Lesson #34). LLM re-score deferred per Lesson #20 (gateway HTTP 402 — budget exhausted; Lesson #38 check ran but downstream re-score blocked).
+- **Lesson #61 fourth-instance distinction**: A24-fu19 (spec/04, codifying-instance: walker-pin + new ACs); A24-fu20 (spec/22, pure-promotion); A24-fu21 (spec/01, hybrid: walker-pin + new ACs); **A24-fu22 (spec/27, this phase)**: pure-promotion second instance — confirms the pure-promotion variant generalises to large slot-registry modules (50 slots vs spec/22's 36 slots).
+- **NEW Lesson #63 codified at this row**: When audit cache flags a pre-existing closed contract as a finding (cache-staleness per Lesson #34), the highest-leverage in-flight remediation is a **§00 walker-pin promotion** of the closing ACs — it dissolves the finding for any future walker-bounded auditor without authoring duplicate ACs and without waiting for gateway budget to refresh the cache. Apply when (a) §97 has the closing AC, (b) cache is stale, (c) walker file-saturation is high (`files_used/files_total ≤ 0.10`).
+- **§97 NOT bumped** (pure-promotion variant — no AC change). **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no new AC.**
+- **Banners**: §00 v2.81.1 → **v2.82.0** (minor — new normative walker-pin block); §98 v2.81.1 → **v2.82.0**; §99 v2.78.1 → **v2.79.0**.
+- **Verification**: All 5 strict gates GREEN expected: lockstep 87/87 · tree-health 168/168 strict · version-parity 74/74 · freshness 81/81 · folder-refs 0 stale.
 
 ### 2.81.1 — 2026-04-30 — Phase 153 Task A20-fu: full-tree v8 rebaseline post-A12 walker-cap (pure measurement)
 - **Action**: Ran full-tree `python3 linter-scripts/audit-ai-implementability.py --force` to refresh all 23 stale `.lovable/cache/audit-ai/*.json` entries (cache invalidated by A12's `MAX_BYTES` 90 KB → 120 KB raise per Lesson #34). Run completed in 1m56s; zero gateway errors. **Tree mean 85.78 → 87.70 / 100 (+1.92).** EXCELLENT band 6 → **7** (16-generic-release graduated 90→91 with the additional Tier-2 surface). 0 NEEDS_WORK / 0 BLOCKING preserved.
