@@ -6,7 +6,7 @@ description: Auditor-self-reference module — defines the toolchain that audits
 
 # Spec Toolchain
 
-**Version:** 2.77.2  
+**Version:** 2.77.3  
 **Updated:** 2026-04-29
 <!-- h10-verified-phase: 48 -->
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
@@ -197,6 +197,55 @@ Slots 10–29 mutate disk. Every write MUST be atomic against concurrent readers
 - Rename over the destination (`os.replace` / `fs.renameSync`) — never `unlink` + `write`.
 - On any exception between temp-write and rename, delete the temp file in a `finally` block.
 - FORBIDDEN: `open(target, 'w')` followed by streaming writes — a Ctrl-C or OOM-kill mid-stream leaves a truncated artifact that fails subsequent linter runs and corrupts trace-map regression baselines.
+
+**Reference implementation (Python — normative example)** — applies to slots 10–29 written in `.py`:
+
+```python
+import os
+
+def atomic_write_text(target: str, content: str) -> None:
+    """R1-conformant atomic write. Use for all spec/dashboard/trace-map artifacts."""
+    tmp = f"{target}.tmp.{os.getpid()}"
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o644)
+    try:
+        os.write(fd, content.encode("utf-8"))
+        os.fsync(fd)               # MUST fsync before rename
+        os.close(fd)
+        fd = -1
+        os.replace(tmp, target)    # atomic same-volume rename
+    finally:
+        if fd != -1:
+            try: os.close(fd)
+            except OSError: pass
+        # On ANY failure path, sweep the temp — never leave .tmp.<pid> behind.
+        if os.path.exists(tmp):
+            try: os.unlink(tmp)
+            except OSError: pass
+```
+
+**Reference implementation (Node — normative example)** — applies to slots 10–29 written in `.cjs`/`.mjs`:
+
+```javascript
+const fs = require('node:fs');
+
+function atomicWriteText(target, content) {
+  const tmp = `${target}.tmp.${process.pid}`;
+  let fd = -1;
+  try {
+    fd = fs.openSync(tmp, 'w', 0o644);
+    fs.writeSync(fd, content, null, 'utf8');
+    fs.fsyncSync(fd);              // MUST fsync before rename
+    fs.closeSync(fd);
+    fd = -1;
+    fs.renameSync(tmp, target);    // atomic same-volume rename
+  } finally {
+    if (fd !== -1) { try { fs.closeSync(fd); } catch (_) {} }
+    if (fs.existsSync(tmp)) { try { fs.unlinkSync(tmp); } catch (_) {} }
+  }
+}
+```
+
+These two snippets are normative reference implementations — slots 10–29 MAY copy them verbatim (preferred) or implement equivalent atomicity in their language of choice. Closes A13 v6 audit D4 MEDIUM finding "Incomplete Examples for Resilience Rules".
 
 ### R2 — File locking (validators reading shared artifacts)
 

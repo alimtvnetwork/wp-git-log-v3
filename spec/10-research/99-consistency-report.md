@@ -1,6 +1,6 @@
 # Consistency Report — Research
 
-**Version:** 1.3.1  
+**Version:** 1.3.2  
 
 > **v1.3.0 update (Phase P48-1-fu1-batch P3 sweep slot 4 — AC-01..AC-08 Verifies clauses):** Closes the P3-tier `**Verifies:**` gap for this module (0 → 8 clauses). Each AC declares the invariant or precedent it defends; AC-01 and AC-06 explicitly call out this module's `kind: index` YAML exemption so future contributors don't mis-flag the deliberately-empty overview. Lockstep: §00 banner 3.3.1 → 3.3.2 (date 2026-04-28 → 2026-04-29), §97 banner 1.0.0 → 1.1.0, §98 release row 3.3.2 added, §99 banner 1.2.0 → 1.3.0. P3 derived tier: Medium → High. No score change to tree-health (168/168 strict-pass holds). Pattern reused verbatim from slots 2–3 — see Core memory entry on `**Verifies:**` as the highest-leverage AI-implementability uplift.
 

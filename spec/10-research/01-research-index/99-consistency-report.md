@@ -1,7 +1,7 @@
 # Consistency Report — Top-Level Research Index
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-27
+**Version:** 2.1.0
+**Updated:** 2026-04-30 (Phase 153 Task A13 — AC-RESEARCH-05 Verifies + AC-RESEARCH-07 domain-registry validator)
 
 
 ## 2026-04-27 — Phase 69b content audit
@@ -53,3 +53,15 @@
 - Acceptance criteria use GWT format with severity tags.
 - Inlined contracts (JSON schema + TS / mermaid) parse cleanly.
 
+
+## 2026-04-30 — Phase 153 Task A13 audit close-out
+
+- AC-RESEARCH-05 lifted from "review-by-PR" to `**Verifies:**`-bound contract — closes v6 D2 LOW.
+- AC-RESEARCH-07 added — binds existing `domains[]` schema constraint to a regex + on-disk resolver — closes v6 D3 MEDIUM.
+- AC count 6 → 7. Lockstep: §97 v2.0.0→v2.1.0, §98 v2.0.0→v2.1.0, §99 v2.0.0→v2.1.0.
+- Sister `lifecycle-top-research.mmd` finding remains pinned upstream by spec/10 §97 AC-9 (Lesson #29 harness-bundling-cap pin); no work needed here.
+
+## Summary
+
+<!-- verified-phase: 153 -->
+spec/10/01-research-index v2.1.0 closes the two genuine v6 audit findings (D2 LOW + D3 MEDIUM) by Verifies-clause binding + a normative on-disk-relpath validator AC. The third v6 finding (`lifecycle-*.mmd` D5 HIGH) is a harness-bundling-cap artifact already pinned by spec/10 §97 AC-9 per Lesson #29 — no spec defect.

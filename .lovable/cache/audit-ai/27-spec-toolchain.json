@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 19,
-  "d4": 12,
+  "d2": 14,
+  "d3": 17,
+  "d4": 19,
   "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing GWT/Verifies for individual artifacts",
-      "why": "The module delegates all per-script logic to 79 separate files (01-*.md to 79-*.md) which are not provided in this context, leaving the actual tool logic unverified.",
-      "fix": "Explicitly list the delegation contract in \u00a797 and provide at least one sample per-artifact spec file in the bundle."
+      "title": "Delegated Acceptance Criteria",
+      "why": "The module-level AC-T-29 explicitly delegates per-script logic to 79 external files not provided in this context, making it impossible for an AI to verify the specific logic of any individual tool.",
+      "fix": "Include the per-artifact GWT criteria for the most critical slots (e.g., 01, 05, 34) directly within the module bundle."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Incomplete Examples for Resilience Rules",
-      "why": "The 'Resilience \u2014 CI Edge Cases' section (R1-R5) defines complex behaviors (atomic writes, signal forwarding) but lacks code snippets or worked cases showing the implementation.",
-      "fix": "Add a 'Reference Implementations' section to \u00a700 with a Python/Node snippet for the R1 atomic-write pattern."
+      "dim": "D5",
+      "title": "Unresolved External Memory References",
+      "why": "Frequent references to 'mem://index.md' and '.lovable/memory/...' are used to define core logic (e.g., SELF-HEAL pipeline) but these files are not part of the provided context.",
+      "fix": "Inline the specific 'SELF-HEAL' step list and 'INV-08' ledger definitions into the \u00a700 overview."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous CODE_GLOB in Normative Contract",
-      "why": "The Normative Contract uses brace-expansion globs (e.g., {py,sh,cjs}) but doesn't explicitly state if these are exhaustive or if new extensions require a contract bump.",
-      "fix": "Add a note to the Contract block stating the extension list is exhaustive and requires a \u00a798 entry to extend."
+      "dim": "D2",
+      "title": "Truncated Changelog and Context",
+      "why": "The file ends mid-sentence due to a 90KB cap, losing the final lessons and potentially the full consistency report (\u00a799), which is required for D2/D5 closure.",
+      "fix": "Move historical changelog entries (pre-v2.70.0) to an archive file to keep the active spec within context limits."
     }
   ],
   "module": "27-spec-toolchain",
   "files_used": 3,
   "files_total": 50,
   "bytes_used": 90000,
-  "bundle_sha": "031743eae625e0e6",
-  "total": 80,
+  "bundle_sha": "80869d2a36683e6f",
+  "total": 83,
   "band": "GOOD"
 }
