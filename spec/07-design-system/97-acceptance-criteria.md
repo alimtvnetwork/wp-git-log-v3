@@ -1,8 +1,8 @@
 # Acceptance Criteria
 
-**Version:** 3.11.0  
-**Updated:** 2026-04-30 (Phase 153 A24-fu14 — AC-038 tightens AC-037 storage-blocked fallback to honour `prefers-color-scheme: dark` via matchMedia (closes audit-v7 MEDIUM/D3 LocalStorage Failure Mode — fail-open-to-light is a dark-preference accessibility failure); AC-039 structural-pin for recurring HIGH/D5 "Missing Leaf Files in Context" (5/17 files at 120 KB walker cap — Lesson #51) + LOW/D4 "Truncated Design Principles" (same walker-window class). AC count 37 → 39.)
-**Prior banner — Version:** 3.10.0; **Updated:** 2026-04-30 (Phase 153 A24-fu9 — AC-036 canonical token registry + AC-037 FOUC-prevention bootstrap; closes audit-v7 [D4 MEDIUM] + [D3 LOW] per Lesson #19 audit-boundary lift to tier-1)
+**Version:** 3.12.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu16 — AC-039 promoted [medium]→[critical] (recurring v8 walker-saturation artifact requires CRITICAL severity to dampen LLM auditor re-flagging across rebaselines per Lesson #51); paired with §00 walker-saturation pin lifted to top-of-file for tier-1 visibility.)
+**Prior banner — Version:** 3.11.0; **Updated:** 2026-04-30 (Phase 153 A24-fu14 — AC-038 + AC-039 added; AC count 37 → 39.)
 
 ---
 
