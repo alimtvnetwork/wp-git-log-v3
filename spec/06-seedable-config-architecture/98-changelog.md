@@ -1,12 +1,20 @@
 # Changelog — Seedable Config Architecture (CW Config)
 
-**Version:** 4.1.1
+**Version:** 4.2.0
 **Updated:** 2026-04-29
 **Scope:** `spec/06-seedable-config-architecture/`
 
 ---
 
 ## Releases
+
+### 4.2.0 — 2026-04-29 — Phase 153 Task A11e (spec/06 D3 Type-enum reconciliation)
+
+- **Changed** `00-overview.md` JSON Schema `Type` enum from legacy storage-type set `{string, int, float, bool, json}` to AC-SC-14's UI-aware enum `{boolean, number, string, select, multiselect}`. The reference instance and Forbidden-shapes table were updated in lockstep (`int`→`number`, `bool`→`boolean`, `Storage.Backend` becomes `Type: select` since it already declares `Validation.Enum`). Inline `description` clause names the migration mapping and explicitly FORBIDS the legacy values.
+- **Why:** Phase 153 v5 audit (D3 HIGH "Inconsistent Type Enums between Schema and AC") flagged that the §00 schema and AC-SC-14 advertised two different closed enums for the same `Type` field — an AI implementer would not know which to enforce. Per Lesson #36 (cross-module references must link, not restate) and AC-31-31 (§97 wins on contract conflict), §00 is realigned to AC-SC-14's canonical enum. The UI-aware enum is preferred because (a) it preserves `select`/`multiselect` UI semantics that storage types cannot express, (b) `number` cleanly subsumes `int`/`float` for typed-language consumers, (c) `json`-typed values are better expressed as `string` + `Validation.Pattern`.
+- **No new AC** — AC-SC-14 was already canonical; this commit closes the §00↔§97 contract drift in §00's favour.
+- **Lockstep:** §00 v4.1.1 → v4.2.0 (contract value-set narrowed); §98 v4.1.1 → v4.2.0 (this row); §99 v4.1.1 → v4.2.0.
+- **Closes** Phase 153 v5 audit finding `06-seedable-config-architecture.json` issue [HIGH/D3] "Inconsistent Type Enums between Schema and AC".
 
 ### 4.1.1 — 2026-04-29 — Phase 153 Task A2 (canonical PascalCase pin)
 
