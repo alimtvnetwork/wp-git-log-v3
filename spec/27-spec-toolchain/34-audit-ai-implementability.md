@@ -1,6 +1,6 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.3.1  
+**Version:** 1.4.0  
 **Updated:** 2026-04-30  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
@@ -46,7 +46,7 @@ Bands: **EXCELLENT** ≥90 · **GOOD** 75-89 · **NEEDS_WORK** 60-74 · **BLOCKI
 
 ## Inputs
 
-- `spec/<module>/**/*.{md,json,yaml,yml,tmpl,toml}` — bundled up to 90 KB (Cloudflare-safe).
+- `spec/<module>/**/*.{md,json,yaml,yml,tmpl,toml}` — bundled up to **120 KB** (Cloudflare-safe; raised from 90 KB in Phase 153 Task A12 — see AC-34-13).
 - `LOVABLE_API_KEY` env var — required unless `--no-network` is passed.
 
 ## Usage
@@ -199,3 +199,9 @@ Renormalisation rule: if raw sum ≠ 5.0, every multiplier is divided by `(raw_s
 - **When** the auditor processes that module,
 - **Then** the script MUST exit code 2 (CLI/data error) with a message naming the offending module + the missing/invalid value, and MUST NOT silently fall back to v6 uniform weighting. The Phase 153 Task A16 bulk injection guarantees all 23 top-level modules carry valid axis values; this AC enforces that any future module addition (or accidental front-matter deletion) breaks CI immediately.
 - **Verifies:** §34 fail-loud contract — silent v6 fallback would mask Rubric v7 regressions; mirrors AC-34-04 (unknown `--module=` slug exits 2).
+
+### AC-34-13 — Bundle cap raised 90 KB → 120 KB to suppress tree-wide saturation `[critical]`
+- **Given** the pre-A12 `MAX_BYTES = 90_000` ceiling caused every audited top-level module to hit 100% saturation (probe at Phase 153 Task A12: spec/17 fit 4/39 files, spec/18 fit 10/35, spec/02 fit 6/251, spec/27 fit 3/50, spec/07 fit 3/17 — all bundles exactly 90000 bytes),
+- **When** `load_module_bundle()` constructs the prompt,
+- **Then** `MAX_BYTES` MUST be `120_000` (not `90_000`); the 120 KB ceiling was confirmed safe via a live gateway probe at Task A12 (`POST /v1/chat/completions` with a 119 KB user-content payload returned HTTP 200); above ~125 KB the Cloudflare 1010 class fires for `User-Agent: lovable-spec-audit/1.0` POSTs (the 25 KB Lesson #11 cliff is for the *default* Python UA — the explicit UA header lifts the cliff to ~125 KB). The 5 KB headroom below 125 KB MUST be preserved. Any future raise above 120 KB requires a fresh live-probe at the proposed ceiling. Tier-1 contract priority (AC-34-09) MUST be retained — the cap raise expands the Tier-2 budget; it does NOT relax the Tier-1 guarantee.
+- **Verifies:** §34 contract-bundling completeness — tree-wide saturation at the 90 KB cap meant every audited module was scored on 3-10 of 17-251 files; D2/D3/D4 dimensions were systematically under-counted because feature/issue prose past Tier 1 was silently truncated (Lesson #46 saturation class). The 120 KB cap restores ~33% additional Tier-2 capacity, expected to lift saturated modules' D4 (Examples) and D5 (Cross-Ref) scores without requiring §97 edits. Mirrors AC-34-09's bundle-completeness contract.

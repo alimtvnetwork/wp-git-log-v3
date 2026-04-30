@@ -42,7 +42,7 @@ DEFAULT_REPORT = ROOT / ".lovable" / "memory" / "audit" / "v2-deterministic" / "
 ENDPOINT = "https://ai.gateway.lovable.dev/v1/chat/completions"
 MODEL = "google/gemini-3-flash-preview"
 USER_AGENT = "lovable-spec-audit/1.0 (audit-ai-implementability.py)"
-MAX_BYTES = 90_000  # Cloudflare-safe ceiling (~22k tokens).
+MAX_BYTES = 120_000  # Cloudflare-safe ceiling (~30k tokens). Raised from 90_000 in Phase 153 Task A12 (codified as AC-34-13) after tree-wide saturation probe (every audited module hit the 90 KB cap; most fit only 3-10 of 17-251 files). 120 KB live-probe at gateway returned HTTP 200; remaining headroom for `User-Agent`-tagged POSTs above this point produces Cloudflare 1010.
 
 WALK_GLOBS = ("*.md", "*.json", "*.yaml", "*.yml", "*.tmpl", "*.toml")
 
@@ -174,6 +174,12 @@ def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
     because the §97 additions were never bundled. Tier-1 priority guarantees
     the contract surface is always sampled.
 
+    Phase 153 Task A12 (AC-34-13) raised MAX_BYTES from 90 KB → 120 KB after a
+    tree-wide saturation probe found every audited module exhausted the 90 KB
+    cap (most modules fit only 3-10 files of 17-251). The 120 KB limit was
+    confirmed via a live gateway probe (HTTP 200); above ~125 KB Cloudflare
+    1010 fires for `User-Agent`-tagged POSTs.
+
     Returns (bundle_text, bytes_used, files_used, files_total).
     """
     files: list[Path] = []
@@ -204,7 +210,7 @@ def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
         if total + len(chunk) > MAX_BYTES:
             remaining = MAX_BYTES - total
             if remaining > 500:
-                parts.append(chunk[:remaining] + "\n\n[...TRUNCATED at 90KB context cap...]")
+                parts.append(chunk[:remaining] + "\n\n[...TRUNCATED at 120KB context cap...]")
                 total += remaining
                 used += 1
             break
