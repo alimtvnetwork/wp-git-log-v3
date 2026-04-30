@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.78.1
+**Version:** 2.79.0
 **Updated:** 2026-04-30
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.79.0 — 2026-04-30 — Phase 153 Task A17: Rubric v7 axis-driven dimension weight cascades (slot 34 §97)
+- **Action**: Authored Rubric v7 contract in `spec/27-spec-toolchain/34-audit-ai-implementability.md` §97 — three new ACs (**AC-34-10** axis-driven multipliers `[critical]`, **AC-34-11** soft caps + 60-strict-floor preservation `[high]`, **AC-34-12** missing/invalid axis fails-fast exit code 2 `[critical]`) plus a normative "Rubric v7 — Axis-driven dimension weight cascades" prose section with two tables: (a) per-axis D1–D5 multiplier cascade (sum-renormalised to 5.0 so total stays bounded at 100), (b) per-axis soft caps (95 for `process-guidance`/`integration-spec`/`audit-corpus`; 100 for `normative-contract`/`tooling-spec`) with 60 strict floor preserved tree-wide.
+- **Goal**: Close the structural 75-floor on modules 03/12/17/25 (Phase 153 Task A8 v5 baseline) by giving `audit-corpus` and `process-guidance` axes weight skews that match their content nature (D2/D3 dialled DOWN, D1/D5 dialled UP). Rubric v6's uniform D1–D5 weighting penalised these axes for "missing AC coverage" they were never supposed to deliver — per Lesson #29 (audit-corpus pin) + Lesson #36 (cross-ref ceiling).
+- **Spec lockstep**: slot 34 §00 v1.2.0 → **v1.3.0** (AC count 9 → 12; new "Rubric v7" section between AC-34-09 and existing footer). §27 §00 v2.78.1 → **v2.79.0** (slot-34 minor → module minor; 3 new ACs is contract-level change). §98 v2.78.1 → **v2.79.0**; §99 v2.75.1 → **v2.76.0**.
+- **No AC-31-31 cascade** (slot-34 ACs are not §27 module-level ACs; AC-31-31 tracks the 14 module-level parity-ACs, not per-slot AC counts). **No CI workflow change** (A19 wires `content_axis` into the auditor; A20 measures rebaseline). **No RUBRIC bump** (the Rubric v7 weight contract is INSIDE the audit script's spec, not a CI rubric version field). **No gate-count change** — strict gate threshold remains 60 (BLOCKING) tree-wide per AC-34-11; soft caps adjust band labels only.
+- **Lesson #41 reinforced** (codified at A16, applied here): A16 shipped the metadata foundation (5-axis enum in front-matter); A17 ships the contract that consumes it; A19 ships the auditor wiring; A20 measures the result. Splitting these phases lets each layer stabilise before the next amplifies any errors. Future rubric-evolution work MUST cite this 4-phase split (foundation → contract → wiring → measurement).
+- Memo: `phase-153-task-A17-rubric-v7-weights.md` (next). Predecessors: A15 (design memo), A16 (metadata foundation). Successors: A18 (per-axis dimension caps refinement if measurement reveals miscalibration), A19 (auditor wiring), A20 (rebaseline expected to lift 03/12/17/25 from 75 → 85+).
 
 ### 2.78.1 — 2026-04-30 — Phase 153 Task A16: `content_axis` front-matter metadata (Rubric v7 foundation)
 - **Action**: Added 5-value `content_axis` enum to all 23 top-level module `00-overview.md` files via `/tmp/a16_inject_axis.py`. Axes: `normative-contract` (12 modules), `process-guidance` (4), `integration-spec` (2), `audit-corpus` (4), `tooling-spec` (1). Each module also got a one-sentence `axis_rationale`. For 7 modules without prior front-matter (04, 06, 07, 13, 14, 17, 18) a minimal block was inserted; existing front-matter (kind/description/drift_acknowledged) preserved unchanged in the other 16.
