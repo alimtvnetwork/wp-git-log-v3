@@ -97,14 +97,9 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 | # | Action | Files |
 |---|--------|-------|
 | 1 | Fix `CHANGELOG.md` → `changelog.md` in `readme.md:84` | `readme.md` |
-| 2 | Fix `../../06-golang-standards/` → `../../02-coding-guidelines/03-golang/` in 2 files | `02-enums-and-coding-style/00-overview.md`, `02-enums-and-coding-style/02-enum-metadata-pattern.md` |
-| 3 | Remove or redirect `formatting-rules-reference.md` refs → point to `spec/02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` | `01-foundation-and-architecture.md`, `02-enums-and-coding-style/01-enum-architecture.md` |
 
-### P1 — Create Missing File or Remove Refs
+**Note:** Prior P0 rows #2/#3 + P1 row #4 (formatting-rules-reference + Go enum prefix + 05-info-object-pattern) were RESOLVED 2026-04-29 — see §2.2 + §2.3. Removed from this table 2026-04-30 (Phase 153 A24-fu10) per Lesson #34 to keep "Recommended Fixes" actionable-only.
 
-| # | Action |
-|---|--------|
-| 4 | Create `spec/02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md` OR remove the 4 references to it |
 
 ---
 
