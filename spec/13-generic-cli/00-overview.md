@@ -1,8 +1,8 @@
 # Generic CLI Creation Guidelines — Overview
 
-> **Version:** 1.1.6  
+> **Version:** 1.1.7  
 <!-- h10-verified-phase: 153 -->
-> **Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-24 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
+> **Updated:** 2026-04-30 (Phase 153 Task A11g — added normative reference Go implementation snippet to `10-database.md` (PRAGMA DSN + `withWriteTx` + retry-on-busy) closing audit-v5 D3 MED for spec/13 — pure implementer prose under existing AC-22/AC-24)
 > **Status:** Active  
 > **Related specs:**
 > - [02-project-structure.md](02-project-structure.md) — package layout and file organization

@@ -1,8 +1,8 @@
 # Universal CI CLI — Spec Overview
 
-**Version:** 2.1.3  
-<!-- h10-verified-phase: 22 -->
-**Updated:** 2026-04-29  
+**Version:** 2.2.0  
+<!-- h10-verified-phase: 153 -->
+**Updated:** 2026-04-30 (Phase 153 Task A11g — AC-28-41/42/43 close audit-v5 findings: D4 HIGH (harness-truncation pin), D3 MED (PTY-forbidden / kernel-pipe-merge), D1 LOW (GitProfile server-side resolution). AC count 40 → 43.)
 **Status:** Draft  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  

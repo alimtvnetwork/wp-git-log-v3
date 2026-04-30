@@ -1,10 +1,17 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.6  
-**Updated:** 2026-04-30 (Phase 153 — Lesson #33 follow-through: 7 stale `os.Exit(1)` literals refreshed to typed-enum form across `03-subcommand-architecture.md`, `04-flag-parsing.md`, `07-error-handling.md`, `09-help-system.md`, `18-batch-execution.md`)
+**Version:** 1.1.7  
+**Updated:** 2026-04-30 (Phase 153 Task A11g — added normative reference Go snippet to `10-database.md` closing audit-v5 D3 MED for spec/13)
 **Scope:** `spec/13-generic-cli/`
 
 ---
+
+### 1.1.7 — 2026-04-30 — Phase 153 Task A11g: reference Go implementation snippet (audit-v5 D3 MED close-out)
+- **Action**: Added new `### Reference Go implementation (normative example)` subsection between PRAGMA table (line 48) and Transaction discipline (line 50) in `10-database.md`. Snippet shows: (a) `openDB` constructing the DSN with `_journal=WAL&_busy_timeout=5000&_foreign_keys=ON&_synchronous=NORMAL` then `db.SetMaxOpenConns(1)`; (b) `withWriteTx` wrapping every write transaction in `BEGIN IMMEDIATE` + 3-attempt retry-on-`SQLITE_BUSY`/`SQLITE_LOCKED` with 100 ms ±25 % jitter (mirrors spec/27 AC-T-28 R3); (c) `isBusyOrLocked` predicate documented as matching `sqlite3.ErrBusy` / `sqlite3.ErrLocked`. **No §97 change · no AC change** — pure prose-mirror under existing AC-22 (concurrency contract) and AC-24 (cross-reference pin) per Lesson #36 (link-don't-restate; the snippet is the canonical Go-side implementer surface for AC-22's contract).
+- **Why**: Audit-v5 D3 MED for spec/13 cited "10-database.md is truncated/missing — show the implementation of the retry loop" — verified the file is complete (195 lines, ends at Contributors footer); the gap was a missing concrete Go example. Per Lesson #16 (auditor walker bias) the truncation claim is harness-side; per Lesson #33 (§97-WINS prose-mirror cadence) the missing snippet is genuine implementer-side. This phase closes the genuine half.
+- **Files**: `10-database.md` (+~55 lines for the Go snippet), §00/§98/§99 banners.
+- **Spec lockstep**: §97 v2.3.0 (no change — no new AC, no contract change); §00 v1.1.6 → **v1.1.7**; §98 v1.1.6 → **v1.1.7**; §99 v1.1.6 → **v1.1.7**. h10 stamp 153 → 153 (no change). **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**, **no new AC** — pure prose-mirror under existing AC-22/AC-24.
+- **Validation**: `wc -l spec/13-generic-cli/10-database.md` shows file growth ~195 → ~250 lines; new section is the only delta. Lockstep 87/87 (verify after run).
 
 ### 1.1.6 — 2026-04-30 — Phase 153 LOW-batch verify: residual `os.Exit(1)` stale-prose sweep (Lesson #33 follow-through)
 - **Action**: Audit-v6 LOW finding `[D1] Stale Prose Contradictions` (spec/13 score 84) verified-and-closed. A11a-fu1 (v1.1.3) refreshed `03-subcommand-architecture.md` line 84+102 + `07-error-handling.md` exit-code table, but missed 7 inline Go example literals. This phase swept all 7: `03-subcommand-architecture.md:16/40/56` (Run/dispatch/multi-layer dispatch), `04-flag-parsing.md:76` (runClone source-required), `07-error-handling.md:106` (runImport loadFile error), `09-help-system.md:88` (Print missing-help), `18-batch-execution.md:120` (runExec missing-args). All now use `os.Exit(int(exit.ExitMisuse))` or `os.Exit(int(exit.ExitError))` per §97 AC-21 typed-enum contract, with `// §97 AC-21: typed enum mandatory` comment.

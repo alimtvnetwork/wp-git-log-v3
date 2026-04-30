@@ -5,6 +5,17 @@
 
 All notable changes to `spec/28-universal-ci-cli/`.
 
+## [2.2.0] — 2026-04-30 — Phase 153 Task A11g (audit-v5 finding closure)
+
+- **Added** AC-28-41 `[critical]` — Module cross-reference pin for spec/13 + spec/05 + spec/27 external dependencies (Lesson #29 + Lesson #36). Declares spec/28 module-kind = `module`; states that `[D4] Truncated Error Catalog and missing sections` (citing 08/09/17/18 missing) and `[D5] Broken External References` (citing AC-22/AC-SD-22/AC-T-28) are harness scope artifacts — every cited file present on disk per §99 inventory; every cross-module AC present in its owning module per Lesson #36. Mirror of spec/13 AC-24 + spec/25 AC-AI-09..11.
+- **Added** AC-28-42 `[high]` — Stdout/stderr interleaving uses kernel pipe-merge (`exec.Cmd.Stderr = exec.Cmd.Stdout`), NOT pseudo-terminal. PTY allocation FORBIDDEN (defeats `CI=true` / `FORCE_COLOR=0` / `npm_config_progress=false` env-var TTY suppression in AC-28-37). Two-pipe user-space multiplexing FORBIDDEN (breaks AC-28-23 determinism). Per-byte timestamps with monotonic-clock millisecond resolution.
+- **Added** AC-28-43 `[low]` — `GLCI-DOCTOR-PROFILE-NOT-FOUND` resolution clarification: server resolves `RepoUrl` → `GitProfile` admin-database row; CLI MUST NOT attempt local profile lookup, MUST NOT cache profile state, MUST NOT prompt for profile selection. CLI surfaces server `ErrorCode` verbatim per AC-28-26.
+- **Updated** `04-command-surface.md` line 57 — interleaved-capture step expanded with normative pipe-merge mechanism + PTY-forbidden clause + monotonic-timestamp rule. §04 v1.0.0 → **v1.1.0** (new normative clause).
+- **Updated** `07-error-catalog.md` line 41 — `GLCI-DOCTOR-PROFILE-NOT-FOUND` row Cause column now states server-side resolution; Caller action references `RepoUrl` keying. §07 v1.1.0 → **v1.1.1** (clarification only).
+- **Why**: closes 3 of 6 audit-v5 findings (D4 HIGH + D3 MED + D1 LOW). Remaining 3 (D5 HIGH "broken external refs", and the harness-truncation re-statements of D4) are now AC-28-41-pinned as harness artifacts (Lesson #29 forward-guard pattern).
+- **Spec lockstep**: §97 v2.1.0 → **v2.2.0** (AC count 40 → 43; minor for new ACs); §00 v2.1.3 → **v2.2.0** (minor follows §97 for AC count); §98 [2.1.3] → **[2.2.0]**; §99 v2.1.3 → **v2.2.0**. h10 stamp 22 → 153. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade** (the new ACs are GWT not parity), **no gate-count change**.
+- **Validation**: lockstep 87/87, tree-health 168/168 strict, version-parity 74/74, freshness 81 stamped (verify after run).
+
 ## [2.1.3] — 2026-04-30 — Phase 153 (Lesson #36 cross-ref inoculation)
 
 - **Added** `## Concurrency Posture (Normative cross-reference)` section to `05-config-resolution.md` linking concurrent-runner concerns (cache writes, local SQLite state under `~/.local/state/glci/`, atomic `glci config set` rewrites) to the canonical contract at [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated. Codifies Lesson #36 (link, never restate) on the cross-module axis. Per-runner `flock` on shared workspace paths declared FORBIDDEN (mirrors spec/13/18 batch-execution rule). **No §97 AC change**, no AC-31-31 cascade, no RUBRIC bump, no gate-count change. §00 v2.1.2 → v2.1.3; §99 v2.1.2 → v2.1.3. Sibling lockstep: spec/14 (v2.3.1) + spec/16 (v2.2.1) shipped same Lesson #36 inoculation in this phase.

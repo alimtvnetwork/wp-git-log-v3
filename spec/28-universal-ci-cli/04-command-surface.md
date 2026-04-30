@@ -1,7 +1,7 @@
 # Command Surface
 
-**Version:** 1.0.0  
-**Updated:** 2026-04-25
+**Version:** 1.1.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11g — added normative pipe-merge mechanism + PTY-forbidden clause + monotonic-timestamp rule to step 3 of `glci lint/build/test`; bound by §97 AC-28-42)
 
 Every subcommand below is normative. Adding a flag requires a row here.
 

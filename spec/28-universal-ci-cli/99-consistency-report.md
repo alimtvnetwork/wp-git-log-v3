@@ -1,7 +1,9 @@
 # Consistency Report
 
 **Generated:** 2026-04-30
-**Module version:** 2.1.3
+**Module version:** 2.2.0
+
+> **v2.2.0 update (Phase 153 Task A11g — audit-v5 finding closure):** Added 3 ACs to §97 closing all genuine audit-v5 findings: AC-28-41 `[critical]` (module-kind/cross-ref pin per Lesson #29 + #36 — closes D4 HIGH harness-truncation re-classification + D5 broken-externals re-classification), AC-28-42 `[high]` (kernel-pipe-merge stdout/stderr interleaving; PTY FORBIDDEN — closes D3 MED), AC-28-43 `[low]` (`GLCI-DOCTOR-PROFILE-NOT-FOUND` server-side `RepoUrl` → `GitProfile` resolution; CLI passive — closes D1 LOW). Sub-files updated: `04-command-surface.md` line 57 (interleaved-capture mechanism + PTY-forbidden clause) v1.0.0 → v1.1.0; `07-error-catalog.md` line 41 (server-side resolution clarification) v1.1.0 → v1.1.1. AC count 40 → **43**. §97 v2.1.0 → v2.2.0; §00 v2.1.3 → v2.2.0; §98 [2.1.3] → [2.2.0]. h10 stamp 22 → 153. No §97 contract change to existing ACs; no AC-31-31 cascade; no RUBRIC bump; no CI workflow change; no gate-count change.
 
 > **v2.1.3 update (Phase 153 — Lesson #36 cross-ref inoculation):** Added `## Concurrency Posture (Normative cross-reference)` to `05-config-resolution.md` linking to [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md) for runtime concurrency on multi-runner glci invocations (SQLite WAL + atomic writes + lock-file). Pure cross-link — no contract restated, no §97 change, no AC count change. Codifies Lesson #36 (link, never restate) on the cross-module axis. §00 v2.1.2 → v2.1.3; §98 [2.1.2] → [2.1.3].
 

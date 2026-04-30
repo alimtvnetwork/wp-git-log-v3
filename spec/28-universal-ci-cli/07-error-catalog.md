@@ -1,7 +1,7 @@
 # Error Catalog
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-27
+**Version:** 1.1.1  
+**Updated:** 2026-04-30 (Phase 153 Task A11g — `GLCI-DOCTOR-PROFILE-NOT-FOUND` row clarification: server-side `RepoUrl` → `GitProfile` resolution, CLI passive; bound by §97 AC-28-43)
 
 All `GLCI-*` codes the CLI itself emits. Server-originated `GL-*` codes are surfaced verbatim per [`spec/22-git-logs-v2/15-error-codes.md`](../22-git-logs-v2/15-error-codes.md). Adding a new code requires a row here.
 

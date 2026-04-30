@@ -1,8 +1,8 @@
 # Acceptance Criteria
 
-**Version:** 2.1.0
-**Updated:** 2026-04-29 (Phase 150 — P3 sweep slot 10: Added `**Verifies:**` clauses to AC-28-01..AC-28-28 (28 ACs). Verifies-coverage 12/40 → 40/40. Each AC now explicitly maps to its underlying invariant: §03 detection contracts, §05 config-precedence/HTTPS-by-default/backoff-length, §06 schema/streaming/4xx-deterministic/5xx-transient/server-driven-recovery/deterministic-serialization/`/fixed-log` invariants, §07 error-code class assignments, §08 provider-binding + SSH-to-HTTPS canonicalization, §09 `HasError` disjunction + `FilePaths[]` sort/dedup, §10 SSH-vs-TempToken auth-lane separation, §11 doctor contracts + clock-skew, §17/§18 OpenAPI/JSON-Schema source-of-truth. AC-28-01..AC-28-28 GWT bodies preserved verbatim. AI-confidence P3 driver eliminated for `spec/28`.)
-**Prior banner — Version:** 2.0.0; **Updated:** 2026-04-26 (Phase 16d-v: Deepen §28 §97 — 12 new module-specific GWT ACs added (AC-28-29..AC-28-40) closing the v1.1 deferred error-code coverage + provider auto-fill gaps. AC count 28 → 40. AC-28-01..AC-28-28 preserved verbatim.)
+**Version:** 2.2.0
+**Updated:** 2026-04-30 (Phase 153 Task A11g — added AC-28-41 (module-kind/cross-ref pin closing audit-v5 D4 HIGH harness-truncation + D5 cross-module externals — Lesson #29 + Lesson #36), AC-28-42 (kernel-pipe-merge stdout/stderr interleaving; PTY forbidden — closes D3 MED), AC-28-43 (`GLCI-DOCTOR-PROFILE-NOT-FOUND` server-side `RepoUrl` → `GitProfile` resolution; CLI is passive — closes D1 LOW). AC count 40 → 43.)
+**Prior banner — Version:** 2.1.0; **Updated:** 2026-04-29 (Phase 150 — P3 sweep slot 10: Added `**Verifies:**` clauses to AC-28-01..AC-28-28 (28 ACs). Verifies-coverage 12/40 → 40/40.)
 
 Each AC is written **Given / When / Then** so it can be lifted directly into a test (bats / phpunit / go test). When this file and a normative source disagree, the normative source wins and this file MUST be patched.
 
