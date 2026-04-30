@@ -1,12 +1,21 @@
 # Changelog — Seedable Config Architecture (CW Config)
 
-**Version:** 4.2.0
+**Version:** 4.3.0
 **Updated:** 2026-04-29
 **Scope:** `spec/06-seedable-config-architecture/`
 
 ---
 
 ## Releases
+
+### 4.3.0 — 2026-04-29 — Phase 153 Task A11f (spec/06 D3 MEDIUM + D5 HIGH closure)
+
+- **Added** AC-SC-21 (CHANGELOG concurrency lock-ordering) — binds AC-SC-11 + AC-SC-16 + AC-SC-17 via a single shared file lock that MUST be acquired BEFORE `BEGIN IMMEDIATE`, held through the COMMIT + CHANGELOG-append + fsync sequence, and released ONLY after fsync. Forbids per-CHANGELOG locks (would race) and forbids release-between-commit-and-changelog (would lose entries). Closes v5 D3 MEDIUM "Ambiguous CHANGELOG.md Write Concurrency".
+- **Added** AC-SC-22 (apperror cross-reference) — every `apperror.Wrap`/`apperror.New`/`*apperror.AppError`/`Err*` sentinel/`AB-NNNN` code in `01-fundamentals.md` + `02-features/*.md` MUST resolve via the canonical contract at `spec/03-error-manage/02-error-architecture/06-apperror-package/` and registry at `spec/03-error-manage/03-error-code-registry/01-registry.md`. Forbids local re-definition (Lesson #36 — link, never restate). Sub-feature files introducing new error codes MUST add a registry row in the same PR. Closes v5 D5 HIGH "Missing External Error Code Registry" — replaces auditor's "inline minimal Go pkg" recommendation with the correct cross-module-reference fix.
+- **Why:** The two findings were genuine (verified-before-open per Lesson #30): AC-SC-11 and AC-SC-17 implied but did not bind the CHANGELOG↔lock ordering; the Go code samples used `apperror`/`AppError`/`AB-9301`/`ErrSeedLoadFailed` symbols that an AI implementer cannot resolve without explicit binding to spec/03.
+- **AC count:** 20 → 22.
+- **Lockstep:** §97 4.0.0 → **4.1.0** (new ACs); §00 4.2.0 → **4.3.0**; §98 4.2.0 → **4.3.0** (this row); §99 4.2.0 → **4.3.0**.
+- **Closes** Phase 153 v5 audit findings [MEDIUM/D3] + [HIGH/D5] in `06-seedable-config-architecture.json`.
 
 ### 4.2.0 — 2026-04-29 — Phase 153 Task A11e (spec/06 D3 Type-enum reconciliation)
 
