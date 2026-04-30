@@ -5,7 +5,7 @@ axis_rationale: "CLI behavioural ACs (subcommand, exit codes, DB concurrency)"
 
 # Generic CLI Creation Guidelines — Overview
 
-> **Version:** 1.1.7  
+> **Version:** 1.1.8  
 <!-- h10-verified-phase: 153 -->
 > **Updated:** 2026-04-30 (Phase 153 Task A11g — added normative reference Go implementation snippet to `10-database.md` (PRAGMA DSN + `withWriteTx` + retry-on-busy) closing audit-v5 D3 MED for spec/13 — pure implementer prose under existing AC-22/AC-24)
 > **Status:** Active  
