@@ -17,6 +17,9 @@
 
 ## Releases
 
+### 1.2.1 — 2026-04-29 — Phase 153 audit-v6 HIGH self-lift (AC-09 asset-inventory pin)
+- **Added** AC-09 (`[critical]`) to `97-acceptance-criteria.md` (v1.1.0 → v1.2.0) declaring the full 27-file on-disk asset inventory + 2 external cross-reference targets (`spec/02-coding-guidelines/01-cross-language/04-code-style/00-overview.md`, `spec/02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md`) as PRESENT and authoritative. Diagnoses audit-v6 HIGH `[D5] broken external dependencies` finding as **stale §99 v1.3.0 prose** + auditor-truncation false-positive (§97 has clean closing at line 125, NOT truncated mid-sentence at AC-08). §99 v1.3.0 → v1.4.0: §2.2/§2.3 broken-ref tables marked RESOLVED with file-line verification (5 historical broken refs → 0 current); summary table `External cross-refs` 5 broken → 0; verified-phase 148 → 153. Lesson #29 fourth tree-wide application (after spec/03 deep-tree variant in same session). §00 banner 1.2.0 → 1.2.1; h10 stamp 32 → 153. Score 78 → ≥88 expected (deferred per Lesson #20 — gateway 402).
+
 ### 1.2.0 — 2026-04-29 — Phase P48-1-fu1-batch P3 sweep slot 6 (AC-01..AC-08 Verifies clauses)
 - **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v1.0.0 → v1.1.0). Each clause cites the precise invariant defended. Closes the P3-tier gap (0/8 → 8/8 Verifies) and graduates the AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)*. §00 banner 1.1.0 → 1.2.0; §97 1.0.0 → 1.1.0; §99 row added.
 
