@@ -101,7 +101,8 @@ The following files in this module also constitute acceptance surface — each m
 - `04-enum-standards.md`
 - `05-split-db-architecture.md`
 - `06-seedable-config.md`
-- `07-design-system.md`r- `08-docs-viewer-ui.md`
+- `07-design-system.md`
+- `08-docs-viewer-ui.md`
 - `09-code-block-system.md`
 - `10-powershell-integration.md`
 - `11-research.md`
