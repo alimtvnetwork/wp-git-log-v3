@@ -50,7 +50,7 @@ folder-refs         : 0 stale (4 A19 fixture refs allowlisted [doc-only])
 
 Both mechanically closeable in a single follow-up phase.
 
-## Lesson #42 codified
+## Lesson #43 codified
 
 > When a new LLM-baseline supersedes the prior baseline (v6 → v7), the prior file MUST get a `**Superseded by:**` line in its banner block AND its data MUST be preserved (not deleted) — historical baselines remain comparable evidence for future rubric changes (mirror of Lesson #18: honest-baseline preservation).
 
