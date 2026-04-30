@@ -66,6 +66,9 @@ $isDebug = PluginConfigType::isDebugMode();
 
 ## 4.3 FileLogger — Complete Specification
 
+> **Concurrency contract (normative; see §97 AC-11):** every write to `info.log` / `error.log` / `stacktrace.log` MUST acquire `flock($handle, LOCK_EX)` before `fwrite()` and release on `flock(…, LOCK_UN)` (or implicit `fclose()`). `LOCK_NB` non-blocking acquire is FORBIDDEN — it silently drops log lines under load. Rotation MUST be atomic: write to `<log>.tmp.<pid>`, hold `LOCK_EX`, then `rename()` to `<log>.<date>` (partial-write fragments FORBIDDEN). Reference one-liner already in this file: `file_put_contents($logPath, $logEntry, FILE_APPEND | LOCK_EX);` (line ~774).
+
+
 ### Singleton access
 
 ```
