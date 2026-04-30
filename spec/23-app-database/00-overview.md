@@ -191,6 +191,21 @@ Every inbound `:repoUrl` resolution call MUST terminate in exactly one of these 
 | `REJECTED_INACTIVE_APP` | A candidate row exists but its App's `AppStatusId` is `Disabled` or `Archived` | Reject with HTTP 410 Gone (or equivalent transport-level signal); do NOT silently fall through to the next candidate. |
 | `REJECTED_NO_MATCH` | No active `AppLink` row matches `:repoUrl` after step 4 | Reject with HTTP 404 Not Found; the push is unattributed. |
 
+### Canonicalization examples (Phase 153 LOW close-out)
+
+The step-1 canonicalisation pipeline MUST produce identical output for any two URLs that name the same repo. Implementers MUST verify their pipeline against this normative table before declaring AC-ADB-14 conformance:
+
+| # | Input `:repoUrl` | Canonical form | Transformations applied |
+|---|---|---|---|
+| 1 | `https://GitHub.com/Acme/Widget.git` | `https://github.com/acme/widget` | lowercase host + lowercase owner/repo + strip `.git` |
+| 2 | `https://github.com/acme/widget/` | `https://github.com/acme/widget` | strip trailing `/` |
+| 3 | `git@github.com:acme/widget.git` | `https://github.com/acme/widget` | SSH→HTTPS rewrite + strip `.git` |
+| 4 | `ssh://git@github.com/acme/widget.git` | `https://github.com/acme/widget` | scheme rewrite + strip `.git` |
+| 5 | `https://github.com:443/acme/widget` | `https://github.com/acme/widget` | strip default port (443 for https, 22 for SSH) |
+| 6 | `https://github.com/Acme/Widget.git/` | `https://github.com/acme/widget` | combined: lowercase + strip `.git` + strip trailing `/` |
+
+Pipelines that diverge on ANY of these 6 cases FAIL AC-ADB-14 — the rejection is not "this URL doesn't match" but "your canonicaliser is non-conformant". The same pipeline MUST be invoked at `Repo.RepoUrl` insertion time (so stored values are already canonical) AND at every resolution call (so inbound URLs match by string equality, NOT by re-canonicalising stored values).
+
 ### Forbidden resolution patterns
 
 Implementers MUST NOT:
