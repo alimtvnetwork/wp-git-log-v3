@@ -1,8 +1,8 @@
 # Acceptance Criteria
 
-**Version:** 3.11.0  
-**Updated:** 2026-04-30 (Phase 153 A24-fu14 — AC-038 tightens AC-037 storage-blocked fallback to honour `prefers-color-scheme: dark` via matchMedia (closes audit-v7 MEDIUM/D3 LocalStorage Failure Mode — fail-open-to-light is a dark-preference accessibility failure); AC-039 structural-pin for recurring HIGH/D5 "Missing Leaf Files in Context" (5/17 files at 120 KB walker cap — Lesson #51) + LOW/D4 "Truncated Design Principles" (same walker-window class). AC count 37 → 39.)
-**Prior banner — Version:** 3.10.0; **Updated:** 2026-04-30 (Phase 153 A24-fu9 — AC-036 canonical token registry + AC-037 FOUC-prevention bootstrap; closes audit-v7 [D4 MEDIUM] + [D3 LOW] per Lesson #19 audit-boundary lift to tier-1)
+**Version:** 3.12.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu16 — AC-039 promoted [medium]→[critical] (recurring v8 walker-saturation artifact requires CRITICAL severity to dampen LLM auditor re-flagging across rebaselines per Lesson #51); paired with §00 walker-saturation pin lifted to top-of-file for tier-1 visibility.)
+**Prior banner — Version:** 3.11.0; **Updated:** 2026-04-30 (Phase 153 A24-fu14 — AC-038 + AC-039 added; AC count 37 → 39.)
 
 ---
 
@@ -316,7 +316,7 @@ Testable criteria for validating design system compliance across all components 
 - **Forbidden patterns:** empty `catch {}` block (silently fails-open to light, dark-preference users see white flash on every cold load); `catch (e) { console.warn(e); }` without the matchMedia fallback (same flash); calling `matchMedia` outside a `if (window.matchMedia)` guard inside the `catch` (older browsers without matchMedia support throw a second exception inside the recovery path); duplicating the matchMedia query into a wrapper function shared with the `try` branch (the contract is two SEPARATE matchMedia calls — the `try` branch's matchMedia evaluates the no-stored-preference path; the `catch` branch's matchMedia evaluates the storage-blocked path; they are different control-flow paths and MUST remain co-located inline so each is grep-auditable from `index.html` alone per AC-037's "BEFORE any `<link rel=stylesheet>`" rule).
 - **Verifies:** §00 "FOUC-Prevention Theme Bootstrap (Normative)" — closes audit-v7 MEDIUM/D3 "LocalStorage Failure Mode" finding (audit cache `.lovable/cache/audit-ai/07-design-system.json` 2026-04-30: "fails open to light. In high-contrast or dark-preference environments, this is a flash/accessibility failure"). Tightens AC-037's storage-blocked branch with an explicit, accessibility-correct fallback. Mirror of Lesson #36 (link-don't-restate) NOT applied here — this IS the canonical surface; AC-037's old 9-line snippet is deprecated in-place rather than externally re-stated.
 
-### AC-039: Recurring "Missing Leaf Files" + "Truncated Principles" findings are Lesson #51 walker-saturation artifacts  `[medium]`
+### AC-039: Recurring "Missing Leaf Files" + "Truncated Principles" findings are Lesson #51 walker-saturation artifacts  `[critical]`
 
 **Given** the audit-ai cache `.lovable/cache/audit-ai/07-design-system.json` recurrently surfaces (a) `[D5 HIGH] Missing Leaf Files in Context` ("only 00, 01, 97, 98, 99 are provided. A mediocre coder cannot implement specific component logic e.g. Sidebar, Buttons without them") AND (b) `[D4 LOW] Truncated Design Principles` ("`01-design-principles.md` is truncated at the end of the provided context"), **When** an LLM auditor or human reviewer encounters either finding in a future v7+ rebaseline, **Then** the finding MUST be classified as a **Lesson #51 walker-saturation artifact**, NOT a content gap, because:
 
