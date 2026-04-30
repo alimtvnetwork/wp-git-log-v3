@@ -1,6 +1,6 @@
 # Consistency Report — Generic Update
 
-**Version:** 1.5.0  
+**Version:** 1.5.1  
 **Updated:** 2026-04-29
 
 > **v1.5.0 (Phase 149 — P3 sweep slot 9):** §97 deepened — all 20 ACs (AC-01..AC-20) now carry `**Verifies:**` clauses mapping each criterion to its underlying invariant (structural floor, slot-immutability, deploy uniformity, parent-survival, supply-chain trust, integrity, atomic rollback, six-target-floor, etc.). Verifies-coverage 0/20 → 20/20. §97 v2.1.0 → v2.2.0; §00 v2.2.0 → v2.3.0; §98 v2.2.0 → v2.3.0. AI-confidence P3 driver eliminated; derived tier Medium → High.

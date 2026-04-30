@@ -1,6 +1,6 @@
 # Changelog — Generic Release Pipeline Specification
 
-**Version:** 2.2.0  
+**Version:** 2.2.1  
 **Updated:** 2026-04-27  
 **Scope:** `spec/16-generic-release/`
 

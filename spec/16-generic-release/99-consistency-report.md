@@ -1,6 +1,6 @@
 # Consistency Report — Generic Release
 
-**Version:** 2.2.0  
+**Version:** 2.2.1  
 **Generated:** 2026-04-27  
 **Health Score:** 100/100 (A+) — Phase 21 deepening sweep
 
