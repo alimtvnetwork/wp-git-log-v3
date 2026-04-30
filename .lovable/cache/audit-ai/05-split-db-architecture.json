@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 19,
-  "d3": 17,
-  "d4": 20,
+  "d2": 20,
+  "d3": 19,
+  "d4": 17,
   "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Unresolved External Dependency: Coding Guidelines",
-      "why": "AC-SD-01 and AC-SD-02 explicitly inherit from and reference `../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md`, which is not provided in the context.",
-      "fix": "Incorporate the relevant AC-CL rules directly into the module or provide the referenced file in the context."
+      "title": "Unresolved External Dependency (AC-CL-*)",
+      "why": "AC-SD-01 and AC-SD-02 explicitly inherit from '../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md', which is not provided in the context.",
+      "fix": "Provide the 02-coding-guidelines module in the context or inline the specific AC-CL rules referenced."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Incomplete Concurrency Implementation for Non-Go Languages",
-      "why": "AC-SD-22 provides a detailed Go implementation for retries but lacks the specific algorithm or pseudo-code for other languages, potentially leading to inconsistent retry logic.",
-      "fix": "Add a language-agnostic pseudo-code block for the exponential backoff + jitter retry loop."
+      "dim": "D4",
+      "title": "Truncated Examples in Feature Files",
+      "why": "The file 02-features/01-cli-examples.md is truncated at the 90KB cap, leaving the DbRegistry schema and other CLI examples incomplete.",
+      "fix": "Move critical schema examples to the Fundamentals file or shorten descriptive text to fit within context limits."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous 'ProjectSlug' Source",
-      "why": "The spec uses `{ProjectSlug}` in file paths (AC-SD-03) but doesn't explicitly state if this must match the `Slug` field in the Root DB `Project` table or a sanitized version of `AppName`.",
-      "fix": "Explicitly define that ProjectSlug in paths MUST exactly match the 'Slug' column in the Root DB 'Project' table."
+      "title": "Inconsistent Table Naming in Fundamentals",
+      "why": "Fundamentals.md uses 'Project' and 'Database' tables, while CLI-examples.md uses 'Application' and 'DbRegistry' for the same Root DB purpose.",
+      "fix": "Standardize Root DB table names across Fundamentals and Feature examples to 'Application' and 'DbRegistry'."
     }
   ],
   "module": "05-split-db-architecture",
   "files_used": 7,
   "files_total": 20,
   "bytes_used": 90000,
-  "bundle_sha": "f87be9c87b6970dd",
+  "bundle_sha": "e01de58eef353edf",
   "total": 89,
   "band": "GOOD"
 }
