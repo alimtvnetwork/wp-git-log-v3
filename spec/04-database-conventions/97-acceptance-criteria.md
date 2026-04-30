@@ -1,7 +1,7 @@
 # Acceptance Criteria — Database Conventions
 
-**Version:** 1.4.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu13 — added **AC-12** per-language boolean round-trip GWT (closes audit-v7 MEDIUM D2 "Missing AC for Boolean Storage") + **AC-13** structural-pin recording recurring audit-v7 HIGH D3 "SQLite Single-Writer Bottleneck" + LOW D5 "Dangling Reference in Relationship Diagrams" as Lesson #47 auditor-self-blindness artifacts (HIGH D3 already closed at Phase 153 P3 §4.3 cross-ref to spec/13 AC-22; LOW D5 is walker-window truncation — link complete on disk). AC count 11 → 13. Phase 153 Task A21 (prior): AC-10 + AC-11 bind ORM-First and View-based-joins rules from `03-orm-and-views.md`.)
+**Version:** 1.5.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu19 — added **AC-14** `[high]` Golden-Rules naming GWT, **AC-15** `[medium]` smallest-type lookup-table convention, **AC-16** `[low]` view-name `Vw`-prefix invariant. Closes audit-v7 HIGH D2 "Missing GWT for Core Naming Rules", MEDIUM D3 "Ambiguous 'Smallest Type' Enforcement", LOW D1 "Inconsistent View Naming Prefix" (cache 2026-04-30, findings [0]/[1]/[2]). AC-13 promoted into §00 walker-pin teaser per Lesson #55. AC count 13 → 16.)
 **Scope:** `spec/04-database-conventions/`
 
 ---
@@ -142,6 +142,38 @@ This document defines testable acceptance criteria for the **Database Convention
   - Promoting either finding to CRITICAL severity in any future audit-corpus consolidation (both are known harness limitations, NOT content quality issues).
 - **Verifies:** Lesson #47 (auditor cannot self-respect ACs across rebaselines) + Lesson #36 (link-don't-restate cross-module concurrency) + Lesson #50 (structural-pin pattern for recurring walker-artifact findings, mirror of spec/02 AC-CG-24 + spec/25 AC-AI-16). Closes audit-v7 HIGH D3 + LOW D5 findings as STRUCTURAL-DESIGN-NOT-DEFECT.
 - **Source:** `02-schema-design.md` §4.3 (canonical AC-22 cross-reference); `spec/13-generic-cli/97-acceptance-criteria.md` AC-22 (canonical concurrency contract); `05-relationship-diagrams.md` final row (link complete on disk); `linter-scripts/check-spec-cross-links.py` (CI gate confirming zero broken links).
+
+### AC-14: Golden Rules 1–4 (naming, PK, FK) are verifiable from the Canonical DDL  `[high]`
+- **Given** the Canonical Reference DDL block in `00-overview.md` § "Canonical Reference DDL" AND any `.sql` migration anywhere in the repo,
+- **When** `python3 linter-scripts/check-forbidden-strings.py` runs in CI,
+- **Then** the following four invariants MUST hold simultaneously across ALL `CREATE TABLE` statements (Canonical DDL + every migration):
+  - **Rule 1 (Singular):** ZERO matches for `^\s*CREATE\s+TABLE\s+\w+s\b` where the trailing `s` makes the name a plural English noun (`Users`, `Projects`, `Transactions`, `Categories`); the deterministic forbidden-token list in `check-forbidden-strings.py` MUST include at minimum `CREATE TABLE Users`, `CREATE TABLE Projects`, `CREATE TABLE Transactions`, `CREATE TABLE Plugins`.
+  - **Rule 2 (PascalCase):** ZERO matches for `\b[a-z][a-z0-9]*_[a-z0-9_]+\b` (snake_case identifiers) inside `CREATE TABLE`/`CREATE VIEW`/`CREATE INDEX` statements; column names, table names, view names, and index names MUST be PascalCase.
+  - **Rule 3 (PK identity):** every `CREATE TABLE <Name>` block's first column MUST match the regex `^\s*<Name>Id\s+INTEGER\s+PRIMARY\s+KEY\s+AUTOINCREMENT\b` (case-sensitive on `<Name>Id`); ZERO `id INTEGER PRIMARY KEY` (lowercase `id`) AND ZERO `UUID|GUID|CHAR\(36\)` PK declarations.
+  - **Rule 4 (FK identity):** every `FOREIGN KEY (<Col>) REFERENCES <Parent>(<ParentPK>)` declaration MUST satisfy `<Col> == <ParentPK>` (the FK column reuses the parent's PK name verbatim — `UserId` in both `User.UserId` and `Project.UserId`); ZERO `user_id`, `fk_user`, or any aliased FK column names.
+- **And** the deterministic check MUST fail-fast with `exit_code=2`, `reason_code=GOLDEN_RULE_VIOLATION` and a per-violation row identifying `(file, line, rule_number, matched_text)`; CI gate `.github/workflows/spec-health.yml` Phase 81 blocks merge on any non-zero exit.
+- **Verifies:** Golden Rules 1–4 from `00-overview.md` § "Golden Rules" + the Canonical DDL § "Acceptance — DDL Conformance" stanza. Closes audit-v7 HIGH D2 finding "Missing GWT for Core Naming Rules" (cache 2026-04-30, finding [0]) by binding the four most-violated rules to a deterministic regex contract; mirrors the AC-10 / AC-11 grep-contract pattern (Lesson #44).
+- **Source:** `00-overview.md` § "Golden Rules" + § "Canonical Reference DDL"; `linter-scripts/check-forbidden-strings.py` (deterministic gate).
+
+### AC-15: Smallest-type rule applies to bounded lookup tables  `[medium]`
+- **Given** the Golden Rule 7 ("Smallest possible key type — `INTEGER` over `BIGINT`, never UUID unless required") AND the Canonical Reference DDL `ProjectStatus` lookup table in `00-overview.md`,
+- **When** an AI implementer or human reviewer reads the Canonical DDL,
+- **Then** lookup tables (tables whose row count is bounded ≤ 32 767 by definition — status enums, role enums, country codes, currency codes) MUST declare their PK as `SMALLINT PRIMARY KEY AUTOINCREMENT`, NOT `INTEGER PRIMARY KEY AUTOINCREMENT`. The Canonical DDL `ProjectStatus.ProjectStatusId` MUST be `SMALLINT` and serves as the worked example.
+- **And** entity tables (User, Project, Transaction, etc. — unbounded row count) MUST continue to use `INTEGER PRIMARY KEY AUTOINCREMENT` per Rule 3; the SMALLINT exemption is **lookup-table-only**.
+- **And** the discriminating heuristic for "lookup table" is: (a) ≤ 5 columns total, (b) one of the columns is a unique TEXT `Code` (or `Slug`/`Key`) acting as a stable enum value, (c) row inserts happen only via migration (not via app runtime). All three MUST hold; if any is false, default back to `INTEGER` per Rule 3.
+- **And** SQLite's `INTEGER PRIMARY KEY` is internally a 64-bit rowid alias regardless of the declared type — the `SMALLINT` declaration is a **documentation-and-portability** contract (MySQL `SMALLINT` is genuinely 16-bit); migrations transposing to MySQL MUST preserve the `SMALLINT` declaration verbatim.
+- **Verifies:** Golden Rule 7 + the previously-ambiguous Canonical DDL where `ProjectStatusId` was `INTEGER` despite being a 2-row enum. Closes audit-v7 MEDIUM D3 finding "Ambiguous 'Smallest Type' Enforcement" (cache 2026-04-30, finding [1]) by replacing the ambiguous rule with a deterministic three-condition heuristic + worked DDL example. Mirror of Lesson #22 (replace open exception phrases with closed Exception Ledger).
+- **Source:** `00-overview.md` § "Golden Rules" Rule 7 + § "Canonical Reference DDL" `ProjectStatus` table.
+
+### AC-16: View names use the `Vw` prefix, never the `View` suffix  `[low]`
+- **Given** the view-naming rule in `01-naming-conventions.md` line 28 (`View names | PascalCase with 'Vw' prefix | VwTransactionDetail, VwActiveAgentSite`) AND the Canonical Reference DDL view declaration in `00-overview.md`,
+- **When** any `CREATE VIEW <Name>` statement is read in any `.sql` migration, view-definition file, or DDL block in this spec,
+- **Then** `<Name>` MUST match `^Vw[A-Z][A-Za-z0-9]*$` (PascalCase with leading `Vw` prefix, e.g. `VwProjectWithOwner`, `VwTransactionDetail`); `<Name>` MUST NOT end in `View` (suffix form `ProjectWithOwnerView` is FORBIDDEN — the prefix and suffix forms are mutually exclusive).
+- **And** the deterministic forbidden-token list in `linter-scripts/check-forbidden-strings.py` MUST include the regex `CREATE\s+VIEW\s+\w+View\b` (any view name ending in `View`); CI gate `.github/workflows/spec-health.yml` Phase 81 blocks merge on any match.
+- **And** the Canonical DDL block in `00-overview.md` MUST itself satisfy the rule (the view declared at the bottom of the DDL block MUST be `CREATE VIEW VwProjectWithOwner` — fixed in this phase from the prior `ProjectWithOwnerView`); the §00 Canonical DDL serves as both contract and conformance test fixture.
+- **And** the §00 "Forbidden Tokens (lint-enforced)" table MUST list `CREATE VIEW …View` (suffix) as forbidden alongside the existing `Inline JOIN in app code` row; the table is the user-facing surface for the rule.
+- **Verifies:** §01-naming-conventions.md line 28 view-naming rule. Closes audit-v7 LOW D1 finding "Inconsistent View Naming Prefix" (cache 2026-04-30, finding [2]) by (a) standardising the Canonical DDL on the prefix form, (b) extending the forbidden-tokens table, (c) binding the rule to a deterministic regex. Mirror of Lesson #25 (dual-source SemVer-style drift across two surfaces — §00 DDL vs §01 rule — caught by promoting both to a single contract anchor in §97).
+- **Source:** `01-naming-conventions.md` line 28 (rule); `00-overview.md` § "Canonical Reference DDL" (worked example) + § "Forbidden Tokens" (lint surface); `linter-scripts/check-forbidden-strings.py` (deterministic gate).
 
 
 ---
