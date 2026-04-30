@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 17,
-  "d4": 19,
-  "d5": 15,
+  "d3": 19,
+  "d4": 18,
+  "d5": 16,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken External References (AC-24)",
-      "why": "AC-22 and AC-23 rely on external specs (spec/05, spec/27) for critical concurrency and atomic-write logic which are not provided in this context.",
-      "fix": "Include the relevant snippets from spec/05 and spec/27 or provide the full files in the bundle."
-    },
-    {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Incomplete Concurrency Implementation Details",
-      "why": "While AC-22 mandates WAL and busy_timeout, the provided code examples (e.g., 10-database.md is truncated/missing) don't show the implementation of the retry loop or connection pool serialization.",
-      "fix": "Add a concrete Go code snippet showing the SQLite driver DSN with PRAGMAs and the BEGIN IMMEDIATE wrapper."
+      "dim": "D5",
+      "title": "Broken External Spec References (AC-24)",
+      "why": "AC-24 explicitly references AC-SD-22 (spec/05) and AC-T-28 (spec/27) which are not provided in the current context, creating a dependency gap for a standalone coder.",
+      "fix": "Incorporate the specific requirements of AC-SD-22 and AC-T-28 directly into AC-22 or provide the text of those external ACs in a 'Dependencies' section."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Prose/Code Example Mismatch (Truncation)",
-      "why": "File 09-help-system.md is truncated mid-sentence in the runScan example, leaving the implementation of help interception incomplete for the coder.",
-      "fix": "Complete the runScan function example in 09-help-system.md."
+      "title": "Ambiguous 'Positive Condition' Rule",
+      "why": "The rule 'Always positive \u2014 no !, no !=' in 08-code-style.md is logically impossible for error checking (e.g., 'if err != nil') which is standard in Go.",
+      "fix": "Clarify that the 'positive condition' rule applies to domain logic and boolean flags, explicitly exempting standard error handling patterns."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Missing 'doctor' Command Example",
+      "why": "AC-20 defines complex behavior for a 'doctor' command (interactive prompts, shell injection), but no code snippet or sample output is provided in the prose files.",
+      "fix": "Add a '21-post-install-shell-activation.md' file (referenced but not provided) or include a sample 'runDoctor' handler snippet in 03-subcommand-architecture.md."
     }
   ],
   "module": "13-generic-cli",
-  "files_used": 12,
+  "files_used": 11,
   "files_total": 24,
-  "bytes_used": 90000,
-  "bundle_sha": "5f71fd8a306565ef",
-  "total": 89,
-  "band": "GOOD"
+  "bytes_used": 89662,
+  "bundle_sha": "214cbf552e8e75d7",
+  "total": 91,
+  "band": "EXCELLENT"
 }

@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 20,
   "d3": 17,
-  "d4": 19,
-  "d5": 18,
+  "d4": 18,
+  "d5": 19,
   "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D1",
-      "title": "Conflicting Versioning Logic",
-      "why": "01-install-contract.md defines --version and --branch flags, but AC-18 (the deeper contract) explicitly forbids branch names in --ref to ensure reproducibility. A mediocre coder will be confused whether to implement branch support or block it.",
-      "fix": "Remove --branch from 01-install-contract and unify all reference flags into a single --ref flag that validates against the 'no-branch' rule in AC-18."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Undefined 'Middle-out' Probe Logic",
-      "why": "01-install-contract mentions a 'middle-out, parallel, 2s timeout' probe for newer repos (vN) but provides no algorithm, endpoint list, or naming convention for these repos.",
-      "fix": "Define the specific GitHub API search query or naming pattern (e.g., 'coding-guidelines-v*') used to discover newer versions."
+      "title": "Ambiguous 'git pull' failure handling in runner",
+      "why": "The runner contract (02-runner-contract.md) says 'warn but continue on failure' for git pull during slides build, but doesn't specify if the exit code should reflect this partial failure.",
+      "fix": "Explicitly state that a failed 'git pull' emits a warning to stderr but MUST NOT change the final exit code if the build succeeds."
     },
     {
       "severity": "LOW",
-      "dim": "D5",
-      "title": "Unresolved External Script Reference",
-      "why": "03-release-pipeline.md references a 'release.sh' script as a source for artifacts, but the content/contract of this script is not provided in the module.",
-      "fix": "Add a brief contract or file-path reference for release.sh explaining its expected outputs."
+      "dim": "D1",
+      "title": "Missing units for timeout in install-contract",
+      "why": "01-install-contract.md mentions a '2s timeout' for probing newer repos but doesn't specify if this is a total timeout or per-request timeout.",
+      "fix": "Clarify: '2s total wall-clock timeout for the parallel probe operation'."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Missing sample for checksums.txt content",
+      "why": "While the format is described as 'sha256sum standard', a concrete 2-line example would prevent 'one vs two spaces' implementation errors by mediocre coders.",
+      "fix": "Add a code block to 03-release-pipeline.md showing: 'e5b0...  install.sh\\n6f21...  install.ps1'."
     }
   ],
   "module": "15-distribution-and-runner",
   "files_used": 8,
   "files_total": 8,
-  "bytes_used": 61779,
-  "bundle_sha": "29b4107c121a6613",
+  "bytes_used": 65747,
+  "bundle_sha": "387469a30c19c929",
   "total": 92,
   "band": "EXCELLENT"
 }
