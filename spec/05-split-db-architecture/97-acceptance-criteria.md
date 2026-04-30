@@ -1,7 +1,7 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.2.0
-**Last Updated:** 2026-04-29 (Phase 153 Task A6: added AC-SD-21 SQL identifier quoting + Go struct mapping; AC-SD-22 cross-process concurrency contract — busy_timeout + retry-loop + locked-error handling; AC-SD-23 TTL/expiry contract for time-bounded rows. Targets v3 audit findings on D2 (AC coverage) + D3 (edge/error handling) for the only NEEDS_WORK module.)
+**Version:** 4.3.0
+**Last Updated:** 2026-04-30 (Phase 153 Task A14: AC-SD-22 polyglot pseudo-code + per-language driver mappings; AC-SD-24 cross-module link-don't-restate harness pin per Lesson #36; AC-SD-25 ProjectSlug↔Project.Slug binding contract. Closes all 3 v6 audit findings: D5 HIGH (cross-ref), D3 MEDIUM (concurrency polyglot), D1 LOW (ProjectSlug ambiguity).)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
 ---
@@ -209,7 +209,30 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
   }
   ```
   Read operations under `journal_mode=WAL` (AC-SD-12) generally do NOT need retries (WAL allows concurrent readers + one writer), but read-after-write coherence MUST be tested under contention.
-- **Verifies:** AC-SD-11 connection pooling + AC-SD-12 WAL + AC-SD-14 atomic write. Closes v3 audit HIGH D3 finding "Concurrency/Locking implementation gaps" (Phase 153 Task A6).
+
+  **Language-agnostic retry algorithm (normative)** — implementations in PHP/Rust/C#/TS/Python MUST follow this pseudo-code; any deviation REQUIRES a §98 row + new AC:
+  ```
+  function with_retry(open_tx, op, max_retries=5, initial_delay_ms=10):
+      delay_ms = initial_delay_ms
+      for attempt in 0 .. max_retries-1:
+          tx = open_tx()                              # MUST use BEGIN IMMEDIATE / equivalent
+          try:
+              op(tx)
+              tx.commit()
+              return SUCCESS
+          catch BUSY_OR_LOCKED_ERROR (errno 5 or 6):
+              tx.rollback()
+              jitter_ms = random(-delay_ms/4, +delay_ms/4)   # ±25 % jitter
+              sleep(delay_ms + jitter_ms)
+              delay_ms = delay_ms * 2                       # exponential backoff
+              continue
+          catch OTHER_ERROR as e:
+              tx.rollback()
+              raise e                                       # do NOT retry non-busy errors
+      raise ErrBusyExhausted                                # surface to caller after max_retries
+  ```
+  Per-language driver mappings: **PHP** PDO `SQLSTATE[HY000]: General error: 5` (PDO::ATTR_TIMEOUT preferred over busy_timeout PRAGMA — DOUBLES the contract; pick one); **Rust** `rusqlite::Error::SqliteFailure(ffi::Error{code: ErrorCode::DatabaseBusy | ErrorCode::DatabaseLocked, ..}, _)`; **C#** `Microsoft.Data.Sqlite.SqliteException` with `SqliteErrorCode == 5 || == 6`; **TypeScript** `better-sqlite3` throws `SqliteError` with `code === 'SQLITE_BUSY' || === 'SQLITE_LOCKED'`; **Python** `sqlite3.OperationalError` matched by `str(e).startswith('database is locked')`. Implementations using `db.execute()` autocommit MUST wrap the autocommit call in the same retry loop — autocommit is a hidden BEGIN/COMMIT and contends identically.
+- **Verifies:** AC-SD-11 connection pooling + AC-SD-12 WAL + AC-SD-14 atomic write. Closes v3 audit HIGH D3 finding "Concurrency/Locking implementation gaps" (Phase 153 Task A6) AND v6 audit MEDIUM D3 finding "Incomplete Concurrency Implementation for Non-Go Languages" (Phase 153 Task A14 — added language-agnostic pseudo-code + per-language driver mappings).
 
 ### AC-SD-23 — TTL / expiry contract for time-bounded rows (Reset tokens, sessions, idempotency keys)
 
@@ -229,6 +252,20 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
   ```
   Forbidden patterns: relative timestamps (`CreatedAt + INTERVAL '5 minutes'` evaluated at read time — clock-skew-sensitive), implicit cleanup-on-read (race-condition prone — two callers may both observe "valid" then both consume), and TTL stored in application config without an `ExpiresAt` column (sweeper would have nothing to query).
 - **Verifies:** AC-SD-04 Root DB scope + AC-SD-13 per-item DB lifecycle + AC-SD-14 atomic write. Closes v3 audit MEDIUM D2 finding "Missing Acceptance Criteria for Reset TTL" (Phase 153 Task A6).
+
+### AC-SD-24 — Cross-module reference pin: AC-CL-* inheritance is link-don't-restate  `[critical]`
+
+- **Given** AC-SD-01 inherits the universal cross-language acceptance criteria from `../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md` (canonical AC-CL-* registry) AND AC-SD-02 cites the cross-language naming-convention contract by reference per Lesson #36 (link-don't-restate),
+- **When** an AI-implementability audit harness with a bounded context window (e.g., spec/27 slot 34 `audit-ai-implementability.py` walker, 90 KB cap, tier-1 `{00,97,98,99}-*.md` per AC-34-09) bundles ONLY this module's files and reports `[D5] Unresolved External Dependency: Coding Guidelines — AC-SD-01/AC-SD-02 reference ../02-coding-guidelines/... not provided in context`,
+- **Then** the auditor MUST treat the finding as a **harness bundling-cap artifact**, NOT a spec defect — the AC-CL-* registry is canonical at `spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md` AND inlining its contents into spec/05 §97 would create the exact dual-source drift Lesson #36 forbids (AC-CL-* surface evolves under spec/02 §98; any copy here would diverge silently across phases). Implementations MUST resolve cross-module references by following the relative path on disk, not by demanding inline content.
+- **Verifies:** the cross-module link-don't-restate invariant (Lesson #36) AND spec/05's deliberate delegation of universal naming/typing rules to spec/02 §97. Mirror of spec/03 AC-08 + spec/07 AC-35 + spec/10 AC-9 + spec/11 AC-10 + spec/12 AC-09 + spec/13 AC-24 + spec/14 AC-21 + spec/16 AC-21 + spec/17 AC-10 + spec/18 AC-09 + spec/22 AC-78 + spec/25 AC-AI-09..11 + spec/28 AC-28-41. **Source:** A14 close of v6 audit D5 HIGH finding "Unresolved External Dependency: Coding Guidelines".
+
+### AC-SD-25 — `{ProjectSlug}` path token binding to Root DB `Project.Slug`  `[high]`
+
+- **Given** AC-SD-03 uses the placeholder `{ProjectSlug}` in canonical hierarchy paths (`data/<ProjectSlug>/{config,cache,logs}.db` AND `data/<ProjectSlug>/<Folder>/<Slug>.db` AND `data/<ProjectSlug>/<Category>/<Type>/<Slug>.db`),
+- **When** any layer (CLI, daemon, migration tool, backup/restore, wipe) materializes a `{ProjectSlug}` placeholder into a real filesystem path,
+- **Then** the substituted value MUST exactly equal the `Slug` column of the corresponding row in the Root DB `Project` table (byte-for-byte identical: same case, same encoding, same hyphenation). Specifically: (a) `Slug` is the canonical source — derived once at project-creation time from the user-supplied `AppName` via the project-creation flow's slug normalizer (NFC normalize → lowercase → replace `[^a-z0-9-]` with `-` → collapse repeated `-` → trim leading/trailing `-` → reject empty result with code 4); (b) once written to `Project.Slug` the value is IMMUTABLE for the lifetime of the project (renaming `AppName` does NOT re-slug — issue a new project instead); (c) callers MUST NOT re-slug `AppName` at path-resolution time — always read `Project.Slug` and use it verbatim; (d) the regex `^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$` enforces 1–64 chars, lowercase alphanumerics + hyphens, no leading/trailing hyphen — same regex MUST be enforced at INSERT into `Project.Slug` AND at path materialization (defense-in-depth); (e) two distinct `Project` rows with the same `Slug` are FORBIDDEN — `Slug` MUST be `UNIQUE NOT NULL` in the Root DB schema.
+- **Verifies:** AC-SD-04 Root DB scope (Slug lives in Root, single source of truth) + AC-SD-05 per-item filename regex (parallel discipline at one level deeper) + AC-SD-13 per-item DB lifecycle (the `<ProjectSlug>` directory is created lazily AFTER `Project.Slug` is written, never before). **Source:** A14 close of v6 audit D1 LOW finding "Ambiguous 'ProjectSlug' Source".
 
 ---
 
