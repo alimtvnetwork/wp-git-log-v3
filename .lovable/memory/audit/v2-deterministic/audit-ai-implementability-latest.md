@@ -7,14 +7,14 @@
 
 | Dimension | Avg |
 |---|---:|
-| D1 Contract Clarity | 18.0/20 |
-| D2 AC Coverage | 16.0/20 |
-| D3 Edge/Error | 14.0/20 |
-| D4 Examples | 19.0/20 |
-| D5 Cross-Ref Closure | 17.0/20 |
+| D1 Contract Clarity | 16.0/20 |
+| D2 AC Coverage | 18.0/20 |
+| D3 Edge/Error | 15.0/20 |
+| D4 Examples | 17.0/20 |
+| D5 Cross-Ref Closure | 14.0/20 |
 
 ## Per-module ranking (low → high)
 
 | Rank | Module | Axis | Total (v7) | Raw (v6) | D1 | D2 | D3 | D4 | D5 | Files | KB | Band |
 |---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|
-| 1 | `spec/04-database-conventions` | normative-contract | **82** | 84 | 18 | 16 | 14 | 19 | 17 | 6/11 | 87 | GOOD |
+| 1 | `spec/06-seedable-config-architecture` | normative-contract | **82** | 80 | 16 | 18 | 15 | 17 | 14 | 7/21 | 87 | GOOD |

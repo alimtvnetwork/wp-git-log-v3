@@ -1,38 +1,38 @@
 {
-  "d1": 18,
-  "d2": 19,
-  "d3": 17,
-  "d4": 18,
-  "d5": 15,
+  "d1": 16,
+  "d2": 18,
+  "d3": 15,
+  "d4": 17,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Broken External Symbol Resolution",
-      "why": "The spec references 'apperror.Wrap', 'ErrSeedLoadFailed', and 'pathutil' which are explicitly delegated to spec/03 and other modules, but those modules are not provided in the context.",
-      "fix": "Provide the 'apperror' package definition and 'pathutil' source or mock signatures in the fundamentals file."
+      "why": "AC-SC-22 mandates resolving 'apperror' and 'AB-NNNN' codes via spec/03, but the provided context only contains spec/06. A mediocre AI cannot verify the constructor signatures or registry existence.",
+      "fix": "Provide the normative content of spec/03-error-manage/02-error-architecture/06-apperror-package/ in the context."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Incomplete Concurrency Implementation Detail",
-      "why": "AC-SC-21 mandates a file lock before SQL transaction, but the Go implementation in 01-fundamentals.md does not show the locking logic, only the GORM transaction.",
-      "fix": "Add a 'Lock()' and 'Unlock()' call using a sentinel file to the Go ConfigService.SeedWithVersionCheck snippet."
+      "dim": "D1",
+      "title": "Conflicting Type Enums in Sub-features",
+      "why": "02-features/01-rag-chunk-settings.md still uses forbidden legacy types (int, float) in its tables and SQL snippets, contradicting the PascalCase/UI-aware enum pin in 00-overview and AC-SC-14.",
+      "fix": "Update all tables in 02-features/01-rag-chunk-settings.md to use 'number' and 'boolean' instead of 'int', 'float', or 'bool'."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous Type Mapping for 'select'",
-      "why": "The schema uses 'Type: select' but the Go struct 'SettingValue' uses a union of scalars; it's unclear if 'select' should map to StringVal or a specific enum type in Go.",
-      "fix": "Explicitly state in the SettingValue struct comment that 'select' maps to StringVal and 'multiselect' maps to StringsVal."
+      "dim": "D3",
+      "title": "Ambiguous Rollback File State",
+      "why": "AC-SC-07 describes rolling back the DB via CHANGELOG replay but does not explicitly state if the physical config.seed.json file should be reverted or if the system should just ignore it.",
+      "fix": "Clarify in AC-SC-07 that rollback only affects DB state and Metadata, while the seed file remains as-is on disk."
     }
   ],
   "module": "06-seedable-config-architecture",
-  "files_used": 8,
+  "files_used": 7,
   "files_total": 21,
   "bytes_used": 90000,
-  "bundle_sha": "c5b46d3cb2b36a7b",
-  "total_v6": 87,
+  "bundle_sha": "574228bf4f5f5371",
+  "total_v6": 80,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 88.8,
-  "total_v7": 89,
-  "total": 89,
+  "weighted_total": 81.6,
+  "total_v7": 82,
+  "total": 82,
   "band": "GOOD",
   "rubric": "v7"
 }
