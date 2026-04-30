@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 12,
-  "d3": 15,
+  "d2": 15,
+  "d3": 17,
   "d4": 19,
-  "d5": 14,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Missing Verifies clauses for Phase 01-06",
-      "why": "While 00-overview has ACs with Verifies clauses in 97-acceptance-criteria.md, the actual technical phases (01-06) lack granular GWT/Verifies pairs for their specific architectural requirements.",
-      "fix": "Add a 'Verification' section to each phase file (01-06) with explicit GWT criteria and a 'Verifies:' line referencing the specific architectural invariant."
+      "title": "Missing Verifies clauses for Phase 07-21",
+      "why": "While AC-01 to AC-08 have Verifies clauses, the architectural invariants for Phases 07 through 21 (referenced in the overview) lack explicit GWT criteria and Verifies bindings in the \u00a797 file.",
+      "fix": "Extend the AC-10 table in 97-acceptance-criteria.md to include rows for Phases 07-21 with specific architectural bindings."
     },
     {
       "severity": "MEDIUM",
       "dim": "D5",
-      "title": "Unresolved External References in Consistency Report",
-      "why": "The 99-consistency-report.md identifies several broken external links (e.g., formatting-rules-reference.md) and marks them as 'RESOLVED' in prose, but the 'Recommended Fixes' section still lists them as P0/P1 actions, creating ambiguity for an AI.",
-      "fix": "Remove the 'Recommended Fixes' P0/P1 table entries for items already marked as RESOLVED in the status tables."
+      "title": "Unresolved internal sub-file references",
+      "why": "The overview references 22 phases, but the provided context only includes files for Phases 00, 01, and 02. A mediocre coder cannot implement the 'Gold Standard' without the content of Phases 03-21.",
+      "fix": "Provide the remaining phase files (03-21) or consolidate their core contracts into the \u00a797 acceptance criteria."
     },
     {
       "severity": "LOW",
-      "dim": "D3",
-      "title": "Concurrency and Race Conditions Unaddressed",
-      "why": "The spec covers file logging and database migrations but does not specify handling for concurrent requests (e.g., file locking for FileLogger or race conditions in the self-update/rollback logic).",
-      "fix": "Add a 'Concurrency' section to Phase 04 (Logging) and Phase 10 (Deployment) specifying flock() or atomic operation requirements."
+      "dim": "D1",
+      "title": "Filename casing mismatch in documentation",
+      "why": "Consistency report identifies a mismatch where 'CHANGELOG.md' is referenced but 'changelog.md' exists on disk, potentially breaking CI on Linux.",
+      "fix": "Run a global search-replace for 'CHANGELOG.md' to 'changelog.md' across all .md files."
     }
   ],
   "module": "18-wp-plugin-how-to",
   "files_used": 11,
   "files_total": 35,
-  "bytes_used": 89767,
-  "bundle_sha": "901f4120b9cb26e9",
-  "total_v6": 78,
+  "bytes_used": 90000,
+  "bundle_sha": "3c27b9b2ccf2a2ef",
+  "total_v6": 85,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 80.4,
-  "total_v7": 80,
-  "total": 80,
+  "weighted_total": 86.1,
+  "total_v7": 86,
+  "total": 86,
   "band": "GOOD",
   "rubric": "v7"
 }
