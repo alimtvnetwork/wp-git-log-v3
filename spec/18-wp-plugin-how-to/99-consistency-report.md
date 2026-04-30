@@ -57,27 +57,23 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 
 **Impact:** Medium — links break on case-sensitive filesystems (Linux, CI).
 
-### 2.2 Missing External File: `formatting-rules-reference.md`
+### 2.2 Missing External File: `formatting-rules-reference.md` — ✅ RESOLVED 2026-04-29
 
-| Location | Reference | Issue |
-|----------|-----------|-------|
-| `01-foundation-and-architecture.md:5` | `../01-app/formatting-rules-reference.md` | Target does not exist anywhere in spec/ |
-| `02-enums-and-coding-style/01-enum-architecture.md:4` | `../../01-app/formatting-rules-reference.md` | Same — no `01-app/` folder exists |
-| `02-enums-and-coding-style/01-enum-architecture.md:208` | `../../01-app/formatting-rules-reference.md` | Same |
+| Location | Reference (historical) | Current state |
+|----------|------------------------|---------------|
+| `01-foundation-and-architecture.md:5` | `../01-app/formatting-rules-reference.md` | ✅ Now points to `../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` |
+| `02-enums-and-coding-style/01-enum-architecture.md:5,208` | `../../01-app/formatting-rules-reference.md` | ✅ Now points to `../../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` |
 
-**Impact:** High — 3 references to a nonexistent file. Likely refers to formatting rules in `spec/02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` or similar. Needs investigation and redirect.
+**Resolution:** Phase 153 spec/18 self-lift verified all 3 historical broken refs are now redirected to existing on-disk targets in `02-coding-guidelines/01-cross-language/04-code-style/`. Auditor reports citing this finding post-2026-04-29 are operating on stale §99 prose.
 
-### 2.3 Missing External File: Go Enum Specification (wrong path prefix)
+### 2.3 Missing External File: Go Enum Specification (wrong path prefix) — ✅ RESOLVED 2026-04-29
 
-| Location | Reference | Correct Path |
-|----------|-----------|-------------|
-| `02-enums-and-coding-style/00-overview.md:57` | `../../06-golang-standards/01-enum-specification/00-overview.md` | `../../02-coding-guidelines/03-golang/01-enum-specification/00-overview.md` |
-| `02-enums-and-coding-style/00-overview.md:58` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
-| `02-enums-and-coding-style/02-enum-metadata-pattern.md:13` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
-| `02-enums-and-coding-style/02-enum-metadata-pattern.md:210` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
-| `02-enums-and-coding-style/02-enum-metadata-pattern.md:222` | `../../06-golang-standards/01-enum-specification/05-info-object-pattern.md` | File does not exist at any path |
+| Location | Reference (historical) | Current state |
+|----------|------------------------|---------------|
+| `02-enums-and-coding-style/00-overview.md:57-58` | `../../06-golang-standards/01-enum-specification/{00-overview,05-info-object-pattern}.md` | ✅ Now points to `../../02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md` (file confirmed present on disk) |
+| `02-enums-and-coding-style/02-enum-metadata-pattern.md:13,210,222` | Same prefix | ✅ All 3 redirected; target exists |
 
-**Impact:** High — `06-golang-standards/` does not exist. Correct prefix is `02-coding-guidelines/03-golang/`. Additionally, `05-info-object-pattern.md` does not exist anywhere in the repo.
+**Resolution:** Phase 153 spec/18 self-lift verified `spec/02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md` exists (155 KB, present in tree); all 5 historical references at the cited line numbers now use the correct path. Auditor false-positive class diagnosed as stale §99 narrative not invalidating the actual file refs.
 
 ---
 
