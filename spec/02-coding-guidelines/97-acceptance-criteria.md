@@ -1,7 +1,7 @@
 # Coding Guidelines — Acceptance Criteria
 
-**Version:** 4.4.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu11 — added **AC-CG-24** Audit-corpus structural pin (Lesson #29 mirror for the `normative-contract` axis on tree-spanning modules). Closes the recurring spec/02 audit findings (HIGH/D5 dangling-subfolder-refs, MEDIUM/D2 legacy-AC-lack-specificity, LOW/D3 incomplete-size-limit) as STRUCTURAL-DELEGATION-NOT-MISSING walker-saturation artifacts (10/251 files loadable at 120 KB cap per AC-34-13). Per-language stub-AC counts re-verified: TS=22, Go=22, PHP=27, Rust=26, C#=27 (all ≥22 GWT ACs each, A10-fu1 contract holds). AC count 28 → 29.)
+**Version:** 4.5.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu16 — added **AC-CG-25** Inline language samples (mirror of CRITICAL/D2 finding "Circular/Self-Referential Acceptance Criteria"; supplies 1 worked GWT example each for Go/TS/Rust directly inside parent §97 so context-window-bounded auditors no longer need to chase subfolder bundles to verify language coverage), **AC-CG-26** Worked example for EX-04 Rust `match`-arm ratio (mirror of HIGH/D4 finding "Missing Worked Examples for Size-Limit Exceptions"; supplies a 25-line Rust function with line-count math showing `match`-line / total-line = 17/24 ≈ 0.71 ≥ 0.6 → exception applies), **AC-CG-27** Fail-fast policy for partial linter scans (mirror of MEDIUM/D3 finding "Ambiguous Concurrency/Partial Failure in CI Gates"; defines that any timeout / partial-result / panic during the 251-file Go+Python mixed-language scan defaults that script's contribution to score 0 with `gate_status=FAIL` reason `LINTER_TIMEOUT|LINTER_PARTIAL|LINTER_PANIC`). AC count 29 → 32.)
 **Scope:** `spec/02-coding-guidelines/` (the parent module — language-specific ACs live in subfolder §97 files).
 
 ---
