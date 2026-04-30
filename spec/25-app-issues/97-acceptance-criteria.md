@@ -1,7 +1,7 @@
 # Acceptance Criteria — App Issues
 
-**Version:** 1.3.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu3 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH "Circular ACs" + [D3] LOW "Issue-status concurrency" as kind-mismatch / out-of-scope-axis artifacts; codifies Lesson #29 Section F for `kind: tracker` sub-class)  
+**Version:** 1.4.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu8 — added **AC-AI-14** R/C/F/P + Severity finding-schema contract with positive verification (closes audit-v7 HIGH D2 `Circular/Structural-only ACs for Tracker Content` by giving the auditor the schema-validator AC it asks for, while preserving AC-AI-12's "structural floor is intentional" framing) + **AC-AI-15** Negative-case malformed-finding example (closes audit-v7 LOW D3 `Unaddressed Schema Validation for Issue Records`). v7 MEDIUM D4 truncation finding deferred per **Lesson #46** — `02-consolidated-audit-findings/00-overview.md` is 32 KB single-file by design (single audit corpus); splitting would break line-anchor citations. Walker-saturation flag set in closing memo per L#46.)  
 **Scope:** `spec/25-app-issues/`
 
 ---
@@ -126,6 +126,85 @@ The following files in this module also constitute acceptance surface — each m
 - **Verifies:** AC-AI-09 (`kind: tracker` module-kind pin) + the file-as-database contract this module inherits from spec authoring conventions. The Git-commit boundary is the concurrency boundary; per **Lesson #36** (link-don't-restate), this AC explicitly does NOT restate runtime concurrency rules from spec/13 AC-22 (DB+file concurrency) or spec/27 AC-T-28 R3 (`SQLITE_BUSY` retry) — those govern runtime database/lock concurrency, which is orthogonal to single-author markdown-edit concurrency.
 - **Why:** Closes the v7 D3 LOW false-positive. The auditor's suggested fix ("Add a 'Concurrency' section to the Issue Record Contract") would create a phantom contract surface — there is no Issue Record Contract to attach concurrency to (issues are prose, not records). Adding such a section would either (a) duplicate Git's merge-conflict semantics in spec prose (forbidden by Lesson #36), or (b) imply a database/runtime layer that doesn't exist (forbidden by AC-AI-09's `kind: tracker` declaration). Mirror of spec/26 AC-22's harness-scope-artifact classification on the cross-axis (concurrency-axis vs context-bundling-axis).
 - **Source:** `02-consolidated-audit-findings/00-overview.md` (status fields as prose, not data); `mem://process/phase-153-lessons` Section F (audit-corpus sub-class enumeration).
+
+### AC-AI-14: Finding-body schema is R/C/F/P + Severity (positive contract for `kind: tracker` output)  `[high]`
+
+- **Given** the tracker output file `02-consolidated-audit-findings/00-overview.md` (32 KB) and its sibling `01-phase-2-git-logs-audit/00-overview.md` (40 KB), both `kind: tracker` per AC-AI-09,
+- **When** an auditor or reviewer parses any finding body inside those files,
+- **Then** EVERY finding (one per `### F-NN:` heading or `### P2-GL-NN:` heading) MUST satisfy ALL of the following structural rules — verifiable by inspection without external context:
+
+**Finding-body schema (normative — closes audit-v7 HIGH D2):**
+
+| Field | Required | Format | Example |
+|---|---|---|---|
+| **Heading** | YES | `### F-NN: <one-line title>` (or `### P2-GL-NN: …` for Phase 2) | `### F-04: Missing line anchors in evidence` |
+| **Severity** | YES | `**Severity:** {Critical \| High \| Medium \| Low}` (exact case, exact set) | `**Severity:** High` |
+| **Category** | YES | `**Category:** {Coverage \| Correctness \| Security \| Edge Cases \| Governance \| Maintainability \| Testability \| Scalability}` (exact closed set) | `**Category:** Correctness` |
+| **File** | YES | `**File:** \`<path>\`` (relative to repo root, backticked) | `**File:** \`spec/_archive/21-git-logs-v1/02-database-schema-and-erd.md\`` |
+| **Line(s)** | YES | `**Line(s):** NN` or `**Line(s):** NN–MM` (en-dash for ranges) | `**Line(s):** 81–91` |
+| **Reproduction** | YES | `**Reproduction:**` heading then ≥1 paragraph of verbatim evidence (≤ 4 lines per snippet) | (free prose with backticked snippets) |
+| **Cause** | YES | `**Cause:**` heading then ≥1 paragraph diagnosing the root cause | (free prose) |
+| **Fix** | YES | `**Fix:**` heading then ≥1 actionable remediation paragraph | (free prose with concrete steps) |
+| **Prevention** | YES | `**Prevention:**` heading then ≥1 paragraph (linter / test / process) | (free prose) |
+| **Linked audit IDs** | conditional | `**Linked audit IDs:**` row IF the finding cross-refs another audit (omit if standalone) | `**Linked audit IDs:** P2-GL-04, CC-12` |
+
+**Validation rules:**
+1. **Severity / Category MUST be from the closed enum sets above** — free-form severity (`"Showstopper"`, `"Nitpick"`) is FORBIDDEN; the finding's roll-up severity table at the top of the document is the authoritative count.
+2. **R/C/F/P MUST appear in that order** — auditors rely on positional reading; reordering breaks the finding-body contract.
+3. **Line anchors MUST be inclusive numeric ranges or single integers** — `**Line(s):** various`, `**Line(s):** throughout`, or `**Line(s):** TBD` are FORBIDDEN (they defeat the line-anchor verifiability that distinguishes a `kind: tracker` finding from a generic complaint).
+4. **Evidence snippets MUST be backticked or fenced** — paraphrased evidence is FORBIDDEN per AC-AI-10 (auditor-quoted-evidence rule).
+
+**Forbidden patterns:**
+- Adding a finding without all 9 mandatory fields (truncated at F-NN heading without R/C/F/P body) — `02-consolidated-audit-findings/00-overview.md` line 708 was the v7 walker truncation point, NOT a missing finding (real F-04 is fully bodied; auditor's "F-04 cut off" is a walker-window artifact per Lesson #46).
+- Restating finding logic in §97 GWT ACs (would create dual-source drift class — Lesson #36; also forbidden by AC-AI-12 which declares §97 stays at structural floor).
+- Promoting a finding to `**Severity:** Critical` without a rebuttable evidence snippet (the `**Reproduction:**` body MUST contain the verbatim quote that justifies the severity).
+
+- **Verifies:** AC-AI-09 (`kind: tracker` module-kind pin) + AC-AI-12 (structural-floor floor on §97) + the finding-body contract that gives the auditor a positive-verification surface WITHOUT contradicting AC-AI-12's "no per-finding logic in §97" rule. The schema lives in §97 ONCE (here); the finding bodies are the instances. This is **structurally identical to a JSON Schema in spec/04 governing many records**: §97 = schema, finding bodies = records, validator = visual inspection (no .json file because findings are markdown prose, not JSON).
+- **Source:** `02-consolidated-audit-findings/00-overview.md` lines 25–37 (the existing `## How to Use This Document` table that THIS AC normalizes into a §97 contract); `01-phase-2-git-logs-audit/00-overview.md` (sibling tracker following the same schema); `mem://process/phase-153-lessons` Section F (audit-corpus pattern, Lesson #29 + extensions).
+
+### AC-AI-15: Negative-case finding-schema example (malformed finding rejection)  `[medium]`
+
+- **Given** the finding-body schema in AC-AI-14 (R/C/F/P + Severity + Category + File + Line + Heading; closed enums for Severity/Category),
+- **When** a reviewer or downstream tool encounters a malformed finding,
+- **Then** the following negative cases MUST be rejected (concrete examples for visual-inspection or future linter):
+
+**Negative cases (normative — closes audit-v7 LOW D3):**
+
+```markdown
+### F-99: Showstopper bug in some file
+**Severity:** Showstopper                    ← REJECTED: free-form severity (closed set: Critical/High/Medium/Low)
+**Category:** Annoying                        ← REJECTED: free-form category (closed set per AC-AI-14)
+**File:** somewhere in spec/                  ← REJECTED: not backticked + not a real path
+**Line(s):** various                          ← REJECTED: non-numeric (AC-AI-14 rule 3)
+**Cause:** ...                                ← REJECTED: missing **Reproduction:** before **Cause:** (AC-AI-14 rule 2 ordering)
+```
+
+```markdown
+### F-100: Bad finding without body
+**Severity:** Critical
+**Category:** Security
+**File:** `spec/_archive/foo.md`
+**Line(s):** 42
+                                              ← REJECTED: no R/C/F/P body (8 of 9 required fields missing)
+```
+
+```markdown
+### F-101: Paraphrased evidence
+**Severity:** High
+**Category:** Correctness
+**File:** `spec/_archive/foo.md`
+**Line(s):** 100–110
+**Reproduction:** The file says something about authentication being weak.   ← REJECTED: paraphrased (AC-AI-14 rule 4 + AC-AI-10 verbatim-quote rule)
+**Cause:** ...
+**Fix:** ...
+**Prevention:** ...
+```
+
+**Acceptance:** the three negative cases above MUST be visually rejectable by any reviewer reading AC-AI-14's schema table; if any negative case becomes ambiguous (e.g. a future severity enum extension), AC-AI-14 MUST be updated FIRST before any finding using the new value lands.
+
+- **Verifies:** AC-AI-14 (the positive schema) by exhaustive negative-case enumeration; closes audit-v7 LOW D3 `Unaddressed Schema Validation for Issue Records` by demonstrating rejection criteria inline. Per **Lesson #29 Section F**, tracker modules with N findings need ONE negative-case AC at the schema layer rather than N per-finding ACs.
+- **Why:** The auditor's v7 LOW D3 fix-suggestion was "Add a 'Negative Case' example to 01-phase-2-git-logs-audit showing a schema validation failure" — this AC delivers exactly that, but at the §97 schema layer (where AC-AI-14 lives) rather than buried in a sibling tracker file. Mirror of how spec/02 AC-CG-23's per-language stub-GWT pattern handles "missing example" findings: the negative case lives next to the positive contract.
+- **Source:** AC-AI-14 (the schema being negated); `02-consolidated-audit-findings/00-overview.md` lines 25–37 (the source table normalized in AC-AI-14).
 
 ---
 
