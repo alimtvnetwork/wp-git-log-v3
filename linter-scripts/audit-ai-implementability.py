@@ -46,6 +46,90 @@ MAX_BYTES = 90_000  # Cloudflare-safe ceiling (~22k tokens).
 
 WALK_GLOBS = ("*.md", "*.json", "*.yaml", "*.yml", "*.tmpl", "*.toml")
 
+# ─── Rubric v7 (Phase 153 Task A17 contract; A19 wiring) ─────────────────────
+# Per-axis dimension multipliers; raw rows that sum to >5.0 are renormalised
+# to 5.0 so the weighted total stays bounded at 100. See slot 34 §97 AC-34-10.
+AXIS_VALUES = {
+    "normative-contract",
+    "process-guidance",
+    "integration-spec",
+    "audit-corpus",
+    "tooling-spec",
+}
+AXIS_MULTIPLIERS_RAW: dict[str, dict[str, float]] = {
+    "normative-contract": {"d1": 1.0, "d2": 1.5, "d3": 1.2, "d4": 0.8, "d5": 0.5},
+    "process-guidance":   {"d1": 1.5, "d2": 0.7, "d3": 0.8, "d4": 1.0, "d5": 1.0},
+    "integration-spec":   {"d1": 1.0, "d2": 0.9, "d3": 0.9, "d4": 1.4, "d5": 1.2},  # raw sum 5.4
+    "audit-corpus":       {"d1": 1.0, "d2": 0.5, "d3": 0.5, "d4": 1.5, "d5": 1.5},
+    "tooling-spec":       {"d1": 1.0, "d2": 1.3, "d3": 1.0, "d4": 1.3, "d5": 0.9},  # raw sum 5.5
+}
+# Per-axis soft cap on band assignment (AC-34-11). Strict CI gate threshold
+# stays 60 (BLOCKING) tree-wide regardless of axis.
+AXIS_CAPS: dict[str, int] = {
+    "normative-contract": 100,
+    "process-guidance":   95,
+    "integration-spec":   95,
+    "audit-corpus":       95,
+    "tooling-spec":       100,
+}
+
+
+def axis_multipliers(axis: str) -> dict[str, float]:
+    """Return AC-34-10 normalised multipliers for an axis (sum exactly 5.0)."""
+    raw = AXIS_MULTIPLIERS_RAW[axis]
+    s = sum(raw.values())
+    if abs(s - 5.0) < 1e-9:
+        return dict(raw)
+    factor = s / 5.0
+    return {k: v / factor for k, v in raw.items()}
+
+
+FRONT_MATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
+AXIS_LINE_RE = re.compile(r"^\s*content_axis:\s*([A-Za-z0-9_\-]+)\s*$", re.MULTILINE)
+
+
+def read_content_axis(mod_dir: Path) -> tuple[str | None, str | None]:
+    """Parse `content_axis:` from the module's `00-overview.md` front-matter.
+
+    Returns (axis, error). On success: (axis, None). On any error (no §00,
+    no front-matter, no axis key, invalid axis value): (None, error_msg).
+    Per AC-34-12, missing or invalid axis MUST cause the auditor to exit 2.
+    """
+    overview = mod_dir / "00-overview.md"
+    if not overview.exists():
+        return None, f"{mod_dir.name}: no 00-overview.md"
+    txt = overview.read_text(encoding="utf-8", errors="replace")
+    m = FRONT_MATTER_RE.match(txt)
+    if not m:
+        return None, f"{mod_dir.name}: 00-overview.md has no YAML front-matter block"
+    fm = m.group(1)
+    am = AXIS_LINE_RE.search(fm)
+    if not am:
+        return None, f"{mod_dir.name}: front-matter missing `content_axis:` key"
+    axis = am.group(1).strip()
+    if axis not in AXIS_VALUES:
+        return None, f"{mod_dir.name}: invalid content_axis '{axis}' (allowed: {sorted(AXIS_VALUES)})"
+    return axis, None
+
+
+def apply_rubric_v7(scores: dict[str, int], axis: str) -> dict[str, Any]:
+    """Apply AC-34-10 multipliers + AC-34-11 soft cap. Returns dict with
+    weighted_total (pre-cap) and total_v7 (post-cap, the score the band uses).
+    """
+    mults = axis_multipliers(axis)
+    weighted = sum(scores[k] * mults[k] for k in ("d1", "d2", "d3", "d4", "d5"))
+    weighted_total = round(weighted, 1)
+    cap = AXIS_CAPS[axis]
+    total_v7 = min(int(round(weighted)), cap)
+    return {
+        "axis": axis,
+        "axis_multipliers": {k: round(v, 4) for k, v in mults.items()},
+        "axis_cap": cap,
+        "weighted_total": weighted_total,
+        "total_v7": total_v7,
+    }
+
+
 RUBRIC = """You are an exacting spec auditor. Score this spec module for whether a MEDIOCRE AI coder
 (no clarifying questions, no web access) can implement it with 100% confidence on first try.
 
@@ -194,20 +278,23 @@ def band(total: int) -> str:
     return "BLOCKING"
 
 
-def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool) -> dict[str, Any]:
+def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, axis: str) -> dict[str, Any]:
     cache_file = CACHE_DIR / f"{mod.name}.json"
     bundle, used_bytes, used_files, total_files = load_module_bundle(mod)
-    bundle_sha = hashlib.sha256(bundle.encode()).hexdigest()[:16]
+    # Fold axis into the cache key so v6 caches (no axis) re-score under v7
+    # and any future axis re-classification invalidates the prior score.
+    bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
 
     if cache_file.exists() and not force:
         cached = json.loads(cache_file.read_text())
-        if cached.get("bundle_sha") == bundle_sha:
+        if cached.get("bundle_sha") == bundle_sha and cached.get("rubric") == "v7":
             cached["from_cache"] = True
             return cached
 
     if no_network:
         return {
             "module": mod.name,
+            "axis": axis,
             "no_network": True,
             "files_used": used_files,
             "files_total": total_files,
@@ -227,8 +314,12 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool) 
     parsed["files_total"] = total_files
     parsed["bytes_used"] = used_bytes
     parsed["bundle_sha"] = bundle_sha
-    parsed["total"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
+    parsed["total_v6"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
+    v7 = apply_rubric_v7({k: int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5")}, axis)
+    parsed.update(v7)
+    parsed["total"] = v7["total_v7"]  # band + report use v7 score
     parsed["band"] = band(parsed["total"])
+    parsed["rubric"] = "v7"
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     cache_file.write_text(json.dumps(parsed, indent=2))
     return parsed
@@ -265,12 +356,13 @@ def write_report(results: list[dict[str, Any]], out: Path) -> None:
         "",
         "## Per-module ranking (low → high)",
         "",
-        "| Rank | Module | Total | D1 | D2 | D3 | D4 | D5 | Files | KB | Band |",
-        "|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|",
+        "| Rank | Module | Axis | Total (v7) | Raw (v6) | D1 | D2 | D3 | D4 | D5 | Files | KB | Band |",
+        "|---:|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|",
     ]
     for i, r in enumerate(sorted(scored, key=lambda x: x["total"]), 1):
+        cap_marker = " 🔒" if r.get("total_v7") == r.get("axis_cap") else ""
         lines.append(
-            f"| {i} | `spec/{r['module']}` | **{r['total']}** | "
+            f"| {i} | `spec/{r['module']}` | {r.get('axis','?')} | **{r['total']}**{cap_marker} | {r.get('total_v6','?')} | "
             f"{r['d1']} | {r['d2']} | {r['d3']} | {r['d4']} | {r['d5']} | "
             f"{r['files_used']}/{r['files_total']} | {r['bytes_used']//1024} | {r.get('band','')} |"
         )
@@ -297,18 +389,38 @@ def main(argv: list[str] | None = None) -> int:
             print(f"audit-ai-implementability: no module matches --module={args.module}", file=sys.stderr)
             return 2
 
+    # AC-34-12 fail-fast: every module MUST declare a valid `content_axis` in
+    # its 00-overview.md front-matter BEFORE any gateway call. Silent v6
+    # uniform-weighting fallback is FORBIDDEN.
+    axes: dict[str, str] = {}
+    axis_errors: list[str] = []
+    for mod in modules:
+        axis, err = read_content_axis(mod)
+        if err:
+            axis_errors.append(err)
+        else:
+            axes[mod.name] = axis  # type: ignore[assignment]
+    if axis_errors:
+        print("audit-ai-implementability: invalid or missing content_axis (AC-34-12):", file=sys.stderr)
+        for e in axis_errors:
+            print(f"  - {e}", file=sys.stderr)
+        print(f"  Allowed values: {sorted(AXIS_VALUES)}", file=sys.stderr)
+        return 2
+
     results: list[dict[str, Any]] = []
     for mod in modules:
         try:
-            r = audit_module(mod, api_key, args.no_network, args.force)
+            r = audit_module(mod, api_key, args.no_network, args.force, axes[mod.name])
             results.append(r)
             if not args.json:
                 if "total" in r:
+                    cap_note = f" (cap {r['axis_cap']})" if r.get("total_v7") == r.get("axis_cap") else ""
                     print(f"  {mod.name:40s} {r['total']:3d}/100  {r.get('band','')}  "
+                          f"axis={r.get('axis','?'):20s}{cap_note}  "
                           f"({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB)"
                           f"{'  [cache]' if r.get('from_cache') else ''}")
                 elif r.get("no_network"):
-                    print(f"  {mod.name:40s} stats-only ({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB, sha={r['bundle_sha']})")
+                    print(f"  {mod.name:40s} stats-only axis={r.get('axis','?'):20s} ({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB, sha={r['bundle_sha']})")
         except Exception as e:  # noqa: BLE001
             print(f"  {mod.name:40s} ERROR: {e}", file=sys.stderr)
             results.append({"module": mod.name, "error": str(e)})
