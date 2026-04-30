@@ -1,7 +1,7 @@
 # Consistency Report: Error Management
 
-**Version:** 3.2.0  
-**Generated:** 2026-04-27  
+**Version:** 3.2.1  
+**Generated:** 2026-04-29  
 **Health Score:** 100/100 (A+)
 
 ---
@@ -57,7 +57,7 @@ All internal cross-references verified. ✅
 ---
 
 ## Summary
-<!-- verified-phase: 148 -->
+<!-- verified-phase: 153 -->
 - **Errors:** 0
 - **Warnings:** 0
 - **Observations:** 0
@@ -70,6 +70,7 @@ All internal cross-references verified. ✅
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-03-31 | 1.0.0 | Initial consolidation from 3 archived sources |
+| 2026-04-29 | 3.2.1 | Phase 153 audit-v6 HIGH self-lift: AC-08 asset-inventory pin added (§97 v2.1.0); diagnoses prior D5 broken-refs as deep-walker tier-1 90 KB cap (Lesson #29 + #36) |
 
 ---
 
