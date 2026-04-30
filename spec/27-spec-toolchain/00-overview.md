@@ -8,7 +8,7 @@ axis_rationale: "Specs the linter-scripts/ contract (validators, generators, gat
 
 # Spec Toolchain
 
-**Version:** 2.79.1  
+**Version:** 2.80.0  
 **Updated:** 2026-04-30
 <!-- h10-verified-phase: 153 -->
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
@@ -254,8 +254,62 @@ These two snippets are normative reference implementations — slots 10–29 MAY
 Validators that read generated artifacts (`spec/spec-index.md`, `spec/dashboard-data.json`, `linter-scripts/trace-map.toml`) MUST tolerate the artifact being mid-rewrite by a concurrent generator:
 
 - Read the file in a single `read()` call (not chunked) so the kernel's atomic-rename semantics give the reader either the OLD or NEW content, never a torn read.
-- On `JSONDecodeError` / parse failure, retry up to 3 times with 100ms back-off before exiting non-zero — covers the narrow window between `unlink` and `rename` on filesystems that don't honour POSIX rename atomicity.
+- On `JSONDecodeError` / parse failure, retry up to 3 times with 100ms back-off (jittered ±25% per AC-T-32) before exiting non-zero — covers the narrow window between `unlink` and `rename` on filesystems that don't honour POSIX rename atomicity.
 - Locked-file errors (Windows `PermissionError`, POSIX `EAGAIN`) MUST exit with code `2` (error / invocation problem), NOT code `1` (genuine fail) — CI orchestrators distinguish "rerun-and-it-passes" from "real violation".
+
+**Reference implementation (Python — normative example, AC-T-32)** — applies to slots 01–09 + 50–59 written in `.py`:
+
+```python
+import errno, json, os, random, sys, time
+
+def read_json_with_retry(target: str, max_attempts: int = 3) -> dict:
+    """R2-conformant read. Tolerates concurrent rewrites by generators (slots 10–29)."""
+    for attempt in range(max_attempts):
+        try:
+            with open(target, 'rb') as f:
+                content = f.read()         # MUST be single read(), not chunked
+            return json.loads(content)
+        except json.JSONDecodeError:
+            if attempt == max_attempts - 1:
+                raise                       # exhausted retries → propagate to exit 1
+            backoff = 0.1 * (1 + random.uniform(-0.25, 0.25))   # 100ms ± 25% jitter
+            time.sleep(backoff)
+        except (PermissionError, OSError) as e:
+            if e.errno in (errno.EAGAIN, errno.EACCES, errno.EBUSY):
+                print(f"{sys.argv[0]}: locked: {target}: {os.strerror(e.errno)}", file=sys.stderr)
+                sys.exit(2)                 # MUST be exit 2, not 1
+            raise
+```
+
+**Reference implementation (Node — normative example, AC-T-32)** — applies to slots 01–09 + 50–59 written in `.cjs`/`.mjs`:
+
+```javascript
+const fs = require('node:fs');
+
+function readJsonWithRetry(target, maxAttempts = 3) {
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    try {
+      const content = fs.readFileSync(target);   // MUST be single read, not chunked
+      return JSON.parse(content);
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        if (attempt === maxAttempts - 1) throw e;
+        const backoff = 100 * (1 + (Math.random() - 0.5) * 0.5);   // 100ms ± 25%
+        const end = Date.now() + backoff;
+        while (Date.now() < end) {}                  // sync sleep
+        continue;
+      }
+      if (e.code === 'EBUSY' || e.code === 'EACCES' || e.code === 'EAGAIN') {
+        process.stderr.write(`${process.argv[1]}: locked: ${target}: ${e.code}\n`);
+        process.exit(2);                              // MUST be exit 2, not 1
+      }
+      throw e;
+    }
+  }
+}
+```
+
+These two snippets are normative reference implementations — slots 01–09 + 50–59 MAY copy them verbatim (preferred) or implement equivalent retry semantics in their language of choice. Closes A24-fu6 v7 audit D3 MEDIUM finding "Concurrency/Locking Implementation Ambiguity".
 
 ### R3 — Network timeouts (AI auditors)
 
