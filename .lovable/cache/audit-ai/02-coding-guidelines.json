@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 19,
-  "d3": 17,
-  "d4": 15,
+  "d2": 16,
+  "d3": 15,
+  "d4": 19,
   "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Dangling Subfolder References",
-      "why": "The overview lists 16 subfolders (e.g., 07-csharp, 09-powershell) that are not provided in the context, preventing the AI from knowing the specific rules for those languages.",
-      "fix": "Provide the 00-overview.md and 97-acceptance-criteria.md for all referenced language subfolders."
+      "why": "The overview lists 16 subfolders (e.g., 02-typescript, 03-golang), but the provided context only includes the root files and the 01-cross-language subfolder. A mediocre AI cannot resolve the language-specific rules required by the 'CODE-RED' mandate.",
+      "fix": "Provide the full content of all referenced subfolders or remove the requirement to satisfy language-specific ACs in this audit."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Missing Concrete Code Examples for Code-Red Rules",
-      "why": "While rules like 'Zero Nesting' (R3) are stated, the parent module lacks inline 'Before/After' code snippets for all 5 languages, forcing the AI to guess idiomatic guard clauses.",
-      "fix": "Add a 'Worked Examples' section to 00-overview.md showing R1-R6 implementations in Go, TS, and Rust."
+      "dim": "D2",
+      "title": "Legacy AC Scaffolds Lack Specificity",
+      "why": "The Legacy Index (AC-CG-LEGACY-001..022) states these are 'NO LONGER authoritative', yet several subfolders (TS, PHP, C#) are noted as having 0 GWT ACs. This leaves the AI with no testable contract for those languages.",
+      "fix": "Author at least 5 GWT ACs for every language subfolder to replace the legacy table rows."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Vague 'Language-Specific Exceptions' for Size Limits",
-      "why": "AC-CG-08 allows exceptions for size limits but delegates the definition to subfolders which are missing from context.",
-      "fix": "Explicitly list the allowed exception patterns (like Go table-tests or Rust match arms) in the parent AC-CG-22 ledger."
+      "title": "Incomplete Size Limit Enforcement Logic",
+      "why": "AC-CG-08 mandates function/file size limits but allows 'language-specific exceptions' without enumerating them in the provided context (except for the 'Size-Limit Exception Ledger' which is partially defined).",
+      "fix": "Ensure the Size-Limit Exception Ledger (AC-CG-22) is the exhaustive and only source for overrides."
     }
   ],
   "module": "02-coding-guidelines",
-  "files_used": 6,
+  "files_used": 10,
   "files_total": 251,
-  "bytes_used": 90000,
-  "bundle_sha": "acfe337bd86effbe",
-  "total_v6": 83,
+  "bytes_used": 120000,
+  "bundle_sha": "0f9dbd5108d4c6d0",
+  "total_v6": 82,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 85.9,
-  "total_v7": 86,
-  "total": 86,
+  "weighted_total": 82.2,
+  "total_v7": 82,
+  "total": 82,
   "band": "GOOD",
   "rubric": "v7"
 }

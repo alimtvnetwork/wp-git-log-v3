@@ -1,38 +1,38 @@
 {
   "d1": 18,
   "d2": 19,
-  "d3": 17,
+  "d3": 16,
   "d4": 14,
-  "d5": 15,
+  "d5": 12,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Missing Core Schema and API Definitions",
-      "why": "The module references 37 files (including 04-rest-api-endpoints.md and 18-schema.sql) but only 3 files are provided in the context. A mediocre AI cannot implement the DB or API without these.",
-      "fix": "Provide the full content of 04-rest-api-endpoints.md and 18-schema.sql in the prompt context."
+      "title": "Missing Core Normative Files",
+      "why": "The spec references 37 files (including 04-REST, 18-SQL, 34-PHP) as authoritative, but only 3 files (00, 97, 98) are provided in the context.",
+      "fix": "Provide the full 37-file module context or at least the normative DDL (18) and REST (04) files."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Missing Concrete Code Fixtures",
-      "why": "While the spec mentions PHPUnit and Bats skeletons (33, 34), the actual code templates are missing from the provided text, leaving the AI to guess the boilerplate.",
-      "fix": "Include the content of 33-bats-test-skeleton.md and 34-phpunit-test-skeleton.md."
+      "title": "Abstract Examples for Complex Logic",
+      "why": "AC-73/75 define complex state transitions and atomic SQL updates, but the provided files lack the concrete SQL snippets or JSON I/O examples to verify them.",
+      "fix": "Include the '14-endpoint-examples.md' and '18-schema.sql' files mentioned in the inventory."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency/Race Condition on Rate Limits",
-      "why": "AC-26 mentions an 'in-memory + persisted floor' for rate limiting but doesn't define the SQLite locking strategy to prevent race conditions during the increment.",
-      "fix": "Add a requirement to use 'BEGIN IMMEDIATE' or a single 'UPDATE ... SET count = count + 1' statement for rate-limit increments."
+      "title": "Concurrency Strategy Externalized",
+      "why": "AC-26 (Rate Limiting) defers the critical concurrency/locking strategy to 'spec/13 AC-22', which is not in this context.",
+      "fix": "Inline the specific SQLite locking/concurrency requirements for the rate-limit persisted floor."
     }
   ],
   "module": "22-git-logs-v2",
   "files_used": 3,
   "files_total": 36,
-  "bytes_used": 90000,
-  "bundle_sha": "35441c6b42f67a34",
-  "total_v6": 83,
+  "bytes_used": 120000,
+  "bundle_sha": "de28d4ebe1036023",
+  "total_v6": 79,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 85.6,
-  "total_v7": 86,
-  "total": 86,
+  "weighted_total": 82.9,
+  "total_v7": 83,
+  "total": 83,
   "band": "GOOD",
   "rubric": "v7"
 }

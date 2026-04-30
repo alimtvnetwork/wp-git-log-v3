@@ -1,38 +1,38 @@
 {
-  "d1": 18,
+  "d1": 20,
   "d2": 20,
-  "d3": 17,
-  "d4": 15,
-  "d5": 14,
+  "d3": 18,
+  "d4": 19,
+  "d5": 20,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken External References (spec/22)",
-      "why": "The spec relies heavily on the 'Git Logs v2' server (folder 22) for auth, endpoints, and error envelopes, but these files are not provided in the context.",
-      "fix": "Include the normative content of spec/22/04, 05, and 15 in the companion context or provide a mock server response schema."
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Ambiguous behavior for parallel runtime failures",
+      "why": "\u00a702 failure semantics define behavior for sequential phases, but for --parallel runtimes, it's unclear if a failure in 'ts' should abort an ongoing 'php' runtime or just prevent its next phase.",
+      "fix": "In \u00a702, specify that --parallel runtime failures only abort subsequent phases within that specific runtime's goroutine."
     },
     {
-      "severity": "MEDIUM",
+      "severity": "LOW",
       "dim": "D4",
-      "title": "Truncated Log Shipping Contract",
-      "why": "File 06-log-shipping-contract.md is truncated at the 90KB cap, leaving the actual JSON payload shapes for /append-log and /fixed-log undefined.",
-      "fix": "Move the JSON payload examples and wire-format definitions to the top of file 06 or into 01-glossary-and-enums.md."
+      "title": "Missing example for SSH signature generation",
+      "why": "While \u00a706 mentions the signing string and tool, it doesn't provide a worked example of the resulting header values, which are prone to encoding errors (Base64 vs Hex).",
+      "fix": "Add a sample SSH auth header block to \u00a706 showing a dummy signature and nonce."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency on Shared State",
-      "why": "While it references spec/13 for concurrency, it mentions local SQLite state (~/.local/state/glci/) which contradicts the 'stateless' claim in 02-architecture.md.",
-      "fix": "Clarify if the CLI is truly stateless or if it uses a local cache for specific features like 'glci config set'."
+      "title": "Missing timeout for log shipping",
+      "why": "Phase timeouts are defined (1800s), but the network 'Push' operation lacks a specific timeout in the error catalog or config, potentially hanging the CI job on a zombie connection.",
+      "fix": "Add a default 'push_timeout_secs: 60' to the [push] section of the config schema."
     }
   ],
   "module": "28-universal-ci-cli",
-  "files_used": 10,
+  "files_used": 15,
   "files_total": 15,
-  "bytes_used": 90000,
-  "bundle_sha": "ddb93cc3663f8167",
-  "total_v6": 84,
+  "bytes_used": 119841,
+  "bundle_sha": "fac31145ecbdfac5",
+  "total_v6": 97,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 87.4,
-  "total_v7": 87,
-  "total": 87,
-  "band": "GOOD",
+  "weighted_total": 96.8,
+  "total_v7": 97,
+  "total": 97,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

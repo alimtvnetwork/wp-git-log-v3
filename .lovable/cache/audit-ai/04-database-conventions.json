@@ -1,38 +1,38 @@
 {
-  "d1": 18,
-  "d2": 16,
-  "d3": 14,
-  "d4": 19,
-  "d5": 17,
+  "d1": 19,
+  "d2": 18,
+  "d3": 15,
+  "d4": 20,
+  "d5": 18,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D3",
-      "title": "Concurrency contract is externalized and unverified",
-      "why": "The spec explicitly offloads concurrency (WAL, busy_timeout, retries) to spec/13, but spec/04 is the 'single source of truth' for DB conventions. A mediocre coder will miss the spec/13 requirements.",
-      "fix": "Inline the mandatory SQLite PRAGMAs and retry logic constants directly into the 07-split-db-pattern.md or 02-schema-design.md."
+      "title": "SQLite Single-Writer Bottleneck",
+      "why": "The spec mandates SQLite-first with a 'Split DB' pattern but lacks explicit guidance on handling 'database is locked' errors during concurrent writes in the business logic examples.",
+      "fix": "Add a normative requirement for a retry-with-jitter policy (e.g., 3 attempts, 100ms base) for all write operations in the ORM/Service layer."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Ambiguous 'Smallest Possible Type' for SQLite",
-      "why": "SQLite uses dynamic typing (manifest typing); specifying SMALLINT vs INTEGER vs BIGINT has no storage impact in SQLite (it uses 1-8 bytes based on value), which contradicts the 'Key Sizing' table logic.",
-      "fix": "Clarify that for SQLite, INTEGER is the universal type, and sizing rules (SMALLINT/BIGINT) apply specifically to the MySQL fallback or logical validation."
+      "dim": "D2",
+      "title": "Missing AC for Boolean Storage",
+      "why": "While \u00a72.1 of 02-schema-design.md provides a detailed normative table for cross-language boolean storage, the Acceptance Criteria (97-acceptance-criteria.md) lacks a specific GWT test for verifying this across different language implementations.",
+      "fix": "Add AC-12: 'Given a boolean field, When persisted in SQLite and read in Go/PHP, Then it must be stored as INTEGER 0/1 and cast to native bool without string-coercion side effects.'"
     },
     {
       "severity": "LOW",
       "dim": "D5",
-      "title": "Dangling reference to 03-orm-and-views.md",
-      "why": "AC-10 and AC-11 reference specific sections (\u00a71.1, \u00a71.2) of 03-orm-and-views.md which is listed in the inventory but its content is not provided in the context.",
-      "fix": "Ensure the content of 03-orm-and-views.md is appended to the module context to resolve section references."
+      "title": "Dangling Reference in Relationship Diagrams",
+      "why": "The file 05-relationship-diagrams.md ends with a truncated cross-reference to '02-boolean-principles/00-overview.m' due to context limits or file end.",
+      "fix": "Complete the link to [../02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md]."
     }
   ],
   "module": "04-database-conventions",
-  "files_used": 6,
+  "files_used": 9,
   "files_total": 11,
-  "bytes_used": 90000,
-  "bundle_sha": "42fe3a42fb2c9d39",
-  "total_v6": 84,
+  "bytes_used": 120000,
+  "bundle_sha": "cd82fafabed61373",
+  "total_v6": 90,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 82.5,
-  "total_v7": 82,
-  "total": 82,
+  "weighted_total": 89.0,
+  "total_v7": 89,
+  "total": 89,
   "band": "GOOD",
   "rubric": "v7"
 }

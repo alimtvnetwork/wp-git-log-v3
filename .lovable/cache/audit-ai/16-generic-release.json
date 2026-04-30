@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 20,
   "d3": 17,
-  "d4": 15,
-  "d5": 19,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Incomplete Installer Templates",
-      "why": "The spec provides logic fragments for Bash/PowerShell but lacks a complete, copy-pasteable 'Golden Template' for the installers, forcing the AI to synthesize the glue code.",
-      "fix": "Add a '08-installer-templates.md' containing the full, un-truncated source for install.sh and install.ps1 with all placeholders."
+      "dim": "D5",
+      "title": "Broken Cross-References to External Modules",
+      "why": "The overview and AC-19 reference files in ../12-cicd-pipeline-workflows/ and ../13-generic-cli/ which are not provided in the context.",
+      "fix": "Treat external module links as harness-scope artifacts per AC-21 and assume they resolve in the full repository structure."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Missing Concurrency Implementation",
-      "why": "AC-21 and 02-release-pipeline defer concurrency logic to spec/13 via cross-reference, but a mediocre AI without web access cannot resolve that external link.",
-      "fix": "In-line the specific SQLite/locking shell commands required for the release pipeline's local state management."
+      "title": "Ambiguous Concurrency Implementation",
+      "why": "Section 02-release-pipeline.md references a 'canonical concurrency contract' in spec/13 but does not provide the logic for SQLite WAL or locking locally.",
+      "fix": "Implement CI-level concurrency using the provided YAML snippet and defer local CLI locking to the spec/13 implementation."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous 'dist' cleanup logic",
-      "why": "05-release-assets.md provides a shell loop for cleanup that might delete the newly created .tar.gz if the globbing or extension check is slightly off in different shells.",
-      "fix": "Provide a specific, tested 'find' command or explicit list of files to keep to avoid accidental deletion of assets."
+      "title": "Inconsistent Placeholder Syntax",
+      "why": "The spec uses two families of placeholders (Legacy vs Modern) across different files (03 vs 08), which could lead to partial substitution if the wrong sed command is used.",
+      "fix": "Use the consolidated regex and substitution logic provided in 09-placeholder-tokens.md to catch both families."
     }
   ],
   "module": "16-generic-release",
-  "files_used": 11,
+  "files_used": 13,
   "files_total": 13,
-  "bytes_used": 90000,
-  "bundle_sha": "a1d1cd2971743df9",
+  "bytes_used": 120000,
+  "bundle_sha": "66cb10f2ef2519a8",
   "total_v6": 89,
   "axis": "normative-contract",
   "axis_multipliers": {
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 89.9,
-  "total_v7": 90,
-  "total": 90,
+  "weighted_total": 91.1,
+  "total_v7": 91,
+  "total": 91,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

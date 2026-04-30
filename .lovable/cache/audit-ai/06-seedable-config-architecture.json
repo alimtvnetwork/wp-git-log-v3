@@ -1,38 +1,38 @@
 {
   "d1": 18,
   "d2": 19,
-  "d3": 17,
-  "d4": 18,
+  "d3": 16,
+  "d4": 17,
   "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken External Symbol Resolution (spec/03)",
-      "why": "The Go code samples and AC-SC-22 rely on the 'apperror' package and 'AB-NNNN' registry from spec/03, which is not provided in this context.",
-      "fix": "Provide the normative content of spec/03-error-manage or a mock definition of the apperror package and registry."
+      "title": "Broken External Symbol Resolution",
+      "why": "The spec references 'apperror' and 'pathutil' packages and specific error codes (AB-9301) which are defined in spec/03, but that context is not provided in this module.",
+      "fix": "Provide the normative Go package definitions for apperror and the error registry in the context or as a snippet."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Inconsistent Database Schema Definitions",
-      "why": "01-fundamentals.md defines 'ConfigMeta' and 'Setting' tables, while AC-SC-02/10/15 require 'Configuration', 'Metadata', and 'UserConfiguration' tables.",
-      "fix": "Realign 01-fundamentals.md SQL blocks to use the table names mandated in the Acceptance Criteria (Metadata/Configuration/UserConfiguration)."
+      "title": "Ambiguous SQLite Transaction Type",
+      "why": "AC-SC-11 and AC-SC-21 mention 'BEGIN TRANSACTION' and 'BEGIN IMMEDIATE' but don't specify the SQLite locking mode required to prevent 'database is locked' errors during the lock-then-tx sequence.",
+      "fix": "Explicitly mandate 'BEGIN IMMEDIATE' for all seeder write transactions to ensure exclusive access."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'select' Type Mapping in Go",
-      "why": "AC-SC-14 specifies 'select' maps to 'StringVal', but the Go struct in 01-fundamentals.md still includes legacy 'IntVal' and 'FloatVal' fields.",
-      "fix": "Update the SettingValue struct in 01-fundamentals.md to match the normative mapping in AC-SC-14 (number -> FloatVal, select -> StringVal)."
+      "dim": "D4",
+      "title": "Truncated Feature Specifications",
+      "why": "The provided file content for 02-features/03-rag-validation-tests.md is truncated, leaving the unit test examples incomplete.",
+      "fix": "Complete the test suite code blocks for ContextBudget, EmbeddingModel, and SimilarityThreshold."
     }
   ],
   "module": "06-seedable-config-architecture",
-  "files_used": 7,
+  "files_used": 9,
   "files_total": 21,
-  "bytes_used": 90000,
-  "bundle_sha": "46259530c5aa13af",
-  "total_v6": 87,
+  "bytes_used": 120000,
+  "bundle_sha": "c9f47e66aacc2bab",
+  "total_v6": 85,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 88.8,
-  "total_v7": 89,
-  "total": 89,
+  "weighted_total": 86.8,
+  "total_v7": 87,
+  "total": 87,
   "band": "GOOD",
   "rubric": "v7"
 }

@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 14,
-  "d4": 17,
-  "d5": 15,
+  "d2": 14,
+  "d3": 15,
+  "d4": 18,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Missing Concurrency/Race Condition Specs for Registry",
-      "why": "The spec mentions a 'master registry' and 'collision resolution' but lacks the technical contract for how concurrent CI/CD pipelines or multiple developers prevent ID collisions during the registration phase.",
-      "fix": "Add a Normative Contract section in 03-error-code-registry defining a 'First-to-Merge' lock or a pre-commit reservation protocol."
+      "dim": "D2",
+      "title": "Missing Acceptance Criteria for Core Architecture",
+      "why": "The root 00-overview.md defines a 'Three-Tier Error Architecture' and 'Universal Response Envelope', but the ACs in 97-acceptance-criteria.md lack specific 'Verifies' clauses for the Tier 2 (Go apperror) and Tier 3 (Frontend Modal) implementation details mentioned in the normative contract.",
+      "fix": "Add ACs for Tier 2 stack trace serialization and Tier 3 Modal rendering requirements with explicit Verifies clauses."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved Downstream Application References",
-      "why": "AC-08 and AC-09 explicitly acknowledge that references to 'backend/internal/...' will fail in this context because they live in downstream repos, creating a 'harness-artifact' gap for a mediocre AI.",
-      "fix": "Provide a mock file-tree or a 'Contract-Only' interface for the expected backend directory structure within the spec context."
+      "dim": "D3",
+      "title": "Concurrency and Timeout Edge Cases Unaddressed",
+      "why": "While retrospectives mention 'Retry/Debounce' fixes, the normative contracts (Phase 50/57) do not define behavior for request timeouts, partial failures in 'Merge' operations, or race conditions in the registry scripts.",
+      "fix": "Add a 'Resilience' section to the Normative Contract defining timeout limits and partial-failure state transitions."
     },
     {
       "severity": "LOW",
-      "dim": "D2",
-      "title": "GWT Gap for Error Resolution Workflow API",
-      "why": "The Phase 60 OpenAPI for Error Resolution (tickets) is provided as a normative reference but lacks a corresponding GWT acceptance test in 97-acceptance-criteria.md.",
-      "fix": "Add AC-10: Error Resolution Ticket Lifecycle, verifying ticket creation and status transitions via the defined OpenAPI schema."
+      "dim": "D5",
+      "title": "Dangling Sub-module References",
+      "why": "The overview references '02-go-delegation-fix.md' and '07-logging-and-diagnostics/', but these files are not provided in the context, making it impossible for an offline coder to verify the full logic.",
+      "fix": "In-line the critical path logic from the missing architecture files into the 00-overview.md or 97-acceptance-criteria.md."
     }
   ],
   "module": "03-error-manage",
-  "files_used": 11,
+  "files_used": 17,
   "files_total": 166,
-  "bytes_used": 90000,
-  "bundle_sha": "bd1b5f03a9769dea",
-  "total_v6": 80,
+  "bytes_used": 120000,
+  "bundle_sha": "ee926dd5dd1c0e94",
+  "total_v6": 81,
   "axis": "audit-corpus",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 1.5
   },
   "axis_cap": 95,
-  "weighted_total": 81.0,
-  "total_v7": 81,
-  "total": 81,
+  "weighted_total": 83.5,
+  "total_v7": 84,
+  "total": 84,
   "band": "GOOD",
   "rubric": "v7"
 }
