@@ -148,7 +148,8 @@ This ensures configuration is always traceable, auditable, and version-aware.
       "properties": {
         "Type": {
           "type": "string",
-          "enum": ["string", "int", "float", "bool", "json"]
+          "enum": ["boolean", "number", "string", "select", "multiselect"],
+          "description": "Closed UI-aware enum per AC-SC-14. `boolean`/`number`/`string` are scalar Types; `select` requires `Validation.Enum` (single-value pick); `multiselect` requires `Validation.Enum` (multi-value pick). NOTE: legacy storage-type values {int, float, bool, json} are FORBIDDEN — use `number` (covers int+float), `boolean`, or `string` (with `Validation.Pattern` for JSON-shaped strings)."
         },
         "Default":        { "$ref": "#/$defs/Scalar" },
         "Description":    { "type": "string" },
