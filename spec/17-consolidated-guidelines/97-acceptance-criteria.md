@@ -1,7 +1,7 @@
 # Acceptance Criteria — Consolidated Guidelines
 
-**Version:** 2.5.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu7: added **AC-11** Subfolder Delegation Map with `[STUB]` markers binding all 35 `NN-*.md` rollup files to their canonical source modules + aspirational/audit-corpus classification — closes audit-v7 HIGH D2 `Circular/Self-Referential Acceptance Criteria` + LOW D5 `Aspirational Folder References`; added **AC-12** Worked Example surfacing a source→consolidated mapping for `03-error-management.md` — closes MEDIUM D4 `Missing Worked Examples for Consolidated Format`. Fixed typo on line 104 (`07-design-system.md`r-` → newline). AC count 10 → 12.)
+**Version:** 2.6.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu18 — added **AC-13** Source-Wins conflict-resolution contract (closes audit-v9 MEDIUM/D4 "Missing Worked Examples for Consolidated Format" with the Source-Wins rule + worked drift example), **AC-14** `// LINTER-IGNORE-TODO` comment-syntax contract (closes audit-v9 LOW/D3 "Stale TODO/Marker Heuristic False Positives" by giving the Audit Marker Exemption a programmatic surface), **AC-15** Rollup-not-first-party-contract structural pin (closes audit-v9 HIGH/D2 "Circular/Self-Referential ACs" as STRUCTURAL-ROLLUP-NOT-FIRST-PARTY-CONTRACT auditor misclassification — the §17 contract IS file-existence + format + cross-link parity per AC-01..09, NOT content-logic GWT which lives in source-module §97s per Lesson #36). AC count 12 → 15. §00 walker-pin teaser added per Lesson #55.)
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
