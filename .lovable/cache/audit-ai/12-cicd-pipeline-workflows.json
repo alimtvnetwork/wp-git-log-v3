@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
+  "d2": 19,
   "d3": 15,
-  "d4": 16,
-  "d5": 12,
+  "d4": 17,
+  "d5": 14,
   "issues": [
     {
-      "severity": "CRITICAL",
+      "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken Internal Cross-References (Slot Collisions)",
-      "why": "The module uses identical numeric prefixes (01, 02, 04, 05, 06, 07) for both root files and subfolders. A mediocre AI will resolve '[01-ci-pipeline.md](./01-ci-pipeline.md)' to the root file but may fail to distinguish it from the subfolder '01-browser-extension-deploy/01-ci-pipeline.md' when referenced via shorthand or relative paths in complex logic.",
-      "fix": "Enforce explicit path resolution in all links and rename colliding root files to include a '-generic' suffix."
+      "title": "Unresolved External Linter Dependencies",
+      "why": "AC-11 explicitly delegates verification to scripts in spec/27, but the provided context does not include spec/27 or the scripts' CLI contracts.",
+      "fix": "Include the CLI interface and exit code definitions for check-tree-health.cjs and check-lockstep.cjs in the 11-technical-interface.md file."
     },
     {
-      "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT/Verifies for Technical Interface",
-      "why": "While the overview has ACs, the '11-technical-interface.md' (referenced in inventory but content truncated/missing in provided text) lacks specific GWT criteria for the secrets schema and environment variable contracts.",
-      "fix": "Add a dedicated 97-acceptance-criteria.md section for the Technical Interface with GWT blocks for secret validation."
+      "severity": "MEDIUM",
+      "dim": "D3",
+      "title": "Truncated Shared Conventions",
+      "why": "The file 01-shared-conventions.md is truncated at the 'Checksum Generation' section, leaving the normative release integrity contract incomplete.",
+      "fix": "Complete the Checksum Generation section with the specific shell command (sha256sum) and output filename (checksums.txt) requirements."
     },
     {
       "severity": "MEDIUM",
       "dim": "D5",
-      "title": "Unresolved External Linter Dependencies",
-      "why": "AC-05 and AC-07 reference 'check-tree-health.cjs' and 'check-spec-cross-links.py' which are not provided in the context, leaving the AI unable to verify the 'tree-health gate' logic.",
-      "fix": "Provide the interface/CLI contract for the referenced linter scripts in a shared-conventions file."
+      "title": "Missing Subfolder Overview References",
+      "why": "The root 00-overview.md references subfolders (01-browser-extension-deploy, 02-go-binary-deploy, 03-reusable-ci-guards), but the Go and Guards subfolder overviews are missing from the context.",
+      "fix": "Provide the 00-overview.md files for the Go Binary Deploy and Reusable CI Guards subfolders to close the dependency graph."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
-  "files_used": 14,
+  "files_used": 12,
   "files_total": 49,
   "bytes_used": 90000,
-  "bundle_sha": "f9ceb92bc1cd6839",
-  "total_v6": 75,
+  "bundle_sha": "3046586068414379",
+  "total_v6": 83,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 74.9,
-  "total_v7": 75,
-  "total": 75,
+  "weighted_total": 82.6,
+  "total_v7": 83,
+  "total": 83,
   "band": "GOOD",
   "rubric": "v7"
 }
