@@ -1,37 +1,37 @@
 {
-  "d1": 19,
-  "d2": 18,
+  "d1": 18,
+  "d2": 19,
   "d3": 17,
-  "d4": 15,
-  "d5": 16,
+  "d4": 14,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Missing Core Schema and API Definitions",
-      "why": "The spec references 36 files in the inventory (01-39), but only 00, 97, and 98 are provided. Critical logic for SQLite schema (18), REST endpoints (04), and Error Codes (15) is missing.",
-      "fix": "Provide the full content of files 01-39, especially 02, 04, 15, 17, and 18."
+      "why": "The module inventory references critical files (04-rest-api-endpoints.md, 18-schema.sql, 17-openapi.yaml) that are not provided in the context, making 100% confident implementation impossible.",
+      "fix": "Provide the content for files 04, 17, and 18 in the prompt context."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
       "title": "Missing Concrete Code Fixtures",
-      "why": "While ACs are detailed, the actual SQL DDL and PHP class skeletons (referenced as \u00a718 and \u00a734) are not in the provided context, leaving the AI to guess the exact implementation of the 'PascalCase' rule.",
-      "fix": "Include the verbatim 18-schema.sql and 34-phpunit-test-skeleton.md files."
+      "why": "While AC-78 claims 18-schema.sql is the canonical DDL, the actual SQL content is missing from the provided text, leaving the AI to guess table structures.",
+      "fix": "Include the verbatim content of 18-schema.sql."
     },
     {
       "severity": "LOW",
       "dim": "D3",
       "title": "Concurrency/Race Condition on Rate Limits",
-      "why": "AC-26 mentions rate limits survive request boundaries with an 'in-memory + persisted floor' but doesn't specify the SQLite locking strategy for the floor update.",
-      "fix": "Specify 'BEGIN IMMEDIATE' for rate-limit increment transactions in \u00a705."
+      "why": "AC-26 mentions 'in-memory + persisted floor' but refers to an external spec (spec/13) for the actual locking strategy.",
+      "fix": "Briefly state the SQLite locking/transaction requirement for the rate-limit counter in AC-26."
     }
   ],
   "module": "22-git-logs-v2",
   "files_used": 3,
   "files_total": 36,
   "bytes_used": 90000,
-  "bundle_sha": "8a538158ebfcfd63",
-  "total": 85,
+  "bundle_sha": "355d092a8f022b76",
+  "total": 83,
   "band": "GOOD"
 }

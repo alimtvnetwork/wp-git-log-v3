@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 15,
+  "d3": 17,
   "d4": 16,
-  "d5": 14,
+  "d5": 19,
   "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken Cross-References to External Modules",
-      "why": "The spec relies heavily on files in `../12-cicd-pipeline-workflows/`, `../13-generic-cli/`, and `../14-update/` which are not provided in the context.",
-      "fix": "Include the content of referenced specs (12, 13, 14) or inline the critical PATH-activation and terminal-output logic."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Missing Concurrency Implementation Details",
-      "why": "AC-13 and 02-release-pipeline.md reference a 'canonical concurrency contract' (Lesson #36) but do not provide the actual logic for SQLite WAL or atomic file writes.",
-      "fix": "Provide the specific shell/Go snippets for atomic staging (temp-then-rename) and SQLite locking within this module."
+      "title": "Ambiguous Error Handling for Checksum Download Failure",
+      "why": "04-checksums-verification.md states the installer should 'warn but NOT skip verification' if checksums.txt fails to download, but then says it 'must exit with an error'.",
+      "fix": "Explicitly mandate a hard exit with code 1 if checksums.txt cannot be retrieved."
     },
     {
-      "severity": "MEDIUM",
+      "severity": "LOW",
       "dim": "D4",
-      "title": "Incomplete Installer Templates",
-      "why": "The spec provides logic fragments for installers but lacks a complete, copy-pasteable template for `install.sh` and `install.ps1` showing the exact placement of placeholders.",
-      "fix": "Add a 'Templates' section to 03-install-scripts.md with the full, un-substituted source for both scripts."
+      "title": "Inconsistent Placeholder Syntax",
+      "why": "03-install-scripts.md uses VERSION_PLACEHOLDER while 09-placeholder-tokens.md (referenced in changelog) mentions modern __VERSION__ syntax, creating potential confusion for template implementation.",
+      "fix": "Standardize on one placeholder format (e.g., __VERSION__) across all script templates and documentation."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Missing Binary Mode Bit Specification for Windows",
+      "why": "AC-09 specifies 0755 for POSIX but doesn't define expectations for Windows binary attributes within the .zip archive.",
+      "fix": "Add a clause stating Windows binaries should be packaged without specific read-only attributes to ensure overwrite capability."
     }
   ],
   "module": "16-generic-release",
   "files_used": 11,
   "files_total": 13,
   "bytes_used": 90000,
-  "bundle_sha": "6688bafbed30b81a",
-  "total": 83,
-  "band": "GOOD"
+  "bundle_sha": "ab3d75cfceeb013d",
+  "total": 90,
+  "band": "EXCELLENT"
 }
