@@ -1,10 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.77.3
+**Version:** 2.77.4
 **Updated:** 2026-04-30
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.77.4 — 2026-04-30 — Phase 153 Task A8: LLM gateway unblock + full-tree v5 re-score
+- **Action**: Gateway became available; ran full-tree `audit-ai-implementability.py --force` capturing first cumulative re-score since v4 baseline (Task A7). Tree mean **82.5 → 84.7 / 100** (+2.22). EXCELLENT band **2 → 5** (added spec/13 +7→91, spec/15 +2→92, spec/16 +4→90; existing 23=97 + 24=93 retained). Top movers: spec/27 +8 (A9 contract land), spec/02 +7 (A10), spec/13 +7 (A11a), spec/10 +7 (A13 closeout), spec/14 +6 (A11h). **Zero regressions.** 4 modules confirmed at structural 75-floor (03/12/17/25 — Rubric v6 ceiling per Lesson #29; Rubric v7 territory).
+- **Spec lockstep**: §00 v2.77.3 → **v2.77.4**, §98 v2.77.3 → **v2.77.4**, §99 v2.74.3 → **v2.74.4**. Patch-only — pure measurement, no contract / AC / CI / RUBRIC change.
+- **Cache refresh**: 23 entries in `.lovable/cache/audit-ai/*.json` rewritten with fresh `bundle_sha` + scores. Closes Lesson #34 staleness class for all 23 modules; cache is now authoritative again.
+- **Lesson #20 graduation**: 7 self-lift tasks (A6/A9/A10/A11a/A11c/A13/A14) had their LLM re-scores deferred per Lesson #20 (gateway 402); A8 now closes all 7 deferrals in a single pass. Future self-lift phases SHOULD wait until A8-class re-score windows rather than declaring "expected ≥N" without measurement.
+- Report: `/mnt/documents/spec-ai-implementability-audit-v5-A8.md`. Memo: `phase-153-task-A8-v5-rebaseline.md`.
 
 ### 2.77.3 — 2026-04-30 — Phase 153 Task A13: R1 atomic-write reference implementations (audit-v6 D4 close)
 - **Action**: Added two normative reference implementations to §00 R1 (Atomic writes) — one Python (`atomic_write_text`) using `os.open` + `os.fsync` + `os.replace` with full `finally`-block temp-sweep; one Node (`atomicWriteText`) using `fs.openSync` + `fs.fsyncSync` + `fs.renameSync` with the same `finally` discipline. Both snippets are normative — slots 10–29 MAY copy them verbatim (preferred) or implement equivalent atomicity in their language of choice. Closes audit-v6 D4 MEDIUM finding "Incomplete Examples for Resilience Rules" against AC-T-28's R1 contract.

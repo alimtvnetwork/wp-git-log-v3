@@ -1,7 +1,7 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.74.3
-**Updated:** 2026-04-29
+**Version:** 2.74.4
+**Updated:** 2026-04-30
 
 > **v2.74.3 update (Phase 153 Task A13 — R1 atomic-write reference implementations; closes audit-v6 D4 MEDIUM):** User reply `next`. Targeted close on spec/27's lone remaining genuine v6 audit finding (D4 MEDIUM "Incomplete Examples for Resilience Rules"). Lifted §00 R1 (Atomic writes) from prose-only to prose + two normative reference implementations: Python (`atomic_write_text` using `os.open` + `os.fsync` + `os.replace`) and Node (`atomicWriteText` using `fs.openSync` + `fs.fsyncSync` + `fs.renameSync`), both with full `finally`-block temp-sweep discipline. Slots 10–29 MAY copy verbatim (preferred) or implement equivalent atomicity in their language of choice. AC-T-28's R1 contract preserved single-source — only the implementer-facing example surface lifted (Phase 153 P3 mirror pattern; Lesson #36 link-don't-restate at file-level: the contract IS R1, the snippet is the implementer surface). Banners: §00 v2.77.2 → **v2.77.3**, §98 v2.77.2 → **v2.77.3**, §99 v2.74.2 → **v2.74.3**. §97 unchanged (v2.8.1). **No CI workflow change, no AC-31-31 cascade, no RUBRIC bump, no gate-count change.** Two other v6 findings against spec/27 (D2 HIGH per-artifact GWT + D1 LOW CODE_GLOB exhaustiveness) are walker-bias artifacts already closed by Task A9's AC-T-27 + AC-T-29 (Lesson #21 Subfolder Delegation Map pattern). Verified: lockstep 87/87 GREEN, tree-health 168/168 strict, version-parity 74/74. Predicted spec/27 next-rescore: 80 → ≥88 (D4 MEDIUM closure adds ~8 in D4 dim; D2/D1 already pinned).
 
