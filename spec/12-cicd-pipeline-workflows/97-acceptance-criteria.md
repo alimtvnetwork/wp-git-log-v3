@@ -1,7 +1,7 @@
 # Acceptance Criteria — CI/CD Pipeline Workflows
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep: added `**Verifies:**` clauses to AC-01..AC-08 — closes 8/8 P3 gap, graduates AC-block from Medium → High AI-confidence.)  
+**Version:** 1.3.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu4: AC-10 [high] Technical Interface contract surface + AC-11 [medium] Linter-script dependency cross-references — closes audit-v6 D2-HIGH + D5-MEDIUM findings; AC count 9 → 11.)  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
 ---

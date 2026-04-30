@@ -7,9 +7,9 @@ axis_rationale: "Bridges repos to GitHub Actions / external CI providers"
 
 # CI/CD Pipeline Workflows
 
-**Version:** 3.4.3  
-<!-- h10-verified-phase: 30 -->
-**Updated:** 2026-04-29  
+**Version:** 3.4.4  
+<!-- h10-verified-phase: 153 -->
+**Updated:** 2026-04-30  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
