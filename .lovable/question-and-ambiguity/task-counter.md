@@ -2,8 +2,9 @@
 
 **Budget:** 40 tasks
 **Activated:** 2026-04-28
-**Counter:** 16 / 40
-**Status:** 🟢 active
+**Counter:** 59 / 40 (budget exceeded)
+**Status:** ✅ completed
+**Deactivated:** 2026-04-30
 
 ## Counting rule
 
@@ -11,10 +12,32 @@ Increment by 1 per **completed user-facing task** (one user message → one
 unit of work delivered). Setup/admin sub-steps inside a single task do NOT
 each count separately.
 
-This setup task (creating prompt-01 + index + folder scaffolding) is task
-**counter setup**, not task #1. Task #1 begins on the user's next message.
+## Final reconciliation (2026-04-30)
 
-## Log
+Counter was last hand-incremented to **15/40 at Phase 31 (2026-04-28)**, then
+silently drifted across the Phase 153 super-cluster (44 sub-task memos under
+`.lovable/memory/audit/v2-deterministic/phase-153-*.md`). Reconciled count:
+
+- Phases 18–31 (logged): **15 tasks**
+- Phase 153 sub-tasks (memos enumerated): **44 tasks**
+- **Total: 59 tasks** (budget +19)
+
+Deactivation per Prompt 01's own `## Deactivation trigger` clause: budget
+crossed, file marked completed, prompt frontmatter + index updated. Resume
+normal question-asking behavior on the next user message.
+
+## Lesson — Counter-drift class
+
+Live counters embedded in markdown files MUST be incremented in the same
+phase that ships the work, OR replaced with a derived count (e.g. a script
+that counts `phase-NNN-*.md` memos). The Phase 153 super-cluster shipped
+44 sub-tasks across two days under a single phase number; the per-task
+hand-increment ritual broke down at the first sub-task. Future prompt
+budgets should either (a) cap at sub-task granularity with mechanical
+increment, or (b) cap at phase granularity (1 phase = 1 unit) with a clear
+sub-task-vs-phase rule in the activation directive.
+
+## Log (Phases 18–31; Phase 153 sub-tasks enumerated in memo)
 
 | # | Date | Brief | Ambiguity notes filed |
 |---|------|-------|----------------------|
@@ -30,14 +53,15 @@ This setup task (creating prompt-01 + index + folder scaffolding) is task
 | 9 | 2026-04-28 | Phase 25 — PR-template + monthly-audit + folder-structure (clean, no-op) | 03-core-memory-gate-count-stale (self-resolved) |
 | 10 | 2026-04-28 | Phase 26 — F3 "Adjacent .py tests" subsection verification (clean) | none |
 | 11 | 2026-04-28 | Phase 27 — Root §97 AC-ROOT-01..08 freshness verification (clean) | none |
-| 12 | 2026-04-28 | Phase 28 — health-dashboard.md freshness sweep (8 fields refreshed, v3.7.7→v3.7.8, §98 3.5.0→3.5.1) | none |
-| 13 | 2026-04-28 | Phase 29 — spec-index.md regen (877→883 files, 6 stale §27 slots flushed) — Phase 30 cascade queued | none |
-| 14 | 2026-04-28 | Phase 30 — Spec-index drift gate strict-promotion (gate 17→18, RUBRIC v2.26→v2.27, full AC-31-31 cascade, 18/18/18 parity) | 04-session-local-phase-vs-global (codified) |
-| 15 | 2026-04-28 | Phase 31 — Advisory CI sibling scan (NO-OP; 5 `\|\| true` hits all in cosmetic Summary aggregator, hypothesis disproven) | none |
+| 12 | 2026-04-28 | Phase 28 — health-dashboard.md freshness sweep | none |
+| 13 | 2026-04-28 | Phase 29 — spec-index.md regen | none |
+| 14 | 2026-04-28 | Phase 30 — Spec-index drift gate strict-promotion | 04-session-local-phase-vs-global (codified) |
+| 15 | 2026-04-28 | Phase 31 — Advisory CI sibling scan (NO-OP) | none |
+| 16-59 | 2026-04-29..30 | Phase 153 super-cluster (44 sub-tasks; see memos `phase-153-*.md`) | none new |
 
-## Deactivation trigger
+## Deactivation trigger (executed 2026-04-30)
 
-When counter reaches **40**, mark this file `Status: ✅ completed`, update
-`.lovable/prompts/01-no-questions.md` frontmatter (`status: completed`,
-`deactivated: <date>`), and update `.lovable/prompts.md` index row. Resume
-normal question-asking behavior on task 41.
+Counter ≥ 40 → file marked `Status: ✅ completed`,
+`.lovable/prompts/01-no-questions.md` frontmatter updated
+(`status: completed`, `deactivated: 2026-04-30`, `counter: 59`),
+`.lovable/prompts.md` index row updated. Normal question-asking resumes.
