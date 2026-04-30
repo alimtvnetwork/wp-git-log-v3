@@ -1,38 +1,38 @@
 {
-  "d1": 18,
-  "d2": 19,
+  "d1": 16,
+  "d2": 18,
   "d3": 17,
-  "d4": 18,
-  "d5": 15,
+  "d4": 15,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Unresolved External Dependency: AC-CL-*",
-      "why": "AC-SD-01 and AC-SD-02 mandate compliance with AC-CL-01..20 from a relative path '../02-coding-guidelines/...' which is not provided in the current context.",
-      "fix": "Provide the content of spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md in the context or inline the specific naming rules."
+      "title": "Broken Cross-Module Reference (AC-SD-01)",
+      "why": "AC-SD-01 inherits AC-CL-* from a relative path '../02-coding-guidelines/...' which is not provided in the context, leaving the AI coder without the mandatory naming and typing rules.",
+      "fix": "Provide the content of spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md in the context or inline the critical AC-CL rules."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous 'ApplicationId' Source",
-      "why": "AC-SD-05 defines a Counter table using ApplicationId, but the Root DB schema in 01-fundamentals.md defines a 'Project' table with 'ProjectId' and no 'Application' table.",
-      "fix": "Update Root DB schema in 01-fundamentals.md to include an Application table or unify terminology to ProjectId in AC-SD-05."
+      "dim": "D1",
+      "title": "Schema Discrepancy in Fundamentals vs AC",
+      "why": "01-fundamentals.md defines 'Project' and 'Database' tables with snake_case columns (e.g., 'ProjectId', 'DisplayName', 'EntityId' are okay, but 'SizeBytes', 'RecordCount' are used while AC-SD-28 requires specific PascalCase and types like TEXT for timestamps).",
+      "fix": "Update 01-fundamentals.md SQL blocks to match the exact schema floor and PascalCase requirements defined in AC-SD-28."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Schema/AC Discrepancy on Registry Table",
-      "why": "AC-SD-05 requires a registry table tracking 'SequenceNumber' and 'LastAccessedAt', but the 'Database' table schema in 01-fundamentals.md lacks a SequenceNumber column.",
-      "fix": "Add 'SequenceNumber INTEGER NOT NULL' to the 'Database' table DDL in 01-fundamentals.md."
+      "dim": "D4",
+      "title": "Truncated Implementation Examples",
+      "why": "The 01-fundamentals.md file is truncated at the 90KB cap, cutting off the 'Cache Database Pattern' and potentially other worked Go examples needed for 100% confidence.",
+      "fix": "Move critical implementation snippets into the parent 97-acceptance-criteria.md or ensure they are within the first 80KB of the module."
     }
   ],
   "module": "05-split-db-architecture",
   "files_used": 5,
   "files_total": 20,
-  "bytes_used": 89751,
-  "bundle_sha": "5418a4196e24378a",
-  "total_v6": 87,
+  "bytes_used": 90000,
+  "bundle_sha": "822e974cb238422b",
+  "total_v6": 80,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 88.8,
-  "total_v7": 89,
-  "total": 89,
+  "weighted_total": 82.4,
+  "total_v7": 82,
+  "total": 82,
   "band": "GOOD",
   "rubric": "v7"
 }
