@@ -3,35 +3,35 @@
   "d2": 20,
   "d3": 17,
   "d4": 15,
-  "d5": 14,
+  "d5": 12,
   "issues": [
     {
-      "severity": "HIGH",
+      "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Missing Dependency Context",
-      "why": "The spec references 13 sub-files (01-13) and external files like 'src/index.css' and 'tailwind.config.ts' which are not provided in the context.",
-      "fix": "Provide the content of 01-design-principles.md and 02-theme-variable-architecture.md to resolve token and principle definitions."
+      "title": "Missing 13 Core Leaf Files",
+      "why": "The spec references 13 critical files (01-13) for principles, variables, and component logic, but they are not provided in the context. A mediocre AI cannot implement the 'Variable-First' architecture without the variable registry (02) or component patterns (07-11).",
+      "fix": "Provide the content for files 01-13 in the prompt context."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D4",
+      "title": "Missing CSS/Tailwind Fixtures",
+      "why": "While the spec defines the architecture, it lacks the actual 'index.css' and 'tailwind.config.ts' content. An AI coder must guess the exact HSL values and Tailwind extension keys, leading to 0% confidence in visual parity.",
+      "fix": "Include the full source code for src/index.css and tailwind.config.ts as examples."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency/Race Condition in Font Loading",
-      "why": "AC-007/008/009 mandate 'display=swap' but don't specify behavior for slow networks where system fonts might cause Layout Shift (CLS) before the 300ms motion budget.",
-      "fix": "Add a requirement for a CSS 'font-display: swap' with specific size-adjust overrides to minimize CLS during font swap."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D4",
-      "title": "Incomplete Code Block Examples",
-      "why": "While logic for loaders is provided in Go/PHP/Python, the actual CSS implementation for the 'gradient underline sweep' (AC-027) is described but not shown as a code snippet.",
-      "fix": "Include a CSS snippet for the .nav-item::after origin-flip logic to ensure 100% CSS accuracy."
+      "title": "Vague Error Handling for Token API",
+      "why": "The OpenAPI spec (Phase 58) defines a 404 for /tokens/{name} but doesn't specify the error response schema or how to handle invalid 'category' queries in the list endpoint.",
+      "fix": "Add a standard Error schema to the OpenAPI components and reference it in 400/404 responses."
     }
   ],
   "module": "07-design-system",
   "files_used": 3,
   "files_total": 17,
   "bytes_used": 90000,
-  "bundle_sha": "3e7fb892b74b6fe8",
-  "total": 84,
+  "bundle_sha": "838994cf8a3d6c84",
+  "total": 82,
   "band": "GOOD"
 }

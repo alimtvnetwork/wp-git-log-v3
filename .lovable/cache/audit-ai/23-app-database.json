@@ -1,37 +1,37 @@
 {
-  "d1": 18,
+  "d1": 19,
   "d2": 20,
-  "d3": 19,
-  "d4": 17,
+  "d3": 18,
+  "d4": 20,
   "d5": 20,
   "issues": [
     {
       "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Conflicting DDL Dialects",
-      "why": "The module provides both SQLite (PascalCase) and PostgreSQL (snake_case/UUID) schemas. While AC-ADB-11 designates SQLite as primary, having two full schemas in one file increases the risk of a mediocre AI picking the wrong dialect or mixing naming conventions.",
-      "fix": "Move the PostgreSQL 'Reference' DDL to a separate file (e.g., 96-postgres-reference.md) to prevent context-window confusion."
+      "dim": "D3",
+      "title": "SQLite CHECK constraint subquery violation",
+      "why": "The DDL in 00-overview.md still contains CHECK constraints with subqueries (SELECT AppLinkTypeId FROM AppLinkType...), which SQLite explicitly forbids, despite AC-ADB-13 acknowledging this and providing a fix.",
+      "fix": "Replace subqueries in AppLink CHECK with hardcoded constants (1 for GitProfile, 2 for Repo) as mandated by AC-ADB-13."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Missing Canonicalization Examples",
-      "why": "The resolution algorithm (Step 1) requires a specific canonicalization pipeline (lowercase, strip .git, etc.), but no worked examples of input vs. output URLs are provided.",
-      "fix": "Add a table of 5-6 example URL transformations (SSH, HTTPS, trailing slashes) to the Normative Resolution section."
+      "dim": "D1",
+      "title": "Conflicting DDL Dialects in Overview",
+      "why": "The overview provides both SQLite (PascalCase) and PostgreSQL (snake_case) DDLs. While AC-ADB-11 designates SQLite as primary, having both in one file without clear visual separation can confuse a mediocre coder.",
+      "fix": "Add a prominent warning header to the PostgreSQL section: 'REFERENCE ONLY - DO NOT IMPLEMENT'."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Missing Concurrency Guidance",
-      "why": "SQLite 'busy_timeout' is mentioned via cross-reference to spec/05, but not explicitly defined for the App resolution queries which are high-frequency.",
-      "fix": "Add a 'Concurrency' note to the Query Patterns section specifying a 5000ms busy_timeout for the App resolver."
+      "title": "Missing Concurrency/Locking Strategy",
+      "why": "SQLite is used for CI/CD push attribution; high-frequency pushes could lead to 'database is locked' errors without a specified busy_timeout or WAL mode instruction.",
+      "fix": "Add 'PRAGMA journal_mode=WAL;' and 'PRAGMA busy_timeout=5000;' to the initialization seed data."
     }
   ],
   "module": "23-app-database",
   "files_used": 4,
   "files_total": 4,
-  "bytes_used": 58383,
-  "bundle_sha": "747e5dc126318858",
-  "total": 94,
+  "bytes_used": 61569,
+  "bundle_sha": "4324640247df1a62",
+  "total": 97,
   "band": "EXCELLENT"
 }

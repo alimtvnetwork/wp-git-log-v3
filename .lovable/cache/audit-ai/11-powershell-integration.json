@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 15,
   "d3": 16,
-  "d4": 14,
-  "d5": 12,
+  "d4": 18,
+  "d5": 14,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Missing Core Template and Schema Files",
-      "why": "The spec references 'templates/run.ps1' and 'schemas/powershell.schema.json' as the primary implementation targets, but these files are not provided in the context.",
-      "fix": "Include the full content of templates/run.ps1 and schemas/powershell.schema.json in the module context."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Acceptance Criteria are Meta-focused",
-      "why": "AC-01 through AC-08 verify file existence and naming conventions rather than functional logic (e.g., verifying that -Force actually deletes the specific paths listed in JSON).",
-      "fix": "Add functional GWT criteria for each pipeline step, specifically verifying the 'Forbidden runtime patterns' defined in the overview."
+      "dim": "D5",
+      "title": "Broken Internal References",
+      "why": "The spec references 07-runner-interface.md and 06-php-known-issues.md in multiple places (AC-09, File Inventory), but these files are not provided in the context.",
+      "fix": "Provide 07-runner-interface.md and 06-php-known-issues.md or merge their content into 02-script-reference.md."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Truncated Interface Contract",
-      "why": "File 07-runner-interface.md is truncated at the end of the context, losing the final exit code definitions and dependency toolchain details.",
-      "fix": "Provide the complete, non-truncated version of 07-runner-interface.md."
+      "dim": "D2",
+      "title": "Acceptance Criteria Mismatch",
+      "why": "AC-09 and AC-10 are highly detailed, but AC-01 through AC-08 are generic boilerplate that doesn't verify the specific logic of pnpm PnP or Go/React orchestration.",
+      "fix": "Add functional GWT criteria for pnpm PnP store resolution and cross-drive fallback logic."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Concurrency / Process Locking",
+      "why": "The script performs recursive deletions and port binding but does not address cases where files are locked by an IDE or a previous instance is still bound to the port.",
+      "fix": "Add a pre-flight check to kill processes bound to the configured ports before starting Step 3."
     }
   ],
   "module": "11-powershell-integration",
-  "files_used": 12,
+  "files_used": 10,
   "files_total": 19,
-  "bytes_used": 90000,
-  "bundle_sha": "582e4a9adff7ac2b",
-  "total": 75,
+  "bytes_used": 89776,
+  "bundle_sha": "6baa08b34c47e66d",
+  "total": 81,
   "band": "GOOD"
 }

@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 20,
   "d3": 15,
-  "d4": 16,
-  "d5": 14,
+  "d4": 18,
+  "d5": 12,
   "issues": [
+    {
+      "severity": "CRITICAL",
+      "dim": "D5",
+      "title": "Missing Authoritative Source Context",
+      "why": "The module is explicitly 'derivative' and relies on spec/22 for all entity names, relationships, and logic, but spec/22 is not provided in the context.",
+      "fix": "Include spec/22-git-logs-v2 files in the prompt context to allow the AI to verify diagram-to-prose parity."
+    },
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Missing Authoritative Source Context",
-      "why": "The spec is a 'derivative' of spec/22, but spec/22 is not provided. An AI cannot verify if the ER diagram or auth flows are correct.",
-      "fix": "Provide the content of spec/22-git-logs-v2/ or include the specific schema/logic snippets being visualized."
+      "title": "Missing Mermaid Source Files",
+      "why": "The inventory lists 7 active .mmd files (01, 05, 06, 07, 08, 09, 10), but the provided file list only contains the markdown documentation and puppeteer.json.",
+      "fix": "Provide the content of the .mmd files so the AI can audit the Mermaid syntax and logic against the ACs."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Non-deterministic SVG Comparison",
-      "why": "AC-DG-12 and the Tooling Snippet rely on SHA-256 diffing of SVGs, but Mermaid renders often contain non-deterministic IDs/timestamps.",
-      "fix": "Update the CI script to use a 'canonical' render pass that strips dynamic IDs or use structural XML diffing."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D4",
-      "title": "Missing Mermaid Source Fixtures",
-      "why": "While the metadata and config are clear, no actual .mmd file content is provided in the context to verify the 'header comment' rule.",
-      "fix": "Include at least one sample .mmd file (e.g., 05-auth-validation.mmd) in the module file list."
+      "title": "Non-deterministic SVG Diffing",
+      "why": "AC-DG-12 and the Tooling Snippet require byte-perfect or SHA-256 matches for SVGs, but Mermaid renders often include non-deterministic IDs that break simple diffs.",
+      "fix": "Update the CI snippet to use a structural XML diff or strip generated IDs before SHA-256 hashing."
     }
   ],
   "module": "26-gitlogs-diagrams",
   "files_used": 9,
   "files_total": 9,
-  "bytes_used": 60649,
-  "bundle_sha": "9741358eda01aaed",
+  "bytes_used": 62615,
+  "bundle_sha": "310b049afe97c9ce",
   "total": 83,
   "band": "GOOD"
 }

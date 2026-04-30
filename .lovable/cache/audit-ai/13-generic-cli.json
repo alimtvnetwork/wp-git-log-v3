@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 19,
+  "d2": 20,
   "d3": 17,
-  "d4": 16,
-  "d5": 14,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken External Spec References",
-      "why": "AC-22 and AC-23 reference external specs (spec/05, spec/27) and specific ACs (AC-SD-22, AC-T-28) that are not provided in the context, making concurrency and atomic-write rules unresolvable.",
-      "fix": "Incorporate the specific requirements of AC-SD-22 and AC-T-28 directly into the text of AC-22/23 or provide the referenced files."
+      "title": "Broken External References (AC-24)",
+      "why": "AC-22 and AC-23 rely on external specs (spec/05, spec/27) for critical concurrency and atomic-write logic which are not provided in this context.",
+      "fix": "Include the relevant snippets from spec/05 and spec/27 or provide the full files in the bundle."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Missing Reference Images",
-      "why": "Multiple files (06, 20) reference a rendering pipeline diagram 'images/terminal-output-pipeline.mmd' which is not included in the module.",
-      "fix": "Include the Mermaid source for the terminal-output-pipeline diagram within the overview or a dedicated file."
+      "dim": "D3",
+      "title": "Incomplete Concurrency Implementation Details",
+      "why": "While AC-22 mandates WAL and busy_timeout, the provided code examples (e.g., 10-database.md is truncated/missing) don't show the implementation of the retry loop or connection pool serialization.",
+      "fix": "Add a concrete Go code snippet showing the SQLite driver DSN with PRAGMAs and the BEGIN IMMEDIATE wrapper."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Stale Prose Contradictions",
-      "why": "Despite AC-21's '97-WINS' rule, files like 03 and 04 still contain 'os.Exit(1)' examples for misuse cases that the contract now mandates as Exit 2.",
-      "fix": "Perform a final regex sweep to replace 'os.Exit(1)' with 'os.Exit(int(exit.ExitMisuse))' in all code examples."
+      "title": "Prose/Code Example Mismatch (Truncation)",
+      "why": "File 09-help-system.md is truncated mid-sentence in the runScan example, leaving the implementation of help interception incomplete for the coder.",
+      "fix": "Complete the runScan function example in 09-help-system.md."
     }
   ],
   "module": "13-generic-cli",
-  "files_used": 13,
+  "files_used": 12,
   "files_total": 24,
   "bytes_used": 90000,
-  "bundle_sha": "d482e2b39d2d7128",
-  "total": 84,
+  "bundle_sha": "5f71fd8a306565ef",
+  "total": 89,
   "band": "GOOD"
 }

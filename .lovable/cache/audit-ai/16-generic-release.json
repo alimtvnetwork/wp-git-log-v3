@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 17,
-  "d4": 19,
-  "d5": 15,
+  "d3": 15,
+  "d4": 16,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Dangling Cross-References to External Modules",
-      "why": "The spec heavily relies on external files (e.g., 13-generic-cli/20-terminal-output-design.md) which are not provided in this context, making it impossible for an AI to verify the 'Terminal Output' or 'Shell Activation' contracts.",
-      "fix": "Incorporate the normative content of the terminal-output and shell-activation contracts directly into the 16-generic-release module or provide them in the context."
+      "title": "Broken Cross-References to External Modules",
+      "why": "The spec relies heavily on files in `../12-cicd-pipeline-workflows/`, `../13-generic-cli/`, and `../14-update/` which are not provided in the context.",
+      "fix": "Include the content of referenced specs (12, 13, 14) or inline the critical PATH-activation and terminal-output logic."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Incomplete Concurrency/Race Condition Handling",
-      "why": "While AC-07 and AC-08 mention immutability and draft-promotion, the provided shell snippets for 'Compress' and 'Checksum' stages lack atomic file operations or cleanup for partial failures in a local environment.",
-      "fix": "Add 'set -o pipefail' and trap-based cleanup to all shell examples, and explicitly define behavior for 'tag already exists' during the Resolve Version stage."
+      "title": "Missing Concurrency Implementation Details",
+      "why": "AC-13 and 02-release-pipeline.md reference a 'canonical concurrency contract' (Lesson #36) but do not provide the actual logic for SQLite WAL or atomic file writes.",
+      "fix": "Provide the specific shell/Go snippets for atomic staging (temp-then-rename) and SQLite locking within this module."
     },
     {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous Placeholder Syntax Families",
-      "why": "The changelog mentions a Phase 123 update for '09-placeholder-tokens.md' with two syntactic families, but the actual file 09 is missing from the provided text, leaving the AI to guess between <NAME> and __NAME__.",
-      "fix": "Include the content of 09-placeholder-tokens.md to pin the exact regex/string patterns for substitution."
+      "severity": "MEDIUM",
+      "dim": "D4",
+      "title": "Incomplete Installer Templates",
+      "why": "The spec provides logic fragments for installers but lacks a complete, copy-pasteable template for `install.sh` and `install.ps1` showing the exact placement of placeholders.",
+      "fix": "Add a 'Templates' section to 03-install-scripts.md with the full, un-substituted source for both scripts."
     }
   ],
   "module": "16-generic-release",
   "files_used": 11,
   "files_total": 13,
   "bytes_used": 90000,
-  "bundle_sha": "1371b26d5dee9622",
-  "total": 89,
+  "bundle_sha": "6688bafbed30b81a",
+  "total": 83,
   "band": "GOOD"
 }

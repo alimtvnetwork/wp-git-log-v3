@@ -3,35 +3,35 @@
   "d2": 14,
   "d3": 15,
   "d4": 19,
-  "d5": 12,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken External Dependencies",
-      "why": "The consistency report (99-consistency-report.md) explicitly identifies 5 broken external cross-references to nonexistent folders like '06-golang-standards' and '01-app'.",
-      "fix": "Update paths to point to 'spec/02-coding-guidelines/03-golang/' and 'spec/02-coding-guidelines/01-cross-language/' respectively."
-    },
-    {
-      "severity": "HIGH",
       "dim": "D2",
-      "title": "Incomplete Acceptance Criteria",
-      "why": "The provided 97-acceptance-criteria.md file is truncated mid-sentence at AC-08, and the criteria listed are meta-checks (file existence) rather than functional logic checks for the WP plugin patterns.",
-      "fix": "Complete the AC file and add functional GWT cases for the 'safeExecute' pattern and Enum metadata resolution."
+      "title": "Missing Verifies clauses for Phase 1-21",
+      "why": "While the meta-files (00, 97, 98, 99) have detailed ACs with Verifies clauses, the actual technical phases (01-21) are listed as 'must remain valid' but lack specific GWT criteria for their technical requirements (e.g., PSR-4 logging, singleton constraints).",
+      "fix": "Add a 'Technical Requirements' section to 97-acceptance-criteria.md with GWT/Verifies for the core architectural patterns defined in Phases 01-06."
     },
     {
       "severity": "MEDIUM",
+      "dim": "D5",
+      "title": "Broken internal link to Phase 2 sub-files",
+      "why": "00-overview.md references '02-enums-and-coding-style/' as a subfolder, but the file inventory and links in 00-quick-start.md and 02-overview.md use inconsistent relative paths that may fail depending on the working directory of the AI.",
+      "fix": "Standardize all internal links to use the full relative path from the module root (e.g., ./02-enums-and-coding-style/01-enum-architecture.md)."
+    },
+    {
+      "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency and Race Conditions Unaddressed",
-      "why": "While the spec covers structure and enums well, it lacks guidance on WordPress-specific concurrency (e.g., race conditions during option updates or file-system locks for the FileLogger).",
-      "fix": "Add a section to Phase 4 or 15 regarding the use of flock() for logging and atomic option updates."
+      "title": "Concurrency and Race Conditions in FileLogger",
+      "why": "Phase 01 and 04 specify a FileLogger singleton but do not address file locking (flock) or concurrent write handling, which is critical in high-traffic WordPress environments.",
+      "fix": "Add a requirement in 04-logging-and-error-handling.md for exclusive file locking during write operations."
     }
   ],
   "module": "18-wp-plugin-how-to",
-  "files_used": 12,
+  "files_used": 11,
   "files_total": 35,
-  "bytes_used": 90000,
-  "bundle_sha": "42f53d4f77982d8a",
-  "total": 78,
+  "bytes_used": 89670,
+  "bundle_sha": "064127fafb0acfe8",
+  "total": 82,
   "band": "GOOD"
 }

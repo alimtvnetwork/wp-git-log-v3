@@ -2,37 +2,36 @@
   "d1": 18,
   "d2": 14,
   "d3": 15,
-  "d4": 17,
+  "d4": 16,
   "d5": 12,
-  "score": 76,
   "issues": [
     {
       "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Broken Cross-References to Source Folders",
-      "why": "The overview and changelog admit that many source folders (08, 09, 13) do not exist yet or were renamed, but the module claims 'Production-Ready' and 'No Ambiguity'.",
-      "fix": "Update the File Inventory to explicitly mark non-existent source modules as 'Aspirational' and remove them from the 'Production-Ready' confidence calculation."
+      "title": "Broken Dependency Closure (Aspirational Folders)",
+      "why": "The spec explicitly references folders like 08-docs-viewer-ui and 09-code-block-system which do not exist on disk. A mediocre AI will fail to find the 'source' it is supposed to consolidate.",
+      "fix": "Provide the content for the 3 aspirational modules or mark them as 'EXEMPT-MISSING' in the provided context."
     },
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Acceptance Criteria Lack Verifiable Code Paths",
-      "why": "AC-01 through AC-05 describe structural rules but lack the 'Verifies:' clause pointing to specific linter logic or file paths required by the module's own P3 rubric.",
-      "fix": "Append a '**Verifies:**' line to every AC in 97-acceptance-criteria.md citing the specific linter script (e.g., check-tree-health.cjs) that enforces it."
+      "title": "Missing Verifies Clauses for AC-09/AC-10",
+      "why": "AC-09 (AI Confidence) and AC-10 (Module-kind pin) lack the mandatory '**Verifies:**' clauses required by the module's own P3-tier confidence rubric.",
+      "fix": "Add '**Verifies:**' clauses to AC-09 and AC-10 citing the specific linter or memory-index rule they enforce."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Truncated Content in Consolidated Reference",
-      "why": "File 02-coding-guidelines.md ends mid-sentence ('$us...'), violating the module's own P2 gate (no truncation markers).",
-      "fix": "Complete the truncated sentence in 02-coding-guidelines.md and ensure all consolidated files are fully closed."
+      "dim": "D5",
+      "title": "Unresolved External Script References",
+      "why": "Multiple ACs (AC-01, AC-02, AC-03) require running specific Python/Node scripts (e.g., check-spec-cross-links.py) that are not provided in the context.",
+      "fix": "Include the CLI interface/contract or source code for the referenced linter-scripts in the context."
     }
   ],
   "module": "17-consolidated-guidelines",
-  "files_used": 6,
+  "files_used": 5,
   "files_total": 38,
   "bytes_used": 90000,
-  "bundle_sha": "9f67d71db8e368cd",
-  "total": 76,
+  "bundle_sha": "836787963bc1da70",
+  "total": 75,
   "band": "GOOD"
 }
