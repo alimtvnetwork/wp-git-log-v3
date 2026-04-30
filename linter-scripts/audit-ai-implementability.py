@@ -278,20 +278,23 @@ def band(total: int) -> str:
     return "BLOCKING"
 
 
-def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool) -> dict[str, Any]:
+def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, axis: str) -> dict[str, Any]:
     cache_file = CACHE_DIR / f"{mod.name}.json"
     bundle, used_bytes, used_files, total_files = load_module_bundle(mod)
-    bundle_sha = hashlib.sha256(bundle.encode()).hexdigest()[:16]
+    # Fold axis into the cache key so v6 caches (no axis) re-score under v7
+    # and any future axis re-classification invalidates the prior score.
+    bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
 
     if cache_file.exists() and not force:
         cached = json.loads(cache_file.read_text())
-        if cached.get("bundle_sha") == bundle_sha:
+        if cached.get("bundle_sha") == bundle_sha and cached.get("rubric") == "v7":
             cached["from_cache"] = True
             return cached
 
     if no_network:
         return {
             "module": mod.name,
+            "axis": axis,
             "no_network": True,
             "files_used": used_files,
             "files_total": total_files,
@@ -311,8 +314,12 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool) 
     parsed["files_total"] = total_files
     parsed["bytes_used"] = used_bytes
     parsed["bundle_sha"] = bundle_sha
-    parsed["total"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
+    parsed["total_v6"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
+    v7 = apply_rubric_v7({k: int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5")}, axis)
+    parsed.update(v7)
+    parsed["total"] = v7["total_v7"]  # band + report use v7 score
     parsed["band"] = band(parsed["total"])
+    parsed["rubric"] = "v7"
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     cache_file.write_text(json.dumps(parsed, indent=2))
     return parsed
