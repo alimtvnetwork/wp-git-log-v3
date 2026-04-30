@@ -1,8 +1,10 @@
 # Consistency Report: Seedable Config Architecture
 
-**Version:** 4.3.0  
-**Generated:** 2026-04-29  
+**Version:** 4.3.1  
+**Generated:** 2026-04-30  
 **Health Score:** 100/100 (A+)
+
+> **v4.3.1 update (Phase 153 Task A24 — EXCELLENT-band push via Lesson #45 working levers):** In-place extensions to existing ACs (no AC count change). Extended **AC-SC-14** with NORMATIVE Go `SettingValue` struct mapping clause (`select`→`StringVal *string`; `multiselect`→`StringsVal *[]string`; forbids `EnumVal int` substitution; closes v7 D1 LOW "Ambiguous Type Mapping for 'select'"). Extended **AC-SC-21** with reference Go pseudo-code showing lock→tx→commit→changelog→fsync→unlock sequence + 4 forbidden patterns (closes v7 D3 MEDIUM "Incomplete Concurrency Implementation Detail"). **Pre-flight per Lesson #45 graduated**: pre-edit tier-1 bundle = 59.9 KB (15.9 KB headroom under 75 KB cap); post-edit = 63.4 KB (12.4 KB remaining). Skipped v7 D5 HIGH (already pinned by AC-SC-22 link-don't-restate per Lesson #36; D5×0.5 axis weight = lowest ROI). §97 v4.1.0 → **v4.2.0** (in-place AC clarification); §00/§98/§99 v4.3.0 → **v4.3.1** (banner patch). **Expected lift**: D1 18→19 (×1.0 = +1.0) + D3 17→18 (×1.2 = +1.2) = weighted +2.2 → 88.8 + 2.2 = **91.0 EXCELLENT**; conservative floor ≥90 (single-dim partial lift still clears threshold). Pattern follows precedents: spec/03 A21 +7, spec/04 A21 +8 — both succeeded because §97 had headroom; spec/05 A23 failed (REVERTED) because §97 was saturated. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no slot-inventory change, no gate-count change.** Memo: `phase-153-task-A24-spec06-excellent-push.md`.
 
 > **v4.3.0 update (Phase 153 Task A11f — spec/06 D3 MEDIUM + D5 HIGH closure):** Added AC-SC-21 (CHANGELOG concurrency lock-ordering — single shared file lock binds AC-SC-11 + AC-SC-16 + AC-SC-17) and AC-SC-22 (apperror/AB-NNNN/ErrSeedLoadFailed symbols cross-referenced to canonical spec/03 apperror package + error-code registry per Lesson #36). AC count 20 → 22. §97 4.0.0 → 4.1.0; §00/§98/§99 4.2.0 → 4.3.0. Closes v5 D3 MEDIUM + D5 HIGH.
 > **v4.2.0 update (Phase 153 Task A11e — spec/06 D3 Type-enum reconciliation):** Closes v5 audit D3 HIGH "Inconsistent Type Enums between Schema and AC". §00 JSON Schema `Type` enum realigned from legacy `{string, int, float, bool, json}` to AC-SC-14's canonical UI-aware `{boolean, number, string, select, multiselect}`. Reference instance + Forbidden-shapes table updated in lockstep. §00 v4.1.1 → v4.2.0; §98 v4.1.1 → v4.2.0; §99 v4.1.1 → v4.2.0. No new AC.

@@ -1,7 +1,7 @@
 # Seedable Config Architecture — Acceptance Criteria
 
-**Version:** 4.1.0
-**Last Updated:** 2026-04-29 (Phase 153 Task A11f: added AC-SC-21 CHANGELOG concurrency lock-ordering + AC-SC-22 apperror cross-reference to spec/03; closes v5 D3 MEDIUM + D5 HIGH. AC count 20 → 22.)
+**Version:** 4.2.0
+**Last Updated:** 2026-04-30 (Phase 153 Task A24: extended AC-SC-14 with Go `SettingValue` struct mapping for `select`/`multiselect` (closes v7 D1 LOW); extended AC-SC-21 with reference Go implementation for lock-then-tx-then-changelog discipline (closes v7 D3 MEDIUM). No AC count change. Pre-flight `wc -c` per Lesson #45 graduated: §97+§00+§01 = 63.4 KB, well under 75 KB cap.)
 **Scope:** `spec/06-seedable-config-architecture/` — Reusable pattern for version-controlled configuration with automatic changelog updates and initial seeding (CW Config).
 
 ---

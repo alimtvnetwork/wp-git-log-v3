@@ -5,10 +5,10 @@ axis_rationale: "Config-loading contract (CW Config) enforceable across consumer
 
 # Seedable Config Architecture + Changelog Versioning (also known as CW Config)
 
-> **Version:** 4.3.0  
+> **Version:** 4.3.1  
 <!-- h10-verified-phase: 153 -->
 > **Created:** 2026-02-01  
-> **Updated:** 2026-04-29  
+> **Updated:** 2026-04-30  
 > **Status:** Active  
 > **AI Confidence:** Production-Ready  
 > **Ambiguity:** Low  
