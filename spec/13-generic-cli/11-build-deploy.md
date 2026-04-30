@@ -107,10 +107,10 @@ Running `.exe` files hold a file lock and cannot be overwritten.
 
 | Scenario | Behavior |
 |----------|----------|
-| No repo path configured | Print error, exit 1 |
-| Already up to date | Print message, exit 0 |
-| Build fails | Backup remains, exit with error |
-| Deploy locked after retries | Restore backup, fail clearly |
+| No repo path configured | Print error, exit `ExitMisuse` (per §97 AC-21 / `07-error-handling.md` typed enum) |
+| Already up to date | Print message, exit `ExitOK` |
+| Build fails | Backup remains, exit `ExitError` |
+| Deploy locked after retries | Restore backup, exit `ExitError` |
 
 ## Semantic Logging
 
