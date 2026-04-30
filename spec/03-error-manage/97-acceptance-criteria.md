@@ -79,6 +79,17 @@ ARCHITECTURE TIERS:
 - **Then** It MUST include specialized domain enums (AppErrType) and support stack trace serialization as defined in 02-error-architecture/06-apperror-package/01-apperror-reference/05-apperrtype-enums.md
 - **Verifies:** 02-error-architecture/06-apperror-package/01-apperror-reference/05-apperrtype-enums.md
 
+### AC-08: Module Asset Inventory Pin (Lesson #29 / Lesson #36)  `[critical]`
+- **Given** An LLM auditor or downstream AI implementer bundling this module's normative surface from disk
+- **When** Resolving cross-references emitted by ACs AC-05/AC-06/AC-07 and the §00 overview (e.g. `02-error-architecture/01-error-handling-reference.md`, `02-error-architecture/03-notification-colors.md`, `02-error-architecture/06-apperror-package/01-apperror-reference/05-apperrtype-enums.md`, root-level `structure.md`, root-level `lifecycle-error-architecture.mmd`)
+- **Then** ALL of the following on-disk assets MUST be treated as PRESENT and authoritative — failure to load any of them is a **harness/walker bug**, NOT a spec gap:
+  - Root: `00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`, `structure.md`, `lifecycle-error-architecture.mmd`
+  - Subfolder `01-error-resolution/` (canonical resolution flows)
+  - Subfolder `02-error-architecture/` containing: `01-error-handling-reference.md`, `02-go-delegation-fix.md`, `03-notification-colors.md`, `04-error-modal/`, `05-response-envelope/`, `06-apperror-package/`, `07-logging-and-diagnostics/`, `00-overview.md`
+  - Subfolder `03-error-code-registry/` (master registry + lint-rule catalog)
+- **And** Auditors that report any of the above as "missing" or "undefined" are misclassifying a deep-walker bundling cap (90 KB tier-1 limit in `linter-scripts/audit-ai-implementability.py`) as a cross-reference defect; the canonical fix is to (a) re-bundle with a higher cap or (b) cite this AC and downgrade the finding to **harness-artifact**, never edit the spec to remove the references
+- **Verifies:** on-disk module asset inventory (Lesson #29 module-kind pin extended to deep-tree modules; Lesson #36 cross-module link-don't-restate — references stay as links, contents stay in their owning subfolder)
+
 ---
 
 ## Cross-References
