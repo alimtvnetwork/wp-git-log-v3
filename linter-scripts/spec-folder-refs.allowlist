@@ -68,6 +68,14 @@
 # --- Allowlist documentation example (used in spec/17-consolidated-guidelines/27-linter-authoring-guide.md §6.1 Format B) ---
 99-future-work
 
+# --- Lesson #38 §G slug-validation memo: documents the original wrong slug
+# `spec/24-design-system/` (correct disk slug is `spec/24-app-design-system-and-ui/`).
+# Referenced verbatim in `mem://process/phase-153-lessons` Section G AND
+# `.lovable/memory/audit/v2-deterministic/phase-153-pL36-cluster-fix.md` AND
+# `.lovable/memory/index.md` Phase 153 ledger as the canonical "wrong slug"
+# example. Documentation-only — must never appear as a live link. ---
+24-design-system
+
 # --- Historical folder numbers from spec/26-spec-outsides/ archive ---
 # These appear in archived spec-outsides documents that reference an
 # older numbering scheme (pre-renumbering). The current equivalents are:
