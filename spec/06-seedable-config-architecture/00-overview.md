@@ -220,7 +220,7 @@ This ensures configuration is always traceable, auditable, and version-aware.
 |--------------|------------|
 | `version`, `categories` (camelCase / lowercase) | `Version`, `Categories` (PascalCase) |
 | `"Version": "1.2"`     | `"Version": "1.2.0"` (full SemVer) |
-| Untyped `Default` without `Type` | Always declare `Type` ∈ {string,int,float,bool,json} |
+| Untyped `Default` without `Type` | Always declare `Type` ∈ {boolean, number, string, select, multiselect} (per AC-SC-14; legacy {string,int,float,bool,json} FORBIDDEN) |
 | Top-level scalar setting (`"Foo": 1`) | Setting nested under a Category |
 | Unknown top-level key (e.g. `"Settings": {…}` at root) | Only `Version` / `Description` / `Categories` allowed |
 | Two seed files in same project | Single `config.seed.json` per bounded context |
