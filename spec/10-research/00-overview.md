@@ -1,6 +1,8 @@
 ---
 kind: index
 description: Top-level routing index for all research / exploratory content. Intentionally empty until child specs are added — exempt from missing-contract / untestable rubric findings.
+content_axis: audit-corpus
+axis_rationale: "Routing-only; child specs document explorations of other systems"
 ---
 
 # Research

@@ -1,6 +1,8 @@
 ---
 kind: future-spec
 drift_acknowledged: 2026-04-26
+content_axis: integration-spec
+axis_rationale: "Bridges CLI to external PowerShell pipeline"
 ---
 
 # PowerShell Integration for Project Runner

@@ -1,3 +1,8 @@
+---
+content_axis: process-guidance
+axis_rationale: "Step-by-step WP plugin authoring guide"
+---
+
 # WordPress Plugin How-To — Overview
 
 **Version:** 1.2.1  

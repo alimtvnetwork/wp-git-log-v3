@@ -1,3 +1,8 @@
+---
+content_axis: normative-contract
+axis_rationale: "CLI behavioural ACs (subcommand, exit codes, DB concurrency)"
+---
+
 # Generic CLI Creation Guidelines — Overview
 
 > **Version:** 1.1.7  

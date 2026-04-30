@@ -1,3 +1,8 @@
+---
+content_axis: normative-contract
+axis_rationale: "Update-flow ACs (TUF, retries, atomic swap)"
+---
+
 # Update — Overview
 
 <!-- h10-verified-phase: 24 -->

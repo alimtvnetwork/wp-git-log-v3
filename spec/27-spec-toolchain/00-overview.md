@@ -2,6 +2,8 @@
 kind: meta-toolchain
 todo_audit_exempt: true
 description: Auditor-self-reference module — defines the toolchain that audits the spec tree, including TODO-detection mechanics. G-TODO-01 is exempted because narrative content here legitimately discusses TODO/TBD/FIXME categories.
+content_axis: tooling-spec
+axis_rationale: "Specs the linter-scripts/ contract (validators, generators, gates)"
 ---
 
 # Spec Toolchain

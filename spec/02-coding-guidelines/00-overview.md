@@ -1,6 +1,8 @@
 ---
 kind: future-spec
 drift_acknowledged: 2026-04-26
+content_axis: normative-contract
+axis_rationale: "Per-language enforceable code rules across 5 languages"
 ---
 
 # Coding Guidelines

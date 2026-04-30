@@ -1,6 +1,8 @@
 ---
 kind: future-spec
 drift_acknowledged: 2026-04-26
+content_axis: process-guidance
+axis_rationale: "Authoring conventions for human spec contributors"
 ---
 
 # Spec Authoring Guide
