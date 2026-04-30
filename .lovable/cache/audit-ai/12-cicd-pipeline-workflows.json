@@ -8,30 +8,30 @@
     {
       "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Broken Internal Cross-References",
-      "why": "The Feature Inventory in 00-overview.md references files like 01-ci-pipeline.md and 02-release-pipeline.md in the root, but the Consistency Report (99-consistency-report.md) and actual file list show these are often duplicated or shadowed by subfolder versions, leading to path resolution ambiguity for an AI.",
-      "fix": "Consolidate root-level generic specs into a single 'templates' folder and use absolute-style paths from the spec root in all inventories."
+      "title": "Broken Dependency Closure (Truncated Context)",
+      "why": "The module references 24+ files in its inventory, but only 14 are provided. Critical logic for 'Go Binary Deploy' (02-go-binary-deploy/01-ci-pipeline.md) and 'Technical Interface' (11-technical-interface.md) is missing.",
+      "fix": "Provide the full content of all 24 files listed in the 99-consistency-report.md inventory."
     },
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Boilerplate-Only Acceptance Criteria",
-      "why": "The 97-acceptance-criteria.md files for both the root and subfolders contain only 'tree-health' and 'naming convention' checks. They lack GWT criteria for the actual logic (e.g., SHA-deduplication logic, source-map removal, or checksum generation).",
-      "fix": "Add GWT cases for SHA-cache hit/miss behavior and artifact packaging constraints (e.g., 'Given a build with .map files, When packaged, Then .zip contains 0 .map files')."
+      "title": "Acceptance Criteria Mismatch",
+      "why": "AC-01 through AC-08 are generic 'meta-specs' (checking if files exist/banners match) rather than verifying the actual CI/CD logic (e.g., 'Verify SHA-dedup skips steps').",
+      "fix": "Add functional ACs verifying specific pipeline behaviors like 'Job Graph execution order' and 'Checksum generation format'."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency Race Condition in SHA-Deduplication",
-      "why": "The SHA-deduplication pattern in 01-ci-pipeline.md describes inlining cache writes to prevent races, but doesn't specify how to handle multiple parallel workflows (e.g., push + PR) hitting the cache-save step simultaneously.",
-      "fix": "Add a requirement to use unique cache keys per workflow type or implement a 'check-then-set' lock using a secondary cache key."
+      "title": "Ambiguous 'Working Directory' for Multi-Module",
+      "why": "The spec forbids 'cd' and mandates 'working-directory', but doesn't define how to resolve the path for the 'extension subdirectory' vs 'root' in a monorepo context.",
+      "fix": "Define a standard variable (e.g., PROJECT_ROOT) and provide a mapping table for component-to-path resolution."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
   "files_used": 14,
   "files_total": 49,
   "bytes_used": 90000,
-  "bundle_sha": "e7941a1ad05d7d82",
+  "bundle_sha": "ac0f1e101d602d01",
   "total": 75,
   "band": "GOOD"
 }

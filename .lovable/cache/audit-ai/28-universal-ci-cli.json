@@ -3,35 +3,35 @@
   "d2": 20,
   "d3": 17,
   "d4": 15,
-  "d5": 16,
+  "d5": 19,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken Server-Side Dependencies (GAPs)",
-      "why": "The spec identifies GAP-22-03 (Streaming format) and GAP-22-04 (PreviousHasError field) as missing in the server spec (folder 22), which are critical for the CLI's core logic.",
-      "fix": "Update spec/22-git-logs-v2 to include NDJSON streaming and the PreviousHasError boolean in the ack envelope."
+      "dim": "D4",
+      "title": "Truncated Error Catalog and missing sections",
+      "why": "The spec file 07-error-catalog.md is truncated mid-sentence at the end of the provided context, leaving the 'Push' table incomplete and missing subsequent files (08, 09, 17, 18).",
+      "fix": "Provide the complete text for files 07 through 18 to ensure the AI has the full mapping of CI provider bindings and classification logic."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Inter-process Concurrency Race",
-      "why": "The spec allows --parallel for runtimes but does not specify how interleaved stdout/stderr from different runtimes is handled before shipping to prevent log corruption.",
-      "fix": "Explicitly state that each runtime in parallel mode must use a thread-safe buffer or separate ship queue to prevent line interleaving."
+      "title": "Ambiguous 'interleaved' capture implementation",
+      "why": "Section 04 specifies capturing stdout/stderr 'interleaved with timestamps', but doesn't define if this requires a pseudo-terminal (PTY) or simple pipe merging, which affects line ordering.",
+      "fix": "Explicitly state that runners must be invoked via a PTY to preserve real-time interleaving or accept standard pipe merging."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Truncated Context",
-      "why": "The provided file content for 08-ci-provider-bindings.md is truncated, leaving the harvest map for Azure and Bitbucket incomplete for the coder.",
-      "fix": "Provide the full harvest map table for all CI providers in section 08."
+      "dim": "D1",
+      "title": "Undefined 'GitProfile' in doctor check",
+      "why": "GLCI-DOCTOR-PROFILE-NOT-FOUND refers to a 'GitProfile' in the admin UI, but the CLI's role in identifying this profile (beyond RepoUrl) is not pinned.",
+      "fix": "Clarify that the server maps RepoUrl to a GitProfile and the CLI merely reports the resulting 404."
     }
   ],
   "module": "28-universal-ci-cli",
-  "files_used": 12,
+  "files_used": 11,
   "files_total": 15,
   "bytes_used": 90000,
-  "bundle_sha": "fdb4c09d4e66512e",
-  "total": 86,
+  "bundle_sha": "a3d10c21c07a0d23",
+  "total": 89,
   "band": "GOOD"
 }

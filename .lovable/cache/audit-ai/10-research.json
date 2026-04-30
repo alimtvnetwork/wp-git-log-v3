@@ -9,29 +9,29 @@
       "severity": "HIGH",
       "dim": "D5",
       "title": "Missing Mermaid Source Files",
-      "why": "The spec references 'lifecycle-10-research-lifecycle.mmd' and 'lifecycle-top-research.mmd' as normative/source files, but their content is not provided in the module text.",
-      "fix": "Include the raw Mermaid code for both .mmd files within the provided file blocks."
+      "why": "The spec references 'lifecycle-10-research-lifecycle.mmd' and 'lifecycle-top-research.mmd' as normative sources, but these files are not provided in the context.",
+      "fix": "Include the .mmd file contents in the module or inline the Mermaid source code within the overview files."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Domain Path Validation Ambiguity",
-      "why": "The JSON schema requires 'domains' to be relpaths to spec modules, but doesn't define if these must be validated against the disk or just string patterns.",
-      "fix": "Add a 'Verifies' clause to AC-RESEARCH-02 stating that domain strings must resolve to existing directories."
+      "title": "Undefined Domain Registry",
+      "why": "The contract for TOP-RES entries requires 'domains' to be an array of spec module relpaths, but there is no validation logic or list provided to verify if a path is valid.",
+      "fix": "Add a regex pattern or a reference to a master module list to the 'domains' property in the JSON schema."
     },
     {
       "severity": "LOW",
       "dim": "D2",
-      "title": "Registry Table Verification Gap",
-      "why": "The SQL DDL for 'RegistryEntry' is provided as a contract, but there is no GWT criterion verifying the database schema matches the DDL.",
-      "fix": "Add AC-RESEARCH-07: 'Registry schema matches DDL' with a 'Then' clause for table/column existence."
+      "title": "Vague Verification Clauses",
+      "why": "AC-RESEARCH-05 (Forward-only updates) lacks a 'Verifies' clause and a concrete automated check, relying on manual PR review which contradicts the 'AI coder' requirement.",
+      "fix": "Add a 'Verifies' clause citing the SemVer invariant and provide a script snippet to check for breaking schema changes."
     }
   ],
   "module": "10-research",
   "files_used": 8,
   "files_total": 8,
-  "bytes_used": 29048,
-  "bundle_sha": "798a2b831e8077df",
+  "bytes_used": 31305,
+  "bundle_sha": "bef8dbe32cfddfd1",
   "total": 81,
   "band": "GOOD"
 }

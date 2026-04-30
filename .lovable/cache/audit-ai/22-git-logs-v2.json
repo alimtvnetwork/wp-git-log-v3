@@ -3,35 +3,35 @@
   "d2": 18,
   "d3": 17,
   "d4": 15,
-  "d5": 20,
+  "d5": 16,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Ambiguous rollback mechanism for streaming ingest",
-      "why": "AC-12 and AC-76 mandate 'atomic rollback' of partial inserts during a chunked/streaming ingest failure, but the spec uses SQLite which does not support nested transactions or long-lived transactions across multiple HTTP chunks easily without locking the DB for other users.",
-      "fix": "Specify use of a temporary 'IngestBuffer' table or a specific transaction-per-request lifecycle with 'BEGIN IMMEDIATE' at the start of the first chunk."
+      "dim": "D5",
+      "title": "Missing Core Schema and API Definitions",
+      "why": "The spec references 36 files in the inventory (01-39), but only 00, 97, and 98 are provided. Critical logic for SQLite schema (18), REST endpoints (04), and Error Codes (15) is missing.",
+      "fix": "Provide the full content of files 01-39, especially 02, 04, 15, 17, and 18."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Missing NDJSON Frame Examples",
-      "why": "While AC-68 defines frame ordering and AC-76 defines error codes, there are no verbatim examples of the 'StreamHeader' or 'StreamFooter' JSON objects in the provided context, forcing the coder to guess the exact key casing and structure.",
-      "fix": "Add a fenced code block in \u00a797 or \u00a704 showing a sample 3-frame NDJSON ingest sequence."
+      "title": "Missing Concrete Code Fixtures",
+      "why": "While ACs are detailed, the actual SQL DDL and PHP class skeletons (referenced as \u00a718 and \u00a734) are not in the provided context, leaving the AI to guess the exact implementation of the 'PascalCase' rule.",
+      "fix": "Include the verbatim 18-schema.sql and 34-phpunit-test-skeleton.md files."
     },
     {
       "severity": "LOW",
-      "dim": "D2",
-      "title": "AC-70 Verification Gap",
-      "why": "AC-70 requires detecting client disconnect within 2000ms, but does not specify the PHP mechanism (e.g., connection_aborted() check) to achieve this in a standard WordPress environment.",
-      "fix": "Add a 'Verifies' clause or implementation note to AC-70 mentioning the use of 'connection_aborted()' during the flush loop."
+      "dim": "D3",
+      "title": "Concurrency/Race Condition on Rate Limits",
+      "why": "AC-26 mentions rate limits survive request boundaries with an 'in-memory + persisted floor' but doesn't specify the SQLite locking strategy for the floor update.",
+      "fix": "Specify 'BEGIN IMMEDIATE' for rate-limit increment transactions in \u00a705."
     }
   ],
   "module": "22-git-logs-v2",
   "files_used": 3,
   "files_total": 36,
   "bytes_used": 90000,
-  "bundle_sha": "aa85e31f78532acb",
-  "total": 89,
+  "bundle_sha": "8a538158ebfcfd63",
+  "total": 85,
   "band": "GOOD"
 }

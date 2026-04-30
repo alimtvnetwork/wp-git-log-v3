@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 20,
+  "d2": 19,
   "d3": 17,
-  "d4": 15,
-  "d5": 16,
+  "d4": 16,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Missing Sub-Module Context",
-      "why": "The overview references files 09 through 27 and subfolder 24, but these files are not provided in the context, leaving the AI to guess the implementation of 'latest.json' schema and 'json-fallback-store'.",
-      "fix": "Provide the content for files 09-28 and the subfolder 24-update-check-mechanism."
+      "why": "The overview references files 09 through 27 and subfolder 24, but these files are not provided in the context, leaving the AI to guess the implementation of 'json-fallback-store', 'version-probe', and 'updater-binary'.",
+      "fix": "Provide the content for files 09-28 and the 24-update-check-mechanism subfolder."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Race Condition in Skip-if-Current",
-      "why": "The 'Skip-if-Current' fast-path (01-self-update-overview.md) relies on 'git pull' output strings which are locale-dependent and prone to race conditions if another process modifies the repo.",
-      "fix": "Compare local HEAD SHA against remote tracking branch SHA instead of parsing stdout strings."
+      "dim": "D4",
+      "title": "Truncated Build Script Logic",
+      "why": "File 04-build-scripts.md is truncated at the end, cutting off the logging implementation and potentially other helper functions needed for a complete script.",
+      "fix": "Complete the PowerShell and Bash logging function definitions in 04-build-scripts.md."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Incomplete Code Snippets",
-      "why": "Several critical functions (e.g., Resolve-DeployTarget in 02-deploy-path-resolution.md) are shown as partial logic or high-level pseudocode without full error handling.",
-      "fix": "Provide the complete, copy-pasteable implementation for the Resolve-DeployTarget function in both PS1 and Bash."
+      "dim": "D1",
+      "title": "Ambiguous <module> Placeholder",
+      "why": "The build scripts use '<module>/constants.RepoPath' as an ldflag. A mediocre coder might literally use the string '<module>' instead of the actual Go module name.",
+      "fix": "Explicitly state that '<module>' must be replaced with the project's go.mod module path."
     }
   ],
   "module": "14-update",
   "files_used": 8,
   "files_total": 54,
   "bytes_used": 90000,
-  "bundle_sha": "50f223b126534a48",
-  "total": 86,
+  "bundle_sha": "9780283c9ecaf987",
+  "total": 85,
   "band": "GOOD"
 }
