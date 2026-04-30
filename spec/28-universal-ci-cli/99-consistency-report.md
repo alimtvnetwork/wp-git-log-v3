@@ -1,7 +1,9 @@
 # Consistency Report
 
-**Generated:** 2026-04-29
-**Module version:** 2.1.2
+**Generated:** 2026-04-30
+**Module version:** 2.1.3
+
+> **v2.1.3 update (Phase 153 — Lesson #36 cross-ref inoculation):** Added `## Concurrency Posture (Normative cross-reference)` to `05-config-resolution.md` linking to [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md) for runtime concurrency on multi-runner glci invocations (SQLite WAL + atomic writes + lock-file). Pure cross-link — no contract restated, no §97 change, no AC count change. Codifies Lesson #36 (link, never restate) on the cross-module axis. §00 v2.1.2 → v2.1.3; §98 [2.1.2] → [2.1.3].
 
 > **v2.1.2 update (Phase 150 — P3 sweep slot 10 — Verifies clauses on §97 AC-28-01..AC-28-28):** §97 deepened — Verifies-coverage 12/40 → 40/40. The pre-existing 12 Verifies on AC-28-29..AC-28-40 (Phase 16d-v) are now joined by 28 new Verifies on AC-28-01..AC-28-28. Each AC explicitly cites the §03/§04/§05/§06/§07/§08/§09/§10/§11/§17/§18 invariant it protects (detection contracts, config precedence, schema/streaming/`/fixed-log`/deterministic-serialization, exit-code class assignments, provider-binding + SSH-to-HTTPS canonicalization, `HasError` disjunction + sort/dedup, SSH-vs-TempToken lane separation, doctor contracts, OpenAPI client/server parity, JSON-Schema-as-source-of-truth). AC-28-01..AC-28-28 GWT bodies preserved verbatim. §97 v2.0.0 → v2.1.0; §00 v2.1.1 → v2.1.2; §98 [2.1.1] → [2.1.2]. AI-confidence P3 driver eliminated for `spec/28`; derived tier remains Production-Ready (already at top tier; this closes the residual Verifies-coverage gap toward the upcoming P4 stamp).
 
