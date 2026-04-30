@@ -4,8 +4,8 @@ description: Diagram index for git-logs WP plugin (Mermaid sources + rendered SV
 ---
 # Gitlogs Diagrams
 
-**Version:** 3.4.1
-**Updated:** 2026-04-28 (Phase P19: H10 §00↔§98 version-field parity catch-up — banner bumped from v2.4.0 to v3.4.0 to match the latest §98 release row (Phase P10). §98 has been on the v3.x line since the Phase 55 `DiagramMetadata` JSON Schema rewrite; the §00 banner had been left on v2.x. Pure parity bookkeeping — no content change.)
+**Version:** 3.4.2
+**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-22 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 <!-- h10-verified-phase: 32 -->
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).

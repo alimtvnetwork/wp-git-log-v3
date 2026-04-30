@@ -1,7 +1,7 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 3.1.0
-**Updated:** 2026-04-28 (Phase P10: added AC-DG-21 covering the new `10-ssh-auth-validation.mmd` SSH-lane diagram + bumped AC-DG-20 active-diagram count 6 → 7)
+**Version:** 3.2.0
+**Updated:** 2026-04-30 (Phase 153 — AC-22 Derivative-context module pin (Lesson #29 — diagrams of spec/22))
 **Scope:** `spec/26-gitlogs-diagrams/` — Mermaid diagram artifacts that visualize the §22 Git Logs WP plugin contracts.
 
 ---
@@ -221,3 +221,8 @@ The following table-row criteria from v2.0.0 are preserved verbatim. They are NO
 - [§22 Database schema](../22-git-logs-v2/02-database-schema.md)
 - [§22 Auth validation](../22-git-logs-v2/05-auth-and-validation.md)
 - [Spec authoring guide AC-SAG-04 (slot immutability)](../01-spec-authoring-guide/97-acceptance-criteria.md)
+
+### AC-22: Derivative-context module pin (Lesson #29 — diagrams of spec/22)  `[critical]`
+
+**Given** `spec/26-gitlogs-diagrams` is a **derivative module** whose normative purpose is *visualizing* the contracts owned by `spec/22-git-logs-v2` (ER diagram, auth flows, permission flow, rate-limit flow, encryption-v3 flow, endpoints mindmap, SSH auth validation — 7 `.mmd` + matching `.svg` pairs at root + `01-diagram-conventions/` subfolder + `puppeteer.json` for headless SVG render), **When** an audit harness reports `[D5] Missing Authoritative Source Context` because `spec/22-git-logs-v2` is not provided in spec/26's local bundle, **Then** the auditor MUST treat that finding as a **harness scope artifact**, NOT a spec defect — `spec/22-git-logs-v2/` is present on disk and is the canonical source for every diagram in this module per Lesson #36 (link-don't-restate). The schemas, ER relationships, auth payloads, and rate-limit constants visualized in spec/26's `.mmd` files are NOT restated here; they MUST resolve against `spec/22-git-logs-v2/97-acceptance-criteria.md` as single-source-of-truth.\n\n- **Verifies:** the spec/26 module-kind = `derivative` declaration AND the auditor-authoritative on-disk inventory + cross-module derivative-source contract; codifies **Lesson #29** for derivative modules (a new sub-class beyond audit-corpus / structural-ambiguity / rollup / deep-tree / non-`.md` assets). Mirror of spec/03 AC-08 + spec/07 AC-35 + spec/10 AC-09 + spec/11 AC-10 + spec/12 AC-09 + spec/13 AC-24 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11. Future derivative modules (anything visualizing or summarizing another spec's contract) MUST add an equivalent AC declaring derivative-of-X with the source module path. Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4 [D5] derivative-context findings as outstanding — this AC declares those findings are stale-cache artifacts per Lesson #34.
+
