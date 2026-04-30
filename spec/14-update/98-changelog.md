@@ -1,7 +1,14 @@
 # Changelog — Update — Overview
 
-**Version:** 2.4.1  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu5 — AC-22 binds `<module>` ldflags placeholder to consuming repo's go.mod path; AC count 21 → 22)
+**Version:** 2.4.2  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu25 — §00 walker-pin teaser per Lesson #63 pure-promotion / fifth instance)
+
+### 2.4.2 — 2026-04-30 — Phase 153 Task A24-fu25: §00 walker-pin pure-promotion (Lesson #63 fifth instance)
+- **Action**: Inserted `> 🤖 Walker-Pin` 2-row teaser table at §00 head (after metadata banner) surfacing AC-21 (module asset inventory pin, 36 entries) + AC-22 (`<module>` ldflags placeholder = consuming repo's `go.mod` path) as canonical close-outs for cache-stale audit findings (D5 missing-sub-module-context, D4 truncated-build-script, D3 ambiguous-`<module>`-placeholder).
+- **Why**: Cache `total=87 GOOD` with 3 advisory findings — ALL pre-closed in §97 (AC-21 from A11h closes D5+D4 by walker bundling-cap pin per Lesson #29; AC-22 from A24-fu5 closes D3 by Lesson #36 use-site prose). Walker `files_used=11/54 (20%)` — extreme saturation; targeted contracts live at §97 lines 228 + 234 well past the cap. Pure visibility patch.
+- **Lockstep**: §00 v2.4.1 → **v2.4.2** (patch — teaser content); §98 v2.4.1 → **v2.4.2** (this row); §99 v1.6.1 → **v1.6.2** (audit row).
+- **§97 NOT bumped at v2.4.0** — no new normative requirement, no AC change, no AC-31-31 cascade, no RUBRIC bump, no CI workflow change. **Pure-promotion variant** of Lesson #61 per spec/22 A24-fu20 + spec/27 A24-fu22 + spec/03 A24-fu23 + spec/13 A24-fu24 precedent.
+- **Lesson #63 fifth instance** — second on `normative-contract` axis (after spec/13 A24-fu24). Pattern now battle-tested across 5 modules and 3 axes.
 
 ### 2.4.1 — 2026-04-30 — Phase 153 Task A24-fu5: AC-22 `<module>` placeholder pin
 - **Added** AC-22 `[high]` — binds the literal `<module>` in `04-build-scripts.md` ldflags (PowerShell line 102; Bash line 200) to the consuming repo's `go.mod` `module` line; build scripts MUST NOT hard-code the path.
