@@ -1,6 +1,6 @@
 # Consistency Report — PowerShell Integration
 
-**Version:** 3.5.0  
+**Version:** 3.5.1  
 **Generated:** 2026-04-29  
 **Health Score:** 100/100 (A+) — Phase 153 P48-4 per-step pipeline contract closure
 
@@ -54,7 +54,7 @@ No external cross-references detected. ✅
 ---
 
 ## Summary
-<!-- verified-phase: 147 -->
+<!-- verified-phase: 153 -->
 - **Errors:** 0
 - **Warnings:** 0
 - **Observations:** 0

@@ -1,6 +1,6 @@
 # Acceptance Criteria — PowerShell Integration for Project Runner
 
-**Version:** 1.2.0  
+**Version:** 1.3.0  
 **Updated:** 2026-04-29  
 **Scope:** `spec/11-powershell-integration/`
 
