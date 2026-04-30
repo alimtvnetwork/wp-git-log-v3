@@ -1,7 +1,10 @@
 # Consistency Report — Generic Update
 
-**Version:** 1.6.0  
-**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-21 module asset inventory pin closes audit-v5 D5/D4/D1 findings as harness bundling-cap artifacts; mirror of spec/13 AC-24, spec/28 AC-28-41, spec/16 AC-21, spec/22 AC-78)
+**Version:** 1.6.1  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu5 — AC-22 binds `<module>` ldflags placeholder to consuming repo's go.mod path; resolves audit-v7 D3 MEDIUM via use-site prose, Lesson #36)
+
+> **v1.6.0 (Phase 153 Task A11h):** AC-21 module asset inventory pin closes audit-v5 D5/D4/D1 findings as harness bundling-cap artifacts; mirror of spec/13 AC-24, spec/28 AC-28-41, spec/16 AC-21, spec/22 AC-78.
+
 
 > **v1.5.1 (Phase 153 — Lesson #36 cross-ref inoculation):** Added `## Concurrency Posture (Normative cross-reference)` to `22-update-command-workflow.md` linking self-update worker `update.lock` + atomic temp-then-rename + state-DB writes to canonical [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated. Codifies Lesson #36 on the cross-module axis. No §97 / AC / RUBRIC / gate-count change. §00 v2.3.0 → v2.3.1; §98 v2.3.0 → v2.3.1.
 
