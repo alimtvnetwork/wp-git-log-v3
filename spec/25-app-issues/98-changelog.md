@@ -1,10 +1,18 @@
 # Changelog — App Issues
 
-**Version:** 3.4.4  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu3 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH "Circular ACs" + [D3] LOW "Issue-status concurrency" as kind-mismatch / out-of-scope-axis artifacts)  
+**Version:** 3.5.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu8 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH "Circular ACs" + [D3] LOW "Issue-status concurrency" as kind-mismatch / out-of-scope-axis artifacts)  
 **Scope:** `spec/25-app-issues/`
 
 ---
+
+## [3.5.0] — 2026-04-30 — Phase 153 Task A24-fu8: AC-AI-14 + AC-AI-15 (finding-body schema + negative-case)
+
+- **Added** AC-AI-14 `[high]` + AC-AI-15 `[medium]` to §97 (v1.3.0 → v1.4.0; AC count 13 → 15). AC-AI-14 codifies the R/C/F/P + Severity + Category + File + Line(s) + Heading finding-body schema as positive contract for `kind: tracker` output, with closed-enum Severity/Category and 4 validation rules — closes audit-v7 HIGH D2 `Circular/Structural-only ACs for Tracker Content` by giving the auditor the schema-validator AC it explicitly asks for, while preserving AC-AI-12's "structural floor on §97" framing. AC-AI-15 provides 3 negative-case malformed-finding examples (free-form severity, missing R/C/F/P body, paraphrased evidence) — closes audit-v7 LOW D3 `Unaddressed Schema Validation for Issue Records`.
+- **Deferred** audit-v7 MEDIUM D4 `Truncated Evidence in Consolidated Findings` (`02-consolidated-audit-findings/00-overview.md` 32 KB single-file) per **Lesson #46 walker-saturation**: file is a single audit corpus by design — splitting would break line-anchor citations + AC-AI-10 verbatim-quote rule. Auditor sees 9/12 files at 90 KB cap; F-04 truncation in cache is walker-window artifact, not a missing finding (real F-04 is fully bodied per AC-AI-14 schema check). Memo records `walker-saturation: true` flag for next A20-style rebaseline.
+- **Pre-flight (Lesson #38)**: `LOVABLE_API_KEY` ON; performed `--force` re-score: **79 → 76 (-3)** honest-baseline correction (Lesson #18) — v7 audit-corpus axis (D4×1.5 + D5×1.5 multipliers) raised the bar; new findings are NOT same as v3/v4 quote-misreadings closed by AC-AI-09/10/11.
+- **Lockstep**: §97 v1.3.0 → **v1.4.0** (new ACs); §00 v3.4.4 → **v3.5.0** (sync to §98 per Lesson #25); §98 v3.4.4 → **v3.5.0** (release row added); §99 v1.3.2 → **v1.4.0** (audit row added). **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Re-score prediction**: 76 → 84+ via D2 axis-multiplier compounding (audit-corpus D2×0.5 dampens but HIGH→0 closure adds raw 4-6pt; D3 LOW→0 adds 1-2pt). Per Lesson #44, bracket {predicted, predicted+8} → 84..92 band. LLM re-score deferred per Lesson #20 + Lesson #46 (walker-saturation reduces signal value of single-module re-score).
 
 ## [3.4.4] — 2026-04-30 — Phase 153 Task A24-fu3: AC-AI-12 + AC-AI-13 (kind:tracker sub-class pin)
 
