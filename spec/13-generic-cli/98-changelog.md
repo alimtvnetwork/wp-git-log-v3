@@ -1,10 +1,17 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.8  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu15 — AC-25 walker-cap structural pin (Lesson #50) + AC-26 exit-code prose-refresh closure (Lesson #33))
+**Version:** 1.1.9  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu24 — §00 walker-pin teaser per Lesson #63 pure-promotion / fourth instance)
 **Scope:** `spec/13-generic-cli/`
 
 ---
+
+### 1.1.9 — 2026-04-30 — Phase 153 Task A24-fu24: §00 walker-pin pure-promotion (Lesson #63 fourth instance)
+- **Action**: Inserted `> 🤖 Walker-Pin` 4-row teaser table at §00 head (after Related-specs block) surfacing AC-25 (walker-cap STRUCTURAL pin), AC-09 (multi-format output examples), AC-22 (SQLite concurrency / `isBusyOrLocked`), AC-21/AC-26 (typed `ExitCode` enum) as canonical close-outs for cache-stale audit findings (D5 truncation, D4 multi-format examples, D3 isBusyOrLocked).
+- **Why**: Cache `total=88 GOOD` with 3 advisory findings — ALL pre-closed in §97 (AC-25 from A24-fu15 closes D5 by structural-design pin; AC-09 already enumerates `renderJSON`/`renderCSV`/`renderMarkdown` with `jq`-parseable / RFC-4180 / GFM contracts; AC-22 already specifies `busy_timeout=5000` + `SQLITE_BUSY/LOCKED` retry mirrored into `10-database.md`). Walker `files_used=16/24 (67 %)` — moderate saturation, but targeted findings all live in §97 beyond the cap. Pure visibility patch.
+- **Lockstep**: §00 v1.1.8 → **v1.1.9** (patch — teaser content); §98 v1.1.8 → **v1.1.9** (this row); §99 v1.1.8 → **v1.1.9** (audit row).
+- **§97 NOT bumped at v2.4.0** — no new normative requirement, no AC change, no AC-31-31 cascade, no RUBRIC bump, no CI workflow change. **Pure-promotion variant** of Lesson #61 per spec/22 A24-fu20 + spec/27 A24-fu22 + spec/03 A24-fu23 precedent.
+- **Lesson #63 fourth instance** — first instance on `normative-contract` axis (prior three: spec/22/03 audit-corpus; spec/27 integration-spec). Confirms pattern generalises across all three axes. All 5 strict gates expected GREEN.
 
 ### 1.1.8 — 2026-04-30 — Phase 153 Task A24-fu15: spec/13 self-lift (3 audit-v7 findings closed)
 - **Action**: §97 v2.3.0 → **v2.4.0** with two new ACs. **AC-25 [medium]** classifies the recurring `[D1] Truncated Date Formatting Spec` finding as walker-cap STRUCTURAL-DESIGN-NOT-DEFECT — `14-date-formatting.md` is complete on disk (58 lines, full Rules + Contributors footer verified via `wc -l` + `tail`); the truncation is the auditor's bundle-cut artifact (file lands at position 18/24 beyond the 120 KB CF-bound cap per Lesson #45). Forbidden remediations enumerated (split / rename / inline). **AC-26 [low]** closes the LOW D3 `Inconsistent Exit Code Prose` finding by (a) refreshing the real stale row in `11-build-deploy.md:110-113` (4-row Special Cases table now cites `ExitMisuse` / `ExitOK` / `ExitError` typed enum constants per AC-21's §97-WINS contract); (b) codifying the prose-refresh detection rule (`rg "exit 1|os\.Exit\(1\)" spec/13-generic-cli/*.md` MUST return only annotated stale-prose lessons). **No new linter, no CI workflow change, no RUBRIC bump, no gate-count change** — pure self-lift.
