@@ -68,4 +68,5 @@ All internal links verified valid. ✅
 | Date | Version | Action |
 |------|---------|--------|
 | 2026-04-26 | 3.3.0 | Phase 20 Module #6 — inlined canonical DDL contract, fixed inventory to include slots 07/97/98, audit medium-priority issue cleared. |
+| 2026-04-30 | 3.7.0 | Phase 153 Task A21 — added AC-10 (ORM-First) + AC-11 (View-based joins) closing audit-v7 HIGH D2; banners §97 1.3.0 / §00 3.5.0 / §98 3.5.0 / §99 3.7.0; Lesson #44 codified. |
 | 2026-04-02 | 1.0.0 | Initial module created with 5 spec files. |
