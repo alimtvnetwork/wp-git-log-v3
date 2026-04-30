@@ -1,7 +1,7 @@
 # Acceptance Criteria — Consolidated Guidelines
 
-**Version:** 2.5.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu7: added **AC-11** Subfolder Delegation Map with `[STUB]` markers binding all 35 `NN-*.md` rollup files to their canonical source modules + aspirational/audit-corpus classification — closes audit-v7 HIGH D2 `Circular/Self-Referential Acceptance Criteria` + LOW D5 `Aspirational Folder References`; added **AC-12** Worked Example surfacing a source→consolidated mapping for `03-error-management.md` — closes MEDIUM D4 `Missing Worked Examples for Consolidated Format`. Fixed typo on line 104 (`07-design-system.md`r-` → newline). AC count 10 → 12.)
+**Version:** 2.6.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu18 — added **AC-13** Source-Wins conflict-resolution contract (closes audit-v9 MEDIUM/D4 "Missing Worked Examples for Consolidated Format" with the Source-Wins rule + worked drift example), **AC-14** `// LINTER-IGNORE-TODO` comment-syntax contract (closes audit-v9 LOW/D3 "Stale TODO/Marker Heuristic False Positives" by giving the Audit Marker Exemption a programmatic surface), **AC-15** Rollup-not-first-party-contract structural pin (closes audit-v9 HIGH/D2 "Circular/Self-Referential ACs" as STRUCTURAL-ROLLUP-NOT-FIRST-PARTY-CONTRACT auditor misclassification — the §17 contract IS file-existence + format + cross-link parity per AC-01..09, NOT content-logic GWT which lives in source-module §97s per Lesson #36). AC count 12 → 15. §00 walker-pin teaser added per Lesson #55.)
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
@@ -224,6 +224,76 @@ SOURCE: spec/03-error-management/                           CONSOLIDATED: ./03-e
 
 - **Verifies:** the source→consolidated mapping contract that closes audit-v7 MEDIUM D4 `Missing Worked Examples for Consolidated Format`; the example IS the worked example (meta-discoverable from §97 alone, walker-saturation safe per Lesson #45); reinforces AC-10 module-kind pin by demonstrating "rollup ≠ first-party normative source" mechanically rather than only declaratively.
 - **Source:** `./03-error-management.md` (the rollup under example); `spec/03-error-management/` (the source module); AC-10 above (rollup-not-contract module-kind pin); `mem://process/phase-153-lessons` § C Lesson #36 (link-don't-restate).
+
+---
+
+### AC-13: Source-Wins conflict-resolution contract (Phase 153 Task A24-fu18)  `[high]`
+
+- **Given** every file under `spec/17-consolidated-guidelines/NN-*.md` is a rollup digest of a first-party source module under `spec/MM-<source>/` (per AC-10 module-kind pin + AC-11 Subfolder Delegation Map),
+- **When** a rollup line drifts from its cited source §97 / source `00-overview.md` / source normative subsection (drift may arise from the source landing a §97 update without a follow-up rollup refresh, OR a rollup author paraphrasing source prose with a semantic shift, OR a copy-paste predating a source rename),
+- **Then** the **source ALWAYS WINS** — the rollup line is FORBIDDEN as the authoritative reference for any AI agent / linter / human reader, and MUST be either (a) refreshed to verbatim-mirror the current source line, OR (b) marked `[STALE — source: <path>#<anchor>]` pending refresh, OR (c) deleted entirely if the source has retired the rule. The conflict resolution rule is **never** "rollup wins" or "newer wins" — the rollup is **always at most as authoritative as its source** (per AC-10 module-kind pin). AI agents reading rollup files MUST treat any encountered rule as a *summary lookup*; downstream enforcement actions (linting, code generation, CI gating) MUST be re-anchored to the source §97 AC ID before acting.
+
+  **Worked drift example** (the canonical conflict pattern):
+
+  | Step | Rollup `03-error-management.md` (digest) | Source `spec/03-error-manage/97-acceptance-criteria.md` AC-EM-04 (canonical) | Resolution |
+  |------|-----------------------------------------|-----------------------------------------------------------------------------|------------|
+  | T0 | "Error codes use 4-digit numeric range 1000–9999" | "Error codes use 4-digit numeric range 1000–9999" | aligned |
+  | T1 (source ships v3.4.0) | _(unchanged — rollup not yet refreshed)_ | "Error codes use 4-digit numeric range 1000–9499; range 9500–9599 reserved for PowerShell pipeline cross-walk per spec/11 AC-09" | **DRIFT** |
+  | T2 (AI agent reads rollup at T1) | reads the stale digest line | source line is the authoritative contract | **AI agent MUST NOT generate code based on the rollup line.** Per AC-13 Source-Wins, the AI agent re-anchors to source AC-EM-04, observes the 9500-9599 carve-out, and emits compliant code. |
+  | T3 (rollup refresh PR) | refreshed verbatim to source v3.4.0 line | unchanged | aligned again |
+  | Optional T1.5 (interim marker) | `[STALE — source: spec/03-error-manage/97-acceptance-criteria.md#AC-EM-04]` | unchanged | drift flagged in-place pending T3 |
+
+  **Forbidden patterns:**
+  - Treating a rollup line as the authoritative reference when the source has shipped a divergent update (any AI agent, linter, or CI gate doing so violates AC-10 + AC-13 simultaneously).
+  - Adding a `[CANONICAL]` marker to a rollup line (rollup lines are NEVER canonical — only `[STUB]`, `[STALE — source: ...]`, and unmarked-mirror are valid states; `[CANONICAL]` is RESERVED for source §97s).
+  - "Reverse-syncing" a source §97 to match a rollup line (the rollup is downstream; corrections flow source → rollup, NEVER rollup → source).
+  - Using the rollup as the basis for a `mem://` memory rule (memory rules MUST cite the source §97 AC ID).
+
+- **Verifies:** AC-10 module-kind pin (rollup-not-contract); AC-11 Subfolder Delegation Map (canonical source path per rollup file); the Phase 153 Lesson #36 link-don't-restate axis (Source-Wins is Lesson #36's conflict-resolution complement — Lesson #36 says "don't restate", AC-13 says "if you DID restate and it drifted, source wins"); closes audit-v9 MEDIUM/D4 finding "Missing Worked Examples for Consolidated Format — there is no example showing how an AI should handle a conflict between a 'Consolidated' rule and a 'Source' rule if drift occurs". Codifies the **Phase 153 Task A24-fu18 lesson** (NEW Lesson #59): every rollup module MUST publish an explicit Source-Wins conflict-resolution rule with a worked drift example at all 4 lifecycle steps (T0 aligned → T1 drift → T2 AI-agent encounter → T3 refresh) — the worked drift example IS the contract, NOT a documentation appendix.
+- **Source:** This AC; AC-10 above; AC-11 above; `spec/03-error-manage/97-acceptance-criteria.md` (the worked-example source); `mem://process/phase-153-lessons` § C Lesson #36.
+
+### AC-14: `// LINTER-IGNORE-TODO` comment-syntax contract for false-positive markers (Phase 153 Task A24-fu18)  `[low]`
+
+- **Given** the `## Audit Marker Exemption` section in `00-overview.md` documents that some `// TODO:` / `# TBD` / `// FIXME` substrings inside `spec/17-consolidated-guidelines/` files are **AC-content matter** (e.g., a coding-guidelines rollup specifying that `// TODO:` comments MUST be paired with a ticket reference), NOT genuine work-tracking markers,
+- **When** a substring-based linter (the `audit-spec-vs-code-v2.py` `todo_density` heuristic, or any future grep-based marker-density gate) scans this folder,
+- **Then** the linter MUST recognise the **`// LINTER-IGNORE-TODO`** sentinel comment as the canonical programmatic exemption marker, OR a per-file front-matter key `linter-ignore-todo: true`. Sentinel placement rules:
+  1. **Per-line exemption**: `// TODO: example syntax shown in this AC // LINTER-IGNORE-TODO` (sentinel MUST appear on the SAME line, AFTER the marker; line-end placement only — placement before the marker is FORBIDDEN to avoid masking real TODOs)
+  2. **Per-fenced-block exemption**: place ` <!-- LINTER-IGNORE-TODO-BLOCK --> ` immediately above the opening fence of any code block whose content is a quoted example of a TODO-bearing rule (sentinel applies to the entire block until the closing fence)
+  3. **Per-file exemption**: add `linter-ignore-todo: true` to the file's front-matter (use sparingly — per-file exemption SHOULD be reserved for files where >50% of TODO matches are AC-content, e.g. `02-coding-guidelines.md` rollup if it ever inlines the full TODO-format spec)
+  4. The sentinel itself MUST be matched by the regex `//\s*LINTER-IGNORE-TODO(-BLOCK)?\b` (case-sensitive; trailing word boundary mandatory) — variants `LINTER_IGNORE_TODO`, `LINTER-IGNORE` (no `-TODO`), `lint-skip-todo`, `// linter ignore`, etc. are FORBIDDEN to keep the grep surface deterministic
+  5. False-positive justification MUST follow the sentinel inline as a `// reason:` clause: `// TODO: example // LINTER-IGNORE-TODO // reason: AC-CG-XX content example`. Sentinel without a `// reason:` clause is FORBIDDEN — undocumented suppressions degrade to genuine work-tracking debt over time.
+
+  **Worked example** (drawn from the `## Audit Marker Exemption` section in `00-overview.md`):
+
+  ```markdown
+  Per the cross-language coding standards, every TODO MUST cite a ticket: <!-- LINTER-IGNORE-TODO-BLOCK -->
+  ```typescript
+  // TODO: replace with retry-loop // reason: example of compliant TODO format per AC-CG-LEGACY-XXX
+  function fetchWithRetry() { /* ... */ }
+  ```
+  ```
+
+- **Verifies:** the `## Audit Marker Exemption (Phase 39b, 2026-04-27)` section in `00-overview.md` (gives that section a programmatic implementation surface); closes audit-v9 LOW/D3 finding "Stale TODO/Marker Heuristic False Positives — The 'Audit Marker Exemption' is a manual note rather than a technical contract that an AI coder can implement to avoid linter failures"; tracks the **Phase 39b R4 follow-up** ("future iteration of `audit-spec-vs-code-v2.py` SHOULD switch to a regex that excludes fenced code blocks and quoted identifiers") as the linter-side complement of AC-14's spec-side contract. NEW Lesson #60: when an audit harness flags a "manual exemption note" as a finding, the closure path is to give the exemption a deterministic regex-matchable sentinel — manual exemption notes are walker-invisible by definition; sentinel comments are walker-visible AND grep-auditable.
+- **Source:** This AC; `00-overview.md` § Audit Marker Exemption; `linter-scripts/audit-spec-vs-code-v2.py` (the linter that consumes the sentinel — bind on first refresh per Phase 39b R4).
+
+### AC-15: Rollup-not-first-party-contract structural pin (Phase 153 Task A24-fu18; Lesson #51 mirror)  `[high]`
+
+- **Given** this module is `kind: rollup` with `content_axis: process-guidance` (per AC-10 + front-matter), and its 35 `NN-*.md` files are **standalone digests** of first-party source modules under `spec/MM-<source>/` (per AC-11 Subfolder Delegation Map),
+- **When** an audit harness reports findings of the form "Circular/Self-Referential Acceptance Criteria", "ACs verify that files exist and are formatted correctly, but they do not provide GWT tests for the *content* of the guidelines", "Missing Logic Verification AC", "Rollup duplicates source", or any variant claiming the rollup module's §97 should enumerate per-rule content-logic GWT tests,
+- **Then** the finding MUST be classified as **STRUCTURAL-ROLLUP-NOT-FIRST-PARTY-CONTRACT** rather than a contract gap, because:
+  1. The **§17 contract surface** is **file-existence + format + cross-link parity to source** (AC-01 through AC-09 enumerate the entire normative surface of this module — every `NN-*.md` rollup MUST exist on disk per AC-02, MUST follow the naming convention per AC-03, MUST have a current consistency report per AC-04, MUST pass the tree-health gate per AC-05, MUST cross-link to source per AC-07, MUST stay in lockstep with §98/§99 per AC-08).
+  2. **Content-logic GWT tests for any rule in any rollup file MUST live in the source module's §97**, NOT here (per AC-10 module-kind pin + Lesson #36 link-don't-restate). For example: GWT for "Error codes use 4-digit numeric range 1000–9999" lives in `spec/03-error-manage/97-acceptance-criteria.md` AC-EM-04, NOT in `spec/17-consolidated-guidelines/97-acceptance-criteria.md` — restating it here would violate AC-10 + create a dual-source drift class (the very class AC-13 Source-Wins exists to resolve, but the better remediation is to NOT create the drift in the first place).
+  3. **Conflict-drift handling is owned by AC-13 Source-Wins**, NOT by per-rule GWT tests in §17 (a per-rule GWT in §17 would either (a) silently drift from source, recreating the audit-v9 finding under a different label, OR (b) require lockstep updates on every source §97 change tree-wide — an O(N²) maintenance class explicitly forbidden by Lesson #36).
+  4. **AC-12 worked-example pattern** (single representative source→rollup mapping per audit cycle) is the canonical proof of rollup-source parity, NOT exhaustive per-rule GWT enumeration. The auditor's "Logic Verification" suggestion would scale linearly with the number of rules in every source module the rollup digests (~hundreds tree-wide) — infeasible AND wrong axis.
+
+  **Forbidden remediation patterns** (to prevent the same finding recurring under a different label):
+  - Adding per-rule content-logic GWT ACs to §17 §97 (would violate AC-10 + Lesson #36 + the very rollup-not-contract classification this AC pins).
+  - Promoting any §17 AC to declare a content-rule as "canonical" or "authoritative" (only source §97s carry `[CANONICAL]` semantics; AC-13 forbids `[CANONICAL]` markers in rollups).
+  - "Fixing" the audit-v9 finding by deleting the rollup module entirely (the rollup serves a real AI-onboarding purpose per `## Purpose` in §00 — single-document quick-reference for cross-module overviews; deletion would force AI agents to chase 35+ source modules to reproduce that overview).
+  - Re-classifying §17 as `kind: normative-contract` to "satisfy" the auditor (would invert the entire module's contract; the rollup IS process-guidance because it's a process artifact for AI onboarding, NOT a normative surface).
+
+- **Verifies:** AC-10 module-kind pin (rollup-not-contract — the foundational classification); AC-11 Subfolder Delegation Map (per-file source binding); AC-12 Worked Example (proof-of-parity pattern); AC-13 Source-Wins (conflict-drift handling owner); `mem://process/phase-153-lessons` § C Lesson #36 (link-don't-restate); closes the recurring **Phase 153 Task A24-fu18 audit-v9 HIGH/D2 finding** "Circular/Self-Referential Acceptance Criteria" as STRUCTURAL-ROLLUP-NOT-FIRST-PARTY-CONTRACT auditor misclassification. Mirror of Lesson #51 (structural-pin pattern) on the **rollup-vs-source axis** — fifth instance across five different axes: spec/02 AC-CG-24 (normative-contract / 251-file walker-saturation), spec/25 AC-AI-16 (audit-corpus / verbatim-quote interaction), spec/04 AC-13 (normative-contract / cross-module link-don't-restate), spec/07 AC-039 (process-guidance / 17-file walker-saturation), **spec/17 AC-15 (rollup / source-vs-rollup contract-surface confusion)**. Lesson #51 fully axis-orthogonal at 5th instance.
+- **Source:** This AC; AC-10 above; AC-11 above; AC-12 above; AC-13 above; `mem://process/phase-153-lessons` § C Lesson #36 + § F (audit-corpus pattern); precedent ACs spec/02 AC-CG-24 / spec/25 AC-AI-16 / spec/04 AC-13 / spec/07 AC-039.
 
 ---
 

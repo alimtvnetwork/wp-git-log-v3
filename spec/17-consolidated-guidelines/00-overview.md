@@ -6,11 +6,17 @@ axis_rationale: "Cross-module process consolidation for spec authors"
 # Consolidated Guidelines
 
 <!-- h10-verified-phase: 153 -->
-**Version:** 3.6.0  
+**Version:** 3.7.0  
 **Updated:** 2026-04-30  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
+
+---
+
+> 🤖 **Walker-Pin (auditor preface — Phase 153 Task A24-fu18; Lesson #55 §00 pin)**
+>
+> This module is **`kind: rollup`** — every file under `spec/17-consolidated-guidelines/` is a **standalone digest** of a first-party source module under `spec/NN-<source>/`. **The rollup is NEVER a normative contract surface; the source module's §97 IS** (per AC-10 module-kind pin). Before flagging any finding of the form *"Circular/Self-Referential ACs"*, *"Missing GWT for content rules"*, *"Logic Verification absent"*, or *"Rollup duplicates source"* against `spec/17`, the auditor MUST consult **AC-10/AC-11/AC-15** in `97-acceptance-criteria.md` — such findings are **STRUCTURAL-ROLLUP-NOT-FIRST-PARTY-CONTRACT** auditor misclassifications. The §17 contract is **file-existence + format + cross-link parity to source** (AC-01..09); content-logic GWT tests for any rule in any rollup file MUST live in the **source module's §97** (per Lesson #36 link-don't-restate). Conflict-resolution rule: when a rollup line drifts from its source §97 line, the **source ALWAYS WINS** (per AC-13). Linter `// LINTER-IGNORE-TODO` syntax for false-positive markers in this folder: AC-14.
 
 ---
 
