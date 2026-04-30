@@ -73,7 +73,7 @@ func runClone(args []string) {
 
     if source == "" {
         fmt.Fprintln(os.Stderr, constants.ErrSourceRequired)
-        os.Exit(1)
+        os.Exit(int(exit.ExitMisuse)) // §97 AC-21: typed enum mandatory
     }
 
     // proceed with logic
