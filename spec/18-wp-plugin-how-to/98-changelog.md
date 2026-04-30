@@ -1,10 +1,16 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.0  
-**Updated:** 2026-04-30 (Phase 153 A24-fu10-fu1 — AC-12 Phases 07-13 Patterns + AC-13 Phases 14-21 Integration + AC-14 filename casing + AC-15 Lesson #29 deep-tree pin; closes audit-v7 [D2 HIGH] + [D5 MEDIUM] + [D1 LOW] — promotes spec/18 to EXCELLENT)
+**Version:** 1.4.1  
+**Updated:** 2026-04-30 (Phase 153 A24-fu10-fu2 — closes audit-v7 [D3 MEDIUM] flock prose-mirror under existing AC-11 + executes AC-14's "Known-stale references" P0 cleanup of 4 `CHANGELOG.md` instances in `10-deployment-patterns.md`; Lesson #33 prose-refresh)
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
+
+### 1.4.1 — 2026-04-30 — Phase 153 A24-fu10-fu2: flock prose-mirror + CHANGELOG.md mechanical cleanup
+- **Action**: Two patch-level fixes closing remaining audit-v7 cache findings on spec/18 (post A24-fu10-fu1). (1) **MEDIUM/D3 `Concurrency Contract Implementation Gap`**: AC-11 mandates `flock($handle, LOCK_EX)` for FileLogger writes but `04-logging-and-error-handling.md` §4.3 FileLogger spec opened with no concurrency notice — added a normative blockquote at line 68 mirroring AC-11's contract (acquire `LOCK_EX` before `fwrite`, release on `LOCK_UN`/`fclose`, `LOCK_NB` FORBIDDEN, atomic rotation via `<log>.tmp.<pid>` + `rename()`). The blockquote IS the prose-mirror per Lesson #33. (2) **LOW/D1 `Filename Casing Inconsistency`**: executed AC-14's enumerated `sed -i 's/CHANGELOG\.md/changelog.md/g' 10-deployment-patterns.md` — refreshed lines 38, 54, 785, 977 (incl. section heading `## 10.8 changelog.md Format`). HIGH/D5 `External Reference Path Drift` was a stale-cache reading — `01-foundation-and-architecture.md:5` already points to `../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` (verified via `rg`), no work needed.
+- **Lesson #33 reinforced (4th instance)**: §97-WINS contract pins (AC-11 here) require sibling-file prose-refresh follow-ups; file-grep auditors don't parse contract supersession. Pattern: A11a-fu1 (spec/13 exit codes) + A24-fu14 deprecation chain (spec/07) + A24-fu15 (spec/13 exit-code table) + A24-fu10-fu2 (spec/18 flock).
+- **Lesson #50 NOT triggered**: unlike A24-fu14/A24-fu15 (walker-cap saturation pins), all 3 spec/18 findings were either genuinely actionable (D3 + D1) or stale-cache (D5) — no STRUCTURAL-DESIGN-NOT-DEFECT class needed. Distinction: walker `files_used: 15/35` IS truncated, but the cited findings happen to land in the visible bundle.
+- **Lockstep**: §97 unchanged (no new AC, no contract change); §00 v1.4.0 → **v1.4.1** (h10 stamp 153 retained); §98 v1.4.0 → **v1.4.1**; §99 v1.4.2 → **v1.4.3**. Patch-only — pure implementer-surface refresh (matches A11a-fu1 + P3 lockstep budget pattern). All 5 strict gates expected GREEN.
 
 ## Format
 
