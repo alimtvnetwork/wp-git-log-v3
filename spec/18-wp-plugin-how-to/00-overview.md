@@ -5,7 +5,7 @@ axis_rationale: "Step-by-step WP plugin authoring guide"
 
 # WordPress Plugin How-To — Overview
 
-**Version:** 1.2.1  
+**Version:** 1.2.2  
 **Updated:** 2026-04-29  
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  

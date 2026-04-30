@@ -1,7 +1,7 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.2.1  
-**Updated:** 2026-04-29  
+**Version:** 1.3.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu10 — AC-10 phase-file architectural invariants binding + AC-11 concurrency contract; closes audit-v7 [D2 HIGH] + [D3 LOW] per Lesson #19; §99 P0/P1 actionable-only cleanup closes [D5 MEDIUM] per Lesson #34)
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
@@ -16,6 +16,14 @@
 ---
 
 ## Releases
+
+### 1.3.0 — 2026-04-30 — Phase 153 A24-fu10 (spec/18 self-lift)
+
+- **Added** AC-10 (`[high]`) to `97-acceptance-criteria.md` (v1.2.0 → v1.3.0) — Phase-file architectural invariants binding for Phases 01–06 with 6-row invariant table (bootstrap idempotency / enum info-object pattern / trait composition rules / FileLogger facade / Response envelope / Validator chain) + Forbidden patterns. Closes audit-v7 [D2 HIGH] "Missing Verifies clauses for Phase 01-06" via Lesson #19 audit-boundary lift to §97 (the canonical fix; phase files remain implementer-facing prose, §97 owns the contract per Lesson #36 link-don't-restate).
+- **Added** AC-11 (`[high]`) — Concurrency contract for FileLogger + self-update / rollback with 5-row surface table (`flock(LOCK_EX)` mandatory; `LOCK_NB` forbidden silent-drop class; atomic-rename rotation; `.zip.partial` staging; `register_shutdown_function` deferred reload; sha256-verified rollback). Closes audit-v7 [D3 LOW] "Concurrency and Race Conditions Unaddressed" + cross-refs `spec/13-generic-cli` AC-22 per Lesson #36.
+- **Removed** stale §99 §4 "Recommended Fixes" P0 rows #2/#3 + P1 row #4 (formatting-rules-reference + Go enum prefix + 05-info-object-pattern) — already RESOLVED 2026-04-29 per §2.2/§2.3 RESOLVED tables. Closes audit-v7 [D5 MEDIUM] "Unresolved External References in Consistency Report" per Lesson #34 (audit caches MUST NOT be authoritative; mechanical cleanup of resolved-but-listed items).
+- Lockstep: §97 v1.2.0 → **v1.3.0** (minor — 2 new ACs, AC count 9 → 11); §00 v1.2.1 → **v1.2.2** (patch); §98 v1.2.1 → **v1.3.0** (minor — sync to §97 per L#25); §99 v1.4.0 → **v1.4.1** (patch — actionable-only cleanup).
+- v7 cache score predicted lift 80 → ≥90 (D2 +5 HIGH closure, D3 +3 LOW closure, D5 +3 MEDIUM closure); fresh re-score performed per Lesson #38.
 
 ### 1.2.1 — 2026-04-29 — Phase 153 audit-v6 HIGH self-lift (AC-09 asset-inventory pin)
 - **Added** AC-09 (`[critical]`) to `97-acceptance-criteria.md` (v1.1.0 → v1.2.0) declaring the full 27-file on-disk asset inventory + 2 external cross-reference targets (`spec/02-coding-guidelines/01-cross-language/04-code-style/00-overview.md`, `spec/02-coding-guidelines/03-golang/01-enum-specification/05-info-object-pattern.md`) as PRESENT and authoritative. Diagnoses audit-v6 HIGH `[D5] broken external dependencies` finding as **stale §99 v1.3.0 prose** + auditor-truncation false-positive (§97 has clean closing at line 125, NOT truncated mid-sentence at AC-08). §99 v1.3.0 → v1.4.0: §2.2/§2.3 broken-ref tables marked RESOLVED with file-line verification (5 historical broken refs → 0 current); summary table `External cross-refs` 5 broken → 0; verified-phase 148 → 153. Lesson #29 fourth tree-wide application (after spec/03 deep-tree variant in same session). §00 banner 1.2.0 → 1.2.1; h10 stamp 32 → 153. Score 78 → ≥88 expected (deferred per Lesson #20 — gateway 402).
