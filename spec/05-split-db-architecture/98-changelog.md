@@ -1,6 +1,6 @@
 # Changelog — Split Database Architecture
 
-**Version:** 4.2.1
+**Version:** 4.3.0
 **Updated:** 2026-04-30
 **Scope:** `spec/05-split-db-architecture/`
 
@@ -10,7 +10,7 @@
 
 ### 4.3.0 — 2026-04-30 — Phase 153 Task A14 — spec/05 v6 audit close-out (89 → ≥92 expected)
 - **Action**: Closed all 3 audit-v6 findings against spec/05 (the lone GOOD module within striking distance of EXCELLENT). (1) **AC-SD-22 polyglot extension**: added language-agnostic retry-loop pseudo-code (Then-clause appendix) + per-language driver mappings for PHP/Rust/C#/TS/Python (PDO `SQLSTATE[HY000]:5`; `rusqlite::ErrorCode::DatabaseBusy|Locked`; `Microsoft.Data.Sqlite.SqliteException` codes 5/6; `better-sqlite3` `SQLITE_BUSY|SQLITE_LOCKED`; `sqlite3.OperationalError` `database is locked`). Closes v6 D3 MEDIUM "Incomplete Concurrency Implementation for Non-Go Languages". Pseudo-code is normative; deviation requires §98 row + new AC. (2) **AC-SD-24 (NEW `[critical]`)**: cross-module link-don't-restate harness pin per Lesson #36 — declares AC-SD-01/AC-SD-02's `../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md` references as canonical (NOT to be inlined; AC-CL-* surface evolves under spec/02 §98 — any inline copy would dual-source-drift). Closes v6 D5 HIGH "Unresolved External Dependency: Coding Guidelines" as harness bundling-cap artifact. Mirror of 13-module pattern (spec/03/07/10/11/12/13/14/16/17/18/22/25/28). (3) **AC-SD-25 (NEW `[high]`)**: ProjectSlug↔Project.Slug binding contract — `{ProjectSlug}` placeholder in canonical paths (AC-SD-03) MUST byte-equal Root DB `Project.Slug`; slug derivation (NFC → lowercase → `[^a-z0-9-]→-` → collapse → trim → reject-empty); IMMUTABLE post-creation; regex `^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$` enforced at INSERT + path materialization (defense-in-depth); `UNIQUE NOT NULL` constraint. Closes v6 D1 LOW "Ambiguous 'ProjectSlug' Source".
-- **Spec lockstep**: §97 v4.2.0 → **v4.3.0** (AC count 23 → 25 + AC-SD-22 polyglot extension under existing AC); §00 v4.2.0 → **v4.2.1** (banner-only — no §00 content edit); §98 v4.2.0 → **v4.2.1**; §99 v4.0.2 → **v4.0.3**. **No CI workflow change, no AC-31-31 cascade, no RUBRIC bump, no gate-count change.**
+- **Spec lockstep**: §97 v4.2.0 → **v4.3.0** (AC count 23 → 25 + AC-SD-22 polyglot extension under existing AC); §00 v4.2.0 → **v4.3.0** (banner-only — no §00 content edit); §98 v4.2.0 → **v4.3.0**; §99 v4.0.2 → **v4.0.3**. **No CI workflow change, no AC-31-31 cascade, no RUBRIC bump, no gate-count change.**
 - **Lesson #36 reinforced**: AC-SD-24 IS the lesson — explicitly declares the cross-module link-don't-restate invariant rather than working around the audit finding by inlining content.
 
 ### 4.2.0 — 2026-04-30 — Phase 153 LOW-batch close-out — AC-SD-05 SequenceNum scope clarification
