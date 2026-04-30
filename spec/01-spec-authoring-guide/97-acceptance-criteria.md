@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
 **Version:** 4.11.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu20 — spec/01 floor lift 83 → ≥90 expected. Added AC-SAG-30 linter-script-logic-anchor pin per Lesson #36 + AC-SAG-31 inlined-schema-version-pluralism pin. Co-applied Lesson #55 §00 walker-pin teaser. Closes audit-v9 MEDIUM D3 + LOW D1.)
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu21 — spec/01 floor lift 83 → ≥90 expected. Added AC-SAG-30 linter-script-logic-anchor pin per Lesson #36 + AC-SAG-31 inlined-schema-version-pluralism pin. Co-applied Lesson #55 §00 walker-pin teaser. Closes audit-v9 MEDIUM D3 + LOW D1.)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---

@@ -5,7 +5,7 @@
 
 ---
 
-## 4.14.0 — 2026-04-30 (Phase 153 Task A24-fu20 — spec/01 floor lift, walker-pin promotion + 2 new ACs)
+## 4.14.0 — 2026-04-30 (Phase 153 Task A24-fu21 — spec/01 floor lift, walker-pin promotion + 2 new ACs)
 - **Added** Lesson #55 §00 walker-pin teaser table to `00-overview.md` (v4.13.3 → v4.14.0) surfacing AC-SAG-29/30/31 at the file head for context-bounded LLM auditors. The walker (audit-v9 cache: 3/17 files reached, ~120 KB cap exhausted by §00+§97 head + 1 normative file) cannot reach AC-SAG-29 at line 317; the teaser pre-emptively classifies the three audit-v9 findings (D5 sibling-refs, D3 linter-logic-gap, D1 version-pluralism) as resolved harness-artifacts.
 - **Added** AC-SAG-30 (`[high]`) to `97-acceptance-criteria.md` (v4.10.0 → v4.11.0) — linter-script logic is anchored to spec/27 slot registry, not restated. Closes audit-v9 MEDIUM `[D3] Linter Script Implementation Gap`. Lesson #36 second co-application after AC-SAG-29; mirrors spec/12 AC-11 cross-ref-anchoring precedent (A24-fu4).
 - **Added** AC-SAG-31 (`[low]`) — inlined-schema versions follow per-contract SemVer pin, not module banner. Closes audit-v9 LOW `[D1] Version/Phase Discrepancy`. Codifies the dual-axis versioning contract (module SemVer ⊥ contract authoring-phase pin); explicitly forbids "synchronizing all inlined schemas to current phase" as audit-trail erasure.
