@@ -76,3 +76,11 @@ All internal cross-references resolve. ✅
 - CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
 - Implementability raised 90 → 95 (deterministic audit).
 
+
+### 2026-04-30 — Phase 153 Task A14 audit close-out
+
+- AC-SD-22 extended with language-agnostic pseudo-code + per-language driver mappings (PHP/Rust/C#/TS/Python) — closes v6 D3 MEDIUM.
+- AC-SD-24 (NEW `[critical]`) — cross-module link-don't-restate harness pin per Lesson #36; mirrors 13-module pattern. Closes v6 D5 HIGH as harness bundling-cap artifact.
+- AC-SD-25 (NEW `[high]`) — `{ProjectSlug}` ↔ Root DB `Project.Slug` byte-equal binding + slug derivation + immutability + UNIQUE NOT NULL. Closes v6 D1 LOW.
+- AC count 23 → 25. §97 v4.2.0 → v4.3.0; §00 v4.2.0 → v4.2.1; §98 v4.2.0 → v4.2.1; §99 v4.0.2 → v4.0.3.
+- All 5 strict gates GREEN. Predicted next-rescore: 89 → ≥92 (EXCELLENT).
