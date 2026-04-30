@@ -79,9 +79,9 @@ python3 linter-scripts/audit-ai-implementability.py --strict              # CI g
 
 ## Status
 
-**Advisory-by-default** per the H1 / P20 / P48-1-fu1 stamp pattern. Will graduate to a strict CI gate after adoption shows the rubric is stable AND the tree-wide score holds at GOOD or above.
+**Strict on BLOCKING (Phase 153 Task A12, 2026-04-30).** Graduated from `--report-only` advisory after Task A8's v5 rebaseline measured tree mean **84.7/100** (5 EXCELLENT · 18 GOOD · 0 NEEDS_WORK · 0 BLOCKING) — H10 graduation filter satisfied: (1) mechanically detectable (per-module score from gateway response), (2) active regression surface (any new module or contract amputation could drop into BLOCKING), (3) low false-positive risk (BLOCKING<60 sits 15 points below the current 75-floor — wide moat).
 
-**CI wiring (Phase 153 Task A5):** wired into `.github/workflows/spec-health.yml` between the Trace-map regression gate and the Summary step as `--report-only`. Step is skipped when `LOVABLE_API_KEY` is unset (community PRs from forks). Cache lives at `.lovable/cache/audit-ai/` and is repo-local.
+**CI wiring (Phase 153 Task A12 — graduated from A5):** runs `python3 linter-scripts/audit-ai-implementability.py --strict` in `.github/workflows/spec-health.yml` between the Trace-map regression gate and the Summary step. Exits 1 if any module scores BLOCKING (<60); GOOD/NEEDS_WORK still pass (advisory inside the report). Step is skipped when `LOVABLE_API_KEY` is unset (community PRs from forks — Lesson #15). Cache lives at `.lovable/cache/audit-ai/` and is repo-local. **Threshold lock**: the 4 modules at the structural 75-floor (03/12/17/25 — Rubric v6 ceiling per Lesson #29/#36/#37) are addressed by Rubric v7 (A15-A20), NOT by lowering the strict threshold. Lowering the threshold is **forbidden** without a corresponding Rubric v7 design memo update.
 
 ---
 
