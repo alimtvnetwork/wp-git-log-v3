@@ -85,7 +85,7 @@ func Print(command string) {
     data, err := Files.ReadFile(command + ".md")
     if err != nil {
         fmt.Fprintf(os.Stderr, "No help available for '%s'\n", command)
-        os.Exit(1)
+        os.Exit(int(exit.ExitMisuse)) // §97 AC-21: typed enum mandatory
     }
     fmt.Print(string(data))
 }
