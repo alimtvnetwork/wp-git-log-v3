@@ -1,7 +1,7 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 3.2.0
-**Updated:** 2026-04-30 (Phase 153 — AC-22 Derivative-context module pin (Lesson #29 — diagrams of spec/22))
+**Version:** 3.3.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu2 — AC-23 Deterministic SVG-render protocol (`.mmd` SHA primary + structural-XML diff fallback); closes audit-v7 [D3] MEDIUM Non-deterministic SVG Diffing + reinforces AC-22 [D4]+[D5] harness-artifact pin per Lesson #34)
 **Scope:** `spec/26-gitlogs-diagrams/` — Mermaid diagram artifacts that visualize the §22 Git Logs WP plugin contracts.
 
 ---
