@@ -1,7 +1,7 @@
 # Acceptance Criteria — Database Conventions
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-29 (Phase 153 P48-2: AC-09 binds the Cross-Language Boolean Storage Convention §2.1 of `02-schema-design.md` — closes P47-fu1 critical finding "04-db cross-lang boolean conventions")
+**Version:** 1.3.0  
+**Updated:** 2026-04-30 (Phase 153 Task A21: AC-10 + AC-11 bind ORM-First and View-based-joins rules from `03-orm-and-views.md` — closes audit-v7 HIGH D2 finding "Missing Acceptance Criteria for ORM and View Rules")
 **Scope:** `spec/04-database-conventions/`
 
 ---
