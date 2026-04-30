@@ -1,6 +1,6 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.10.2
+**Version:** 4.10.3
 **Last Updated:** 2026-04-29
 
 > **v4.10.2 update (Phase P48-1-fu1-batch P3 sweep slot 8 — `### AC-SAG-LEGACY` Verifies clauses):** Closes the P3-tier `**Verifies:**` gap for this module (28/32 → 32/32 — smallest remaining gap among P3 drifters). Added group-level `**Verifies:**` clauses to all four `### AC-SAG-LEGACY` block headings; each clause names the GWT-rewrite supersession chain and the AC-SAG-28 exemption-regex contract. Graduates this module's AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)* gate P3. Lockstep: §00 banner 4.13.1 → 4.13.2, §97 4.8.0 → 4.9.0, §98 release row 4.13.2 added, §99 4.10.1 → 4.10.2. P3 derived tier: Medium → High. Tree-health 168/168 strict-pass holds; lockstep 87/87. **Lesson reinforced** (already in Core from slots 2–4): `**Verifies:**` is the single highest-leverage AC field for AI implementability; group-level clauses on LEGACY scaffolds are the canonical pattern (precedent: spec/02 slot 1).
@@ -27,7 +27,7 @@
 ---
 
 ## Module Health
-<!-- verified-phase: 152 -->
+<!-- verified-phase: 153 -->
 
 | Criterion | Status |
 |-----------|--------|

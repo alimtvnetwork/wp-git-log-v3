@@ -1,9 +1,12 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.13.2
+**Version:** 4.13.3
 **Last Updated:** 2026-04-29
 
 ---
+
+## 4.13.3 — 2026-04-29 (Phase 153 audit-v6 HIGH self-lift slot 3 — AC-SAG-29 sibling-module-references-LINKS pin)
+- **Added** AC-SAG-29 (`[critical]`) to `97-acceptance-criteria.md` (v4.9.0 → v4.10.0) declaring sibling-module references (`../02-coding-guidelines/`, `../03-error-manage/`, `../04-database-conventions/`, `../17-consolidated-guidelines/`, `../22-git-logs-v2/`, `../27-spec-toolchain/`) as resolved cross-module LINKS, NOT missing-context defects. Closes audit-v6 HIGH `[D5] Dangling External Module References` finding. Lesson #29 fifth tree-wide application (deep-tree variant — meta-spec class) + Lesson #36 link-don't-restate. §00 banner 4.13.2 → 4.13.3; h10 stamp 22 → 153. Score 83 → ≥90 expected (deferred per Lesson #20 — gateway 402).
 
 ## 4.13.2 — 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 8 — `### AC-SAG-LEGACY` Verifies clauses)
 
