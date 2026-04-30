@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.8.1
-**Updated:** 2026-04-29 (Phase 153 P49: AC-T-13 mechanical-lock graduation — `test-audit-deterministic-stability.sh` extended to cover all three generators cited in `**Verifies:**` (auditor + spec-index + dashboard-data). 7 → 13 assertions; closes P46-followup-3.)
+**Version:** 2.9.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu6: AC-T-30 Slot Delegation Map + AC-T-31 AC Family Prefix Index + AC-T-32 R2 normative code snippet — closes all 3 v7 audit findings on spec/27 (CRITICAL D5, HIGH D2, MEDIUM D3); AC count 29 → 32; targets lift 76 → ≥85.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
