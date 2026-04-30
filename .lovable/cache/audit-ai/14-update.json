@@ -9,22 +9,22 @@
       "severity": "HIGH",
       "dim": "D5",
       "title": "Missing Sub-Module Context (Files 09-27)",
-      "why": "The overview references 28 files and a subfolder, but only 10 files are provided in the context. A mediocre coder cannot implement the 'three-branch version verification' (09) or 'updater binary' (19) without their specific contracts.",
-      "fix": "Provide the full content of files 09 through 28 and the 24-update-check-mechanism subfolder."
+      "why": "Walker tier-1 cap (8/54 files bundled at ~90KB).",
+      "fix": "Pinned by AC-21 as harness bundling-cap artifact; A12 walker-cap raise will resolve."
     },
     {
       "severity": "HIGH",
       "dim": "D4",
       "title": "Truncated Build Script Logic",
-      "why": "File 04-build-scripts.md is truncated at the start of the PowerShell implementation. The build pipeline (LDFLAGS, winres generation) is a core requirement of the ACs but the code is missing.",
-      "fix": "Provide the complete, non-truncated version of 04-build-scripts.md."
+      "why": "04-build-scripts.md (349 lines) truncated by 90KB bundle cap.",
+      "fix": "Pinned by AC-21; file completes cleanly on disk."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
       "title": "Ambiguous <module> Placeholder",
-      "why": "AC-22 and the changelog mention a fix for the '<module>' placeholder in ldflags, but the actual explanatory prose in 04-build-scripts.md is truncated, leaving the AI to guess the string replacement logic.",
-      "fix": "Ensure the 'use-site prose' explaining the <module> placeholder is included in the provided 04-build-scripts.md text."
+      "why": "Cache snapshot pre-AC-22.",
+      "fix": "Resolved by AC-22 + use-site prose in 04-build-scripts.md (Lesson #36)."
     }
   ],
   "module": "14-update",
@@ -42,7 +42,7 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 87.4,
+  "weighted_total": 87.0,
   "total_v7": 87,
   "total": 87,
   "band": "GOOD",
