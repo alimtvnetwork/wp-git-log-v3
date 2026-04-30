@@ -26,9 +26,10 @@
 - **Then** Exactly one `lifecycle-*.mmd` file MUST exist and parse as a valid Mermaid `flowchart TD`.
 
 ### AC-RESEARCH-05: Forward-only updates  `[medium]`
-- **Given** A change to the contract block.
-- **When** Reviewed in PR.
-- **Then** Removed fields MUST first be marked deprecated for at least one minor version before deletion; renamed fields MUST add the new name and keep the old one as an alias for one minor version.
+- **Given** A change to the contract block in `00-overview.md` (the inlined JSON Schema for `TopLevelResearchEntry`).
+- **When** A diff is computed between the prior `00-overview.md` (preceding §98 row) and the new one.
+- **Then** Removed `properties.*` keys MUST first be marked deprecated (added to `description` with the prefix `DEPRECATED: …`) for at least one minor §98 version before deletion; renamed fields MUST add the new key AND keep the old key as an alias (both validate) for one minor §98 version.
+- **Verifies:** the SemVer minor-bump invariant for the inlined schema (a removed/renamed required field is a breaking change and forbidden inside a single minor bump); enforced by `linter-scripts/check-version-parity.py` (any §00-schema diff without a paired §98 row fails parity) + manual PR review against this AC. **Source:** A13 close of v6 audit D2 LOW finding "Vague Verification Clauses".
 
 ### AC-RESEARCH-06: Cross-references stay valid  `[medium]`
 - **Given** This subfolder's `00-overview.md`.
