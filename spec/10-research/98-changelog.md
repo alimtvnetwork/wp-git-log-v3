@@ -1,6 +1,6 @@
 # Changelog — Research
 
-**Version:** 3.3.3  
+**Version:** 3.3.4  
 **Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-9 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 **Scope:** `spec/10-research/`
 
