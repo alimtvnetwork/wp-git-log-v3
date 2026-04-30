@@ -1,38 +1,38 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 16,
-  "d4": 14,
-  "d5": 12,
+  "d3": 17,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Missing Leaf Files (02-13) in Context",
-      "why": "The walker cap (120KB) has excluded the actual component specifications (Sidebar, Buttons, Typography details). An AI cannot implement the 'Sidebar' or 'Button' logic with 100% confidence because the normative files (02-13) are physically missing from the provided text.",
-      "fix": "Consolidate the core normative requirements for Sidebar, Buttons, and Typography into the 00-overview.md or provide them as separate modules."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Truncated Acceptance Criteria and Changelog",
-      "why": "The context ends abruptly in the middle of the Changelog and Acceptance Criteria (AC-39 is mentioned in the header but the file is truncated). The AI lacks the full set of constraints for the latest version.",
-      "fix": "Reduce the verbosity of historical changelog entries to ensure the latest normative ACs and release notes fit within the 120KB context window."
+      "dim": "D5",
+      "title": "Missing Component Logic (Leaf Files)",
+      "why": "The walker saturation (Lesson #51) means files 02-13 containing specific logic for Sidebar, Buttons, and Typography are missing from the context. While ACs exist, the 'how-to' implementation details for complex components are absent.",
+      "fix": "The auditor pin acknowledges this; however, for 100% confidence, the specific leaf file for the assigned task must be provided in the prompt context."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Undefined 'linter-scripts' and 'linter-commands'",
-      "why": "AC-DS-000 and the CI Workflow stage references rely on external scripts (e.g., detect-changed-modules.sh, validate-contracts.py) that are not defined or provided in the context.",
-      "fix": "Include the source code or a detailed functional spec for the referenced linter-scripts in a 'Dependencies' section."
+      "title": "Missing Error Handling for Clipboard API",
+      "why": "AC-024 mentions falling back to a legacy textarea technique if the Clipboard API fails, but does not provide the code or specific logic for this fallback.",
+      "fix": "Add a code snippet or specific library reference (e.g., copy-to-clipboard) for the legacy fallback implementation."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Ambiguous 'STRUCTURE' Detection",
+      "why": "AC-025 requires detecting directory trees but doesn't define the regex or logic for 'directory patterns ending in /' vs standard code comments.",
+      "fix": "Define a specific regex or logic gate (e.g., 'lines containing \u251c or \u2514') to trigger the STRUCTURE badge."
     }
   ],
   "module": "07-design-system",
   "files_used": 3,
   "files_total": 17,
   "bytes_used": 120000,
-  "bundle_sha": "e7e326b87600ff06",
-  "total_v6": 80,
+  "bundle_sha": "ae161d469076543b",
+  "total_v6": 89,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 79.8,
-  "total_v7": 80,
-  "total": 80,
+  "weighted_total": 88.6,
+  "total_v7": 89,
+  "total": 89,
   "band": "GOOD",
   "rubric": "v7"
 }
