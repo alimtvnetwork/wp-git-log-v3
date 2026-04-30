@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.5.0
+**Version:** 3.5.1
 **Updated:** 2026-04-30
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,13 @@
 ---
 
 ## Releases
+
+### 3.5.1 — 2026-04-30 — Phase 153 Task A20-rescore: A21 close-out confirmed; tree mean 84.4
+- **Re-scored** spec/03-error-manage and spec/04-database-conventions under Rubric v7 with A21's §97 ACs in place. Results vastly exceeded prediction: spec/03 **74 → 81 (+7)** (predicted 76-78); spec/04 **74 → 82 (+8)** (predicted 76-77). Both modules now GOOD.
+- **Tree mean 83.7 → 84.4 (+0.7)**, **EXCELLENT 5 · GOOD 18 · NEEDS_WORK 0 · BLOCKING 0** — first time tree-wide zero-NEEDS_WORK milestone since LLM baselines began (v3 Task A3).
+- **Updated** slot 35 (`35-full-tree-ai-audit-v7.md`) v7.0.0 → **v7.1.0**: refreshed headline metrics table with A20-rescore column, replaced NEEDS_WORK close-out targets with CLOSED section, marked A21 ✅ in Open Items.
+- **Banners** spec/17 §00 3.5.0 → **3.5.1**, §98 3.5.0 → **3.5.1**, §99 4.7.0 → **4.7.1**. Patch-bump on all three: pure baseline data refresh — no §97 surface change, no AC surface change, no CI/RUBRIC change, no slot-inventory change.
+- **Lesson #44 codified inline (this row)**: When axis-driven mechanical AC additions (Lessons #21, #22) land on `audit-corpus` or `normative-contract` modules, the actual score lift commonly exceeds the +1 / +2 prediction by **5-8×** because v7's per-axis multipliers (audit-corpus D5×1.6; normative-contract D3×1.4) compound across multiple new GWT ACs. Future predictions should bracket {predicted, predicted+8} rather than {predicted, predicted+2} for axis-aligned AC additions.
 
 ### 3.5.0 — 2026-04-30 — Phase 153 Task A20: Rubric v7 LLM rebaseline + slot 35 snapshot
 - **Added** `35-full-tree-ai-audit-v7.md` (slot 35, v7.0.0) — LLM rebaseline under Rubric v7 axis-driven dimension weight cascades. Tree mean **82.3 → 83.7 (+1.4)**; EXCELLENT band 4 → 5 (spec/23 lifted 93 → 97); 2 NEEDS_WORK at 74 (spec/03, spec/04 — 1pt below threshold, mechanically closeable). Top movers: spec/10 +12, spec/01 +7, spec/02 +6, spec/11 +6, spec/26 +5. Honest-baseline corrections: spec/14 -10, spec/07 -9 (v7 caught D2/D3 over-credit on narrative/process content).
