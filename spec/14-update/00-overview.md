@@ -5,9 +5,9 @@ axis_rationale: "Update-flow ACs (TUF, retries, atomic swap)"
 
 # Update — Overview
 
-<!-- h10-verified-phase: 24 -->
-**Version:** 2.4.0  
-**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-21 inventory pin closes audit-v5 D5/D4/D1 findings as harness artifacts)
+<!-- h10-verified-phase: 153 -->
+**Version:** 2.4.1  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu5 — AC-22 binds `<module>` ldflags placeholder to consuming repo's go.mod path; resolves audit-v7 D3 MEDIUM via use-site prose in 04-build-scripts.md, Lesson #36)
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
