@@ -1,7 +1,7 @@
 # Acceptance Criteria — 03 Error Manage
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-25  
+**Version:** 2.1.0  
+**Updated:** 2026-04-29  
 **Scope:** `spec/03-error-manage/`  
 **Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
 
