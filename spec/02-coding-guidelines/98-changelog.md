@@ -20,8 +20,7 @@
 - **Spec lockstep**: §97 v4.2.0 → **4.3.0** (AC count 25 → 28); §00 v3.4.0 → **3.4.1**, §98 v3.4.0 → **3.4.1**, §99 v4.5.0 → **4.6.0**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade** (contract-surface change is internal to spec/02), **no gate-count change**.
 - **Validation**: spec/02 force re-score 80 → **TBD ≥ 88** (target band: GOOD; D5 closed, D2 + D3 lifted); lockstep · tree-health pending re-run.
 - **Lesson #21 codified at §98 v3.4.1**: When a parent §97 delegates to N subfolders, the delegation MUST be enumerable from inside §97 itself via a **Delegation Map** (AC-prefix namespace, governing rules, status, AC-count target). Same root cause as A9/Lesson #19 (audit-boundary < verification-boundary), now confirmed as a tree-wide pattern — apply this to spec/13/23/25 in upcoming A11 sweep. **Lesson #22**: Open-ended exception phrases ("language-specific exceptions", "case-by-case") in normative ACs invite implementation drift; replace with a closed enumerated **Exception Ledger** that has Why + Detection + Sunset per row — the ledger IS the normative surface, not an appendix to it. **Lesson #23**: Legacy-deprecated ACs without GWT successors are worse than no ACs (signal "verified" while delivering "unverified"); every legacy section MUST cite a GWT successor AND the successor MUST exist as at least a stub.
-
-
+### 3.4.1 — 2026-04-29 — Phase 153 Task A10: spec/02 self-lift 80 → ≥88 expected (AC-CG-21/22/23 + Subfolder Delegation Map + Size-Limit Exception Ledger)
 
 ## Format
 
