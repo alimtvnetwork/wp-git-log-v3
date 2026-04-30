@@ -1,7 +1,7 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.3.0  
-**Updated:** 2026-04-30 (Phase 153 A24-fu10 — AC-10 phase-file architectural invariants binding + AC-11 concurrency contract; closes audit-v7 [D2 HIGH] + [D3 LOW] per Lesson #19; §99 P0/P1 actionable-only cleanup closes [D5 MEDIUM] per Lesson #34)
+**Version:** 1.4.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu10-fu1 — AC-12 Phases 07-13 Patterns + AC-13 Phases 14-21 Integration + AC-14 filename casing + AC-15 Lesson #29 deep-tree pin; closes audit-v7 [D2 HIGH] + [D5 MEDIUM] + [D1 LOW] — promotes spec/18 to EXCELLENT)
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---

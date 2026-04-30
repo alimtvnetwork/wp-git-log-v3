@@ -1,6 +1,6 @@
 # Consistency Report — spec/18-wp-plugin-how-to/
 
-**Version:** 1.4.1  
+**Version:** 1.4.2  
 **Generated:** 2026-04-29  
 **Status:** ✅ All issues resolved (v1.4.0) — Phase 153 audit-v6 HIGH self-lift: §2.2 + §2.3 broken-ref findings re-verified at file-line level and confirmed RESOLVED in prior phases (paths now `02-coding-guidelines/01-cross-language/04-code-style/` and `02-coding-guidelines/03-golang/01-enum-specification/`); §97 AC-09 asset-inventory pin added per Lesson #29 deep-tree variant. v1.3.0 baseline preserved.
 
