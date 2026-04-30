@@ -1,10 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.77.4
+**Version:** 2.78.0
 **Updated:** 2026-04-30
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.78.0 — 2026-04-30 — Phase 153 Task A12: AI-implementability gate graduates to `--strict` (BLOCKING<60)
+- **Action**: Flipped `.github/workflows/spec-health.yml` step "AI-implementability deep-walk audit" from `--report-only` (advisory, always exit 0) to `--strict` (exit 1 on any module BLOCKING <60). Renamed step from "(Phase 153 Task A5, advisory)" to "(Phase 153 Task A12, strict on BLOCKING)". Updated step comment block: replaced A3 baseline (81.6 GOOD, spec/05=69 NEEDS_WORK) with A8 v5 baseline (84.7 GOOD, 0 NEEDS_WORK, 0 BLOCKING) + 75-floor disclosure (03/12/17/25, Rubric v6 ceiling) + threshold-lock prohibition (lowering the strict threshold is forbidden without a corresponding Rubric v7 design memo update).
+- **Spec lockstep**: slot 34 §00 v1.1.0 → **v1.2.0** (Status section rewritten: "Advisory-by-default" → "Strict on BLOCKING (Phase 153 Task A12)" + H10 graduation criteria evidence + threshold-lock clause). §27 §00 v2.77.4 → **v2.78.0** (slot-34 minor → module minor); §98 v2.77.4 → **v2.78.0**; §99 v2.74.4 → **v2.75.0**.
+- **No new AC, no AC-31-31 cascade, no RUBRIC bump, no gate-count change** (A5 was a broader-contract step per H1 lesson; A12 preserves the same workflow-step slot, just sharpens its exit-code contract). AC-34-08 (`--report-only` never fails) contract preserved — `--report-only` still wins over `--strict`.
+- **Graduation criteria evidence** (per H10 filter): (1) **mechanically detectable** — per-module score returned by gateway as integer 0-100; (2) **active regression surface** — any new module with thin §97, or contract amputation on an existing module, could drop into BLOCKING<60; (3) **low false-positive risk** — current 75-floor (4 modules) sits 15 points above the BLOCKING threshold; tree mean 84.7 sits 25 points above. Wide moat against the rubric measurement noise (~3-5 points typical inter-run variance).
+- **Lesson #20 graduation note continued** (from A8): now that A12 ships, future self-lift phases SHOULD rely on the CI gate to flag regressions rather than running ad-hoc `--force` re-scores after every contract edit. The `--strict` exit code IS the regression signal.
+- **Lesson #40 codified inside this row**: when graduating an LLM-driven advisory gate to strict, the strict threshold MUST sit at least one band-step below the current floor (BLOCKING<60 vs current 75-floor = 15-point moat = one full band gap of GOOD's 75-89 range). Without the moat, the gate would oscillate between PASS and FAIL on rubric-noise alone (~3-5 point inter-run variance observed at A8). Future LLM-gate graduations MUST cite the floor + moat width in the §00 Status section.
 
 ### 2.77.4 — 2026-04-30 — Phase 153 Task A8: LLM gateway unblock + full-tree v5 re-score
 - **Action**: Gateway became available; ran full-tree `audit-ai-implementability.py --force` capturing first cumulative re-score since v4 baseline (Task A7). Tree mean **82.5 → 84.7 / 100** (+2.22). EXCELLENT band **2 → 5** (added spec/13 +7→91, spec/15 +2→92, spec/16 +4→90; existing 23=97 + 24=93 retained). Top movers: spec/27 +8 (A9 contract land), spec/02 +7 (A10), spec/13 +7 (A11a), spec/10 +7 (A13 closeout), spec/14 +6 (A11h). **Zero regressions.** 4 modules confirmed at structural 75-floor (03/12/17/25 — Rubric v6 ceiling per Lesson #29; Rubric v7 territory).
