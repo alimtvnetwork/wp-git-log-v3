@@ -109,6 +109,15 @@ function Build-Binary {
 }
 ```
 
+> **`<module>` placeholder (normative).** The literal string `<module>` in
+> the `-ldflags` arguments above (and in the Bash equivalent below) MUST be
+> replaced at build time with the **Go module path declared on the `module`
+> line of the consuming repository's `go.mod` file** — e.g. if `go.mod`
+> declares `module github.com/acme/my-cli`, the rendered ldflag is
+> `-X 'github.com/acme/my-cli/constants.RepoPath=...'`. The placeholder is
+> intentional and contract-bound; build scripts MUST NOT hard-code a
+> module path. See **AC-22** in `97-acceptance-criteria.md`.
+
 ### Deploy Step
 
 Uses `Resolve-DeployTarget` (see [02-deploy-path-resolution.md](02-deploy-path-resolution.md))
