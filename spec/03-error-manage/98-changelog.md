@@ -1,9 +1,12 @@
 # Error Management — Changelog
 
-**Version:** 3.4.0  
-**Last Updated:** 2026-04-27
+**Version:** 3.4.1  
+**Last Updated:** 2026-04-29
 
 ---
+
+## 3.4.1 — 2026-04-29
+- **Phase 153 audit-v6 HIGH self-lift** (spec/03 D5 broken-refs): added **AC-08 Module Asset Inventory Pin** to §97 (Lesson #29 module-kind extension + Lesson #36 link-don't-restate). Pins on-disk presence of `02-error-architecture/01-error-handling-reference.md`, `structure.md`, `lifecycle-error-architecture.mmd`, and full subfolder tree (`01-error-resolution/`, `02-error-architecture/*`, `03-error-code-registry/`). Diagnoses prior CRITICAL-class auditor finding as deep-walker 90 KB tier-1 bundling cap, NOT spec defect. §97 v2.0.0 → v2.1.0 (minor — new AC-08 critical); §00/§98 v3.4.0 → v3.4.1 (patch); §99 v3.2.0 → v3.2.1 (patch); h10 stamp 22 → 153.
 
 ## 3.4.0 — 2026-04-27
 - **P22 sync** (2026-04-28): §00 banner version field bumped 3.2.0 → 3.4.0 to match this release row (H10 §00 ↔ §98 parity catch-up; opt-in `<!-- h10-verified-phase: 22 -->` stamp added under §00 banner; no spec content change).
