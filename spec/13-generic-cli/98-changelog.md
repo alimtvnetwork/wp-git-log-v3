@@ -1,10 +1,22 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
 **Version:** 1.1.6  
-**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-24 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
+**Updated:** 2026-04-30 (Phase 153 — Lesson #33 follow-through: 7 stale `os.Exit(1)` literals refreshed to typed-enum form across `03-subcommand-architecture.md`, `04-flag-parsing.md`, `07-error-handling.md`, `09-help-system.md`, `18-batch-execution.md`)
 **Scope:** `spec/13-generic-cli/`
 
 ---
+
+### 1.1.6 — 2026-04-30 — Phase 153 LOW-batch verify: residual `os.Exit(1)` stale-prose sweep (Lesson #33 follow-through)
+- **Action**: Audit-v6 LOW finding `[D1] Stale Prose Contradictions` (spec/13 score 84) verified-and-closed. A11a-fu1 (v1.1.3) refreshed `03-subcommand-architecture.md` line 84+102 + `07-error-handling.md` exit-code table, but missed 7 inline Go example literals. This phase swept all 7: `03-subcommand-architecture.md:16/40/56` (Run/dispatch/multi-layer dispatch), `04-flag-parsing.md:76` (runClone source-required), `07-error-handling.md:106` (runImport loadFile error), `09-help-system.md:88` (Print missing-help), `18-batch-execution.md:120` (runExec missing-args). All now use `os.Exit(int(exit.ExitMisuse))` or `os.Exit(int(exit.ExitError))` per §97 AC-21 typed-enum contract, with `// §97 AC-21: typed enum mandatory` comment.
+- **Why**: Lesson #33 reaffirmed — file-grep auditors continue to flag literal stale strings until prose matches contract; Lesson #41 (severity-tally ≠ unique findings) verified the LOW was genuine on enumeration. Mirror of Lesson #34 (cache-stale finding pattern) with the inverse outcome — this one was real and required action.
+- **Files**: 5 implementer prose files (+~7 lines net for typed-enum form + comments), §00/§98/§99 patch banners.
+- **Spec lockstep**: §97 v2.3.0 (no change — no new AC, no contract change); §00 v1.1.5 → **v1.1.6**; §98 v1.1.5 → **v1.1.6**; §99 v1.1.5 → **v1.1.6**. h10 stamp 153 → 153 (no change). **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**, **no new AC** — pure prose-refresh under existing AC-21.
+- **Validation**: `grep -rn "os.Exit(1)" spec/13-generic-cli/` returns only AC documentation references (98-changelog row + the FORBIDDEN-pin in 03 line 84 + the stale-prose self-reference comment in 07 line 57) — zero remaining live code-example violations.
+- **Lesson #43 codified at this row**: when a §97-WINS contract-pin AC ships AND a follow-up prose-refresh phase ships, the refresh phase MUST `grep -rn` the entire module folder (NOT just the files cited in the audit finding) — A11a-fu1 missed 7 of 11 violation sites because it patched only the files explicitly listed in the deterministic-audit finding. Mirror of Lesson #36 (closure enumeration via grep, not finding-list scan) for the prose-refresh axis.
+
+### 1.1.5 — 2026-04-29 — Phase 153 inventory-pin batch: Lesson #29 AC-24 (cross-reference pin for AC-22/23 externals)
+- **Action**: Added AC-24 declaring on-disk asset inventory + cross-reference list (AC-SD-22 in spec/05, AC-T-28 in spec/27); follows Lesson #36 (link-don't-restate). Closes audit-v6 HIGH `[D5] Missing files` class as harness bundling-cap artifact per Lesson #34.
+- **Spec lockstep**: §97 v2.2.0 → **v2.3.0** (AC count 23 → 24); §00 v1.1.4 → **v1.1.5**; §98 v1.1.4 → **v1.1.5**; §99 v1.1.4 → **v1.1.5**.
 
 ### 1.1.4 — 2026-04-29 — Phase 153 P3: AC-22 concurrency prose mirrored into implementer surfaces
 - **Action**: Lifted AC-22's normative concurrency contract from §97 prose-only into the two files where implementers actually look: (1) added `## Concurrency & Locking (Normative)` section to `10-database.md` (PRAGMA table, transaction discipline, atomic temp-then-rename, `update.lock` discipline, forbidden patterns) and (2) added `### Concurrency Discipline (Normative)` subsection to `18-batch-execution.md` Execution Flow (single connection pool sized N for `--parallel=N`, no per-worker `flock`, retry on worker goroutine).
