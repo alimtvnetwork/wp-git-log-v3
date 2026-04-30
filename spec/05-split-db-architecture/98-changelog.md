@@ -8,6 +8,12 @@
 
 ## Releases
 
+### 4.2.0 — 2026-04-30 — Phase 153 LOW-batch close-out — AC-SD-05 SequenceNum scope clarification
+- **Action**: Audit-v6 LOW finding `[D1] Ambiguous SequenceNum Assignment` (spec/05 score 89) closed by extending AC-SD-05 to specify the counter scope as `(ApplicationId, Category, SubCategory)` tuple in the Root DB `Counter` table — NOT global, NOT per-Application alone. Added rationale (global counter would break per-category co-existence; per-App counter would break categorical `ls`-enumeration property), explicit `Counter` table schema (`ApplicationId INTEGER, Category TEXT, SubCategory TEXT, NextValue INTEGER, PRIMARY KEY (ApplicationId, Category, SubCategory)`), and atomic-increment requirement bound to AC-SD-14.
+- **Why**: Lesson #32 per-finding tracker (`phase-153-batch-verify-low-17.md`) enabled mechanical close-out; Lesson #36 cross-references AC-SD-14 (atomic transaction wrapper) without restating it; Lesson #22-style closed-enumeration replacement for the open phrase "assigned by the Root DB registry" (which left scope ambiguous).
+- **Files**: `97-acceptance-criteria.md` AC-SD-05 in-place clarification (≈4 lines added to Then clause); banners.
+- **Spec lockstep**: §97 v4.1.0 → **v4.2.0** (in-place AC clarification with new schema constraint = minor bump); §00 v4.1.0 → **v4.1.1** (banner only); §98 v4.1.0 → **v4.2.0**; §99 v4.0.1 → **v4.0.2**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**, **no new AC** — pure in-place AC clarification under existing AC-SD-05.
+
 ### 4.1.0 — 2026-04-29 — Phase 153 Task A6: AC-SD-21/22/23 close v3 audit findings (D1 CRITICAL + D3 HIGH + D2 MEDIUM)
 - **Added** three GWT acceptance criteria targeting the only NEEDS_WORK module in the v3 AI-implementability baseline (was 69/100; targets D2 12→16, D3 10→15):
   - **AC-SD-21** — SQL identifier quoting (double-quote PascalCase always; backticks/brackets forbidden) + Go struct↔DB mapping with explicit `db:` / `gorm:column:` tags. Closes v3 CRITICAL D1 finding.
