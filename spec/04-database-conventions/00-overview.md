@@ -138,10 +138,12 @@ CREATE TABLE User (
 );
 
 -- Rule 8: Repeated values normalized into a lookup table.
+-- Rule 7: Smallest possible key type — lookup tables with bounded cardinality
+-- (≤ 32 767 rows) MUST use SMALLINT, not INTEGER. AUTOINCREMENT is preserved.
 CREATE TABLE ProjectStatus (
-    ProjectStatusId INTEGER PRIMARY KEY AUTOINCREMENT,
-    Code            TEXT    NOT NULL UNIQUE,    -- e.g., 'Active', 'Archived'
-    Label           TEXT    NOT NULL
+    ProjectStatusId SMALLINT PRIMARY KEY AUTOINCREMENT,  -- bounded ≤ 32 767 rows
+    Code            TEXT     NOT NULL UNIQUE,    -- e.g., 'Active', 'Archived'
+    Label           TEXT     NOT NULL
 );
 
 -- Rule 4: FK column reuses the EXACT PK name from the parent table.
@@ -161,7 +163,8 @@ CREATE INDEX Idx_Project_UserId          ON Project (UserId);
 CREATE INDEX Idx_Project_ProjectStatusId ON Project (ProjectStatusId);
 
 -- Rule 9: Joins exposed via a view rather than ad-hoc SQL in code.
-CREATE VIEW ProjectWithOwnerView AS
+-- View names use the `Vw` prefix per §01-naming-conventions.md (NOT `View` suffix).
+CREATE VIEW VwProjectWithOwner AS
 SELECT
     p.ProjectId,
     p.Name              AS ProjectName,
@@ -186,7 +189,8 @@ JOIN ProjectStatus  s ON s.ProjectStatusId = p.ProjectStatusId;
 | `id INTEGER PRIMARY KEY`    | `UserId INTEGER PRIMARY KEY` |
 | `UUID`, `GUID`, `CHAR(36)`  | `INTEGER PRIMARY KEY AUTOINCREMENT` |
 | `IsDisabled`, `IsDeleted`   | `IsActive`, `IsArchived`     |
-| Inline `JOIN` in app code   | `CREATE VIEW … View`         |
+| Inline `JOIN` in app code   | `CREATE VIEW Vw…`            |
+| `CREATE VIEW …View` (suffix)| `CREATE VIEW Vw…` (prefix)   |
 
 ### Acceptance — DDL Conformance
 
