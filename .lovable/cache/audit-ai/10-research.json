@@ -1,7 +1,7 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 14,
+  "d2": 19,
+  "d3": 17,
   "d4": 18,
   "d5": 15,
   "issues": [
@@ -9,29 +9,29 @@
       "severity": "HIGH",
       "dim": "D5",
       "title": "Missing Mermaid Source Files",
-      "why": "The spec references 'lifecycle-10-research-lifecycle.mmd' and 'lifecycle-top-research.mmd' as normative sources, but these files are not provided in the context.",
-      "fix": "Include the .mmd file contents in the module or inline the Mermaid source code within the overview files."
+      "why": "The spec references 'lifecycle-10-research-lifecycle.mmd' and '01-research-index/lifecycle-top-research.mmd' as normative sources, but these files are not provided in the context.",
+      "fix": "Include the raw .mmd files in the module file list or inline the Mermaid code directly into the overview files."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Undefined Domain Registry",
-      "why": "The contract for TOP-RES entries requires 'domains' to be an array of spec module relpaths, but there is no validation logic or list provided to verify if a path is valid.",
-      "fix": "Add a regex pattern or a reference to a master module list to the 'domains' property in the JSON schema."
+      "title": "Undefined Linter Script Logic",
+      "why": "Multiple ACs (AC-05, AC-07, AC-RESEARCH-07) rely on specific python/node scripts (check-tree-health.cjs, check-spec-cross-links.py) whose logic for 'strict gates' is not defined.",
+      "fix": "Provide the core logic or pseudo-code for the linter scripts in a 'Tooling' section."
     },
     {
       "severity": "LOW",
-      "dim": "D2",
-      "title": "Vague Verification Clauses",
-      "why": "AC-RESEARCH-05 (Forward-only updates) lacks a 'Verifies' clause and a concrete automated check, relying on manual PR review which contradicts the 'AI coder' requirement.",
-      "fix": "Add a 'Verifies' clause citing the SemVer invariant and provide a script snippet to check for breaking schema changes."
+      "dim": "D1",
+      "title": "Registry Table Type Mismatch",
+      "why": "The SQL DDL uses 'TEXT' for AuthoredAt, while the Validation Schema expects 'date-time' format; SQLite does not enforce ISO-8601 by default.",
+      "fix": "Add a CHECK constraint to the SQL DDL: CHECK(AuthoredAt IS datetime(AuthoredAt))."
     }
   ],
   "module": "10-research",
   "files_used": 8,
   "files_total": 8,
-  "bytes_used": 31305,
-  "bundle_sha": "bef8dbe32cfddfd1",
-  "total": 81,
+  "bytes_used": 36022,
+  "bundle_sha": "8ad61d82959ecb13",
+  "total": 87,
   "band": "GOOD"
 }
