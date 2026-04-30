@@ -1,6 +1,6 @@
 # Changelog — Generic CLI Creation Guidelines — Overview
 
-**Version:** 1.1.5  
+**Version:** 1.1.6  
 **Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-24 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 **Scope:** `spec/13-generic-cli/`
 
