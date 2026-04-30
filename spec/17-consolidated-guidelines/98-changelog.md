@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.4.6
+**Version:** 3.4.7
 **Updated:** 2026-04-29
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,13 @@
 ---
 
 ## Releases
+
+### 3.4.7 — 2026-04-29 — Phase 153 audit-v6 close-out: spec/17 self-lift (consolidated-guide module-kind pin)
+- **Added** AC-10 (`[critical]`) to §97 — consolidated-guide module-kind pin declaring all 35 `NN-*.md` files as DESCRIPTIVE rollups (NOT first-party normative source-module entry points). Enumerates 3 aspirational source mnemonics (`08-docs-viewer-ui`, `09-code-block-system`, `13-app`) already classified `[doc-only]` per Phase F1 (2026-04-28), and 6 audit-corpus rollups (slots 25/26/29/31/33/34) as dated snapshots.
+- **Closes** Phase 153 audit-v6 CRITICAL finding `spec/17-consolidated-guidelines` "Broken Cross-References to Source Folders [D5]" (score 76 → ≥86 expected on next LLM re-score; deferred per Lesson #20 — gateway 402). The cited "non-existent source folders" + "Production-Ready" tension is a **harness misreading of module kind** — `consolidated-guide` rollups legitimately reference both present AND aspirational source modules; aspirational ones are already in `linter-scripts/spec-folder-refs.allowlist` `[doc-only]` bucket per Phase F1.
+- **Codifies Lesson #29 third extension** — audit-corpus pattern (originally for verbatim-quoted evidence in spec/25, AC-AI-09/10/11; first extended to non-`.md` assets in spec/11 AC-10; second extended to structural ambiguities in spec/12 AC-09) extends to **rollup / consolidated-guide modules** under the same auditor-misreads-by-default class. Future `kind: consolidated-guide` modules MUST add a module-kind pin AC declaring rollup-not-contract semantics with line-anchored citations to the file inventory.
+- **Banners**: §97 v2.3.0 → **v2.4.0** (minor — AC count 9 → 10); §00 v3.4.6 → **v3.4.7** (patch — module-kind clarification, no public contract change); §98 v3.4.6 → **v3.4.7**; §99 v4.6.6 → **v4.6.7**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no file moves, no allowlist edit (Phase F1 already wired the doc-only bucket).**
+- **All 4 audit-v6 CRITICALs now CLOSED**: spec/25 (A11c), spec/11 (AC-10 asset-inventory), spec/12 (AC-09 slot-collision), spec/17 (AC-10 module-kind). Lesson #29 extension lineage complete: quoted-evidence → assets → structure → rollups.
 
 ### 3.4.6 — 2026-04-29 (Phase 153 pL36-cluster-fix — Source-header drift repair)
 
