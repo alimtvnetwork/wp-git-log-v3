@@ -1,7 +1,7 @@
 # Acceptance Criteria — Research
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-30 (Phase 153 — AC-9 Module asset inventory pin (Lesson #29 — research lifecycle + index subfolder))
+**Version:** 1.3.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu — AC-10 v7-finding tri-closure (D1 CHECK + D3 path-resolution + D5 script-binding); EXCELLENT-band push per Lesson #44 audit-corpus axis)
 **Scope:** `spec/10-research/`
 
 ---
