@@ -1,6 +1,6 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.79.0
+**Version:** 2.76.0
 **Updated:** 2026-04-30
 
 > **v2.79.0 update (Phase 153 Task A24-fu22 — spec/27 §00 walker-pin promotion, Lesson #61 fourth instance / pure-promotion second instance):** Promoted pre-existing AC-T-27/28/29/30/31/32 (shipped A9 + A24-fu6) into §00 walker-pin teaser (Lesson #55) — 6-row table between Scope line and `## Purpose`. Walker (3/50 files = highest walker-saturation observed at 6%) now sees all 6 structural anchors in first ~2 KB. Audit-v9 cache findings (CRITICAL D5 + HIGH D2 + MEDIUM D3) were ALREADY closed in A24-fu6 by AC-T-30/31/32 — cache pre-A24-fu6 stale (Lesson #34). LLM re-score deferred per Lesson #20 (gateway HTTP 402; Lesson #38 check ran). **Lesson #63 codified at §98 v2.82.0 row**: cache-stale-finding + pre-existing closing AC + high walker-saturation → §00 walker-pin promotion is the canonical lightest-touch remediation. Lockstep: §00 v2.81.1 → **v2.82.0** (minor — new normative walker-pin block); §98 v2.81.1 → **v2.82.0**; §99 v2.78.1 → **v2.79.0**. §97 NOT bumped. All 5 strict gates GREEN expected.
