@@ -1,7 +1,7 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 3.4.4  
-**Updated:** 2026-04-30 (Phase 153 A24-fu14 — AC-038 matchMedia fallback for storage-blocked theme bootstrap (closes audit-v7 MEDIUM/D3 LocalStorage Failure Mode); AC-039 Lesson #51 structural-pin for HIGH/D5 + LOW/D4 walker-saturation findings)
+**Version:** 3.4.5  
+**Updated:** 2026-04-30 (Phase 153 A24-fu16 — §00 walker-saturation pin promoted to top-of-file (tier-1 visibility); AC-039 [medium]→[critical]; closes recurring v8 audit-cache CRITICAL/D5 + HIGH/D4 walker-saturation artifacts per Lessons #50/#51)
 **Scope:** `spec/07-design-system/`
 
 ---
