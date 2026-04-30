@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 15,
+  "d2": 16,
   "d3": 14,
-  "d4": 16,
-  "d5": 12,
+  "d4": 17,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken Sub-module References",
-      "why": "The spec frequently references files like '02-error-architecture/01-error-handling-reference.md' which are listed in the inventory but not provided in the context.",
-      "fix": "Provide the full content of the 02-error-architecture and 03-error-code-registry subfolders in the prompt context."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Incomplete GWT Coverage for Phase 50 Contracts",
-      "why": "The Normative Contract (Phase 50) defines invariants (INV-01 to INV-07) that lack corresponding GWT acceptance criteria in 97-acceptance-criteria.md.",
-      "fix": "Add AC-09 through AC-15 to 97-acceptance-criteria.md mapping each INV-N to a Given/When/Then clause."
-    },
-    {
-      "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency and Race Condition Ambiguity",
-      "why": "While retrospectives mention dedup locks, the normative Go/PHP/Python validator code snippets do not implement thread-safe registry lookups or collision checks.",
-      "fix": "Add a 'Concurrency' section to the Phase 50 contract specifying mutex requirements for registry access."
+      "title": "Missing Concurrency/Race Condition Specs for Registry",
+      "why": "The spec mentions a 'master registry' and 'collision resolution' but lacks the technical contract for how concurrent CI/CD pipelines or multiple developers prevent ID collisions during the registration phase.",
+      "fix": "Add a Normative Contract section in 03-error-code-registry defining a 'First-to-Merge' lock or a pre-commit reservation protocol."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D5",
+      "title": "Unresolved Downstream Application References",
+      "why": "AC-08 and AC-09 explicitly acknowledge that references to 'backend/internal/...' will fail in this context because they live in downstream repos, creating a 'harness-artifact' gap for a mediocre AI.",
+      "fix": "Provide a mock file-tree or a 'Contract-Only' interface for the expected backend directory structure within the spec context."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D2",
+      "title": "GWT Gap for Error Resolution Workflow API",
+      "why": "The Phase 60 OpenAPI for Error Resolution (tickets) is provided as a normative reference but lacks a corresponding GWT acceptance test in 97-acceptance-criteria.md.",
+      "fix": "Add AC-10: Error Resolution Ticket Lifecycle, verifying ticket creation and status transitions via the defined OpenAPI schema."
     }
   ],
   "module": "03-error-manage",
   "files_used": 11,
   "files_total": 166,
   "bytes_used": 90000,
-  "bundle_sha": "0092873a3d9ddb5d",
-  "total_v6": 75,
+  "bundle_sha": "bd1b5f03a9769dea",
+  "total_v6": 80,
   "axis": "audit-corpus",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 1.5
   },
   "axis_cap": 95,
-  "weighted_total": 74.5,
-  "total_v7": 74,
-  "total": 74,
-  "band": "NEEDS_WORK",
+  "weighted_total": 81.0,
+  "total_v7": 81,
+  "total": 81,
+  "band": "GOOD",
   "rubric": "v7"
 }

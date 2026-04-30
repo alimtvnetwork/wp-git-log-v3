@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 12,
-  "d4": 17,
-  "d5": 15,
+  "d2": 16,
+  "d3": 14,
+  "d4": 19,
+  "d5": 17,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing Acceptance Criteria for ORM and View Rules",
-      "why": "While naming and schema design have ACs (AC-03, AC-09), the mandatory 'ORM-First' and 'No On-the-fly Joins' rules in 03-orm-and-views.md lack GWT criteria and verification clauses.",
-      "fix": "Add AC-10 and AC-11 to 97-acceptance-criteria.md specifically covering ORM usage and View-based joins with grep-based verification commands."
-    },
-    {
-      "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Incomplete Concurrency Handling in SQLite",
-      "why": "The spec acknowledges SQLite is single-writer but offloads the actual locking/retry logic (WAL, BEGIN IMMEDIATE) to a cross-reference (spec/13) which is not provided in this context.",
-      "fix": "Inline the mandatory SQLite PRAGMAs and transaction retry policy into 02-schema-design.md \u00a74.3."
+      "title": "Concurrency contract is externalized and unverified",
+      "why": "The spec explicitly offloads concurrency (WAL, busy_timeout, retries) to spec/13, but spec/04 is the 'single source of truth' for DB conventions. A mediocre coder will miss the spec/13 requirements.",
+      "fix": "Inline the mandatory SQLite PRAGMAs and retry logic constants directly into the 07-split-db-pattern.md or 02-schema-design.md."
     },
     {
       "severity": "MEDIUM",
+      "dim": "D1",
+      "title": "Ambiguous 'Smallest Possible Type' for SQLite",
+      "why": "SQLite uses dynamic typing (manifest typing); specifying SMALLINT vs INTEGER vs BIGINT has no storage impact in SQLite (it uses 1-8 bytes based on value), which contradicts the 'Key Sizing' table logic.",
+      "fix": "Clarify that for SQLite, INTEGER is the universal type, and sizing rules (SMALLINT/BIGINT) apply specifically to the MySQL fallback or logical validation."
+    },
+    {
+      "severity": "LOW",
       "dim": "D5",
-      "title": "Dangling Reference to Split-DB Pattern",
-      "why": "02-schema-design.md \u00a74.1 and 00-overview.md point to 07-split-db-pattern.md for 'full specification', but that file's content is missing from the provided context.",
-      "fix": "Provide the content for 07-split-db-pattern.md or merge its core directory layout rules into the overview."
+      "title": "Dangling reference to 03-orm-and-views.md",
+      "why": "AC-10 and AC-11 reference specific sections (\u00a71.1, \u00a71.2) of 03-orm-and-views.md which is listed in the inventory but its content is not provided in the context.",
+      "fix": "Ensure the content of 03-orm-and-views.md is appended to the module context to resolve section references."
     }
   ],
   "module": "04-database-conventions",
-  "files_used": 7,
+  "files_used": 6,
   "files_total": 11,
   "bytes_used": 90000,
-  "bundle_sha": "b18fd7f9b7fb2aa9",
-  "total_v6": 76,
+  "bundle_sha": "42fe3a42fb2c9d39",
+  "total_v6": 84,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 74.5,
-  "total_v7": 74,
-  "total": 74,
-  "band": "NEEDS_WORK",
+  "weighted_total": 82.5,
+  "total_v7": 82,
+  "total": 82,
+  "band": "GOOD",
   "rubric": "v7"
 }
