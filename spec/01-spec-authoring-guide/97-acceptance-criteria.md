@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.9.0
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 8 — added group-level `**Verifies:**` clauses to all four `### AC-SAG-LEGACY` block headings; closes 4/4 P3 gap (28/32 → 32/32 Verifies coverage), graduates AC-block from Medium → High AI-confidence per the four-gate rubric. Each clause names the exemption-regex contract per AC-SAG-28 and the supersession chain to the GWT ACs above. Phase P7b context preserved in v4.8.0 trail below.)
+**Version:** 4.10.0
+**Updated:** 2026-04-29 (Phase 153 audit-v6 HIGH self-lift slot 3 — added AC-SAG-29 sibling-module-references-are-LINKS pin per Lesson #29 fifth tree-wide application + Lesson #36 link-don't-restate. Closes audit-v6 HIGH `[D5] Dangling External Module References`. Supersedes Phase P48-1-fu1-batch P3 v4.9.0.)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
