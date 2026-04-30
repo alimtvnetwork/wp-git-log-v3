@@ -1,6 +1,6 @@
 # Consistency Report — spec/18-wp-plugin-how-to/
 
-**Version:** 1.4.1  
+**Version:** 1.4.2  
 **Generated:** 2026-04-29  
 **Status:** ✅ All issues resolved (v1.4.0) — Phase 153 audit-v6 HIGH self-lift: §2.2 + §2.3 broken-ref findings re-verified at file-line level and confirmed RESOLVED in prior phases (paths now `02-coding-guidelines/01-cross-language/04-code-style/` and `02-coding-guidelines/03-golang/01-enum-specification/`); §97 AC-09 asset-inventory pin added per Lesson #29 deep-tree variant. v1.3.0 baseline preserved.
 
@@ -48,14 +48,17 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 
 ## 2. Broken Cross-References
 
-### 2.1 CHANGELOG.md Casing Mismatch
+### 2.1 CHANGELOG.md Casing Mismatch — ⚠️ Partial (1 RESOLVED, 4 OPEN)
 
-| Location | Reference | Issue | Fix |
-|----------|-----------|-------|-----|
-| `readme.md:84` | `CHANGELOG.md` | File is `changelog.md` (lowercase) | Change to `changelog.md` |
-| `10-deployment-patterns.md:38,54,785,977` | `CHANGELOG.md` | Same casing mismatch | Change to `changelog.md` or document as convention name |
+| Location | Reference | Status | Fix |
+|----------|-----------|--------|-----|
+| `readme.md:84` | `changelog.md` | ✅ RESOLVED 2026-04-30 — file already lowercase on disk and reference matches; §97 AC-14 governs going forward | n/a |
+| `10-deployment-patterns.md:38,54,785,977` | `CHANGELOG.md` | ⚠️ OPEN — 4 conceptual prose references to WP-ecosystem convention name (sections "## 10.8 CHANGELOG.md Format" + structure-tree + procedural step "Update CHANGELOG.md"); FORBIDDEN by §97 AC-14. Mechanical fix: `sed -i 's/CHANGELOG\.md/changelog.md/g' spec/18-wp-plugin-how-to/10-deployment-patterns.md` (deferred — see Note below). | sed-replace + bump §00/§98 patch |
 
-**Impact:** Medium — links break on case-sensitive filesystems (Linux, CI).
+**Note:** the 4 OPEN refs are documentation prose discussing the file-name convention itself (NOT live cross-links to the on-disk artifact); rendering impact is zero on case-sensitive filesystems because they are not anchor targets. Listed as P0 row #1 below; AC-14 codifies the forbidden-pattern contract for future authoring.
+
+**Impact:** Low — prose-level only; no broken on-disk links. Auditors flagging this as `[D1]` are operating against the AC-14 forbidden-pattern contract, which is the correct enforcement surface.
+
 
 ### 2.2 Missing External File: `formatting-rules-reference.md` — ✅ RESOLVED 2026-04-29
 

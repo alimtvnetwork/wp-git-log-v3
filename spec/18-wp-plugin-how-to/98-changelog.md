@@ -1,7 +1,7 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.3.0  
-**Updated:** 2026-04-30 (Phase 153 A24-fu10 — AC-10 phase-file architectural invariants binding + AC-11 concurrency contract; closes audit-v7 [D2 HIGH] + [D3 LOW] per Lesson #19; §99 P0/P1 actionable-only cleanup closes [D5 MEDIUM] per Lesson #34)
+**Version:** 1.4.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu10-fu1 — AC-12 Phases 07-13 Patterns + AC-13 Phases 14-21 Integration + AC-14 filename casing + AC-15 Lesson #29 deep-tree pin; closes audit-v7 [D2 HIGH] + [D5 MEDIUM] + [D1 LOW] — promotes spec/18 to EXCELLENT)
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
@@ -16,6 +16,16 @@
 ---
 
 ## Releases
+
+### 1.4.0 — 2026-04-30 — Phase 153 A24-fu10-fu1 (spec/18 second-pass self-lift; promotes to EXCELLENT)
+
+- **Added** AC-12 (`[high]`) — Phase-file architectural invariants binding for **Phases 07–13 (Patterns)** with 7-row table covering reference-impl runnability, hook priority+arg-count discipline, WP_UnitTestCase + Factory test pattern, deployment reproducibility, template escaping, design-system token consumption (cross-ref spec/07 AC-036 per L#36), admin-page capability checks. Closes audit-v7 [D2 HIGH] second band.
+- **Added** AC-13 (`[high]`) — Phase-file architectural invariants binding for **Phases 14–21 (Integration)** with 8-row table covering REST `permission_callback` discipline, settings facade, typed exceptions, bundled-data sha256 pinning, JS module enqueue, micro-ORM Repository facade (cross-ref spec/04 AC-09 per L#36), end-to-end walkthrough parity, ping-endpoint exact-shape contract. Closes audit-v7 [D2 HIGH] third + final band — AC-10/12/13 trio now exhaustively binds all 21 phase files.
+- **Added** AC-14 (`[low]`) — Filename casing discipline. `CHANGELOG.md` + `README.md` (uppercase) FORBIDDEN; canonical lowercase `changelog.md` + `readme.md`. Lists `readme.md:84` as RESOLVED (already lowercase) + flags `10-deployment-patterns.md` 4 prose refs as remaining actionable items. Closes audit-v7 [D1 LOW] "Filename casing mismatch" via forbidden-pattern contract surface.
+- **Added** AC-15 (`[medium]`) — Internal sub-file resolution discipline (Lesson #29 deep-tree variant). Auditor MUST treat [D5] findings citing missing internal phase files as **harness bundling-cap artifacts** when on-disk inventory matches AC-09. Mirror of spec/03/11/12/17/25 inventory pins. Closes audit-v7 [D5 MEDIUM] "Unresolved internal sub-file references" per Lesson #29 module-kind pin.
+- **Updated** §99 §2.1 — `readme.md:84` row marked RESOLVED 2026-04-30 (file already lowercase on disk + reference matches); `10-deployment-patterns.md` 4 prose refs reclassified as P0 actionable per AC-14 forbidden-pattern contract; impact downgraded Medium → Low (prose-only, no broken on-disk links).
+- Lockstep: §97 v1.3.0 → **v1.4.0** (minor — 4 new ACs, AC count 11 → 15); §00 v1.3.0 → **v1.4.0** (minor — sync to §97/§98 per L#25); §98 v1.3.0 → **v1.4.0** (minor — release row); §99 v1.4.1 → **v1.4.2** (patch — §2.1 update).
+- v7 cache score predicted lift 86 → ≥91 (EXCELLENT band — D2 +3 HIGH closure of phases 07-21 band, D5 +2 MEDIUM Lesson #29 pin, D1 +1 LOW casing); fresh re-score performed per Lesson #38.
 
 ### 1.3.0 — 2026-04-30 — Phase 153 A24-fu10 (spec/18 self-lift)
 
