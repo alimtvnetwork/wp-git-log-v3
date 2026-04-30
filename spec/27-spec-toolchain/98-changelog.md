@@ -1,10 +1,22 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.82.0
+**Version:** 2.83.0
 **Updated:** 2026-04-30
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.83.0 — 2026-04-30 — Phase 153 Task A24-fu28: §98 archive split (Lesson #65 first structural-fix instance — spec/27 tier1 455 → ~133 KB)
+
+- **Action**: Moved 83 release rows older than v2.72.0 (Phase 153 Task #29a, 2026-04-29) to a new frozen archive at [`_archive/98-changelog-pre-v2.72.0.md`](./_archive/98-changelog-pre-v2.72.0.md). Live §98 reduced from 248 KB → 45 KB; spec/27 tier1 (§00 + §97 + §98 + §99) reduced from **455 KB → ~133 KB** (-71%). The walker cap is 120 KB, so spec/27 remains AT_CEILING but no longer in catastrophic OVER territory.
+- **Why**: fu27 walker-bundle-budget audit (`/tmp/a24-fu27-bundle-budget.py`, codified as Lesson #65) revealed spec/27 tier1 alone was 4× the walker cap; the auditor never saw the bottom half of any tier-1 file. Cache score floored at 83 GOOD despite §97 quality work in A9 (AC-T-27/28/29) and A24-fu6 (AC-T-30/31/32). Lesson #65: bundle budget is the dominant cache-score driver — pure-promotion teasers cannot rescue OVER modules; structural surgery (cap raise / archive split / §97 sub-folder) is the only effective lever.
+- **Cut point**: row #15 from §98 head, boundary v2.72.0 (Phase #29a) / v2.71.0 (Phase P48-1-fu1-batch slot 3). Keeps last 15 release rows live; archives 83 rows (Phase 90-117, F/G/H/P series). Cut chosen by deterministic byte-budget table from `/tmp/a24-fu27-bundle-budget.py`: row #15 minimised live-§98 size while keeping all current Phase 153 trail discoverable in-place.
+- **Parity gate safety verified pre-cut**: `check-version-parity.py` reads only `overview.parent / "98-changelog.md"` and computes SemVer-MAX (since #35-fu) — archive file at `_archive/98-changelog-*.md` is invisible to the gate; latest release (v2.83.0) remains the SemVer-max. `check-lockstep.cjs` uses `releases.sort().slice(-1)[0]` (latest by string-date) — also reads only `mod / "98-changelog.md"`, also unaffected. Confirmed by code inspection at `linter-scripts/check-version-parity.py:129` and `linter-scripts/check-lockstep.cjs:120`.
+- **Archive contract**: archive file is frozen historical reference only. New rows MUST always go to live §98, never to archive. Pointer section "Archived Releases" added to live §98 tail with explicit "single source of truth" + "do not add new rows here" prose. Archive header carries explicit `Status: Frozen archive` + matching prose.
+- **Spec lockstep**: §00 v2.82.0 → **v2.83.0** (banner-only patch — no §97/AC change; deferred to fu28-fu1 if any prose refresh needed). §98 banner v2.82.0 → **v2.83.0** (this row). §99 audit row + banner bump v2.75.0 → **v2.76.0** (next sub-step).
+- **Lesson #65 reinforcement**: this is the first STRUCTURAL-FIX instance of the lesson (vs all prior fu20-fu25 work which was pure-promotion). Confirms the lesson's central claim: structural surgery delivers what pure-promotion cannot. Expected cache score: 83 → 87+ (one ceiling barrier removed).
+- **Verifies:** §98 contract — `wc -c spec/27-spec-toolchain/98-changelog.md` < 50_000 (currently 45_173). `grep -c "^### " spec/27-spec-toolchain/_archive/98-changelog-pre-v2.72.0.md` == 83. Live §98 row count `grep -c "^### " spec/27-spec-toolchain/98-changelog.md` == 16 (15 prior + this new row). All 5 strict gates GREEN post-cut: cross-links, tree-health 168/168 strict, lockstep 87/87, version-parity 74/74, freshness 81/81.
+
 
 ### 2.82.0 — 2026-04-30 — Phase 153 Task A24-fu22: spec/27 §00 walker-pin promotion (Lesson #61 fourth instance, pure-promotion)
 - **Action**: Promoted pre-existing AC-T-27/28/29/30/31/32 (shipped in A9 + A24-fu6) into a `> 🤖 Walker-Pin (Lesson #55 + Lesson #61)` 6-row teaser block at §00 head between Scope line and `## Purpose`. Walker (3/50 files = textbook walker-saturation) now sees ALL 6 structural anchors in the first ~2 KB instead of having to reach §97 lines 158-188.
