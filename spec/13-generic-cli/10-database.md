@@ -47,6 +47,65 @@ Every CLI built per this spec runs in a multi-process / multi-thread environment
 | `foreign_keys` | `ON` | SQLite default is OFF; FK enforcement is load-bearing for AC-23 cascade contracts |
 | `synchronous` | `NORMAL` | Safe under WAL; `FULL` is wasteful, `OFF` risks corruption |
 
+### Reference Go implementation (normative example)
+
+The PRAGMAs above MUST be applied at every connection open. Concrete Go form using `mattn/go-sqlite3`:
+
+```go
+import (
+    "database/sql"
+    "fmt"
+    "math/rand"
+    "time"
+
+    _ "github.com/mattn/go-sqlite3"
+)
+
+func openDB(path string) (*sql.DB, error) {
+    // PRAGMAs are encoded in the DSN — applied per-connection automatically.
+    dsn := fmt.Sprintf(
+        "file:%s?_journal=WAL&_busy_timeout=5000&_foreign_keys=ON&_synchronous=NORMAL",
+        path,
+    )
+    db, err := sql.Open("sqlite3", dsn)
+    if err != nil {
+        return nil, err
+    }
+    // Single connection — SQLite serialises writers regardless; pool > 1 just amplifies WAL contention.
+    db.SetMaxOpenConns(1)
+    return db, nil
+}
+
+// withWriteTx wraps every write transaction in BEGIN IMMEDIATE + retry-on-busy
+// (3 attempts, base 100 ms, ±25 % jitter — mirrors spec/27 AC-T-28 R3).
+func withWriteTx(db *sql.DB, fn func(tx *sql.Tx) error) error {
+    var lastErr error
+    for attempt := 0; attempt < 3; attempt++ {
+        tx, err := db.Begin() // sqlite3 driver maps Begin → BEGIN; use raw Exec for IMMEDIATE:
+        if err == nil {
+            if _, err = tx.Exec("ROLLBACK; BEGIN IMMEDIATE"); err == nil {
+                if err = fn(tx); err == nil {
+                    if err = tx.Commit(); err == nil {
+                        return nil
+                    }
+                }
+                _ = tx.Rollback()
+            }
+        }
+        lastErr = err
+        if !isBusyOrLocked(err) {
+            return err
+        }
+        // 100 ms base, ±25 % jitter.
+        backoff := 100*time.Millisecond + time.Duration(rand.Int63n(int64(50*time.Millisecond))) - 25*time.Millisecond
+        time.Sleep(backoff)
+    }
+    return lastErr
+}
+```
+
+`isBusyOrLocked` matches `sqlite3.ErrBusy` (`SQLITE_BUSY`) or `sqlite3.ErrLocked` (`SQLITE_LOCKED`). After 3 failed retries, surface the original error to the caller — do NOT swallow it.
+
 ### Transaction discipline
 
 - **Every WRITE transaction MUST use `BEGIN IMMEDIATE`** (NOT default `DEFERRED`). Reason: `DEFERRED` acquires the write lock at first write statement, mid-transaction — by then the application has done useful work and the rollback cost is high. `IMMEDIATE` fails fast at `BEGIN` with `SQLITE_BUSY`, letting the retry loop kick in cheaply.

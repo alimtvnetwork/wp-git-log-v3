@@ -1,7 +1,7 @@
 # Error Catalog
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-27
+**Version:** 1.1.1  
+**Updated:** 2026-04-30 (Phase 153 Task A11g — `GLCI-DOCTOR-PROFILE-NOT-FOUND` row clarification: server-side `RepoUrl` → `GitProfile` resolution, CLI passive; bound by §97 AC-28-43)
 
 All `GLCI-*` codes the CLI itself emits. Server-originated `GL-*` codes are surfaced verbatim per [`spec/22-git-logs-v2/15-error-codes.md`](../22-git-logs-v2/15-error-codes.md). Adding a new code requires a row here.
 
@@ -38,7 +38,7 @@ All `GLCI-*` codes the CLI itself emits. Server-originated `GL-*` codes are surf
 | GLCI-DOCTOR-LINTER-MISSING | 5 (warn) | `golangci-lint` absent; falling back to `go vet` | Install golangci-lint for full coverage |
 | GLCI-DOCTOR-SERVER-UNREACHABLE | 5 | TCP/TLS handshake to `server.url` failed | Check network/firewall/cert |
 | GLCI-DOCTOR-AUTH-INVALID | 5 | Server returned `GL-AUTH-*` on probe | Re-issue TempToken in admin UI |
-| GLCI-DOCTOR-PROFILE-NOT-FOUND | 5 | Server returned `GL-VALIDATION-PROFILE-NOT-FOUND` | Add the GitProfile in admin UI |
+| GLCI-DOCTOR-PROFILE-NOT-FOUND | 5 | Server returned `GL-VALIDATION-PROFILE-NOT-FOUND` (server resolves the runner's `RepoUrl` to a `GitProfile` row in the admin database; the CLI itself MUST NOT attempt local profile lookup — it merely surfaces the server's 404 verbatim) | Add the GitProfile in the admin UI for this `RepoUrl` |
 | GLCI-DOCTOR-CLOCK-SKEW | 5 | Local clock vs server > 60s; would fail SSH `GL-SSH-TIMESTAMP-SKEW` | NTP sync the runner |
 
 ## Execution
