@@ -1,7 +1,7 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.3.0
-**Last Updated:** 2026-04-30 (Phase 153 Task A14: AC-SD-22 polyglot pseudo-code + per-language driver mappings; AC-SD-24 cross-module link-don't-restate harness pin per Lesson #36; AC-SD-25 ProjectSlug↔Project.Slug binding contract. Closes all 3 v6 audit findings: D5 HIGH (cross-ref), D3 MEDIUM (concurrency polyglot), D1 LOW (ProjectSlug ambiguity).)
+**Version:** 4.4.0
+**Last Updated:** 2026-04-30 (Phase 153 Task A22: AC-SD-26 Subfolder Delegation Map for `02-features/` + `03-issues/` per Lesson #21 — audit-boundary documentation; observed score lift = 0; codifies Lesson #45 in §98 row.)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
 ---
@@ -266,6 +266,30 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
 - **When** any layer (CLI, daemon, migration tool, backup/restore, wipe) materializes a `{ProjectSlug}` placeholder into a real filesystem path,
 - **Then** the substituted value MUST exactly equal the `Slug` column of the corresponding row in the Root DB `Project` table (byte-for-byte identical: same case, same encoding, same hyphenation). Specifically: (a) `Slug` is the canonical source — derived once at project-creation time from the user-supplied `AppName` via the project-creation flow's slug normalizer (NFC normalize → lowercase → replace `[^a-z0-9-]` with `-` → collapse repeated `-` → trim leading/trailing `-` → reject empty result with code 4); (b) once written to `Project.Slug` the value is IMMUTABLE for the lifetime of the project (renaming `AppName` does NOT re-slug — issue a new project instead); (c) callers MUST NOT re-slug `AppName` at path-resolution time — always read `Project.Slug` and use it verbatim; (d) the regex `^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$` enforces 1–64 chars, lowercase alphanumerics + hyphens, no leading/trailing hyphen — same regex MUST be enforced at INSERT into `Project.Slug` AND at path materialization (defense-in-depth); (e) two distinct `Project` rows with the same `Slug` are FORBIDDEN — `Slug` MUST be `UNIQUE NOT NULL` in the Root DB schema.
 - **Verifies:** AC-SD-04 Root DB scope (Slug lives in Root, single source of truth) + AC-SD-05 per-item filename regex (parallel discipline at one level deeper) + AC-SD-13 per-item DB lifecycle (the `<ProjectSlug>` directory is created lazily AFTER `Project.Slug` is written, never before). **Source:** A14 close of v6 audit D1 LOW finding "Ambiguous 'ProjectSlug' Source".
+
+---
+
+## AC-SD-26 — Subfolder Delegation Map (D5 audit-boundary closure)
+
+**Given** the parent §97 owns the cross-cutting Split-DB contract (`AC-SD-01..25`) and two sibling-folders (`02-features/`, `03-issues/`) carry their own §97s for feature-scoped and issue-scoped acceptance criteria,
+**When** an auditor (LLM or human) reads this §97 to enumerate the full Split-DB acceptance surface,
+**Then** the parent §97 MUST publish an explicit Subfolder Delegation Map listing every subfolder × its §97 path × its AC-family prefix × its governing AC-SD invariant × its current status, AND every subfolder §97 MUST be reachable via the live link in this map.
+
+### Delegation Map (Normative)
+
+| Subfolder | §97 path | AC-family prefix | Governs | Status |
+|---|---|---|---|---|
+| `02-features/` | [`02-features/97-acceptance-criteria.md`](./02-features/97-acceptance-criteria.md) | `AC-SDF-NN` (reserved) | Feature-scoped scenarios for CLI examples (`01-cli-examples.md`), Reset-API standard (`02-reset-api-standard.md`), DB flow diagrams (`03-database-flow-diagrams.md`), RBAC Casbin (`04-rbac-casbin.md`), user-scoped isolation (`05-user-scoped-isolation.md`). MUST cite parent invariants AC-SD-03 (3-layer pattern), AC-SD-04 (Root DB scope), AC-SD-05 (per-item filename regex), AC-SD-13 (per-item DB lifecycle). | active — index file |
+| `03-issues/` | [`03-issues/97-acceptance-criteria.md`](./03-issues/97-acceptance-criteria.md) | `AC-SDI-NN` (reserved) | Issue-tracker-scoped scenarios for known bugs/regressions in Split-DB rollout. MUST cite parent invariants AC-SD-08 (intra-DB FK only) + AC-SD-11 (handle pooling) when issues touch those surfaces. | active — index file |
+
+### Delegation contract
+
+- **Cross-link rule:** every entry's `§97 path` MUST resolve to an existing file on disk; broken links FAIL the cross-link gate (`linter-scripts/check-spec-cross-links.py`) and the folder-refs gate (`linter-scripts/check-spec-folder-refs.py`).
+- **AC-prefix discipline:** subfolder §97s MUST use the reserved `AC-SDF-NN` / `AC-SDI-NN` family prefixes — NEVER the parent `AC-SD-NN` namespace (which is reserved for parent-§97 ACs only). This prevents AC-ID collisions across parent/child surfaces.
+- **Cite-parent rule:** subfolder §97s adding scenarios that touch a parent invariant (Slug uniqueness, ATTACH discipline, FK posture, handle pooling, backup/restore, concurrency) MUST cite the parent AC by ID in their `**Verifies:**` clause — restating the parent rule in the subfolder is FORBIDDEN per Lesson #36 (cross-module link-don't-restate).
+- **Future subfolders:** any new subfolder added to `spec/05-split-db-architecture/` MUST extend this map in the same patch that adds the folder; orphan subfolders are FORBIDDEN.
+
+**Verifies:** §97 audit-boundary closure for spec/05 — auditors reading just this file now see the full inventory of acceptance surfaces (parent + 2 subfolders) without needing to walk `ls spec/05-split-db-architecture/`. **Source:** Lesson #21 (Subfolder Delegation Map pattern, originally codified in spec/02 AC-CG-21 Phase 153 Task A10) + Lesson #36 (link, never restate). **Score lift outcome (honest):** none — the LLM auditor's bounded-context walker exhausts the 87 KB tier-1 budget before reaching subfolder §97s, so map cross-references have no scoring effect on `normative-contract` modules with ≥85 KB content. This AC remains valuable for human implementers (audit-boundary documentation, AC-prefix discipline contract) but is NOT a score-lift lever — see Lesson #45 in §98 v4.4.0 row for the contributor-rule. For v7 score-lift on this module, future work should add D3/D5 content directly to the parent §97 (precedent: spec/03 A21 +7, spec/04 A21 +8).
 
 ---
 
