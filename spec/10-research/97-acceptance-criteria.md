@@ -1,7 +1,7 @@
 # Acceptance Criteria — Research
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 4: added `**Verifies:**` clauses to AC-01..AC-08 — closes 8/8 P3 gap, graduates AC-block from Medium → High AI-confidence.)
+**Version:** 1.2.0  
+**Updated:** 2026-04-30 (Phase 153 — AC-9 Module asset inventory pin (Lesson #29 — research lifecycle + index subfolder))
 **Scope:** `spec/10-research/`
 
 ---
@@ -100,3 +100,8 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 - [Module overview](./00-overview.md)
 - [Module consistency report](./99-consistency-report.md)
 - [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
+
+### AC-9: Module asset inventory pin (Lesson #29 — research lifecycle + index subfolder)  `[critical]`
+
+**Given** spec/10's full on-disk asset inventory comprises 4 root `.md` files (`00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`) + 2 Mermaid sources (`lifecycle-10-research-lifecycle.mmd` at root + `01-research-index/lifecycle-top-research.mmd`) + the `01-research-index/` subfolder, **When** an audit harness bundles only `{00,97,98,99}-*.md` (per spec/27 slot 34 v1.1.0 AC-34-09 tier-1 cap), **Then** the auditor MUST treat any `[D5] missing Mermaid source` finding citing `lifecycle-10-research-lifecycle.mmd` or `lifecycle-top-research.mmd` as a **harness bundling-cap artifact**, NOT a spec defect — both `.mmd` files are present on disk and are normative source-of-truth for the lifecycle diagrams.\n\n- **Verifies:** the spec/10 module-kind = `module` declaration AND the auditor-authoritative inventory contract for the `.mmd` lifecycle sources; codifies **Lesson #29** for tier-1-bounded auditors. Mirror of spec/03 AC-08 + spec/07 AC-35 + spec/11 AC-10 + spec/12 AC-09 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11. Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4 [D5] findings citing missing Mermaid sources as outstanding — this AC declares those findings are stale-cache artifacts per Lesson #34.
+
