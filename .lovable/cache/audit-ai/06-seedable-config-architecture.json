@@ -1,37 +1,37 @@
 {
   "d1": 18,
   "d2": 19,
-  "d3": 15,
-  "d4": 18,
-  "d5": 16,
+  "d3": 17,
+  "d4": 16,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Inconsistent Type Enums between Schema and AC",
-      "why": "The JSON Schema in 00-overview allows ['string', 'int', 'float', 'bool', 'json'], but AC-SC-14 mandates ['boolean', 'number', 'string', 'select', 'multiselect']. An AI coder will not know which set to implement for the validator.",
-      "fix": "Align AC-SC-14 and the JSON Schema enum to use the same set of canonical type strings."
-    },
-    {
-      "severity": "HIGH",
       "dim": "D5",
-      "title": "Missing External Error Code Registry",
-      "why": "Multiple files reference 'apperror' and specific error codes (e.g., AB-9301, ErrSeedLoadFailed) which are not defined in the provided context, leading to compilation failures in a 'no web access' environment.",
-      "fix": "Provide a minimal Go 'apperror' package and a const block for all referenced error codes within the module."
+      "title": "Unresolved External Symbols in Go Samples",
+      "why": "Go code references 'apperror', 'pathutil', and 'semver' packages which are not defined in this context, nor are their specific method signatures (e.g., pathutil.ReadFileIfExists) provided.",
+      "fix": "Add a 'Dependencies' section to 01-fundamentals.md mapping these symbols to their respective spec modules or standard library equivalents."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous CHANGELOG.md Write Concurrency",
-      "why": "AC-SC-11 states the CHANGELOG write is outside the SQL transaction. AC-SC-17 mentions file locks but doesn't specify if the lock must be held during the file append, risking lost updates if two processes commit DB changes and then race to append to the same file.",
-      "fix": "Explicitly state that the file lock must be acquired before the SQL transaction begins and held until the CHANGELOG write completes."
+      "title": "Ambiguous Rollback Data Source",
+      "why": "AC-SC-07 requires rolling back to a 'cached value from CHANGELOG', but the CHANGELOG format in 01-fundamentals does not store the previous value for 'Removed' keys, making machine-led restoration impossible.",
+      "fix": "Update the CHANGELOG.md format to include 'Removed: Key (last value: X)' to enable the reverse-replay logic."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Truncated Feature Specifications",
+      "why": "The provided context cuts off mid-file for 02-rag-validation-helpers.md, leaving the implementation of TopK validation and other helpers incomplete for the coder.",
+      "fix": "Ensure the full content of 02-features/02-rag-validation-helpers.md is included in the module bundle."
     }
   ],
   "module": "06-seedable-config-architecture",
   "files_used": 8,
   "files_total": 21,
   "bytes_used": 90000,
-  "bundle_sha": "936125b40b9f65d8",
-  "total": 86,
+  "bundle_sha": "5013e437b35f7baf",
+  "total": 85,
   "band": "GOOD"
 }
