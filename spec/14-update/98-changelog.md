@@ -1,7 +1,7 @@
 # Changelog — Update — Overview
 
 **Version:** 2.3.1  
-**Updated:** 2026-04-29  
+**Updated:** 2026-04-30  
 **Scope:** `spec/14-update/`
 
 ---
