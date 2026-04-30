@@ -368,23 +368,28 @@ jobs:
         # references a missing AC / file. Spec: spec/27-spec-toolchain/15-check-trace-map-regression.md
         run: python3 linter-scripts/check-trace-map-regression.py
 
-      - name: AI-implementability deep-walk audit (Phase 153 Task A5, advisory)
-        # Phase 153 Task A5: wires `audit-ai-implementability.py` (slot 34, shipped
-        # by Task A4) into CI as a `--report-only` advisory step. Always exits 0
-        # — the gate's purpose is observability, not enforcement. Per H1
-        # workflow-step-parity lesson this is a *broader-contract* step (LLM
-        # 5-dimension rubric vs the deterministic single-gate self-tests), so it
-        # gets its own workflow step rather than collapsing into a numbered
+      - name: AI-implementability deep-walk audit (Phase 153 Task A12, strict on BLOCKING)
+        # Phase 153 Task A12 (graduated from A5 advisory): `audit-ai-implementability.py`
+        # (slot 34, shipped by Task A4) now runs `--strict`. Exits 1 if any module
+        # scores BLOCKING (<60); GOOD/NEEDS_WORK still pass (advisory inside the
+        # report). Per H1 workflow-step-parity lesson this is a *broader-contract*
+        # step (LLM 5-dimension rubric vs the deterministic single-gate self-tests),
+        # so it gets its own workflow step rather than collapsing into a numbered
         # footer gate. Skipped on forks / when LOVABLE_API_KEY is unset to avoid
         # noisy 401 failures on community PRs. Cache lives at
         # .lovable/cache/audit-ai/ and is repo-local — re-runs are cheap.
-        # Baseline: 81.6/100 (GOOD) at A3 closure 2026-04-29; lone NEEDS_WORK
-        # module is spec/05-split-db-architecture (69) — Task A6 targets the lift.
+        # Baseline: 84.7/100 (GOOD) at Task A8 v5 closure 2026-04-30; 5 EXCELLENT,
+        # 18 GOOD, 0 NEEDS_WORK, 0 BLOCKING — graduation criteria met per H10
+        # filter (mechanically detectable + active regression surface + low
+        # false-positive risk: BLOCKING<60 is a wide moat from current 75-floor).
+        # 4 modules sit at the structural 75-floor (03/12/17/25 — Rubric v6
+        # ceiling per Lesson #29/#36/#37); Rubric v7 (A15-A20) is the proper
+        # tool to lift those, NOT lowering the strict threshold.
         # Spec: spec/27-spec-toolchain/34-audit-ai-implementability.md
         if: env.LOVABLE_API_KEY != ''
         env:
           LOVABLE_API_KEY: ${{ secrets.LOVABLE_API_KEY }}
-        run: python3 linter-scripts/audit-ai-implementability.py --report-only
+        run: python3 linter-scripts/audit-ai-implementability.py --strict
 
       - name: Summary
         if: always()
