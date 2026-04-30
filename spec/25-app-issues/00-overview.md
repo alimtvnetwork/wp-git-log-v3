@@ -7,9 +7,9 @@ axis_rationale: "Routing parent of kind:tracker post-mortems (Lesson #29)"
 
 # App Issues
 
-**Version:** 3.5.0  
+**Version:** 3.5.1  
 <!-- h10-verified-phase: 153 -->
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 7 — Verifies clauses)
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — AC-AI-16 walker-cap truncation pin)
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

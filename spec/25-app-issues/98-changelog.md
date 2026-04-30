@@ -1,12 +1,21 @@
 # Changelog — App Issues
 
-**Version:** 3.5.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu8 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH "Circular ACs" + [D3] LOW "Issue-status concurrency" as kind-mismatch / out-of-scope-axis artifacts)  
+**Version:** 3.5.1  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — AC-AI-16 walker-cap truncation pin; Lesson #50 mirror on audit-corpus axis)  
 **Scope:** `spec/25-app-issues/`
 
 ---
 
+## [3.5.1] — 2026-04-30 — Phase 153 Task A24-fu12: AC-AI-16 (walker-cap truncation as STRUCTURAL-DESIGN-NOT-DEFECT)
+
+- **Added** AC-AI-16 `[high]` to §97 (v1.4.0 → v1.5.0; AC count 15 → 16). Codifies that recurring v7 HIGH D4 `Truncated Evidence in Consolidated Findings` is a **STRUCTURAL-DESIGN-NOT-DEFECT walker-window artifact**, NOT a content gap: `02-consolidated-audit-findings/00-overview.md` is 32 KB single-file by AC-AI-10's verbatim-citation contract (line-anchored quotes from `spec/_archive/21-git-logs-v1/` MUST remain in single-file integrity). Walker loads 9/12 files at 120 KB cap — F-24+ live in the *same* file just past the bundle cutoff. The auditor's recommended fix ("split into smaller files") DIRECTLY VIOLATES AC-AI-10 and would invalidate every existing line-anchored citation. AC-AI-16 enumerates 4 forbidden remediation patterns (split file, cross-reference continuation file, reduce verbosity to fit, promote severity).
+- **Verified pre-closed findings**: v7 cache also reported CRITICAL/D2 `Circular/Structural-only ACs` and MEDIUM/D3 `Unaddressed Schema Validation` — both already closed by A24-fu3 (AC-AI-12) + A24-fu8 (AC-AI-14/15). Lesson #47 (auditor-cannot-self-respect-ACs) confirmed: spec content cannot suppress LLM auditor restating closed findings; this is a known harness limitation, not a contract gap.
+- **Lockstep**: §97 v1.4.0 → **v1.5.0** (new AC); §00 v3.5.0 → **v3.5.1** (banner + Updated date); §98 v3.5.0 → **v3.5.1** (release row); §99 v1.4.0 → **v1.4.1** (audit row). **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change** — pure contract-clarification AC.
+- **Score-lift NOT attempted**: AC-AI-16 cannot bypass walker-cap arithmetic; per Lesson #50 the structural-pin is for human auditors / future explicit-AC-following LLMs, NOT a current-LLM score-lift mechanism. Module remains at v8 score 79 (audit-corpus GOOD); deterministic improvement requires harness work (A18 per-axis cap or A12-style raise).
+- **Lesson #50 mirror codified**: Lesson #50 (codified spec/02 A24-fu11) extends from `kind: future-spec normative-contract tree-spanning` axis to **`kind: tracker` audit-corpus axis** when single-file integrity is contractually required (AC-AI-10 verbatim-citation rule). Cross-axis Lesson-#50 instances now: spec/02 AC-CG-24 (normative-contract / 251-file subtree) + spec/25 AC-AI-16 (audit-corpus / 32 KB single-file). The common shape: structural-pin AC declares "auditor's bundle limit is the constraint, not the spec" + enumerates forbidden remediation patterns to prevent contract drift in future cleanup attempts.
+
 ## [3.5.0] — 2026-04-30 — Phase 153 Task A24-fu8: AC-AI-14 + AC-AI-15 (finding-body schema + negative-case)
+
 
 - **Added** AC-AI-14 `[high]` + AC-AI-15 `[medium]` to §97 (v1.3.0 → v1.4.0; AC count 13 → 15). AC-AI-14 codifies the R/C/F/P + Severity + Category + File + Line(s) + Heading finding-body schema as positive contract for `kind: tracker` output, with closed-enum Severity/Category and 4 validation rules — closes audit-v7 HIGH D2 `Circular/Structural-only ACs for Tracker Content` by giving the auditor the schema-validator AC it explicitly asks for, while preserving AC-AI-12's "structural floor on §97" framing. AC-AI-15 provides 3 negative-case malformed-finding examples (free-form severity, missing R/C/F/P body, paraphrased evidence) — closes audit-v7 LOW D3 `Unaddressed Schema Validation for Issue Records`.
 - **Deferred** audit-v7 MEDIUM D4 `Truncated Evidence in Consolidated Findings` (`02-consolidated-audit-findings/00-overview.md` 32 KB single-file) per **Lesson #46 walker-saturation**: file is a single audit corpus by design — splitting would break line-anchor citations + AC-AI-10 verbatim-quote rule. Auditor sees 9/12 files at 90 KB cap; F-04 truncation in cache is walker-window artifact, not a missing finding (real F-04 is fully bodied per AC-AI-14 schema check). Memo records `walker-saturation: true` flag for next A20-style rebaseline.

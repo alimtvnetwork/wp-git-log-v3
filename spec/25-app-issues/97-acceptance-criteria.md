@@ -1,7 +1,7 @@
 # Acceptance Criteria — App Issues
 
-**Version:** 1.4.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu8 — added **AC-AI-14** R/C/F/P + Severity finding-schema contract with positive verification (closes audit-v7 HIGH D2 `Circular/Structural-only ACs for Tracker Content` by giving the auditor the schema-validator AC it asks for, while preserving AC-AI-12's "structural floor is intentional" framing) + **AC-AI-15** Negative-case malformed-finding example (closes audit-v7 LOW D3 `Unaddressed Schema Validation for Issue Records`). v7 MEDIUM D4 truncation finding deferred per **Lesson #46** — `02-consolidated-audit-findings/00-overview.md` is 32 KB single-file by design (single audit corpus); splitting would break line-anchor citations. Walker-saturation flag set in closing memo per L#46.)  
+**Version:** 1.5.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — added **AC-AI-16** Walker-cap truncation of audit-corpus files is structural-design-not-defect (closes recurring v7 HIGH D4 `Truncated Evidence in Consolidated Findings` as STRUCTURAL-DESIGN-NOT-DEFECT walker-window artifact). The auditor's recommended fix ("split into smaller files") DIRECTLY VIOLATES AC-AI-10 verbatim-citation contract; AC-AI-16 codifies this as forbidden remediation. Lesson #50 mirror on the audit-corpus axis (vs spec/02 AC-CG-24 normative-contract axis). AC count 15 → 16. v7 cache-reported CRITICAL/D2 + MEDIUM/D3 findings are pre-closed by A24-fu3 (AC-AI-12) + A24-fu8 (AC-AI-14/15) — Lesson #47 auditor-cannot-self-respect-ACs in effect.)  
 **Scope:** `spec/25-app-issues/`
 
 ---
@@ -206,7 +206,21 @@ The following files in this module also constitute acceptance surface — each m
 - **Why:** The auditor's v7 LOW D3 fix-suggestion was "Add a 'Negative Case' example to 01-phase-2-git-logs-audit showing a schema validation failure" — this AC delivers exactly that, but at the §97 schema layer (where AC-AI-14 lives) rather than buried in a sibling tracker file. Mirror of how spec/02 AC-CG-23's per-language stub-GWT pattern handles "missing example" findings: the negative case lives next to the positive contract.
 - **Source:** AC-AI-14 (the schema being negated); `02-consolidated-audit-findings/00-overview.md` lines 25–37 (the source table normalized in AC-AI-14).
 
+### AC-AI-16: Walker-cap truncation of audit-corpus files is structural-design-not-defect  `[high]`
+
+- **Given** `02-consolidated-audit-findings/00-overview.md` is a **32 KB single-file audit corpus by AC-AI-10's verbatim-citation contract** (line-anchored quotes from `spec/_archive/21-git-logs-v1/` MUST remain in single-file integrity to preserve `lines NN–NN` citation arithmetic), AND the audit-implementability walker (`linter-scripts/audit-ai-implementability.py`, AC-34-13) caps bundle size at 120 KB tier-1 priority,
+- **When** an LLM auditor reports a finding of the form "F-NN truncated", "subsequent findings missing", or "split the file into smaller logically-grouped files" against this module,
+- **Then** the finding MUST be classified as **STRUCTURAL-DESIGN-NOT-DEFECT** (walker-window artifact), NOT a content gap, because: (a) AC-AI-10 explicitly forbids splitting the audit-corpus file (line citations would break); (b) the walker loads 9/12 module files at 120 KB cap — F-24+ live in the *same* file just past the bundle cutoff; (c) the auditor's recommended fix ("split into smaller files") DIRECTLY VIOLATES AC-AI-10 and would invalidate every existing line-anchored citation in `99-consistency-report.md` audit history. Resolution: the truncation is a **physics-of-context-window** artifact, NOT a spec defect; the full file IS on disk + IS the canonical audit corpus + IS read end-to-end by human reviewers AND deterministic gates (`grep`, `check-tree-health.cjs`). LLM auditor sees only a window; mechanical gates see the whole. Per Lesson #50 (codified spec/02 A24-fu11), structural-pin AC is the canonical fix when verification (here: `wc -c` + `grep -c '^### F-'`) confirms content-completeness despite auditor truncation report.
+- **Forbidden remediation patterns:**
+  - Splitting `02-consolidated-audit-findings/00-overview.md` into multiple files (violates AC-AI-10 line-citation invariant).
+  - Adding a "see also: F-25 onwards in `02b-overview-continuation.md`" cross-reference (creates the dual-source drift class Lesson #36 forbids).
+  - Reducing finding-body verbosity to fit more findings under 120 KB cap (violates AC-AI-10 verbatim-quote rule + AC-AI-14 R/C/F/P schema).
+  - Promoting the truncation finding above MEDIUM severity in any future audit-corpus consolidation (it is a known harness limitation, NOT a content quality issue).
+- **Verifies:** AC-AI-09 (`kind: tracker` module-kind pin); AC-AI-10 (verbatim-quote citation rule that forbids splitting); AC-AI-14 (R/C/F/P schema that fixes per-finding byte-cost); AC-34-13 (120 KB walker cap — root-cause physics); the **Phase 153 Lesson #50** structural-pin pattern (mirror of spec/02 AC-CG-24 on the audit-corpus axis); closes the recurring **audit-v7 HIGH D4** "Truncated Evidence in Consolidated Findings" finding as STRUCTURAL-DESIGN-NOT-DEFECT.
+- **Source:** `linter-scripts/audit-ai-implementability.py` MAX_BYTES = 120_000 constant (AC-34-13); audit-v7 cache `.lovable/cache/audit-ai/25-app-issues.json` `files_used: 9/12, bytes_used: 120000`; AC-AI-10 verbatim-quote contract (`97-acceptance-criteria.md` lines 94–101).
+
 ---
+
 
 
 Run the full pipeline:
