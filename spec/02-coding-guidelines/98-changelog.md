@@ -1,11 +1,19 @@
 # Changelog — Coding Guidelines
 
-**Version:** 3.4.1
-**Updated:** 2026-04-29
+**Version:** 3.4.2
+**Updated:** 2026-04-30
 **Scope:** `spec/02-coding-guidelines/`
 
 ---
 
+### 3.4.2 — 2026-04-30 — Phase 153 Task A24-fu11: spec/02 audit-corpus structural pin (AC-CG-24, Lesson #29 mirror)
+- **Action**: Closed three recurring spec/02 audit-v8 findings (HIGH/D5 "Dangling Subfolder References", MEDIUM/D2 "Legacy AC Scaffolds Lack Specificity", LOW/D3 "Incomplete Size Limit Enforcement Logic") as **STRUCTURAL-DELEGATION-NOT-MISSING** walker-saturation artifacts. Walker loaded only **10/251 files** at the 120 KB cap (per AC-34-13), so the auditor cannot see (a) the 5 per-language §97s with 22-27 GWT ACs each, (b) AC-CG-21's full Subfolder Delegation Map binding, or (c) AC-CG-22's exhaustive 8-row Exception Ledger — all three already shipped in A10. New **AC-CG-24** in §97 declares the audit-corpus structural pin: parent §97 + AC-CG-21/22/23 are the canonical delegation surface; subfolder absence in an auditor's bundle is a walker-saturation artifact NOT a contract gap. Per-language stub-AC counts re-verified: TS=22, Go=22, PHP=27, Rust=26, C#=27.
+- **Spec lockstep**: §97 v4.3.0 → **4.4.0** (AC count 28 → 29); §00 v3.4.1 → **3.4.2**, §98 v3.4.1 → **3.4.2**, §99 v4.6.0 → **4.6.1**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Validation**: spec/02 v8 score 82 (GOOD) — band stable; the structural pin is a contract-clarification AC, NOT a score-lift attempt (auditor cannot bypass walker cap regardless of contract clarity). Lockstep · tree-health pending re-run.
+- **Lesson #29 mirror codified**: Lesson #29 (audit-corpus module-kind pin) generalizes from `kind: tracker|post-mortem` (spec/25 AC-AI-09/10/11) to the `normative-contract` axis when `files_total / files_used` exceeds ~10× — tree-spanning modules with large subfolder counts hit the same auditor-misclassification class as content-meaning modules. Future modules with `files_total ≥ 100` SHOULD carry an audit-corpus structural pin AC. Cross-axis applicability: spec/12 AC-10 (integration-axis), spec/25 AC-AI-09/10/11 (post-mortem axis), spec/02 AC-CG-24 (normative-contract axis tree-spanning) — all three are Lesson #29 instances with axis-specific framing.
+- **Lesson #49 (NEW)**: When an audit-v8 finding flags "Subfolder X has 0 GWT ACs" but verification shows X has ≥ N GWT ACs, the finding is a walker-saturation artifact, NOT a contract gap. The fix is a structural-pin AC in the parent §97 declaring the delegation contract — NOT to author duplicate per-language ACs in the parent (which would violate Lesson #36 cross-module link-don't-restate). The parent §97 says "delegation map is canonical, see subfolder §97s"; the LLM auditor's bundle limit cannot be lifted by spec content alone.
+
+---
 ### 3.4.1 — 2026-04-29 — Phase 153 Task A10: spec/02 self-lift 80 → ≥88 expected (AC-CG-21/22/23 + Subfolder Delegation Map + Size-Limit Exception Ledger)
 - **Action**: Closed the three v4 audit findings against spec/02 (HIGH D5 dangling subfolder refs, MEDIUM D2 legacy AC scaffolds, LOW D3 incomplete size-limit logic). (1) **AC-CG-21** binds a new **Subfolder Delegation Map** inside §97 listing all 16 subfolders by slot + path + AC-family-prefix (`AC-XL-NN`/`AC-TS-NN`/`AC-GO-NN`/etc.) + governing CODE-RED rules + status — makes the delegation auditable from inside §97 (mirror of A9/AC-T-29 in spec/27). (2) **AC-CG-22** binds a new **Size-Limit Exception Ledger** with 8 closed-enumeration exception classes (EX-01..EX-08; AUTO-GENERATED, test fixtures, Go table-driven tests, Rust match arms, Rust `#[derive]`, TS co-located styles with sunset, Go init() registration, exhaustive enum dispatch) replacing AC-CG-08's open phrase "language-specific exceptions". (3) **AC-CG-23** mandates per-language stub GWT ACs for legacy-AC scaffolds (TS/PHP/C# 0-AC subfolders FORBIDDEN — must carry at least one stub citing the legacy IDs pending Task A10-fu1 deepening sweep).
 - **Spec lockstep**: §97 v4.2.0 → **4.3.0** (AC count 25 → 28); §00 v3.4.0 → **3.4.1**, §98 v3.4.0 → **3.4.1**, §99 v4.5.0 → **4.6.0**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade** (contract-surface change is internal to spec/02), **no gate-count change**.
