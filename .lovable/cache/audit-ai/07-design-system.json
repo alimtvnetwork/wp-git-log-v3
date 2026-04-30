@@ -3,36 +3,36 @@
   "d2": 20,
   "d3": 18,
   "d4": 19,
-  "d5": 17,
+  "d5": 15,
   "issues": [
     {
-      "severity": "MEDIUM",
+      "severity": "HIGH",
       "dim": "D5",
-      "title": "Missing Leaf File Context",
-      "why": "The spec references 13 leaf files (01-13) for specific component logic (e.g., button variants, sidebar tree) that are not provided in the context.",
-      "fix": "Provide the content of files 01-13 or merge their core logic into the overview/AC files."
+      "title": "Missing Leaf Files in Context",
+      "why": "The overview references 13 leaf files (01-13) as 'authoritative', but only 00, 01, 97, 98, and 99 are provided. A mediocre coder cannot implement specific component logic (e.g., Sidebar, Buttons) without them.",
+      "fix": "Provide the content for files 02 through 13 or merge their normative constraints into the overview."
     },
     {
-      "severity": "LOW",
+      "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Missing Concurrency/Race Condition for Theme Toggle",
-      "why": "While FOUC is addressed, the spec doesn't explicitly handle rapid-fire toggle clicks or storage event synchronization across multiple tabs.",
-      "fix": "Add a requirement for a 'storage' event listener to sync theme state across browser tabs."
+      "title": "LocalStorage Failure Mode",
+      "why": "The FOUC script catches errors for blocked localStorage but 'fails open to light'. In high-contrast or dark-preference environments, this is a flash/accessibility failure.",
+      "fix": "Update the catch block to check window.matchMedia('(prefers-color-scheme: dark)').matches even if localStorage fails."
     },
     {
       "severity": "LOW",
       "dim": "D4",
-      "title": "Incomplete Language-to-Color Map",
-      "why": "AC-018 lists 'typical mappings' but uses 'e.g.', leaving the full set of supported languages and their exact HSL values ambiguous for a coder.",
-      "fix": "Provide a complete, non-exemplary JSON mapping of language strings to HSL triplets."
+      "title": "Truncated Design Principles",
+      "why": "File 01-design-principles.md is truncated at the end of the provided context, losing potential implementation rules.",
+      "fix": "Ensure the full text of 01-design-principles.md is included within the context window."
     }
   ],
   "module": "07-design-system",
-  "files_used": 3,
+  "files_used": 5,
   "files_total": 17,
-  "bytes_used": 90000,
-  "bundle_sha": "a8f6f585dbc68ab0",
-  "total_v6": 94,
+  "bytes_used": 120000,
+  "bundle_sha": "5424f40aa906da13",
+  "total_v6": 92,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 94.4,
-  "total_v7": 94,
-  "total": 94,
+  "weighted_total": 92.4,
+  "total_v7": 92,
+  "total": 92,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

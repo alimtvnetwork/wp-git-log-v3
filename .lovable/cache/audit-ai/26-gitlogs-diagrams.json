@@ -1,38 +1,38 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 15,
-  "d4": 16,
-  "d5": 14,
+  "d3": 17,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Missing Authoritative Source Context",
-      "why": "The module is explicitly 'derivative' and relies on spec/22 for all data shapes, error codes, and logic, but spec/22 is not provided in the context.",
-      "fix": "Include spec/22-git-logs-v2/ files in the prompt context to allow verification of diagram parity."
+      "title": "Missing Authoritative Source Context (spec/22)",
+      "why": "The module is a derivative spec visualizing spec/22, but the actual schema/logic definitions from spec/22 are not provided in this context.",
+      "fix": "Provide the content of spec/22-git-logs-v2/02-database-schema.md and 05-auth-and-validation.md in the prompt context."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Non-deterministic SVG Diffing",
-      "why": "AC-DG-12 and the Tooling Snippet require byte-identical or SHA-256 matches for SVGs, but Mermaid renders often include non-deterministic IDs/timestamps.",
-      "fix": "Update CI snippet to use a structural XML diff or allow for non-identical SHAs if the source .mmd is unchanged."
+      "title": "Non-deterministic SVG Diffing Logic",
+      "why": "AC-23 requires complex XML canonicalization (xmllint --c14n11) and regex stripping of random IDs which is prone to implementation drift in a mediocre coder.",
+      "fix": "Provide a concrete Python or Bash script snippet that performs the exact xmllint + sed normalization sequence."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Missing .mmd Source Content",
-      "why": "While the spec describes the diagrams and metadata, the actual Mermaid source code for the 7 active diagrams is missing from the provided file list.",
-      "fix": "Provide the .mmd file contents (01, 05, 06, 07, 08, 09, 10) to allow the coder to verify the '%% Diagram type' headers."
+      "dim": "D1",
+      "title": "Ambiguous 'Audit Category' Types",
+      "why": "AC-DG-08 requires the mindmap to include 'audit category' for endpoints, but the valid enum values for these categories are not defined in this module.",
+      "fix": "Add an enum or list of valid Audit Categories (e.g., REPO_MGMT, PIPELINE_OPS) to the Inlined Contracts in 97-acceptance-criteria.md."
     }
   ],
   "module": "26-gitlogs-diagrams",
   "files_used": 9,
   "files_total": 9,
-  "bytes_used": 62712,
-  "bundle_sha": "5a2dfed23647f3ee",
-  "total_v6": 83,
+  "bytes_used": 69317,
+  "bundle_sha": "8ec9575885f9a61d",
+  "total_v6": 89,
   "axis": "audit-corpus",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 1.5
   },
   "axis_cap": 95,
-  "weighted_total": 80.5,
-  "total_v7": 80,
-  "total": 80,
+  "weighted_total": 87.5,
+  "total_v7": 88,
+  "total": 88,
   "band": "GOOD",
   "rubric": "v7"
 }

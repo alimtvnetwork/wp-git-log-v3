@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 20,
-  "d3": 18,
-  "d4": 19,
+  "d2": 19,
+  "d3": 17,
+  "d4": 18,
   "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken External Spec References (AC-24)",
-      "why": "AC-22 and AC-23 rely on external modules (spec/05, spec/27) for critical resilience and DB logic which are not provided in this context.",
-      "fix": "Incorporate the normative content of AC-SD-22 and AC-T-28 directly into a 'Shared Infrastructure' section within this module."
+      "title": "Broken External Spec References",
+      "why": "AC-22 and AC-23 reference external modules (spec/05, spec/27) for critical concurrency and atomic write logic which are not provided in this context.",
+      "fix": "Provide the referenced spec/05 and spec/27 modules or inline the specific AC-SD-22 and AC-T-28 requirements."
     },
     {
       "severity": "MEDIUM",
       "dim": "D1",
-      "title": "Inconsistent Function Length Constraints",
-      "why": "AC-11 mandates functions \u2264 50 lines, but 08-code-style.md mandates a much stricter 8\u201315 lines.",
-      "fix": "Standardize on \u2264 50 lines in 08-code-style.md to match the AC-11 master contract."
+      "title": "Truncated Date Formatting Spec",
+      "why": "File 14-date-formatting.md is truncated mid-sentence, leaving the implementation and rules incomplete.",
+      "fix": "Restore the full content of 14-date-formatting.md including the complete Contributors footer."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Missing Timeout/Deadline Contract for Network Ops",
-      "why": "While DB concurrency is addressed in AC-22, network timeouts (HTTP/Clone) are mentioned in AC-15 but lack a specific duration or retry policy.",
-      "fix": "Add a 'Network Resilience' AC specifying a 30s default timeout and 3-attempt retry policy for all external calls."
+      "title": "Inconsistent Exit Code Prose",
+      "why": "While AC-21 establishes a '97-WINS' rule, several files (07, 11, 18) still contain prose or code snippets suggesting 'exit 1' for misuse or partial failures.",
+      "fix": "Perform a final sweep of all code snippets to replace os.Exit(1) with os.Exit(int(exit.ExitMisuse)) or similar."
     }
   ],
   "module": "13-generic-cli",
-  "files_used": 11,
+  "files_used": 17,
   "files_total": 24,
-  "bytes_used": 89783,
-  "bundle_sha": "8bdee2acdff4b9d5",
-  "total_v6": 90,
+  "bytes_used": 120000,
+  "bundle_sha": "f6e423e14f017555",
+  "total_v6": 87,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 92.3,
-  "total_v7": 92,
-  "total": 92,
-  "band": "EXCELLENT",
+  "weighted_total": 88.8,
+  "total_v7": 89,
+  "total": 89,
+  "band": "GOOD",
   "rubric": "v7"
 }

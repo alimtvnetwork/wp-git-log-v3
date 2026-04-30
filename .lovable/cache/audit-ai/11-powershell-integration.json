@@ -1,38 +1,38 @@
 {
-  "d1": 18,
-  "d2": 15,
-  "d3": 16,
+  "d1": 19,
+  "d2": 18,
+  "d3": 17,
   "d4": 18,
-  "d5": 14,
+  "d5": 15,
   "issues": [
     {
       "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Missing Core Template and Schema Files",
-      "why": "The spec relies entirely on 'templates/run.ps1' and 'schemas/powershell.schema.json' as the normative implementation source, but these files are not provided in the context.",
-      "fix": "Include the content of templates/run.ps1 and schemas/powershell.schema.json in the provided context."
+      "title": "Truncated JSON Schema and Missing Template Files",
+      "why": "The context cap truncated the normative JSON Schema (schemas/powershell.schema.json) and the 855-line template (templates/run.ps1) is referenced but not provided in the text.",
+      "fix": "Provide the full text of schemas/powershell.schema.json and templates/run.ps1 within the spec context."
     },
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Acceptance Criteria lack Verifies clauses",
-      "why": "AC-01 through AC-05 in 97-acceptance-criteria.md describe behaviors but lack the mandatory 'Verifies:' clause linking them to specific spec sections or linter slots.",
-      "fix": "Add 'Verifies: \u00a700 baseline' or similar anchors to each AC in 97-acceptance-criteria.md."
+      "dim": "D5",
+      "title": "Unresolved External Script Dependencies",
+      "why": "The spec references 'upload-plugin-v2.ps1' and 'upload-plugin-U-Q.ps1' as core to the upload functionality, but their contracts/interfaces are not defined here.",
+      "fix": "Include the interface contracts or full source for the referenced upload scripts."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved Sibling References",
-      "why": "00-overview.md and 02-script-reference.md reference '07-runner-interface.md' and 'upload-scripts' which are listed as 'pending creation' or missing from the file list.",
-      "fix": "Provide 07-runner-interface.md or remove normative dependencies on it from the pipeline contract."
+      "dim": "D3",
+      "title": "Concurrency Race Conditions in Multi-Site Upload",
+      "why": "The 'Parallel Work Sync Output' pattern uses Start-Job but doesn't address potential race conditions if multiple jobs attempt to write to the same log file or shared pnpm store.",
+      "fix": "Add a requirement for per-job unique log paths and explicit file locking for shared resources."
     }
   ],
   "module": "11-powershell-integration",
-  "files_used": 10,
+  "files_used": 18,
   "files_total": 19,
-  "bytes_used": 89869,
-  "bundle_sha": "6e38b24f97d1430f",
-  "total_v6": 81,
+  "bytes_used": 120000,
+  "bundle_sha": "ddb86a4b0b5b3a68",
+  "total_v6": 87,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 81.4,
-  "total_v7": 81,
-  "total": 81,
+  "weighted_total": 86.8,
+  "total_v7": 87,
+  "total": 87,
   "band": "GOOD",
   "rubric": "v7"
 }
