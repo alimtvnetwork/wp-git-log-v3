@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.7.0
+**Version:** 3.7.1
 **Updated:** 2026-04-30
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 3.7.1 — 2026-04-30 — Phase 153 Task A24-fu25: §00 compact AC-index teaser table (Lesson #63 sixth instance — process-guidance axis)
+
+- **Added** compact AC-index teaser table to `00-overview.md` head (under existing Lesson #55 narrative pin) surfacing AC-10/11/13/14/15/07/02 with severity column. Cap-bound auditors (6/39 files visible at 120 KB) can now classify findings without reaching `97-acceptance-criteria.md`. Pure-promotion: zero §97 / AC / contract change. Mirrors fu20–fu24 pattern (spec/22, spec/01, spec/27, spec/03, spec/13).
+- **Lesson #63 sixth instance** validates the compact-table walker-pin pattern across the **process-guidance** content_axis (prior axes: integration-spec ×3, normative-contract ×1, audit-corpus ×1).
 
 ### 3.7.0 — 2026-04-30 — Phase 153 Task A24-fu18: spec/17 floor-lift (AC-13/14/15 close all 3 audit-v9 findings + §00 walker-pin)
 - **Action**: Closed all 3 audit-v9 findings on spec/17 (process-guidance axis floor at 80, 6/39 walker, 117 KB cap). **AC-13 [high]** ships Source-Wins conflict-resolution contract — when a rollup line drifts from its source §97, source ALWAYS WINS; rollup lines are NEVER authoritative; AI agents MUST re-anchor to source AC IDs before acting; includes a 5-row worked drift example walking T0 aligned → T1 source ships v3.4.0 → T2 AI-agent reads stale rollup → T3 refresh + optional T1.5 `[STALE — source: ...]` interim marker; closes audit-v9 MEDIUM/D4. **AC-14 [low]** defines `// LINTER-IGNORE-TODO` sentinel comment-syntax contract for false-positive markers — per-line / per-fenced-block (`<!-- LINTER-IGNORE-TODO-BLOCK -->`) / per-file front-matter variants; mandatory `// reason:` clause; case-sensitive regex `//\s*LINTER-IGNORE-TODO(-BLOCK)?\b`; gives the Phase-39b Audit Marker Exemption a programmatic surface; closes audit-v9 LOW/D3. **AC-15 [high]** Lesson #51 structural-pin (5th instance, rollup-vs-source axis) — declares HIGH/D2 "Circular/Self-Referential ACs" as STRUCTURAL-ROLLUP-NOT-FIRST-PARTY-CONTRACT auditor misclassification; §17 contract IS file-existence + format + cross-link parity (AC-01..09), content-logic GWT lives in source-module §97s per Lesson #36; 4 forbidden remediation patterns (per-rule GWT in §17 / `[CANONICAL]` in rollup / delete the module / re-classify as `normative-contract`); closes audit-v9 HIGH/D2.

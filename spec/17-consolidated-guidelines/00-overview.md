@@ -6,7 +6,7 @@ axis_rationale: "Cross-module process consolidation for spec authors"
 # Consolidated Guidelines
 
 <!-- h10-verified-phase: 153 -->
-**Version:** 3.7.0  
+**Version:** 3.7.1  
 **Updated:** 2026-04-30  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
