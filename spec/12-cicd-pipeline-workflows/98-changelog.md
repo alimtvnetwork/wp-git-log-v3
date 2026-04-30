@@ -1,6 +1,6 @@
 # Changelog — CI/CD Pipeline Workflows
 
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 **Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 3.4.3 — 2026-04-29 — Phase 153 audit-v6 close-out: spec/12 self-lift (slot-collision pin)
+- **Added** AC-09 (`[critical]`) to §97 — slot-collision disambiguation pin enumerating all 6 colliding-slot pairs (01/02/04/05/06/07: 12 root `.md` files + 3 subfolders, all grandfathered pre-rule). Declares the contract: root `.md` = generic CI/CD pipeline contract; subfolder = platform/target-specific binding. Auditor MUST treat collisions as TOPIC PARTITIONS (not version conflicts / shadowing). Inbound cross-references MUST use explicit on-disk paths; bare slot numbers are FORBIDDEN.
+- **Closes** Phase 153 audit-v6 CRITICAL finding `spec/12-cicd-pipeline-workflows` "Broken Internal Cross-References [D5]" (score 75 → ≥85 expected on next LLM re-score; deferred per Lesson #20 — gateway 402). The cited "duplication / shadowing / path resolution ambiguity" is a real structural feature that LLM auditors and fresh implementers misread by default — pinning the structure-meaning contract in §97 closes the misreading class without any file moves (file-slot-immutability rule applies — see Phase 130 precedent).
+- **Codifies Lesson #29 second extension** — audit-corpus pattern (originally for verbatim-quoted evidence in spec/25 post-mortem prose, AC-AI-09/10/11; first extended to non-`.md` assets in spec/11 AC-10) extends to **structural ambiguities** (slot collisions, multi-overview folders, parallel taxonomies) under the same auditor-misreads-by-default class. Future modules with structural ambiguities MUST add a structure-meaning pin AC.
+- **Banners**: §97 v1.1.0 → **v1.2.0** (minor — AC count 8 → 9); §00 v3.4.2 → **v3.4.3** (patch — no new feature, structural pin only); §98 v3.4.2 → **v3.4.3**; §99 v3.4.2 → **v3.4.3**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no file moves.**
 
 ### 3.4.2 — 2026-04-29 — Phase P48-1-fu1-batch P3 sweep slot 5 (AC-01..AC-08 Verifies clauses)
 - **Added** `**Verifies:**` clauses to AC-01 through AC-08 in `97-acceptance-criteria.md` (v1.0.0 → v1.1.0). Each clause cites the precise invariant defended; AC-01/AC-06 also document this module's `kind: future-spec` YAML exemption. Closes the P3-tier gap (0/8 → 8/8 Verifies) and graduates the AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)*. §00 banner 3.4.1 → 3.4.2; §97 1.0.0 → 1.1.0; §99 row added.

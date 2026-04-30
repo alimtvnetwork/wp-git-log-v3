@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # CI/CD Pipeline Workflows
 
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 <!-- h10-verified-phase: 30 -->
 **Updated:** 2026-04-29  
 **AI Confidence:** Production-Ready  
