@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 19,
+  "d2": 20,
   "d3": 17,
-  "d4": 16,
-  "d5": 15,
+  "d4": 15,
+  "d5": 19,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Missing Sub-Module Context",
-      "why": "The overview references files 09 through 27 and subfolder 24, but these files are not provided in the context, leaving the AI to guess the implementation of 'json-fallback-store', 'version-probe', and 'updater-binary'.",
-      "fix": "Provide the content for files 09-28 and the 24-update-check-mechanism subfolder."
+      "dim": "D4",
+      "title": "Truncated Build Script Logic",
+      "why": "The core build script (04-build-scripts.md) is truncated at the 90KB cap, leaving the Bash implementation and the final deploy logic undefined for the AI.",
+      "fix": "Move the Bash implementation of the build script to a separate file or ensure the overview provides a complete pseudo-code summary of the missing logic."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Truncated Build Script Logic",
-      "why": "File 04-build-scripts.md is truncated at the end, cutting off the logging implementation and potentially other helper functions needed for a complete script.",
-      "fix": "Complete the PowerShell and Bash logging function definitions in 04-build-scripts.md."
+      "dim": "D3",
+      "title": "Race Condition in Update Check",
+      "why": "AC-15 specifies updating 'last_check_unix' BEFORE spawning the child to prevent thundering herds, but does not define behavior if the child process fails to start or crashes immediately.",
+      "fix": "Add a requirement to reset 'last_check_unix' to 0 or the previous value if the detached process spawn fails."
     },
     {
       "severity": "LOW",
       "dim": "D1",
       "title": "Ambiguous <module> Placeholder",
-      "why": "The build scripts use '<module>/constants.RepoPath' as an ldflag. A mediocre coder might literally use the string '<module>' instead of the actual Go module name.",
-      "fix": "Explicitly state that '<module>' must be replaced with the project's go.mod module path."
+      "why": "The ldflags in 04-build-scripts.md use a '<module>' placeholder which is not explicitly defined as the Go module path from go.mod.",
+      "fix": "Explicitly state that '<module>' must be replaced with the 'module' declaration found in the project's go.mod file."
     }
   ],
   "module": "14-update",
   "files_used": 8,
   "files_total": 54,
   "bytes_used": 90000,
-  "bundle_sha": "9780283c9ecaf987",
-  "total": 85,
+  "bundle_sha": "c4dd825b441fa859",
+  "total": 89,
   "band": "GOOD"
 }
