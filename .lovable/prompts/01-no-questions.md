@@ -1,10 +1,11 @@
 ---
 id: 01
 title: No-Questions Mode (40-task budget)
-status: active
+status: completed
 activated: 2026-04-28
+deactivated: 2026-04-30
 budget: 40
-counter: 0
+counter: 59
 tags: [no question, not ques for 40]
 ---
 
