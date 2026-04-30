@@ -190,6 +190,10 @@ concurrency:
 Release branches must NOT use `cancel-in-progress: true` — a cancelled
 release leaves orphaned tags and partial assets.
 
+### Local-tooling concurrency (cross-reference)
+
+CI-job concurrency above is workflow-level. Any local CLI invocations the pipeline shells out to (e.g. update-state DB writes, asset staging via temp-then-rename) MUST follow the canonical concurrency contract at [spec/13-generic-cli §97 AC-22](../13-generic-cli/97-acceptance-criteria.md) (SQLite WAL + `busy_timeout=5000` + `BEGIN IMMEDIATE` + atomic file writes + `update.lock`). This module MUST NOT restate that contract — see Lesson #36 (link, never restate).
+
 ---
 
 ## Permissions

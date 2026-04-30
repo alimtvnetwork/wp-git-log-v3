@@ -122,3 +122,9 @@ Any `${env:NAME}` token in `glci.toml` resolves at config load time. If `NAME` i
 ## Defaults Document
 
 The compiled-in defaults are dumped by `glci config print --defaults-only`. This output is the contract — if a field appears here, it MUST exist in the config struct. The deterministic-audit script for this module asserts both directions.
+
+---
+
+## Concurrency Posture (Normative cross-reference)
+
+When `glci` is invoked from multiple concurrent CI runners against the same workspace (cache writes, local SQLite state under `~/.local/state/glci/`, atomic config rewrites via `glci config set`), the runtime concurrency contract is governed by [spec/13-generic-cli §97 AC-22](../13-generic-cli/97-acceptance-criteria.md) (SQLite WAL + `busy_timeout=5000` + `BEGIN IMMEDIATE` + 3× backoff + atomic temp-then-rename + lock-file discipline). This module MUST NOT restate that contract — see Lesson #36 (link, never restate). Per-runner `flock` on shared workspace paths is FORBIDDEN (deadlocks vs SQLite locking, mirrors spec/13/18 batch-execution rule).

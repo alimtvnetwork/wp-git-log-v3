@@ -1,9 +1,13 @@
 # Changelog
 
-**Updated:** 2026-04-29
+**Updated:** 2026-04-30
 
 
 All notable changes to `spec/28-universal-ci-cli/`.
+
+## [2.1.3] — 2026-04-30 — Phase 153 (Lesson #36 cross-ref inoculation)
+
+- **Added** `## Concurrency Posture (Normative cross-reference)` section to `05-config-resolution.md` linking concurrent-runner concerns (cache writes, local SQLite state under `~/.local/state/glci/`, atomic `glci config set` rewrites) to the canonical contract at [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated. Codifies Lesson #36 (link, never restate) on the cross-module axis. Per-runner `flock` on shared workspace paths declared FORBIDDEN (mirrors spec/13/18 batch-execution rule). **No §97 AC change**, no AC-31-31 cascade, no RUBRIC bump, no gate-count change. §00 v2.1.2 → v2.1.3; §99 v2.1.2 → v2.1.3. Sibling lockstep: spec/14 (v2.3.1) + spec/16 (v2.2.1) shipped same Lesson #36 inoculation in this phase.
 
 ## [2.1.2] — 2026-04-29 — Phase 150 (P3 sweep slot 10 — Verifies clauses on §97 AC-28-01..AC-28-28)
 

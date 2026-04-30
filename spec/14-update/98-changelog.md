@@ -1,7 +1,7 @@
 # Changelog — Update — Overview
 
-**Version:** 2.3.0  
-**Updated:** 2026-04-29  
+**Version:** 2.3.1  
+**Updated:** 2026-04-30  
 **Scope:** `spec/14-update/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 2.3.1 — 2026-04-30 — Phase 153 (Lesson #36 cross-ref inoculation)
+- **Added** `## Concurrency Posture (Normative cross-reference)` section to `22-update-command-workflow.md` linking the self-update worker's `update.lock` discipline, atomic temp-then-rename for staged binaries, and any state-DB writes to the canonical contract at [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated. Codifies Lesson #36 (link, never restate). **No §97 AC change**, no AC-31-31 cascade, no RUBRIC bump, no gate-count change. §99 v1.5.0 → v1.5.1. Sibling lockstep: spec/16 (v2.2.1) + spec/28 (v2.1.3) shipped same Lesson #36 inoculation in this phase.
 
 ### 2.3.0 — 2026-04-29 — Phase 149 (P3 sweep slot 9 — Verifies clauses on §97)
 - **Added** `**Verifies:**` clauses to all 20 ACs in `97-acceptance-criteria.md` (gap=20 → 0). Each AC now explicitly maps to the underlying invariant it protects: structural floor (AC-01), zero broken links (AC-02), slot-immutability (AC-03), §99 inventory rubric (AC-04), strict-pass tree-health (AC-05), cross-platform deploy uniformity (AC-06), parent-survival (AC-07), build-time version-injection (AC-08), supply-chain trust (AC-09), integrity / no-MD5-SHA1 (AC-10), idempotent install + no-silent-sudo (AC-11), latest-probe-or-fail (AC-12), XDG + atomic-write 0600 (AC-13), ordered-pipeline-with-fail-fast (AC-14), no-daemon / no-stdout-pollution (AC-15), idempotent silent-cleanup-budget (AC-16), single-step atomic rollback + RECOVERY.md (AC-17), three-layer precedence + system-dir blacklist (AC-18), tag-first monotonicity (AC-19), six-target-floor + CGO_ENABLED=0 + reproducible-toolchain (AC-20). §97 v2.1.0 → v2.2.0. AI-confidence: P3 driver eliminated for `spec/14`; derived tier Medium → High.

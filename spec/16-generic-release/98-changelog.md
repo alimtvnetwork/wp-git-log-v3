@@ -1,7 +1,7 @@
 # Changelog — Generic Release Pipeline Specification
 
-**Version:** 2.2.0  
-**Updated:** 2026-04-27  
+**Version:** 2.2.1  
+**Updated:** 2026-04-30  
 **Scope:** `spec/16-generic-release/`
 
 ---
@@ -16,6 +16,9 @@
 ---
 
 ## Releases
+
+### 2.2.1 — 2026-04-30 (Phase 153 — Lesson #36 cross-ref inoculation)
+- **Added** `### Local-tooling concurrency (cross-reference)` subsection under `## Concurrency` in `02-release-pipeline.md` linking local CLI invocations the pipeline shells out to (state-DB writes, asset staging via temp-then-rename) to the canonical concurrency contract at [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated; CI-job-level concurrency block (`concurrency: group: release-${{ github.ref }}`) untouched. Codifies Lesson #36 (link, never restate). **No §97 AC change**, no AC-31-31 cascade, no RUBRIC bump, no gate-count change. §00 v2.2.0 → v2.2.1; §99 v2.2.0 → v2.2.1. Sibling lockstep: spec/14 (v2.3.1) + spec/28 (v2.1.3) shipped same Lesson #36 inoculation in this phase.
 
 ### 2.2.0 — 2026-04-27 (Phase 123 — placeholder catalog)
 - **Added** `09-placeholder-tokens.md` v1.0.0 — canonical SoT for 6 install-script placeholder tokens across 2 families (legacy `<NAME>_PLACEHOLDER` + modern `__<NAME>__`). Closes Phase 121 Candidate N — placeholders previously restated across §03/§08/§12/§14/§17 with no canonical catalog. Pre-req for Phase 117 containment harness. Inventory 11 → 12 files.
