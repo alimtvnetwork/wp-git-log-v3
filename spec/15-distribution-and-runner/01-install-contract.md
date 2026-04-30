@@ -47,9 +47,11 @@ This list is loaded from [`install-config.json`](./04-install-config.md). The li
 | Mode | Flag | Behavior |
 |------|------|----------|
 | Latest tag | (none) | Probes for newer `coding-guidelines-vN` repos (middle-out, parallel, 2s timeout). Hands off to newer installer if found. |
-| Pinned version | `--version vX.Y.Z` (Bash) / `-Version vX.Y.Z` (PS) | Downloads the tagged tarball/zipball and extracts the four folders. |
-| Pinned branch | `--branch <name>` / `-Branch <name>` | Downloads from the specified branch head. |
+| Pinned ref | `--ref <tag-or-sha>` (Bash) / `-Ref <tag-or-sha>` (PS) | Downloads the spec+linters tree from `codeload.github.com/<org>/<repo>/zip/<ref>`. **Reproducible install** (per §97 AC-18): `<ref>` MUST be a tag (e.g. `v1.2.3`) or full SHA — branch names like `main` are FORBIDDEN (branches move, defeating reproducibility) and MUST exit `2`. |
+| Pinned version | `--version vX.Y.Z` (Bash) / `-Version vX.Y.Z` (PS) | Convenience alias for `--ref vX.Y.Z`. Downloads the tagged tarball/zipball and extracts the four folders. |
 | Skip probe | `-n`, `--no-probe`, `--no-latest` (Bash) / `-NoProbe` (PS) | Use the running installer as-is, no version detection. |
+
+> **Why no `--branch` flag?** Branch heads move — installing from `--branch main` today produces a different artifact than installing from `--branch main` next week. This violates the **reproducible install** contract (§97 AC-18). For development against an unreleased commit, use `--ref <full-sha>` instead.
 
 ---
 
