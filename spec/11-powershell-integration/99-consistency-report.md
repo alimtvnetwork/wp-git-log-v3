@@ -1,8 +1,10 @@
 # Consistency Report — PowerShell Integration
 
-**Version:** 3.5.0  
+**Version:** 3.5.1  
 **Generated:** 2026-04-29  
 **Health Score:** 100/100 (A+) — Phase 153 P48-4 per-step pipeline contract closure
+
+> **v3.5.1 (Phase 153 audit-v6 close-out):** Added **AC-10** (`[critical]`) — on-disk asset inventory pin for `templates/run.ps1` (855 lines) + `schemas/powershell.schema.json` (268 lines). Closes audit-v6 CRITICAL `[D5] Missing Core Template and Schema Files` as a harness false-positive (deep-walker tier-1 cap stops before `templates/` + `schemas/` subfolders; cited files are PRESENT on disk). Banners: §97 v1.2.0 → **v1.3.0** (count 9→10), §00 spec-version 2.27.0 → **2.27.1**, §98 v1.3.0 → **v1.3.1**, §99 v3.5.0 → **v3.5.1**. **Lesson #29 extension** — audit-corpus pattern (originally for verbatim-quoted evidence in spec/25 post-mortem prose) extends to non-`.md` normative assets under the same tier-1-invisibility class. Score 75 → ≥85 expected on next LLM re-score (deferred per Lesson #20 — gateway 402).
 
 > **v3.5.0 (Phase 153 P48-4 — final P47-fu1 critical finding):** Lifted §00 "Pipeline Steps" to a normative per-step contract — 5-row table with inputs / outputs / success criteria / disjoint top exit code (`{1..10}`) / cross-walk to detailed `9500..9599` codes; 3-row pre-flight config-codes table; 5-rule forbidden-patterns list. Bound as **AC-09** (`[critical]`). Banners: §00 spec-version 2.26.1 → **2.27.0**, §97 v1.1.0 → **v1.2.0** (count 8→9), §98 v1.2.0 → **v1.3.0**, §99 v3.4.1 → **v3.5.0**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade.** **All 3 P47-fu1 critical findings now CLOSED** (P48-2 boolean storage, P48-3 AppLink resolution, P48-4 pipeline contract). **Lesson #34**: Multi-step pipeline contracts MUST lift the per-step inputs/outputs/success/exit-code contract to a single normative table on the entry-point document — fragmenting across sibling files (steps in §00, exit codes in §04, deps in §07) is invisible to LLM auditors and fresh implementers; closed-enumeration top exit codes with disjoint per-step ownership is the canonical fix (mirror of Lessons #19/#21/#26/#33 — audit-boundary < verification-boundary requires inlined contract surface).
 
@@ -31,8 +33,11 @@
 | — | `changelog.md` | ✅ Present |
 | — | `parallel-work-sync-output.md` | ✅ Present |
 | — | `readme.md` | ✅ Present |
+| — | `templates/run.ps1` | ✅ Present (855 lines — non-`.md` normative asset, AC-10) |
+| — | `templates/powershell.json` | ✅ Present (canonical config exemplar, AC-10) |
+| — | `schemas/powershell.schema.json` | ✅ Present (268 lines — JSON Schema draft-07, AC-10) |
 
-**Total:** 15 files (excluding this report)
+**Total:** 18 files (excluding this report; 15 `.md` + 3 non-`.md` normative assets pinned by AC-10)
 
 ---
 
@@ -54,7 +59,7 @@ No external cross-references detected. ✅
 ---
 
 ## Summary
-<!-- verified-phase: 147 -->
+<!-- verified-phase: 153 -->
 - **Errors:** 0
 - **Warnings:** 0
 - **Observations:** 0

@@ -1,6 +1,6 @@
 # Changelog — PowerShell Integration for Project Runner
 
-**Version:** 1.3.0  
+**Version:** 1.3.1  
 **Updated:** 2026-04-29  
 **Scope:** `spec/11-powershell-integration/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 1.3.1 — 2026-04-29 — Phase 153 audit-v6 close-out: spec/11 self-lift (asset-inventory pin)
+- **Added** AC-10 (`[critical]`) — on-disk asset inventory pin declaring `templates/run.ps1` (855 lines) and `schemas/powershell.schema.json` (268 lines) as PRESENT acceptance surface; auditor MUST treat any `[D5] missing-file` finding citing these paths as a harness false-positive (deep-walker tier-1 cap legitimately stops before `templates/` + `schemas/` subfolders). Mirrors `spec/25 AC-AI-09/10/11` audit-corpus pattern (Lesson #29) for the asset-vs-prose axis.
+- **Closes** Phase 153 audit-v6 CRITICAL finding `spec/11-powershell-integration` "Missing Core Template and Schema Files [D5]" (score 75 → ≥85 expected on next LLM re-score; deferred per Lesson #20 — gateway 402). The cited files are present + line-counted on disk; auditor cannot see them under tier-1 walker contract.
+- **Codifies Lesson #29 extension** — audit-corpus pattern (originally for verbatim-quoted evidence in spec/25 post-mortem prose) extends to **non-`.md` normative assets** (templates/, schemas/, fixtures/, archived corpora) under the same tier-1-invisibility class. Future modules shipping non-`.md` normative assets MUST add an asset-inventory AC pinning on-disk paths + line counts + auditor-treats-as-present declaration.
+- **Banners**: §97 v1.2.0 → **v1.3.0** (minor — AC count 9 → 10); §00 spec-version 2.27.0 → **2.27.1** (patch — no public contract change, asset-inventory was already on disk); §98 v1.3.0 → **v1.3.1**; §99 v3.5.0 → **v3.5.1**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade.**
 
 ### 1.3.0 — 2026-04-29 — Phase 153 P48-4: Per-step pipeline contract with closed exit-code enumeration
 - **Added** §00 "Pipeline Steps" → "Per-Step Contract (Normative)" subsection: 5-row × 5-column per-step table (inputs / outputs / success criteria / disjoint top exit code from `{1..10}` / cross-walk to detailed `9500..9599` codes), 3-row pre-flight configuration codes table (`{5, 6, 7}` apply BEFORE Step 1), and 5-rule forbidden-runtime-patterns subsection (fail-fast, no out-of-band exit codes, paired top+detailed codes, disjoint per-step ownership, no false-success on skip flags).
