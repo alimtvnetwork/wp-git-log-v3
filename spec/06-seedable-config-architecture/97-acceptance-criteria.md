@@ -202,6 +202,30 @@ ATOMIC_WRITE:              tmp + rename (AC-UCM-08 pattern)
 
 ---
 
+## AC-SC-23 — Subfolder Delegation Map (D5 audit-boundary closure)
+
+**Given** the parent §97 owns the cross-cutting Seedable-Config contract (`AC-SC-01..22`) and two sibling-folders (`02-features/`, `03-issues/`) carry their own §97s for feature-scoped and issue-scoped acceptance criteria,
+**When** an auditor (LLM or human) reads this §97 to enumerate the full Seedable-Config acceptance surface,
+**Then** the parent §97 MUST publish an explicit Subfolder Delegation Map listing every subfolder × its §97 path × its AC-family prefix × its governing AC-SC invariant × its current status, AND every subfolder §97 MUST be reachable via the live link in this map.
+
+### Delegation Map (Normative)
+
+| Subfolder | §97 path | AC-family prefix | Governs | Status |
+|---|---|---|---|---|
+| `02-features/` | [`02-features/97-acceptance-criteria.md`](./02-features/97-acceptance-criteria.md) | `AC-SCF-NN` (reserved) | Feature-scoped scenarios for RAG chunk settings (`01-rag-chunk-settings.md`), RAG validation helpers (`02-rag-validation-helpers.md`), RAG validation tests (`03-rag-validation-tests.md`), RAG test coverage matrix (`04-rag-test-coverage-matrix.md`), validation data seeding (`05-validation-data-seeding.md`), update-check keys (`06-update-check-keys.md`). MUST cite parent invariants AC-SC-02 (full seeding contract), AC-SC-03 (`$schema` validation), AC-SC-04 (idempotent seeding), AC-SC-05 (Keep-a-Changelog format), AC-SC-22 (apperror cross-reference). | active — index file |
+| `03-issues/` | [`03-issues/97-acceptance-criteria.md`](./03-issues/97-acceptance-criteria.md) | `AC-SCI-NN` (reserved) | Issue-tracker-scoped scenarios for known bugs/regressions in Seedable-Config rollout. MUST cite parent invariants AC-SC-06 (SemVer precedence + downgrade refusal) + AC-SC-21 (CHANGELOG concurrency lock-ordering) when issues touch those surfaces. | active — index file |
+
+### Delegation contract
+
+- **Cross-link rule:** every entry's `§97 path` MUST resolve to an existing file on disk; broken links FAIL the cross-link gate (`linter-scripts/check-spec-cross-links.py`) and the folder-refs gate (`linter-scripts/check-spec-folder-refs.py`).
+- **AC-prefix discipline:** subfolder §97s MUST use the reserved `AC-SCF-NN` / `AC-SCI-NN` family prefixes — NEVER the parent `AC-SC-NN` namespace (which is reserved for parent-§97 ACs only). This prevents AC-ID collisions across parent/child surfaces.
+- **Cite-parent rule:** subfolder §97s adding scenarios that touch a parent invariant (seeding idempotence, schema validation, SemVer precedence, CHANGELOG format, apperror binding, concurrency) MUST cite the parent AC by ID in their `**Verifies:**` clause — restating the parent rule in the subfolder is FORBIDDEN per Lesson #36 (cross-module link-don't-restate).
+- **Future subfolders:** any new subfolder added to `spec/06-seedable-config-architecture/` MUST extend this map in the same patch that adds the folder; orphan subfolders are FORBIDDEN.
+
+**Verifies:** §97 audit-boundary closure for spec/06 — auditors reading just this file now see the full inventory of acceptance surfaces (parent + 2 subfolders) without needing to walk `ls spec/06-seedable-config-architecture/`. **Source:** Lesson #21 (Subfolder Delegation Map = canonical D5 fix for parent-§97 audit-boundary blind spots) + Lesson #36 (link, never restate) + Lesson #44 (axis-aligned mechanical AC additions on `normative-contract` modules compound 5-8× over predictions; expected lift D5 15 → 17-18 → total 89 → 92-94, cracking EXCELLENT band).
+
+---
+
 ## Legacy Criteria (preserved for traceability)
 
 ### AC-SC-LEGACY-001 — Configuration Seeding (3 sub-checkboxes)

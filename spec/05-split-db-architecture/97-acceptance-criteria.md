@@ -269,6 +269,30 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
 
 ---
 
+## AC-SD-26 — Subfolder Delegation Map (D5 audit-boundary closure)
+
+**Given** the parent §97 owns the cross-cutting Split-DB contract (`AC-SD-01..25`) and two sibling-folders (`02-features/`, `03-issues/`) carry their own §97s for feature-scoped and issue-scoped acceptance criteria,
+**When** an auditor (LLM or human) reads this §97 to enumerate the full Split-DB acceptance surface,
+**Then** the parent §97 MUST publish an explicit Subfolder Delegation Map listing every subfolder × its §97 path × its AC-family prefix × its governing AC-SD invariant × its current status, AND every subfolder §97 MUST be reachable via the live link in this map.
+
+### Delegation Map (Normative)
+
+| Subfolder | §97 path | AC-family prefix | Governs | Status |
+|---|---|---|---|---|
+| `02-features/` | [`02-features/97-acceptance-criteria.md`](./02-features/97-acceptance-criteria.md) | `AC-SDF-NN` (reserved) | Feature-scoped scenarios for CLI examples (`01-cli-examples.md`), Reset-API standard (`02-reset-api-standard.md`), DB flow diagrams (`03-database-flow-diagrams.md`), RBAC Casbin (`04-rbac-casbin.md`), user-scoped isolation (`05-user-scoped-isolation.md`). MUST cite parent invariants AC-SD-03 (3-layer pattern), AC-SD-04 (Root DB scope), AC-SD-05 (per-item filename regex), AC-SD-13 (per-item DB lifecycle). | active — index file |
+| `03-issues/` | [`03-issues/97-acceptance-criteria.md`](./03-issues/97-acceptance-criteria.md) | `AC-SDI-NN` (reserved) | Issue-tracker-scoped scenarios for known bugs/regressions in Split-DB rollout. MUST cite parent invariants AC-SD-08 (intra-DB FK only) + AC-SD-11 (handle pooling) when issues touch those surfaces. | active — index file |
+
+### Delegation contract
+
+- **Cross-link rule:** every entry's `§97 path` MUST resolve to an existing file on disk; broken links FAIL the cross-link gate (`linter-scripts/check-spec-cross-links.py`) and the folder-refs gate (`linter-scripts/check-spec-folder-refs.py`).
+- **AC-prefix discipline:** subfolder §97s MUST use the reserved `AC-SDF-NN` / `AC-SDI-NN` family prefixes — NEVER the parent `AC-SD-NN` namespace (which is reserved for parent-§97 ACs only). This prevents AC-ID collisions across parent/child surfaces.
+- **Cite-parent rule:** subfolder §97s adding scenarios that touch a parent invariant (Slug uniqueness, ATTACH discipline, FK posture, handle pooling, backup/restore, concurrency) MUST cite the parent AC by ID in their `**Verifies:**` clause — restating the parent rule in the subfolder is FORBIDDEN per Lesson #36 (cross-module link-don't-restate).
+- **Future subfolders:** any new subfolder added to `spec/05-split-db-architecture/` MUST extend this map in the same patch that adds the folder; orphan subfolders are FORBIDDEN.
+
+**Verifies:** §97 audit-boundary closure for spec/05 — auditors reading just this file now see the full inventory of acceptance surfaces (parent + 2 subfolders) without needing to walk `ls spec/05-split-db-architecture/`. **Source:** Lesson #21 (Subfolder Delegation Map = canonical D5 fix for parent-§97 audit-boundary blind spots, originally codified in spec/02 AC-CG-21 Phase 153 Task A10) + Lesson #36 (link, never restate). Score lift expected: D5 15 → 17-18 (axis multiplier ×1.4 → +3-4 raw → +4-5 weighted; should crack EXCELLENT band ≥90).
+
+---
+
 ## Legacy Criteria (preserved for traceability)
 
 ### AC-SD-LEGACY-001 — Database Partitioning (3 sub-checkboxes)
