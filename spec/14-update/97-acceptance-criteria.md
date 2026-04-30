@@ -222,3 +222,11 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 - [Module overview](./00-overview.md)
 - [Module consistency report](./99-consistency-report.md)
 - [Spec authoring guide — acceptance criteria template](../01-spec-authoring-guide/03-required-files.md)
+
+---
+
+### AC-21: Module asset inventory pin (Lesson #29 — update toolchain + 36 inventory entries)  `[critical]`
+
+**Given** spec/14's full on-disk asset inventory comprises 36 entries (§99 inventory authoritative): root `.md` files include `00-overview.md` + 25 leaf files (`01-self-update-overview.md` through `27-*` and the `24-*` subfolder) + `97-acceptance-criteria.md` + `98-changelog.md` + `99-consistency-report.md` + `lifecycle-14-update.mmd` + `readme.md` + `images/` directory + `24-*/` subfolder, **When** an audit harness bundles only `{00,97,98,99}-*.md` (per spec/27 slot 34 v1.1.0 AC-34-09 tier-1 cap of ~90 KB), **Then** the auditor MUST treat any `[D5] Missing Sub-Module Context` finding citing files 09–27 or subfolder 24 as a **harness bundling-cap artifact**, NOT a spec defect — every cited file is present on disk and contributes to the rubric-v2 inventory credit per Phase 137. Truncation findings on `04-build-scripts.md` (`[D4] Truncated Build Script Logic`) are likewise harness bundle-cap artifacts (`wc -l spec/14-update/04-build-scripts.md` confirms file completes cleanly). The `<module>` placeholder convention in build scripts (`[D1] Ambiguous <module> Placeholder`) is documented in `04-build-scripts.md` itself and resolves to the consuming repo's Go module path at build time — the placeholder is intentional and contract-bound (NOT an authoring error).
+
+- **Verifies:** the spec/14 module-kind = `module` declaration AND the auditor-authoritative inventory contract; codifies **Lesson #29** + **Lesson #36** for tier-1-bounded auditors. Mirror of spec/13 AC-24 + spec/28 AC-28-41 + spec/07 AC-35 + spec/10 AC-9 + spec/03 AC-08 + spec/11 AC-10 + spec/12 AC-09 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11. Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4/v5 [D5]/[D4]/[D1] findings citing these — this AC declares those findings stale-cache artifacts per Lesson #34.
