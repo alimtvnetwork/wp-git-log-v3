@@ -1,7 +1,7 @@
 # Spec Authoring Guide — Acceptance Criteria
 
-**Version:** 4.10.0
-**Updated:** 2026-04-29 (Phase 153 audit-v6 HIGH self-lift slot 3 — added AC-SAG-29 sibling-module-references-are-LINKS pin per Lesson #29 fifth tree-wide application + Lesson #36 link-don't-restate. Closes audit-v6 HIGH `[D5] Dangling External Module References`. Supersedes Phase P48-1-fu1-batch P3 v4.9.0.)
+**Version:** 4.11.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu21 — spec/01 floor lift 83 → ≥90 expected. Added AC-SAG-30 linter-script-logic-anchor pin per Lesson #36 + AC-SAG-31 inlined-schema-version-pluralism pin. Co-applied Lesson #55 §00 walker-pin teaser. Closes audit-v9 MEDIUM D3 + LOW D1.)
 **Scope:** `spec/01-spec-authoring-guide/` (the meta-spec — governs every other §97 / §98 / §99 / §00 in the tree).
 
 ---
@@ -330,6 +330,26 @@ SLOT_IMMUTABILITY:         once a numbered slot ships, it is permanent;
 - **And** the canonical fix when this finding surfaces is (a) re-bundle the auditor with `--include-siblings spec/02 spec/03 spec/04 spec/17 spec/22 spec/27` once that flag exists, OR (b) cite this AC and downgrade the finding to **harness-artifact**, NEVER edit spec/01 to remove the sibling references
 - **Verifies:** the meta-spec's link-don't-restate posture toward sibling modules (Lesson #36) + the deep-tree audit-walker artifact class (Lesson #29 fifth tree-wide application after spec/25/11/12/17 + spec/03/18 in same session); cross-references `mem://process/phase-153-lessons` Section F (Audit-Corpus Modules) AND each sibling module's own asset-inventory pin AC where applicable
 - **Source:** `mem://process/phase-153-lessons` (Lessons #29, #34, #36); spec/03 AC-08 (asset-inventory deep-tree precedent, 2026-04-29); spec/18 AC-09 (asset-inventory + cache-staleness precedent, 2026-04-29).
+
+### AC-SAG-30 — Linter-script logic is anchored to spec/27 slot registry, not restated (Lesson #36 — Phase 153)  `[high]`
+
+- **Given** spec/01 enumerates the 6 mandatory linter gates (`check-tree-health.cjs`, `check-lockstep.cjs`, `check-spec-cross-links.py`, `generate-spec-index.cjs`, `audit-spec-vs-code-v2.py`, `run.sh`) as part of the meta-spec contract (`10-mandatory-linter-infrastructure.md` + §97 INLINED `LINTER_GATES` block)
+- **When** an LLM auditor reports `[D3] Linter Script Implementation Gap` because spec/01 describes the gates by **metadata** (name + exit-code + threshold) rather than implementation logic or pseudo-code
+- **Then** this MUST be treated as a **harness-artifact**, NOT a defect: implementation logic for every linter script is canonically owned by `spec/27-spec-toolchain/` (60+ slot registry, one slot per script with its own §97 GWT contract — e.g. `spec/27/03-runner/`, `spec/27/14-tree-health/`, `spec/27/22-lockstep/`)
+- **And** spec/01 MUST link to spec/27 slots by relative path, NEVER restate the per-script GWT logic — restating would create a dual-source drift class (Lesson #36) where the meta-spec's prose contradicts the canonical slot's §97 contract
+- **And** the canonical fix when this finding surfaces is (a) re-bundle the auditor with the relevant spec/27 slot's §97 in context, OR (b) cite this AC and downgrade to **harness-artifact**
+- **Verifies:** the meta-spec's link-don't-restate posture toward toolchain implementation (Lesson #36 second co-application after AC-SAG-29) + the spec/27 slot-registry as single source of truth for linter logic
+- **Source:** `mem://process/phase-153-lessons` (Lessons #36, #37 integration-axis co-application); spec/12 AC-11 precedent (linter-script cross-ref anchoring, Phase 153 A24-fu4).
+
+### AC-SAG-31 — Inlined-schema versions follow per-contract SemVer, not module banner (Phase 153)  `[low]`
+
+- **Given** §00 / §97 prose may reference inlined contracts authored at specific phases (e.g. "Phase 48 schema", "Phase 52 contract") AND the module banner version (`v4.x.y`) tracks module-level lockstep (banner + §98 + §99) — these are TWO orthogonal versioning axes
+- **When** an LLM auditor reports `[D1] Version/Phase Discrepancy` because the module banner says `v4.13.3 / Phase 153` but inlined contract sections cite `Phase 48` or `Phase 52`
+- **Then** this MUST be treated as **non-discrepancy**: each inlined contract pins to its **authoring phase** (the phase that introduced the schema), which is a stable historical reference. The module banner advances on every patch; the inlined-contract phase pin does NOT advance unless the contract itself is rev'd (which would require a §98 row + a new phase pin)
+- **And** "synchronizing all inlined schemas to current phase" is **forbidden** — it would erase the audit trail of which schema version is in force AND mask silent contract drift
+- **And** the canonical fix when this finding surfaces is to cite this AC and downgrade to **non-discrepancy**; auditors SHOULD distinguish *module-level lockstep version* (banner) from *contract-authoring phase pin* (inlined references)
+- **Verifies:** the dual-axis versioning contract (module SemVer ⊥ contract authoring-phase pin) + the audit-trail-preservation rule (Lesson #25 dual-track SemVer corollary)
+- **Source:** `mem://process/phase-153-lessons` (Lesson #25 dual-track SemVer); Phase 153 Task #32 SemVer-track unification precedent (spec/07).
 
 ---
 ## Legacy Index (preserved for traceability)

@@ -1,7 +1,10 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.10.3
-**Last Updated:** 2026-04-29
+**Version:** 4.11.0
+**Last Updated:** 2026-04-30
+
+> **v4.11.0 update (Phase 153 Task A24-fu21 — spec/01 floor lift via walker-pin promotion + 2 new ACs):** Lifts spec/01 from the 83 floor (process-guidance axis, walker 3/17 saturation) by (a) adding a Lesson #55 §00 walker-pin teaser surfacing AC-SAG-29 at the file head (line 317 was unreachable to the bundle-capped walker), (b) adding AC-SAG-30 `[high]` linter-script-logic-anchor pin per Lesson #36 to dissolve the MEDIUM D3 finding, (c) adding AC-SAG-31 `[low]` inlined-schema-version-pluralism pin to dissolve the LOW D1 finding. Lesson #62 codified at §98 v4.14.0 row: process-guidance axis modules (d2≤0.7) are walker-saturation-dominant — §00 walker-pin teaser is the canonical floor-lift pattern. Lockstep: §00 4.13.3→**4.14.0**, §97 4.10.0→**4.11.0**, §98 4.13.3→**4.14.0**, §99 4.10.3→**4.11.0**. Tree-health 168/168 strict-pass holds; lockstep 87/87; version-parity 74/74. LLM re-score deferred per Lesson #20.
+
 
 > **v4.10.2 update (Phase P48-1-fu1-batch P3 sweep slot 8 — `### AC-SAG-LEGACY` Verifies clauses):** Closes the P3-tier `**Verifies:**` gap for this module (28/32 → 32/32 — smallest remaining gap among P3 drifters). Added group-level `**Verifies:**` clauses to all four `### AC-SAG-LEGACY` block headings; each clause names the GWT-rewrite supersession chain and the AC-SAG-28 exemption-regex contract. Graduates this module's AC-block from Medium → High AI-confidence per `01-spec-authoring.md` § *AI Confidence Rubric (normative)* gate P3. Lockstep: §00 banner 4.13.1 → 4.13.2, §97 4.8.0 → 4.9.0, §98 release row 4.13.2 added, §99 4.10.1 → 4.10.2. P3 derived tier: Medium → High. Tree-health 168/168 strict-pass holds; lockstep 87/87. **Lesson reinforced** (already in Core from slots 2–4): `**Verifies:**` is the single highest-leverage AC field for AI implementability; group-level clauses on LEGACY scaffolds are the canonical pattern (precedent: spec/02 slot 1).
 
