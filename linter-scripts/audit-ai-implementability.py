@@ -388,18 +388,38 @@ def main(argv: list[str] | None = None) -> int:
             print(f"audit-ai-implementability: no module matches --module={args.module}", file=sys.stderr)
             return 2
 
+    # AC-34-12 fail-fast: every module MUST declare a valid `content_axis` in
+    # its 00-overview.md front-matter BEFORE any gateway call. Silent v6
+    # uniform-weighting fallback is FORBIDDEN.
+    axes: dict[str, str] = {}
+    axis_errors: list[str] = []
+    for mod in modules:
+        axis, err = read_content_axis(mod)
+        if err:
+            axis_errors.append(err)
+        else:
+            axes[mod.name] = axis  # type: ignore[assignment]
+    if axis_errors:
+        print("audit-ai-implementability: invalid or missing content_axis (AC-34-12):", file=sys.stderr)
+        for e in axis_errors:
+            print(f"  - {e}", file=sys.stderr)
+        print(f"  Allowed values: {sorted(AXIS_VALUES)}", file=sys.stderr)
+        return 2
+
     results: list[dict[str, Any]] = []
     for mod in modules:
         try:
-            r = audit_module(mod, api_key, args.no_network, args.force)
+            r = audit_module(mod, api_key, args.no_network, args.force, axes[mod.name])
             results.append(r)
             if not args.json:
                 if "total" in r:
+                    cap_note = f" (cap {r['axis_cap']})" if r.get("total_v7") == r.get("axis_cap") else ""
                     print(f"  {mod.name:40s} {r['total']:3d}/100  {r.get('band','')}  "
+                          f"axis={r.get('axis','?'):20s}{cap_note}  "
                           f"({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB)"
                           f"{'  [cache]' if r.get('from_cache') else ''}")
                 elif r.get("no_network"):
-                    print(f"  {mod.name:40s} stats-only ({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB, sha={r['bundle_sha']})")
+                    print(f"  {mod.name:40s} stats-only axis={r.get('axis','?'):20s} ({r['files_used']}/{r['files_total']} files, {r['bytes_used']//1024} KB, sha={r['bundle_sha']})")
         except Exception as e:  # noqa: BLE001
             print(f"  {mod.name:40s} ERROR: {e}", file=sys.stderr)
             results.append({"module": mod.name, "error": str(e)})
