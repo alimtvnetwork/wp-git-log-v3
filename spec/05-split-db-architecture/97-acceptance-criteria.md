@@ -1,7 +1,7 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.2.0
-**Last Updated:** 2026-04-29 (Phase 153 Task A6: added AC-SD-21 SQL identifier quoting + Go struct mapping; AC-SD-22 cross-process concurrency contract — busy_timeout + retry-loop + locked-error handling; AC-SD-23 TTL/expiry contract for time-bounded rows. Targets v3 audit findings on D2 (AC coverage) + D3 (edge/error handling) for the only NEEDS_WORK module.)
+**Version:** 4.3.0
+**Last Updated:** 2026-04-30 (Phase 153 Task A14: AC-SD-22 polyglot pseudo-code + per-language driver mappings; AC-SD-24 cross-module link-don't-restate harness pin per Lesson #36; AC-SD-25 ProjectSlug↔Project.Slug binding contract. Closes all 3 v6 audit findings: D5 HIGH (cross-ref), D3 MEDIUM (concurrency polyglot), D1 LOW (ProjectSlug ambiguity).)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
 ---
