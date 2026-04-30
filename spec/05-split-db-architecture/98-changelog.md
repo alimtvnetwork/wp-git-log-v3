@@ -1,6 +1,6 @@
 # Changelog — Split Database Architecture
 
-**Version:** 4.3.0
+**Version:** 4.4.0
 **Updated:** 2026-04-30
 **Scope:** `spec/05-split-db-architecture/`
 

@@ -1,6 +1,6 @@
 # Changelog — Seedable Config Architecture (CW Config)
 
-**Version:** 4.3.0
+**Version:** 4.4.0
 **Updated:** 2026-04-29
 **Scope:** `spec/06-seedable-config-architecture/`
 
