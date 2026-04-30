@@ -293,6 +293,60 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
 
 ---
 
+### AC-SD-27 — Application/Project terminology binding (Root DB canonical-term contract)  `[high]`
+
+- **Given** the Root DB stores the top-level project registry AND multiple ACs in this module reference identifiers using both `ApplicationId` (legacy v1 prose, AC-SD-05 Counter table example) and `ProjectId` (current Root DB schema in `01-fundamentals.md`, AC-SD-25 `Project.Slug` binding),
+- **When** any DDL example, AC body, code snippet, or schema diagram in this module references the top-level registry row's primary key,
+- **Then** the canonical term MUST be `Project` / `ProjectId` / `ProjectSlug` — `Application` / `ApplicationId` / `AppId` are FORBIDDEN as Root-DB column or table names. Inline binding table (NORMATIVE — auditors MUST treat these as the only allowed forms):
+
+| Concept | Canonical (REQUIRED) | Forbidden aliases | Storage location |
+|---|---|---|---|
+| Top-level registry table | `Project` | `Application`, `App`, `Tenant` | Root DB (`data/root.db`) |
+| Top-level primary key | `ProjectId` (INTEGER PRIMARY KEY AUTOINCREMENT) | `ApplicationId`, `AppId`, `TenantId` | Root DB `Project` table |
+| Top-level slug | `ProjectSlug` (in path tokens), `Project.Slug` (column) | `ApplicationSlug`, `AppSlug` | Root DB `Project.Slug` |
+| FK from per-item DBs | `ProjectId` (matching parent name per AC-CL-11) | `ApplicationId`, `OwnerId` (when meaning project) | Per-item DBs (App/Session/Cache) |
+| Per-item filename token | `<ProjectSlug>` (resolved at materialization per AC-SD-25) | `<AppSlug>`, `<TenantSlug>` | Filesystem path |
+
+- **Exception:** the word "application" MAY appear in PROSE narrative (e.g., "the application's Counter") but NEVER in identifiers (DDL, struct fields, JSON keys, path tokens, AC IDs). The mechanizable grep is: `rg -n -e '\b(ApplicationId|AppId|application_id|app_id)\b' --glob 'spec/05-split-db-architecture/**/*.md' --glob '!**/97-acceptance-criteria.md'` MUST return zero hits in identifier contexts (DDL ``CREATE TABLE``, struct field declarations, FK clauses).
+- **Verifies:** AC-SD-04 (Root DB scope — single source of truth for project identity) + AC-SD-05 (per-item filename regex uses `ProjectSlug` token) + AC-SD-25 (`{ProjectSlug}` path-token binding) + AC-CL-09 (PascalCase) + AC-CL-11 (FK naming `<TargetTable>Id`). **Source:** v7 audit MEDIUM D3 finding "Ambiguous 'ApplicationId' Source" (`bundle_sha 5418a4196e24378a`) — AC-SD-05 Counter example used `ApplicationId` while Root DB schema in `01-fundamentals.md` defines `Project.ProjectId`. This AC pins the canonical form inline so auditors no longer need to cross-walk schema files.
+
+### AC-SD-28 — Root DB registry-table column completeness (`Database` + `Project` schema floor)  `[high]`
+
+- **Given** the Root DB houses two registry tables (`Project` for top-level identity per AC-SD-04 + AC-SD-25, `Database` for per-item DB tracking per AC-SD-13) AND multiple ACs reference columns on these tables (AC-SD-05 cites `SequenceNumber` + `LastAccessedAt` on `Database`; AC-SD-25 cites `Project.Slug` UNIQUE NOT NULL),
+- **When** any implementer materializes the Root DB schema OR any auditor reviews `01-fundamentals.md` for schema/AC consistency,
+- **Then** the Root DB DDL MUST include AT LEAST the following columns on each registry table (additional implementation-specific columns are PERMITTED; missing any of these FAILS the AC):
+
+**`Project` table — REQUIRED columns:**
+
+| Column | Type | Constraints | Purpose | Cited by |
+|---|---|---|---|---|
+| `ProjectId` | `INTEGER` | `PRIMARY KEY AUTOINCREMENT` | Stable surrogate key | AC-SD-04, AC-SD-27 |
+| `Slug` | `TEXT` | `UNIQUE NOT NULL CHECK(length(Slug) BETWEEN 1 AND 64)` | Filesystem path token | AC-SD-25 |
+| `AppName` | `TEXT` | `NOT NULL` | Human-readable display name (mutable) | AC-SD-25 (slug derived once from this at creation) |
+| `CreatedAt` | `TEXT` | `NOT NULL DEFAULT (datetime('now'))` | ISO-8601 UTC timestamp | AC-CL-09 (PascalCase ts) |
+
+**`Database` table — REQUIRED columns:**
+
+| Column | Type | Constraints | Purpose | Cited by |
+|---|---|---|---|---|
+| `DatabaseId` | `INTEGER` | `PRIMARY KEY AUTOINCREMENT` | Stable surrogate key | AC-SD-13 |
+| `ProjectId` | `INTEGER` | `NOT NULL REFERENCES Project(ProjectId) ON DELETE CASCADE` | Owning project | AC-SD-08 (intra-Root FK), AC-SD-27 |
+| `Slug` | `TEXT` | `NOT NULL` | Per-item filename slug per AC-SD-05 | AC-SD-05 |
+| `Category` | `TEXT` | `NOT NULL` | One of `app`/`session`/`cache`/`document`/`<custom>` | AC-SD-03 (3-layer taxonomy) |
+| `SequenceNumber` | `INTEGER` | `NOT NULL` | Monotonic creation order within (`ProjectId`, `Category`) — drives the `^[0-9]{3}-` filename prefix in AC-SD-05 | AC-SD-05 (filename regex) |
+| `LastAccessedAt` | `TEXT` | `NOT NULL DEFAULT (datetime('now'))` | LRU eviction signal for handle pool | AC-SD-11 (LRU + IdleCloseSec) |
+| `CreatedAt` | `TEXT` | `NOT NULL DEFAULT (datetime('now'))` | Audit trail | AC-CL-09 |
+| `SchemaVersion` | `INTEGER` | `NOT NULL DEFAULT 0` | Mirrors per-DB `SchemaVersion` row for fast Root-DB-only lookups during migration planning | AC-SD-15 |
+
+- **Mechanizable grep (REQUIRED columns must appear in `01-fundamentals.md` Root DB DDL):**
+  - `rg -n -e '^\s*SequenceNumber\s+INTEGER\s+NOT NULL' spec/05-split-db-architecture/01-fundamentals.md` MUST return ≥1 hit.
+  - `rg -n -e '^\s*LastAccessedAt\s+TEXT\s+NOT NULL' spec/05-split-db-architecture/01-fundamentals.md` MUST return ≥1 hit.
+  - `rg -n -e '^\s*Slug\s+TEXT\s+UNIQUE NOT NULL' spec/05-split-db-architecture/01-fundamentals.md` MUST return ≥1 hit (Project.Slug uniqueness).
+- **Forbidden:** dropping any REQUIRED column "for simplicity"; renaming any column to a non-canonical alias from AC-SD-27; using `INTEGER` for timestamps (MUST be `TEXT` ISO-8601 per AC-CL-09 portability per spec/04 §2.1 boolean-storage convention rationale).
+- **Verifies:** AC-SD-05 (Counter / `SequenceNumber` source) + AC-SD-11 (LRU `LastAccessedAt` source) + AC-SD-13 (per-item registry rows) + AC-SD-15 (`SchemaVersion` mirror) + AC-SD-25 (`Project.Slug` UNIQUE NOT NULL). **Source:** v7 audit LOW D1 finding "Schema/AC Discrepancy on Registry Table" (`bundle_sha 5418a4196e24378a`) — AC-SD-05 required `SequenceNumber` + `LastAccessedAt` but Root DB DDL in `01-fundamentals.md` lacked them. This AC pins both registry-table column floors inline so the schema source-of-truth lives next to the citing ACs (Lesson #36: link, never restate — but for normative columns the contract IS the inline table).
+
+---
+
 ## Legacy Criteria (preserved for traceability)
 
 ### AC-SD-LEGACY-001 — Database Partitioning (3 sub-checkboxes)
