@@ -268,6 +268,17 @@ CREATE INDEX IdxHistoryChanged ON SettingsHistory(ChangedAt);
 ```go
 // SettingValue is the strongly-typed union container for all config values.
 // See spec/22-ai-bridge-cli/01-backend/57-settings-service.md for the canonical definition.
+//
+// Type → field mapping (NORMATIVE per AC-SC-14, §97):
+//   "boolean"     → BoolVal     (*bool)
+//   "number"      → IntVal OR FloatVal (use FloatVal for general-purpose; IntVal when
+//                                       schema declares Min/Max as integers)
+//   "string"      → StringVal   (*string)
+//   "select"      → StringVal   (*string — verbatim chosen value from Options; NOT enum-index)
+//   "multiselect" → StringsVal  ([]string — ordered list of chosen values from Options)
+//
+// Forbidden: introducing EnumVal int for "select" (loses round-trip with Options);
+//            flattening "multiselect" into comma-separated StringVal (loses values containing commas).
 type SettingValue struct {
     StringVal  *string            `json:"StringVal,omitempty"`
     IntVal     *int               `json:"IntVal,omitempty"`
