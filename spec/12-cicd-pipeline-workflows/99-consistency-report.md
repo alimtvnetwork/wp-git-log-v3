@@ -1,6 +1,6 @@
 # Consistency Report — CI/CD Pipeline Workflows
 
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 
 > **v3.4.2 update (Phase P48-1-fu1-batch P3 sweep slot 5 — AC-01..AC-08 Verifies clauses):** Closes the P3-tier `**Verifies:**` gap (0 → 8 clauses). AC-01 and AC-06 explicitly call out the `kind: future-spec` YAML exemption. Lockstep: §00 3.4.1 → 3.4.2, §97 1.0.0 → 1.1.0, §98 row 3.4.2 added, §99 3.4.1 → 3.4.2. P3 derived tier: Medium → High. Tree-health 168/168 strict-pass holds.
 

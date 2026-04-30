@@ -1,6 +1,6 @@
 # Changelog — CI/CD Pipeline Workflows
 
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 **Updated:** 2026-04-29  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 

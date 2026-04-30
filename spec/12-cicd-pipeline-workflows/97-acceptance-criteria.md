@@ -1,6 +1,6 @@
 # Acceptance Criteria — CI/CD Pipeline Workflows
 
-**Version:** 1.1.0  
+**Version:** 1.2.0  
 **Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep: added `**Verifies:**` clauses to AC-01..AC-08 — closes 8/8 P3 gap, graduates AC-block from Medium → High AI-confidence.)  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
