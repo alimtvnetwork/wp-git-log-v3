@@ -33,8 +33,11 @@
 | — | `changelog.md` | ✅ Present |
 | — | `parallel-work-sync-output.md` | ✅ Present |
 | — | `readme.md` | ✅ Present |
+| — | `templates/run.ps1` | ✅ Present (855 lines — non-`.md` normative asset, AC-10) |
+| — | `templates/powershell.json` | ✅ Present (canonical config exemplar, AC-10) |
+| — | `schemas/powershell.schema.json` | ✅ Present (268 lines — JSON Schema draft-07, AC-10) |
 
-**Total:** 15 files (excluding this report)
+**Total:** 18 files (excluding this report; 15 `.md` + 3 non-`.md` normative assets pinned by AC-10)
 
 ---
 
