@@ -1,39 +1,38 @@
 {
   "d1": 18,
-  "d2": 19,
-  "d3": 15,
-  "d4": 14,
-  "d5": 12,
-  "score_rationale": "The module is exceptionally well-structured for an AI, with high-quality acceptance criteria and a clear 'module-kind pin' that prevents common AI misinterpretations. However, it suffers from significant 'Dependency Closure' issues (D5) because it references many external scripts and folders that are not provided in the context, and the final file is truncated mid-sentence, losing critical workflow instructions.",
+  "d2": 15,
+  "d3": 14,
+  "d4": 12,
+  "d5": 17,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Missing External Dependencies",
-      "why": "The spec relies heavily on external linter scripts (e.g., check-tree-health.cjs, validate-guidelines.py) and source folders (e.g., spec/01-spec-authoring-guide/) that are not included in the provided context.",
-      "fix": "Include the source code or interface definitions for all referenced linter scripts and the content of the 'Source' folders in the prompt context."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Content Truncation in Critical Workflow",
-      "why": "File 01-spec-authoring.md cuts off at the 'Mandatory Execution Order' section, leaving the AI without the final steps to maintain version parity and CI compliance.",
-      "fix": "Ensure the full content of 01-spec-authoring.md is provided, specifically the completion of the sync script execution sequence."
+      "dim": "D2",
+      "title": "Circular/Self-Referential Acceptance Criteria",
+      "why": "AC-01 through AC-05 in \u00a797 define the 'structural floor' for the module itself, but the module's purpose is to consolidate 35 other files. There are no GWT criteria for the actual content/logic of the 35 guidelines.",
+      "fix": "Add a 'Content Integrity' AC requiring each rollup file to match its source module's normative tables/regex/schemas byte-for-byte."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Incomplete Example for Sync Scripts",
-      "why": "The 'Mandatory Execution Order' section starts a bash/node command list but terminates at 'python3 linter-scripts/c', preventing the AI from knowing the full command.",
-      "fix": "Provide the complete command string and a sample output for the synchronization workflow."
+      "title": "Missing Worked Examples for Consolidated Format",
+      "why": "While the module contains many files, the provided context (Overview/AC/Changelog) lacks a sample of how a source spec is actually 'condensed' into a rollup file.",
+      "fix": "Add a 'Worked Example' section to \u00a797 showing a 3-paragraph source spec mapped to a 1-paragraph consolidated summary."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "Aspirational Folder References",
+      "why": "The File Inventory (e.g., 08-docs-viewer-ui.md) references source modules like '08-docs-viewer-ui/' which are noted as aspirational/not yet existing, potentially confusing a blind AI.",
+      "fix": "Mark aspirational rows in the \u00a700 inventory table with a [STUB] prefix and a note that the source folder is not yet materialised."
     }
   ],
   "module": "17-consolidated-guidelines",
-  "files_used": 5,
-  "files_total": 38,
+  "files_used": 4,
+  "files_total": 39,
   "bytes_used": 90000,
-  "bundle_sha": "d648db887ebe5af6",
-  "total_v6": 78,
+  "bundle_sha": "ff4fab1c3572913b",
+  "total_v6": 76,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -43,7 +42,7 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 78.3,
+  "weighted_total": 77.7,
   "total_v7": 78,
   "total": 78,
   "band": "GOOD",

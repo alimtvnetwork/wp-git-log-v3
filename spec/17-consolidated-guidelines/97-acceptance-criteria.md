@@ -1,7 +1,7 @@
 # Acceptance Criteria — Consolidated Guidelines
 
-**Version:** 2.4.0
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 2: added `**Verifies:**` clauses to AC-01..AC-08 to graduate this module from Medium → High AI-confidence per the four-gate rubric (gap closes from 8 → 0).)
+**Version:** 2.5.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu7: added **AC-11** Subfolder Delegation Map with `[STUB]` markers binding all 35 `NN-*.md` rollup files to their canonical source modules + aspirational/audit-corpus classification — closes audit-v7 HIGH D2 `Circular/Self-Referential Acceptance Criteria` + LOW D5 `Aspirational Folder References`; added **AC-12** Worked Example surfacing a source→consolidated mapping for `03-error-management.md` — closes MEDIUM D4 `Missing Worked Examples for Consolidated Format`. Fixed typo on line 104 (`07-design-system.md`r-` → newline). AC count 10 → 12.)
 **Scope:** `spec/17-consolidated-guidelines/`
 
 ---
@@ -101,7 +101,8 @@ The following files in this module also constitute acceptance surface — each m
 - `04-enum-standards.md`
 - `05-split-db-architecture.md`
 - `06-seedable-config.md`
-- `07-design-system.md`r- `08-docs-viewer-ui.md`
+- `07-design-system.md`
+- `08-docs-viewer-ui.md`
 - `09-code-block-system.md`
 - `10-powershell-integration.md`
 - `11-research.md`
@@ -125,6 +126,104 @@ The following files in this module also constitute acceptance surface — each m
 - `29-blind-ai-audit-v3.md`
 - `30-readme-improvement-suggestions.md`
 - `31-full-tree-ai-audit-v4.md`
+
+---
+
+### AC-11: Subfolder Delegation Map (rollup-source binding with `[STUB]` markers)  `[high]`
+
+- **Given** the 35 `NN-*.md` consolidated rollup files in `spec/17-consolidated-guidelines/` (each declared `kind: consolidated-guide` per AC-10),
+- **When** any LLM auditor or fresh implementer needs to know (a) which source module a rollup condenses, (b) whether the cited source folder physically exists on disk today, and (c) which canonical AC-family / contract holds the normative truth,
+- **Then** the rollup-source binding MUST be discoverable from this §97 alone via the **Subfolder Delegation Map** below — no auditor SHALL need to open `spec/17-consolidated-guidelines/00-overview.md` or any rollup file to disambiguate aspirational refs from live refs from audit-corpus snapshots.
+
+**Subfolder Delegation Map (normative — closes audit-v7 HIGH D2 + LOW D5):**
+
+| Rollup file | Source module | Status | Governing AC-family / contract |
+|---|---|---|---|
+| `01-spec-authoring.md` | `spec/01-spec-authoring-guide/` | live | AC-SAG-* in source §97 |
+| `02-coding-guidelines.md` | `spec/02-coding-guidelines/` | live | AC-CG-* in source §97 |
+| `03-error-management.md` | `spec/03-error-management/` | live | AC-EM-* in source §97 |
+| `04-enum-standards.md` | `spec/02-coding-guidelines/04-enum-standards/` | live | AC-CG-15..18 (enum subset) |
+| `05-split-db-architecture.md` | `spec/05-split-db-architecture/` | live | AC-SD-* in source §97 |
+| `06-seedable-config.md` | `spec/06-seedable-config-architecture/` | live | AC-SC-* in source §97 |
+| `07-design-system.md` | `spec/07-design-system/` | live | AC-DS-* in source §97 |
+| `08-docs-viewer-ui.md` | `spec/08-docs-viewer-ui/` | **`[STUB]` aspirational** | none (Phase F1 `[doc-only]`) |
+| `09-code-block-system.md` | `spec/09-code-block-system/` | **`[STUB]` aspirational** | none (Phase F1 `[doc-only]`) |
+| `10-powershell-integration.md` | `spec/11-powershell-integration/` | live | AC-PS-* + AC-09 (pipeline contract) |
+| `11-research.md` | `spec/10-research/` | live | AC-RES-* in source §97 |
+| `12-root-research.md` | `spec/10-research/` (root-level subset) | live | AC-RES-* (root subset) |
+| `13-app.md` | `spec/21-app/` | **`[STUB]` aspirational** | none (Phase F1 `[doc-only]`) |
+| `14-app-issues.md` | `spec/25-app-issues/` | live | AC-AI-* (esp. AC-09/10/11 module-kind pin) |
+| `15-cicd-pipeline-workflows.md` | `spec/12-cicd-pipeline-workflows/` | live | AC-CI-* + AC-10/11 (Phase A24-fu4) |
+| `16-app-design-system-and-ui.md` | `spec/24-app-design-system-and-ui/` | live | AC-ADSU-* in source §97 |
+| `17-self-update-app-update.md` | `spec/14-update/` | live | AC-UPD-* + AC-22 (Phase A24-fu5) |
+| `18-database-conventions.md` | `spec/04-database-conventions/` | live | AC-DBC-* + AC-09 (Phase P48-2 boolean storage) |
+| `19-gap-analysis.md` | (cross-cutting analysis, no single source) | live | meta-rollup (binds Phase 153 task ledger) |
+| `20-wp-plugin-conventions.md` | `spec/18-wp-plugin-how-to/` | live | AC-WP-* in source §97 |
+| `21-lovable-folder-structure.md` | (project-root convention, no spec/* source) | live | meta-rollup |
+| `22-app-database.md` | `spec/23-app-database/` | live | AC-ADB-* + AC-ADB-14 (Phase P48-3 polymorphic AppLink) |
+| `23-generic-cli.md` | `spec/13-generic-cli/` | live | AC-GCLI-* + AC-21..23 (Phase A11a §97-WINS contract) |
+| `24-folder-mapping.md` | (cross-tree mapping table) | live | meta-rollup |
+| `25-blind-ai-implementability-audit.md` | `spec/_archive/blind-audits/v1/` | **`[AUDIT-CORPUS]`** | dated snapshot (Phase 130) |
+| `26-blind-ai-audit-v2.md` | `spec/_archive/blind-audits/v2/` | **`[AUDIT-CORPUS]`** | dated snapshot |
+| `27-linter-authoring-guide.md` | `linter-scripts/` (toolchain) | live | AC-T-* in `spec/27-spec-toolchain/` §97 |
+| `28-distribution-and-runner.md` | `spec/15-distribution-and-runner/` | live | AC-DAR-* in source §97 |
+| `29-blind-ai-audit-v3.md` | `spec/_archive/blind-audits/v3/` | **`[AUDIT-CORPUS]`** | dated snapshot |
+| `30-readme-improvement-suggestions.md` | (project-root README) | live | meta-rollup |
+| `31-full-tree-ai-audit-v4.md` | full-tree audit Phase H1 | **`[AUDIT-CORPUS]`** | dated snapshot |
+| `32-phase-26-31-rollup.md` | meta-rollup of slots 25-31 audit corpora | **`[AUDIT-CORPUS]`** | dated snapshot |
+| `33-full-tree-ai-audit-v5.md` | full-tree audit (banner-superseded by v6) | **`[AUDIT-CORPUS]`** | dated snapshot |
+| `34-full-tree-ai-audit-v6.md` | full-tree audit (banner-superseded by v7) | **`[AUDIT-CORPUS]`** | dated snapshot |
+| `35-full-tree-ai-audit-v7.md` | full-tree audit Phase A20 (current LLM baseline) | **`[AUDIT-CORPUS]`** | live snapshot |
+
+**Status legend:**
+- **`live`** — source module exists on disk today; rollup is a condensed reference. Auditor MUST resolve cross-refs against the live source.
+- **`[STUB]` aspirational** — source folder does NOT exist; mnemonic is in `linter-scripts/spec-folder-refs.allowlist` `[doc-only]` bucket per Phase F1 (2026-04-28). Auditor MUST NOT flag as broken.
+- **`[AUDIT-CORPUS]`** — dated snapshot of a historical audit. Quoted findings are evidence, NOT live contract (Lesson #29 first extension; AC-AI-09/10/11 in spec/25 codified the original pattern).
+
+- **Forbidden patterns:**
+  - Adding a NEW rollup file without a corresponding row in this Map (silently grows the consolidated surface and breaks AC-02 inventory parity).
+  - Promoting an `[AUDIT-CORPUS]` snapshot to `live` without first migrating its findings into the cited source module's §97 (creates dual-source drift class — Lesson #36).
+  - Demoting a `live` rollup to `[STUB]` without a Phase F1-style `[doc-only]` allowlist entry (would break the spec-folder-refs gate).
+- **Verifies:** the rollup-source binding contract that protects auditors from misreading aspirational refs as broken refs (Phase F1 close-out) AND from misreading audit-corpus snapshots as live contract (Lesson #29 / spec/25 AC-AI-09/10/11 / spec/12 AC-09); the Map IS the discoverable surface so future LLM auditors do NOT flag HIGH D2 `Circular/Self-Referential ACs` or LOW D5 `Aspirational Folder References` (audit-v7 findings closed by this AC).
+- **Source:** this file § "Module-Specific Files" (lines 91–127, the file inventory under audit); `linter-scripts/spec-folder-refs.allowlist` `[doc-only]` bucket (Phase F1 close-out, includes `08-docs-viewer-ui`, `09-code-block-system`, `21-app`); `mem://specs/full-tree-audit-v4.md` (Phase F1 narrative); `mem://process/phase-153-lessons` § F (audit-corpus pattern, Lesson #29 + extensions).
+
+---
+
+### AC-12: Worked Example — source→consolidated mapping for `03-error-management.md`  `[medium]`
+
+- **Given** a fresh implementer or LLM auditor reading this §97 and asking "*how* does a 38 KB consolidated rollup relate to its source spec module?",
+- **When** the implementer inspects the `03-error-management.md` rollup (38191 bytes) alongside its source `spec/03-error-management/` (12+ files, ~150 KB total),
+- **Then** the implementer MUST be able to follow the mapping below to verify (a) which source-§97 ACs are condensed, (b) which source narrative is dropped vs preserved, and (c) why the rollup's own `**AI Confidence:** Production-Ready` claim applies to the rollup's own structural floor (AC-01..05 of THIS §97) and NOT to the source module's deeper contract:
+
+**Worked Example (normative — closes audit-v7 MEDIUM D4):**
+
+```
+SOURCE: spec/03-error-management/                           CONSOLIDATED: ./03-error-management.md
+├── 00-overview.md          (~8 KB, scope/purpose)         §1 Purpose             ← preserved verbatim
+├── 01-error-taxonomy.md    (~22 KB, 6 categories)         §2 Error Taxonomy      ← table only, drops worked examples
+├── 02-error-codes.md       (~18 KB, 9500..9599 ranges)    §3 Code Ranges         ← preserved verbatim (normative)
+├── 03-error-handling.md    (~28 KB, per-language)         §4 Per-Language        ← TS/Go/PHP/Rust/C# code samples preserved
+├── 04-error-recovery.md    (~14 KB, retry/backoff)        §5 Recovery Patterns   ← preserved verbatim (normative)
+├── 05-error-logging.md     (~12 KB, structured logging)   §6 Logging             ← schema preserved, transport drops
+├── 06-error-reporting.md   (~10 KB, telemetry)            (DROPPED)              ← non-normative, link to source
+├── 97-acceptance-criteria.md (AC-EM-01..AC-EM-25)         §7 Verification        ← AC-IDs cited, full GWT in source
+├── 98-changelog.md                                        (DROPPED)              ← out of rollup scope
+└── 99-consistency-report.md                               (DROPPED)              ← out of rollup scope
+```
+
+**Mapping rules (normative):**
+1. **Preserved verbatim** — sections containing normative tables, regex, code-range definitions, or wire-protocol schemas. The rollup MUST NOT paraphrase these (paraphrase = dual-source drift, Lesson #36).
+2. **Condensed (table-only / schema-only)** — narrative source sections whose worked examples can be safely dropped because the source §97 ACs cite them by line-anchor.
+3. **Dropped** — telemetry, changelogs, consistency reports — auditor MUST NOT flag their absence in the rollup; the rollup is a *reference*, not a mirror.
+4. **AC citation** — every normative claim in the rollup MUST cite an `AC-EM-NN` ID (or equivalent source AC-family) so the reader can resolve to the live source contract.
+
+**Forbidden patterns:**
+- Restating a source §97 AC's GWT in the rollup (creates dual-source drift; the rollup MUST link to the source AC by ID).
+- Adding new normative content in the rollup that does NOT exist in the source module (the rollup is at most as authoritative as its source — AC-10 module-kind pin).
+- Dropping a `[preserved verbatim]` section without first migrating its content into the cited source module.
+
+- **Verifies:** the source→consolidated mapping contract that closes audit-v7 MEDIUM D4 `Missing Worked Examples for Consolidated Format`; the example IS the worked example (meta-discoverable from §97 alone, walker-saturation safe per Lesson #45); reinforces AC-10 module-kind pin by demonstrating "rollup ≠ first-party normative source" mechanically rather than only declaratively.
+- **Source:** `./03-error-management.md` (the rollup under example); `spec/03-error-management/` (the source module); AC-10 above (rollup-not-contract module-kind pin); `mem://process/phase-153-lessons` § C Lesson #36 (link-don't-restate).
 
 ---
 
