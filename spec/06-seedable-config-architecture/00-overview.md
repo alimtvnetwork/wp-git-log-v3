@@ -192,22 +192,22 @@ This ensures configuration is always traceable, auditable, and version-aware.
       "Version": "1.1.0",
       "Description": "Retrieval-augmented generation chunk strategy.",
       "Settings": {
-        "ChunkSizeTokens":   { "Type": "int",  "Default": 512,  "AddedInVersion": "1.0.0", "Validation": { "Min": 64, "Max": 4096 } },
-        "ChunkOverlapTokens":{ "Type": "int",  "Default": 64,   "AddedInVersion": "1.0.0", "Validation": { "Min": 0,  "Max": 1024 } },
+        "ChunkSizeTokens":   { "Type": "number", "Default": 512,  "AddedInVersion": "1.0.0", "Validation": { "Min": 64, "Max": 4096 } },
+        "ChunkOverlapTokens":{ "Type": "number", "Default": 64,   "AddedInVersion": "1.0.0", "Validation": { "Min": 0,  "Max": 1024 } },
         "EmbeddingModel":    { "Type": "string", "Default": "text-embedding-3-small", "AddedInVersion": "1.1.0" }
       }
     },
     "Update": {
       "Version": "1.0.0",
       "Settings": {
-        "CheckIntervalHours":          { "Type": "int",  "Default": 12, "Validation": { "Min": 1, "Max": 168 } },
-        "BackgroundUpdateCheckEnabled":{ "Type": "bool", "Default": true }
+        "CheckIntervalHours":          { "Type": "number",  "Default": 12, "Validation": { "Min": 1, "Max": 168 } },
+        "BackgroundUpdateCheckEnabled":{ "Type": "boolean", "Default": true }
       }
     },
     "Storage": {
       "Version": "1.0.0",
       "Settings": {
-        "Backend": { "Type": "string", "Default": "sqlite", "Validation": { "Enum": ["sqlite", "json"] } }
+        "Backend": { "Type": "select", "Default": "sqlite", "Validation": { "Enum": ["sqlite", "json"] } }
       }
     }
   }
