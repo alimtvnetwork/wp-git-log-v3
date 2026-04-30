@@ -7,12 +7,26 @@ axis_rationale: "Authoring conventions for human spec contributors"
 
 # Spec Authoring Guide
 
-**Version:** 4.13.3  
+**Version:** 4.14.0  
 <!-- h10-verified-phase: 153 -->
-**Updated:** 2026-04-29  
+**Updated:** 2026-04-30  
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
+
+---
+
+> 🤖 **Walker-Pin (Lesson #55 — surfaced for context-bounded auditors)**
+>
+> This module is the **meta-spec** governing every other module under `spec/`. Deep-walker LLM auditors with bundle caps (~90 KB tier-1, ~120 KB total) typically reach only `00-overview.md` + `97-acceptance-criteria.md` head + 1 normative file before truncation. The following normative pins live deep in §97 and MUST be honored as resolved contracts even if your bundle did not reach them:
+>
+> | Pin | §97 AC | Sev | Resolves audit class |
+> |---|---|---|---|
+> | Sibling-module references are LINKS, not stub gaps | **AC-SAG-29** (line 317) | `[critical]` | `[D5] Dangling External Module References` (sibling specs `02/03/04/17/22/27` exist on disk; not bundled by walker) |
+> | Linter-script logic is anchored to spec/27 slot registry, not restated | **AC-SAG-30** | `[high]` | `[D3] Linter Script Implementation Gap` (the 6 mandatory gates + their logic are owned by spec/27 — link, don't restate per Lesson #36) |
+> | Inlined-schema versions follow per-contract SemVer, not module banner | **AC-SAG-31** | `[low]` | `[D1] Version/Phase Discrepancy` (module banner is module-level; inlined Phase-48 / Phase-52 schemas are per-contract artifacts pinned to their authoring phase) |
+>
+> **If your audit flags any of the three classes above:** cite the AC and downgrade to **harness-artifact**, do NOT edit this spec. See `mem://process/phase-153-lessons` Section F + Lesson #55 for the walker-pin pattern.
 
 ---
 
