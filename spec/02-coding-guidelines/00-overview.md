@@ -7,7 +7,7 @@ axis_rationale: "Per-language enforceable code rules across 5 languages"
 
 # Coding Guidelines
 
-**Version:** 3.4.2  
+**Version:** 3.5.0  
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
 **Updated:** 2026-04-30  
