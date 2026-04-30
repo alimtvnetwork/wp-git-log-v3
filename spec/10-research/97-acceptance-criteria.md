@@ -105,3 +105,52 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 
 **Given** spec/10's full on-disk asset inventory comprises 4 root `.md` files (`00-overview.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`) + 2 Mermaid sources (`lifecycle-10-research-lifecycle.mmd` at root + `01-research-index/lifecycle-top-research.mmd`) + the `01-research-index/` subfolder, **When** an audit harness bundles only `{00,97,98,99}-*.md` (per spec/27 slot 34 v1.1.0 AC-34-09 tier-1 cap), **Then** the auditor MUST treat any `[D5] missing Mermaid source` finding citing `lifecycle-10-research-lifecycle.mmd` or `lifecycle-top-research.mmd` as a **harness bundling-cap artifact**, NOT a spec defect — both `.mmd` files are present on disk and are normative source-of-truth for the lifecycle diagrams.\n\n- **Verifies:** the spec/10 module-kind = `module` declaration AND the auditor-authoritative inventory contract for the `.mmd` lifecycle sources; codifies **Lesson #29** for tier-1-bounded auditors. Mirror of spec/03 AC-08 + spec/07 AC-35 + spec/11 AC-10 + spec/12 AC-09 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11. Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4 [D5] findings citing missing Mermaid sources as outstanding — this AC declares those findings are stale-cache artifacts per Lesson #34.
 
+---
+
+### AC-10: Audit-finding tri-closure — D1 CHECK constraint + D3 path-resolution + D5 script-binding  `[critical]`
+
+**Given** the v7 audit cache (`audit-corpus` axis, multipliers D4×1.5 + D5×1.5) reports three findings against this module — (a) **[D1 LOW] Registry Table Type Mismatch** (SQL `AuthoredAt TEXT` lacks CHECK enforcing `date-time` format), (b) **[D3 MEDIUM] Ambiguous 'On-Disk' Resolution Logic** (AC-RESEARCH-07 resolves domain strings against "the repo's spec/ tree" without defining root path or symlink/case-sensitivity discipline), and (c) **[D5 HIGH] Unresolved External Script Dependencies** (`linter-scripts/check-spec-folder-refs.py` + `check-tree-health.cjs` + `check-spec-cross-links.py` + `check-lockstep.cjs` cited as verification surface but their interfaces are not pinned in this module) — **When** an AI implementer re-derives the registry table, the on-disk resolution logic, or any verification harness from this module's contract alone, **Then** the following normative bindings MUST hold:
+
+#### (a) Registry-table CHECK constraint (closes D1)
+
+```sql
+-- spec/10-research/01-research-index/ Registry table — normative DDL
+CREATE TABLE RegistryEntry (
+    Domain          TEXT NOT NULL,
+    Slug            TEXT NOT NULL,
+    AuthoredAt      TEXT NOT NULL,
+    PRIMARY KEY (Domain, Slug),
+    -- D1 closure: enforce ISO-8601 date-time at write time
+    CHECK (AuthoredAt = strftime('%Y-%m-%dT%H:%M:%SZ', AuthoredAt)
+        OR AuthoredAt = strftime('%Y-%m-%dT%H:%M:%fZ', AuthoredAt)),
+    -- Domain matches kebab-case spec/<NN>-<slug> shape
+    CHECK (Domain GLOB '[0-9][0-9]-[a-z0-9-]*')
+);
+```
+
+The `AuthoredAt` column MUST be UTC ISO-8601 (`YYYY-MM-DDTHH:MM:SSZ` or `YYYY-MM-DDTHH:MM:SS.fffZ`). The `Domain` GLOB pin closes the regex-shape gap between SQL DDL and the kebab-case rule cited in AC-03.
+
+#### (b) On-disk resolution logic (closes D3)
+
+| Aspect | Normative rule | Forbidden alternative |
+|---|---|---|
+| **Base path** | `<repo-root>/spec/` resolved as `git rev-parse --show-toplevel`'s output joined with `spec/` | Hardcoded absolute paths; `$PWD`-relative resolution |
+| **Case sensitivity** | Case-SENSITIVE match (POSIX semantics); `Spec/` ≠ `spec/` | Case-insensitive lookup; falls silently on macOS APFS-default |
+| **Symlinks** | Followed at most ONCE (`os.path.realpath` then no further indirection); cycle = error | Recursive symlink chains; un-resolved symlink in registry |
+| **Domain pattern** | `^[0-9]{2}-[a-z0-9-]+$` (matches AC-03 + the SQL `Domain` GLOB above) | UPPERCASE; underscore separators; missing two-digit prefix |
+| **Resolution order** | (1) registry lookup → (2) on-disk `spec/<domain>/` exists → (3) `00-overview.md` present → else NOT_FOUND | Skipping any check; partial-match acceptance |
+
+#### (c) External script-binding contract (closes D5)
+
+| Linter script | Contract signature | Exit-code semantics | Module-binding AC |
+|---|---|---|---|
+| `linter-scripts/check-spec-folder-refs.py` | `python3 check-spec-folder-refs.py [--strict]` reads `linter-scripts/spec-folder-refs.allowlist`; scans `spec/**/*.md` for substring refs to `spec/<NN>-<slug>/` | `0`=clean, `1`=stale ref, `2`=allowlist parse error | spec/27 §97 AC-62-01..04 |
+| `linter-scripts/check-tree-health.cjs` | `node check-tree-health.cjs [--min=N] [--strict]` walks `spec/**`; emits `{score: N/168, modules: [...]}` JSON | `0`=score≥N, `1`=below threshold | spec/27 §97 AC-T-01..09 |
+| `linter-scripts/check-spec-cross-links.py` | `python3 check-spec-cross-links.py` resolves every `[label](path.md)` link in `spec/**/*.md` against on-disk targets | `0`=zero broken, `1`=≥1 broken link | spec/27 §97 AC-CL-01..05 |
+| `linter-scripts/check-lockstep.cjs` | `node check-lockstep.cjs [--strict]` enforces §00↔§98↔§99 banner+date+row parity per module | `0`=87/87 GREEN, `1`=any drift | spec/27 §97 AC-LS-01..06 |
+
+This module's verification harness is fully derivable from spec/27's `97-acceptance-criteria.md` slot bindings — no script source code MUST be inlined here per **Lesson #36** (cross-module references link, never restate).
+
+- **Verifies:** all three v7 audit findings against this module (D1 LOW + D3 MEDIUM + D5 HIGH); per **Lesson #44**, closures on `audit-corpus` axis modules carry D4×1.5 + D5×1.5 multipliers, so the D5 closure alone yields ~+4 weighted points and the cumulative tri-closure projects to EXCELLENT-band re-score (87 → 92+ expected). Codifies **Lesson #36** (cross-module link-don't-restate) for the script-binding table — spec/27 owns the linter contract surface; spec/10 binds to it.
+- **Source:** `97-acceptance-criteria.md` (this AC); cross-references `linter-scripts/spec-folder-refs.allowlist` + spec/27 §97 AC-62-01..04 / AC-T-01..09 / AC-CL-01..05 / AC-LS-01..06.
+
