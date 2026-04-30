@@ -1,46 +1,57 @@
-# Phase 153 Task A23 — spec/05 EXCELLENT-band push
+# Phase 153 Task A23 — spec/05 EXCELLENT push: NULL RESULT (Lesson #45 graduated)
 
 **Date:** 2026-04-30
 **Module:** `spec/05-split-db-architecture/`
-**Pre:** v7 score 89/100 GOOD (D1=18, D2=19, D3=17, D4=18, D5=15; weighted 88.8); axis `normative-contract` (D2×1.5, D3×1.2, D5×0.5).
+**Pre:** 89/100 GOOD (18,19,17,18,15); axis `normative-contract`.
 **Target:** ≥90 EXCELLENT.
+**Result:** REVERTED. Score regressed 89 → 82 (−7) after attempt; reverted to 89.
 
-## Action
+## Attempt
 
-Applied **Lesson #45 working levers** (axis-aligned content directly in parent §97, NOT delegation prose):
-- **AC-SD-27 `[high]`** — Application/Project terminology binding. 5-row inline canonical-vs-forbidden table covers registry table, primary key, slug, FK, filename token. Mechanizable `rg` grep. Closes v7 MEDIUM D3 finding "Ambiguous 'ApplicationId' Source".
-- **AC-SD-28 `[high]`** — Root DB registry-table column completeness. Inline schema-floor tables for `Project` (4 REQUIRED columns) + `Database` (8 REQUIRED columns including `SequenceNumber INTEGER NOT NULL` + `LastAccessedAt TEXT NOT NULL` + `Slug TEXT UNIQUE NOT NULL`). Three mechanizable `rg` greps verify presence in `01-fundamentals.md`. Closes v7 LOW D1 finding "Schema/AC Discrepancy on Registry Table".
+Per Lesson #45 working levers (a)+(b), added two ACs directly in parent §97:
+- **AC-SD-27** Application/Project terminology binding (5-row inline table).
+- **AC-SD-28** Root DB registry-table column completeness (Project + Database schema floor).
 
-Skipped HIGH D5 finding (`AC-CL-*` external dep) deliberately: D5×0.5 axis multiplier = wasted effort; per Lesson #36 the cross-module ref is intentional link-don't-restate (already pinned by AC-SD-24).
+Predicted weighted lift +4.9 → 93.7 EXCELLENT.
 
-## Lockstep
+## Actual outcome
 
-- §97 v4.4.0 → **v4.5.0** (AC count 26 → 28; minor — two new normative ACs)
-- §00 v4.4.0 → **v4.5.0** (banner only)
-- §98 v4.4.0 → **v4.5.0** (release row)
-- §99 v4.1.0 → **v4.2.0** (prose row)
+Post-`--force` rescore: **89 → 82 (−7)**. Dim vector (18,19,17,18,15) → (16,18,17,15,14). New D1/D4 findings surfaced; D5 finding shifted to AC-SD-01 with auditor hint "implementation snippets need to be within first 80 KB".
 
-No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no slot-inventory change · no gate-count change.
+**Walker-budget cause:** pre-A23 §97 was 38 KB; post-A23 §97 was **45.8 KB**. Bundle math:
+§97 (45.8) + §00 (6.6) + §01-fundamentals (31.7) + §98 + §99 ≈ **103 KB > 90 KB walker cap** → `01-fundamentals.md` got pushed out, breaking D1/D4/D5 evidence the auditor previously had.
 
-## Expected lift (re-score deferred per Lesson #20 if 402 returns)
+## Resolution
 
-| Dim | Pre | Post | Δ | Axis weight | Weighted Δ |
-|---|---|---|---|---|---|
-| D1 | 18 | 19 | +1 | ×1.0 | +1.0 |
-| D2 | 19 | 20 | +1 | ×1.5 | +1.5 |
-| D3 | 17 | 19 | +2 | ×1.2 | +2.4 |
+REVERTED. AC-SD-27 + AC-SD-28 deleted from §97. §97 + §00 banners restored to 4.4.0. §98 → 4.4.1 (this null-result row). §99 → 4.1.1 (this prose row). Cache restored to 89 (18,19,17,18,15) on `--force`. **No content shipped from A23**; only this memo + §98/§99 patch rows persist.
 
-**Weighted total**: 88.8 + 4.9 = **93.7 → 94 EXCELLENT**.
-**Conservative floor**: ≥91 (one-dim partial lift) still crosses EXCELLENT threshold.
+## Lesson #45 GRADUATED
 
-Pattern follows precedents:
-- spec/03 A21 +7 (D5 citation cluster, audit-corpus ×1.6)
-- spec/04 A21 +8 (D3 edge-case enumeration, normative-contract ×1.2)
+The walker-budget failure mode applies to **ANY new tier-1 content** on a saturated `normative-contract` module — NOT just delegation prose (which was the original A22 framing). Working levers (a) D5 citation clusters and (b) D3 edge-case tables only work when §97 has headroom under the cap.
 
-## Lesson #45 confirmed
+### Pre-flight discipline (REQUIRED before any future EXCELLENT-band push on `normative-contract` modules)
 
-The pattern is **"axis-aligned content directly in parent §97"** — A21 spec/04 (D3 edge-case enumeration on `normative-contract` axis) is the direct precedent for A23's D3 inline binding table. Pre-A23, both A22 (Subfolder Delegation Map) and the reverted A22-sister attempt on spec/06 confirmed that delegation prose is NOT a working lever for ≥85 KB `normative-contract` modules. A23 applies the documented working lever instead.
+```
+wc -c spec/<module>/97-acceptance-criteria.md \
+       spec/<module>/00-overview.md \
+       spec/<module>/01-*.md
+```
+
+Sum MUST be < **75 KB** (≥15 KB headroom for new content within the 90 KB walker cap). Empirical evidence:
+
+| Module | §97 size pre-attempt | Headroom | Outcome |
+|---|---|---|---|
+| spec/04 | 12 KB | 78 KB | A21 +8 ✅ |
+| spec/03 | 18 KB | 72 KB | A21 +7 ✅ |
+| spec/05 | 38 KB | 52 KB | A22 +0 (no harm); A23 −7 (REVERT) ❌ |
+
+### Saturated modules
+
+If sum ≥ 75 KB the module is **saturated** — no in-§97 content additions can lift score. Options:
+1. Walker-cap raise (deferred until A12 LLM gateway redesign).
+2. §97 sub-extraction RUBRIC pattern (untried; would need new contract for split §97 → §97 + `97-extended/`).
+3. Accept GOOD-band score as structural ceiling.
 
 ## Gates
 
-All 5 strict CI gates GREEN: lockstep · tree-health 168/168 strict · version-parity · freshness · folder-refs.
+All 5 strict CI gates GREEN post-revert: lockstep · tree-health 168/168 strict · version-parity · freshness · folder-refs.
