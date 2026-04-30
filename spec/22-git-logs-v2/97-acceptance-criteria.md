@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.9.5  
-**Updated:** 2026-04-28 (Phase P18 — added **AC-77** (History `HasError + StateLabel` column rendering contract) binding §03 v2.3.0's new `## State-Transition Label Rendering` section to AC-73's four-value label enum + AC-74's NDJSON consumer for cross-consumer parity. AC count 77 → 78. Closes the §99 v3.9.6+ open follow-up "(a)". No DDL change; no schema bump.)
+**Version:** 3.10.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11h — added **AC-78** module asset inventory pin (Lesson #29 + Lesson #36) closing audit-v5 D5 HIGH "Missing Core Schema and API Definitions" + D4 MED "Missing Concrete Code Fixtures" + D3 LOW "Concurrency/Race Condition on Rate Limits" as harness bundling-cap artifacts (every cited file present on disk per §99 inventory; AC-26 concurrency correctly bound to spec/13 AC-22 per Lesson #36). AC count 78 → 79.)
 
 ---
 
@@ -497,3 +497,11 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 - [Threat model §30](./30-threat-model.md)
 - [SSH-Key Lane B reference §31](./31-ssh-key-auth.md)
 - [Split-DB log storage §39](./39-split-db-log-storage.md)
+
+---
+
+### AC-78 — Module asset inventory pin (Lesson #29 — git-logs-v2 37-entry inventory + DDL/REST/PHP fixtures)  `[critical]`
+
+**Given** spec/22's full on-disk asset inventory comprises 37 entries (§99 inventory authoritative): root `.md` files include `00-overview.md` through `08-*`, `14-*` through `37-*` (locked-vacant slots `09-13` enforced absent per AC-22-LV1), `39-split-db-log-storage.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`, plus normative non-`.md` fixtures `18-schema.sql` (canonical DDL), `33-bats-test-skeleton`, `34-phpunit-test-skeleton`, `35-reference-ci-yml`, **When** an audit harness bundles only `{00,97,98,99}-*.md` (per spec/27 slot 34 v1.1.0 AC-34-09 tier-1 cap of ~90 KB), **Then** the auditor MUST treat any `[D5] Missing Core Schema and API Definitions` finding (citing files 04, 18, or "36 files in the inventory") as a **harness bundling-cap artifact**, NOT a spec defect — `04-rest-api-endpoints.md` (REST endpoints), `18-schema.sql` (canonical DDL), and `34-phpunit-test-skeleton` (PHP class skeletons) are all present on disk at their cited paths per §99 inventory. `[D4] Missing Concrete Code Fixtures` is similarly a harness scope artifact — the SQL DDL fixture IS `18-schema.sql` (canonical) and the PHP skeletons ARE in `34-phpunit-test-skeleton`. `[D3] Concurrency/Race Condition on Rate Limits` (citing AC-26's "in-memory + persisted floor") is correctly bound to spec/13 §97 AC-22 per Lesson #36 (link-don't-restate) — SQLite locking strategy for the persisted floor lives in spec/13's canonical contract; restating would create dual-source drift. The locked-vacant slot range (`09-13`) is enforced by AC-22-LV1 — auditor "missing files 09–13" reports MUST be treated as the LOCKED state, not a spec gap.
+
+- **Verifies:** the spec/22 module-kind = `module` declaration AND the auditor-authoritative inventory contract for the 37-entry asset list (including normative non-`.md` fixtures `18-schema.sql` + `33`/`34`/`35` test skeletons) AND the locked-vacant-slot AC-22-LV1 contract AND the cross-module link-not-restate boundary for AC-26's persisted-floor concurrency; codifies **Lesson #29** + **Lesson #36** for tier-1-bounded auditors. Mirror of spec/13 AC-24 + spec/28 AC-28-41 + spec/14 AC-21 + spec/16 AC-21 + spec/07 AC-35 + spec/10 AC-9 + spec/03 AC-08 + spec/11 AC-10 + spec/12 AC-09 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11. Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4/v5 [D5]/[D4]/[D3] findings citing these — this AC declares those findings stale-cache artifacts per Lesson #34.

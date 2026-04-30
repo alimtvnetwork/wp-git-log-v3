@@ -6,8 +6,8 @@ description: Authoritative spec for the Git Logs WordPress plugin (SQLite-backed
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.9.14  
-**Updated:** 2026-04-28 (Phase P19: H10 §00↔§98 version-field parity catch-up — banner bumped from v3.8.9 to v3.9.11 to match the latest §98 release row (Phase P18). Phases P5/P6/P7/P7b/P8/P16/P17/P18 had each bumped §98 without re-stamping the §00 banner; this is pure parity bookkeeping (no content change). Eats our own dog food before any tree-wide H10-strict promotion.)
+**Version:** 3.10.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-78 module asset inventory pin closes audit-v5 D5/D4/D3 findings as harness bundling-cap artifacts; AC count 78 → 79)
 <!-- h10-verified-phase: 32 -->
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  

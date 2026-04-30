@@ -1,7 +1,9 @@
 # Consistency Report — Generic Release
 
-**Version:** 2.2.1  
+**Version:** 2.3.0  
 **Generated:** 2026-04-30  
+
+> **v2.3.0 update (Phase 153 Task A11h — AC-21 module asset inventory pin + cross-module link-don't-restate pin):** Added AC-21 `[critical]` to §97 closing all 3 audit-v5 findings (D5 HIGH broken-cross-refs, D3 MED missing-concurrency-impl, D4 MED incomplete-installer-templates) as harness scope / spec-vs-impl boundary artifacts per Lesson #29 + Lesson #36. Mirror of spec/13 AC-24 + spec/28 AC-28-41 + spec/14 AC-21 + spec/22 AC-78. AC count 20 → 21. §97 v2.0.0 → v2.1.0; §00 v2.2.1 → v2.3.0 (h10 stamp 22 → 153); §98 v2.2.1 → v2.3.0. No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change.
 **Health Score:** 100/100 (A+) — Phase 21 deepening sweep
 
 > **v2.2.1 (Phase 153 — Lesson #36 cross-ref inoculation):** Added `### Local-tooling concurrency (cross-reference)` subsection under `## Concurrency` in `02-release-pipeline.md` linking local CLI shell-outs (state-DB writes + atomic asset staging) to canonical [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated; CI-job-level `concurrency: group: release-${{ github.ref }}` block untouched (orthogonal axis). Codifies Lesson #36 (link, never restate). No §97 / AC / RUBRIC / gate-count change. §00 v2.2.0 → v2.2.1; §98 v2.2.0 → v2.2.1.

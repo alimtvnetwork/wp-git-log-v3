@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.21
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch slot 7 — P1 inventory sync: added 7 missing §00 Document Inventory rows for slots 31–37 (`31-ssh-key-auth`, `32-cli-test-plan`, `33-bats-test-skeleton`, `34-phpunit-test-skeleton`, `35-reference-ci-yml`, `36-why-v1-archived`, `37-blind-ai-gap-analysis`). Files all shipped earlier (P5/audit phases) and §97/§99-tracked; only §00 inventory lagged. `check-ai-confidence.py` P1 driver eliminated for `spec/22` — last P1 drifter tree-wide. Lockstep 87/87 ✅; tree health 168/168 strict ✅. Prior: P19 — H10 §00↔§98 version-field parity catch-up (§00 v3.8.9 → v3.9.11; sibling §26 parallel; H10 advisory tree-wide 59 → 57; AC count unchanged at 78).)
+**Version:** 3.10.0
+**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-78 module asset inventory pin (Lesson #29 + Lesson #36) closes audit-v5 D5 HIGH "Missing Core Schema and API Definitions" + D4 MED "Missing Concrete Code Fixtures" + D3 LOW "Concurrency/Race Condition on Rate Limits" as harness bundling-cap artifacts — every cited file present on disk per this report's File Inventory (slots 04, 18, 34 all confirmed); AC-26 persisted-floor concurrency correctly cross-referenced to spec/13 §97 AC-22 per Lesson #36 link-don't-restate; locked-vacant slots `09-13` enforced by AC-22-LV1. Mirror of spec/13 AC-24 + spec/28 AC-28-41 + spec/14 AC-21 + spec/16 AC-21. AC count 78 → 79. §97 v3.9.5 → v3.10.0; §00 v3.9.14 → v3.10.0; §98 v3.9.14 → v3.10.0. No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no DDL change · no schema bump.)
 
 ---
 

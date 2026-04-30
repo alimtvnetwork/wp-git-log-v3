@@ -1,7 +1,13 @@
 # Changelog — Update — Overview
 
-**Version:** 2.3.1  
-**Updated:** 2026-04-30  
+**Version:** 2.4.0  
+**Updated:** 2026-04-30 (Phase 153 Task A11h — AC-21 module asset inventory pin (Lesson #29 + Lesson #36) closes audit-v5 D5/D4/D1 findings as harness bundling-cap artifacts; AC count 20 → 21)
+
+### 2.4.0 — 2026-04-30 — Phase 153 Task A11h: AC-21 module asset inventory pin
+- **Added** AC-21 `[critical]` — declares spec/14's full 36-entry on-disk inventory as auditor-authoritative; classifies audit-v5 D5 HIGH (missing files 09–27, subfolder 24), D4 MED (truncated `04-build-scripts.md`), D1 LOW (`<module>` placeholder ambiguity) as harness bundling-cap artifacts. Mirror of spec/13 AC-24 + spec/28 AC-28-41 + spec/16 AC-21 + spec/22 AC-78.
+- **Why**: per Lesson #29 (audit-corpus pin generalised at A11g memo) — every cited file is present on disk per §99 inventory; the `<module>` placeholder is intentional contract-bound at-build-time substitution (NOT an authoring error).
+- **Spec lockstep**: §97 v2.2.0 → **v2.3.0** (AC count 20 → 21); §00 v2.3.1 → **v2.4.0**; §98 v2.3.1 → **v2.4.0**; §99 v1.5.1 → **v1.6.0**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Validation**: lockstep 87/87, tree-health 168/168 strict, version-parity 74/74, freshness 81/81 (verify after run).
 **Scope:** `spec/14-update/`
 
 ---
