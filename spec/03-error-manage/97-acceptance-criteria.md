@@ -1,7 +1,7 @@
 # Acceptance Criteria — 03 Error Manage
 
-**Version:** 2.1.0  
-**Updated:** 2026-04-29  
+**Version:** 2.2.0  
+**Updated:** 2026-04-30 (Phase 153 Task A21: AC-09 elevates D5 from passive asset-inventory to active citation-density floor + dual-gate verification — closes audit-v7 HIGH D5 finding "Broken Sub-module References")
 **Scope:** `spec/03-error-manage/`  
 **Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
 
