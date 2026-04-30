@@ -1,38 +1,38 @@
 {
-  "d1": 16,
-  "d2": 18,
+  "d1": 18,
+  "d2": 19,
   "d3": 17,
-  "d4": 15,
-  "d5": 14,
+  "d4": 18,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Broken Cross-Module Reference (AC-SD-01)",
-      "why": "AC-SD-01 inherits AC-CL-* from a relative path '../02-coding-guidelines/...' which is not provided in the context, leaving the AI coder without the mandatory naming and typing rules.",
-      "fix": "Provide the content of spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md in the context or inline the critical AC-CL rules."
+      "title": "Unresolved External Dependency: Coding Guidelines",
+      "why": "AC-SD-01 and AC-SD-02 reference AC-CL-* rules in a relative path outside the provided context, which a mediocre AI cannot resolve.",
+      "fix": "Inline the critical AC-CL-09 and AC-CL-11 naming rules into AC-SD-02 or provide the file content in the prompt."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Schema Discrepancy in Fundamentals vs AC",
-      "why": "01-fundamentals.md defines 'Project' and 'Database' tables with snake_case columns (e.g., 'ProjectId', 'DisplayName', 'EntityId' are okay, but 'SizeBytes', 'RecordCount' are used while AC-SD-28 requires specific PascalCase and types like TEXT for timestamps).",
-      "fix": "Update 01-fundamentals.md SQL blocks to match the exact schema floor and PascalCase requirements defined in AC-SD-28."
+      "dim": "D3",
+      "title": "Truncated Implementation Evidence",
+      "why": "The fundamentals.md file is truncated at the 90KB cap, losing the end of the Import/Export implementation logic.",
+      "fix": "Move critical implementation logic for Import/Export into a dedicated feature file or shorten the fundamentals overview."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Truncated Implementation Examples",
-      "why": "The 01-fundamentals.md file is truncated at the 90KB cap, cutting off the 'Cache Database Pattern' and potentially other worked Go examples needed for 100% confidence.",
-      "fix": "Move critical implementation snippets into the parent 97-acceptance-criteria.md or ensure they are within the first 80KB of the module."
+      "dim": "D1",
+      "title": "Schema Discrepancy: Fundamentals vs AC",
+      "why": "The SQL in fundamentals.md uses IdxProject_Slug (snake_case index) while AC-SD-02 strictly forbids underscores in index names.",
+      "fix": "Update fundamentals.md SQL to use IxProjectSlug to match the PascalCase-only requirement in AC-SD-02."
     }
   ],
   "module": "05-split-db-architecture",
   "files_used": 5,
   "files_total": 20,
   "bytes_used": 90000,
-  "bundle_sha": "822e974cb238422b",
-  "total_v6": 80,
+  "bundle_sha": "3fdd9189928919ad",
+  "total_v6": 87,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 82.4,
-  "total_v7": 82,
-  "total": 82,
+  "weighted_total": 88.8,
+  "total_v7": 89,
+  "total": 89,
   "band": "GOOD",
   "rubric": "v7"
 }
