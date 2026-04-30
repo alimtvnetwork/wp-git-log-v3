@@ -1,7 +1,7 @@
 # Seedable Config Architecture — Acceptance Criteria
 
-**Version:** 4.0.0
-**Last Updated:** 2026-04-26 (Phase 16r: full GWT rewrite — replaced 2 stub criteria (AC-01/AC-02 with 6 sub-checkboxes total) with 20 module-specific Given/When/Then ACs covering CW Config seeding, version flow, changelog automation, merge strategy, and rollback. Old stubs preserved as AC-SC-LEGACY-001..002 at end.)
+**Version:** 4.1.0
+**Last Updated:** 2026-04-29 (Phase 153 Task A11f: added AC-SC-21 CHANGELOG concurrency lock-ordering + AC-SC-22 apperror cross-reference to spec/03; closes v5 D3 MEDIUM + D5 HIGH. AC count 20 → 22.)
 **Scope:** `spec/06-seedable-config-architecture/` — Reusable pattern for version-controlled configuration with automatic changelog updates and initial seeding (CW Config).
 
 ---
