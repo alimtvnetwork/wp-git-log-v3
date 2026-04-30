@@ -1,7 +1,7 @@
 # Install Config
 
-**Version:** 1.0.0
-**Updated:** 2026-04-19
+**Version:** 1.1.0
+**Updated:** 2026-04-29 (Phase 153 A11d: removed `--branch` from CLI override precedence; clarified JSON `branch` field is default-branch hint only.)
 
 ---
 
