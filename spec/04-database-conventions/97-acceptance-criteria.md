@@ -1,7 +1,7 @@
 # Acceptance Criteria — Database Conventions
 
-**Version:** 1.2.0  
-**Updated:** 2026-04-29 (Phase 153 P48-2: AC-09 binds the Cross-Language Boolean Storage Convention §2.1 of `02-schema-design.md` — closes P47-fu1 critical finding "04-db cross-lang boolean conventions")
+**Version:** 1.3.0  
+**Updated:** 2026-04-30 (Phase 153 Task A21: AC-10 + AC-11 bind ORM-First and View-based-joins rules from `03-orm-and-views.md` — closes audit-v7 HIGH D2 finding "Missing Acceptance Criteria for ORM and View Rules")
 **Scope:** `spec/04-database-conventions/`
 
 ---
@@ -78,6 +78,38 @@ This document defines testable acceptance criteria for the **Database Convention
 - **Then** it MUST contain (a) a per-engine storage table covering at minimum SQLite, MySQL/MariaDB, and PostgreSQL with allowed values + forbidden alternatives; (b) a per-language scan/insert pattern table covering at minimum Go, PHP, Rust, C#, and TypeScript; (c) the tri-state `NULL` exception clause; (d) the migration discipline subsection (NOT NULL default, positive-only rename rule, type-swap precondition). Adding a NEW supported language (per §02 Coding Guidelines) requires extending the §2.1.2 table in the same PR.
 - **Verifies:** the cross-language storage contract that prevents silent boolean data corruption when one consumer reads `0` as false and another reads `'0'` (string) as truthy; closes the **P47-fu1 critical finding** "04-db cross-lang boolean conventions" surfaced in `mem://index.md` line 55. Cross-references the cross-language naming rule in `spec/02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md` (storage-vs-naming axis split — naming lives in §02 Coding Guidelines, storage lives in §04 DB Conventions).
 - **Source:** `02-schema-design.md` §2.1; cross-language naming rule in `spec/02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md`.
+
+### AC-10: ORM-First rule has zero raw SQL in business/service layers  `[high]`
+- **Given** any business-logic, service, or repository file in any language listed in `03-orm-and-views.md` §1.2 (Go, PHP, TypeScript, Rust, C#)
+- **When** the file is scanned for raw SQL string literals (e.g. `"SELECT "`, `"INSERT INTO "`, `"UPDATE "`, `"DELETE FROM "`, `` `SELECT ` ``, `` `INSERT INTO ` ``, etc., case-insensitive)
+- **Then** ZERO matches MUST appear outside the four allowed surfaces enumerated in `03-orm-and-views.md` §1.1 table: (a) migration files (path matches `**/migrations/**`), (b) `CREATE VIEW` statements in view-definition files (path matches `**/views/**` or files containing only `CREATE VIEW` DDL), (c) one-off scripts under `scripts/` flagged as approved (header comment `// orm-exempt: <reason>` or `# orm-exempt: <reason>`), (d) test fixtures under `**/test/**` or `**/tests/**` constructing seed data
+- **And** the `linter-scripts/check-orm-first.sh` (or equivalent CI gate when materialised) MUST execute the following grep contract and exit non-zero on any match outside allowed surfaces:
+  ```bash
+  rg -i --type-add 'biz:*.{go,php,ts,tsx,rs,cs}' -t biz \
+     -e '"\s*(SELECT|INSERT INTO|UPDATE\s+\w+\s+SET|DELETE FROM)\s' \
+     -e '`\s*(SELECT|INSERT INTO|UPDATE\s+\w+\s+SET|DELETE FROM)\s' \
+     --glob '!**/migrations/**' --glob '!**/views/**' \
+     --glob '!**/test/**' --glob '!**/tests/**' \
+     --glob '!**/scripts/**'
+  ```
+- **Verifies:** §03-orm-and-views.md §1.1 "ORM-First Rule" + §1.3 forbidden patterns; closes audit-v7 HIGH D2 finding "Missing Acceptance Criteria for ORM and View Rules" (spec/04 cache 2026-04-30, finding [0]).
+- **Source:** `03-orm-and-views.md` §1 (ORM-First Rule), table §1.1 (allowed-surface enumeration), examples §1.3 (forbidden vs correct patterns).
+
+### AC-11: Multi-table joins use database views, not on-the-fly SQL  `[high]`
+- **Given** any business-logic, service, or repository file in any language listed in `03-orm-and-views.md` §1.2
+- **When** the file is scanned for ORM/query-builder calls that compose joins at query time (e.g. PHP `->join(`, `->leftJoin(`, `->innerJoin(`; Go GORM `.Joins(`; TS Prisma `include:` with nested relations beyond depth 1; raw SQL `JOIN` keyword in string literals already covered by AC-10)
+- **Then** ZERO matches MUST appear in business-logic surfaces — joins MUST be pre-defined as `CREATE VIEW` DDL (path matches `**/views/**` or `**/migrations/**` per §1.1) and the business layer MUST query the resulting flat view as if it were a table (single-table SELECT semantics)
+- **And** the `linter-scripts/check-no-on-the-fly-joins.sh` (or equivalent CI gate when materialised) MUST execute the following grep contract and exit non-zero on any match outside allowed surfaces:
+  ```bash
+  rg --type-add 'biz:*.{go,php,ts,tsx,rs,cs}' -t biz \
+     -e '->join\(' -e '->leftJoin\(' -e '->innerJoin\(' -e '->rightJoin\(' \
+     -e '\.Joins\(' -e '\.JoinAndSelect\(' \
+     --glob '!**/migrations/**' --glob '!**/views/**' \
+     --glob '!**/test/**' --glob '!**/tests/**'
+  ```
+- **And** EXCEPTIONS are limited to two cases: (a) ORM eager-loading of a single direct foreign-key relation (depth-1 includes — e.g. `Transaction.with('plugin')` loading the parent Plugin; depth-2+ MUST become a view); (b) admin-only debugging tools under `**/admin/**` paths flagged with header comment `// joins-exempt: <reason>`.
+- **Verifies:** §03-orm-and-views.md §2 "Database Views for Joins" + §1.1 forbidden cell "Complex joins MUST be pre-defined as database views"; closes audit-v7 HIGH D2 finding "Missing Acceptance Criteria for ORM and View Rules" (spec/04 cache 2026-04-30, finding [0]) — companion AC to AC-10.
+- **Source:** `03-orm-and-views.md` §1.1 (allowed-surface table) + §2 (View-based join discipline).
 
 
 ---

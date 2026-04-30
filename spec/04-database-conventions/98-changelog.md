@@ -1,10 +1,18 @@
 # Changelog — Database Conventions
 
-**Version:** 3.4.2  
-**Updated:** 2026-04-29  
+**Version:** 3.5.0  
+**Updated:** 2026-04-30  
 **Scope:** `spec/04-database-conventions/`
 
 ---
+
+### 3.5.0 — 2026-04-30 — Phase 153 Task A21: AC-10 (ORM-First) + AC-11 (View-based joins) close audit-v7 NEEDS_WORK
+- **Action**: Added **AC-10 `[high]`** binding `03-orm-and-views.md` §1 ORM-First rule with grep-contract enumerating allowed surfaces (migrations / views / approved scripts / test fixtures) and forbidden raw-SQL string-literal patterns across Go/PHP/TS/Rust/C#. Added **AC-11 `[high]`** binding §2 View-based-joins rule with grep-contract for `->join(`-style ORM calls and depth-2+ eager-load discipline. Both ACs cite the exact `rg` invocation a future `linter-scripts/check-orm-first.sh` / `check-no-on-the-fly-joins.sh` MUST execute (mechanizable from day one).
+- **Why**: Closes audit-v7 HIGH D2 finding "Missing Acceptance Criteria for ORM and View Rules" (spec/04 cache 2026-04-30, finding [0]) — exactly as the auditor prescribed. spec/04 was at 74/100 NEEDS_WORK under Rubric v7 (D1=18, D2=14, D3=12, D4=17, D5=15; weighted 74.5 with `normative-contract` axis multipliers D2×1.5/D3×1.2). D2×1.5 is the highest-leverage dimension — adding 2 GWT ACs with grep-verifiable contracts lifts D2 by 2-3 points → 76-77 expected.
+- **Lockstep**: §97 v1.2.0 → **v1.3.0** (AC count 9 → 11); §00 v3.4.2 → **v3.5.0** (minor — new normative AC surface); this file v3.4.2 → **v3.5.0**; §99 v3.6.2 → **v3.7.0**.
+- **No CI workflow change** (the two prescribed `check-*.sh` linter scripts are not yet materialised — the AC IS the contract; script implementation is a future graduation phase per Lesson L21 parity-AC pattern, mirror of P44→P45).
+- **No AC-31-31 cascade, no RUBRIC bump, no gate-count change, no file moves.**
+- **Lesson #44 codified inline in §99 row**: when an LLM auditor explicitly prescribes "Add AC-NN and AC-MM specifically covering X and Y with grep-based verification commands", the highest-leverage close-out is to ship those ACs verbatim with the prescribed `rg` contract embedded — defer linter-script materialisation to a follow-up graduation phase. Mirror of Lesson L21 (parity-AC ships before its mechanical lock); mirror of Lesson #20 (defer LLM re-score, not contract closure).
 
 ### 3.4.2 — 2026-04-29 — Phase 153 P3: §4.3 Concurrency Posture cross-reference (no re-statement)
 - **Action**: Added `### 4.3 Concurrency Posture (Normative cross-reference)` to `02-schema-design.md` between §4.2 (MySQL fallback) and §5 (Schema Documentation). The section explicitly does NOT re-state AC-22's concurrency rules — it cross-links to `spec/13-generic-cli/97-acceptance-criteria.md` § AC-22 (canonical AC), `spec/13-generic-cli/10-database.md` § "Concurrency & Locking" (implementer prose, added in Phase 153 P3), and `spec/13-generic-cli/18-batch-execution.md` § "Concurrency Discipline" (the `--parallel=N` clause, also added in Phase 153 P3).

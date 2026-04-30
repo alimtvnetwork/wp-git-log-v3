@@ -7,9 +7,9 @@ axis_rationale: "Catalogues error patterns observed across modules"
 
 # Error Management Specification
 
-**Version:** 3.4.1  
+**Version:** 3.4.2  
 <!-- h10-verified-phase: 153 -->
-**Updated:** 2026-04-29  
+**Updated:** 2026-04-30  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 

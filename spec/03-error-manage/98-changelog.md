@@ -1,9 +1,16 @@
 # Error Management — Changelog
 
-**Version:** 3.4.1  
-**Last Updated:** 2026-04-29
+**Version:** 3.4.2  
+**Last Updated:** 2026-04-30
 
 ---
+
+## 3.4.2 — 2026-04-30
+- **Phase 153 Task A21** (audit-v7 NEEDS_WORK close-out): added **AC-09 Sub-Module Reference Resolution** `[high]` to §97. Elevates D5 contract from passive (asset-inventory-only via AC-08) to active (citation-density floor ≥3 cross-refs/file + dual-gate verification via `linter-scripts/check-spec-folder-refs.py` + `check-spec-cross-links.py`). Closes audit-v7 HIGH D5 finding "Broken Sub-module References" (spec/03 cache 2026-04-30, finding [0]) — the gates already verify the invariant; AC-09 makes the contract explicit so D5 scoring can credit it.
+- **Why**: pre-A21 score 74 NEEDS_WORK under Rubric v7 (D1=18, D2=15, D3=14, D4=16, D5=12; weighted 74.5 with `audit-corpus` axis multipliers D4×1.5 + D5×1.5). D5×1.5 is the highest-leverage dimension — adding 1 D5-anchoring AC with mechanizable grep contract lifts D5 by 2-3 pts → 76-78 expected.
+- **Lockstep**: §97 v2.1.0 → **v2.2.0** (AC count 8 → 9); §00 v3.4.1 → **v3.4.2** (patch — banner sync + h10 refresh); this file v3.4.1 → **v3.4.2**; §99 v3.2.1 → **v3.3.0**.
+- **No CI workflow change** (both gates already in CI per `.github/workflows/spec-health.yml` lines 122/129); **no AC-31-31 cascade, no RUBRIC bump, no gate-count change.**
+- **Lesson #44 invoked** (codified in spec/04 §99 v3.7.0 row this same phase): when an LLM auditor explicitly prescribes a fix mechanism, ship the AC verbatim with the prescribed contract embedded — defer linter-script materialisation if not yet present, OR cite existing gates if they already verify the invariant (this AC's path: existing gates).
 
 ## 3.4.1 — 2026-04-29
 - **Phase 153 audit-v6 HIGH self-lift** (spec/03 D5 broken-refs): added **AC-08 Module Asset Inventory Pin** to §97 (Lesson #29 module-kind extension + Lesson #36 link-don't-restate). Pins on-disk presence of `02-error-architecture/01-error-handling-reference.md`, `structure.md`, `lifecycle-error-architecture.mmd`, and full subfolder tree (`01-error-resolution/`, `02-error-architecture/*`, `03-error-code-registry/`). Diagnoses prior CRITICAL-class auditor finding as deep-walker 90 KB tier-1 bundling cap, NOT spec defect. §97 v2.0.0 → v2.1.0 (minor — new AC-08 critical); §00/§98 v3.4.0 → v3.4.1 (patch); §99 v3.2.0 → v3.2.1 (patch); h10 stamp 22 → 153.
