@@ -1,7 +1,7 @@
 # Acceptance Criteria — Update — Overview
 
-**Version:** 2.3.0  
-**Updated:** 2026-04-30 (Phase 153 Task A11h — added AC-21 module asset inventory pin (Lesson #29 + Lesson #36) closing audit-v5 D5 HIGH "Missing Sub-Module Context" + D4 MED "Truncated Build Script Logic" + D1 LOW "Ambiguous <module> Placeholder" as harness bundling-cap artifacts. AC count 20 → 21.)
+**Version:** 2.4.0  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu5 — added AC-22 binding `<module>` ldflags placeholder to consuming repo's `go.mod` module path; resolves audit-v7 D3 MEDIUM "Ambiguous <module> Placeholder" via use-site prose in `04-build-scripts.md` (Lesson #36 link-don't-restate). AC count 21 → 22.)
 **Scope:** `spec/14-update/`
 
 > **v2.2.0 (Phase 149 — P3 sweep slot 9):** Added `**Verifies:**` clauses to all 20 ACs (AC-01..AC-20). Each criterion now explicitly maps to the underlying invariant it protects (structural floor, slot-immutability, cross-platform deploy uniformity, parent-survival, build-time version-injection, supply-chain trust, integrity, idempotent install, latest-probe-or-fail, XDG/atomic-write, ordered-pipeline-with-fail-fast, no-daemon, idempotent silent-cleanup-budget, single-step atomic rollback, three-layer precedence + system-dir blacklist, tag-first monotonicity, six-target-floor + CGO_ENABLED=0). Verifies-coverage gap: 0/20 → 20/20. Drives AI-confidence Medium → High.
