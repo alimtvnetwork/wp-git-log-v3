@@ -1,12 +1,12 @@
 # Consistency Report — Gitlogs Diagrams
 
-**Version:** 3.3.1
-**Updated:** 2026-04-28 (Phase P19 — H10 §00↔§98 version-field parity catch-up: §00 v2.4.0 → v3.4.0 to match §98 latest (Phase P10 release line). The §00 banner had been left on the v2.x line since the Phase 55 `DiagramMetadata` JSON Schema rewrite shipped on §98's v3.x line. Pure parity bookkeeping, no inventory or content change. Sibling `spec/22-git-logs-v2/00-overview.md` got parallel parity catch-up (v3.8.9 → v3.9.11). H10 advisory delta tree-wide: 59 → 57 mismatches. Tree health 168/168 strict-pass. Lockstep 87/87 ✅.)
+**Version:** 3.3.2
+**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-22 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 
 > **v3.0.0 update (Phase 16g):** §97 fully rewritten from 9 table-row criteria (with 02/03/04 already retired as locked gaps) to **20 module-specific Given/When/Then ACs** (AC-DG-01..AC-DG-20). New ACs codify ER parity with §22 (entities + FK cardinalities), auth validation order with `GL-*` reject codes, RBAC RolePermission-union resolution (never role name), header-comment contract for non-ER diagrams (`%% Diagram type:` + `%% What this answers:`), emoji-free + Mermaid-CLI rendering, JWT/RS256/JWKS forbidden tokens, 8-endpoint mindmap completeness, encryption v3 7-node derivation chain, slot 02/03/04 locked-gap immutability (per AC-SAG-04), `.mmd` ↔ `.svg` build-artifact lockstep, kebab-case ASCII node IDs, `GL-*` codes cross-validated against §22 §14 registry, `puppeteer.json` reproducibility, governance rule "§26 trails §22 — never leads", and self-application audit (AC-DG-20). Legacy AC-D-01..AC-D-11 preserved as AC-DG-LEGACY-01..11 at end of §97. Module-level tree-health: 100/100 (A+).
 
 ## File Inventory
-<!-- verified-phase: 147 -->
+<!-- verified-phase: 153 -->
 
 | File | Present | Notes |
 |------|---------|-------|

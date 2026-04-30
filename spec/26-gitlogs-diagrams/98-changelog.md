@@ -1,7 +1,7 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.4.1
-**Updated:** 2026-04-28 (Phase P19 — H10 §00↔§98 version-field parity catch-up)
+**Version:** 3.4.2
+**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-22 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 **Scope:** `spec/26-gitlogs-diagrams/`
 
 ---
@@ -104,4 +104,8 @@
 - Added Mermaid lifecycle diagram and 5-stage CI workflow contract.
 - Activates v2.9 evidenced-tracker / evidenced-index bonus (+5 each).
 - Documentation-only promotion.
+
+## 3.4.2 — 2026-04-30 — Phase 153 (inventory-pin)
+
+- Added **AC-22** (Derivative-context pin for spec/22 source) — Lesson #29 module asset inventory pin. Auditor-authoritative on-disk inventory declaration; closes audit-v6 HIGH [D5] missing-files class as bundling-cap artifact (cache-stale per Lesson #34 until A8 LLM re-score). Lockstep §00/§97/§98/§99 patch+minor coordinated.
 
