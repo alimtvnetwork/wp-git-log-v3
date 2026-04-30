@@ -1,26 +1,26 @@
 # 35 — Full Spec-Tree AI-Implementability Audit (v7.0)
 
-> **Version:** 7.0.0
-> **Updated:** 2026-04-30 (Phase 153 Task A20)
+> **Version:** 7.1.0
+> **Updated:** 2026-04-30 (Phase 153 Task A20-rescore — A21 close-out confirmed)
 > **Scope:** Entire `spec/` tree — 23 numbered top-level modules
 > **Method:** LLM auditor (`linter-scripts/audit-ai-implementability.py` slot 34 v1.4.0) with **Rubric v7 axis-driven dimension weight cascades** + soft caps + fail-fast on missing `content_axis`
 > **Supersedes:** [`34-full-tree-ai-audit-v6.md`](./34-full-tree-ai-audit-v6.md) (Phase 152, deterministic-only baseline 100/100; v6's LLM companion baseline was 82.3/100 across v3/v4/v5 LLM rebaselines in Tasks A3/A7/A8)
-> **Headline:** **Tree mean 82.3 → 83.7 (+1.4).** Rubric v7's axis-driven weight redistribution successfully boosted audit-corpus + integration-spec + process-guidance modules previously stuck at the v6 75-floor (spec/10 +12, spec/01 +7, spec/02 +6, spec/11 +6, spec/26 +5, spec/25 +4) while the soft-cap corrected over-credit on non-contract modules (spec/14 -10, spec/07 -9). EXCELLENT band 4→5 (spec/23 lifted 93→97). Zero BLOCKING; 2 NEEDS_WORK at 74 (spec/03, spec/04 — both 1 point below threshold, mechanically closeable).
+> **Headline (A20-rescore):** **Tree mean 83.7 → 84.4 (+0.7); zero NEEDS_WORK; zero BLOCKING.** Task A21 mechanical close-out lifted both 74-band modules past predicted floor: **spec/03 74 → 81 (+7)** via two D5 citation-cluster ACs (AC-EM-* in `03-error-manage/97`); **spec/04 74 → 82 (+8)** via D3 edge-case enumeration ACs in `04-database-conventions/97`. Tree band distribution: **5 EXCELLENT · 18 GOOD · 0 NEEDS_WORK · 0 BLOCKING.** v7's axis-driven scoring + A21's mechanical lifts together close the v6 75-floor era.
 
 ---
 
-## Headline metrics (Phase 153 Task A20, 2026-04-30)
+## Headline metrics (Phase 153 Task A20-rescore, 2026-04-30)
 
-| Metric | v6 LLM baseline (Task A8) | v7 baseline (Task A20) | Delta |
-|---|---|---|---|
-| Tree mean | 82.3 | **83.7** | **+1.4** |
-| EXCELLENT (≥90) | 4 | **5** | +1 |
-| GOOD (75-89) | 18 | 16 | -2 |
-| NEEDS_WORK (60-74) | 1 | **2** | +1 |
-| BLOCKING (<60) | 0 | **0** | held |
-| Strict CI floor | 60 | **60** | held (preserved per AC-34-11) |
-| Modules with `content_axis` | 0 | **23/23** | full coverage (Task A16) |
-| Auditor exits 2 on missing axis | n/a | yes (AC-34-12) | new fail-fast |
+| Metric | v6 LLM baseline (Task A8) | v7 baseline (Task A20) | v7 + A21 (A20-rescore) | Δ vs v6 |
+|---|---|---|---|---|
+| Tree mean | 82.3 | 83.7 | **84.4** | **+2.1** |
+| EXCELLENT (≥90) | 4 | 5 | **5** | +1 |
+| GOOD (75-89) | 18 | 16 | **18** | held |
+| NEEDS_WORK (60-74) | 1 | 2 | **0** | **−1** |
+| BLOCKING (<60) | 0 | 0 | **0** | held |
+| Strict CI floor | 60 | 60 | **60** | held (AC-34-11) |
+| Modules with `content_axis` | 0 | 23/23 | **23/23** | full coverage |
+| Auditor exits 2 on missing axis | n/a | yes | **yes** | AC-34-12 |
 
 ## Per-module v6 → v7 deltas (sorted by delta)
 
@@ -44,8 +44,8 @@
 | 16-generic-release | normative-contract | 90 | **90** | 0 | EXCELLENT |
 | 18-wp-plugin-how-to | process-guidance | 80 | **80** | 0 | GOOD |
 | 22-git-logs-v2 | normative-contract | 86 | **86** | 0 | GOOD |
-| 03-error-manage | audit-corpus | 75 | **74** | **-1** | NEEDS_WORK |
-| 04-database-conventions | normative-contract | 75 | **74** | **-1** | NEEDS_WORK |
+| 03-error-manage | audit-corpus | 75 | **81** (was 74 pre-A21) | **+6** | GOOD |
+| 04-database-conventions | normative-contract | 75 | **82** (was 74 pre-A21) | **+7** | GOOD |
 | 13-generic-cli | normative-contract | 93 | **92** | **-1** | EXCELLENT |
 | 07-design-system | process-guidance | 89 | **80** | **-9** | GOOD |
 | 14-update | normative-contract | 86 | **76** | **-10** | GOOD |
@@ -72,12 +72,12 @@ Two modules dropped under v7 because they previously over-scored on D2/D3 (AC-co
 - **spec/14-update (86→76, -10)** — `normative-contract` axis. v7 caught that update prose carries narrative D5 over-credit; D2/D3 now weighted higher for normative axis. **Action:** mechanical close — bind missing GWT ACs in `14-update/97-acceptance-criteria.md`.
 - **spec/07-design-system (89→80, -9)** — `process-guidance` axis. v7 down-weights D2 (AC coverage) for design rationale where ACs are deliberately sparse. Score still GOOD; no action required (matches axis intent).
 
-## NEEDS_WORK close-out targets
+## NEEDS_WORK close-out (CLOSED — A21 + A20-rescore)
 
-- **spec/03-error-manage (74)** — `audit-corpus`. 1 point below GOOD; needs one D5 citation cluster lift in §97.
-- **spec/04-database-conventions (74)** — `normative-contract`. 1 point below GOOD; D3 edge-case enumeration thin.
+- **spec/03-error-manage:** 74 → **81 (+7)** via D5 citation-cluster ACs in §97 (audit-corpus axis lift exceeded +1 prediction by 6×).
+- **spec/04-database-conventions:** 74 → **82 (+8)** via D3 edge-case enumeration ACs in §97.
 
-Both mechanically closeable in a single follow-up phase (call it **A21** if pursued).
+**Result: 0 NEEDS_WORK modules tree-wide.** A21's predicted lifts (76-78 / 76-77) were exceeded — mechanical AC additions on `audit-corpus` and `normative-contract` axes carry stronger D5/D3 multipliers than estimated.
 
 ## What v7 unblocked
 
@@ -87,9 +87,10 @@ Both mechanically closeable in a single follow-up phase (call it **A21** if purs
 
 ## Open items
 
-- **A21 (optional):** Close spec/03 + spec/04 from 74→≥75 (single-phase mechanical, ≤2 ACs each).
+- **A21 (CLOSED 2026-04-30):** spec/03 81, spec/04 82 — both GOOD. ✅
 - **R1 (blocked):** Trace-map deeper bindings — needs `enable cloud` (separate from `LOVABLE_API_KEY`).
-- **P4 (cache hygiene):** All 23 caches refreshed under v7 in this phase; no follow-up needed.
+- **A18 (conditional):** D5 honor-list pattern auto-detection — pursue only if a future re-score reveals miscalibration. v7+A21 baseline shows none.
+- **P4 (cache hygiene):** All 23 caches refreshed under v7 + A21 lifts; no follow-up needed.
 
 ---
 
