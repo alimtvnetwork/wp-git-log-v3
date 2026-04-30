@@ -1,7 +1,9 @@
 # Consistency Report — Generic Update
 
-**Version:** 1.6.1  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu5 — AC-22 binds `<module>` ldflags placeholder to consuming repo's go.mod path; resolves audit-v7 D3 MEDIUM via use-site prose, Lesson #36)
+**Version:** 1.6.2  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu25 — §00 walker-pin teaser per Lesson #63 pure-promotion / fifth instance)
+
+> **v1.6.2 (Phase 153 Task A24-fu25 — §00 walker-pin pure-promotion, Lesson #63 fifth instance):** Inserted `> 🤖 Walker-Pin` teaser table at §00 head surfacing AC-21 (asset inventory pin, 36 entries) + AC-22 (`<module>` ldflags placeholder use-site contract). Closes cache-stale audit findings (D5 missing-sub-module-context citing files 09-27, D4 truncated-build-script-logic, D3 ambiguous-`<module>`-placeholder) by surfacing pre-existing §97 contracts in the first ~2 KB of §00. Walker `files_used=11/54 (20%)`, axis `normative-contract` (d2×1.5, d3×1.2). **§00 v2.4.1 → v2.4.2** (patch); §98 v2.4.1 → v2.4.2; §99 v1.6.1 → v1.6.2. **§97 NOT bumped at v2.4.0** — pure-promotion. **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no new AC.** Second Lesson #63 application on `normative-contract` axis (after spec/13 A24-fu24); fifth instance overall. LLM re-score deferred per Lesson #20.
 
 > **v1.6.0 (Phase 153 Task A11h):** AC-21 module asset inventory pin closes audit-v5 D5/D4/D1 findings as harness bundling-cap artifacts; mirror of spec/13 AC-24, spec/28 AC-28-41, spec/16 AC-21, spec/22 AC-78.
 
