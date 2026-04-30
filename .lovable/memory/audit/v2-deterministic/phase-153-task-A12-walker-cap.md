@@ -60,7 +60,7 @@ No CI workflow change · no AC-31-31 cascade · no RUBRIC bump · no gate-count 
 ## Cache invalidation
 All 23 `.lovable/cache/audit-ai/*.json` entries become stale-by-construction (bundle content lengthens). A20-fu rebaseline will refresh them in one pass per Lesson #20 graduation note.
 
-## Lesson #47 codified (in §98 row + §99 update)
+## Lesson #48 codified (in §98 row + §99 update)
 `MAX_BYTES`-class fixes follow a 5-step sequence:
 1. Probe current saturation across representative modules.
 2. Live-probe proposed ceiling against gateway with explicit-UA payload.
