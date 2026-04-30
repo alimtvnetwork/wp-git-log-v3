@@ -48,7 +48,7 @@
 - [Module acceptance criteria](./97-acceptance-criteria.md)
 - [Module consistency report](./99-consistency-report.md)
 
-## 2026-04-30 — Phase 153 (inventory-pin)
+## 3.3.3 — 2026-04-30 — Phase 153 (inventory-pin)
 
 - Added **AC-9** (Module asset inventory pin) — Lesson #29 module asset inventory pin. Auditor-authoritative on-disk inventory declaration; closes audit-v6 HIGH [D5] missing-files class as bundling-cap artifact (cache-stale per Lesson #34 until A8 LLM re-score). Lockstep §00/§97/§98/§99 patch+minor coordinated.
 

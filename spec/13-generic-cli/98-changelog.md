@@ -72,7 +72,7 @@
 - Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
 - Documentation-only promotion; no behavioural rules changed.
 
-## 2026-04-30 — Phase 153 (inventory-pin)
+## 1.1.5 — 2026-04-30 — Phase 153 (inventory-pin)
 
 - Added **AC-24** (Cross-reference pin for AC-22/AC-23 externals) — Lesson #29 module asset inventory pin. Auditor-authoritative on-disk inventory declaration; closes audit-v6 HIGH [D5] missing-files class as bundling-cap artifact (cache-stale per Lesson #34 until A8 LLM re-score). Lockstep §00/§97/§98/§99 patch+minor coordinated.
 
