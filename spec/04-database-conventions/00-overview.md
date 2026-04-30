@@ -5,10 +5,10 @@ axis_rationale: "Schema/concurrency/boolean rules MUST be satisfied by downstrea
 
 # Database Conventions
 
-**Version:** 3.4.2  
+**Version:** 3.5.0  
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
-**Updated:** 2026-04-29  
+**Updated:** 2026-04-30  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
