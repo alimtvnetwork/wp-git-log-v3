@@ -1,7 +1,7 @@
 # Coding Guidelines — Acceptance Criteria
 
-**Version:** 4.3.0
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 layer — added 5 group-level `**Verifies:**` clauses to the LEGACY scaffolds (Cross-Language, TypeScript, Golang, PHP, Rust). Each clause cites the source subfolder + the GWT AC that supersedes the legacy table-row group. `check-ai-confidence.py` P3 driver eliminated for `spec/02` — derived tier promoted from Medium → High. AC count unchanged at 25.)
+**Version:** 4.4.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu11 — added **AC-CG-24** Audit-corpus structural pin (Lesson #29 mirror for the `normative-contract` axis on tree-spanning modules). Closes the recurring spec/02 audit findings (HIGH/D5 dangling-subfolder-refs, MEDIUM/D2 legacy-AC-lack-specificity, LOW/D3 incomplete-size-limit) as STRUCTURAL-DELEGATION-NOT-MISSING walker-saturation artifacts (10/251 files loadable at 120 KB cap per AC-34-13). Per-language stub-AC counts re-verified: TS=22, Go=22, PHP=27, Rust=26, C#=27 (all ≥22 GWT ACs each, A10-fu1 contract holds). AC count 28 → 29.)
 **Scope:** `spec/02-coding-guidelines/` (the parent module — language-specific ACs live in subfolder §97 files).
 
 ---
