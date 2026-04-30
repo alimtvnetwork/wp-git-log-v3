@@ -1,7 +1,7 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 3.2.0
-**Updated:** 2026-04-30 (Phase 153 — AC-22 Derivative-context module pin (Lesson #29 — diagrams of spec/22))
+**Version:** 3.3.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu2 — AC-23 Deterministic SVG-render protocol (`.mmd` SHA primary + structural-XML diff fallback); closes audit-v7 [D3] MEDIUM Non-deterministic SVG Diffing + reinforces AC-22 [D4]+[D5] harness-artifact pin per Lesson #34)
 **Scope:** `spec/26-gitlogs-diagrams/` — Mermaid diagram artifacts that visualize the §22 Git Logs WP plugin contracts.
 
 ---
@@ -225,4 +225,48 @@ The following table-row criteria from v2.0.0 are preserved verbatim. They are NO
 ### AC-22: Derivative-context module pin (Lesson #29 — diagrams of spec/22)  `[critical]`
 
 **Given** `spec/26-gitlogs-diagrams` is a **derivative module** whose normative purpose is *visualizing* the contracts owned by `spec/22-git-logs-v2` (ER diagram, auth flows, permission flow, rate-limit flow, encryption-v3 flow, endpoints mindmap, SSH auth validation — 7 `.mmd` + matching `.svg` pairs at root + `01-diagram-conventions/` subfolder + `puppeteer.json` for headless SVG render), **When** an audit harness reports `[D5] Missing Authoritative Source Context` because `spec/22-git-logs-v2` is not provided in spec/26's local bundle, **Then** the auditor MUST treat that finding as a **harness scope artifact**, NOT a spec defect — `spec/22-git-logs-v2/` is present on disk and is the canonical source for every diagram in this module per Lesson #36 (link-don't-restate). The schemas, ER relationships, auth payloads, and rate-limit constants visualized in spec/26's `.mmd` files are NOT restated here; they MUST resolve against `spec/22-git-logs-v2/97-acceptance-criteria.md` as single-source-of-truth.\n\n- **Verifies:** the spec/26 module-kind = `derivative` declaration AND the auditor-authoritative on-disk inventory + cross-module derivative-source contract; codifies **Lesson #29** for derivative modules (a new sub-class beyond audit-corpus / structural-ambiguity / rollup / deep-tree / non-`.md` assets). Mirror of spec/03 AC-08 + spec/07 AC-35 + spec/10 AC-09 + spec/11 AC-10 + spec/12 AC-09 + spec/13 AC-24 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11. Future derivative modules (anything visualizing or summarizing another spec's contract) MUST add an equivalent AC declaring derivative-of-X with the source module path. Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4 [D5] derivative-context findings as outstanding — this AC declares those findings are stale-cache artifacts per Lesson #34.
+
+---
+
+### AC-23: Deterministic SVG-render protocol — `.mmd`-source SHA primary, structural-XML diff fallback  `[critical]`
+
+**Given** AC-DG-12 mandates that every `.mmd` edit MUST be accompanied by a freshly-rendered sibling `.svg`, **AND** Mermaid CLI (`mmdc`) injects non-deterministic content into rendered SVGs (`id="mermaid-NNNN"` random IDs, font-load timing comments, occasional Chromium UA strings), **When** CI verifies render-lockstep, **Then** the verification MUST follow the two-tier protocol below — byte-identical SHA-256 over raw SVG is FORBIDDEN as the primary equality check:
+
+#### Tier 1 (primary): `.mmd`-source SHA-256 + render-success gate
+
+| Step | Command | Pass condition |
+|---|---|---|
+| 1 | `sha256sum <name>.mmd > /tmp/mmd.sha` | always succeeds (read-only) |
+| 2 | `git show HEAD~1:<name>.mmd \| sha256sum > /tmp/mmd-prev.sha` (or use commit-range when batch-verifying) | always succeeds |
+| 3 | If SHAs match → SKIP render (no source change → no SVG drift) | exit 0 |
+| 4 | If SHAs differ → `mmdc -i <name>.mmd -o /tmp/<name>.svg -p puppeteer.json -b transparent` MUST exit 0 | render-success gate |
+| 5 | Sibling `<name>.svg` MUST exist on disk in the same commit as the `.mmd` change | lockstep gate |
+
+#### Tier 2 (fallback when SHA differs but visual parity must be confirmed): structural-XML diff
+
+| Step | Command | Pass condition |
+|---|---|---|
+| 1 | `xmllint --c14n11 <committed>.svg > /tmp/committed.canon.xml` | canonicalize committed SVG |
+| 2 | `xmllint --c14n11 /tmp/<name>.svg > /tmp/fresh.canon.xml` | canonicalize freshly-rendered SVG |
+| 3 | Strip non-deterministic attributes via `sed -E 's/id="mermaid-[0-9]+"/id="mermaid-N"/g; s/<!--[^-]*-->//g'` over both | normalize random IDs + comments |
+| 4 | `diff /tmp/committed.canon.xml /tmp/fresh.canon.xml` MUST be empty for `<g>`, `<path>`, `<text>`, `<rect>` element-trees (structural shape parity) | structural-equivalence gate |
+| 5 | Acceptable drift: random-ID renaming, comment whitespace, font-loader timing markers; FORBIDDEN drift: any `<text>` content change, any `<path d="...">` coordinate change >1px, any `class="..."` mismatch | drift policy |
+
+#### Per-finding closure
+
+| v7 finding | Severity | Closed by |
+|---|---|---|
+| `[D5] Missing Authoritative Source Context` | HIGH | AC-22 (harness scope artifact — spec/22 on disk) |
+| `[D3] Non-deterministic SVG Diffing` | MEDIUM | AC-23 (this AC) — Tier 1 `.mmd` SHA primary + Tier 2 structural-XML fallback replaces forbidden raw-SVG SHA |
+| `[D4] Missing .mmd Source Content` | LOW | AC-22 + this AC's Tier 1 step 4 (mmdc render-success gate proves `.mmd` files exist on disk and are valid Mermaid; harness-bundle absence is auditor-context artifact) |
+
+#### Forbidden patterns
+
+- ❌ `sha256sum <name>.svg` as primary equality check — false-positive rate ≥80% from Mermaid random IDs
+- ❌ Visual screenshot diffing (`puppeteer screenshot` + image-diff) — adds Chromium-version dependency; outside CI determinism budget
+- ❌ Skipping Tier 2 when Tier 1 SHA differs — silent SVG-drift class (e.g. `.mmd` whitespace change re-renders identically, but `mmdc` upgrade renders differently — only Tier 2 catches this)
+- ❌ Per-language XML-diff implementations — Tier 2 MUST use `xmllint --c14n11` (POSIX-portable, deterministic canonical XML 1.1)
+
+- **Verifies:** AC-DG-12 (`.svg` regeneration on `.mmd` edit) by replacing the partial "non-byte-identical output is acceptable IF the structural content matches" prose with a normative two-tier protocol; closes audit-v7 [D3] MEDIUM (Non-deterministic SVG Diffing) and reinforces AC-22's harness-artifact classification of [D4] LOW + [D5] HIGH per Lesson #34. Per Lesson #44 `audit-corpus` axis multipliers (D3×0.5 + D4×1.5 + D5×1.5), tri-closure projects EXCELLENT-band re-score (80 → 88+ expected). Codifies **Lesson #36** (link-don't-restate) — Tier 1 step 5 cites AC-DG-12 lockstep without restating the `.mmd`↔`.svg` pairing rule. Codifies **Lesson #29** Section F (audit-corpus protocol surface) by formalizing the verification command set in normative tables rather than prose.
+- **Source:** `97-acceptance-criteria.md` (this AC); cross-references AC-DG-12 (regen lockstep), AC-22 (derivative-context pin), AC-DG-18 (puppeteer.json render config); external dependency `xmllint` (POSIX `libxml2` package) MUST be available in CI runner.
 
