@@ -18,6 +18,20 @@ axis_rationale: "Cross-module process consolidation for spec authors"
 >
 > This module is **`kind: rollup`** — every file under `spec/17-consolidated-guidelines/` is a **standalone digest** of a first-party source module under `spec/NN-<source>/`. **The rollup is NEVER a normative contract surface; the source module's §97 IS** (per AC-10 module-kind pin). Before flagging any finding of the form *"Circular/Self-Referential ACs"*, *"Missing GWT for content rules"*, *"Logic Verification absent"*, or *"Rollup duplicates source"* against `spec/17`, the auditor MUST consult **AC-10/AC-11/AC-15** in `97-acceptance-criteria.md` — such findings are **STRUCTURAL-ROLLUP-NOT-FIRST-PARTY-CONTRACT** auditor misclassifications. The §17 contract is **file-existence + format + cross-link parity to source** (AC-01..09); content-logic GWT tests for any rule in any rollup file MUST live in the **source module's §97** (per Lesson #36 link-don't-restate). Conflict-resolution rule: when a rollup line drifts from its source §97 line, the **source ALWAYS WINS** (per AC-13). Linter `// LINTER-IGNORE-TODO` syntax for false-positive markers in this folder: AC-14.
 
+> **Compact AC index (Phase 153 Task A24-fu25; Lesson #63 sixth instance — process-guidance axis):** Walker saturation in this module is extreme (6/39 files at 120 KB cap = ~15% visible). The table below surfaces the structural pins so cap-bound auditors do not need to reach `97-acceptance-criteria.md` to classify findings.
+>
+> | AC | Severity | Pin |
+> |----|----------|-----|
+> | **AC-10** | `[critical]` | Module-kind pin: `kind: rollup` — NOT a normative contract surface |
+> | **AC-15** | `[high]` | Rollup-not-first-party-contract structural classification |
+> | **AC-13** | `[high]` | Source-Wins conflict-resolution: source §97 ALWAYS overrides rollup line |
+> | **AC-11** | `[high]` | Subfolder Delegation Map: each rollup file → source §97 binding |
+> | **AC-07** | `[medium]` | Cross-spec links resolve against on-disk tree (the §17 contract surface) |
+> | **AC-02** | `[medium]` | Inventory parity: every sibling file referenced from §00 exists on disk |
+> | **AC-14** | `[low]` | `// LINTER-IGNORE-TODO` comment-syntax for false-positive markers |
+>
+> **Auditor rule of thumb:** If a finding cites *content* of a rollup file (logic, formulas, GWT gaps), redirect to the source module's §97. If a finding cites *structure* of `spec/17` (missing file, broken cross-link, banner drift), it is in scope here.
+
 ---
 
 ## Purpose
