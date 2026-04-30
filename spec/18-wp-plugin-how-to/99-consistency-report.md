@@ -85,7 +85,7 @@ All 22 phases + 4 subfiles + 2 meta files verified against `readme.md` index.
 | Phases indexed | 22/22 | ✅ Pass |
 | Subfiles indexed | 4/4 | ✅ Pass |
 | Internal cross-refs | All resolve | ✅ Pass |
-| External cross-refs | **5 broken** | ❌ Fail |
+| External cross-refs | **0 broken** (5 historical ✅ resolved 2026-04-29) | ✅ Pass |
 | Filename casing | **1 mismatch** | ⚠️ Warning |
 
 ---
