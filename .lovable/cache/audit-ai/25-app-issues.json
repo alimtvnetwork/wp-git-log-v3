@@ -3,36 +3,36 @@
   "d2": 14,
   "d3": 15,
   "d4": 12,
-  "d5": 19,
+  "d5": 17,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D2",
-      "title": "Circular Acceptance Criteria",
-      "why": "AC-01 through AC-08 in the sub-modules are generic boilerplate that verify the existence of the spec files themselves rather than the logic of the issue tracker or the validity of the audit findings.",
-      "fix": "Add logic-based ACs that verify the 'Reproduction/Cause/Fix/Prevention' structure and the JSON schema validation of issue records."
+      "title": "Circular/Structural-only ACs for Tracker Content",
+      "why": "AC-01 through AC-08 only verify file existence and banners; they do not verify that the 'Findings' (the actual output) follow the R/C/F/P schema defined in the overview.",
+      "fix": "Add an AC-AI-14 verifying that every finding in 02-consolidated-audit-findings contains the 4 mandatory sections and a valid severity label."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Truncated Content in Consolidated Findings",
-      "why": "File 02-consolidated-audit-findings/00-overview.md is truncated at the end of the provided context, leaving 'F-12' and subsequent findings incomplete.",
-      "fix": "Ensure the full text of the consolidated findings is present or split into smaller, complete files."
+      "title": "Truncated Evidence in Consolidated Findings",
+      "why": "The primary output file (02-consolidated-audit-findings) is truncated in the spec, leaving the auditor with an incomplete list of findings (F-04 is cut off).",
+      "fix": "Ensure the full list of 24 findings is present or split into multiple files to avoid context window truncation."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency and Race Conditions in Issue Status",
-      "why": "The spec defines issue statuses (Open, In Progress, Resolved) but does not address state-transition safety if multiple auditors/scripts update the tracker simultaneously.",
-      "fix": "Add a 'Concurrency' section to the Issue Record Contract specifying a 'last-writer-wins' or 'version-check' strategy."
+      "title": "Unaddressed Schema Validation for Issue Records",
+      "why": "The spec provides a JSON schema for issue records but lacks a 'Verifies' clause or test case showing how a malformed record is rejected by the linter.",
+      "fix": "Add a 'Negative Case' example to 01-phase-2-git-logs-audit showing a schema validation failure."
     }
   ],
   "module": "25-app-issues",
   "files_used": 9,
   "files_total": 12,
   "bytes_used": 90000,
-  "bundle_sha": "4a943b79755ac6d3",
-  "total_v6": 78,
+  "bundle_sha": "1f696d91fb028c31",
+  "total_v6": 76,
   "axis": "audit-corpus",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 1.5
   },
   "axis_cap": 95,
-  "weighted_total": 79.0,
-  "total_v7": 79,
-  "total": 79,
+  "weighted_total": 76.0,
+  "total_v7": 76,
+  "total": 76,
   "band": "GOOD",
   "rubric": "v7"
 }
