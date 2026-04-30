@@ -5,7 +5,7 @@ axis_rationale: "Token/component conventions for designers and authors"
 
 # AI-Adaptable Design System
 
-**Version:** 3.4.3  
+**Version:** 3.4.4  
 **Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-35 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
