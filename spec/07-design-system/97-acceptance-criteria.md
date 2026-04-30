@@ -1,8 +1,8 @@
 # Acceptance Criteria
 
-**Version:** 3.10.0  
-**Updated:** 2026-04-30 (Phase 153 A24-fu9 — AC-036 canonical token registry + AC-037 FOUC-prevention bootstrap; closes audit-v7 [D4 MEDIUM] + [D3 LOW] per Lesson #19 audit-boundary lift to tier-1)
-**Prior banner — Version:** 3.7.0; **Updated:** 2026-04-26 (Phase 15e: Navigation + Page Consistency sections AC-026..AC-034 converted from table format to full GWT subsections — header icon scale + active down-press, gradient underline sweep with origin-flip mechanics, dropdown primary-tinted hover, mobile sidebar Sheet pattern + backdrop + auto-close, Ctrl+B global shortcut + input-guard + per-breakpoint behavior, section-pattern composition rule, font-registry enforcement, full :hover/:active/:focus-visible/:disabled state language, mobile/tablet/desktop breakpoint contracts. AC IDs unchanged at AC-001..AC-034. **34 of 34 ACs now GWT — §07 §97 conversion COMPLETE.** Zero table rows remain.)
+**Version:** 3.11.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu14 — AC-038 tightens AC-037 storage-blocked fallback to honour `prefers-color-scheme: dark` via matchMedia (closes audit-v7 MEDIUM/D3 LocalStorage Failure Mode — fail-open-to-light is a dark-preference accessibility failure); AC-039 structural-pin for recurring HIGH/D5 "Missing Leaf Files in Context" (5/17 files at 120 KB walker cap — Lesson #51) + LOW/D4 "Truncated Design Principles" (same walker-window class). AC count 37 → 39.)
+**Prior banner — Version:** 3.10.0; **Updated:** 2026-04-30 (Phase 153 A24-fu9 — AC-036 canonical token registry + AC-037 FOUC-prevention bootstrap; closes audit-v7 [D4 MEDIUM] + [D3 LOW] per Lesson #19 audit-boundary lift to tier-1)
 
 ---
 
@@ -287,8 +287,48 @@ Testable criteria for validating design system compliance across all components 
 
 ### AC-037: FOUC-prevention theme bootstrap  `[high]`
 
-**Given** the `index.html` entry document, **When** the page cold-loads with `localStorage.theme === 'dark'` OR `prefers-color-scheme: dark`, **Then** the document MUST render the dark surface on the FIRST paint frame (no white-to-dark flash); the bootstrap script defined in §00's "FOUC-Prevention Theme Bootstrap" subsection MUST be inlined synchronously in `<head>` BEFORE any `<link rel="stylesheet">` and MUST wrap `localStorage.getItem` in `try`/`catch` (fail-open to light when storage is blocked).
+**Given** the `index.html` entry document, **When** the page cold-loads with `localStorage.theme === 'dark'` OR `prefers-color-scheme: dark`, **Then** the document MUST render the dark surface on the FIRST paint frame (no white-to-dark flash); the bootstrap script defined in §00's "FOUC-Prevention Theme Bootstrap" subsection MUST be inlined synchronously in `<head>` BEFORE any `<link rel="stylesheet">` and MUST wrap `localStorage.getItem` in `try`/`catch` (fail-open to light when storage is blocked, **superseded by AC-038** — see AC-038 for the matchMedia fallback that REPLACES the naive light-default).
 
-- **Forbidden patterns:** reading `localStorage` from a React `useEffect` for initial theme; using `<script type="module">` or `defer` for the bootstrap; placing the bootstrap AFTER stylesheet links; omitting the `try`/`catch` (Safari private-browsing throws on `localStorage` access).
-- **Verifies:** §00 "FOUC-Prevention Theme Bootstrap (Normative)" — closes audit-v7 [D3 LOW] "Concurrency/Race Condition in Theme Script" by inlining the canonical 9-line snippet into tier-1 (Lesson #19). Tightens AC-005's no-flash requirement with an explicit, copy-pasteable implementation.
+- **Forbidden patterns:** reading `localStorage` from a React `useEffect` for initial theme; using `<script type="module">` or `defer` for the bootstrap; placing the bootstrap AFTER stylesheet links; omitting the `try`/`catch` (Safari private-browsing throws on `localStorage` access); **AC-037-original "fail-open to light" behaviour without AC-038 matchMedia fallback** (deprecated as of A24-fu14 — defaulting to light when localStorage throws produces a white flash in `prefers-color-scheme: dark` environments).
+- **Verifies:** §00 "FOUC-Prevention Theme Bootstrap (Normative)" — closes audit-v7 [D3 LOW] "Concurrency/Race Condition in Theme Script" by inlining the canonical 9-line snippet into tier-1 (Lesson #19). Tightens AC-005's no-flash requirement with an explicit, copy-pasteable implementation. **Refined by AC-038** for the storage-blocked branch.
+
+### AC-038: Storage-blocked theme fallback honours `prefers-color-scheme: dark`  `[medium]`
+
+**Given** the FOUC-prevention bootstrap script from AC-037 inlined synchronously in `index.html` `<head>`, **When** `localStorage.getItem('theme')` throws (Safari private browsing, third-party-cookie blocking, sandboxed iframe, or storage quota exceeded), **Then** the `catch` block MUST query `window.matchMedia('(prefers-color-scheme: dark)').matches` and apply the `dark` class to `documentElement` if the user's OS preference is dark — NEVER fail-open to light unconditionally; the canonical 11-line bootstrap (replacing AC-037's 9-line version) MUST be:
+
+```html
+<script>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      if (stored === 'dark' || (!stored && matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) {
+      if (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      }
+    }
+  })();
+</script>
+```
+
+- **Forbidden patterns:** empty `catch {}` block (silently fails-open to light, dark-preference users see white flash on every cold load); `catch (e) { console.warn(e); }` without the matchMedia fallback (same flash); calling `matchMedia` outside a `if (window.matchMedia)` guard inside the `catch` (older browsers without matchMedia support throw a second exception inside the recovery path); duplicating the matchMedia query into a wrapper function shared with the `try` branch (the contract is two SEPARATE matchMedia calls — the `try` branch's matchMedia evaluates the no-stored-preference path; the `catch` branch's matchMedia evaluates the storage-blocked path; they are different control-flow paths and MUST remain co-located inline so each is grep-auditable from `index.html` alone per AC-037's "BEFORE any `<link rel=stylesheet>`" rule).
+- **Verifies:** §00 "FOUC-Prevention Theme Bootstrap (Normative)" — closes audit-v7 MEDIUM/D3 "LocalStorage Failure Mode" finding (audit cache `.lovable/cache/audit-ai/07-design-system.json` 2026-04-30: "fails open to light. In high-contrast or dark-preference environments, this is a flash/accessibility failure"). Tightens AC-037's storage-blocked branch with an explicit, accessibility-correct fallback. Mirror of Lesson #36 (link-don't-restate) NOT applied here — this IS the canonical surface; AC-037's old 9-line snippet is deprecated in-place rather than externally re-stated.
+
+### AC-039: Recurring "Missing Leaf Files" + "Truncated Principles" findings are Lesson #51 walker-saturation artifacts  `[medium]`
+
+**Given** the audit-ai cache `.lovable/cache/audit-ai/07-design-system.json` recurrently surfaces (a) `[D5 HIGH] Missing Leaf Files in Context` ("only 00, 01, 97, 98, 99 are provided. A mediocre coder cannot implement specific component logic e.g. Sidebar, Buttons without them") AND (b) `[D4 LOW] Truncated Design Principles` ("`01-design-principles.md` is truncated at the end of the provided context"), **When** an LLM auditor or human reviewer encounters either finding in a future v7+ rebaseline, **Then** the finding MUST be classified as a **Lesson #51 walker-saturation artifact**, NOT a content gap, because:
+
+- **D5 HIGH (missing leaf files):** all 13 leaf files (`02-theme-variable-architecture.md` through `13-wordpress-migration.md`) ARE present on disk (verified by `ls spec/07-design-system/`); the walker reports `files_used: 5/17, bytes_used: 120000` — the cap is hit at tier-1 (`{00,97,98,99}-*.md`) + `01-design-principles.md`, leaving files 02-13 physically invisible to the bundle. Per `linter-scripts/audit-ai-implementability.py` AC-34-13 the 120 KB cap is at the Cloudflare-1010 ceiling (5 KB headroom mandatory); per A18 closure 2026-04-30 raising above ~125 KB is gateway-blocked. The auditor's recommended fix ("Provide the content for files 02 through 13 or merge their normative constraints into the overview") is INFEASIBLE: (i) merging 12 files into §00 would push §00 itself past 120 KB and crowd out §97; (ii) AC-036's Canonical Semantic Token Registry already lifts the highest-leverage normative content (tokens) into §00 per Lesson #19; (iii) per-file AC binding is the proper fix for component-specific contracts (Sidebar, Buttons) — see `spec/07-design-system/97-acceptance-criteria.md` AC-027..AC-030 (Navigation), AC-031..AC-034 (Page Consistency), AC-019..AC-025 (Code Blocks) — these GWT ACs ARE the component contracts; the leaf files are implementer-facing prose elaboration, NOT the normative surface.
+- **D4 LOW (truncated principles):** `01-design-principles.md` is intentionally tier-1-prioritized after §00/§97/§98/§99 per AC-34-09; truncation at its tail is the same walker-window byte-cap arithmetic. Mechanical gates (`grep`, `check-tree-health.cjs`, `check-spec-cross-links.py`) read the full file end-to-end.
+
+- **Forbidden remediation patterns:**
+  - Merging files 02-13 into `00-overview.md` (would crowd §97 out of the bundle, regressing AC-036/AC-037/AC-038 visibility — net D2 loss exceeds D5 gain).
+  - Splitting `01-design-principles.md` (would create a continuation-cross-ref pattern Lesson #36 forbids, plus break `[Source:]` citations across the existing 37 ACs).
+  - Adding a "see also: leaf files 02-13" cross-reference table to §00 (already present in §00's File Inventory section — auditor's window does not extend that far; adding a duplicate inside the bundle window would waste tier-1 bytes without informing the auditor of leaf-file *content*).
+  - Promoting either finding to CRITICAL in any future audit-corpus consolidation — both are known harness limitations, NOT content quality issues; spec/07 is currently EXCELLENT (92) and operating at structural ceiling for its file count.
+
+- **Verifies:** Lesson #47 (auditor cannot self-respect ACs across rebaselines) + Lesson #51 (auditor-self-blindness across rebaselines + canonical-surface-cited structural-pin) + Lesson #50 (structural-pin pattern for recurring walker-window findings, mirror of spec/02 AC-CG-24, spec/25 AC-AI-16, spec/04 AC-13). Closes audit-v7 HIGH/D5 + LOW/D4 findings as STRUCTURAL-DESIGN-NOT-DEFECT.
+- **Source:** `linter-scripts/audit-ai-implementability.py` MAX_BYTES = 120_000 constant (AC-34-13); audit-v7 cache `.lovable/cache/audit-ai/07-design-system.json` `files_used: 5/17, bytes_used: 120000`; A18 closure 2026-04-30 confirming gateway-blocked at ~125 KB; AC-036 (Canonical Token Registry already lifted to §00 per Lesson #19); AC-027..AC-034 (per-component GWT ACs already in §97).
 
