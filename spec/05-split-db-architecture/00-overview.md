@@ -5,7 +5,7 @@ drift_acknowledged: 2026-04-26
 
 # Split Database Architecture
 
-> **Version:** 4.1.0  
+> **Version:** 4.1.1  
 <!-- h10-verified-phase: 153 -->
 > **Created:** 2026-02-01  
 > **Updated:** 2026-04-29  

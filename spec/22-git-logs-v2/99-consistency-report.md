@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.9.20
+**Version:** 3.9.21
 **Updated:** 2026-04-29 (Phase P48-1-fu1-batch slot 7 — P1 inventory sync: added 7 missing §00 Document Inventory rows for slots 31–37 (`31-ssh-key-auth`, `32-cli-test-plan`, `33-bats-test-skeleton`, `34-phpunit-test-skeleton`, `35-reference-ci-yml`, `36-why-v1-archived`, `37-blind-ai-gap-analysis`). Files all shipped earlier (P5/audit phases) and §97/§99-tracked; only §00 inventory lagged. `check-ai-confidence.py` P1 driver eliminated for `spec/22` — last P1 drifter tree-wide. Lockstep 87/87 ✅; tree health 168/168 strict ✅. Prior: P19 — H10 §00↔§98 version-field parity catch-up (§00 v3.8.9 → v3.9.11; sibling §26 parallel; H10 advisory tree-wide 59 → 57; AC count unchanged at 78).)
 
 ---

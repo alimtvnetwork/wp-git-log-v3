@@ -1,6 +1,6 @@
 # Changelog — App Database
 
-**Version:** 4.1.0
+**Version:** 4.2.0
 **Updated:** 2026-04-29
 **Scope:** `spec/23-app-database/`
 
