@@ -5,7 +5,7 @@ axis_rationale: "Token/component conventions for designers and authors"
 
 # AI-Adaptable Design System
 
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 **Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-35 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
@@ -122,6 +122,68 @@ All animations and transitions use **CSS3 only** — no JavaScript-driven animat
 │  Consistent spacing rhythm              │
 └─────────────────────────────────────────┘
 ```
+
+---
+
+## Canonical Semantic Token Registry (Normative)
+
+The complete set of semantic CSS custom properties that MUST exist in both `:root` and `.dark` blocks of `src/index.css`. This is the auditor-authoritative inventory — any token consumed by `tailwind.config.ts` or component code MUST appear here. Values shown are the project defaults; re-themes change values, never names.
+
+| Token | `:root` (light) | `.dark` | Purpose |
+|-------|-----------------|---------|---------|
+| `--background` | `0 0% 100%` | `222 47% 11%` | Page background |
+| `--foreground` | `222 47% 11%` | `210 40% 98%` | Default body text |
+| `--card` | `0 0% 100%` | `222 47% 13%` | Card surfaces |
+| `--card-foreground` | `222 47% 11%` | `210 40% 98%` | Text on cards |
+| `--popover` | `0 0% 100%` | `222 47% 11%` | Popover/dropdown surfaces |
+| `--popover-foreground` | `222 47% 11%` | `210 40% 98%` | Text in popovers |
+| `--primary` | `252 85% 60%` | `252 85% 65%` | Brand primary |
+| `--primary-foreground` | `0 0% 100%` | `0 0% 100%` | Text on primary |
+| `--primary-glow` | `252 85% 75%` | `252 85% 80%` | Primary halo / focus ring |
+| `--secondary` | `210 40% 96%` | `217 33% 18%` | Secondary surface |
+| `--secondary-foreground` | `222 47% 11%` | `210 40% 98%` | Text on secondary |
+| `--muted` | `210 40% 96%` | `217 33% 18%` | Muted surface |
+| `--muted-foreground` | `215 16% 47%` | `215 20% 65%` | Muted text |
+| `--accent` | `330 85% 60%` | `330 85% 65%` | Brand accent |
+| `--accent-foreground` | `0 0% 100%` | `0 0% 100%` | Text on accent |
+| `--destructive` | `0 84% 60%` | `0 63% 50%` | Errors, destructive actions |
+| `--destructive-foreground` | `210 40% 98%` | `210 40% 98%` | Text on destructive |
+| `--border` | `214 32% 91%` | `217 33% 22%` | Default borders |
+| `--input` | `214 32% 91%` | `217 33% 22%` | Input borders |
+| `--ring` | `252 85% 60%` | `252 85% 65%` | Focus ring |
+| `--heading-gradient-from` | `252 85% 60%` | `252 85% 65%` | H1/H2 gradient start |
+| `--heading-gradient-to` | `330 85% 60%` | `330 85% 65%` | H1/H2 gradient end |
+| `--radius` | `0.5rem` | `0.5rem` | Default border-radius |
+
+**Forbidden:** any HSL token NOT listed here (registry is closed-set); raw hex / `rgb()` / named colors anywhere outside `:root`/`.dark`; `--token: hsl(...)` form (values MUST be space-separated triplets, NOT wrapped in `hsl()`).
+
+**Bound by:** §97 AC-036 (Canonical token registry).
+
+---
+
+## FOUC-Prevention Theme Bootstrap (Normative)
+
+To satisfy AC-005 (no theme flash on cold load), `index.html` MUST inline the following synchronous script in `<head>` BEFORE any stylesheet `<link>`. Any deviation (async, `defer`, post-`<link>` placement, missing `try`/`catch`) causes a visible white-to-dark flash on dark-mode reload.
+
+```html
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      }
+    } catch (e) { /* localStorage may be blocked — fail open to light */ }
+  })();
+</script>
+```
+
+**Forbidden patterns:**
+- Reading `localStorage` from a React `useEffect` for initial theme (renders light frame first → flash).
+- Using `<script type="module">` or `defer` for the bootstrap (modules execute after parsing).
+- Placing the bootstrap AFTER `<link rel="stylesheet">` (stylesheet may paint before script runs).
+
+**Bound by:** §97 AC-037 (FOUC-prevention bootstrap).
 
 ---
 

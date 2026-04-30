@@ -1,7 +1,7 @@
 # Acceptance Criteria
 
-**Version:** 3.9.0  
-**Updated:** 2026-04-30 (Phase 153 — AC-35 Module asset inventory pin (Lesson #29 — design-system tokens + 13 leaf files))
+**Version:** 3.10.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu9 — AC-036 canonical token registry + AC-037 FOUC-prevention bootstrap; closes audit-v7 [D4 MEDIUM] + [D3 LOW] per Lesson #19 audit-boundary lift to tier-1)
 **Prior banner — Version:** 3.7.0; **Updated:** 2026-04-26 (Phase 15e: Navigation + Page Consistency sections AC-026..AC-034 converted from table format to full GWT subsections — header icon scale + active down-press, gradient underline sweep with origin-flip mechanics, dropdown primary-tinted hover, mobile sidebar Sheet pattern + backdrop + auto-close, Ctrl+B global shortcut + input-guard + per-breakpoint behavior, section-pattern composition rule, font-registry enforcement, full :hover/:active/:focus-visible/:disabled state language, mobile/tablet/desktop breakpoint contracts. AC IDs unchanged at AC-001..AC-034. **34 of 34 ACs now GWT — §07 §97 conversion COMPLETE.** Zero table rows remain.)
 
 ---
@@ -277,4 +277,18 @@ Testable criteria for validating design system compliance across all components 
 ### AC-35: Module asset inventory pin (Lesson #29 — design-system tokens + 13 leaf files)  `[critical]`
 
 **Given** spec/07's full on-disk asset inventory comprises 17 `.md` files (`00-overview.md`, leaves `01-design-principles.md` through `13-wordpress-migration.md`, `97-acceptance-criteria.md`, `98-changelog.md`, `99-consistency-report.md`) + `lifecycle-design-token-flow.mmd` + 0 subfolders, **When** an audit harness bundles only `{00,97,98,99}-*.md` (per spec/27 slot 34 v1.1.0 AC-34-09 tier-1 cap of ~90 KB), **Then** the auditor MUST treat any `[D5] missing-file` finding citing the 13 leaf files (`01-design-principles.md` through `13-wordpress-migration.md`) or `lifecycle-design-token-flow.mmd` as a **harness bundling-cap artifact**, NOT a spec defect — all 17 files are present on disk and contribute to the rubric-v2 inventory credit per Phase 137. References to `src/index.css` and `tailwind.config.ts` are intentional cross-repo pointers (the design-system tokens are surfaced into application code at those paths) and are out of audit scope per Lesson #36 (link-don't-restate).\n\n- **Verifies:** the spec/07 module-kind = `module` declaration AND the auditor-authoritative inventory contract that lets the rubric-v2 inventory credit accumulate; codifies **Lesson #29** (audit-corpus pin) for tier-1-bounded auditors. Mirror of spec/03 AC-08 + spec/11 AC-10 + spec/12 AC-09 + spec/17 AC-10 + spec/18 AC-09 + spec/25 AC-AI-09..11. Until A8 (LLM-gateway re-score) unblocks, the cache will report v3/v4 [D5] findings citing 01/02 leaf files as outstanding — this AC declares those findings are stale-cache artifacts per Lesson #34.
+
+### AC-036: Canonical semantic token registry  `[critical]`
+
+**Given** an authored or re-themed `src/index.css`, **When** the file is parsed for `:root` and `.dark` blocks, **Then** every token listed in §00's "Canonical Semantic Token Registry" table MUST be declared in BOTH blocks (light and dark), values MUST be space-separated HSL triplets (NOT wrapped in `hsl()`), and NO token outside the registered closed-set MAY appear; raw hex / `rgb()` / named colors anywhere outside `:root`/`.dark` MUST cause a hard fail.
+
+- **Forbidden patterns:** registering a new token in only one of `:root`/`.dark`; storing values as `hsl(252 85% 60%)` instead of `252 85% 60%`; introducing ad-hoc tokens (e.g. `--brand-purple-2`) outside the registry without first amending §00's registry table.
+- **Verifies:** §00 "Canonical Semantic Token Registry (Normative)" — closes audit-v7 [D4 MEDIUM] "Incomplete Token Registry Example" by lifting the full registry into tier-1 (Lesson #19 audit-boundary < verification-boundary). The registry table IS the contract; AC-001..AC-006 reference it without restating (Lesson #36 link-don't-restate).
+
+### AC-037: FOUC-prevention theme bootstrap  `[high]`
+
+**Given** the `index.html` entry document, **When** the page cold-loads with `localStorage.theme === 'dark'` OR `prefers-color-scheme: dark`, **Then** the document MUST render the dark surface on the FIRST paint frame (no white-to-dark flash); the bootstrap script defined in §00's "FOUC-Prevention Theme Bootstrap" subsection MUST be inlined synchronously in `<head>` BEFORE any `<link rel="stylesheet">` and MUST wrap `localStorage.getItem` in `try`/`catch` (fail-open to light when storage is blocked).
+
+- **Forbidden patterns:** reading `localStorage` from a React `useEffect` for initial theme; using `<script type="module">` or `defer` for the bootstrap; placing the bootstrap AFTER stylesheet links; omitting the `try`/`catch` (Safari private-browsing throws on `localStorage` access).
+- **Verifies:** §00 "FOUC-Prevention Theme Bootstrap (Normative)" — closes audit-v7 [D3 LOW] "Concurrency/Race Condition in Theme Script" by inlining the canonical 9-line snippet into tier-1 (Lesson #19). Tightens AC-005's no-flash requirement with an explicit, copy-pasteable implementation.
 

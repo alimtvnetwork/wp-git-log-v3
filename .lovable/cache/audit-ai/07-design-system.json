@@ -1,38 +1,38 @@
 {
-  "d1": 18,
+  "d1": 20,
   "d2": 20,
-  "d3": 16,
-  "d4": 14,
-  "d5": 12,
+  "d3": 18,
+  "d4": 19,
+  "d5": 17,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Missing Leaf Files (01-13)",
-      "why": "The module references 13 critical leaf files (01-design-principles.md through 13-wordpress-migration.md) containing the actual token values and component logic, but they are not provided in the context.",
-      "fix": "Provide the content for files 01 through 13 to complete the dependency closure."
-    },
-    {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Incomplete Token Registry Example",
-      "why": "While HSL logic is explained, the actual 'canonical' list of semantic tokens (e.g., --primary-glow, --card, --popover) mentioned in ACs is not fully listed in the overview.",
-      "fix": "Include a comprehensive table of all required semantic CSS variables and their default HSL values in the overview or file 02."
+      "dim": "D5",
+      "title": "Missing Leaf File Context",
+      "why": "The spec references 13 leaf files (01-13) for specific component logic (e.g., button variants, sidebar tree) that are not provided in the context.",
+      "fix": "Provide the content of files 01-13 or merge their core logic into the overview/AC files."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency/Race Condition in Theme Script",
-      "why": "AC-005 requires a synchronous script to prevent FOUC but doesn't provide the specific script snippet, leaving the 'no-flash' implementation to guesswork.",
-      "fix": "Add the specific 5-line blocking script for index.html to the Theme & Variables section."
+      "title": "Missing Concurrency/Race Condition for Theme Toggle",
+      "why": "While FOUC is addressed, the spec doesn't explicitly handle rapid-fire toggle clicks or storage event synchronization across multiple tabs.",
+      "fix": "Add a requirement for a 'storage' event listener to sync theme state across browser tabs."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Incomplete Language-to-Color Map",
+      "why": "AC-018 lists 'typical mappings' but uses 'e.g.', leaving the full set of supported languages and their exact HSL values ambiguous for a coder.",
+      "fix": "Provide a complete, non-exemplary JSON mapping of language strings to HSL triplets."
     }
   ],
   "module": "07-design-system",
   "files_used": 3,
   "files_total": 17,
   "bytes_used": 90000,
-  "bundle_sha": "0469003529972d02",
-  "total_v6": 80,
+  "bundle_sha": "a8f6f585dbc68ab0",
+  "total_v6": 94,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 79.8,
-  "total_v7": 80,
-  "total": 80,
-  "band": "GOOD",
+  "weighted_total": 94.4,
+  "total_v7": 94,
+  "total": 94,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }
