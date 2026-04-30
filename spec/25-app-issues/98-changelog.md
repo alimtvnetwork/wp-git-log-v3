@@ -1,10 +1,17 @@
 # Changelog — App Issues
 
-**Version:** 3.4.3  
-**Updated:** 2026-04-29  
+**Version:** 3.4.4  
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu3 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH "Circular ACs" + [D3] LOW "Issue-status concurrency" as kind-mismatch / out-of-scope-axis artifacts)  
 **Scope:** `spec/25-app-issues/`
 
 ---
+
+## [3.4.4] — 2026-04-30 — Phase 153 Task A24-fu3: AC-AI-12 + AC-AI-13 (kind:tracker sub-class pin)
+
+- **Added** AC-AI-12 `[critical]` + AC-AI-13 `[high]` to §97 (v1.2.0 → v1.3.0; AC count 11 → 13). AC-AI-12 closes audit-v7 [D2] HIGH "Circular Acceptance Criteria" by formalizing that AC-01..AC-08 in child `kind: tracker` modules ARE the structural-floor normative surface (NOT boilerplate) — per-finding logic lives in finding bodies (R/C/F/P sections) per AC-AI-10, NOT in additional §97 GWT ACs. AC-AI-13 closes audit-v7 [D3] LOW "Concurrency and Race Conditions in Issue Status" by classifying issue-status concurrency as out-of-scope axis (Git is the concurrency boundary; markdown-edit ⊥ runtime-database concurrency per Lesson #36). Both ACs cite spec/26 AC-22 as cross-axis precedent for harness-scope-artifact classification.
+- **Why**: per **Lesson #29 Section F**, `kind: tracker` sub-class joins `kind: index` + `kind: post-mortem` as audit-corpus protocols requiring explicit module-kind pins. Lesson #34 verification confirmed v7 D2 + D3 are NEW findings not covered by AC-AI-09/10/11 (which addressed v3/v4 quote-misreadings). Per Lesson #44 `audit-corpus` axis multipliers (D2×0.5 + D3×0.5 + D4×1.5), tri-closure projects 79 → 85+ band reinforcement (D4 not directly closed but AC-AI-11 covers truncation as harness artifact).
+- **Spec lockstep**: §97 v1.2.0 → **v1.3.0** (new ACs; count 11 → 13); §00 v3.4.3 → **v3.4.4**; §98 v3.4.3 → **v3.4.4**; §99 v1.3.1 → **v1.3.2**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Validation**: lockstep 87/87, tree-health 168/168 strict, version-parity 74/74. Pre-flight Lesson #45 verified: tier-1 ~24 KB → ~28 KB (well under 75 KB saturation); total tree ~28 KB (well under 90 KB walker cap). LLM re-score deferred per Lesson #20 (Cloudflare 402-budget-blocked).
 
 ## Format
 

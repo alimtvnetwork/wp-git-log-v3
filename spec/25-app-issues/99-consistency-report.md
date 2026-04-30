@@ -1,11 +1,13 @@
 # Consistency Report — 25-app-issues
 
-**Version:** 1.3.1  
+**Version:** 1.3.2  
+
+> **v1.3.2 update (Phase 153 Task A24-fu3 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH + [D3] LOW kind-mismatch / out-of-scope-axis artifacts):** AC-AI-12 (`[critical]`) formalizes that AC-01..AC-08 in child `kind: tracker` modules ARE the structural-floor normative surface (NOT boilerplate) — closes audit-v7 [D2] HIGH "Circular Acceptance Criteria" as kind-mismatch artifact per Lesson #29 Section F. AC-AI-13 (`[high]`) classifies issue-status concurrency as out-of-scope axis (Git-commit is the concurrency boundary; markdown-edit ⊥ runtime-DB concurrency per Lesson #36) — closes audit-v7 [D3] LOW. Per Lesson #44 axis multipliers (audit-corpus D2×0.5 + D3×0.5 + D4×1.5), projected re-score 79 → 85+. Lockstep §97 1.2.0 → 1.3.0, §00 3.4.3 → 3.4.4, §98 row 3.4.4 added. Pre-flight Lesson #45 verified: tier-1 24 KB → ~28 KB (massive headroom).
 
 > **v1.3.0 update (Phase P48-1-fu1-batch P3 sweep slot 7 — AC-01..AC-08 Verifies clauses):** Closes the P3-tier `**Verifies:**` gap (0 → 8 clauses). AC-01 and AC-06 explicitly call out the `kind: index` YAML exemption (parent of two `kind: tracker` children). Lockstep: §00 3.4.1 → 3.4.2 (date 2026-04-28 → 2026-04-29), §97 1.0.0 → 1.1.0, §98 row 3.4.2 added, §99 1.2.0 → 1.3.0. P3 derived tier: Medium → High. Tree-health 168/168 strict-pass holds.
 
 > **v1.2.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 1 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `1.1.0`→`3.4.1`; §00 banner `3.4.0`→`3.4.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
-**Updated:** 2026-04-29 (Phase P48-1-fu1-batch P3 sweep slot 7 — Verifies clauses landed; prior P11 nested-subdir audit context preserved in v1.2.0 block.)
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu3 — AC-AI-12 + AC-AI-13 close v7 [D2] HIGH + [D3] LOW; Lesson #29 Section F sub-class `kind: tracker` formalized.)
 
 ---
 
