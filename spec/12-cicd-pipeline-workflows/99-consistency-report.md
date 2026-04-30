@@ -2,6 +2,8 @@
 
 **Version:** 3.4.3  
 
+> **v3.4.3 update (Phase 153 audit-v6 close-out):** Added **AC-09** (`[critical]`) to §97 — slot-collision disambiguation pin enumerating all 6 grandfathered colliding-slot pairs (01/02/04/05/06/07). Closes audit-v6 CRITICAL `[D5] Broken Internal Cross-References` as a structure-meaning misreading (not a real ambiguity — root `.md` = generic contract, subfolder = platform binding). Banners: §97 v1.1.0 → **v1.2.0** (count 8 → 9), §00/§98/§99 v3.4.2 → **v3.4.3**. Score 75 → ≥85 expected on next LLM re-score (deferred per Lesson #20). **Lesson #29 second extension** (codified inside AC-09 + §98 row): audit-corpus pattern extends from quoted-evidence (spec/25) → non-`.md` assets (spec/11 AC-10) → **structural ambiguities** (slot collisions, multi-overview folders, parallel taxonomies) under the same auditor-misreads-by-default class.
+
 > **v3.4.2 update (Phase P48-1-fu1-batch P3 sweep slot 5 — AC-01..AC-08 Verifies clauses):** Closes the P3-tier `**Verifies:**` gap (0 → 8 clauses). AC-01 and AC-06 explicitly call out the `kind: future-spec` YAML exemption. Lockstep: §00 3.4.1 → 3.4.2, §97 1.0.0 → 1.1.0, §98 row 3.4.2 added, §99 3.4.1 → 3.4.2. P3 derived tier: Medium → High. Tree-health 168/168 strict-pass holds.
 
 > **v3.4.1 update (Phase P48-1-fu1-batch slot 4):** P1 inventory sync — added 4 missing root rows to §00 (`readme.md`, `01-ci-pipeline.md`, `02-release-pipeline.md`, `11-technical-interface.md`). Slots 01/02 receive co-located rows per precedent (spec/01 slot 04, spec/17 slot 33). `check-ai-confidence.py` P1 driver eliminated for `spec/12`.
