@@ -1,7 +1,7 @@
 # Changelog — AI-Adaptable Design System
 
-**Version:** 3.4.2  
-**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-35 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
+**Version:** 3.4.3  
+**Updated:** 2026-04-30 (Phase 153 — A24-fu9 spec/07 self-lift: AC-036 canonical token registry table + AC-037 FOUC-prevention bootstrap script lifted into tier-1 §00; closes audit-v7 [D4 MEDIUM] + [D3 LOW] per Lesson #19)
 **Scope:** `spec/07-design-system/`
 
 ---
