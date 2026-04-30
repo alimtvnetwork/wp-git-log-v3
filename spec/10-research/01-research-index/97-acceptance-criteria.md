@@ -1,7 +1,7 @@
 # Acceptance Criteria — Top-Level Research Index
 
-**Version:** 2.0.0
-**Updated:** 2026-04-27
+**Version:** 2.1.0
+**Updated:** 2026-04-30 (Phase 153 Task A13 — AC-RESEARCH-05 Verifies clause + AC-RESEARCH-07 domain-registry validator)
 
 ---
 
