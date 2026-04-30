@@ -119,6 +119,64 @@ This document defines testable acceptance criteria for the **WordPress Plugin Ho
 - **Forbidden patterns:** `fwrite` to log file without preceding `flock`; using `LOCK_NB` (silent drop class); writing self-update artifacts directly to live plugin directory (corrupts in-flight requests); rollback via `cp -r` (non-atomic).
 - **Verifies:** concurrency contract for FileLogger + self-update / rollback (closes audit-v7 [D3 LOW] "Concurrency and Race Conditions Unaddressed"). Cross-references `spec/13-generic-cli` AC-22 (DB+file concurrency) per Lesson #36 (link-don't-restate — spec/13 owns the canonical concurrency posture; this AC pins the WordPress-specific surfaces).
 
+### AC-12: Phase-file architectural invariants binding (Phases 07–13 — Patterns)  `[high]`
+
+- **Given** the 7 pattern-implementation phase files (`07-reference-implementations.md`, `08-wordpress-integration-patterns.md`, `09-testing-patterns.md`, `10-deployment-patterns.md`, `11-frontend-and-template-patterns.md`, `12-design-system.md`, `13-admin-ui-patterns.md`)
+- **When** an LLM auditor or implementer audits the module's normative surface from §97
+- **Then** each phase MUST satisfy the invariants listed below; deviation MUST cause a hard fail in code review:
+
+| Phase | Architectural invariant (binding) |
+|-------|-----------------------------------|
+| 07-reference-implementations | All reference snippets MUST be runnable as-is against the bootstrap from AC-10/01; ellipsis `…` placeholders FORBIDDEN in code blocks; PHP version pin MUST match `composer.json` `require.php`. |
+| 08-wordpress-integration-patterns | All WordPress hooks MUST use `add_action`/`add_filter` with explicit priority + arg-count; `priority=10` default-magic-number FORBIDDEN (always pass explicitly); never call `apply_filters` on hooks not declared in this module. |
+| 09-testing-patterns | All tests MUST inherit from the `WP_UnitTestCase` base + use the project's `Factory` helpers (NEVER bare `wp_insert_post` in tests — leaks fixtures); transient/cache cleanup MUST run in `tearDown()`. |
+| 10-deployment-patterns | Self-update + rollback contract per AC-11; deployment artifacts MUST be reproducible (sha256 pinned in `changelog.md` per release); zero-downtime activation MUST defer schema migrations to `register_shutdown_function`. |
+| 11-frontend-and-template-patterns | All template output MUST go through `esc_html`/`esc_attr`/`wp_kses_post` per content type; raw `echo $var` of user-influenced data FORBIDDEN; template files MUST live under `templates/` (NEVER inline in PHP class methods). |
+| 12-design-system | All admin-side CSS MUST consume tokens declared in `spec/07-design-system` registry (cross-ref AC-036 per Lesson #36); inline `style="…"` FORBIDDEN outside one-off `wp_add_inline_style` calls registered with explicit handle. |
+| 13-admin-ui-patterns | All admin pages MUST register via `add_menu_page`/`add_submenu_page` with capability check (`manage_options` minimum); raw `is_admin()` gates without capability check FORBIDDEN (privilege-escalation class). |
+
+- **Forbidden patterns:** authoring a phase file in this band that introduces a new architectural concept without a row in this table; introducing per-phase ACs in the phase file itself (Lesson #36 dual-source drift).
+- **Verifies:** the architectural-invariant contract for spec/18 phases 07–13 (Lesson #19 audit-boundary < verification-boundary lift; second band of AC-10's mirror-of-spec/02 AC-CG-21 pattern at phase-file granularity).
+
+### AC-13: Phase-file architectural invariants binding (Phases 14–21 — Integration)  `[high]`
+
+- **Given** the 8 integration-layer phase files (`14-rest-api-conventions.md`, `15-settings-architecture.md`, `16-error-handling-extraction.md`, `17-data-file-patterns.md`, `18-frontend-javascript-patterns.md`, `19-micro-orm-and-root-db.md`, `20-end-to-end-walkthrough.md`, `21-ping-endpoint.md`)
+- **When** an LLM auditor or implementer audits the module's normative surface from §97
+- **Then** each phase MUST satisfy the invariants listed below; deviation MUST cause a hard fail in code review:
+
+| Phase | Architectural invariant (binding) |
+|-------|-----------------------------------|
+| 14-rest-api-conventions | All REST routes MUST register via `register_rest_route` with explicit `permission_callback` (NEVER `__return_true` outside public read-only ping); response envelope per AC-10/05; route namespace MUST be plugin-prefixed (NEVER `wp/v2/`). |
+| 15-settings-architecture | All settings MUST register via `register_setting` with `sanitize_callback`; raw `update_option` from request handlers FORBIDDEN (must flow through Settings facade); option names MUST be plugin-prefixed (collision-safe). |
+| 16-error-handling-extraction | All errors MUST extend `\WP_Error` OR the project's typed exception base; bare `throw new \Exception` FORBIDDEN (loses error_code routing); error responses MUST flow through Response envelope per AC-10/05. |
+| 17-data-file-patterns | All bundled data files (JSON/YAML/CSV) MUST live under `data/` with sha256 pinned in `changelog.md`; `file_get_contents` of remote URLs FORBIDDEN at runtime (use build-time fetch + commit). |
+| 18-frontend-javascript-patterns | All JS MUST register via `wp_enqueue_script` with explicit version + dependency array; inline `<script>` in templates FORBIDDEN; module scripts MUST use `wp_enqueue_script_module` (WP 6.5+). |
+| 19-micro-orm-and-root-db | All DB writes MUST go through the micro-ORM `Repository` facade; raw `$wpdb->query` FORBIDDEN outside Repository internals; cross-ref `spec/04-database-conventions` schema rules + AC-09 boolean storage per Lesson #36. |
+| 20-end-to-end-walkthrough | The walkthrough MUST exercise every architectural-invariant row in AC-10/12/13 end-to-end; deviations between the walkthrough and the AC tables MUST cause a hard fail in tree-health (cross-ref via `Verifies` line). |
+| 21-ping-endpoint | The ping endpoint MUST be the ONLY public-no-auth route (cross-ref AC-13/14 `permission_callback` discipline); response MUST be `{ok: true, ts: <unix>}` exact-shape (NEVER add fields without bumping §98 minor). |
+
+- **Forbidden patterns:** authoring a phase file in this band that introduces a new architectural concept without a row in this table; introducing per-phase ACs in the phase file itself (Lesson #36 dual-source drift).
+- **Verifies:** the architectural-invariant contract for spec/18 phases 14–21 (Lesson #19 audit-boundary lift; third + final band of AC-10's mirror-of-spec/02 AC-CG-21 pattern — the AC-10/12/13 trio now covers all 21 phase files exhaustively).
+
+### AC-14: Filename casing discipline  `[low]`
+
+- **Given** any cross-reference from this module's prose, AC tables, or example code blocks to a sibling file in this module OR a peer module
+- **When** the reference is parsed under a case-sensitive filesystem (Linux CI, macOS APFS case-sensitive variant)
+- **Then** the reference MUST match the on-disk filename byte-for-byte; `CHANGELOG.md` (uppercase) is FORBIDDEN — the canonical on-disk name is `changelog.md` (lowercase, project convention since v1.0.0); `README.md` (uppercase) is FORBIDDEN — canonical is `readme.md`.
+
+- **Forbidden patterns:** `CHANGELOG.md` anywhere in this module's `.md` files (the legacy capitalized form ships in many WP plugin templates but conflicts with this project's lowercase convention); `README.md` anywhere; assuming case-insensitive filesystem behaviour (works on Windows + macOS HFS+ default, breaks on Linux + macOS APFS-CS).
+- **Known-stale references:** `readme.md:84` + `10-deployment-patterns.md:38,54,785,977` reference `CHANGELOG.md` per §99 §2.1 — these are P0 actionable cleanup items NOT covered by the §99 §2.2/§2.3 RESOLVED tables (which closed the *external-ref* class). Closing them is mechanical: `sed -i 's/CHANGELOG\.md/changelog.md/g'` on the cited files.
+- **Verifies:** filename casing convention for spec/18 (closes audit-v7 [D1 LOW] "Filename casing mismatch in documentation"). The forbidden-pattern enumeration is the contract; the §99 §2.1 P0 row #1 is the standing actionable instance.
+
+### AC-15: Internal sub-file resolution discipline (Lesson #29 deep-tree variant)  `[medium]`
+
+- **Given** an LLM auditor bundling spec/18 from disk under the `linter-scripts/audit-ai-implementability.py` 90 KB tier-1 cap
+- **When** the auditor flags "internal sub-file references unresolved" or "Phases 03-21 missing context" because the walker only loaded `{00,97,98,99}-*.md` + 7 phase files (≈ 11/35 files at 90 KB cap)
+- **Then** the auditor MUST treat any [D5] finding citing missing internal sub-files (`03-traits-and-composition.md` through `21-ping-endpoint.md`) as a **harness bundling-cap artifact**, NOT a spec defect — all 22 phase files + 4 enum sub-files are present on disk per AC-09 and §99 §1; the on-disk inventory is the auditor-authoritative contract.
+
+- **Forbidden patterns:** opening a "spec gap" phase against spec/18 citing missing phase files without first running `ls -la spec/18-wp-plugin-how-to/*.md` to verify on-disk presence (Lesson #34 cache-staleness); auto-stamping such findings as CRITICAL in cache without human review (Lesson #30 verify-before-open).
+- **Verifies:** the auditor-authoritative inventory contract for spec/18's 27 on-disk files (mirror of AC-09 — AC-09 declares the inventory; this AC defines the auditor's response discipline when bundling truncates the view). Closes audit-v7 [D5 MEDIUM] "Unresolved internal sub-file references" via Lesson #29 module-kind pin (deep-tree variant — same pattern as spec/03/11/12/17/25 inventory pins).
+
 ---
 
 ## Module-Specific Files
