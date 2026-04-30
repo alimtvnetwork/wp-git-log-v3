@@ -83,6 +83,77 @@ else
   FAIL=$((FAIL+1))
 fi
 
+# 7. AC-34-10: axis multipliers normalise to sum 5.0 (apply_rubric_v7 invariant).
+if python3 -c "
+import importlib.util, pathlib
+spec = importlib.util.spec_from_file_location('aai', 'linter-scripts/audit-ai-implementability.py')
+m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+for axis in m.AXIS_VALUES:
+    s = sum(m.axis_multipliers(axis).values())
+    assert abs(s - 5.0) < 1e-6, f'{axis} sum={s}'
+# spot-check audit-corpus weighting penalises D2/D3 vs uniform
+r = m.apply_rubric_v7({'d1':20,'d2':20,'d3':20,'d4':20,'d5':20}, 'audit-corpus')
+assert r['total_v7'] == 95, f'audit-corpus 100s capped to 95, got {r[\"total_v7\"]}'
+" 2>/dev/null; then
+  echo "  PASS — AC-34-10: axis multipliers normalise to 5.0; audit-corpus capped at 95"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-10: multiplier renorm or cap broken"
+  FAIL=$((FAIL+1))
+fi
+
+# 8. AC-34-11: 60-floor preserved across all axes (BLOCKING band threshold unchanged).
+if python3 -c "
+import importlib.util
+spec = importlib.util.spec_from_file_location('aai', 'linter-scripts/audit-ai-implementability.py')
+m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+# A module scoring all 12s (raw 60) under any axis MUST land in NEEDS_WORK or above (≥60).
+# A module scoring all 11s (raw 55) MUST land in BLOCKING for axes whose multipliers don't lift it above 60.
+for axis in m.AXIS_VALUES:
+    r60 = m.apply_rubric_v7({k: 12 for k in ['d1','d2','d3','d4','d5']}, axis)
+    assert r60['total_v7'] >= 60, f'{axis} 12s should be ≥60, got {r60[\"total_v7\"]}'
+    # Caps never lift below their declared minimum (i.e. cap is a max, not a min).
+    assert r60['axis_cap'] >= 95, f'{axis} cap below 95: {r60[\"axis_cap\"]}'
+" 2>/dev/null; then
+  echo "  PASS — AC-34-11: 60-floor preserved across all 5 axes; caps ≥95"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-11: floor or cap invariant broken"
+  FAIL=$((FAIL+1))
+fi
+
+# 9. AC-34-12: missing/invalid content_axis MUST exit 2 (fail-fast).
+TMPMOD="spec/00-aai-axis-test-fixture"
+mkdir -p "$TMPMOD"
+# fixture A: no front-matter at all → exit 2
+cat > "$TMPMOD/00-overview.md" <<'EOF'
+# Test fixture (no front-matter)
+This module has no YAML front-matter and MUST trigger AC-34-12 fail-fast.
+EOF
+set +e
+python3 "$SCRIPT" --no-network --module=00-aai-axis-test-fixture >/dev/null 2>&1
+rc_missing=$?
+set -e
+# fixture B: invalid axis value → exit 2
+cat > "$TMPMOD/00-overview.md" <<'EOF'
+---
+content_axis: not-a-real-axis
+---
+# Test fixture (invalid axis)
+EOF
+set +e
+python3 "$SCRIPT" --no-network --module=00-aai-axis-test-fixture >/dev/null 2>&1
+rc_invalid=$?
+set -e
+rm -rf "$TMPMOD"
+if [ "$rc_missing" = "2" ] && [ "$rc_invalid" = "2" ]; then
+  echo "  PASS — AC-34-12: missing axis → exit 2; invalid axis → exit 2"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-12: expected exit 2/2, got missing=$rc_missing invalid=$rc_invalid"
+  FAIL=$((FAIL+1))
+fi
+
 echo
 echo "Result: $PASS passed, $FAIL failed"
 [ "$FAIL" = "0" ]
