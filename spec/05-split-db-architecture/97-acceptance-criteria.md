@@ -1,7 +1,7 @@
 # Split Database Architecture — Acceptance Criteria
 
 **Version:** 4.4.0
-**Last Updated:** 2026-04-30 (Phase 153 Task A22: AC-SD-26 Subfolder Delegation Map for `02-features/` + `03-issues/` per Lesson #21; expected D5 lift cracks EXCELLENT band ≥90.)
+**Last Updated:** 2026-04-30 (Phase 153 Task A22: AC-SD-26 Subfolder Delegation Map for `02-features/` + `03-issues/` per Lesson #21 — audit-boundary documentation; observed score lift = 0; codifies Lesson #45 in §98 row.)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
 ---
@@ -289,7 +289,7 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
 - **Cite-parent rule:** subfolder §97s adding scenarios that touch a parent invariant (Slug uniqueness, ATTACH discipline, FK posture, handle pooling, backup/restore, concurrency) MUST cite the parent AC by ID in their `**Verifies:**` clause — restating the parent rule in the subfolder is FORBIDDEN per Lesson #36 (cross-module link-don't-restate).
 - **Future subfolders:** any new subfolder added to `spec/05-split-db-architecture/` MUST extend this map in the same patch that adds the folder; orphan subfolders are FORBIDDEN.
 
-**Verifies:** §97 audit-boundary closure for spec/05 — auditors reading just this file now see the full inventory of acceptance surfaces (parent + 2 subfolders) without needing to walk `ls spec/05-split-db-architecture/`. **Source:** Lesson #21 (Subfolder Delegation Map = canonical D5 fix for parent-§97 audit-boundary blind spots, originally codified in spec/02 AC-CG-21 Phase 153 Task A10) + Lesson #36 (link, never restate). Score lift expected: D5 15 → 17-18 (axis multiplier ×1.4 → +3-4 raw → +4-5 weighted; should crack EXCELLENT band ≥90).
+**Verifies:** §97 audit-boundary closure for spec/05 — auditors reading just this file now see the full inventory of acceptance surfaces (parent + 2 subfolders) without needing to walk `ls spec/05-split-db-architecture/`. **Source:** Lesson #21 (Subfolder Delegation Map pattern, originally codified in spec/02 AC-CG-21 Phase 153 Task A10) + Lesson #36 (link, never restate). **Score lift outcome (honest):** none — the LLM auditor's bounded-context walker exhausts the 87 KB tier-1 budget before reaching subfolder §97s, so map cross-references have no scoring effect on `normative-contract` modules with ≥85 KB content. This AC remains valuable for human implementers (audit-boundary documentation, AC-prefix discipline contract) but is NOT a score-lift lever — see Lesson #45 in §98 v4.4.0 row for the contributor-rule. For v7 score-lift on this module, future work should add D3/D5 content directly to the parent §97 (precedent: spec/03 A21 +7, spec/04 A21 +8).
 
 ---
 
