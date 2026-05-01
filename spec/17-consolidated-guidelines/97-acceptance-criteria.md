@@ -141,7 +141,7 @@ The following files in this module also constitute acceptance surface — each m
 |---|---|---|---|
 | `01-spec-authoring.md` | `spec/01-spec-authoring-guide/` | live | AC-SAG-* in source §97 |
 | `02-coding-guidelines.md` | `spec/02-coding-guidelines/` | live | AC-CG-* in source §97 |
-| `03-error-management.md` | `spec/03-error-management/` | live | AC-EM-* in source §97 |
+| `03-error-management.md` | `spec/03-error-manage/` | live | AC-EM-* in source §97 |
 | `04-enum-standards.md` | `spec/02-coding-guidelines/04-enum-standards/` | live | AC-CG-15..18 (enum subset) |
 | `05-split-db-architecture.md` | `spec/05-split-db-architecture/` | live | AC-SD-* in source §97 |
 | `06-seedable-config.md` | `spec/06-seedable-config-architecture/` | live | AC-SC-* in source §97 |
@@ -192,13 +192,13 @@ The following files in this module also constitute acceptance surface — each m
 ### AC-12: Worked Example — source→consolidated mapping for `03-error-management.md`  `[medium]`
 
 - **Given** a fresh implementer or LLM auditor reading this §97 and asking "*how* does a 38 KB consolidated rollup relate to its source spec module?",
-- **When** the implementer inspects the `03-error-management.md` rollup (38191 bytes) alongside its source `spec/03-error-management/` (12+ files, ~150 KB total),
+- **When** the implementer inspects the `03-error-management.md` rollup (38191 bytes) alongside its source `spec/03-error-manage/` (12+ files, ~150 KB total),
 - **Then** the implementer MUST be able to follow the mapping below to verify (a) which source-§97 ACs are condensed, (b) which source narrative is dropped vs preserved, and (c) why the rollup's own `**AI Confidence:** Production-Ready` claim applies to the rollup's own structural floor (AC-01..05 of THIS §97) and NOT to the source module's deeper contract:
 
 **Worked Example (normative — closes audit-v7 MEDIUM D4):**
 
 ```
-SOURCE: spec/03-error-management/                           CONSOLIDATED: ./03-error-management.md
+SOURCE: spec/03-error-manage/                           CONSOLIDATED: ./03-error-management.md
 ├── 00-overview.md          (~8 KB, scope/purpose)         §1 Purpose             ← preserved verbatim
 ├── 01-error-taxonomy.md    (~22 KB, 6 categories)         §2 Error Taxonomy      ← table only, drops worked examples
 ├── 02-error-codes.md       (~18 KB, 9500..9599 ranges)    §3 Code Ranges         ← preserved verbatim (normative)
@@ -223,7 +223,7 @@ SOURCE: spec/03-error-management/                           CONSOLIDATED: ./03-e
 - Dropping a `[preserved verbatim]` section without first migrating its content into the cited source module.
 
 - **Verifies:** the source→consolidated mapping contract that closes audit-v7 MEDIUM D4 `Missing Worked Examples for Consolidated Format`; the example IS the worked example (meta-discoverable from §97 alone, walker-saturation safe per Lesson #45); reinforces AC-10 module-kind pin by demonstrating "rollup ≠ first-party normative source" mechanically rather than only declaratively.
-- **Source:** `./03-error-management.md` (the rollup under example); `spec/03-error-management/` (the source module); AC-10 above (rollup-not-contract module-kind pin); `mem://process/phase-153-lessons` § C Lesson #36 (link-don't-restate).
+- **Source:** `./03-error-management.md` (the rollup under example); `spec/03-error-manage/` (the source module); AC-10 above (rollup-not-contract module-kind pin); `mem://process/phase-153-lessons` § C Lesson #36 (link-don't-restate).
 
 ---
 

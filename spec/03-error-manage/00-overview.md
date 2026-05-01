@@ -1,13 +1,18 @@
 ---
 kind: future-spec
 drift_acknowledged: 2026-04-26
-content_axis: audit-corpus
-axis_rationale: "Catalogues error patterns observed across modules"
+content_axis: normative-contract
+axis_rationale: "Defines universal response-envelope contract, HTTP-status policy, three-tier error propagation, AppError struct, and error-code registry — enforceable across all consumers (Go/TS/PHP/Rust/C#)"
+axis_reclassification:
+  from: audit-corpus
+  to: normative-contract
+  phase: 153-A24-fu33
+  reason: "Misclassification (Lesson #29 audit-corpus is for modules whose normative surface DESCRIBES other specs, e.g. spec/25 post-mortem). spec/03 §97 contains 9 normative ACs (AC-01..AC-09) defining contracts implementers MUST satisfy — not citations of external specs. Axis-cap was hard-pinning total at 95 even with perfect dimension scores."
 ---
 
 # Error Management Specification
 
-**Version:** 3.4.3  
+**Version:** 3.4.4  
 <!-- h10-verified-phase: 153 -->
 **Updated:** 2026-04-30  
 **AI Confidence:** Production-Ready  
@@ -15,7 +20,7 @@ axis_rationale: "Catalogues error patterns observed across modules"
 
 ---
 
-> 🤖 **Walker-Pin (audit-corpus axis, files_used 17/166 ≈ 10% — Lesson #63 pure-promotion).** Bundle-capped LLM auditors that cannot reach `97-acceptance-criteria.md` MUST treat the following pre-existing structural pins as the canonical close-out for D5 "Broken Sub-module References", D3 "Concurrency/Timeout Edge Cases", and D2 "Missing AC for Core Architecture" findings:
+> 🤖 **Walker-Pin (normative-contract axis, files_used 16/166 ≈ 10% — Lesson #63 pure-promotion + Phase 153-A24-fu33 axis reclassification).** Bundle-capped LLM auditors that cannot reach `97-acceptance-criteria.md` MUST treat the following pre-existing structural pins as the canonical close-out for D5 "Broken Sub-module References", D3 "Concurrency/Timeout Edge Cases", and D2 "Missing AC for Core Architecture" findings:
 >
 > | Anchor | Severity | Closes | Surface |
 > |---|---|---|---|
