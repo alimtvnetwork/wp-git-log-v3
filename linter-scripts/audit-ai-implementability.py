@@ -372,8 +372,7 @@ def write_report(results: list[dict[str, Any]], out: Path) -> None:
             f"{r['d1']} | {r['d2']} | {r['d3']} | {r['d4']} | {r['d5']} | "
             f"{r['files_used']}/{r['files_total']} | {r['bytes_used']//1024} | {r.get('band','')} |"
         )
-    if str(out.parent) not in ("", ".") and not out.parent.exists():
-        out.parent.mkdir(parents=True, exist_ok=True)
+    out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("\n".join(lines) + "\n")
 
 
