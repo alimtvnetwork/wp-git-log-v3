@@ -3,36 +3,36 @@
   "d2": 20,
   "d3": 17,
   "d4": 15,
-  "d5": 14,
+  "d5": 19,
   "issues": [
-    {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Missing Sub-Module Context (Files 09-27)",
-      "why": "The overview references files 09 through 27 and subfolder 24 as 'Active', but these files are not provided in the context. A mediocre AI cannot verify the 'Three-branch version verification' (09) or 'Code signing' (12) logic it is told to implement in AC-08 and AC-09.",
-      "fix": "Provide the full content of files 09-27 and the 24-update-check-mechanism subfolder in the prompt context."
-    },
     {
       "severity": "HIGH",
       "dim": "D4",
-      "title": "Truncated Reference Implementation",
-      "why": "File 07-console-safe-handoff.md is truncated at the end due to the 120KB context cap, cutting off the 'Reference Implementation Pattern' code snippet.",
-      "fix": "Ensure the reference implementation in 07-console-safe-handoff.md is complete or moved to a shorter file."
+      "title": "Truncated Console-Safe Handoff Logic",
+      "why": "File 07-console-safe-handoff.md is truncated at the 'Root Cause' section, leaving the actual implementation of console-safe handoff (the core solution) undefined.",
+      "fix": "Provide the full content of 07-console-safe-handoff.md including the specific Windows API flags or Go exec patterns required."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous <module> Placeholder in Build Scripts",
-      "why": "While AC-22 explains the <module> placeholder, the actual code snippets in 04-build-scripts.md use it inside strings without a clear 'how-to-replace' for an AI that doesn't have web access to check go.mod logic.",
-      "fix": "Add a specific code example showing the transformation from 'module github.com/user/repo' to the ldflags string."
+      "title": "Ambiguous Rollback Trigger in Handoff",
+      "why": "AC-17 and 05-handoff describe rollback, but it's unclear how the detached worker signals the parent to rollback if the parent has already exited or is blocking on a failed process.",
+      "fix": "Explicitly define the exit code contract between worker and parent to trigger the rename-back logic."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Missing Unit for Cleanup Latency",
+      "why": "AC-16 mentions a 100ms cap for cleanup but doesn't specify if this is wall-clock time or CPU time, which matters for network-mounted filesystems.",
+      "fix": "Specify 'wall-clock time' for the 100ms p95 cleanup budget."
     }
   ],
   "module": "14-update",
   "files_used": 11,
   "files_total": 54,
   "bytes_used": 120000,
-  "bundle_sha": "ae15155450ed3b33",
-  "total_v6": 84,
+  "bundle_sha": "6a9329afd4f3a5f0",
+  "total_v6": 89,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 87.4,
-  "total_v7": 87,
-  "total": 87,
-  "band": "GOOD",
+  "weighted_total": 89.9,
+  "total_v7": 90,
+  "total": 90,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

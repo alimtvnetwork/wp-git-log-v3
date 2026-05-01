@@ -1,38 +1,38 @@
 {
   "d1": 18,
   "d2": 20,
-  "d3": 17,
-  "d4": 15,
-  "d5": 16,
+  "d3": 19,
+  "d4": 17,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Truncated Context (Files 14-21 Missing)",
-      "why": "The module is truncated at 120KB. Critical normative files for Date Formatting (14), Constants (15), Verbose Logging (16), Progress (17), Batch Exec (18), Shell Completion (19), Terminal Design (20), and Post-Install (21) are missing from the provided context.",
-      "fix": "Provide the remaining files (14-21) or increase the context window to include the full 117 KB module."
+      "title": "Truncated Context (Files 13-21)",
+      "why": "The module is truncated at file 13 due to the 120KB context cap. Files 14-21 (Date Formatting, Constants, Logging, Progress, Batch, Shell Completion, Terminal Design, Post-Install) are missing from the provided text.",
+      "fix": "Provide the remaining files (14-21) in a follow-up message or reduce the size of earlier files to fit the cap."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Missing Concrete Examples for Multi-Format Output",
-      "why": "While AC-09 and 06-output-formatting.md define the requirement for CSV/Markdown/JSON, they lack the specific sample I/O or 'Worked Cases' required for a mediocre coder to implement the exact layout (e.g., specific CSV headers or Markdown table styles) without guessing.",
-      "fix": "Add a 'Worked Examples' section to 06-output-formatting.md with sample input data and the resulting CSV/JSON/MD strings."
+      "title": "Missing Multi-Format Examples",
+      "why": "AC-09 requires specific output formats (JSON, CSV, Markdown), but the provided text in 06-output-formatting.md only describes them without providing concrete sample I/O or code snippets for the renderers.",
+      "fix": "Add concrete code snippets for renderJSON, renderCSV, and renderMarkdown to 06-output-formatting.md."
     },
     {
       "severity": "LOW",
-      "dim": "D3",
-      "title": "Undefined 'isBusyOrLocked' Implementation",
-      "why": "10-database.md references a predicate 'isBusyOrLocked(err)' in the Go snippet but does not provide the implementation, leaving the coder to guess how to extract SQLite error codes.",
-      "fix": "Add the implementation of isBusyOrLocked using errors.As or type assertion to the Go snippet in 10-database.md."
+      "dim": "D1",
+      "title": "Stale Prose in Code Examples",
+      "why": "Despite AC-21/AC-26, some code examples (e.g., 07-error-handling.md) still use bare integers or 'exit 1' in comments/code which contradicts the typed ExitCode enum requirement.",
+      "fix": "Replace all literal 'os.Exit(1)' in code blocks with 'os.Exit(int(exit.ExitError))' and add the mandatory AC-21 comment."
     }
   ],
   "module": "13-generic-cli",
   "files_used": 16,
   "files_total": 24,
   "bytes_used": 120000,
-  "bundle_sha": "3062f34a1da1b1c1",
-  "total_v6": 86,
+  "bundle_sha": "ba6baa15cf63710d",
+  "total_v6": 89,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 88.4,
-  "total_v7": 88,
-  "total": 88,
-  "band": "GOOD",
+  "weighted_total": 91.9,
+  "total_v7": 92,
+  "total": 92,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
+  "d2": 19,
   "d3": 15,
-  "d4": 18,
-  "d5": 16,
+  "d4": 17,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing Acceptance Criteria for Core Architecture",
-      "why": "The root 00-overview.md defines a 'Three-Tier Error Architecture' and 'Universal Response Envelope', but the ACs in 97-acceptance-criteria.md lack specific 'Verifies' clauses for the Tier 2 (Go apperror) and Tier 3 (Frontend Modal) implementation details mentioned in the normative contract.",
-      "fix": "Add ACs for Tier 2 stack trace serialization and Tier 3 Modal rendering requirements with explicit Verifies clauses."
+      "dim": "D5",
+      "title": "Truncated Context / Missing Sub-modules",
+      "why": "The spec relies heavily on sub-folders (02-error-architecture, 03-error-code-registry) which are referenced as canonical but are truncated in the provided 120KB context.",
+      "fix": "Provide the full content of 02-error-architecture/ and 03-error-code-registry/ to resolve core implementation logic for AppError and the Registry."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency and Timeout Edge Cases Unaddressed",
-      "why": "While retrospectives mention 'Retry/Debounce' fixes, the normative contracts (Phase 50/57) do not define behavior for request timeouts, partial failures in 'Merge' operations, or race conditions in the registry scripts.",
-      "fix": "Add a 'Resilience' section to the Normative Contract defining timeout limits and partial-failure state transitions."
+      "title": "Concurrency in Registry Scripts",
+      "why": "The spec mentions collision resolution and registry scripts but does not define how the 'error-codes-master.json' handles concurrent CI writes or locking.",
+      "fix": "Add a concurrency section to 03-error-code-registry/00-overview.md specifying a 'last-writer-wins' or 'CI-lock' policy."
     },
     {
       "severity": "LOW",
-      "dim": "D5",
-      "title": "Dangling Sub-module References",
-      "why": "The overview references '02-go-delegation-fix.md' and '07-logging-and-diagnostics/', but these files are not provided in the context, making it impossible for an offline coder to verify the full logic.",
-      "fix": "In-line the critical path logic from the missing architecture files into the 00-overview.md or 97-acceptance-criteria.md."
+      "dim": "D1",
+      "title": "Ambiguous 'identifier' in Fallback Flow",
+      "why": "AC-07 and Retrospective 04 mention a fallback to WP Core API using '{identifier}', but don't specify if this is the numeric ID or the string slug.",
+      "fix": "Explicitly define 'identifier' as the 'plugin-folder/plugin-file.php' string in 01-error-resolution/03-retrospectives/04-activation-endpoint-mismatch.md."
     }
   ],
   "module": "03-error-manage",
-  "files_used": 17,
+  "files_used": 16,
   "files_total": 166,
   "bytes_used": 120000,
-  "bundle_sha": "ee926dd5dd1c0e94",
-  "total_v6": 81,
+  "bundle_sha": "e29d7d819562678a",
+  "total_v6": 83,
   "axis": "audit-corpus",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 1.5
   },
   "axis_cap": 95,
-  "weighted_total": 83.5,
-  "total_v7": 84,
-  "total": 84,
+  "weighted_total": 81.5,
+  "total_v7": 82,
+  "total": 82,
   "band": "GOOD",
   "rubric": "v7"
 }

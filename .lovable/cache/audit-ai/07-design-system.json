@@ -8,30 +8,30 @@
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Missing Component Logic (Leaf Files)",
-      "why": "The walker saturation (Lesson #51) means files 02-13 containing specific logic for Sidebar, Buttons, and Typography are missing from the context. While ACs exist, the 'how-to' implementation details for complex components are absent.",
-      "fix": "The auditor pin acknowledges this; however, for 100% confidence, the specific leaf file for the assigned task must be provided in the prompt context."
+      "title": "Walker-Saturation Context Gap",
+      "why": "The auditor walker byte-cap (120KB) excludes 13 leaf files (02-13) containing the actual component logic for Sidebar, Buttons, and Typography.",
+      "fix": "The spec already includes a 'Structural Pin' (AC-039) to acknowledge this; implementers must rely on the detailed GWT criteria in \u00a797 which act as the normative proxy for the missing files."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Missing Error Handling for Clipboard API",
-      "why": "AC-024 mentions falling back to a legacy textarea technique if the Clipboard API fails, but does not provide the code or specific logic for this fallback.",
-      "fix": "Add a code snippet or specific library reference (e.g., copy-to-clipboard) for the legacy fallback implementation."
+      "title": "Missing Concurrency/Race Condition Handling in Theme Toggle",
+      "why": "While FOUC is addressed via a head script, the interaction between the system 'prefers-color-scheme' listener and the manual toggle state is not explicitly defined for edge cases (e.g., OS theme change while app is open).",
+      "fix": "Add a requirement to AC-005 for a window.matchMedia listener that updates the theme only if no localStorage override exists."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous 'STRUCTURE' Detection",
-      "why": "AC-025 requires detecting directory trees but doesn't define the regex or logic for 'directory patterns ending in /' vs standard code comments.",
-      "fix": "Define a specific regex or logic gate (e.g., 'lines containing \u251c or \u2514') to trigger the STRUCTURE badge."
+      "title": "Ambiguous 'Primary-Glow' Token Usage",
+      "why": "The --primary-glow token is defined in \u00a700 but its specific HSL derivation logic (relative to --primary) is not pinned, leading to potential inconsistency if re-themed manually.",
+      "fix": "Explicitly state in \u00a700 that --primary-glow should maintain a +15% lightness offset from --primary unless otherwise specified."
     }
   ],
   "module": "07-design-system",
-  "files_used": 3,
-  "files_total": 17,
+  "files_used": 4,
+  "files_total": 18,
   "bytes_used": 120000,
-  "bundle_sha": "ae161d469076543b",
+  "bundle_sha": "a10e604d64fb5658",
   "total_v6": 89,
   "axis": "process-guidance",
   "axis_multipliers": {
