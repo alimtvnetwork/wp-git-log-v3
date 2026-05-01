@@ -1,38 +1,38 @@
 {
-  "d1": 19,
-  "d2": 18,
-  "d3": 17,
-  "d4": 19,
+  "d1": 18,
+  "d2": 17,
+  "d3": 19,
+  "d4": 18,
   "d5": 20,
   "issues": [
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Stale Date/Version Drift",
-      "why": "The Overview (00) and Changelog (98) are dated 2026-04-30, but the Consistency Report (99) footer is dated 2026-04-22, violating the AC-04 lockstep freshness rule.",
-      "fix": "Update the footer date in 99-consistency-report.md to 2026-04-30 to match the module's latest release."
-    },
-    {
-      "severity": "LOW",
       "dim": "D2",
-      "title": "Minor GWT Structural Gap",
-      "why": "AC-11 (Subfolder Delegation Map) lacks a 'Verifies' clause, which is required for P3-tier AI confidence as defined in the module's own authoring rules.",
-      "fix": "Add a '**Verifies:** the mapping of rollup files to normative source modules' clause to AC-11."
+      "title": "Truncated Acceptance Criteria in \u00a701",
+      "why": "The provided context cuts off mid-sentence in spec/17-consolidated-guidelines/01-spec-authoring.md due to the 120KB cap, leaving the AI coder without the full authoring contract.",
+      "fix": "Prioritize the delivery of the normative \u00a797 and \u00a700 files over the large descriptive NN-*.md files to ensure the contract is received before the cap."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Inventory Count Mismatch",
-      "why": "The Consistency Report (99) summary claims 34 files, but the release notes for 3.5.0/3.4.3 and the inventory table itself list up to slot 35.",
-      "fix": "Update the 'Total' count in the Consistency Report file inventory to 35."
+      "title": "Aspirational Folder References",
+      "why": "The inventory lists folders like 08-docs-viewer-ui and 09-code-block-system which are marked as 'aspirational' or 'STUB', potentially confusing an AI looking for physical source files.",
+      "fix": "Ensure the AI system prompt explicitly defines 'STUB' status as a skip-condition for file-system verification."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Worked Example refers to external module",
+      "why": "AC-12 provides a worked example for 03-error-management.md, but the source module spec/03-error-manage/ is not provided in this context, preventing direct verification of the mapping rules.",
+      "fix": "Include a small inline snippet of the source \u00a797 within the worked example block for immediate comparison."
     }
   ],
   "module": "17-consolidated-guidelines",
   "files_used": 5,
   "files_total": 39,
   "bytes_used": 120000,
-  "bundle_sha": "1911dcca34ffcdcb",
-  "total_v6": 93,
+  "bundle_sha": "c9fe22d5fc58b536",
+  "total_v6": 92,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 93.7,
-  "total_v7": 94,
-  "total": 94,
+  "weighted_total": 92.1,
+  "total_v7": 92,
+  "total": 92,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

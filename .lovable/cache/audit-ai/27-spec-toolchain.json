@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 19,
-  "d3": 17,
-  "d4": 20,
-  "d5": 18,
+  "d2": 16,
+  "d3": 19,
+  "d4": 18,
+  "d5": 15,
   "issues": [
     {
-      "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "R3 Network Timeout Ambiguity",
-      "why": "R3 mandates a 60s timeout and 3x exponential backoff for LLM calls but doesn't provide a normative code snippet like R1 and R2, increasing implementation variance for new auditors.",
-      "fix": "Add a normative Python/Node code snippet for R3 in \u00a700 demonstrating the specific backoff and jitter logic."
-    },
-    {
-      "severity": "LOW",
+      "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Dangling Reference to check-ac-family-index.py",
-      "why": "AC-T-31 references a future validator 'check-ac-family-index.py' which is not yet in the inventory or provided in the context.",
-      "fix": "Mark the script as 'TBD/Future' in the AC-T-31 text or add it to the reserved slot range in the inventory."
+      "title": "Missing Per-Artifact Spec Files",
+      "why": "The module references 79 external spec files (NN-*.md) which are the 'canonical source of truth' for script logic, but these are not provided in the context. A mediocre AI cannot implement the toolchain logic (e.g., the specific regex for a validator or the logic for a generator) without these files.",
+      "fix": "Provide the content of the 50+ NN-*.md files or consolidate core logic for critical scripts into the overview."
     },
     {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Exit Code 2 vs 130 Conflict",
-      "why": "R4 mandates exit 130 for signal interrupts, while R5 and others mandate exit 2 for environmental errors; a mediocre coder might confuse 'invocation error' with 'process interrupt'.",
-      "fix": "Explicitly state in the Exit Codes table that 130 is the reserved override for SIGINT/SIGTERM per R4."
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Delegated Acceptance Criteria",
+      "why": "AC-T-29 explicitly delegates per-script logic to external files. While the 'Slot Delegation Map' and 'AC Family Prefix Index' provide metadata, they do not provide the actual Given/When/Then criteria required for implementation.",
+      "fix": "Include the GWT criteria for the most critical toolchain scripts (01, 05, 10, 14, 24, 70) directly in \u00a797."
+    },
+    {
+      "severity": "MEDIUM",
+      "dim": "D5",
+      "title": "Unresolved External Memory References",
+      "why": "The spec frequently references 'mem://' URIs (e.g., mem://index.md, mem://process/phase-153-lessons) and specific Phase 107/108 ledgers that are not present in the provided context.",
+      "fix": "Inline the specific rules or constants referenced from the memory/ledger files into the Normative Contract section."
     }
   ],
   "module": "27-spec-toolchain",
   "files_used": 3,
-  "files_total": 51,
+  "files_total": 52,
   "bytes_used": 120000,
-  "bundle_sha": "21c3188593fa124c",
-  "total_v6": 92,
+  "bundle_sha": "1008c51e0dfea621",
+  "total_v6": 86,
   "axis": "tooling-spec",
   "axis_multipliers": {
     "d1": 0.9091,
@@ -42,9 +42,9 @@
     "d5": 0.8182
   },
   "axis_cap": 100,
-  "weighted_total": 92.6,
-  "total_v7": 93,
-  "total": 93,
-  "band": "EXCELLENT",
+  "weighted_total": 86.1,
+  "total_v7": 86,
+  "total": 86,
+  "band": "GOOD",
   "rubric": "v7"
 }
