@@ -1,10 +1,19 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.4.3
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu2 — AC-23 Deterministic SVG-render protocol; closes v7 [D3] MEDIUM + reinforces AC-22 [D4]+[D5] harness-artifact pin)
+**Version:** 3.4.4
+**Updated:** 2026-05-01 (Phase 153 Task A24-fu34 — axis reclassification audit-corpus → normative-contract per Lesson #69)
 **Scope:** `spec/26-gitlogs-diagrams/`
 
 ---
+
+## [3.4.4] — 2026-05-01 — Phase 153 Task A24-fu34: axis reclassification (audit-corpus → normative-contract)
+
+- **Changed** front-matter `content_axis: audit-corpus` → `content_axis: normative-contract` per Lesson #69 tree-wide audit. Added `axis_reclassification:` block citing phase + reason for forward auditability.
+- **Why**: spec/26 §97 contains 22+ GWT-style normative ACs (AC-DG-01 ER-table coverage, AC-DG-02 cardinality alignment, AC-DG-03 auth-flow order, AC-DG-04 RolePermission-union resolution, AC-DG-05 type+intent header comments, AC-DG-06 emoji-free lexer compliance, AC-DG-07 JWT/RS256/JWKS absence, AC-DG-08 endpoints-mindmap completeness, etc.) defining diagram invariants implementer audience (diagram authors) MUST satisfy. Per Lesson #69 strict definition: `audit-corpus` is reserved for modules whose normative surface DESCRIBES other specs (post-mortems, deprecation registries — e.g. spec/10 routing-meta, spec/25 post-mortem). spec/26 OWNS the diagrams as artifacts; depicting spec/22 architecture does NOT make it a corpus describing spec/22 (mirror of fu33 spec/03 reasoning at the artifact-vs-citation axis).
+- **Diagnosis**: v9 cache `total=88 weighted=87.5 cap=95 d2=20 d3=17` — d2 at maximum + d3 strong, exactly the dimensions audit-corpus axis penalises (×0.5). Sibling spec/03 same pattern (fu33: 82 → 94 EXCELLENT after reclassification). Expected post-fix score 92-94 EXCELLENT (axis_cap 95 → 100; d2 ×0.5 → ×1.5 lifts weighted by ~10 points; capped near 95).
+- **Spec lockstep**: §00 v3.4.3 → **v3.4.4** (patch — front-matter); §98 v3.4.3 → **v3.4.4** (patch — this row); §99 v3.3.3 → **v3.3.4** (patch — Phase 153 audit row). **§97 unchanged at v3.3.0** — no contract change, no AC-31-31 cascade, no RUBRIC bump.
+- **Lesson #69 second instance** (after fu33 spec/03 first instance) — pattern stable across normative-contract-defining axes.
+- **Tree-wide axis audit complete**: spec/10 (audit-corpus, routing-only — CORRECT, retain); spec/25 (audit-corpus, post-mortem-router — CORRECT, retain per Lesson #29); spec/26 (audit-corpus, MISCLASSIFIED — fixed here). 0 additional misclassifications surfaced. Lesson #69 stands as a forward-looking guard.
 
 ## [3.4.3] — 2026-04-30 — Phase 153 Task A24-fu2: AC-23 Deterministic SVG-render protocol
 
