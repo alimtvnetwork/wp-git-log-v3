@@ -5,8 +5,8 @@ axis_rationale: "Token/component conventions for designers and authors"
 
 # AI-Adaptable Design System
 
-**Version:** 3.4.5  
-**Updated:** 2026-04-30 (Phase 153 A24-fu16 — §00 walker-saturation pin promoted to top of file + AC-039 promoted [medium]→[critical]; closes recurring v8 audit-cache CRITICAL/D5 + HIGH/D4 walker-cap artifacts per Lessons #50/#51)
+**Version:** 3.4.6  
+**Updated:** 2026-05-01 (Phase 153 A24-fu31 — §98 archive split per Lesson #65; rows v3.3.0 → v1.0.0 relocated to `_archive/98-changelog-pre-v3.4.0.md`; tier-1 bundle 137 KB → 122.7 KB CLEAR under walker cap)
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
 **AI Confidence:** Production-Ready  
