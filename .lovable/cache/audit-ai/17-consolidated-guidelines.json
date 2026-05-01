@@ -1,39 +1,38 @@
 {
-  "d1": 18,
-  "d2": 14,
-  "d3": 15,
-  "d4": 12,
-  "d5": 19,
-  "score_rationale": "The module is exceptionally well-structured for a 'consolidated' guide, providing high-level clarity on project-wide standards. D1 is strong due to explicit naming and versioning rules. D2 is lower because while the meta-acceptance criteria (AC-01 to AC-12) are very detailed, they focus on the *structure* of the guidelines rather than the *implementation* of the logic described within the sub-files (e.g., the actual coding rules). D4 is moderate; while it provides some mapping examples, it lacks a 'first-try' implementation walkthrough for a specific guideline. D3 is solid but doesn't fully address concurrency or large-scale drift in the consolidated files themselves.",
+  "d1": 19,
+  "d2": 18,
+  "d3": 17,
+  "d4": 19,
+  "d5": 20,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D2",
-      "title": "Circular/Self-Referential Acceptance Criteria",
-      "why": "The ACs in 97-acceptance-criteria.md verify that the files exist and are formatted correctly, but they do not provide GWT tests for the *content* of the guidelines (e.g., 'Given a JSON key with an underscore, When validated, Then it fails').",
-      "fix": "Add a 'Logic Verification' AC that requires every consolidated rule to have a corresponding negative/positive test case in the linter suite."
-    },
-    {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Missing Worked Examples for Consolidated Format",
-      "why": "While AC-12 provides a mapping example, there is no example showing how an AI should handle a conflict between a 'Consolidated' rule and a 'Source' rule if drift occurs.",
-      "fix": "Add a 'Conflict Resolution' example to 00-overview.md explicitly stating that Source ACs always override Consolidated summaries."
+      "dim": "D3",
+      "title": "Stale Date/Version Drift",
+      "why": "The Overview (00) and Changelog (98) are dated 2026-04-30, but the Consistency Report (99) footer is dated 2026-04-22, violating the AC-04 lockstep freshness rule.",
+      "fix": "Update the footer date in 99-consistency-report.md to 2026-04-30 to match the module's latest release."
     },
     {
       "severity": "LOW",
-      "dim": "D3",
-      "title": "Stale TODO/Marker Heuristic False Positives",
-      "why": "The 'Audit Marker Exemption' in 00-overview.md is a manual note rather than a technical contract that an AI coder can implement to avoid linter failures.",
-      "fix": "Define a specific comment syntax (e.g., // LINTER-IGNORE-TODO) in the coding guidelines to programmatically handle these cases."
+      "dim": "D2",
+      "title": "Minor GWT Structural Gap",
+      "why": "AC-11 (Subfolder Delegation Map) lacks a 'Verifies' clause, which is required for P3-tier AI confidence as defined in the module's own authoring rules.",
+      "fix": "Add a '**Verifies:** the mapping of rollup files to normative source modules' clause to AC-11."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Inventory Count Mismatch",
+      "why": "The Consistency Report (99) summary claims 34 files, but the release notes for 3.5.0/3.4.3 and the inventory table itself list up to slot 35.",
+      "fix": "Update the 'Total' count in the Consistency Report file inventory to 35."
     }
   ],
   "module": "17-consolidated-guidelines",
-  "files_used": 6,
+  "files_used": 5,
   "files_total": 39,
   "bytes_used": 120000,
-  "bundle_sha": "13ce552a49639426",
-  "total_v6": 78,
+  "bundle_sha": "1911dcca34ffcdcb",
+  "total_v6": 93,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -43,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 79.8,
-  "total_v7": 80,
-  "total": 80,
-  "band": "GOOD",
+  "weighted_total": 93.7,
+  "total_v7": 94,
+  "total": 94,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

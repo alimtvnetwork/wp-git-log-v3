@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 15,
-  "d4": 19,
-  "d5": 18,
+  "d2": 19,
+  "d3": 17,
+  "d4": 18,
+  "d5": 20,
   "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT for Core Naming Rules",
-      "why": "While AC-10/11/12 cover ORM and Booleans, the fundamental 'Golden Rules' (Singular names, PascalCase, PK={Table}Id) lack explicit GWT criteria in the AC file.",
-      "fix": "Add AC-14 with GWT steps to verify Table/Column naming and PK/FK identity matching against the Canonical DDL."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous 'Smallest Type' Enforcement",
-      "why": "Rule 1.1 and 2 suggest using SMALLINT/TINYINT, but the Canonical DDL uses INTEGER for everything, creating a conflict for a mediocre coder.",
-      "fix": "Update Canonical DDL in 00-overview.md to use SMALLINT for ProjectStatusId to demonstrate the sizing rule."
+      "title": "Ambiguous 'Smallest Type' Heuristic for AI",
+      "why": "AC-15 defines a lookup table as having '\u2264 5 columns' and 'one unique TEXT Code', but doesn't specify behavior if a table has 6 columns but is clearly a static enum. A mediocre AI might strictly follow the count and use INTEGER, violating the intent.",
+      "fix": "Clarify that the 5-column rule is a guideline and the 'migration-only inserts' condition is the primary determinant for SMALLINT."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Inconsistent View Naming Prefix",
-      "why": "01-naming-conventions.md specifies 'Vw' prefix for views, but the Canonical DDL in 00-overview.md uses 'View' suffix (ProjectWithOwnerView).",
-      "fix": "Standardize on 'Vw' prefix in the Canonical DDL (e.g., VwProjectWithOwner)."
+      "title": "Inconsistent Boolean Type Mapping for MySQL",
+      "why": "\u00a72.1.1 specifies TINYINT(1) for MySQL, but \u00a701 Rule 1 uses 'BOOLEAN' in the SQL snippet. While MySQL aliases BOOLEAN to TINYINT(1), an AI might be confused about which keyword is 'normative' for DDL generation.",
+      "fix": "Standardize all MySQL examples to use TINYINT(1) explicitly to match the normative storage table."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Truncated View Example",
+      "why": "The end of 03-orm-and-views.md is truncated due to the context cap, leaving the 'Example \u2014 Creating and Using a View' incomplete.",
+      "fix": "Ensure the worked example for View creation is moved or summarized within the first 100KB of the module."
     }
   ],
   "module": "04-database-conventions",
-  "files_used": 9,
+  "files_used": 7,
   "files_total": 11,
   "bytes_used": 120000,
-  "bundle_sha": "0ead3d11a9dd6392",
-  "total_v6": 84,
+  "bundle_sha": "a8dba4598a5357e2",
+  "total_v6": 92,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 81.2,
-  "total_v7": 81,
-  "total": 81,
-  "band": "GOOD",
+  "weighted_total": 91.3,
+  "total_v7": 91,
+  "total": 91,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }
