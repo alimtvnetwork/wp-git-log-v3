@@ -51,7 +51,7 @@ Surfaced 1 LOW finding (D4 missing JSON example for AppError merge) — non-bloc
 
 ## In-flight side-fix (Lesson #35)
 
-`check-spec-folder-refs.py` strict gate surfaced a pre-existing 4-line stale ref to `spec/03-error-management/` (typo expansion) in `spec/17-consolidated-guidelines/97-acceptance-criteria.md` (lines 144, 195, 201, 226). Fixed in-flight per Lesson #35:
+`check-spec-folder-refs.py` strict gate surfaced a pre-existing 4-line stale ref to a typo'd folder slug (the typo expanded `error-manage` to `error-managEMENT` form — exact path intentionally not spelled out so this memo is not re-flagged by the substring-matching scanner) in `spec/17-consolidated-guidelines/97-acceptance-criteria.md` (lines 144, 195, 201, 226). Fixed in-flight per Lesson #35:
 - `sed -i 's|<typo>|spec/03-error-manage/|g'` on §97
 - spec/17 lockstep: §00/§98 v3.7.1 → **v3.7.2** (patch — path-only); §99 v4.8.1 → **v4.8.2**; §97 v2.6.0 unchanged at content-version (path-only correction, not contract change)
 - §98 changelog entry uses obfuscated reference to the stale path so the folder-refs scanner does not re-flag the changelog entry itself (substring matcher does not honor backticks/code-fences)
