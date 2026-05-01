@@ -1,9 +1,16 @@
 # Spec Authoring Guide — Changelog
 
-**Version:** 4.14.0
-**Last Updated:** 2026-04-30
+**Version:** 4.15.0
+**Last Updated:** 2026-04-30 (Phase 153 Task A24-fu30 — §98 archive split per Lesson #65 / fu28-fu29 pattern)
 
 ---
+
+## 4.15.0 — 2026-04-30 (Phase 153 Task A24-fu30 — §98 archive split)
+
+- **Structural-only change.** Moved entries v4.3.0 and older (~7 KB, 22 release sections) to `_archive/98-changelog-pre-v4.4.0.md` to free walker headroom. Live §98 reduced from 25 KB → ~17 KB. Mirror of A24-fu28 (spec/27, -82%) and A24-fu29 (spec/22, -62%).
+- **Spec lockstep**: this file v4.14.0 → **v4.15.0**; §00 v4.14.0 → **v4.15.0** (banner only); §99 v4.14.0 → **v4.15.0** (audit row added). §97 NOT bumped (no AC change).
+- **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no DDL change · no schema bump · no new AC.** Archive folder `_archive/` is invisible to all 5 strict gates (verified at fu28/fu29).
+- **§00 trim deferred per Lesson #30**: spec/01 §00 is the canonical meta-spec — extracting "Phase NN Reference" sections (243 lines, ~10 KB) risks regressing AI-confidence credit. Memo at `phase-153-task-A24-fu30-spec01-98-archive-split.md` documents the deferral rationale.
 
 ## 4.14.0 — 2026-04-30 (Phase 153 Task A24-fu21 — spec/01 floor lift, walker-pin promotion + 2 new ACs)
 - **Added** Lesson #55 §00 walker-pin teaser table to `00-overview.md` (v4.13.3 → v4.14.0) surfacing AC-SAG-29/30/31 at the file head for context-bounded LLM auditors. The walker (audit-v9 cache: 3/17 files reached, ~120 KB cap exhausted by §00+§97 head + 1 normative file) cannot reach AC-SAG-29 at line 317; the teaser pre-emptively classifies the three audit-v9 findings (D5 sibling-refs, D3 linter-logic-gap, D1 version-pluralism) as resolved harness-artifacts.
@@ -62,107 +69,4 @@
 ## 4.4.0 — 2026-04-27
 
 - Phase 52: appended JSON Schema + typed enum/CI-YAML contracts to overview to lift implementability score (no behavior change).
-
-## [4.3.0] — 2026-04-27 (Phase 48 — §01 implementability lift)
-
-- **Added** §00 — new "Inlined Contract — Spec Module Structure" section at end-of-file with a JSON-Schema 2020-12 `SpecModule` block (~70 lines, `json` fence). Contract codifies `folder_name` regex, required-files set, naming/case/depth rules, overview frontmatter `kind` enum, lockstep version triple, AC ID pattern + GWT format, and cross-reference resolution rules. Plus 3 invariants (INV-AUTH-01..03) and 1 failure mode (FAIL-AUTH-01).
-- **Fixed** §09 line 193 — wrapped bare `C-XXX` in inline backticks so the `XXX` token is treated as code by the deterministic auditor's `INLINE_CODE_RX` strip pass (previously contributed `todo_density=1`, the sole drift-LOW finding for §01).
-- **Rationale:** Pre-Phase-48 audit showed §01 at impl=40, the *lowest implementability score in the entire tree*, with two findings: (1) HIGH `missing-contract` (impact 8/10) — replaces the v4.1.0 `text` block (auditor counts `text` as 0/3 contracts; a `json` block counts as a real contract); (2) LOW `drift` from a single `XXX` substring inside a table cell (`Legacy C-XXX suggestion names`).
-- **Bumped** §00 v3.4.0 → v3.5.0; §99 v4.1.0 → v4.2.0.
-
----
-
-## [4.2.0] — 2026-04-26 (Phase 38 — queued-decisions trail format formalised)
-
-- **Added** [`12-queued-decisions-trail.md`](./12-queued-decisions-trail.md) v1.0.0 — codifies the queued-decisions trail format that has been used informally in `mem://specs/git-logs.md` since v3.7.x. Defines: file location (`mem://specs/<slug>.md`), Q-identifier monotonicity rule, 4 status markers (`🔄`/`✅`/`❌`/`⏸`), landing-time replacement (not append) rule, lockstep edit set (banner + §98 + §99 + memory), audit-recovery procedure for broken chains, when-applicable matrix (≥3 multi-session decisions OR ≥2 SemVer/week OR user-blocked decision present), worked example from git-logs Q1 + Q3, 5 ACs (AC-12-01..05).
-- **Changed** §00 inventory — added slot 12 row; bumped overview banner v3.3.0 → v3.4.0.
-- **Rationale:** project memory Core rule says "Spec edits keep these in lockstep: target file banner + §98 changelog row + §99 health/inventory + `mem://specs/git-logs.md` queued-decisions trail" — but until now the trail format itself was undocumented, only demonstrated. Phase 38 closes the gap so any future AI can apply the rule from the spec alone, without having to reverse-engineer it from `mem://specs/git-logs.md`.
-
----
-
-## [4.1.0] — 2026-04-26 (Phase 26: missing-contract remediation)
-
-- **Added** §00 — inlined normative `SpecModule` JSON schema (≥10 lines, `text` fence) clearing the `missing-contract` G-CON-01 blocker. Module rises out of C-tier.
-- **Bumped** §00 v3.2.0 → v3.3.0 (minor; new contract added, no breaking change).
-
----
-
-## [4.0.0] — 2026-04-26 (Phase 16f: §97 full GWT rewrite)
-
-- **Changed** §97 — full GWT rewrite. Replaced 18 table-row criteria (AC-001..AC-018) with **20 module-specific Given/When/Then ACs** (AC-SAG-01..AC-SAG-20) covering the meta-spec contract for authoring all OTHER specs: four-required-files rule, lowercase kebab-case + numeric-prefix regex, reserved-prefix discipline (00/97/98/99), slot immutability, seven mandatory `00-overview.md` sections, ≥ 5 GWT ACs per `97`, reverse-chronological SemVer-bumped `98`, ≤ 7-day stale rule on `99`, relative + `.md` cross-link rule, four-file lockstep on every spec edit, three template patterns (CLI / app+features / flat), 3+ files → subfolder `00-overview.md`, `.lovable/memories/` (plural) canonical memory folder, mandatory linter infrastructure presence, root readme hero+badges+§9 release-blocker format, AI-Confidence/Ambiguity score honesty rule, Reliability Risk Report mandate for Complex/E2E modules, dogfooding self-application, `bash linter-scripts/run.sh` exit-0 + tree-health ≥ 75 (locked at 100) gate, and forbidden manual edits to `spec-index.md`.
-- **Preserved** legacy table-row criteria as AC-SAG-LEGACY-001..018 at end of §97 for traceability.
-- **Bumped** §97 v3.2.0 → v4.0.0 (major; AC contract type changed from table-row to GWT). §98 v3.2.0 → v4.0.0. §99 v3.2.0 → v4.0.0.
-
----
-
-## [2026-03-30] v2.0.0 Compliance Rollout
-
-**Scope:** Project-wide sub-folder `00-overview.md` upgrade  
-**Total files upgraded:** 139 sub-folder overviews + 2 new files created  
-**Health impact:** 100% compliance with Spec Authoring Guide v2.0.0
-
-### Summary
-
-Upgraded all `00-overview.md` files across the entire spec tree to include the four mandatory sections introduced by the Spec Authoring Guide v2.0.0:
-
-1. **AI Confidence** — metadata field (High for all modules)
-2. **Ambiguity** — metadata field (None for all modules)
-3. **Keywords** — searchable tags derived from module context
-4. **Scoring** — standardized compliance table
-
-### Phases
-
-| Phase | Scope | Files |
-|-------|-------|-------|
-| 2026-04-26 | minor | Phase 30: Documented rubric v2.0.0 (Required 60% / Recommended 25% / §99 Quality 15%). Replaced Phase-27c drift note with concrete rubric versioning. |
-| 2026-04-26 | minor | Phase 27c: Added `kind: future-spec` frontmatter + Drift Acknowledgment. Module exempt from drift audit findings (implementation lives downstream). |
-| 1 | Module-level overviews (01–36, 99) | 31 |
-| 2 | Module 01 sub-folders | 12 |
-| 3 | Module 02 sub-folders | 60 |
-| 4 | Module 03 sub-folders | 5 |
-| 5 | Modules 04–36, 99, validation-reports | 62 |
-
-### New Files Created
-
-| File | Module |
-|------|--------|
-| `spec/02-coding-guidelines/05-rust/97-acceptance-criteria.md` | Rust Coding Standards |
-| `spec/02-coding-guidelines/05-rust/99-consistency-report.md` | Rust Coding Standards |
-
-### Method
-
-- Phases 1–2: Manual per-file upgrades
-- Phases 3–5: Automated Python script with keyword derivation and version bumping
-- Post-processing: Keyword cleanup pass to remove path artifacts
-
-### Verification
-
-- Final scan confirmed 0 non-compliant `00-overview.md` files (excluding root dashboard)
-- Parent consistency reports updated where applicable
-
----
-
-## Cross-References
-
-- [Spec Authoring Guide Overview](./00-overview.md)
-- [Acceptance Criteria](./97-acceptance-criteria.md)
-- [Consistency Report](./99-consistency-report.md)
-
-## 2026-04-27 — Phase 57 impl-sweep
-
-- Phase 57: appended Go/PHP/Python SpecModule validator references to satisfy `has_typed_lang_contract` rubric (impl 65 → 75).
-
-## 2026-04-27 — Phase 60 impl-sweep
-
-- Phase 60: appended Spec Authoring Audit API OpenAPI to satisfy `has_yaml_openapi` rubric (impl 75 → 85).
-
-## 2026-04-27 — Phase 66 (impl 85→90)
-
-- Added Mermaid lifecycle diagram (`*.mmd`) and `## Phase 66 Reference` block in `00-overview.md`.
-- Pushes implementability score to 90 via mermaid bonus.
-
-## 2026-04-27 — Phase 72 (impl 90 → 95)
-
-- Inlined 5-stage CI workflow contract (yaml) — satisfies `has_ci_workflow` gate.
-- Documentation-only promotion; no behavioural rules changed.
 
