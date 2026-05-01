@@ -32,7 +32,7 @@ spec/03's strongest dimensions are D2 (AC coverage = 19) and D3 (testability = 1
 2. **Walker-pin teaser updated** (line 18): `audit-corpus axis` → `normative-contract axis`
 3. **Lockstep banners**:
    - §00 v3.4.3 → **v3.4.4**
-   - §98 v3.4.3 → **v3.4.4** (new release row + Lesson #68)
+   - §98 v3.4.3 → **v3.4.4** (new release row + Lesson #69)
    - §99 v3.3.1 → **v3.3.2** (audit-trail row + audit-section block)
    - §97 **unchanged at v2.2.0** — no contract change
 
@@ -66,7 +66,7 @@ Surfaced 1 LOW finding (D4 missing JSON example for AppError merge) — non-bloc
 | `check-99-summary-freshness.py --strict-position` | 81 stamped + 6 exempt + 0 unstamped |
 | `check-spec-folder-refs.py` | 0 stale (was 1 pre-fix, side-fix cleared) |
 
-## NEW Lesson #68 — Axis classification audit before assuming auditor is wrong
+## NEW Lesson #69 — Axis classification audit before assuming auditor is wrong
 
 **Rule:** When v9 / future-rebaseline shows a module **regress while sibling modules with comparable d-scores rank higher**, the FIRST diagnostic step is to compare `content_axis:` declarations against Lesson #29's strict definition:
 
@@ -84,19 +84,19 @@ Surfaced 1 LOW finding (D4 missing JSON example for AppError merge) — non-bloc
 - All modules currently `audit-corpus`: spec/03 (FIXED fu33), spec/25 (correct), spec/26 (audit-corpus rationale = "git-logs diagrams describe other specs" — needs verification)
 - All modules currently `future-spec`: spec/03 (kind: future-spec but content_axis was wrong) — verify the two are aligned post-fu33
 
-**Codification surfaces:** §98 row 3.4.4 + §99 row 3.3.2 + this memo + memory index Lesson #68 entry.
+**Codification surfaces:** §98 row 3.4.4 + §99 row 3.3.2 + this memo + memory index Lesson #69 entry.
 
 ## Files changed
 
 - `spec/03-error-manage/00-overview.md` — front-matter axis flip + walker-pin update + banner
-- `spec/03-error-manage/98-changelog.md` — release row 3.4.4 + Lesson #68
+- `spec/03-error-manage/98-changelog.md` — release row 3.4.4 + Lesson #69
 - `spec/03-error-manage/99-consistency-report.md` — banner + audit table row + audit-section block
 - `spec/17-consolidated-guidelines/97-acceptance-criteria.md` — 4 path corrections (in-flight)
 - `spec/17-consolidated-guidelines/00-overview.md` — banner v3.7.2
 - `spec/17-consolidated-guidelines/98-changelog.md` — release row 3.7.2 + banner
 - `spec/17-consolidated-guidelines/99-consistency-report.md` — banner v4.8.2
 - `.lovable/cache/audit-ai/03-error-manage.json` — re-scored cache (94 EXCELLENT)
-- `.lovable/memory/index.md` — index update + Lesson #68 entry
+- `.lovable/memory/index.md` — index update + Lesson #69 entry
 - `.lovable/memory/audit/v2-deterministic/phase-153-task-A24-fu33-spec03-axis-reclassification.md` — this memo
 
 ## Tree-wide impact projection
@@ -106,4 +106,4 @@ If next full-tree rebaseline (A20-fu5) confirms spec/03 → 94, tree mean lifts:
 - EXCELLENT band count: 15 → **16**
 - GOOD band count: 8 → **7**
 
-Lesson #68 candidates (spec/26 audit-corpus verification) could lift further if any are misclassified.
+Lesson #69 candidates (spec/26 audit-corpus verification) could lift further if any are misclassified.
