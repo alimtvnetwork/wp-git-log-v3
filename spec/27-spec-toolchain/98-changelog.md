@@ -1,10 +1,22 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.83.0
-**Updated:** 2026-04-30
+**Version:** 2.84.0
+**Updated:** 2026-05-01
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.84.0 — 2026-05-01 — Phase 153 Task A20-fu4: full-tree v9 rebaseline (post OVER-class sweep + walker tier-1 fix)
+
+- **Action**: Ran `audit-ai-implementability.py --force` tree-wide (23 modules, ~5 minutes, gateway live per Lesson #38 — `LOVABLE_API_KEY` set). v8 cache (snapshot 2026-04-30) → v9 fresh re-score. Report: `/mnt/documents/spec-ai-implementability-audit-v9.md`.
+- **Tree mean: 88.04 → 90.52 / 100 (+2.48) — crosses EXCELLENT band threshold (≥90).** EXCELLENT count: **9 → 15 (+6)**; GOOD count: 14 → 8 (-6); zero NEEDS_WORK; zero BLOCKING. **First time the tree mean enters EXCELLENT band since the v3 baseline (81.6) on 2026-04-29.**
+- **Top movers (Δ ≥ +3)**: spec/17 **80→94 (+14)**; spec/04 **81→91 (+10)**; spec/27 **83→93 (+10)** ← validates A24-fu28 archive split; spec/07 **80→89 (+9)** ← validates A24-fu31 archive split; spec/22 **83→90 (+7)** ← validates A24-fu29 archive split; spec/13 88→92 (+4); spec/14 87→90 (+3). One small drop: spec/03 84→82 (-2 — within noise band; honest-baseline correction class).
+- **OVER-class sweep validation**: All 4 OVER modules from fu27 audit closed at the LLM scoring level: spec/27 (+10), spec/22 (+7), spec/01 (+2 — predicted "modest" lift in fu30 memo, actual matches), spec/07 (+9). Cumulative OVER-class lift: **+28 score points across 4 modules** in 4 phases (fu28-fu31). Lesson #65 (structural surgery > pure-promotion) fully validated empirically.
+- **Walker tier-1 fix validation (A6 / Lesson #16)**: spec/17 +14 is the largest single-module delta of the entire A-series — the consolidated-guidelines module has 39 leaf files; the alphabetical-then-tier-1 walker now reaches §97 reliably across all of them.
+- **Spec lockstep**: §00 v2.83.0 → **v2.84.0** (banner-only — no §97/AC change). §98 v2.83.0 → **v2.84.0** (this row). §99 v2.80.0 → **v2.81.0** (rebaseline summary row).
+- **No CI workflow change · no AC-31-31 cascade · no RUBRIC bump · no gate-count change** — pure cache-refresh phase.
+- **Verifies:** v9 report exists at `/mnt/documents/spec-ai-implementability-audit-v9.md`; `.lovable/cache/audit-ai/*.json` all carry fresh `bundle_sha` post-`--force`; tree mean ≥ 90 (90.52); EXCELLENT ≥ 12 modules (15). All 5 strict gates GREEN post-edit.
+- **NEW Lesson #67 codified at this row**: When a coordinated multi-phase sweep (here: OVER-class fu28→fu31) targets the same audit-physics root cause (walker bundle saturation), run a single full-tree `--force` rebaseline AFTER the sweep closes — not per-phase — to (a) capture cumulative lift in one cache snapshot, (b) avoid HTTP 402 budget churn from N partial rebaselines, (c) surface band-threshold crossings at tree-mean granularity (here: 88→90+, the GOOD/EXCELLENT boundary). Mirror of Lesson #38 (gateway-availability-check) at the **batch-vs-iterative axis**: gateway is cheap-per-module but expensive-per-rebaseline; batch the rebaseline to the natural sweep boundary.
 
 ### 2.83.0 — 2026-04-30 — Phase 153 Task A24-fu28: §98 archive split (Lesson #65 first structural-fix instance — spec/27 tier1 455 → ~133 KB)
 
