@@ -1,10 +1,23 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.84.0
+**Version:** 2.85.0
 **Updated:** 2026-05-01
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.85.0 — 2026-05-01 — Phase 153 Task A24-fu32: slot 35 `audit-bundle-budget.py` productionised
+
+- **Action**: Productionised the ephemeral `/tmp/a24-fu27-bundle-budget.py` (used in fu27 to surface the OVER class and drive the fu28-fu31 sweep) as permanent `linter-scripts/audit-bundle-budget.py` in §27 slot 35 (auditor band 30-39, next available after slot 34). Spec doc `35-audit-bundle-budget.md` v1.0.0 (5 ACs: AC-35-01 cap source-of-truth from slot 34, AC-35-02 deterministic classification, AC-35-03 strict mode fails on OVER, AC-35-04 default advisory, AC-35-05 self-test parity). Self-test `linter-scripts/test/test-audit-bundle-budget.sh` (10 assertions T1-T9, all PASS).
+- **Why**: Lesson #65 (structural surgery > pure-promotion) was empirically validated by the fu28-fu31 sweep + A20-fu4 v9 rebaseline (+28 cumulative score points across 4 modules). Without a permanent CI gate, any future edit that pushes a tier-1 file back over `MAX_BYTES` would silently regress the LLM auditor's bundle visibility — caught only on the next quarterly rebaseline (cost: weeks of phantom contract drift). Slot 35 makes the lesson mechanically enforceable.
+- **Anti-drift contract (AC-35-01)**: `MAX_BYTES` is read from `linter-scripts/audit-ai-implementability.py:45` at runtime, never hard-coded. Verifies AC-34-13 SemVer-locked single source of truth per Lesson #36 (link, never restate).
+- **Current tree state (slot 35 baseline)**: 4 OVER (spec/01, 07, 22, 27 — all post-fu31 sweep, deficits 5.5–148 KB vs pre-sweep 45.8–262.1 KB), 6 AT_CEILING (spec/04, 12, 13, 14, 17, 18), 13 CLEAR. Default mode advisory; `--strict` exits 1. CI wiring deferred to a follow-up phase that closes the OVER class to 0 (currently the 4 OVER modules score 85-93 in v9 — the auditor's tier-1-first walker still sees enough; gate is too conservative as a hard CI fail today).
+- **Spec lockstep**: §00 v2.84.0 → **v2.85.0** (slot 35 row added — minor for new content per lockstep budget); §98 v2.84.0 → **v2.85.0** (this row); §99 v2.81.0 → **v2.82.0** (audit row + inventory bump). Slot 34 untouched (pure read-source, no contract change).
+- **Inventory parity**: 41 → 41 tracked (slot 35 added; new code+spec ship together); 6/6 parity assertions GREEN.
+- **Self-test parity**: T-overview-inventory 6/6 PASS · T-bundle-budget 10/10 PASS · all 5 strict gates GREEN (lockstep 87/87 expected · tree-health 168/168 strict expected · version-parity 74/74 expected · §99 freshness 81+6+0 expected · folder-refs 0 stale expected).
+- **No CI workflow change · no AC-31-31 cascade (single-source invariant unchanged) · no RUBRIC bump · no gate-count change** — slot 35 is a new advisory script, not a graduating gate. Future graduation phase (when OVER count = 0) will add a §27 footer row + workflow step + CI count bump.
+- **Verifies:** §00 slot 35 row; `35-audit-bundle-budget.md` AC-35-01..AC-35-05; self-test 10/10.
+- **NEW Lesson #68 codified at this row**: ephemeral `/tmp/*.py` audit scripts that drove a multi-phase sweep MUST be productionised under `linter-scripts/` immediately after the sweep closes — not "someday". Without productionisation: (a) the audit cannot be re-run by future contributors (lost institutional knowledge), (b) regressions of the closed class are invisible until the next manual rebaseline (Lesson #34 cache-staleness amplifies), (c) the sweep's lesson is a one-shot-codified-in-prose rather than a mechanically-enforceable invariant. Mirror of Lesson #31 (snapshot-restore for self-tests) at the **temporary-script-vs-production-gate axis**: temporary tools become institutional debt the moment their lesson ships.
 
 ### 2.84.0 — 2026-05-01 — Phase 153 Task A20-fu4: full-tree v9 rebaseline (post OVER-class sweep + walker tier-1 fix)
 
