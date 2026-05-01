@@ -1,7 +1,7 @@
 # Consistency Report — Spec Authoring Guide
 
-**Version:** 4.11.0
-**Last Updated:** 2026-04-30
+**Version:** 4.15.0
+**Last Updated:** 2026-04-30 (Phase 153 Task A24-fu30 — §98 archive split per Lesson #65 / fu28-fu29 pattern)
 
 > **v4.11.0 update (Phase 153 Task A24-fu21 — spec/01 floor lift via walker-pin promotion + 2 new ACs):** Lifts spec/01 from the 83 floor (process-guidance axis, walker 3/17 saturation) by (a) adding a Lesson #55 §00 walker-pin teaser surfacing AC-SAG-29 at the file head (line 317 was unreachable to the bundle-capped walker), (b) adding AC-SAG-30 `[high]` linter-script-logic-anchor pin per Lesson #36 to dissolve the MEDIUM D3 finding, (c) adding AC-SAG-31 `[low]` inlined-schema-version-pluralism pin to dissolve the LOW D1 finding. Lesson #62 codified at §98 v4.14.0 row: process-guidance axis modules (d2≤0.7) are walker-saturation-dominant — §00 walker-pin teaser is the canonical floor-lift pattern. Lockstep: §00 4.13.3→**4.14.0**, §97 4.10.0→**4.11.0**, §98 4.13.3→**4.14.0**, §99 4.10.3→**4.11.0**. Tree-health 168/168 strict-pass holds; lockstep 87/87; version-parity 74/74. LLM re-score deferred per Lesson #20.
 
