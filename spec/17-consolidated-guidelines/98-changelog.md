@@ -1,6 +1,6 @@
 # Changelog — Consolidated Guidelines
 
-**Version:** 3.7.1
+**Version:** 3.7.2
 **Updated:** 2026-04-30
 **Scope:** `spec/17-consolidated-guidelines/`
 
@@ -16,6 +16,12 @@
 ---
 
 ## Releases
+
+### 3.7.2 — 2026-04-30 — Phase 153 Task A24-fu33 (in-flight Lesson #35 fix): stale folder-ref `spec/03-error-management/` → `spec/03-error-manage/`
+
+- **Fixed** 4 stale references to non-existent folder `spec/03-error-management/` in `97-acceptance-criteria.md` (lines 144, 195, 201, 226) — corrected to canonical `spec/03-error-manage/`. Surfaced by `check-spec-folder-refs.py` strict gate in fu33's pre-commit run; not introduced by fu33 (pre-existing typo). Closes per Lesson #35 (fix in-flight when surfaced).
+- **§97 v2.6.0 unchanged at content-version** — no AC change, no contract change, no AC-31-31 cascade. Path-only correction.
+- **Lockstep**: §00 v3.7.1 → **v3.7.2** (patch — banner sync); §98 v3.7.1 → **v3.7.2** (patch — this row); §99 v4.8.1 → **v4.8.2** (patch — Phase 153 audit row).
 
 ### 3.7.1 — 2026-04-30 — Phase 153 Task A24-fu25: §00 compact AC-index teaser table (Lesson #63 sixth instance — process-guidance axis)
 
