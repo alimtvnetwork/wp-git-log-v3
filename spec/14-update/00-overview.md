@@ -6,8 +6,8 @@ axis_rationale: "Update-flow ACs (TUF, retries, atomic swap)"
 # Update — Overview
 
 <!-- h10-verified-phase: 153 -->
-**Version:** 2.4.2  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu25 — §00 walker-pin teaser per Lesson #63 pure-promotion / fifth instance)
+**Version:** 2.4.3  
+**Updated:** 2026-05-01 (Phase 153 Task A24-fu38 — banner-only bump tracking §97 v2.4.1 prose patch (AC-16 wall-clock pin + AC-17 rollback-ownership subsection))
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
