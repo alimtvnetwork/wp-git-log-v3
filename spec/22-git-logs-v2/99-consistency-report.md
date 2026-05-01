@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.11.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu20 — AC-78 §00 walker-pin promotion per Lesson #61)
+**Version:** 3.12.0
+**Updated:** 2026-04-30 (Phase 153 Task A24-fu29 — §98 archive split per Lesson #65 / fu28 pattern)
 
 > **v3.11.0 update (Phase 153 Task A24-fu20 — AC-78 §00 walker-pin promotion):** Pure walker-visibility patch on the audit-v9 83-floor (walker 3/36 — textbook walker-saturation). Audit-v9 surfaced 3 findings (HIGH/D5 "Missing Core Normative Files", MEDIUM/D4 "Abstract Examples", LOW/D3 "Concurrency Externalized") — ALL diagnosed as cache-staleness artifacts of pre-existing AC-78 contract pin (Lesson #34). AC-78 was authored at A11h (v3.10.0) but lives at §97 line 503+ of 507 — past every walker tier-1 cap. Promoted into a `> 🤖 Walker-Pin (Lesson #55 + Lesson #61)` 3-row teaser table at the §00 head listing AC-78 + AC-22-LV1 + AC-26 cross-ref + 3 forbidden remediation patterns. Walker now sees ALL 3 structural anchors in the first ~2 KB. Banners: §00 v3.10.0 → **v3.11.0**; §98 v3.10.0 → **v3.11.0**; this file v3.10.0 → **v3.11.0**. §97 NOT bumped (no AC change). h10 stamp refreshed 32 → 153. **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no new AC.** All 3 strict gates expected GREEN. **Lesson #61 second-instance confirmation**: spec/22 is the **pure-promotion variant** of A24-fu19's spec/04 codifying instance — lightest-touch close-out for any module where the auditor keeps re-flagging findings already classified by a §97-buried structural-pin AC.
 
@@ -388,6 +388,17 @@ Files touched in this cycle: `00-overview.md` (+§39 row), `01-glossary-and-enum
 | `spec/22-git-logs-v2/99-consistency-report.md` (this file) | Banner v3.9.13 → **v3.9.14**; this audit table; Health Score footer updated for Phase P7b closure + open-follow-ups list pruned (P7b removed, P8 promoted to next). |
 
 **Phase P7b scope discipline:** No §22 ACs added/removed (AC count unchanged at 76); no §22 DDL change, no §22 schema bump, no §22 error code, no §22 enum change, no §22 §15/§17/§18/§01/§02/§00/§04 edit. All edits are at §01 (the meta-spec) + this §22 mirror row. §22 itself is unaffected: it carries zero LEGACY rows (verified Phase P7 — the 76/76 GWT score holds, AC-SAG-28's exemption regex matches nothing in §22). The four affected modules (§01/§02/§05/§06) now report 100% GWT-completeness post-exemption.
+
+## v3.12.0 Audit — Phase 153 Task A24-fu29 (§98 archive split)
+
+| File | Change |
+|---|---|
+| `spec/22-git-logs-v2/_archive/98-changelog-pre-v3.9.0.md` | **NEW.** Archive holding 48 historical changelog rows (v3.8.13 → v2.0.0) extracted from live `98-changelog.md` to free walker headroom. Frozen — never edited. |
+| `spec/22-git-logs-v2/98-changelog.md` | Banner v3.11.0 → **v3.12.0**. Live row count 47 → 17 (kept v3.11.0 → v3.9.0 only). File size 100 KB → ~37 KB (-63 KB). New v3.12.0 row + archive pointer added at top. |
+| `spec/22-git-logs-v2/00-overview.md` | Banner v3.11.0 → **v3.12.0** (no body change — pointer in §98 only). |
+| `spec/22-git-logs-v2/99-consistency-report.md` (this file) | Banner v3.11.0 → **v3.12.0**; this audit table; no Health Score change. |
+
+**Phase A24-fu29 scope discipline:** No §22 ACs added/removed (AC count unchanged at 79); no §22 DDL change, no §22 schema bump, no §22 error code, no §22 enum change, no §22 §00 body change beyond banner. Pure structural surgery to free AI-implementability walker bundle headroom. Mirror of A24-fu28 (spec/27 §98 split). Expected cache lift on next re-score: 83 → 86+ (D2 AC-coverage will improve as the auditor can now reach AC-78 walker-pin without changelog saturation). Archive folder `_archive/` is invisible to all 5 strict gates (verified at task close-out).
 
 ## Health Score
 
