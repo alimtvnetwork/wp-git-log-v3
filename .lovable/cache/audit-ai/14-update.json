@@ -3,36 +3,36 @@
   "d2": 20,
   "d3": 17,
   "d4": 15,
-  "d5": 19,
+  "d5": 20,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D4",
-      "title": "Truncated Console-Safe Handoff Logic",
-      "why": "File 07-console-safe-handoff.md is truncated at the 'Root Cause' section, leaving the actual implementation of console-safe handoff (the core solution) undefined.",
-      "fix": "Provide the full content of 07-console-safe-handoff.md including the specific Windows API flags or Go exec patterns required."
+      "title": "Truncated Build Script Logic",
+      "why": "The provided context for 04-build-scripts.md and 06-cleanup.md is truncated due to the 120KB cap, leaving the Bash implementation of cleanup and the end of the build script logic missing.",
+      "fix": "Consult the full version of 04-build-scripts.md and 06-cleanup.md in the repository to complete the implementation."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
       "title": "Ambiguous Rollback Trigger in Handoff",
-      "why": "AC-17 and 05-handoff describe rollback, but it's unclear how the detached worker signals the parent to rollback if the parent has already exited or is blocking on a failed process.",
-      "fix": "Explicitly define the exit code contract between worker and parent to trigger the rename-back logic."
+      "why": "While AC-17 was patched to clarify ownership, the interaction between the blocking cmd.Run() in the parent and the detached updater's failure state creates a potential race or 'zombie' state if the parent is killed during the wait.",
+      "fix": "Ensure the updater process explicitly handles SIGPIPE/parent-death by checking the parent PID status before proceeding with the final swap."
     },
     {
       "severity": "LOW",
       "dim": "D1",
       "title": "Missing Unit for Cleanup Latency",
-      "why": "AC-16 mentions a 100ms cap for cleanup but doesn't specify if this is wall-clock time or CPU time, which matters for network-mounted filesystems.",
-      "fix": "Specify 'wall-clock time' for the 100ms p95 cleanup budget."
+      "why": "AC-16 specifies a 100ms budget but does not explicitly define if this is CPU time or wall-clock time in the normative text (though the changelog claims it was patched).",
+      "fix": "Explicitly label the 100ms limit as 'wall-clock time' within the body of 06-cleanup.md."
     }
   ],
   "module": "14-update",
-  "files_used": 11,
+  "files_used": 10,
   "files_total": 54,
   "bytes_used": 120000,
-  "bundle_sha": "6a9329afd4f3a5f0",
-  "total_v6": 89,
+  "bundle_sha": "f3b8765e5e4ca8fa",
+  "total_v6": 90,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,7 +42,7 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 89.9,
+  "weighted_total": 90.4,
   "total_v7": 90,
   "total": 90,
   "band": "EXCELLENT",

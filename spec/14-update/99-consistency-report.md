@@ -1,9 +1,12 @@
 # Consistency Report — Generic Update
 
-**Version:** 1.6.2  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu25 — §00 walker-pin teaser per Lesson #63 pure-promotion / fifth instance)
+**Version:** 1.6.3  
+**Updated:** 2026-05-01 (Phase 153 Task A24-fu38 — AC-16 wall-clock pin + AC-17 rollback-ownership prose patch)
+
+> **v1.6.3 (Phase 153 Task A24-fu38 — AC-16/AC-17 prose-tightening patch):** Patched AC-16 to pin cleanup-budget 100ms as **wall-clock** time (closes audit-v10 LOW D1 "Missing Unit for Cleanup Latency"). Patched AC-17 with new **Rollback-trigger ownership** normative paragraph declaring rollback is process-local to the updater OR delegated to next-start cleanup per AC-16; NO inter-process signaling permitted (closes audit-v10 MEDIUM D3 "Ambiguous Rollback Trigger in Handoff"). §97 v2.4.0 → **v2.4.1** (patch — prose-only, no new AC, no AC-31-31 cascade); §00 v2.4.2 → v2.4.3; §98 v2.4.2 → v2.4.3; §99 v1.6.2 → v1.6.3. **No CI workflow change · no RUBRIC bump · no gate-count change · no new AC.** **Lesson #71 counter-case**: spec/14 score 90 with axis cap 100 = gap 10 > 3 threshold → contract-tightening JUSTIFIED, not no-op (vs spec/17 fu37 where score 92 + axis cap 95 + d2 mult 0.7 = no-op). LLM re-score deferred per Lesson #20.
 
 > **v1.6.2 (Phase 153 Task A24-fu25 — §00 walker-pin pure-promotion, Lesson #63 fifth instance):** Inserted `> 🤖 Walker-Pin` teaser table at §00 head surfacing AC-21 (asset inventory pin, 36 entries) + AC-22 (`<module>` ldflags placeholder use-site contract). Closes cache-stale audit findings (D5 missing-sub-module-context citing files 09-27, D4 truncated-build-script-logic, D3 ambiguous-`<module>`-placeholder) by surfacing pre-existing §97 contracts in the first ~2 KB of §00. Walker `files_used=11/54 (20%)`, axis `normative-contract` (d2×1.5, d3×1.2). **§00 v2.4.1 → v2.4.2** (patch); §98 v2.4.1 → v2.4.2; §99 v1.6.1 → v1.6.2. **§97 NOT bumped at v2.4.0** — pure-promotion. **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no new AC.** Second Lesson #63 application on `normative-contract` axis (after spec/13 A24-fu24); fifth instance overall. LLM re-score deferred per Lesson #20.
+
 
 > **v1.6.0 (Phase 153 Task A11h):** AC-21 module asset inventory pin closes audit-v5 D5/D4/D1 findings as harness bundling-cap artifacts; mirror of spec/13 AC-24, spec/28 AC-28-41, spec/16 AC-21, spec/22 AC-78.
 
