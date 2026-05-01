@@ -1,9 +1,17 @@
 # Error Management — Changelog
 
-**Version:** 3.4.3  
+**Version:** 3.4.4  
 **Last Updated:** 2026-04-30
 
 ---
+
+## 3.4.4 — 2026-04-30
+- **Phase 153 Task A24-fu33** (audit-v9 honest-baseline regression close-out — axis reclassification): corrected front-matter `content_axis: audit-corpus` → `content_axis: normative-contract`. Added `axis_reclassification:` block citing phase + reason. spec/03 §97 contains 9 normative ACs (AC-01..AC-09) defining response-envelope/HTTP-status/three-tier-propagation/AppError contracts implementers MUST satisfy across Go/TS/PHP/Rust/C# — this is `normative-contract` per Lesson #29 (audit-corpus is reserved for modules whose normative surface DESCRIBES other specs, e.g. spec/25 post-mortem, NOT modules that DEFINE contracts).
+- **Why**: v9 baseline showed spec/03 weighted_total 81.5 → axis-capped at 82 (cap=95 for audit-corpus axis with d2/d3 multipliers ×0.5). spec/06 (correct precedent: `normative-contract`, also defines contracts) scored 87 with comparable d-scores. The 5-point gap is pure axis-cap drag. Reclassification removes the cap; expected post-fix score 87-90 (uncapped weighted ≈ 88-92 depending on auditor stability per Lesson #45).
+- **Walker-pin teaser** updated head-of-file: `audit-corpus axis` → `normative-contract axis`.
+- **Lockstep**: §00 v3.4.3 → **v3.4.4** (patch — front-matter + walker-pin teaser); §98 v3.4.3 → **v3.4.4** (patch — this row); §99 v3.3.1 → **v3.3.2** (patch — Phase 153 audit row).
+- **§97 unchanged at v2.2.0** — no new normative requirement, no AC-31-31 cascade, no RUBRIC bump. Pure axis-classification correction.
+- **NEW Lesson #68 — Axis classification audit before assuming auditor is wrong.** When v9 / future-rebaseline shows a module regress while sibling modules with comparable d-scores rank higher, the FIRST diagnostic step is to compare `content_axis:` declarations against Lesson #29's strict definition: `audit-corpus` = describes/cites other specs as primary content (post-mortems, deprecation registries, audit trackers); `normative-contract` = defines contracts implementers satisfy; `process-guidance` = how-to/conventions for spec authors; `integration-spec` = describes interfaces between modules. Misclassification creates silent axis-cap drag that no §97 work can recover. Apply tree-wide: any module flagged `audit-corpus` whose §97 contains GWT-style normative ACs is mis-classified.
 
 ## 3.4.3 — 2026-04-30
 - **Phase 153 Task A24-fu23** (audit-corpus walker-saturation pure-promotion, Lesson #61/#63 third instance): added `> 🤖 Walker-Pin` teaser table to head of `00-overview.md` surfacing pre-existing AC-08 (asset inventory), AC-09 (citation density), AC-05/AC-07 (Tier 2/3 verification), and AC-01/AC-02 (envelope + HTTP-status) as canonical close-outs for cache findings (D5 broken-refs, D2 missing-AC-for-architecture, D3 concurrency/timeout). Diagnosis: walker `files_used 17/166 ≈ 10%` saturation — auditor cannot reach §97 where contracts already exist.
