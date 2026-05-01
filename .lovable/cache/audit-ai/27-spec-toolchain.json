@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 19,
-  "d4": 18,
+  "d2": 19,
+  "d3": 17,
+  "d4": 16,
   "d5": 15,
   "issues": [
     {
       "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Missing Per-Artifact Spec Files",
-      "why": "The module references 79 external spec files (NN-*.md) which are the 'canonical source of truth' for script logic, but these are not provided in the context. A mediocre AI cannot implement the toolchain logic (e.g., the specific regex for a validator or the logic for a generator) without these files.",
-      "fix": "Provide the content of the 50+ NN-*.md files or consolidate core logic for critical scripts into the overview."
+      "title": "Context Truncation of Per-Artifact Specs",
+      "why": "The module defines 50+ scripts but delegates their logic to external files (01-*.md, etc.) which are truncated in this context. A mediocre AI cannot implement the logic for scripts 10-79.",
+      "fix": "Provide the full content of the NN-*.md files or consolidate core logic for the most critical scripts into the overview."
     },
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Delegated Acceptance Criteria",
-      "why": "AC-T-29 explicitly delegates per-script logic to external files. While the 'Slot Delegation Map' and 'AC Family Prefix Index' provide metadata, they do not provide the actual Given/When/Then criteria required for implementation.",
-      "fix": "Include the GWT criteria for the most critical toolchain scripts (01, 05, 10, 14, 24, 70) directly in \u00a797."
+      "dim": "D5",
+      "title": "Unresolved External Lesson References",
+      "why": "The spec relies heavily on 'Lesson #NN' (e.g., #36, #55, #61) and 'Phase NNN' markers to define normative behavior, but these are not defined in the provided context.",
+      "fix": "In-line the normative requirements from the referenced lessons or provide the lesson-registry file."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved External Memory References",
-      "why": "The spec frequently references 'mem://' URIs (e.g., mem://index.md, mem://process/phase-153-lessons) and specific Phase 107/108 ledgers that are not present in the provided context.",
-      "fix": "Inline the specific rules or constants referenced from the memory/ledger files into the Normative Contract section."
+      "dim": "D3",
+      "title": "Ambiguous Concurrency Implementation",
+      "why": "AC-T-32 mandates normative code snippets for R2 (file-locking retry) in \u00a700, but the provided \u00a700 text only references them; the actual snippets are missing from the provided context.",
+      "fix": "Insert the Python and Node.js retry-logic snippets directly into the \u00a700 Resilience section."
     }
   ],
   "module": "27-spec-toolchain",
-  "files_used": 3,
-  "files_total": 52,
+  "files_used": 10,
+  "files_total": 57,
   "bytes_used": 120000,
-  "bundle_sha": "1008c51e0dfea621",
-  "total_v6": 86,
+  "bundle_sha": "ca6fc8e792e9799e",
+  "total_v6": 85,
   "axis": "tooling-spec",
   "axis_multipliers": {
     "d1": 0.9091,
@@ -42,9 +42,9 @@
     "d5": 0.8182
   },
   "axis_cap": 100,
-  "weighted_total": 86.1,
-  "total_v7": 86,
-  "total": 86,
+  "weighted_total": 85.5,
+  "total_v7": 85,
+  "total": 85,
   "band": "GOOD",
   "rubric": "v7"
 }
