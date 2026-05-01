@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.80.0
-**Updated:** 2026-04-30
+**Version:** 2.81.0
+**Updated:** 2026-05-01
+
+> **v2.81.0 update (Phase 153 Task A20-fu4 — full-tree v9 rebaseline post OVER-class sweep):** Ran `audit-ai-implementability.py --force` tree-wide (gateway live per Lesson #38). **Tree mean 88.04 → 90.52 / 100 (+2.48) — first crossing into EXCELLENT band.** EXCELLENT count 9 → 15 (+6); GOOD 14 → 8; zero NEEDS_WORK; zero BLOCKING. Top movers: spec/17 +14, spec/04 +10, spec/27 +10, spec/07 +9, spec/22 +7, spec/13 +4, spec/14 +3. **OVER-class sweep validated empirically**: cumulative +28 score points across the 4 modules closed in fu28-fu31 (spec/27/22/01/07). Lesson #65 (structural surgery > pure-promotion) and Lesson #16 (walker tier-1 fix) both confirmed at LLM scoring level. **NEW Lesson #67 codified at §98 v2.84.0 row**: batch the full-tree rebaseline to the natural sweep boundary (cumulative cache snapshot, no HTTP 402 churn, surfaces band-threshold crossings). Lockstep: §00 v2.83.0 → **v2.84.0**; §98 v2.83.0 → **v2.84.0**; this file v2.80.0 → **v2.81.0**. §97 untouched. All 5 strict gates GREEN. Report: `/mnt/documents/spec-ai-implementability-audit-v9.md`.
 
 > **v2.79.0 update (Phase 153 Task A24-fu22 — spec/27 §00 walker-pin promotion, Lesson #61 fourth instance / pure-promotion second instance):** Promoted pre-existing AC-T-27/28/29/30/31/32 (shipped A9 + A24-fu6) into §00 walker-pin teaser (Lesson #55) — 6-row table between Scope line and `## Purpose`. Walker (3/50 files = highest walker-saturation observed at 6%) now sees all 6 structural anchors in first ~2 KB. Audit-v9 cache findings (CRITICAL D5 + HIGH D2 + MEDIUM D3) were ALREADY closed in A24-fu6 by AC-T-30/31/32 — cache pre-A24-fu6 stale (Lesson #34). LLM re-score deferred per Lesson #20 (gateway HTTP 402; Lesson #38 check ran). **Lesson #63 codified at §98 v2.82.0 row**: cache-stale-finding + pre-existing closing AC + high walker-saturation → §00 walker-pin promotion is the canonical lightest-touch remediation. Lockstep: §00 v2.81.1 → **v2.82.0** (minor — new normative walker-pin block); §98 v2.81.1 → **v2.82.0**; §99 v2.78.1 → **v2.79.0**. §97 NOT bumped. All 5 strict gates GREEN expected.
 
