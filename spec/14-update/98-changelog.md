@@ -1,7 +1,14 @@
 # Changelog — Update — Overview
 
-**Version:** 2.4.2  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu25 — §00 walker-pin teaser per Lesson #63 pure-promotion / fifth instance)
+**Version:** 2.4.3  
+**Updated:** 2026-05-01 (Phase 153 Task A24-fu38 — AC-16 wall-clock-time pin + AC-17 rollback-trigger ownership normative subsection)
+
+### 2.4.3 — 2026-05-01 — Phase 153 Task A24-fu38: AC-16 wall-clock pin + AC-17 rollback-ownership prose patch
+- **Action**: Patched AC-16 to specify cleanup-budget 100ms is **wall-clock** time (closes audit-v10 LOW D1 "Missing Unit for Cleanup Latency"). Patched AC-17 with normative paragraph **Rollback-trigger ownership** — rollback is process-local to the updater OR delegated to next-start cleanup per AC-16; NO inter-process signaling permitted (closes audit-v10 MEDIUM D3 "Ambiguous Rollback Trigger in Handoff").
+- **Why**: Both findings are LLM-auditor surfaced contract-clarification gaps in the §97 portion the auditor DID see. spec/14 stays at axis cap=100, score 90 — Lesson #71 NO-OP threshold not met (gap=10 > 3); cheap prose tightenings shipped together per Lesson #67.
+- **Lockstep**: §97 v2.4.0 → **v2.4.1** (patch — prose-only, no new AC, no AC count change, no AC-31-31 cascade); §00 v2.4.2 → **v2.4.3** (patch — banner-only); §98 v2.4.2 → **v2.4.3** (this row); §99 v1.6.2 → **v1.6.3** (audit row).
+- **No CI workflow change · no RUBRIC bump · no gate-count change · no new AC.**
+- **Lesson #71 counter-case**: gap 10 > 3 threshold → contract-tightening justified, NOT no-op. spec/22 (also gap 10) defers to A24-fu39 (Lesson #70 walker-budget archive split, not contract-tightening).
 
 ### 2.4.2 — 2026-04-30 — Phase 153 Task A24-fu25: §00 walker-pin pure-promotion (Lesson #63 fifth instance)
 - **Action**: Inserted `> 🤖 Walker-Pin` 2-row teaser table at §00 head (after metadata banner) surfacing AC-21 (module asset inventory pin, 36 entries) + AC-22 (`<module>` ldflags placeholder = consuming repo's `go.mod` path) as canonical close-outs for cache-stale audit findings (D5 missing-sub-module-context, D4 truncated-build-script, D3 ambiguous-`<module>`-placeholder).
