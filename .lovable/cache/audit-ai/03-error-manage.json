@@ -1,50 +1,50 @@
 {
   "d1": 18,
-  "d2": 19,
-  "d3": 15,
-  "d4": 17,
-  "d5": 14,
+  "d2": 20,
+  "d3": 17,
+  "d4": 19,
+  "d5": 20,
   "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Truncated Context / Missing Sub-modules",
-      "why": "The spec relies heavily on sub-folders (02-error-architecture, 03-error-code-registry) which are referenced as canonical but are truncated in the provided 120KB context.",
-      "fix": "Provide the full content of 02-error-architecture/ and 03-error-code-registry/ to resolve core implementation logic for AppError and the Registry."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency in Registry Scripts",
-      "why": "The spec mentions collision resolution and registry scripts but does not define how the 'error-codes-master.json' handles concurrent CI writes or locking.",
-      "fix": "Add a concurrency section to 03-error-code-registry/00-overview.md specifying a 'last-writer-wins' or 'CI-lock' policy."
+      "title": "Race Condition in Multi-Language Envelope Validation",
+      "why": "The Go/PHP/Python reference implementations for ErrorEnvelope (Phase 57) use simple regex for timestamps/codes but do not address thread-safety for the shared registry or concurrent log writes mentioned in INV-05.",
+      "fix": "Add a 'Concurrency' section to Phase 57 requiring mutex-protected registry lookups in Go and atomic log appends."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous 'identifier' in Fallback Flow",
-      "why": "AC-07 and Retrospective 04 mention a fallback to WP Core API using '{identifier}', but don't specify if this is the numeric ID or the string slug.",
-      "fix": "Explicitly define 'identifier' as the 'plugin-folder/plugin-file.php' string in 01-error-resolution/03-retrospectives/04-activation-endpoint-mismatch.md."
+      "title": "Ambiguous Retry Policy Units",
+      "why": "The JSON Schema for ErrorEvent defines 'backoff_ms' as an integer but doesn't specify if it's a constant, linear, or exponential base.",
+      "fix": "Update the schema description for backoff_ms to specify 'constant delay in milliseconds'."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Missing Failure Example for Merge",
+      "why": "The 'Error merge methods' section in the changelog (v2.2.0) describes merging multiple AppErrors but lacks a worked JSON example of a merged response envelope.",
+      "fix": "Add a sample JSON block showing a 'Results' array containing multiple merged error objects."
     }
   ],
   "module": "03-error-manage",
-  "files_used": 16,
+  "files_used": 14,
   "files_total": 166,
-  "bytes_used": 120000,
-  "bundle_sha": "e29d7d819562678a",
-  "total_v6": 83,
-  "axis": "audit-corpus",
+  "bytes_used": 119743,
+  "bundle_sha": "9cc95f23a7e9aafa",
+  "total_v6": 94,
+  "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
-    "d2": 0.5,
-    "d3": 0.5,
-    "d4": 1.5,
-    "d5": 1.5
+    "d2": 1.5,
+    "d3": 1.2,
+    "d4": 0.8,
+    "d5": 0.5
   },
-  "axis_cap": 95,
-  "weighted_total": 81.5,
-  "total_v7": 82,
-  "total": 82,
-  "band": "GOOD",
+  "axis_cap": 100,
+  "weighted_total": 93.6,
+  "total_v7": 94,
+  "total": 94,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }
