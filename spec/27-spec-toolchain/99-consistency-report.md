@@ -1,7 +1,9 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.81.0
+**Version:** 2.82.0
 **Updated:** 2026-05-01
+
+> **v2.82.0 update (Phase 153 Task A24-fu32 — slot 35 `audit-bundle-budget.py` productionised):** Productionised the ephemeral fu27 walker-bundle-budget script as permanent §27 slot 35. Spec doc v1.0.0 (5 ACs); self-test 10/10 PASS; inventory parity 41/41. Anti-drift contract: `MAX_BYTES` read from slot 34 source at runtime per Lesson #36. Current baseline: 4 OVER (post-fu31 deficits 5.5–148 KB, scoring 85-93 in v9), 6 AT_CEILING, 13 CLEAR. Default advisory; `--strict` exits 1 on OVER. CI wiring deferred to graduation phase when OVER count = 0. **NEW Lesson #68 codified at §98 v2.85.0 row**: ephemeral audit scripts driving multi-phase sweeps MUST be productionised under `linter-scripts/` immediately on sweep closure — temporary tools become institutional debt the moment their lesson ships. Lockstep: §00 v2.84.0 → **v2.85.0**; §98 v2.84.0 → **v2.85.0**; this file v2.81.0 → **v2.82.0**. Slot 34 untouched. All 5 strict gates GREEN.
 
 > **v2.81.0 update (Phase 153 Task A20-fu4 — full-tree v9 rebaseline post OVER-class sweep):** Ran `audit-ai-implementability.py --force` tree-wide (gateway live per Lesson #38). **Tree mean 88.04 → 90.52 / 100 (+2.48) — first crossing into EXCELLENT band.** EXCELLENT count 9 → 15 (+6); GOOD 14 → 8; zero NEEDS_WORK; zero BLOCKING. Top movers: spec/17 +14, spec/04 +10, spec/27 +10, spec/07 +9, spec/22 +7, spec/13 +4, spec/14 +3. **OVER-class sweep validated empirically**: cumulative +28 score points across the 4 modules closed in fu28-fu31 (spec/27/22/01/07). Lesson #65 (structural surgery > pure-promotion) and Lesson #16 (walker tier-1 fix) both confirmed at LLM scoring level. **NEW Lesson #67 codified at §98 v2.84.0 row**: batch the full-tree rebaseline to the natural sweep boundary (cumulative cache snapshot, no HTTP 402 churn, surfaces band-threshold crossings). Lockstep: §00 v2.83.0 → **v2.84.0**; §98 v2.83.0 → **v2.84.0**; this file v2.80.0 → **v2.81.0**. §97 untouched. All 5 strict gates GREEN. Report: `/mnt/documents/spec-ai-implementability-audit-v9.md`.
 
