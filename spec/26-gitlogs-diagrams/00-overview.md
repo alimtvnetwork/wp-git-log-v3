@@ -1,12 +1,17 @@
 ---
 kind: index
 description: Diagram index for git-logs WP plugin (Mermaid sources + rendered SVGs). Indexes .mmd/.svg companions of folder 22 plus a Phase-55 DiagramMetadata JSON Schema contract. Index baseline scoring still applies.
-content_axis: audit-corpus
-axis_rationale: "Diagrams describing the 22-git-logs-v2 architecture"
+content_axis: normative-contract
+axis_rationale: "Defines diagram-correctness contracts (AC-DG-01..AC-DG-22+) implementers MUST satisfy when authoring/modifying Mermaid sources — invariants on table coverage, cardinality alignment, auth flow order, permission resolution, emoji-free lexer compliance, JWT/RS256 absence, endpoint-mindmap completeness. Diagrams are owned artifacts (not citations of spec/22); diagram authors are the implementer audience."
+axis_reclassification:
+  from: audit-corpus
+  to: normative-contract
+  phase: 153-A24-fu34
+  reason: "Misclassification per Lesson #69 + Lesson #29 strict definition. spec/26 §97 contains 22+ GWT-style normative ACs (AC-DG-01..22+) defining diagram invariants — implementer obligation falls on diagram authors. The diagrams DEPICT spec/22 architecture but spec/26 OWNS the diagrams as artifacts; this is normative-contract (defines invariants), not audit-corpus (describes other specs). Sibling spec/03 lifted 82 → 94 in fu33 under same reclassification pattern. d2=20 (max) + d3=17 are exactly the dimensions audit-corpus penalises ×0.5; cap=95 silently dragged the score."
 ---
 # Gitlogs Diagrams
 
-**Version:** 3.4.3
+**Version:** 3.4.4
 **Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-22 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
 <!-- h10-verified-phase: 32 -->
 
