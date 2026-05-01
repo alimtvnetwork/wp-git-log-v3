@@ -104,3 +104,14 @@ All internal links verified valid. ✅
 - CI workflow contract inlined: 5 stages (detect, validate, lint, promote, report).
 - Implementability raised 90 → 95 (deterministic audit).
 
+## v4.15.0 Audit — Phase 153 Task A24-fu30 (§98 archive split)
+
+| File | Change |
+|---|---|
+| `spec/01-spec-authoring-guide/_archive/98-changelog-pre-v4.4.0.md` | **NEW.** Archive holding 22 historical changelog sections (v4.3.0 → v2.0.0 + Phase 57/60/66/72 sweep notes) extracted from live `98-changelog.md` to free walker headroom. Frozen — never edited. |
+| `spec/01-spec-authoring-guide/98-changelog.md` | Banner v4.14.0 → **v4.15.0**. File size 25 KB → ~19 KB (-24%). New v4.15.0 section + structural-change note added at top. |
+| `spec/01-spec-authoring-guide/00-overview.md` | Banner v4.14.0 → **v4.15.0** (no body change — duplicate **Updated:** line collapsed). |
+| `spec/01-spec-authoring-guide/99-consistency-report.md` (this file) | Banner v4.11.0 → **v4.15.0**; this audit table; no Health Score change. |
+
+**Phase A24-fu30 scope discipline:** No §01 ACs added/removed; no §00 body change beyond banner (despite §00 being 48 KB / largest in tree, **§00 trim deferred per Lesson #30** — extracting "Phase NN Reference" sections risks AI-confidence regression on this canonical meta-spec). Pure structural surgery on §98 only. Mirror of A24-fu28 (spec/27, -82%) and A24-fu29 (spec/22, -62%); spec/01's smaller delta (-24%) reflects already-modest §98 size. Expected cache lift on next re-score: 83 → 84-85 (modest; spec/01 is bound more by §00 + §97 size than §98). Archive folder `_archive/` is invisible to all 5 strict gates (verified at fu28/fu29).
+
