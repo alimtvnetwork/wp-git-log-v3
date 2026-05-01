@@ -1,8 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.86.0
+**Version:** 2.87.0
 **Updated:** 2026-05-01
 **Scope:** `spec/27-spec-toolchain/`
+
+---
+
+### 2.87.0 — 2026-05-01 — Phase 153 Task A24-fu36: spec/27 §00 Lesson #36 trim + §98 third archive split (walker OVER → CLEAR)
+
+- **Action**: Closed remaining 9.6 KB tier-1 OVER deficit from fu35. (1) §00 `## Resilience — CI Edge Cases` 148-line restatement of AC-T-28's R1–R5 → 10-line cross-reference (Lesson #36 dual-source-drift removal); prose archived to `_archive/00-resilience-r1-r5-pre-A24-fu36.md`. (2) §00 `## CI Workflow Integration — Phase 79 Normative` 80-line pedagogical YAML stage examples → 6-line cross-reference to `.github/workflows/spec-health.yml`; archived to `_archive/00-ci-workflow-yaml-pre-A24-fu36.md`. (3) §98 third archive split — moved 7 mid-aged release rows (v2.77.1 SemVer-max → v2.81.1 v8 rebaseline) into `_archive/98-changelog-v2.77.1-to-v2.81.1.md` (30 KB extracted). §00: 31.7 → 23.5 → ~17 KB; §98: 46.4 → ~16 KB; tier-1 sum target ~91 KB (under 120 KB cap). All work is **Lesson #36 application** (cross-references MUST link, never restate) — both §00 trims removed normative restatements with canonical sources elsewhere.
+- **Spec lockstep**: §00 v2.86.0 → **v2.87.0** (minor — two normative-prose trims to cross-references constitute structural surface change); §98 v2.86.0 → **v2.87.0** (this row + archive split); §99 v2.83.0 → **v2.84.0** (active-file content reduction reflected). No §97 / AC / CI / RUBRIC / gate-count change. Patch-pattern compatible with Phase A24-fu35 + spec/07 fu31 precedent (structural surgery, not contract change).
+- **Validation**: spec/27 bundle-budget pre-fu36: tier-1 134.4 KB / OVER −9.6 KB; expected post-fu36: ~91 KB / **CLEAR**. All 5 strict gates expected GREEN. LLM re-score deferred per Lesson #20 — but Lesson #38 check passed (gateway live), so single-module `--force` re-score available next phase. Expected lift: 86 → 92-95 (auditor will see full §97 + remaining §98 + walker-pinned §00 inventory).
+- **Lesson #70 reinforcement (third application)**: structural archive splits + Lesson #36 prose trims compose cleanly; the two patterns are orthogonal (archive = move historical rows out; trim = replace cross-module restatements with links). Apply both when budget deficit exceeds a single-pattern's clearable range (~10 KB).
+- **No CI workflow change, no AC change, no AC-31-31 cascade, no RUBRIC bump, no gate-count change.**
 
 ---
 
