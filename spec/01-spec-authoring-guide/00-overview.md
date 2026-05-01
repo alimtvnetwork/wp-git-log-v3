@@ -8,8 +8,6 @@ axis_rationale: "Authoring conventions for human spec contributors"
 # Spec Authoring Guide
 
 **Version:** 4.15.0  
-**Status:** Active  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu30 — §98 archive split per Lesson #65 / fu28-fu29 pattern)  
 <!-- h10-verified-phase: 153 -->
 **Updated:** 2026-04-30 (Phase 153 Task A24-fu30 — §98 archive split per Lesson #65 / fu28-fu29 pattern)  
 **Status:** Active  
