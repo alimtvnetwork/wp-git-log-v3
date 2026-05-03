@@ -34,3 +34,11 @@ spec/17-consolidated-guidelines/28-distribution-and-runner.md:234:../../spec-sli
 spec/01-spec-authoring-guide/97-acceptance-criteria.md:114:../foo
 spec/02-coding-guidelines/06-ai-optimization/97-acceptance-criteria.md:111:...
 spec/27-spec-toolchain/98-changelog.md:70:./test-foo.sh
+spec/01-spec-authoring-guide/_archive/98-changelog-pre-v4.4.0.md:22:./12-queued-decisions-trail.md
+spec/01-spec-authoring-guide/_archive/98-changelog-pre-v4.4.0.md:92:./00-overview.md
+spec/01-spec-authoring-guide/_archive/98-changelog-pre-v4.4.0.md:93:./97-acceptance-criteria.md
+spec/01-spec-authoring-guide/_archive/98-changelog-pre-v4.4.0.md:94:./99-consistency-report.md
+spec/07-design-system/_archive/98-changelog-pre-v3.4.0.md:80:./00-overview.md
+spec/07-design-system/_archive/98-changelog-pre-v3.4.0.md:81:./97-acceptance-criteria.md
+spec/07-design-system/_archive/98-changelog-pre-v3.4.0.md:82:./99-consistency-report.md
+spec/22-git-logs-v2/_archive/98-changelog-pre-v3.9.0.md:33:../05-split-db-architecture/00-overview.md
