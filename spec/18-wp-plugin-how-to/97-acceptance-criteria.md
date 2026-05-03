@@ -1,7 +1,7 @@
 # Acceptance Criteria — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.1  
-**Updated:** 2026-04-30 (Phase 153 A18-fu1 #4 — closes audit-v7 [D2 HIGH] "Missing Verifies clauses for Phase 14-21": AC-13's `**Verifies:**` clause extended with explicit linter/test artifact citations per dimension (REST/Settings/Response-envelope/ORM/ping/walkthrough); patch-only — no new AC, no AC-31-31 cascade. Lesson #28 + Lesson #19 reinforcement.)  
+**Version:** 1.5.0  
+**Updated:** 2026-05-03 (Phase 153 A18-fu2 — added **AC-16** `[low]` autoloader silent-fail contract closing audit-v7 [D3 LOW] "Partial Failure in Autoloader" (Phase 1.4 diagnostic-write must wrap in silent try-catch to prevent fatal loop; original `require_once` failure still re-throws, only the logging failure is swallowed). AC count 15 → 16. Lesson #19 (audit-boundary < verification-boundary) + Lesson #36 (link-don't-restate from AC-11 FileLogger).)  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
