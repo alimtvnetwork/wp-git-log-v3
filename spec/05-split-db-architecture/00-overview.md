@@ -7,21 +7,21 @@ axis_rationale: "Architecture invariants enforceable via runtime checks"
 
 # Split Database Architecture
 
-> **Version:** 4.4.4  
+> **Version:** 4.5.0  
 <!-- h10-verified-phase: 153 -->
 > **Created:** 2026-02-01  
-> **Updated:** 2026-05-03 (Phase 153 A24-fu47 — §00 walker-pin teaser, schema-naming disambiguation note; Lesson #71 saturated-module promotion-class)  
+> **Updated:** 2026-05-03 (Phase 153 A05-fu — §97 AC-SD-27 polyglot connection-discipline cross-ref; §00 teaser refreshed against current cache snapshot)  
 > **Status:** Active  
 > **AI Confidence:** Production-Ready  
 > **Ambiguity:** Low  
 > **Purpose:** Reusable pattern for hierarchical SQLite database organization across all projects
 
-> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on stale `.lovable/cache/audit-ai/05-*.json` may surface three findings already closed in §97 / on-disk artifacts — do NOT re-author:
+> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on `.lovable/cache/audit-ai/05-*.json` may surface findings already closed in §97 — do NOT re-author:
 > | Cache finding | Pre-closure | Source |
 > |---|---|---|
 > | HIGH D5 — AC-SD-01/02 inherit from `../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md` not in context | **Pre-closed** by AC-SD-24 (`[critical]` — Lesson #36 link-don't-restate cross-module pin); inheritance is by reference, full restatement FORBIDDEN | §97 AC-SD-24 |
-> | MEDIUM D1 — `Database` (01-fundamentals.md:160) vs `DbRegistry` (02-features/01-cli-examples.md:95) table naming | **Resolved**: `Database` in `01-fundamentals.md` is the canonical Root-DB table per AC-SD-04; `DbRegistry` in `02-features/01-cli-examples.md` is a downstream consumer-project alias retained for legacy compatibility (per-project bootstrap may rename). Both spellings are acceptable identifier choices for the same logical table — see disambiguation note in `01-fundamentals.md` § "Table: Database" | §97 AC-SD-04 + this teaser |
-> | LOW D4 — `02-features/03-database-flow-diagrams.md` truncated mid-diagram (AI Bridge flow incomplete) | Harness artifact — file is complete on disk (`wc -l` confirms full diagram); truncation is walker bundle-cap (`bytes_used: 140000`, `files_used: 9/20`), NOT spec defect | `02-features/03-database-flow-diagrams.md` (on disk) |
+> | MEDIUM D3 — Missing concurrency handling for non-Go languages (`01-fundamentals.md` § "SQLite WAL Mode" exhibits Go fragment only) | **Closed** by AC-SD-27 (this phase) — polyglot driver-recipe canonical at `spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)" per Lesson #36; spec/05 deliberately does NOT inline Python/TS/Rust/PHP/C# DSN forms (dual-source drift class) | §97 AC-SD-27 |
+> | LOW D1 — `{ProjectSlug}` source ambiguity (Project.Slug vs Application.AppName) | **Pre-closed** by AC-SD-25 — `Project.Slug` is canonical, derived once from `AppName` via slug normalizer at project creation, IMMUTABLE for project lifetime; `Application.AppName` (02-features/01-cli-examples.md:72) is the user-facing display name, not a path token | §97 AC-SD-25 |
 
 ---
 
