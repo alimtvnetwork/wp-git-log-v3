@@ -11,8 +11,8 @@ axis_reclassification:
 ---
 # Gitlogs Diagrams
 
-**Version:** 3.5.1
-**Updated:** 2026-05-03 (Phase 153 Task S26-fu — §97 AC-DG-22 widened to catalog audit-v? `[D4] LOW Missing .mmd Source Content` as walker-bundle-scope artifact per Lesson #39 evidence triple)
+**Version:** 3.6.0
+**Updated:** 2026-05-04 (Phase 153 Task S26-D3 — §97 added **AC-24** Python-stdlib fallback for AC-23 Tier 2 structural-XML diff so render-lockstep verification no longer requires `xmllint`/`libxml2`; closes audit-v7 [D3] MEDIUM)
 <!-- h10-verified-phase: 153 -->
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).

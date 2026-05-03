@@ -1,8 +1,19 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.5.1
-**Updated:** 2026-05-03 (Phase 153 Task S26-fu — §97 AC-DG-22 widened to catalog `[D4] LOW Missing .mmd Source Content` walker-bundle-scope artifact per Lesson #39)
+**Version:** 3.6.0
+**Updated:** 2026-05-04 (Phase 153 Task S26-D3 — §97 added AC-24 Python-stdlib fallback removing `xmllint` hard dependency; closes audit-v7 [D3] MEDIUM)
 **Scope:** `spec/26-gitlogs-diagrams/`
+
+---
+
+## [3.6.0] — 2026-05-04 — Phase 153 Task S26-D3: AC-24 stdlib fallback removes xmllint hard-dependency
+
+- **Action:** Added **AC-24** `[medium]` to §97. AC-24 introduces a Python-stdlib (`xml.etree.ElementTree.canonicalize`, 3.8+) fallback for AC-23 Tier 2 structural-XML diff. Verifier dispatches: prefer `xmllint --c14n11`; if absent, fall back to stdlib canonicaliser. AC-23 Tier 2 step 3/4/5 (sed normalisation, diff gate, drift policy) are delegated by reference (Lesson #36 link-don't-restate) — only the canonicaliser binary forks.
+- **Why:** Closes audit-v7 [D3] MEDIUM `External Dependency on xmllint`. Some CI runners + AI coding sandboxes do not ship `libxml2`; hard-depending on `xmllint` blocked verification in those environments. Equivalence claim: for Mermaid-emitted SVG (no namespace prefixes beyond root, no DTD subset, no PIs, no `xml:space`), c14n10 (stdlib) and c14n11 (`xmllint`) outputs are byte-identical after AC-23 Tier 2 step 3 normalisation.
+- **Files:** `97-acceptance-criteria.md` (+1 AC, +~40 lines); banners.
+- **Spec lockstep:** §97 v3.4.1 → **v3.5.0** (AC count +1, minor — new contract surface). §00 v3.5.1 → **v3.6.0**. §98 v3.5.1 → **v3.6.0**. §99 v3.4.1 → **v3.5.0**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**.
+- **Lessons applied:** **Lesson #36** (link-don't-restate — only canonicaliser binary forks; normalisation/diff/drift inherit from AC-23). **New sub-pattern of Lesson #29 Section F**: audit-corpus protocol surfaces citing OS-level binaries MUST also offer a stdlib fallback so AI sandboxes can verify the contract.
+- **Expected re-score:** 94 → ≥97 EXCELLENT (closes the only remaining MED finding; D3 dim was 17 → projected 19+; D5 HIGH and D4 LOW already classified as harness artifacts via AC-22).
 
 ---
 
