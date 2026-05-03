@@ -5,9 +5,9 @@ axis_rationale: "Universal CI binary behavioural ACs"
 
 # Universal CI CLI — Spec Overview
 
-**Version:** 2.2.0  
+**Version:** 2.3.0  
 <!-- h10-verified-phase: 153 -->
-**Updated:** 2026-04-30 (Phase 153 Task A11g — AC-28-41/42/43 close audit-v5 findings: D4 HIGH (harness-truncation pin), D3 MED (PTY-forbidden / kernel-pipe-merge), D1 LOW (GitProfile server-side resolution). AC count 40 → 43.)
+**Updated:** 2026-05-03 (Task S28-01 — added AC-28-44 codifying `--parallel` failure isolation; AC count 43 → 44.)
 **Status:** Draft  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** Low  
