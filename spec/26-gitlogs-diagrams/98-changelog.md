@@ -1,7 +1,7 @@
 # Changelog — Gitlogs Diagrams
 
 **Version:** 3.5.1
-**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 — AC-DG-22 derivative-artifact module-kind pin; closes audit-v13 HIGH [D5] `Missing Authoritative Source Context (spec/22)` per Lesson #29 + Lesson #36)
+**Updated:** 2026-05-03 (Phase 153 Task S26-fu — §97 AC-DG-22 widened to catalog `[D4] LOW Missing .mmd Source Content` walker-bundle-scope artifact per Lesson #39)
 **Scope:** `spec/26-gitlogs-diagrams/`
 
 ---
