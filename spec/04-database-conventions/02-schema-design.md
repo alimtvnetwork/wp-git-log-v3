@@ -1,7 +1,7 @@
 # Database Schema Design
 
-**Version:** 3.4.1  
-**Updated:** 2026-04-29 (Phase 153 P3: §4.3 Concurrency Posture cross-reference to spec/13 AC-22 added — implementer-facing prose mirror, no contract change)
+**Version:** 3.4.2  
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 #5 — §2.1.1 SQLite row tightened: `INTEGER` is now MANDATORY, `BOOLEAN` keyword alias FORBIDDEN; closes audit-v7 [D1 LOW] "Boolean Type Ambiguity in SQLite". Bound by §97 AC-17.)
 
 ---
 
