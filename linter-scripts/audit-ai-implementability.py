@@ -210,7 +210,7 @@ def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
         if total + len(chunk) > MAX_BYTES:
             remaining = MAX_BYTES - total
             if remaining > 500:
-                parts.append(chunk[:remaining] + "\n\n[...TRUNCATED at 120KB context cap...]")
+                parts.append(chunk[:remaining] + f"\n\n[...TRUNCATED at {MAX_BYTES//1024}KB context cap...]")
                 total += remaining
                 used += 1
             break
