@@ -1,7 +1,7 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.4.0  
-**Updated:** 2026-04-30  
+**Version:** 1.5.0  
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu2: AC-34-14 codifies the 120 KB → 140 KB raise + dynamic truncation-marker contract — closes the spec-vs-code drift where `linter-scripts/audit-ai-implementability.py:45` already cited "AC-34-14" but the AC did not exist.)  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
 **Category:** Auditor (LLM-driven, deep-walk)
