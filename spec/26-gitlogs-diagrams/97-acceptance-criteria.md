@@ -1,7 +1,7 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 3.4.0
-**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 — AC-DG-22 derivative-artifact module-kind pin closes audit-v13 HIGH [D5] `Missing Authoritative Source Context (spec/22)` as bundling-scope artifact per Lesson #29 + Lesson #36; mirrors spec/25 AC-AI-09/10/11 pattern. AC count 22 → 23.)
+**Version:** 3.4.1
+**Updated:** 2026-05-03 (Phase 153 Task S26-fu — extended **AC-DG-22** Given/Then to also catalog audit-v? `[D4] LOW Missing .mmd Source Content` as walker-bundle-scope artifact per Lesson #39 evidence triple: all 7 active `.mmd` files present on disk (01/05/06/07/08/09/10 — 150/38/36/33/29/107/61 lines respectively); walker glob omits `.mmd` extensions in tier-1 cap, NOT file-system absence. AC-DG-11 + AC-DG-14 already enforce on-disk `.mmd` ↔ `.svg` lockstep. No new AC, no AC-31-31 cascade — pure verifies-clause widening per Lesson #36 link-don't-restate.)
 **Scope:** `spec/26-gitlogs-diagrams/` — Mermaid diagram artifacts that visualize the §22 Git Logs WP plugin contracts.
 
 ---
