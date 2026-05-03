@@ -1,7 +1,7 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.4.1
-**Last Updated:** 2026-04-30 (Phase 153 Task A22: AC-SD-26 Subfolder Delegation Map for `02-features/` + `03-issues/` per Lesson #21 — audit-boundary documentation; observed score lift = 0; codifies Lesson #45 in §98 row.)
+**Version:** 4.5.0
+**Last Updated:** 2026-05-03 (Phase 153 Task A05-fu — added **AC-SD-27** `[medium]` polyglot connection-discipline cross-reference closing audit-v7 MEDIUM/D3 "Missing Concurrency Handling for Non-Go Languages"; spec/13 §10 "Concurrency & Locking (Normative)" is the canonical polyglot driver-recipe owner per Lesson #36 link-don't-restate; mirror of AC-SD-24 inheritance axis applied to polyglot-driver axis. AC-SD count 26 → 27.)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
 ---
