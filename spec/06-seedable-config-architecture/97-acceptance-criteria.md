@@ -1,7 +1,7 @@
 # Seedable Config Architecture — Acceptance Criteria
 
-**Version:** 4.2.0
-**Last Updated:** 2026-04-30 (Phase 153 Task A24: extended AC-SC-14 with Go `SettingValue` struct mapping for `select`/`multiselect` (closes v7 D1 LOW); extended AC-SC-21 with reference Go implementation for lock-then-tx-then-changelog discipline (closes v7 D3 MEDIUM). No AC count change. Pre-flight `wc -c` per Lesson #45 graduated: §97+§00+§01 = 63.4 KB, well under 75 KB cap.)
+**Version:** 4.3.0
+**Last Updated:** 2026-05-03 (Phase 153 Task A18-fu1 #6: added **AC-SC-23** module asset inventory pin (Lesson #29 + Lesson #36) closing audit-v7 D3 HIGH "Truncated Feature Specifications" + missing files 05/06/03/97/99 as harness bundling-cap artifacts — every cited file present on disk, file 04 ends cleanly at 265 lines. AC count 22 → 23.)
 **Scope:** `spec/06-seedable-config-architecture/` — Reusable pattern for version-controlled configuration with automatic changelog updates and initial seeding (CW Config).
 
 ---
