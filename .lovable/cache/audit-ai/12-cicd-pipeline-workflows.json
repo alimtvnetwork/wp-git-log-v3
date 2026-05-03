@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 14,
-  "d3": 15,
-  "d4": 17,
-  "d5": 12,
+  "d2": 16,
+  "d3": 17,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Truncated Context / Missing Dependencies",
-      "why": "The provided context is truncated at 136KB, cutting off the end of the 'Complete Workflow Reference' and omitting several files listed in the inventory (03-vulnerability-scanning, 04-install-script-generation, etc.).",
-      "fix": "Provide the full content of all referenced files in the module root to ensure dependency closure."
+      "title": "Truncated Context / Missing Subfolder Content",
+      "why": "The spec exceeds the 136KB cap, causing the Go Binary Release Pipeline (02-release-pipeline.md) and other subfolder files to be cut off mid-sentence.",
+      "fix": "Split the module into smaller, independent spec files or increase the context window for the auditor."
     },
     {
       "severity": "MEDIUM",
       "dim": "D2",
-      "title": "Missing GWT for Archetype Pipelines",
-      "why": "While the overview has ACs, the specific behaviors of the Browser Extension and Go Binary pipelines (e.g., source map removal, SHA-dedup logic) lack individual GWT acceptance criteria.",
-      "fix": "Add specific GWT criteria to 97-acceptance-criteria.md for the build-graph logic and packaging constraints."
+      "title": "Archetype GWT Stubs",
+      "why": "AC-13 explicitly admits that subfolder archetypes (Browser/Go) currently only have structural-floor ACs and lack runtime behavior GWTs.",
+      "fix": "Add specific GWT criteria for source-map removal, cross-compile matrix verification, and checksum integrity."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous Module Path Placeholders",
-      "why": "The Go build commands use '<module>/version' placeholders which an AI might implement literally or fail to map to the actual repository structure.",
-      "fix": "Explicitly define that '<module>' must be replaced with the module name from go.mod."
+      "dim": "D5",
+      "title": "Unresolved External Linter Dependencies",
+      "why": "AC-11 references linter scripts in spec/27-spec-toolchain/ which are not provided in the current context.",
+      "fix": "Include the relevant sections of spec/27 or provide the script CLI signatures in the shared conventions."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
-  "files_used": 17,
+  "files_used": 16,
   "files_total": 49,
   "bytes_used": 140000,
-  "bundle_sha": "db2280eb1ceabf5f",
-  "total_v6": 76,
+  "bundle_sha": "3856064959e84a6a",
+  "total_v6": 85,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 76.2,
-  "total_v7": 76,
-  "total": 76,
+  "weighted_total": 85.5,
+  "total_v7": 85,
+  "total": 85,
   "band": "GOOD",
   "rubric": "v7"
 }
