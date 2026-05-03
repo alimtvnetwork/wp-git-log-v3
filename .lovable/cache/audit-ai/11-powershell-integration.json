@@ -1,38 +1,38 @@
 {
-  "d1": 18,
-  "d2": 19,
-  "d3": 17,
-  "d4": 18,
-  "d5": 15,
+  "d1": 20,
+  "d2": 20,
+  "d3": 18,
+  "d4": 20,
+  "d5": 20,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Truncated JSON Schema",
-      "why": "The normative JSON Schema file (schemas/powershell.schema.json) is truncated at the end of the provided context, leaving the 'credentials' object and 'wpPlugins' properties incomplete.",
-      "fix": "Ensure the full JSON Schema is provided or reference the complete schema structure in 01-configuration-schema.md."
-    },
-    {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Missing External Script Context",
-      "why": "The spec references 'upload-plugin-v2.ps1' and 'upload-plugin-U-Q.ps1' as active components for the -u and -q flags, but these scripts are not provided in the context.",
-      "fix": "Add a 'Mock/Stub' section for these scripts or explicitly define their CLI interface (parameters/exit codes) in 02-script-reference.md."
+      "dim": "D3",
+      "title": "Missing timeout for Step 5 (Copy & Run)",
+      "why": "The normative contract in 00-overview.md specifies the backend must bind to its port within 30s, but does not define the behavior if it fails (e.g., process hangs or port conflict).",
+      "fix": "Add a 'Timeout Handling' column to the Step 5 row specifying a 30s wait-loop with a '9533 ERR_GO_RUN_FAILED' exit on timeout."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Winget Availability Edge Case",
-      "why": "Step 2 (Prerequisites) relies on winget for auto-install, but if winget is missing (e.g., older Windows Server), the fallback behavior is mentioned but not codified with an exit code.",
-      "fix": "Explicitly map 'Winget Not Found' to Exit Code 1 (ERR_PREREQUISITES) in the Step 2 contract table."
+      "title": "Unspecified behavior for partial clean failures",
+      "why": "The -Force flag removes multiple paths; if one file is locked (e.g., by an IDE), the spec doesn't clarify if the runner should abort or warn and continue.",
+      "fix": "In 00-overview.md Step 3, specify that clean failures on non-critical paths (like .db) should warn, while failures on .pnp.cjs must abort."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Missing winget version check logic",
+      "why": "07-runner-interface.md says 'do not auto-upgrade existing user installs' but doesn't define the exit code if a tool exists but is below the minimum required version.",
+      "fix": "Add a rule to Step 2 in 00-overview.md stating that sub-minimum versions trigger a warning but allow the pipeline to proceed at user risk."
     }
   ],
   "module": "11-powershell-integration",
   "files_used": 18,
   "files_total": 19,
   "bytes_used": 140000,
-  "bundle_sha": "ba435f7d778c38cb",
-  "total_v6": 87,
+  "bundle_sha": "00c23aea358debe5",
+  "total_v6": 98,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 86.7,
-  "total_v7": 87,
-  "total": 87,
-  "band": "GOOD",
+  "weighted_total": 98.3,
+  "total_v7": 95,
+  "total": 95,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }
