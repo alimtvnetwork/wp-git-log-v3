@@ -8,8 +8,8 @@ axis_rationale: "Git Logs WordPress plugin enforceable spec"
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.13.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu29 — §98 archive split per Lesson #65 / fu28 pattern)
+**Version:** 3.13.1  
+**Updated:** 2026-05-03 (Phase 153 Task S22-01 — §97 AC-78 widened to catalog audit-v7 D4 MED "Truncated Glossary" finding as walker-cap artifact per Lesson #39)
 <!-- h10-verified-phase: 153 -->
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
