@@ -1,10 +1,17 @@
 # Changelog — App Issues
 
-**Version:** 3.5.1  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — AC-AI-16 walker-cap truncation pin; Lesson #50 mirror on audit-corpus axis)  
+**Version:** 3.5.2  
+**Updated:** 2026-05-03 (Phase 153 Task S25-02 — AC-AI-17 process-terminology pin + `## Process Terminology` glossary in §00 closes LOW D1 `Ambiguous 'Phase 153' references` per Lesson #36)  
 **Scope:** `spec/25-app-issues/`
 
 ---
+
+## [3.5.2] — 2026-05-03 — Phase 153 Task S25-02: AC-AI-17 (process terminology link-don't-restate pin)
+
+- **Added** AC-AI-17 `[low]` to §97 (v1.5.0 → v1.6.0; AC count 16 → 17). Codifies that recurring v? LOW D1 `Ambiguous 'Phase 153' references` is **link-don't-restate compliance** (Lesson #36), NOT a contract gap: `Phase NN`, `Lesson #NN`, `Task XNN` are contributor-process artifacts owned by `mem://index.md` + `mem://process/phase-153-lessons` + `.lovable/memory/audit/v2-deterministic/phase-NNN-task-XNN-*.md` — restating their definitions inside spec/25 would create dual-source drift. Auditor's recommended fix ("Add a brief glossary or link to a 'Process Fundamentals' module") is satisfied via the new `## Process Terminology` glossary in `00-overview.md` (one-hop disambiguation pointer table — Term × Form × Authority).
+- **Forbidden remediation patterns**: inlining the full Phase/Lesson catalogue (violates Lesson #36); stripping all `Phase NN` / `Lesson #NN` references (loses contributor-process audit trail); promoting above LOW severity (these references are intentional bidirectional spec↔memory links).
+- **Lockstep**: §97 v1.5.0 → **v1.6.0** (new AC); §00 v3.5.1 → **v3.5.2** (banner + new `## Process Terminology` section); §98 v3.5.1 → **v3.5.2** (this row); §99 v1.4.1 → **v1.4.2** (audit row). **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change** — pure link-don't-restate compliance AC.
+- **Memo**: `.lovable/memory/audit/v2-deterministic/phase-153-task-S25-02-process-terminology.md`. Verified: lockstep 87/87 ✅; tree-health 168/168 strict ✅; version-parity 74/74 ✅.
 
 ## [3.5.1] — 2026-04-30 — Phase 153 Task A24-fu12: AC-AI-16 (walker-cap truncation as STRUCTURAL-DESIGN-NOT-DEFECT)
 

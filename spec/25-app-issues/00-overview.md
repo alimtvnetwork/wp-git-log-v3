@@ -7,9 +7,9 @@ axis_rationale: "Routing parent of kind:tracker post-mortems (Lesson #29)"
 
 # App Issues
 
-**Version:** 3.5.1  
+**Version:** 3.5.2  
 <!-- h10-verified-phase: 153 -->
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — AC-AI-16 walker-cap truncation pin)
+**Updated:** 2026-05-03 (Phase 153 Task S25-02 — added `## Process Terminology` glossary section + AC-AI-17 link-don't-restate pin)
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
@@ -44,6 +44,21 @@ Any content that analyzes bugs, failures, root causes, or fixes for application-
 |-----------|----------|
 | App Specs (legacy v1 git-logs) | [../_archive/21-git-logs-v1/00-overview.md](../_archive/21-git-logs-v1/00-overview.md) |
 | Spec Authoring Guide | [../01-spec-authoring-guide/00-overview.md](../01-spec-authoring-guide/00-overview.md) |
+
+---
+
+## Process Terminology
+
+This module's prose (§97 / §98 / §99 + child trackers) routinely cites contributor-process artifacts that live OUTSIDE `spec/` by design (per Lesson #36 — link-don't-restate). Use this glossary as the one-hop disambiguation pointer:
+
+| Term | Form | Authority (single source of truth) |
+|------|------|------------------------------------|
+| **Phase NN** | Phase ordinal (e.g. `Phase 152`, `Phase 153`) | `mem://index.md` Core narrative + per-phase closing memo `.lovable/memory/audit/v2-deterministic/phase-NNN-*.md` |
+| **Lesson #NN** | Numbered contributor rule (e.g. `Lesson #29`, `Lesson #36`, `Lesson #50`) | `mem://process/phase-153-lessons` (consolidated catalogue, sections A–G) |
+| **Task XNN / X-NN-fu / SNN-NN** | Per-task tracker ID inside a phase (e.g. `A11c`, `A24-fu12`, `S22-01`, `S26-fu`) | `.lovable/memory/audit/v2-deterministic/phase-NNN-task-XNN-*.md` (one closing memo per task) |
+| **AC-NN** / **AC-XX-NN** | Numbered acceptance criterion in a §97 file | The owning module's `97-acceptance-criteria.md` (look up by ID prefix; e.g. `AC-AI-*` = `spec/25-app-issues/97-acceptance-criteria.md`, `AC-CG-*` = `spec/02-coding-guidelines/97-acceptance-criteria.md`) |
+
+These references are intentional bidirectional links between spec content and contributor memory — they are NOT spec-internal terminology. AC-AI-17 codifies this disambiguation contract and pins the `[D1] Ambiguous 'Phase 153' references` audit finding class as link-don't-restate compliance.
 
 ---
 

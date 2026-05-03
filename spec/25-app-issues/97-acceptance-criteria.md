@@ -1,7 +1,7 @@
 # Acceptance Criteria — App Issues
 
-**Version:** 1.5.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — added **AC-AI-16** Walker-cap truncation of audit-corpus files is structural-design-not-defect (closes recurring v7 HIGH D4 `Truncated Evidence in Consolidated Findings` as STRUCTURAL-DESIGN-NOT-DEFECT walker-window artifact). The auditor's recommended fix ("split into smaller files") DIRECTLY VIOLATES AC-AI-10 verbatim-citation contract; AC-AI-16 codifies this as forbidden remediation. Lesson #50 mirror on the audit-corpus axis (vs spec/02 AC-CG-24 normative-contract axis). AC count 15 → 16. v7 cache-reported CRITICAL/D2 + MEDIUM/D3 findings are pre-closed by A24-fu3 (AC-AI-12) + A24-fu8 (AC-AI-14/15) — Lesson #47 auditor-cannot-self-respect-ACs in effect.)  
+**Version:** 1.6.0  
+**Updated:** 2026-05-03 (Phase 153 Task S25-02 — added **AC-AI-17** Process terminology pin (`Phase NN` / `Lesson #NN` / `Task XNN`) anchored to canonical contributor-process memos per Lesson #36 link-don't-restate. Closes recurring v? LOW D1 `Ambiguous 'Phase 153' references` finding by adding a `## Process Terminology` glossary to `00-overview.md` (one-hop disambiguation pointer to `mem://index.md` + `mem://process/phase-153-lessons` + `.lovable/memory/audit/v2-deterministic/`). AC count 16 → 17.)  
 **Scope:** `spec/25-app-issues/`
 
 ---
@@ -220,6 +220,21 @@ The following files in this module also constitute acceptance surface — each m
 - **Source:** `linter-scripts/audit-ai-implementability.py` MAX_BYTES = 120_000 constant (AC-34-13); audit-v7 cache `.lovable/cache/audit-ai/25-app-issues.json` `files_used: 9/12, bytes_used: 120000`; AC-AI-10 verbatim-quote contract (`97-acceptance-criteria.md` lines 94–101).
 
 ---
+
+### AC-AI-17: Process terminology (`Phase NN`, `Lesson #NN`, `Task XNN`) is anchored to the canonical contributor process memos  `[low]`
+
+- **Given** the §97 + §98 + §99 prose of `kind: tracker` modules in spec/25 routinely cites contributor-process artifacts of the form `Phase 153`, `Lesson #29`, `Task A11c`, `A24-fu12`, etc., AND a standalone audit-implementability LLM bundle does NOT include the contributor-process memos (`mem://process/phase-153-lessons`, `.lovable/memory/audit/v2-deterministic/*.md`) because they live OUTSIDE `spec/` by design,
+- **When** an auditor reports `[D1] Ambiguous 'Phase 153' references` or "Add a brief glossary or link to a 'Process Fundamentals' module that defines Phase and Lesson terminology",
+- **Then** the finding MUST be classified as **link-don't-restate compliance** (Lesson #36), NOT a contract gap, because: (a) `Phase NN` is a contributor-side phase ordinal owned by `mem://index.md` + the `.lovable/memory/audit/` per-phase memo set; (b) `Lesson #NN` is a numbered contributor rule owned by `mem://process/phase-153-lessons`; (c) `Task XNN` (e.g. `A11c`, `S22-01`, `S26-fu`) is a per-task tracker ID owned by the closing memo file under `.lovable/memory/audit/v2-deterministic/phase-153-task-XNN-*.md`; AND the `## Process Terminology` glossary in `00-overview.md` (added at AC-AI-17 codification) provides the one-hop disambiguation pointer to all three. Restating Phase/Lesson/Task definitions inside spec/25 would create the dual-source drift class Lesson #36 explicitly forbids — the contributor-process memos are the authoritative source.
+- **Forbidden remediation patterns:**
+  - Inlining the full Phase/Lesson catalogue into spec/25 (violates Lesson #36; creates dual-source drift the moment a new lesson lands).
+  - Stripping all `Phase NN` / `Lesson #NN` references from spec/25 prose (loses the contributor-process audit trail that links spec edits to their closing memos).
+  - Promoting this finding above LOW severity in future audits (process-terminology references are intentional bidirectional links between spec content and contributor memory; they are NOT spec-internal terminology).
+- **Verifies:** the `## Process Terminology` glossary in `00-overview.md` (one-hop disambiguation pointer); AC-AI-09/10/11 (audit-corpus module-kind invariants that justify referencing contributor process from spec content); Lesson #36 (link-don't-restate cross-module discipline applied to the spec↔memory axis); closes the recurring **audit-v? LOW D1** `Ambiguous 'Phase 153' references` finding as link-don't-restate compliance.
+- **Source:** audit cache `.lovable/cache/audit-ai/25-app-issues.json` finding `[D1] LOW Ambiguous 'Phase 153' references`; `mem://index.md` (Phase ordinal authority); `mem://process/phase-153-lessons` (Lesson catalogue authority); `.lovable/memory/audit/v2-deterministic/phase-153-task-*.md` (Task ID authority).
+
+---
+
 
 
 
