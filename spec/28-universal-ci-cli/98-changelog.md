@@ -1,9 +1,16 @@
 # Changelog
 
-**Updated:** 2026-04-30
+**Updated:** 2026-05-03
 
 
 All notable changes to `spec/28-universal-ci-cli/`.
+
+## [2.3.0] — 2026-05-03 — Task S28-01: `--parallel` failure isolation (audit-v6 MED/D3 close-out)
+
+- **Added** AC-28-44 `[medium]` — Codifies `--parallel` failure isolation: per-runtime goroutine scope, aggregated worst-exit precedence (`4 > 2 > 1 > 0`), opt-in `--fail-fast` for cross-runtime cancellation, external-signal propagation (`SIGINT` → `130`, `SIGTERM` → `143`), per-runtime ship-queue sealing per AC-28-22.
+- **Updated** `02-architecture.md` `## Failure Semantics` — added new normative subsection `### --parallel failure isolation (Normative)` with 4-row event table (single-runtime failure / `SIGINT` / `SIGTERM` / `--fail-fast`), aggregated-exit-code rule, and 4-pattern forbidden list (cross-runtime cancellation without `--fail-fast`, sibling-SIGTERM inheritance, exit-code-lowering on later success, cross-runtime ship-queue reordering). §02 v1.0.0 → **v1.1.0** (new normative subsection).
+- **Why**: audit-v6 cache (`.lovable/cache/audit-ai/28-universal-ci-cli.json`) flagged MEDIUM/D3 "Ambiguous behavior for parallel runtime failures — §02 failure semantics define behavior for sequential phases, but for --parallel runtimes, it's unclear if a failure in 'ts' should abort an ongoing 'php' runtime or just prevent its next phase." Closed by binding the answer ("only the failed runtime's subsequent phases skip; siblings run to completion; opt-in `--fail-fast` for cross-runtime cancellation") to a new normative §02 subsection + AC-28-44 GWT pin. Aggregated-exit-code precedence preserves the existing `4 > 2 > 1 > 0` ordering from §07 error catalog.
+- **Spec lockstep**: §97 v2.2.0 → **v2.3.0** (minor — new AC, count 43 → 44); §00 v2.2.0 → **v2.3.0** (banner sync per version-parity gate); §02 v1.0.0 → **v1.1.0** (new normative subsection); §98 [2.2.0] → **[2.3.0]** (this row); §99 v2.2.0 → **v2.3.0**. h10 stamp 153 (unchanged). **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change** — pure ambiguity-closure on existing §02 surface.
 
 ## [2.2.0] — 2026-04-30 — Phase 153 Task A11g (audit-v5 finding closure)
 
