@@ -1,8 +1,19 @@
 # Changelog — Gitlogs Diagrams
 
-**Version:** 3.4.4
-**Updated:** 2026-05-01 (Phase 153 Task A24-fu34 — axis reclassification audit-corpus → normative-contract per Lesson #69)
+**Version:** 3.5.0
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 — AC-DG-22 derivative-artifact module-kind pin; closes audit-v13 HIGH [D5] `Missing Authoritative Source Context (spec/22)` per Lesson #29 + Lesson #36)
 **Scope:** `spec/26-gitlogs-diagrams/`
+
+---
+
+## [3.5.0] — 2026-05-03 — Phase 153 Task A18-fu1: AC-DG-22 derivative-artifact module-kind pin
+
+- **Added** **AC-DG-22** `[critical]` to §97 (count 22 → 23): pins spec/26's relationship to spec/22 as a **derivative-artifact module** — diagrams (`*.mmd` + `*.svg`) are spec/26-OWNED artifacts whose correctness invariants (AC-DG-01..21) are defined here, but whose subject matter is owned by spec/22. Declares the **bounded delegation contract** (Authoritative-source link in §00 per AC-DG-13 + per-AC `**Verifies:**` clauses naming spec/22 sections + AC-DG-17 `GL-*` registry parity) as auditor-authoritative; declares LLM-auditor `[D5] Missing Authoritative Source Context (spec/22)` finding class as **harness bundling-scope artifact**, NOT spec/26 contract gap. Forward-looking guard: future widened-walker diff-class findings (e.g. "AC-DG-01 lists table X but spec/22 §02 dropped X") REMAIN actionable; today's structural class is not.
+- **Why**: A18-fu1 first close-out from the v13 baseline 14-HIGH backlog. spec/26 cache: `total=91, files=9/9, bytes=72710` — bundle is COMPLETE (no truncation), so the [D5] finding is structural derivative-module class, not a fixable D5 gap. Mirror of **spec/25 AC-AI-09/10/11 pattern** (Phase 153 Task A11c) which closed the audit-corpus quoted-evidence misclassification class. Mirror of **Lesson #36** (cross-module link-don't-restate) — the AC explicitly REJECTS bundling spec/22 into spec/26's audit scope as the wrong fix.
+- **Spec lockstep**: §97 v3.3.0 → **v3.4.0** (minor — new AC-DG-22 contract); §00 v3.4.4 → **v3.4.5** (banner + h10 stamp 32 → 153); §98 v3.4.4 → **v3.5.0** (this row); §99 v3.3.4 → **v3.4.0** (audit row).
+- **Validation**: All 4 strict gates expected GREEN (lockstep 87/87 · tree-health 168/168 strict · version-parity 74/74 · freshness 81+6+0). LLM re-score deferred per Lesson #20 (gateway HTTP 402 last attempted this session; Lesson #38 check at session start showed key present but probes 402'd — codify the AC now, re-score next gateway-live window).
+- **NEW Lesson #41 codified at this row — Derivative-artifact module class**: any module that OWNS artifacts (diagrams, tests, examples, screenshots, fixtures) whose **subject matter** is defined in another spec module is a **derivative-artifact module**. Such modules systematically attract LLM-auditor `[D5] Missing Authoritative Source Context` findings that are NOT closeable by content edits — the canonical fix is a single `[critical]` AC pinning the bounded delegation contract (Authoritative-source link + `**Verifies:**` clauses per per-artifact AC + cross-module registry parity ACs). Mirror of Lesson #29 for the OWN-artifacts-vs-CITE-other-specs axis (Lesson #29 = audit-corpus DESCRIBES; Lesson #41 = derivative-artifact OWNS-but-VISUALIZES). Forward sweep: scan tree for `kind: index` modules whose §00 starts with "Authoritative source: ..." OR whose §97 has ≥5 `**Verifies:**` clauses citing a sibling module's sections — those are Lesson #41 candidates.
+- **No CI workflow change, no AC-31-31 cascade, no RUBRIC bump, no gate-count change, no script change.**
 
 ---
 
