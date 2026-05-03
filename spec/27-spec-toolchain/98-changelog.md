@@ -6,6 +6,16 @@
 
 ---
 
+### 2.88.1 — 2026-05-03 — Phase 153 Task A21: spec/27 §00 R2 reference snippets restored (closes audit-v5 MEDIUM D4 + LOW D3)
+
+- **Action**: Added `### R2 — File-Locking Retry Reference Snippets (Normative, AC-T-32)` subsection under §00 `## Resilience — CI Edge Cases` with Python + Node reference implementations: single `read()` + 3× retry on `JSONDecodeError`/`SyntaxError` + jittered 100 ms ± 25 % back-off (75–125 ms range explicit) + `errno.EAGAIN`/`EACCES`/`EBUSY` → `sys.exit(2)`. Snippets are the executable analogue of AC-T-32's GWT prose (line 188 of §97), NOT a restatement of AC-T-28's R1–R5 contract.
+- **Why**: F-03b tree-wide refresh surfaced fresh audit-v5 findings — MEDIUM D4 "Missing Concrete Implementation for R2 Snippets" + LOW D3 "Concurrency/Locking Implementation Ambiguity — lacks specific jitter/back-off implementation". A24-fu36's `## Resilience` trim correctly removed AC-T-28's R1–R5 prose restatement (Lesson #36) but accidentally also removed the AC-T-32-mandated reference snippets, which are NOT a Lesson #36 violation (Lesson #36 forbids restating *rules*; it does not forbid shipping *reference code* a rule explicitly mandates). HIGH D5 "Dangling External References (Truncation)" in same finding-set is harness-artifact, already mitigated by AC-T-30 Slot Delegation Map + AC-T-31 AC Family Prefix Index per Lesson #29.
+- **Spec lockstep**: §00 v2.88.0 → **v2.88.1** (patch — R2 normative subsection added; no §97 / AC change since AC-T-32 already exists); §98 v2.88.0 → **v2.88.1** (this row); §99 v2.85.0 → **v2.85.1** (banner only). No §97 / AC count / CI / RUBRIC / gate-count change.
+- **Validation**: All 5 strict gates expected GREEN. Expected re-score lift: D3 17→18-19, D4 16→18-19 → spec/27 85 → ~89-92.
+- **NEW Lesson #78** — *Lesson #36 has a code-vs-rule distinction*: trims that remove cross-module restatements of rules (R1–R5 GWT) are correct; trims that remove reference-implementation code mandated by an AC in the SAME module are NOT Lesson #36 violations and should be preserved. Future archive-split tasks MUST grep for `AC-T-NN` references in the about-to-be-archived prose and verify each cited AC's mandate is still satisfied post-trim.
+
+---
+
 ### 2.88.0 — 2026-05-03 — Phase 153 Task A18-fu2: slot 34 AC-34-14 codifies 140 KB cap + dynamic truncation marker
 
 - **Action**: Added **AC-34-14** `[critical]` to `spec/27-spec-toolchain/34-audit-ai-implementability.md` (slot 34 §00 v1.4.0 → **v1.5.0**) pinning (a) `MAX_BYTES = 140_000` (raised from `120_000` at Phase 153 Task A18-full), (b) the truncation-marker string MUST interpolate `{MAX_BYTES//1024}KB` dynamically (no hard-coded literal byte counts), (c) the source-line comment at `linter-scripts/audit-ai-implementability.py:45` MUST cite both AC-34-13 and AC-34-14 so the raise history is grep-able, (d) any future raise above 140 KB requires a fresh live-probe under the canonical `User-Agent: lovable-spec-audit/1.0` header. AC-34-13 marked as superseded (retained as historical contract for the 120 KB intermediate). Slot Delegation Map row for slot 34 + AC Family Prefix Index updated to `AC-34-09..14` / count `≥14`.
