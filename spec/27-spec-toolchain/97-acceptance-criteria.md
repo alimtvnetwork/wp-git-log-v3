@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.11.0
-**Updated:** 2026-05-03 (Task S27-02: AC-T-33 codified — R2 read-target scope closed to a 5-row ledger, eliminating "all reads vs. concurrent-write reads only" ambiguity surfaced by audit-v6 MEDIUM/D3.)
+**Version:** 2.12.0
+**Updated:** 2026-05-03 (Task S27-01: AC-T-34 codified — pins audit-v6 HIGH/D4 "AC-11-05 mid-sentence truncation" as walker-cap artifact NOT contract gap; canonical `(wc -l, tail -10, grep)` evidence triple per Lesson #11/#16/#29 truncation-axis application.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
