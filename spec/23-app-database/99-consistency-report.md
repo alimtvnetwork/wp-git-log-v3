@@ -1,7 +1,7 @@
 # Consistency Report — 23-app-database
 
 **Version:** 2.1.3
-**Updated:** 2026-04-30
+**Updated:** 2026-05-04
 
 > **v2.1.3 update (Phase 153 Task S23-02 — close 2× LOW audit-v7 findings):** Added **AC-ADB-15** `[low]` (SQLite concurrency pragmas linked to spec/13 §10 owner per Lesson #36 — link, do not restate; closes D3 LOW `Missing SQLite Busy Timeout/WAL configuration`) and **AC-ADB-16** `[low]` (PostgreSQL reference appendix MUST expose `timestamptz` as UTC Unix seconds for application-logic parity with SQLite primary `INTEGER`; closes D1 LOW `Timestamp Unit Ambiguity in Postgres Block`). Mirrored both as a one-line bullet in §00 § "Convention recap" and a `⏱ Timestamp parity` blockquote in §00 § "Inlined Contracts (Phase 53)". Banners: §97 v3.2.0 → **v3.3.0** (AC 14 → 16); §00 v4.2.1 → **v4.2.2**; §98 v4.2.1 → **v4.2.2**. Expected re-score: 97 → ≥99 EXCELLENT. **No CI workflow change, no RUBRIC bump, no gate-count change.**
 

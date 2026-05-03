@@ -9,7 +9,7 @@ axis_rationale: "App tables + AppLink polymorphic resolution rules"
 
 <!-- h10-verified-phase: 153 -->
 **Version:** 4.2.2
-**Updated:** 2026-04-30
+**Updated:** 2026-05-04
 **AI Confidence:** Production-Ready
 **Ambiguity:** None
 
