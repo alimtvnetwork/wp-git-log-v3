@@ -1,10 +1,16 @@
 # Changelog — Split Database Architecture
 
-**Version:** 4.4.4
-**Updated:** 2026-05-03 (Phase 153 A24-fu47 — §00 walker-pin teaser + 01-fundamentals schema-naming disambiguation note; Lesson #71 saturated-module promotion-class)
+**Version:** 4.5.0
+**Updated:** 2026-05-03 (Phase 153 A05-fu — §97 AC-SD-27 polyglot connection-discipline cross-ref + §00 teaser refresh)
 **Scope:** `spec/05-split-db-architecture/`
 
 ---
+
+### 4.5.0 — 2026-05-03 — Phase 153 A05-fu: AC-SD-27 polyglot connection-discipline cross-ref (Lesson #36)
+- **Action**: Closes audit-v7 cache MEDIUM/D3 finding "Missing Concurrency Handling for Non-Go Languages" (`01-fundamentals.md` § "SQLite WAL Mode" exhibits Go fragment only). Added **AC-SD-27** `[medium]` mandating that the polyglot driver-recipe (Python `sqlite3` / TypeScript `better-sqlite3` / Rust `rusqlite` / PHP `PDO_SQLITE` / C# `Microsoft.Data.Sqlite` connection-string + PRAGMA + retry-loop) be resolved via the canonical owner `spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)" per Lesson #36 link-don't-restate. spec/05 deliberately does NOT inline driver examples — the dual-source drift class is forbidden. Mirror of AC-SD-24 (cross-language inheritance axis) applied here to the polyglot-driver axis. Verifies spec/13 AC-22 (canonical concurrency owner per Phase 153 P3 prose-mirror).
+- **§00 teaser refresh**: previous A24-fu47 teaser cited a different cache snapshot (HIGH/D5 inheritance + MEDIUM/D1 Database/DbRegistry + LOW/D4 truncation). Rewrote against current snapshot's 3 findings: HIGH/D5 inheritance (still pre-closed by AC-SD-24); MEDIUM/D3 polyglot drivers (closed by AC-SD-27 this phase); LOW/D1 ProjectSlug ambiguity (pre-closed by AC-SD-25, expanded teaser entry to clarify Project.Slug = canonical path-token, Application.AppName = display-name).
+- **Saturation note**: `files_used: 9/20`, `bytes_used: 140000` — module IS walker-saturated. AC-SD-27 lands in tier-1 §97 head region (line ~270 within the §97 walker window); no Lesson #45 violation.
+- **Lockstep**: §97 v4.4.1 → **v4.5.0** (new AC, count 26 → 27; minor per Lesson #24 — new content); §00 v4.4.4 → **v4.5.0**; §98 v4.4.4 → **v4.5.0**; §99 v4.1.4 → **v4.5.0** (alignment bump). All 5 strict gates expected GREEN.
 
 ### 4.4.4 — 2026-05-03 — Phase 153 A24-fu47: walker-pin teaser + schema-naming disambiguation
 - **Action**: Two patch-level edits closing all 3 audit-v7 cache findings on the saturation-locked spec/05 (`bytes_used: 140000`, `files_used: 9/20`). (1) **§00 walker-pin teaser** (Lesson #63): 3-row table surfaces pre-closures — HIGH/D5 cross-module inheritance pre-closed by AC-SD-24; MEDIUM/D1 `Database` vs `DbRegistry` resolved as canonical/alias relationship; LOW/D4 truncation = harness artifact. (2) **`01-fundamentals.md:160` Table: Database** got a normative disambiguation blockquote (Lesson #36) declaring `Database` as canonical Root-DB table name and `DbRegistry` (used in `02-features/01-cli-examples.md:95`) as a downstream consumer-project alias retained for legacy compatibility.
