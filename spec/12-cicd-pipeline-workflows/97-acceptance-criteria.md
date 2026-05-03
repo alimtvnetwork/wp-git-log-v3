@@ -1,7 +1,7 @@
 # Acceptance Criteria — CI/CD Pipeline Workflows
 
-**Version:** 1.3.0  
-**Updated:** 2026-04-30 (Phase 153 A24-fu4: AC-10 [high] Technical Interface contract surface + AC-11 [medium] Linter-script dependency cross-references — closes audit-v6 D2-HIGH + D5-MEDIUM findings; AC count 9 → 11.)  
+**Version:** 1.4.0  
+**Updated:** 2026-04-30 (Phase 153 A24-fu43: AC-12 [high] Subfolder Delegation Map + AC-13 [medium] Per-archetype GWT stub mandate + AC-14 [low] `<module>` placeholder resolution — closes audit-v6 D5-HIGH + D2-MEDIUM + D1-LOW spec/12 findings; AC count 11 → 14.)  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
 ---
