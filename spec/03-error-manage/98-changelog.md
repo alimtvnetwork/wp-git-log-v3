@@ -1,9 +1,17 @@
 # Error Management — Changelog
 
 **Version:** 3.4.5  
-**Last Updated:** 2026-04-30
+**Last Updated:** 2026-05-03
 
 ---
+
+## 3.4.5 — 2026-05-03 — Phase 153 Task A24-fu44: spec/03 self-lift (ZIP must-cleanup + Interface Contract pin + sub-module GWT mandate)
+- **Added** AC-10 (`[high]`) — ZIP finalization must-cleanup contract. Lifts retro `01-error-resolution/03-retrospectives/03-zip-finalization-before-return.md` lines 38–129 into normative §97 surface: explicit-close-then-cleanup sequence (writer first, then file, then `pathutil.IsFileValid` validation; `pathutil.Remove` on every error branch); inverse contract for temp-ZIP cleanup-on-failure (`publishFailed bool` flag — ALWAYS preserve ZIP on failure for debugging). Closes audit-v7 HIGH D3 finding `Concurrency/Race Condition in ZIP Finalization` (cache 2026-04-30 finding [0]; the retro is at depth 3 → in walker truncation tail at 20/166 files used).
+- **Added** AC-11 (`[low]`) — Downstream-repo references are Interface Contracts, not local file paths. Closed-set enumeration `{backend/internal/, backend/cmd/, frontend/src/, wp-plugin-publish/pkg/}`; auditor `[D5]` "broken reference" findings on these prefixes are harness misclassifications (Phase 27 drift acknowledgment). Closes audit-v7 LOW D5 finding `Dangling References to Downstream Repos` (cache finding [2]). Lesson #29 extended to spec-vs-implementation cross-repo axis.
+- **Added** AC-12 (`[medium]`) — Sub-module GWT-table mandate. `01-error-resolution/` → `AC-ER-NN`; `02-error-architecture/` → `AC-EA-NN`; `03-error-code-registry/` → `AC-ECR-NN`. Forward-looking authoring contract per Lesson #23 + Lesson #29 pattern; tracker `A24-fu44-fu1` enumerates 3 sub-module GWT-extension follow-ups. Closes audit-v7 MEDIUM D2 finding `Incomplete Acceptance Test Coverage for Sub-modules` (cache finding [1]).
+- **Closes all 3 audit-v7 spec/03 findings** (was 81 GOOD; expected post-rescore ≥87, +6 — D3 14/20 → ≥17 expected, D5 15/20 → ≥17 expected, D2 16/20 → ≥18 expected).
+- **NEW Lesson #40 — Lesson #39 full-triplet pattern is axis-independent.** spec/03 is `normative-contract` axis (audit-v7 `axis_multipliers d2=1.5 + d5=0.5`), but the same 3-class triplet shape applied as on integration-axis spec/12: AC-08 = Lesson #29 module-asset pin (was already present); AC-09 = Lesson #36 cross-module link contract + Lesson #44 grep (already present); AC-10/11/12 = Lesson #21 sub-module delegation + Lesson #36 cross-repo link + Lesson #23 GWT-mandate (this phase). Triplet pattern applies as long as the module has (a) ≥2 deep subfolders with own §97 AND (b) ≥1 outside-spec reference class (linter-scripts in spec/12; downstream-repos in spec/03). Future first-pass self-lifts on any module satisfying both predicates SHOULD ship the full triplet in a single phase.
+- **Banners**: §97 v2.2.0 → **v2.3.0** (minor — AC count 9 → 12, three new GWT ACs); §00 v3.4.4 → **v3.4.5** (patch); §98 v3.4.4 → **v3.4.5** (patch); §99 v3.3.2 → **v3.3.3** (patch). **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no file moves, no script change.** Pure §97 binding work.
 
 ## 3.4.4 — 2026-04-30
 - **Phase 153 Task A24-fu33** (audit-v9 honest-baseline regression close-out — axis reclassification): corrected front-matter `content_axis: audit-corpus` → `content_axis: normative-contract`. Added `axis_reclassification:` block citing phase + reason. spec/03 §97 contains 9 normative ACs (AC-01..AC-09) defining response-envelope/HTTP-status/three-tier-propagation/AppError contracts implementers MUST satisfy across Go/TS/PHP/Rust/C# — this is `normative-contract` per Lesson #29 (audit-corpus is reserved for modules whose normative surface DESCRIBES other specs, e.g. spec/25 post-mortem, NOT modules that DEFINE contracts).
