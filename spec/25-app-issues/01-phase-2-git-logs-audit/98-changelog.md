@@ -6,7 +6,7 @@
 
 ---
 
-## 1.4.1 — 2026-05-03 (Task S25-01: dual-severity-enum frozen-historical pin)
+## 1.4.2 — 2026-05-03 (Task S25-01: dual-severity-enum frozen-historical pin)
 
 - **Added** AC-09 `[high]` to `97-acceptance-criteria.md` (§97 v1.1.0 → **v1.2.0**) declaring the dual severity enum in `00-overview.md` (`{Critical,High,Medium,Low}` at lines 54+/102 vs `{blocker,major,minor,info}` at lines 605/634/673–678/701) as **frozen historical content** per AC-SAG-04 slot-immutability + Phase P11 supersession banner. Canonical issue-record severity enum is `../97-acceptance-criteria.md` AC-AI-14 (parent §25 §97). Closes audit-v6 MEDIUM/D3 finding "Inconsistent Severity Enums between trackers" (the auditor mislocated the drift as sub-01↔sub-02; on disk it's intra-sub-01 and is intentional historical evidence). Applies Lesson #29 (audit-corpus module-kind pin) + Lesson #36 (cross-module link-not-restate).
 - **Bumped** §00 v1.4.1 → **v1.4.2**; §97 v1.1.0 → **v1.2.0**; this §98 v1.3.2 → **v1.3.3**; §99 v1.4.2 → **v1.4.3**. h10 stamps refreshed to phase 153 lineage.
