@@ -1,6 +1,6 @@
 # Consistency Report — CI/CD Pipeline Workflows
 
-**Version:** 3.4.4  
+**Version:** 3.4.5  
 
 > **v3.4.4 update (Phase 153 A24-fu4):** Added **AC-10** (`[high]`) + **AC-11** (`[medium]`) to §97. AC-10 binds `11-technical-interface.md` (kind: interface-contract) — closes audit-v6 D2-HIGH `Missing GWT/Verifies for Technical Interface` by giving the runtime-contract surface (runner matrix + secrets + env + permissions + asset JSON Schema) an explicit §97 GWT. AC-11 anchors 4 linter cross-refs to canonical spec/27-spec-toolchain slots — closes audit-v6 D5-MEDIUM `Unresolved External Linter Dependencies` per Lesson #36 (link-don't-restate). Banners: §97 v1.2.0 → **v1.3.0** (count 9 → 11), §00/§98/§99 v3.4.3 → **v3.4.4**. Score 75 → ≥85 expected on next LLM re-score (deferred per Lesson #20). Codifies parallel application of Lesson #19 (audit-boundary in-§97 delegation) + Lesson #36 (cross-module link-don't-restate) on the same module — the two lessons are orthogonal and routinely co-occur on integration-spec-axis modules.
 
