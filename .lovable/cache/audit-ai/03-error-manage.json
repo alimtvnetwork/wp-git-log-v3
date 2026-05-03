@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 20,
-  "d3": 17,
-  "d4": 19,
-  "d5": 20,
+  "d2": 16,
+  "d3": 14,
+  "d4": 18,
+  "d5": 15,
   "issues": [
     {
+      "severity": "HIGH",
+      "dim": "D3",
+      "title": "Concurrency/Race Condition in ZIP Finalization",
+      "why": "The spec identifies a critical race condition in Go's zip writer (ZIP-FINALIZE-001) but provides a code snippet that manually manages file handles without a robust 'must-cleanup' pattern for all failure branches.",
+      "fix": "Provide a standardized Go 'SafeZip' wrapper or a definitive try/finally-equivalent pattern that guarantees handle closure and disk cleanup on all error paths."
+    },
+    {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous Concurrency Scope for Dedup Lock",
-      "why": "AC-04 and the retrospective code snippet define a client-side (JS) IIFE closure for deduplication, which fails if the user has multiple tabs open or restarts the app.",
-      "fix": "Add a requirement that critical mutations (Publish) must also implement a server-side idempotency key or lock in Tier 2 (Go)."
+      "dim": "D2",
+      "title": "Incomplete Acceptance Test Coverage for Sub-modules",
+      "why": "The root overview (spec/03/00-overview.md) relies on AC-08/AC-09 to 'pin' sub-modules, but the actual behavioral ACs for Error Resolution and Verification Patterns are truncated or missing from the provided context.",
+      "fix": "Ensure every sub-module overview contains a complete GWT table for its specific domain logic (e.g., specific retry backoff values)."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Regex Pattern Mismatch for Error Codes",
-      "why": "AC-04 in \u00a797 defines the pattern as ^[A-Z]{2,4}-[0-9]{3}-[0-9]{2}$ while the Phase 50 contract in \u00a700 defines it as ^[A-Z]{2,5}-[A-Z]+-\\d{3}$.",
-      "fix": "Standardize all regex patterns to the Phase 50 'ErrorEvent' schema format."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D3",
-      "title": "Missing Timeout on ZIP Finalization",
-      "why": "AC-05 mandates synchronous ZIP closing but does not specify behavior for large files or disk-full scenarios during the central directory write.",
-      "fix": "Add a requirement for context-aware timeouts and disk-space pre-flight checks in the ZIP service."
+      "dim": "D5",
+      "title": "Dangling References to Downstream Repos",
+      "why": "The spec acknowledges 'drift' (Phase 27) where ACs reference files in non-existent 'downstream repos' (e.g., backend/internal/api/handlers/handlers.go).",
+      "fix": "Explicitly define these as 'Interface Contracts' that the downstream repo MUST implement, rather than referencing them as existing local files."
     }
   ],
   "module": "03-error-manage",
-  "files_used": 14,
+  "files_used": 20,
   "files_total": 166,
-  "bytes_used": 119743,
-  "bundle_sha": "f2db87557af069d0",
-  "total_v6": 94,
+  "bytes_used": 140000,
+  "bundle_sha": "1fd512062e8aaa4c",
+  "total_v6": 81,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 93.6,
-  "total_v7": 94,
-  "total": 94,
-  "band": "EXCELLENT",
+  "weighted_total": 80.7,
+  "total_v7": 81,
+  "total": 81,
+  "band": "GOOD",
   "rubric": "v7"
 }

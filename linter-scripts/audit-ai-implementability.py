@@ -42,7 +42,7 @@ DEFAULT_REPORT = ROOT / ".lovable" / "memory" / "audit" / "v2-deterministic" / "
 ENDPOINT = "https://ai.gateway.lovable.dev/v1/chat/completions"
 MODEL = "google/gemini-3-flash-preview"
 USER_AGENT = "lovable-spec-audit/1.0 (audit-ai-implementability.py)"
-MAX_BYTES = 120_000  # Cloudflare-safe ceiling (~30k tokens). Raised from 90_000 in Phase 153 Task A12 (codified as AC-34-13) after tree-wide saturation probe (every audited module hit the 90 KB cap; most fit only 3-10 of 17-251 files). 120 KB live-probe at gateway returned HTTP 200; remaining headroom for `User-Agent`-tagged POSTs above this point produces Cloudflare 1010.
+MAX_BYTES = 140_000  # Cloudflare-safe ceiling (~35k tokens). Raised from 120_000 in Phase 153 Task A18-full (codified as AC-34-14) after A18-probe confirmed 140 KB live-probes return HTTP 200; Lesson #77 fix: truncation marker now uses dynamic `{MAX_BYTES//1024}KB` (line 213) so the LLM no longer fabricates "context-window-truncation" findings against a hard-coded literal. Earlier raise (Phase 153 Task A12, AC-34-13): 90_000 → 120_000.
 
 WALK_GLOBS = ("*.md", "*.json", "*.yaml", "*.yml", "*.tmpl", "*.toml")
 
@@ -210,7 +210,7 @@ def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
         if total + len(chunk) > MAX_BYTES:
             remaining = MAX_BYTES - total
             if remaining > 500:
-                parts.append(chunk[:remaining] + "\n\n[...TRUNCATED at 120KB context cap...]")
+                parts.append(chunk[:remaining] + f"\n\n[...TRUNCATED at {MAX_BYTES//1024}KB context cap...]")
                 total += remaining
                 used += 1
             break

@@ -3,36 +3,36 @@
   "d2": 19,
   "d3": 17,
   "d4": 20,
-  "d5": 19,
+  "d5": 18,
   "issues": [
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous Concurrency/Partial Failure in CI Gates",
-      "why": "While AC-CG-27 defines a fail-fast policy, it doesn't specify how the linter should handle race conditions or file-locking when scanning 251 files across 5 runtimes simultaneously.",
-      "fix": "Add a clause to AC-CG-27 requiring linter scripts to use deterministic sequential scanning or explicit file-locking for shared report artifacts."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Inconsistent Boolean Prefix Regex",
-      "why": "The TS contract defines BOOLEAN_NAME_REGEX as /^(is|has|should|can|will|did|was)[A-Z]/, but the human-readable summary in 00-overview only lists is/has/should.",
-      "fix": "Sync the overview text to include 'can/will/did/was' to match the normative TS contract."
+      "title": "Ambiguous 'AST count' implementation for non-Rust languages",
+      "why": "While AC-CG-26 provides a brilliant worked example for Rust's match-arm ratio, the 'AST count' logic for EX-08 (Switch/Select dispatch) lacks a similar line-by-line breakdown for Go or TypeScript, leading to potential linter divergence.",
+      "fix": "Add a worked example for EX-08 showing a Go 'switch' statement line-count calculation similar to the Rust match example."
     },
     {
       "severity": "LOW",
       "dim": "D5",
-      "title": "Dangling Reference to PowerShell/Research",
-      "why": "00-overview lists folders 09 and 10 as having 0 files, and AC-CG-17 marks them as placeholders, which might confuse an AI looking for automation standards.",
-      "fix": "Add a 'NOT_IMPLEMENTED' status to the Subfolder Delegation Map for slots 09 and 10."
+      "title": "Dangling reference to PowerShell/Research content",
+      "why": "AC-CG-17 acknowledges these are placeholders but the overview still lists them as 'Files: 0' which can trigger 'missing file' errors in strict AI auditors despite the structural-delegation-pin.",
+      "fix": "Add a single .gitkeep or stub 00-overview.md to folders 09 and 10 to satisfy file-existence checks."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D1",
+      "title": "Inconsistent Boolean Prefix List",
+      "why": "The TypeScript contract in \u00a797 lists ['is', 'has', 'should', 'can', 'will', 'did', 'was'], but the JSON Schema in \u00a701-cross-language adds ['are', 'must', 'needs'].",
+      "fix": "Synchronize the BOOLEAN_PREFIX_ALLOWLIST in the \u00a797 TS block with the JSON Schema in \u00a701."
     }
   ],
   "module": "02-coding-guidelines",
-  "files_used": 6,
+  "files_used": 9,
   "files_total": 251,
-  "bytes_used": 120000,
-  "bundle_sha": "6f6ff4c3a77417ce",
-  "total_v6": 93,
+  "bytes_used": 140000,
+  "bundle_sha": "fbaad7ef861a1c51",
+  "total_v6": 92,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,7 +42,7 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 92.4,
+  "weighted_total": 91.9,
   "total_v7": 92,
   "total": 92,
   "band": "EXCELLENT",

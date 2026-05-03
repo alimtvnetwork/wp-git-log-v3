@@ -2,37 +2,37 @@
   "d1": 18,
   "d2": 20,
   "d3": 17,
-  "d4": 15,
-  "d5": 20,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Truncated Build Script Logic",
-      "why": "The provided context for 04-build-scripts.md and 06-cleanup.md is truncated due to the 120KB cap, leaving the Bash implementation of cleanup and the end of the build script logic missing.",
-      "fix": "Consult the full version of 04-build-scripts.md and 06-cleanup.md in the repository to complete the implementation."
+      "dim": "D5",
+      "title": "Missing Sub-Module Context (Files 09-27)",
+      "why": "The provided context truncates after file 09. While AC-21 attempts to 'pin' these as present, a mediocre coder cannot implement the logic for the updater binary (19), config schema (21), or parallel check (24) without the actual file content.",
+      "fix": "Provide the full content of files 10 through 28 and the subfolder 24-update-check-mechanism."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous Rollback Trigger in Handoff",
-      "why": "While AC-17 was patched to clarify ownership, the interaction between the blocking cmd.Run() in the parent and the detached updater's failure state creates a potential race or 'zombie' state if the parent is killed during the wait.",
-      "fix": "Ensure the updater process explicitly handles SIGPIPE/parent-death by checking the parent PID status before proceeding with the final swap."
+      "title": "Ambiguous 'updater.exe' Lifecycle",
+      "why": "AC-07 and 05-handoff describe a detached updater process but do not explicitly define if this is a separate codebase or the same binary invoked with a hidden flag, leading to potential 'missing file' errors during implementation.",
+      "fix": "Explicitly state in 05-handoff that the updater is the same binary invoked with a hidden 'update-runner' subcommand."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Missing Unit for Cleanup Latency",
-      "why": "AC-16 specifies a 100ms budget but does not explicitly define if this is CPU time or wall-clock time in the normative text (though the changelog claims it was patched).",
-      "fix": "Explicitly label the 100ms limit as 'wall-clock time' within the body of 06-cleanup.md."
+      "title": "Undefined 'latest.json' Schema in Overview",
+      "why": "01-self-update-overview mentions a 'latest.json' schema but the actual JSON structure is not defined in the visible files (it likely resides in the truncated file 28).",
+      "fix": "Include the JSON schema for latest.json directly in 01-self-update-overview.md."
     }
   ],
   "module": "14-update",
-  "files_used": 10,
+  "files_used": 13,
   "files_total": 54,
-  "bytes_used": 120000,
-  "bundle_sha": "f3b8765e5e4ca8fa",
-  "total_v6": 90,
+  "bytes_used": 140000,
+  "bundle_sha": "533c411886320c7b",
+  "total_v6": 89,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 90.4,
-  "total_v7": 90,
-  "total": 90,
+  "weighted_total": 91.1,
+  "total_v7": 91,
+  "total": 91,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

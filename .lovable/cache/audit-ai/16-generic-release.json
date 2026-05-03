@@ -1,38 +1,38 @@
 {
-  "d1": 18,
+  "d1": 20,
   "d2": 20,
-  "d3": 17,
-  "d4": 19,
-  "d5": 15,
+  "d3": 18,
+  "d4": 20,
+  "d5": 20,
   "issues": [
     {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken Cross-References to External Modules",
-      "why": "The overview and AC-19 reference files in ../12-cicd-pipeline-workflows/ and ../13-generic-cli/ which are not provided in the context.",
-      "fix": "Treat external module links as harness-scope artifacts per AC-21 and assume they resolve in the full repository structure."
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Implicit Concurrency Dependency",
+      "why": "The spec relies on SQLite WAL and specific busy_timeouts for local CLI concurrency but links to an external module (spec/13) rather than defining the local lock-file pathing here.",
+      "fix": "Explicitly define the 'update.lock' file path in the 02-release-pipeline.md concurrency section."
     },
     {
-      "severity": "MEDIUM",
+      "severity": "LOW",
       "dim": "D3",
-      "title": "Ambiguous Concurrency Implementation",
-      "why": "Section 02-release-pipeline.md references a 'canonical concurrency contract' in spec/13 but does not provide the logic for SQLite WAL or locking locally.",
-      "fix": "Implement CI-level concurrency using the provided YAML snippet and defer local CLI locking to the spec/13 implementation."
+      "title": "Partial Failure Cleanup",
+      "why": "The Bash trap for cleanup is defined but the PowerShell equivalent for cleaning up $TMP_DIR on failure (Try/Finally) is less explicit in the snippet.",
+      "fix": "Add a Try/Finally block to the PowerShell installer snippet in 03-install-scripts.md to ensure temp directory removal."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Inconsistent Placeholder Syntax",
-      "why": "The spec uses two families of placeholders (Legacy vs Modern) across different files (03 vs 08), which could lead to partial substitution if the wrong sed command is used.",
-      "fix": "Use the consolidated regex and substitution logic provided in 09-placeholder-tokens.md to catch both families."
+      "title": "Ambiguous 'sh' vs 'bash' in curl pipe",
+      "why": "AC-18 mentions Bash 4+ but 03-install-scripts.md uses a self-re-exec guard for 'sh' which might be 'dash' on some systems, potentially causing syntax errors before the guard executes.",
+      "fix": "Ensure the first 10 lines of install.sh use only POSIX-compliant syntax before the Bash re-exec guard."
     }
   ],
   "module": "16-generic-release",
   "files_used": 13,
   "files_total": 13,
-  "bytes_used": 120000,
-  "bundle_sha": "66cb10f2ef2519a8",
-  "total_v6": 89,
+  "bytes_used": 122319,
+  "bundle_sha": "e16de187513b288e",
+  "total_v6": 98,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 91.1,
-  "total_v7": 91,
-  "total": 91,
+  "weighted_total": 97.6,
+  "total_v7": 98,
+  "total": 98,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

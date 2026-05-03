@@ -1,6 +1,6 @@
 {
   "d1": 18,
-  "d2": 19,
+  "d2": 20,
   "d3": 17,
   "d4": 15,
   "d5": 14,
@@ -8,31 +8,31 @@
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Critical normative files missing from context",
-      "why": "The spec relies on 04-rest-api-endpoints.md and 18-schema.sql for core implementation, but these are not in the provided 3/38 files.",
-      "fix": "Provide the full 37-entry asset inventory in the prompt context to resolve external symbols."
+      "title": "Missing Core Normative Files (04, 18, 34)",
+      "why": "The spec references 04-rest-api-endpoints.md (API), 18-schema.sql (DDL), and 34-phpunit-test-skeleton (PHP) as authoritative, but they are not provided in the context.",
+      "fix": "Provide the content of files 04, 18, and 34 in the prompt context."
     },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Abstract examples for complex logic",
-      "why": "While ACs are detailed, the actual JSON/SQL fixtures (files 14, 18) are referenced but not visible, forcing the AI to guess exact syntax.",
-      "fix": "Include 14-endpoint-examples.md and 18-schema.sql to provide concrete I/O and DDL samples."
+      "title": "Truncated Glossary and Enums",
+      "why": "The 01-glossary-and-enums.md file is truncated at the 136KB cap, losing the TypeScript Mirror and Enum Catalog required for implementation.",
+      "fix": "Move the TypeScript Mirror and Enum Catalog to the top of file 01 or provide them in a separate file."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Concurrency strategy externalized",
-      "why": "AC-26 delegates SQLite locking/concurrency to spec/13, which is not provided, leaving the AI uncertain about the 'persisted floor' implementation.",
-      "fix": "Inline the specific SQLite locking contract from spec/13 AC-22 into the Git Logs concurrency section."
+      "title": "Externalized Concurrency Strategy",
+      "why": "AC-26 delegates SQLite locking/concurrency to spec/13 AC-22, which is not provided, leaving the implementer to guess the 'persisted floor' logic.",
+      "fix": "Inline the specific SQLite locking/concurrency rules from spec/13 into AC-26."
     }
   ],
   "module": "22-git-logs-v2",
-  "files_used": 3,
+  "files_used": 5,
   "files_total": 38,
-  "bytes_used": 120000,
-  "bundle_sha": "809e2f420f8d0195",
-  "total_v6": 83,
+  "bytes_used": 140000,
+  "bundle_sha": "4d764f3d45da6021",
+  "total_v6": 84,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 85.9,
-  "total_v7": 86,
-  "total": 86,
+  "weighted_total": 87.4,
+  "total_v7": 87,
+  "total": 87,
   "band": "GOOD",
   "rubric": "v7"
 }
