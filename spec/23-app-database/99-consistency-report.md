@@ -1,7 +1,7 @@
 # Consistency Report — 23-app-database
 
-**Version:** 2.1.1
-**Updated:** 2026-04-29
+**Version:** 2.1.2
+**Updated:** 2026-05-03
 
 > **v2.1.0 update (Phase 153 P48-3 — Polymorphic AppLink resolution lifted to normative prose; closes 2nd of 3 P47-fu1 critical findings):** Added §00 "Polymorphic AppLink Resolution (Normative)" section with discriminator→target binding table, 4-step deterministic resolution algorithm, 4-state closed-enumeration outcome table (`RESOLVED_DIRECT` / `RESOLVED_TRANSITIVE` / `REJECTED_INACTIVE_APP` / `REJECTED_NO_MATCH`), and forbidden-patterns list. Bound as **AC-ADB-14** (`[critical]`) with cross-references to AC-ADB-05/06/10/13. Banners: §00 v4.0.3 → **v4.1.0**, §97 v3.1.0 → **v3.2.0** (count 13→14), §98 v4.0.2 → **v4.1.0**, §99 v2.0.3 → **v2.1.0**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade.** **Lesson #33**: Polymorphic-FK resolution algorithms MUST be lifted to normative prose with closed-enumeration outcomes — example SQL is illustrative, not authoritative; relying on `ORDER BY` clauses to encode precedence is invisible to auditors and fresh implementers (mirror of Lessons #19/#21/#26 — audit-boundary < verification-boundary requires inlined contract surface).
 
