@@ -312,7 +312,7 @@ Per AC-T-31, this index lets a context-window-bounded auditor count the per-scri
 | AC-29-* (incl. AC-29-15) | [29-check-version-parity.md](./29-check-version-parity.md) | ≥15 |
 | AC-31-* (incl. AC-31-31) | [31-audit-spec-vs-code-v2.md](./31-audit-spec-vs-code-v2.md) | ≥31 |
 | AC-33-* (incl. AC-33-08..12) | [33-check-ai-confidence.md](./33-check-ai-confidence.md) | ≥12 |
-| AC-34-* (incl. AC-34-09..12) | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | ≥12 |
+| AC-34-* (incl. AC-34-09..14) | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | ≥14 |
 | AC-RUN-* | [40-run-sh.md](./40-run-sh.md) + [41-run-ps1.md](./41-run-ps1.md) | ≥2 |
 | AC-VG-* (twin) | [50-validate-guidelines-py.md](./50-validate-guidelines-py.md) + [51-validate-guidelines-go.md](./51-validate-guidelines-go.md) | ≥2 |
 | AC-FST-*, AC-SCLA-*, AC-RCL-* | [60-forbidden-strings-toml.md](./60-forbidden-strings-toml.md), [61-spec-cross-links-allowlist.md](./61-spec-cross-links-allowlist.md), [63-readme-cross-links-md.md](./63-readme-cross-links-md.md) | ≥3 |
