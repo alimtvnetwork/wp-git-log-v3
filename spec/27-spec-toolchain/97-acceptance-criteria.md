@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.10.0
-**Updated:** 2026-05-03 (Phase 153 Task A18-fu2: slot 34 AC-34-14 codified — 120 KB → 140 KB cap raise + dynamic truncation-marker contract; closes the spec-vs-code drift where `audit-ai-implementability.py:45` cited a non-existent AC. Slot Delegation Map + AC Family Prefix Index updated to reflect AC-34-09..14 / count ≥14.)
+**Version:** 2.11.0
+**Updated:** 2026-05-03 (Task S27-02: AC-T-33 codified — R2 read-target scope closed to a 5-row ledger, eliminating "all reads vs. concurrent-write reads only" ambiguity surfaced by audit-v6 MEDIUM/D3.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
