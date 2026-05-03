@@ -1,8 +1,17 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.87.0
-**Updated:** 2026-05-01
+**Version:** 2.88.0
+**Updated:** 2026-05-03
 **Scope:** `spec/27-spec-toolchain/`
+
+---
+
+### 2.88.0 — 2026-05-03 — Phase 153 Task A18-fu2: slot 34 AC-34-14 codifies 140 KB cap + dynamic truncation marker
+
+- **Action**: Added **AC-34-14** `[critical]` to `spec/27-spec-toolchain/34-audit-ai-implementability.md` (slot 34 §00 v1.4.0 → **v1.5.0**) pinning (a) `MAX_BYTES = 140_000` (raised from `120_000` at Phase 153 Task A18-full), (b) the truncation-marker string MUST interpolate `{MAX_BYTES//1024}KB` dynamically (no hard-coded literal byte counts), (c) the source-line comment at `linter-scripts/audit-ai-implementability.py:45` MUST cite both AC-34-13 and AC-34-14 so the raise history is grep-able, (d) any future raise above 140 KB requires a fresh live-probe under the canonical `User-Agent: lovable-spec-audit/1.0` header. AC-34-13 marked as superseded (retained as historical contract for the 120 KB intermediate). Slot Delegation Map row for slot 34 + AC Family Prefix Index updated to `AC-34-09..14` / count `≥14`.
+- **Why**: Closes a spec-vs-code drift — the line-45 source comment in `audit-ai-implementability.py` already cited "AC-34-14" but the AC did not exist in this file. Codifies **Lesson #77** (LLM-fabrication suppression: hard-coded literals like `120KB` in prompt scaffolding get treated as contract claims by the LLM auditor → recurring fabricated D3 findings) by mandating dynamic interpolation. Codifies **Lesson #34** (cache cannot be authoritative until LLM gateway is reliably live — A18-fu2 itself was triggered by a 402-blocked re-score attempt for spec/05).
+- **Spec lockstep**: §97 v2.9.0 → **v2.10.0** (minor — AC count 32 → 33 via slot 34 internal addition; map + index updated); §00 v2.87.0 → **v2.88.0** (banner only); §98 v2.87.0 → **v2.88.0** (this row); §99 v2.84.0 → **v2.85.0** (banner only — slot delta noted in audit row). Slot 34: §00 v1.4.0 → **v1.5.0**.
+- **Validation**: No CI workflow change, no script behaviour change (this AC pins existing line-45 + line-213 implementation), no AC-31-31 cascade, no RUBRIC bump, no gate-count change. All 5 strict gates expected GREEN. LLM re-score for spec/27 deferred per Lesson #20 (gateway 402 active).
 
 ---
 

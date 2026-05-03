@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.9.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu6: AC-T-30 Slot Delegation Map + AC-T-31 AC Family Prefix Index + AC-T-32 R2 normative code snippet — closes all 3 v7 audit findings on spec/27 (CRITICAL D5, HIGH D2, MEDIUM D3); AC count 29 → 32; targets lift 76 → ≥85.)
+**Version:** 2.10.0
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu2: slot 34 AC-34-14 codified — 120 KB → 140 KB cap raise + dynamic truncation-marker contract; closes the spec-vs-code drift where `audit-ai-implementability.py:45` cited a non-existent AC. Slot Delegation Map + AC Family Prefix Index updated to reflect AC-34-09..14 / count ≥14.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -249,7 +249,7 @@ The following map enumerates every occupied slot in the range 01–79 with its g
 | 31 | [31-audit-spec-vs-code-v2.md](./31-audit-spec-vs-code-v2.md) | `linter-scripts/audit-spec-vs-code-v2.py` | `AC-31-*` (incl. AC-31-31) | AC-T-14, AC-T-25, AC-T-26 |
 | 32 | [32-check-truncated-prose.md](./32-check-truncated-prose.md) | `linter-scripts/check-truncated-prose.py` | `AC-CTP-*` | AC-T-03 |
 | 33 | [33-check-ai-confidence.md](./33-check-ai-confidence.md) | `linter-scripts/check-ai-confidence.py` | `AC-33-*` (incl. AC-33-08..12) | AC-T-14 |
-| 34 | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | `linter-scripts/audit-ai-implementability.py` | `AC-34-*` (incl. AC-34-09/10/11/12) | AC-T-14, AC-T-28 (R3 LLM timeouts) |
+| 34 | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | `linter-scripts/audit-ai-implementability.py` | `AC-34-*` (incl. AC-34-09/10/11/12/13/14) | AC-T-14, AC-T-28 (R3 LLM timeouts) |
 | 35–39 | _(reserved)_ | _(reserved)_ | _(reserved)_ | _(reserved)_ |
 
 ### Runners (40–49)
@@ -312,7 +312,7 @@ Per AC-T-31, this index lets a context-window-bounded auditor count the per-scri
 | AC-29-* (incl. AC-29-15) | [29-check-version-parity.md](./29-check-version-parity.md) | ≥15 |
 | AC-31-* (incl. AC-31-31) | [31-audit-spec-vs-code-v2.md](./31-audit-spec-vs-code-v2.md) | ≥31 |
 | AC-33-* (incl. AC-33-08..12) | [33-check-ai-confidence.md](./33-check-ai-confidence.md) | ≥12 |
-| AC-34-* (incl. AC-34-09..12) | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | ≥12 |
+| AC-34-* (incl. AC-34-09..14) | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | ≥14 |
 | AC-RUN-* | [40-run-sh.md](./40-run-sh.md) + [41-run-ps1.md](./41-run-ps1.md) | ≥2 |
 | AC-VG-* (twin) | [50-validate-guidelines-py.md](./50-validate-guidelines-py.md) + [51-validate-guidelines-go.md](./51-validate-guidelines-go.md) | ≥2 |
 | AC-FST-*, AC-SCLA-*, AC-RCL-* | [60-forbidden-strings-toml.md](./60-forbidden-strings-toml.md), [61-spec-cross-links-allowlist.md](./61-spec-cross-links-allowlist.md), [63-readme-cross-links-md.md](./63-readme-cross-links-md.md) | ≥3 |
