@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.9.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu6: AC-T-30 Slot Delegation Map + AC-T-31 AC Family Prefix Index + AC-T-32 R2 normative code snippet — closes all 3 v7 audit findings on spec/27 (CRITICAL D5, HIGH D2, MEDIUM D3); AC count 29 → 32; targets lift 76 → ≥85.)
+**Version:** 2.10.0
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu2: slot 34 AC-34-14 codified — 120 KB → 140 KB cap raise + dynamic truncation-marker contract; closes the spec-vs-code drift where `audit-ai-implementability.py:45` cited a non-existent AC. Slot Delegation Map + AC Family Prefix Index updated to reflect AC-34-09..14 / count ≥14.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
