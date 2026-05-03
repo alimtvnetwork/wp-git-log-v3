@@ -32,6 +32,8 @@ All database objects use **PascalCase**. This document summarizes the rules and 
 
 ## Boolean Column Rules
 
+> **Storage note (Normative cross-reference, AC-10):** The `BOOLEAN` keyword used in the SQL snippets throughout this section is **DDL pseudo-syntax for the naming axis only** — it demonstrates column naming, not engine storage. Per [§2.1 Cross-Language Boolean Storage Convention](./02-schema-design.md#21-cross-language-boolean-storage-convention-normative) (AC-09), engine-specific storage is: SQLite → `INTEGER NOT NULL DEFAULT 0/1`; MySQL → `TINYINT(1) NOT NULL DEFAULT 0/1`; PostgreSQL → `BOOLEAN NOT NULL DEFAULT FALSE/TRUE`. Production DDL MUST follow §2.1; the snippets below MUST NOT be copied as-is into a SQLite migration. This cross-reference is normative — do NOT restate §2.1's storage table here (per Phase 153 Lesson #36 — the dual-source drift class is forbidden).
+
 Boolean columns follow the same principles as the [cross-language boolean conventions](../02-coding-guidelines/01-cross-language/02-boolean-principles/00-overview.md) and [no-negatives rule](../02-coding-guidelines/01-cross-language/12-no-negatives.md).
 
 ### Rule 1: Always Use `Is` or `Has` Prefix
