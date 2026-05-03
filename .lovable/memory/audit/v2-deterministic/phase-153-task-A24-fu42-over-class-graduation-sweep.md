@@ -64,6 +64,6 @@ version-parity 74/74 ✅.
 **Lesson #74 confirmed at scale**: applied to 3 modules in one sweep, all 3
 graduate. Future `next` cycles MUST run the cache pre-flight (axis-floor
 signature check) BEFORE opening any per-module self-lift phase. The signature
-is now empirically validated for: integration-spec (spec/12, spec/22-pre-fu29),
+is now empirically validated for: integration-spec (spec/12, spec/22 pre-fu29),
 process-guidance (spec/01, spec/07), tooling-spec (spec/27), and
 audit-corpus-via-axis (spec/14 pre-fu38). Tree-wide applicability confirmed.
