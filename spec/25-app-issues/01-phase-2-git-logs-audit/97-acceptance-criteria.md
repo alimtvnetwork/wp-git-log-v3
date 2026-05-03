@@ -1,7 +1,7 @@
 # Acceptance Criteria — Phase-2 Spec Issues Report — `git-logs` App
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29  
+**Version:** 1.2.0  
+**Updated:** 2026-05-03  
 **Scope:** `spec/25-app-issues/01-phase-2-git-logs-audit/`
 
 ---
@@ -72,6 +72,13 @@ This document defines testable acceptance criteria for the **Phase-2 Spec Issues
 - **Source:** `linter-scripts/check-lockstep.cjs`.
 - **Verifies:** `linter-scripts/check-lockstep.cjs` §strict date+phase parity
 
+### AC-09: Frozen dual-severity-enum is intentional and non-canonical [high]
+- **Given** this module is **SUPERSEDED** (banner line 7) and frozen for traceability per AC-SAG-04 (slot immutability) + the §22 GAP-V2-01 LEGACY-ledger precedent (Phase P7b)
+- **When** an auditor or downstream AI encounters TWO severity enums in `00-overview.md` — `{Critical, High, Medium, Low}` (issue table line 54+, first JSON Schema line 102) AND `{blocker, major, minor, info}` (Phase 50 INV-03 line 605, second JSON Schema line 634, TS enum lines 673–678, Go comment line 701)
+- **Then** the dual enum MUST be treated as **frozen historical content**, NOT as a contract conflict. The canonical issue-record severity enum is `{Critical, High, Medium, Low}` defined in `../97-acceptance-criteria.md` AC-AI-14 (parent §25 §97). The `{blocker, major, minor, info}` enum is the Phase-50 internal-audit-process enum and is preserved verbatim as evidence of the original Phase-2 audit's self-classification rules — it has NO active downstream consumer.
+- **And** rewriting either enum to "unify" them is **FORBIDDEN** — it would corrupt the historical record this superseded module exists to preserve. The active tracker is `../02-consolidated-audit-findings/00-overview.md` (parent §25 §97 AC-AI-14 binds the canonical enum there).
+- **Source:** Lesson #29 (audit-corpus module-kind pin) + Lesson #36 (cross-module link-not-restate); precedent AC-AI-09/10/11 in `../97-acceptance-criteria.md`.
+- **Verifies:** §00 lines 54–78, 102, 605, 634, 673–678, 701 (dual-enum frozen historical content); `../97-acceptance-criteria.md` AC-AI-14 (canonical severity enum)
 
 ---
 
