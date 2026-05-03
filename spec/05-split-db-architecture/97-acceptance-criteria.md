@@ -1,6 +1,6 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.4.0
+**Version:** 4.4.1
 **Last Updated:** 2026-04-30 (Phase 153 Task A22: AC-SD-26 Subfolder Delegation Map for `02-features/` + `03-issues/` per Lesson #21 — audit-boundary documentation; observed score lift = 0; codifies Lesson #45 in §98 row.)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
@@ -268,6 +268,7 @@ FK_CASCADE:                ON DELETE CASCADE within a single DB only
 - **Verifies:** AC-SD-04 Root DB scope (Slug lives in Root, single source of truth) + AC-SD-05 per-item filename regex (parallel discipline at one level deeper) + AC-SD-13 per-item DB lifecycle (the `<ProjectSlug>` directory is created lazily AFTER `Project.Slug` is written, never before). **Source:** A14 close of v6 audit D1 LOW finding "Ambiguous 'ProjectSlug' Source".
 
 ---
+
 
 ## AC-SD-26 — Subfolder Delegation Map (D5 audit-boundary closure)
 

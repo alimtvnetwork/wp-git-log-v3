@@ -7,10 +7,10 @@ axis_rationale: "Architecture invariants enforceable via runtime checks"
 
 # Split Database Architecture
 
-> **Version:** 4.4.1  
+> **Version:** 4.4.3  
 <!-- h10-verified-phase: 153 -->
 > **Created:** 2026-02-01  
-> **Updated:** 2026-04-30  
+> **Updated:** 2026-05-03  
 > **Status:** Active  
 > **AI Confidence:** Production-Ready  
 > **Ambiguity:** Low  
