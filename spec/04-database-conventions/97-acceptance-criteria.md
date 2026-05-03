@@ -1,7 +1,7 @@
 # Acceptance Criteria — Database Conventions
 
-**Version:** 1.5.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu19 — added **AC-14** `[high]` Golden-Rules naming GWT, **AC-15** `[medium]` smallest-type lookup-table convention, **AC-16** `[low]` view-name `Vw`-prefix invariant. Closes audit-v7 HIGH D2 "Missing GWT for Core Naming Rules", MEDIUM D3 "Ambiguous 'Smallest Type' Enforcement", LOW D1 "Inconsistent View Naming Prefix" (cache 2026-04-30, findings [0]/[1]/[2]). AC-13 promoted into §00 walker-pin teaser per Lesson #55. AC count 13 → 16.)
+**Version:** 1.6.0  
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 #5 — added **AC-17** `[medium]` Lesson #34/#47 structural-pin closing audit-v7 HIGH D5 "Truncated Relationship Diagram File" (walker-cap artifact, file is 15.8 KB on disk) + LOW D1 "Boolean Type Ambiguity in SQLite" (tightened §02-schema-design §2.1.1 SQLite row to mandate INTEGER and explicitly forbid the BOOLEAN keyword alias-trap). MEDIUM D3 "SQLite Concurrency Logic Externalized" remains canonically closed at AC-13 + §4.3 cross-ref per Lesson #36. AC count 16 → 17.)  
 **Scope:** `spec/04-database-conventions/`
 
 ---
