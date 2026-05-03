@@ -1,7 +1,7 @@
 # Acceptance Criteria — PowerShell Integration for Project Runner
 
-**Version:** 1.3.0  
-**Updated:** 2026-04-29  
+**Version:** 1.4.0  
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 #3 — added **AC-11** `[high]` shared pnpm store concurrency contract + **AC-12** `[medium]` indexed parallel job result ordering + **AC-13** `[low]` downstream upload-script reference disambiguation; closes all 3 audit-v7 findings via Lesson #40 triplet pattern. AC count 10 → 13.)  
 **Scope:** `spec/11-powershell-integration/`
 
 ---
