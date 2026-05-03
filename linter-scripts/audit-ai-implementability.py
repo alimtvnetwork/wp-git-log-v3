@@ -42,7 +42,7 @@ DEFAULT_REPORT = ROOT / ".lovable" / "memory" / "audit" / "v2-deterministic" / "
 ENDPOINT = "https://ai.gateway.lovable.dev/v1/chat/completions"
 MODEL = "google/gemini-3-flash-preview"
 USER_AGENT = "lovable-spec-audit/1.0 (audit-ai-implementability.py)"
-MAX_BYTES = 140_000  # Cloudflare-safe ceiling (~30k tokens). Raised from 90_000 in Phase 153 Task A12 (codified as AC-34-13) after tree-wide saturation probe (every audited module hit the 90 KB cap; most fit only 3-10 of 17-251 files). 120 KB live-probe at gateway returned HTTP 200; remaining headroom for `User-Agent`-tagged POSTs above this point produces Cloudflare 1010.
+MAX_BYTES = 120_000  # Cloudflare-safe ceiling (~30k tokens). Raised from 90_000 in Phase 153 Task A12 (codified as AC-34-13) after tree-wide saturation probe (every audited module hit the 90 KB cap; most fit only 3-10 of 17-251 files). 120 KB live-probe at gateway returned HTTP 200; remaining headroom for `User-Agent`-tagged POSTs above this point produces Cloudflare 1010.
 
 WALK_GLOBS = ("*.md", "*.json", "*.yaml", "*.yml", "*.tmpl", "*.toml")
 

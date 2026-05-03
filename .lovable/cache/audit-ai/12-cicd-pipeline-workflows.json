@@ -1,37 +1,37 @@
 {
   "d1": 18,
-  "d2": 19,
+  "d2": 14,
   "d3": 15,
   "d4": 17,
-  "d5": 14,
+  "d5": 19,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Truncated Context / Missing Files",
-      "why": "The provided context is truncated at 120KB, cutting off the end of the 'Complete Workflow Reference' and missing several root files (03-10, 11-technical-interface) referenced in the overview.",
-      "fix": "Provide the full content of all files listed in the Feature Inventory, especially the technical interface contract."
+      "dim": "D2",
+      "title": "Missing GWT for core pipeline logic",
+      "why": "While structural ACs (AC-01 to AC-08) are robust, the actual logic for SHA-deduplication, vulnerability filtering, and matrix aggregation lacks GWT criteria.",
+      "fix": "Add GWT criteria to 97-acceptance-criteria.md for SHA-cache hit/miss behavior and stdlib vs third-party vuln exit codes."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Race Condition in SHA Cache Pattern",
-      "why": "The SHA-deduplication pattern in 01-ci-pipeline.md relies on a cache lookup that might be stale if multiple PRs are merged rapidly, potentially leading to 'green' builds on broken code if the cache key collision occurs.",
-      "fix": "Add a 'force-run' label check or include the parent commit SHA in the cache key to ensure uniqueness."
+      "title": "Race condition in SHA cache saving",
+      "why": "The spec notes inlining cache writes to prevent races but doesn't specify behavior if the 'final validation job' is skipped via step-conditionals.",
+      "fix": "Explicitly define that the cache-save step must only execute if all previous validation steps in that job were successful and not skipped."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous Slot Resolution",
-      "why": "The module uses 'slot collisions' (e.g., 01-ci-pipeline.md vs 01-browser-extension-deploy/). While AC-09 explains this, a mediocre AI might still struggle with path resolution without explicit file extensions in all cross-refs.",
-      "fix": "Enforce absolute-style relative paths (./path/to/file.md) for all internal cross-references."
+      "title": "Ambiguous binary naming placeholders",
+      "why": "The build command uses <binary> and <module> placeholders without a defined source (e.g., from go.mod or a specific env var).",
+      "fix": "Pin the source of the binary name to the 'binary_name' property defined in the Technical Interface JSON schema."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
-  "files_used": 17,
+  "files_used": 15,
   "files_total": 49,
-  "bytes_used": 140000,
-  "bundle_sha": "1252ffefc75d7af1",
+  "bytes_used": 120000,
+  "bundle_sha": "060f359ec28e13b6",
   "total_v6": 83,
   "axis": "integration-spec",
   "axis_multipliers": {
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 82.6,
-  "total_v7": 83,
-  "total": 83,
+  "weighted_total": 84.0,
+  "total_v7": 84,
+  "total": 84,
   "band": "GOOD",
   "rubric": "v7"
 }

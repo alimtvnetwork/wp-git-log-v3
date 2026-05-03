@@ -3,36 +3,36 @@
   "d2": 19,
   "d3": 17,
   "d4": 16,
-  "d5": 20,
+  "d5": 15,
   "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "Dangling Sibling References (Bundling Cap)",
+      "why": "The spec explicitly acknowledges (AC-SAG-29) that auditors with ~120KB caps cannot see sibling modules (02, 03, 04, etc.), yet it relies on them for normative logic.",
+      "fix": "Inline the 'Top 10' most critical rules from sibling modules into a 'Core Constraints' section in 00-overview.md."
+    },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Missing Template Content",
-      "why": "The overview lists files 04, 05, and 06 as templates for CLI, App, and Non-CLI modules, but the actual content of these templates is not provided in the context, leaving a mediocre AI to guess the boilerplate.",
-      "fix": "Provide the markdown content for files 04-06 in the context."
+      "title": "Missing Concrete Examples for App/WP Pattern",
+      "why": "While it provides a folder tree for the 'Features + Issues' pattern, it lacks a sample content snippet for a '01-backend.md' file within that specific context.",
+      "fix": "Add a 10-line markdown snippet showing the expected header and first section of a feature-level backend spec."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Linter Script Logic Gaps",
-      "why": "AC-SAG-30 explicitly states that linter logic is anchored to spec/27 and not restated here. While this is a valid 'walker-pin', a mediocre AI cannot verify if its implementation of a new spec will actually pass those external scripts without seeing their logic.",
-      "fix": "Include the GWT criteria for the 6 mandatory linter scripts from spec/27 in the context."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'Production-Ready' Thresholds",
-      "why": "The AI Confidence scoring table uses qualitative terms like 'Minor gaps' or 'Significant gaps'. While AC-SAG-16 adds quantitative checks, it doesn't define the exact line between 'High' and 'Production-Ready' for the percentage-based scoring mentioned in the text.",
-      "fix": "Add a mapping table between the 0-100% score and the Tier icons (e.g., 90-100 = Production-Ready)."
+      "title": "Concurrency/Locking for Linter Scripts",
+      "why": "The spec mandates several linter scripts (AC-SAG-14) but does not specify behavior if multiple instances run (e.g., CI vs local) or how to handle partial file writes during 'self-heal'.",
+      "fix": "Add a requirement to 10-mandatory-linter-infrastructure.md stating scripts must use atomic writes for file updates."
     }
   ],
   "module": "01-spec-authoring-guide",
-  "files_used": 4,
+  "files_used": 3,
   "files_total": 18,
-  "bytes_used": 140000,
-  "bundle_sha": "255946041a96b187",
-  "total_v6": 90,
+  "bytes_used": 120000,
+  "bundle_sha": "de39d01d2478c753",
+  "total_v6": 85,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 89.9,
-  "total_v7": 90,
-  "total": 90,
-  "band": "EXCELLENT",
+  "weighted_total": 84.9,
+  "total_v7": 85,
+  "total": 85,
+  "band": "GOOD",
   "rubric": "v7"
 }
