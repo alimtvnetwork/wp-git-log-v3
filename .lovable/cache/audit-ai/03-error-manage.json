@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 14,
+  "d2": 17,
+  "d3": 19,
   "d4": 18,
-  "d5": 15,
+  "d5": 20,
   "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D3",
-      "title": "Concurrency/Race Condition in ZIP Finalization",
-      "why": "The spec identifies a critical race condition in Go's zip writer (ZIP-FINALIZE-001) but provides a code snippet that manually manages file handles without a robust 'must-cleanup' pattern for all failure branches.",
-      "fix": "Provide a standardized Go 'SafeZip' wrapper or a definitive try/finally-equivalent pattern that guarantees handle closure and disk cleanup on all error paths."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D2",
-      "title": "Incomplete Acceptance Test Coverage for Sub-modules",
-      "why": "The root overview (spec/03/00-overview.md) relies on AC-08/AC-09 to 'pin' sub-modules, but the actual behavioral ACs for Error Resolution and Verification Patterns are truncated or missing from the provided context.",
-      "fix": "Ensure every sub-module overview contains a complete GWT table for its specific domain logic (e.g., specific retry backoff values)."
+      "title": "Sub-module GWT stubs",
+      "why": "AC-12 mandates GWT tables for sub-modules (01, 02, 03), but the provided context only shows the parent \u00a797 and a partial \u00a797 for 01/03-retrospectives, leaving other sub-modules with behavior but no local ACs.",
+      "fix": "Add at least one GWT-style acceptance criterion to the \u00a797 file of every sub-module folder."
     },
     {
       "severity": "LOW",
-      "dim": "D5",
-      "title": "Dangling References to Downstream Repos",
-      "why": "The spec acknowledges 'drift' (Phase 27) where ACs reference files in non-existent 'downstream repos' (e.g., backend/internal/api/handlers/handlers.go).",
-      "fix": "Explicitly define these as 'Interface Contracts' that the downstream repo MUST implement, rather than referencing them as existing local files."
+      "dim": "D1",
+      "title": "Integer vs Prefixed Code Ambiguity",
+      "why": "AC-03 and AC-04 define two different formats (Integer 7000-7919 vs Regex ^[A-Z]{2,4}-...) without explicitly stating which takes precedence for cross-stack Go-to-PHP communication.",
+      "fix": "Add a 'Format Selection' rule: Go-internal uses Integer; all cross-stack/API-envelope errors MUST use Prefixed."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D4",
+      "title": "Truncated Verification Patterns",
+      "why": "The file 01-frontend-backend-sync.md is referenced in inventories but its content is missing/truncated, preventing a coder from seeing the actual pattern.",
+      "fix": "Ensure 01-frontend-backend-sync.md content is fully inlined or provided in the bundle."
     }
   ],
   "module": "03-error-manage",
-  "files_used": 20,
+  "files_used": 17,
   "files_total": 166,
   "bytes_used": 140000,
-  "bundle_sha": "1fd512062e8aaa4c",
-  "total_v6": 81,
+  "bundle_sha": "d113f501d4502cbb",
+  "total_v6": 92,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 80.7,
-  "total_v7": 81,
-  "total": 81,
-  "band": "GOOD",
+  "weighted_total": 90.7,
+  "total_v7": 91,
+  "total": 91,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

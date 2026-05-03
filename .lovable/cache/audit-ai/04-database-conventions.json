@@ -1,38 +1,38 @@
 {
-  "d1": 19,
-  "d2": 18,
+  "d1": 18,
+  "d2": 19,
   "d3": 17,
   "d4": 18,
-  "d5": 16,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Truncated Relationship Diagram File",
-      "why": "The file 05-relationship-diagrams.md is truncated at the 136KB cap, leaving the 'Complete Schema Example' and 'AI Implementation Checklist' incomplete.",
-      "fix": "Move the 'Complete Schema Example' to a standalone file or ensure the overview's Canonical DDL is the primary reference."
+      "why": "File 05-relationship-diagrams.md is truncated mid-sentence at the end of the provided context, losing the N-to-M pattern and the AI Implementation Checklist.",
+      "fix": "Ensure the full content of 05-relationship-diagrams.md is included in the context window."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
       "title": "SQLite Concurrency Logic Externalized",
-      "why": "Critical concurrency handling (WAL, retries, busy_timeout) is referenced via AC-13/AC-22 but the actual implementation logic is in spec/13, which is not provided.",
-      "fix": "Inline the specific SQLite PRAGMA and retry settings into 02-schema-design.md \u00a74.3."
+      "why": "Critical runtime behavior (WAL mode, busy_timeout, retries) is referenced via AC-13/AC-22 but not defined in this module, forcing the AI to guess implementation details.",
+      "fix": "Inline the specific SQLite PRAGMA and retry logic constants from spec/13 into \u00a702-schema-design.md \u00a74.3."
     },
     {
       "severity": "LOW",
       "dim": "D1",
       "title": "Boolean Type Ambiguity in SQLite",
-      "why": "Spec allows both INTEGER and BOOLEAN for SQLite, but notes BOOLEAN is an alias. This can confuse mediocre coders on which to use in DDL.",
-      "fix": "Strictly mandate 'INTEGER' for SQLite boolean columns in the Canonical DDL and \u00a72.1.1."
+      "why": "While \u00a702-schema-design mandates INTEGER, \u00a701-naming-conventions still uses 'BOOLEAN' in code snippets, which may confuse a mediocre AI into using the alias.",
+      "fix": "Update all SQL snippets in 01-naming-conventions.md to use INTEGER instead of BOOLEAN for SQLite examples."
     }
   ],
   "module": "04-database-conventions",
   "files_used": 9,
   "files_total": 11,
   "bytes_used": 140000,
-  "bundle_sha": "f43e498f3bea216d",
-  "total_v6": 88,
+  "bundle_sha": "2c96eed40efcda13",
+  "total_v6": 87,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,

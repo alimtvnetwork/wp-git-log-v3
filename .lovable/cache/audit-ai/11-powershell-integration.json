@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 16,
-  "d3": 15,
-  "d4": 19,
-  "d5": 17,
+  "d2": 19,
+  "d3": 17,
+  "d4": 18,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Concurrency Race Condition in Shared Store",
-      "why": "The spec encourages a shared pnpm store across multiple projects but does not define locking behavior or handling for concurrent 'pnpm store prune' or '-Force' clean operations from multiple script instances.",
-      "fix": "Add a requirement to check for a global lockfile or skip 'store prune' if other run.ps1 processes are detected."
+      "dim": "D5",
+      "title": "Truncated JSON Schema",
+      "why": "The normative JSON Schema file (schemas/powershell.schema.json) is truncated at the end of the provided context, leaving the 'credentials' object and 'wpPlugins' properties incomplete.",
+      "fix": "Ensure the full JSON Schema is provided or reference the complete schema structure in 01-configuration-schema.md."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Missing AC for Multi-Site Parallelism",
-      "why": "The 'Parallel Work Sync Output' document provides a complex implementation pattern for background jobs, but there is no corresponding Acceptance Criterion in 97-acceptance-criteria.md to verify ordered output or job failure recovery.",
-      "fix": "Add AC-11 verifying that -uas output is sorted by index and handles null job returns gracefully."
+      "dim": "D5",
+      "title": "Missing External Script Context",
+      "why": "The spec references 'upload-plugin-v2.ps1' and 'upload-plugin-U-Q.ps1' as active components for the -u and -q flags, but these scripts are not provided in the context.",
+      "fix": "Add a 'Mock/Stub' section for these scripts or explicitly define their CLI interface (parameters/exit codes) in 02-script-reference.md."
     },
     {
       "severity": "LOW",
-      "dim": "D5",
-      "title": "Unresolved External Script References",
-      "why": "The Script Reference (02) and Changelog mention 'upload-plugin-v2.ps1' and 'upload-plugin-U-Q.ps1' as active components, but these files are not provided in the context nor pinned in the asset inventory.",
-      "fix": "Add the upload scripts to the AC-10 asset inventory pin or provide stubs in the templates folder."
+      "dim": "D3",
+      "title": "Winget Availability Edge Case",
+      "why": "Step 2 (Prerequisites) relies on winget for auto-install, but if winget is missing (e.g., older Windows Server), the fallback behavior is mentioned but not codified with an exit code.",
+      "fix": "Explicitly map 'Winget Not Found' to Exit Code 1 (ERR_PREREQUISITES) in the Step 2 contract table."
     }
   ],
   "module": "11-powershell-integration",
-  "files_used": 19,
+  "files_used": 18,
   "files_total": 19,
-  "bytes_used": 128567,
-  "bundle_sha": "be738a7e29c7a8c4",
-  "total_v6": 85,
+  "bytes_used": 140000,
+  "bundle_sha": "ba435f7d778c38cb",
+  "total_v6": 87,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 86.0,
-  "total_v7": 86,
-  "total": 86,
+  "weighted_total": 86.7,
+  "total_v7": 87,
+  "total": 87,
   "band": "GOOD",
   "rubric": "v7"
 }
