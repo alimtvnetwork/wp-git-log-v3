@@ -159,6 +159,8 @@ CREATE INDEX IdxProject_Status ON Project(Status);
 
 ### Table: Database
 
+> **Naming disambiguation (Phase 153 A24-fu47, Lesson #36):** This Root-DB table is canonically named `Database` in this normative spec. Downstream consumer projects MAY alias it as `DbRegistry` (see `02-features/01-cli-examples.md:95` for an example consumer-project alias retained for legacy compatibility). Both spellings refer to the same logical table — the per-project bootstrap MAY choose either identifier. Auditors flagging this as a "schema discrepancy" between `01-fundamentals.md` and `02-features/01-cli-examples.md` MUST treat the finding as a **harness misclassification**: `02-features/` files are non-normative consumer examples, NOT contract surfaces.
+
 ```sql
 -- linter-waive: MISSING-DESC-001 reason="Split-DB architecture example; focus on per-DB isolation, not free-text columns"
 CREATE TABLE Database (
