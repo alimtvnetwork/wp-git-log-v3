@@ -1,10 +1,16 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.88.1
+**Version:** 2.88.2
 **Updated:** 2026-05-03
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
+
+### 2.88.2 — 2026-05-03 — Task S27-02: AC-T-33 codifies R2 read-target scope as closed ledger
+
+- **Added** AC-T-33 `[medium]` to §97 (v2.10.0 → **v2.11.0**, AC count +1) closing audit-v6 MEDIUM/D3 finding "Concurrency/Locking Implementation Ambiguity — AC-T-28 R2 doesn't explicitly state if all scripts must use this for all file reads, or only for the specific 'concurrent-write' targets." AC-T-33 enumerates 5 read-target rows (RT-01 `spec-index.md`, RT-02 `dashboard-data.json`, RT-03 `trace-map.toml`, RT-04 `.lovable/cache/audit-ai/*.json`, RT-05 `~/.local/state/<binary-name>/update.lock`) with concurrent-writer attribution; opt-in scope outside ledger; 3 forbidden patterns (speculative wrapping, prose-only ledger extension, retry on read-only fixtures). Applies Lesson #22 (Closed Exception Ledger pattern) — mirror of AC-CG-22 EX-01..EX-08 in spec/02. **Verifies:** AC-T-28 R2 (scope binding); AC-T-32 R2 normative snippet (binding-target enumeration).
+- **Bumped** §00 v2.88.1 → **v2.88.2**; §97 v2.10.0 → **v2.11.0**; this §98 v2.88.1 → **v2.88.2**; §99 v2.85.1 → **v2.85.2**.
+- **Verified:** `node linter-scripts/check-lockstep.cjs` ✅; `node linter-scripts/check-tree-health.cjs --strict` ✅; `python3 linter-scripts/check-version-parity.py` ✅; `python3 linter-scripts/check-99-summary-freshness.py` ✅.
 
 ### 2.88.1 — 2026-05-03 — Phase 153 Task A21: spec/27 §00 R2 reference snippets restored (closes audit-v5 MEDIUM D4 + LOW D3)
 
