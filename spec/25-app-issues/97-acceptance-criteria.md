@@ -221,6 +221,21 @@ The following files in this module also constitute acceptance surface — each m
 
 ---
 
+### AC-AI-17: Process terminology (`Phase NN`, `Lesson #NN`, `Task XNN`) is anchored to the canonical contributor process memos  `[low]`
+
+- **Given** the §97 + §98 + §99 prose of `kind: tracker` modules in spec/25 routinely cites contributor-process artifacts of the form `Phase 153`, `Lesson #29`, `Task A11c`, `A24-fu12`, etc., AND a standalone audit-implementability LLM bundle does NOT include the contributor-process memos (`mem://process/phase-153-lessons`, `.lovable/memory/audit/v2-deterministic/*.md`) because they live OUTSIDE `spec/` by design,
+- **When** an auditor reports `[D1] Ambiguous 'Phase 153' references` or "Add a brief glossary or link to a 'Process Fundamentals' module that defines Phase and Lesson terminology",
+- **Then** the finding MUST be classified as **link-don't-restate compliance** (Lesson #36), NOT a contract gap, because: (a) `Phase NN` is a contributor-side phase ordinal owned by `mem://index.md` + the `.lovable/memory/audit/` per-phase memo set; (b) `Lesson #NN` is a numbered contributor rule owned by `mem://process/phase-153-lessons`; (c) `Task XNN` (e.g. `A11c`, `S22-01`, `S26-fu`) is a per-task tracker ID owned by the closing memo file under `.lovable/memory/audit/v2-deterministic/phase-153-task-XNN-*.md`; AND the `## Process Terminology` glossary in `00-overview.md` (added at AC-AI-17 codification) provides the one-hop disambiguation pointer to all three. Restating Phase/Lesson/Task definitions inside spec/25 would create the dual-source drift class Lesson #36 explicitly forbids — the contributor-process memos are the authoritative source.
+- **Forbidden remediation patterns:**
+  - Inlining the full Phase/Lesson catalogue into spec/25 (violates Lesson #36; creates dual-source drift the moment a new lesson lands).
+  - Stripping all `Phase NN` / `Lesson #NN` references from spec/25 prose (loses the contributor-process audit trail that links spec edits to their closing memos).
+  - Promoting this finding above LOW severity in future audits (process-terminology references are intentional bidirectional links between spec content and contributor memory; they are NOT spec-internal terminology).
+- **Verifies:** the `## Process Terminology` glossary in `00-overview.md` (one-hop disambiguation pointer); AC-AI-09/10/11 (audit-corpus module-kind invariants that justify referencing contributor process from spec content); Lesson #36 (link-don't-restate cross-module discipline applied to the spec↔memory axis); closes the recurring **audit-v? LOW D1** `Ambiguous 'Phase 153' references` finding as link-don't-restate compliance.
+- **Source:** audit cache `.lovable/cache/audit-ai/25-app-issues.json` finding `[D1] LOW Ambiguous 'Phase 153' references`; `mem://index.md` (Phase ordinal authority); `mem://process/phase-153-lessons` (Lesson catalogue authority); `.lovable/memory/audit/v2-deterministic/phase-153-task-*.md` (Task ID authority).
+
+---
+
+
 
 
 Run the full pipeline:
