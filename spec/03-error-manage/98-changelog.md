@@ -1,6 +1,6 @@
 # Error Management — Changelog
 
-**Version:** 3.4.4  
+**Version:** 3.4.5  
 **Last Updated:** 2026-04-30
 
 ---
