@@ -1,8 +1,8 @@
 # Acceptance Criteria
 
-**Version:** 2.2.0
-**Updated:** 2026-04-30 (Phase 153 Task A11g — added AC-28-41 (module-kind/cross-ref pin closing audit-v5 D4 HIGH harness-truncation + D5 cross-module externals — Lesson #29 + Lesson #36), AC-28-42 (kernel-pipe-merge stdout/stderr interleaving; PTY forbidden — closes D3 MED), AC-28-43 (`GLCI-DOCTOR-PROFILE-NOT-FOUND` server-side `RepoUrl` → `GitProfile` resolution; CLI is passive — closes D1 LOW). AC count 40 → 43.)
-**Prior banner — Version:** 2.1.0; **Updated:** 2026-04-29 (Phase 150 — P3 sweep slot 10: Added `**Verifies:**` clauses to AC-28-01..AC-28-28 (28 ACs). Verifies-coverage 12/40 → 40/40.)
+**Version:** 2.3.0
+**Updated:** 2026-05-03 (Task S28-01 — added AC-28-44 `[medium]` codifying `--parallel` failure isolation: per-runtime goroutine scope, aggregated worst-exit precedence, opt-in `--fail-fast`. Closes audit-v6 MED/D3 ambiguity.)
+**Prior banner — Version:** 2.2.0; **Updated:** 2026-04-30 (Phase 153 Task A11g — added AC-28-41/42/43; AC count 40 → 43.)
 
 Each AC is written **Given / When / Then** so it can be lifted directly into a test (bats / phpunit / go test). When this file and a normative source disagree, the normative source wins and this file MUST be patched.
 
@@ -318,3 +318,11 @@ The following 12 ACs close the four error codes flagged "v1.1 deferred" in `99-c
 - **When** the doctor probe `GET /get-logs?q=<repo>&limit=0` returns `404 GL-VALIDATION-PROFILE-NOT-FOUND`,
 - **Then** the CLI MUST surface the server's `ErrorCode` verbatim per AC-28-26 — it MUST NOT attempt any local `GitProfile` lookup, MUST NOT cache profile state, MUST NOT prompt the user to "select a profile" (the runner has no profile concept — only a `RepoUrl` from `glci.toml` or auto-detection per §03). The `GitProfile` entity is a server-side admin-database row that maps `RepoUrl` → auth credentials + branch policies; the server performs the resolution and returns 404 if no match. The CLI's role is binary: forward the `RepoUrl`, surface the response. The caller-action prompt "Add the GitProfile in admin UI for this `RepoUrl`" (§07 row 41 prose) instructs the operator to navigate to the admin UI and create the missing profile keyed by `RepoUrl`.
 - **Verifies:** §04 doctor 404 mapping; §07 GLCI-DOCTOR-PROFILE-NOT-FOUND row; AC-28-26 server `ErrorCode` verbatim surface; closes audit-v5 D1 LOW ambiguity (GitProfile undefined in CLI surface).
+
+### AC-28-44 — `--parallel` failure isolation: per-runtime scope, aggregated worst-exit, opt-in `--fail-fast` (Task S28-01) `[medium]`
+
+- **Given** §02 `## Concurrency Model` declares "runtimes run in parallel goroutines, separate ship queues" under `--parallel` AND §02 `## Failure Semantics` table defines per-phase outcomes for sequential runs,
+- **When** `glci --parallel ts,php` executes and `ts.lint` exits non-zero while `php.build` is mid-flight,
+- **Then** the `ts` runtime MUST skip its own `ts.build` + `ts.test` per the §02 Failure Semantics table, AND the `php` runtime MUST run to completion (success OR failure) without receiving any `SIGTERM`/`SIGINT` from `glci` originating in the `ts` failure — failure scope is **per-runtime goroutine**, never cross-runtime. Sibling cancellation is opt-in via `--fail-fast` (which propagates `SIGTERM` to ALL runtimes on first phase failure). Without `--fail-fast`, `glci` MUST wait for all runtimes to terminate, then exit with the **highest** observed exit code per precedence `4` (transport) > `2` (config) > `1` (phase) > `0` (success). External signals (`SIGINT` / `SIGTERM` to the `glci` parent) MUST propagate to ALL runtime subtrees and exit `130` / `143` respectively. Codified in §02 `### --parallel failure isolation (Normative)` subsection (4-row event table + aggregated-exit-code rule + 4-pattern forbidden list).
+- **AND** per-runtime ship queues remain sealed per AC-28-22 — a failed runtime's ship queue MUST NOT be drained "first" to prioritize its diagnostic logs over a sibling's ongoing queue (cross-runtime queue reordering is forbidden).
+- **Verifies:** §02 `## Concurrency Model` table (per-runtime goroutine declaration); §02 `### --parallel failure isolation (Normative)` (event table + forbidden patterns); §02 `## Failure Semantics` table (per-phase exit codes feeding the aggregated rule); AC-28-22 (per-runtime PipelineName separation, sealed ship queues); closes audit-v6 MEDIUM/D3 finding "Ambiguous behavior for parallel runtime failures — unclear if a failure in 'ts' should abort an ongoing 'php' runtime or just prevent its next phase".
