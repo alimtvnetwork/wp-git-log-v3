@@ -8,8 +8,8 @@ axis_rationale: "App tables + AppLink polymorphic resolution rules"
 # App Database
 
 <!-- h10-verified-phase: 153 -->
-**Version:** 4.2.1
-**Updated:** 2026-05-03
+**Version:** 4.2.2
+**Updated:** 2026-04-30
 **AI Confidence:** Production-Ready
 **Ambiguity:** None
 
@@ -71,6 +71,7 @@ This file is the **single source of truth** for the App table family. Cross-refe
 - **Timestamps:** `INTEGER` Unix seconds UTC, named `CreatedAt`, `UpdatedAt`, `DisconnectedAt`.
 - **Foreign keys:** `ON UPDATE CASCADE ON DELETE RESTRICT` unless stated.
 - **Migrations (Rule 12):** Forward-only. New columns must be `NULLABLE` and **must not** declare a `DEFAULT`. No destructive `DROP TABLE` / `DROP COLUMN` in production migrations — superseded data moves via a "shadow + backfill + cutover" sequence.
+- **Concurrency pragmas (cross-reference, AC-ADB-15):** The required SQLite PRAGMA set (`journal_mode=WAL`, `busy_timeout=5000`, `foreign_keys=ON`, `synchronous=NORMAL`) and the `SQLITE_BUSY` retry contract (3×100ms ±25% jitter) are owned by [`spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)"](../13-generic-cli/10-database.md) (which mirrors `spec/05` AC-SD-22 + `spec/27` AC-T-28 R3). Per Lesson #36, this module MUST NOT restate them — link, do not duplicate.
 
 ### DDL — Lookup tables
 
@@ -342,6 +343,16 @@ _Verification section last updated: 2026-04-27_
 > reference dialect any future AC opening a PostgreSQL implementation lane
 > would build on. Implementers MUST NOT materialise this block as the App
 > database — silent dialect-flip is FORBIDDEN per AC-ADB-11.
+>
+> **⏱ Timestamp parity (AC-ADB-16):** the SQLite primary block stores
+> `CreatedAt` / `UpdatedAt` as Unix seconds (`INTEGER`). For
+> application-logic parity, all `timestamptz` values in this reference
+> block MUST be handled as **UTC** and exposed to the application layer
+> as **Unix seconds** (e.g., `EXTRACT(EPOCH FROM created_at)::bigint` on
+> read, `to_timestamp($1)` on write) — consumers receive the same
+> `INTEGER` Unix-seconds shape regardless of dialect. Exposing
+> `timestamptz` as ISO-8601 strings or as local-tz timestamps is
+> FORBIDDEN.
 
 ### Canonical app-database schema (SQL DDL, PostgreSQL 15+ — REFERENCE ONLY)
 
