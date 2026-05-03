@@ -7,9 +7,9 @@ axis_rationale: "Bridges CLI to external PowerShell pipeline"
 
 # PowerShell Integration for Project Runner
 
-> **Spec Version:** 2.27.1  
+> **Spec Version:** 2.27.2  
 > **Script Version:** 2.25.0  
-> **Updated:** 2026-04-29  
+> **Updated:** 2026-05-03  
 > **Status:** Active  
 > **Location:** `spec/powershell-integration/`  
 > **Purpose:** Reusable PowerShell runner for Go backend + React frontend projects with pnpm PnP support
