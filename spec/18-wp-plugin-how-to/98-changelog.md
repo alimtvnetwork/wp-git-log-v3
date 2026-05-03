@@ -1,10 +1,15 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.1  
-**Updated:** 2026-04-30 (Phase 153 A24-fu10-fu2 — closes audit-v7 [D3 MEDIUM] flock prose-mirror under existing AC-11 + executes AC-14's "Known-stale references" P0 cleanup of 4 `CHANGELOG.md` instances in `10-deployment-patterns.md`; Lesson #33 prose-refresh)
+**Version:** 1.4.2  
+**Updated:** 2026-04-30 (Phase 153 A18-fu1 #4 — closes audit-v7 [D2 HIGH] "Missing Verifies clauses for Phase 14-21": AC-13 Verifies-clause extension with explicit linter/test artifact citations)
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
+
+### 1.4.2 — 2026-04-30 — Phase 153 A18-fu1 #4: AC-13 Verifies-clause artifact-citation extension
+- **Action**: Closes audit-v7 [D2 HIGH] `Missing Verifies clauses for Phase 14-21`. AC-13 already carried a `**Verifies:**` line citing the architectural-invariant contract (Lesson #19), but the auditor flagged absence of explicit linter/test artifact bindings for the REST/Settings/ORM dimensions. Extended the clause with 6 sub-citations: (a) REST permission_callback + namespace → `check-forbidden-strings.py`; (b) Settings `register_setting`/sanitize/raw `update_option` → `check-forbidden-strings.py`; (c) Response envelope + typed exceptions → `check-forbidden-strings.py`; (d) Repository facade vs raw `$wpdb->query` → `check-forbidden-strings.py`; (e) ping endpoint exact-shape → `test-readme-inventory.sh` schema-snapshot extension hook; (f) walkthrough end-to-end parity → `check-tree-health.cjs --strict` + `check-lockstep.cjs`. Added authoring rule per Lesson #28: AC-10/12/13 row changes MUST add matching forbidden-string patterns to `linter-scripts/forbidden-strings.toml` in the same phase.
+- **Lesson #28 reinforced**: every new contract row in an architectural-invariant table SHOULD point at a mechanical verifier; absent that pointer, the auditor cannot disambiguate "contract exists but unverified" from "contract verified by an unbound script". Verifies-clause extension is the remediation surface.
+- **Lockstep**: §97 v1.4.0 → **v1.4.1** (Verifies-clause extension only — no new AC, no AC count change, no AC-31-31 cascade); §00 v1.4.1 → **v1.4.2**; §98 v1.4.1 → **v1.4.2**; §99 v1.4.3 → **v1.4.4**. Patch-only (per Lesson #24 — banner-only-style edit on §97 for an existing AC). All 5 strict gates expected GREEN.
 
 ### 1.4.1 — 2026-04-30 — Phase 153 A24-fu10-fu2: flock prose-mirror + CHANGELOG.md mechanical cleanup
 - **Action**: Two patch-level fixes closing remaining audit-v7 cache findings on spec/18 (post A24-fu10-fu1). (1) **MEDIUM/D3 `Concurrency Contract Implementation Gap`**: AC-11 mandates `flock($handle, LOCK_EX)` for FileLogger writes but `04-logging-and-error-handling.md` §4.3 FileLogger spec opened with no concurrency notice — added a normative blockquote at line 68 mirroring AC-11's contract (acquire `LOCK_EX` before `fwrite`, release on `LOCK_UN`/`fclose`, `LOCK_NB` FORBIDDEN, atomic rotation via `<log>.tmp.<pid>` + `rename()`). The blockquote IS the prose-mirror per Lesson #33. (2) **LOW/D1 `Filename Casing Inconsistency`**: executed AC-14's enumerated `sed -i 's/CHANGELOG\.md/changelog.md/g' 10-deployment-patterns.md` — refreshed lines 38, 54, 785, 977 (incl. section heading `## 10.8 changelog.md Format`). HIGH/D5 `External Reference Path Drift` was a stale-cache reading — `01-foundation-and-architecture.md:5` already points to `../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` (verified via `rg`), no work needed.
