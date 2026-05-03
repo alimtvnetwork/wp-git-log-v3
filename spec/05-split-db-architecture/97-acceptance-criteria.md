@@ -1,6 +1,6 @@
 # Split Database Architecture — Acceptance Criteria
 
-**Version:** 4.4.0
+**Version:** 4.5.0
 **Last Updated:** 2026-04-30 (Phase 153 Task A22: AC-SD-26 Subfolder Delegation Map for `02-features/` + `03-issues/` per Lesson #21 — audit-boundary documentation; observed score lift = 0; codifies Lesson #45 in §98 row.)
 **Scope:** `spec/05-split-db-architecture/` — Reusable pattern for hierarchical SQLite database organization across all projects.
 
