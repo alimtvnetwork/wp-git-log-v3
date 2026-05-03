@@ -13,8 +13,8 @@
 |-----------|--------|
 | `00-overview.md` present | ✅ |
 | `99-consistency-report.md` present | ✅ (this file) |
-| `97-acceptance-criteria.md` present | ⚠️ Pending (Phase 2b) |
-| `98-changelog.md` present | ⚠️ Optional |
+| `97-acceptance-criteria.md` present | ✅ (v1.2.0; AC-09 dual-enum frozen-historical pin shipped 2026-05-03) |
+| `98-changelog.md` present | ✅ |
 | Lowercase kebab-case naming | ✅ |
 | Numeric prefix sequence | ✅ |
 
