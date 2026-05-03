@@ -1,7 +1,7 @@
 # Acceptance Criteria — 24 App Design System & UI
 
-**Version:** 3.0.0
-**Updated:** 2026-04-27
+**Version:** 3.1.0
+**Updated:** 2026-04-29
 **Scope:** `spec/24-app-design-system-and-ui/`
 **Generated:** Hand-authored alongside the v4.0.0 overview (Phase 39a). Supersedes the auto-extracted v2.0.0 set.
 
