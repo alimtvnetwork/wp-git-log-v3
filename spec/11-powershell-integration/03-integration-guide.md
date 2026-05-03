@@ -14,7 +14,7 @@
 |-------------|-----------------|--------------|
 | Windows | 10/11 or Server 2019+ | N/A |
 | PowerShell | 5.1 or 7+ | N/A |
-| winget | Latest | N/A |
+| winget | Latest | N/A — if missing, exit `1` (`ERR_PREREQUISITES`) and surface diagnostic `9510` (`ERR_WINGET_NOT_FOUND`) per `04-error-codes.md` |
 | Go | 1.21+ | ✅ Yes |
 | Node.js | 18+ LTS | ✅ Yes |
 | pnpm | 8+ | ✅ Yes |
