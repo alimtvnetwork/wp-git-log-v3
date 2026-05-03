@@ -7,10 +7,10 @@ axis_rationale: "App-only token extensions (additive contract over §07)"
 
 # App Design System & UI
 
-**Version:** 4.1.2
-**Updated:** 2026-04-29
+**Version:** 4.1.3
+**Updated:** 2026-04-30
 **AI Confidence:** Production-Ready
-<!-- h10-verified-phase: 27 -->
+<!-- h10-verified-phase: 153 -->
 **Ambiguity:** None
 
 ---

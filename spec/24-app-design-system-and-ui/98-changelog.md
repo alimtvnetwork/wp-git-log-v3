@@ -1,10 +1,13 @@
 # Changelog — App Design System & UI
 
-**Version:** 4.1.2
-**Updated:** 2026-04-29
+**Version:** 4.1.3
+**Updated:** 2026-04-30
 **Scope:** `spec/24-app-design-system-and-ui/`
 
 ---
+
+### 4.1.3 — 2026-04-30 — Phase 153 Task S24-fu: close audit-v7 MED + 2× LOW findings
+- **Phase 153 Task S24-fu** — closed all 3 outstanding audit-v7 findings on spec/24 via §97 AC additions (Lesson #36 link-don't-restate). **AC-ADS-11** `[medium]` enumerates the §07 primitive token registry visible to the §24 bundle and pins the cross-reference contract (closes D5 MED `External Dependency §07 Missing`). **AC-ADS-12** `[low]` defines unified `isCollapsed` derivation combining breakpoint + manual toggle, forbidding racing state slots (closes D3 LOW `Sidebar State Concurrency`). **AC-ADS-13** `[low]` requires every linter-script reference in §24 to resolve to a canonical §27 slot with exit-code contract documented there, not restated (closes D5 LOW `Missing linter-scripts`). §97 v3.0.0 → v3.1.0 (AC count 10 → 13). §00/§98/§99 patch-bumped. Expected re-score: 95 → ≥97 EXCELLENT.
 
 ### 4.1.2 — 2026-04-29 — Phase 153 Task #29e: AI Confidence promoted High → Production-Ready
 - Phase 153 Task #29e — promoted `**AI Confidence:**` from `High` to `Production-Ready`. Pure banner edit: this module already passes P1+P2+P3+P4 per `check-ai-confidence.py`; the prior `High` value was a stale underclaim. **No AC change, no CI workflow change, no RUBRIC bump.**
