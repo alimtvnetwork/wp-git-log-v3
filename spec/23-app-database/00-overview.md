@@ -332,14 +332,27 @@ _Verification section last updated: 2026-04-27_
 
 ## Inlined Contracts (Phase 53 — SQL DDL lever)
 
-### Canonical app-database schema (SQL DDL, PostgreSQL 15+)
+> **⚠️ Reference / Secondary dialect (per AC-ADB-11).** The PostgreSQL DDL
+> below is **NOT the Primary Implementation Target** for this module. Every
+> consuming binary (CI/CD push handler, app-link resolver, `app-database`
+> CLI) MUST materialise the **SQLite block** under § "Schema" above
+> (PascalCase, INTEGER PKs). This appendix is preserved (a) to document the
+> canonical column-naming intent in snake_case for cross-reference with
+> `spec/05-split-db-architecture/` (PostgreSQL root DB) and (b) as the
+> reference dialect any future AC opening a PostgreSQL implementation lane
+> would build on. Implementers MUST NOT materialise this block as the App
+> database — silent dialect-flip is FORBIDDEN per AC-ADB-11.
+
+### Canonical app-database schema (SQL DDL, PostgreSQL 15+ — REFERENCE ONLY)
 
 ```sql
 -- =========================================================================
--- Canonical schema for the App database. Every implementing repo MUST
--- materialize these tables EXACTLY (same names, same columns, same types,
--- same constraints). Migrations may add columns/indexes but MUST NOT
--- rename or remove anything declared here.
+-- REFERENCE-ONLY PostgreSQL dialect for the App database (per AC-ADB-11).
+-- The Primary Implementation Target is the SQLite block under § "Schema"
+-- above. This appendix preserves the snake_case naming intent and is the
+-- starting point for any FUTURE AC that opens a PostgreSQL lane (which
+-- must also reconcile with spec/05's per-SHA partitioning model).
+-- Do NOT materialise this block as the App database.
 -- =========================================================================
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
