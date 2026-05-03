@@ -1,7 +1,7 @@
 # Database Naming Conventions
 
-**Version:** 3.5.0  
-**Updated:** 2026-04-19
+**Version:** 3.5.1  
+**Updated:** 2026-05-03
 
 ---
 
