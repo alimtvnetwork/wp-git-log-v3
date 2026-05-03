@@ -1,10 +1,16 @@
 # Changelog — Split Database Architecture
 
-**Version:** 4.4.4
-**Updated:** 2026-05-03 (Phase 153 A24-fu47 — §00 walker-pin teaser + 01-fundamentals schema-naming disambiguation note; Lesson #71 saturated-module promotion-class)
+**Version:** 4.4.5
+**Updated:** 2026-05-03 (Phase 153 A05-fu — §00 walker-pin teaser refresh; pure-promotion of spec/13 §10 polyglot owner per Lesson #63 + Lesson #36; §97 untouched per Lesson #45 saturation budget)
 **Scope:** `spec/05-split-db-architecture/`
 
 ---
+
+### 4.4.5 — 2026-05-03 — Phase 153 A05-fu: §00 teaser refresh (pure-promotion, Lesson #63 + Lesson #45 saturation-safe)
+- **Action**: Refreshed §00 walker-pin teaser against the current `.lovable/cache/audit-ai/05-*.json` snapshot (3 findings: HIGH/D5 inheritance, MEDIUM/D3 polyglot drivers, LOW/D1 ProjectSlug ambiguity). Previous A24-fu47 teaser cited stale findings (Database/DbRegistry, AI Bridge truncation). MEDIUM/D3 polyglot finding resolved by **pure-promotion cross-link** to canonical owner `spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)" per Lesson #36 (link-don't-restate); spec/05's own AC-SD-22 already carries the language-agnostic PRAGMA+retry contract.
+- **Lesson #45 hit + recovery**: initially attempted to author **AC-SD-27** with the cross-ref contract inlined; pre-flight `wc -c §97 §00 §01 = 82.5 KB` exceeded the 75 KB headroom from the §99 v4.1.1 A23 precedent (post-A23 was 103 KB → −7 regression). Reverted §97 edit BEFORE re-score; retained as teaser-only promotion in §00. Confirms Lesson #45 budget rule applies symmetrically to all `normative-contract` modules at saturation.
+- **Saturation note**: `files_used: 9/20`, `bytes_used: 140000`. Pure-promotion teaser lands inside the existing §00 bundle window (no new tier-1 surface added); Lesson #45 budget unchanged.
+- **Lockstep**: §97 untouched (v4.4.1 preserved); §00 v4.4.4 → **v4.4.5**; §98 v4.4.4 → **v4.4.5** (this row); §99 v4.1.4 → **v4.1.5** (banner only). Patch-only — no new AC, no AC-31-31 cascade, no RUBRIC bump, no CI change.
 
 ### 4.4.4 — 2026-05-03 — Phase 153 A24-fu47: walker-pin teaser + schema-naming disambiguation
 - **Action**: Two patch-level edits closing all 3 audit-v7 cache findings on the saturation-locked spec/05 (`bytes_used: 140000`, `files_used: 9/20`). (1) **§00 walker-pin teaser** (Lesson #63): 3-row table surfaces pre-closures — HIGH/D5 cross-module inheritance pre-closed by AC-SD-24; MEDIUM/D1 `Database` vs `DbRegistry` resolved as canonical/alias relationship; LOW/D4 truncation = harness artifact. (2) **`01-fundamentals.md:160` Table: Database** got a normative disambiguation blockquote (Lesson #36) declaring `Database` as canonical Root-DB table name and `DbRegistry` (used in `02-features/01-cli-examples.md:95`) as a downstream consumer-project alias retained for legacy compatibility.
