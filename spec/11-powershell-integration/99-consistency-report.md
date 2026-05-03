@@ -1,8 +1,8 @@
 # Consistency Report — PowerShell Integration
 
-**Version:** 3.6.0  
+**Version:** 3.6.1  
 **Generated:** 2026-05-03  
-**Health Score:** 100/100 (A+) — Phase 153 A18-fu1 #3 self-lift triplet (concurrency + parallelism + downstream-pin)
+**Health Score:** 100/100 (A+) — Phase 153 A24-fu45 winget cross-ref + §00 walker-pin teaser (Lesson #63 7th instance, Lesson #71 reinforcement); v3.6.0 baseline preserved.
 
 > **v3.6.0 (Phase 153 Task A18-fu1 #3 — self-lift triplet, Lesson #40 pattern):** Added **AC-11** (`[high]`) shared pnpm store concurrency contract — read-safe by design (no external mutex), destructive ops gated via `$env:TEMP\pnpm-store-prune.lock` advisory lock + sibling Get-Process enumeration; mirrors spec/13 AC-22 + spec/27 AC-T-28 R3 per Lesson #36. Added **AC-12** (`[medium]`) indexed parallel job result ordering + null-return recovery — pre-sized ArrayList, Sort-Object Index, null→CRASHED slot preservation, closure-over-loop-variable capture; lifts `parallel-work-sync-output.md` from illustrative to normative per Lesson #19. Added **AC-13** (`[low]`) downstream upload-script reference disambiguation — `upload-plugin-v2.ps1` + `upload-plugin-U-Q.ps1` are downstream-repo assets per spec/03 AC-11 + spec/22 AC-78 pattern. Closes all 3 audit-v7 findings on spec/11 in single phase (D3 HIGH + D2 MEDIUM + D5 LOW). Banners: §97 v1.3.0 → **v1.4.0** (count 10→13), §00 spec-version 2.27.1 → **2.27.2**, §98 v1.3.1 → **v1.4.0**, §99 v3.5.1 → **v3.6.0**. Pre-flight (Lesson #45): tier-1 sum 51 KB ≪ 75 KB threshold — safe. Score 86 → ≥91 EXCELLENT expected on next LLM re-score (deferred per Lesson #20 — gateway 402; cache-stale per Lesson #34). **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.**
 
