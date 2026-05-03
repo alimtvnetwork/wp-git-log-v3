@@ -97,6 +97,25 @@ A runtime plugin MUST be deterministic — given the same `repoRoot`, `Detect()`
 
 A ship failure NEVER hides a phase failure: if both happen, exit code is `4` (transport) but `ErrorCount` from the phase is preserved in any logs that did make it through.
 
+### `--parallel` failure isolation (Normative)
+
+Under `--parallel`, runtimes execute in **independent goroutines with disjoint failure scopes**. A phase failure in runtime *R₁* (e.g. `ts.lint` exits non-zero) MUST NOT abort, signal, or cancel an in-flight phase in any sibling runtime *R₂* (e.g. an ongoing `php.build`). Only *R₁*'s own subsequent phases are skipped per the table above.
+
+| Event | Sibling runtime impact | Process-tree impact | Exit code |
+|---|---|---|---|
+| Single-runtime phase failure | NONE — siblings run to completion | sibling subprocesses receive NO `SIGTERM`/`SIGINT` from `glci` | aggregated per "Aggregated exit code" rule below |
+| `glci` receives `SIGINT` (Ctrl-C) | ALL runtimes propagate `SIGTERM` to their child subprocess tree | full tree shutdown | `130` |
+| `glci` receives `SIGTERM` | ALL runtimes propagate `SIGTERM` to their child subprocess tree | full tree shutdown | `143` |
+| `--fail-fast` flag set | First failure cancels ALL siblings via `SIGTERM` | full tree shutdown | first non-zero phase exit code |
+
+**Aggregated exit code (without `--fail-fast`):** `glci` waits for ALL parallel runtimes to terminate (success or failure), then exits with the **highest** observed exit code (precedence: `4` transport > `2` config > `1` phase > `0`). A runtime that completed successfully does NOT lower the aggregated exit code. Ship-queue failures are accumulated per-runtime and surface independently in the aggregated code per the existing precedence rule.
+
+**Forbidden patterns:**
+- ❌ Cross-runtime cancellation on first phase failure WITHOUT `--fail-fast` (silent loss of sibling diagnostic logs).
+- ❌ Inheriting `SIGTERM` from a sibling runtime's failed subprocess (each runtime owns its own process group).
+- ❌ Lowering the aggregated exit code because a later sibling succeeded (last-writer-wins is a regression class — exit code reflects the worst outcome).
+- ❌ Reordering ship queues across runtime boundaries to "drain" a failed runtime's logs first (per-runtime ship queues are sealed by AC-28-22).
+
 ---
 
 ## State
