@@ -8,7 +8,7 @@ axis_rationale: "Specs the linter-scripts/ contract (validators, generators, gat
 
 # Spec Toolchain
 
-**Version:** 2.88.0  
+**Version:** 2.88.1  
 **Updated:** 2026-05-03
 <!-- h10-verified-phase: 153 -->
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
@@ -211,6 +211,56 @@ FAIL-05: lockstep break (§00 vs §98 vs §99 mismatch)  -> exit 1 (via §24 che
 > Per **Lesson #36** (cross-module cross-references MUST link, never restate), the prior 149-line restatement of AC-T-28's R1–R5 invariants in this overview was archived in Phase 153 Task A24-fu36 to remove dual-source drift risk and recover walker tier-1 budget. Implementers MUST consult AC-T-28 directly for the GWT contract; per-slot specs (`linter-scripts/<name>` under §27 slots 01–35) MAY add slot-specific resilience overrides but inherit AC-T-28 by default.
 >
 > **Archive:** [`_archive/00-resilience-r1-r5-pre-A24-fu36.md`](./_archive/00-resilience-r1-r5-pre-A24-fu36.md) preserves the prose for historical reference.
+
+### R2 — File-Locking Retry Reference Snippets (Normative, AC-T-32)
+
+Per [`97-acceptance-criteria.md` AC-T-32](./97-acceptance-criteria.md), validators in slots 01–09/50–59 reading concurrently-written artifacts (`spec/spec-index.md`, `spec/dashboard-data.json`, `linter-scripts/trace-map.toml`) MUST implement single-`read()` + 3× retry on `JSONDecodeError` with jittered 100 ms ± 25 % back-off, exiting `2` on hard lock errors. The following snippets are the canonical reference implementations (slots MAY copy verbatim or implement equivalent semantics in another language).
+
+**Python:**
+
+```python
+import errno, json, random, sys, time
+from pathlib import Path
+
+def read_json_with_retry(path: Path, *, attempts: int = 3) -> dict:
+    for i in range(attempts):
+        try:
+            return json.loads(path.read_bytes())          # single read, NOT chunked
+        except json.JSONDecodeError:
+            if i == attempts - 1:
+                raise
+            time.sleep(0.100 * (0.75 + random.random() * 0.5))   # 75–125 ms
+        except (PermissionError, OSError) as e:
+            if e.errno in (errno.EAGAIN, errno.EACCES):
+                sys.exit(2)                               # hard lock → exit 2
+            raise
+```
+
+**Node:**
+
+```js
+const fs = require('fs');
+
+function readJsonWithRetry(target, attempts = 3) {
+  for (let i = 0; i < attempts; i++) {
+    try {
+      return JSON.parse(fs.readFileSync(target));        // single read
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        if (i === attempts - 1) throw e;
+        const ms = 100 * (0.75 + Math.random() * 0.5);   // 75–125 ms
+        const end = Date.now() + ms;
+        while (Date.now() < end) { /* busy-wait; sync caller */ }
+        continue;
+      }
+      if (e.code === 'EBUSY' || e.code === 'EACCES') process.exit(2);
+      throw e;
+    }
+  }
+}
+```
+
+These snippets are normative reference implementations (the executable analogue of AC-T-32's GWT prose), NOT a restatement of AC-T-28's R1–R5 contract — Lesson #36 forbids restating *rules*; it does not forbid shipping the *reference code* a rule explicitly mandates.
 
 ---
 
