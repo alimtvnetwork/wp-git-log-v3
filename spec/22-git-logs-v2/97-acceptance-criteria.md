@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.10.0  
-**Updated:** 2026-04-30 (Phase 153 Task A11h — added **AC-78** module asset inventory pin (Lesson #29 + Lesson #36) closing audit-v5 D5 HIGH "Missing Core Schema and API Definitions" + D4 MED "Missing Concrete Code Fixtures" + D3 LOW "Concurrency/Race Condition on Rate Limits" as harness bundling-cap artifacts (every cited file present on disk per §99 inventory; AC-26 concurrency correctly bound to spec/13 AC-22 per Lesson #36). AC count 78 → 79.)
+**Version:** 3.10.1  
+**Updated:** 2026-05-03 (Phase 153 Task S22-01 — extended **AC-78** Given/Then to also catalog the audit-v7 D4 MED `Truncated Glossary and Enums` finding as a walker-cap artifact per Lesson #39 evidence triple: `01-glossary-and-enums.md` is 14346 B / 313 lines on disk with TypeScript Mirror + Enum Catalog + Drift-detection contract intact at the file tail — multi-file bundle sibling exhaustion of the 140 KB walker budget is the cause, not file content. Also updated D5 catalog to include file `34` cited by name. No new AC, no AC-31-31 cascade — pure verifies-clause widening.)
 
 ---
 
