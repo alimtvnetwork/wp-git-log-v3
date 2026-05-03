@@ -7,21 +7,21 @@ axis_rationale: "Architecture invariants enforceable via runtime checks"
 
 # Split Database Architecture
 
-> **Version:** 4.5.0  
+> **Version:** 4.4.5  
 <!-- h10-verified-phase: 153 -->
 > **Created:** 2026-02-01  
-> **Updated:** 2026-05-03 (Phase 153 A05-fu — §97 AC-SD-27 polyglot connection-discipline cross-ref; §00 teaser refreshed against current cache snapshot)  
+> **Updated:** 2026-05-03 (Phase 153 A05-fu — §00 walker-pin teaser refresh: pure-promotion of spec/13 §10 polyglot driver-recipe per Lesson #63 + Lesson #36; saturation-safe — no §97 edit per Lesson #45)  
 > **Status:** Active  
 > **AI Confidence:** Production-Ready  
 > **Ambiguity:** Low  
 > **Purpose:** Reusable pattern for hierarchical SQLite database organization across all projects
 
-> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on `.lovable/cache/audit-ai/05-*.json` may surface findings already closed in §97 — do NOT re-author:
+> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on `.lovable/cache/audit-ai/05-*.json` may surface findings already closed in §97 OR resolved by canonical cross-module owners — do NOT re-author:
 > | Cache finding | Pre-closure | Source |
 > |---|---|---|
 > | HIGH D5 — AC-SD-01/02 inherit from `../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md` not in context | **Pre-closed** by AC-SD-24 (`[critical]` — Lesson #36 link-don't-restate cross-module pin); inheritance is by reference, full restatement FORBIDDEN | §97 AC-SD-24 |
-> | MEDIUM D3 — Missing concurrency handling for non-Go languages (`01-fundamentals.md` § "SQLite WAL Mode" exhibits Go fragment only) | **Closed** by AC-SD-27 (this phase) — polyglot driver-recipe canonical at `spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)" per Lesson #36; spec/05 deliberately does NOT inline Python/TS/Rust/PHP/C# DSN forms (dual-source drift class) | §97 AC-SD-27 |
-> | LOW D1 — `{ProjectSlug}` source ambiguity (Project.Slug vs Application.AppName) | **Pre-closed** by AC-SD-25 — `Project.Slug` is canonical, derived once from `AppName` via slug normalizer at project creation, IMMUTABLE for project lifetime; `Application.AppName` (02-features/01-cli-examples.md:72) is the user-facing display name, not a path token | §97 AC-SD-25 |
+> | MEDIUM D3 — Missing concurrency handling for non-Go languages (Python/TS/Rust/PHP/C# DSN forms absent from `01-fundamentals.md` § "SQLite WAL Mode") | **Resolved** by canonical owner `spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)" — owns per-driver DSN form, `BEGIN IMMEDIATE` discipline, retry-loop with 3×100ms±25% jitter, `~/.local/state/<binary>/update.lock` posture (Phase 153 P3 prose-mirror). spec/05 deliberately does NOT inline polyglot driver examples — Lesson #36 forbids the dual-source drift class; AC-SD-22's PRAGMA+retry contract is language-agnostic by design. The Go fragment in `01-fundamentals.md:230` is illustrative, not normative. **No new §97 AC** per Lesson #45 saturation budget (`97+00+01 = 82.5 KB > 75 KB headroom`). | spec/13 §10 + AC-SD-22 (this module) |
+> | LOW D1 — `{ProjectSlug}` source ambiguity (Project.Slug vs Application.AppName) | **Pre-closed** by AC-SD-25 — `Project.Slug` is the canonical path token, derived once from `AppName` via slug normalizer at project creation, IMMUTABLE for project lifetime; `Application.AppName` (02-features/01-cli-examples.md:72) is the user-facing display name, NOT a path token | §97 AC-SD-25 |
 
 ---
 
