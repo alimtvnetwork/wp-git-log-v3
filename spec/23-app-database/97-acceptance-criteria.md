@@ -1,7 +1,7 @@
 # Acceptance Criteria — 23 App Database
 
-**Version:** 3.2.0
-**Updated:** 2026-04-29
+**Version:** 3.3.0
+**Updated:** 2026-04-30
 **Scope:** `spec/23-app-database/`
 **Generated:** Hand-authored alongside the v4.0.0 overview (Phase 39a). Supersedes the auto-extracted v2.0.0 set.
 
@@ -156,6 +156,18 @@ Defines the App, AppLink, AppStatus, and AppLinkType tables — the polymorphic-
 - **When** any implementer (CI/CD push handler, `app-database` CLI, app-link resolver binary) resolves `:repoUrl` to an App,
 - **Then** the implementer MUST follow the **4-step resolution algorithm** in `00-overview.md` § "Polymorphic AppLink Resolution (Normative)" — (1) canonicalise the URL using the same pipeline as `Repo.RepoUrl` insertion, (2) collect Direct (Repo) candidates with `AppLinkTypeId = 2`, (3) collect Transitive (GitProfile) candidates with `AppLinkTypeId = 1` via `Repo.GitProfileId`, (4) tie-break with **Direct > Transitive > newer `CreatedAt`** AND require the resolved App's `AppStatusId` = `Active`. Resolution MUST terminate in exactly one of the four closed states `{RESOLVED_DIRECT, RESOLVED_TRANSITIVE, REJECTED_INACTIVE_APP, REJECTED_NO_MATCH}` — implementations MUST NOT invent additional outcomes, MUST NOT silently fall through `REJECTED_INACTIVE_APP` to the next candidate, and MUST NOT join `AppLink` directly to `GitProfile` bypassing the `Repo` table in step 3 (the inbound URL carries no GitProfile hint). Q1 in `00-overview.md` § "Query Patterns" is the SQL realisation; the prose algorithm is authoritative — if Q1 and the prose ever diverge, the prose wins and Q1 MUST be patched. This codifies the **Phase 153 P47-fu1 critical finding** "Polymorphic AppLink resolution logic ambiguous — DDL describes structure, not the resolution algorithm". Mirrors spec/02 AC-CG-21 Subfolder Delegation Map and spec/27 AC-T-29 per-artifact AC delegation contracts (Lesson #19/#21/#26): when a contract surface (the resolution algorithm) lives implicitly inside example SQL, it is invisible to context-window-bounded auditors and to fresh implementers — the algorithm MUST be lifted to a normative prose section with a closed-enumeration outcome table.
 - **Verifies:** `00-overview.md` § "Polymorphic AppLink Resolution (Normative)" (discriminator binding table + 4-step algorithm + 4-state outcome enumeration + forbidden patterns); `00-overview.md` § "Q1 — Resolve App from inbound RepoUrl" (SQL realisation); AC-ADB-05 (XOR target invariant — load-bearing for step 2/3 disjointness); AC-ADB-06 (disconnect-timestamp invariant — load-bearing for `IsActive = 1` filter); AC-ADB-10 (Repo > GitProfile precedence — now codified prose-side, not just `ORDER BY`); AC-ADB-13 (locked IDs 1/2 referenced by the algorithm). Codifies **Lesson #33** "Polymorphic-FK resolution algorithms MUST be lifted to normative prose with a closed-enumeration outcome table — example SQL is illustrative, not authoritative; relying on `ORDER BY` clauses to encode precedence rules is invisible to auditors and fresh implementers."
+
+### AC-ADB-15: SQLite concurrency pragmas — link to spec/13 §10 (Phase 153 Task S23-02)  `[low]`
+- **Given** the SQLite App database is opened by any consuming binary (CI/CD push handler, app-link resolver, `app-database` CLI) and may face concurrent CI/CD push resolutions.
+- **When** an implementer searches §00 for the required PRAGMA set (`journal_mode=WAL`, `busy_timeout=5000`, `foreign_keys=ON`, `synchronous=NORMAL`) and the `SQLITE_BUSY` retry contract.
+- **Then** §00 § "Convention recap" MUST cross-link to the canonical pragma + retry contract owned by `spec/13-generic-cli/10-database.md` § "Concurrency & Locking (Normative)" (which itself mirrors `spec/05` AC-SD-22 + spec/27 AC-T-28 R3) — this module MUST NOT restate the pragmas (Lesson #36 link-don't-restate). Inlining the pragma table here would create a dual-source drift class with spec/13 / spec/05.
+- **Verifies:** `00-overview.md` § "Convention recap" cross-reference; closes audit-v7 D3 LOW `Missing SQLite Busy Timeout/WAL configuration`. Codifies **Lesson #36** "concurrency-pragma contracts owned by spec/13 §10 are linked, never restated".
+
+### AC-ADB-16: Postgres reference block — UTC Unix-seconds parity note (Phase 153 Task S23-02)  `[low]`
+- **Given** the SQLite primary block stores `CreatedAt` / `UpdatedAt` as Unix seconds (`INTEGER`) and the PostgreSQL reference appendix uses `timestamptz NOT NULL DEFAULT now()`.
+- **When** any future contributor opens the PostgreSQL lane (per AC-ADB-11) and ports application logic between the two dialects.
+- **Then** the PostgreSQL reference appendix in §00 § "Inlined Contracts (Phase 53 — SQL DDL lever)" MUST carry an explicit note that **for application-logic parity, all `timestamptz` values MUST be handled as UTC and exposed to the application layer as Unix seconds** (e.g., `EXTRACT(EPOCH FROM created_at)::bigint`) so consumers receive the same `INTEGER` Unix-seconds shape regardless of dialect. Silent unit drift (timestamptz exposed as ISO-8601 strings, or as local-tz timestamps) is FORBIDDEN.
+- **Verifies:** `00-overview.md` § "Inlined Contracts (Phase 53 — SQL DDL lever)" parity note; closes audit-v7 D1 LOW `Timestamp Unit Ambiguity in Postgres Block`.
 
 ---
 
