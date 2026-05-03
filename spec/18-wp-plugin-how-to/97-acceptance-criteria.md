@@ -1,7 +1,7 @@
 # Acceptance Criteria — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.0  
-**Updated:** 2026-04-29 (Phase 153 audit-v6 HIGH self-lift: AC-09 asset-inventory pin added — Lesson #29 deep-tree variant + Lesson #34 cache-staleness; supersedes Phase P48-1-fu1-batch P3 v1.1.0.)  
+**Version:** 1.4.1  
+**Updated:** 2026-04-30 (Phase 153 A18-fu1 #4 — closes audit-v7 [D2 HIGH] "Missing Verifies clauses for Phase 14-21": AC-13's `**Verifies:**` clause extended with explicit linter/test artifact citations per dimension (REST/Settings/Response-envelope/ORM/ping/walkthrough); patch-only — no new AC, no AC-31-31 cascade. Lesson #28 + Lesson #19 reinforcement.)  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
