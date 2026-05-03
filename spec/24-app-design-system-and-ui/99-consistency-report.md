@@ -1,7 +1,9 @@
 # Consistency Report — 24-app-design-system-and-ui
 
-**Version:** 2.2.1
-**Updated:** 2026-04-29
+**Version:** 2.2.2
+**Updated:** 2026-04-30
+
+> **v2.2.2 update (Phase 153 Task S24-fu):** closed audit-v7 MED + 2× LOW findings via §97 AC additions AC-ADS-11 (§07 primitive registry inlined cross-reference, Lesson #36), AC-ADS-12 (sidebar unified `isCollapsed` concurrency contract), AC-ADS-13 (linter-scripts anchored to canonical §27 slots, Lesson #36). §97 v3.0.0 → v3.1.0 (10 → 13 ACs). Expected re-score: 95 → ≥97 EXCELLENT.
 
 > **v2.2.1 update (Phase 153 Task #29e):** Phase 153 Task #29e — promoted `**AI Confidence:**` from `High` to `Production-Ready`. Pure banner edit: this module already passes P1+P2+P3+P4 per `check-ai-confidence.py`; the prior `High` value was a stale underclaim. **No AC change, no CI workflow change, no RUBRIC bump.**
 
