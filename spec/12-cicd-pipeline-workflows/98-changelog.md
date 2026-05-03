@@ -1,10 +1,16 @@
 # Changelog — CI/CD Pipeline Workflows
 
-**Version:** 3.4.5  
-**Updated:** 2026-04-30  
+**Version:** 3.4.6  
+**Updated:** 2026-05-03 (Phase 153 A24-fu47 — §00 walker-pin teaser; Lesson #71 saturated-module promotion-class)  
 **Scope:** `spec/12-cicd-pipeline-workflows/`
 
 ---
+
+### 3.4.6 — 2026-05-03 — Phase 153 A24-fu47: §00 walker-pin teaser (pure-promotion)
+- **Action**: Added 3-row walker-pin teaser table to §00 surfacing all 3 audit-v7 cache findings on saturation-locked spec/12 (`bytes_used: 140000`, `files_used: 16/49`): HIGH/D5 truncation = harness artifact (file complete on disk); MEDIUM/D2 archetype GWT stubs = pre-closed by AC-13 structural-floor classification; LOW/D5 spec/27 cross-refs = pre-closed by AC-11 (A24-fu4 Lesson #36 cross-module pin).
+- **Lesson #71 first paired confirmation** (with spec/05 same phase): saturated module accepts §00 teaser-class promotion; no new §97 ACs (which would land outside walker window per Lesson #45).
+- **Lockstep**: §97 untouched; §00 v3.4.5 → **v3.4.6**; §98 v3.4.5 → **v3.4.6** (new release row); §99 v3.4.5 → **v3.4.6** (banner only). Patch-only.
+
 
 ## Format
 
