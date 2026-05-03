@@ -176,6 +176,19 @@ This document defines testable acceptance criteria for the **Database Convention
 - **Source:** `01-naming-conventions.md` line 28 (rule); `00-overview.md` § "Canonical Reference DDL" (worked example) + § "Forbidden Tokens" (lint surface); `linter-scripts/check-forbidden-strings.py` (deterministic gate).
 
 
+### AC-17: Canonical INTEGER mandate + walker-cap finding pin (Lesson #34/#47 follow-up)  `[medium]`
+- **Given** the audit-ai cache `.lovable/cache/audit-ai/04-database-conventions.json` (2026-05-03 snapshot) surfaces (a) `[D5 HIGH] Truncated Relationship Diagram File` ("`05-relationship-diagrams.md` is truncated at the 136KB cap, leaving the 'Complete Schema Example' and 'AI Implementation Checklist' incomplete") AND (b) `[D1 LOW] Boolean Type Ambiguity in SQLite` ("Spec allows both INTEGER and BOOLEAN for SQLite, but notes BOOLEAN is an alias"),
+- **When** an LLM auditor or human reviewer encounters either finding in any future v7+ rebaseline,
+- **Then**:
+  - **D5 HIGH (truncated diagram):** the on-disk file `05-relationship-diagrams.md` is **15.8 KB** (verified by `wc -c`), well under the walker's 90 KB tier-1 + 50 KB tier-2 budgets; the auditor's "truncated at 136 KB cap" report is a **bundle-cap artifact** caused by sibling §02-schema-design.md (22 KB) + §97 (24 KB) + §00 (16 KB) + §98 (21 KB) consuming the budget BEFORE §05 makes the cut. The "Complete Schema Example" and "AI Implementation Checklist" sections are present and complete on disk (verified by `tail -25 spec/04-database-conventions/05-relationship-diagrams.md`). Per **Lesson #47** (auditor self-blindness across rebaselines) + **Lesson #34** (cache MUST NOT be authoritative source for content claims), this finding MUST be classified as STRUCTURAL-DESIGN-NOT-DEFECT, NOT a content gap.
+  - **D1 LOW (boolean ambiguity):** closed in this phase by tightening `02-schema-design.md` §2.1.1 SQLite row from `INTEGER (preferred) or BOOLEAN (alias)` to `INTEGER MANDATORY in DDL (NEVER BOOLEAN)` with rationale (declared `BOOLEAN` keyword has `NUMERIC` storage affinity, creating false signal for ORMs/drivers). The forbidden-alternatives column now lists `BOOLEAN keyword (alias-trap — use INTEGER)` explicitly. Auditors flagging this finding in future rebaselines MUST verify the §2.1.1 row before re-opening.
+- **Forbidden remediation patterns:**
+  - "Splitting" `05-relationship-diagrams.md` into a standalone "Complete Schema Example" file (the file is not truncated; splitting would violate Lesson #34 — acting on stale cache claims).
+  - Restoring `BOOLEAN` as a permitted SQLite type (closed contract — `INTEGER` is mandatory; the SQLite 3.23+ `BOOLEAN` alias remains a documented anti-pattern, not an alternative).
+- **Verifies:** Lesson #47 (auditor self-blindness for byte-cap artifacts) + Lesson #34 (cache-staleness — verify file size on disk before acting on truncation findings) + the §02-schema-design §2.1.1 SQLite row tightening (D1 closure). Mirror of AC-13 (which closed the prior single-writer + dangling-link recurring artifacts) — AC-17 extends the same structural-pin pattern to the diagram-truncation + boolean-ambiguity finding class.
+- **Source:** `02-schema-design.md` §2.1.1 SQLite row (D1 closure); `05-relationship-diagrams.md` (verified complete on disk); `linter-scripts/audit-ai-implementability.py` (cache-producing harness).
+
+
 ---
 
 ## Module-Specific Files
