@@ -1,10 +1,17 @@
 # Changelog — App Database
 
-**Version:** 4.2.1
-**Updated:** 2026-05-03
+**Version:** 4.2.2
+**Updated:** 2026-04-30
 **Scope:** `spec/23-app-database/`
 
 ---
+
+### 4.2.2 — 2026-04-30 — Phase 153 Task S23-02 — close 2× LOW audit-v7 findings (concurrency cross-link + UTC parity note)
+- **Action**: Added **AC-ADB-15** `[low]` (SQLite concurrency pragmas linked to `spec/13-generic-cli/10-database.md` § "Concurrency & Locking", Lesson #36 link-don't-restate) and **AC-ADB-16** `[low]` (PostgreSQL reference appendix MUST expose `timestamptz` as UTC Unix seconds for application-logic parity with the SQLite `INTEGER` primary block). Mirrored AC-ADB-15 into §00 § "Convention recap" as a one-line cross-link bullet; mirrored AC-ADB-16 into §00 § "Inlined Contracts (Phase 53)" callout as a `⏱ Timestamp parity` blockquote.
+- **Why**: Closes audit-v7 D3 LOW `Missing SQLite Busy Timeout/WAL configuration` (auditor wanted pragmas inlined; correct fix per Lesson #36 is to LINK the canonical owner in spec/13, not restate) and D1 LOW `Timestamp Unit Ambiguity in Postgres Block` (auditor noted SQLite=INTEGER vs Postgres=timestamptz unit mismatch risk).
+- **Files**: `00-overview.md` § "Convention recap" + § "Inlined Contracts (Phase 53)" callout; `97-acceptance-criteria.md` (+2 ACs); banners.
+- **Spec lockstep**: §97 v3.2.0 → **v3.3.0** (AC count 14 → 16, minor — new contract surface); §00 v4.2.1 → **v4.2.2**; §98 v4.2.1 → **v4.2.2**; §99 v2.1.2 → **v2.1.3**. **No CI workflow change**, **no RUBRIC bump**, **no gate-count change**.
+- Expected re-score: 97 → ≥99 EXCELLENT.
 
 ### 4.2.1 — 2026-05-03 — Phase 153 S23-01 — PostgreSQL DDL appendix marked Reference-only inline (per AC-ADB-11)
 - **Action**: Added a normative `> ⚠️ Reference / Secondary dialect (per AC-ADB-11)` callout immediately above the "Inlined Contracts (Phase 53 — SQL DDL lever)" appendix in `00-overview.md`, retitled the heading to `Canonical app-database schema (SQL DDL, PostgreSQL 15+ — REFERENCE ONLY)`, and rewrote the in-block SQL comment from "Every implementing repo MUST materialize these tables EXACTLY" → "REFERENCE-ONLY PostgreSQL dialect (per AC-ADB-11). The Primary Implementation Target is the SQLite block under § 'Schema' above."
