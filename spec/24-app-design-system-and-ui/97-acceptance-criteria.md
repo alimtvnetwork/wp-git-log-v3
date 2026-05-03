@@ -114,6 +114,24 @@ Regex of forbidden substrings in `*.tsx` / `*.ts` / `*.css` under `src/component
 - **Then** They MUST appear only inside `src/components/app/**` and `src/index.css`. They MUST NOT appear in `src/components/ui/**` (which is §07 territory).
 - **Verifies:** `00-overview.md` § "App-only semantic tokens" warning block
 
+### AC-ADS-11: §07 primitive token registry — inlined snippet  `[medium]`
+- **Given** This module is a "strict additive overlay" on §07 (per `00-overview.md` § "Relationship to §07").
+- **When** An AI implementer needs to resolve a `var(--<§07 token>)` reference cited by AC-ADS-02 / AC-ADS-04 without leaving the §24 bundle.
+- **Then** The §07 primitive registry MUST be discoverable from §24 via either (a) the inlined snippet below, OR (b) the explicit cross-link to `../07-design-system/00-overview.md` in this file's Cross-References section. The minimum primitive set required for §24 token derivation is: `--background`, `--foreground`, `--card`, `--card-foreground`, `--popover`, `--popover-foreground`, `--primary`, `--primary-foreground`, `--secondary`, `--secondary-foreground`, `--muted`, `--muted-foreground`, `--accent`, `--accent-foreground`, `--destructive`, `--destructive-foreground`, `--border`, `--input`, `--ring`, plus spacing (`--space-*`) and typography (`--font-*`) families. Any `--app-*` whose RHS references a primitive outside this set MUST add a row to the Cross-References table.
+- **Verifies:** `00-overview.md` § "Relationship to §07 (Core Design System)" — closes audit-v7 D5 MED `External Dependency §07 Missing` (Lesson #36 cross-reference: link, do not restate the canonical §07 registry).
+
+### AC-ADS-12: Sidebar collapse — concurrency of breakpoint vs manual toggle  `[low]`
+- **Given** A rendered `<AppShell>` where the user can manually toggle the sidebar AND the viewport can cross the `md` breakpoint (768px).
+- **When** Both signals are observed concurrently (e.g., user clicks toggle while window resizes across the breakpoint).
+- **Then** Sidebar collapsed-state MUST derive from a single unified `isCollapsed` source-of-truth that combines `(viewport < md) || userPreferToggleCollapsed`. Manual toggle MUST persist user preference; viewport crossing MUST NOT clobber an explicit user preference within the same session. Forbidden: two independent state slots (one for breakpoint, one for toggle) racing on render.
+- **Verifies:** `00-overview.md` § "Responsive breakpoints (binding)" — closes audit-v7 D3 LOW `Sidebar State Concurrency`.
+
+### AC-ADS-13: Linter-script references resolve to canonical §27 slots  `[low]`
+- **Given** Any CI workflow / Verification section reference in this module to a script under `linter-scripts/` (e.g., `detect-changed-modules.sh`).
+- **When** The reference is followed.
+- **Then** It MUST resolve to a script catalogued in `spec/27-spec-toolchain/` (per Lesson #36 anchor-at-canonical-slot). The script's expected exit-code contract (0 = pass, non-zero = fail) and CI invocation pattern MUST be documented in §27, NOT restated here. Any script cited from §24 that lacks a §27 slot is a broken cross-reference and fails this AC.
+- **Verifies:** `00-overview.md` § Verification — closes audit-v7 D5 LOW `Missing linter-scripts` (Lesson #36: link to canonical authority, do not duplicate behavior contracts).
+
 ---
 
 ## Cross-References
