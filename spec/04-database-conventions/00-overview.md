@@ -5,10 +5,10 @@ axis_rationale: "Schema/concurrency/boolean rules MUST be satisfied by downstrea
 
 # Database Conventions
 
-**Version:** 3.8.0  
+**Version:** 3.8.1  
 <!-- h10-verified-phase: 153 -->
 **Status:** Active  
-**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 #5 — §97 v1.6.0 lockstep: AC-17 + §02-schema-design §2.1.1 SQLite INTEGER mandate)  
+**Updated:** 2026-05-03 (Phase 153 Task F-05 — §01-naming-conventions cross-reference banner: AC-09/AC-17 storage-vs-naming axis pin)  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
 
