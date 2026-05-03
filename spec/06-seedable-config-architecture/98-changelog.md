@@ -1,12 +1,22 @@
 # Changelog — Seedable Config Architecture (CW Config)
 
-**Version:** 4.3.1
-**Updated:** 2026-04-30
+**Version:** 4.4.0
+**Updated:** 2026-05-03
 **Scope:** `spec/06-seedable-config-architecture/`
 
 ---
 
 ## Releases
+
+### 4.4.0 — 2026-05-03 — Phase 153 Task A18-fu1 #6: AC-SC-23 module asset inventory pin (Lesson #29 + #36 + #34)
+
+- **Added** **AC-SC-23** `[critical]` — declares spec/06's full on-disk asset inventory (root + `02-features/` 10 files + `03-issues/` 4 files + lifecycle.mmd) and instructs the auditor to treat audit-v7 cache findings (`bundle_sha` flagging mid-sentence cutoff in `02-features/04-rag-test-coverage-matrix.md` AND missing files 05/06/03/97/99) as **harness bundling-cap artifacts** — every cited file present on disk; file 04 ends cleanly at line 265.
+- **Why:** Cache `06-seedable-config-architecture.json` reports `total=88, files_used=20/166, bytes_used=140000` (saturated walker — the LLM never reached files 04–06 of `02-features/` after exhausting budget on the chunky `03-rag-validation-tests.md` 894-line sibling). Mirror of spec/05 AC-SD-24 + spec/14 AC-21 + spec/22 AC-78 pattern (Lesson #29 audit-corpus / harness-misclassification pin).
+- **AC count:** 22 → 23.
+- **Lockstep:** §97 4.2.0 → **4.3.0** (new AC — minor per AC-31-31); §00/§98/§99 4.3.1 → **4.4.0** (banner minor cascade per new AC).
+- **Closes** audit-v7 cache D3 HIGH "Truncated Feature Specifications" as a Lesson #34 cache-stale finding.
+- **No CI change · no RUBRIC bump · no AC-31-31 cascade beyond §97-minor (count change is the cascade trigger; module count unchanged at 56).**
+- **Memo:** `.lovable/memory/audit/v2-deterministic/phase-153-task-A18-fu1-6-spec06-inventory-pin.md`.
 
 ### 4.3.1 — 2026-04-30 — Phase 153 Task A24: in-place AC-SC-14 + AC-SC-21 extensions close v7 D1 LOW + D3 MEDIUM (89 → ≥90 EXCELLENT expected)
 
