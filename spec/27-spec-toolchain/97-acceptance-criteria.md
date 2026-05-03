@@ -249,7 +249,7 @@ The following map enumerates every occupied slot in the range 01–79 with its g
 | 31 | [31-audit-spec-vs-code-v2.md](./31-audit-spec-vs-code-v2.md) | `linter-scripts/audit-spec-vs-code-v2.py` | `AC-31-*` (incl. AC-31-31) | AC-T-14, AC-T-25, AC-T-26 |
 | 32 | [32-check-truncated-prose.md](./32-check-truncated-prose.md) | `linter-scripts/check-truncated-prose.py` | `AC-CTP-*` | AC-T-03 |
 | 33 | [33-check-ai-confidence.md](./33-check-ai-confidence.md) | `linter-scripts/check-ai-confidence.py` | `AC-33-*` (incl. AC-33-08..12) | AC-T-14 |
-| 34 | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | `linter-scripts/audit-ai-implementability.py` | `AC-34-*` (incl. AC-34-09/10/11/12) | AC-T-14, AC-T-28 (R3 LLM timeouts) |
+| 34 | [34-audit-ai-implementability.md](./34-audit-ai-implementability.md) | `linter-scripts/audit-ai-implementability.py` | `AC-34-*` (incl. AC-34-09/10/11/12/13/14) | AC-T-14, AC-T-28 (R3 LLM timeouts) |
 | 35–39 | _(reserved)_ | _(reserved)_ | _(reserved)_ | _(reserved)_ |
 
 ### Runners (40–49)
