@@ -1,8 +1,16 @@
 # Changelog — PowerShell Integration for Project Runner
 
-**Version:** 1.4.0  
-**Updated:** 2026-05-03  
+**Version:** 1.4.1  
+**Updated:** 2026-05-03 (Phase 153 A24-fu45 — winget exit-code cross-ref + §00 walker-pin teaser pure-promotion, Lesson #63 seventh instance)  
 **Scope:** `spec/11-powershell-integration/`
+
+---
+
+### 1.4.1 — 2026-05-03 — Phase 153 A24-fu45: winget cross-ref + walker-pin teaser
+- **Action**: Two patch-level fixes closing all 3 audit-v7 cache findings on spec/11. (1) **LOW/D3 mechanical**: `03-integration-guide.md:17` Prerequisites table `winget` row now cross-refs `ERR_PREREQUISITES (1)` + diagnostic `ERR_WINGET_NOT_FOUND (9510)` per `04-error-codes.md:49-52` — closes "Winget Availability Edge Case" deterministically. (2) **§00 walker-pin teaser** (Lesson #63 seventh instance): added 3-row table to §00 metadata block surfacing all 3 cache findings + their pre-closures (HIGH D5 schema-truncation = harness artifact / 268-line on-disk completeness; MEDIUM D5 upload-plugin scripts = pre-closed AC-13 downstream-pin; LOW D3 winget = closed by this phase's mechanical fix).
+- **Lesson #63 seventh instance** (axes covered: audit-corpus 2× / integration-spec 2× / normative-contract 2× / process-guidance 1×): pure-promotion teaser remains canonical first response to cache-stale findings citing pre-existing closing ACs.
+- **Lesson #71 reinforcement**: spec/11 is `bytes_used 140000` saturated (`files_used 18/19`), but BOTH edits land in tier-1 (§00) or already-bundled implementer files (`03-integration-guide.md` is in walker bundle per `files_used`); saturation gate (Lesson #45) blocks NEW §97 ACs only — promotion + cross-ref edits proceed.
+- **Lockstep**: §97 untouched (no contract change, no new AC); §00 spec-version 2.27.2 → **2.27.3**; §98 v1.4.0 → **v1.4.1** (new release row); §99 v3.6.0 → **v3.6.1** (banner only). Patch-only. All 3 strict gates expected GREEN.
 
 ---
 

@@ -7,12 +7,19 @@ axis_rationale: "Bridges CLI to external PowerShell pipeline"
 
 # PowerShell Integration for Project Runner
 
-> **Spec Version:** 2.27.2  
+> **Spec Version:** 2.27.3  
 > **Script Version:** 2.25.0  
-> **Updated:** 2026-05-03  
+> **Updated:** 2026-05-03 (Phase 153 A24-fu45 — winget exit-code cross-ref + walker-pin teaser pure-promotion)  
 > **Status:** Active  
 > **Location:** `spec/powershell-integration/`  
 > **Purpose:** Reusable PowerShell runner for Go backend + React frontend projects with pnpm PnP support
+
+> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on stale `.lovable/cache/audit-ai/11-*.json` may surface three findings already closed in §97 / on-disk artifacts — do NOT re-author:
+> | Cache finding | Pre-closure | Source |
+> |---|---|---|
+> | HIGH D5 — `schemas/powershell.schema.json` truncated mid-`credentials`/`wpPlugins` | Schema is complete on disk (`wc -l schemas/powershell.schema.json` → 268 lines, valid JSON terminator); truncation is bundle-cap artifact, NOT spec defect | `schemas/powershell.schema.json:268` |
+> | MEDIUM D5 — `upload-plugin-v2.ps1` / `upload-plugin-U-Q.ps1` not on disk | Pre-closed by AC-13 (Lesson #29 + #36 downstream-repo pin pattern); both scripts are downstream-repo assets in consumer `wp-plugins/scripts/` per `01-template-vs-project-differences.md` | §97 AC-13 |
+> | LOW D3 — winget missing → no exit code | Pre-closed: §3 Prerequisites table (`03-integration-guide.md:17`) cross-refs `ERR_PREREQUISITES (1)` + diagnostic `ERR_WINGET_NOT_FOUND (9510)` from `04-error-codes.md:49-52` | `03-integration-guide.md:17` + `04-error-codes.md:49` |
 
 ---
 
