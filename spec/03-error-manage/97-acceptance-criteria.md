@@ -1,7 +1,7 @@
 # Acceptance Criteria — 03 Error Manage
 
 **Version:** 2.3.0  
-**Updated:** 2026-04-30 (Phase 153 Task A21: AC-09 elevates D5 from passive asset-inventory to active citation-density floor + dual-gate verification — closes audit-v7 HIGH D5 finding "Broken Sub-module References")
+**Updated:** 2026-05-03 (Phase 153 Task A24-fu44: AC-10 [high] ZIP must-cleanup contract + AC-11 [low] Downstream-repo Interface Contract pin + AC-12 [medium] Sub-module GWT-table mandate — closes audit-v7 D3-HIGH + D5-LOW + D2-MEDIUM spec/03 findings; AC count 9 → 12)
 **Scope:** `spec/03-error-manage/`  
 **Generated:** AI-extracted Given/When/Then from module body via `linter-scripts/generate-gwt-acceptance.py`
 
