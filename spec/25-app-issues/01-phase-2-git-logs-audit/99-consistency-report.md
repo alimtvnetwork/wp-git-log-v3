@@ -1,7 +1,7 @@
 # Consistency Report — 01-phase-2-git-logs-audit
 
-**Version:** 1.4.2
-**Updated:** 2026-04-29
+**Version:** 1.4.3
+**Updated:** 2026-05-03
 **Scope:** `spec/25-app-issues/01-phase-2-git-logs-audit/`
 
 ---
