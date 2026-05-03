@@ -1,7 +1,7 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 3.3.0
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu2 — AC-23 Deterministic SVG-render protocol (`.mmd` SHA primary + structural-XML diff fallback); closes audit-v7 [D3] MEDIUM Non-deterministic SVG Diffing + reinforces AC-22 [D4]+[D5] harness-artifact pin per Lesson #34)
+**Version:** 3.4.0
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 — AC-DG-22 derivative-artifact module-kind pin closes audit-v13 HIGH [D5] `Missing Authoritative Source Context (spec/22)` as bundling-scope artifact per Lesson #29 + Lesson #36; mirrors spec/25 AC-AI-09/10/11 pattern. AC count 22 → 23.)
 **Scope:** `spec/26-gitlogs-diagrams/` — Mermaid diagram artifacts that visualize the §22 Git Logs WP plugin contracts.
 
 ---
