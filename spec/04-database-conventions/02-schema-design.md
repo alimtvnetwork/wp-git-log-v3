@@ -92,7 +92,7 @@ Apply the smallest-type principle to ALL columns, not just primary keys:
 
 | Engine | Storage column type | Allowed values on disk | Forbidden alternatives |
 |---|---|---|---|
-| **SQLite** | `INTEGER` (preferred) or `BOOLEAN` (alias of `INTEGER` since SQLite 3.23) | `0` (false), `1` (true), `NULL` only when the column is genuinely tri-state | `'Y'/'N'`, `'T'/'F'`, `'true'/'false'` strings, any non-{0,1,NULL} integer |
+| **SQLite** | **`INTEGER` MANDATORY** in DDL (NEVER `BOOLEAN`) — although SQLite 3.23+ accepts `BOOLEAN` as a syntactic alias of `INTEGER`, the on-disk affinity is `NUMERIC` not the declared keyword, so writing `BOOLEAN` creates a false signal that ORMs/drivers will type-check; declare `INTEGER` so the wire-type and storage-type are byte-identical (closes audit-v7 [D1 LOW] "Boolean Type Ambiguity in SQLite") | `0` (false), `1` (true), `NULL` only when the column is genuinely tri-state | `BOOLEAN` keyword (alias-trap — use `INTEGER`); `'Y'/'N'`, `'T'/'F'`, `'true'/'false'` strings; any non-{0,1,NULL} integer |
 | **MySQL / MariaDB** | `TINYINT(1) NOT NULL` (default `0` or `1` per business rule) | `0`, `1` | `BIT(1)` (legacy, scan-type drift across drivers); `ENUM('Y','N')`; `CHAR(1)` |
 | **PostgreSQL** | `BOOLEAN NOT NULL` | `TRUE`, `FALSE` | `INTEGER 0/1` (loses type-safety; pgsql distinguishes them) |
 
