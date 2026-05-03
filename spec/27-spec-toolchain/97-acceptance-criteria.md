@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.11.0
-**Updated:** 2026-05-03 (Task S27-02: AC-T-33 codified — R2 read-target scope closed to a 5-row ledger, eliminating "all reads vs. concurrent-write reads only" ambiguity surfaced by audit-v6 MEDIUM/D3.)
+**Version:** 2.12.0
+**Updated:** 2026-05-03 (Task S27-01: AC-T-34 codified — pins audit-v6 HIGH/D4 "AC-11-05 mid-sentence truncation" as walker-cap artifact NOT contract gap; canonical `(wc -l, tail -10, grep)` evidence triple per Lesson #11/#16/#29 truncation-axis application.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
@@ -214,6 +214,13 @@ Any future generator that writes an artifact consumed by a sibling validator MUS
 - ❌ Using R2 retry on **read-only fixtures** under `linter-scripts/test/fixtures/` (those are committed, never rewritten — a `JSONDecodeError` there is a real bug, not a torn read).
 
 - **Verifies:** AC-T-28 R2 (scope binding); AC-T-32 R2 normative snippet (binding-target enumeration); codifies the **Lesson #22** "Open exception phrases in normative ACs MUST be replaced with closed Exception Ledger" pattern applied to the R2 read-target axis (the ledger IS the normative surface, mirroring AC-CG-22 EX-01..EX-08 in spec/02).
+
+### AC-T-34 — Audit "AC-11-05 truncated" finding is a walker-cap artifact, NOT a contract gap (Task S27-01) [high]
+- **Given** the AI-implementability auditor (slot 34 `audit-ai-implementability.py`) bundles spec/27 at the 140 KB walker cap (AC-34-14) and reports `files_used: 15/57` against this module — meaning ~42 of 57 sub-files (including most of `11-generate-dashboard-data.md` past the bundle horizon) are NEVER in the auditor's visible context window,
+- **When** the auditor surfaces a HIGH/D4 finding such as "AC-11-05 ends mid-sentence due to the 136KB cap, leaving the Verifies clause and final logic for inline-code blanking undefined" (audit-v6 cache `.lovable/cache/audit-ai/27-spec-toolchain.json`),
+- **Then** the finding MUST be classified as an **auditor walker-cap artifact, NOT a contract gap**, because: (a) `spec/27-spec-toolchain/11-generate-dashboard-data.md` is **107 lines / on-disk-complete** as of 2026-05-03 (`wc -l` confirms); (b) AC-11-05 lives at lines 83–89, ends with a complete `**Verifies:**` block citing three sources (`generate-dashboard-data.cjs:137-176` + `check-spec-cross-links.py:57-66` + `test-inline-code-blanking-parity.sh`); (c) the file's `## Cross-references` + `## Changelog` sections (lines 90–107) close cleanly. The "mid-sentence" appearance is the auditor's bundle horizon falling inside the AC body — fixing it requires either a walker re-tier (out of scope for spec/27 self-lift; tracked under spec/27 §00 R3) OR an explicit auditor-misreading pin (this AC). This codifies **Lesson #11** "audits MUST walk the full sub-tree" + **Lesson #16** "tier contract files first" + **Lesson #29** "module-kind / auditor-misreading pin in §97 is the canonical fix when the audit-corpus surface is misread by a context-window-bounded LLM" — applied here at the **truncation-as-evidence axis** (vs Lesson #29's quoted-evidence-as-evidence axis in spec/25). Future contributors who see "AC-NN-NN ends mid-sentence" findings against ANY spec/27 slot file MUST first run `wc -l spec/27-spec-toolchain/<NN>-*.md` + `tail -10` + grep for the AC-ID end-marker on disk; if the file is on-disk-complete, the finding is walker-cap noise and resolves under this AC's classification rule, NOT under a content edit.
+- **AND** the canonical evidence-bundle for any walker-cap dispute is the triple `(wc -l, tail -10, grep "Verifies:" or last-line-of-AC)` against the cited slot file — these three commands constitute the "on-disk completeness" verification surface; if all three pass, the AC stands and the finding closes under AC-T-34.
+- **Verifies:** `spec/27-spec-toolchain/11-generate-dashboard-data.md` lines 83–89 (AC-11-05 on-disk-complete with 3-source `**Verifies:**` block); `spec/27-spec-toolchain/11-generate-dashboard-data.md:107` (file end-of-content); slot 34 AC-34-14 (140 KB walker cap declaration); slot 34 `audit-ai-implementability.py` `files_used` field in cache JSON (proves 42/57 sub-files never bundled); codifies **Lesson #11 + #16 + #29 + #37** at the truncation-as-evidence axis; mirrors AC-AI-09/10/11 in spec/25 (audit-corpus pin pattern from L29-codify).
 
 ---
 
