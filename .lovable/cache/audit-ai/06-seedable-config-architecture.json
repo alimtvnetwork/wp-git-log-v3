@@ -1,38 +1,38 @@
 {
   "d1": 19,
-  "d2": 18,
-  "d3": 16,
-  "d4": 18,
+  "d2": 20,
+  "d3": 18,
+  "d4": 20,
   "d5": 17,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D3",
-      "title": "Truncated Feature Specifications",
-      "why": "The provided context cuts off mid-sentence in 02-features/04-rag-test-coverage-matrix.md and misses subsequent files (05, 06, 03, 97, 99).",
-      "fix": "Ensure the full 21-file module context is provided or focus the audit on the completed 00, 01, and 97-AC files."
+      "dim": "D5",
+      "title": "External Error Code Registry Reference Missing",
+      "why": "AC-SC-22 and 02-features/02 reference spec/03-error-manage for AB-9301+ codes, but the provided context only includes spec/06. An AI coder cannot verify if these codes exist or conflict.",
+      "fix": "Provide the registry file from spec/03 or explicitly define the AB-9300 block as reserved for RAG in the overview."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved External Error Registry",
-      "why": "AC-SC-22 references spec/03 for error codes, but the actual registry content is not in the context, leaving codes like AB-9301 unverified.",
-      "fix": "Include the error code registry from spec/03 in the audit context."
+      "dim": "D3",
+      "title": "Ambiguous SQLite DDL for SettingValue Union",
+      "why": "AC-SC-14 defines a complex Go union struct (SettingValue) but the SQL DDL in 01-fundamentals uses a single 'Value TEXT' column without specifying if it's JSON-encoded or a flat string for scalars.",
+      "fix": "Explicitly state in the DDL comments that 'Value' column MUST store the JSON-serialized representation of the SettingValue struct."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Minor Type Mapping Ambiguity in Go",
-      "why": "01-fundamentals.md defines SettingValue with both IntVal and FloatVal, while AC-SC-14 mandates a single NumberVal (*float64).",
-      "fix": "Update 01-fundamentals.md Go struct to use a single FloatVal for all 'number' types to match AC-SC-14."
+      "title": "Inconsistent Type naming in 01-fundamentals",
+      "why": "01-fundamentals \u00a7config.schema.json uses 'Type' (Pascal) while the JSON Schema in 00-overview uses 'type' (lowercase) for JSON-native types, potentially confusing the PascalCase-only rule.",
+      "fix": "Standardize the JSON Schema fragments to use lowercase 'type' for JSON Schema keywords while keeping PascalCase for property keys."
     }
   ],
   "module": "06-seedable-config-architecture",
-  "files_used": 10,
+  "files_used": 9,
   "files_total": 21,
-  "bytes_used": 140000,
-  "bundle_sha": "0e09e35615fbd62f",
-  "total_v6": 88,
+  "bytes_used": 139679,
+  "bundle_sha": "ddd24a320aed32bb",
+  "total_v6": 94,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 88.1,
-  "total_v7": 88,
-  "total": 88,
-  "band": "GOOD",
+  "weighted_total": 95.1,
+  "total_v7": 95,
+  "total": 95,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

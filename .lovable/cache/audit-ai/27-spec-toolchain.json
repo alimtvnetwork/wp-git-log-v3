@@ -2,37 +2,37 @@
   "d1": 18,
   "d2": 19,
   "d3": 17,
-  "d4": 15,
-  "d5": 20,
+  "d4": 16,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Truncated Examples for Core Logic",
-      "why": "The context window cuts off at File 13 (GWT Generator), leaving 44/57 files (including all CI workflows, runners, and source validators) without usage examples or specific ACs.",
-      "fix": "Move the 'Slot Delegation Map' and 'AC Family Prefix Index' from \u00a797 to \u00a700 to ensure they are seen before truncation."
+      "dim": "D5",
+      "title": "Dangling External References (Truncation)",
+      "why": "The module relies on 50+ external NN-*.md files for normative script logic, but these are truncated in the provided context, leaving the AI with only the overview and module-level ACs.",
+      "fix": "The Slot Delegation Map (AC-T-30) and AC Family Prefix Index (AC-T-31) are provided in \u00a797 to mitigate this; ensure the AI is instructed to treat these indices as the source of truth for delegated logic."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous R2 Retry Jitter Implementation",
-      "why": "AC-T-32 mandates a '100ms \u00b1 25% back-off' but the normative code snippets referenced are not actually provided in the text (only described).",
-      "fix": "Inline the literal Python/Node code snippets for the R2 retry loop directly into the \u00a700 Resilience section."
+      "dim": "D4",
+      "title": "Missing Concrete Implementation for R2 Snippets",
+      "why": "AC-T-32 mandates normative code snippets for R2 file-locking retries in \u00a700, but the provided context ends before these snippets are visible or they are referenced but not inlined in the overview.",
+      "fix": "Incorporate the Python/Node R2 retry snippets directly into the \u00a700 Resilience section as promised by the AC."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Exit Code 2 Definition Drift",
-      "why": "Overview defines Code 2 as 'error', but AC-T-28 and AC-T-32 specifically narrow this to 'environmental/locking failures', creating slight ambiguity for a mediocre coder.",
-      "fix": "Standardize the Exit Code table in \u00a700 to explicitly label 2 as 'Environmental/Transient Error (Retryable)'."
+      "dim": "D3",
+      "title": "Concurrency/Locking Implementation Ambiguity",
+      "why": "While R1 (atomic writes) is well-defined, R2 (torn reads) relies on a 3x retry logic that is described but lacks the specific jitter/back-off implementation details in the prose.",
+      "fix": "Explicitly define the jitter calculation (e.g., 100ms * (0.75 + random() * 0.5)) in the R2 prose."
     }
   ],
   "module": "27-spec-toolchain",
-  "files_used": 17,
+  "files_used": 15,
   "files_total": 57,
   "bytes_used": 140000,
-  "bundle_sha": "360dc527b6ff4f6b",
-  "total_v6": 89,
+  "bundle_sha": "4b02fe4224f5e995",
+  "total_v6": 84,
   "axis": "tooling-spec",
   "axis_multipliers": {
     "d1": 0.9091,
@@ -42,9 +42,9 @@
     "d5": 0.8182
   },
   "axis_cap": 100,
-  "weighted_total": 88.4,
-  "total_v7": 88,
-  "total": 88,
+  "weighted_total": 84.6,
+  "total_v7": 85,
+  "total": 85,
   "band": "GOOD",
   "rubric": "v7"
 }

@@ -2,36 +2,36 @@
   "d1": 18,
   "d2": 16,
   "d3": 17,
-  "d4": 15,
-  "d5": 19,
+  "d4": 19,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing Verifies clauses for Phase 14-21",
-      "why": "While AC-13 defines architectural invariants for the final phases, it lacks the explicit 'Verifies' clause required by the authoring guide to link criteria to specific linter/test artifacts.",
-      "fix": "Add a 'Verifies:' line to AC-13 citing the specific linter script or test suite that validates REST, Settings, and ORM invariants."
+      "dim": "D5",
+      "title": "Unresolved External Reference Path Drift",
+      "why": "01-foundation-and-architecture.md:5 and 02-enums-and-coding-style/01-enum-architecture.md:5 reference a non-existent '../01-app/' path.",
+      "fix": "Update all references to '../01-app/formatting-rules-reference.md' to point to the correct path in '../02-coding-guidelines/'."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Truncated Reference Implementations",
-      "why": "The file 07-reference-implementations.md is referenced as the source for copy-paste code, but it is missing from the provided context (truncated at 136KB).",
-      "fix": "Ensure Phase 07 is fully inlined or provide a minimal standalone bootstrap snippet in 00-quick-start.md."
+      "dim": "D2",
+      "title": "Missing Verifies Clauses for Integration Phases",
+      "why": "AC-13 (Phases 14-21) lacks explicit Verifies clauses for several dimensions like ORM and ping endpoint shape.",
+      "fix": "Extend AC-13 with explicit Verifies clauses citing linter-scripts/check-forbidden-strings.py and specific test artifacts."
     },
     {
       "severity": "LOW",
-      "dim": "D3",
-      "title": "Incomplete Concurrency Implementation in Prose",
-      "why": "AC-11 mandates flock for FileLogger, but the actual FileLogger spec in 04-logging-and-error-handling.md only mentions it in a blockquote without showing the implementation logic for the atomic rotation.",
-      "fix": "Add a code snippet to Phase 04 showing the exact flock() and rename() sequence for log rotation."
+      "dim": "D1",
+      "title": "Filename Casing Inconsistency",
+      "why": "10-deployment-patterns.md contains 4 prose references to 'CHANGELOG.md' which violates the project's lowercase 'changelog.md' convention.",
+      "fix": "Run 'sed -i s/CHANGELOG\\.md/changelog.md/g' on 10-deployment-patterns.md to align prose with on-disk naming."
     }
   ],
   "module": "18-wp-plugin-how-to",
   "files_used": 16,
   "files_total": 35,
   "bytes_used": 140000,
-  "bundle_sha": "38bd5429d307bf2e",
+  "bundle_sha": "e6bc4c6b767c3e9c",
   "total_v6": 85,
   "axis": "process-guidance",
   "axis_multipliers": {
