@@ -11,9 +11,9 @@ axis_reclassification:
 ---
 # Gitlogs Diagrams
 
-**Version:** 3.4.4
-**Updated:** 2026-04-30 (Phase 153 — Lesson #29 inventory-pin AC-22 — declares full on-disk asset inventory as auditor-authoritative; closes audit-v6 HIGH [D5] missing-files class as harness bundling-cap artifact)
-<!-- h10-verified-phase: 32 -->
+**Version:** 3.5.0
+**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 — AC-DG-22 derivative-artifact module-kind pin; closes audit-v13 HIGH [D5] `Missing Authoritative Source Context (spec/22)` as bundling-scope artifact per Lesson #29 + Lesson #36; mirror of spec/25 AC-AI-09/10/11 pattern)
+<!-- h10-verified-phase: 153 -->
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).
 
