@@ -3,36 +3,36 @@
   "d2": 14,
   "d3": 15,
   "d4": 17,
-  "d5": 19,
+  "d5": 12,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D2",
-      "title": "Missing GWT for core pipeline logic",
-      "why": "While structural ACs (AC-01 to AC-08) are robust, the actual logic for SHA-deduplication, vulnerability filtering, and matrix aggregation lacks GWT criteria.",
-      "fix": "Add GWT criteria to 97-acceptance-criteria.md for SHA-cache hit/miss behavior and stdlib vs third-party vuln exit codes."
+      "dim": "D5",
+      "title": "Truncated Context / Missing Dependencies",
+      "why": "The provided context is truncated at 136KB, cutting off the end of the 'Complete Workflow Reference' and omitting several files listed in the inventory (03-vulnerability-scanning, 04-install-script-generation, etc.).",
+      "fix": "Provide the full content of all referenced files in the module root to ensure dependency closure."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Race condition in SHA cache saving",
-      "why": "The spec notes inlining cache writes to prevent races but doesn't specify behavior if the 'final validation job' is skipped via step-conditionals.",
-      "fix": "Explicitly define that the cache-save step must only execute if all previous validation steps in that job were successful and not skipped."
+      "dim": "D2",
+      "title": "Missing GWT for Archetype Pipelines",
+      "why": "While the overview has ACs, the specific behaviors of the Browser Extension and Go Binary pipelines (e.g., source map removal, SHA-dedup logic) lack individual GWT acceptance criteria.",
+      "fix": "Add specific GWT criteria to 97-acceptance-criteria.md for the build-graph logic and packaging constraints."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous binary naming placeholders",
-      "why": "The build command uses <binary> and <module> placeholders without a defined source (e.g., from go.mod or a specific env var).",
-      "fix": "Pin the source of the binary name to the 'binary_name' property defined in the Technical Interface JSON schema."
+      "title": "Ambiguous Module Path Placeholders",
+      "why": "The Go build commands use '<module>/version' placeholders which an AI might implement literally or fail to map to the actual repository structure.",
+      "fix": "Explicitly define that '<module>' must be replaced with the module name from go.mod."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
-  "files_used": 15,
+  "files_used": 17,
   "files_total": 49,
-  "bytes_used": 120000,
-  "bundle_sha": "060f359ec28e13b6",
-  "total_v6": 83,
+  "bytes_used": 140000,
+  "bundle_sha": "db2280eb1ceabf5f",
+  "total_v6": 76,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 84.0,
-  "total_v7": 84,
-  "total": 84,
+  "weighted_total": 76.2,
+  "total_v7": 76,
+  "total": 76,
   "band": "GOOD",
   "rubric": "v7"
 }
