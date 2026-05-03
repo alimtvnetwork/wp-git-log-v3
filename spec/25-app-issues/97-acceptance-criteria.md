@@ -1,7 +1,7 @@
 # Acceptance Criteria — App Issues
 
-**Version:** 1.5.0  
-**Updated:** 2026-04-30 (Phase 153 Task A24-fu12 — added **AC-AI-16** Walker-cap truncation of audit-corpus files is structural-design-not-defect (closes recurring v7 HIGH D4 `Truncated Evidence in Consolidated Findings` as STRUCTURAL-DESIGN-NOT-DEFECT walker-window artifact). The auditor's recommended fix ("split into smaller files") DIRECTLY VIOLATES AC-AI-10 verbatim-citation contract; AC-AI-16 codifies this as forbidden remediation. Lesson #50 mirror on the audit-corpus axis (vs spec/02 AC-CG-24 normative-contract axis). AC count 15 → 16. v7 cache-reported CRITICAL/D2 + MEDIUM/D3 findings are pre-closed by A24-fu3 (AC-AI-12) + A24-fu8 (AC-AI-14/15) — Lesson #47 auditor-cannot-self-respect-ACs in effect.)  
+**Version:** 1.6.0  
+**Updated:** 2026-05-03 (Phase 153 Task S25-02 — added **AC-AI-17** Process terminology pin (`Phase NN` / `Lesson #NN` / `Task XNN`) anchored to canonical contributor-process memos per Lesson #36 link-don't-restate. Closes recurring v? LOW D1 `Ambiguous 'Phase 153' references` finding by adding a `## Process Terminology` glossary to `00-overview.md` (one-hop disambiguation pointer to `mem://index.md` + `mem://process/phase-153-lessons` + `.lovable/memory/audit/v2-deterministic/`). AC count 16 → 17.)  
 **Scope:** `spec/25-app-issues/`
 
 ---
