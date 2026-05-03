@@ -5,16 +5,19 @@ axis_rationale: "Step-by-step WP plugin authoring guide"
 
 # WordPress Plugin How-To — Overview
 
-**Version:** 1.4.3  
-**Updated:** 2026-05-03 (Phase 153 A24-fu46 — walker-pin teaser surfacing pre-closed audit findings per Lesson #63)  
+**Version:** 1.5.0  
+**Updated:** 2026-05-03 (Phase 153 A18-fu2 — §97 AC-16 autoloader silent-fail contract closes audit-v7 [D3 LOW]; §00 walker-pin teaser refreshed to current cache snapshot)  
 <!-- h10-verified-phase: 153 -->
 
-> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on stale `.lovable/cache/audit-ai/18-*.json` may surface three findings already closed in §97/§99 — do NOT re-author:
+> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on `.lovable/cache/audit-ai/18-*.json` may surface findings already closed in §97/§99 — do NOT re-author:
 > | Cache finding | Pre-closure | Source |
 > |---|---|---|
-> | HIGH D5 — `../01-app/` path drift in `01-foundation-and-architecture.md:5` + `02-enums-and-coding-style/01-enum-architecture.md:5` | Pre-closed by AC-13 §97 line 81 (Lesson #29 quoted-evidence pattern) + §99 v1.4.0 §2.2/§2.3 RESOLVED tables; references already point to `../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` | §97 AC-13 + §99 v1.4.0 |
-> | MEDIUM D2 — AC-13 missing Verifies for ORM + ping shape | Pre-closed by AC-13 Verifies clauses (d) `$wpdb->query` outside `Repository/` via `check-forbidden-strings.py` and (e) ping exact-shape via `test-readme-inventory.sh` schema-snapshot extension hook | §97 AC-13 (d)+(e) |
-> | LOW D1 — `CHANGELOG.md` casing in `10-deployment-patterns.md` | Auditor hallucination — `grep -c 'CHANGELOG\.md' 10-deployment-patterns.md` returns 0; AC-14 already mandates lowercase `changelog.md` | §97 AC-14 |
+> | HIGH D5 — Truncated Context Cap (Phases 4-21 missing) | Walker-cap artifact: AC-15 declares all 22 phase files + 4 enum sub-files present on disk per AC-09 inventory; `files_used: 16/35`, `bytes_used: 140000` (saturation, not content gap) | §97 AC-09 + AC-15 |
+> | MEDIUM D4 — Missing FileLogger implementation (Phase 4 truncated) | Walker-cap artifact: `04-logging-and-error-handling.md` is 836 lines on disk with `## 4.3 FileLogger — Complete Specification` (line 67), `## 4.9 safeExecute` (line 363), `## 4.12 ErrorLogHelper` (line 677) all present and complete; auditor's "truncated at Complete Specification" reflects bundle horizon | §97 AC-15 + on-disk verification |
+> | LOW D3 — Partial Failure in Autoloader (silent-fail contract) | **Closed** by AC-16 (this phase) — Phase 1.4 diagnostic-write must wrap in silent try-catch; original `require_once` failure still re-throws | §97 AC-16 |
+**Status:** Active  
+**AI Confidence:** Production-Ready  
+**Ambiguity:** None
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None

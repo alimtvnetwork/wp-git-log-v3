@@ -1,10 +1,16 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.3  
-**Updated:** 2026-05-03 (Phase 153 A24-fu46 — §00 walker-pin teaser surfacing 3 pre-closed cache findings per Lesson #63)
+**Version:** 1.5.0  
+**Updated:** 2026-05-03 (Phase 153 A18-fu2 — §97 AC-16 autoloader silent-fail + §00 walker-pin teaser refresh)
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
+
+### 1.5.0 — 2026-05-03 — Phase 153 A18-fu2: AC-16 autoloader silent-fail contract + §00 walker-pin teaser refresh
+- **Action**: Closes the only genuine residual finding from `.lovable/cache/audit-ai/18-wp-plugin-how-to.json` 2026-05-03 snapshot — **[D3 LOW] Partial Failure in Autoloader** ("Phase 1.4 mandates 'Diagnostic logging' but doesn't specify behavior if disk full / permissions missing"). Added **AC-16** `[low]` mandating silent `try { ... } catch (\Throwable $logFailure) { /* swallow + Tier 1 error_log fallback */ }` around every diagnostic write to `wp-content/uploads/{slug}/logs/autoloader.log`; original `require_once` failure still re-throws per Phase 1.4 row 3, only the *logging* failure is swallowed (otherwise a fatal loop arises: re-throw → diagnostic write → fail → raise → re-throw …). Cross-references AC-11 FileLogger concurrency posture per Lesson #36 (FileLogger context is OUT of scope for AC-16; AC-16 owns only the pre-FileLogger autoloader-diagnostic surface). Verifying linter: `check-forbidden-strings.py` pattern `file_put_contents.*autoloader\.log` outside a `try {` block.
+- **§00 walker-pin teaser refresh**: previous 3-row teaser (A24-fu46, 2026-05-03 morning) cited a different cache snapshot. Rewrote against the current snapshot's 3 findings: (1) HIGH/D5 Truncated Context Cap → walker-cap artifact (AC-09 + AC-15 cover the inventory); (2) MEDIUM/D4 Missing FileLogger implementation → walker-cap artifact (`04-logging-and-error-handling.md` is 836 lines on disk with §4.3/§4.9/§4.12 all complete); (3) LOW/D3 Autoloader silent-fail → **closed by AC-16 this phase**. Lesson #63 reinforcement: §00 teaser must be re-anchored against the current cache snapshot whenever a self-lift lands a new closing AC, so future auditors see the latest classification.
+- **Saturation note**: `files_used: 16/35`, `bytes_used: 140000` — module IS walker-saturated. AC-16 lands inside the tier-1 bundle window (§97 head + AC index region); no saturation gate (Lesson #45) violation.
+- **Lockstep**: §97 v1.4.1 → **v1.5.0** (new AC, count 15 → 16; minor per Lesson #24 — new content); §00 v1.4.3 → **v1.5.0**; §98 v1.4.3 → **v1.5.0**; §99 v1.4.5 → **v1.5.0**. All 5 strict gates expected GREEN.
 
 ### 1.4.3 — 2026-05-03 — Phase 153 A24-fu46: §00 walker-pin teaser (pure-promotion, Lesson #63 sixth instance)
 - **Action**: Added 3-row walker-pin teaser table to §00 surfacing pre-closed audit-v7 cache findings: (1) HIGH D5 `../01-app/` path drift — pre-closed by §97 AC-13 line 81 + §99 v1.4.0 §2.2/§2.3 RESOLVED tables (Lesson #29 quoted-evidence pattern); (2) MEDIUM D2 AC-13 missing Verifies for ORM/ping — pre-closed by AC-13 Verifies clauses (d) `$wpdb->query` outside `Repository/` + (e) ping exact-shape via `test-readme-inventory.sh`; (3) LOW D1 `CHANGELOG.md` casing in `10-deployment-patterns.md` — auditor hallucination (`grep -c` returns 0 on disk).

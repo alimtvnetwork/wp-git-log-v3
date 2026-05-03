@@ -1,7 +1,7 @@
 # Acceptance Criteria — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.1  
-**Updated:** 2026-04-30 (Phase 153 A18-fu1 #4 — closes audit-v7 [D2 HIGH] "Missing Verifies clauses for Phase 14-21": AC-13's `**Verifies:**` clause extended with explicit linter/test artifact citations per dimension (REST/Settings/Response-envelope/ORM/ping/walkthrough); patch-only — no new AC, no AC-31-31 cascade. Lesson #28 + Lesson #19 reinforcement.)  
+**Version:** 1.5.0  
+**Updated:** 2026-05-03 (Phase 153 A18-fu2 — added **AC-16** `[low]` autoloader silent-fail contract closing audit-v7 [D3 LOW] "Partial Failure in Autoloader" (Phase 1.4 diagnostic-write must wrap in silent try-catch to prevent fatal loop; original `require_once` failure still re-throws, only the logging failure is swallowed). AC count 15 → 16. Lesson #19 (audit-boundary < verification-boundary) + Lesson #36 (link-don't-restate from AC-11 FileLogger).)  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
@@ -167,6 +167,15 @@ This document defines testable acceptance criteria for the **WordPress Plugin Ho
 - **Forbidden patterns:** `CHANGELOG.md` anywhere in this module's `.md` files (the legacy capitalized form ships in many WP plugin templates but conflicts with this project's lowercase convention); `README.md` anywhere; assuming case-insensitive filesystem behaviour (works on Windows + macOS HFS+ default, breaks on Linux + macOS APFS-CS).
 - **Known-stale references:** `readme.md:84` + `10-deployment-patterns.md:38,54,785,977` reference `CHANGELOG.md` per §99 §2.1 — these are P0 actionable cleanup items NOT covered by the §99 §2.2/§2.3 RESOLVED tables (which closed the *external-ref* class). Closing them is mechanical: `sed -i 's/CHANGELOG\.md/changelog.md/g'` on the cited files.
 - **Verifies:** filename casing convention for spec/18 (closes audit-v7 [D1 LOW] "Filename casing mismatch in documentation"). The forbidden-pattern enumeration is the contract; the §99 §2.1 P0 row #1 is the standing actionable instance.
+
+### AC-16: Autoloader diagnostic-write must be silent-fail (no fatal loop)  `[low]`
+
+- **Given** Phase 1.4 (`01-foundation-and-architecture.md` § "Autoloader") mandates **Diagnostic logging** to `wp-content/uploads/{slug}/logs/autoloader.log` AND **Error re-throw** if `require_once` fails,
+- **When** the diagnostic-log write itself fails (disk full, permissions denied, parent directory missing, inode exhaustion),
+- **Then** the autoloader MUST wrap every diagnostic write in a silent `try { ... } catch (\Throwable $logFailure) { /* swallow — Tier 1 error_log() fallback only */ }` block; the original `require_once` failure MUST still re-throw per Phase 1.4 row 3 (so the bootstrap halts as designed), but the *logging* failure MUST NOT itself raise — otherwise the catch-block of the caller becomes a fatal loop (re-throw triggers another diagnostic write, which fails again, which raises again). Fallback: emit a single Tier 1 line via native `error_log("[<plugin>] Autoloader diagnostic write failed: " . $logFailure->getMessage())` and continue the re-throw of the *original* exception.
+
+- **Forbidden patterns:** unguarded `file_put_contents($logPath, ...)` inside the autoloader's catch-block (any `\Throwable` from the write WILL escape and shadow the original `require_once` failure); calling `$this->fileLogger->...` inside the autoloader (FileLogger is not yet bootstrapped per Phase 1.4 row 5 + AC-11 cross-ref); raising the diagnostic-write exception (it MUST be swallowed — only the original autoloader failure may propagate).
+- **Verifies:** the autoloader silent-fail contract for spec/18 Phase 1.4 (closes audit-v7 [D3 LOW] "Partial Failure in Autoloader" — Phase 1.4 row 2 Diagnostic logging now has explicit failure-mode contract). Mirror of AC-11's FileLogger concurrency posture at the bootstrap-tier-1 layer (Lesson #36 link-don't-restate — AC-11 owns FileLogger; this AC owns the pre-FileLogger autoloader-diagnostic surface). **Verifying linter/test artifact:** `linter-scripts/check-forbidden-strings.py` pattern `file_put_contents.*autoloader\.log` outside a `try {` block (fixture: any unguarded write to `autoloader.log` is a fail); the canonical reference one-liner in `04-logging-and-error-handling.md` line ~774 (`file_put_contents($logPath, $logEntry, FILE_APPEND | LOCK_EX)`) is OUT of scope (FileLogger context, not autoloader).
 
 ### AC-15: Internal sub-file resolution discipline (Lesson #29 deep-tree variant)  `[medium]`
 
