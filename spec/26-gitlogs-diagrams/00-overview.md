@@ -11,8 +11,8 @@ axis_reclassification:
 ---
 # Gitlogs Diagrams
 
-**Version:** 3.5.0
-**Updated:** 2026-05-03 (Phase 153 Task A18-fu1 — AC-DG-22 derivative-artifact module-kind pin; closes audit-v13 HIGH [D5] `Missing Authoritative Source Context (spec/22)` as bundling-scope artifact per Lesson #29 + Lesson #36; mirror of spec/25 AC-AI-09/10/11 pattern)
+**Version:** 3.5.1
+**Updated:** 2026-05-03 (Phase 153 Task S26-fu — §97 AC-DG-22 widened to catalog audit-v? `[D4] LOW Missing .mmd Source Content` as walker-bundle-scope artifact per Lesson #39 evidence triple)
 <!-- h10-verified-phase: 153 -->
 
 Authoritative source: [`../22-git-logs-v2/00-overview.md`](../22-git-logs-v2/00-overview.md).
