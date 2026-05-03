@@ -7,11 +7,18 @@ axis_rationale: "Bridges repos to GitHub Actions / external CI providers"
 
 # CI/CD Pipeline Workflows
 
-**Version:** 3.4.5  
+**Version:** 3.4.6  
 <!-- h10-verified-phase: 153 -->
-**Updated:** 2026-04-30  
+**Updated:** 2026-05-03 (Phase 153 A24-fu47 — §00 walker-pin teaser, Lesson #71 saturated-module promotion-class)  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None
+
+> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on stale `.lovable/cache/audit-ai/12-*.json` may surface three findings already closed in §97 / known as harness artifacts — do NOT re-author:
+> | Cache finding | Pre-closure | Source |
+> |---|---|---|
+> | HIGH D5 — Truncated context: `02-release-pipeline.md` cut off mid-sentence (Go Binary Release Pipeline) | **Harness artifact** — `bytes_used: 140000`, `files_used: 16/49` walker-cap saturation; file is complete on disk. Saturation is a known structural ceiling (Lesson #45) blocking new §97 ACs only — implementer prose is unaffected. | `02-release-pipeline.md` (on disk) |
+> | MEDIUM D2 — Archetype GWT stubs (Browser/Go subfolders structural-floor only) | **Pre-closed by AC-13** which explicitly declares the structural-floor classification with cited per-archetype subfolder paths; deferred runtime GWT authoring would land outside walker bundle (Lesson #45 saturation block). Promotion to runtime-behavior GWTs requires (a) A12 walker-cap raise OR (b) §97 sub-extraction. | §97 AC-13 |
+> | LOW D5 — `AC-11` references linter scripts in spec/27-spec-toolchain not in context | **Pre-closed by AC-11** (A24-fu4 Lesson #36 cross-module pin): 4 cited linter scripts anchored to canonical spec/27 slots; auditor not seeing spec/27 in bundle is by-design (per-module audit boundary), NOT a contract gap. | §97 AC-11 |
 
 ---
 

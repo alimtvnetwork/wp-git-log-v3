@@ -1,6 +1,6 @@
 # Consistency Report — CI/CD Pipeline Workflows
 
-**Version:** 3.4.5  
+**Version:** 3.4.6  
 
 > **v3.4.4 update (Phase 153 A24-fu4):** Added **AC-10** (`[high]`) + **AC-11** (`[medium]`) to §97. AC-10 binds `11-technical-interface.md` (kind: interface-contract) — closes audit-v6 D2-HIGH `Missing GWT/Verifies for Technical Interface` by giving the runtime-contract surface (runner matrix + secrets + env + permissions + asset JSON Schema) an explicit §97 GWT. AC-11 anchors 4 linter cross-refs to canonical spec/27-spec-toolchain slots — closes audit-v6 D5-MEDIUM `Unresolved External Linter Dependencies` per Lesson #36 (link-don't-restate). Banners: §97 v1.2.0 → **v1.3.0** (count 9 → 11), §00/§98/§99 v3.4.3 → **v3.4.4**. Score 75 → ≥85 expected on next LLM re-score (deferred per Lesson #20). Codifies parallel application of Lesson #19 (audit-boundary in-§97 delegation) + Lesson #36 (cross-module link-don't-restate) on the same module — the two lessons are orthogonal and routinely co-occur on integration-spec-axis modules.
 
@@ -11,7 +11,7 @@
 > **v3.4.1 update (Phase P48-1-fu1-batch slot 4):** P1 inventory sync — added 4 missing root rows to §00 (`readme.md`, `01-ci-pipeline.md`, `02-release-pipeline.md`, `11-technical-interface.md`). Slots 01/02 receive co-located rows per precedent (spec/01 slot 04, spec/17 slot 33). `check-ai-confidence.py` P1 driver eliminated for `spec/12`.
 
 > **v3.4.0 update (Phase P30 — P28-style hybrid batch reconciliation):** §98 reconstructed from 1 post-footer prose block(s) + 1 dual-stream alignment row + 1 final patch reconciliation row. §98 header `1.1.0`→`3.3.1`; §00 banner `3.3.0`→`3.3.1`; H10 stamp added; date sync `→2026-04-28`. Part of Phase P30 batch (23 modules).
-**Updated:** 2026-04-30
+**Updated:** 2026-05-03
 
 > **v3.3.0 (Phase 39c):** Added `11-technical-interface.md` (CI platform, runner OS matrix, required secrets, env vars, asset-matrix JSON Schema). Resolves audit finding *HIGH — Missing Pipeline Infrastructure Interfaces*. Inventory-numbering ambiguity (root-level vs subfolder prefix collision on `04`/`05`) is now documented as scoped, not duplicate, in §6 of the new file.
 

@@ -1,10 +1,16 @@
 # Changelog — Split Database Architecture
 
-**Version:** 4.4.3
-**Updated:** 2026-05-03
+**Version:** 4.4.4
+**Updated:** 2026-05-03 (Phase 153 A24-fu47 — §00 walker-pin teaser + 01-fundamentals schema-naming disambiguation note; Lesson #71 saturated-module promotion-class)
 **Scope:** `spec/05-split-db-architecture/`
 
 ---
+
+### 4.4.4 — 2026-05-03 — Phase 153 A24-fu47: walker-pin teaser + schema-naming disambiguation
+- **Action**: Two patch-level edits closing all 3 audit-v7 cache findings on the saturation-locked spec/05 (`bytes_used: 140000`, `files_used: 9/20`). (1) **§00 walker-pin teaser** (Lesson #63): 3-row table surfaces pre-closures — HIGH/D5 cross-module inheritance pre-closed by AC-SD-24; MEDIUM/D1 `Database` vs `DbRegistry` resolved as canonical/alias relationship; LOW/D4 truncation = harness artifact. (2) **`01-fundamentals.md:160` Table: Database** got a normative disambiguation blockquote (Lesson #36) declaring `Database` as canonical Root-DB table name and `DbRegistry` (used in `02-features/01-cli-examples.md:95`) as a downstream consumer-project alias retained for legacy compatibility.
+- **Lesson #71 second saturated-module instance** (paired with spec/12 same phase): saturation gate is class-scoped — both edits land in tier-1 (§00) or already-bundled implementer files; no new §97 ACs.
+- **Lockstep**: §97 untouched; §00 v4.4.3 → **v4.4.4**; §98 v4.4.3 → **v4.4.4** (new release row); §99 v4.1.3 → **v4.1.4** (banner only). Patch-only.
+
 
 ## Releases
 
