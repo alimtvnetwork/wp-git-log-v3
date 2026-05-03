@@ -1,39 +1,38 @@
 {
-  "d1": 18,
-  "d2": 19,
+  "d1": 16,
+  "d2": 18,
   "d3": 17,
-  "d4": 18,
-  "d5": 15,
-  "score": 87,
+  "d4": 15,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
-      "title": "Unresolved External Dependency (AC-CL-*)",
-      "why": "AC-SD-01 and AC-SD-02 inherit critical naming and typing rules from a relative path '../02-coding-guidelines/...' which is not provided in the context.",
-      "fix": "Provide the content of spec/02-coding-guidelines/01-cross-language/97-acceptance-criteria.md in the audit bundle."
+      "title": "Unresolved External Dependency: Coding Guidelines",
+      "why": "AC-SD-01 and AC-SD-02 explicitly inherit from '../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md', which is not provided in this context.",
+      "fix": "Provide the 02-coding-guidelines module in the audit context or inline the specific AC-CL-* rules referenced."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Truncated Implementation Examples",
-      "why": "The file 02-features/01-cli-examples.md is truncated at the 120KB cap, leaving the Nexus Flow and Reset API sections incomplete.",
-      "fix": "Refactor large example files into smaller, category-specific files to stay under context limits."
+      "dim": "D1",
+      "title": "Schema Discrepancy: Registry Table Naming",
+      "why": "01-fundamentals.md defines the registry table as 'Database', while 02-features/01-cli-examples.md defines it as 'DbRegistry'.",
+      "fix": "Standardize on a single table name (e.g., 'DbRegistry') across all fundamental and feature DDL examples."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Schema Discrepancy in Registry Table",
-      "why": "01-fundamentals.md defines a 'Database' table while 02-features/01-cli-examples.md uses 'DbRegistry' with different columns for the same purpose.",
-      "fix": "Standardize on a single registry table name and schema across fundamentals and feature examples."
+      "dim": "D4",
+      "title": "Truncated Implementation Examples",
+      "why": "The file 02-features/03-database-flow-diagrams.md is truncated mid-diagram, leaving the AI Bridge flow incomplete.",
+      "fix": "Complete the Mermaid/ASCII diagram for the AI Bridge request-to-database flow."
     }
   ],
   "module": "05-split-db-architecture",
-  "files_used": 7,
+  "files_used": 9,
   "files_total": 20,
-  "bytes_used": 120000,
-  "bundle_sha": "b59815107c78afc6",
-  "total_v6": 87,
+  "bytes_used": 140000,
+  "bundle_sha": "da8fb17a7c60f857",
+  "total_v6": 80,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -43,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 88.8,
-  "total_v7": 89,
-  "total": 89,
+  "weighted_total": 82.4,
+  "total_v7": 82,
+  "total": 82,
   "band": "GOOD",
   "rubric": "v7"
 }

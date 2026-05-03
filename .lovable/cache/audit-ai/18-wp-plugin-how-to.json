@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 19,
+  "d2": 16,
   "d3": 17,
-  "d4": 20,
-  "d5": 16,
+  "d4": 15,
+  "d5": 19,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "External Reference Path Drift",
-      "why": "The overview (00-overview.md) and foundation (01-foundation-and-architecture.md) reference '../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md', but the consistency report (\u00a72.2) admits historical drift and the provided context does not include the target file to verify resolution.",
-      "fix": "Ensure all external paths in 01-foundation-and-architecture.md match the current on-disk structure of spec/02."
+      "dim": "D2",
+      "title": "Missing Verifies clauses for Phase 14-21",
+      "why": "While AC-13 defines architectural invariants for the final phases, it lacks the explicit 'Verifies' clause required by the authoring guide to link criteria to specific linter/test artifacts.",
+      "fix": "Add a 'Verifies:' line to AC-13 citing the specific linter script or test suite that validates REST, Settings, and ORM invariants."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Concurrency Implementation Prose Gap",
-      "why": "AC-11 mandates specific flock() usage for FileLogger, but the actual FileLogger spec (04-logging-and-error-handling.md) is mentioned as having a 'prose-mirror gap' in the changelog, potentially leading to implementation without locks if the coder skips the AC file.",
-      "fix": "Explicitly inline the flock(LOCK_EX) requirement into the normative blockquote of 04-logging-and-error-handling.md \u00a74.3."
+      "dim": "D4",
+      "title": "Truncated Reference Implementations",
+      "why": "The file 07-reference-implementations.md is referenced as the source for copy-paste code, but it is missing from the provided context (truncated at 136KB).",
+      "fix": "Ensure Phase 07 is fully inlined or provide a minimal standalone bootstrap snippet in 00-quick-start.md."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Filename Casing Inconsistency",
-      "why": "The spec contains references to 'CHANGELOG.md' (uppercase) in 10-deployment-patterns.md while the project standard is lowercase 'changelog.md', creating ambiguity for case-sensitive filesystems.",
-      "fix": "Run sed -i 's/CHANGELOG\\.md/changelog.md/g' on all files in spec/18/."
+      "dim": "D3",
+      "title": "Incomplete Concurrency Implementation in Prose",
+      "why": "AC-11 mandates flock for FileLogger, but the actual FileLogger spec in 04-logging-and-error-handling.md only mentions it in a blockquote without showing the implementation logic for the atomic rotation.",
+      "fix": "Add a code snippet to Phase 04 showing the exact flock() and rename() sequence for log rotation."
     }
   ],
   "module": "18-wp-plugin-how-to",
-  "files_used": 14,
+  "files_used": 16,
   "files_total": 35,
-  "bytes_used": 120000,
-  "bundle_sha": "c3adf80d9097bc14",
-  "total_v6": 90,
+  "bytes_used": 140000,
+  "bundle_sha": "38bd5429d307bf2e",
+  "total_v6": 85,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 89.9,
-  "total_v7": 90,
-  "total": 90,
-  "band": "EXCELLENT",
+  "weighted_total": 85.8,
+  "total_v7": 86,
+  "total": 86,
+  "band": "GOOD",
   "rubric": "v7"
 }

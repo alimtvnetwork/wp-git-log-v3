@@ -3,36 +3,36 @@
   "d2": 20,
   "d3": 19,
   "d4": 17,
-  "d5": 15,
+  "d5": 18,
   "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Truncated Context (Files 13-21)",
-      "why": "The module is truncated at file 13 due to the 120KB context cap. Files 14-21 (Date Formatting, Constants, Logging, Progress, Batch, Shell Completion, Terminal Design, Post-Install) are missing from the provided text.",
-      "fix": "Provide the remaining files (14-21) in a follow-up message or reduce the size of earlier files to fit the cap."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D4",
-      "title": "Missing Multi-Format Examples",
-      "why": "AC-09 requires specific output formats (JSON, CSV, Markdown), but the provided text in 06-output-formatting.md only describes them without providing concrete sample I/O or code snippets for the renderers.",
-      "fix": "Add concrete code snippets for renderJSON, renderCSV, and renderMarkdown to 06-output-formatting.md."
+      "title": "Truncated Constants Reference",
+      "why": "File 15-constants-reference.md is truncated mid-sentence due to the 136KB context cap, leaving the 'Contributors' section and potentially some final rules incomplete.",
+      "fix": "Move the Contributors section to a shared file or ensure critical normative rules are placed at the top of the file."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Stale Prose in Code Examples",
-      "why": "Despite AC-21/AC-26, some code examples (e.g., 07-error-handling.md) still use bare integers or 'exit 1' in comments/code which contradicts the typed ExitCode enum requirement.",
-      "fix": "Replace all literal 'os.Exit(1)' in code blocks with 'os.Exit(int(exit.ExitError))' and add the mandatory AC-21 comment."
+      "title": "Ambiguous 'isBusyOrLocked' Implementation",
+      "why": "AC-22 and 10-database.md refer to an 'isBusyOrLocked' predicate but the exact error-code mapping for 'modernc.org/sqlite' (the recommended CGo-free driver) vs 'mattn/go-sqlite3' is not explicitly enumerated.",
+      "fix": "Add a code snippet in 10-database.md explicitly mapping SQLITE_BUSY (5) and SQLITE_LOCKED (6) for the recommended driver."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "Unresolved Mermaid Diagram References",
+      "why": "00-overview.md and 06-output-formatting.md reference .mmd and .mmd files (e.g., lifecycle-cli-invocation.mmd) that are mentioned but the raw content for some is not provided in the text blocks.",
+      "fix": "Ensure all referenced Mermaid source code is inlined within the markdown files."
     }
   ],
   "module": "13-generic-cli",
-  "files_used": 16,
+  "files_used": 18,
   "files_total": 24,
-  "bytes_used": 120000,
-  "bundle_sha": "ba6baa15cf63710d",
-  "total_v6": 89,
+  "bytes_used": 140000,
+  "bundle_sha": "3f8c67213c7cde9f",
+  "total_v6": 92,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 91.9,
-  "total_v7": 92,
-  "total": 92,
+  "weighted_total": 93.4,
+  "total_v7": 93,
+  "total": 93,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

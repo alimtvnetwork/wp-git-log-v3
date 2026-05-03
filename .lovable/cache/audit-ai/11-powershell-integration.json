@@ -1,38 +1,38 @@
 {
-  "d1": 19,
-  "d2": 18,
-  "d3": 17,
-  "d4": 18,
-  "d5": 15,
+  "d1": 18,
+  "d2": 16,
+  "d3": 15,
+  "d4": 19,
+  "d5": 17,
   "issues": [
     {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Truncated JSON Schema and Missing Template Files",
-      "why": "The context cap truncated the normative JSON Schema (schemas/powershell.schema.json) and the 855-line template (templates/run.ps1) is referenced but not provided in the text.",
-      "fix": "Provide the full text of schemas/powershell.schema.json and templates/run.ps1 within the spec context."
-    },
-    {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Unresolved External Script Dependencies",
-      "why": "The spec references 'upload-plugin-v2.ps1' and 'upload-plugin-U-Q.ps1' as core to the upload functionality, but their contracts/interfaces are not defined here.",
-      "fix": "Include the interface contracts or full source for the referenced upload scripts."
+      "dim": "D3",
+      "title": "Concurrency Race Condition in Shared Store",
+      "why": "The spec encourages a shared pnpm store across multiple projects but does not define locking behavior or handling for concurrent 'pnpm store prune' or '-Force' clean operations from multiple script instances.",
+      "fix": "Add a requirement to check for a global lockfile or skip 'store prune' if other run.ps1 processes are detected."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Concurrency Race Conditions in Multi-Site Upload",
-      "why": "The 'Parallel Work Sync Output' pattern uses Start-Job but doesn't address potential race conditions if multiple jobs attempt to write to the same log file or shared pnpm store.",
-      "fix": "Add a requirement for per-job unique log paths and explicit file locking for shared resources."
+      "dim": "D2",
+      "title": "Missing AC for Multi-Site Parallelism",
+      "why": "The 'Parallel Work Sync Output' document provides a complex implementation pattern for background jobs, but there is no corresponding Acceptance Criterion in 97-acceptance-criteria.md to verify ordered output or job failure recovery.",
+      "fix": "Add AC-11 verifying that -uas output is sorted by index and handles null job returns gracefully."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "Unresolved External Script References",
+      "why": "The Script Reference (02) and Changelog mention 'upload-plugin-v2.ps1' and 'upload-plugin-U-Q.ps1' as active components, but these files are not provided in the context nor pinned in the asset inventory.",
+      "fix": "Add the upload scripts to the AC-10 asset inventory pin or provide stubs in the templates folder."
     }
   ],
   "module": "11-powershell-integration",
-  "files_used": 18,
+  "files_used": 19,
   "files_total": 19,
-  "bytes_used": 120000,
-  "bundle_sha": "ddb86a4b0b5b3a68",
-  "total_v6": 87,
+  "bytes_used": 128567,
+  "bundle_sha": "be738a7e29c7a8c4",
+  "total_v6": 85,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 86.8,
-  "total_v7": 87,
-  "total": 87,
+  "weighted_total": 86.0,
+  "total_v7": 86,
+  "total": 86,
   "band": "GOOD",
   "rubric": "v7"
 }

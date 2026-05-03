@@ -1,38 +1,38 @@
 {
-  "d1": 18,
-  "d2": 19,
+  "d1": 19,
+  "d2": 18,
   "d3": 16,
-  "d4": 17,
-  "d5": 15,
+  "d4": 18,
+  "d5": 17,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Broken External Symbol Resolution",
-      "why": "The spec references 'apperror' and 'pathutil' packages and specific error codes (AB-9301) which are defined in spec/03, but that context is not provided in this module.",
-      "fix": "Provide the normative Go package definitions for apperror and the error registry in the context or as a snippet."
+      "dim": "D3",
+      "title": "Truncated Feature Specifications",
+      "why": "The provided context cuts off mid-sentence in 02-features/04-rag-test-coverage-matrix.md and misses subsequent files (05, 06, 03, 97, 99).",
+      "fix": "Ensure the full 21-file module context is provided or focus the audit on the completed 00, 01, and 97-AC files."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous SQLite Transaction Type",
-      "why": "AC-SC-11 and AC-SC-21 mention 'BEGIN TRANSACTION' and 'BEGIN IMMEDIATE' but don't specify the SQLite locking mode required to prevent 'database is locked' errors during the lock-then-tx sequence.",
-      "fix": "Explicitly mandate 'BEGIN IMMEDIATE' for all seeder write transactions to ensure exclusive access."
+      "dim": "D5",
+      "title": "Unresolved External Error Registry",
+      "why": "AC-SC-22 references spec/03 for error codes, but the actual registry content is not in the context, leaving codes like AB-9301 unverified.",
+      "fix": "Include the error code registry from spec/03 in the audit context."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Truncated Feature Specifications",
-      "why": "The provided file content for 02-features/03-rag-validation-tests.md is truncated, leaving the unit test examples incomplete.",
-      "fix": "Complete the test suite code blocks for ContextBudget, EmbeddingModel, and SimilarityThreshold."
+      "dim": "D1",
+      "title": "Minor Type Mapping Ambiguity in Go",
+      "why": "01-fundamentals.md defines SettingValue with both IntVal and FloatVal, while AC-SC-14 mandates a single NumberVal (*float64).",
+      "fix": "Update 01-fundamentals.md Go struct to use a single FloatVal for all 'number' types to match AC-SC-14."
     }
   ],
   "module": "06-seedable-config-architecture",
-  "files_used": 9,
+  "files_used": 10,
   "files_total": 21,
-  "bytes_used": 120000,
-  "bundle_sha": "c9f47e66aacc2bab",
-  "total_v6": 85,
+  "bytes_used": 140000,
+  "bundle_sha": "0e09e35615fbd62f",
+  "total_v6": 88,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 86.8,
-  "total_v7": 87,
-  "total": 87,
+  "weighted_total": 88.1,
+  "total_v7": 88,
+  "total": 88,
   "band": "GOOD",
   "rubric": "v7"
 }

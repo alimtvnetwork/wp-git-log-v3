@@ -1,38 +1,38 @@
 {
-  "d1": 18,
-  "d2": 19,
+  "d1": 19,
+  "d2": 18,
   "d3": 17,
   "d4": 18,
-  "d5": 20,
+  "d5": 16,
   "issues": [
+    {
+      "severity": "HIGH",
+      "dim": "D5",
+      "title": "Truncated Relationship Diagram File",
+      "why": "The file 05-relationship-diagrams.md is truncated at the 136KB cap, leaving the 'Complete Schema Example' and 'AI Implementation Checklist' incomplete.",
+      "fix": "Move the 'Complete Schema Example' to a standalone file or ensure the overview's Canonical DDL is the primary reference."
+    },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Ambiguous 'Smallest Type' Heuristic for AI",
-      "why": "AC-15 defines a lookup table as having '\u2264 5 columns' and 'one unique TEXT Code', but doesn't specify behavior if a table has 6 columns but is clearly a static enum. A mediocre AI might strictly follow the count and use INTEGER, violating the intent.",
-      "fix": "Clarify that the 5-column rule is a guideline and the 'migration-only inserts' condition is the primary determinant for SMALLINT."
+      "title": "SQLite Concurrency Logic Externalized",
+      "why": "Critical concurrency handling (WAL, retries, busy_timeout) is referenced via AC-13/AC-22 but the actual implementation logic is in spec/13, which is not provided.",
+      "fix": "Inline the specific SQLite PRAGMA and retry settings into 02-schema-design.md \u00a74.3."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Inconsistent Boolean Type Mapping for MySQL",
-      "why": "\u00a72.1.1 specifies TINYINT(1) for MySQL, but \u00a701 Rule 1 uses 'BOOLEAN' in the SQL snippet. While MySQL aliases BOOLEAN to TINYINT(1), an AI might be confused about which keyword is 'normative' for DDL generation.",
-      "fix": "Standardize all MySQL examples to use TINYINT(1) explicitly to match the normative storage table."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D4",
-      "title": "Truncated View Example",
-      "why": "The end of 03-orm-and-views.md is truncated due to the context cap, leaving the 'Example \u2014 Creating and Using a View' incomplete.",
-      "fix": "Ensure the worked example for View creation is moved or summarized within the first 100KB of the module."
+      "title": "Boolean Type Ambiguity in SQLite",
+      "why": "Spec allows both INTEGER and BOOLEAN for SQLite, but notes BOOLEAN is an alias. This can confuse mediocre coders on which to use in DDL.",
+      "fix": "Strictly mandate 'INTEGER' for SQLite boolean columns in the Canonical DDL and \u00a72.1.1."
     }
   ],
   "module": "04-database-conventions",
-  "files_used": 7,
+  "files_used": 9,
   "files_total": 11,
-  "bytes_used": 120000,
-  "bundle_sha": "a8dba4598a5357e2",
-  "total_v6": 92,
+  "bytes_used": 140000,
+  "bundle_sha": "f43e498f3bea216d",
+  "total_v6": 88,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 91.3,
-  "total_v7": 91,
-  "total": 91,
-  "band": "EXCELLENT",
+  "weighted_total": 88.8,
+  "total_v7": 89,
+  "total": 89,
+  "band": "GOOD",
   "rubric": "v7"
 }

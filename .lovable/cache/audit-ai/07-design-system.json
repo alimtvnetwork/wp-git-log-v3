@@ -1,38 +1,38 @@
 {
-  "d1": 18,
+  "d1": 20,
   "d2": 20,
-  "d3": 17,
-  "d4": 19,
-  "d5": 15,
+  "d3": 18,
+  "d4": 18,
+  "d5": 20,
   "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Walker-Saturation Context Gap",
-      "why": "The auditor walker byte-cap (120KB) excludes 13 leaf files (02-13) containing the actual component logic for Sidebar, Buttons, and Typography.",
-      "fix": "The spec already includes a 'Structural Pin' (AC-039) to acknowledge this; implementers must rely on the detailed GWT criteria in \u00a797 which act as the normative proxy for the missing files."
-    },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Missing Concurrency/Race Condition Handling in Theme Toggle",
-      "why": "While FOUC is addressed via a head script, the interaction between the system 'prefers-color-scheme' listener and the manual toggle state is not explicitly defined for edge cases (e.g., OS theme change while app is open).",
-      "fix": "Add a requirement to AC-005 for a window.matchMedia listener that updates the theme only if no localStorage override exists."
+      "title": "Missing concurrency/race condition handling for localStorage",
+      "why": "The FOUC-prevention script in \u00a700 and AC-038 handles storage blocking but doesn't address potential race conditions if multiple tabs or scripts attempt to mutate the 'theme' key simultaneously during initialization.",
+      "fix": "Add a window 'storage' event listener to the bootstrap script to sync theme changes across tabs instantly."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'Primary-Glow' Token Usage",
-      "why": "The --primary-glow token is defined in \u00a700 but its specific HSL derivation logic (relative to --primary) is not pinned, leading to potential inconsistency if re-themed manually.",
-      "fix": "Explicitly state in \u00a700 that --primary-glow should maintain a +15% lightness offset from --primary unless otherwise specified."
+      "dim": "D4",
+      "title": "Truncated Typography Spec",
+      "why": "The file 03-typography.md is truncated due to the 136KB context cap, leaving H4-H6 and specific prose spacing rules undefined for the coder.",
+      "fix": "Move the normative Typography scale table from 03-typography.md into the \u00a700 Overview Canonical Registry section."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Missing timeout/fallback for Google Fonts",
+      "why": "The spec mandates specific fonts (Ubuntu/Poppins) but does not define behavior if the Google Fonts CDN is unreachable or times out, beyond a generic CSS fallback.",
+      "fix": "Add a requirement for a font-loading timeout script that applies a 'fonts-loaded' class to the body to prevent layout shift."
     }
   ],
   "module": "07-design-system",
-  "files_used": 4,
+  "files_used": 7,
   "files_total": 18,
-  "bytes_used": 120000,
-  "bundle_sha": "a10e604d64fb5658",
-  "total_v6": 89,
+  "bytes_used": 140000,
+  "bundle_sha": "b96f00d621465113",
+  "total_v6": 96,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +42,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 88.6,
-  "total_v7": 89,
-  "total": 89,
-  "band": "GOOD",
+  "weighted_total": 96.4,
+  "total_v7": 95,
+  "total": 95,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }
