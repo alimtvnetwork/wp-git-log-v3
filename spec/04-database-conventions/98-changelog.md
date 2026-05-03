@@ -1,10 +1,17 @@
 # Changelog — Database Conventions
 
-**Version:** 3.8.0  
+**Version:** 3.8.1  
 **Updated:** 2026-05-03  
 **Scope:** `spec/04-database-conventions/`
 
 ---
+
+### 3.8.1 — 2026-05-03 — Phase 153 Task F-05: §01-naming-conventions storage-vs-naming axis cross-reference banner
+- **Action**: Added a Normative cross-reference banner at the top of `01-naming-conventions.md` § "Boolean Column Rules" pinning that the `BOOLEAN` keyword in this section's SQL snippets is **DDL pseudo-syntax for the naming axis only** — production storage MUST follow §2.1 (AC-09) + §2.1.1 SQLite-INTEGER mandate (AC-17). Closes the LOW-D1 cache finding "Boolean Type Ambiguity in SQLite" without mass `BOOLEAN→INTEGER` sed across 50 SQL snippets (which would corrupt the naming-axis demonstration purpose). Per Lesson #36 (cross-reference, never restate) the banner explicitly does NOT duplicate §2.1's storage table.
+- **Why**: spec/04 sits at 89/100 GOOD in the v8 baseline (F-04 closed 2026-05-03) — the LOW-D1 finding is the only remaining productive lever (HIGH-D5 = walker artifact per AC-17 / Lesson #74; MEDIUM-D3 explicitly violates Lesson #36 if remediated as auditor suggests). Single normative banner clears the finding while preserving §01's naming-axis pedagogy.
+- **Lockstep**: §01-naming-conventions v3.5.0 → **v3.5.1**; §00 v3.8.0 → **v3.8.1**; this file v3.8.0 → **v3.8.1**; §99 v3.9.1 → **v3.9.2**. **No §97 change** (AC-09 + AC-17 unchanged — banner is implementer-facing prose mirror, not new contract); **no CI / RUBRIC / AC-31-31 / gate-count change**. All 5 strict gates expected GREEN.
+- **Lesson #36 reinforcement (Nth instance)**: cross-module + cross-section rules MUST link, never restate. The banner cites AC-09/AC-17 line anchors and explicitly tags the dual-source drift class as forbidden. Same pattern that closed P3 concurrency mirror, A24-fu4 spec/12, A24-fu45 spec/11.
+- **Lesson #74 reinforcement**: HIGH-D5 "truncated diagram" finding (cache 2026-05-03) was NOT remediated — it is a maximal-walker-pin LLM hallucination class (file is 15.8 KB on disk; auditor cited "136 KB cap" — that's a bundle-cap byte-budget artifact, not a content gap). Per Lesson #74, no stronger pin attempted (AC-17 is already at maximum precision).
 
 ### 3.8.0 — 2026-05-03 — Phase 153 Task A18-fu1 #5: spec/04 walker-cap structural-pin + SQLite INTEGER mandate
 - **Action**: Closed all 3 audit-v7 cache findings on spec/04 (cache snapshot 2026-05-03; gateway 402 still active so re-score deferred per Lesson #20). **HIGH D5 "Truncated Relationship Diagram File"**: classified as STRUCTURAL-DESIGN-NOT-DEFECT — `05-relationship-diagrams.md` is **15.8 KB on disk** (verified `wc -c`), well under walker tier-2 budget. The "truncated at 136KB cap" report is a Lesson #47 auditor self-blindness artifact: sibling §02 (22 KB) + §97 (24 KB) + §00 (16 KB) + §98 (21 KB) consume the bundle budget BEFORE §05 makes the cut. **MEDIUM D3 "SQLite Concurrency Logic Externalized"**: already canonically closed at AC-13 + §02-schema-design §4.3 cross-reference to spec/13 AC-22 per Lesson #36 (link-don't-restate); the recurring auditor flag is a known cross-module artifact, NOT a content gap. **LOW D1 "Boolean Type Ambiguity in SQLite"**: tightened `02-schema-design.md` §2.1.1 SQLite row from `INTEGER (preferred) or BOOLEAN (alias)` to `INTEGER MANDATORY in DDL (NEVER BOOLEAN)` with full rationale (declared `BOOLEAN` keyword has `NUMERIC` storage affinity creating false signal for ORMs/drivers); forbidden-alternatives column now lists `BOOLEAN keyword (alias-trap — use INTEGER)` explicitly. Both remediation surfaces bound by new **AC-17 `[medium]`** Lesson #34/#47 structural-pin AC.
