@@ -39,7 +39,7 @@ baseline cache. Final state: 84 / 85 / 85 with 0 findings — identical to A20-f
 
 ## Lessons
 
-- **NEW Lesson #76 — Walker MAX_BYTES is coupled to the prompt template.** Raising
+- **NEW Lesson #77 — Walker MAX_BYTES is coupled to the prompt template.** Raising
   the byte ceiling without updating the prompt's "120KB cap" language causes the
   LLM to fabricate a "context truncation" CRITICAL on any bundle that previously
   fit. Future A18-class probes MUST update both:
@@ -53,7 +53,7 @@ baseline cache. Final state: 84 / 85 / 85 with 0 findings — identical to A20-f
   After the prompt-template fix in a future A18-full, items #2 and #3 are
   actionable D2/D4 lift opportunities.
 
-- **NEW Lesson #77 — A18 is a 2-edit phase, not a 1-edit phase.** The "small probe"
+- **NEW Lesson #78 — A18 is a 2-edit phase, not a 1-edit phase.** The "small probe"
   framing in A20-fu7's closing memo was incomplete. A18 proper requires:
   (a) MAX_BYTES bump, (b) prompt-cap-language update, (c) re-score, (d) finding
   triage, (e) per-module D2/D4 lift work. Estimated 5–15 LLM calls + 1–3 §97 edits.
