@@ -1,38 +1,38 @@
 {
   "d1": 18,
-  "d2": 20,
+  "d2": 19,
   "d3": 17,
   "d4": 15,
-  "d5": 19,
+  "d5": 14,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D4",
-      "title": "Truncated Examples and OpenAPI Reference",
-      "why": "The module is ~117 KB and the provided context is truncated at the 120KB cap, cutting off the end of the changelog and potentially critical parts of the OpenAPI (17) and Examples (14) files if they were appended.",
-      "fix": "Ensure the AI coder has access to the full text of 14-endpoint-examples.md and 17-openapi.yaml in a separate context window."
+      "dim": "D5",
+      "title": "Critical normative files missing from context",
+      "why": "The spec relies on 04-rest-api-endpoints.md and 18-schema.sql for core implementation, but these are not in the provided 3/38 files.",
+      "fix": "Provide the full 37-entry asset inventory in the prompt context to resolve external symbols."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Concurrency Strategy Externalized",
-      "why": "AC-26 and AC-78 explicitly offload the SQLite locking/concurrency contract to spec/13. A mediocre coder without web access or cross-module context cannot resolve this dependency.",
-      "fix": "Inline the specific SQLite locking pragma requirements (e.g., BEGIN IMMEDIATE) and WAL mode settings into 02-database-schema.md."
+      "dim": "D4",
+      "title": "Abstract examples for complex logic",
+      "why": "While ACs are detailed, the actual JSON/SQL fixtures (files 14, 18) are referenced but not visible, forcing the AI to guess exact syntax.",
+      "fix": "Include 14-endpoint-examples.md and 18-schema.sql to provide concrete I/O and DDL samples."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'PascalCase' for JSON Values",
-      "why": "Locked Decision #2 mandates PascalCase for JSON values, but AC-73/74 use kebab-case strings like 'still-green' for state labels, creating a naming convention conflict.",
-      "fix": "Update AC-73 and \u00a701 Glossary to use PascalCase (StillGreen, FirstFailure) for all enum-like string values."
+      "dim": "D3",
+      "title": "Concurrency strategy externalized",
+      "why": "AC-26 delegates SQLite locking/concurrency to spec/13, which is not provided, leaving the AI uncertain about the 'persisted floor' implementation.",
+      "fix": "Inline the specific SQLite locking contract from spec/13 AC-22 into the Git Logs concurrency section."
     }
   ],
   "module": "22-git-logs-v2",
   "files_used": 3,
-  "files_total": 37,
+  "files_total": 38,
   "bytes_used": 120000,
-  "bundle_sha": "c1d7d591ace12ac7",
-  "total_v6": 89,
+  "bundle_sha": "809e2f420f8d0195",
+  "total_v6": 83,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 89.9,
-  "total_v7": 90,
-  "total": 90,
-  "band": "EXCELLENT",
+  "weighted_total": 85.9,
+  "total_v7": 86,
+  "total": 86,
+  "band": "GOOD",
   "rubric": "v7"
 }
