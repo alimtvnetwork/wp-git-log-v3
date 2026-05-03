@@ -1,7 +1,7 @@
 # Acceptance Criteria — Phase-2 Spec Issues Report — `git-logs` App
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29  
+**Version:** 1.2.0  
+**Updated:** 2026-05-03  
 **Scope:** `spec/25-app-issues/01-phase-2-git-logs-audit/`
 
 ---
