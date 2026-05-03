@@ -1,10 +1,16 @@
 # Changelog — Database Conventions
 
-**Version:** 3.7.0  
-**Updated:** 2026-04-30  
+**Version:** 3.8.0  
+**Updated:** 2026-05-03  
 **Scope:** `spec/04-database-conventions/`
 
 ---
+
+### 3.8.0 — 2026-05-03 — Phase 153 Task A18-fu1 #5: spec/04 walker-cap structural-pin + SQLite INTEGER mandate
+- **Action**: Closed all 3 audit-v7 cache findings on spec/04 (cache snapshot 2026-05-03; gateway 402 still active so re-score deferred per Lesson #20). **HIGH D5 "Truncated Relationship Diagram File"**: classified as STRUCTURAL-DESIGN-NOT-DEFECT — `05-relationship-diagrams.md` is **15.8 KB on disk** (verified `wc -c`), well under walker tier-2 budget. The "truncated at 136KB cap" report is a Lesson #47 auditor self-blindness artifact: sibling §02 (22 KB) + §97 (24 KB) + §00 (16 KB) + §98 (21 KB) consume the bundle budget BEFORE §05 makes the cut. **MEDIUM D3 "SQLite Concurrency Logic Externalized"**: already canonically closed at AC-13 + §02-schema-design §4.3 cross-reference to spec/13 AC-22 per Lesson #36 (link-don't-restate); the recurring auditor flag is a known cross-module artifact, NOT a content gap. **LOW D1 "Boolean Type Ambiguity in SQLite"**: tightened `02-schema-design.md` §2.1.1 SQLite row from `INTEGER (preferred) or BOOLEAN (alias)` to `INTEGER MANDATORY in DDL (NEVER BOOLEAN)` with full rationale (declared `BOOLEAN` keyword has `NUMERIC` storage affinity creating false signal for ORMs/drivers); forbidden-alternatives column now lists `BOOLEAN keyword (alias-trap — use INTEGER)` explicitly. Both remediation surfaces bound by new **AC-17 `[medium]`** Lesson #34/#47 structural-pin AC.
+- **Lesson #51 reinforcement (4th instance)**: structural-pin AC pattern now applied across spec/02 AC-CG-24 + spec/25 AC-AI-16 + spec/04 AC-13 + spec/04 AC-17; pattern stable for recurring walker-window byte-cap artifacts that survive §97 contract closure.
+- **Lesson #34 reinforcement**: cache truncation claims MUST be verified against on-disk `wc -c` BEFORE allocating remediation effort; today's HIGH D5 would have triggered an unnecessary file-split phase if treated at face value.
+- **Lockstep**: §97 v1.5.0 → **v1.6.0** (AC count 16 → 17); §00 v3.7.0 → **v3.7.1**; §02-schema-design v3.4.1 → **v3.4.2**; §98 v3.7.0 → **v3.8.0**; §99 v3.9.0 → **v3.9.1**. **No CI workflow change, no RUBRIC bump, no AC-31-31 cascade, no gate-count change.** All 4 strict gates expected GREEN. LLM re-score deferred per Lesson #20 (gateway 402 active).
 
 ### 3.7.0 — 2026-04-30 — Phase 153 Task A24-fu19: spec/04 floor lift (81 → ≥89 expected) + AC-13 §00 walker-pin promotion
 - **Action**: Closed all three audit-v7 cache findings (HIGH D2 + MEDIUM D3 + LOW D1) on the lowest normative-contract floor. **AC-14 `[high]`** binds Golden Rules 1–4 (Singular table names, PascalCase identifiers, PK = `{TableName}Id INTEGER PRIMARY KEY AUTOINCREMENT`, FK reuses parent PK name) to a deterministic four-invariant regex contract enforced by `linter-scripts/check-forbidden-strings.py` (fail-fast `exit_code=2`, `reason_code=GOLDEN_RULE_VIOLATION`). **AC-15 `[medium]`** resolves the "smallest type" ambiguity with a three-condition discriminating heuristic (lookup-table = ≤5 columns + unique TEXT `Code` + migration-only inserts) and updates the Canonical DDL `ProjectStatus.ProjectStatusId` from `INTEGER` to `SMALLINT` as the worked example. **AC-16 `[low]`** standardises view names on the `Vw` prefix (forbidding the `View` suffix), updates the Canonical DDL view from `ProjectWithOwnerView` → `VwProjectWithOwner`, and extends the §00 Forbidden Tokens table with the new row.
