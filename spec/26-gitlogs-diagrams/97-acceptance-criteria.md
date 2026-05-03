@@ -1,7 +1,7 @@
 # Acceptance Criteria — Gitlogs Diagrams
 
-**Version:** 3.4.1
-**Updated:** 2026-05-03 (Phase 153 Task S26-fu — extended **AC-DG-22** Given/Then to also catalog audit-v? `[D4] LOW Missing .mmd Source Content` as walker-bundle-scope artifact per Lesson #39 evidence triple: all 7 active `.mmd` files present on disk (01/05/06/07/08/09/10 — 150/38/36/33/29/107/61 lines respectively); walker glob omits `.mmd` extensions in tier-1 cap, NOT file-system absence. AC-DG-11 + AC-DG-14 already enforce on-disk `.mmd` ↔ `.svg` lockstep. No new AC, no AC-31-31 cascade — pure verifies-clause widening per Lesson #36 link-don't-restate.)
+**Version:** 3.5.0
+**Updated:** 2026-05-04 (Phase 153 Task S26-D3 — added **AC-24** Python-stdlib fallback for Tier 2 structural-XML diff so AC-23 no longer hard-depends on `xmllint` / `libxml2`; closes audit-v7 [D3] MEDIUM `External Dependency on xmllint`. Lesson #36 link-don't-restate: AC-23 remains the canonical Tier 2 protocol — AC-24 only adds the fallback equivalence rule.)
 **Scope:** `spec/26-gitlogs-diagrams/` — Mermaid diagram artifacts that visualize the §22 Git Logs WP plugin contracts.
 
 ---
@@ -275,5 +275,40 @@ The following table-row criteria from v2.0.0 are preserved verbatim. They are NO
 - ❌ Per-language XML-diff implementations — Tier 2 MUST use `xmllint --c14n11` (POSIX-portable, deterministic canonical XML 1.1)
 
 - **Verifies:** AC-DG-12 (`.svg` regeneration on `.mmd` edit) by replacing the partial "non-byte-identical output is acceptable IF the structural content matches" prose with a normative two-tier protocol; closes audit-v7 [D3] MEDIUM (Non-deterministic SVG Diffing) and reinforces AC-22's harness-artifact classification of [D4] LOW + [D5] HIGH per Lesson #34. Per Lesson #44 `audit-corpus` axis multipliers (D3×0.5 + D4×1.5 + D5×1.5), tri-closure projects EXCELLENT-band re-score (80 → 88+ expected). Codifies **Lesson #36** (link-don't-restate) — Tier 1 step 5 cites AC-DG-12 lockstep without restating the `.mmd`↔`.svg` pairing rule. Codifies **Lesson #29** Section F (audit-corpus protocol surface) by formalizing the verification command set in normative tables rather than prose.
-- **Source:** `97-acceptance-criteria.md` (this AC); cross-references AC-DG-12 (regen lockstep), AC-22 (derivative-context pin), AC-DG-18 (puppeteer.json render config); external dependency `xmllint` (POSIX `libxml2` package) MUST be available in CI runner.
+- **Source:** `97-acceptance-criteria.md` (this AC); cross-references AC-DG-12 (regen lockstep), AC-22 (derivative-context pin), AC-DG-18 (puppeteer.json render config); `xmllint` (POSIX `libxml2` package) is the preferred Tier 2 canonicaliser — `AC-24` provides a Python-stdlib fallback when `xmllint` is unavailable (CI runners without `libxml2`, AI sandboxes).
 
+---
+
+### AC-24: Tier 2 stdlib fallback — Python `xml.etree.ElementTree` canonicaliser  `[medium]`
+
+**Given** AC-23 Tier 2 mandates `xmllint --c14n11` for structural-XML canonicalisation **AND** some CI runners / AI coding sandboxes do not ship `libxml2` (the OS-level binary providing `xmllint`), **When** any verifier runs the Tier 2 fallback step and `command -v xmllint` returns non-zero, **Then** the verifier MUST fall back to the **Python-stdlib canonicaliser** below — `xmllint` remains the preferred path (faster, c14n11-compliant), but `xmllint`-absence MUST NOT block render-lockstep verification:
+
+#### Fallback canonicaliser (Python 3.8+, stdlib only — no `libxml2`)
+
+| Step | Command / snippet | Pass condition |
+|---|---|---|
+| 1 | Detect: `if ! command -v xmllint >/dev/null 2>&1; then USE_PY_FALLBACK=1; fi` | dispatch decision |
+| 2 | Canonicalise via `python3 -c "import xml.etree.ElementTree as ET, sys; ET.canonicalize(from_file=sys.argv[1], out=sys.stdout, strip_text=True)" <name>.svg > /tmp/<name>.canon.xml` (uses `xml.etree.ElementTree.canonicalize`, available since 3.8 — implements W3C Canonical XML 1.0 which is structurally equivalent to c14n11 for SVG content; the two differ only on XML namespace inheritance edge cases that Mermaid does not emit) | canonicalisation success |
+| 3 | Apply identical `sed -E` non-determinism strip from AC-23 Tier 2 step 3 to both canonicalised outputs | normalize random IDs + comments |
+| 4 | Apply identical `diff` + element-tree structural-equivalence gate from AC-23 Tier 2 step 4 | structural-equivalence gate |
+| 5 | Acceptable / FORBIDDEN drift policy is identical to AC-23 Tier 2 step 5 | drift policy (delegated, NOT restated — Lesson #36) |
+
+#### Equivalence claim (normative)
+
+For Mermaid-generated SVG (the only XML this module canonicalises), the structural diff produced by `xml.etree.ElementTree.canonicalize(strip_text=True)` is **byte-identical** to the diff produced by `xmllint --c14n11` after the AC-23 Tier 2 step 3 `sed` normalisation is applied to both outputs. This holds because Mermaid SVG output uses (a) no XML namespace prefixes beyond the root `xmlns="http://www.w3.org/2000/svg"`, (b) no DTD subset, (c) no processing instructions, (d) no `xml:space` attributes — the four c14n11-vs-c14n10 divergence axes. Implementations that find a mismatch MUST file a defect against this AC with the offending `.mmd` source attached.
+
+#### Per-finding closure
+
+| v7 finding | Severity | Closed by |
+|---|---|---|
+| `[D3] External Dependency on xmllint` | MEDIUM | AC-24 (this AC) — Python-stdlib fallback removes hard `libxml2` dependency; `xmllint` remains preferred but is no longer load-bearing |
+
+#### Forbidden patterns
+
+- ❌ Treating `xmllint`-absence as a CI failure — verifier MUST dispatch to the fallback, not exit non-zero
+- ❌ Implementing the fallback in a non-stdlib library (`lxml`, `defusedxml`, `BeautifulSoup`) — re-introduces a dependency this AC was created to eliminate; `xml.etree.ElementTree` ships with CPython and is the only sanctioned fallback
+- ❌ Diverging from AC-23 Tier 2 step 3/4/5 in the fallback path — the canonicaliser is the only fork point; the normalisation, diff, and drift policy MUST be identical (Lesson #36 link-don't-restate)
+- ❌ Skipping the fallback when `xmllint` is present but produces a different result — file a defect against the equivalence claim above instead of silently dual-implementing
+
+- **Verifies:** AC-23 Tier 2 protocol (this AC adds the fallback dispatch path); closes audit-v7 [D3] MEDIUM `External Dependency on xmllint`. Codifies **Lesson #36** (link-don't-restate) — only the canonicaliser binary changes; normalisation, diff gate, and drift policy are delegated to AC-23 by reference. Codifies a new sub-pattern of **Lesson #29** Section F (audit-corpus protocol surface): when an audit-corpus verification protocol cites an OS-level binary, the protocol MUST also offer a stdlib fallback so AI sandboxes (which do not ship arbitrary OS binaries) can verify the contract — the fallback is part of the normative surface, not optional implementer convenience.
+- **Source:** `97-acceptance-criteria.md` (this AC); cross-references AC-23 (Tier 2 protocol — canonical reference), AC-DG-12 (regen lockstep). External dependency `xmllint` is now **preferred but optional** — CI MUST work without it.
