@@ -34,7 +34,7 @@ gates: lockstep 87/87 · tree-health 168/168 strict · version-parity 74/74 — 
 
 ## Lesson reinforcement
 
-- **Lesson #71 confirmed empirically for the 3rd time** (after spec/22-pre-fu29 and
+- **Lesson #71 confirmed empirically for the 3rd time** (after spec/22 pre-fu29 and
   spec/14 pre-fu38): `findings: []` + `weighted_total == total` is the canonical signature
   of an axis-floor module. Future contributors MUST run `--force` ONCE to confirm zero
   findings before opening a self-lift phase on any module already showing this signature
