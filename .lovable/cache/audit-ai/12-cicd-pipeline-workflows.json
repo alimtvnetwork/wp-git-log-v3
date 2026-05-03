@@ -1,38 +1,38 @@
 {
   "d1": 18,
   "d2": 16,
-  "d3": 17,
+  "d3": 15,
   "d4": 19,
-  "d5": 15,
+  "d5": 14,
   "issues": [
     {
-      "severity": "HIGH",
+      "severity": "CRITICAL",
       "dim": "D5",
-      "title": "Truncated Context / Missing Subfolder Content",
-      "why": "The spec exceeds the 136KB cap, causing the Go Binary Release Pipeline (02-release-pipeline.md) and other subfolder files to be cut off mid-sentence.",
-      "fix": "Split the module into smaller, independent spec files or increase the context window for the auditor."
+      "title": "Truncated Context / Missing Dependencies",
+      "why": "The provided context is 16/49 files and cuts off mid-sentence in 02-release-pipeline.md. Crucial logic for install script generation and checksum verification is missing.",
+      "fix": "Provide the full content of 02-release-pipeline.md and the referenced 04-install-script-generation.md."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D2",
+      "title": "Archetype GWT Stubs",
+      "why": "Subfolder ACs (Browser/Go) are structural stubs only (AC-01..AC-08). AC-13 explicitly admits they lack runtime behavior GWTs.",
+      "fix": "Implement specific GWT criteria for 'source-map removal' and 'cross-compile matrix' in their respective 97-acceptance-criteria.md files."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D2",
-      "title": "Archetype GWT Stubs",
-      "why": "AC-13 explicitly admits that subfolder archetypes (Browser/Go) currently only have structural-floor ACs and lack runtime behavior GWTs.",
-      "fix": "Add specific GWT criteria for source-map removal, cross-compile matrix verification, and checksum integrity."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D5",
-      "title": "Unresolved External Linter Dependencies",
-      "why": "AC-11 references linter scripts in spec/27-spec-toolchain/ which are not provided in the current context.",
-      "fix": "Include the relevant sections of spec/27 or provide the script CLI signatures in the shared conventions."
+      "dim": "D3",
+      "title": "Race Condition in Cache Write",
+      "why": "While the spec warns against separate mark-success jobs, the implementation details for 'test-summary' cache-writing lack explicit concurrency handling for parallel matrix jobs.",
+      "fix": "Add a 'Verifies' clause ensuring the cache-save step uses a unique key per SHA and handles 'already exists' errors gracefully."
     }
   ],
   "module": "12-cicd-pipeline-workflows",
   "files_used": 16,
   "files_total": 49,
   "bytes_used": 140000,
-  "bundle_sha": "3856064959e84a6a",
-  "total_v6": 85,
+  "bundle_sha": "15fb7f3bc2d85ef9",
+  "total_v6": 82,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -42,9 +42,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 85.5,
-  "total_v7": 85,
-  "total": 85,
+  "weighted_total": 82.7,
+  "total_v7": 83,
+  "total": 83,
   "band": "GOOD",
   "rubric": "v7"
 }
