@@ -1,38 +1,38 @@
 {
-  "d1": 16,
-  "d2": 18,
+  "d1": 18,
+  "d2": 19,
   "d3": 17,
-  "d4": 15,
-  "d5": 14,
+  "d4": 18,
+  "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Unresolved External Dependency: Coding Guidelines",
-      "why": "AC-SD-01 and AC-SD-02 explicitly inherit from '../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md', which is not provided in this context.",
-      "fix": "Provide the 02-coding-guidelines module in the audit context or inline the specific AC-CL-* rules referenced."
+      "why": "AC-SD-01 and AC-SD-02 inherit core naming and typing rules from '../02-coding-guidelines/01-cross-language/97-acceptance-criteria.md', which is not provided in the context.",
+      "fix": "Provide the content of the referenced cross-language guidelines or inline the specific PascalCase and FK naming rules into \u00a797."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Schema Discrepancy: Registry Table Naming",
-      "why": "01-fundamentals.md defines the registry table as 'Database', while 02-features/01-cli-examples.md defines it as 'DbRegistry'.",
-      "fix": "Standardize on a single table name (e.g., 'DbRegistry') across all fundamental and feature DDL examples."
+      "dim": "D3",
+      "title": "Missing Concurrency Handling for Non-Go Languages",
+      "why": "While AC-SD-22 provides a Go example and pseudo-code, the actual implementation files (01-fundamentals.md) only show Go code for WAL and connection pooling, leaving other languages to interpret the pseudo-code without concrete driver-specific setup examples.",
+      "fix": "Add a 'Polyglot Implementation' section to 01-fundamentals.md with the driver-specific connection strings for Python/TS/Rust mentioned in AC-SD-22."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Truncated Implementation Examples",
-      "why": "The file 02-features/03-database-flow-diagrams.md is truncated mid-diagram, leaving the AI Bridge flow incomplete.",
-      "fix": "Complete the Mermaid/ASCII diagram for the AI Bridge request-to-database flow."
+      "dim": "D1",
+      "title": "Ambiguous 'ProjectSlug' Source",
+      "why": "AC-SD-03 and AC-SD-25 refer to {ProjectSlug} in paths, but the Root DB schema in 01-fundamentals.md uses 'Slug' in the Project table and 'AppName' in the Application table (02-features/01-cli-examples.md), creating confusion on which registry table is the source of truth.",
+      "fix": "Standardize on a single registry table name (e.g., 'Project') and field name (e.g., 'Slug') across all examples and fundamentals."
     }
   ],
   "module": "05-split-db-architecture",
   "files_used": 9,
   "files_total": 20,
   "bytes_used": 140000,
-  "bundle_sha": "da8fb17a7c60f857",
-  "total_v6": 80,
+  "bundle_sha": "c03aaf11912e6d17",
+  "total_v6": 87,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +42,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 82.4,
-  "total_v7": 82,
-  "total": 82,
+  "weighted_total": 88.8,
+  "total_v7": 89,
+  "total": 89,
   "band": "GOOD",
   "rubric": "v7"
 }

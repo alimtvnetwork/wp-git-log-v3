@@ -2,37 +2,37 @@
   "d1": 18,
   "d2": 19,
   "d3": 17,
-  "d4": 16,
+  "d4": 15,
   "d5": 14,
   "issues": [
     {
-      "severity": "HIGH",
+      "severity": "CRITICAL",
       "dim": "D5",
       "title": "Dangling External References (Truncation)",
-      "why": "The module relies on 50+ external NN-*.md files for normative script logic, but these are truncated in the provided context, leaving the AI with only the overview and module-level ACs.",
-      "fix": "The Slot Delegation Map (AC-T-30) and AC Family Prefix Index (AC-T-31) are provided in \u00a797 to mitigate this; ensure the AI is instructed to treat these indices as the source of truth for delegated logic."
+      "why": "The module delegates all per-script logic to 50+ external files (01-*.md, etc.) which are truncated by the context cap. A mediocre AI cannot implement the actual tool logic (e.g., the specific regex for cross-links or the logic for tree-health) without these files.",
+      "fix": "The spec acknowledges this via 'Walker-Pin' and 'Slot Delegation Map' to provide high-level context, but for 100% implementation confidence, the specific script specs must be provided or the logic inlined."
+    },
+    {
+      "severity": "HIGH",
+      "dim": "D4",
+      "title": "Truncated Acceptance Criteria (AC-11-05)",
+      "why": "The file 11-generate-dashboard-data.md ends mid-sentence in AC-11-05 due to the 136KB cap, leaving the 'Verifies' clause and final logic for inline-code blanking undefined.",
+      "fix": "Move detailed implementation logic for generators into their specific slot files and keep the overview/AC files leaner to stay under the 120KB-140KB walker budget."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Missing Concrete Implementation for R2 Snippets",
-      "why": "AC-T-32 mandates normative code snippets for R2 file-locking retries in \u00a700, but the provided context ends before these snippets are visible or they are referenced but not inlined in the overview.",
-      "fix": "Incorporate the Python/Node R2 retry snippets directly into the \u00a700 Resilience section as promised by the AC."
-    },
-    {
-      "severity": "LOW",
       "dim": "D3",
       "title": "Concurrency/Locking Implementation Ambiguity",
-      "why": "While R1 (atomic writes) is well-defined, R2 (torn reads) relies on a 3x retry logic that is described but lacks the specific jitter/back-off implementation details in the prose.",
-      "fix": "Explicitly define the jitter calculation (e.g., 100ms * (0.75 + random() * 0.5)) in the R2 prose."
+      "why": "While R2 provides code snippets, it doesn't explicitly state if *all* scripts must use this for *all* file reads, or only for the specific 'generated artifacts' listed in AC-T-32.",
+      "fix": "Clarify in AC-T-28 that R2 applies to any file read that is subject to concurrent writes by other toolchain members."
     }
   ],
   "module": "27-spec-toolchain",
   "files_used": 15,
   "files_total": 57,
   "bytes_used": 140000,
-  "bundle_sha": "4b02fe4224f5e995",
-  "total_v6": 84,
+  "bundle_sha": "dc47f8a56d241d7b",
+  "total_v6": 83,
   "axis": "tooling-spec",
   "axis_multipliers": {
     "d1": 0.9091,
@@ -42,9 +42,9 @@
     "d5": 0.8182
   },
   "axis_cap": 100,
-  "weighted_total": 84.6,
-  "total_v7": 85,
-  "total": 85,
+  "weighted_total": 83.5,
+  "total_v7": 83,
+  "total": 83,
   "band": "GOOD",
   "rubric": "v7"
 }
