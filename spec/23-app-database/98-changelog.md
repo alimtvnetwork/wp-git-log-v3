@@ -1,12 +1,18 @@
 # Changelog — App Database
 
-**Version:** 4.2.0
-**Updated:** 2026-04-30
+**Version:** 4.2.1
+**Updated:** 2026-05-03
 **Scope:** `spec/23-app-database/`
 
 ---
 
-### 4.2.0 — 2026-04-30 — Phase 153 LOW-batch close-out — AC-ADB-14 canonicalization examples
+### 4.2.1 — 2026-05-03 — Phase 153 S23-01 — PostgreSQL DDL appendix marked Reference-only inline (per AC-ADB-11)
+- **Action**: Added a normative `> ⚠️ Reference / Secondary dialect (per AC-ADB-11)` callout immediately above the "Inlined Contracts (Phase 53 — SQL DDL lever)" appendix in `00-overview.md`, retitled the heading to `Canonical app-database schema (SQL DDL, PostgreSQL 15+ — REFERENCE ONLY)`, and rewrote the in-block SQL comment from "Every implementing repo MUST materialize these tables EXACTLY" → "REFERENCE-ONLY PostgreSQL dialect (per AC-ADB-11). The Primary Implementation Target is the SQLite block under § 'Schema' above."
+- **Why**: AC-ADB-11 already declares SQLite primary + PostgreSQL reference, but the appendix's own header + in-block comment still read as authoritative ("MUST materialize these tables EXACTLY"), giving auditors and fresh implementers two contradictory in-file signals. Lesson #36 cross-module rule applies intra-file too: when one section is normatively superseded by an AC, the section MUST link/defer, not restate. Closes spec/23 audit-v6 MED/D1 finding "dual SQLite+Postgres DDL — appendix self-claims authoritative".
+- **Files**: `00-overview.md` § "Inlined Contracts (Phase 53 — SQL DDL lever)" (callout + heading + comment-block edits, ~13 lines added); banners.
+- **Spec lockstep**: §00 v4.2.0 → **v4.2.1** (patch — clarifying prose around existing AC-ADB-11; no new contract surface, no AC count change); §97 v3.2.0 unchanged (AC-ADB-11 already binds the rule); §98 v4.2.0 → **v4.2.1**; §99 v2.1.1 → **v2.1.2**. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**, **no new AC** — pure prose-mirror of existing AC-ADB-11 into the appendix surface (Lesson #36 intra-file application).
+
+
 - **Action**: Audit-v6 LOW finding `[D4] Missing Canonicalization Examples` (spec/23 score 86) closed by adding "Canonicalization examples (Phase 153 LOW close-out)" subsection under Resolution states, providing 6 normative URL transformation examples covering: lowercase host + lowercase path + strip `.git` (case 1); strip trailing `/` (case 2); SSH→HTTPS rewrite + strip `.git` (case 3); `ssh://` scheme rewrite (case 4); strip default port 443/22 (case 5); combined transformation (case 6). Pipelines that diverge on ANY of these 6 cases FAIL AC-ADB-14. Added invariant: same pipeline MUST be invoked at `Repo.RepoUrl` insertion AND at every resolution call (string equality, not re-canonicalisation).
 - **Why**: Lesson #32 per-finding tracker (`phase-153-batch-verify-low-17.md`) anchored the gap; Lesson #22 closed-enumeration table replaces the open prose "(lowercase host, strip trailing `.git`, strip trailing `/`, normalise SSH `git@host:owner/repo` → `https://host/owner/repo`)" with a concrete-input → expected-output worked table that auditors AND implementers can both verify against.
 - **Files**: `00-overview.md` Resolution states section (+~16 lines new subsection); banners.

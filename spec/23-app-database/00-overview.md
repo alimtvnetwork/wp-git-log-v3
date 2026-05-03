@@ -8,8 +8,8 @@ axis_rationale: "App tables + AppLink polymorphic resolution rules"
 # App Database
 
 <!-- h10-verified-phase: 153 -->
-**Version:** 4.2.0
-**Updated:** 2026-04-29
+**Version:** 4.2.1
+**Updated:** 2026-05-03
 **AI Confidence:** Production-Ready
 **Ambiguity:** None
 
