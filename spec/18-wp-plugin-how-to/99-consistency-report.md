@@ -1,8 +1,8 @@
 # Consistency Report — spec/18-wp-plugin-how-to/
 
-**Version:** 1.4.3  
+**Version:** 1.4.4  
 **Generated:** 2026-04-30  
-**Status:** ✅ All issues resolved (v1.4.3) — Phase 153 A24-fu10-fu2 closed remaining audit-v7 [D3 MEDIUM] flock prose-mirror gap (added normative blockquote to `04-logging-and-error-handling.md` §4.3 FileLogger spec; references AC-11) + executed AC-14's enumerated `sed` cleanup on 4 `CHANGELOG.md` references in `10-deployment-patterns.md` (lines 38/54/785/977). HIGH/D5 verified stale-cache (paths already canonical). v1.4.2 baseline preserved.
+**Status:** ✅ All issues resolved (v1.4.4) — Phase 153 A18-fu1 #4 closed audit-v7 [D2 HIGH] `Missing Verifies clauses for Phase 14-21` by extending AC-13's `**Verifies:**` line with 6 explicit linter/test artifact citations (REST/Settings/Response/ORM/ping/walkthrough). Patch-only — no new AC, no AC-31-31 cascade. Lesson #28 + #19 reinforcement. v1.4.3 baseline preserved.
 
 ---
 

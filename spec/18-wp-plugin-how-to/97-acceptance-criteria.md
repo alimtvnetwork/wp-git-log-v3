@@ -1,7 +1,7 @@
 # Acceptance Criteria — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.0  
-**Updated:** 2026-04-29 (Phase 153 audit-v6 HIGH self-lift: AC-09 asset-inventory pin added — Lesson #29 deep-tree variant + Lesson #34 cache-staleness; supersedes Phase P48-1-fu1-batch P3 v1.1.0.)  
+**Version:** 1.4.1  
+**Updated:** 2026-04-30 (Phase 153 A18-fu1 #4 — closes audit-v7 [D2 HIGH] "Missing Verifies clauses for Phase 14-21": AC-13's `**Verifies:**` clause extended with explicit linter/test artifact citations per dimension (REST/Settings/Response-envelope/ORM/ping/walkthrough); patch-only — no new AC, no AC-31-31 cascade. Lesson #28 + Lesson #19 reinforcement.)  
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
@@ -156,7 +156,7 @@ This document defines testable acceptance criteria for the **WordPress Plugin Ho
 | 21-ping-endpoint | The ping endpoint MUST be the ONLY public-no-auth route (cross-ref AC-13/14 `permission_callback` discipline); response MUST be `{ok: true, ts: <unix>}` exact-shape (NEVER add fields without bumping §98 minor). |
 
 - **Forbidden patterns:** authoring a phase file in this band that introduces a new architectural concept without a row in this table; introducing per-phase ACs in the phase file itself (Lesson #36 dual-source drift).
-- **Verifies:** the architectural-invariant contract for spec/18 phases 14–21 (Lesson #19 audit-boundary lift; third + final band of AC-10's mirror-of-spec/02 AC-CG-21 pattern — the AC-10/12/13 trio now covers all 21 phase files exhaustively).
+- **Verifies:** the architectural-invariant contract for spec/18 phases 14–21 (Lesson #19 audit-boundary lift; third + final band of AC-10's mirror-of-spec/02 AC-CG-21 pattern — the AC-10/12/13 trio now covers all 21 phase files exhaustively). **Verifying linter/test artifacts:** (a) REST permission_callback + namespace discipline → `linter-scripts/check-forbidden-strings.py` patterns `__return_true` (outside `21-ping-endpoint`) + `wp/v2/` namespace; (b) Settings `register_setting` + sanitize_callback + raw `update_option` → `linter-scripts/check-forbidden-strings.py` pattern `update_option(` outside `Settings/` facade; (c) Response envelope + typed exceptions → `linter-scripts/check-forbidden-strings.py` pattern `throw new \Exception` + `wp_send_json` (cross-ref AC-10/05); (d) Repository facade + raw `$wpdb->query` → `linter-scripts/check-forbidden-strings.py` pattern `$wpdb->query` outside `Repository/` internals; (e) ping endpoint exact-shape → `linter-scripts/test/test-readme-inventory.sh` schema-snapshot test (extension hook); (f) walkthrough end-to-end parity (AC-10/12/13 row coverage) → `linter-scripts/check-tree-health.cjs --strict` (banner + body floor) + `linter-scripts/check-lockstep.cjs` (banner ↔ §98 ↔ §99 lockstep). Authoring rule per Lesson #28: when AC-10/12/13 invariant rows change, add the matching forbidden-string pattern to `linter-scripts/forbidden-strings.toml` in the same phase to keep verification mechanical.
 
 ### AC-14: Filename casing discipline  `[low]`
 
