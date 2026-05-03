@@ -5,9 +5,16 @@ axis_rationale: "Step-by-step WP plugin authoring guide"
 
 # WordPress Plugin How-To — Overview
 
-**Version:** 1.4.2  
-**Updated:** 2026-04-30 (Phase 153 A18-fu1 #4 — §97 v1.4.1 patch lockstep: AC-13 Verifies-clause artifact-citation extension)  
+**Version:** 1.4.3  
+**Updated:** 2026-05-03 (Phase 153 A24-fu46 — walker-pin teaser surfacing pre-closed audit findings per Lesson #63)  
 <!-- h10-verified-phase: 153 -->
+
+> **Walker-pin (Lesson #63 — pre-closed cache findings):** Auditors operating on stale `.lovable/cache/audit-ai/18-*.json` may surface three findings already closed in §97/§99 — do NOT re-author:
+> | Cache finding | Pre-closure | Source |
+> |---|---|---|
+> | HIGH D5 — `../01-app/` path drift in `01-foundation-and-architecture.md:5` + `02-enums-and-coding-style/01-enum-architecture.md:5` | Pre-closed by AC-13 §97 line 81 (Lesson #29 quoted-evidence pattern) + §99 v1.4.0 §2.2/§2.3 RESOLVED tables; references already point to `../02-coding-guidelines/01-cross-language/04-code-style/00-overview.md` | §97 AC-13 + §99 v1.4.0 |
+> | MEDIUM D2 — AC-13 missing Verifies for ORM + ping shape | Pre-closed by AC-13 Verifies clauses (d) `$wpdb->query` outside `Repository/` via `check-forbidden-strings.py` and (e) ping exact-shape via `test-readme-inventory.sh` schema-snapshot extension hook | §97 AC-13 (d)+(e) |
+> | LOW D1 — `CHANGELOG.md` casing in `10-deployment-patterns.md` | Auditor hallucination — `grep -c 'CHANGELOG\.md' 10-deployment-patterns.md` returns 0; AC-14 already mandates lowercase `changelog.md` | §97 AC-14 |
 **Status:** Active  
 **AI Confidence:** Production-Ready  
 **Ambiguity:** None

@@ -1,10 +1,16 @@
 # Changelog — WordPress Plugin How-To — Overview
 
-**Version:** 1.4.2  
-**Updated:** 2026-04-30 (Phase 153 A18-fu1 #4 — closes audit-v7 [D2 HIGH] "Missing Verifies clauses for Phase 14-21": AC-13 Verifies-clause extension with explicit linter/test artifact citations)
+**Version:** 1.4.3  
+**Updated:** 2026-05-03 (Phase 153 A24-fu46 — §00 walker-pin teaser surfacing 3 pre-closed cache findings per Lesson #63)
 **Scope:** `spec/18-wp-plugin-how-to/`
 
 ---
+
+### 1.4.3 — 2026-05-03 — Phase 153 A24-fu46: §00 walker-pin teaser (pure-promotion, Lesson #63 sixth instance)
+- **Action**: Added 3-row walker-pin teaser table to §00 surfacing pre-closed audit-v7 cache findings: (1) HIGH D5 `../01-app/` path drift — pre-closed by §97 AC-13 line 81 + §99 v1.4.0 §2.2/§2.3 RESOLVED tables (Lesson #29 quoted-evidence pattern); (2) MEDIUM D2 AC-13 missing Verifies for ORM/ping — pre-closed by AC-13 Verifies clauses (d) `$wpdb->query` outside `Repository/` + (e) ping exact-shape via `test-readme-inventory.sh`; (3) LOW D1 `CHANGELOG.md` casing in `10-deployment-patterns.md` — auditor hallucination (`grep -c` returns 0 on disk).
+- **Lesson #63 sixth instance**: pure-promotion teaser is the canonical first response to cache-stale findings citing pre-existing closing ACs. Pattern history: spec/22/03 (audit-corpus 2×), spec/27 (integration-spec 1×), spec/13/14 (normative-contract 2×), now spec/18 (process-guidance 1×) — pattern stable across 4 axes.
+- **Saturation note**: `files_used 16/35`, `bytes_used 140000` — module IS walker-saturated, but findings landed in already-bundled tier-1 files (§00/§97/§99), so saturation gate (Lesson #45) does NOT block teaser-class promotions. Distinction: saturation blocks NEW §97 AC authoring (which would land outside window); promotion of EXISTING §97 ACs into §00 teaser stays within visible bundle.
+- **Lockstep**: §97 untouched (pure-promotion, no contract change); §00 v1.4.2 → **v1.4.3**; §98 v1.4.2 → **v1.4.3**; §99 v1.4.4 → **v1.4.5**. Patch-only. All 5 strict gates expected GREEN.
 
 ### 1.4.2 — 2026-04-30 — Phase 153 A18-fu1 #4: AC-13 Verifies-clause artifact-citation extension
 - **Action**: Closes audit-v7 [D2 HIGH] `Missing Verifies clauses for Phase 14-21`. AC-13 already carried a `**Verifies:**` line citing the architectural-invariant contract (Lesson #19), but the auditor flagged absence of explicit linter/test artifact bindings for the REST/Settings/ORM dimensions. Extended the clause with 6 sub-citations: (a) REST permission_callback + namespace → `check-forbidden-strings.py`; (b) Settings `register_setting`/sanitize/raw `update_option` → `check-forbidden-strings.py`; (c) Response envelope + typed exceptions → `check-forbidden-strings.py`; (d) Repository facade vs raw `$wpdb->query` → `check-forbidden-strings.py`; (e) ping endpoint exact-shape → `test-readme-inventory.sh` schema-snapshot extension hook; (f) walkthrough end-to-end parity → `check-tree-health.cjs --strict` + `check-lockstep.cjs`. Added authoring rule per Lesson #28: AC-10/12/13 row changes MUST add matching forbidden-string patterns to `linter-scripts/forbidden-strings.toml` in the same phase.

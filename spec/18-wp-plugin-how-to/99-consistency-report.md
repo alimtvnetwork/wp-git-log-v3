@@ -1,7 +1,7 @@
 # Consistency Report — spec/18-wp-plugin-how-to/
 
-**Version:** 1.4.4  
-**Generated:** 2026-04-30  
+**Version:** 1.4.5  
+**Generated:** 2026-05-03 — Phase 153 A24-fu46 §00 walker-pin teaser pure-promotion (Lesson #63 sixth instance); v1.4.4 baseline preserved.
 **Status:** ✅ All issues resolved (v1.4.4) — Phase 153 A18-fu1 #4 closed audit-v7 [D2 HIGH] `Missing Verifies clauses for Phase 14-21` by extending AC-13's `**Verifies:**` line with 6 explicit linter/test artifact citations (REST/Settings/Response/ORM/ping/walkthrough). Patch-only — no new AC, no AC-31-31 cascade. Lesson #28 + #19 reinforcement. v1.4.3 baseline preserved.
 
 ---
