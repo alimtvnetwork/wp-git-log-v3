@@ -552,6 +552,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--json", action="store_true", help="Emit machine-readable JSON to stdout")
     ap.add_argument("--report-only", action="store_true", help="Always exit 0 (advisory mode)")
     ap.add_argument("--strict", action="store_true", help="Exit 1 if any module scores BLOCKING (<60)")
+    ap.add_argument("--chunked", action="store_true",
+                    help="A18-impl-1: enable chunked re-scoring for >MAX_BYTES modules (AC-34-15). Off by default; ≤MAX_BYTES modules are byte-identical to non-chunked output.")
+    ap.add_argument("--chunk-stats", action="store_true",
+                    help="A18-impl-1: print per-module chunk count + tier breakdown to stdout (no network).")
     ap.add_argument("--report", type=Path, default=DEFAULT_REPORT, help="Markdown report output path")
     args = ap.parse_args(argv)
 
