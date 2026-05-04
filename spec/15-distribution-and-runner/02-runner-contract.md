@@ -1,7 +1,7 @@
 # Runner Contract
 
-**Version:** 1.0.0
-**Updated:** 2026-04-19
+**Version:** 1.1.0
+**Updated:** 2026-05-04
 
 ---
 
@@ -39,7 +39,7 @@ When invoked with **no positional arguments**, the runner MUST behave exactly as
 1. Print a banner: `▸ slides — building offline deck and opening in browser`.
 2. `git pull` (best-effort; warn but continue on failure — the deck may still be buildable from local state).
 3. Verify `slides-app/` exists. If not, abort with a clear message pointing to the slides spec.
-4. Verify `bun` is available (`bun --version`). If not, fall back to `pnpm`. If neither, abort with installation instructions.
+4. Verify `bun` is available (`bun --version`). **Bun is the SOLE supported toolchain for the slides build per AC-22 — pnpm fallback FORBIDDEN** (different lockfile + `node_modules` resolution + `bun:*` import semantics produce non-deterministic builds across environments). If `bun` is missing, abort with exit `4` ("missing toolchain — install bun.sh") and link to <https://bun.sh/docs/installation>.
 5. Run, with `slides-app/` as the working directory:
    - `bun install --frozen-lockfile || bun install`
    - `bun run build`
