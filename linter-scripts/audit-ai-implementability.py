@@ -585,6 +585,15 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  Allowed values: {sorted(AXIS_VALUES)}", file=sys.stderr)
         return 2
 
+    # A18-impl-1: --chunk-stats short-circuits to chunk-packer telemetry only.
+    if args.chunk_stats:
+        for mod in modules:
+            chunks = pack_chunks(mod)
+            tiers = ",".join(c["tier"] for c in chunks)
+            total_kb = sum(c["bytes_used"] for c in chunks) // 1024
+            print(f"  {mod.name:40s} chunks={len(chunks):2d}  tiers=[{tiers}]  total={total_kb} KB")
+        return 0
+
     results: list[dict[str, Any]] = []
     for mod in modules:
         try:
