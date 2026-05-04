@@ -515,6 +515,22 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     # and any future axis re-classification invalidates the prior score.
     bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
 
+    # A18-impl-2 (AC-34-16): per-chunk SHA inventory enables partial cache
+    # invalidation — when one tier-file moves, only chunks containing it
+    # need re-scoring on the next gateway pass. The composite `bundle_sha`
+    # remains the load_module_bundle-derived single-pass key for backward
+    # compatibility with the parity contract from AC-34-15.
+    chunks = pack_chunks(mod)
+    chunk_inventory = []
+    for c in chunks:
+        c_sha = hashlib.sha256(f"axis={axis}\n{c['bundle']}".encode()).hexdigest()[:16]
+        chunk_inventory.append({
+            "tier": c["tier"],
+            "bundle_sha_chunk": c_sha,
+            "files": [str(f.relative_to(ROOT)) for f in c["files"]],
+            "bytes_used": c["bytes_used"],
+        })
+
     if cache_file.exists() and not force:
         cached = json.loads(cache_file.read_text())
         if cached.get("bundle_sha") == bundle_sha and cached.get("rubric") == "v7":
@@ -530,6 +546,7 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
             "files_total": total_files,
             "bytes_used": used_bytes,
             "bundle_sha": bundle_sha,
+            "chunks": chunk_inventory,
         }
 
     if api_key is None:
@@ -544,6 +561,7 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     parsed["files_total"] = total_files
     parsed["bytes_used"] = used_bytes
     parsed["bundle_sha"] = bundle_sha
+    parsed["chunks"] = chunk_inventory
     parsed["total_v6"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
     v7 = apply_rubric_v7({k: int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5")}, axis)
     parsed.update(v7)
