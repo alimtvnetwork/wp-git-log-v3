@@ -315,15 +315,68 @@ def pack_chunks(mod_dir: Path, max_bytes: int = MAX_BYTES) -> list[dict[str, Any
     # always prefixing with the full T1 surface.
     budget = max_bytes - t1_size - CHUNK_OVERHEAD
     if budget <= 0:
-        # Pathological: T1 alone exceeds the cap. Fall back to truncated T1.
-        return [{
-            "tier": "T1",
-            "files": tier1,
-            "bundle": t1_text[:max_bytes],
-            "bytes_used": min(t1_size, max_bytes),
-        }]
+        # A18-impl-2 (AC-34-16): T1 alone exceeds cap. Split T1 itself into
+        # multiple chunks. Strategy: 00+97 are the contract pair (always
+        # together — §97 ACs reference §00 invariants). §98 (changelog) and
+        # §99 (consistency) each get their own chunk, prefixed with 00+97
+        # when room allows; else they go solo (truncated as a last resort).
+        # This eliminates the prior "truncate T1 to first 140KB" data loss
+        # for spec/27-class modules where T1 = 455 KB (fu27 audit).
+        anchor_files = [f for f in tier1 if f.name in ("00-overview.md", "97-acceptance-criteria.md")]
+        anchor_text, anchor_size = _render(anchor_files)
+        rest_t1 = [f for f in tier1 if f not in anchor_files]
+        t1_chunks: list[dict[str, Any]] = []
+        if anchor_size <= max_bytes:
+            # Anchor pair fits; first chunk = anchor only, then each remaining
+            # T1 file gets its own anchor-prefixed chunk (or solo if too large).
+            t1_chunks.append({
+                "tier": "T1",
+                "files": list(anchor_files),
+                "bundle": anchor_text,
+                "bytes_used": anchor_size,
+            })
+            for f in rest_t1:
+                solo_text, solo_size = _render([f])
+                if anchor_size + solo_size <= max_bytes:
+                    t1_chunks.append({
+                        "tier": "T1",
+                        "files": anchor_files + [f],
+                        "bundle": anchor_text + solo_text,
+                        "bytes_used": anchor_size + solo_size,
+                    })
+                else:
+                    # Solo (still better than dropping the file).
+                    t1_chunks.append({
+                        "tier": "T1",
+                        "files": [f],
+                        "bundle": solo_text[:max_bytes],
+                        "bytes_used": min(solo_size, max_bytes),
+                    })
+        else:
+            # Anchor pair itself exceeds cap (extreme: §00 or §97 alone >70KB
+            # combined). Last-resort: truncate the anchor and warn via tier label.
+            t1_chunks.append({
+                "tier": "T1",
+                "files": list(anchor_files),
+                "bundle": anchor_text[:max_bytes],
+                "bytes_used": min(anchor_size, max_bytes),
+            })
+            for f in rest_t1:
+                solo_text, solo_size = _render([f])
+                t1_chunks.append({
+                    "tier": "T1",
+                    "files": [f],
+                    "bundle": solo_text[:max_bytes],
+                    "bytes_used": min(solo_size, max_bytes),
+                })
+        return t1_chunks
+
 
     chunks: list[dict[str, Any]] = []
+
+    # A18-impl-2 (AC-34-16): intra-T1 splitting when budget<=0 already handled
+    # above as a fallback. The richer case — T1 fits in cap but tier2+tier3
+    # overflow — is the common path below.
     for tier_label, tier_files in (("T2", tier2), ("T3", tier3)):
         cur: list[Path] = []
         cur_size = 0
@@ -462,6 +515,22 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     # and any future axis re-classification invalidates the prior score.
     bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
 
+    # A18-impl-2 (AC-34-16): per-chunk SHA inventory enables partial cache
+    # invalidation — when one tier-file moves, only chunks containing it
+    # need re-scoring on the next gateway pass. The composite `bundle_sha`
+    # remains the load_module_bundle-derived single-pass key for backward
+    # compatibility with the parity contract from AC-34-15.
+    chunks = pack_chunks(mod)
+    chunk_inventory = []
+    for c in chunks:
+        c_sha = hashlib.sha256(f"axis={axis}\n{c['bundle']}".encode()).hexdigest()[:16]
+        chunk_inventory.append({
+            "tier": c["tier"],
+            "bundle_sha_chunk": c_sha,
+            "files": [str(f.relative_to(ROOT)) for f in c["files"]],
+            "bytes_used": c["bytes_used"],
+        })
+
     if cache_file.exists() and not force:
         cached = json.loads(cache_file.read_text())
         if cached.get("bundle_sha") == bundle_sha and cached.get("rubric") == "v7":
@@ -477,6 +546,7 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
             "files_total": total_files,
             "bytes_used": used_bytes,
             "bundle_sha": bundle_sha,
+            "chunks": chunk_inventory,
         }
 
     if api_key is None:
@@ -491,6 +561,7 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     parsed["files_total"] = total_files
     parsed["bytes_used"] = used_bytes
     parsed["bundle_sha"] = bundle_sha
+    parsed["chunks"] = chunk_inventory
     parsed["total_v6"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
     v7 = apply_rubric_v7({k: int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5")}, axis)
     parsed.update(v7)
