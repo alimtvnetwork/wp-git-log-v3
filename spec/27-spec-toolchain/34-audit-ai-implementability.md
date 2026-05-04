@@ -1,7 +1,7 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.5.0  
-**Updated:** 2026-05-03 (Phase 153 Task A18-fu2: AC-34-14 codifies the 120 KB → 140 KB raise + dynamic truncation-marker contract — closes the spec-vs-code drift where `linter-scripts/audit-ai-implementability.py:45` already cited "AC-34-14" but the AC did not exist.)  
+**Version:** 1.6.0  
+**Updated:** 2026-05-04 (Phase 153 Task A18-impl-1: AC-34-15 codifies chunked re-scoring contract + `--chunked` / `--chunk-stats` CLI flags + `pack_chunks()` / `merge_chunk_scores()` helpers + parity-on-≤MAX_BYTES guarantee. Self-test 9 → 14 assertions. Default behaviour unchanged; chunking opt-in pending A18-impl-2 gateway-on rollout.)  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
 **Category:** Auditor (LLM-driven, deep-walk)
