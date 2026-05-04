@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.90.0
+**Version:** 2.90.1
 **Updated:** 2026-05-04
 **Scope:** `spec/27-spec-toolchain/`
 
