@@ -154,6 +154,77 @@ else
   FAIL=$((FAIL+1))
 fi
 
+# 10. AC-34-15 (A18-impl-1): --chunk-stats exits 0 and emits per-module chunk lines.
+assert "AC-34-15: --chunk-stats exits 0" \
+  python3 "$SCRIPT" --chunk-stats
+assert_contains "AC-34-15: --chunk-stats reports tier breakdown" "tiers=" \
+  python3 "$SCRIPT" --chunk-stats --module=04-database-conventions
+
+# 11. AC-34-15 parity: ≤MAX_BYTES modules → 1 FULL chunk byte-identical to load_module_bundle().
+if python3 - <<'PY' >/dev/null 2>&1
+import importlib.util
+s = importlib.util.spec_from_file_location("aai", "linter-scripts/audit-ai-implementability.py")
+m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
+fails = 0; checked = 0
+for mod in m.discover_modules():
+    bundle, used_bytes, used_files, total_files = m.load_module_bundle(mod)
+    if used_bytes < m.MAX_BYTES and used_files == total_files:
+        checked += 1
+        chunks = m.pack_chunks(mod)
+        if len(chunks) != 1 or chunks[0]["tier"] != "FULL" or chunks[0]["bundle"] != bundle:
+            fails += 1
+assert checked >= 5, f"expected >=5 parity-eligible modules, got {checked}"
+assert fails == 0, f"{fails} parity failures"
+PY
+then
+  echo "  PASS — AC-34-15: pack_chunks parity on <=MAX_BYTES modules"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-15: pack_chunks parity broken"
+  FAIL=$((FAIL+1))
+fi
+
+# 12. AC-34-15 multi-chunk: every chunk includes T1 prefix (re-anchor invariant).
+if python3 - <<'PY' >/dev/null 2>&1
+import importlib.util
+s = importlib.util.spec_from_file_location("aai", "linter-scripts/audit-ai-implementability.py")
+m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
+mod = m.SPEC / "17-consolidated-guidelines"
+chunks = m.pack_chunks(mod)
+assert len(chunks) > 1, f"expected multi-chunk, got {len(chunks)}"
+for c in chunks:
+    assert "00-overview.md" in c["bundle"] or "97-acceptance-criteria.md" in c["bundle"], \
+        f"chunk tier={c['tier']} missing T1 anchor"
+PY
+then
+  echo "  PASS — AC-34-15: multi-chunk T1 re-anchor invariant"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-15: T1 not present in every multi-chunk slice"
+  FAIL=$((FAIL+1))
+fi
+
+# 13. merge_chunk_scores weighted-merge math sanity.
+if python3 - <<'PY' >/dev/null 2>&1
+import importlib.util
+s = importlib.util.spec_from_file_location("aai", "linter-scripts/audit-ai-implementability.py")
+m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
+results = [
+    {"tier": "T2", "d1": 18, "d2": 16, "d3": 14, "d4": 12, "d5": 10, "findings": [{"severity":"high","dimension":"d2","title":"x"}]},
+    {"tier": "T3", "d1": 10, "d2": 10, "d3": 10, "d4": 10, "d5": 10, "findings": [{"severity":"high","dimension":"d2","title":"x"}, {"severity":"low","dimension":"d5","title":"y"}]},
+]
+merged = m.merge_chunk_scores(results)
+assert merged["d1"] == 15, f"d1 expected 15, got {merged['d1']}"
+assert len(merged["findings"]) == 2, f"dedupe failed: {len(merged['findings'])}"
+PY
+then
+  echo "  PASS — AC-34-15: weighted-merge + finding dedupe"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-15: merge math or dedupe broken"
+  FAIL=$((FAIL+1))
+fi
+
 echo
 echo "Result: $PASS passed, $FAIL failed"
 [ "$FAIL" = "0" ]
