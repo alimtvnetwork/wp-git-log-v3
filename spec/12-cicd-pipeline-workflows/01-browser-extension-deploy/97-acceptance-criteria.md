@@ -1,7 +1,7 @@
 # Acceptance Criteria — Browser Extension Deploy — Overview
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29  
+**Version:** 1.2.0  
+**Updated:** 2026-05-04 (Phase 153 A24-fu43-fu1: AC-BX-09 archetype runtime GWT — closes parent AC-13 stub mandate for browser-extension subfolder.)  
 **Scope:** `spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/`
 
 ---
@@ -102,3 +102,26 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 - [Module overview](./00-overview.md)
 - [Module consistency report](./99-consistency-report.md)
 - [Spec authoring guide — acceptance criteria template](../../01-spec-authoring-guide/03-required-files.md)
+
+---
+
+## Archetype-Specific Runtime Criteria (Phase 153 A24-fu43-fu1)
+
+### AC-BX-09: Browser-extension build → packaged release artifact `[high]`
+- **Given** a downstream browser-extension repo following this module's pipeline contract — TypeScript/JavaScript source under `src/`, a `manifest.json` declaring `"manifest_version": 3`, a bundler producing a `dist/` directory on `pnpm build` (or `npm run build`),
+- **When** the release pipeline declared in `02-release-pipeline.md` executes against a `v*` tag,
+- **Then** ALL of the following invariants MUST hold on the resulting GitHub Release artifact:
+  1. **Source-map exclusion** — the published `.zip` MUST NOT contain any `*.map` file (Chrome Web Store rejects extensions whose `dist/` ships source maps; downstream `vite.config.ts` MUST set `build.sourcemap: false` for the release build, OR the packaging step MUST `find dist -name '*.map' -delete` before zipping).
+  2. **Manifest v3 invariant** — the zipped `manifest.json` MUST contain `"manifest_version": 3` (Manifest v2 is a release-blocker; CI MUST fail-fast if `jq -r .manifest_version dist/manifest.json` ≠ `3`).
+  3. **Diamond-build ordering** — the SDK build job MUST complete before any module-build job starts (CI graph: `setup → build-sdk → [build-module-*] → build-extension`); module jobs MUST download the SDK artifact via `actions/download-artifact@v4` keyed on the same workflow run, NOT rebuild it.
+  4. **Asset naming** — the release asset MUST follow the shape `<extension-name>-v<semver>.zip` (no spaces, no platform suffix; browser extensions are platform-agnostic at the package layer).
+  5. **No native binaries** — the `.zip` MUST NOT contain platform-specific compiled binaries (`.exe`, `.dll`, `.dylib`, `.so`); browser extensions ship JS/CSS/HTML/JSON/PNG only.
+- **Source:** `02-release-pipeline.md` §Build/Package; `01-ci-pipeline.md` §Diamond dependency graph; downstream `manifest.json` schema (Chrome MV3).
+- **Verifies:** parent `spec/12-cicd-pipeline-workflows/97-acceptance-criteria.md` AC-13 [medium] (per-archetype GWT stub mandate) for the browser-extension axis. Closes audit-v7 finding `[D2 HIGH] Archetype GWT Stubs` for this subfolder.
+
+**Forbidden patterns** (release-blockers — CI MUST fail-fast):
+- `dist/**/*.map` present in the packaged `.zip` (source-map leak).
+- `manifest.json` with `manifest_version: 2` (deprecated).
+- Module-build job starting before SDK-build job completes (broken diamond).
+- Release asset name containing spaces or platform suffixes (`linux`, `windows`, `darwin`).
+- Any `.exe` / `.dll` / `.dylib` / `.so` inside the `.zip`.
