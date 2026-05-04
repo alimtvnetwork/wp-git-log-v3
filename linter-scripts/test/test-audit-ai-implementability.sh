@@ -229,25 +229,27 @@ fi
 # exceeds MAX_BYTES, pack_chunks emits ≥2 chunks (anchor pair + per-file)
 # rather than truncating a single oversized chunk.
 if python3 - <<'PY' >/dev/null 2>&1
-import importlib.util, tempfile, shutil
+import importlib.util, shutil
 from pathlib import Path
 s = importlib.util.spec_from_file_location("aai", "linter-scripts/audit-ai-implementability.py")
 m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
-# Synth: 4 T1 files each 50KB → 200KB total > 140KB cap.
-tmp = Path(tempfile.mkdtemp(prefix="aai-t1-overflow-")) / "00-synth"
+# Synth fixture under spec/ so file.relative_to(ROOT) works.
+tmp = Path("spec/00-aai-t1-overflow-fixture")
+if tmp.exists(): shutil.rmtree(tmp)
 tmp.mkdir(parents=True)
-big = "x" * 50_000
-for n in ("00-overview.md", "97-acceptance-criteria.md", "98-changelog.md", "99-consistency-report.md"):
-    (tmp / n).write_text(big)
-chunks = m.pack_chunks(tmp)
-shutil.rmtree(tmp.parent)
-assert len(chunks) >= 2, f"T1-overflow expected ≥2 chunks, got {len(chunks)}"
-assert all(c["tier"] == "T1" for c in chunks), f"T1-overflow expected all-T1 tiers, got {[c['tier'] for c in chunks]}"
-# Anchor pair (00+97) MUST be present in first chunk.
-first = chunks[0]
-names = [Path(str(f)).name for f in first["files"]]
-assert "00-overview.md" in names and "97-acceptance-criteria.md" in names, \
-    f"first chunk missing anchor pair: {names}"
+try:
+    big = "x" * 50_000
+    for n in ("00-overview.md", "97-acceptance-criteria.md", "98-changelog.md", "99-consistency-report.md"):
+        (tmp / n).write_text(big)
+    chunks = m.pack_chunks(tmp)
+    assert len(chunks) >= 2, f"T1-overflow expected ≥2 chunks, got {len(chunks)}"
+    assert all(c["tier"] == "T1" for c in chunks), f"T1-overflow expected all-T1 tiers, got {[c['tier'] for c in chunks]}"
+    first = chunks[0]
+    names = [Path(str(f)).name for f in first["files"]]
+    assert "00-overview.md" in names and "97-acceptance-criteria.md" in names, \
+        f"first chunk missing anchor pair: {names}"
+finally:
+    shutil.rmtree(tmp)
 PY
 then
   echo "  PASS — AC-34-16: T1-overflow splits into ≥2 anchor-prefixed chunks"
