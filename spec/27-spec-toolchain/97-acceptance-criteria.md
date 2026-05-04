@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.13.0
-**Updated:** 2026-05-04 (Phase 153 Task A18-impl-1: slot 34 §00 v1.5.0 → v1.6.0 codifies AC-34-15 chunked re-scoring contract — `pack_chunks()` + `merge_chunk_scores()` helpers + `--chunked` / `--chunk-stats` CLI flags + parity-on-≤MAX_BYTES guarantee + T1 re-anchor invariant. Self-test 9 → 14 assertions. Default behaviour unchanged; chunking opt-in.)
+**Version:** 2.14.0
+**Updated:** 2026-05-04 (Phase 153 Task A18-impl-2: slot 34 §00 v1.6.0 → v1.7.0 codifies AC-34-16 — intra-T1 splitting (anchor-pair-first when T1>MAX_BYTES) + per-chunk SHA cache schema (`chunks: [{tier, bundle_sha_chunk, files, bytes_used}]`). Self-test 14 → 16 assertions. Closes Lesson #65 spec/27-class T1-truncation data-loss path.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
