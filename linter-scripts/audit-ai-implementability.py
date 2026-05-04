@@ -220,6 +220,174 @@ def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
     return "".join(parts), total, used, len(files)
 
 
+# ─── A18-impl-1: chunk packer (Phase 153 Task A18-design AC-34-15) ───────────
+# Tier weights for weighted-merge scoring (AC-34-15). T1 always present in
+# every chunk so the LLM re-anchors against the contract surface in each call.
+TIER_WEIGHTS = {"T1": 1.00, "T2": 0.85, "T3": 0.60}
+T1_NAMES = ("00-overview.md", "97-acceptance-criteria.md",
+            "98-changelog.md", "99-consistency-report.md")
+CHUNK_OVERHEAD = 2_000  # bytes reserved for prompt scaffolding per chunk
+
+
+def _classify_tier(rel: Path) -> str:
+    """T1 = root-level contract files; T2 = 0X/1X-* algorithm prose;
+    T3 = 2X/3X-* worked examples + everything else under WALK_GLOBS."""
+    name = rel.name
+    if rel.parent == rel.parent.parent and name in T1_NAMES:
+        # depth==1 (mod root) AND canonical T1 name
+        pass  # handled by caller via membership test
+    if name in T1_NAMES and "/" not in str(rel.parent.relative_to(rel.parent.parent.parent)) if False else False:
+        return "T1"
+    # Simpler classification by name prefix:
+    if name in T1_NAMES:
+        return "T1"
+    m = re.match(r"^(\d{2})-", name)
+    if not m:
+        return "T3"
+    n = int(m.group(1))
+    if 0 <= n <= 19:
+        return "T2"
+    return "T3"
+
+
+def pack_chunks(mod_dir: Path, max_bytes: int = MAX_BYTES) -> list[dict[str, Any]]:
+    """A18-impl-1: pack a module into ≥1 chunks of ≤max_bytes bytes each.
+
+    Contract (AC-34-15):
+      - T1 (contract-bearing root files) is duplicated in EVERY chunk so the
+        LLM re-anchors against §97 in each call.
+      - Single-chunk parity: when total content ≤ max_bytes, returns exactly
+        one chunk whose `bundle` is byte-identical to `load_module_bundle()`
+        (same file ordering, same trailing TRUNCATED-marker semantics — i.e.
+        no marker when nothing was dropped).
+      - Multi-chunk path: T2 files first (one per chunk band, packed greedily),
+        then T3 files. Each chunk = T1 prefix + tier slice. Tier label set to
+        the dominant non-T1 tier in the chunk for weighted-merge.
+
+    Returns list of dicts: {tier, files, bundle, bytes_used}.
+    """
+    files: list[Path] = []
+    for pattern in WALK_GLOBS:
+        files.extend(mod_dir.rglob(pattern))
+    files = sorted(set(files))
+
+    # Tier-1 first (canonical order at module root), then T2, then T3 (alpha).
+    tier1: list[Path] = []
+    for name in T1_NAMES:
+        candidate = mod_dir / name
+        if candidate in files:
+            tier1.append(candidate)
+            files.remove(candidate)
+    tier2 = [f for f in files if _classify_tier(f.relative_to(mod_dir.parent)) == "T2"]
+    tier3 = [f for f in files if _classify_tier(f.relative_to(mod_dir.parent)) == "T3"]
+
+    def _render(file_list: list[Path]) -> tuple[str, int]:
+        parts: list[str] = []
+        total = 0
+        for f in file_list:
+            try:
+                txt = f.read_text(encoding="utf-8", errors="replace")
+            except Exception:
+                continue
+            chunk = f"\n\n===== FILE: {f.relative_to(ROOT)} =====\n\n" + txt
+            parts.append(chunk)
+            total += len(chunk)
+        return "".join(parts), total
+
+    t1_text, t1_size = _render(tier1)
+
+    # Parity fast-path: if everything fits in one chunk, mirror load_module_bundle()
+    # output exactly (single chunk, no truncation marker — same flat ordering).
+    flat = tier1 + tier2 + tier3
+    flat_text, flat_size = _render(flat)
+    if flat_size <= max_bytes:
+        return [{
+            "tier": "FULL",
+            "files": flat,
+            "bundle": flat_text,
+            "bytes_used": flat_size,
+        }]
+
+    # Multi-chunk path: pack T2 then T3 into max_bytes-sized buckets,
+    # always prefixing with the full T1 surface.
+    budget = max_bytes - t1_size - CHUNK_OVERHEAD
+    if budget <= 0:
+        # Pathological: T1 alone exceeds the cap. Fall back to truncated T1.
+        return [{
+            "tier": "T1",
+            "files": tier1,
+            "bundle": t1_text[:max_bytes],
+            "bytes_used": min(t1_size, max_bytes),
+        }]
+
+    chunks: list[dict[str, Any]] = []
+    for tier_label, tier_files in (("T2", tier2), ("T3", tier3)):
+        cur: list[Path] = []
+        cur_size = 0
+        for f in tier_files:
+            try:
+                fsize = len(f.read_text(encoding="utf-8", errors="replace")) + 64
+            except Exception:
+                continue
+            if cur_size + fsize > budget and cur:
+                body, body_size = _render(cur)
+                chunks.append({
+                    "tier": tier_label,
+                    "files": tier1 + cur,
+                    "bundle": t1_text + body,
+                    "bytes_used": t1_size + body_size,
+                })
+                cur, cur_size = [], 0
+            cur.append(f)
+            cur_size += fsize
+        if cur:
+            body, body_size = _render(cur)
+            chunks.append({
+                "tier": tier_label,
+                "files": tier1 + cur,
+                "bundle": t1_text + body,
+                "bytes_used": t1_size + body_size,
+            })
+    if not chunks:
+        # No T2/T3 files — emit T1-only chunk.
+        chunks.append({
+            "tier": "T1",
+            "files": tier1,
+            "bundle": t1_text,
+            "bytes_used": t1_size,
+        })
+    return chunks
+
+
+def merge_chunk_scores(chunk_results: list[dict[str, Any]]) -> dict[str, Any]:
+    """A18-impl-1: weighted-merge per-chunk dimension scores into a single
+    score per AC-34-15. FULL-tier chunks bypass merging (return as-is).
+    """
+    if len(chunk_results) == 1 and chunk_results[0].get("tier") == "FULL":
+        return chunk_results[0]
+    dims = ("d1", "d2", "d3", "d4", "d5")
+    weights = [TIER_WEIGHTS.get(r.get("tier", "T3"), 0.60) for r in chunk_results]
+    wsum = sum(weights) or 1.0
+    merged: dict[str, Any] = {}
+    for d in dims:
+        merged[d] = round(sum(int(r.get(d, 0)) * w for r, w in zip(chunk_results, weights)) / wsum)
+    # Union-dedupe findings by (severity, dimension, first 120 chars).
+    seen: set[tuple[str, str, str]] = set()
+    findings: list[dict[str, Any]] = []
+    for r in chunk_results:
+        for f in r.get("findings", []) or []:
+            key = (str(f.get("severity", "")), str(f.get("dimension", "")),
+                   str(f.get("title", ""))[:120])
+            if key in seen:
+                continue
+            seen.add(key)
+            findings.append(f)
+    merged["findings"] = findings
+    merged["chunks"] = [{"tier": r["tier"], "bytes_used": r.get("bytes_used", 0)}
+                        for r in chunk_results]
+    return merged
+
+
 def call_gateway(content: str, api_key: str) -> dict[str, Any]:
     body = json.dumps({
         "model": MODEL,
