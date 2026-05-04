@@ -1,7 +1,13 @@
 # Changelog — Update — Overview
 
-**Version:** 2.4.3  
-**Updated:** 2026-05-01 (Phase 153 Task A24-fu38 — AC-16 wall-clock-time pin + AC-17 rollback-trigger ownership normative subsection)
+**Version:** 2.4.4  
+**Updated:** 2026-05-04 (Phase 153 Task A24-fu44 — AC-21 enumeration extended to D3 'updater.exe lifecycle' + D1 'latest.json schema' + 24% saturation note)
+
+### 2.4.4 — 2026-05-04 — Phase 153 Task A24-fu44: AC-21 stale-cache enumeration extension
+- **Action**: Extended AC-21's `Then` clause from a single-class enumeration (D5 + D4) to a four-class enumeration covering all currently-cached findings: (a) D5 missing-sub-module-context citing files 09–27 / subfolder 24; (b) D4 truncated `04-build-scripts.md`; (c) **NEW** D3 ambiguous `updater.exe` lifecycle (canonically specified in `19-updater-binary.md` + `12-code-signing.md` + `06-cleanup.md` (AC-16 wall-clock budget) + AC-17 handoff ownership — none in tier-1 bundle); (d) **NEW** D1 undefined `latest.json` schema in §00 (canonically defined in `01-self-update-overview.md` + `13-release-assets.md`; §00 line 84 links per Lesson #36 link-don't-restate). Added cache-observed `files_used=13/54 ≈ 24%` saturation citation.
+- **Why**: All 3 cached findings (HIGH D5 + MEDIUM D3 + LOW D1) are walker-cap artifacts on this `normative-contract` axis module; the contracts the auditor flags as missing are all on disk in non-tier-1 files. Per Lesson #75 (walker-cap triage before self-lift), authoring new ACs would be measurement-bias work — extending the existing harness-artifact pin closes the findings honestly.
+- **Lockstep**: §97 v2.4.1 → **v2.4.2** (patch — prose-only enumeration extension, no new AC, no AC-31-31 cascade); §00 v2.4.3 → **v2.4.4** (patch — banner-only); §98 v2.4.3 → **v2.4.4** (this row); §99 v1.6.3 → **v1.6.4** (audit row).
+- **No CI workflow change · no RUBRIC bump · no gate-count change · no new AC.** LLM re-score deferred per Lesson #20.
 
 ### 2.4.3 — 2026-05-01 — Phase 153 Task A24-fu38: AC-16 wall-clock pin + AC-17 rollback-ownership prose patch
 - **Action**: Patched AC-16 to specify cleanup-budget 100ms is **wall-clock** time (closes audit-v10 LOW D1 "Missing Unit for Cleanup Latency"). Patched AC-17 with normative paragraph **Rollback-trigger ownership** — rollback is process-local to the updater OR delegated to next-start cleanup per AC-16; NO inter-process signaling permitted (closes audit-v10 MEDIUM D3 "Ambiguous Rollback Trigger in Handoff").
