@@ -315,13 +315,62 @@ def pack_chunks(mod_dir: Path, max_bytes: int = MAX_BYTES) -> list[dict[str, Any
     # always prefixing with the full T1 surface.
     budget = max_bytes - t1_size - CHUNK_OVERHEAD
     if budget <= 0:
-        # Pathological: T1 alone exceeds the cap. Fall back to truncated T1.
-        return [{
-            "tier": "T1",
-            "files": tier1,
-            "bundle": t1_text[:max_bytes],
-            "bytes_used": min(t1_size, max_bytes),
-        }]
+        # A18-impl-2 (AC-34-16): T1 alone exceeds cap. Split T1 itself into
+        # multiple chunks. Strategy: 00+97 are the contract pair (always
+        # together — §97 ACs reference §00 invariants). §98 (changelog) and
+        # §99 (consistency) each get their own chunk, prefixed with 00+97
+        # when room allows; else they go solo (truncated as a last resort).
+        # This eliminates the prior "truncate T1 to first 140KB" data loss
+        # for spec/27-class modules where T1 = 455 KB (fu27 audit).
+        anchor_files = [f for f in tier1 if f.name in ("00-overview.md", "97-acceptance-criteria.md")]
+        anchor_text, anchor_size = _render(anchor_files)
+        rest_t1 = [f for f in tier1 if f not in anchor_files]
+        t1_chunks: list[dict[str, Any]] = []
+        if anchor_size <= max_bytes:
+            # Anchor pair fits; first chunk = anchor only, then each remaining
+            # T1 file gets its own anchor-prefixed chunk (or solo if too large).
+            t1_chunks.append({
+                "tier": "T1",
+                "files": list(anchor_files),
+                "bundle": anchor_text,
+                "bytes_used": anchor_size,
+            })
+            for f in rest_t1:
+                solo_text, solo_size = _render([f])
+                if anchor_size + solo_size <= max_bytes:
+                    t1_chunks.append({
+                        "tier": "T1",
+                        "files": anchor_files + [f],
+                        "bundle": anchor_text + solo_text,
+                        "bytes_used": anchor_size + solo_size,
+                    })
+                else:
+                    # Solo (still better than dropping the file).
+                    t1_chunks.append({
+                        "tier": "T1",
+                        "files": [f],
+                        "bundle": solo_text[:max_bytes],
+                        "bytes_used": min(solo_size, max_bytes),
+                    })
+        else:
+            # Anchor pair itself exceeds cap (extreme: §00 or §97 alone >70KB
+            # combined). Last-resort: truncate the anchor and warn via tier label.
+            t1_chunks.append({
+                "tier": "T1",
+                "files": list(anchor_files),
+                "bundle": anchor_text[:max_bytes],
+                "bytes_used": min(anchor_size, max_bytes),
+            })
+            for f in rest_t1:
+                solo_text, solo_size = _render([f])
+                t1_chunks.append({
+                    "tier": "T1",
+                    "files": [f],
+                    "bundle": solo_text[:max_bytes],
+                    "bytes_used": min(solo_size, max_bytes),
+                })
+        return t1_chunks
+
 
     chunks: list[dict[str, Any]] = []
 
