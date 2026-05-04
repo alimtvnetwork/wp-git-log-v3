@@ -279,7 +279,10 @@ def pack_chunks(mod_dir: Path, max_bytes: int = MAX_BYTES) -> list[dict[str, Any
             tier1.append(candidate)
             files.remove(candidate)
     tier2 = [f for f in files if _classify_tier(f.relative_to(mod_dir.parent)) == "T2"]
-    tier3 = [f for f in files if _classify_tier(f.relative_to(mod_dir.parent)) == "T3"]
+    # `rest` preserves alphabetical ordering for parity with load_module_bundle()
+    rest = files  # already alpha-sorted, tier1 already removed above
+    tier2 = [f for f in rest if _classify_tier(f.relative_to(mod_dir.parent)) == "T2"]
+    tier3 = [f for f in rest if _classify_tier(f.relative_to(mod_dir.parent)) == "T3"]
 
     def _render(file_list: list[Path]) -> tuple[str, int]:
         parts: list[str] = []
@@ -297,8 +300,8 @@ def pack_chunks(mod_dir: Path, max_bytes: int = MAX_BYTES) -> list[dict[str, Any
     t1_text, t1_size = _render(tier1)
 
     # Parity fast-path: if everything fits in one chunk, mirror load_module_bundle()
-    # output exactly (single chunk, no truncation marker — same flat ordering).
-    flat = tier1 + tier2 + tier3
+    # output exactly (same tier1+alphabetical-rest ordering, no truncation marker).
+    flat = tier1 + rest
     flat_text, flat_size = _render(flat)
     if flat_size <= max_bytes:
         return [{
