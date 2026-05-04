@@ -1,7 +1,7 @@
 # Acceptance Criteria — Update — Overview
 
-**Version:** 2.4.1  
-**Updated:** 2026-05-01 (Phase 153 Task A24-fu38 — AC-16 wall-clock-time pin closes audit-v10 LOW D1; AC-17 rollback-trigger ownership normative subsection closes audit-v10 MEDIUM D3. Prose-only patch — no new AC, no AC-31-31 cascade. AC count remains 22.)
+**Version:** 2.4.2  
+**Updated:** 2026-05-04 (Phase 153 Task A24-fu44 — AC-21 enumeration extended to cover audit-v* D3 'updater.exe lifecycle' + D1 'latest.json schema' + cache-observed 24% files_used saturation. Prose-only patch — no new AC, no AC-31-31 cascade. AC count remains 22.)
 **Scope:** `spec/14-update/`
 
 > **v2.2.0 (Phase 149 — P3 sweep slot 9):** Added `**Verifies:**` clauses to all 20 ACs (AC-01..AC-20). Each criterion now explicitly maps to the underlying invariant it protects (structural floor, slot-immutability, cross-platform deploy uniformity, parent-survival, build-time version-injection, supply-chain trust, integrity, idempotent install, latest-probe-or-fail, XDG/atomic-write, ordered-pipeline-with-fail-fast, no-daemon, idempotent silent-cleanup-budget, single-step atomic rollback, three-layer precedence + system-dir blacklist, tag-first monotonicity, six-target-floor + CGO_ENABLED=0). Verifies-coverage gap: 0/20 → 20/20. Drives AI-confidence Medium → High.
