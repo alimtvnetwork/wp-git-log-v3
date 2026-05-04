@@ -1,10 +1,15 @@
 # Changelog — Browser Extension Deploy — Overview
 
-**Version:** 3.4.2  
-**Updated:** 2026-04-29  
+**Version:** 3.4.3  
+**Updated:** 2026-05-04  
 **Scope:** `spec/12-cicd-pipeline-workflows/01-browser-extension-deploy/`
 
 ---
+
+## 3.4.3 — 2026-05-04 — Phase 153 A24-fu43-fu1: AC-BX-09 archetype runtime GWT
+
+- §97 v1.1.0 → **v1.2.0**: added **AC-BX-09** [high] (browser-extension build → packaged release artifact) covering source-map exclusion, MV3 invariant, diamond-build ordering, asset naming, native-binary exclusion + 5 forbidden patterns. Closes parent `spec/12-cicd-pipeline-workflows/97-acceptance-criteria.md` AC-13 [medium] stub mandate for the browser-extension axis. Closes audit-v7 finding `[D2 HIGH] Archetype GWT Stubs` for this subfolder.
+- §00/§98/§99 patch-bump to absorb §97 minor (banner-only). Per Lesson #36: the AC lives ONLY in the subfolder §97 — parent §97 retains the delegation map (AC-12) and stub-mandate (AC-13) without restating archetype prose.
 
 ## 3.4.1 — 2026-04-28 — Phase P29: P25-pure dual-stream reconciliation (batch)
 

@@ -1,9 +1,9 @@
 # Consistency Report — Go Binary Deploy
 
-**Version:** 3.5.1  
+**Version:** 3.5.2  
 
-> **v3.5.0 update (Phase P29 — P25-pure dual-stream batch reconciliation):** §98 header `1.2.0`→`3.4.1` to align with §00 banner; §00 banner `3.4.0`→`3.4.1`; H10 stamp added; ladder body untouched. Part of Phase P29 batch (8 modules).
-**Generated:** 2026-04-28  
+> **v3.5.2 update (Phase 153 A24-fu43-fu1):** §97 v1.1.0 → v1.2.0 (AC-GB-09 archetype runtime GWT for go-binary axis); §98 v3.4.2 → v3.4.3; §00 banner v3.4.2 → v3.4.3. Closes parent AC-13 stub mandate.
+**Generated:** 2026-05-04  
 **Health Score:** 100/100 (A+) — Phase 21 deepening sweep
 
 ---

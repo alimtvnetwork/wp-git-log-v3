@@ -1,10 +1,15 @@
 # Changelog — Go Binary Deploy — Overview
 
-**Version:** 3.4.2  
-**Updated:** 2026-04-29  
+**Version:** 3.4.3  
+**Updated:** 2026-05-04  
 **Scope:** `spec/12-cicd-pipeline-workflows/02-go-binary-deploy/`
 
 ---
+
+## 3.4.3 — 2026-05-04 — Phase 153 A24-fu43-fu1: AC-GB-09 archetype runtime GWT
+
+- §97 v1.1.0 → **v1.2.0**: added **AC-GB-09** [high] (go-binary cross-compile matrix → release-asset attach) covering 6-target matrix + version embedding + asset naming + SHA dedup + per-asset checksums + install-script attachment + 5 forbidden patterns. Closes parent `spec/12-cicd-pipeline-workflows/97-acceptance-criteria.md` AC-13 [medium] stub mandate for the go-binary axis. Closes audit-v7 finding `[D2 HIGH] Archetype GWT Stubs` for this subfolder.
+- §00/§98/§99 patch-bump to absorb §97 minor (banner-only).
 
 ## 3.4.1 — 2026-04-28 — Phase P29: P25-pure dual-stream reconciliation (batch)
 

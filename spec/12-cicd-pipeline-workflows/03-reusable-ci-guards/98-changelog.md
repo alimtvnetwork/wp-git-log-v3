@@ -1,7 +1,7 @@
 # Changelog — Reusable CI Guards — AI-Implementation Guide
 
-**Version:** 1.0.1  
-**Updated:** 2026-04-29  
+**Version:** 1.0.2  
+**Updated:** 2026-05-04  
 **Scope:** `spec/12-cicd-pipeline-workflows/03-reusable-ci-guards/`
 
 ---
@@ -17,6 +17,10 @@
 
 ## Releases
 
+
+### 1.0.2 — 2026-05-04 — Phase 153 A24-fu43-fu1: AC-CG-09 archetype runtime GWT
+- **Added** §97 v1.1.0 → **v1.2.0**: **AC-CG-09** [high] (forbidden-name guard runtime contract) covering diff-scope, exit-code separation (1=finding, 2=infra), output format, config schema (`forbidden-names.yaml`), language-adapter contract, and baseline regeneration + 4 forbidden patterns. Closes parent `spec/12-cicd-pipeline-workflows/97-acceptance-criteria.md` AC-13 [medium] stub mandate for the reusable-ci-guards axis. Closes audit-v7 finding `[D2 HIGH] Archetype GWT Stubs` for this subfolder.
+- **Lockstep**: §00/§98/§99 patch-bump to absorb §97 minor (banner-only).
 
 ### 1.0.1 — 2026-04-29 — Phase 153 Task #31: §97 boilerplate ACs gained `**Verifies:**` clauses (8/8)
 - **Action**: Phase 153 Task #31 bulk sweep — added `**Verifies:**` lines to all 8 boilerplate ACs (AC-01..AC-08) anchored to §00 baseline / sibling spec / linter scripts. Closes the audit-v6 boilerplate blind spot for this module.
