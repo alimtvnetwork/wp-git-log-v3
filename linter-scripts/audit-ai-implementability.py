@@ -324,6 +324,10 @@ def pack_chunks(mod_dir: Path, max_bytes: int = MAX_BYTES) -> list[dict[str, Any
         }]
 
     chunks: list[dict[str, Any]] = []
+
+    # A18-impl-2 (AC-34-16): intra-T1 splitting when budget<=0 already handled
+    # above as a fallback. The richer case — T1 fits in cap but tier2+tier3
+    # overflow — is the common path below.
     for tier_label, tier_files in (("T2", tier2), ("T3", tier3)):
         cur: list[Path] = []
         cur_size = 0
