@@ -1,7 +1,9 @@
 # Consistency Report — Generic Update
 
-**Version:** 1.6.3  
-**Updated:** 2026-05-01 (Phase 153 Task A24-fu38 — AC-16 wall-clock pin + AC-17 rollback-ownership prose patch)
+**Version:** 1.6.4  
+**Updated:** 2026-05-04 (Phase 153 Task A24-fu44 — AC-21 enumeration extension)
+
+> **v1.6.4 (Phase 153 Task A24-fu44 — AC-21 stale-cache enumeration extension):** Extended AC-21's `Then` clause to enumerate all 3 currently-cached findings as walker-cap artifacts: D5 missing-sub-module-context (files 09–27), D4 truncated `04-build-scripts.md`, **NEW** D3 ambiguous `updater.exe` lifecycle (canonical contract spans `19-updater-binary.md` + `12-code-signing.md` + `06-cleanup.md` + AC-17 — none in tier-1 bundle), **NEW** D1 undefined `latest.json` schema in §00 (canonical schema in `01-self-update-overview.md` + `13-release-assets.md`; §00 line 84 already links — Lesson #36 link-don't-restate). Cache `files_used=13/54 ≈ 24%` saturation explicitly cited. §97 v2.4.1 → **v2.4.2** (patch — prose-only enumeration, no new AC, no AC-31-31 cascade); §00 v2.4.3 → v2.4.4; §98 v2.4.3 → v2.4.4; §99 v1.6.3 → v1.6.4. Per Lesson #75 (walker-cap triage) + Lesson #34 (cache ≠ truth source) + Lesson #71 (no-op threshold met: gap=10 + all findings stale-cache → no contract-tightening warranted; harness-pin extension only).
 
 > **v1.6.3 (Phase 153 Task A24-fu38 — AC-16/AC-17 prose-tightening patch):** Patched AC-16 to pin cleanup-budget 100ms as **wall-clock** time (closes audit-v10 LOW D1 "Missing Unit for Cleanup Latency"). Patched AC-17 with new **Rollback-trigger ownership** normative paragraph declaring rollback is process-local to the updater OR delegated to next-start cleanup per AC-16; NO inter-process signaling permitted (closes audit-v10 MEDIUM D3 "Ambiguous Rollback Trigger in Handoff"). §97 v2.4.0 → **v2.4.1** (patch — prose-only, no new AC, no AC-31-31 cascade); §00 v2.4.2 → v2.4.3; §98 v2.4.2 → v2.4.3; §99 v1.6.2 → v1.6.3. **No CI workflow change · no RUBRIC bump · no gate-count change · no new AC.** **Lesson #71 counter-case**: spec/14 score 90 with axis cap 100 = gap 10 > 3 threshold → contract-tightening JUSTIFIED, not no-op (vs spec/17 fu37 where score 92 + axis cap 95 + d2 mult 0.7 = no-op). LLM re-score deferred per Lesson #20.
 
