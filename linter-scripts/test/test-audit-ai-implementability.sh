@@ -225,6 +225,58 @@ else
   FAIL=$((FAIL+1))
 fi
 
+# 14. AC-34-16 (A18-impl-2): T1-overflow synthetic split — when T1 alone
+# exceeds MAX_BYTES, pack_chunks emits ≥2 chunks (anchor pair + per-file)
+# rather than truncating a single oversized chunk.
+if python3 - <<'PY' >/dev/null 2>&1
+import importlib.util, tempfile, shutil
+from pathlib import Path
+s = importlib.util.spec_from_file_location("aai", "linter-scripts/audit-ai-implementability.py")
+m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
+# Synth: 4 T1 files each 50KB → 200KB total > 140KB cap.
+tmp = Path(tempfile.mkdtemp(prefix="aai-t1-overflow-")) / "00-synth"
+tmp.mkdir(parents=True)
+big = "x" * 50_000
+for n in ("00-overview.md", "97-acceptance-criteria.md", "98-changelog.md", "99-consistency-report.md"):
+    (tmp / n).write_text(big)
+chunks = m.pack_chunks(tmp)
+shutil.rmtree(tmp.parent)
+assert len(chunks) >= 2, f"T1-overflow expected ≥2 chunks, got {len(chunks)}"
+assert all(c["tier"] == "T1" for c in chunks), f"T1-overflow expected all-T1 tiers, got {[c['tier'] for c in chunks]}"
+# Anchor pair (00+97) MUST be present in first chunk.
+first = chunks[0]
+names = [Path(str(f)).name for f in first["files"]]
+assert "00-overview.md" in names and "97-acceptance-criteria.md" in names, \
+    f"first chunk missing anchor pair: {names}"
+PY
+then
+  echo "  PASS — AC-34-16: T1-overflow splits into ≥2 anchor-prefixed chunks"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-16: T1-overflow split broken"
+  FAIL=$((FAIL+1))
+fi
+
+# 15. AC-34-16: per-chunk SHA inventory present in --no-network --json output.
+if python3 "$SCRIPT" --no-network --json --module=04-database-conventions 2>/dev/null \
+  | python3 -c "
+import sys, json
+d = json.load(sys.stdin)
+assert isinstance(d, list) and len(d) == 1
+ch = d[0].get('chunks')
+assert isinstance(ch, list) and len(ch) >= 1, f'chunks missing or empty: {ch!r}'
+for c in ch:
+    assert 'tier' in c and 'bundle_sha_chunk' in c and 'files' in c and 'bytes_used' in c, \
+        f'chunk missing keys: {c!r}'
+    assert len(c['bundle_sha_chunk']) == 16, f'sha length: {c[\"bundle_sha_chunk\"]!r}'
+"; then
+  echo "  PASS — AC-34-16: per-chunk SHA inventory in --json output"
+  PASS=$((PASS+1))
+else
+  echo "  FAIL — AC-34-16: per-chunk SHA inventory missing"
+  FAIL=$((FAIL+1))
+fi
+
 echo
 echo "Result: $PASS passed, $FAIL failed"
 [ "$FAIL" = "0" ]
