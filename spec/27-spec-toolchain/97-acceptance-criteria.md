@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.12.0
-**Updated:** 2026-05-03 (Task S27-01: AC-T-34 codified — pins audit-v6 HIGH/D4 "AC-11-05 mid-sentence truncation" as walker-cap artifact NOT contract gap; canonical `(wc -l, tail -10, grep)` evidence triple per Lesson #11/#16/#29 truncation-axis application.)
+**Version:** 2.13.0
+**Updated:** 2026-05-04 (Phase 153 Task A18-impl-1: slot 34 §00 v1.5.0 → v1.6.0 codifies AC-34-15 chunked re-scoring contract — `pack_chunks()` + `merge_chunk_scores()` helpers + `--chunked` / `--chunk-stats` CLI flags + parity-on-≤MAX_BYTES guarantee + T1 re-anchor invariant. Self-test 9 → 14 assertions. Default behaviour unchanged; chunking opt-in.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
