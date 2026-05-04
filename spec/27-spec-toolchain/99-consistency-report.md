@@ -1,6 +1,6 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.86.0
+**Version:** 2.86.1
 **Updated:** 2026-05-04
 
 ---
