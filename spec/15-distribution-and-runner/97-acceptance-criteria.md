@@ -1,7 +1,7 @@
 # Acceptance Criteria — Distribution and Runner
 
-**Version:** 2.0.0  
-**Updated:** 2026-04-26 (Phase 16d-i: Deepened from 5 generic scaffold ACs to **20 module-specific GWT ACs** covering installer contract, runner sub-command surface, release pipeline, install-config schema, default install layout, and back-compat preservation. AC-01..AC-05 retained as scaffold floor; AC-06..AC-20 added.)  
+**Version:** 2.1.0  
+**Updated:** 2026-05-04 (Phase 153 A24-fu44: AC-21 [medium] installer fetch timeout/retry contract closes audit-v7 D3 MEDIUM "Missing timeout/retry logic for installers"; AC-22 [low] Bun-vs-pnpm toolchain disambiguation closes audit-v7 D1 MEDIUM "Ambiguous 'slides' build toolchain". AC count 20 → 22.)  
 **Scope:** `spec/15-distribution-and-runner/`
 
 ---
@@ -135,6 +135,24 @@ This document defines testable acceptance criteria for the **Distribution and Ru
 - **When** each is opened
 - **Then** each MUST have a top-level H1, a `**Version:**` banner, and an `**Updated:**` date per the universal §01 spec-authoring-guide template; AND each file's content MUST elaborate (not contradict) the §00 overview's high-level claims — specifically: `01-install-contract.md` defines the install layout AC-07/AC-09/AC-15 reference; `02-runner-contract.md` defines the sub-command dispatch AC-10/AC-11/AC-17 reference; `03-release-pipeline.md` defines the CI workflow AC-12/AC-13/AC-14/AC-16 reference; `04-install-config.md` defines the schema AC-08 references; AND when AC-06..AC-19 cite a normative behavior, the citing AC's `**Verifies:**` line MUST point to BOTH §00 AND the relevant sibling file — single-source citation (only §00 OR only the sibling) is incomplete; AND any contradiction between §00 and a sibling MUST be resolved in favor of §00 (the overview is the canonical summary; sibling files are elaborations) and a §99 audit row MUST record the resolution.
 - **Verifies:** §01 install-contract, §02 runner-contract, §03 release-pipeline, §04 install-config, §00 §"Reading order".
+
+### AC-21 — Installer fetch timeout, retry, and resume contract  `[medium]`
+- **Given** AC-06 mandates a 60-second download SLO over a 100Mbps connection for the installer one-liner (Bash + PowerShell parity), and the underlying transports are `curl` (POSIX) + `Invoke-WebRequest` / `Start-BitsTransfer` (PowerShell),
+- **When** the installer one-liner runs against a release artifact host that may experience transient network failures (TLS handshake stall, intermittent 5xx, partial-content disconnects),
+- **Then** ALL of the following invariants MUST hold:
+  1. **Bash transport flags** — the `curl` invocation MUST include `--connect-timeout 10 --max-time 60 --retry 3 --retry-delay 2 --retry-connrefused --fail --location --show-error --silent` (or the long-form equivalents); the maximum 60s wall-clock applies per attempt, not cumulatively (3 retries × 60s = 180s ceiling on hostile network).
+  2. **PowerShell transport flags** — the `Invoke-WebRequest` invocation MUST set `-TimeoutSec 60 -MaximumRetryCount 3 -RetryIntervalSec 2 -UseBasicParsing -ErrorAction Stop`; PowerShell 5.1 environments without native retry MUST wrap in a `try/catch` loop matching the same 3-attempt + 2-second-backoff contract.
+  3. **Failure exit codes** — on terminal failure (3 attempts exhausted), the installer MUST exit with a documented non-zero code (`1` = network failure; `2` = checksum mismatch per AC-13; `3` = unsupported OS/arch). Generic exit `1` for all errors is FORBIDDEN.
+  4. **Forbidden patterns** — `curl <url> | bash` without explicit `--fail --max-time` is a release-blocker (silent partial-download corruption); `Invoke-WebRequest` without `-ErrorAction Stop` is a release-blocker (silently continues on 4xx); `set -e` alone in Bash is INSUFFICIENT (does not catch piped curl failures unless `set -o pipefail` is also set).
+- **Source:** `01-install-contract.md` §Installer one-liner; AC-06 SLO clause.
+- **Verifies:** AC-06 (60s SLO is per-attempt, not cumulative); `01-install-contract.md` §Installer one-liner. Closes audit-v7 cache `15-distribution-and-runner.json` finding `[D3 MEDIUM] Missing timeout/retry logic for installers`.
+
+### AC-22 — `slides` build toolchain pin: Bun primary, no pnpm fallback  `[low]`
+- **Given** §00 overview mandates `bun install && bun run build` for the `slides` sub-command (AC-17 browser-open contract) and `02-runner-contract.md` previously contained a "verify bun, fall back to pnpm" branch,
+- **When** the `slides` sub-command runs in any supported environment (downstream installer, CI, dev workstation),
+- **Then** Bun MUST be the SOLE supported toolchain for the slides build pipeline; the `02-runner-contract.md` MUST NOT specify a pnpm fallback path. If `bun` is not on `$PATH`, the runner MUST fail-fast with exit `4` ("missing toolchain — install bun.sh") and link to <https://bun.sh/docs/installation>; silently falling back to pnpm is FORBIDDEN because pnpm produces a different lockfile + different `node_modules` resolution + different runtime semantics for `bun:*` imports — non-deterministic across environments.
+- **Source:** §00 overview §`slides` sub-command; AC-17 browser-open contract; `02-runner-contract.md` §Toolchain detection.
+- **Verifies:** `02-runner-contract.md` §Toolchain detection (single-source pin); §00 overview Bun mandate. Closes audit-v7 cache `15-distribution-and-runner.json` finding `[D1 MEDIUM] Ambiguous 'slides' build toolchain` per Lesson #36 (link-don't-restate — `02-runner-contract.md` is the canonical surface; this AC pins the contract to it).
 
 ---
 
