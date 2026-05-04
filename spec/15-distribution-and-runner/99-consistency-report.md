@@ -1,7 +1,9 @@
 # Consistency Report — Distribution and Runner
 
-**Version:** 2.1.2  
-**Updated:** 2026-04-29
+**Version:** 2.1.3  
+**Updated:** 2026-05-04
+
+> **v2.1.3 update (Phase 153 A24-fu44):** §97 v2.0.0 → v2.1.0 (AC-21 installer timeout/retry + AC-22 Bun toolchain pin); `02-runner-contract.md` v1.0.0 → v1.1.0 (pnpm fallback removed per AC-22); §00 v2.2.0 → v2.3.0; §98 v2.2.0 → v2.3.0. Closes 2 audit-v7 MEDIUM findings.
 
 ---
 

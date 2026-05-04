@@ -1,7 +1,7 @@
 # Changelog — Distribution and Runner
 
-**Version:** 2.2.0  
-**Updated:** 2026-04-29  
+**Version:** 2.3.0  
+**Updated:** 2026-05-04  
 **Scope:** `spec/15-distribution-and-runner/`
 
 ---
@@ -16,6 +16,11 @@
 ---
 
 ## Releases
+
+### 2.3.0 — 2026-05-04 — Phase 153 A24-fu44: 2 new ACs close audit-v7 MEDIUM findings
+- **Added** §97 v2.0.0 → **v2.1.0**: **AC-21** [medium] (installer fetch timeout/retry contract — closes `[D3 MEDIUM] Missing timeout/retry logic for installers`); **AC-22** [low] (Bun-vs-pnpm toolchain pin — closes `[D1 MEDIUM] Ambiguous 'slides' build toolchain`). AC count 20 → 22.
+- **Changed** `02-runner-contract.md` v1.0.0 → **v1.1.0**: line 42 step 4 — pnpm fallback removed per AC-22 (Bun is sole supported toolchain for slides build; missing-toolchain → exit 4 with bun.sh install link). Single-source pin per Lesson #36; AC-22 cites this file as canonical surface.
+- **Lockstep**: §00 v2.2.0 → **v2.3.0**; §99 v2.1.2 → **v2.1.3**. No CI/RUBRIC/gate-count change.
 
 ### 2.2.0 — 2026-04-29 (Phase 153 A11d — `--branch` CLI flag removed; reproducibility hardened)
 - **Removed** `--branch <name>` / `-Branch <name>` CLI flag from `01-install-contract.md` § "Versioning" — branch heads move, defeating the **reproducible install** contract codified in §97 AC-18. Replaced with `--ref <tag-or-sha>` row that explicitly cites AC-18's no-branch rule and the exit-`2` enforcement.
