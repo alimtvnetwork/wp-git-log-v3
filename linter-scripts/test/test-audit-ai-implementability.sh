@@ -233,8 +233,8 @@ import importlib.util, shutil
 from pathlib import Path
 s = importlib.util.spec_from_file_location("aai", "linter-scripts/audit-ai-implementability.py")
 m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
-# Synth fixture under spec/ so file.relative_to(ROOT) works.
-tmp = Path("spec/00-aai-t1-overflow-fixture")
+# Synth fixture under spec/ so file.relative_to(ROOT) works (absolute path).
+tmp = m.SPEC / "00-aai-t1-overflow-fixture"
 if tmp.exists(): shutil.rmtree(tmp)
 tmp.mkdir(parents=True)
 try:
