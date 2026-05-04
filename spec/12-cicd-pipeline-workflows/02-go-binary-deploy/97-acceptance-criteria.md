@@ -1,7 +1,7 @@
 # Acceptance Criteria — Go Binary Deploy — Overview
 
-**Version:** 1.1.0  
-**Updated:** 2026-04-29  
+**Version:** 1.2.0  
+**Updated:** 2026-05-04 (Phase 153 A24-fu43-fu1: AC-GB-09 archetype runtime GWT — closes parent AC-13 stub mandate for go-binary subfolder.)  
 **Scope:** `spec/12-cicd-pipeline-workflows/02-go-binary-deploy/`
 
 ---
@@ -103,3 +103,27 @@ This executes: validator → self-heal → regen index → tree-health gate. All
 - [Module overview](./00-overview.md)
 - [Module consistency report](./99-consistency-report.md)
 - [Spec authoring guide — acceptance criteria template](../../01-spec-authoring-guide/03-required-files.md)
+
+---
+
+## Archetype-Specific Runtime Criteria (Phase 153 A24-fu43-fu1)
+
+### AC-GB-09: Go-binary cross-compile matrix → release-asset attach `[high]`
+- **Given** a downstream Go-binary repo following this module's pipeline contract — `go.mod` at root, `main.go` with `var Version string` for ldflags injection, and a release pipeline declared in `02-release-pipeline.md` triggered by `v*` tag,
+- **When** the release pipeline executes against a `v*` tag,
+- **Then** ALL of the following invariants MUST hold:
+  1. **6-target matrix** — the build-matrix MUST produce exactly 6 binaries: `{linux,darwin,windows} × {amd64,arm64}`. Missing any combination is a release-blocker. The Go toolchain MUST be invoked with `CGO_ENABLED=0` (static linking; no glibc dependency).
+  2. **Version embedding** — every binary MUST be built with `go build -ldflags "-X <module>/version.Version=${GITHUB_REF_NAME#v} -s -w"` (the `<module>` placeholder resolves per parent AC-14). `-s -w` strips debug symbols + DWARF (smaller binaries; not a release-blocker but mandatory by convention).
+  3. **Asset naming + compression** — each release asset MUST follow the shape `<binary-name>-v<semver>-<os>-<arch>.{zip,tar.gz}`: `.zip` for `windows-*`, `.tar.gz` for `linux-*` and `darwin-*`. The archive MUST contain exactly one binary at its root (no nested directories).
+  4. **SHA-based dedup gate** — the CI pipeline (NOT the release pipeline) MUST short-circuit at the `sha-check` job if the current commit SHA already has a passing CI run cached; the gate's lookup key MUST be the full commit SHA, not a prefix or branch name (Lesson #36: the dedup logic lives in `01-ci-pipeline.md` §SHA passthrough — this AC verifies the gate exists, not its implementation).
+  5. **Per-asset SHA256 checksums** — the release MUST attach a `checksums.txt` file in the format `<sha256-hex>  <asset-filename>` (two spaces between hash and name; matches `sha256sum -c` format). One line per binary archive (6 lines minimum). The checksums file itself MUST NOT be hashed in its own body.
+  6. **Install scripts attached** — the release MUST attach `install.sh` (POSIX) and `install.ps1` (PowerShell) generated per parent `04-install-script-generation.md`; their contents MUST reference the release's own checksums.txt for verification (no hard-coded SHAs).
+- **Source:** `02-release-pipeline.md` §Build matrix + §Compression + §Release; `01-ci-pipeline.md` §SHA dedup; parent `../04-install-script-generation.md` (script shape) + `../05-code-signing.md` (signing extends but does not override this contract).
+- **Verifies:** parent `spec/12-cicd-pipeline-workflows/97-acceptance-criteria.md` AC-13 [medium] (per-archetype GWT stub mandate) for the go-binary axis. Closes audit-v7 finding `[D2 HIGH] Archetype GWT Stubs` for this subfolder.
+
+**Forbidden patterns** (release-blockers — CI MUST fail-fast):
+- Build matrix producing fewer than 6 binaries (any missing OS/arch combo).
+- `CGO_ENABLED=1` (dynamic glibc dependency makes Linux binaries non-portable).
+- Asset archive containing nested directories or more than one binary at root.
+- `checksums.txt` missing entries for any released binary, or using single-space separator (breaks `sha256sum -c`).
+- Install script with hard-coded SHA literals (must read from `checksums.txt` at runtime).

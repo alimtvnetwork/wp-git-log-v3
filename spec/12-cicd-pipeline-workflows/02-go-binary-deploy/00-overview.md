@@ -5,10 +5,10 @@ description: Forward-looking CI/CD pipeline architecture for cross-compiled Go b
 
 # Go Binary Deploy — Overview
 
-**Version:** 3.4.2  
+**Version:** 3.4.3  
 <!-- h10-verified-phase: 153 -->
 **Status:** Active (future-spec — workflows + Go source live in downstream binary repos)  
-**Updated:** 2026-04-28
+**Updated:** 2026-05-04
 
 ---
 
