@@ -1,9 +1,9 @@
 # Consistency Report — Reusable CI Guards
 
-**Version:** 1.0.1  
-**Updated:** 2026-04-29  
+**Version:** 1.0.2  
+**Updated:** 2026-05-04  
 
-> **v1.0.1 update (Phase 153 Task #31):** §97 boilerplate ACs (AC-01..AC-08) gained `**Verifies:**` clauses (8 added). Bulk sweep closes the audit-v6 boilerplate blind spot tree-wide. §97 v1.0.0→**v1.1.0**; §98 v1.0.0→**v1.0.1**.
+> **v1.0.2 update (Phase 153 A24-fu43-fu1):** §97 v1.1.0 → v1.2.0 (AC-CG-09 archetype runtime GWT for reusable-ci-guards axis); §98 v1.0.1 → v1.0.2; §00 banner v1.0.1 → v1.0.2. Closes parent AC-13 stub mandate. Tree-wide A24-fu43-fu1 closes 3/3 subfolders (browser-extension, go-binary, reusable-ci-guards).
 
 **Status:** Active
 
