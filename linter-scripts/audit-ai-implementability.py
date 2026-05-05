@@ -524,8 +524,8 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     # the module is actually multi-chunk. Single-chunk FULL modules MUST
     # produce the same hash regardless of flag — that is the parity contract,
     # so we hash exactly the same payload as the pre-A18-impl-3 code path.
-    chunks_preview = pack_chunks(mod)
-    multi_chunk_preview = len(chunks_preview) > 1
+    chunks = pack_chunks(mod)
+    multi_chunk_preview = len(chunks) > 1
     if multi_chunk_preview:
         chunked_tag = "chunked=1" if use_chunked else "chunked=0"
         bundle_sha = hashlib.sha256(f"axis={axis}\n{chunked_tag}\n{bundle}".encode()).hexdigest()[:16]
@@ -537,7 +537,6 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     # need re-scoring on the next gateway pass. The composite `bundle_sha`
     # remains the load_module_bundle-derived single-pass key for backward
     # compatibility with the parity contract from AC-34-15.
-    chunks = pack_chunks(mod)
     chunk_inventory = []
     for c in chunks:
         c_sha = hashlib.sha256(f"axis={axis}\n{c['bundle']}".encode()).hexdigest()[:16]
