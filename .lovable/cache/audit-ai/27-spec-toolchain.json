@@ -1,37 +1,433 @@
 {
   "d1": 18,
   "d2": 19,
-  "d3": 17,
-  "d4": 15,
-  "d5": 14,
+  "d3": 15,
+  "d4": 14,
+  "d5": 17,
   "issues": [
-    {
-      "severity": "CRITICAL",
-      "dim": "D5",
-      "title": "Dangling External References (Truncation)",
-      "why": "The module delegates all per-script logic to 50+ external files (01-*.md, etc.) which are truncated by the context cap. A mediocre AI cannot implement the actual tool logic (e.g., the specific regex for cross-links or the logic for tree-health) without these files.",
-      "fix": "The spec acknowledges this via 'Walker-Pin' and 'Slot Delegation Map' to provide high-level context, but for 100% implementation confidence, the specific script specs must be provided or the logic inlined."
-    },
     {
       "severity": "HIGH",
       "dim": "D4",
-      "title": "Truncated Acceptance Criteria (AC-11-05)",
-      "why": "The file 11-generate-dashboard-data.md ends mid-sentence in AC-11-05 due to the 136KB cap, leaving the 'Verifies' clause and final logic for inline-code blanking undefined.",
-      "fix": "Move detailed implementation logic for generators into their specific slot files and keep the overview/AC files leaner to stay under the 120KB-140KB walker budget."
+      "title": "Truncated Implementation Details",
+      "why": "The module overview and several script specs (04-09, etc.) are cut off mid-sentence due to the 136KB cap, leaving the AI without the full usage or logic for those specific artifacts.",
+      "fix": "The AI should rely on the 'Slot Delegation Map' in \u00a797 and the 'Walker-Pin' in \u00a700 to prioritize the core contract over the truncated prose."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Concurrency/Locking Implementation Ambiguity",
-      "why": "While R2 provides code snippets, it doesn't explicitly state if *all* scripts must use this for *all* file reads, or only for the specific 'generated artifacts' listed in AC-T-32.",
-      "fix": "Clarify in AC-T-28 that R2 applies to any file read that is subject to concurrent writes by other toolchain members."
+      "title": "Speculative R2 Implementation",
+      "why": "While normative snippets for R2 (file-locking) are provided, the 'R2 Read-Target Ledger' is partially truncated, meaning a mediocre coder might miss which specific files require the retry logic.",
+      "fix": "Explicitly list all RT-01 through RT-05 targets within the first 100KB of the overview or \u00a797."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D5",
+      "title": "External Script Logic Dependency",
+      "why": "The module delegates logic to 50+ external files. While AC-T-30/31 provide a map and prefix index, the actual GWT for individual scripts (like 04-09) is missing from the provided context.",
+      "fix": "Ensure the 'Slot Delegation Map' includes a brief one-line functional summary for each script to guide implementation when sub-files are missing."
     }
   ],
   "module": "27-spec-toolchain",
-  "files_used": 15,
+  "files_used": 8,
   "files_total": 57,
   "bytes_used": 140000,
-  "bundle_sha": "dc47f8a56d241d7b",
+  "bundle_sha": "32d63df09b6a63a0",
+  "chunks": [
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "22884276ef5976a6",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/01-check-spec-cross-links.md",
+        "spec/27-spec-toolchain/02-check-spec-folder-refs.md"
+      ],
+      "bytes_used": 137322
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "9ff85eff81e3a7af",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/03-check-forbidden-strings.md",
+        "spec/27-spec-toolchain/04-check-forbidden-spec-paths.md",
+        "spec/27-spec-toolchain/05-check-tree-health.md"
+      ],
+      "bytes_used": 136871
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "69e26b6af8c6dc82",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/06-check-root-readme.md",
+        "spec/27-spec-toolchain/07-check-readme-canonicals.md",
+        "spec/27-spec-toolchain/08-check-readme-install-section.md",
+        "spec/27-spec-toolchain/09-check-memory-mirror-drift.md",
+        "spec/27-spec-toolchain/10-generate-spec-index.md"
+      ],
+      "bytes_used": 137871
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "3b9b107af7227d0f",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/11-generate-dashboard-data.md"
+      ],
+      "bytes_used": 137611
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "a9bd7462c39ed05d",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/12-suggest-spec-cross-link-fixes.md",
+        "spec/27-spec-toolchain/13-generate-gwt-acceptance.md",
+        "spec/27-spec-toolchain/14-generate-trace-map.md"
+      ],
+      "bytes_used": 137560
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "57100748a5580e6f",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/15-generate-fix-checklist.md"
+      ],
+      "bytes_used": 134141
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "73f53d0d5070b376",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/16-generate-gate-report.md"
+      ],
+      "bytes_used": 132826
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "fce049c0eac34fa3",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/17-check-trace-map-regression.md",
+        "spec/27-spec-toolchain/18-check-mermaid-syntax.md"
+      ],
+      "bytes_used": 136660
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "01bccd7fe41b2fdf",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/19-check-memo-retrospective-headings.md",
+        "spec/27-spec-toolchain/_archive/00-ci-workflow-yaml-pre-A24-fu36.md",
+        "spec/27-spec-toolchain/_archive/00-resilience-r1-r5-pre-A24-fu36.md"
+      ],
+      "bytes_used": 132736
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "4bcced12a9291ac4",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/20-fill-missing-acceptance-criteria.md",
+        "spec/27-spec-toolchain/21-fill-missing-changelogs.md",
+        "spec/27-spec-toolchain/22-fill-missing-consistency-reports.md"
+      ],
+      "bytes_used": 135192
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "c8abaab8ed165833",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/23-scaffold-spec-module.md"
+      ],
+      "bytes_used": 134079
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "694aa96bf8a09e02",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/24-check-lockstep.md",
+        "spec/27-spec-toolchain/25-deepen-consistency-reports.md"
+      ],
+      "bytes_used": 137654
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "d7796d1a4982a165",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/26-check-99-summary-freshness.md"
+      ],
+      "bytes_used": 141114
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "674265ac8116a995",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/27-check-99-stamp-bump.md"
+      ],
+      "bytes_used": 135422
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "247403541a90ef02",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/28-check-archive-exclusion-runtime.md"
+      ],
+      "bytes_used": 135641
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "b8bfc0e5ed05be78",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/29-check-version-parity.md"
+      ],
+      "bytes_used": 149555
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "ba7f6d39a7fab970",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/30-audit-spec-vs-code.md"
+      ],
+      "bytes_used": 130927
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "d85b017d49fd5c27",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/31-audit-spec-vs-code-v2.md"
+      ],
+      "bytes_used": 184919
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "3715764582454579",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/32-check-truncated-prose.md"
+      ],
+      "bytes_used": 132763
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "1e159409cdabb150",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/33-check-ai-confidence.md"
+      ],
+      "bytes_used": 143625
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "7994b42e79153966",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/34-audit-ai-implementability.md"
+      ],
+      "bytes_used": 153329
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "203f1604c200b7eb",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/35-audit-bundle-budget.md",
+        "spec/27-spec-toolchain/40-run-sh.md",
+        "spec/27-spec-toolchain/41-run-ps1.md"
+      ],
+      "bytes_used": 137447
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "605afe88f7e15e4f",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/50-validate-guidelines-py.md",
+        "spec/27-spec-toolchain/51-validate-guidelines-go.md",
+        "spec/27-spec-toolchain/52-check-axios-version.md",
+        "spec/27-spec-toolchain/60-forbidden-strings-toml.md"
+      ],
+      "bytes_used": 136919
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "02a6841a459ef8fc",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/61-spec-cross-links-allowlist.md"
+      ],
+      "bytes_used": 134787
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "0dbe5f2e9872c611",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/62-spec-folder-refs-allowlist.md",
+        "spec/27-spec-toolchain/63-readme-cross-links-md.md"
+      ],
+      "bytes_used": 137736
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "5f63a6fbbff6847b",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/70-spec-health-yml.md",
+        "spec/27-spec-toolchain/71-spec-monthly-audit-yml.md"
+      ],
+      "bytes_used": 137171
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "8a1ce5e3a17a3b86",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/_archive/98-changelog-pre-v2.72.0.md"
+      ],
+      "bytes_used": 329369
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "37b8e051ae85e3fe",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/_archive/98-changelog-v2.73.0-to-v2.77.0.md"
+      ],
+      "bytes_used": 142392
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "0649df20496863d1",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/_archive/98-changelog-v2.77.1-to-v2.81.1.md"
+      ],
+      "bytes_used": 158467
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "db03960efe3ddbe5",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/_archive/99-validation-history-pre-v2.83.0.md"
+      ],
+      "bytes_used": 260434
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "59b93f1f9221e9d5",
+      "files": [
+        "spec/27-spec-toolchain/00-overview.md",
+        "spec/27-spec-toolchain/97-acceptance-criteria.md",
+        "spec/27-spec-toolchain/98-changelog.md",
+        "spec/27-spec-toolchain/99-consistency-report.md",
+        "spec/27-spec-toolchain/trace-map.md"
+      ],
+      "bytes_used": 180359
+    }
+  ],
   "total_v6": 83,
   "axis": "tooling-spec",
   "axis_multipliers": {
@@ -42,7 +438,7 @@
     "d5": 0.8182
   },
   "axis_cap": 100,
-  "weighted_total": 83.5,
+  "weighted_total": 82.9,
   "total_v7": 83,
   "total": 83,
   "band": "GOOD",
