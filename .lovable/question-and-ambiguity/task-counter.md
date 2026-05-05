@@ -72,7 +72,7 @@ Counter ≥ 40 → file marked `Status: ✅ completed`,
 
 **Budget:** 40 tasks
 **Activated:** 2026-05-05
-**Counter:** 4 / 40
+**Counter:** 5 / 40
 **Status:** 🟢 active
 
 Increment rule (carried from Prompt 01 + Lesson "increment on same tool turn"):
@@ -86,3 +86,4 @@ counter on the SAME closing tool turn that ships the work; do not defer.
 | 2 | 2026-05-05 | P2 dimension forensics — 8/8 sub-90 modules LIFTABLE (not capped); P3-P8 plan | phase-153-task-P2-dimension-forensics.md |
 | 3 | 2026-05-05 | P3 spec/17 self-lift — NO-OP (A24-fu18 already shipped AC-10..15; gateway 402 confirmed) | phase-153-task-P3-spec17-noop.md |
 | 4 | 2026-05-05 | P4 spec/18 NO-OP + Gap B misdiagnosis resolved (Lesson #82); ALL 8 sub-90 modules confirmed cache-stale-only | phase-153-task-P4-gapB-noop-resolution.md |
+| 5 | 2026-05-05 | N2 codified Lesson #79 (§97-grep complement to cache-grep #75) in phase-153-lessons memo | mem://process/phase-153-lessons (line 36–37, 213) |
