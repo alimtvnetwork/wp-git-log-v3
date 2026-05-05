@@ -661,8 +661,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--json", action="store_true", help="Emit machine-readable JSON to stdout")
     ap.add_argument("--report-only", action="store_true", help="Always exit 0 (advisory mode)")
     ap.add_argument("--strict", action="store_true", help="Exit 1 if any module scores BLOCKING (<60)")
-    ap.add_argument("--chunked", action="store_true",
-                    help="A18-impl-1: enable chunked re-scoring for >MAX_BYTES modules (AC-34-15). Off by default; ≤MAX_BYTES modules are byte-identical to non-chunked output.")
+    ap.add_argument("--chunked", dest="chunked", action="store_true", default=True,
+                    help="A18-impl-3 (AC-34-17): chunked re-scoring is DEFAULT-ON. ≤MAX_BYTES modules take the byte-identical FULL-tier parity path (AC-34-15 §(b)); >MAX_BYTES modules score per-chunk via the gateway and merge with TIER_WEIGHTS. This flag is retained as a no-op for backward CLI compatibility — use --no-chunked to opt out.")
+    ap.add_argument("--no-chunked", dest="chunked", action="store_false",
+                    help="A18-impl-3 rollback: force single-pass legacy bundle (truncate at MAX_BYTES). Use only for parity-verification or emergency rollback; loses contract surface on >MAX_BYTES modules per Lesson #11/#16.")
     ap.add_argument("--chunk-stats", action="store_true",
                     help="A18-impl-1: print per-module chunk count + tier breakdown to stdout (no network).")
     ap.add_argument("--report", type=Path, default=DEFAULT_REPORT, help="Markdown report output path")
