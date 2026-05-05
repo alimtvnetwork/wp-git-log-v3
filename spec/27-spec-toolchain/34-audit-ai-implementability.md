@@ -1,7 +1,7 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.7.0  
-**Updated:** 2026-05-04 (Phase 153 Task A18-impl-2: AC-34-16 codifies (a) intra-T1 splitting when T1 alone exceeds MAX_BYTES — anchor pair `00+97` always together, `98`/`99` get anchor-prefixed chunks when budget allows, solo otherwise; closes the spec/27-class data-loss path where T1=455KB previously truncated to first 140KB; (b) per-chunk SHA inventory in cache schema (`chunks: [{tier, bundle_sha_chunk, files, bytes_used}]`) enabling partial cache invalidation when one tier-file moves. Composite `bundle_sha` retained for backward parity. Self-test 14 → 16 assertions. Phase 153 Task A18-impl-1: AC-34-15 codifies chunked re-scoring contract.)  
+**Version:** 1.8.0  
+**Updated:** 2026-05-05 (Phase 153 Task A18-impl-3: AC-34-17 promotes `--chunked` to default-on for all >MAX_BYTES modules — `audit_module()` now routes multi-chunk modules through the gateway-per-chunk path with `merge_chunk_scores()` weighted-merge per AC-34-15(d); single-chunk FULL-tier modules retain byte-identical bundle_sha (parity invariant from AC-34-15(b) preserved verbatim — confirmed via spec/16 cross-flag hash equality test). New `--no-chunked` rollback flag. AC-34-15(e) "promotion to default" milestone closed. Live re-score deltas: spec/27 83 → 88 (+5, contract surface previously truncated now visible); spec/12 87 → 84 (–3, honest-baseline correction per Lesson #18 — chunked path now scores against ALL 49 files instead of first ~140KB only).)  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
 **Category:** Auditor (LLM-driven, deep-walk)
