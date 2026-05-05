@@ -1,37 +1,16 @@
 {
   "d1": 18,
-  "d2": 19,
-  "d3": 17,
-  "d4": 18,
-  "d5": 15,
-  "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Context Truncation at 136KB",
-      "why": "The Go Binary Release Pipeline (02-release-pipeline.md) is cut off mid-sentence, losing critical instructions for multi-module builds and packaging.",
-      "fix": "Split the module into smaller chunks or increase the walker-cap to ensure the Go release logic is fully visible."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D5",
-      "title": "Unresolved External Linter Scripts",
-      "why": "AC-11 references scripts in spec/27-spec-toolchain which are not provided in the current context, preventing verification of linter behavior.",
-      "fix": "Include the relevant sections of spec/27 or provide the script CLI signatures in the Shared Conventions file."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D3",
-      "title": "Missing Concurrency Edge Case for Browser Deploy",
-      "why": "01-browser-extension-deploy/02-release-pipeline.md sets cancel-in-progress to false but doesn't address race conditions for manual store uploads.",
-      "fix": "Add a step to check for existing store versions before attempting the upload/publish curl command."
-    }
-  ],
+  "d2": 17,
+  "d3": 16,
+  "d4": 17,
+  "d5": 16,
+  "issues": [],
+  "findings": [],
   "module": "12-cicd-pipeline-workflows",
   "files_used": 16,
   "files_total": 49,
   "bytes_used": 140000,
-  "bundle_sha": "c0cf07a258c6a361",
+  "bundle_sha": "72fc856e20140f7f",
   "chunks": [
     {
       "tier": "T2",
@@ -122,7 +101,8 @@
       "bytes_used": 68923
     }
   ],
-  "total_v6": 87,
+  "chunked_path": true,
+  "total_v6": 84,
   "axis": "integration-spec",
   "axis_multipliers": {
     "d1": 0.9259,
@@ -132,9 +112,9 @@
     "d5": 1.1111
   },
   "axis_cap": 95,
-  "weighted_total": 86.7,
-  "total_v7": 87,
-  "total": 87,
+  "weighted_total": 84.0,
+  "total_v7": 84,
+  "total": 84,
   "band": "GOOD",
   "rubric": "v7"
 }
