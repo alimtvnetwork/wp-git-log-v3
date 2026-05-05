@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.13.1  
+**Version:** 3.13.2  
 **Updated:** 2026-05-03 (Phase 153 Task S22-01 — §97 AC-78 widened per Lesson #39)
 
 > **v3.11.0 update (Phase 153 Task A24-fu20 — AC-78 §00 walker-pin promotion):** Pure walker-visibility patch on the audit-v9 83-floor (walker 3/36 — textbook walker-saturation). Audit-v9 surfaced 3 findings (HIGH/D5 "Missing Core Normative Files", MEDIUM/D4 "Abstract Examples", LOW/D3 "Concurrency Externalized") — ALL diagnosed as cache-staleness artifacts of pre-existing AC-78 contract pin (Lesson #34). AC-78 was authored at A11h (v3.10.0) but lives at §97 line 503+ of 507 — past every walker tier-1 cap. Promoted into a `> 🤖 Walker-Pin (Lesson #55 + Lesson #61)` 3-row teaser table at the §00 head listing AC-78 + AC-22-LV1 + AC-26 cross-ref + 3 forbidden remediation patterns. Walker now sees ALL 3 structural anchors in the first ~2 KB. Banners: §00 v3.10.0 → **v3.11.0**; §98 v3.10.0 → **v3.11.0**; this file v3.10.0 → **v3.11.0**. §97 NOT bumped (no AC change). h10 stamp refreshed 32 → 153. **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no new AC.** All 3 strict gates expected GREEN. **Lesson #61 second-instance confirmation**: spec/22 is the **pure-promotion variant** of A24-fu19's spec/04 codifying instance — lightest-touch close-out for any module where the auditor keeps re-flagging findings already classified by a §97-buried structural-pin AC.
@@ -106,6 +106,10 @@ Resolved by parallel-folder strategy; v2 wins. **Deprecation banners (v2.7.1, 20
 
 **Phase A24-fu39 scope discipline:** No §22 ACs added/removed (AC count unchanged at 79); no §22 DDL change, no §22 schema bump, no §22 error code, no §22 enum change, no §22 §00 body change beyond banner; no §97 edit. Pure structural surgery — mirror of A24-fu29 (§98 archive split) applied to §99. Spec/22 tier1 walker bundle: §97 (71 KB) + §98 (37 KB) + §99 (58 KB → 12 KB) + §00 (13 KB) = 179 KB → ~133 KB (-26%). Combined with fu29's §98 split, total tier1 reduction since fu20 baseline (239 KB) is now ~106 KB (-44%). Expected cache lift on next re-score: 90 → 92+ (walker `files_used: 3/37 → 6+/37` likely; previously starved spec sub-files (15-error-codes, 14-endpoint-examples, 18-schema.sql) should now fit in budget). Archive folder `_archive/` is invisible to all 5 strict gates.
 
+
+## v3.13.2 Audit — Phase 153 Task N3 (false-coverage inverse audit · AC-36 deprecated)
+
+Tree-wide false-coverage inverse audit scanned 1241 ACs / 1128 verifies-clauses across 91 §97 files (3 refinement loops: 142 → 13 → 3 candidates → 1 real drift). Only **AC-36** in this module surfaced as a true drift: it cited `**Verifies:** §21` (Translatable scope), but §21 was retired in §98 v3.7.8 with rationale "i18n out of scope for v2" (see §00 inventory row 21). Resolution: AC-36 marked `[active]` → `[deprecated]` with new dormancy contract (§00 inventory row 21 + §98 v3.7.8 retirement entry as authoritative anchors). The §97 AC-count remains **76 total** (AC-36 still listed, just dormant — `[deprecated]` ACs are retained for cross-version diff per the §97 status-legend contract). **Tree-wide false-coverage rate: 1 / 1241 = 0.08%** — confirms the P3 Verifies-coverage sweep closed the structural gap; this is residual maintenance drift, not a class. Future §-retirement phases MUST grep `**Verifies:** §NN` against the retired number BEFORE closing (Lesson #39-class reinforcement). Memo: `phase-153-task-N3-false-coverage-inverse-audit.md`.
 
 ## Health Score
 
