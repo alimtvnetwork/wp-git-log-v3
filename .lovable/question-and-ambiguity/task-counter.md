@@ -1,6 +1,6 @@
 # No-Questions Mode Counter
 
-Counter: **16/40**
+Counter: **17/40**
 
-Last task: N14 — Codify Lesson #84 (--module slug-vs-path argparse hint)
-Outcome: Single-line argparse `help=` clarification on `audit-ai-implementability.py --module` flag (line 667). Re-evaluated R1-attempt's Lesson #36 deferral and rejected: #36 governs cross-module restatement, not local CLI hint UX. NEW Lesson #85 (meta): verify a lesson's *class* applies before deferring under it. No lockstep ripple — argparse `help=` is operator UX, not §97 contract. No spec edits, no version bump, no §98 row.
+Last task: N15 — Codify Lessons #83/#84/#85 into process memo
+Outcome: Per Lesson #32 (anchor-at-source for discoverability), added 3 rows to `mem://process/phase-153-lessons` See-also reverse index for #83 (stale-backlog steady-state), #84 (slug-vs-path UX), #85 (verify-lesson-class-before-deferring meta-rule). Updated front-matter `name` (#11–#38 → #11–#85) and `description`. Updated `mem://index.md` Memories label (#11–#82 → #11–#85) with new "(#83-#85)" cluster mention. Pure docs — no spec edits, no script edits, no lockstep ripple.
