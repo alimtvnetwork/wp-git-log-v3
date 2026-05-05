@@ -72,7 +72,7 @@ Counter ≥ 40 → file marked `Status: ✅ completed`,
 
 **Budget:** 40 tasks
 **Activated:** 2026-05-05
-**Counter:** 1 / 40
+**Counter:** 2 / 40
 **Status:** 🟢 active
 
 Increment rule (carried from Prompt 01 + Lesson "increment on same tool turn"):
@@ -83,3 +83,4 @@ counter on the SAME closing tool turn that ships the work; do not defer.
 |---|------|------|--------------|
 | 0 | 2026-05-05 | (activation; no task yet) | Prompt 02 setup |
 | 1 | 2026-05-05 | P1 attempted — gateway 402 + chunked_path metadata gap; deferred | Ambiguity 05 |
+| 2 | 2026-05-05 | P2 dimension forensics — 8/8 sub-90 modules LIFTABLE (not capped); P3-P8 plan | phase-153-task-P2-dimension-forensics.md |
