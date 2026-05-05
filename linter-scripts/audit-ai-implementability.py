@@ -522,11 +522,15 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     # and any future axis re-classification invalidates the prior score.
     # AC-34-17 / AC-34-15(b): fold use_chunked into the cache key ONLY when
     # the module is actually multi-chunk. Single-chunk FULL modules MUST
-    # produce the same hash regardless of flag — that is the parity contract.
+    # produce the same hash regardless of flag — that is the parity contract,
+    # so we hash exactly the same payload as the pre-A18-impl-3 code path.
     chunks_preview = pack_chunks(mod)
     multi_chunk_preview = len(chunks_preview) > 1
-    chunked_tag = ("chunked=1" if use_chunked else "chunked=0") if multi_chunk_preview else "chunked=parity"
-    bundle_sha = hashlib.sha256(f"axis={axis}\n{chunked_tag}\n{bundle}".encode()).hexdigest()[:16]
+    if multi_chunk_preview:
+        chunked_tag = "chunked=1" if use_chunked else "chunked=0"
+        bundle_sha = hashlib.sha256(f"axis={axis}\n{chunked_tag}\n{bundle}".encode()).hexdigest()[:16]
+    else:
+        bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
 
     # A18-impl-2 (AC-34-16): per-chunk SHA inventory enables partial cache
     # invalidation — when one tier-file moves, only chunks containing it
