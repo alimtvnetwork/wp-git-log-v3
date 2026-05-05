@@ -1,7 +1,7 @@
 # Changelog (v2)
 
 **Updated:** 2026-05-03 (Phase 153 Task S22-01 — §97 AC-78 widened to catalog audit-v7 D4 MED `Truncated Glossary` finding as walker-cap artifact per Lesson #39)
-**Version:** 3.13.1
+**Version:** 3.13.2
 
 > **Archive pointers:** (1) §98 rows for v3.8.x and earlier (48 rows, 66 KB) moved to
 > [`_archive/98-changelog-pre-v3.9.0.md`](./_archive/98-changelog-pre-v3.9.0.md) at fu29.

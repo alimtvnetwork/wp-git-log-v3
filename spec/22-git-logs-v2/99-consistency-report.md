@@ -1,6 +1,6 @@
 # Consistency Report (v2)
 
-**Version:** 3.13.1  
+**Version:** 3.13.2  
 **Updated:** 2026-05-03 (Phase 153 Task S22-01 — §97 AC-78 widened per Lesson #39)
 
 > **v3.11.0 update (Phase 153 Task A24-fu20 — AC-78 §00 walker-pin promotion):** Pure walker-visibility patch on the audit-v9 83-floor (walker 3/36 — textbook walker-saturation). Audit-v9 surfaced 3 findings (HIGH/D5 "Missing Core Normative Files", MEDIUM/D4 "Abstract Examples", LOW/D3 "Concurrency Externalized") — ALL diagnosed as cache-staleness artifacts of pre-existing AC-78 contract pin (Lesson #34). AC-78 was authored at A11h (v3.10.0) but lives at §97 line 503+ of 507 — past every walker tier-1 cap. Promoted into a `> 🤖 Walker-Pin (Lesson #55 + Lesson #61)` 3-row teaser table at the §00 head listing AC-78 + AC-22-LV1 + AC-26 cross-ref + 3 forbidden remediation patterns. Walker now sees ALL 3 structural anchors in the first ~2 KB. Banners: §00 v3.10.0 → **v3.11.0**; §98 v3.10.0 → **v3.11.0**; this file v3.10.0 → **v3.11.0**. §97 NOT bumped (no AC change). h10 stamp refreshed 32 → 153. **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no new AC.** All 3 strict gates expected GREEN. **Lesson #61 second-instance confirmation**: spec/22 is the **pure-promotion variant** of A24-fu19's spec/04 codifying instance — lightest-touch close-out for any module where the auditor keeps re-flagging findings already classified by a §97-buried structural-pin AC.
