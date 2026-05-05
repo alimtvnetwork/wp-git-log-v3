@@ -361,6 +361,28 @@ jobs:
         # Spec: spec/27-spec-toolchain/28-check-archive-exclusion-runtime.md (AC-28-01..05)
         run: bash linter-scripts/test/test-archive-exclusion-runtime.sh
 
+      - name: Audit-AI self-test triplet (deterministic — no gateway)
+        # Phase 153 Task N9 — wires three deterministic self-tests for
+        # `audit-ai-implementability.py` and its sibling `audit-bundle-budget.py`
+        # into CI. None of these tests invoke the LLM gateway:
+        #   - test-audit-ai-implementability.sh: CLI surface contract (--help,
+        #     --no-network, --module=, --json, non-md walker per AC-34-01..06)
+        #     — locks the deep-walk + tier-1 walker contract from Tasks A4/A6.
+        #   - test-audit-bundle-budget.sh: stat-only walker-budget analyzer
+        #     (CLEAR/AT_CEILING/OVER classification per Lesson #65/#73).
+        #   - test-audit-chunked-cache-advisory.sh: snapshot-restore fixture
+        #     test for the Lesson #82 chunked-cache advisory emitted by
+        #     audit-ai-implementability.py (Task N6). Locks the advisory's
+        #     filter contract (sub-90 + chunked_path=false ONLY) so a future
+        #     refactor cannot silently drop the warning that tells contributors
+        #     "this NO-OP finding is from a stale pre-chunked-walker cache".
+        # Per H1 workflow-step-parity rule these are broader-contract tests
+        # (not single-footer-gate locks), so they get a dedicated step. All
+        # three exit fast (~8s combined) and run without LOVABLE_API_KEY.
+        run: |
+          bash linter-scripts/test/test-audit-ai-implementability.sh
+          bash linter-scripts/test/test-audit-bundle-budget.sh
+          bash linter-scripts/test/test-audit-chunked-cache-advisory.sh
       - name: Trace-map regression gate
         # Runs generate-trace-map.py and compares against the committed baseline at
         # .lovable/memory/audit/trace-map-baseline.json. Fails the build if AC
