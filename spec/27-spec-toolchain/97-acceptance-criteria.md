@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.14.0
-**Updated:** 2026-05-04 (Phase 153 Task A18-impl-2: slot 34 §00 v1.6.0 → v1.7.0 codifies AC-34-16 — intra-T1 splitting (anchor-pair-first when T1>MAX_BYTES) + per-chunk SHA cache schema (`chunks: [{tier, bundle_sha_chunk, files, bytes_used}]`). Self-test 14 → 16 assertions. Closes Lesson #65 spec/27-class T1-truncation data-loss path.)
+**Version:** 2.15.0
+**Updated:** 2026-05-05 (Phase 153 Task A18-impl-3: slot 34 §00 v1.7.0 → v1.8.0 codifies AC-34-17 — chunked re-scoring promoted to default-on; `audit_module()` routes multi-chunk modules through gateway-per-chunk + `merge_chunk_scores()` weighted-merge; FULL-tier parity invariant preserved verbatim (spec/16 cross-flag bundle_sha equality `e16de187513b288e`); new `--no-chunked` rollback flag. Live re-scores: spec/27 83→88, spec/12 87→84 (honest baseline per Lesson #18). Closes AC-34-15(e) "promotion to default" milestone.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---

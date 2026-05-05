@@ -1,37 +1,16 @@
 {
   "d1": 18,
-  "d2": 19,
-  "d3": 15,
-  "d4": 14,
-  "d5": 17,
-  "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D4",
-      "title": "Truncated Implementation Details",
-      "why": "The module overview and several script specs (04-09, etc.) are cut off mid-sentence due to the 136KB cap, leaving the AI without the full usage or logic for those specific artifacts.",
-      "fix": "The AI should rely on the 'Slot Delegation Map' in \u00a797 and the 'Walker-Pin' in \u00a700 to prioritize the core contract over the truncated prose."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Speculative R2 Implementation",
-      "why": "While normative snippets for R2 (file-locking) are provided, the 'R2 Read-Target Ledger' is partially truncated, meaning a mediocre coder might miss which specific files require the retry logic.",
-      "fix": "Explicitly list all RT-01 through RT-05 targets within the first 100KB of the overview or \u00a797."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D5",
-      "title": "External Script Logic Dependency",
-      "why": "The module delegates logic to 50+ external files. While AC-T-30/31 provide a map and prefix index, the actual GWT for individual scripts (like 04-09) is missing from the provided context.",
-      "fix": "Ensure the 'Slot Delegation Map' includes a brief one-line functional summary for each script to guide implementation when sub-files are missing."
-    }
-  ],
+  "d2": 18,
+  "d3": 17,
+  "d4": 17,
+  "d5": 18,
+  "issues": [],
+  "findings": [],
   "module": "27-spec-toolchain",
   "files_used": 8,
   "files_total": 57,
   "bytes_used": 140000,
-  "bundle_sha": "32d63df09b6a63a0",
+  "bundle_sha": "e0e43257308fdc58",
   "chunks": [
     {
       "tier": "T2",
@@ -428,7 +407,8 @@
       "bytes_used": 180359
     }
   ],
-  "total_v6": 83,
+  "chunked_path": true,
+  "total_v6": 88,
   "axis": "tooling-spec",
   "axis_multipliers": {
     "d1": 0.9091,
@@ -438,9 +418,9 @@
     "d5": 0.8182
   },
   "axis_cap": 100,
-  "weighted_total": 82.9,
-  "total_v7": 83,
-  "total": 83,
+  "weighted_total": 87.9,
+  "total_v7": 88,
+  "total": 88,
   "band": "GOOD",
   "rubric": "v7"
 }

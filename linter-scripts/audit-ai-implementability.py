@@ -508,19 +508,35 @@ def band(total: int) -> str:
     return "BLOCKING"
 
 
-def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, axis: str) -> dict[str, Any]:
+def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, axis: str, use_chunked: bool = True) -> dict[str, Any]:
+    """A18-impl-3 (AC-34-17): chunked path is default-on. When `use_chunked=True`
+    AND `pack_chunks(mod)` returns >1 chunks, score each chunk via the gateway
+    and merge per AC-34-15 §(d). Single-chunk FULL-tier modules take the
+    byte-identical legacy path (parity invariant from AC-34-15 §(b)). Set
+    `use_chunked=False` (--no-chunked) to force single-pass legacy scoring
+    for parity verification or rollback.
+    """
     cache_file = CACHE_DIR / f"{mod.name}.json"
     bundle, used_bytes, used_files, total_files = load_module_bundle(mod)
     # Fold axis into the cache key so v6 caches (no axis) re-score under v7
     # and any future axis re-classification invalidates the prior score.
-    bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
+    # AC-34-17 / AC-34-15(b): fold use_chunked into the cache key ONLY when
+    # the module is actually multi-chunk. Single-chunk FULL modules MUST
+    # produce the same hash regardless of flag — that is the parity contract,
+    # so we hash exactly the same payload as the pre-A18-impl-3 code path.
+    chunks = pack_chunks(mod)
+    multi_chunk_preview = len(chunks) > 1
+    if multi_chunk_preview:
+        chunked_tag = "chunked=1" if use_chunked else "chunked=0"
+        bundle_sha = hashlib.sha256(f"axis={axis}\n{chunked_tag}\n{bundle}".encode()).hexdigest()[:16]
+    else:
+        bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
 
     # A18-impl-2 (AC-34-16): per-chunk SHA inventory enables partial cache
     # invalidation — when one tier-file moves, only chunks containing it
     # need re-scoring on the next gateway pass. The composite `bundle_sha`
     # remains the load_module_bundle-derived single-pass key for backward
     # compatibility with the parity contract from AC-34-15.
-    chunks = pack_chunks(mod)
     chunk_inventory = []
     for c in chunks:
         c_sha = hashlib.sha256(f"axis={axis}\n{c['bundle']}".encode()).hexdigest()[:16]
@@ -552,16 +568,44 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     if api_key is None:
         raise RuntimeError("LOVABLE_API_KEY not set; pass --no-network for stats-only mode")
 
-    prompt = f"# Module: spec/{mod.name}\n\nFiles: {used_files}/{total_files}, ~{used_bytes//1024} KB\n\n{bundle}"
-    resp = call_gateway(prompt, api_key)
-    raw = resp["choices"][0]["message"]["content"]
-    parsed = parse_score(raw)
+    # A18-impl-3 (AC-34-17): chunked-default scoring path. Skipped when
+    # use_chunked=False (--no-chunked rollback flag) OR when pack_chunks
+    # returned a single FULL-tier chunk (byte-identical to legacy bundle —
+    # AC-34-15 §(b) parity invariant ensures the legacy single-pass path
+    # is bit-for-bit equivalent, so we keep it for cache-hash stability).
+    multi_chunk = len(chunks) > 1
+    if use_chunked and multi_chunk:
+        chunk_results: list[dict[str, Any]] = []
+        for c in chunks:
+            c_prompt = (
+                f"# Module: spec/{mod.name} (chunk {len(chunk_results)+1}/{len(chunks)}, tier={c['tier']})\n\n"
+                f"Files in chunk: {len(c['files'])}, ~{c['bytes_used']//1024} KB\n\n"
+                f"{c['bundle']}"
+            )
+            c_resp = call_gateway(c_prompt, api_key)
+            c_raw = c_resp["choices"][0]["message"]["content"]
+            c_parsed = parse_score(c_raw)
+            c_parsed["tier"] = c["tier"]
+            c_parsed["bytes_used"] = c["bytes_used"]
+            chunk_results.append(c_parsed)
+            time.sleep(0.5)
+        merged = merge_chunk_scores(chunk_results)
+        parsed = {k: merged.get(k, 0) for k in ("d1", "d2", "d3", "d4", "d5")}
+        # `findings` from merge dedupe; keep `issues` legacy key for report compat.
+        parsed["issues"] = merged.get("findings", [])
+        parsed["findings"] = merged.get("findings", [])
+    else:
+        prompt = f"# Module: spec/{mod.name}\n\nFiles: {used_files}/{total_files}, ~{used_bytes//1024} KB\n\n{bundle}"
+        resp = call_gateway(prompt, api_key)
+        raw = resp["choices"][0]["message"]["content"]
+        parsed = parse_score(raw)
     parsed["module"] = mod.name
     parsed["files_used"] = used_files
     parsed["files_total"] = total_files
     parsed["bytes_used"] = used_bytes
     parsed["bundle_sha"] = bundle_sha
     parsed["chunks"] = chunk_inventory
+    parsed["chunked_path"] = bool(use_chunked and multi_chunk)
     parsed["total_v6"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
     v7 = apply_rubric_v7({k: int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5")}, axis)
     parsed.update(v7)
@@ -626,8 +670,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--json", action="store_true", help="Emit machine-readable JSON to stdout")
     ap.add_argument("--report-only", action="store_true", help="Always exit 0 (advisory mode)")
     ap.add_argument("--strict", action="store_true", help="Exit 1 if any module scores BLOCKING (<60)")
-    ap.add_argument("--chunked", action="store_true",
-                    help="A18-impl-1: enable chunked re-scoring for >MAX_BYTES modules (AC-34-15). Off by default; ≤MAX_BYTES modules are byte-identical to non-chunked output.")
+    ap.add_argument("--chunked", dest="chunked", action="store_true", default=True,
+                    help="A18-impl-3 (AC-34-17): chunked re-scoring is DEFAULT-ON. ≤MAX_BYTES modules take the byte-identical FULL-tier parity path (AC-34-15 §(b)); >MAX_BYTES modules score per-chunk via the gateway and merge with TIER_WEIGHTS. This flag is retained as a no-op for backward CLI compatibility — use --no-chunked to opt out.")
+    ap.add_argument("--no-chunked", dest="chunked", action="store_false",
+                    help="A18-impl-3 rollback: force single-pass legacy bundle (truncate at MAX_BYTES). Use only for parity-verification or emergency rollback; loses contract surface on >MAX_BYTES modules per Lesson #11/#16.")
     ap.add_argument("--chunk-stats", action="store_true",
                     help="A18-impl-1: print per-module chunk count + tier breakdown to stdout (no network).")
     ap.add_argument("--report", type=Path, default=DEFAULT_REPORT, help="Markdown report output path")
@@ -671,7 +717,7 @@ def main(argv: list[str] | None = None) -> int:
     results: list[dict[str, Any]] = []
     for mod in modules:
         try:
-            r = audit_module(mod, api_key, args.no_network, args.force, axes[mod.name])
+            r = audit_module(mod, api_key, args.no_network, args.force, axes[mod.name], use_chunked=args.chunked)
             results.append(r)
             if not args.json:
                 if "total" in r:
