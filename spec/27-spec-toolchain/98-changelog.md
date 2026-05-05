@@ -1,6 +1,6 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.90.2
+**Version:** 2.90.3
 **Updated:** 2026-05-05
 **Scope:** `spec/27-spec-toolchain/`
 ### 2.90.2 — 2026-05-05 — Phase 153 Task A18-impl-3: AC-34-17 chunked re-scoring promoted to default-on

@@ -1,6 +1,6 @@
 # No-Questions Mode Counter
 
-Counter: **8/40**
+Counter: **9/40**
 
-Last task: N4 — Codify Lessons #79+#82 in `mem://process/phase-153-lessons` (new Section H)
-Outcome: Section H added; see-also rows for #79 + #82 appended; index Memories description updated #11–#38 → #11–#82.
+Last task: N6 — Lesson #82 mechanical lock
+Outcome: `audit-ai-implementability.py` 1.8.0 → 1.9.0; advisory warning shipped; 6 modules trigger at landing; §27 banners patch-bumped; inventory parity 6/6 GREEN.
