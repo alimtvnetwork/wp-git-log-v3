@@ -733,6 +733,23 @@ def main(argv: list[str] | None = None) -> int:
             results.append({"module": mod.name, "error": str(e)})
         time.sleep(0.5)
 
+    # Lesson #82 (Phase 153 Task N6) — emit advisory warning for sub-90
+    # modules whose cache predates the chunked walker (chunked_path falsy).
+    # Findings from such caches are advisory only; do NOT authorise §97 edits
+    # without a fresh `--force --chunked` re-score. See
+    # `mem://process/phase-153-lessons` Section H.
+    pre_chunked_sub90 = [
+        r for r in results
+        if r.get("from_cache")
+        and not r.get("chunked_path")
+        and isinstance(r.get("total"), int)
+        and r["total"] < 90
+    ]
+    if pre_chunked_sub90 and not args.json:
+        print("\nLesson #82 advisory — pre-chunked-walker cache (chunked_path falsy):")
+        for r in pre_chunked_sub90:
+            print(f"  {r['module']:40s} {r['total']:3d}/100  findings advisory only — re-run with --force --chunked")
+
     if args.json:
         print(json.dumps(results, indent=2))
     else:
