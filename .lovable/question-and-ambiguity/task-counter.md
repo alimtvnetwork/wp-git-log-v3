@@ -65,3 +65,20 @@ Counter ≥ 40 → file marked `Status: ✅ completed`,
 `.lovable/prompts/01-no-questions.md` frontmatter updated
 (`status: completed`, `deactivated: 2026-04-30`, `counter: 59`),
 `.lovable/prompts.md` index row updated. Normal question-asking resumes.
+
+---
+
+## Prompt 02 counter
+
+**Budget:** 40 tasks
+**Activated:** 2026-05-05
+**Counter:** 0 / 40
+**Status:** 🟢 active
+
+Increment rule (carried from Prompt 01 + Lesson "increment on same tool turn"):
+one user-facing task = one user message → one unit of work delivered. Bump the
+counter on the SAME closing tool turn that ships the work; do not defer.
+
+| # | Date | Task | Phase / Memo |
+|---|------|------|--------------|
+| 0 | 2026-05-05 | (activation; no task yet) | Prompt 02 setup |
