@@ -1,8 +1,15 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.90.1
-**Updated:** 2026-05-04
+**Version:** 2.90.2
+**Updated:** 2026-05-05
 **Scope:** `spec/27-spec-toolchain/`
+### 2.90.2 — 2026-05-05 — Phase 153 Task A18-impl-3: AC-34-17 chunked re-scoring promoted to default-on
+- **Action**: Wired `audit_module()` to route multi-chunk modules through gateway-per-chunk path + `merge_chunk_scores()` weighted-merge per AC-34-15(d). Flipped `--chunked` CLI default from `False` → `True` (`action="store_true", default=True`); added `--no-chunked` (`dest="chunked", action="store_false"`) as explicit rollback flag. Folded `chunked={1,0}` tag into `bundle_sha` for multi-chunk modules ONLY (FULL-tier path unchanged — verified parity via spec/16 cross-flag hash equality `e16de187513b288e` on both `--chunked` + `--no-chunked` invocations). Added `parsed["chunked_path"] = bool(use_chunked and multi_chunk)` for downstream tooling. Added AC-34-17 `[high]` to slot 34 §00 (count 16 → 17). Self-test all **16 PASS** unchanged (parity invariant verified by existing test #12 + cross-flag bundle_sha equality on spec/16).
+- **Why**: Closes AC-34-15(e) "promotion to default requires A18-impl-2 + gateway-on parity rebaseline" milestone — A18-impl-2 shipped the splitter + cache schema; A18-impl-3 ships the wiring + flag flip. Pre-A18-impl-3 multi-chunk modules silently scored against the first ~140KB only (truncated bundle), masking real D2/D3/D5 gaps. Live re-score deltas (single-module, gateway-confirmed): **spec/27 83 → 88 (+5)** — contract surface previously truncated now visible to LLM (8 files × 30 chunks now scored instead of single 140KB slice); **spec/12 87 → 84 (–3)** — honest-baseline correction per Lesson #18 (chunked path scores against ALL 49 files vs first ~140KB; previously masked D3 edge-case gaps surface). Net positive for tree mean. Tree-wide rebaseline (16 multi-chunk modules × ~480 chunk calls) deferred to backlog item #10 (gateway-cost-bounded).
+- **Files**: `linter-scripts/audit-ai-implementability.py` (~50 LoC: chunked branch in `audit_module` + flag flip in `main` + multi-chunk-conditional `chunked_tag` fold in `bundle_sha`); `spec/27-spec-toolchain/34-audit-ai-implementability.md` (AC-34-17 + banner v1.7.0 → v1.8.0); banners.
+- **Spec lockstep**: slot 34 §00 v1.7.0 → **v1.8.0** (minor — new AC-34-17 + new behaviour); §97 v2.14.0 → **v2.15.0** (banner sync mirroring slot-34 minor); §00 v2.90.1 → **v2.90.2** (banner sync per version-parity gate); §98 v2.90.1 → **v2.90.2** (this row); §99 v2.86.1 → **v2.86.2** (audit row).
+- **Lesson #79 (codified inside this row)**: Multi-phase rollouts (opt-in helpers → splitter → default-on flip) work — A18 split into impl-1/impl-2/impl-3 over 3 phases let each step ship with self-test green and the parity invariant verifiable at every step. Default-on flips MUST preserve byte-identical hashes for the unchanged-behavior path (FULL-tier here) so existing caches stay valid; flag-state-folded hashes apply ONLY to paths whose behaviour actually changes (multi-chunk here). Rollback flag (`--no-chunked`) is mandatory on default-on flips so emergency rollback is one-CLI-arg away.
+
 
 ---
 
