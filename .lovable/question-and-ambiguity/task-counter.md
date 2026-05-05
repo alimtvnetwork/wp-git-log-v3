@@ -1,6 +1,6 @@
 # No-Questions Mode Counter
 
-Counter: **11/40**
+Counter: **12/40**
 
-Last task: N7 + N9 — Gateway probe + audit self-test CI wiring
-Outcome: N7 confirmed gateway 402 budget-cap (key set, gateway capped — Lesson #38 refined). N9 wired 3 deterministic audit self-tests into `spec-health.yml` (31 assertions / ~8s combined, no LOVABLE_API_KEY dependency); Lesson #82 mechanical lock now active in CI; tree-health 168/168 strict + lockstep 87/87 GREEN.
+Last task: N10 — Codify Lesson #38 refinement (NO-OP)
+Outcome: Verified Lesson #74 already codifies "key set ≠ gateway capacity" with full L38+L74 combined contract (lines 27-28 of process memo, 2026-05-04 v13-rebaseline precedent). Index Memories already labels catalogue "#11–#82" + "#71-#74" cluster. 3rd no-op this session caught by Lesson #30 verify-before-open — each no-op closes faster than the prior one. Pure docs / verification — no edits, no lockstep ripple.
