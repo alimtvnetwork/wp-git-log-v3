@@ -6,6 +6,7 @@ Each row points to a prompt file under `.lovable/prompts/`.
 | ID | Title | Status | Activated | Budget | Counter | Tags |
 |----|-------|--------|-----------|--------|---------|------|
 | 01 | [No-Questions Mode](./prompts/01-no-questions.md) | ✅ completed | 2026-04-28 | 40 tasks | 59/40 (deactivated 2026-04-30) | `no question`, `not ques for 40` |
+| 02 | [No-Questions Mode (re-activation)](./prompts/02-no-questions.md) | 🟢 active | 2026-05-05 | 40 tasks | 0/40 | `no question`, `not ques for 40` |
 
 ## Status legend
 
