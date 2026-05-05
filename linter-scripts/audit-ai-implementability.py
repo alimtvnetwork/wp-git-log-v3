@@ -508,7 +508,14 @@ def band(total: int) -> str:
     return "BLOCKING"
 
 
-def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, axis: str) -> dict[str, Any]:
+def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, axis: str, use_chunked: bool = True) -> dict[str, Any]:
+    """A18-impl-3 (AC-34-17): chunked path is default-on. When `use_chunked=True`
+    AND `pack_chunks(mod)` returns >1 chunks, score each chunk via the gateway
+    and merge per AC-34-15 §(d). Single-chunk FULL-tier modules take the
+    byte-identical legacy path (parity invariant from AC-34-15 §(b)). Set
+    `use_chunked=False` (--no-chunked) to force single-pass legacy scoring
+    for parity verification or rollback.
+    """
     cache_file = CACHE_DIR / f"{mod.name}.json"
     bundle, used_bytes, used_files, total_files = load_module_bundle(mod)
     # Fold axis into the cache key so v6 caches (no axis) re-score under v7
