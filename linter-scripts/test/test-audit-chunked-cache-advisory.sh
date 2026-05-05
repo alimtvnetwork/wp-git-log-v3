@@ -76,9 +76,9 @@ EOF
 }
 
 # Pick 3 real spec module dirs to host fixtures.
-M_FAIL="05-spec-driven-development"   # sub-90 + chunked=false → SHOULD appear
+M_FAIL="05-split-db-architecture"     # sub-90 + chunked=false → SHOULD appear
 M_OK_CHUNKED="12-github-actions"      # sub-90 + chunked=true  → MUST NOT appear
-M_OK_HIGH="24-cli-design"             # high   + chunked=false → MUST NOT appear
+M_OK_HIGH="24-cli-design-and-ux"      # high   + chunked=false → MUST NOT appear
 
 write_fixture "$M_FAIL"        85 false
 write_fixture "$M_OK_CHUNKED"  85 true
