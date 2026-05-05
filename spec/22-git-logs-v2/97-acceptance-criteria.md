@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.10.1  
-**Updated:** 2026-05-03 (Phase 153 Task S22-01 — extended **AC-78** Given/Then to also catalog the audit-v7 D4 MED `Truncated Glossary and Enums` finding as a walker-cap artifact per Lesson #39 evidence triple: `01-glossary-and-enums.md` is 14346 B / 313 lines on disk with TypeScript Mirror + Enum Catalog + Drift-detection contract intact at the file tail — multi-file bundle sibling exhaustion of the 140 KB walker budget is the cause, not file content. Also updated D5 catalog to include file `34` cited by name. No new AC, no AC-31-31 cascade — pure verifies-clause widening.)
+**Version:** 3.10.2  
+**Updated:** 2026-05-05 (Phase 153 Task N3 — marked **AC-36** `[active]` → `[deprecated]` to reflect §21 retirement in §98 v3.7.8. AC was carrying a dead `**Verifies:** §21` since the i18n-out-of-scope retirement; tree-wide false-coverage inverse audit surfaced this as the only real drift across 1241 ACs / 1128 verifies-clauses. Dormancy contract pinned to §00 inventory row 21 + §98 v3.7.8 retirement entry. No new AC, no AC-count change, no AC-31-31 cascade.)
 
 ---
 
