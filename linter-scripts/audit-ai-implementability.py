@@ -734,21 +734,28 @@ def main(argv: list[str] | None = None) -> int:
         time.sleep(0.5)
 
     # Lesson #82 (Phase 153 Task N6) — emit advisory warning for sub-90
-    # modules whose cache predates the chunked walker (chunked_path falsy).
-    # Findings from such caches are advisory only; do NOT authorise §97 edits
-    # without a fresh `--force --chunked` re-score. See
-    # `mem://process/phase-153-lessons` Section H.
-    pre_chunked_sub90 = [
-        r for r in results
-        if r.get("from_cache")
-        and not r.get("chunked_path")
-        and isinstance(r.get("total"), int)
-        and r["total"] < 90
-    ]
+    # modules whose cached score predates the chunked walker (chunked_path
+    # falsy in the on-disk cache). Such findings are advisory only; do NOT
+    # authorise §97 edits without a fresh `--force --chunked` re-score.
+    # Scans on-disk cache regardless of bundle_sha drift, so the warning
+    # surfaces even when the live audit can't refresh (e.g. gateway-402).
+    # See `mem://process/phase-153-lessons` Section H.
+    pre_chunked_sub90: list[tuple[str, int]] = []
+    for mod in modules:
+        cf = CACHE_DIR / f"{mod.name}.json"
+        if not cf.exists():
+            continue
+        try:
+            cd = json.loads(cf.read_text())
+        except Exception:  # noqa: BLE001
+            continue
+        t = cd.get("total")
+        if isinstance(t, int) and t < 90 and not cd.get("chunked_path"):
+            pre_chunked_sub90.append((mod.name, t))
     if pre_chunked_sub90 and not args.json:
         print("\nLesson #82 advisory — pre-chunked-walker cache (chunked_path falsy):")
-        for r in pre_chunked_sub90:
-            print(f"  {r['module']:40s} {r['total']:3d}/100  findings advisory only — re-run with --force --chunked")
+        for name, t in pre_chunked_sub90:
+            print(f"  {name:40s} {t:3d}/100  findings advisory only — re-run with --force --chunked")
 
     if args.json:
         print(json.dumps(results, indent=2))
