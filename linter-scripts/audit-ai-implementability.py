@@ -520,7 +520,11 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     bundle, used_bytes, used_files, total_files = load_module_bundle(mod)
     # Fold axis into the cache key so v6 caches (no axis) re-score under v7
     # and any future axis re-classification invalidates the prior score.
-    bundle_sha = hashlib.sha256(f"axis={axis}\n{bundle}".encode()).hexdigest()[:16]
+    # AC-34-17: fold use_chunked into the cache key so toggling --no-chunked
+    # invalidates the chunked-path cache (and vice versa). Single-chunk FULL
+    # modules take the same hash regardless of flag (parity invariant).
+    chunked_tag = "chunked=1" if use_chunked else "chunked=0"
+    bundle_sha = hashlib.sha256(f"axis={axis}\n{chunked_tag}\n{bundle}".encode()).hexdigest()[:16]
 
     # A18-impl-2 (AC-34-16): per-chunk SHA inventory enables partial cache
     # invalidation — when one tier-file moves, only chunks containing it
