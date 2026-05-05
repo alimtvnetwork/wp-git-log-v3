@@ -1,7 +1,7 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.8.0  
-**Updated:** 2026-05-05 (Phase 153 Task A18-impl-3: AC-34-17 promotes `--chunked` to default-on for all >MAX_BYTES modules — `audit_module()` now routes multi-chunk modules through the gateway-per-chunk path with `merge_chunk_scores()` weighted-merge per AC-34-15(d); single-chunk FULL-tier modules retain byte-identical bundle_sha (parity invariant from AC-34-15(b) preserved verbatim — confirmed via spec/16 cross-flag hash equality test). New `--no-chunked` rollback flag. AC-34-15(e) "promotion to default" milestone closed. Live re-score deltas: spec/27 83 → 88 (+5, contract surface previously truncated now visible); spec/12 87 → 84 (–3, honest-baseline correction per Lesson #18 — chunked path now scores against ALL 49 files instead of first ~140KB only).)  
+**Version:** 1.9.0  
+**Updated:** 2026-05-05 (Phase 153 Task N6: Lesson #82 mechanical lock — `main()` now scans the on-disk cache after the run loop and emits an advisory "Lesson #82 advisory — pre-chunked-walker cache (chunked_path falsy)" block for every sub-90 module whose cached score predates the chunked walker (`chunked_path` falsy). Surfaces regardless of bundle_sha drift, so the warning fires even when the live audit can't refresh (gateway-402). No exit-code change — pure stdout advisory aligned with `--report-only` advisory contract. Codifies `mem://process/phase-153-lessons` Section H Lesson #82 ("`chunked_path: None` caches MUST NOT drive contract work"). Empirical baseline at landing: 6 modules trigger (spec/01/04/05/17/18/22 at 85-89/100).)  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
 **Category:** Auditor (LLM-driven, deep-walk)
