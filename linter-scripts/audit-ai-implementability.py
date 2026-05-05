@@ -559,16 +559,44 @@ def audit_module(mod: Path, api_key: str | None, no_network: bool, force: bool, 
     if api_key is None:
         raise RuntimeError("LOVABLE_API_KEY not set; pass --no-network for stats-only mode")
 
-    prompt = f"# Module: spec/{mod.name}\n\nFiles: {used_files}/{total_files}, ~{used_bytes//1024} KB\n\n{bundle}"
-    resp = call_gateway(prompt, api_key)
-    raw = resp["choices"][0]["message"]["content"]
-    parsed = parse_score(raw)
+    # A18-impl-3 (AC-34-17): chunked-default scoring path. Skipped when
+    # use_chunked=False (--no-chunked rollback flag) OR when pack_chunks
+    # returned a single FULL-tier chunk (byte-identical to legacy bundle —
+    # AC-34-15 §(b) parity invariant ensures the legacy single-pass path
+    # is bit-for-bit equivalent, so we keep it for cache-hash stability).
+    multi_chunk = len(chunks) > 1
+    if use_chunked and multi_chunk:
+        chunk_results: list[dict[str, Any]] = []
+        for c in chunks:
+            c_prompt = (
+                f"# Module: spec/{mod.name} (chunk {len(chunk_results)+1}/{len(chunks)}, tier={c['tier']})\n\n"
+                f"Files in chunk: {len(c['files'])}, ~{c['bytes_used']//1024} KB\n\n"
+                f"{c['bundle']}"
+            )
+            c_resp = call_gateway(c_prompt, api_key)
+            c_raw = c_resp["choices"][0]["message"]["content"]
+            c_parsed = parse_score(c_raw)
+            c_parsed["tier"] = c["tier"]
+            c_parsed["bytes_used"] = c["bytes_used"]
+            chunk_results.append(c_parsed)
+            time.sleep(0.5)
+        merged = merge_chunk_scores(chunk_results)
+        parsed = {k: merged.get(k, 0) for k in ("d1", "d2", "d3", "d4", "d5")}
+        # `findings` from merge dedupe; keep `issues` legacy key for report compat.
+        parsed["issues"] = merged.get("findings", [])
+        parsed["findings"] = merged.get("findings", [])
+    else:
+        prompt = f"# Module: spec/{mod.name}\n\nFiles: {used_files}/{total_files}, ~{used_bytes//1024} KB\n\n{bundle}"
+        resp = call_gateway(prompt, api_key)
+        raw = resp["choices"][0]["message"]["content"]
+        parsed = parse_score(raw)
     parsed["module"] = mod.name
     parsed["files_used"] = used_files
     parsed["files_total"] = total_files
     parsed["bytes_used"] = used_bytes
     parsed["bundle_sha"] = bundle_sha
     parsed["chunks"] = chunk_inventory
+    parsed["chunked_path"] = bool(use_chunked and multi_chunk)
     parsed["total_v6"] = sum(int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5"))
     v7 = apply_rubric_v7({k: int(parsed[k]) for k in ("d1", "d2", "d3", "d4", "d5")}, axis)
     parsed.update(v7)
