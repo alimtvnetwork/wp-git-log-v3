@@ -717,7 +717,7 @@ def main(argv: list[str] | None = None) -> int:
     results: list[dict[str, Any]] = []
     for mod in modules:
         try:
-            r = audit_module(mod, api_key, args.no_network, args.force, axes[mod.name])
+            r = audit_module(mod, api_key, args.no_network, args.force, axes[mod.name], use_chunked=args.chunked)
             results.append(r)
             if not args.json:
                 if "total" in r:
