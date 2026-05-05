@@ -664,7 +664,7 @@ def write_report(results: list[dict[str, Any]], out: Path) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Deep-walk AI implementability audit (Phase 153 Task A4)")
-    ap.add_argument("--module", help="Only audit this module slug (e.g. 04-database-conventions)")
+    ap.add_argument("--module", help="Only audit this module SLUG, not path (e.g. 04-database-conventions; NOT spec/04). Lesson #84.")
     ap.add_argument("--no-network", action="store_true", help="Print bundle stats only; never call gateway")
     ap.add_argument("--force", action="store_true", help="Ignore cache and re-score")
     ap.add_argument("--json", action="store_true", help="Emit machine-readable JSON to stdout")
