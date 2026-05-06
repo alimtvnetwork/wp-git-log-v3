@@ -1,8 +1,11 @@
 # No-Questions Mode Counter
 
-Counter: **27/40**
+Counter: **28/40**
 
-Last task: P-sweep-2/3/4 — spec/03, spec/14, spec/16 anchor map ACs (ALL NO-OP — class-wide already shipped) + Lesson #88 tree-wide sweep
+Last task: P5/P6/P7/P8 — app-scope self-lifts spec/22-28 (ALL NO-OP — tree-wide plateau confirmed)
+Outcome: Cache snapshot reveals **23/23 modules with 0 actionable findings · tree mean 91.78** (matches user's session-open observation). P5 spec/26 (94 EXC, 0 findings, AC-22/23/24 derivative-axis closure already shipped); P6 spec/24 (95 EXC, 0 findings, ceiling); P7 spec/23 (97 EXC, 0 findings, AC-ADB-14 already closed P48-3); P8 spec/28 (97 EXC, 0 findings — prior scorecard had stale 86/90 number, cache has been fresher than scorecard). Live `--force` re-score attempt → HTTP 402 (gateway-blocked). **NEW Lesson #89 codified**: env-set `LOVABLE_API_KEY` ≠ gateway-available; two-step probe required (env + live single-module call). **NEW Lesson #90 codified**: tree-mean plateau-class diagnosis — when tree-wide 0 findings + N consecutive NO-OPs, productive paths collapse to (1) A8 live re-baseline (gateway-blocked today) OR (2) R2 walker/axis-rubric upgrade (productive without gateway). Self-lift P-series is NO-OP by construction on 0-finding cache. Memo: phase-153-p5-p8-tree-plateau-noop.md.
+
+Prior task: P-sweep-2/3/4 — spec/03/14/16 anchor map ACs (NO-OP — Lesson #88 confirmed 23/23 pair-complete).
 Outcome: All 3 modules already carry Lesson #29+#36 ACs (spec/03 AC-08/09/11, spec/14 AC-21/22, spec/16 AC-21). Verifies clauses explicitly enumerate 12-module mirror tree-wide. Lesson #88 grep (`Lesson #29|Lesson #36` in §97) ran tree-wide: **23/23 modules pair-complete · 0 true gaps**. Original P-sweep heuristic underestimated by ~21 modules (false-negative rate 91%). **NEW Lesson #88 codified**: lesson-ID grep is the canonical pair-detection signal — AC titles drift per axis ("Subfolder Delegation Map" / "Module Asset Inventory Pin" / "Walker-Pin" all encode the same Lesson #29+#36 pair); lesson IDs are stable. Mirror of Lesson #87 at the lesson-discovery level. **Entire P-sweep family CLOSED as NO-OP class.** Memo: phase-153-p-sweep-2-3-4-spec-03-14-16-noop.md.
 
 Prior task: P-sweep-1 — spec/17 NO-OP (already richest pair-complete).
