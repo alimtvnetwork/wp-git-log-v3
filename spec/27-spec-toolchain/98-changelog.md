@@ -1,8 +1,18 @@
 # Changelog — Spec Toolchain
 
-**Version:** 2.90.3
-**Updated:** 2026-05-05
+**Version:** 2.91.0
+**Updated:** 2026-05-06
 **Scope:** `spec/27-spec-toolchain/`
+
+### 2.91.0 — 2026-05-06 — Phase 153 Task A8-prep / R2: AC-34-18 — bounded tier-1B promotion (nested contract files)
+- **Action**: Patched `linter-scripts/audit-ai-implementability.py` `load_module_bundle()` to lift nested `{00,97,98,99}-*.md` contract files (e.g. `spec/05/02-features/00-overview.md`) to tier-1 priority alongside root contract files, BUT only when `_bytes(tier1) + _bytes(tier1b) ≤ MAX_BYTES` (140 KB). When T1B would overflow, falls back to current pre-A8-prep behavior (T1B remains at natural alphabetical position in T2 — graceful degradation, zero regression). Sub-module contracts sorted depth-shallowest-first, then alpha. New self-test `linter-scripts/test/test-audit-ai-tier1b-promotion.sh` (6/6 PASS) codifies bimodal contract: T1=spec/05 FITS path = 4 root T1 + 8 nested T1B in first 12 entries; T2=spec/02 OVERFLOW-fallback path = 4 root T1 + ≤3 nested T1B (no mass promotion); T3=spec/22 (zero nested T1B) bundle unchanged.
+- **Why**: Closes the nested-contract blind spot identified by Lesson #16 — pre-A8-prep walker priority discipline only saw root contract files, silently truncating sub-module contracts on chunky modules. Tree-wide probe (per Lesson #17 dry-run protocol) found 10 modules with nested contract files; 6 fit cleanly (spec/05/06/10/12/18/26), 4 overflow (spec/02/03/14/25). Bounded promotion lifts the 6 FITS modules immediately with zero risk to the 4 OVERFLOW modules. Sub-module recursion for the OVERFLOW giants is deferred indefinitely per Lesson #79 (saturation triage: spec/02 already 90/EXC, spec/03 already 87/GOOD via current flat walker — diminishing returns).
+- **Files**: `linter-scripts/audit-ai-implementability.py` (~30 LoC: tier-1B collection + bounded-promotion gate inside `load_module_bundle()`); `linter-scripts/test/test-audit-ai-tier1b-promotion.sh` (NEW, ~80 LoC, 6 assertions); `spec/27-spec-toolchain/34-audit-ai-implementability.md` (banner v1.9.0 → v1.10.0; AC-34-18 added — count 17 → 18); banners.
+- **Spec lockstep**: slot 34 §00 v1.9.0 → **v1.10.0** (minor — new AC-34-18); §00 v2.90.3 → **v2.91.0**; §98 v2.90.3 → **v2.91.0** (this row); §99 v2.86.3 → **v2.87.0** (audit row + new AC inventory).
+- **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade**, **no gate-count change**. **New AC: AC-34-18** (count 17 → 18). Live LLM re-score deferred per Lesson #20 — gateway returned HTTP 402 on `--force` call despite `LOVABLE_API_KEY` set (Lesson #86 oscillation pattern reconfirmed). Self-test `test-overview-inventory-parity.sh` GREEN (Phase F3 hard rule for new linter-scripts/ files satisfied).
+- **Lesson #91 (NEW, codified inside this row)**: Walker tier-1 promotion patches benefit from a Lesson #17 dry-run probe BEFORE implementation — the bimodal FITS vs OVERFLOW distribution (here: 6/4 split at 140 KB cap) is the design driver for "bounded promotion + graceful fallback" vs "blind mass promotion" (which would bloat spec/02 from 98 KB to 783 KB and cause catastrophic truncation). Probe-then-design is the correct sequence; design-then-probe risks shipping a regression on the OVERFLOW class.
+
+---
 
 ### 2.90.3 — 2026-05-05 — Phase 153 Task N6: Lesson #82 mechanical lock — pre-chunked-cache advisory in `audit-ai-implementability.py`
 - **Action**: Added on-disk cache scan after the run loop in `linter-scripts/audit-ai-implementability.py` `main()`. Scans every `.lovable/cache/audit-ai/<module>.json`, emits a `Lesson #82 advisory — pre-chunked-walker cache (chunked_path falsy)` block listing every sub-90 module whose cache lacks `chunked_path: True`. Surfaces regardless of `bundle_sha` drift (gateway-402 immune). Pure stdout — no exit-code change, aligned with `--report-only` advisory contract. Slot 34 §00 v1.8.0 → **v1.9.0** (minor — new behaviour); banners.
