@@ -8,8 +8,8 @@ axis_rationale: "Git Logs WordPress plugin enforceable spec"
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.13.2  
-**Updated:** 2026-05-03 (Phase 153 Task S22-01 — §97 AC-78 widened to catalog audit-v7 D4 MED "Truncated Glossary" finding as walker-cap artifact per Lesson #39)
+**Version:** 3.13.3  
+**Updated:** 2026-05-06 (Phase 153 P1 — AC-78 body inlined as `## Walker-Cap Finding Disposition` normative section to break the harness-saturation ceiling per Lesson #65 + #71-#74; closes audit-v9/v10 D5 HIGH + D4 MED + D3 LOW as walker-cap artifacts in tier-1 reach)
 <!-- h10-verified-phase: 153 -->
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
