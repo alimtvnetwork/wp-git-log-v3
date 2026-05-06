@@ -195,6 +195,35 @@ def load_module_bundle(mod_dir: Path) -> tuple[str, int, int, int]:
         if candidate in files:
             tier1.append(candidate)
             files.remove(candidate)
+
+    # Tier-1B (Phase 153 AC-34-18): nested contract files (`{00,97,98,99}-*.md`
+    # under sub-modules) get the SAME tier-1 priority as root contract files —
+    # but ONLY when the combined T1 + T1B byte-size fits under MAX_BYTES.
+    # Bounded promotion: if T1B would overflow the cap, fall back to current
+    # behavior (T1B remains alphabetical T2/T3 — risks truncation, no regression).
+    # Lifts spec/05/06/10/12/18/26 (6/10) immediately; spec/02/03/14/25 fall back.
+    # Sub-module contract files are sorted depth-shallowest-first, then alpha,
+    # so the outermost nested contracts are sampled first under any sub-cap.
+    tier1b: list[Path] = [
+        f for f in files
+        if f.name in tier1_names and len(f.relative_to(mod_dir).parts) > 1
+    ]
+    tier1b.sort(key=lambda p: (len(p.relative_to(mod_dir).parts), str(p)))
+    if tier1b:
+        def _bytes(fl: list[Path]) -> int:
+            n = 0
+            for f in fl:
+                try:
+                    n += len(f.read_text(encoding="utf-8", errors="replace"))
+                    n += len(f"\n\n===== FILE: {f.relative_to(ROOT)} =====\n\n")
+                except Exception:
+                    pass
+            return n
+        if _bytes(tier1) + _bytes(tier1b) <= MAX_BYTES:
+            for f in tier1b:
+                files.remove(f)
+            tier1 = tier1 + tier1b
+
     files = tier1 + files
 
     parts: list[str] = []
