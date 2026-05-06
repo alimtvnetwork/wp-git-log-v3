@@ -1,7 +1,7 @@
 # Changelog (v2)
 
-**Updated:** 2026-05-05 (Phase 153 Task N3 — AC-36 marked `[deprecated]` per false-coverage inverse audit; §21 retirement orphan swept)
-**Version:** 3.13.2
+**Updated:** 2026-05-06 (Phase 153 P1 — §00 Walker-Cap Finding Disposition normative section inlined; AC-78 body mirrored to tier-1 to break harness-saturation ceiling)
+**Version:** 3.13.3
 
 > **Archive pointers:** (1) §98 rows for v3.8.x and earlier (48 rows, 66 KB) moved to
 > [`_archive/98-changelog-pre-v3.9.0.md`](./_archive/98-changelog-pre-v3.9.0.md) at fu29.
