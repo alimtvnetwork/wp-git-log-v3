@@ -1,6 +1,6 @@
 # No-Questions Mode Counter
 
-Counter: **21/40**
+Counter: **22/40**
 
-Last task: P1 — spec/22 walker-cap disposition inline (LLM re-score deferred per Lesson #86 mid-phase 402)
-Outcome: Per Lesson #86, re-probed gateway → HTTP 402 (still blocked since N17). Ran 3 strict gates in parallel: lockstep 87/87 · tree-health 168/168 strict · inventory parity 6/6 — all GREEN. Three consecutive `next` loops at steady-state (#83 threshold met twice over). No spec edits, no script edits, no lockstep ripple. R1/R2 remain budget-blocked.
+Last task: P2 — spec/27 self-lift NO-OP (plateau-class + gateway 402)
+Outcome: Cache shows 0 findings @ score 88. `--force` re-score returned HTTP 402 despite `LOVABLE_API_KEY` set (Lesson #86 reaffirmed; Lesson #20 deferral). Chunk stats: 50 chunks / 7.26 MB / 19×T2 + 31×T3 — largest module in tree. 12-pt gap is structural `TIER_WEIGHTS` aggregation cost, NOT a contract gap. Closed per Lessons #71/#74/#79/#82 plateau-hygiene. No spec edits, no lockstep ripple. Memo: phase-153-task-P2-spec27-noop.md.
