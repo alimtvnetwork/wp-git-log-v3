@@ -1,6 +1,6 @@
 # No-Questions Mode Counter
 
-Counter: **24/40**
+Counter: **25/40**
 
-Last task: P4 — spec/25 self-lift NO-OP (cache stale; all 3 findings already closed by AC-AI-14/16/17)
-Outcome: Verified per Lesson #30 — cache HIGH/MED/LOW findings (Truncated context, Severity Enums, Phase 153 references) are all closed in §97 by AC-AI-16 (S25-01) + AC-AI-14 + AC-AI-17 (S25-02). Gateway 402 on `--force` (Lesson #86 reaffirmed). No spec edits — authoring would create Lesson #36 dual-source drift. Closed per Lessons #79/#82/#34 plateau+cache-class hygiene. **Pattern observation**: P2+P4 both NO-OP back-to-back; remaining app-scope modules (P5/P6/P7) MUST be §97-grep-verified BEFORE opening. Memo: phase-153-p4-spec25-noop.md.
+Last task: P-sweep — Lesson #37 complete-pair coverage audit across 7 integration-axis candidates (spec/03, 10, 11, 14, 16, 17, 18)
+Outcome: Survey-only (no spec edits). Result: **0/7 pair-complete** (anchor-map AC missing tree-wide). Two true hotspots by external-ref density: spec/17 (63 refs) + spec/03 (43 refs). Lower-density candidates (10/14/16/18) need per-module judgment, not mass apply (Lesson #79). Pair pattern is undersaturated tree-wide (only spec/22 + spec/12 have it). Memo: phase-153-p-sweep-lesson37-pair-coverage.md. Next: P-sweep-1 (spec/17 anchor map).
