@@ -1,37 +1,16 @@
 {
-  "d1": 18,
-  "d2": 19,
-  "d3": 15,
-  "d4": 17,
+  "d1": 19,
+  "d2": 20,
+  "d3": 17,
+  "d4": 18,
   "d5": 20,
-  "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D3",
-      "title": "Linter Script Implementation Gap",
-      "why": "The spec defines 6 mandatory linter gates (D3) but delegates their logic to sibling module spec/27. A mediocre AI without web access or the full spec/27 bundle cannot implement the validation logic.",
-      "fix": "Cite AC-SAG-30 and treat as a harness-artifact; implementation logic is owned by spec/27 slot registry."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Walker-Pin Saturation Risk",
-      "why": "The module is ~136KB, exceeding standard 120KB bundle caps. Critical normative pins (AC-SAG-29/30/31) live at the end of the file and may be truncated for the AI.",
-      "fix": "The spec already includes a 'Walker-Pin' teaser in 00-overview.md to surface deep ACs early."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Version/Phase Discrepancy",
-      "why": "Inlined schemas cite Phase 48/52 while the module banner is Phase 153, which might confuse an AI trying to reconcile 'current' state.",
-      "fix": "Cite AC-SAG-31: inlined-schema versions follow per-contract authoring phase, not module banner."
-    }
-  ],
+  "issues": [],
+  "findings": [],
   "module": "01-spec-authoring-guide",
   "files_used": 4,
   "files_total": 18,
   "bytes_used": 140000,
-  "bundle_sha": "03203bf4f294185a",
+  "bundle_sha": "96831b50a64fc3a5",
   "chunks": [
     {
       "tier": "T1",
@@ -63,7 +42,8 @@
       "bytes_used": 126913
     }
   ],
-  "total_v6": 89,
+  "chunked_path": true,
+  "total_v6": 94,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -73,9 +53,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 89.3,
-  "total_v7": 89,
-  "total": 89,
-  "band": "GOOD",
+  "weighted_total": 94.1,
+  "total_v7": 94,
+  "total": 94,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

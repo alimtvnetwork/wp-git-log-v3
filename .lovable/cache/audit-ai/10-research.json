@@ -32,6 +32,24 @@
   "files_total": 8,
   "bytes_used": 42753,
   "bundle_sha": "3508f746ab4b984c",
+  "chunks": [
+    {
+      "tier": "FULL",
+      "bundle_sha_chunk": "3508f746ab4b984c",
+      "files": [
+        "spec/10-research/00-overview.md",
+        "spec/10-research/97-acceptance-criteria.md",
+        "spec/10-research/98-changelog.md",
+        "spec/10-research/99-consistency-report.md",
+        "spec/10-research/01-research-index/00-overview.md",
+        "spec/10-research/01-research-index/97-acceptance-criteria.md",
+        "spec/10-research/01-research-index/98-changelog.md",
+        "spec/10-research/01-research-index/99-consistency-report.md"
+      ],
+      "bytes_used": 42753
+    }
+  ],
+  "chunked_path": false,
   "total_v6": 92,
   "axis": "audit-corpus",
   "axis_multipliers": {
