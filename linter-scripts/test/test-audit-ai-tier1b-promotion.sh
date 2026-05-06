@@ -87,6 +87,26 @@ echo "  probe → $out"
 nt1b_all=$(echo "$out" | sed -n 's/.*nT1B_total=\([0-9]*\).*/\1/p')
 assert "spec/22 nT1B total == 0"  "0" "$nt1b_all"
 
+# R2-followup: extend coverage to all 6 FITS modules
+fits_test() {
+  local label="$1"; local slug="$2"; local exp_total="$3"; local exp_top12="$4"
+  echo "$label: spec/$slug (FITS — clean lift expected)"
+  local out; out=$(probe "$slug")
+  echo "  probe → $out"
+  local rt1; rt1=$(echo "$out" | sed -n 's/.*root_t1=\([0-9]*\).*/\1/p')
+  local nt1b_top; nt1b_top=$(echo "$out" | sed -n 's/.*nT1B_first12=\([0-9]*\).*/\1/p')
+  local nt1b_all; nt1b_all=$(echo "$out" | sed -n 's/.*nT1B_total=\([0-9]*\).*/\1/p')
+  assert "spec/$slug root_t1 == 4"                "4"          "$rt1"
+  assert "spec/$slug nT1B_first12 == $exp_top12"  "$exp_top12" "$nt1b_top"
+  assert "spec/$slug nT1B_total == $exp_total"    "$exp_total" "$nt1b_all"
+}
+
+fits_test "T4" "06-seedable-config-architecture" "8"  "8"
+fits_test "T5" "10-research"                     "4"  "4"
+fits_test "T6" "12-cicd-pipeline-workflows"      "12" "8"
+fits_test "T7" "18-wp-plugin-how-to"             "4"  "4"
+fits_test "T8" "26-gitlogs-diagrams"             "4"  "4"
+
 echo "---"
 echo "AC-34-18 self-test: $PASS pass, $FAIL fail"
 [[ "$FAIL" -eq 0 ]] || exit 1
