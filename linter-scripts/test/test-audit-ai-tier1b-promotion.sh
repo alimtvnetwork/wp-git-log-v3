@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 # Self-test for AC-34-18: bounded tier-1B promotion (nested contract files).
 #
-# Asserts:
-#   T1: spec/05 (small nested T1B set, FITS path) → all 4 root T1 + all 8
-#       nested T1B files appear at the head of the bundle (positions 1-12).
-#   T2: spec/02 (giant nested T1B set, OVERFLOW-fallback path) → all 4 root T1
-#       still appear at the head; nested T1B files NOT mass-promoted (≤ 3 of
-#       116 nested T1B files in the first 12 bundle entries — they fall back
-#       to natural alphabetical order).
-#   T3: spec/22 (zero nested T1B) → behavior unchanged (root T1 first, no
-#       new entries, no error).
+# Asserts (R2-followup extension — all 6 FITS modules + OVERFLOW + zero-T1B):
+#   T1: spec/05 (FITS, 8 nested T1B)  → root_t1=4 · nT1B_first12=8 · total=8
+#   T2: spec/02 (OVERFLOW-fallback, 116 nested T1B) → root_t1=4 · nT1B_first12 ≤ 3
+#   T3: spec/22 (zero nested T1B) → behavior unchanged · nT1B_total=0
+#   T4: spec/06 (FITS, 8 nested T1B)  → root_t1=4 · nT1B_first12=8 · total=8
+#   T5: spec/10 (FITS, 4 nested T1B)  → root_t1=4 · nT1B_first12=4 · total=4
+#   T6: spec/12 (FITS, 12 nested T1B) → root_t1=4 · nT1B_first12=8 · total=12
+#         (only 8 fit in first 12 alongside 4 root-T1 — natural 12-slot ceiling)
+#   T7: spec/18 (FITS, 4 nested T1B)  → root_t1=4 · nT1B_first12=4 · total=4
+#   T8: spec/26 (FITS, 4 nested T1B)  → root_t1=4 · nT1B_first12=4 · total=4
 #
 # Codifies the bounded-promotion contract so future walker edits cannot
 # silently regress the FITS path (clean lift) or the OVERFLOW path
@@ -85,6 +86,26 @@ out=$(probe "22-git-logs-v2")
 echo "  probe → $out"
 nt1b_all=$(echo "$out" | sed -n 's/.*nT1B_total=\([0-9]*\).*/\1/p')
 assert "spec/22 nT1B total == 0"  "0" "$nt1b_all"
+
+# R2-followup: extend coverage to all 6 FITS modules
+fits_test() {
+  local label="$1"; local slug="$2"; local exp_total="$3"; local exp_top12="$4"
+  echo "$label: spec/$slug (FITS — clean lift expected)"
+  local out; out=$(probe "$slug")
+  echo "  probe → $out"
+  local rt1; rt1=$(echo "$out" | sed -n 's/.*root_t1=\([0-9]*\).*/\1/p')
+  local nt1b_top; nt1b_top=$(echo "$out" | sed -n 's/.*nT1B_first12=\([0-9]*\).*/\1/p')
+  local nt1b_all; nt1b_all=$(echo "$out" | sed -n 's/.*nT1B_total=\([0-9]*\).*/\1/p')
+  assert "spec/$slug root_t1 == 4"                "4"          "$rt1"
+  assert "spec/$slug nT1B_first12 == $exp_top12"  "$exp_top12" "$nt1b_top"
+  assert "spec/$slug nT1B_total == $exp_total"    "$exp_total" "$nt1b_all"
+}
+
+fits_test "T4" "06-seedable-config-architecture" "8"  "8"
+fits_test "T5" "10-research"                     "4"  "4"
+fits_test "T6" "12-cicd-pipeline-workflows"      "12" "8"
+fits_test "T7" "18-wp-plugin-how-to"             "4"  "4"
+fits_test "T8" "26-gitlogs-diagrams"             "4"  "4"
 
 echo "---"
 echo "AC-34-18 self-test: $PASS pass, $FAIL fail"

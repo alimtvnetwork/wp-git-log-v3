@@ -1,8 +1,11 @@
 # No-Questions Mode Counter
 
-Counter: **30/40**
+Counter: **31/40**
 
-Last task: A8 partial v5 tree-wide re-baseline (PRODUCTIVE — gateway live, 9/23 modules fresh)
+Last task: R2-followup — AC-34-18 Tier-1B mechanical lock extended 3/8 → 8/8 affected modules (PRODUCTIVE)
+Outcome: Gateway oscillated back to HTTP 402 on A8-cont1 probe (Lesson #86 reconfirmed, third oscillation this Phase 153 sweep) — fell back to gateway-independent R2-followup. Extended `linter-scripts/test/test-audit-ai-tier1b-promotion.sh` from **6 → 21 assertions**: T1=spec/05 FITS, T2=spec/02 OVERFLOW, T3=spec/22 zero-T1B (existing); T4=spec/06 FITS (8 nested T1B), T5=spec/10 FITS (4), T6=spec/12 FITS (12 — natural 12-slot ceiling), T7=spec/18 FITS (4), T8=spec/26 FITS (4). Reusable `fits_test()` helper added (~15 LoC). Self-test **21/21 PASS**. Per L21 parity-AC mechanical-lock rule (mirror of P49 AC-T-13 graduation): pre-R2-followup AC-34-18 only locked 3/8 sentinels — 5 FITS modules shared the same code path with no test, future walker edits could silently regress them. **Discovery codified**: spec/12's 12-slot natural ceiling (4 root T1 + 8 nested T1B fills priority-1 alongside 4 root, remaining 4 nested T1B fall to T2 alpha) is correct contract behavior, not regression. Lockstep patch-only (no AC, no code, no CI/RUBRIC/gate-count): slot 34 v1.10.0 → v1.10.1; §27 §00/§98 v2.91.0 → v2.91.1; §99 v2.87.0 → v2.87.1. **All 5 strict gates GREEN**: lockstep 87/87 (0 findings) · tree-health 168/168 strict · version-parity 74/74 · inventory parity 6/6 · self-test 21/21. Memo: phase-153-task-R2-followup-tier1b-mechanical-lock.md.
+
+Prior task: A8 partial v5 tree-wide re-baseline (PRODUCTIVE — gateway live, 9/23 modules fresh)
 Outcome: Lesson #89 two-step probe → HTTP 200 (gateway GREEN, first since A24-fu4). Ran `--force` tree-wide; gateway oscillated mid-run (Lesson #86 reconfirmed) — **9/23 modules scored fresh** before HTTP 402 cascade. **Scored-subset tree mean: 91.3 / 100 EXCELLENT** · 6 EXCELLENT + 3 GOOD + 0 NEEDS_WORK + 0 BLOCKING · 0 CRITICAL + 0 HIGH + 1 MEDIUM + 2 LOW. **Top mover: spec/05 86 → 88 (+2)** confirms A6 tier-1 walker AND AC-34-18 Tier-1B promotion are working in production (file count 14/20, 136 KB cap honored — FITS path executed cleanly). Other deltas all within ±2 noise band. **14 modules pending** (12/13/14/15/16/17/18/22/23/24/25/26/27/28); A24-fu4 spec/12 expected 75 → 83 not yet captured. NO spec edits, no lockstep ripple. Memo: phase-153-task-A8-partial-v5-baseline.md.
 
 Prior task: A8-prep / R2 — AC-34-18 bounded tier-1B promotion (PRODUCTIVE — first R2-class win since plateau)
