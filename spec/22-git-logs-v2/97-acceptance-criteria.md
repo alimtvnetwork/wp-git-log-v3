@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.10.2  
-**Updated:** 2026-05-05 (Phase 153 Task N3 — marked **AC-36** `[active]` → `[deprecated]` to reflect §21 retirement in §98 v3.7.8. AC was carrying a dead `**Verifies:** §21` since the i18n-out-of-scope retirement; tree-wide false-coverage inverse audit surfaced this as the only real drift across 1241 ACs / 1128 verifies-clauses. Dormancy contract pinned to §00 inventory row 21 + §98 v3.7.8 retirement entry. No new AC, no AC-count change, no AC-31-31 cascade.)
+**Version:** 3.11.0  
+**Updated:** 2026-05-06 (Phase 153 P3 — added **AC-79** `[critical]` Cross-Module Externalized Citation Map per Lessons #36 + #37; explicit normative anchor table for 6 externalized citations: spec/04 (DDL conventions), spec/12 (CI runner matrix), spec/13 AC-22 (SQLite locking), spec/26 (Mermaid diagrams), spec/05 (split-DB pattern), linter-scripts/check-spec-folder-refs.py. Each row pins owning-AC + cite-source-file + purpose + restate-forbidden flag. Closes audit-followability gap for integration-axis modules. AC count 73 → 74.)
 
 ---
 
