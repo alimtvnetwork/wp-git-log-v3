@@ -8,8 +8,8 @@ axis_rationale: "Git Logs WordPress plugin enforceable spec"
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.13.3  
-**Updated:** 2026-05-06 (Phase 153 P1 — AC-78 body inlined as `## Walker-Cap Finding Disposition` normative section to break the harness-saturation ceiling per Lesson #65 + #71-#74; closes audit-v9/v10 D5 HIGH + D4 MED + D3 LOW as walker-cap artifacts in tier-1 reach)
+**Version:** 3.13.4  
+**Updated:** 2026-05-06 (Phase 153 P3 — §97 v3.11.0 ships AC-79 Cross-Module Externalized Citation Map per Lessons #36 + #37; banner-only patch bump in §00, no inventory or content change here)
 <!-- h10-verified-phase: 153 -->
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
