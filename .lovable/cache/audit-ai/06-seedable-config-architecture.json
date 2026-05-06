@@ -1,37 +1,16 @@
 {
   "d1": 19,
-  "d2": 20,
-  "d3": 18,
-  "d4": 20,
+  "d2": 19,
+  "d3": 19,
+  "d4": 18,
   "d5": 17,
-  "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "External Error Code Registry Reference Missing",
-      "why": "AC-SC-22 and 02-features/02 reference spec/03-error-manage for AB-9301+ codes, but the provided context only includes spec/06. An AI coder cannot verify if these codes exist or conflict.",
-      "fix": "Provide the registry file from spec/03 or explicitly define the AB-9300 block as reserved for RAG in the overview."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Ambiguous SQLite DDL for SettingValue Union",
-      "why": "AC-SC-14 defines a complex Go union struct (SettingValue) but the SQL DDL in 01-fundamentals uses a single 'Value TEXT' column without specifying if it's JSON-encoded or a flat string for scalars.",
-      "fix": "Explicitly state in the DDL comments that 'Value' column MUST store the JSON-serialized representation of the SettingValue struct."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Inconsistent Type naming in 01-fundamentals",
-      "why": "01-fundamentals \u00a7config.schema.json uses 'Type' (Pascal) while the JSON Schema in 00-overview uses 'type' (lowercase) for JSON-native types, potentially confusing the PascalCase-only rule.",
-      "fix": "Standardize the JSON Schema fragments to use lowercase 'type' for JSON Schema keywords while keeping PascalCase for property keys."
-    }
-  ],
+  "issues": [],
+  "findings": [],
   "module": "06-seedable-config-architecture",
-  "files_used": 9,
+  "files_used": 16,
   "files_total": 21,
-  "bytes_used": 139679,
-  "bundle_sha": "ddd24a320aed32bb",
+  "bytes_used": 140000,
+  "bundle_sha": "cf053dbfea3d6f0e",
   "chunks": [
     {
       "tier": "T2",
@@ -76,7 +55,8 @@
       "bytes_used": 68135
     }
   ],
-  "total_v6": 94,
+  "chunked_path": true,
+  "total_v6": 92,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -86,9 +66,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 95.1,
-  "total_v7": 95,
-  "total": 95,
+  "weighted_total": 93.2,
+  "total_v7": 93,
+  "total": 93,
   "band": "EXCELLENT",
   "rubric": "v7"
 }
