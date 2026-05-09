@@ -1,38 +1,47 @@
 {
-  "d1": 18,
-  "d2": 20,
-  "d3": 17,
-  "d4": 15,
-  "d5": 14,
-  "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Missing Core Normative Files (04, 18, 34)",
-      "why": "The spec references 04-rest-api-endpoints.md (API), 18-schema.sql (DDL), and 34-phpunit-test-skeleton (PHP) as authoritative, but they are not provided in the context.",
-      "fix": "Provide the content of files 04, 18, and 34 in the prompt context."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Truncated Glossary and Enums",
-      "why": "The 01-glossary-and-enums.md file is truncated at the 136KB cap, losing the TypeScript Mirror and Enum Catalog required for implementation.",
-      "fix": "Move the TypeScript Mirror and Enum Catalog to the top of file 01 or provide them in a separate file."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D3",
-      "title": "Externalized Concurrency Strategy",
-      "why": "AC-26 delegates SQLite locking/concurrency to spec/13 AC-22, which is not provided, leaving the implementer to guess the 'persisted floor' logic.",
-      "fix": "Inline the specific SQLite locking/concurrency rules from spec/13 into AC-26."
-    }
-  ],
+  "d1": 16,
+  "d2": 16,
+  "d3": 16,
+  "d4": 12,
+  "d5": 19,
+  "issues": [],
+  "findings": [],
   "module": "22-git-logs-v2",
-  "files_used": 5,
+  "files_used": 3,
   "files_total": 38,
   "bytes_used": 140000,
-  "bundle_sha": "4d764f3d45da6021",
-  "total_v6": 84,
+  "bundle_sha": "f1faa9a18149c618",
+  "chunks": [
+    {
+      "tier": "T1",
+      "bundle_sha_chunk": "6539cf7cf809902e",
+      "files": [
+        "spec/22-git-logs-v2/00-overview.md",
+        "spec/22-git-logs-v2/97-acceptance-criteria.md"
+      ],
+      "bytes_used": 95607
+    },
+    {
+      "tier": "T1",
+      "bundle_sha_chunk": "428caec73fa20555",
+      "files": [
+        "spec/22-git-logs-v2/98-changelog.md"
+      ],
+      "bytes_used": 49812
+    },
+    {
+      "tier": "T1",
+      "bundle_sha_chunk": "f5273869cc98236b",
+      "files": [
+        "spec/22-git-logs-v2/00-overview.md",
+        "spec/22-git-logs-v2/97-acceptance-criteria.md",
+        "spec/22-git-logs-v2/99-consistency-report.md"
+      ],
+      "bytes_used": 114876
+    }
+  ],
+  "chunked_path": true,
+  "total_v6": 79,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +51,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 87.4,
-  "total_v7": 87,
-  "total": 87,
+  "weighted_total": 78.3,
+  "total_v7": 78,
+  "total": 78,
   "band": "GOOD",
   "rubric": "v7"
 }
