@@ -2,37 +2,56 @@
   "d1": 20,
   "d2": 20,
   "d3": 18,
-  "d4": 19,
+  "d4": 18,
   "d5": 15,
   "issues": [
     {
       "severity": "HIGH",
       "dim": "D5",
       "title": "Missing Authoritative Source (spec/22)",
-      "why": "The module is a derivative of spec/22 (Database, Auth, Errors), but spec/22 is not provided in the context. A mediocre AI cannot verify if the diagrams are actually correct.",
-      "fix": "Provide spec/22-git-logs-v2 files in the prompt context."
+      "why": "The module is a derivative of spec/22 (ER schema, error codes, auth logic) but spec/22 is not provided in the context. A mediocre AI cannot verify if the diagrams are 'correct' against the source of truth.",
+      "fix": "Include spec/22 (specifically 02-database-schema.md and 14-error-codes.md) in the provided context."
     },
     {
       "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "External Dependency on xmllint",
-      "why": "AC-23 mandates a Tier 2 structural-XML diff using 'xmllint --c14n11', which is an external OS-level binary not guaranteed in a standard AI coding environment.",
-      "fix": "Provide a fallback script or regex-based normalization logic that doesn't require libxml2."
+      "dim": "D4",
+      "title": "Missing .mmd Source Content",
+      "why": "The spec defines invariants for .mmd files (AC-DG-01..21) and references 7 active files, but the actual Mermaid source text for these files is missing from the provided context.",
+      "fix": "Append the raw text content of the 7 active .mmd files (01, 05-10) to the module context."
     },
     {
       "severity": "LOW",
-      "dim": "D4",
-      "title": "Missing .mmd Source Content",
-      "why": "The spec references 7 active .mmd files (01, 05-10) but the provided context only contains the markdown documentation and puppeteer.json, not the Mermaid sources themselves.",
-      "fix": "Include the .mmd file contents in the module file list."
+      "dim": "D3",
+      "title": "Ambiguous 'Structural-XML' Diff Logic",
+      "why": "AC-23/24 mandate a structural diff but do not define the exact 'diff' command flags or exit-code behavior for partial coordinate drift (>1px).",
+      "fix": "Specify the exact diff command (e.g., 'diff -u') and define the numeric tolerance check for path coordinates."
     }
   ],
   "module": "26-gitlogs-diagrams",
   "files_used": 9,
   "files_total": 9,
-  "bytes_used": 79456,
-  "bundle_sha": "e1982e55e90782bb",
-  "total_v6": 92,
+  "bytes_used": 88287,
+  "bundle_sha": "333a5aa450a349a8",
+  "chunks": [
+    {
+      "tier": "FULL",
+      "bundle_sha_chunk": "333a5aa450a349a8",
+      "files": [
+        "spec/26-gitlogs-diagrams/00-overview.md",
+        "spec/26-gitlogs-diagrams/97-acceptance-criteria.md",
+        "spec/26-gitlogs-diagrams/98-changelog.md",
+        "spec/26-gitlogs-diagrams/99-consistency-report.md",
+        "spec/26-gitlogs-diagrams/01-diagram-conventions/00-overview.md",
+        "spec/26-gitlogs-diagrams/01-diagram-conventions/97-acceptance-criteria.md",
+        "spec/26-gitlogs-diagrams/01-diagram-conventions/98-changelog.md",
+        "spec/26-gitlogs-diagrams/01-diagram-conventions/99-consistency-report.md",
+        "spec/26-gitlogs-diagrams/puppeteer.json"
+      ],
+      "bytes_used": 88287
+    }
+  ],
+  "chunked_path": false,
+  "total_v6": 91,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,7 +61,7 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 94.3,
+  "weighted_total": 93.5,
   "total_v7": 94,
   "total": 94,
   "band": "EXCELLENT",

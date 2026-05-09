@@ -1,8 +1,11 @@
 # No-Questions Mode Counter
 
-Counter: **32/40**
+Counter: **33/40**
 
-Last task: A8-cont1 NO-OP (gateway 402, no gateway-independent productive backlog)
+Last task: A8-cont1 sub-batch — 11 modules fresh-scored (gateway oscillated GREEN→402 mid-run)
+Outcome: Lesson #89 probe → HTTP 200 (5th gateway oscillation in Phase 153, 2nd to GREEN). Three sub-batches `--force`: 12=84 GOOD (A24-fu4 prediction confirmed), 13=94 EXC (+7), 15=91 EXC, 16=98 EXC, 17=88 GOOD, 18=90 EXC, 22=78 GOOD, 23=99 EXC (top), 24=97 EXC, 25=87 GOOD, 26=94 EXC. Combined with prior A8-partial 9 fresh → ~20/23 modules now have v5 baselines. **Pending:** spec/14 (deterministic gateway JSON parse error — likely malformed response, distinct from 402 class), spec/27 + spec/28 (HTTP 402 — gateway oscillated mid sub-batch 3). NO spec edits, NO lockstep ripple — `--force` only refreshes cache snapshots. All 5 strict gates GREEN. **NEW Lesson #92 candidate** (not yet codified): malformed-JSON gateway responses on a single module across retries are a distinct failure class from 402 oscillation; try `--chunked` to bypass. Memo: phase-153-task-A8-cont1-sub-batch.md.
+
+Prior task: A8-cont1 NO-OP (gateway 402, no gateway-independent productive backlog)
 Outcome: Lesson #89 two-step probe → ENV SET ✓ + live `--force` → HTTP 402 (4th oscillation in Phase 153). Backlog re-survey per Lesson #30: A8-cont1 + A8-finalize gateway-blocked; R2-followup CLOSED prior phase (8/8 mechanical lock); AC-34-18-deep deferred per Lesson #79; R1 blocked; git-logs awaits user decision. **No gateway-independent productive task surfaced.** Per Lesson #74 + Lesson #84 (steady-state + meta-deferral hygiene): declared honest hold rather than synthesize low-leverage busy-work. Surveyed other low-assertion self-tests (test-audit-explain-contract.sh 6, test-audit-deterministic-stability.sh 9, test-audit-cli-thresholds.sh 12) — none flagged in prior memos as having coverage gaps; extending without surfaced regression would be busy-work. NO spec edits, NO script edits, NO lockstep ripple. All 5 strict gates remain GREEN (verified prior phase). Memo: phase-153-a8-cont1-noop-gateway-402.md.
 
 Prior task: R2-followup — AC-34-18 Tier-1B mechanical lock extended 3/8 → 8/8 affected modules (PRODUCTIVE)

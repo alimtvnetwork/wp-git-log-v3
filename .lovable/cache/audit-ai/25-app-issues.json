@@ -2,37 +2,51 @@
   "d1": 18,
   "d2": 19,
   "d3": 17,
-  "d4": 20,
-  "d5": 18,
+  "d4": 15,
+  "d5": 19,
   "issues": [
     {
       "severity": "HIGH",
-      "dim": "D5",
-      "title": "Truncated context blocks critical files",
-      "why": "The provided context is truncated at 136KB, cutting off the end of 02-consolidated-audit-findings/98-changelog.md and potentially missing 99-consistency-report.md for that sub-module.",
-      "fix": "Ensure the audit walker provides the full content of all 12 files in the module to resolve internal consistency."
+      "dim": "D4",
+      "title": "Truncated Consolidated Findings File",
+      "why": "The file '02-consolidated-audit-findings/00-overview.md' is truncated mid-sentence at the 136KB cap, losing the final findings and the closing contract/verification sections.",
+      "fix": "Split the consolidated findings into multiple files (e.g., by severity or category) to ensure each file stays well under the context limit."
     },
     {
       "severity": "MEDIUM",
       "dim": "D3",
-      "title": "Inconsistent Severity Enums between trackers",
-      "why": "Sub-module 01 uses {blocker, major, minor, info} in its Phase 50 contract, while sub-module 02 uses {Critical, High, Medium, Low} per AC-AI-14.",
-      "fix": "Standardize all trackers in spec/25 to use the closed set {Critical, High, Medium, Low} defined in AC-AI-14."
+      "title": "Inconsistent Severity Enums in Superseded Module",
+      "why": "File '01-phase-2-git-logs-audit/00-overview.md' contains two competing severity enums (Critical/High vs Blocker/Major), which can confuse an AI coder on which to implement for the legacy parser.",
+      "fix": "Add a 'DEPRECATED' comment block next to the Phase 50 internal-audit-process enum in the overview."
     },
     {
       "severity": "LOW",
       "dim": "D1",
-      "title": "Ambiguous 'Phase 153' references",
-      "why": "The spec frequently references 'Phase 153' and 'Lesson #NN' which are external process artifacts not fully defined in the provided context.",
-      "fix": "Add a brief glossary or link to a 'Process Fundamentals' module that defines Phase and Lesson terminology."
+      "title": "Ambiguous 'mem://' Protocol References",
+      "why": "The spec refers to 'mem://index.md' and 'mem://process/...' which are external to the provided context and not standard URI schemes.",
+      "fix": "Add a note in the Process Terminology glossary explaining that 'mem://' refers to the project's internal memory/knowledge-base files."
     }
   ],
   "module": "25-app-issues",
-  "files_used": 11,
+  "files_used": 9,
   "files_total": 12,
   "bytes_used": 140000,
-  "bundle_sha": "f7feb681fecea0f1",
-  "total_v6": 92,
+  "bundle_sha": "39e19a180c14d422",
+  "chunks": [
+    {
+      "tier": "T1",
+      "bundle_sha_chunk": "956600ed84aeefcb",
+      "files": [
+        "spec/25-app-issues/00-overview.md",
+        "spec/25-app-issues/97-acceptance-criteria.md",
+        "spec/25-app-issues/98-changelog.md",
+        "spec/25-app-issues/99-consistency-report.md"
+      ],
+      "bytes_used": 58177
+    }
+  ],
+  "chunked_path": false,
+  "total_v6": 88,
   "axis": "audit-corpus",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +56,9 @@
     "d5": 1.5
   },
   "axis_cap": 95,
-  "weighted_total": 93.0,
-  "total_v7": 93,
-  "total": 93,
-  "band": "EXCELLENT",
+  "weighted_total": 87.0,
+  "total_v7": 87,
+  "total": 87,
+  "band": "GOOD",
   "rubric": "v7"
 }

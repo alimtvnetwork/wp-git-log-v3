@@ -1,38 +1,146 @@
 {
   "d1": 18,
-  "d2": 19,
+  "d2": 17,
   "d3": 17,
-  "d4": 16,
-  "d5": 15,
-  "issues": [
-    {
-      "severity": "HIGH",
-      "dim": "D5",
-      "title": "Truncated Context Cap",
-      "why": "The module is ~136 KB, exceeding the provided context. Critical implementation details for Phases 4-21 (Logging, REST, ORM, etc.) are missing from the prompt.",
-      "fix": "Provide the remaining phase files (04-21) in a follow-up or split the module into smaller chunks."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Missing Concrete Implementation for FileLogger",
-      "why": "Phase 4 is truncated exactly at the 'Complete Specification' section. An AI cannot implement the FileLogger (flock, rotation, stack trace formatting) without the elided text.",
-      "fix": "Restore the elided text for Phase 4 in the specification body."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D3",
-      "title": "Partial Failure in Autoloader",
-      "why": "Phase 1.4 mandates 'Error re-throw' if require_once fails, but doesn't specify the behavior for the 'Diagnostic logging' if the disk is full or permissions are missing.",
-      "fix": "Add a requirement to wrap autoloader file writes in a silent try-catch to prevent fatal loops during log failure."
-    }
-  ],
+  "d4": 19,
+  "d5": 18,
+  "issues": [],
+  "findings": [],
   "module": "18-wp-plugin-how-to",
-  "files_used": 16,
+  "files_used": 15,
   "files_total": 35,
   "bytes_used": 140000,
-  "bundle_sha": "6379fb4adb7ecb58",
-  "total_v6": 85,
+  "bundle_sha": "28b967309e74a3b0",
+  "chunks": [
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "8c1b8f21d60b05e0",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/00-quick-start.md",
+        "spec/18-wp-plugin-how-to/01-foundation-and-architecture.md",
+        "spec/18-wp-plugin-how-to/02-enums-and-coding-style/01-enum-architecture.md",
+        "spec/18-wp-plugin-how-to/02-enums-and-coding-style/02-enum-metadata-pattern.md",
+        "spec/18-wp-plugin-how-to/02-enums-and-coding-style/03-self-update-status-enum.md",
+        "spec/18-wp-plugin-how-to/02-enums-and-coding-style/04-action-type-enum.md",
+        "spec/18-wp-plugin-how-to/03-traits-and-composition.md"
+      ],
+      "bytes_used": 119837
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "afba277a5fc5d7f6",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/04-logging-and-error-handling.md",
+        "spec/18-wp-plugin-how-to/05-helpers-responses-and-integration.md",
+        "spec/18-wp-plugin-how-to/06-input-validation-patterns.md"
+      ],
+      "bytes_used": 121448
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "22fd608572ec3791",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/07-reference-implementations.md",
+        "spec/18-wp-plugin-how-to/08-wordpress-integration-patterns.md"
+      ],
+      "bytes_used": 127054
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "8d83019917fa9eec",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/09-testing-patterns.md",
+        "spec/18-wp-plugin-how-to/10-deployment-patterns.md"
+      ],
+      "bytes_used": 126955
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "362341f6ff47d21f",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/11-frontend-and-template-patterns.md",
+        "spec/18-wp-plugin-how-to/12-design-system.md"
+      ],
+      "bytes_used": 115133
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "62520f2816446440",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/13-admin-ui-patterns.md",
+        "spec/18-wp-plugin-how-to/14-rest-api-conventions.md"
+      ],
+      "bytes_used": 119583
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "ebdc4d6b7e7acef2",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/15-settings-architecture.md",
+        "spec/18-wp-plugin-how-to/16-error-handling-extraction.md",
+        "spec/18-wp-plugin-how-to/17-data-file-patterns.md"
+      ],
+      "bytes_used": 128866
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "65b3d8be99bf3be4",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/18-frontend-javascript-patterns.md",
+        "spec/18-wp-plugin-how-to/19-micro-orm-and-root-db.md"
+      ],
+      "bytes_used": 92636
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "dd326d5bbc068db5",
+      "files": [
+        "spec/18-wp-plugin-how-to/00-overview.md",
+        "spec/18-wp-plugin-how-to/97-acceptance-criteria.md",
+        "spec/18-wp-plugin-how-to/98-changelog.md",
+        "spec/18-wp-plugin-how-to/99-consistency-report.md",
+        "spec/18-wp-plugin-how-to/20-end-to-end-walkthrough.md",
+        "spec/18-wp-plugin-how-to/21-ping-endpoint.md",
+        "spec/18-wp-plugin-how-to/changelog.md",
+        "spec/18-wp-plugin-how-to/readme.md"
+      ],
+      "bytes_used": 116317
+    }
+  ],
+  "chunked_path": true,
+  "total_v6": 89,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -42,9 +150,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 84.9,
-  "total_v7": 85,
-  "total": 85,
-  "band": "GOOD",
+  "weighted_total": 89.5,
+  "total_v7": 90,
+  "total": 90,
+  "band": "EXCELLENT",
   "rubric": "v7"
 }

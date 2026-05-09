@@ -1,38 +1,52 @@
 {
-  "d1": 19,
+  "d1": 20,
   "d2": 20,
-  "d3": 18,
+  "d3": 19,
   "d4": 20,
   "d5": 20,
   "issues": [
     {
-      "severity": "MEDIUM",
-      "dim": "D1",
-      "title": "Conflicting DDL Dialects",
-      "why": "The module provides both SQLite (PascalCase) and PostgreSQL (snake_case) DDLs. While AC-ADB-11 designates SQLite as primary, having two distinct schemas in one file increases the risk of a mediocre coder picking the wrong one or mixing conventions.",
-      "fix": "Move the PostgreSQL DDL block to a clearly marked 'Reference Only' appendix or a separate file in the 01-96 slot range."
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Implicit SQLite String Length Limits",
+      "why": "While the Postgres reference block has CHECK constraints for string lengths (e.g., 1-120 chars), the primary SQLite DDL lacks these, relying on application-layer enforcement.",
+      "fix": "Add CHECK(length(AppName) BETWEEN 1 AND 120) to the SQLite App table definition."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Missing SQLite Busy Timeout/WAL configuration",
-      "why": "While it references spec/05 for architecture, a standalone implementation of this module might suffer from 'database is locked' errors during concurrent CI/CD push resolutions if the specific SQLite pragmas aren't inlined.",
-      "fix": "Add a 'Recommended Pragmas' section to the Query Patterns including WAL mode and busy_timeout."
+      "title": "Missing Index on AppSlug",
+      "why": "The AppSlug column is marked UNIQUE (which creates an implicit index), but for high-volume resolution, an explicit index is often preferred for clarity in audit logs.",
+      "fix": "The current UNIQUE constraint is sufficient for a mediocre coder, but adding an explicit index comment would clarify intent."
     },
     {
       "severity": "LOW",
-      "dim": "D1",
-      "title": "Timestamp Unit Ambiguity in Postgres Block",
-      "why": "The SQLite DDL explicitly uses Unix seconds (INTEGER), but the Postgres reference block uses 'timestamptz'. A coder porting logic between them might introduce unit mismatches in application code.",
-      "fix": "Add a note to the Postgres block stating that for application logic parity, timestamps should be handled as UTC Unix seconds."
+      "dim": "D3",
+      "title": "Concurrency Retry Logic Detail",
+      "why": "The spec references the retry contract (3x100ms) but doesn't explicitly state if the 'mediocre coder' should implement the wrapper or assume the driver handles it.",
+      "fix": "Clarify that the database connection factory MUST wrap executions in the specified retry logic."
     }
   ],
   "module": "23-app-database",
   "files_used": 4,
   "files_total": 4,
-  "bytes_used": 61670,
-  "bundle_sha": "715e11148d2ca42b",
-  "total_v6": 97,
+  "bytes_used": 69751,
+  "bundle_sha": "1d0c4cc3c0662a82",
+  "chunks": [
+    {
+      "tier": "FULL",
+      "bundle_sha_chunk": "1d0c4cc3c0662a82",
+      "files": [
+        "spec/23-app-database/00-overview.md",
+        "spec/23-app-database/97-acceptance-criteria.md",
+        "spec/23-app-database/98-changelog.md",
+        "spec/23-app-database/99-consistency-report.md"
+      ],
+      "bytes_used": 69751
+    }
+  ],
+  "chunked_path": false,
+  "total_v6": 99,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +56,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 96.6,
-  "total_v7": 97,
-  "total": 97,
+  "weighted_total": 98.8,
+  "total_v7": 99,
+  "total": 99,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

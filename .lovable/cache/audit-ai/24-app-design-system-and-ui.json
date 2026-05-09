@@ -3,36 +3,50 @@
   "d2": 20,
   "d3": 18,
   "d4": 20,
-  "d5": 15,
+  "d5": 19,
   "issues": [
     {
-      "severity": "MEDIUM",
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Z-index collision risk",
+      "why": "The AppShell uses hardcoded z-40 (header) and z-30 (sidebar) without referencing a central z-index scale from \u00a707.",
+      "fix": "Map z-index values to \u00a707 tokens like var(--z-index-fixed) or var(--z-index-sidebar)."
+    },
+    {
+      "severity": "LOW",
       "dim": "D5",
-      "title": "External Dependency \u00a707 Missing",
-      "why": "The module is a 'strict additive overlay' on \u00a707, but the \u00a707 primitive tokens (e.g., --background, --card) are not provided in this context, preventing 100% confidence in variable resolution.",
-      "fix": "Provide a snippet of the core \u00a707 token registry in the Cross-References or as a mock fixture."
+      "title": "Implicit dependency on Lucide/Icons",
+      "why": "The responsive breakpoint section mentions 'icons only' for the collapsed sidebar but doesn't specify the icon library or sizing contract.",
+      "fix": "Add a cross-reference to \u00a707 Iconography or specify a standard icon size (e.g., 1.25rem) for collapsed state."
     },
     {
       "severity": "LOW",
       "dim": "D3",
-      "title": "Sidebar State Concurrency",
-      "why": "The spec mentions a 'collapsed' state for the sidebar at < md breakpoints but does not define the transition logic or how to handle the state if toggled manually (concurrency of window resize vs user click).",
-      "fix": "Add a requirement that sidebar state must be derived from a unified 'isCollapsed' hook sensitive to both breakpoint and manual toggle."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D5",
-      "title": "Missing linter-scripts",
-      "why": "The verification section and CI workflow rely on specific scripts (e.g., detect-changed-modules.sh) that are referenced but not defined.",
-      "fix": "Add a brief comment describing the expected behavior/exit codes of the referenced linter-scripts."
+      "title": "Scrollbar gutter shift",
+      "why": "The AppCanvas is 'overflow-y-auto' while the header is 'fixed inset-x-0', which can cause layout shift when scrollbars appear/disappear.",
+      "fix": "Add 'scrollbar-gutter: stable' to the AppShell container or main element."
     }
   ],
   "module": "24-app-design-system-and-ui",
   "files_used": 4,
   "files_total": 4,
-  "bytes_used": 39103,
-  "bundle_sha": "a192dbc85adf0bba",
-  "total_v6": 93,
+  "bytes_used": 43370,
+  "bundle_sha": "5cffecf14cd83b8c",
+  "chunks": [
+    {
+      "tier": "FULL",
+      "bundle_sha_chunk": "5cffecf14cd83b8c",
+      "files": [
+        "spec/24-app-design-system-and-ui/00-overview.md",
+        "spec/24-app-design-system-and-ui/97-acceptance-criteria.md",
+        "spec/24-app-design-system-and-ui/98-changelog.md",
+        "spec/24-app-design-system-and-ui/99-consistency-report.md"
+      ],
+      "bytes_used": 43370
+    }
+  ],
+  "chunked_path": false,
+  "total_v6": 97,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +56,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 95.1,
-  "total_v7": 95,
-  "total": 95,
+  "weighted_total": 97.1,
+  "total_v7": 97,
+  "total": 97,
   "band": "EXCELLENT",
   "rubric": "v7"
 }
