@@ -7,10 +7,10 @@
   "issues": [],
   "findings": [],
   "module": "12-cicd-pipeline-workflows",
-  "files_used": 16,
+  "files_used": 17,
   "files_total": 49,
   "bytes_used": 140000,
-  "bundle_sha": "72fc856e20140f7f",
+  "bundle_sha": "91b5524b47885aad",
   "chunks": [
     {
       "tier": "T2",

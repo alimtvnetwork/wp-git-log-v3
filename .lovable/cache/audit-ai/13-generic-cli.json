@@ -1,38 +1,73 @@
 {
-  "d1": 18,
-  "d2": 20,
+  "d1": 19,
+  "d2": 19,
   "d3": 19,
-  "d4": 17,
+  "d4": 18,
   "d5": 18,
-  "issues": [
-    {
-      "severity": "MEDIUM",
-      "dim": "D4",
-      "title": "Truncated Constants Reference",
-      "why": "File 15-constants-reference.md is truncated mid-sentence due to the 136KB context cap, leaving the 'Contributors' section and potentially some final rules incomplete.",
-      "fix": "Move the Contributors section to a shared file or ensure critical normative rules are placed at the top of the file."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D1",
-      "title": "Ambiguous 'isBusyOrLocked' Implementation",
-      "why": "AC-22 and 10-database.md refer to an 'isBusyOrLocked' predicate but the exact error-code mapping for 'modernc.org/sqlite' (the recommended CGo-free driver) vs 'mattn/go-sqlite3' is not explicitly enumerated.",
-      "fix": "Add a code snippet in 10-database.md explicitly mapping SQLITE_BUSY (5) and SQLITE_LOCKED (6) for the recommended driver."
-    },
-    {
-      "severity": "LOW",
-      "dim": "D5",
-      "title": "Unresolved Mermaid Diagram References",
-      "why": "00-overview.md and 06-output-formatting.md reference .mmd and .mmd files (e.g., lifecycle-cli-invocation.mmd) that are mentioned but the raw content for some is not provided in the text blocks.",
-      "fix": "Ensure all referenced Mermaid source code is inlined within the markdown files."
-    }
-  ],
+  "issues": [],
+  "findings": [],
   "module": "13-generic-cli",
   "files_used": 18,
   "files_total": 24,
   "bytes_used": 140000,
-  "bundle_sha": "3f8c67213c7cde9f",
-  "total_v6": 92,
+  "bundle_sha": "38d6a5e24419e741",
+  "chunks": [
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "4cffb4c45c72cfc9",
+      "files": [
+        "spec/13-generic-cli/00-overview.md",
+        "spec/13-generic-cli/97-acceptance-criteria.md",
+        "spec/13-generic-cli/98-changelog.md",
+        "spec/13-generic-cli/99-consistency-report.md",
+        "spec/13-generic-cli/02-project-structure.md",
+        "spec/13-generic-cli/03-subcommand-architecture.md",
+        "spec/13-generic-cli/04-flag-parsing.md",
+        "spec/13-generic-cli/05-configuration.md",
+        "spec/13-generic-cli/06-output-formatting.md",
+        "spec/13-generic-cli/07-error-handling.md",
+        "spec/13-generic-cli/08-code-style.md",
+        "spec/13-generic-cli/09-help-system.md",
+        "spec/13-generic-cli/10-database.md",
+        "spec/13-generic-cli/11-build-deploy.md",
+        "spec/13-generic-cli/12-testing.md",
+        "spec/13-generic-cli/13-checklist.md",
+        "spec/13-generic-cli/14-date-formatting.md"
+      ],
+      "bytes_used": 128650
+    },
+    {
+      "tier": "T2",
+      "bundle_sha_chunk": "b63e733821fca7d3",
+      "files": [
+        "spec/13-generic-cli/00-overview.md",
+        "spec/13-generic-cli/97-acceptance-criteria.md",
+        "spec/13-generic-cli/98-changelog.md",
+        "spec/13-generic-cli/99-consistency-report.md",
+        "spec/13-generic-cli/15-constants-reference.md",
+        "spec/13-generic-cli/16-verbose-logging.md",
+        "spec/13-generic-cli/17-progress-tracking.md",
+        "spec/13-generic-cli/18-batch-execution.md",
+        "spec/13-generic-cli/19-shell-completion.md"
+      ],
+      "bytes_used": 116233
+    },
+    {
+      "tier": "T3",
+      "bundle_sha_chunk": "7a4ff6eed35d9bf6",
+      "files": [
+        "spec/13-generic-cli/00-overview.md",
+        "spec/13-generic-cli/97-acceptance-criteria.md",
+        "spec/13-generic-cli/98-changelog.md",
+        "spec/13-generic-cli/99-consistency-report.md",
+        "spec/13-generic-cli/20-terminal-output-design.md",
+        "spec/13-generic-cli/21-post-install-shell-activation.md"
+      ],
+      "bytes_used": 105044
+    }
+  ],
+  "chunked_path": true,
+  "total_v6": 93,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +77,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 93.4,
-  "total_v7": 93,
-  "total": 93,
+  "weighted_total": 93.7,
+  "total_v7": 94,
+  "total": 94,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

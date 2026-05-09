@@ -2,37 +2,55 @@
   "d1": 18,
   "d2": 20,
   "d3": 17,
-  "d4": 19,
-  "d5": 18,
+  "d4": 16,
+  "d5": 19,
   "issues": [
     {
       "severity": "MEDIUM",
       "dim": "D1",
-      "title": "Ambiguous 'slides' build toolchain",
-      "why": "02-runner-contract.md specifies 'Verify bun... if not, fall back to pnpm', but 00-overview.md explicitly mandates 'bun install && bun run build'.",
-      "fix": "Standardize on Bun as the primary toolchain in 02-runner-contract.md and remove the pnpm fallback to ensure deterministic builds."
-    },
-    {
-      "severity": "MEDIUM",
-      "dim": "D3",
-      "title": "Missing timeout/retry logic for installers",
-      "why": "AC-06 mandates a 60-second SLO on a 100Mbps connection, but the contract doesn't specify retry counts or timeout flags for curl/Invoke-WebRequest.",
-      "fix": "Add mandatory '--connect-timeout 10' and '--retry 3' to the curl/PS command specifications in 01-install-contract.md."
+      "title": "Ambiguous 'latest tag' probe logic",
+      "why": "01-install-contract.md mentions 'middle-out, parallel, 2s timeout' probing for newer repos but doesn't define the discovery mechanism (e.g., GitHub API search vs. hardcoded list).",
+      "fix": "Define the specific GitHub API endpoint or naming convention used to discover 'newer' repos."
     },
     {
       "severity": "LOW",
-      "dim": "D5",
-      "title": "Unresolved external script reference",
-      "why": "03-release-pipeline.md references a 'release.sh' script and 'release-artifacts/' directory not defined in the provided context.",
-      "fix": "Add a brief functional summary or file-path reference for the 'release.sh' script within the 03-release-pipeline.md file."
+      "dim": "D4",
+      "title": "Missing sample output for --dry-run",
+      "why": "AC-09 requires --dry-run to print 'WOULD: ' prefixed lines, but no example of this output is provided in the examples or contracts.",
+      "fix": "Add a code block showing sample stdout for a dry-run installation of the 4 default folders."
+    },
+    {
+      "severity": "LOW",
+      "dim": "D3",
+      "title": "Undefined behavior for partial folder failures",
+      "why": "If 3 of 4 folders download successfully but the 4th fails, the spec doesn't explicitly mandate a full rollback vs. leaving a partial install.",
+      "fix": "Add a clause to 01-install-contract.md requiring atomic folder moves or full cleanup of the destination on partial failure."
     }
   ],
   "module": "15-distribution-and-runner",
   "files_used": 8,
   "files_total": 8,
-  "bytes_used": 65835,
-  "bundle_sha": "4c541b9a7cee056f",
-  "total_v6": 92,
+  "bytes_used": 70674,
+  "bundle_sha": "9599df946044fa6e",
+  "chunks": [
+    {
+      "tier": "FULL",
+      "bundle_sha_chunk": "9599df946044fa6e",
+      "files": [
+        "spec/15-distribution-and-runner/00-overview.md",
+        "spec/15-distribution-and-runner/97-acceptance-criteria.md",
+        "spec/15-distribution-and-runner/98-changelog.md",
+        "spec/15-distribution-and-runner/99-consistency-report.md",
+        "spec/15-distribution-and-runner/01-install-contract.md",
+        "spec/15-distribution-and-runner/02-runner-contract.md",
+        "spec/15-distribution-and-runner/03-release-pipeline.md",
+        "spec/15-distribution-and-runner/04-install-config.md"
+      ],
+      "bytes_used": 70674
+    }
+  ],
+  "chunked_path": false,
+  "total_v6": 90,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -42,9 +60,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 92.6,
-  "total_v7": 93,
-  "total": 93,
+  "weighted_total": 90.7,
+  "total_v7": 91,
+  "total": 91,
   "band": "EXCELLENT",
   "rubric": "v7"
 }
