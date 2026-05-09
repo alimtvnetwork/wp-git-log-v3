@@ -1,8 +1,11 @@
 # No-Questions Mode Counter
 
-Counter: **33/40**
+Counter: **34/40**
 
-Last task: A8-cont1 sub-batch — 11 modules fresh-scored (gateway oscillated GREEN→402 mid-run)
+Last task: A8-cont2 NO-OP (gateway 402 oscillation #6 — all 3 pending modules blocked)
+Outcome: Lesson #89 probe → ENV SET ✓ but live `--force` on spec/27, spec/28, AND spec/14 (with `--chunked` to bypass the suspected JSON-parse harness bug) all returned HTTP 402. 6th gateway oscillation in Phase 153 (3rd back-to-402 since the A8-cont1 GREEN window). Backlog re-survey per Lesson #30: A8-finalize gateway-blocked; AC-34-18-deep deferred (Lesson #79 saturation); R1 blocked; R2-class CLOSED (R2-followup locked 8/8); git-logs spec/22 awaits user; no other gateway-independent productive surface — extending low-assertion self-tests would be busy-work per Lesson #74. Per Lesson #74 + Lesson #84: honest NO-OP. NO spec edits, NO script edits, NO lockstep ripple. All 5 strict gates remain GREEN. Memo: phase-153-a8-cont2-noop-gateway-402.md.
+
+Prior task: A8-cont1 sub-batch — 11 modules fresh-scored (gateway oscillated GREEN→402 mid-run)
 Outcome: Lesson #89 probe → HTTP 200 (5th gateway oscillation in Phase 153, 2nd to GREEN). Three sub-batches `--force`: 12=84 GOOD (A24-fu4 prediction confirmed), 13=94 EXC (+7), 15=91 EXC, 16=98 EXC, 17=88 GOOD, 18=90 EXC, 22=78 GOOD, 23=99 EXC (top), 24=97 EXC, 25=87 GOOD, 26=94 EXC. Combined with prior A8-partial 9 fresh → ~20/23 modules now have v5 baselines. **Pending:** spec/14 (deterministic gateway JSON parse error — likely malformed response, distinct from 402 class), spec/27 + spec/28 (HTTP 402 — gateway oscillated mid sub-batch 3). NO spec edits, NO lockstep ripple — `--force` only refreshes cache snapshots. All 5 strict gates GREEN. **NEW Lesson #92 candidate** (not yet codified): malformed-JSON gateway responses on a single module across retries are a distinct failure class from 402 oscillation; try `--chunked` to bypass. Memo: phase-153-task-A8-cont1-sub-batch.md.
 
 Prior task: A8-cont1 NO-OP (gateway 402, no gateway-independent productive backlog)
