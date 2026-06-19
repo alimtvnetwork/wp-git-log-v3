@@ -1,8 +1,8 @@
 {
   "d1": 19,
   "d2": 20,
-  "d3": 17,
-  "d4": 18,
+  "d3": 18,
+  "d4": 19,
   "d5": 20,
   "issues": [],
   "findings": [],
@@ -43,7 +43,7 @@
     }
   ],
   "chunked_path": true,
-  "total_v6": 94,
+  "total_v6": 96,
   "axis": "process-guidance",
   "axis_multipliers": {
     "d1": 1.5,
@@ -53,9 +53,9 @@
     "d5": 1.0
   },
   "axis_cap": 95,
-  "weighted_total": 94.1,
-  "total_v7": 94,
-  "total": 94,
+  "weighted_total": 95.9,
+  "total_v7": 95,
+  "total": 95,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

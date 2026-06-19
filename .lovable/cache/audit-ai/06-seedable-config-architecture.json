@@ -1,7 +1,7 @@
 {
-  "d1": 19,
+  "d1": 18,
   "d2": 19,
-  "d3": 19,
+  "d3": 18,
   "d4": 18,
   "d5": 17,
   "issues": [],
@@ -56,7 +56,7 @@
     }
   ],
   "chunked_path": true,
-  "total_v6": 92,
+  "total_v6": 90,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -66,9 +66,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 93.2,
-  "total_v7": 93,
-  "total": 93,
+  "weighted_total": 91.0,
+  "total_v7": 91,
+  "total": 91,
   "band": "EXCELLENT",
   "rubric": "v7"
 }

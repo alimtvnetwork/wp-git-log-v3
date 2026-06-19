@@ -1,9 +1,9 @@
 {
   "d1": 18,
-  "d2": 17,
-  "d3": 17,
-  "d4": 18,
-  "d5": 18,
+  "d2": 18,
+  "d3": 16,
+  "d4": 19,
+  "d5": 19,
   "issues": [],
   "findings": [],
   "module": "03-error-manage",
@@ -210,7 +210,7 @@
     }
   ],
   "chunked_path": true,
-  "total_v6": 88,
+  "total_v6": 90,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -220,9 +220,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 87.3,
-  "total_v7": 87,
-  "total": 87,
+  "weighted_total": 88.9,
+  "total_v7": 89,
+  "total": 89,
   "band": "GOOD",
   "rubric": "v7"
 }
