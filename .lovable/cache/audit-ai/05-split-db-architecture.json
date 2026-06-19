@@ -1,5 +1,5 @@
 {
-  "d1": 17,
+  "d1": 18,
   "d2": 19,
   "d3": 17,
   "d4": 18,
@@ -66,7 +66,7 @@
     }
   ],
   "chunked_path": true,
-  "total_v6": 86,
+  "total_v6": 87,
   "axis": "normative-contract",
   "axis_multipliers": {
     "d1": 1.0,
@@ -76,9 +76,9 @@
     "d5": 0.5
   },
   "axis_cap": 100,
-  "weighted_total": 87.8,
-  "total_v7": 88,
-  "total": 88,
+  "weighted_total": 88.8,
+  "total_v7": 89,
+  "total": 89,
   "band": "GOOD",
   "rubric": "v7"
 }
