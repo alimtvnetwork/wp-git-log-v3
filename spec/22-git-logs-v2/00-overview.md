@@ -8,8 +8,8 @@ axis_rationale: "Git Logs WordPress plugin enforceable spec"
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.13.4  
-**Updated:** 2026-05-06 (Phase 153 P3 — §97 v3.11.0 ships AC-79 Cross-Module Externalized Citation Map per Lessons #36 + #37; banner-only patch bump in §00, no inventory or content change here)
+**Version:** 3.13.5  
+**Updated:** 2026-06-20 (Phase 153 — §97 v3.12.0 ships AC-80 Laravel Endpoint Binding Parity (Lesson #36 + #37 framework-binding application); inventory row 40 added for new `40-laravel-endpoint-definition.md`; banner-only patch bump in §00, no content change in §00 body)
 <!-- h10-verified-phase: 153 -->
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  
@@ -159,6 +159,7 @@ Items marked `format:hide` in mind-map are informational only and never rendered
 | 37 | [37-blind-ai-gap-analysis.md](./37-blind-ai-gap-analysis.md) | Blind-AI gap analysis — implementability audit findings (relocated from §16 per Phase P5 immutability) |
 | 38 | [38-test-plan-superseded.md](./38-test-plan-superseded.md) | **Superseded** — redirect stub for the old §16 test plan; authoritative content in §32–§35. Relocated from slot 16 in Phase P5 (2026-04-28) per Core memory file-slot-immutability rule. |
 | 39 | [39-split-db-log-storage.md](./39-split-db-log-storage.md) | **v3.8.0 introduced; v2.9.0 active.** Per-SHA SQLite log storage. Root DB keeps only `ShaRegistry` + 3 ConfigKv keys (`ShaLogsRoot`, `MaxOpenShaDbHandles`, `ShaDbIdleCloseSec`); logs live in `<dataDir>/<ShaLogsRoot>/<Sha[0:2]>/<Sha>.db`. See §15 `GL-SHA-DB-*` codes, §22 prune, §23 backup manifest, §29 wipe. |
+| 40 | [40-laravel-endpoint-definition.md](./40-laravel-endpoint-definition.md) | **v1.0.0 introduced 2026-06-20 (Phase 153).** Laravel 10+ framework binding of the v2 REST surface — sibling to §04 (WordPress binding). Binding-only: routes/api.php declarations + FormRequest validation classes + invokable controller signatures + middleware lane mapping (`gl.lane-a`, `gl.lane-b`, `gl.permission:*`) + raw-PDO-vs-Eloquent posture. Cross-module contracts cited per Lesson #36 — NO restatement of endpoints, codes, envelope, DDL, locking, or auth steps. Bound by AC-80. |
 | 97 | [97-acceptance-criteria.md](./97-acceptance-criteria.md) | Testable AC (mirrors brief §Acceptance) |
 | 98 | [98-changelog.md](./98-changelog.md) | Changelog |
 | 99 | [99-consistency-report.md](./99-consistency-report.md) | Health/structure report |
