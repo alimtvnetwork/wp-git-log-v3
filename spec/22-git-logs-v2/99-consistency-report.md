@@ -1,7 +1,7 @@
 # Consistency Report (v2)
 
-**Version:** 3.13.4  
-**Updated:** 2026-05-06 (Phase 153 P3 — AC-79 Cross-Module Externalized Citation Map per Lessons #36 + #37)
+**Version:** 3.13.5  
+**Updated:** 2026-06-20 (Phase 153 — AC-80 Laravel Endpoint Binding Parity + new file 40-laravel-endpoint-definition.md v1.0.0)
 
 > **v3.13.4 update (Phase 153 P3 — AC-79 Cross-Module Externalized Citation Map):** User request closed: "Add explicit normative anchors for any cross-module externalized citations in spec/22 so the auditor can follow the dependency chain." Survey via `rg -no "spec/[0-9]+-[a-z-]+" spec/22-git-logs-v2/*.md` surfaced 6 externalized contract dependencies lacking a §97-bound anchor. Added `[critical]` **AC-79** to §97 with a 6-row normative table — each row pins (External cite, Owning module + AC, Cited from spec/22 file, Citation purpose, Restate-in-22 forbidden?). Rows: spec/04 (DDL conventions, cited from 02-database-schema.md L368), spec/12 (CI runner matrix, cited from 05-auth-and-validation.md L114), spec/13 §97 AC-22 (SQLite locking, cited from AC-26 + AC-78 line 505), spec/26 (Mermaid diagrams, cited from 39-split-db-log-storage.md L184–185), spec/05 (split-DB pattern, cited from 39-split-db-log-storage.md L186), linter-scripts/check-spec-folder-refs.py (allowlist enforcement, cited from AC-22-LV1 line 477). Restate-FORBIDDEN by construction (Lesson #36 dual-source drift class). Append-only within a phase. Cross-references mirror of spec/02 AC-CG-21 (Subfolder Delegation Map — same pattern on intra-module sub-folder axis) + spec/12 AC-11 (linter-script anchor pattern from A24-fu4). AC count 73 → **74**. Banners: §97 v3.10.2 → **v3.11.0** (minor — new AC); §00 v3.13.3 → **v3.13.4** (banner — patch); §98 v3.13.3 → **v3.13.4** (banner + row — patch); this file v3.13.3 → **v3.13.4** (banner + this audit row — patch). **No CI workflow change · no RUBRIC bump · no AC-31-31 cascade · no gate-count change · no DDL change · no schema bump.** **Lesson #37 second-instance confirmation**: spec/12 (A24-fu4) was the codifying instance for integration-axis modules co-needing Lesson #19 (audit-boundary pin) + Lesson #36 (cross-module anchor) ACs together; spec/22 (this phase) confirms the pattern — AC-78 (Lesson #29 module-kind pin) + AC-79 (Lesson #36 cross-module anchor) ship as a complete pair for the integration-axis class.
 
@@ -53,6 +53,7 @@
 | 37-blind-ai-gap-analysis.md | ✅ (v1.5.0 — Phase P17 marked GAP-V2-09 RESOLVED; 9 of 10 historical gaps closed; effort remaining 7m → 5m) |
 | 38-test-plan-superseded.md | ✅ (relocated from `16-test-plan.md` in Phase P5 2026-04-28 — slot-16 collision resolution; redirect stub → §32–§35) |
 | 39-split-db-log-storage.md | ✅ (added v3.8.0 2026-04-26 — per-SHA SQLite storage spec) |
+| 40-laravel-endpoint-definition.md | ✅ (added v1.0.0 2026-06-20 Phase 153 — Laravel 10+ sibling binding to §04 WordPress binding; binding-only per AC-80 + Lesson #36) |
 | 97-acceptance-criteria.md | ✅ (v3.9.4 — Phase P18 added AC-77 binding the §03 v2.3.0 History `HasError + StateLabel` rendering contract to AC-73's label enum + AC-74's NDJSON consumer; AC count 77 → 78) |
 | 98-changelog.md | ✅ |
 | 99-consistency-report.md | ✅ |
