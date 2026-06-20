@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.11.0  
-**Updated:** 2026-05-06 (Phase 153 P3 — added **AC-79** `[critical]` Cross-Module Externalized Citation Map per Lessons #36 + #37; explicit normative anchor table for 6 externalized citations: spec/04 (DDL conventions), spec/12 (CI runner matrix), spec/13 AC-22 (SQLite locking), spec/26 (Mermaid diagrams), spec/05 (split-DB pattern), linter-scripts/check-spec-folder-refs.py. Each row pins owning-AC + cite-source-file + purpose + restate-forbidden flag. Closes audit-followability gap for integration-axis modules. AC count 73 → 74.)
+**Version:** 3.12.0  
+**Updated:** 2026-06-20 (Phase 153 — added **AC-80** `[high]` Laravel Endpoint Binding Parity per Lesson #36 + Lesson #37; binds new `40-laravel-endpoint-definition.md` (Laravel sibling to §04 WordPress binding) with cross-module restate-forbidden anchors to spec/03-error-manage envelope + spec/04 boolean storage + spec/13 §97 AC-22 SQLite locking + spec/02 PHP coding-guidelines. AC count 74 → 75.)
 
 ---
 
