@@ -8,8 +8,8 @@ axis_rationale: "Git Logs WordPress plugin enforceable spec"
 
 # Git Logs v2 — Spec Overview
 
-**Version:** 3.13.5  
-**Updated:** 2026-06-20 (Phase 153 — §97 v3.12.0 ships AC-80 Laravel Endpoint Binding Parity (Lesson #36 + #37 framework-binding application); inventory row 40 added for new `40-laravel-endpoint-definition.md`; banner-only patch bump in §00, no content change in §00 body)
+**Version:** 3.13.6  
+**Updated:** 2026-06-21 (Phase 153 — §97 v3.13.0 ships AC-81 + AC-82 (Laravel raw-PDO ingest posture + Sanctum Lane A auth) closing LBR-06 + LBR-08 from the slot-40 confidence-analysis memo; bound to new locked decisions 14 + 15 in §07; banner-only patch in §00, no content change in §00 body)
 <!-- h10-verified-phase: 153 -->
 **Status:** Draft (future-spec — plugin code lives downstream)  
 **AI Confidence:** Production-Ready  

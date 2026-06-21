@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.12.0  
-**Updated:** 2026-06-20 (Phase 153 — added **AC-80** `[high]` Laravel Endpoint Binding Parity per Lesson #36 + Lesson #37; binds new `40-laravel-endpoint-definition.md` (Laravel sibling to §04 WordPress binding) with cross-module restate-forbidden anchors to spec/03-error-manage envelope + spec/04 boolean storage + spec/13 §97 AC-22 SQLite locking + spec/02 PHP coding-guidelines. AC count 74 → 75.)
+**Version:** 3.13.0  
+**Updated:** 2026-06-21 (Phase 153 — added **AC-81** `[critical]` Laravel ingest persistence posture (raw PDO MANDATORY; Eloquent forbidden on writes) + **AC-82** `[critical]` Laravel Lane A auth driver pinned to Sanctum. Both close the single HIGH (LBR-06) and highest-confidence MEDIUM (LBR-08) delivery-risk rows from `.lovable/memory/audit/v2-deterministic/phase-153-laravel-binding-confidence-analysis.md`. Bound to new locked decisions 14 + 15 in §07. AC count 75 → 77.)
 
 ---
 
@@ -552,3 +552,37 @@ Every criterion below is stated as **Given / When / Then**. Each AC also carries
 **AND** auditor findings against the binding file citing "missing endpoint definition" / "missing error code" / "missing DDL" / "missing auth validation step" MUST be classified as stale-cache artifacts — the binding file is by-design a thin adapter and the contracts live upstream per the anchor table.
 
 - **Verifies:** the per-framework binding contract for spec/22 — every framework-specific REST binding (WordPress §04, Laravel §40, future Symfony §41, etc.) is a thin adapter pinning route declarations + FormRequest/validation-class boundaries + middleware lane mapping + database-driver posture + controller signatures to the framework's idioms, while the wire-format contract (endpoints, codes, envelope, DDL, locking, auth) remains single-source-owned upstream. Codifies the framework-binding-axis application of **Lesson #36** (link-don't-restate cross-module boundary) and **Lesson #37** (integration-axis modules co-need both Lesson #19 audit-boundary pin AND Lesson #36 cross-module anchor map). Mirror of AC-79's cross-module externalized citation map pattern, narrowed to the per-framework binding axis. Until A8 LLM-gateway re-score runs cleanly, this AC declares any "missing endpoint/code/DDL/auth" finding against `40-laravel-endpoint-definition.md` a stale-cache artifact per Lesson #34.
+
+---
+
+### AC-81 — Laravel ingest persistence: raw PDO MANDATORY, Eloquent FORBIDDEN on writes (locked decision 14)  `[critical]`
+
+**Given** a Laravel binding (slot 40, `40-laravel-endpoint-definition.md`) implementing any Lane B writer (`/append-log`, `/fixed-log`, `/clear-log`, `/clear-log-all`) OR any Lane A path that mutates the root DB (AuditTrail inserts, AppLink inserts/disables, AppStatusId updates),
+
+**When** a contributor authors or reviews controller/service code under that binding,
+
+**Then** the code MUST acquire a raw `PDO` handle (via `DB::connection('gl_root')->getPdo()` is acceptable; per-SHA file DB MUST use a directly-constructed `new PDO("sqlite:...")` handle pooled per `MaxOpenShaDbHandles` per §39) and issue parameterized statements with `PDO::prepare()` + `PDOStatement::execute()`; transactions MUST be opened via `$pdo->exec('BEGIN IMMEDIATE')` (NOT `$pdo->beginTransaction()` which issues `BEGIN DEFERRED` on SQLite — defeating spec/13 §97 AC-22's write-lock acquisition contract); `SQLITE_BUSY` / `SQLITE_LOCKED` MUST be caught and retried 3× with 100 ms ±25 % jitter per spec/13 §97 AC-22;
+
+**AND FORBIDDEN patterns** (any occurrence is a SPEC VIOLATION detectable by `phpcs` rule or grep at code-review time): (a) Eloquent model write methods — `Model::create()`, `Model::save()`, `$model->update()`, `$model->delete()`, `$model->fill(...)->save()`, `Model::updateOrCreate()`, `Model::firstOrCreate()`; (b) Eloquent QueryBuilder writes on ingest tables — `DB::table('Log_*')->insert(...)`, `DB::table('AuditTrail')->insert(...)`, `DB::table('AppLink')->update(...)` (QueryBuilder still routes through Laravel's connection event dispatcher); (c) `DB::transaction(function () { ... })` wrapping any of the above — uses `BEGIN DEFERRED`, breaks AC-22; (d) Eloquent observers / model events (`creating`, `created`, `updating`, `updated`, `saved`, `deleted`) attached to any model whose table appears in §02 Lane B writer paths;
+
+**AND PERMITTED exceptions**: Lane A read paths (`/get-logs`, `/get-pipeline-logs`, `/get-error-logs`, `/get-pipeline-error-logs`) MAY use Eloquent reads (`Model::find()`, `Model::where(...)->get()`, `Model::paginate(...)`) bounded by pagination per §04 (latency non-critical, no write-lock contention); Lane A read paths MAY use `DB::table(...)->select(...)->get()` QueryBuilder reads;
+
+**AND** any future per-framework binding (Symfony slot 41, Slim, Lumen, etc.) inheriting locked decision 14 is FORBIDDEN — each framework MUST author its own equivalent locked decision pinning a raw-driver ingest posture appropriate to that framework's ORM event-dispatcher idiom.
+
+- **Verifies:** §07 locked decision 14 (Laravel ingest persistence posture); §40 §6 (raw-PDO posture row + Why rationale); spec/13 §97 AC-22 (SQLite locking + `BEGIN IMMEDIATE` + retry-with-jitter — protected from silent breakage). Closes **LBR-06** (HIGH severity — single highest delivery-risk row for slot 40) from `.lovable/memory/audit/v2-deterministic/phase-153-laravel-binding-confidence-analysis.md`. Codifies the framework-binding-axis application of **Lesson #36** (link-don't-restate — this AC references spec/13 AC-22 rather than restating the locking contract) + **Lesson #16** (contract surfaces relevant to implementer hands must be lifted out of buried prose into a §97-bound AC for harness-saturated walker visibility).
+
+---
+
+### AC-82 — Laravel Lane A authentication driver pinned to Sanctum (locked decision 15)  `[critical]`
+
+**Given** a Laravel binding (slot 40, `40-laravel-endpoint-definition.md`) implementing any Lane A route (`/get-logs`, `/get-pipeline-logs`, `/get-error-logs`, `/get-pipeline-error-logs`) requiring authenticated access per §05 Lane A,
+
+**When** a contributor authors or reviews the middleware chain for those routes,
+
+**Then** Lane A authentication MUST be performed by Laravel Sanctum (`laravel/sanctum`) bearer tokens; each `Profile` row maps 1:1 to a Sanctum `Laravel\Sanctum\PersonalAccessToken`; the `gl.lane-a` middleware MUST resolve the bearer token → `PersonalAccessToken` → `Profile` and reject with `GL-AUTH-INVALID-TOKEN` (§15) on miss; the `gl.permission:{Perm}` middleware MUST then look up the `RolePermission` row per §19 and reject with `GL-AUTHZ-PERMISSION-DENIED` (§15) on miss;
+
+**AND FORBIDDEN auth drivers** (any occurrence is a SPEC VIOLATION at code-review time): (a) Laravel Passport (`laravel/passport`) — full OAuth2 authorization server; over-engineered for App-Password-equivalence; its scope-string permission model cannot be reverse-mapped onto §19's row-level `RolePermission` matrix without inventing scope-to-permission glue (Lesson #36 dual-source drift class); (b) custom token brokers — re-implements what Sanctum already provides, breaks the §05 Lane A revoke-parity contract; (c) WP-cookie-bridge — couples the Laravel binding to a WordPress installation, defeating the framework-binding axis (per LBR-06 + LBR-08 closure rationale, each framework binding MUST be standalone); (d) JWT libraries (`tymondesigns/jwt-auth`, `firebase/php-jwt`, `lcobucci/jwt`) — JWT's stateless model defeats Sanctum's per-token revocation parity with §05 Lane A App-Password revoke semantics (revoking a JWT requires a server-side blocklist, which is what Sanctum already provides natively); (e) `auth:basic` middleware — no token surface, breaks revocation parity; (f) Laravel Breeze / Jetstream session-cookie auth — session-cookie auth requires same-origin SPA architecture which the binding does not assume;
+
+**AND** any future per-framework binding (Symfony slot 41, etc.) inheriting locked decision 15 is FORBIDDEN — each framework MUST author its own auth-driver locked decision pinning a per-token revocable bearer model with row-level permission lookup compatible with §19.
+
+- **Verifies:** §07 locked decision 15 (Laravel Lane A auth driver); §40 §5 middleware-table row 1 (Sanctum citation); §05 Lane A revoke parity (App-Password revoke ⇄ Sanctum `tokens()->where('id', $tokenId)->delete()`); §19 row-level permission matrix (Sanctum abilities map onto `RolePermission` 1:1). Closes **LBR-08** (highest-confidence MEDIUM severity) from the same confidence-analysis memo. Same lesson-attribution as AC-81 (Lesson #36 + #16).

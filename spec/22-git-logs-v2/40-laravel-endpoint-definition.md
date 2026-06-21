@@ -8,8 +8,8 @@ axis_rationale: "Per-framework binding of the v2 REST contract"
 
 # Laravel Endpoint Definition (Git Logs v2 — Laravel Binding)
 
-**Version:** 1.0.0
-**Updated:** 2026-06-20 (Phase 153 — initial Laravel sibling binding to §04 WordPress binding; created per user request "create Laravel endpoint definition"; cross-module anchors per Lesson #36; no contract content restated)
+**Version:** 1.1.0
+**Updated:** 2026-06-21 (Phase 153 — §5 + §6 now cite spec/22 §07 locked decisions 14 (raw-PDO ingest posture) + 15 (Sanctum Lane A auth); both bound by §97 AC-81 + AC-82; closes LBR-06 + LBR-08 from `.lovable/memory/audit/v2-deterministic/phase-153-laravel-binding-confidence-analysis.md`. Prior v1.0.0 stated these as prose; v1.1.0 anchors them to normative locked-decision + AC surfaces.)
 <!-- h10-verified-phase: 153 -->
 **Status:** Draft (future-spec — Laravel package code lives downstream, not in this spec-only repo)
 **Pairs with:** [`04-rest-api-endpoints.md`](./04-rest-api-endpoints.md) (WordPress binding — authoritative for verb, path, body, response, error code; this file is binding-only)
@@ -107,11 +107,13 @@ Constructor injection is mandatory (no facade access in controllers — spec/02 
 
 | Middleware alias | Lane | Responsibilities | Sources |
 |---|---|---|---|
-| `gl.lane-a` | A | Authenticate WP App Password / cookie equivalent (Sanctum bearer token in Laravel binding) → resolve to `Profile` row | §05 Lane A |
-| `gl.permission:{Perm}` | A | Look up `RolePermission` row; reject with `GL-AUTHZ-PERMISSION-DENIED` (§15) if missing | §05 + §19 permission matrix |
+| `gl.lane-a` | A | Authenticate via Laravel Sanctum bearer token (MANDATORY per §07 locked decision 15 + §97 AC-82 — Passport / custom brokers / WP-cookie-bridge / JWT / `auth:basic` / Breeze/Jetstream session cookies all FORBIDDEN) → resolve `PersonalAccessToken` → `Profile` row (1:1 mapping); reject with `GL-AUTH-INVALID-TOKEN` (§15) on miss | §05 Lane A + §07 locked decision 15 + §97 AC-82 |
+| `gl.permission:{Perm}` | A | Look up `RolePermission` row per §19; reject with `GL-AUTHZ-PERMISSION-DENIED` (§15) if missing | §05 + §19 permission matrix |
 | `gl.lane-b` | B | Run the §05 mode-gated 8-step (TempToken) or 10-step (SSH) ordered validation; reject early with the exact `GL-*` code; write `AuditTrail` row before passing to controller | §05 + §31 |
 
 Each middleware terminates the request with a `JsonResponse` carrying the spec/03-error-manage envelope. The error envelope shape, the `TraceId` UUIDv4 generator binding, and the `Details` field structure are owned by spec/03 and MUST NOT be redefined here.
+
+**Auth-driver pin (Lesson #16 + LBR-08 closure).** The Sanctum requirement above is normative — bound to §07 locked decision 15 + §97 AC-82 `[critical]`. The 6 forbidden auth-driver classes (Passport / custom brokers / WP-cookie-bridge / JWT / `auth:basic` / Breeze/Jetstream session cookies) are enumerated with per-driver rationale in §07 locked decision 15. Future framework bindings (Symfony slot 41, etc.) MUST author their own auth-driver locked decision — inheriting decision 15 is FORBIDDEN.
 
 ---
 
@@ -125,7 +127,9 @@ Each middleware terminates the request with a `JsonResponse` carrying the spec/0
 | Concurrency | `PRAGMA journal_mode=WAL; busy_timeout=5000`; `BEGIN IMMEDIATE` for writes; `SQLITE_BUSY` retry 3× 100 ms ±25 % jitter | spec/13 §97 AC-22 (mirrored to spec/13 §10) |
 | Migrations | Versioned migration markers per `06-migrations-and-logger.md`; Laravel `artisan migrate` is **disabled** — migrations are framework-agnostic SQL files executed by the same migrator as the WP binding | §06 |
 
-**Why raw PDO (not Eloquent) on ingest paths:** Eloquent's model hydration + event dispatcher adds ~3–8× latency to per-row INSERT and breaks the `BEGIN IMMEDIATE` + retry-with-jitter contract owned by spec/13 §97 AC-22. Eloquent is permitted in Lane A read paths where latency is non-critical and the row count is bounded by pagination. This split mirrors §39's "root DB raw, log shipping raw, query UI flexible" posture.
+**Persistence-posture pin (Lesson #16 + LBR-06 closure).** The raw-PDO ingest posture above is normative — bound to §07 locked decision 14 + §97 AC-81 `[critical]`. **Forbidden patterns** (any occurrence is a SPEC VIOLATION, detectable by `phpcs` rule or grep at code-review time): (a) Eloquent model write methods (`Model::create()`, `Model::save()`, `$model->update()`, `$model->delete()`, `Model::updateOrCreate()`, `Model::firstOrCreate()`); (b) Eloquent QueryBuilder writes (`DB::table('Log_*')->insert(...)`, `DB::table('AuditTrail')->insert(...)` — still routes through the connection event dispatcher); (c) `DB::transaction(function () { ... })` wrapping any write — uses `BEGIN DEFERRED`, silently breaks spec/13 §97 AC-22's `BEGIN IMMEDIATE` contract; (d) Eloquent model observers/events (`creating`, `created`, `updating`, `updated`, `saved`, `deleted`) attached to any model whose table appears in §02 Lane B writer paths. **Required pattern**: acquire raw `PDO` via `DB::connection('gl_root')->getPdo()`; open transactions with `$pdo->exec('BEGIN IMMEDIATE')`; catch `SQLITE_BUSY` / `SQLITE_LOCKED` and retry 3× with 100 ms ±25 % jitter per spec/13 §97 AC-22.
+
+**Why raw PDO (not Eloquent) on ingest paths:** Eloquent's model hydration + event dispatcher adds ~3–8× latency to per-row INSERT, AND `DB::transaction` issues `BEGIN DEFERRED` (not `BEGIN IMMEDIATE`) which silently breaks spec/13 §97 AC-22's write-lock acquisition contract under SQLite WAL — implementer cannot discover this until production lock-contention. Eloquent is permitted in Lane A read paths where latency is non-critical and the row count is bounded by pagination. This split mirrors §39's "root DB raw, log shipping raw, query UI flexible" posture. Future framework bindings MUST author their own equivalent locked decision per their ORM event-dispatcher idiom — inheriting decision 14 is FORBIDDEN.
 
 ---
 
