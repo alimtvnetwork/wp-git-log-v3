@@ -7,7 +7,7 @@ type: ambiguity-resolved-self
 
 # Ambiguity 03 — Core memory CI-gate count stale (RESOLVED, no action needed)
 
-## Status: SELF-RESOLVED 2026-04-28
+## Resolution note (legacy) — SELF-RESOLVED 2026-04-28
 
 Initial concern: the in-context `mem://index.md` summary shown to the
 session said "CI gate count 14 → 15" while `test-qa-baseline-footer.sh`
@@ -37,3 +37,13 @@ itself is current.
 User confirms the auto-summary cadence — does it regenerate per
 session, per phase, or only on memory-write events? Knowing this
 helps future sessions calibrate trust in the Core summary block.
+
+
+---
+## Status
+
+**Status:** Resolved
+**Resolved-in-phase:** Phase 25 (self-resolved on investigation — auto-summary artifact, not on-disk drift)
+**Resolved-on:** 2026-04-28
+**Resolution:** On-disk `.lovable/memory/index.md` line 13 already states "CI gate count 17"; the "15" figure was an auto-summary staleness artifact, not a real drift. Suggested clarification (auto-summary cadence) is informational only — not blocking.
+**Do not re-surface:** yes

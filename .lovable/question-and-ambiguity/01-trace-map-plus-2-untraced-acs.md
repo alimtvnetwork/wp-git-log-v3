@@ -52,6 +52,16 @@ encodes stale numbers and the next sweep falsely reports growth. Better:
 `check-trace-map-regression.py --update-baseline` runs them atomically and
 should be preferred over manual JSON edits.
 
-## Status
+## Resolution note (legacy)
 
 ✅ **RESOLVED** — no user action required.
+
+
+---
+## Status
+
+**Status:** Resolved
+**Resolved-in-phase:** pre-Phase-153 (legacy archival — exact phase not recorded at closure time; this footer added by hygiene-round-3 to normalize the closure protocol per README convention)
+**Resolved-on:** unknown (legacy)
+**Resolution:** see body — original "RESOLVED" / "SELF-RESOLVED" note retained verbatim above this footer.
+**Do not re-surface:** yes
