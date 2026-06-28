@@ -52,7 +52,7 @@ encodes stale numbers and the next sweep falsely reports growth. Better:
 `check-trace-map-regression.py --update-baseline` runs them atomically and
 should be preferred over manual JSON edits.
 
-## Status
+## Resolution note (legacy)
 
 ✅ **RESOLVED** — no user action required.
 

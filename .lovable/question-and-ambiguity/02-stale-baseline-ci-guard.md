@@ -91,7 +91,7 @@ advisory warning is wired, run the linter live — if the warning fires on a
 real regression, that's a signal to inspect the baseline, not just confirm
 the warning string.
 
-## Status
+## Resolution note (legacy)
 
 ✅ **RESOLVED** — no further user action required.
 
