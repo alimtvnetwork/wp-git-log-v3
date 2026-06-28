@@ -1,7 +1,7 @@
 # Acceptance Criteria — Spec Toolchain
 
-**Version:** 2.15.0
-**Updated:** 2026-05-05 (Phase 153 Task A18-impl-3: slot 34 §00 v1.7.0 → v1.8.0 codifies AC-34-17 — chunked re-scoring promoted to default-on; `audit_module()` routes multi-chunk modules through gateway-per-chunk + `merge_chunk_scores()` weighted-merge; FULL-tier parity invariant preserved verbatim (spec/16 cross-flag bundle_sha equality `e16de187513b288e`); new `--no-chunked` rollback flag. Live re-scores: spec/27 83→88, spec/12 87→84 (honest baseline per Lesson #18). Closes AC-34-15(e) "promotion to default" milestone.)
+**Version:** 2.16.0
+**Updated:** 2026-06-28 (Phase 153 process-improvements round / trace-map proposer trio: adds AC-T-35 auto-proposer + AC-T-36 OpenAPI export + AC-T-37 symbol extraction. All three are spec-only-mode ACs per `mem://preference/spec-only-mode` — script implementation deferred; each carries a **Detection** clause per Lesson #93 giving auditors a manual operational substitute. The trio composes: AC-T-35 drafts entries → AC-T-37 fills `symbols` → AC-T-36 exports OpenAPI metadata for the framework-binding axis introduced in slot 34 v2.92.0.)
 **Scope:** `spec/27-spec-toolchain/`
 
 ---
