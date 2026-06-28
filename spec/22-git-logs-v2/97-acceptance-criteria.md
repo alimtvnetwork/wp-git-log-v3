@@ -1,7 +1,7 @@
 # Acceptance Criteria (v2)
 
-**Version:** 3.13.0  
-**Updated:** 2026-06-21 (Phase 153 — added **AC-81** `[critical]` Laravel ingest persistence posture (raw PDO MANDATORY; Eloquent forbidden on writes) + **AC-82** `[critical]` Laravel Lane A auth driver pinned to Sanctum. Both close the single HIGH (LBR-06) and highest-confidence MEDIUM (LBR-08) delivery-risk rows from `.lovable/memory/audit/v2-deterministic/phase-153-laravel-binding-confidence-analysis.md`. Bound to new locked decisions 14 + 15 in §07. AC count 75 → 77.)
+**Version:** 3.14.0  
+**Updated:** 2026-06-28 (Phase 153 — added **AC-83** `[high]` Laravel binding implementer-ergonomics bundle (closes LBR-04 `?q=` resolver + LBR-05 `$errorCodes` mapping + LBR-07 domain-service interface signatures + LBR-09 worked migration example + LBR-10 testing harness) PLUS new mechanical-lock self-test `test-ac80-laravel-wp-endpoint-parity.sh` that locks AC-80 + AC-81 + AC-82 verb+path + raw-PDO + Sanctum citations (closes LBR-12 per Lesson L21 / Phase P47–P49 graduation chain). AC count 77 → 78.)
 
 ---
 
