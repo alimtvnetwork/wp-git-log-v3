@@ -4,16 +4,38 @@ todo_audit_exempt: true
 description: Laravel framework binding for the Git Logs v2 REST surface. Sibling to §04 (WordPress binding). Defines the route file, base FormRequest with `resolveQParam()` collapse resolver, FormRequest `$errorCodes` mapping convention, controller signatures, middleware lane mapping, domain-service interface contracts, raw-PDO ingest posture, a worked migration example, and a testing harness story. Per Lesson #36 this file LINKS to the upstream contracts (§04 endpoints, §05 auth, §15 error codes, spec/03-error-manage envelope, spec/04-database-conventions DDL/boolean storage, spec/02-coding-guidelines PHP rules) and MUST NOT restate them.
 content_axis: framework-binding
 axis_rationale: "Per-framework binding of the v2 REST contract"
+# Machine-discoverable binding graph (Phase 153 / 2026-06-28 — lifted from prose per low-leverage hygiene task #2).
+# Future graph tooling (e.g. binding-parity report, sibling-coverage matrix) MUST read these YAML keys
+# instead of grepping the §-prose "Pairs with:" / "Sibling of:" lines below.
+pairs_with:
+  - path: ./04-rest-api-endpoints.md
+    role: authoritative-contract
+    binding: wordpress
+    note: "WordPress binding — authoritative for verb, path, body, response, error code; this file is binding-only."
+siblings:
+  - binding: wordpress
+    path: ./04-rest-api-endpoints.md
+    status: shipped
+  - binding: laravel
+    path: ./40-laravel-endpoint-definition.md
+    status: draft
+    self: true
+  - binding: symfony
+    path: ./41-symfony-endpoint-definition.md
+    status: planned
+  - binding: slim
+    path: ./42-slim-endpoint-definition.md
+    status: planned
 ---
 
 # Laravel Endpoint Definition (Git Logs v2 — Laravel Binding)
 
-**Version:** 1.2.0
-**Updated:** 2026-06-28 (Phase 153 — slot-40 confidence-lift round 2: closes LBR-04 (`?q=` resolver — also fixes the v1.0.0/v1.1.0 misnomer "base64-json"; §04 actually uses URL-style `q=github.com/{org}/{repo}` shorthand), LBR-05 (`GlValidationException` ⇄ §15 `protected array $errorCodes` mapping convention pinned), LBR-07 (`LogIngestService` / `ShaRegistryRepository` / `SplitDbWriter` interface signatures added in new §4.1), LBR-09 (worked Laravel migration example added in new §6.1 — framework-agnostic SQL files + Phinx-style migrator binding contract), LBR-10 (testing-harness story added in new §10 — Pest-preferred, `:memory:` for unit + file-DB for integration, AC-22 retry contract test pattern). All six lifts bound by new AC-83 `[high]` in §97. Cross-cutting parity AC-80 + AC-81 + AC-82 mechanically locked in CI by new `linter-scripts/test/test-ac80-laravel-wp-endpoint-parity.sh` (LBR-12 closure).)
+**Version:** 1.3.0
+**Updated:** 2026-06-28 (Phase 153 — low-leverage hygiene round: (a) lifted "Pairs with:" / "Sibling of:" prose into machine-discoverable YAML front-matter (`pairs_with:` + `siblings:` keys) so future binding-parity graph tooling can read them without grepping markdown. (b) `framework-binding` `content_axis` row added to `spec/27-spec-toolchain/34-audit-ai-implementability.md` Rubric v7 weight cascade — slot 40 (and any future per-framework binding) now scores against a proper axis floor instead of borrowing `integration-spec`'s. No §97 / AC change to this file; prose preserved verbatim below for human readers per Lesson #25 (dual-source-only when YAML is the authoritative source and prose is a derived view).)
 <!-- h10-verified-phase: 153 -->
 **Status:** Draft (future-spec — Laravel package code lives downstream, not in this spec-only repo)
-**Pairs with:** [`04-rest-api-endpoints.md`](./04-rest-api-endpoints.md) (WordPress binding — authoritative for verb, path, body, response, error code; this file is binding-only)
-**Sibling of (downstream):** WordPress plugin (§04), planned Symfony binding (future slot 41)
+**Pairs with:** [`04-rest-api-endpoints.md`](./04-rest-api-endpoints.md) (WordPress binding — authoritative for verb, path, body, response, error code; this file is binding-only) — **NOTE:** this prose line is a human-readable mirror of the front-matter `pairs_with:` key; on divergence, **YAML wins** (Lesson #25 single-source-of-truth rule; graph tooling reads YAML).
+**Sibling of (downstream):** WordPress plugin (§04 — shipped), planned Symfony binding (future slot 41), planned Slim binding (future slot 42) — **NOTE:** mirror of front-matter `siblings:`; on divergence, YAML wins.
 
 ---
 
