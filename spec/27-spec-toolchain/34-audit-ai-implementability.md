@@ -1,6 +1,6 @@
 # 34 — audit-ai-implementability.py
 
-**Version:** 1.10.1  
+**Version:** 1.11.0  
 **Updated:** 2026-05-06 (Phase 153 Task R2-followup: extended `test-audit-ai-tier1b-promotion.sh` from 6 → 21 assertions covering all 6 FITS modules (spec/05/06/10/12/18/26) + OVERFLOW (spec/02) + zero-T1B (spec/22). Discovered spec/12 has 12 nested T1B but only 8 fit in first-12-bundle-entries alongside 4 root-T1 — natural 12-slot ceiling, not regression. AC-34-18 contract surface mechanically locked across all 8 modules. No code change to `audit-ai-implementability.py`; pure self-test extension. Phase 153 Task A8-prep / R2: AC-34-18 — bounded tier-1B promotion. `load_module_bundle()` now lifts nested `{00,97,98,99}-*.md` contract files (e.g. `spec/05/02-features/00-overview.md`) to tier-1 priority alongside root contract files, BUT only when `_bytes(tier1) + _bytes(tier1b) ≤ MAX_BYTES` (140 KB). When T1B would overflow the cap, falls back to current behavior (T1B remains at natural alphabetical position in T2 — graceful degradation, no regression). Empirical impact at landing: 6 of 10 affected modules get full clean lift (spec/05/06/10/12/18/26 all FITS); 4 fall back (spec/02/03/14/25 OVERFLOW). Closes the nested-contract blind spot identified by Lesson #16. Self-test `test-audit-ai-tier1b-promotion.sh` codifies bimodal contract (FITS path = full lift, OVERFLOW path = no mass promotion). Live re-score deferred per Lesson #20 (gateway HTTP 402 at landing — Lesson #86 oscillation re-confirmed: env var set ≠ live call succeeds).)  
 **Source:** [`linter-scripts/audit-ai-implementability.py`](../../linter-scripts/audit-ai-implementability.py)  
 **Self-test:** [`linter-scripts/test/test-audit-ai-implementability.sh`](../../linter-scripts/test/test-audit-ai-implementability.sh)  
@@ -165,8 +165,11 @@ Rubric v7 reads `content_axis` from each module's `00-overview.md` front-matter 
 | `integration-spec` | 1.0 | 0.9 | 0.9 | **1.4** | **1.2** (allowed external) | 5.4 → renormalised to 5.0 |
 | `audit-corpus` | 1.0 | **0.5** | **0.5** | 1.5 | **1.5** (citation density) | 5.0 |
 | `tooling-spec` | 1.0 | **1.3** | 1.0 | **1.3** | 0.9 | 5.5 → renormalised to 5.0 |
+| `framework-binding` | 1.0 | **1.3** | **0.7** (errors owned upstream) | **1.2** | **0.8** (upstream-citation heavy) | 5.0 |
 
 Renormalisation rule: if raw sum ≠ 5.0, every multiplier is divided by `(raw_sum / 5.0)` so the module total stays bounded at 100.
+
+**`framework-binding` axis (added Phase 153 / 2026-06-28):** per-framework re-implementations of an already-shipped REST/CLI contract (e.g. `spec/22-git-logs-v2/40-laravel-endpoint-definition.md` binding the WordPress §04 contract to Laravel; planned slot 41 = Symfony; planned slot 42 = Slim). Differs from `integration-spec` (which describes how this spec integrates with external systems like GitHub Actions) — `framework-binding` modules re-bind **this spec's own** contract surface into a sibling framework idiom. D2 elevated because parity-AC coverage is the dominant correctness signal (every upstream endpoint/auth-step/error-code MUST have a binding row). D3 deflated because edge/error semantics are inherited from the upstream binding (Lesson #36 link-don't-restate). D4 elevated because worked framework examples (route file, FormRequest, controller signature) are the deliverable. D5 deflated to 0.8 because heavy upstream citation is expected and not a quality signal (caps the inflation that would otherwise push EXCELLENT trivially).
 
 ### Per-axis caps + floor preservation
 
@@ -177,6 +180,7 @@ Renormalisation rule: if raw sum ≠ 5.0, every multiplier is divided by `(raw_s
 | `integration-spec` | 95 | 60 | External-system uncertainty caps achievable D5 |
 | `audit-corpus` | 95 | 60 | Per Lesson #29 — describing other specs has inherent semantic distance |
 | `tooling-spec` | 100 | 60 | Full range — script ACs are GWT-checkable |
+| `framework-binding` | 95 | 60 | Translation distance from upstream contract — perfect parity is asymptotic; some idiomatic gap is structural |
 
 **Strict CI threshold remains 60 (BLOCKING) for every axis** — caps are upper bounds for the GOOD/EXCELLENT band assignment, not the strict gate. The 15-point moat between the v6 75-floor and the 60 strict threshold (per Lesson #40) is preserved across all axes.
 
@@ -185,7 +189,7 @@ Renormalisation rule: if raw sum ≠ 5.0, every multiplier is divided by `(raw_s
 ### AC-34-10 — Axis-driven weight multipliers applied per module `[critical]`
 - **Given** a module's `00-overview.md` declares `content_axis: <one-of-5>`,
 - **When** the auditor computes the per-module score,
-- **Then** the five raw dimension scores (D1–D5, each 0–20) MUST be multiplied by the axis-appropriate multipliers from the Rubric v7 weight cascade table above BEFORE summing to the 0–100 total. The multiplier sum MUST be normalised to 5.0 (so the module total stays bounded at 100); for axes whose raw multiplier sum exceeds 5.0 (`integration-spec`=5.4, `tooling-spec`=5.5), every multiplier MUST be divided by `(raw_sum / 5.0)` before scoring.
+- **Then** the five raw dimension scores (D1–D5, each 0–20) MUST be multiplied by the axis-appropriate multipliers from the Rubric v7 weight cascade table above BEFORE summing to the 0–100 total. The multiplier sum MUST be normalised to 5.0 (so the module total stays bounded at 100); for axes whose raw multiplier sum exceeds 5.0 (`integration-spec`=5.4, `tooling-spec`=5.5), every multiplier MUST be divided by `(raw_sum / 5.0)` before scoring. **Valid axis enum** (Phase 153 / 2026-06-28): `{normative-contract, process-guidance, integration-spec, audit-corpus, tooling-spec, framework-binding}` — see AC-34-12 for missing/invalid handling.
 - **Verifies:** §34 Rubric v7 contract — uniform v6 weighting penalised non-contract axes (Phase 153 Task A8 v5 baseline showed 4 modules at structural 75-floor); axis-appropriate weights close the ceiling per Lesson #29 + Lesson #36.
 
 ### AC-34-11 — Per-axis soft cap applied to band assignment, NOT to strict gate `[high]`
@@ -195,9 +199,9 @@ Renormalisation rule: if raw sum ≠ 5.0, every multiplier is divided by `(raw_s
 - **Verifies:** §34 strict-gate stability under axis-aware scoring — caps adjust band labels without weakening the regression-detection contract Task A12 graduated.
 
 ### AC-34-12 — Missing or invalid `content_axis` fails fast `[critical]`
-- **Given** a module's `00-overview.md` lacks `content_axis:` or declares a value outside `{normative-contract, process-guidance, integration-spec, audit-corpus, tooling-spec}`,
+- **Given** a module's `00-overview.md` lacks `content_axis:` or declares a value outside `{normative-contract, process-guidance, integration-spec, audit-corpus, tooling-spec, framework-binding}`,
 - **When** the auditor processes that module,
-- **Then** the script MUST exit code 2 (CLI/data error) with a message naming the offending module + the missing/invalid value, and MUST NOT silently fall back to v6 uniform weighting. The Phase 153 Task A16 bulk injection guarantees all 23 top-level modules carry valid axis values; this AC enforces that any future module addition (or accidental front-matter deletion) breaks CI immediately.
+- **Then** the script MUST exit code 2 (CLI/data error) with a message naming the offending module + the missing/invalid value, and MUST NOT silently fall back to v6 uniform weighting. The Phase 153 Task A16 bulk injection guarantees all 23 top-level modules carry valid axis values; this AC enforces that any future module addition (or accidental front-matter deletion) breaks CI immediately. **Implementation update deferred (2026-06-28 spec-only directive):** the script's `AXIS_VALUES` constant in `linter-scripts/audit-ai-implementability.py` MUST be updated to include `framework-binding` (currently a 5-value enum); deferred per spec-only mode — tracked as backlog item `A8-axis-enum-update`. Until then, slot 40 (the sole `framework-binding` module today) will fail-fast at exit code 2 on next gateway pass — this is the intended interim behavior; no module loses scoring (slot 40 is sibling-not-top-level, audited transitively via spec/22 walker per AC-34-18).
 - **Verifies:** §34 fail-loud contract — silent v6 fallback would mask Rubric v7 regressions; mirrors AC-34-04 (unknown `--module=` slug exits 2).
 
 ### AC-34-13 — Bundle cap raised 90 KB → 120 KB to suppress tree-wide saturation `[critical]`
