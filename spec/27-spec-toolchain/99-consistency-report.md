@@ -1,7 +1,7 @@
 # Consistency Report — Spec Toolchain
 
-**Version:** 2.89.0
-**Updated:** 2026-06-28 (Phase 153 process-improvements round: AC-34-19 cache-staleness banner + tracker-folder closure protocol)
+**Version:** 2.90.0
+**Updated:** 2026-06-28 (Phase 153 process-improvements round / trace-map proposer trio: AC-T-35 + AC-T-36 + AC-T-37 added to §97)
 
 ---
 
