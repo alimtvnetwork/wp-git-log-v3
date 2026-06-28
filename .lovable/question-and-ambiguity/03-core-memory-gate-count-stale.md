@@ -37,3 +37,11 @@ itself is current.
 User confirms the auto-summary cadence — does it regenerate per
 session, per phase, or only on memory-write events? Knowing this
 helps future sessions calibrate trust in the Core summary block.
+
+
+---
+## Status
+
+**Status:** Open
+**Last-reviewed:** 2026-06-28 (hygiene-round-3 — footer added per new closure protocol)
+**Blocked-on:** gateway-budget (HTTP 402 oscillation per Lesson #86) + user-decision on auto-summary cadence (file 03) / budget reset (file 05)

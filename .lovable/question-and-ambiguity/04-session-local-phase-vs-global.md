@@ -50,3 +50,13 @@ Added to Phase 30 memo as Lesson #4. Candidate for Core-memory promotion
 if a third instance occurs (e.g. another session-local counter session).
 
 ## Resolution: SELF-RESOLVED · do NOT escalate to user
+
+
+---
+## Status
+
+**Status:** Resolved
+**Resolved-in-phase:** pre-Phase-153 (legacy archival — exact phase not recorded at closure time; this footer added by hygiene-round-3 to normalize the closure protocol per README convention)
+**Resolved-on:** unknown (legacy)
+**Resolution:** see body — original "RESOLVED" / "SELF-RESOLVED" note retained verbatim above this footer.
+**Do not re-surface:** yes

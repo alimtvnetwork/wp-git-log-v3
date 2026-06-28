@@ -94,3 +94,13 @@ the warning string.
 ## Status
 
 ✅ **RESOLVED** — no further user action required.
+
+
+---
+## Status
+
+**Status:** Resolved
+**Resolved-in-phase:** pre-Phase-153 (legacy archival — exact phase not recorded at closure time; this footer added by hygiene-round-3 to normalize the closure protocol per README convention)
+**Resolved-on:** unknown (legacy)
+**Resolution:** see body — original "RESOLVED" / "SELF-RESOLVED" note retained verbatim above this footer.
+**Do not re-surface:** yes

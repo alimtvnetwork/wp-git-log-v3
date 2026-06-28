@@ -63,3 +63,11 @@ Inspection: `python3 -c "import json; print(json.load(open('.lovable/cache/audit
   If so, P1/P3-P6/P8 all defer until reset.
 - Should Gap B (chunked_path missing) be opened as its own phase or
   rolled into the next spec/27 self-lift?
+
+
+---
+## Status
+
+**Status:** Open
+**Last-reviewed:** 2026-06-28 (hygiene-round-3 — footer added per new closure protocol)
+**Blocked-on:** gateway-budget (HTTP 402 oscillation per Lesson #86) + user-decision on auto-summary cadence (file 03) / budget reset (file 05)
