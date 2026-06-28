@@ -8,8 +8,8 @@ axis_rationale: "Specs the linter-scripts/ contract (validators, generators, gat
 
 # Spec Toolchain
 
-**Version:** 2.93.0  
-**Updated:** 2026-05-05
+**Version:** 2.94.0  
+**Updated:** 2026-06-28
 <!-- h10-verified-phase: 153 -->
 **Scope:** `linter-scripts/` + `.github/workflows/` — every executable artifact that maintains, validates, audits, or scaffolds the `spec/` tree.
 
