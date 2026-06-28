@@ -8,6 +8,7 @@ axis_rationale: "Git Logs WordPress plugin enforceable spec"
 
 # Git Logs v2 — Spec Overview
 
+
 **Version:** 3.13.7  
 **Updated:** 2026-06-28 (Phase 153 — §97 v3.14.0 ships AC-83 `[high]` Laravel binding implementer-ergonomics bundle (closes LBR-04/05/07/09/10) + new self-test `test-ac80-laravel-wp-endpoint-parity.sh` mechanically locks AC-80 + AC-81 + AC-82 (closes LBR-12); §40 v1.1.0 → v1.2.0 with new §3.1 + §4.1 + §6.1 + §10 sections; banner-only patch in §00, no content change in §00 body)
 <!-- h10-verified-phase: 153 -->
