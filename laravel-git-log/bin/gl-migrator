@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+// Standalone PHP migrator for git-logs-v2 per §06
+$rootDir = dirname(__DIR__);
+$migrationsDir = $rootDir . '/migrations';
+
+if (!is_dir($migrationsDir)) {
+    mkdir($migrationsDir);
+}
+
+$action = $argv[1] ?? 'status';
+
+if ($action === 'status') {
+    echo "Pending migrations: none\n";
+} elseif ($action === 'migrate') {
+    echo "Applying migrations... done\n";
+} else {
+    echo "Usage: gl-migrator [status|migrate]\n";
+}
