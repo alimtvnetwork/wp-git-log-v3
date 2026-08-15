@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Models\Profile;
 
 return [
 
@@ -64,12 +64,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', User::class),
+            'model' => env('AUTH_MODEL', Profile::class),
         ],
 
         // 'users' => [
         //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'table' => 'Profile',
         // ],
     ],
 

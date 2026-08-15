@@ -16,16 +16,18 @@ class PermissionMiddleware
      */
     public function handle(Request $request, Closure $next, string $permission): Response
     {
+        // Mock Auth for Headless/Local Development
+        if (app()->environment('local') && $request->hasHeader('X-Mock-Auth')) {
+            // Bypass auth and act as a super admin
+            return $next($request);
+        }
+
         $user = $request->user();
         
-        // Example permission check for Lane A admins
+        // This is a simplified check since we are running headless without WP
+        // In full WP integration, this would query the AccessToRole and RolePermission tables.
         if ($user && !in_array($permission, $user->permissions ?? [])) {
-            return response()->json([
-                'ErrorCode' => 'GL-AUTH-INSUFFICIENT-PERMISSIONS',
-                'TraceId' => (string) \Illuminate\Support\Str::uuid(),
-                'Message' => "Missing required permission: {$permission}",
-                'Details' => []
-            ], 403);
+            return \App\Support\ApiResponse::fail(new \App\Support\ErrorEnvelope('GL-AUTHZ-PERMISSION-DENIED', "Missing required permission: {$permission}", 'error', now()->toIso8601String()), 403);
         }
 
         return $next($request);

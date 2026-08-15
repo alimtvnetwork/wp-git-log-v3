@@ -20,7 +20,38 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        $exceptions->shouldRenderJsonWhen(
-            fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
-        );
+        $exceptions->render(function (\Throwable $e, Request $request) {
+            if ($request->is('api/*') || $request->expectsJson()) {
+                $code = 'GL-SYS-500';
+                $severity = 'error';
+                $statusCode = 500;
+                $message = $e->getMessage() ?: 'Internal Server Error';
+
+                if ($e instanceof \Illuminate\Validation\ValidationException) {
+                    $code = 'GL-VAL-400';
+                    $severity = 'warn';
+                    $statusCode = 422;
+                    $message = 'Validation failed';
+                } elseif ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException || $e instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+                    $code = 'GL-REQ-404';
+                    $severity = 'warn';
+                    $statusCode = 404;
+                    $message = 'Not Found';
+                } elseif ($e instanceof \App\Exceptions\GlValidationException) {
+                    $code = $e->errorCode;
+                    $severity = 'error';
+                    $statusCode = 400;
+                    $message = $e->getMessage();
+                }
+
+                $error = new \App\Support\ErrorEnvelope(
+                    code: $code,
+                    message: $message,
+                    severity: $severity,
+                    timestamp: now()->toIso8601String(),
+                );
+
+                return \App\Support\ApiResponse::fail($error, $statusCode);
+            }
+        });
     })->create();
