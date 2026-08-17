@@ -4,87 +4,141 @@ param (
     [switch]$CI = $false
 )
 
-Write-Host "WP Git Log Project Runner" -ForegroundColor Green
+$configPath = Join-Path $PSScriptRoot "run.config.json"
+if (-Not (Test-Path $configPath)) {
+    Write-Host "Error: run.config.json not found." -ForegroundColor Red
+    exit 1
+}
 
-$frontendDir = $PSScriptRoot
-$backendDir = Join-Path $PSScriptRoot "laravel-git-log"
+$config = Get-Content $configPath | ConvertFrom-Json
+$jobs = @()
 
-# Function to run local CI via act
-if ($CI) {
-    Write-Host "Running CI Pipeline locally using 'act'..." -ForegroundColor Cyan
-    if (Get-Command act -ErrorAction SilentlyContinue) {
-        act -j phpunit
+Write-Host "WP Git Log Project Runner (Dynamic Orchestrator)" -ForegroundColor Green
+
+try {
+    if ($CI) {
+        Write-Host "--- CI MODE ENABLED ---" -ForegroundColor Cyan
+        
+        $ciCmd = $config.commands."ci:local"
+        if ($null -ne $ciCmd) {
+            Write-Host "Running: $ciCmd"
+            Invoke-Expression $ciCmd
+            if ($LASTEXITCODE -ne 0) { throw "CI Local execution failed." }
+        }
+        
+        $testBeCmd = $config.commands."test:backend"
+        if ($null -ne $testBeCmd) {
+            Push-Location (Join-Path $PSScriptRoot $config.backend.dir)
+            Write-Host "Running Backend tests: $testBeCmd"
+            Invoke-Expression $testBeCmd
+            if ($LASTEXITCODE -ne 0) { throw "Backend tests failed." }
+            Pop-Location
+        }
+        
+        $testFeCmd = $config.commands."test:frontend"
+        if ($null -ne $testFeCmd) {
+            Push-Location (Join-Path $PSScriptRoot $config.frontend.dir)
+            Write-Host "Running Frontend tests: $testFeCmd"
+            Invoke-Expression $testFeCmd
+            if ($LASTEXITCODE -ne 0) { throw "Frontend tests failed." }
+            Pop-Location
+        }
+        
+        Write-Host "CI steps passed successfully." -ForegroundColor Green
+        exit 0
+    }
+
+    if ($Install) {
+        Write-Host "--- INSTALLING DEPENDENCIES ---" -ForegroundColor Cyan
+        Push-Location (Join-Path $PSScriptRoot $config.backend.dir)
+        $installBe = $config.commands."install:backend"
+        Write-Host "Backend: $installBe"
+        Invoke-Expression $installBe
+        Pop-Location
+
+        Push-Location (Join-Path $PSScriptRoot $config.frontend.dir)
+        $installFe = $config.commands."install:frontend"
+        Write-Host "Frontend: $installFe"
+        Invoke-Expression $installFe
+        Pop-Location
+    }
+
+    if ($Test) {
+        Write-Host "--- RUNNING TESTS ---" -ForegroundColor Cyan
+        Push-Location (Join-Path $PSScriptRoot $config.backend.dir)
+        $testBe = $config.commands."test:backend"
+        Write-Host "Backend: $testBe"
+        Invoke-Expression $testBe
+        Pop-Location
+
+        Push-Location (Join-Path $PSScriptRoot $config.frontend.dir)
+        $testFe = $config.commands."test:frontend"
+        Write-Host "Frontend: $testFe"
+        Invoke-Expression $testFe
+        Pop-Location
+        exit 0
+    }
+
+    # Start Services Dynamically
+    Write-Host "--- STARTING SERVICES ---" -ForegroundColor Cyan
+    
+    # Backend
+    $beDir = Join-Path $PSScriptRoot $config.backend.dir
+    $beCmdStr = $config.commands."dev:backend"
+    $bePort = $config.backend.port
+    $beCmdStr = $beCmdStr -replace '\{bePort\}', $bePort
+
+    Write-Host "Starting Backend on port $bePort..." -ForegroundColor Yellow
+    $beProcess = Start-Process -NoNewWindow -PassThru -FilePath "cmd.exe" -ArgumentList "/c cd `"$beDir`" && $beCmdStr"
+    $jobs += $beProcess
+
+    # Wait for Backend to be healthy
+    Write-Host "Waiting for backend to become responsive..." -ForegroundColor Yellow
+    $retries = 0
+    $beHealthy = $false
+    while ($retries -lt 30) {
+        try {
+            $resp = Invoke-WebRequest -Uri "http://$($config.host):$bePort" -UseBasicParsing -TimeoutSec 1 -ErrorAction Stop
+            $beHealthy = $true
+            break
+        } catch {
+            Start-Sleep -Seconds 1
+            $retries++
+        }
+    }
+    if ($beHealthy) {
+        Write-Host "Backend is online!" -ForegroundColor Green
     } else {
-        Write-Host "Error: 'act' CLI not found. Please install nektos/act to run GitHub Actions locally." -ForegroundColor Red
+        Write-Host "Warning: Backend did not respond in time, continuing anyway..." -ForegroundColor Yellow
     }
-    exit
-}
 
-# Function to run tests
-if ($Test) {
-    Write-Host "Running Backend Tests & Endpoint Checks..." -ForegroundColor Cyan
-    if (Test-Path $backendDir) {
-        Push-Location $backendDir
-        # Mocking or running php artisan test
-        if (Get-Command php -ErrorAction SilentlyContinue) {
-            Write-Host "Executing PHP tests..."
-            php artisan test
-            if ($LASTEXITCODE -eq 0) {
-                Write-Host "Backend tests passed successfully." -ForegroundColor Green
-            } else {
-                Write-Host "Backend tests failed. Verify dependencies (vendor/autoload.php)." -ForegroundColor Red
-            }
+    # Frontend
+    $feDir = Join-Path $PSScriptRoot $config.frontend.dir
+    $feCmdStr = $config.commands."dev:frontend"
+    $fePort = $config.frontend.port
+    $feCmdStr = $feCmdStr -replace '\{fePort\}', $fePort
+
+    Write-Host "Starting Frontend..." -ForegroundColor Yellow
+    $feProcess = Start-Process -NoNewWindow -PassThru -FilePath "cmd.exe" -ArgumentList "/c cd `"$feDir`" && $feCmdStr"
+    $jobs += $feProcess
+
+    Write-Host "All services started! Press Ctrl+C to gracefully shut down." -ForegroundColor Green
+    
+    # Keep script running to maintain handle on jobs
+    while ($true) {
+        Start-Sleep -Seconds 1
+    }
+
+} catch {
+    Write-Host "Execution aborted: $_" -ForegroundColor Red
+    exit 1
+} finally {
+    Write-Host "`n--- CLEANUP: Terminating child processes ---" -ForegroundColor Cyan
+    foreach ($job in $jobs) {
+        if ($null -ne $job -and -not $job.HasExited) {
+            Write-Host "Killing Process ID $($job.Id)..."
+            Stop-Process -Id $job.Id -Force -ErrorAction SilentlyContinue
         }
-        Pop-Location
     }
-
-    Write-Host "Running Frontend Tests..." -ForegroundColor Cyan
-    Push-Location $frontendDir
-    if (Get-Command bun -ErrorAction SilentlyContinue) {
-        bun run test
-    } elseif (Get-Command npm -ErrorAction SilentlyContinue) {
-        npm run test
-    }
-    Pop-Location
-    exit
-}
-
-# Install dependencies if requested
-if ($Install) {
-    Write-Host "Installing Backend Dependencies..." -ForegroundColor Cyan
-    if (Test-Path $backendDir) {
-        Push-Location $backendDir
-        if (Get-Command composer -ErrorAction SilentlyContinue) {
-            composer install
-        } else {
-            Write-Host "Composer not found! Please install composer to manage PHP dependencies." -ForegroundColor Yellow
-        }
-        Pop-Location
-    }
-
-    Write-Host "Installing Frontend Dependencies..." -ForegroundColor Cyan
-    Push-Location $frontendDir
-    if (Get-Command bun -ErrorAction SilentlyContinue) {
-        bun install
-    } elseif (Get-Command npm -ErrorAction SilentlyContinue) {
-        npm install
-    }
-    Pop-Location
-}
-
-# Start Backend
-if (Test-Path $backendDir) {
-    Write-Host "Starting Laravel Backend..." -ForegroundColor Cyan
-    Start-Process -NoNewWindow -FilePath "php" -ArgumentList "artisan serve" -WorkingDirectory $backendDir
-    Write-Host "Laravel endpoints available at http://127.0.0.1:8000" -ForegroundColor Green
-}
-
-# Start Frontend
-Write-Host "Starting React Frontend..." -ForegroundColor Cyan
-if (Get-Command bun -ErrorAction SilentlyContinue) {
-    bun run dev
-} elseif (Get-Command npm -ErrorAction SilentlyContinue) {
-    npm run dev
-} else {
-    Write-Host "Could not find bun or npm to start the frontend." -ForegroundColor Red
+    Write-Host "Cleanup complete."
 }

@@ -1,0 +1,21 @@
+{
+  "projectName": "wp-git-log",
+  "frontend": {
+    "dir": ".",
+    "port": 5173
+  },
+  "backend": {
+    "dir": "laravel-git-log",
+    "port": 8000
+  },
+  "host": "127.0.0.1",
+  "commands": {
+    "install:frontend": "npm install",
+    "install:backend": "composer install",
+    "dev:frontend": "npm run dev",
+    "dev:backend": "php artisan serve --port {bePort}",
+    "test:frontend": "npm run test",
+    "test:backend": "php artisan test",
+    "ci:local": "act -j phpunit"
+  }
+}
