@@ -70,36 +70,36 @@ This document breaks down the entire Git Logs v2 specification into ~300 granula
 
 ## Phase 3: Lane A Endpoints (Read & Admin) (Tasks 61-90)
 
-- [ ] 061. Controller: `GetLogsController` (Fetch from specific Sha DB)
-- [ ] 062. Controller: `GetPipelineLogsController`
-- [ ] 063. Controller: `GetErrorLogsController`
-- [ ] 064. Controller: `GetPipelineErrorLogsController`
-- [ ] 065. FormRequest: Validation for `GetLogsRequest`
-- [ ] 066. FormRequest: Validation for pipeline queries
-- [ ] 067. Implement pagination envelope metadata for list endpoints
-- [ ] 068. Apply Permission checks (`Permission::ReadLogs`)
-- [ ] 069. Controller: `DashboardStatsController` (Metrics)
-- [ ] 070. Controller: `ListGitProfilesController`
-- [ ] 071. Controller: `CreateGitProfileController`
-- [ ] 072. Controller: `UpdateGitProfileController`
-- [ ] 073. Controller: `DeleteGitProfileController`
-- [ ] 074. Controller: `ListReposController`
-- [ ] 075. Controller: `CreateRepoController`
-- [ ] 076. Controller: `DeleteRepoController`
-- [ ] 077. Controller: `ListAppsController`
-- [ ] 078. Controller: `CreateAppController`
-- [ ] 079. Controller: `UpdateAppStatusController`
-- [ ] 080. Controller: `DeleteAppController`
-- [ ] 081. Controller: `ListRolesController`
-- [ ] 082. Controller: `UpdateRolePermissionsController`
-- [ ] 083. Controller: `ListAuditTrailController`
-- [ ] 084. Controller: `ListSystemEventsController`
-- [ ] 085. Implement Sanctum Token generation for Lane A users
-- [ ] 086. Implement `GL-AUTH-INVALID-TOKEN` response mapping
-- [ ] 087. Implement `GL-AUTHZ-PERMISSION-DENIED` response mapping
-- [ ] 088. Setup Prometheus `/metrics` endpoint logic
-- [ ] 089. Support NDJSON streaming via `Accept: application/x-ndjson`
-- [ ] 090. Ensure `TotalRowsHint` exists in NDJSON headers
+- [x] 061. Controller: `GetLogsController` (Fetch from specific Sha DB)
+- [x] 062. Controller: `GetPipelineLogsController`
+- [x] 063. Controller: `GetErrorLogsController`
+- [x] 064. Controller: `GetPipelineErrorLogsController`
+- [x] 065. FormRequest: Validation for `GetLogsRequest`
+- [x] 066. FormRequest: Validation for pipeline queries
+- [x] 067. Implement pagination envelope metadata for list endpoints
+- [x] 068. Apply Permission checks (`Permission::ReadLogs`)
+- [x] 069. Controller: `DashboardStatsController` (Metrics)
+- [x] 070. Controller: `ListGitProfilesController`
+- [x] 071. Controller: `CreateGitProfileController`
+- [x] 072. Controller: `UpdateGitProfileController`
+- [x] 073. Controller: `DeleteGitProfileController`
+- [x] 074. Controller: `ListReposController`
+- [x] 075. Controller: `CreateRepoController`
+- [x] 076. Controller: `DeleteRepoController`
+- [x] 077. Controller: `ListAppsController`
+- [x] 078. Controller: `CreateAppController`
+- [x] 079. Controller: `UpdateAppStatusController`
+- [x] 080. Controller: `DeleteAppController`
+- [x] 081. Controller: `ListRolesController`
+- [x] 082. Controller: `UpdateRolePermissionsController`
+- [x] 083. Controller: `ListAuditTrailController`
+- [x] 084. Controller: `ListSystemEventsController`
+- [x] 085. Implement Sanctum Token generation for Lane A users
+- [x] 086. Implement `GL-AUTH-INVALID-TOKEN` response mapping
+- [x] 087. Implement `GL-AUTHZ-PERMISSION-DENIED` response mapping
+- [x] 088. Setup Prometheus `/metrics` endpoint logic
+- [x] 089. Support NDJSON streaming via `Accept: application/x-ndjson`
+- [x] 090. Ensure `TotalRowsHint` exists in NDJSON headers
 
 ## Phase 4: Lane B Endpoints (Ingestion & CLI) (Tasks 91-120)
 
