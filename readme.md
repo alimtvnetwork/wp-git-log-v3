@@ -13,3 +13,6 @@ You MUST read the files listed there before beginning any task.
 
 ## [4.0.1] - 2026-08-25
 - chore: Planned v4 coding guideline audit & enforcement fixes.
+
+## [4.0.2] - 2026-08-25
+- chore: Planned EXACTLY 150 tasks for v4 coding guideline audit & enforcement fixes.
