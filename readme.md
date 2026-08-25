@@ -10,3 +10,6 @@ You MUST read the files listed there before beginning any task.
 - `.lovable/plans/index.md`
 - `.lovable/strictly-avoid.md`
 - `.lovable/ambiguous-questions/01-new-ambiguity/`
+
+## [4.0.1] - 2026-08-25
+- chore: Planned v4 coding guideline audit & enforcement fixes.
