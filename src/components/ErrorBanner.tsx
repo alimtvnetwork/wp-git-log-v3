@@ -8,10 +8,12 @@ interface ErrorBannerProps {
 }
 
 export const ErrorBanner: React.FC<ErrorBannerProps> = ({ error, className }) => {
-  if (!error) return null;
+  if (!error) {
+    return null;
+  }
 
   // Handle Axios errors containing the Universal Error Envelope
-  if (error && typeof error === 'object' && 'Status' in error) {
+  if (error && typeof error === JsType.Object && 'Status' in error) {
     const env = (error as { Status: { Code: string; Message: string; TraceId?: string } }).Status;
     return (
       <Alert variant="destructive" className={className}>
