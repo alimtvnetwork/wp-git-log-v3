@@ -13,6 +13,7 @@ class GitProfileController extends Controller
     public function index(Request $request)
     {
         $profiles = GitProfile::orderBy('GitProfileId', 'desc')->get();
+
         return ApiResponse::success($profiles->toArray());
     }
 
@@ -52,6 +53,7 @@ class GitProfileController extends Controller
         $profile->UpdatedAt = time();
         $profile->save();
 
+
         return ApiResponse::success($profile->toArray());
     }
 
@@ -82,6 +84,7 @@ class GitProfileController extends Controller
         $profile->UpdatedAt = time();
         $profile->save();
 
+
         return ApiResponse::success($profile->toArray());
     }
 
@@ -93,6 +96,7 @@ class GitProfileController extends Controller
         }
 
         $profile->delete();
+
         return ApiResponse::success(['deleted' => true]);
     }
 }

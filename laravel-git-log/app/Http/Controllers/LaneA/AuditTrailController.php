@@ -12,6 +12,7 @@ class AuditTrailController extends Controller
     public function index(Request $request)
     {
         $items = AuditTrail::orderBy('AuditTrailId', 'desc')->get();
+
         return ApiResponse::success($items->toArray());
     }
 
@@ -32,6 +33,7 @@ class AuditTrailController extends Controller
         }
 
         $item->delete();
+
         return ApiResponse::success(['deleted' => true]);
     }
 }

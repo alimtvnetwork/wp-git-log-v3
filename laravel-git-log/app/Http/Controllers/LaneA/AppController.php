@@ -12,6 +12,7 @@ class AppController extends Controller
     public function index(Request $request)
     {
         $items = App::orderBy('AppId', 'desc')->get();
+
         return ApiResponse::success($items->toArray());
     }
 
@@ -32,6 +33,7 @@ class AppController extends Controller
         }
 
         $item->delete();
+
         return ApiResponse::success(['deleted' => true]);
     }
 }

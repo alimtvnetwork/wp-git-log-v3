@@ -12,6 +12,7 @@ class PermissionController extends Controller
     public function index(Request $request)
     {
         $items = Permission::orderBy('PermissionId', 'desc')->get();
+
         return ApiResponse::success($items->toArray());
     }
 
@@ -32,6 +33,7 @@ class PermissionController extends Controller
         }
 
         $item->delete();
+
         return ApiResponse::success(['deleted' => true]);
     }
 }

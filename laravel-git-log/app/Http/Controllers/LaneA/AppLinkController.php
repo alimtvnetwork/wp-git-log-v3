@@ -12,6 +12,7 @@ class AppLinkController extends Controller
     public function index(Request $request)
     {
         $items = AppLink::orderBy('AppLinkId', 'desc')->get();
+
         return ApiResponse::success($items->toArray());
     }
 
@@ -32,6 +33,7 @@ class AppLinkController extends Controller
         }
 
         $item->delete();
+
         return ApiResponse::success(['deleted' => true]);
     }
 }

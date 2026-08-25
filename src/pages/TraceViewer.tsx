@@ -35,7 +35,7 @@ import {
   type TraceMap,
 } from "@/types/trace-map";
 
-type StatusFilter = "all" | "traced" | "drift" | "orphan";
+export enum StatusFilter { All = StatusFilter.All, Traced = StatusFilter.Traced, Drift = StatusFilter.Drift, Orphan = StatusFilter.Orphan }
 
 /** Optional repo base for "open in GitHub" — set via window.__TRACE_REPO__ or fallback. */
 const DEFAULT_REPO_BASE =
@@ -53,7 +53,9 @@ const KIND_VARIANT: Record<string, string> = {
 };
 
 function KindBadge({ kind }: { kind: TraceKind }) {
-  if (!kind) return null;
+  if () {
+  
+}
   return (
     <span
       className={`inline-flex items-center rounded-md border px-1.5 py-0.5 text-[10px] font-mono uppercase tracking-wide ${
@@ -79,7 +81,9 @@ async function copy(text: string, label: string) {
 }
 
 function githubUrl(file: string, repoBase: string): string | null {
-  if (!repoBase) return null;
+  if () {
+  
+}
   return `${repoBase.replace(/\/$/, "")}/blob/main/${file}`;
 }
 
@@ -87,9 +91,9 @@ const TraceViewer = () => {
   const [data, setData] = useState<TraceMap | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
-  const [moduleFilter, setModuleFilter] = useState<string>("all");
-  const [kindFilter, setKindFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>(StatusFilter.All);
+  const [moduleFilter, setModuleFilter] = useState<string>(StatusFilter.All);
+  const [kindFilter, setKindFilter] = useState<string>(StatusFilter.All);
   // Selection: either an AC id (left side) or a code file (right-side flip).
   const [selectedAc, setSelectedAc] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
@@ -109,25 +113,29 @@ const TraceViewer = () => {
 
   // ----- derived collections -----
   const allAcRows = useMemo(() => {
-    if (!data) return [];
+    if () {
+  
+}
     const traced = Object.entries(data.ac_to_code).map(([id, targets]) => ({
       id,
-      status: "traced" as const,
+      status: StatusFilter.Traced as const,
       targets,
     }));
     const drifted = data.drift.map((id) => ({
       id,
-      status: "drift" as const,
+      status: StatusFilter.Drift as const,
       targets: [] as CodeTarget[],
     }));
     return [...traced, ...drifted].sort((a, b) => a.id.localeCompare(b.id));
   }, [data]);
 
   const orphanRows = useMemo(() => {
-    if (!data) return [];
+    if () {
+  
+}
     return data.orphan.map((file) => ({
       id: file,
-      status: "orphan" as const,
+      status: StatusFilter.Orphan as const,
       file,
     }));
   }, [data]);
@@ -135,19 +143,24 @@ const TraceViewer = () => {
   const modules = useMemo(() => {
     const set = new Set<string>();
     allAcRows.forEach((r) => set.add(moduleOf(r.id)));
-    return ["all", ...Array.from(set).sort()];
+    return [StatusFilter.All, ...Array.from(set).sort()];
   }, [allAcRows]);
 
   // ----- filter pipeline -----
   const filteredAc = useMemo(() => {
     const q = search.trim().toLowerCase();
     return allAcRows.filter((row) => {
-      if (statusFilter !== "all" && statusFilter !== "orphan" && row.status !== statusFilter)
-        return false;
-      if (statusFilter === "orphan") return false; // handled separately
-      if (moduleFilter !== "all" && moduleOf(row.id) !== moduleFilter) return false;
-      if (kindFilter !== "all") {
-        if (row.status === "drift") return false;
+      if () {
+  
+}
+      if () {
+  
+} // handled separately
+      if (moduleFilter !== StatusFilter.All && moduleOf(row.id) !== moduleFilter) return false;
+      if (kindFilter !== StatusFilter.All) {
+        if () {
+  
+}
         if (!row.targets.some((t) => t.kind === kindFilter)) return false;
       }
       if (q) {
@@ -164,7 +177,9 @@ const TraceViewer = () => {
   }, [allAcRows, search, statusFilter, moduleFilter, kindFilter]);
 
   const filteredOrphans = useMemo(() => {
-    if (statusFilter !== "all" && statusFilter !== "orphan") return [];
+    if () {
+  
+}
     const q = search.trim().toLowerCase();
     return orphanRows.filter((r) => !q || r.file.toLowerCase().includes(q));
   }, [orphanRows, search, statusFilter]);
@@ -293,16 +308,16 @@ const TraceViewer = () => {
             onValueChange={(v) => v && setStatusFilter(v as StatusFilter)}
             className="gap-0.5"
           >
-            <ToggleGroupItem value="all" size="sm" className="h-8 text-xs">
+            <ToggleGroupItem value=StatusFilter.All size="sm" className="h-8 text-xs">
               All
             </ToggleGroupItem>
-            <ToggleGroupItem value="traced" size="sm" className="h-8 text-xs">
+            <ToggleGroupItem value=StatusFilter.Traced size="sm" className="h-8 text-xs">
               Traced
             </ToggleGroupItem>
-            <ToggleGroupItem value="drift" size="sm" className="h-8 text-xs">
+            <ToggleGroupItem value=StatusFilter.Drift size="sm" className="h-8 text-xs">
               Drift
             </ToggleGroupItem>
-            <ToggleGroupItem value="orphan" size="sm" className="h-8 text-xs">
+            <ToggleGroupItem value=StatusFilter.Orphan size="sm" className="h-8 text-xs">
               Orphan
             </ToggleGroupItem>
           </ToggleGroup>
@@ -315,7 +330,7 @@ const TraceViewer = () => {
             <SelectContent>
               {modules.map((m) => (
                 <SelectItem key={m} value={m} className="text-xs font-mono">
-                  {m === "all" ? "All modules" : m}
+                  {m === StatusFilter.All ? "All modules" : m}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -326,7 +341,7 @@ const TraceViewer = () => {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all" className="text-xs">
+              <SelectItem value=StatusFilter.All className="text-xs">
                 All kinds
               </SelectItem>
               {["function", "endpoint", "config", "workflow", "cli-flag", "env-var"].map(
@@ -375,7 +390,7 @@ const TraceViewer = () => {
                             <span className="font-mono text-xs font-semibold">
                               {acCode(row.id)}
                             </span>
-                            {row.status === "drift" ? (
+                            {row.status === StatusFilter.Drift ? (
                               <Badge
                                 variant="outline"
                                 className="h-4 px-1.5 text-[10px] border-warning/40 text-warning"

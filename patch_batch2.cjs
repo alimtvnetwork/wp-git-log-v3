@@ -9,27 +9,36 @@ function patch(file, replacer) {
     }
 }
 
-const files = [
-    'src/components/ui/chart.tsx',
-    'src/components/ui/scroll-area.tsx',
-    'src/components/ui/select.tsx',
-    'src/components/ui/separator.tsx',
-    'src/components/ui/sidebar.tsx',
-    'src/hooks/use-toast.ts',
-    'src/lib/query-client.ts',
-    'src/pages/Dashboard.tsx'
+// 1. src/pages/GitProfiles.tsx
+// 2. src/pages/LogViewer.tsx
+// 3. src/pages/PipelineDetail.tsx
+// 4. src/pages/Pipelines.tsx
+// 5. src/pages/Profiles.tsx
+// 6. src/pages/Repos.tsx
+// 7. src/pages/TraceViewer.tsx
+// 8. src/types/trace-map.ts
+// 9. laravel-git-log/app/Http/Controllers/LaneA/*.php
+
+const filesToFix = [
+    'src/pages/GitProfiles.tsx',
+    'src/pages/LogViewer.tsx',
+    'src/pages/PipelineDetail.tsx',
+    'src/pages/Pipelines.tsx',
+    'src/pages/Profiles.tsx',
+    'src/pages/Repos.tsx',
+    'src/pages/TraceViewer.tsx',
+    'src/types/trace-map.ts',
+    'laravel-git-log/app/Http/Controllers/LaneA/AppController.php',
+    'laravel-git-log/app/Http/Controllers/LaneA/AppLinkController.php',
+    'laravel-git-log/app/Http/Controllers/LaneA/AuditTrailController.php',
+    'laravel-git-log/app/Http/Controllers/LaneA/GitProfileController.php',
+    'laravel-git-log/app/Http/Controllers/LaneA/PermissionController.php'
 ];
 
-for (let f of files) {
+for (let f of filesToFix) {
     if (!fs.existsSync(f)) continue;
     patch(f, c => {
-        // magic strings to Enums
-        c = c.replace(/orientation === "vertical"/g, "orientation === OrientationType.Vertical");
-        c = c.replace(/orientation === "horizontal"/g, "orientation === OrientationType.Horizontal");
-        c = c.replace(/=== 'left'/g, "=== DirectionType.Left");
-        c = c.replace(/=== 'right'/g, "=== DirectionType.Right");
-        
-        // Blank lines before returns
+        // Fix missing blank line before return
         c = c.replace(/([^\n])\n(\s*)(return\s+)/g, (match, p1, p2, p3) => {
             if (p1.trim() === '{' || p1.trim() === '}' || p1.trim() === '') {
                 return match;
@@ -37,10 +46,36 @@ for (let f of files) {
             return p1 + '\n\n' + p2 + p3;
         });
 
-        if ((c.includes('OrientationType.') || c.includes('DirectionType.')) && !c.includes('@/enums')) {
-            c = "import { OrientationType, DirectionType } from '@/enums';\n" + c;
+        // Fix missing braces on single-line if
+        // Matches: if (something) return something;
+        // Does not match multiline yet.
+        c = c.replace(/if\s*\(([^)]+)\)\s+(return[^;]+;)/g, "if () {\n  \n}");
+
+        // LogViewer magic strings:
+        if (f.endsWith('LogViewer.tsx')) {
+            c = c.replace(/variant === "lane-a"/g, "variant === LaneVariant.LaneA");
+            c = c.replace(/variant === "lane-b"/g, "variant === LaneVariant.LaneB");
+            if (c.includes('LaneVariant.') && !c.includes('LaneVariant')) {
+                c = "export enum LaneVariant { LaneA = 'lane-a', LaneB = 'lane-b' }\n" + c;
+            }
         }
-        
+
+        // TraceViewer magic strings:
+        if (f.endsWith('TraceViewer.tsx')) {
+            c = c.replace(/type StatusFilter = "all" \| "traced" \| "drift" \| "orphan";/, "export enum StatusFilter { All = 'all', Traced = 'traced', Drift = 'drift', Orphan = 'orphan' }");
+            
+            c = c.replace(/"all"/g, "StatusFilter.All");
+            c = c.replace(/"traced"/g, "StatusFilter.Traced");
+            c = c.replace(/"drift"/g, "StatusFilter.Drift");
+            c = c.replace(/"orphan"/g, "StatusFilter.Orphan");
+            
+            c = c.replace(/'all'/g, "StatusFilter.All");
+            c = c.replace(/'traced'/g, "StatusFilter.Traced");
+            c = c.replace(/'drift'/g, "StatusFilter.Drift");
+            c = c.replace(/'orphan'/g, "StatusFilter.Orphan");
+        }
+
         return c;
     });
 }
+
