@@ -16,7 +16,7 @@
 | **Append batch** | One HTTP POST `/append-log` that contains all `Logs[]` and `ErrorLogs[]` produced by one phase. |
 | **Stream chunk** | One body chunk in `Transfer-Encoding: chunked` — newline-delimited JSON, one log line per chunk. |
 | **Doctor check** | A pre-flight assertion (binary present, server reachable, auth valid). |
-| **Phase plan** | The ordered list of `(Runtime, Phase, Runner, Args)` that `glci run` will execute. Printed by `glci detect`. |
+| **Phase plan** | The ordered list of `(Runtime, Phase, Runner, Args)` that `rlogger run` will execute. Printed by `rlogger detect`. |
 | **PipelineName** | Mirrors v2 server field; format `{runtime}-{phase}` (e.g. `ts-test`, `go-lint`). |
 | **GitSha256** | Always sourced from the CI environment (`GITHUB_SHA`, `CI_COMMIT_SHA`, …); never recomputed. |
 
@@ -40,7 +40,7 @@
 | `go`  | `go.mod` | `go` (system Go ≥ 1.21) |
 | `php` | `composer.json` | `composer`, `phpunit`, `phpcs`/`phpstan` resolved via `vendor/bin` first |
 
-A repo MAY ship multiple runtimes (e.g. PHP plugin + TypeScript admin SPA). `glci run` then runs each runtime's full phase set; logs are tagged separately per `PipelineName`.
+A repo MAY ship multiple runtimes (e.g. PHP plugin + TypeScript admin SPA). `rlogger run` then runs each runtime's full phase set; logs are tagged separately per `PipelineName`.
 
 ---
 
@@ -63,10 +63,10 @@ Used in `--severity` filter and in `Logs[]` line classification (§09).
 |-------|---------|
 | `0`  | All requested phases succeeded AND all log POSTs returned 2xx |
 | `1`  | At least one phase reported `error` or `fatal` (logs were still shipped successfully) |
-| `2`  | Configuration error (bad `glci.toml`, missing required field, contradictory flags) |
+| `2`  | Configuration error (bad `rlogger.toml`, missing required field, contradictory flags) |
 | `3`  | Auth error from Git Logs server (`GL-AUTH-*` returned by §22 server) |
 | `4`  | Network/transport error after `MaxRetries` exhausted |
-| `5`  | Doctor check failed (`glci doctor`) |
+| `5`  | Doctor check failed (`rlogger doctor`) |
 | `64` | Misuse of CLI (sysexits.h `EX_USAGE`) |
 
 The exit-code table is **non-overlapping**: each numeric value MUST map to exactly one cause class. Adding a new code requires a row here.
@@ -78,6 +78,6 @@ The exit-code table is **non-overlapping**: each numeric value MUST map to exact
 | Value | When used | Wire format |
 |-------|-----------|-------------|
 | `batched`   | default | One POST `/append-log` per phase, body = full `Logs[]`+`ErrorLogs[]` |
-| `streaming` | `--stream` flag OR `[push] mode = "streaming"` in `glci.toml` | `Transfer-Encoding: chunked`, NDJSON body, one chunk per log line |
+| `streaming` | `--stream` flag OR `[push] mode = "streaming"` in `rlogger.toml` | `Transfer-Encoding: chunked`, NDJSON body, one chunk per log line |
 
 Both modes target the same endpoint; the v2 server already supports streaming per `spec/22-git-logs-v2/04-rest-api-endpoints.md` AC-12.

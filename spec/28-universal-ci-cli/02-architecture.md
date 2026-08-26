@@ -7,11 +7,11 @@
 
 ## Process Model
 
-`glci` is a single static binary. One invocation = one process = one set of phases for one commit. No daemons, no background workers, no shared state across invocations.
+`rlogger` is a single static binary. One invocation = one process = one set of phases for one commit. No daemons, no background workers, no shared state across invocations.
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  glci run --phases lint,build,test                          │
+│  rlogger run --phases lint,build,test                          │
 │  ┌──────────────────────────────────────────────────────┐   │
 │  │ 1. config.Resolve()       (file → env → flag)       │   │
 │  │ 2. ci.Harvest()           (CI env vars → defaults)  │   │
@@ -43,7 +43,7 @@
 │  internal/classify internal/doctor              │
 ├─────────────────────────────────────────────────┤
 │  pkg/api    (typed structs for v2 endpoints)    │
-│  pkg/errors (GLCI-* taxonomy, see §07)          │
+│  pkg/errors (RLOGGER-* taxonomy, see §07)          │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -103,12 +103,12 @@ Under `--parallel`, runtimes execute in **independent goroutines with disjoint f
 
 | Event | Sibling runtime impact | Process-tree impact | Exit code |
 |---|---|---|---|
-| Single-runtime phase failure | NONE — siblings run to completion | sibling subprocesses receive NO `SIGTERM`/`SIGINT` from `glci` | aggregated per "Aggregated exit code" rule below |
-| `glci` receives `SIGINT` (Ctrl-C) | ALL runtimes propagate `SIGTERM` to their child subprocess tree | full tree shutdown | `130` |
-| `glci` receives `SIGTERM` | ALL runtimes propagate `SIGTERM` to their child subprocess tree | full tree shutdown | `143` |
+| Single-runtime phase failure | NONE — siblings run to completion | sibling subprocesses receive NO `SIGTERM`/`SIGINT` from `rlogger` | aggregated per "Aggregated exit code" rule below |
+| `rlogger` receives `SIGINT` (Ctrl-C) | ALL runtimes propagate `SIGTERM` to their child subprocess tree | full tree shutdown | `130` |
+| `rlogger` receives `SIGTERM` | ALL runtimes propagate `SIGTERM` to their child subprocess tree | full tree shutdown | `143` |
 | `--fail-fast` flag set | First failure cancels ALL siblings via `SIGTERM` | full tree shutdown | first non-zero phase exit code |
 
-**Aggregated exit code (without `--fail-fast`):** `glci` waits for ALL parallel runtimes to terminate (success or failure), then exits with the **highest** observed exit code (precedence: `4` transport > `2` config > `1` phase > `0`). A runtime that completed successfully does NOT lower the aggregated exit code. Ship-queue failures are accumulated per-runtime and surface independently in the aggregated code per the existing precedence rule.
+**Aggregated exit code (without `--fail-fast`):** `rlogger` waits for ALL parallel runtimes to terminate (success or failure), then exits with the **highest** observed exit code (precedence: `4` transport > `2` config > `1` phase > `0`). A runtime that completed successfully does NOT lower the aggregated exit code. Ship-queue failures are accumulated per-runtime and surface independently in the aggregated code per the existing precedence rule.
 
 **Forbidden patterns:**
 - ❌ Cross-runtime cancellation on first phase failure WITHOUT `--fail-fast` (silent loss of sibling diagnostic logs).
@@ -122,4 +122,4 @@ Under `--parallel`, runtimes execute in **independent goroutines with disjoint f
 
 The CLI is **stateless across invocations**. The only persistent state is what the receiving Git Logs v2 server records (per AC-13: `Pipeline.HasError` survives until `/fixed-log` clears it). This means a PR pipeline that previously failed and now passes will automatically POST `/fixed-log` *because the server told us `HasError=1` from the previous run* — never because the CLI cached anything locally.
 
-`glci doctor` is the only command that reads server state (`GET /get-pipeline-error-logs?…`); all other commands are write-only against the server.
+`rlogger doctor` is the only command that reads server state (`GET /get-pipeline-error-logs?…`); all other commands are write-only against the server.

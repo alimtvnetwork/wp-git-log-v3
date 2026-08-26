@@ -1,7 +1,7 @@
 # Command Surface
 
 **Version:** 1.1.0  
-**Updated:** 2026-04-30 (Phase 153 Task A11g — added normative pipe-merge mechanism + PTY-forbidden clause + monotonic-timestamp rule to step 3 of `glci lint/build/test`; bound by §97 AC-28-42)
+**Updated:** 2026-04-30 (Phase 153 Task A11g — added normative pipe-merge mechanism + PTY-forbidden clause + monotonic-timestamp rule to step 3 of `rlogger lint/build/test`; bound by §97 AC-28-42)
 
 Every subcommand below is normative. Adding a flag requires a row here.
 
@@ -12,10 +12,10 @@ Every subcommand below is normative. Adding a flag requires a row here.
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
 | `--cwd <dir>` | path | `$PWD` | Project root for detection + execution |
-| `--config <file>` | path | `./glci.toml` | Config file path |
+| `--config <file>` | path | `./rlogger.toml` | Config file path |
 | `--server <url>` | url | from config | Git Logs v2 base URL (`https://example.com/wp-json/git-logs/v2`) |
-| `--temp-token <s>` | string | `$GLCI_TEMP_TOKEN` | Lane B TempToken |
-| `--token <s>` | string | `$GLCI_TOKEN` | Lane B Token |
+| `--temp-token <s>` | string | `$RLOGGER_TEMP_TOKEN` | Lane B TempToken |
+| `--token <s>` | string | `$RLOGGER_TOKEN` | Lane B Token |
 | `--auth-mode <m>` | enum | `temptoken` | `temptoken` \| `ssh` (see §22 server `X-GL-Auth-Mode`) |
 | `--repo-url <url>` | url | from CI env | Overrides harvested `RepoUrl` |
 | `--branch <s>` | string | from CI env | Overrides harvested `Branch` |
@@ -30,17 +30,17 @@ Every subcommand below is normative. Adding a flag requires a row here.
 
 ---
 
-## `glci detect`
+## `rlogger detect`
 
 Print phase plan + detected runtimes; do nothing else.
 
 - Exit `0` on success (≥1 runtime).
-- Exit `2` (`GLCI-DETECT-NONE`) if no runtime detected.
+- Exit `2` (`RLOGGER-DETECT-NONE`) if no runtime detected.
 - Output: see §03 "Detection Output" JSON shape (when `--json`); human table otherwise.
 
 ---
 
-## `glci lint` / `glci build` / `glci test`
+## `rlogger lint` / `rlogger build` / `rlogger test`
 
 Run a single phase across all detected runtimes.
 
@@ -61,9 +61,9 @@ Behavior:
 
 ---
 
-## `glci run`
+## `rlogger run`
 
-The CI/CD entry point. Equivalent to `glci lint && glci build && glci test` but as one process — only one auth handshake, one detect, one config read.
+The CI/CD entry point. Equivalent to `rlogger lint && rlogger build && rlogger test` but as one process — only one auth handshake, one detect, one config read.
 
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
@@ -74,9 +74,9 @@ Behavior identical to running each phase individually with `--keep-going` unset.
 
 ---
 
-## `glci push-fixed`
+## `rlogger push-fixed`
 
-Send `PUT /fixed-log` for the current `(RepoUrl, Branch, PipelineName)`. Used when a CI step has manually verified a previous failure is resolved (e.g. flake retry passed). Normally automatic — `glci run` calls it itself when a previously-failing pipeline now passes.
+Send `PUT /fixed-log` for the current `(RepoUrl, Branch, PipelineName)`. Used when a CI step has manually verified a previous failure is resolved (e.g. flake retry passed). Normally automatic — `rlogger run` calls it itself when a previously-failing pipeline now passes.
 
 | Flag | Type | Default | Description |
 |------|------|---------|-------------|
@@ -84,7 +84,7 @@ Send `PUT /fixed-log` for the current `(RepoUrl, Branch, PipelineName)`. Used wh
 
 ---
 
-## `glci clear`
+## `rlogger clear`
 
 Send `POST /clear-log` (single pipeline) or `POST /clear-log-all` (with `--all`).
 
@@ -97,13 +97,13 @@ Refuses to run on the `main`/`master` branch unless `--force`.
 
 ---
 
-## `glci config print`
+## `rlogger config print`
 
 Print the resolved configuration as JSON, with provenance (`file` \| `env` \| `flag` \| `default`) for each field. Secrets are redacted (`"TempToken": "***"`).
 
 ---
 
-## `glci doctor`
+## `rlogger doctor`
 
 Pre-flight checks. Exits `5` on first failure, `0` if all pass.
 
@@ -114,8 +114,8 @@ Checks:
 3. Server URL reachable (HTTPS handshake).
 4. Auth handshake — `GET /get-logs?q=<repo>&limit=0` with current credentials. Map server response codes:
    - `200/204` → pass.
-   - `401` → `GLCI-DOCTOR-AUTH-INVALID` (surface server's `ErrorCode`).
-   - `404` → `GLCI-DOCTOR-PROFILE-NOT-FOUND`.
+   - `401` → `RLOGGER-DOCTOR-AUTH-INVALID` (surface server's `ErrorCode`).
+   - `404` → `RLOGGER-DOCTOR-PROFILE-NOT-FOUND`.
 5. Clock skew ≤ 60s if `--auth-mode=ssh` (`GL-SSH-TIMESTAMP-SKEW` would fail otherwise).
 
 ---

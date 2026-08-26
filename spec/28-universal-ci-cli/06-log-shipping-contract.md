@@ -14,9 +14,9 @@ The CLI is a *client* of Git Logs v2. Wire shapes here MUST stay byte-compatible
 |-----------|------|-------------|---------|
 | Phase finished, logs to deliver | `POST` | `/append-log` | Always (unless `--no-push`) |
 | Phase passed AND server says previous run had `HasError=1` | `PUT`  | `/fixed-log` | Automatic post-success check |
-| `glci clear --pipeline X` | `POST` | `/clear-log` | Manual |
-| `glci clear --all` | `POST` | `/clear-log-all` | Manual |
-| `glci doctor` reachability ping | `GET`  | `/get-logs?q=<repo>&limit=0` | Pre-flight only |
+| `rlogger clear --pipeline X` | `POST` | `/clear-log` | Manual |
+| `rlogger clear --all` | `POST` | `/clear-log-all` | Manual |
+| `rlogger doctor` reachability ping | `GET`  | `/get-logs?q=<repo>&limit=0` | Pre-flight only |
 
 `/get-pipeline-logs`, `/get-error-logs`, `/get-pipeline-error-logs` are read endpoints owned by humans/admin UI; the CLI does NOT call them in any phase.
 
@@ -44,13 +44,13 @@ One POST per `(Runtime, Phase)`. Body = full payload from §22 `/append-log`:
 
 Field rules:
 
-- `Logs[]` cap: `batch_max_bytes` (default 1 MiB) total UTF-8. Lines beyond cap are dropped and `ErrorLogs[]` gains a synthetic `"GLCI: log truncated, N lines dropped"`.
+- `Logs[]` cap: `batch_max_bytes` (default 1 MiB) total UTF-8. Lines beyond cap are dropped and `ErrorLogs[]` gains a synthetic `"RLOGGER: log truncated, N lines dropped"`.
 - `ErrorLogs[]` cap: same; dropped lines counted in same synthetic line.
 - `FilePaths[]` derived from §09 classifier; deduplicated; max 100 entries.
 - `HasError` is **true iff** `ErrorLogs[]` is non-empty OR runner exit code ≠ 0.
-- `GitSha256` must be a real commit SHA — when unset, exit `2` with `GLCI-PUSH-NO-SHA`.
+- `GitSha256` must be a real commit SHA — when unset, exit `2` with `RLOGGER-PUSH-NO-SHA`.
 
-Retry on `5xx`/network: exponential backoff per `push.backoff_ms`. After `max_retries`, exit `4` with `GLCI-PUSH-RETRIES-EXHAUSTED`.
+Retry on `5xx`/network: exponential backoff per `push.backoff_ms`. After `max_retries`, exit `4` with `RLOGGER-PUSH-RETRIES-EXHAUSTED`.
 
 Retry on `4xx`: **never**. Surface server's `ErrorCode` directly and exit `3`.
 
@@ -75,7 +75,7 @@ X-GL-Stream: 1
 - Each subsequent chunk MUST be one valid JSON object terminated by `\n`.
 - Final chunk MUST carry `StreamFooter=true` plus the resolved `HasError`.
 - Server returns standard ack envelope after the final chunk; CLI parses and treats it identically to batched mode.
-- Buffer cap: `max_buffer_lines` lines kept in memory; if the channel blocks (slow server), oldest non-error lines are dropped first and a `"GLCI: stream backpressure dropped N lines"` synthetic line is inserted before the next sent chunk.
+- Buffer cap: `max_buffer_lines` lines kept in memory; if the channel blocks (slow server), oldest non-error lines are dropped first and a `"RLOGGER: stream backpressure dropped N lines"` synthetic line is inserted before the next sent chunk.
 
 Streaming and batched modes are mutually exclusive per invocation. Mixing per-phase is not supported in v1.
 
@@ -110,7 +110,7 @@ Signing string for SSH mode is `GL-SSHSIG-V1` per `spec/22-git-logs-v2/05-auth-a
 
 ## Determinism
 
-Two consecutive `glci run` invocations on the same commit, same env, same source MUST emit byte-identical request bodies (modulo `GitSha256` if HEAD changed). Specifically:
+Two consecutive `rlogger run` invocations on the same commit, same env, same source MUST emit byte-identical request bodies (modulo `GitSha256` if HEAD changed). Specifically:
 
 - `Logs[]` order reflects exec capture order, not goroutine scheduling.
 - `FilePaths[]` is sorted lexicographically.

@@ -8,17 +8,17 @@
 ## Override Order (lowest → highest precedence)
 
 1. Built-in defaults (compiled into binary).
-2. `glci.toml` at `--cwd` (or `--config`).
-3. Environment variables (`GLCI_*`).
+2. `rlogger.toml` at `--cwd` (or `--config`).
+3. Environment variables (`RLOGGER_*`).
 4. Command-line flags.
 
-Higher levels override individual fields, not entire sections. Example: `[push] mode = "streaming"` in `glci.toml` + CLI flag `--no-push` results in `Push.Enabled=false, Push.Mode=streaming`.
+Higher levels override individual fields, not entire sections. Example: `[push] mode = "streaming"` in `rlogger.toml` + CLI flag `--no-push` results in `Push.Enabled=false, Push.Mode=streaming`.
 
-`glci config print` MUST display the provenance source for every resolved field.
+`rlogger config print` MUST display the provenance source for every resolved field.
 
 ---
 
-## `glci.toml` Schema
+## `rlogger.toml` Schema
 
 ```toml
 [server]
@@ -28,9 +28,9 @@ timeout_secs  = 30
 verify_tls    = true                                         # set false ONLY for self-signed dev
 
 [auth]
-temp_token    = "${env:GLCI_TEMP_TOKEN}"                     # ${env:NAME} interpolation supported
-token         = "${env:GLCI_TOKEN}"
-ssh_key_path  = "~/.ssh/glci_ed25519"                        # required when auth_mode=ssh
+temp_token    = "${env:RLOGGER_TEMP_TOKEN}"                     # ${env:NAME} interpolation supported
+token         = "${env:RLOGGER_TOKEN}"
+ssh_key_path  = "~/.ssh/rlogger_ed25519"                        # required when auth_mode=ssh
 ssh_fingerprint = "SHA256:abc…"                              # else derived from key
 
 [push]
@@ -87,19 +87,19 @@ Full JSON Schema lives at [`18-config-schema.json`](./18-config-schema.json).
 
 | Env var | Maps to | Notes |
 |---------|---------|-------|
-| `GLCI_SERVER_URL` | `server.url` | |
-| `GLCI_AUTH_MODE` | `server.auth_mode` | |
-| `GLCI_TEMP_TOKEN` | `auth.temp_token` | **Required** unless `auth_mode=ssh` |
-| `GLCI_TOKEN` | `auth.token` | |
-| `GLCI_SSH_KEY_PATH` | `auth.ssh_key_path` | |
-| `GLCI_REPO_URL` | `repo.url` | Often unset; CI-provider harvest fills it |
-| `GLCI_BRANCH` | `repo.branch` | |
-| `GLCI_GIT_SHA` | _(no field; runtime only)_ | Forces `GitSha256` in payload |
-| `GLCI_PUSH_MODE` | `push.mode` | |
-| `GLCI_VERIFY_TLS` | `server.verify_tls` | `0`/`1` |
-| `GLCI_LOG_LEVEL` | `_log_level` | `error`\|`warn`\|`info`\|`debug`\|`trace` |
+| `RLOGGER_SERVER_URL` | `server.url` | |
+| `RLOGGER_AUTH_MODE` | `server.auth_mode` | |
+| `RLOGGER_TEMP_TOKEN` | `auth.temp_token` | **Required** unless `auth_mode=ssh` |
+| `RLOGGER_TOKEN` | `auth.token` | |
+| `RLOGGER_SSH_KEY_PATH` | `auth.ssh_key_path` | |
+| `RLOGGER_REPO_URL` | `repo.url` | Often unset; CI-provider harvest fills it |
+| `RLOGGER_BRANCH` | `repo.branch` | |
+| `RLOGGER_GIT_SHA` | _(no field; runtime only)_ | Forces `GitSha256` in payload |
+| `RLOGGER_PUSH_MODE` | `push.mode` | |
+| `RLOGGER_VERIFY_TLS` | `server.verify_tls` | `0`/`1` |
+| `RLOGGER_LOG_LEVEL` | `_log_level` | `error`\|`warn`\|`info`\|`debug`\|`trace` |
 
-Any `${env:NAME}` token in `glci.toml` resolves at config load time. If `NAME` is unset and the field is required, exit `2` with `GLCI-CONFIG-MISSING-ENV`.
+Any `${env:NAME}` token in `rlogger.toml` resolves at config load time. If `NAME` is unset and the field is required, exit `2` with `RLOGGER-CONFIG-MISSING-ENV`.
 
 ---
 
@@ -109,22 +109,22 @@ Any `${env:NAME}` token in `glci.toml` resolves at config load time. If `NAME` i
 
 | Rule | Failure code |
 |------|--------------|
-| `server.url` is HTTPS (or `--insecure-http` flag passed) | `GLCI-CONFIG-INSECURE-URL` |
-| `push.backoff_ms` length == `push.max_retries` | `GLCI-CONFIG-BACKOFF-LENGTH` |
-| `auth.temp_token` non-empty when `auth_mode=temptoken` | `GLCI-CONFIG-MISSING-TOKEN` |
-| `auth.ssh_key_path` exists+readable when `auth_mode=ssh` | `GLCI-CONFIG-SSH-KEY-MISSING` |
-| `pipeline.name_template` only contains `{runtime}` and `{phase}` placeholders | `GLCI-CONFIG-BAD-TEMPLATE` |
-| At least one `[runtime.*].enabled = true` | `GLCI-CONFIG-NO-RUNTIME` |
-| `batch_max_bytes` ≤ server's known cap (1 MiB v2 default) | `GLCI-CONFIG-BATCH-TOO-LARGE` |
+| `server.url` is HTTPS (or `--insecure-http` flag passed) | `RLOGGER-CONFIG-INSECURE-URL` |
+| `push.backoff_ms` length == `push.max_retries` | `RLOGGER-CONFIG-BACKOFF-LENGTH` |
+| `auth.temp_token` non-empty when `auth_mode=temptoken` | `RLOGGER-CONFIG-MISSING-TOKEN` |
+| `auth.ssh_key_path` exists+readable when `auth_mode=ssh` | `RLOGGER-CONFIG-SSH-KEY-MISSING` |
+| `pipeline.name_template` only contains `{runtime}` and `{phase}` placeholders | `RLOGGER-CONFIG-BAD-TEMPLATE` |
+| At least one `[runtime.*].enabled = true` | `RLOGGER-CONFIG-NO-RUNTIME` |
+| `batch_max_bytes` ≤ server's known cap (1 MiB v2 default) | `RLOGGER-CONFIG-BATCH-TOO-LARGE` |
 
 ---
 
 ## Defaults Document
 
-The compiled-in defaults are dumped by `glci config print --defaults-only`. This output is the contract — if a field appears here, it MUST exist in the config struct. The deterministic-audit script for this module asserts both directions.
+The compiled-in defaults are dumped by `rlogger config print --defaults-only`. This output is the contract — if a field appears here, it MUST exist in the config struct. The deterministic-audit script for this module asserts both directions.
 
 ---
 
 ## Concurrency Posture (Normative cross-reference)
 
-When `glci` is invoked from multiple concurrent CI runners against the same workspace (cache writes, local SQLite state under `~/.local/state/glci/`, atomic config rewrites via `glci config set`), the runtime concurrency contract is governed by [spec/13-generic-cli §97 AC-22](../13-generic-cli/97-acceptance-criteria.md) (SQLite WAL + `busy_timeout=5000` + `BEGIN IMMEDIATE` + 3× backoff + atomic temp-then-rename + lock-file discipline). This module MUST NOT restate that contract — see Lesson #36 (link, never restate). Per-runner `flock` on shared workspace paths is FORBIDDEN (deadlocks vs SQLite locking, mirrors spec/13/18 batch-execution rule).
+When `rlogger` is invoked from multiple concurrent CI runners against the same workspace (cache writes, local SQLite state under `~/.local/state/rlogger/`, atomic config rewrites via `rlogger config set`), the runtime concurrency contract is governed by [spec/13-generic-cli §97 AC-22](../13-generic-cli/97-acceptance-criteria.md) (SQLite WAL + `busy_timeout=5000` + `BEGIN IMMEDIATE` + 3× backoff + atomic temp-then-rename + lock-file discipline). This module MUST NOT restate that contract — see Lesson #36 (link, never restate). Per-runner `flock` on shared workspace paths is FORBIDDEN (deadlocks vs SQLite locking, mirrors spec/13/18 batch-execution rule).

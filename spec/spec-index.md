@@ -1033,7 +1033,7 @@
 
 | File | Title | Version |
 |------|-------|---------|
-| `spec/28-universal-ci-cli/00-overview.md` | Universal CI CLI — Spec Overview | 1.1.0 |
+| `spec/28-universal-ci-cli/00-overview.md` | RiseUp-Git-Logger (rlogger) — Spec Overview | 1.1.0 |
 | `spec/28-universal-ci-cli/01-glossary-and-enums.md` | Glossary and Enums | 1.0.0 |
 | `spec/28-universal-ci-cli/02-architecture.md` | Architecture | 1.0.0 |
 | `spec/28-universal-ci-cli/03-runtime-detection.md` | Runtime Detection | 1.0.0 |

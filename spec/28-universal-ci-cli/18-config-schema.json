@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/alimtvnetwork/glci/schemas/glci.toml.schema.json",
-  "title": "glci.toml",
+  "$id": "https://github.com/alimtvnetwork/rlogger/schemas/rlogger.toml.schema.json",
+  "title": "rlogger.toml",
   "type": "object",
   "additionalProperties": false,
   "required": ["server"],

@@ -55,7 +55,7 @@ Root index for the entire specification tree. Each top-level folder contains a d
 | 25 | [App Issues](./25-app-issues/00-overview.md) | App bug analysis, root cause analysis, fix documentation |
 | 26 | [Git Logs Diagrams](./26-gitlogs-diagrams/00-overview.md) | Mermaid diagrams + SVG renders for the Git Logs spec |
 | 27 | [Spec Toolchain](./27-spec-toolchain/00-overview.md) | Linter scripts, generators, and audit tooling for the spec tree |
-| 28 | [Universal CI/CLI](./28-universal-ci-cli/00-overview.md) | Cross-project CI/CLI conventions and runner contracts |
+| 28 | [RiseUp-Git-Logger (rlogger)](./28-universal-ci-cli/00-overview.md) | Universal CI CLI wrapper, runtime detection, and log shipping contracts |
 
 ---
 

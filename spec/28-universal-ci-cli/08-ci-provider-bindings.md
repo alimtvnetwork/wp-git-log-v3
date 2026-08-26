@@ -19,7 +19,7 @@ Detection is by env-var presence (in priority order). First match wins.
 | 4 | `bitbucket` | `BITBUCKET_BUILD_NUMBER` set |
 | 5 | `shell` | _(fallback)_ — uses `git` CLI shellout |
 
-`[ci_provider].override` in `glci.toml` short-circuits detection.
+`[ci_provider].override` in `rlogger.toml` short-circuits detection.
 
 ---
 
@@ -33,7 +33,7 @@ Detection is by env-var presence (in priority order). First match wins.
 | `PipelineName` prefix _(optional)_ | `${GITHUB_JOB}` | `${CI_JOB_NAME}` | `${SYSTEM_JOBNAME}` | `${BITBUCKET_STEP_TRIGGERER_UUID}` _(opaque, ignored)_ | _(empty)_ |
 | `RootRepo` | _(derived: strip `-vN` from `RepoUrl`)_ | _(same)_ | _(same)_ | _(same)_ | _(same)_ |
 
-If a field cannot be harvested AND no override is given, that field is left unset and validation in `config.Resolve()` will reject the run with `GLCI-CONFIG-MISSING-*` or `GLCI-PUSH-NO-SHA`.
+If a field cannot be harvested AND no override is given, that field is left unset and validation in `config.Resolve()` will reject the run with `RLOGGER-CONFIG-MISSING-*` or `RLOGGER-PUSH-NO-SHA`.
 
 ---
 
@@ -68,47 +68,47 @@ The CLI does NOT branch its behavior on PR-vs-push (the server's `History`/`Acti
 ### GitHub Actions
 
 ```yaml
-- name: Run glci
-  uses: alimtvnetwork/glci-action@v1
+- name: Run rlogger
+  uses: alimtvnetwork/rlogger-action@v1
   env:
-    GLCI_SERVER_URL: ${{ secrets.GLCI_SERVER_URL }}
-    GLCI_TEMP_TOKEN: ${{ secrets.GLCI_TEMP_TOKEN }}
-    GLCI_TOKEN:      ${{ secrets.GLCI_TOKEN }}
+    RLOGGER_SERVER_URL: ${{ secrets.RLOGGER_SERVER_URL }}
+    RLOGGER_TEMP_TOKEN: ${{ secrets.RLOGGER_TEMP_TOKEN }}
+    RLOGGER_TOKEN:      ${{ secrets.RLOGGER_TOKEN }}
 ```
 
 ### GitLab CI
 
 ```yaml
-glci:
-  image: ghcr.io/alimtvnetwork/glci:1
+rlogger:
+  image: ghcr.io/alimtvnetwork/rlogger:1
   variables:
-    GLCI_SERVER_URL: $GLCI_SERVER_URL
-    GLCI_TEMP_TOKEN: $GLCI_TEMP_TOKEN
-    GLCI_TOKEN:      $GLCI_TOKEN
+    RLOGGER_SERVER_URL: $RLOGGER_SERVER_URL
+    RLOGGER_TEMP_TOKEN: $RLOGGER_TEMP_TOKEN
+    RLOGGER_TOKEN:      $RLOGGER_TOKEN
   script:
-    - glci run
+    - rlogger run
 ```
 
 ### Azure Pipelines
 
 ```yaml
 - script: |
-    curl -sSL https://github.com/alimtvnetwork/glci/releases/latest/download/glci-linux-amd64 -o /usr/local/bin/glci
-    chmod +x /usr/local/bin/glci
-    glci run
+    curl -sSL https://github.com/alimtvnetwork/rlogger/releases/latest/download/rlogger-linux-amd64 -o /usr/local/bin/rlogger
+    chmod +x /usr/local/bin/rlogger
+    rlogger run
   env:
-    GLCI_SERVER_URL: $(GLCI_SERVER_URL)
-    GLCI_TEMP_TOKEN: $(GLCI_TEMP_TOKEN)
-    GLCI_TOKEN:      $(GLCI_TOKEN)
+    RLOGGER_SERVER_URL: $(RLOGGER_SERVER_URL)
+    RLOGGER_TEMP_TOKEN: $(RLOGGER_TEMP_TOKEN)
+    RLOGGER_TOKEN:      $(RLOGGER_TOKEN)
 ```
 
 ### Bitbucket Pipelines
 
 ```yaml
 - step:
-    name: glci
+    name: rlogger
     script:
-      - curl -sSL https://github.com/alimtvnetwork/glci/releases/latest/download/glci-linux-amd64 -o /usr/local/bin/glci
-      - chmod +x /usr/local/bin/glci
-      - glci run
+      - curl -sSL https://github.com/alimtvnetwork/rlogger/releases/latest/download/rlogger-linux-amd64 -o /usr/local/bin/rlogger
+      - chmod +x /usr/local/bin/rlogger
+      - rlogger run
 ```

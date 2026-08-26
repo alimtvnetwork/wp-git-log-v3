@@ -13,10 +13,10 @@ Detection is **lockfile- and manifest-based** — never extension-based. A repo 
 for each runtime in [ts, go, php]:
     if any(marker exists for runtime in repoRoot):
         detected += runtime
-return detected   // empty list → exit 2 with GLCI-DETECT-NONE
+return detected   // empty list → exit 2 with RLOGGER-DETECT-NONE
 ```
 
-Order is fixed (`ts → go → php`) only for deterministic output of `glci detect`. All detected runtimes run; one cannot suppress another.
+Order is fixed (`ts → go → php`) only for deterministic output of `rlogger detect`. All detected runtimes run; one cannot suppress another.
 
 ---
 
@@ -38,7 +38,7 @@ Lockfile picks the package manager:
 | `package-lock.json` | `npm` | `npm exec eslint --` | `npm run build --if-present` (else `npm exec tsc -- --noEmit`) | `npm test` |
 | _(none)_ | `npm` | same as above | same | same |
 
-Multiple lockfiles → reject with `GLCI-DETECT-AMBIGUOUS-LOCK` (forces user to pick one in `glci.toml`).
+Multiple lockfiles → reject with `RLOGGER-DETECT-AMBIGUOUS-LOCK` (forces user to pick one in `rlogger.toml`).
 
 ### Runtime: `go` (Golang)
 
@@ -50,7 +50,7 @@ Phase plan:
 
 | Phase | Default runner |
 |-------|----------------|
-| lint  | `golangci-lint run ./...` (falls back to `go vet ./...` if golangci-lint absent — emits `GLCI-DOCTOR-LINTER-MISSING` warning) |
+| lint  | `golangci-lint run ./...` (falls back to `go vet ./...` if golangci-lint absent — emits `RLOGGER-DOCTOR-LINTER-MISSING` warning) |
 | build | `go build ./...` |
 | test  | `go test -race -count=1 ./...` |
 
@@ -72,7 +72,7 @@ Phase plan, resolved with `vendor/bin` first, then `$PATH`:
 
 ## Override
 
-`glci.toml` may pin runners explicitly:
+`rlogger.toml` may pin runners explicitly:
 
 ```toml
 [runtime.ts]
@@ -90,7 +90,7 @@ When overridden, detection still runs (for the `Detect()` boolean) but `Phases()
 
 ## Detection Output
 
-`glci detect` prints (and exits 0) a stable JSON document:
+`rlogger detect` prints (and exits 0) a stable JSON document:
 
 ```json
 {

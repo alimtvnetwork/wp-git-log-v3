@@ -11,28 +11,28 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 ### AC-28-01 — Detection: TS-only repo
 
 - **Given** a directory containing `package.json` and `tsconfig.json` and no `go.mod` or `composer.json`,
-- **When** `glci detect --json` runs,
+- **When** `rlogger detect --json` runs,
 - **Then** it MUST exit `0` and the JSON `Runtimes[]` MUST contain exactly one entry with `Id="ts"`.
 - **Verifies:** §03 TS detection table; §04 phase-runtime binding; AC-28-22 multi-runtime precedent.
 
 ### AC-28-02 — Detection: empty repo rejected
 
 - **Given** a directory with no recognized markers,
-- **When** `glci detect` runs,
-- **Then** it MUST exit `2` and stderr MUST contain code `GLCI-DETECT-NONE`.
-- **Verifies:** §07 `GLCI-DETECT-NONE`; §03 detection contract (no-marker rejection invariant).
+- **When** `rlogger detect` runs,
+- **Then** it MUST exit `2` and stderr MUST contain code `RLOGGER-DETECT-NONE`.
+- **Verifies:** §07 `RLOGGER-DETECT-NONE`; §03 detection contract (no-marker rejection invariant).
 
 ### AC-28-03 — Detection: ambiguous TS lockfiles
 
 - **Given** a directory with both `package-lock.json` and `pnpm-lock.yaml`,
-- **When** `glci detect` runs,
-- **Then** it MUST exit `2` with `GLCI-DETECT-AMBIGUOUS-LOCK`.
-- **Verifies:** §07 `GLCI-DETECT-AMBIGUOUS-LOCK`; §03 single-lockfile invariant (eliminates non-deterministic install).
+- **When** `rlogger detect` runs,
+- **Then** it MUST exit `2` with `RLOGGER-DETECT-AMBIGUOUS-LOCK`.
+- **Verifies:** §07 `RLOGGER-DETECT-AMBIGUOUS-LOCK`; §03 single-lockfile invariant (eliminates non-deterministic install).
 
 ### AC-28-04 — Override order: flag beats env beats file
 
-- **Given** `glci.toml` sets `server.url=A`, env `GLCI_SERVER_URL=B`, and CLI flag `--server=C`,
-- **When** `glci config print --json` runs,
+- **Given** `rlogger.toml` sets `server.url=A`, env `RLOGGER_SERVER_URL=B`, and CLI flag `--server=C`,
+- **When** `rlogger config print --json` runs,
 - **Then** the resolved `server.url` MUST equal `C` and its `provenance` MUST equal `flag`.
 - **Verifies:** §05 three-layer config precedence (file < env < flag); provenance-tracking invariant for diagnosability.
 
@@ -73,7 +73,7 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 
 ### AC-28-10 — Auth lane: TempToken mode populates body fields
 
-- **Given** `--auth-mode=temptoken` and `GLCI_TEMP_TOKEN=tt`, `GLCI_TOKEN=t`,
+- **Given** `--auth-mode=temptoken` and `RLOGGER_TEMP_TOKEN=tt`, `RLOGGER_TOKEN=t`,
 - **When** the CLI POSTs `/append-log`,
 - **Then** the body MUST contain `"TempToken":"tt"` AND `"Token":"t"` AND no `X-GL-Auth-Mode` header.
 - **Verifies:** §10 TempToken-lane separation (auth-in-body, never-as-X-GL-Auth-Mode-header) — guarantees the two auth modes never co-mingle credentials; AC-28-09 SSH-mode complement.
@@ -96,29 +96,29 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 
 - **Given** the server returns 502 four times in a row with `max_retries=3`,
 - **When** the CLI processes the responses,
-- **Then** the CLI MUST exit `4` with `GLCI-PUSH-RETRIES-EXHAUSTED`.
+- **Then** the CLI MUST exit `4` with `RLOGGER-PUSH-RETRIES-EXHAUSTED`.
 - **Verifies:** §07 exit-code-4 for retries-exhausted; §06 retry-budget invariant (max_retries is a hard cap, never silently extended); AC-28-31 stream-broken fallback uses same exit code.
 
 ### AC-28-14 — Payload cap enforced before send
 
 - **Given** a phase produces 2 MiB of `Logs[]` and `batch_max_bytes=1048576`,
 - **When** the payload is built,
-- **Then** the serialized JSON body MUST be ≤ 1 MiB AND `ErrorLogs[]` MUST contain a `"GLCI: log truncated, N lines dropped"` synthetic entry where `N≥1`.
+- **Then** the serialized JSON body MUST be ≤ 1 MiB AND `ErrorLogs[]` MUST contain a `"RLOGGER: log truncated, N lines dropped"` synthetic entry where `N≥1`.
 - **Verifies:** §05 `push.batch_max_bytes` cap-before-send invariant; §06 truncation-must-be-loud rule (synthetic ErrorLogs entry, not silent drop); pairs with AC-28-36 streaming buffer cap.
 
-### AC-28-15 — `glci doctor` happy path
+### AC-28-15 — `rlogger doctor` happy path
 
 - **Given** valid config, reachable server, valid TempToken, all runners on PATH,
-- **When** `glci doctor` runs,
+- **When** `rlogger doctor` runs,
 - **Then** it MUST exit `0` AND stdout MUST list each check with `OK`.
-- **Verifies:** §11 `glci doctor` happy-path contract — config-valid, server-reachable, auth-valid, runners-on-PATH; AC-28-16 / AC-28-26 failure-mode complements.
+- **Verifies:** §11 `rlogger doctor` happy-path contract — config-valid, server-reachable, auth-valid, runners-on-PATH; AC-28-16 / AC-28-26 failure-mode complements.
 
-### AC-28-16 — `glci doctor` flags clock skew for SSH mode
+### AC-28-16 — `rlogger doctor` flags clock skew for SSH mode
 
 - **Given** `--auth-mode=ssh` AND local clock is 120 s ahead of server (as detected via `Date:` response header from probe),
-- **When** `glci doctor` runs,
-- **Then** it MUST exit `5` with `GLCI-DOCTOR-CLOCK-SKEW`.
-- **Verifies:** §07 `GLCI-DOCTOR-CLOCK-SKEW`; §11 SSH-mode signature-window invariant (clock skew breaks `X-GL-Timestamp` validation); exit-code-5 for doctor-failure class.
+- **When** `rlogger doctor` runs,
+- **Then** it MUST exit `5` with `RLOGGER-DOCTOR-CLOCK-SKEW`.
+- **Verifies:** §07 `RLOGGER-DOCTOR-CLOCK-SKEW`; §11 SSH-mode signature-window invariant (clock skew breaks `X-GL-Timestamp` validation); exit-code-5 for doctor-failure class.
 
 ### AC-28-17 — `/fixed-log` auto-fires only when server reports prior failure
 
@@ -158,41 +158,41 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 ### AC-28-22 — Multiple runtimes: separate PipelineName per (runtime, phase)
 
 - **Given** a repo with both `package.json` AND `composer.json`,
-- **When** `glci run` runs,
+- **When** `rlogger run` runs,
 - **Then** at least 6 distinct `PipelineName` values MUST appear in posted payloads: `ts-lint`, `ts-build`, `ts-test`, `php-lint`, `php-build`, `php-test`.
 - **Verifies:** §03 polyglot-detection invariant; §04 `<runtime>-<phase>` PipelineName naming convention; AC-28-37/38/39 per-runtime tool-selection complements.
 
 ### AC-28-23 — Determinism: identical input → identical body
 
 - **Given** the same repo, env, and a recorded runner transcript,
-- **When** `glci run --no-push --dump-payload` is invoked twice,
+- **When** `rlogger run --no-push --dump-payload` is invoked twice,
 - **Then** the two dumped JSON bodies MUST be byte-identical (modulo wall-clock fields not present in this contract).
 - **Verifies:** §06 deterministic-serialization invariant — supports payload-replay testing AND signature-stability for SSH-mode (signed-body cannot be a moving target); AC-28-08 sort/dedup is a precondition.
 
 ### AC-28-24 — Config validation: HTTPS required by default
 
-- **Given** `glci.toml` sets `server.url="http://example.com/…"` AND `--insecure-http` is NOT passed,
-- **When** `glci doctor` runs,
-- **Then** it MUST exit `2` with `GLCI-CONFIG-INSECURE-URL`.
-- **Verifies:** §05 HTTPS-by-default invariant; §07 `GLCI-CONFIG-INSECURE-URL`; `--insecure-http` is the single explicit opt-out (never silent fallback).
+- **Given** `rlogger.toml` sets `server.url="http://example.com/…"` AND `--insecure-http` is NOT passed,
+- **When** `rlogger doctor` runs,
+- **Then** it MUST exit `2` with `RLOGGER-CONFIG-INSECURE-URL`.
+- **Verifies:** §05 HTTPS-by-default invariant; §07 `RLOGGER-CONFIG-INSECURE-URL`; `--insecure-http` is the single explicit opt-out (never silent fallback).
 
 ### AC-28-25 — Config validation: backoff length matches max_retries
 
 - **Given** `push.max_retries=3` AND `push.backoff_ms=[500,2000]`,
 - **When** config is loaded,
-- **Then** the CLI MUST exit `2` with `GLCI-CONFIG-BACKOFF-LENGTH`.
-- **Verifies:** §05 backoff-array length-must-equal-max_retries invariant — eliminates a class of off-by-one retry bugs (last attempt with no backoff value); §07 `GLCI-CONFIG-BACKOFF-LENGTH`.
+- **Then** the CLI MUST exit `2` with `RLOGGER-CONFIG-BACKOFF-LENGTH`.
+- **Verifies:** §05 backoff-array length-must-equal-max_retries invariant — eliminates a class of off-by-one retry bugs (last attempt with no backoff value); §07 `RLOGGER-CONFIG-BACKOFF-LENGTH`.
 
 ### AC-28-26 — Doctor surfaces server ErrorCode verbatim
 
 - **Given** the server returns `403 GL-AUTH-PROFILE-INACTIVE` on the doctor probe,
-- **When** `glci doctor` runs,
+- **When** `rlogger doctor` runs,
 - **Then** stderr MUST contain literal `GL-AUTH-PROFILE-INACTIVE` AND exit code MUST equal `5`.
 - **Verifies:** §11 doctor-passes-server-codes-verbatim invariant; pairs with AC-28-11 (verbatim ErrorCode passthrough at runtime); exit-code-5 doctor-failure class.
 
 ### AC-28-27 — JSON Schema validates default config
 
-- **Given** the output of `glci config print --defaults-only`,
+- **Given** the output of `rlogger config print --defaults-only`,
 - **When** the JSON is validated against `18-config-schema.json`,
 - **Then** validation MUST pass with zero errors.
 - **Verifies:** §18 JSON-Schema-as-source-of-truth invariant — defaults are machine-checkable, not human-curated prose; eliminates drift between docs and runtime parser.
@@ -208,35 +208,35 @@ Each AC is written **Given / When / Then** so it can be lifted directly into a t
 
 ## v1.1 Deferred-AC Closure (Phase 16d-v additions, AC-28-29..AC-28-40)
 
-The following 12 ACs close the four error codes flagged "v1.1 deferred" in `99-consistency-report.md` plus eight gap-coverage criteria for CI-provider auto-fill, telemetry prohibition, streaming buffer cap, per-runtime tool selection, and direct invocation of `glci push-fixed` / `glci clear`. AC-28-01..AC-28-28 above remain authoritative; these additions extend coverage without modifying existing rules.
+The following 12 ACs close the four error codes flagged "v1.1 deferred" in `99-consistency-report.md` plus eight gap-coverage criteria for CI-provider auto-fill, telemetry prohibition, streaming buffer cap, per-runtime tool selection, and direct invocation of `rlogger push-fixed` / `rlogger clear`. AC-28-01..AC-28-28 above remain authoritative; these additions extend coverage without modifying existing rules.
 
-### AC-28-29 — `GLCI-EXEC-RUNNER-CRASHED` surfaces non-zero subprocess signals
+### AC-28-29 — `RLOGGER-EXEC-RUNNER-CRASHED` surfaces non-zero subprocess signals
 
 - **Given** a runner subprocess (e.g. `npm test`, `go test`, `composer test`) terminates via signal SIGSEGV/SIGABRT/SIGKILL with no stdout/stderr output recoverable,
 - **When** the CLI's process supervisor reaps the child,
-- **Then** the CLI MUST exit `1` AND stderr MUST emit a single line `GLCI-EXEC-RUNNER-CRASHED: phase=<ts-test|go-build|...> signal=<SIGNAME> exit=<code>` AND the posted `ErrorLogs[]` MUST contain a synthetic entry `"GLCI: runner crashed with <SIGNAME> (exit=<code>); no captured output"` so the receiving server's diagnostic UI can distinguish a crash from a clean failure. The crash MUST NOT trigger HTTP retry (treated as a deterministic local failure, NOT a transient network condition).
-- **Verifies:** §07 `GLCI-EXEC-RUNNER-CRASHED`; §06 `ErrorLogs[]` contract; §99 v1.1 deferred-coverage closure.
+- **Then** the CLI MUST exit `1` AND stderr MUST emit a single line `RLOGGER-EXEC-RUNNER-CRASHED: phase=<ts-test|go-build|...> signal=<SIGNAME> exit=<code>` AND the posted `ErrorLogs[]` MUST contain a synthetic entry `"RLOGGER: runner crashed with <SIGNAME> (exit=<code>); no captured output"` so the receiving server's diagnostic UI can distinguish a crash from a clean failure. The crash MUST NOT trigger HTTP retry (treated as a deterministic local failure, NOT a transient network condition).
+- **Verifies:** §07 `RLOGGER-EXEC-RUNNER-CRASHED`; §06 `ErrorLogs[]` contract; §99 v1.1 deferred-coverage closure.
 
-### AC-28-30 — `GLCI-EXEC-TIMEOUT` enforces phase wall-clock cap
+### AC-28-30 — `RLOGGER-EXEC-TIMEOUT` enforces phase wall-clock cap
 
-- **Given** `glci.toml` sets `exec.phase_timeout_sec=600` (default `1800` per §05) AND a runner phase exceeds the cap with no output for ≥ 60 s,
+- **Given** `rlogger.toml` sets `exec.phase_timeout_sec=600` (default `1800` per §05) AND a runner phase exceeds the cap with no output for ≥ 60 s,
 - **When** the timeout fires,
-- **Then** the CLI MUST send SIGTERM, wait `exec.grace_period_sec` (default `10`) for graceful shutdown, then SIGKILL on grace expiry; exit `1`; emit stderr `GLCI-EXEC-TIMEOUT: phase=<name> elapsed=<sec>s cap=<cap>s`; populate `ErrorLogs[]` with `"GLCI: phase exceeded wall-clock cap of <cap>s; sent SIGTERM at <ts> SIGKILL at <ts>"`. The partial captured stdout up to the timeout MUST be preserved in `Logs[]` (NOT discarded) so the user can diagnose the hang.
-- **Verifies:** §07 `GLCI-EXEC-TIMEOUT`; §05 `exec.phase_timeout_sec` + `exec.grace_period_sec`; §99 v1.1 deferred-coverage closure.
+- **Then** the CLI MUST send SIGTERM, wait `exec.grace_period_sec` (default `10`) for graceful shutdown, then SIGKILL on grace expiry; exit `1`; emit stderr `RLOGGER-EXEC-TIMEOUT: phase=<name> elapsed=<sec>s cap=<cap>s`; populate `ErrorLogs[]` with `"RLOGGER: phase exceeded wall-clock cap of <cap>s; sent SIGTERM at <ts> SIGKILL at <ts>"`. The partial captured stdout up to the timeout MUST be preserved in `Logs[]` (NOT discarded) so the user can diagnose the hang.
+- **Verifies:** §07 `RLOGGER-EXEC-TIMEOUT`; §05 `exec.phase_timeout_sec` + `exec.grace_period_sec`; §99 v1.1 deferred-coverage closure.
 
-### AC-28-31 — `GLCI-PUSH-STREAM-BROKEN` recovers a broken NDJSON stream via batched fallback
+### AC-28-31 — `RLOGGER-PUSH-STREAM-BROKEN` recovers a broken NDJSON stream via batched fallback
 
-- **Given** `--stream` is active AND the server closes the chunked connection mid-frame (TCP reset, HTTP/2 GOAWAY, or NDJSON parse error reported via `400 GLCI-STREAM-MALFORMED`),
+- **Given** `--stream` is active AND the server closes the chunked connection mid-frame (TCP reset, HTTP/2 GOAWAY, or NDJSON parse error reported via `400 RLOGGER-STREAM-MALFORMED`),
 - **When** the CLI detects the broken stream,
-- **Then** the CLI MUST emit stderr `GLCI-PUSH-STREAM-BROKEN: bytes_sent=<N> at_seq=<seq>`, buffer the remaining un-acked frames in memory (capped by `push.stream_buffer_max_lines` default `10000`), and re-attempt delivery via batched `POST /append-log` (NOT another stream) with the SAME `(RepoUrl, Branch, PipelineName)` triple. If the batched fallback also fails, exit `4` (`GLCI-PUSH-RETRIES-EXHAUSTED` per AC-28-13). The CLI MUST NOT silently drop frames — frame loss is a hard failure surfaced via exit code.
-- **Verifies:** §07 `GLCI-PUSH-STREAM-BROKEN`; §06 streaming + batched contracts; AC-28-06 streaming headers; §99 v1.1 deferred-coverage closure.
+- **Then** the CLI MUST emit stderr `RLOGGER-PUSH-STREAM-BROKEN: bytes_sent=<N> at_seq=<seq>`, buffer the remaining un-acked frames in memory (capped by `push.stream_buffer_max_lines` default `10000`), and re-attempt delivery via batched `POST /append-log` (NOT another stream) with the SAME `(RepoUrl, Branch, PipelineName)` triple. If the batched fallback also fails, exit `4` (`RLOGGER-PUSH-RETRIES-EXHAUSTED` per AC-28-13). The CLI MUST NOT silently drop frames — frame loss is a hard failure surfaced via exit code.
+- **Verifies:** §07 `RLOGGER-PUSH-STREAM-BROKEN`; §06 streaming + batched contracts; AC-28-06 streaming headers; §99 v1.1 deferred-coverage closure.
 
-### AC-28-32 — `GLCI-DETECT-MULTIPLE-MODULES` rejects nested-monorepo ambiguity
+### AC-28-32 — `RLOGGER-DETECT-MULTIPLE-MODULES` rejects nested-monorepo ambiguity
 
-- **Given** a directory containing TWO `go.mod` files at different depths (e.g. `./go.mod` AND `./services/api/go.mod`) without a `glci.toml` `detect.module_root` override,
-- **When** `glci detect` runs,
-- **Then** the CLI MUST exit `2` with stderr `GLCI-DETECT-MULTIPLE-MODULES: runtime=go found=[./go.mod, ./services/api/go.mod]` AND suggest the resolution `set detect.module_root=<path> in glci.toml or pass --module-root=<path>`. The same rule applies to multiple `package.json` files (Node.js workspaces) and multiple `composer.json` files (PHP monorepo). Ambiguity MUST NOT be resolved by "first wins" or "deepest wins" heuristics — the CLI ALWAYS demands an explicit resolution.
-- **Verifies:** §07 `GLCI-DETECT-MULTIPLE-MODULES`; §03 detection contract; AC-28-02 detection-rejection precedent; §99 v1.1 deferred-coverage closure.
+- **Given** a directory containing TWO `go.mod` files at different depths (e.g. `./go.mod` AND `./services/api/go.mod`) without a `rlogger.toml` `detect.module_root` override,
+- **When** `rlogger detect` runs,
+- **Then** the CLI MUST exit `2` with stderr `RLOGGER-DETECT-MULTIPLE-MODULES: runtime=go found=[./go.mod, ./services/api/go.mod]` AND suggest the resolution `set detect.module_root=<path> in rlogger.toml or pass --module-root=<path>`. The same rule applies to multiple `package.json` files (Node.js workspaces) and multiple `composer.json` files (PHP monorepo). Ambiguity MUST NOT be resolved by "first wins" or "deepest wins" heuristics — the CLI ALWAYS demands an explicit resolution.
+- **Verifies:** §07 `RLOGGER-DETECT-MULTIPLE-MODULES`; §03 detection contract; AC-28-02 detection-rejection precedent; §99 v1.1 deferred-coverage closure.
 
 ### AC-28-33 — CI provider auto-fill: GitLab
 
@@ -249,7 +249,7 @@ The following 12 ACs close the four error codes flagged "v1.1 deferred" in `99-c
 
 - **Given** EITHER (a) env `TF_BUILD=True`, `BUILD_REPOSITORY_URI=https://dev.azure.com/org/proj/_git/repo`, `BUILD_SOURCEBRANCH=refs/heads/main`, `BUILD_SOURCEVERSION=abc...` (Azure), OR (b) env `BITBUCKET_BUILD_NUMBER`, `BITBUCKET_GIT_HTTP_ORIGIN`, `BITBUCKET_BRANCH`, `BITBUCKET_COMMIT` (Bitbucket), OR (c) NO recognized CI env (generic shell fallback),
 - **When** any phase runs,
-- **Then** the payload `RepoUrl`/`Branch`/`GitSha256` MUST be derived per the §08 binding table for each provider; for the generic-shell case (c) the CLI MUST fall back to `git config remote.origin.url` (normalized per AC-28-20), `git rev-parse --abbrev-ref HEAD`, and `git rev-parse HEAD` AND emit a stderr warning `GLCI: no CI provider detected; using local git derivation`. Azure's `refs/heads/` prefix MUST be stripped from `Branch`. The provider-detection precedence order MUST be deterministic: GitHub → GitLab → Azure → Bitbucket → generic shell.
+- **Then** the payload `RepoUrl`/`Branch`/`GitSha256` MUST be derived per the §08 binding table for each provider; for the generic-shell case (c) the CLI MUST fall back to `git config remote.origin.url` (normalized per AC-28-20), `git rev-parse --abbrev-ref HEAD`, and `git rev-parse HEAD` AND emit a stderr warning `RLOGGER: no CI provider detected; using local git derivation`. Azure's `refs/heads/` prefix MUST be stripped from `Branch`. The provider-detection precedence order MUST be deterministic: GitHub → GitLab → Azure → Bitbucket → generic shell.
 - **Verifies:** §08 Azure/Bitbucket/generic-shell bindings; AC-28-19 GitHub-binding precedent; AC-28-20 URL normalization.
 
 ### AC-28-35 — Telemetry prohibition is enforced at network layer
@@ -257,41 +257,41 @@ The following 12 ACs close the four error codes flagged "v1.1 deferred" in `99-c
 - **Given** Locked Decision #10 ("Telemetry: None. The CLI MUST NOT call any host other than the configured Git Logs server"),
 - **When** the CLI is built AND its outbound HTTP allowlist is inspected (linker-time or runtime),
 - **Then** the binary MUST refuse to make any HTTPS call to a host other than the resolved `server.url` host AND the host of any `git config remote.origin.url` (read-only, never written-to). Accidental analytics SDKs, crash-reporting endpoints (Sentry, Bugsnag), and update-check probes are FORBIDDEN — the CI test suite MUST include a sandboxed-network test that fails if ANY DNS resolution OR TCP connect targets a host outside the two-host allowlist. A telemetry violation is a CRITICAL security finding and blocks release.
-- **Verifies:** Locked Decision #10; §07 (no `GLCI-TELEMETRY-*` codes — telemetry doesn't exist); CI release-gate sandboxed-network test.
+- **Verifies:** Locked Decision #10; §07 (no `RLOGGER-TELEMETRY-*` codes — telemetry doesn't exist); CI release-gate sandboxed-network test.
 
-### AC-28-36 — Streaming mode buffer cap drops oldest frames with audit log
-
-- **Given** `--stream` is active AND the server is slow (ack lag ≥ 5 s) AND the CLI has buffered `push.stream_buffer_max_lines + 1` un-acked frames in memory,
-- **When** the next frame would be enqueued,
-- **Then** the CLI MUST drop the OLDEST un-acked frame (FIFO eviction, NOT the newest), increment a counter `dropped_frames`, emit stderr `GLCI: stream buffer full; dropped frame seq=<N>` once per 100 drops (NOT every drop, to avoid log flood), AND inject a synthetic `ErrorLogs[]` entry at end-of-phase `"GLCI: stream buffer overflow; dropped <count> frames (oldest first); consider increasing push.stream_buffer_max_lines or switching to batched mode"`. The phase exit code MUST be `1` (not `0`) when ANY frame was dropped, even if the underlying runner exited `0`, because dropped frames mean the server's record is incomplete.
+### AC-28-36: Stream buffer overflow FIFO drop & exit-1
+- **Status:** active (v2.0.0)
+- **Given** streaming mode (`--stream`) with slow server ingestion causing the internal memory buffer to hit `push.stream_buffer_max_lines` (default `10000`)
+- **When** new log lines arrive from the runner while the buffer is full
+- **Then** the CLI MUST drop the OLDEST un-acked frame (FIFO eviction, NOT the newest), increment a counter `dropped_frames`, emit stderr `RLOGGER: stream buffer full; dropped frame seq=<N>` once per 100 drops (NOT every drop, to avoid log flood), AND inject a synthetic `ErrorLogs[]` entry at end-of-phase `"RLOGGER: stream buffer overflow; dropped <count> frames (oldest first); consider increasing push.stream_buffer_max_lines or switching to batched mode"`. The phase exit code MUST be `1` (not `0`) when ANY frame was dropped, even if the underlying runner exited `0`, because dropped frames mean the server's record is incomplete.
 - **Verifies:** §05 `push.stream_buffer_max_lines`; §06 streaming contract; AC-28-31 stream-broken precedent.
 
 ### AC-28-37 — Per-runtime tool selection: TypeScript
 
 - **Given** a TS-only repo (per AC-28-01) AND a `package.json` with `scripts.lint`, `scripts.build`, `scripts.test` defined AND a lockfile of one of `package-lock.json` (npm), `pnpm-lock.yaml` (pnpm), `bun.lockb` (bun), `yarn.lock` (yarn classic) OR `yarn.lock` + `.yarnrc.yml` (yarn berry),
-- **When** `glci lint` / `glci build` / `glci test` runs without `--runner` override,
-- **Then** the CLI MUST select the package manager from the lockfile (per the §03 detection table) AND invoke `<pm> run <phase>` (e.g. `pnpm run test`); MUST set `CI=true`, `FORCE_COLOR=0`, `npm_config_progress=false` in the subprocess env to suppress interactive prompts and color codes that break log parsing; MUST NOT install dependencies implicitly — if `node_modules/` is absent the CLI exits `1` with `GLCI-EXEC-DEPS-MISSING: run <pm> install first`. Yarn berry's `.yarnrc.yml` MUST be detected even when `yarn.lock` is also present (berry takes precedence over classic yarn).
+- **When** `rlogger lint` / `rlogger build` / `rlogger test` runs without `--runner` override,
+- **Then** the CLI MUST select the package manager from the lockfile (per the §03 detection table) AND invoke `<pm> run <phase>` (e.g. `pnpm run test`); MUST set `CI=true`, `FORCE_COLOR=0`, `npm_config_progress=false` in the subprocess env to suppress interactive prompts and color codes that break log parsing; MUST NOT install dependencies implicitly — if `node_modules/` is absent the CLI exits `1` with `RLOGGER-EXEC-DEPS-MISSING: run <pm> install first`. Yarn berry's `.yarnrc.yml` MUST be detected even when `yarn.lock` is also present (berry takes precedence over classic yarn).
 - **Verifies:** §03 TS detection table; §04 phase commands; AC-28-01 TS detection.
 
 ### AC-28-38 — Per-runtime tool selection: Go
 
 - **Given** a Go repo (`go.mod` present, no `package.json`/`composer.json`),
-- **When** `glci lint` / `glci build` / `glci test` runs,
-- **Then** the CLI MUST invoke: `lint` → `golangci-lint run ./...` (if `.golangci.yml` exists) OR `go vet ./...` (fallback); `build` → `go build ./...` with `GOFLAGS=-buildvcs=false`; `test` → `go test -race -count=1 ./...` with `GOMAXPROCS` capped at `runtime.NumCPU()` (NOT unbounded, to keep CI runners stable); MUST set `CGO_ENABLED=0` unless `glci.toml` explicitly sets `runtime.go.cgo=true`; the test phase's stdout MUST be parsed by §09's Go-specific classifier to extract `FilePaths[]` from `--- FAIL: TestName (<duration>)` blocks via `t.go:<line>:` anchors. `go test -json` MAY be used internally for structured parsing but the human-readable output MUST still be preserved in `Logs[]`.
+- **When** `rlogger lint` / `rlogger build` / `rlogger test` runs,
+- **Then** the CLI MUST invoke: `lint` → `golangci-lint run ./...` (if `.golangci.yml` exists) OR `go vet ./...` (fallback); `build` → `go build ./...` with `GOFLAGS=-buildvcs=false`; `test` → `go test -race -count=1 ./...` with `GOMAXPROCS` capped at `runtime.NumCPU()` (NOT unbounded, to keep CI runners stable); MUST set `CGO_ENABLED=0` unless `rlogger.toml` explicitly sets `runtime.go.cgo=true`; the test phase's stdout MUST be parsed by §09's Go-specific classifier to extract `FilePaths[]` from `--- FAIL: TestName (<duration>)` blocks via `t.go:<line>:` anchors. `go test -json` MAY be used internally for structured parsing but the human-readable output MUST still be preserved in `Logs[]`.
 - **Verifies:** §03 Go detection table; §04 phase commands; §09 Go classifier; AC-28-08 FilePaths sort/dedup.
 
 ### AC-28-39 — Per-runtime tool selection: PHP
 
 - **Given** a PHP repo (`composer.json` present, no `package.json`/`go.mod`),
-- **When** `glci lint` / `glci build` / `glci test` runs,
-- **Then** the CLI MUST invoke: `lint` → `composer run lint` (if defined) OR `vendor/bin/phpcs --standard=PSR12` (fallback) OR `vendor/bin/phpstan analyse` if `phpstan.neon` exists; `build` → `composer run build` if defined ELSE no-op exit `0` (PHP usually skips build); `test` → `vendor/bin/phpunit --colors=never` OR `vendor/bin/pest --colors=never`; MUST set `COMPOSER_NO_INTERACTION=1` AND `XDEBUG_MODE=off` (unless `--coverage` is passed, which sets `XDEBUG_MODE=coverage`); MUST refuse to run if `vendor/` is absent with `GLCI-EXEC-DEPS-MISSING: run composer install first`. The test classifier MUST extract `FilePaths[]` from PHPUnit's `<file>:<line>` anchors.
+- **When** `rlogger lint` / `rlogger build` / `rlogger test` runs,
+- **Then** the CLI MUST invoke: `lint` → `composer run lint` (if defined) OR `vendor/bin/phpcs --standard=PSR12` (fallback) OR `vendor/bin/phpstan analyse` if `phpstan.neon` exists; `build` → `composer run build` if defined ELSE no-op exit `0` (PHP usually skips build); `test` → `vendor/bin/phpunit --colors=never` OR `vendor/bin/pest --colors=never`; MUST set `COMPOSER_NO_INTERACTION=1` AND `XDEBUG_MODE=off` (unless `--coverage` is passed, which sets `XDEBUG_MODE=coverage`); MUST refuse to run if `vendor/` is absent with `RLOGGER-EXEC-DEPS-MISSING: run composer install first`. The test classifier MUST extract `FilePaths[]` from PHPUnit's `<file>:<line>` anchors.
 - **Verifies:** §03 PHP detection table; §04 phase commands; §09 PHP classifier; AC-28-08 FilePaths sort/dedup.
 
-### AC-28-40 — `glci push-fixed` and `glci clear` invoke their endpoints directly without phase execution
+### AC-28-40 — `rlogger push-fixed` and `rlogger clear` invoke their endpoints directly without phase execution
 
-- **Given** the user runs `glci push-fixed` OR `glci clear` (NOT `glci run`),
+- **Given** the user runs `rlogger push-fixed` OR `rlogger clear` (NOT `rlogger run`),
 - **When** the command executes,
-- **Then** `glci push-fixed` MUST send a single `PUT /fixed-log` for the current `(RepoUrl, Branch, PipelineName)` triple WITHOUT running any lint/build/test phase — the command exists to manually mark a green pipeline when the server didn't get the auto-fired `/fixed-log` (per AC-28-17); `glci clear` MUST send `POST /clear-log` for the same triple, AND with `--all` it MUST send `POST /clear-log-all` for `(RepoUrl, Branch)` — affecting ALL pipelines on the branch. Both commands MUST honor `--no-push` (in which case they print the would-be request body to stdout and exit `0`); both MUST surface server `ErrorCode` verbatim per AC-28-26; both MUST NOT auto-trigger `/fixed-log` (no recursive auto-fire). Exit codes match the table in AC-28-11/12/13.
+- **Then** `rlogger push-fixed` MUST send a single `PUT /fixed-log` for the current `(RepoUrl, Branch, PipelineName)` triple WITHOUT running any lint/build/test phase — the command exists to manually mark a green pipeline when the server didn't get the auto-fired `/fixed-log` (per AC-28-17); `rlogger clear` MUST send `POST /clear-log` for the same triple, AND with `--all` it MUST send `POST /clear-log-all` for `(RepoUrl, Branch)` — affecting ALL pipelines on the branch. Both commands MUST honor `--no-push` (in which case they print the would-be request body to stdout and exit `0`); both MUST surface server `ErrorCode` verbatim per AC-28-26; both MUST NOT auto-trigger `/fixed-log` (no recursive auto-fire). Exit codes match the table in AC-28-11/12/13.
 - **Verifies:** §04 `push-fixed` / `clear` / `clear --all` subcommands; §06 endpoint mapping; AC-28-17 auto-fired `/fixed-log`; AC-28-21 `--no-push` precedent.
 
 ---
@@ -307,22 +307,22 @@ The following 12 ACs close the four error codes flagged "v1.1 deferred" in `99-c
 
 ### AC-28-42 — Stdout/stderr interleaving uses kernel pipe-merge, NOT pseudo-terminal  `[high]`
 
-- **Given** §04 `## glci lint / build / test` step 3 specifies "Capture stdout + stderr **interleaved** with timestamps to preserve ordering",
+- **Given** §04 `## rlogger lint / build / test` step 3 specifies "Capture stdout + stderr **interleaved** with timestamps to preserve ordering",
 - **When** a runner subprocess is spawned for any phase (lint/build/test/run),
 - **Then** the CLI MUST merge stdout + stderr at the **OS pipe level** (`exec.Cmd.Stderr = exec.Cmd.Stdout` in Go; equivalent constructions in TS/PHP/Rust/C# runtimes) so the kernel's pipe FIFO discipline preserves byte-level ordering. The CLI MUST NOT allocate a pseudo-terminal (PTY) for the runner — runners detect TTY via `isatty(fd)` and emit ANSI escapes / progress bars / pager invocations that corrupt log parsing (the §04 env vars `CI=true`, `FORCE_COLOR=0`, `npm_config_progress=false` per AC-28-37 suppress most TTY-conditional output, but PTY allocation defeats those signals because `isatty` returns true). The CLI MUST NOT use two independent pipes round-robined in user space (separate `Stdout` + `Stderr` then multiplex via `select` / goroutines) because interleaving order then becomes user-space-scheduling-dependent and non-reproducible across runs (breaks AC-28-23 determinism). Each captured byte MUST be timestamped at read time with monotonic-clock millisecond resolution.
 - **Verifies:** §04 interleaved-capture clause; AC-28-23 determinism (identical input → identical body); AC-28-37 TS env-var TTY suppression; AC-28-38 Go `CGO_ENABLED=0`; closes audit-v5 D3 MED ambiguity (PTY vs pipe).
 
-### AC-28-43 — `GLCI-DOCTOR-PROFILE-NOT-FOUND` server-side resolves `RepoUrl` → `GitProfile`; CLI is passive  `[low]`
+### AC-28-43 — `RLOGGER-DOCTOR-PROFILE-NOT-FOUND` server-side resolves `RepoUrl` → `GitProfile`; CLI is passive  `[low]`
 
-- **Given** §04 `glci doctor` step 4 maps server `404` → `GLCI-DOCTOR-PROFILE-NOT-FOUND` AND §07 catalog row "Code GLCI-DOCTOR-PROFILE-NOT-FOUND" cites server `GL-VALIDATION-PROFILE-NOT-FOUND` with caller action "Add the GitProfile in admin UI",
+- **Given** §04 `rlogger doctor` step 4 maps server `404` → `RLOGGER-DOCTOR-PROFILE-NOT-FOUND` AND §07 catalog row "Code RLOGGER-DOCTOR-PROFILE-NOT-FOUND" cites server `GL-VALIDATION-PROFILE-NOT-FOUND` with caller action "Add the GitProfile in admin UI",
 - **When** the doctor probe `GET /get-logs?q=<repo>&limit=0` returns `404 GL-VALIDATION-PROFILE-NOT-FOUND`,
-- **Then** the CLI MUST surface the server's `ErrorCode` verbatim per AC-28-26 — it MUST NOT attempt any local `GitProfile` lookup, MUST NOT cache profile state, MUST NOT prompt the user to "select a profile" (the runner has no profile concept — only a `RepoUrl` from `glci.toml` or auto-detection per §03). The `GitProfile` entity is a server-side admin-database row that maps `RepoUrl` → auth credentials + branch policies; the server performs the resolution and returns 404 if no match. The CLI's role is binary: forward the `RepoUrl`, surface the response. The caller-action prompt "Add the GitProfile in admin UI for this `RepoUrl`" (§07 row 41 prose) instructs the operator to navigate to the admin UI and create the missing profile keyed by `RepoUrl`.
-- **Verifies:** §04 doctor 404 mapping; §07 GLCI-DOCTOR-PROFILE-NOT-FOUND row; AC-28-26 server `ErrorCode` verbatim surface; closes audit-v5 D1 LOW ambiguity (GitProfile undefined in CLI surface).
+- **Then** the CLI MUST surface the server's `ErrorCode` verbatim per AC-28-26 — it MUST NOT attempt any local `GitProfile` lookup, MUST NOT cache profile state, MUST NOT prompt the user to "select a profile" (the runner has no profile concept — only a `RepoUrl` from `rlogger.toml` or auto-detection per §03). The `GitProfile` entity is a server-side admin-database row that maps `RepoUrl` → auth credentials + branch policies; the server performs the resolution and returns 404 if no match. The CLI's role is binary: forward the `RepoUrl`, surface the response. The caller-action prompt "Add the GitProfile in admin UI for this `RepoUrl`" (§07 row 41 prose) instructs the operator to navigate to the admin UI and create the missing profile keyed by `RepoUrl`.
+- **Verifies:** §04 doctor 404 mapping; §07 RLOGGER-DOCTOR-PROFILE-NOT-FOUND row; AC-28-26 server `ErrorCode` verbatim surface; closes audit-v5 D1 LOW ambiguity (GitProfile undefined in CLI surface).
 
 ### AC-28-44 — `--parallel` failure isolation: per-runtime scope, aggregated worst-exit, opt-in `--fail-fast` (Task S28-01) `[medium]`
 
 - **Given** §02 `## Concurrency Model` declares "runtimes run in parallel goroutines, separate ship queues" under `--parallel` AND §02 `## Failure Semantics` table defines per-phase outcomes for sequential runs,
-- **When** `glci --parallel ts,php` executes and `ts.lint` exits non-zero while `php.build` is mid-flight,
-- **Then** the `ts` runtime MUST skip its own `ts.build` + `ts.test` per the §02 Failure Semantics table, AND the `php` runtime MUST run to completion (success OR failure) without receiving any `SIGTERM`/`SIGINT` from `glci` originating in the `ts` failure — failure scope is **per-runtime goroutine**, never cross-runtime. Sibling cancellation is opt-in via `--fail-fast` (which propagates `SIGTERM` to ALL runtimes on first phase failure). Without `--fail-fast`, `glci` MUST wait for all runtimes to terminate, then exit with the **highest** observed exit code per precedence `4` (transport) > `2` (config) > `1` (phase) > `0` (success). External signals (`SIGINT` / `SIGTERM` to the `glci` parent) MUST propagate to ALL runtime subtrees and exit `130` / `143` respectively. Codified in §02 `### --parallel failure isolation (Normative)` subsection (4-row event table + aggregated-exit-code rule + 4-pattern forbidden list).
+- **When** `rlogger --parallel ts,php` executes and `ts.lint` exits non-zero while `php.build` is mid-flight,
+- **Then** the `ts` runtime MUST skip its own `ts.build` + `ts.test` per the §02 Failure Semantics table, AND the `php` runtime MUST run to completion (success OR failure) without receiving any `SIGTERM`/`SIGINT` from `rlogger` originating in the `ts` failure — failure scope is **per-runtime goroutine**, never cross-runtime. Sibling cancellation is opt-in via `--fail-fast` (which propagates `SIGTERM` to ALL runtimes on first phase failure). Without `--fail-fast`, `rlogger` MUST wait for all runtimes to terminate, then exit with the **highest** observed exit code per precedence `4` (transport) > `2` (config) > `1` (phase) > `0` (success). External signals (`SIGINT` / `SIGTERM` to the `rlogger` parent) MUST propagate to ALL runtime subtrees and exit `130` / `143` respectively. Codified in §02 `### --parallel failure isolation (Normative)` subsection (4-row event table + aggregated-exit-code rule + 4-pattern forbidden list).
 - **AND** per-runtime ship queues remain sealed per AC-28-22 — a failed runtime's ship queue MUST NOT be drained "first" to prioritize its diagnostic logs over a sibling's ongoing queue (cross-runtime queue reordering is forbidden).
 - **Verifies:** §02 `## Concurrency Model` table (per-runtime goroutine declaration); §02 `### --parallel failure isolation (Normative)` (event table + forbidden patterns); §02 `## Failure Semantics` table (per-phase exit codes feeding the aggregated rule); AC-28-22 (per-runtime PipelineName separation, sealed ship queues); closes audit-v6 MEDIUM/D3 finding "Ambiguous behavior for parallel runtime failures — unclear if a failure in 'ts' should abort an ongoing 'php' runtime or just prevent its next phase".

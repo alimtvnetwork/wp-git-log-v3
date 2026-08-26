@@ -16,16 +16,16 @@ All notable changes to `spec/28-universal-ci-cli/`.
 
 - **Added** AC-28-41 `[critical]` — Module cross-reference pin for spec/13 + spec/05 + spec/27 external dependencies (Lesson #29 + Lesson #36). Declares spec/28 module-kind = `module`; states that `[D4] Truncated Error Catalog and missing sections` (citing 08/09/17/18 missing) and `[D5] Broken External References` (citing AC-22/AC-SD-22/AC-T-28) are harness scope artifacts — every cited file present on disk per §99 inventory; every cross-module AC present in its owning module per Lesson #36. Mirror of spec/13 AC-24 + spec/25 AC-AI-09..11.
 - **Added** AC-28-42 `[high]` — Stdout/stderr interleaving uses kernel pipe-merge (`exec.Cmd.Stderr = exec.Cmd.Stdout`), NOT pseudo-terminal. PTY allocation FORBIDDEN (defeats `CI=true` / `FORCE_COLOR=0` / `npm_config_progress=false` env-var TTY suppression in AC-28-37). Two-pipe user-space multiplexing FORBIDDEN (breaks AC-28-23 determinism). Per-byte timestamps with monotonic-clock millisecond resolution.
-- **Added** AC-28-43 `[low]` — `GLCI-DOCTOR-PROFILE-NOT-FOUND` resolution clarification: server resolves `RepoUrl` → `GitProfile` admin-database row; CLI MUST NOT attempt local profile lookup, MUST NOT cache profile state, MUST NOT prompt for profile selection. CLI surfaces server `ErrorCode` verbatim per AC-28-26.
+- **Added** AC-28-43 `[low]` — `RLOGGER-DOCTOR-PROFILE-NOT-FOUND` resolution clarification: server resolves `RepoUrl` → `GitProfile` admin-database row; CLI MUST NOT attempt local profile lookup, MUST NOT cache profile state, MUST NOT prompt for profile selection. CLI surfaces server `ErrorCode` verbatim per AC-28-26.
 - **Updated** `04-command-surface.md` line 57 — interleaved-capture step expanded with normative pipe-merge mechanism + PTY-forbidden clause + monotonic-timestamp rule. §04 v1.0.0 → **v1.1.0** (new normative clause).
-- **Updated** `07-error-catalog.md` line 41 — `GLCI-DOCTOR-PROFILE-NOT-FOUND` row Cause column now states server-side resolution; Caller action references `RepoUrl` keying. §07 v1.1.0 → **v1.1.1** (clarification only).
+- **Updated** `07-error-catalog.md` line 41 — `RLOGGER-DOCTOR-PROFILE-NOT-FOUND` row Cause column now states server-side resolution; Caller action references `RepoUrl` keying. §07 v1.1.0 → **v1.1.1** (clarification only).
 - **Why**: closes 3 of 6 audit-v5 findings (D4 HIGH + D3 MED + D1 LOW). Remaining 3 (D5 HIGH "broken external refs", and the harness-truncation re-statements of D4) are now AC-28-41-pinned as harness artifacts (Lesson #29 forward-guard pattern).
 - **Spec lockstep**: §97 v2.1.0 → **v2.2.0** (AC count 40 → 43; minor for new ACs); §00 v2.1.3 → **v2.2.0** (minor follows §97 for AC count); §98 [2.1.3] → **[2.2.0]**; §99 v2.1.3 → **v2.2.0**. h10 stamp 22 → 153. **No CI workflow change**, **no RUBRIC bump**, **no AC-31-31 cascade** (the new ACs are GWT not parity), **no gate-count change**.
 - **Validation**: lockstep 87/87, tree-health 168/168 strict, version-parity 74/74, freshness 81 stamped (verify after run).
 
 ## [2.1.3] — 2026-04-30 — Phase 153 (Lesson #36 cross-ref inoculation)
 
-- **Added** `## Concurrency Posture (Normative cross-reference)` section to `05-config-resolution.md` linking concurrent-runner concerns (cache writes, local SQLite state under `~/.local/state/glci/`, atomic `glci config set` rewrites) to the canonical contract at [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated. Codifies Lesson #36 (link, never restate) on the cross-module axis. Per-runner `flock` on shared workspace paths declared FORBIDDEN (mirrors spec/13/18 batch-execution rule). **No §97 AC change**, no AC-31-31 cascade, no RUBRIC bump, no gate-count change. §00 v2.1.2 → v2.1.3; §99 v2.1.2 → v2.1.3. Sibling lockstep: spec/14 (v2.3.1) + spec/16 (v2.2.1) shipped same Lesson #36 inoculation in this phase.
+- **Added** `## Concurrency Posture (Normative cross-reference)` section to `05-config-resolution.md` linking concurrent-runner concerns (cache writes, local SQLite state under `~/.local/state/rlogger/`, atomic `rlogger config set` rewrites) to the canonical contract at [spec/13 §97 AC-22](../13-generic-cli/97-acceptance-criteria.md). Pure cross-link — contract NOT restated. Codifies Lesson #36 (link, never restate) on the cross-module axis. Per-runner `flock` on shared workspace paths declared FORBIDDEN (mirrors spec/13/18 batch-execution rule). **No §97 AC change**, no AC-31-31 cascade, no RUBRIC bump, no gate-count change. §00 v2.1.2 → v2.1.3; §99 v2.1.2 → v2.1.3. Sibling lockstep: spec/14 (v2.3.1) + spec/16 (v2.2.1) shipped same Lesson #36 inoculation in this phase.
 
 ## [2.1.2] — 2026-04-29 — Phase 150 (P3 sweep slot 10 — Verifies clauses on §97 AC-28-01..AC-28-28)
 
@@ -42,36 +42,36 @@ All notable changes to `spec/28-universal-ci-cli/`.
 
 ### Fixed
 
-- **Phase 119 — §07 ↔ §97 GLCI-* containment drift repair (surfaced by Phase 118 sweep).** The Phase 118 AC-31-31 bounding sweep against §28 surfaced 2 codes referenced in §97-acceptance-criteria.md but undefined in §07-error-catalog.md: `GLCI-EXEC-DEPS-MISSING` (cited in AC-28-37 for TypeScript and AC-28-39 for PHP — refusal to implicitly install dependencies) and `GLCI-STREAM-MALFORMED` (cited in AC-28-26 — server-side NDJSON framing rejection during `--stream` mode). Both codes are now formally added to §07: `GLCI-EXEC-DEPS-MISSING` slotted into the `## Execution` table with `Exit=1`, scoped explicitly to TypeScript+PHP runtimes (Go excluded — modules cache lives outside the repo); `GLCI-STREAM-MALFORMED` slotted into `## Push (transport)` with `Exit=4` and an explicit comparison clause distinguishing it from the adjacent `GLCI-PUSH-STREAM-BROKEN` (the latter = post-retry connection drop; the new code = active server framing rejection). The Phase 118 sweep also flagged a `GLCI-TELEMETRY-` family reference in §97 line 231 — re-inspection confirmed this is a **negative reference** ("no `GLCI-TELEMETRY-*` codes — telemetry doesn't exist" per Locked Decision #10) and NOT a real undefined code; no §07 row added. Catalog GLCI-* count: 27 → **29**. §07 banner v1.0.0 → v1.1.0; §99 v2.0.0 → v2.1.0; §99's prior claim "all 28 GLCI-* codes have direct AC coverage" superseded — now 29 codes with full §07 ↔ §97 containment, the inverse direction (§97 ⊆ §07) verified by Phase 118 re-sweep. No new ACs in §97 (the existing AC-28-26 / AC-28-37 / AC-28-39 already cite the now-defined codes; this is a §07 catalog hygiene fix, not a coverage extension). Mechanical guard for this drift class is still pending Phase 117 (`test-glci-error-code-containment.sh` — currently in the Phase 117 backlog awaiting user go/no-go).
+- **Phase 119 — §07 ↔ §97 RLOGGER-* containment drift repair (surfaced by Phase 118 sweep).** The Phase 118 AC-31-31 bounding sweep against §28 surfaced 2 codes referenced in §97-acceptance-criteria.md but undefined in §07-error-catalog.md: `RLOGGER-EXEC-DEPS-MISSING` (cited in AC-28-37 for TypeScript and AC-28-39 for PHP — refusal to implicitly install dependencies) and `RLOGGER-STREAM-MALFORMED` (cited in AC-28-26 — server-side NDJSON framing rejection during `--stream` mode). Both codes are now formally added to §07: `RLOGGER-EXEC-DEPS-MISSING` slotted into the `## Execution` table with `Exit=1`, scoped explicitly to TypeScript+PHP runtimes (Go excluded — modules cache lives outside the repo); `RLOGGER-STREAM-MALFORMED` slotted into `## Push (transport)` with `Exit=4` and an explicit comparison clause distinguishing it from the adjacent `RLOGGER-PUSH-STREAM-BROKEN` (the latter = post-retry connection drop; the new code = active server framing rejection). The Phase 118 sweep also flagged a `RLOGGER-TELEMETRY-` family reference in §97 line 231 — re-inspection confirmed this is a **negative reference** ("no `RLOGGER-TELEMETRY-*` codes — telemetry doesn't exist" per Locked Decision #10) and NOT a real undefined code; no §07 row added. Catalog RLOGGER-* count: 27 → **29**. §07 banner v1.0.0 → v1.1.0; §99 v2.0.0 → v2.1.0; §99's prior claim "all 28 RLOGGER-* codes have direct AC coverage" superseded — now 29 codes with full §07 ↔ §97 containment, the inverse direction (§97 ⊆ §07) verified by Phase 118 re-sweep. No new ACs in §97 (the existing AC-28-26 / AC-28-37 / AC-28-39 already cite the now-defined codes; this is a §07 catalog hygiene fix, not a coverage extension). Mechanical guard for this drift class is still pending Phase 117 (`test-rlogger-error-code-containment.sh` — currently in the Phase 117 backlog awaiting user go/no-go).
 
 ## [2.0.0] — 2026-04-26
 
 ### Added
 - **Phase 16d-v — Deepen §28 §97.** Added 12 new module-specific GWT ACs (AC-28-29..AC-28-40), bringing total from 28 → 40. AC-28-01..AC-28-28 preserved verbatim.
-- **AC-28-29..AC-28-32** close the four error codes flagged "v1.1 deferred" in `99-consistency-report.md`: `GLCI-EXEC-RUNNER-CRASHED` (subprocess signal handling, no retry), `GLCI-EXEC-TIMEOUT` (SIGTERM→grace→SIGKILL with partial-stdout preservation), `GLCI-PUSH-STREAM-BROKEN` (NDJSON stream failure → batched fallback), `GLCI-DETECT-MULTIPLE-MODULES` (nested-monorepo ambiguity, no heuristic resolution).
+- **AC-28-29..AC-28-32** close the four error codes flagged "v1.1 deferred" in `99-consistency-report.md`: `RLOGGER-EXEC-RUNNER-CRASHED` (subprocess signal handling, no retry), `RLOGGER-EXEC-TIMEOUT` (SIGTERM→grace→SIGKILL with partial-stdout preservation), `RLOGGER-PUSH-STREAM-BROKEN` (NDJSON stream failure → batched fallback), `RLOGGER-DETECT-MULTIPLE-MODULES` (nested-monorepo ambiguity, no heuristic resolution).
 - **AC-28-33..AC-28-34** add CI-provider auto-fill coverage for GitLab, Azure Pipelines, Bitbucket, and generic-shell fallback (AC-28-19 only covered GitHub). Provider precedence order locked: GitHub → GitLab → Azure → Bitbucket → generic shell.
 - **AC-28-35** enforces Locked Decision #10 (telemetry prohibition) at network layer via two-host allowlist + sandboxed-network test in CI.
 - **AC-28-36** specifies stream buffer overflow behavior (FIFO drop oldest, throttled stderr, synthetic ErrorLogs entry, exit `1` on any drop).
 - **AC-28-37..AC-28-39** specify per-runtime tool selection for TypeScript (npm/pnpm/bun/yarn berry detection + env hardening), Go (`golangci-lint`/`go test -race -count=1`/CGO disabled), and PHP (composer/phpcs/phpstan/phpunit/pest with XDEBUG_MODE management).
-- **AC-28-40** specifies direct invocation of `glci push-fixed` (manual `/fixed-log` mark, no phase execution) and `glci clear` / `clear --all` (`/clear-log` vs `/clear-log-all` triple-vs-pair scope).
+- **AC-28-40** specifies direct invocation of `rlogger push-fixed` (manual `/fixed-log` mark, no phase execution) and `rlogger clear` / `clear --all` (`/clear-log` vs `/clear-log-all` triple-vs-pair scope).
 - Banner v1.0.0 → v2.0.0 (major; AC count 28 → 40 closing all v1.1 deferred coverage). Lockstep §99 v1.0.0 → v2.0.0; spec-index regenerated.
 
 ## [1.0.0] — 2026-04-25
 
 ### Added
-- Initial draft of the Universal CI CLI spec module.
+- Initial draft of the RiseUp-Git-Logger (rlogger) spec module.
 - §00 overview with 12 locked decisions and 14-file inventory.
 - §01 glossary + 5 enums (`Phase`, `Runtime`, `Severity`, `ExitCode`, `LogShipMode`).
 - §02 architecture: process model, layered design, plugin model, concurrency, failure semantics.
 - §03 runtime detection table for `ts` (npm/pnpm/bun/yarn), `go`, `php`.
 - §04 command surface: 9 subcommands, full flag tables, exit-code matrix.
-- §05 config resolution: 4-tier override order, full `glci.toml` schema, env-var map, validation rules.
+- §05 config resolution: 4-tier override order, full `rlogger.toml` schema, env-var map, validation rules.
 - §06 log shipping contract: batched + streaming modes mapped to v2 endpoints.
-- §07 error catalog: 24 `GLCI-*` codes + verbatim `GL-*` forwarding from v2 server.
+- §07 error catalog: 24 `RLOGGER-*` codes + verbatim `GL-*` forwarding from v2 server.
 - §08 CI provider bindings for GitHub Actions, GitLab CI, Azure Pipelines, Bitbucket, generic shell.
 - §09 output classification: built-in pattern table + per-runtime `FilePaths` extraction.
 - §17 OpenAPI 3.1 client contract (`17-openapi-client.yaml`).
-- §18 JSON Schema for `glci.toml` (`18-config-schema.json`).
+- §18 JSON Schema for `rlogger.toml` (`18-config-schema.json`).
 - §97 acceptance criteria: 28 Given/When/Then ACs covering detection, config, classification, shipping, auth, doctor, determinism.
 - §99 consistency report with cross-doc bijection table.
 
@@ -93,7 +93,7 @@ All notable changes to `spec/28-universal-ci-cli/`.
 
 ## 2026-04-27 — Phase 63 impl-sweep
 
-- Phase 63: appended Universal CI CLI enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).
+- Phase 63: appended RiseUp-Git-Logger (rlogger) enums TS enum mirror to satisfy `has_ts_enums` rubric (impl 80 → 90).
 
 ## 2026-04-27 — Phase 76 (impl 90 → 100)
 
