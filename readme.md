@@ -16,3 +16,9 @@ You MUST read the files listed there before beginning any task.
 
 ## [4.0.2] - 2026-08-25
 - chore: Planned EXACTLY 150 tasks for v4 coding guideline audit & enforcement fixes.
+
+## Memory
+
+- .ai-memory/memory/readme.md
+- .ai-memory/memory/learned/01-recent-session-2026-10-29.md
+- .ai-memory/plans/readme.md
